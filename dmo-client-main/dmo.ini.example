@@ -1,0 +1,16 @@
+[DEBUG]
+FilePack=1
+Server=pgsql
+AccountIP=127.0.0.1
+MySqlAccountPort=7029
+MySqlCharacterPort=7050
+MySqlGamePort=7608
+PgSqlAccountPort=17029
+PgSqlCharacterPort=17050
+PgSqlGamePort=17608
+
+[network]
+ip=127.0.0.1
+port=7029
+id=admin
+pw=admin

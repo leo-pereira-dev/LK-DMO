@@ -1,0 +1,177 @@
+﻿using DigitalWorldOnline.Application.Admin.Repositories;
+using DigitalWorldOnline.Application.Extensions;
+using DigitalWorldOnline.Application.GameAssets.Bins;
+using DigitalWorldOnline.Application.Separar.Queries;
+using DigitalWorldOnline.Application.Services;
+using DigitalWorldOnline.Commons.Interfaces;
+using DigitalWorldOnline.Commons.Repositories.Admin;
+using DigitalWorldOnline.Infraestructure;
+using DigitalWorldOnline.Infraestructure.Extensions;
+using DigitalWorldOnline.Infraestructure.Mapping;
+using DigitalWorldOnline.Infraestructure.Repositories.Account;
+using DigitalWorldOnline.Infraestructure.Repositories.Admin;
+using DigitalWorldOnline.Infraestructure.Repositories.Character;
+using DigitalWorldOnline.Infraestructure.Repositories.Config;
+using DigitalWorldOnline.Infraestructure.Repositories.Routine;
+using DigitalWorldOnline.Infraestructure.Repositories.Server;
+using MediatR;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Serilog;
+using Serilog.Events;
+using System.Globalization;
+using System.Reflection;
+
+namespace DigitalWorldOnline.Account
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            try
+            {
+                CreateHostBuilder(args).Run();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("FATAL ERROR in Main:");
+                Console.WriteLine($"Exception: {ex.GetType().Name}");
+                Console.WriteLine($"Message: {ex.Message}");
+                Console.WriteLine($"StackTrace: {ex.StackTrace}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.GetType().Name}");
+                    Console.WriteLine($"Inner Message: {ex.InnerException.Message}");
+                    Console.WriteLine($"Inner StackTrace: {ex.InnerException.StackTrace}");
+                }
+                Console.ReadLine();
+                throw;
+            }
+        }
+
+        private static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (e.IsTerminating)
+            {
+                Console.WriteLine("Terminating by unhandled exception...");
+                Console.WriteLine($"Exception: {e.ExceptionObject}");
+                if (e.ExceptionObject is Exception ex)
+                {
+                    Console.WriteLine($"Message: {ex.Message}");
+                    Console.WriteLine($"StackTrace: {ex.StackTrace}");
+                    if (ex.InnerException != null)
+                    {
+                        Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                        Console.WriteLine($"Inner StackTrace: {ex.InnerException.StackTrace}");
+                    }
+                }
+            }
+            else
+                Console.WriteLine("Received unhandled exception.");
+
+            Console.ReadLine();
+        }
+
+        public static IHost CreateHostBuilder(string[] args)
+        {
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+
+            var host = Host.CreateDefaultBuilder(args)
+                .UseSerilog()
+                .UseEnvironment("Development")
+                .UseDefaultServiceProvider((_, options) =>
+                {
+                    options.ValidateOnBuild = false;
+                })
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddScoped<StoragePersistenceDualWriteCoordinator>();
+
+                    services.AddDsoDatabase(context.Configuration);
+
+                    services.AddScoped<IAdminQueriesRepository, AdminQueriesRepository>();
+                    services.AddScoped<IAdminCommandsRepository, AdminCommandsRepository>();
+
+                    services.AddScoped<IAccountQueriesRepository, AccountQueriesRepository>();
+                    services.AddScoped<IAccountCommandsRepository, AccountCommandsRepository>();
+
+                    services.AddScoped<IServerQueriesRepository, ServerQueriesRepository>();
+                    services.AddScoped<IServerCommandsRepository, ServerCommandsRepository>();
+
+                    services.AddScoped<ICharacterQueriesRepository, CharacterQueriesRepository>();
+                    services.AddScoped<ICharacterCommandsRepository, CharacterCommandsRepository>();
+
+                    services.AddScoped<IConfigQueriesRepository, ConfigQueriesRepository>();
+                    services.AddScoped<IConfigCommandsRepository, ConfigCommandsRepository>();
+
+                    services.AddScoped<IRoutineRepository, RoutineRepository>();
+
+                    services.AddSingleton<DMBaseBinLoader>();
+                    services.AddSingleton<DigimonListBinLoader>();
+                    services.AddSingleton<DigimonEvoBinLoader>();
+                    services.AddSingleton<BuffBinLoader>();
+                    services.AddSingleton<AchieveBinLoader>();
+                    services.AddSingleton<EventTableBinLoader>();
+                    services.AddSingleton<CashShopBinLoader>();
+                    services.AddSingleton<SkillBinLoader>();
+                    services.AddSingleton<NatureBinLoader>();
+                    services.AddSingleton<MonsterBinLoader>();
+                    services.AddSingleton<MapBinLoader>();
+                    services.AddSingleton<ItemListBinLoader>();
+
+                    //services.AddScoped<IEmailService, EmailService>();
+
+                    services.AddSingleton<ISender, ScopedSender<Mediator>>();
+                    services.AddSingleton<IProcessor, AuthenticationPacketProcessor>();
+                    services.AddSingleton(ConfigureLogger(context.Configuration));
+                    services.AddHostedService<AuthenticationServer>();
+                    services.AddMediatR(typeof(AccountByUsernameQuery).GetTypeInfo().Assembly);
+                    services.AddTransient<Mediator>();
+
+                    services.AddAutoMapper(typeof(AccountProfile));
+                    services.AddAutoMapper(typeof(CharacterProfile));
+                    services.AddAutoMapper(typeof(ConfigProfile));
+                    services.AddAutoMapper(typeof(DigimonProfile));
+                    services.AddAutoMapper(typeof(GameProfile));
+                    services.AddAutoMapper(typeof(SecurityProfile));
+                    services.AddAutoMapper(typeof(ShopProfile));
+                })
+                .ConfigureAppConfiguration((context, config) =>
+                {
+                    var projectDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    config.SetBasePath(projectDir)
+                          .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                          .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                          .AddEnvironmentVariables("DSO_");
+                })
+                .Build();
+
+            return host;
+        }
+
+        private static ILogger ConfigureLogger(IConfiguration configuration)
+        {
+            return new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}", restrictedToMinimumLevel: LogEventLevel.Information)
+                .WriteTo.Logger(lc => lc
+                    .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Verbose)
+                    .WriteTo.RollingFile(configuration["Log:VerboseRepository"] ?? "logs\\Verbose\\AccountServer", retainedFileCountLimit: 10))
+                .WriteTo.Logger(lc => lc
+                    .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Debug)
+                    .WriteTo.RollingFile(configuration["Log:DebugRepository"] ?? "logs\\Debug\\AccountServer", retainedFileCountLimit: 5))
+                .WriteTo.Logger(lc => lc
+                    .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Information)
+                    .WriteTo.RollingFile(configuration["Log:InformationRepository"] ?? "logs\\Information\\AccountServer", retainedFileCountLimit: 5))
+                .WriteTo.Logger(lc => lc
+                    .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Warning)
+                    .WriteTo.RollingFile(configuration["Log:WarningRepository"] ?? "logs\\Warning\\AccountServer", retainedFileCountLimit: 5))
+                .WriteTo.Logger(lc => lc
+                    .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Error)
+                    .WriteTo.RollingFile(configuration["Log:ErrorRepository"] ?? "logs\\Error\\AccountServer", retainedFileCountLimit: 5))
+                .CreateLogger();
+        }
+    }
+}

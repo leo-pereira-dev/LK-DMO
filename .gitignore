@@ -1,0 +1,40 @@
+# Root workspace outputs
+/build-temp/
+/ClientDist/
+
+# Local build/package outputs outside the nested project ignores
+/Release/
+/Give/
+
+# Runtime logs and local overrides
+*.log
+*.binlog
+*.tmp
+*.bak
+*.bak-*
+*.local.*
+
+# Visual Studio and editor state
+.vs/
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Heavy generated binaries/debug artifacts
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.ilk
+*.tlog
+*.lastbuildstate
+*.exe
+
+# Docker/local database volumes or dumps generated during experiments
+docker-data/
+postgres-data/
+mysql-data/

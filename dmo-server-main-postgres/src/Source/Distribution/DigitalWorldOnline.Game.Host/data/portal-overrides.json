@@ -1,0 +1,18 @@
+[
+  {
+    "portalId": 105002,
+    "sourceMapId": 105,
+    "destinationMapId": 110,
+    "destinationX": 8802,
+    "destinationY": 20706,
+    "reason": "Confirmed usable Yokohama East Village arrival point after Yokohama Village -> Yokohama East Village portal."
+  },
+  {
+    "portalId": 110001,
+    "sourceMapId": 110,
+    "destinationMapId": 105,
+    "destinationX": 20141,
+    "destinationY": 35104,
+    "reason": "v487 MapPortal.bin sends Yokohama East Village -> Yokohama Village to 105 (39382,46791), far from the matching 105-side portal; use the confirmed usable Yokohama Village return point."
+  }
+]

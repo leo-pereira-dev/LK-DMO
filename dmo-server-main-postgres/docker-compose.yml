@@ -1,0 +1,163 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: dmo-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: dso
+      POSTGRES_USER: dso
+      POSTGRES_PASSWORD: dso_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - dmo_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dso -d dso"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+  pgloader:
+    image: dimitri/pgloader:latest
+    container_name: dmo-pgloader
+    profiles: ["migrate"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./postgres/pgloader.load:/work/pgloader.load:ro
+    command: pgloader /work/pgloader.load
+
+  account:
+    container_name: dmo-pg-account
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: src/Source/Distribution/DigitalWorldOnline.Account.Host/DigitalWorldOnline.Account.csproj
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      APP_DLL: DigitalWorldOnline.Account.dll
+      Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      DSO_AuthenticationServer__Address: 0.0.0.0
+      DSO_AuthenticationServer__Port: 7029
+      DSO_AuthenticationServer__Backlog: 5
+      DSO_AuthenticationServer__Hash: "true"
+      DSO_CharacterServer__Address: 127.0.0.1
+    ports:
+      - "17029:7029"
+    restart: unless-stopped
+
+  character:
+    container_name: dmo-pg-character
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: src/Source/Distribution/DigitalWorldOnline.Character.Host/DigitalWorldOnline.Character.csproj
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      APP_DLL: DigitalWorldOnline.Character.dll
+      Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      DSO_CharacterServer__Address: 0.0.0.0
+      DSO_CharacterServer__Port: 7050
+      DSO_CharacterServer__Backlog: 5
+      DSO_GameServer__Address: 127.0.0.1
+      DSO_GameServer__Port: 7608
+    ports:
+      - "17050:7050"
+    volumes:
+      - ./Bins:/app/Bins:ro
+    restart: unless-stopped
+
+  game:
+    container_name: dmo-pg-game
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: src/Source/Distribution/DigitalWorldOnline.Game.Host/DigitalWorldOnline.Game.csproj
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      APP_DLL: DigitalWorldOnline.Game.dll
+      Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      DSO_GameServer__Address: 0.0.0.0
+      DSO_GameServer__Port: 7608
+      DSO_GameServer__Backlog: 5
+      DSO_GameServer__PublicAddress: 127.0.0.1
+      DSO_Fatigue__Enabled: "false"
+    ports:
+      - "17608:7608"
+    volumes:
+      - ./Bins:/app/Bins:ro
+    restart: unless-stopped
+
+  routine:
+    container_name: dmo-pg-routine
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: src/Source/Distribution/DigitalWorldOnline.Routine.Host/DigitalWorldOnline.Routine/DigitalWorldOnline.Routine.csproj
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      APP_DLL: DigitalWorldOnline.Routine.dll
+      Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+    volumes:
+      - ./Bins:/app/Bins:ro
+    restart: unless-stopped
+
+  api:
+    container_name: dmo-pg-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: src/Source/Distribution/DigitalWorldOnline.Account.Api/DigitalWorldOnline.Api.csproj
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      APP_DLL: DigitalWorldOnline.Api.dll
+      ASPNETCORE_URLS: http://+:5189
+      Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+    ports:
+      - "15189:5189"
+    restart: unless-stopped
+
+  admin:
+    container_name: dmo-pg-admin
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: src/Source/Distribution/DigitalWorldOnline.Admin/DigitalWorldOnline.Admin.csproj
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      APP_DLL: DigitalWorldOnline.Admin.dll
+      ASPNETCORE_URLS: http://+:5000
+      Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+    ports:
+      - "15000:5000"
+    volumes:
+      - ./Bins:/app/Bins:ro
+    restart: unless-stopped
+
+volumes:
+  dmo_postgres_data:

@@ -1,0 +1,1 @@
+C:\0-NewDmo\dmo-client-main\Gamebryo2.3\ThirdPartyCode\TinyXML\NiProject\Win32\VC80\Lib\TinyXML.lib

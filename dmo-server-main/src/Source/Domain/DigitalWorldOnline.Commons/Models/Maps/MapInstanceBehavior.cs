@@ -1,0 +1,318 @@
+﻿using DigitalWorldOnline.Commons.Entities;
+using DigitalWorldOnline.Commons.Enums.Character;
+using DigitalWorldOnline.Commons.Models.Base;
+using DigitalWorldOnline.Commons.Models.Character;
+using DigitalWorldOnline.Commons.Models.Config;
+using DigitalWorldOnline.Commons.Models.TamerShop;
+using DigitalWorldOnline.Commons.Packets.MapServer;
+using System.Text;
+
+namespace DigitalWorldOnline.Commons.Models.Map
+{
+    public sealed partial class MapInstance : ICloneable
+    {
+        //TODO: externalizar
+        private readonly int _startToSee = 4000;
+        private readonly int _stopSeeing = 4001;
+
+        public List<ConsignedShop> ConsignedShopsToRemove = new();
+
+        /// <summary>
+        /// Channel Step 1 — set the channel index for this MapInstance instance.
+        /// Channel 0 is the always-on baseline; 1+ are auto-spawned by the channel
+        /// manager.  Caller is <see cref="DigitalWorldOnline.GameHost.MapServer"/>
+        /// during initial map load / auto-scale-up.
+        /// </summary>
+        public void SetChannelIdx(byte channelIdx) => Channel = channelIdx;
+
+        public void Initialize()
+        {
+            if (Initialized)
+                return;
+
+            Clients = new List<GameClient>();
+            Drops = new List<Drop>();
+            ConsignedShops = new List<ConsignedShop>();
+
+            TamersView = new Dictionary<long, List<long>>();
+            MobsView = new Dictionary<long, List<long>>();
+            DropsView = new Dictionary<long, List<long>>();
+            ConsignedShopView = new Dictionary<long, List<long>>();
+
+            TamerHandlers = new Dictionary<short, long>();
+            DigimonHandlers = new Dictionary<short, long>();
+            MobHandlers = new Dictionary<short, long>();
+            DropHandlers = new Dictionary<short, long>();
+            ColiseumMobs = new List<int>();
+
+            for (short i = 1; i <= byte.MaxValue; i++)
+                TamerHandlers.Add(i, 0);
+
+            for (short i = 1; i <= 2000; i++)
+                DigimonHandlers.Add(i, 0);
+
+            for (short i = 1; i <= 1000; i++)
+                MobHandlers.Add(i, 0);
+
+            for (short i = 1; i <= 2000; i++)
+                DropHandlers.Add(i, 0);
+
+            KillSpawns.ForEach(killSpawn =>
+            {
+                killSpawn.ResetCurrentSourceMobAmount();
+            });
+
+            Mobs.ForEach(mob =>
+            {
+                mob.UpdateCurrentHp(mob.HPValue);
+                mob.SetInitialLocation();
+
+                var mobKillSpawn = KillSpawns.FirstOrDefault(x => x.TargetMobs.Any(x => x.TargetMobType == mob.Type));
+
+                if (mobKillSpawn != null)
+                {
+                    mob.SetAwaitingKillSpawn();
+                }
+                
+            });
+
+            Initialized = true;
+        }
+
+        public bool RequestMobsUpdate(IList<MobConfigModel> mapMobs)
+        {
+            UpdateMobs = NeedToAddMobs(mapMobs) || NeedToRemoveMobs(mapMobs);
+
+            return UpdateMobs;
+        }
+
+        private bool NeedToAddMobs(IList<MobConfigModel> mapMobs)
+        {
+            MobsToAdd = new List<MobConfigModel>();
+
+            MobsToAdd.AddRange(mapMobs.Where(x => !Mobs.Select(y => y.Id).Contains(x.Id)));
+
+            return MobsToAdd.Count > 0;
+        }
+
+        private bool NeedToRemoveMobs(IList<MobConfigModel> mapMobs)
+        {
+            MobsToRemove = new List<MobConfigModel>();
+
+            MobsToRemove.AddRange(Mobs.Where(x => !mapMobs.Select(y => y.Id).Contains(x.Id)));
+
+            return MobsToRemove.Count > 0;
+        }
+
+        public void FinishMobsUpdate()
+        {
+            _mobsToAdd.Clear();
+            UpdateMobs = false;
+        }
+       
+        public bool MobsAttacking(long tamerId) => Mobs.Any(x => !x.Dead && x.TargetTamers.Exists(x => x.Id == tamerId));
+        public bool MobsAttacking(long tamerId,bool Summon) => SummonMobs.Any(x => !x.Dead && x.TargetTamers.Exists(x => x.Id == tamerId));
+        public bool PlayersAttacking(long partnerId) => ConnectedTamers.Any(x => x.Alive && x.TargetPartners.Exists(x => x.Id == partnerId));
+
+        public void BroadcastForMap(byte[] packet)
+        {
+            Clients.ForEach(client => { client.Send(packet); });
+        }
+
+        public void BroadcastForUniqueTamer(long tamerId, byte[] packet)
+        {
+            BroadcastForSelf(tamerId, packet);
+        }
+
+        public void BroadcastForTargetTamers(List<long> targetTamers, byte[] packet)
+        {
+            var clients = Clients.Where(x => targetTamers.Contains(x.TamerId)).ToList();
+
+            clients.ForEach(client => { client.Send(packet); });
+        }
+        
+        public void BroadcastForTargetTamers(long sourceId, byte[] packet)
+        {
+            BroadcastForTamerViews(sourceId, packet);
+        }
+
+        public void BroadcastForTamerViewsAndSelf(long sourceId, byte[] packet)
+        {
+            BroadcastForTamerViews(sourceId, packet);
+            BroadcastForSelf(sourceId, packet);
+        }
+
+        private void BroadcastForTamerViews(long sourceId, byte[] packet)
+        {
+            if (TamersView.ContainsKey(sourceId))
+            {
+                var views = new List<long>();
+                views.AddRange(TamersView[sourceId]);
+                views.ForEach(view => { Clients.FirstOrDefault(x => x.TamerId == view)?.Send(packet); });
+            }
+        }
+
+        private void BroadcastForSelf(long sourceId, byte[] packet)
+        {
+            Clients.FirstOrDefault(x => x.TamerId == sourceId)?.Send(packet);
+        }
+
+        public void StartOperation() => Operating = true;
+        public void EndOperation() => Operating = false;
+
+        public void ManageHandlers()
+        {
+            if (!Tamers.Any())
+                return;
+
+            foreach (var tamer in LoadingTamers)
+            {
+                if (NeedNewHandler(tamer.Id))
+                {
+                    SetDigimonHandlers(tamer.Digimons);
+                    SetTamerHandler(tamer);
+                    ResetView(tamer.Id);
+                }
+
+                if (tamer.State != CharacterStateEnum.Ready)
+                    tamer.UpdateState(CharacterStateEnum.Connected);
+            }
+
+            Mobs.ForEach(mob =>
+            {
+                if (NeedNewHandler(mob))
+                    SetMobHandler(mob);
+            });
+
+            Drops.ForEach(drop =>
+            {
+                if (NeedNewHandler(drop))
+                    SetDropHandler(drop);
+            });
+        }
+
+        public void AddClient(GameClient client)
+        {
+            AddTamerView(client.TamerId);
+
+            lock (ClientsLock)
+            {
+                Clients.RemoveAll(x => x.TamerId == client.TamerId || x.AccountId == client.AccountId);
+                Clients.Add(client);
+            }
+
+            WithoutTamers = DateTime.MaxValue;
+
+            var handlerTimeout = DateTime.Now.AddSeconds(15);
+            while (NeedNewHandler(client.Tamer.Id))
+            {
+                Thread.Sleep(500);
+                if (DateTime.Now > handlerTimeout)
+                    break;
+            }
+
+            client.SetLoading(false);
+        }
+
+        private void ClearViews(long tamerId)
+        {
+            var client = Clients.FirstOrDefault(x => x.TamerId == tamerId);
+            if (client != null)
+            {
+                client.Tamer.MobsInView.Clear();
+                client.Tamer.StopBattle();
+                client.Tamer.StopBattle(true);
+            }
+
+            if (ConsignedShopView != null && ConsignedShopView.Any())
+            {
+                var consignedShopsView = ConsignedShopView.FirstOrDefault(x => x.Value.Contains(tamerId));
+                consignedShopsView.Value?.Remove(tamerId);
+            }
+
+            if (TamersView != null && TamersView.Any())
+            {
+                if (TamersView.ContainsKey(tamerId))
+                    TamersView.Remove(tamerId);
+
+                foreach (var tamerView in TamersView.Values.Where(x => x != null && x.Contains(tamerId)))
+                {
+                    tamerView.Remove(tamerId);
+                }
+            }
+
+            Mobs.ForEach(mob => { mob.TamersViewing.Remove(tamerId); });
+            SummonMobs.ForEach(mob => { mob.TamersViewing.Remove(tamerId); });
+
+            if (DropsView != null && DropsView.Any())
+            {
+                foreach (var dropView in DropsView.Values.Where(x => x.Contains(tamerId)))
+                {
+                    dropView.Remove(tamerId);
+                }
+            }
+        }
+
+        public bool RemoveClient(GameClient client)
+        {
+            lock (ClientsLock)
+            {
+                if (!Clients.Any(x => ReferenceEquals(x, client)))
+                    return false;
+            }
+
+            BroadcastForTamerViews(client.TamerId, new UnloadTamerPacket(client.Tamer).Serialize());
+
+#if DEBUG
+            var serialized = SerializeHideTamer(client.Tamer);
+            //File.WriteAllText($"Hides\\Hide{client.TamerId}To{client.TamerId}_Views_{DateTime.Now:dd_MM_yy_HH_mm_ss}.temp", serialized);
+#endif
+            ClearViews(client.TamerId);
+            FreeTamerHandler(client.Tamer.Id);
+            FreeDigimonsHandler(client.Tamer.Digimons);
+
+            lock (ClientsLock)
+            {
+                Clients.RemoveAll(x => ReferenceEquals(x, client));
+            }
+
+            if (!Tamers.Any())
+                WithoutTamers = DateTime.Now;
+
+            return true;
+        }
+  
+        private static string SerializeHideTamer(CharacterModel tamer)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"Tamer{tamer.Id}{tamer.Name}");
+            sb.AppendLine($"TamerHandler {tamer.GeneralHandler.ToString()}");
+            sb.AppendLine($"TamerLocation {tamer.Location.X.ToString()}");
+            sb.AppendLine($"TamerLocation {tamer.Location.Y.ToString()}");
+
+            sb.AppendLine($"Partner{tamer.Partner.Id}{tamer.Partner.Name}");
+            sb.AppendLine($"PartnerHandler {tamer.Partner.GeneralHandler.ToString()}");
+            sb.AppendLine($"PartnerLocation {tamer.Partner.Location.X.ToString()}");
+            sb.AppendLine($"PartnerLocation {tamer.Partner.Location.Y.ToString()}");
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Phase C deprecation note: <see cref="ICloneable.Clone"/> was a shallow
+        /// <see cref="MemberwiseClone"/> that reference-shared Mobs / Drops /
+        /// Clients lists across the clone — a long-standing latent bug.  All
+        /// remaining callers build dungeon instances via the canonical
+        /// <see cref="MapInstance(MapDefinition, byte, List{MobConfigModel}, List{SummonMobModel}, List{KillSpawnConfigModel})"/>
+        /// constructor.  Method retained only to satisfy the
+        /// <see cref="ICloneable"/> contract; calling it throws.
+        /// </summary>
+        public object Clone()
+        {
+            throw new NotSupportedException(
+                "MapInstance.Clone is no longer supported. Build a fresh instance " +
+                "via the (MapDefinition, channel, mobs, summons, killSpawns) " +
+                "constructor with per-channel runtime state.");
+        }
+    }
+}

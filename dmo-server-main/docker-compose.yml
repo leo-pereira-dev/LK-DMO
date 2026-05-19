@@ -1,0 +1,154 @@
+services:
+  mysql:
+    image: mariadb:10.11
+    container_name: dmo-mysql
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: root_password
+      MARIADB_DATABASE: dso
+      MARIADB_USER: dso
+      MARIADB_PASSWORD: dso_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - dmo_mysql_data:/var/lib/mysql
+      - ./db/dso.sql:/docker-entrypoint-initdb.d/01-dso.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -uroot -proot_password --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+  account:
+    container_name: dmo-account
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: src/Source/Distribution/DigitalWorldOnline.Account.Host/DigitalWorldOnline.Account.csproj
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      APP_DLL: DigitalWorldOnline.Account.dll
+      Database__Connection: Server=mysql;Port=3306;Database=dso;Uid=dso;Pwd=dso_password;SslMode=None;AllowPublicKeyRetrieval=True;
+      DSO_Database__Connection: Server=mysql;Port=3306;Database=dso;Uid=dso;Pwd=dso_password;SslMode=None;AllowPublicKeyRetrieval=True;
+      DSO_AuthenticationServer__Address: 0.0.0.0
+      DSO_AuthenticationServer__Port: 7029
+      DSO_AuthenticationServer__Backlog: 5
+      DSO_AuthenticationServer__Hash: "true"
+      DSO_CharacterServer__Address: 127.0.0.1
+    ports:
+      - "7029:7029"
+    restart: unless-stopped
+
+  character:
+    container_name: dmo-character
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: src/Source/Distribution/DigitalWorldOnline.Character.Host/DigitalWorldOnline.Character.csproj
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      APP_DLL: DigitalWorldOnline.Character.dll
+      Database__Connection: Server=mysql;Port=3306;Database=dso;Uid=dso;Pwd=dso_password;SslMode=None;AllowPublicKeyRetrieval=True;
+      DSO_Database__Connection: Server=mysql;Port=3306;Database=dso;Uid=dso;Pwd=dso_password;SslMode=None;AllowPublicKeyRetrieval=True;
+      DSO_CharacterServer__Address: 0.0.0.0
+      DSO_CharacterServer__Port: 7050
+      DSO_CharacterServer__Backlog: 5
+      DSO_GameServer__Address: 127.0.0.1
+      DSO_GameServer__Port: 7608
+    ports:
+      - "7050:7050"
+    volumes:
+      - ./Bins:/app/Bins:ro
+    restart: unless-stopped
+
+  game:
+    container_name: dmo-game
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: src/Source/Distribution/DigitalWorldOnline.Game.Host/DigitalWorldOnline.Game.csproj
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      APP_DLL: DigitalWorldOnline.Game.dll
+      Database__Connection: Server=mysql;Port=3306;Database=dso;Uid=dso;Pwd=dso_password;SslMode=None;AllowPublicKeyRetrieval=True;
+      DSO_Database__Connection: Server=mysql;Port=3306;Database=dso;Uid=dso;Pwd=dso_password;SslMode=None;AllowPublicKeyRetrieval=True;
+      DSO_GameServer__Address: 0.0.0.0
+      DSO_GameServer__Port: 7608
+      DSO_GameServer__Backlog: 5
+      DSO_GameServer__PublicAddress: 127.0.0.1
+      DSO_Fatigue__Enabled: "false"
+    ports:
+      - "7608:7608"
+    volumes:
+      - ./Bins:/app/Bins:ro
+    restart: unless-stopped
+
+  routine:
+    container_name: dmo-routine
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: src/Source/Distribution/DigitalWorldOnline.Routine.Host/DigitalWorldOnline.Routine/DigitalWorldOnline.Routine.csproj
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      APP_DLL: DigitalWorldOnline.Routine.dll
+      Database__Connection: Server=mysql;Port=3306;Database=dso;Uid=dso;Pwd=dso_password;SslMode=None;AllowPublicKeyRetrieval=True;
+      DSO_Database__Connection: Server=mysql;Port=3306;Database=dso;Uid=dso;Pwd=dso_password;SslMode=None;AllowPublicKeyRetrieval=True;
+    volumes:
+      - ./Bins:/app/Bins:ro
+    restart: unless-stopped
+
+  api:
+    container_name: dmo-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: src/Source/Distribution/DigitalWorldOnline.Account.Api/DigitalWorldOnline.Api.csproj
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      APP_DLL: DigitalWorldOnline.Api.dll
+      ASPNETCORE_URLS: http://+:5189
+      Database__Connection: Server=mysql;Port=3306;Database=dso;Uid=dso;Pwd=dso_password;SslMode=None;AllowPublicKeyRetrieval=True;
+      DSO_Database__Connection: Server=mysql;Port=3306;Database=dso;Uid=dso;Pwd=dso_password;SslMode=None;AllowPublicKeyRetrieval=True;
+    ports:
+      - "5189:5189"
+    restart: unless-stopped
+
+  admin:
+    container_name: dmo-admin
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: src/Source/Distribution/DigitalWorldOnline.Admin/DigitalWorldOnline.Admin.csproj
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      APP_DLL: DigitalWorldOnline.Admin.dll
+      ASPNETCORE_URLS: http://+:5000
+      Database__Connection: Server=mysql;Port=3306;Database=dso;Uid=dso;Pwd=dso_password;SslMode=None;AllowPublicKeyRetrieval=True;
+      DSO_Database__Connection: Server=mysql;Port=3306;Database=dso;Uid=dso;Pwd=dso_password;SslMode=None;AllowPublicKeyRetrieval=True;
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./Bins:/app/Bins:ro
+    restart: unless-stopped
+
+volumes:
+  dmo_mysql_data:

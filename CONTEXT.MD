@@ -9,10 +9,8 @@ map discovered while adapting the client and server.
 ## Repository layout
 
 - `dmo-client-main/`: C++ client source. Main game project is `DProject.sln`.
-- `dmo-server-main/`: original server tree used as a MySQL reference.
 - `dmo-server-main-postgres/`: PostgreSQL server port and active Docker setup.
 - `ClientDist/`: local compiled client distribution/output copy. Ignored by Git.
-- `Start-DMO-Docker.bat`: helper for the MySQL stack.
 - `Start-DMO-Postgres-Docker.bat`: helper for the PostgreSQL stack.
 - `Start-DMO-Servers.bat`: helper for local server startup.
 
@@ -98,14 +96,13 @@ Schema: dso
 
 ### Docker and database environment
 
-- Brought up a local MySQL/MariaDB stack for the original server reference.
 - Created and used a PostgreSQL server copy under `dmo-server-main-postgres`.
 - Added/used Docker Compose services for account, character, game, API, admin,
   routine, and PostgreSQL.
 - Configured service connection strings to use PostgreSQL with `Search Path=dso`.
 - Imported/migrated the MySQL dump into PostgreSQL for active testing.
-- Kept MySQL stack available as a behavioral reference because the original
-  implementation was known to work there.
+- Retired the local MySQL server tree from the active workspace so server work
+  targets PostgreSQL only.
 
 ### Admin/account/secondary password
 
@@ -575,9 +572,7 @@ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 
 ## Maintenance notes
 
-- Keep `dmo-server-main` as the MySQL behavioral reference until PostgreSQL is
-  proven stable across login, movement, inventory, seals, cash items, and GM
-  tooling.
+- Treat `dmo-server-main-postgres` as the only active server tree.
 - Prefer fixing packet alignment at the source instead of masking symptoms in the
   UI.
 - When adding a new feature:

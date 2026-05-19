@@ -2,11 +2,11 @@
 setlocal
 
 set "ROOT=%~dp0"
-set "SERVER_ROOT=%ROOT%dmo-server-main"
+set "SERVER_ROOT=%ROOT%dmo-server-main-postgres"
 set "CONFIGURATION=Debug"
 set "FRAMEWORK=net7.0"
 
-set "DB_CONNECTION=Server=104.234.41.94,1433;Database=ODMO;User Id=sa;Password=Essasenha2020@@@;TrustServerCertificate=True;"
+set "DB_CONNECTION=Host=localhost;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;"
 
 set "ASPNETCORE_ENVIRONMENT=Development"
 set "DOTNET_ENVIRONMENT=Development"

@@ -3939,12 +3939,13 @@ void cCliGame::RecvAllStat(void)
 void cCliGame::RecvStartMessage(void)
 {
 	u1 nMsgCnt = 0;
-	char msg[256];
+	char msg[Language::pLength::str + 1] = { 0, };
 
 	pop(nMsgCnt);
 
 	for(uint i=0; i<nMsgCnt; i++)
 	{
+		memset(msg, 0, sizeof(msg));
 		pop(msg);
 		ST_CHAT_PROTOCOL	CProtocol;
 		CProtocol.m_Type = NS_CHAT::NORMAL_TEXT;

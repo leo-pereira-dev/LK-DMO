@@ -287,11 +287,13 @@ void cCliGame::RecvMonBuffSet()
 	CsC_AvObject* pObject = g_pMngCollector->GetObject( nMonIDX );	
 	if( pObject == NULL )
 	{
+#if 0
 		ST_CHAT_PROTOCOL	CProtocol;
 		CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
 		//CProtocol.m_wStr = GetVAString( _T( "존재하지 않는 몬스터 \n UID : %d" ), nMonIDX  );
 		DmCS::StringFn::Format(CProtocol.m_wStr, _T( "존재하지 않는 몬스터 \n UID : %d" ), nMonIDX);
 		GAME_EVENT_STPTR->OnEvent( EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol );
+#endif
 		return;
 	}
 	CMonster*	pMonster = (CMonster*)pObject;
@@ -326,11 +328,13 @@ void cCliGame::RecvMonBuffSet()
 
 			if( fScale == 0.0f )
 			{
+#if 0
 				ST_CHAT_PROTOCOL	CProtocol;
 				CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
 				//CProtocol.m_wStr = GetVAString( _T( "스케일 증가값 0\n\nSkill_Idx : %d" ), nMonSkill_Idx );
 				DmCS::StringFn::Format(CProtocol.m_wStr, _T( "스케일 증가값 0\n\nSkill_Idx : %d" ), nMonSkill_Idx);
 				GAME_EVENT_STPTR->OnEvent( EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol );
+#endif
 				break;
 			}
 			else
@@ -339,12 +343,14 @@ void cCliGame::RecvMonBuffSet()
 				pMonster->SetScale( fScale );
 			}
 
+#if 0
 			ST_CHAT_PROTOCOL	CProtocol;
 			CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
 			//CProtocol.m_wStr = GetVAString( _T( "%s 스킬 ( %d )중첩 스케일 : %.2f" ), nsCsFileTable::g_pBuffMng->GetBuff( nBuffCode )->GetInfo()->s_szName, nStack, fScale );
 			DmCS::StringFn::Format(CProtocol.m_wStr, _T( "%s 스킬 ( %d )중첩 스케일 : %.2f" ), nsCsFileTable::g_pBuffMng->GetBuff( nBuffCode )->GetInfo()->s_szName, nStack, fScale);
 			
 			GAME_EVENT_STPTR->OnEvent( EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol );
+#endif
 		}
 		break;
 	case CsMonsterSkill::SUMMON_MONSTER:		// 몬스터 소환
@@ -352,6 +358,7 @@ void cCliGame::RecvMonBuffSet()
 		break;		//버프 없는 스킬들이니 여기 올 일은 없음
 	default:
 		{
+#if 0
 			wstring str;
 			//str = GetVAString( _T( "알수 없는 효과(Effect)타입\n\n Idx : %d \n Effect : %d" ), nMonSkill_Idx, pSkillInfo->s_nSkillType );
 			DmCS::StringFn::Format(str, _T( "알수 없는 효과(Effect)타입\n\n Idx : %d \n Effect : %d" ), nMonSkill_Idx, pSkillInfo->s_nSkillType);
@@ -360,6 +367,7 @@ void cCliGame::RecvMonBuffSet()
 			CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
 			CProtocol.m_wStr = str;
 			GAME_EVENT_STPTR->OnEvent( EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol );
+#endif
 			return;
 		}
 	}
@@ -399,6 +407,7 @@ void cCliGame::RecvMonBuffRelease()
 	default:
 		break;
 	}
+#if 0
 	wstring str;
 	//GetVAString( _T( "%s 스킬 버프해제" ), nsCsFileTable::g_pBuffMng->GetBuff( nBuffCode )->GetInfo()->s_szName );	
 	DmCS::StringFn::Format(str, _T( "%s 스킬 버프해제" ), nsCsFileTable::g_pBuffMng->GetBuff( nBuffCode )->GetInfo()->s_szName);
@@ -406,5 +415,6 @@ void cCliGame::RecvMonBuffRelease()
 	CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
 	CProtocol.m_wStr = str;
 	GAME_EVENT_STPTR->OnEvent( EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol );
+#endif
 }
 #endif	// MONSTER_SKILL_GROWTH

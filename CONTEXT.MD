@@ -205,31 +205,45 @@ Schema: dso
   to inspect string length, reader position, payload remainder, slot, and raw
   packet during debugging.
 
-### Chat debug text issue
+### Chat debug/corrupted text issue
 
 - Investigated strange cyan/garbled chat lines.
 - Determined they are not the megaphone payload.
 - Found client-side debug messages also appear in the chat, for example:
   - `MoveSpeed ...`
   - other `NS_CHAT::DEBUG_TEXT` lines from C++ systems.
-- Changed `ChatContents::_SetDebug` so debug chat only displays for `_DEBUG` or
-  `CHEAT_KEY` builds:
+- Changed `ChatContents::_SetDebug` so debug chat only displays for `_DEBUG`
+  builds:
 
   ```cpp
-  #if defined(_DEBUG) || defined(CHEAT_KEY)
+  #if defined(_DEBUG)
       _SetText(szText, nType, nValue);
   #endif
   ```
 
-- User later reported the strange characters still appeared, so this is not fully
-  resolved. The remaining suspected source is another chat/system line, possibly
-  a client-side debug/event message not routed through `_SetDebug`, or a packet
-  being displayed as `NORMAL_TEXT`.
-
-Known unresolved item:
-
-- Strange cyan/garbled text can still appear in chat. Leave as known issue until
-  a fresh reproduction with packet/log capture is available.
+- Added a non-debug guard in `ChatContents::Chat_Process` so direct
+  `NS_CHAT::DEBUG_TEXT` events are dropped before entering the chat UI.
+- Removed several monster/buff growth debug chat emissions from:
+  - `DProject/network/cCliGameSync.cpp`
+  - `DProject/network/cCliGameBuff.cpp`
+  - `DProject/Monster.cpp`
+- Found a stronger root cause for the static mojibake/cyan spam: the base
+  client packet reader copied length-prefixed `char*` strings without writing a
+  terminating `\0` into the destination buffer. Short system/chat strings could
+  therefore display stack residue after the valid message.
+- Fixed `dmo-client-main/nlib/packet.cpp` so `cPacket::pop(..., wlen=true)`
+  always null-terminates the copied string, including empty/short reads.
+- Also zeroed `SyncMsgSystem()`'s local `msg` buffer before each pop.
+- Added final render diagnostics and a defensive mojibake gate in
+  `ChatMainWindow::Notify(NS_CHAT::ADDSTRING_UPDATE)`.
+  - Runtime log: `Log\ChatRenderTrace_client.txt` beside the running exe.
+  - Each line records chat type, value, string length, whether it was blocked,
+    and the first codepoints.
+- Last successful client build/copy for this fix:
+  - `C:\Release\GSP\DProject_R_ENG.exe`
+  - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`
+  - `D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe`
+  - timestamp `2026-05-19 21:13:50`, size `10835456`.
 
 ## Packet/protocol maintenance guide
 

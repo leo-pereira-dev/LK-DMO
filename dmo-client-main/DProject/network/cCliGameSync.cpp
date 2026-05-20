@@ -529,19 +529,12 @@ void cCliGame::SyncWalkObject(void)
 		pop(nUID);
 		pop(pos);
 
-		DBG("\nSyncWalkObject\n", nUID);
-		DBG("nUID: %d\n", nUID);
-
 		xassert2(pos.m_nX > 0, "(%d, %d)", pos.m_nX, pos.m_nY);
 		xassert2(pos.m_nY > 0, "(%d, %d)", pos.m_nX, pos.m_nY);
 		xassert2((nsCsGBTerrain::g_pCurRoot == NULL) || (pos.m_nX < nsCsGBTerrain::g_pCurRoot->GetMapSizeWidth()), "(%d, %d)", pos.m_nX, pos.m_nY);
 		xassert2((nsCsGBTerrain::g_pCurRoot == NULL) || (pos.m_nY < nsCsGBTerrain::g_pCurRoot->GetMapSizeHeight()), "(%d, %d)", pos.m_nX, pos.m_nY);
 
 		type.m_nUID = nUID;
-
-		auto classType = GetClass(nUID);
-
-		DBG("Class type: %d\n", classType);
 
 		// Patched: was GetClass(nUID), which calls the legacy free helper
 		// `__forceinline uint GetClass(u2 nUID) { return nUID >> 14; }`. With u4 nUID,
@@ -1139,11 +1132,13 @@ void cCliGame::SyncInMonster(nSync::Pos& pos, cType& type, bool bNew)
 
 			if (fScale == 0.0f)
 			{
+#if 0
 				ST_CHAT_PROTOCOL	CProtocol;
 				CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
 				//CProtocol.m_wStr = GetVAString(_T( "스케일 증가값 0\n\nSkill_Idx : %d" ), nMonSkill_Idx);
 				DmCS::StringFn::Format(CProtocol.m_wStr, _T("스케일 증가값 0\n\nSkill_Idx : %d"), nMonSkill_Idx);
 				GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
+#endif
 				break;
 			}
 			else
@@ -1153,15 +1148,18 @@ void cCliGame::SyncInMonster(nSync::Pos& pos, cType& type, bool bNew)
 					pMonster->SetScale(fScale);
 			}
 
+#if 0
 			ST_CHAT_PROTOCOL	CProtocol;
 			CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
 			//CProtocol.m_wStr = GetVAString(_T( "%s 스킬 ( %d )중첩 스케일 : %.2f" ), nsCsFileTable::g_pBuffMng->GetBuff( nBuffCode )->GetInfo()->s_szName, nStack, fScale);
 			DmCS::StringFn::Format(CProtocol.m_wStr, _T("%s 스킬 ( %d )중첩 스케일 : %.2f"), nsCsFileTable::g_pBuffMng->GetBuff(nBuffCode)->GetInfo()->s_szName, nStack, fScale);
 			GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
+#endif
 		}
 		break;
 		default:
 		{
+#if 0
 			wstring str;
 			//str = GetVAString( _T( "SyncInMonster :: 몬스터 스킬 효과(Effect)가 성장타입이 아님\n\n Idx : %d \n Effect : %d" ), nMonSkill_Idx, pSkillInfo->s_nSkillType );
 			DmCS::StringFn::Format(str, _T("SyncInMonster :: 몬스터 스킬 효과(Effect)가 성장타입이 아님\n\n Idx : %d \n Effect : %d"), nMonSkill_Idx, pSkillInfo->s_nSkillType);
@@ -1170,6 +1168,7 @@ void cCliGame::SyncInMonster(nSync::Pos& pos, cType& type, bool bNew)
 			CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
 			CProtocol.m_wStr = str;
 			GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
+#endif
 			break;
 		}
 		}
@@ -1201,22 +1200,26 @@ void cCliGame::SyncInMonster(nSync::Pos& pos, cType& type, bool bNew)
 		CsC_AvObject* pObject = g_pMngCollector->GetObject(type);
 		if (pObject == NULL)
 		{
+#if 0
 			ST_CHAT_PROTOCOL	CProtocol;
 			CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
 			//CProtocol.m_wStr = GetVAString(_T( "SyncInMonster :: Sync 내에 존재하지 않는 몬스터 - UID : %d" ), nMonsterUID);
 			DmCS::StringFn::Format(CProtocol.m_wStr, _T("SyncInMonster :: Sync 내에 존재하지 않는 몬스터 - UID : %d"), nMonsterUID);
 			GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
+#endif
 			return;
 		}
 
 		CsMonsterSkill::sINFO* pSkillInfo = nsCsFileTable::g_pMonsterMng->GetMonsterSkill(nSkillIdx);
 		if (pSkillInfo == NULL)
 		{
+#if 0
 			ST_CHAT_PROTOCOL	CProtocol;
 			CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
 			//CProtocol.m_wStr = GetVAString(_T( "SyncInMonster :: 존재하지 않는 몬스터스킬 - SkillIdx : %d" ), nSkillIdx);
 			DmCS::StringFn::Format(CProtocol.m_wStr, _T("SyncInMonster :: 존재하지 않는 몬스터스킬 - SkillIdx : %d"), nSkillIdx);
 			GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
+#endif
 			return;
 		}
 
@@ -1253,11 +1256,13 @@ void cCliGame::SyncInMonster(nSync::Pos& pos, cType& type, bool bNew)
 		CsMonsterSkill::sINFO* pSkillInfo = nsCsFileTable::g_pMonsterMng->GetMonsterSkill(nSkillIdx);
 		if (pSkillInfo == NULL)
 		{
+#if 0
 			ST_CHAT_PROTOCOL	CProtocol;
 			CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
 			//CProtocol.m_wStr = GetVAString( _T( "SyncInMonster :: 존재하지 않는 몬스터스킬 - SkillIdx : %d" ), nSkillIdx );
 			DmCS::StringFn::Format(CProtocol.m_wStr, _T("SyncInMonster :: 존재하지 않는 몬스터스킬 - SkillIdx : %d"), nSkillIdx);
 			GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
+#endif
 			return;
 		}
 #define CENTERFLAG	nsEFFECT::POS_CHARPOS | nsEFFECT::SPOS_BOUND_CENTER | nsEFFECT::LIVE_LOOP
@@ -1659,7 +1664,7 @@ void cCliGame::SyncMsgShout(bool bGuild /*= false*/)
 void cCliGame::SyncMsgSystem(void)
 {
 	uchar cnt;
-	char msg[Language::pLength::str + 1];
+	char msg[Language::pLength::str + 1] = { 0, };
 
 	pop(cnt);
 	// #ifdef CRASHDUMP_0305
@@ -1668,6 +1673,7 @@ void cCliGame::SyncMsgSystem(void)
 
 	for (int i = 0; i < cnt; i++)
 	{
+		memset(msg, 0, sizeof(msg));
 		pop(msg);
 
 #ifdef THAI_CHANNELDOWN		// 태국 채널 다운 시 메세지 출력 관련 코드 수정 lks007	12.11.01

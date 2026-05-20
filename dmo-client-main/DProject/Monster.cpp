@@ -276,14 +276,6 @@ void CMonster::SetBattleEnd()
 	if( m_BuffData.IsBuffData( nsBuff::BK_MONSTER_GROWTH ) )	//	전투 끝났는데 성장 버프 있으면 제거
 	{
 		m_BuffData.ReleaseBuff( nsBuff::BK_MONSTER_GROWTH );
-#ifndef _GIVE
-		ST_CHAT_PROTOCOL	CProtocol;
-		CProtocol.m_Type = NS_CHAT::NORMAL_TEXT;
-		DmCS::StringFn::Format(CProtocol.m_wStr, _T( "몬스터-%d 전투종료 :: %d 스킬 버프해제" ), m_pFT_Monster->GetInfo()->s_dwMonsterID, nsBuff::BK_MONSTER_GROWTH); 
-		//.CProtocol.m_wStr = GetVAString( _T( "몬스터-%d 전투종료 :: %d 스킬 버프해제" ), m_pFT_Monster->GetInfo()->s_dwMonsterID, nsBuff::BK_MONSTER_GROWTH );
-	
-		GAME_EVENT_STPTR->OnEvent( EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol );
-#endif
 	}
 #endif
 }

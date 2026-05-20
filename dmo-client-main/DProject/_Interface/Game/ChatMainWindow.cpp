@@ -9,6 +9,131 @@
 
 
 #include <string.h>
+#include <stdio.h>
+
+namespace
+{
+	bool IsSuspiciousChatGarbage( std::wstring const& text )
+	{
+		if( text.length() < 4 )
+			return false;
+
+		int asciiAlphaNum = 0;
+		int asciiOther = 0;
+		int extendedLatin = 0;
+		int suspicious = 0;
+		bool hasCjk = false;
+
+		for( size_t i = 0; i < text.length(); ++i )
+		{
+			wchar_t ch = text[ i ];
+			if( ch == L'\r' || ch == L'\n' || ch == L'\t' )
+				continue;
+			if( ch < 0x20 )
+				return true;
+			if( ch >= 0xAC00 && ch <= 0xD7AF )
+				hasCjk = true;
+			if( ch >= 0x3040 && ch <= 0x30FF )
+				hasCjk = true;
+			if( ch >= 0x4E00 && ch <= 0x9FFF )
+				hasCjk = true;
+			if( ( ch >= L'A' && ch <= L'Z' ) ||
+				( ch >= L'a' && ch <= L'z' ) ||
+				( ch >= L'0' && ch <= L'9' ) )
+			{
+				++asciiAlphaNum;
+			}
+			else if( ch >= 0x20 && ch <= 0x7E )
+			{
+				++asciiOther;
+			}
+			else if( ( ch >= 0x00A0 && ch <= 0x00FF ) ||
+				( ch >= 0x0100 && ch <= 0x024F ) )
+			{
+				++extendedLatin;
+			}
+
+			switch( ch )
+			{
+			case 0x201A:
+			case 0x201E:
+			case 0x201D:
+			case 0x00C3:
+			case 0x00C2:
+			case 0x00A2:
+			case 0x00AC:
+			case 0x00BF:
+			case 0x00BC:
+			case 0x00BD:
+			case 0x00BE:
+			case 0x00EF:
+			case 0x00EC:
+			case 0x00EA:
+			case 0x00F0:
+			case 0x017E:
+			case 0x0161:
+			case 0x00A1:
+			case 0x0153:
+			case 0x00E8:
+			case 0x00E9:
+				++suspicious;
+				break;
+			default:
+				break;
+			}
+		}
+
+		if( hasCjk )
+			return false;
+
+		return suspicious >= 2 ||
+			( suspicious > 0 && extendedLatin >= 3 ) ||
+			( extendedLatin >= 6 && asciiAlphaNum <= 8 && asciiOther <= 8 );
+	}
+
+	void TraceChatRender( NS_CHAT::TYPE eType, int nValue, std::wstring const& text, bool blocked )
+	{
+		CreateDirectoryA( "Log", NULL );
+
+		HANDLE hFile = CreateFileA( "Log\\ChatRenderTrace_client.txt",
+			FILE_APPEND_DATA,
+			FILE_SHARE_READ | FILE_SHARE_WRITE,
+			NULL,
+			OPEN_ALWAYS,
+			FILE_ATTRIBUTE_NORMAL,
+			NULL );
+
+		if( hFile == INVALID_HANDLE_VALUE )
+			return;
+
+		SYSTEMTIME st;
+		GetLocalTime( &st );
+
+		char line[4096] = { 0, };
+		int offset = sprintf_s( line, sizeof( line ),
+			"%04u-%02u-%02u %02u:%02u:%02u.%03u type=%d value=%d len=%u blocked=%d cps=",
+			st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, st.wMilliseconds,
+			static_cast<int>( eType ), nValue, static_cast<unsigned int>( text.length() ), blocked ? 1 : 0 );
+
+		for( size_t i = 0; i < text.length() && i < 96; ++i )
+		{
+			if( offset < 0 || offset >= static_cast<int>( sizeof( line ) ) - 16 )
+				break;
+			offset += sprintf_s( line + offset, sizeof( line ) - offset, "%04X ", static_cast<unsigned int>( text[ i ] ) );
+		}
+
+		if( offset >= 0 && offset < static_cast<int>( sizeof( line ) ) - 3 )
+			offset += sprintf_s( line + offset, sizeof( line ) - offset, "\r\n" );
+
+		if( offset > 0 )
+		{
+			DWORD written = 0;
+			WriteFile( hFile, line, static_cast<DWORD>( offset ), &written, NULL );
+		}
+
+		CloseHandle( hFile );
+	}
+}
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////		ChatEditWindow		//////////////////////////
@@ -1062,6 +1187,10 @@ void ChatMainWindow::Notify(int const& iNotifiedEvt, ContentsStream const& kStre
 			TCHAR		szOwnerName[ Language::pLength::GuildName ] = {0, };
 
 			kStream >> bOutline >> nCurCut >> color >> eType >> nValue >> str;
+			bool bBlockedGarbage = IsSuspiciousChatGarbage( str );
+			TraceChatRender( eType, nValue, str, bBlockedGarbage );
+			if( bBlockedGarbage )
+				return;
 
 			// 타입 체크해서 이름을 얻어 내자
 			GetSystem()->_GetUserName(eType, szOwnerName, (TCHAR*)str.c_str());

@@ -25,6 +25,72 @@ namespace
 			safe.resize( CHAT_TEXT_MAX_CHARS );
 		return safe;
 	}
+
+	inline bool IsMojibakeChatText( std::wstring const& text )
+	{
+		if( text.length() < 4 )
+			return false;
+
+		int asciiCount = 0;
+		int extendedLatinCount = 0;
+		int suspiciousCount = 0;
+
+		for( size_t i = 0; i < text.length(); ++i )
+		{
+			wchar_t ch = text[ i ];
+			if( ch == L'\r' || ch == L'\n' || ch == L'\t' )
+				continue;
+			if( ch < 0x20 )
+				return true;
+			if( ch >= 0x20 && ch <= 0x7E )
+			{
+				++asciiCount;
+				continue;
+			}
+			if( ch >= 0xAC00 && ch <= 0xD7AF )
+				return false;
+			if( ch >= 0x3040 && ch <= 0x30FF )
+				return false;
+			if( ch >= 0x4E00 && ch <= 0x9FFF )
+				return false;
+			if( ( ch >= 0x00A0 && ch <= 0x00FF ) ||
+				( ch >= 0x0100 && ch <= 0x024F ) )
+				++extendedLatinCount;
+
+			switch( ch )
+			{
+			case 0x201A:
+			case 0x201E:
+			case 0x201D:
+			case 0x00C3:
+			case 0x00C2:
+			case 0x00A2:
+			case 0x00AC:
+			case 0x00BF:
+			case 0x00BC:
+			case 0x00BD:
+			case 0x00BE:
+			case 0x00EF:
+			case 0x00EC:
+			case 0x00EA:
+			case 0x00F0:
+			case 0x017E:
+			case 0x0161:
+			case 0x00A1:
+			case 0x0153:
+			case 0x00E8:
+			case 0x00E9:
+				++suspiciousCount;
+				break;
+			default:
+				break;
+			}
+		}
+
+		return suspiciousCount >= 2 ||
+			( suspiciousCount > 0 && extendedLatinCount >= 3 ) ||
+			( extendedLatinCount >= 6 && asciiCount <= 8 );
+	}
 }
 
 WNDPROC WndProc;
@@ -1163,6 +1229,8 @@ bool ChatContents::_SetText( uint nOwnerUID, TCHAR const* szText, int nType /* =
 	std::wstring safeText = NormalizeChatText( szText );
 	if( safeText.empty() )
 		return false;
+	if( IsMojibakeChatText( safeText ) )
+		return false;
 
 	//	그리기 제외인 경우 값 않받는다. 메가폰은 값 받는다.
 	if(_ChatEnableShow(nType, false))
@@ -1188,6 +1256,8 @@ void ChatContents::_SetText( TCHAR const* szText, int nType /* = NS_CHAT::NORMAL
 {
 	std::wstring safeText = NormalizeChatText( szText );
 	if( safeText.empty() )
+		return;
+	if( IsMojibakeChatText( safeText ) )
 		return;
 
 	// 내용이 없으면 제외.
@@ -1241,7 +1311,7 @@ void ChatContents::_SetText( TCHAR const* szText, int nType /* = NS_CHAT::NORMAL
 
 void ChatContents::_SetDebug( TCHAR const* szText, int nType,	int nValue)
 {
-#if defined(_DEBUG) || defined(CHEAT_KEY)
+#if defined(_DEBUG)
 	_SetText(szText, nType, nValue);
 #endif
 }
@@ -1280,6 +1350,10 @@ void ChatContents::Chat_Process(void* pData)
 {
 	SAFE_POINTER_RET(pData);
 	ST_CHAT_PROTOCOL CProtocol = *static_cast<ST_CHAT_PROTOCOL*>(pData);
+#if !defined(_DEBUG)
+	if( CProtocol.m_Type == NS_CHAT::DEBUG_TEXT )
+		return;
+#endif
 	//차단 목록에 추가된 테이머라면 채팅을 보여주지 않는다.
 	std::size_t strPos = CProtocol.m_wStr.find(' ');
 	std::wstring szTamerName = CProtocol.m_wStr.substr(0, strPos);

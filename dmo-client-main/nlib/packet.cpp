@@ -93,12 +93,20 @@ void cPacket::pop(void* data, size_t len, bool wlen)
 	auto available = m_buf.size();
 	if (len > available)
 	{
+		if (wlen)
+			((char*)data)[0] = '\0';
 		return;
 	}
 
 	if (len == 0)
+	{
+		if (wlen)
+			((char*)data)[0] = '\0';
 		return;
+	}
 
 	memcpy_s(data, len, m_buf.data().data(), len);
+	if (wlen)
+		((char*)data)[len] = '\0';
 	m_buf.consume(len);
 }

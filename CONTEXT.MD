@@ -254,11 +254,31 @@ Schema: dso
   - Added a small system-chat Korean translation pass in `ChatContents` for known
     debug/system phrases, using Unicode escape literals in source to avoid
     source-file encoding corruption.
+- Second follow-up after user reported the spam still appears every 5-6 seconds:
+  - Existing logs showed the normal chat hook still only recorded valid English
+    `NORMAL_TEXT` / `DIGIMON_TIP` messages, and `ChatVisibleTrace_client.txt`
+    was not created. That means the visible garbage was not matching the earlier
+    Hangul-only guard, or it was being rendered through a lower `cString` path.
+  - Network logs showed packet `16032` repeating at roughly five-second cadence
+    among other frequent packets, matching the user's timing clue.
+  - Added a lower render guard in `DProject/_Interface/Base/String.cpp` at
+    `cString::sTEXT::Render()` / `RenderLimit()`. It blocks short rendered text
+    with classic mojibake signatures such as Cyrillic `Г`, `ї`, Latin-extended
+    `ž`, the Hangul artifact `촫`, and comma-zero suffixes like `, 0`.
+  - Added runtime log `Log\TextRenderTrace_client.txt`; it records blocked text
+    render attempts and throttled comma-containing samples as codepoints.
 - Latest successful client build/copy for this follow-up:
   - `C:\Release\GSP\DProject_R_ENG.exe`
   - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`
   - `D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe`
   - timestamp `2026-05-19 21:25:41`, size `10840064`.
+- Latest successful client build after the lower render guard:
+  - `C:\Release\GSP\DProject_R_ENG.exe`
+  - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`
+  - timestamp `2026-05-19 21:30:56`, size `10842624`.
+  - Copy to `D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe`
+    failed because the running client process held the file open and could not be
+    stopped from the current PowerShell session (`Access denied`).
 - Last successful client build/copy for this fix:
   - `C:\Release\GSP\DProject_R_ENG.exe`
   - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`

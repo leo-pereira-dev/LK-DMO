@@ -1,6 +1,158 @@
 #include "stdafx.h"
 #include "String.h"
 
+namespace
+{
+	bool IsShortRenderedMojibake( std::wstring const& text )
+	{
+		if( text.length() < 4 || text.length() > 96 )
+			return false;
+
+		int asciiAlphaNum = 0;
+		int asciiOther = 0;
+		int extendedLatin = 0;
+		int cyrillic = 0;
+		int hangul = 0;
+		int otherNonAscii = 0;
+		int suspicious = 0;
+
+		for( size_t i = 0; i < text.length(); ++i )
+		{
+			wchar_t ch = text[ i ];
+			if( ch == L'\r' || ch == L'\n' || ch == L'\t' )
+				continue;
+			if( ch < 0x20 )
+				return true;
+
+			if( ( ch >= L'A' && ch <= L'Z' ) ||
+				( ch >= L'a' && ch <= L'z' ) ||
+				( ch >= L'0' && ch <= L'9' ) )
+			{
+				++asciiAlphaNum;
+			}
+			else if( ch >= 0x20 && ch <= 0x7E )
+			{
+				++asciiOther;
+			}
+			else if( ( ch >= 0x00A0 && ch <= 0x00FF ) ||
+				( ch >= 0x0100 && ch <= 0x024F ) )
+			{
+				++extendedLatin;
+			}
+			else if( ch >= 0x0400 && ch <= 0x04FF )
+			{
+				++cyrillic;
+			}
+			else if( ch >= 0xAC00 && ch <= 0xD7AF )
+			{
+				++hangul;
+				if( ch == 0xCD2B )
+					++suspicious;
+			}
+			else
+			{
+				++otherNonAscii;
+			}
+
+			switch( ch )
+			{
+			case 0x0413:
+			case 0x0457:
+			case 0x201A:
+			case 0x201E:
+			case 0x201D:
+			case 0x00C3:
+			case 0x00C2:
+			case 0x00A2:
+			case 0x00AC:
+			case 0x00BF:
+			case 0x00BC:
+			case 0x00BD:
+			case 0x00BE:
+			case 0x00EF:
+			case 0x00EC:
+			case 0x00EA:
+			case 0x00F0:
+			case 0x017E:
+			case 0x0161:
+			case 0x0153:
+			case 0x00E8:
+			case 0x00E9:
+				++suspicious;
+				break;
+			default:
+				break;
+			}
+		}
+
+		bool hasCommaZero = text.find( L", 0" ) != std::wstring::npos ||
+			text.find( L",, 0" ) != std::wstring::npos ||
+			( text.find( L',' ) != std::wstring::npos && !text.empty() && text[ text.length() - 1 ] == L'0' );
+		int nonAscii = extendedLatin + cyrillic + hangul + otherNonAscii;
+
+		if( hangul > 0 && suspicious == 0 )
+			return false;
+
+		return suspicious >= 2 ||
+			( hasCommaZero && nonAscii >= 2 && asciiAlphaNum <= 10 ) ||
+			( suspicious > 0 && nonAscii >= 3 && asciiAlphaNum <= 12 ) ||
+			( extendedLatin >= 4 && cyrillic > 0 && asciiAlphaNum <= 12 ) ||
+			( cyrillic >= 2 && extendedLatin >= 1 && asciiAlphaNum <= 12 );
+	}
+
+	void TraceRenderedText( std::wstring const& text, bool blocked, CsPoint pos )
+	{
+		static DWORD s_dwLastSampleTick = 0;
+		DWORD dwNow = GetTickCount();
+		if( !blocked )
+		{
+			if( dwNow - s_dwLastSampleTick < 1000 )
+				return;
+			s_dwLastSampleTick = dwNow;
+		}
+
+		CreateDirectoryA( "Log", NULL );
+
+		HANDLE hFile = CreateFileA( "Log\\TextRenderTrace_client.txt",
+			FILE_APPEND_DATA,
+			FILE_SHARE_READ | FILE_SHARE_WRITE,
+			NULL,
+			OPEN_ALWAYS,
+			FILE_ATTRIBUTE_NORMAL,
+			NULL );
+
+		if( hFile == INVALID_HANDLE_VALUE )
+			return;
+
+		SYSTEMTIME st;
+		GetLocalTime( &st );
+
+		char line[4096] = { 0, };
+		int offset = sprintf_s( line, sizeof( line ),
+			"%04u-%02u-%02u %02u:%02u:%02u.%03u blocked=%d pos=%d,%d len=%u cps=",
+			st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, st.wMilliseconds,
+			blocked ? 1 : 0, pos.x, pos.y, static_cast<unsigned int>( text.length() ) );
+
+		for( size_t i = 0; i < text.length() && i < 96; ++i )
+		{
+			if( offset < 0 || offset >= static_cast<int>( sizeof( line ) ) - 16 )
+				break;
+			offset += sprintf_s( line + offset, sizeof( line ) - offset, "%04X ", static_cast<unsigned int>( text[ i ] ) );
+		}
+
+		if( offset >= 0 && offset < static_cast<int>( sizeof( line ) ) - 3 )
+			offset += sprintf_s( line + offset, sizeof( line ) - offset, "\r\n" );
+
+		if( offset > 0 )
+		{
+			DWORD written = 0;
+			WriteFile( hFile, line, static_cast<DWORD>( offset ), &written, NULL );
+		}
+
+		CloseHandle( hFile );
+	}
+}
+
 void cString::sELEMENT::RenderLimit( CsPoint pos )
 {
 	Render( pos ); 
@@ -51,11 +203,32 @@ void cString::sTEXT::Delete()
 
 void cString::sTEXT::Render( CsPoint pos )
 {
-	s_Text.Render( pos + s_ptDeltaPos );
+	CsPoint renderPos = pos + s_ptDeltaPos;
+	TCHAR const* szText = s_Text.GetText();
+	if( szText != NULL )
+	{
+		std::wstring text( szText );
+		bool bBlocked = IsShortRenderedMojibake( text );
+		if( bBlocked || text.find( L',' ) != std::wstring::npos )
+			TraceRenderedText( text, bBlocked, renderPos );
+		if( bBlocked )
+			return;
+	}
+	s_Text.Render( renderPos );
 }
 
 void cString::sTEXT::RenderLimit( CsPoint pos )
 {
+	TCHAR const* szText = s_Text.GetText();
+	if( szText != NULL )
+	{
+		std::wstring text( szText );
+		bool bBlocked = IsShortRenderedMojibake( text );
+		if( bBlocked || text.find( L',' ) != std::wstring::npos )
+			TraceRenderedText( text, bBlocked, pos );
+		if( bBlocked )
+			return;
+	}
 	s_Text.RenderLimit( pos ); 
 }
 

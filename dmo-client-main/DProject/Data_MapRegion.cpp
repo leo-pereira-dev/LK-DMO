@@ -109,6 +109,12 @@ bool cData_MapRegion::IsOpenedWorld( int nWorldID )
 
 bool cData_MapRegion::IsOpenedMap( int nMapID )
 {
+	if( nMapID == 1 )
+		nMapID = 3;
+
+	if( nMapID == 2 || nMapID == 3 )
+		return true;
+
 	CsMapList*	pList =nsCsMapTable::g_pMapListMng->GetList( nMapID );
 
 	SAFE_POINTER_RETVAL(pList, false);
@@ -119,4 +125,3 @@ bool cData_MapRegion::IsOpenedMap( int nMapID )
 	USHORT	ID = pInfo->s_nMapRegionID;
 	return m_MapRegion.IsOpened( ID );
 }
-

@@ -43,9 +43,12 @@ private:
 	void	PressLoginButton(void* pSender, void* pData);
 	void	PressExitButton(void* pSender, void* pData);
 	void	PressIDSaveCheckBox(void* pSender, void* pData);
+	void	PressRememberPasswordCheckBox(void* pSender, void* pData);
 	void	PressConfigeButton(void* pSender, void* pData);
 	void	ChangeIP(void* pSender, void* pData);
 	void	SetAccountInfoFromIni();
+	void	SaveAccountInfoToIni();
+	bool	IsRememberPasswordEnabled();
 	void	_HomepageOpen(void* pSender, void* pData);
 
 protected:
@@ -59,6 +62,7 @@ private:
 // 	cButton*		m_pIntro;
 // 	cButton*		m_pCredit;
 	cCheckBox*		m_pIDSaveCheckBox;
+	cCheckBox*		m_pRememberPasswordCheckBox;
 	cCheckBox*		m_pUseBarcodeCheckBox;
 	cStringList		m_Copyright;
 

@@ -23,6 +23,7 @@ public:
 	int GetInt(const char* section, const char* value);
 	std::string GetStr(const char* section, const char* value);
 	void Write(const char* section, const char* value, int data);
+	void Write(const char* section, const char* value, const char* data);
 
 private:
 	inipp::Ini<char> m_ini;

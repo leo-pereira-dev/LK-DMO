@@ -9,6 +9,11 @@ PgSqlAccountPort=17029
 PgSqlCharacterPort=17050
 PgSqlGamePort=17608
 
+[login]
+RememberPassword=0
+id=
+pw=
+
 [network]
 ip=127.0.0.1
 port=7029

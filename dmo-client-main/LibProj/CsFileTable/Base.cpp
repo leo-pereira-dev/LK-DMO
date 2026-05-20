@@ -22,6 +22,8 @@ void CsBaseJumpBuster::Delete()
 
 void CsBaseJumpBuster::Insert( DWORD nDestMapID )
 {
-	assert_cs( m_mapJumpMapID.find( nDestMapID ) == m_mapJumpMapID.end() );
+	if( m_mapJumpMapID.find( nDestMapID ) != m_mapJumpMapID.end() )
+		return;
+
 	m_mapJumpMapID[ nDestMapID ] = nDestMapID;
 }

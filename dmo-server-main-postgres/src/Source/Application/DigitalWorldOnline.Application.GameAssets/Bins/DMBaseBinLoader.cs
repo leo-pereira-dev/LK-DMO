@@ -133,7 +133,37 @@ public sealed class DMBaseBinLoader
                 dests[j] = (int)r.ReadUInt32();
             map[itemId] = dests;
         }
-        return map;
+
+        return NormalizeJumpBusterDestinations(map);
+    }
+
+    private static Dictionary<int, IReadOnlyList<int>> NormalizeJumpBusterDestinations(
+        Dictionary<int, IReadOnlyList<int>> destinations)
+    {
+        const int datsCenterMapId = 3;
+        const int dTerminalMapId = 2;
+        const int allAreaMinimumDestinations = 20;
+
+        foreach (var itemId in destinations.Keys.ToArray())
+        {
+            var normalized = destinations[itemId]
+                .Select(x => x == 1 ? datsCenterMapId : x)
+                .Distinct()
+                .ToList();
+            var allAreaScope = normalized.Count >= allAreaMinimumDestinations;
+
+            normalized.Add(datsCenterMapId);
+
+            if (allAreaScope)
+                normalized.Add(dTerminalMapId);
+
+            destinations[itemId] = normalized
+                .Distinct()
+                .OrderBy(x => x)
+                .ToArray();
+        }
+
+        return destinations;
     }
 
     private static Dictionary<int, DMBaseGuildLevelConfig> ReadGuildLevels(BinaryReader r)

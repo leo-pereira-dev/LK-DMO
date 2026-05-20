@@ -108,10 +108,11 @@ bool cJumpBuster::_CheckMapList( CsWorldMap* pZone )
 	std::list< CsAreaMap* >::iterator itEnd = pList->end();
 	for( ; it!=itEnd; ++it )
 	{
-		if( g_pDataMng->GetMapRegion()->IsOpenedMap( ( *it )->GetInfo()->s_nMapID ) == false )
+		int nMapID = ( *it )->GetInfo()->s_nMapID;
+		if( g_pDataMng->GetMapRegion()->IsOpenedMap( nMapID ) == false )
 			continue;
 
-		if( nsCsFileTable::g_pBaseMng->IsUseJumpBuster( m_nJumpBusterItemID, ( *it )->GetInfo()->s_nMapID ) == true )
+		if( nsCsFileTable::g_pBaseMng->IsUseJumpBuster( m_nJumpBusterItemID, nMapID ) == true )
 			return true;
 	}
 	return false;
@@ -163,10 +164,10 @@ void cJumpBuster::_MakeMapList( CsWorldMap* pZone )
 	std::list< CsAreaMap* >::iterator itEnd = pList->end();
 	for( ; it!=itEnd; ++it )
 	{
-		if( g_pDataMng->GetMapRegion()->IsOpenedMap( ( *it )->GetInfo()->s_nMapID ) == false )
+		DWORD dwMapID = ( *it )->GetInfo()->s_nMapID;
+		if( g_pDataMng->GetMapRegion()->IsOpenedMap( dwMapID ) == false )
 			continue;
 
-		DWORD dwMapID = ( *it )->GetInfo()->s_nMapID;
 		if( nsCsFileTable::g_pBaseMng->IsUseJumpBuster( m_nJumpBusterItemID, dwMapID ) == false )
 			continue;			
 

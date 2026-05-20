@@ -130,6 +130,8 @@ bool CsBaseMng::Init( char* cPath )
 		assert_cs( false );
 	}
 
+	_NormalizeJumpBusterDestinations();
+
 	return true;
 }
 
@@ -253,6 +255,29 @@ void CsBaseMng::_LoadExcel()
 
 	_LoadExcel_DSkillMaxLevel();
 	_LoadExcel_DskillOpenExpansion();
+}
+
+void CsBaseMng::_NormalizeJumpBusterDestinations()
+{
+	const DWORD DATS_CENTER_MAP_ID = 3;
+	const DWORD D_TERMINAL_MAP_ID = 2;
+	const size_t ALL_AREA_MIN_DESTINATIONS = 20;
+
+	MAP_JUMPBUSTER_IT it = m_mapJumpBuster.begin();
+	MAP_JUMPBUSTER_IT itEnd = m_mapJumpBuster.end();
+	for( ; it != itEnd; ++it )
+	{
+		if( it->second == NULL )
+			continue;
+
+		std::map< DWORD, DWORD >* pDestinations = it->second->GetMap();
+		bool bAllAreaScope = pDestinations && pDestinations->size() >= ALL_AREA_MIN_DESTINATIONS;
+
+		it->second->Insert( DATS_CENTER_MAP_ID );
+
+		if( bAllAreaScope )
+			it->second->Insert( D_TERMINAL_MAP_ID );
+	}
 }
 
 void CsBaseMng::_LoadExcel_TamerDigimon()

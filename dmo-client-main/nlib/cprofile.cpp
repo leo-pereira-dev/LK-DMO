@@ -32,6 +32,11 @@ void cProfile::Write(const char* section, const char* value, int data)
 	m_ini.sections[section][value] = std::to_string(data);
 }
 
+void cProfile::Write(const char* section, const char* value, const char* data)
+{
+	m_ini.sections[section][value] = data ? data : "";
+}
+
 int cProfile::GetInt(const char* section, const char* value)
 {
 	int ret = -1;

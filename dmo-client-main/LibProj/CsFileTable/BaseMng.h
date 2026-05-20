@@ -270,6 +270,7 @@ protected:
 
 	void			_LoadExcel_DSkillMaxLevel();
 	void			_LoadExcel_DskillOpenExpansion();
+	void			_NormalizeJumpBusterDestinations();
 
 public:
 	void			SaveBin( char* cPath );	

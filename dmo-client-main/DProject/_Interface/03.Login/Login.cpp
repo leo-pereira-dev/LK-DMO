@@ -13,6 +13,7 @@ m_pEditBoxPW(NULL),
 m_pLoginBtn(NULL),
 m_pExitBtn(NULL),
 m_pIDSaveCheckBox(NULL),
+m_pRememberPasswordCheckBox(NULL),
 m_pUseBarcodeCheckBox(NULL),
 m_pConfigeBtn(NULL),
 m_pHomePageBtn(NULL)
@@ -198,6 +199,20 @@ void CLogin::_MakeLoginWindow(bool bVisible)
 		m_pEditBoxID->SetText( szID );
 #endif
 
+	m_pRememberPasswordCheckBox = m_LogIn.AddCheckBox( CsPoint( 46, 232 ), CsPoint( 24, 24 ), CsPoint( 0, 24 ), "CommonUI\\checkbox.tga", cWindow::SD_Wi1 );
+	if( m_pRememberPasswordCheckBox )
+	{
+		m_pRememberPasswordCheckBox->SetCheck( IsRememberPasswordEnabled() );
+		m_pRememberPasswordCheckBox->AddEvent(cCheckBox::BUTTON_LBUP_EVENT, this, &CLogin::PressRememberPasswordCheckBox);
+	}
+
+	{
+		cText::sTEXTINFO ti;
+		ti.Init( &g_pEngine->m_FontText, CFont::FS_13, NiColor(0.28,0.6,1.0) );
+		ti.SetText( _T( "Remember PW" ) );
+		m_LogIn.AddText( &ti, CsPoint( 72, 239 ) );
+	}
+
 	m_pLoginBtn = m_LogIn.AddButton( CsPoint(239,240), CsPoint( 137, 46 ), CsPoint( 0, 46 ), "CommonUI\\Simple_btn_S.tga", cWindow::SD_Bu3 );
 	if( m_pLoginBtn )
 	{
@@ -260,7 +275,8 @@ void CLogin::SetFocusEdit()
 	SAFE_POINTER_RET( m_pEditBoxPW );
 
 #ifdef USE_DMO_INI
-	SetAccountInfoFromIni();
+	if( IsRememberPasswordEnabled() )
+		SetAccountInfoFromIni();
 #endif
 
 	TCHAR const* pId = m_pEditBoxID->GetTextAll();
@@ -321,6 +337,9 @@ BOOL CLogin::UpdateMouse()
 			return TRUE;
 
 		if(m_pIDSaveCheckBox && m_pIDSaveCheckBox->Update_ForMouse() == cCheckBox::ACTION_CLICK )
+			return TRUE;
+
+		if(m_pRememberPasswordCheckBox && m_pRememberPasswordCheckBox->Update_ForMouse() == cCheckBox::ACTION_CLICK )
 			return TRUE;
 
 		if(m_pUseBarcodeCheckBox && m_pUseBarcodeCheckBox->Update_ForMouse() == cCheckBox::ACTION_CLICK )
@@ -561,6 +580,12 @@ void CLogin::PressLoginButton( void* pSender, void* pData )
 
 		}
 	}
+
+#ifdef USE_DMO_INI
+	if( IsRememberPasswordEnabled() )
+		SaveAccountInfoToIni();
+#endif
+
 	GetSystem()->TryToLogin( userid.c_str(), userpw.c_str() );
 }
 
@@ -582,28 +607,73 @@ void CLogin::PressIDSaveCheckBox( void* pSender, void* pData )
 		GetSystem()->ToggleIDSaveCheckBox( pCheck->IsCheck() );
 }
 
+void CLogin::PressRememberPasswordCheckBox( void* pSender, void* pData )
+{
+	cCheckBox * pCheck = static_cast< cCheckBox*>(pSender);
+	SAFE_POINTER_RET(pCheck);
+
+	cProfile x("./dmo.ini");
+	x.Write("login", "RememberPassword", pCheck->IsCheck() ? 1 : 0);
+
+	if( pCheck->IsCheck() )
+		SetAccountInfoFromIni();
+}
+
+bool CLogin::IsRememberPasswordEnabled()
+{
+	cProfile x("./dmo.ini");
+	return x.GetInt("login", "RememberPassword") == 1;
+}
+
 void CLogin::SetAccountInfoFromIni()
 {
 	SAFE_POINTER_RET(m_pEditBoxID);
 	SAFE_POINTER_RET(m_pEditBoxPW);
 
 	cProfile x("./dmo.ini");
+	std::string id = x.GetStr("login", "id");
+	std::string pw = x.GetStr("login", "pw");
 
+	if( id.empty() )
+	{
 #ifdef VERSION_USA
-	m_pEditBoxID->SetText( nBase::m2w( x.GetStr("network_eng", "id") ).c_str());
-	m_pEditBoxPW->SetText( nBase::m2w( x.GetStr("network_eng", "pw") ).c_str());
+		id = x.GetStr("network_eng", "id");
+		pw = x.GetStr("network_eng", "pw");
+		if( id.empty() )
+		{
+			id = x.GetStr("network", "id");
+			pw = x.GetStr("network", "pw");
+		}
 #elif defined VERSION_TH
-	m_pEditBoxID->SetText( nBase::m2w( x.GetStr("network_tha", "id") ).c_str());
-	m_pEditBoxPW->SetText( nBase::m2w( x.GetStr("network_tha", "pw") ).c_str());
+		id = x.GetStr("network_tha", "id");
+		pw = x.GetStr("network_tha", "pw");
 #elif defined VERSION_TW
-	m_pEditBoxID->SetText( nBase::m2w( x.GetStr("network_taiwan", "id") ).c_str());
-	m_pEditBoxPW->SetText( nBase::m2w( x.GetStr("network_taiwan", "pw") ).c_str());
+		id = x.GetStr("network_taiwan", "id");
+		pw = x.GetStr("network_taiwan", "pw");
 #elif defined VERSION_HK
-	m_pEditBoxID->SetText( nBase::m2w( x.GetStr("network_hongkong", "id") ).c_str());
-	m_pEditBoxPW->SetText( nBase::m2w( x.GetStr("network_hongkong", "pw") ).c_str());
+		id = x.GetStr("network_hongkong", "id");
+		pw = x.GetStr("network_hongkong", "pw");
 #else
-	m_pEditBoxID->SetText( nBase::m2w( x.GetStr("network", "id") ).c_str());
-	m_pEditBoxPW->SetText( nBase::m2w( x.GetStr("network", "pw") ).c_str());
+		id = x.GetStr("network", "id");
+		pw = x.GetStr("network", "pw");
 #endif
+	}
+
+	m_pEditBoxID->SetText( nBase::m2w( id ).c_str());
+	m_pEditBoxPW->SetText( nBase::m2w( pw ).c_str());
+}
+
+void CLogin::SaveAccountInfoToIni()
+{
+	SAFE_POINTER_RET(m_pEditBoxID);
+	SAFE_POINTER_RET(m_pEditBoxPW);
+
+	std::wstring userid = m_pEditBoxID->GetTextAll();
+	std::wstring userpw = m_pEditBoxPW->GetTextAll();
+
+	cProfile x("./dmo.ini");
+	x.Write("login", "RememberPassword", 1);
+	x.Write("login", "id", nBase::w2m( userid ).c_str());
+	x.Write("login", "pw", nBase::w2m( userpw ).c_str());
 }
 // @@ 여기까지

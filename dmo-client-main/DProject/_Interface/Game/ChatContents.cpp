@@ -34,6 +34,7 @@ namespace
 		int asciiCount = 0;
 		int extendedLatinCount = 0;
 		int suspiciousCount = 0;
+		int hangulCount = 0;
 
 		for( size_t i = 0; i < text.length(); ++i )
 		{
@@ -48,7 +49,12 @@ namespace
 				continue;
 			}
 			if( ch >= 0xAC00 && ch <= 0xD7AF )
-				return false;
+			{
+				++hangulCount;
+				if( ch == 0xCD2B )
+					++suspiciousCount;
+				continue;
+			}
 			if( ch >= 0x3040 && ch <= 0x30FF )
 				return false;
 			if( ch >= 0x4E00 && ch <= 0x9FFF )
@@ -89,7 +95,75 @@ namespace
 
 		return suspiciousCount >= 2 ||
 			( suspiciousCount > 0 && extendedLatinCount >= 3 ) ||
+			( suspiciousCount > 0 && hangulCount > 0 && asciiCount <= 8 ) ||
 			( extendedLatinCount >= 6 && asciiCount <= 8 );
+	}
+
+	inline bool HasHangul( std::wstring const& text )
+	{
+		for( size_t i = 0; i < text.length(); ++i )
+		{
+			wchar_t ch = text[ i ];
+			if( ch >= 0xAC00 && ch <= 0xD7AF )
+				return true;
+		}
+		return false;
+	}
+
+	inline bool IsSystemChatType( int nType )
+	{
+		return nType == NS_CHAT::NORMAL_TEXT ||
+			nType == NS_CHAT::NOTICE ||
+			nType == NS_CHAT::DIGIMON_TIP ||
+			nType == NS_CHAT::DEBUG_TEXT;
+	}
+
+	inline void ReplaceAll( std::wstring& text, wchar_t const* from, wchar_t const* to )
+	{
+		std::wstring source( from );
+		std::wstring target( to );
+		size_t pos = 0;
+		while( ( pos = text.find( source, pos ) ) != std::wstring::npos )
+		{
+			text.replace( pos, source.length(), target );
+			pos += target.length();
+		}
+	}
+
+	inline std::wstring TranslateKnownKoreanChatText( std::wstring text, int nType )
+	{
+		if( !IsSystemChatType( nType ) || !HasHangul( text ) )
+			return text;
+
+		ReplaceAll( text, L"\xC2A4\xCF00\xC77C \xC99D\xAC00\xAC12", L"Scale increase value" );
+		ReplaceAll( text, L"\xB0B4\xC5D0 \xC874\xC7AC\xD558\xC9C0 \xC54A\xB294", L"not found in sync" );
+		ReplaceAll( text, L"\xC874\xC7AC\xD558\xC9C0 \xC54A\xB294", L"Missing" );
+		ReplaceAll( text, L"\xC798\xBABB\xB41C \xB300\xC0C1", L"Invalid target" );
+		ReplaceAll( text, L"\xD0C0\xAC9F\xC744 \xCC3E\xC9C0 \xBABB\xCC3E\xC74C", L"Target not found" );
+		ReplaceAll( text, L"\xC815\xBCF4 \xBABB\xCC3E\xC74C", L"info not found" );
+		ReplaceAll( text, L"\xBABB\xCC3E\xC74C", L"not found" );
+		ReplaceAll( text, L"\xBC84\xD504\xCF54\xB4DC", L"BuffCode" );
+		ReplaceAll( text, L"\xAC70\xB9AC \xC624\xB958", L"range error" );
+		ReplaceAll( text, L"\xC694\xAD6C\xCE58", L"required" );
+		ReplaceAll( text, L"\xD604\xC7AC", L"current" );
+		ReplaceAll( text, L"\xC560\xB2C8 \xC815\xC9C0", L"Animation paused" );
+		ReplaceAll( text, L"UID \xC5C6\xC74C", L"UID missing" );
+		ReplaceAll( text, L"\xB4F1\xB85D \xC131\xACF5", L"registered successfully" );
+		ReplaceAll( text, L"\xC0AD\xC81C \xC131\xACF5", L"deleted successfully" );
+		ReplaceAll( text, L"\xC0AC\xC6A9 \xC131\xACF5", L"used successfully" );
+		ReplaceAll( text, L"\xC544\xC774\xD15C\xC774 \xBD80\xC871\xD569\xB2C8\xB2E4.", L"Not enough items." );
+		ReplaceAll( text, L"\xBD09\xC778 \xD574\xC81C \xC544\xC774\xD15C \xC218\xB7C9\xC774 \xBD80\xC871\xD569\xB2C8\xB2E4.", L"Not enough seal opener items." );
+		ReplaceAll( text, L"\xBC00\xBD09 \xC544\xC774\xD15C\xC758 \xC218\xB7C9\xC774 \xBD80\xC871\xD569\xB2C8\xB2E4.", L"Not enough reseal items." );
+		ReplaceAll( text, L"\xAC19\xC740 \xC885\xB958\xC758 \xC530\xC740 \xCD5C\xB300 3000\xAC1C\xAE4C\xC9C0\xB9CC \xB4F1\xB85D\xD560 \xC218 \xC788\xC2B5\xB2C8\xB2E4.", L"You can register up to 3000 seals of the same type." );
+		ReplaceAll( text, L"\xB9C8\xC2A4\xD130 \xC530\xB9CC \xB9AC\xB354\xB85C \xC124\xC815\xD560 \xC218 \xC788\xC2B5\xB2C8\xB2E4.", L"Only master seals can be set as leader." );
+		ReplaceAll( text, L"\xBA3C\xC800 \xB9AC\xB354\xB97C \xD574\xC81C\xD55C \xB4A4 \xB2E4\xC2DC \xC2DC\xB3C4\xD574\xC8FC\xC138\xC694.", L"Unset the leader first, then try again." );
+		ReplaceAll( text, L"\xC774 \xC801\xC6A9\xB418\xC5C8\xC2B5\xB2C8\xB2E4.", L" has been applied." );
+		ReplaceAll( text, L"\xC774 \xBC00\xBD09\xB418\xC5C8\xC2B5\xB2C8\xB2E4.", L" has been sealed." );
+		ReplaceAll( text, L"\xD53C\xB178\xD0A4\xBAAC \xC774\xBCA4\xD2B8 \xC708\xB3C4\xC6B0 \xC0DD\xC131 \xC2E4\xD328", L"Failed to create Pinokimon event window." );
+		ReplaceAll( text, L"\xC2A4\xD0AC", L"Skill" );
+		ReplaceAll( text, L"\xBAAC\xC2A4\xD130", L"Monster" );
+
+		return text;
 	}
 }
 
@@ -1227,6 +1301,7 @@ void ChatContents::_GetUserName(int _type, TCHAR* _pName, TCHAR const* _pText)
 bool ChatContents::_SetText( uint nOwnerUID, TCHAR const* szText, int nType /* = NS_CHAT::NORMAL */, int nValue /* = 0 */ )
 {
 	std::wstring safeText = NormalizeChatText( szText );
+	safeText = TranslateKnownKoreanChatText( safeText, nType );
 	if( safeText.empty() )
 		return false;
 	if( IsMojibakeChatText( safeText ) )
@@ -1255,6 +1330,7 @@ bool ChatContents::_SetText( uint nOwnerUID, TCHAR const* szText, int nType /* =
 void ChatContents::_SetText( TCHAR const* szText, int nType /* = NS_CHAT::NORMAL */, int nValue /* = 0 */ )
 {
 	std::wstring safeText = NormalizeChatText( szText );
+	safeText = TranslateKnownKoreanChatText( safeText, nType );
 	if( safeText.empty() )
 		return;
 	if( IsMojibakeChatText( safeText ) )

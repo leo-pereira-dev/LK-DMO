@@ -239,6 +239,26 @@ Schema: dso
   - Runtime log: `Log\ChatRenderTrace_client.txt` beside the running exe.
   - Each line records chat type, value, string length, whether it was blocked,
     and the first codepoints.
+- Follow-up for the persistent cyan/green static spam:
+  - User identified one visible character as `촫` (`U+CD2B`), which is a strong
+    mojibake signature in the malformed chat line.
+  - Extended the chat garbage detector to treat `U+CD2B` plus nearby Latin-1
+    mojibake as suspicious while still allowing normal Korean/Hangul text.
+  - Added a second defensive gate directly in `ChatMainWindow::StringListRender()`
+    because the previous `ADDSTRING_UPDATE` trace only saw normal chat/system
+    messages, meaning the spam could already be resident in the visible list or
+    entering below the prior hook.
+  - Added runtime log `Log\ChatVisibleTrace_client.txt`; it records blocked
+    visible-list lines and Hangul lines using codepoints without logging every
+    normal frame render.
+  - Added a small system-chat Korean translation pass in `ChatContents` for known
+    debug/system phrases, using Unicode escape literals in source to avoid
+    source-file encoding corruption.
+- Latest successful client build/copy for this follow-up:
+  - `C:\Release\GSP\DProject_R_ENG.exe`
+  - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`
+  - `D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe`
+  - timestamp `2026-05-19 21:25:41`, size `10840064`.
 - Last successful client build/copy for this fix:
   - `C:\Release\GSP\DProject_R_ENG.exe`
   - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`

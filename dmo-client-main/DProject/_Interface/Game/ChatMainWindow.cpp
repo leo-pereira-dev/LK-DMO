@@ -22,7 +22,8 @@ namespace
 		int asciiOther = 0;
 		int extendedLatin = 0;
 		int suspicious = 0;
-		bool hasCjk = false;
+		int hangul = 0;
+		bool hasOtherCjk = false;
 
 		for( size_t i = 0; i < text.length(); ++i )
 		{
@@ -32,11 +33,15 @@ namespace
 			if( ch < 0x20 )
 				return true;
 			if( ch >= 0xAC00 && ch <= 0xD7AF )
-				hasCjk = true;
+			{
+				++hangul;
+				if( ch == 0xCD2B )
+					++suspicious;
+			}
 			if( ch >= 0x3040 && ch <= 0x30FF )
-				hasCjk = true;
+				hasOtherCjk = true;
 			if( ch >= 0x4E00 && ch <= 0x9FFF )
-				hasCjk = true;
+				hasOtherCjk = true;
 			if( ( ch >= L'A' && ch <= L'Z' ) ||
 				( ch >= L'a' && ch <= L'z' ) ||
 				( ch >= L'0' && ch <= L'9' ) )
@@ -83,12 +88,24 @@ namespace
 			}
 		}
 
-		if( hasCjk )
+		if( hasOtherCjk || ( hangul > 0 && suspicious == 0 ) )
 			return false;
 
 		return suspicious >= 2 ||
 			( suspicious > 0 && extendedLatin >= 3 ) ||
+			( suspicious > 0 && hangul > 0 && asciiAlphaNum <= 8 ) ||
 			( extendedLatin >= 6 && asciiAlphaNum <= 8 && asciiOther <= 8 );
+	}
+
+	bool HasHangulText( std::wstring const& text )
+	{
+		for( size_t i = 0; i < text.length(); ++i )
+		{
+			wchar_t ch = text[ i ];
+			if( ch >= 0xAC00 && ch <= 0xD7AF )
+				return true;
+		}
+		return false;
 	}
 
 	void TraceChatRender( NS_CHAT::TYPE eType, int nValue, std::wstring const& text, bool blocked )
@@ -114,6 +131,52 @@ namespace
 			"%04u-%02u-%02u %02u:%02u:%02u.%03u type=%d value=%d len=%u blocked=%d cps=",
 			st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, st.wMilliseconds,
 			static_cast<int>( eType ), nValue, static_cast<unsigned int>( text.length() ), blocked ? 1 : 0 );
+
+		for( size_t i = 0; i < text.length() && i < 96; ++i )
+		{
+			if( offset < 0 || offset >= static_cast<int>( sizeof( line ) ) - 16 )
+				break;
+			offset += sprintf_s( line + offset, sizeof( line ) - offset, "%04X ", static_cast<unsigned int>( text[ i ] ) );
+		}
+
+		if( offset >= 0 && offset < static_cast<int>( sizeof( line ) ) - 3 )
+			offset += sprintf_s( line + offset, sizeof( line ) - offset, "\r\n" );
+
+		if( offset > 0 )
+		{
+			DWORD written = 0;
+			WriteFile( hFile, line, static_cast<DWORD>( offset ), &written, NULL );
+		}
+
+		CloseHandle( hFile );
+	}
+
+	void TraceChatVisible( int eType, std::wstring const& text, bool blocked )
+	{
+		if( !blocked && !HasHangulText( text ) )
+			return;
+
+		CreateDirectoryA( "Log", NULL );
+
+		HANDLE hFile = CreateFileA( "Log\\ChatVisibleTrace_client.txt",
+			FILE_APPEND_DATA,
+			FILE_SHARE_READ | FILE_SHARE_WRITE,
+			NULL,
+			OPEN_ALWAYS,
+			FILE_ATTRIBUTE_NORMAL,
+			NULL );
+
+		if( hFile == INVALID_HANDLE_VALUE )
+			return;
+
+		SYSTEMTIME st;
+		GetLocalTime( &st );
+
+		char line[4096] = { 0, };
+		int offset = sprintf_s( line, sizeof( line ),
+			"%04u-%02u-%02u %02u:%02u:%02u.%03u type=%d len=%u blocked=%d cps=",
+			st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, st.wMilliseconds,
+			eType, static_cast<unsigned int>( text.length() ), blocked ? 1 : 0 );
 
 		for( size_t i = 0; i < text.length() && i < 96; ++i )
 		{
@@ -605,6 +668,19 @@ void ChatMainWindow::StringListRender()
 		{
 			--nRemainPos;
 			continue;
+		}
+		cString::sTEXT* pText = dynamic_cast<cString::sTEXT*>( pStr->FindElement( cString::sELEMENT::TEXT ) );
+		if( pText != NULL )
+		{
+			TCHAR const* szVisibleText = pText->s_Text.GetText();
+			if( szVisibleText != NULL )
+			{
+				std::wstring visibleText( szVisibleText );
+				bool bBlockedGarbage = IsSuspiciousChatGarbage( visibleText );
+				TraceChatVisible( eChatType, visibleText, bBlockedGarbage );
+				if( bBlockedGarbage )
+					continue;
+			}
 		}
 		pStr->Render( pos );	// 채팅 출력
 		pos.y -= LINE_HEIGHT;	// 한줄 사이즈만큼

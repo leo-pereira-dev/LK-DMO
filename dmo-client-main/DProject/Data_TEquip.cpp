@@ -214,7 +214,7 @@ void cData_TEquip::ToInven( int nEquipIndex, int nInvenIndex )
 		CopyItemInfoFields( *pInven->GetData( nInvenIndex ), *GetData( nEquipIndex ) );
 
 		// 장비 창에서 빼주자
-		SetData( nEquipIndex, NULL, false );
+		SetData( nEquipIndex, NULL, true );
 	}
 	// 차 있는 인벤 인가
 	else
@@ -240,7 +240,7 @@ void cData_TEquip::ToInven( int nEquipIndex, int nInvenIndex )
 		SetImpute( &Temp );
 
 		// 장비 창에 넣어주자		
-		SetData( nEquipIndex, &Temp, false );
+		SetData( nEquipIndex, &Temp, true );
 	}
 
 #ifdef UI_INVENTORY_RENEWAL

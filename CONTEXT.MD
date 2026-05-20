@@ -121,6 +121,27 @@ Schema: dso
 - Fixed character selection/loading issues that originally caused a white screen
   or non-responsive client after selecting a character.
 - Added and later reduced diagnostics as packet formats became clear.
+- Added a user-facing "Remember PW" checkbox to the login box.
+  - Runtime setting is stored in `dmo.ini` under `[login]`, not under `[DEBUG]`,
+    because this is a user feature rather than a debug/server environment flag.
+  - Expected keys:
+
+    ```ini
+    [login]
+    RememberPassword=0
+    id=
+    pw=
+    ```
+
+  - When `RememberPassword=1`, the login screen auto-fills ID/PW.
+  - New credentials are saved back to `[login]` when logging in while the
+    checkbox is enabled.
+  - For backward compatibility, if `[login] id/pw` are empty the client falls
+    back to `[network_eng] id/pw`, then `[network] id/pw`.
+  - `dmo.ini.example` and the local `ClientDist\dmo.ini` were updated with the
+    new `[login]` section.
+  - `cProfile` now supports writing string values, not only integers, so the
+    client can persist the remembered ID/PW through the existing ini wrapper.
 
 ### PostgreSQL compatibility fixes
 
@@ -270,6 +291,36 @@ Schema: dso
   - Built `DigitalWorldOnline.Game.csproj` successfully and published the
     `game` service with `docker compose up -d --build game`.
   - Container `dmo-pg-game` started cleanly and loaded all bins after publish.
+- Final DATS / D-Terminal follow-up:
+  - The initial "All Area can show DATS/D-Terminal" approach was replaced
+    because it was too item-specific.
+  - Investigation showed current world-map/jump data uses:
+    - D-Terminal: `mapId 2`
+    - DATS Center: `mapId 3`
+    - old/legacy DATS id: `mapId 1`
+  - Client-side data normalization now happens during base table load:
+    - `CsBaseMng::_NormalizeJumpBusterDestinations()` adds DATS `3` to all
+      jump booster destination sets.
+    - It adds D-Terminal `2` to broad/all-area-style boosters, detected by
+      destination count instead of hardcoding item `9801`.
+    - `CsBaseJumpBuster::Insert()` is idempotent so normalized duplicates do
+      not assert/crash.
+  - Client map-open checks now treat legacy DATS `1` as DATS `3`, and treat
+    DATS/D-Terminal as base opened hub maps.
+  - Server-side `DMBaseBinLoader.ReadJumpBuster()` applies the same
+    normalization:
+    - maps destination `1 -> 3`,
+    - adds DATS `3` to all jump booster lists,
+    - adds D-Terminal `2` to all-area-scope destination lists.
+  - The normal and tamer/all-area jump processors now validate against the
+    normalized `DMBase.bin -> JumpBusterDestinations` data instead of carrying
+    special-case allow logic.
+  - Latest client rebuild/copy after this normalization:
+    - `C:\Release\GSP\DProject_R_ENG.exe`
+    - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`
+  - Latest Docker publish after this normalization:
+    - `docker compose up -d --build game`
+    - `dmo-pg-game` started cleanly.
 
 ### Megaphone / shout systems
 

@@ -192,6 +192,10 @@ Schema: dso
   repeated reloads clear old quest state instead of appending or asserting on
   existing entries.
 - Client build verification was done with `Release_English|Win32`.
+- User confirmed quests now load and are visible through NPC/Digivice UI.
+- Important remaining validation: quest acceptance, progress tracking,
+  completion/reward delivery, and persistence after relog have not been tested
+  yet. Current confirmation covers visibility/loading only.
 
 ### GM tools / GM panel
 

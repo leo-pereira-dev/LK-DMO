@@ -1,6 +1,6 @@
 # LK-DMO Technical Context
 
-Last updated: 2026-05-19
+Last updated: 2026-05-20
 
 This document is the working memory for the LK-DMO workspace in `C:\0-NewDmo`.
 It summarizes the main fixes, migration work, build notes, and packet/protocol
@@ -171,6 +171,105 @@ Schema: dso
 - Adjusted inventory expansion handling so the expansion item increases usable
   slots instead of treating existing empty slots as failure.
 - User confirmed the later iteration worked.
+
+### Usable items / consumables
+
+- Investigated usable items after the inventory expansion fix because several
+  valid items still returned incorrect client messages:
+  - seal box / container-style items eventually worked,
+  - HP/DS recovery items such as `Special Chicken Combo` still failed,
+  - the client displayed misleading messages such as "Inventory is full" or
+    "Item function is not connected".
+- Important terminology: an item `SkillCode` / `SkillId` is not necessarily a
+  player-cast skill. For items it usually points to a `Skill_Code` row from
+  `DM_Item_List`, which describes the technical effect to apply.
+  - `ItemId` identifies the item.
+  - `SkillCode` identifies the effect row.
+  - `SkillInfo.Apply[]` contains the actual behavior, such as HP, DS, EXP,
+    movement speed, attack, buff code, percent/default value, etc.
+- Client reference points:
+  - `LibProj/CsFileTable/ItemMng.cpp` reads the item `Skill` field.
+  - `LibProj/CsFileTable/SkillMng.cpp` loads `DM_Item_List -> Skill_Code`.
+  - `DProject/_Interface/Game/ToolTip_Item.cpp` uses `s_dwSkill` to render item
+    effect text.
+- Server reference points:
+  - `AssetsLoader.cs` maps `ItemAssetModel.SkillCode` to `SkillCodeInfo`.
+  - `ItemConsumePacketProcessor.cs` applies `SkillInfo.Apply[]` when the item is
+    consumed.
+- Fixed the consumable flow in `ItemConsumePacketProcessor.cs`:
+  - reloads runtime `ItemInfo` from assets if an inventory item is missing or has
+    stale metadata,
+  - resolves missing skill info from both database assets and `ItemList.bin`,
+  - treats item types `61` and `71` as food/recovery consumables,
+  - accepts `Percent`, `AlsoPercent`, `Unknown105`, and `Default` apply rows for
+    HP/DS style recovery,
+  - infers target `Both` for recovery consumables when the target field is
+    missing/unavailable but the applies clearly restore HP/DS,
+  - correctly applies tamer DS to the tamer instead of accidentally applying it
+    to the partner in the `Tamer` target branch,
+  - refreshes current HP/DS resource packets and HP rate packets after applying
+    a consumable,
+  - logs unsupported applies with item id, type, target, skill code, and apply
+    summary for future debugging.
+- Disabled the old `ItemTap` validation as a use allow-list. In this client data
+  it is tab/category metadata, and using it as a gate rejected valid usable
+  items such as recovery consumables, warehouse/inventory expansion, buffs, and
+  containers.
+- Adjusted failure packet mapping so unrelated validation failures do not show
+  the inventory-full style message.
+- Client diagnostics were added in `cCliGameReceive.cpp` for item-use failures,
+  and `USE_FAIL_NOT_USE_TERMS` now maps to the more accurate "item function is
+  not connected" style message instead of the previous misleading text.
+- `ItemAssetModel.SetSkillInfo(...)` now allows replacing null/stale skill info
+  with a resolved non-null skill model, while still preserving already-loaded
+  valid skill info.
+- Server build and Docker game publish were performed after the fix. User
+  confirmed HP/DS consumables now work.
+
+### Jump boosters / All Area jump booster
+
+- Normal jump booster:
+  - The `Release_English|Win32` client does not define
+    `SDM_VIP_SYSTEM_20181105`, so it sends the jump booster request without the
+    leading VIP byte.
+  - The server originally always read `vip + slot + mapId`, which misaligned
+    the payload for this build.
+  - `JumpBoosterPacketProcessor.cs` now accepts both payload shapes:
+    - `vip:u1 + slot:u2 + map:u2`,
+    - `slot:u2 + map:u2`.
+  - Added a log line with packet length, payload length, vip flag, slot, and map
+    id.
+  - User confirmed one regular jump booster path worked after this change.
+- All Area / tamer jump gate:
+  - The All Area flow does not use the normal item-slot jump booster packet.
+  - Client path:
+    - `JumpBuster.cpp` opens/selects the All Area destination.
+    - `MessageBox.cpp` sends `SendTamerActiveSkill(...)` and then
+      `SendTamerJumpGate(9801, mapId)`.
+    - `cCliGameSend.cpp::SendTamerJumpGate` sends `pSkill::RickySkill`.
+    - `common_vs2019/pSkill.h` defines `RickySkill` as packet `1113`.
+  - Server did not have a processor for packet `1113`.
+  - Added `GameServerPacketEnum.TamerJumpBooster = 1113`.
+  - Added `TamerJumpBoosterPacketProcessor.cs`, which reads:
+
+    ```text
+    itemId:u2
+    mapId:u2
+    ```
+
+  - The processor mirrors normal jump validation against
+    `DMBase.bin -> JumpBusterDestinations`, flushes owner storage before map
+    transition, removes the client from the current map, persists tamer and
+    partner locations, marks the tamer as loading, and sends `MapSwapPacket`.
+  - Added a log line:
+
+    ```text
+    Tamer jump booster request: tamer ... packetBytes ... item ... map ...
+    ```
+
+  - Built `DigitalWorldOnline.Game.csproj` successfully and published the
+    `game` service with `docker compose up -d --build game`.
+  - Container `dmo-pg-game` started cleanly and loaded all bins after publish.
 
 ### Megaphone / shout systems
 

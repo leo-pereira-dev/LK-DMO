@@ -50,9 +50,41 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         {
             var packet = new GamePacketReader(packetData);
 
-            var vipEnabled = Convert.ToBoolean(packet.ReadByte());
-            var slot = packet.ReadShort();
-            var mapId = packet.ReadShort();
+            var payloadBytes = packet.Length - 6;
+            if (payloadBytes < 4)
+            {
+                _logger.Warning(
+                    "Invalid jump booster packet from tamer {TamerId}: packetBytes {PacketBytes} payloadBytes {PayloadBytes}.",
+                    client.TamerId,
+                    packetData.Length,
+                    payloadBytes);
+                return;
+            }
+
+            var vipEnabled = false;
+            short slot;
+            short mapId;
+
+            if (payloadBytes >= 5)
+            {
+                vipEnabled = Convert.ToBoolean(packet.ReadByte());
+                slot = packet.ReadShort();
+                mapId = packet.ReadShort();
+            }
+            else
+            {
+                slot = packet.ReadShort();
+                mapId = packet.ReadShort();
+            }
+
+            _logger.Information(
+                "Jump booster request: tamer {TamerId} packetBytes {PacketBytes} payloadBytes {PayloadBytes} vip {Vip} slot {Slot} map {MapId}.",
+                client.TamerId,
+                packetData.Length,
+                payloadBytes,
+                vipEnabled,
+                slot,
+                mapId);
 
             if(mapId == 1 )
             {

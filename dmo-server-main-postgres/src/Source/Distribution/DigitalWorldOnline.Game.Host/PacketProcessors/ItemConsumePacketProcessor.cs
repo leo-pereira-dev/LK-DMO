@@ -12,6 +12,7 @@ using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Extensions;
 using DigitalWorldOnline.Commons.Interfaces;
+using DigitalWorldOnline.Commons.Models.Asset;
 using DigitalWorldOnline.Commons.Models.Base;
 using DigitalWorldOnline.Commons.Models.Character;
 using DigitalWorldOnline.Commons.Models.Config;
@@ -108,6 +109,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return;
             }
 
+            if (!EnsureRuntimeItemInfo(client, itemSlot, targetItem))
+                return;
+
             if (!ValidateItemTap(client, itemSlot, targetItem))
                 return;
 
@@ -130,7 +134,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 targetItem.ItemInfo?.TypeN,
                 targetItem.ItemInfo?.Section);
 
-            if (targetItem.ItemInfo.Type == 60)
+            if (targetItem.ItemInfo.Type == 60 || targetItem.ItemInfo.Type == 78)
             {
 
                 if (targetItem.ItemInfo?.SkillInfo == null)
@@ -450,7 +454,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return;
             }
 
-            if (targetItem.ItemInfo.Type == 61)
+            if (targetItem.ItemInfo.Type == 61 || targetItem.ItemInfo.Type == 71)
             {
                 await ConsumeFoodItem(client, itemSlot, targetItem);
             }
@@ -468,7 +472,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 }
 
             }
-            else if (targetItem.ItemInfo.Type == 63)
+            else if (targetItem.ItemInfo.Type == 63 || targetItem.ItemInfo.Type == 64)
             {
                 await BuffItem(client, itemSlot, targetItem);
             }
@@ -520,7 +524,18 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 await MemorySkillRegister(client, itemSlot, targetItem);
             }
             else
+            {
+                _logger.Warning(
+                    "Unsupported item use request: tamer {TamerId} slot {Slot} item {ItemId} type {Type} typeN {TypeN} section {Section}.",
+                    client.TamerId,
+                    itemSlot,
+                    targetItem.ItemId,
+                    targetItem.ItemInfo.Type,
+                    targetItem.ItemInfo.TypeN,
+                    targetItem.ItemInfo.Section);
+
                 client.Send(new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type));
+            }
         }
 
         /// <summary>
@@ -870,9 +885,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 int mapId = (int)mapDisp.MapId;
                 if (!itemList.MapTypeName.Any(x => x.Type == targetIte.ItemInfo.Type))
                 {
-                    client.Send(new ItemConsumeFailPacket(itemSlot, targetIte.ItemInfo.Type, ItemConsumeFailEnum.ConditionNotMet));
-                    return;
-                }
+                client.Send(new ItemConsumeFailPacket(itemSlot, targetIte.ItemInfo.Type, ItemConsumeFailEnum.OtherError));
+                return;
+            }
 
                 // if (client.Tamer.Location.MapId == mapId)
                 // {
@@ -936,26 +951,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         private bool ValidateItemTap(GameClient client, short itemSlot, ItemModel targetItem)
         {
-            if (targetItem.ItemInfo.Type == 155)
-                return true;
-
-            var taps = _itemListBinLoader.Data.ItemTap;
-            if (taps.Count == 0)
-                return true;
-
-            if (taps.Any(x => x.Type == targetItem.ItemInfo.Type))
-                return true;
-
-            _logger.Warning(
-                "Item use rejected by ItemTap validation: tamer {TamerId} slot {Slot} item {ItemId} type {Type} section {Section}.",
-                client.TamerId,
-                itemSlot,
-                targetItem.ItemId,
-                targetItem.ItemInfo.Type,
-                targetItem.ItemInfo.Section);
-
-            client.Send(new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type, ItemConsumeFailEnum.ConditionNotMet));
-            return false;
+            // ItemTap is inventory tab/category metadata from ItemList.bin, not a pItem::Use allow-list.
+            // Comparing it with Type_L rejects valid usable items like Potion(61), Warehouse+1(156), Buff(63) and Container(170).
+            return true;
         }
 
         private bool ValidateItemCoolTime(GameClient client, short itemSlot, ItemModel targetItem)
@@ -988,7 +986,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (!itemList.ElementItem1.Contains(itemId) && !itemList.ElementItem2.Contains(itemId))
                 return true;
 
-            client.Send(new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type, ItemConsumeFailEnum.ConditionNotMet));
+            client.Send(new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type, ItemConsumeFailEnum.OtherError));
             return false;
         }
 
@@ -997,9 +995,140 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (!_itemListBinLoader.Data.Exchange.Any(x => x.ItemType == targetItem.ItemInfo.Type))
                 return true;
 
-            client.Send(new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type, ItemConsumeFailEnum.ConditionNotMet));
+            client.Send(new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type, ItemConsumeFailEnum.OtherError));
             return false;
         }
+
+        private bool EnsureRuntimeItemInfo(GameClient client, short itemSlot, ItemModel targetItem)
+        {
+            if (targetItem.ItemInfo == null || targetItem.ItemInfo.ItemId != targetItem.ItemId)
+            {
+                var itemInfo = _assets.ItemInfo.FirstOrDefault(x => x.ItemId == targetItem.ItemId);
+                if (itemInfo != null)
+                    targetItem.SetItemInfo(itemInfo);
+            }
+
+            if (targetItem.ItemInfo == null)
+            {
+                _logger.Warning(
+                    "Item use rejected because runtime ItemInfo was missing: tamer {TamerId} slot {Slot} item {ItemId} amount {Amount}.",
+                    client.TamerId,
+                    itemSlot,
+                    targetItem.ItemId,
+                    targetItem.Amount);
+
+                client.Send(
+                    UtilitiesFunctions.GroupPackets(
+                        new ItemConsumeFailPacket(itemSlot, 0, ItemConsumeFailEnum.OtherError).Serialize(),
+                        new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
+                    )
+                );
+
+                return false;
+            }
+
+            ResolveSkillInfo(targetItem);
+            return true;
+        }
+
+        private SkillCodeAssetModel? ResolveSkillInfo(ItemModel targetItem)
+        {
+            if (HasUsableSkillApply(targetItem.ItemInfo?.SkillInfo))
+                return targetItem.ItemInfo?.SkillInfo;
+
+            var skillCode = ResolveItemSkillCode(targetItem);
+
+            if (skillCode == 0)
+                return targetItem.ItemInfo?.SkillInfo;
+
+            var skillInfo = _assets.SkillCodeInfo.FirstOrDefault(x => x.SkillCode == skillCode);
+            if (skillInfo != null)
+                targetItem.ItemInfo?.SetSkillInfo(skillInfo);
+
+            return skillInfo ?? targetItem.ItemInfo?.SkillInfo;
+        }
+
+        private long ResolveItemSkillCode(ItemModel targetItem)
+        {
+            var skillCode = targetItem.ItemInfo?.SkillCode ?? 0;
+            if (skillCode != 0)
+                return skillCode;
+
+            var binItem = _itemListBinLoader.Data.Items.FirstOrDefault(x => x.ItemId == targetItem.ItemId);
+            return binItem?.SkillCode ?? 0;
+        }
+
+        private static bool HasUsableSkillApply(SkillCodeAssetModel? skillInfo)
+        {
+            return skillInfo?.Apply != null && skillInfo.Apply.Any(x => x.Type != SkillCodeApplyTypeEnum.None);
+        }
+
+        private ItemConsumeTargetEnum ResolveItemTarget(ItemModel targetItem, SkillCodeAssetModel? skillInfo)
+        {
+            if (targetItem.ItemInfo?.Target != null && targetItem.ItemInfo.Target != ItemConsumeTargetEnum.Unavailable)
+                return targetItem.ItemInfo.Target;
+
+            var binItem = _itemListBinLoader.Data.Items.FirstOrDefault(x => x.ItemId == targetItem.ItemId);
+            if (binItem?.Target != null && binItem.Target != ItemConsumeTargetEnum.Unavailable)
+                return binItem.Target;
+
+            if (IsRecoveryConsumable(targetItem, skillInfo))
+            {
+                _logger.Warning(
+                    "Consumable item target was unavailable; inferred Both from recovery applies. item {ItemId} type {Type} skillCode {SkillCode}.",
+                    targetItem.ItemId,
+                    targetItem.ItemInfo?.Type,
+                    ResolveItemSkillCode(targetItem));
+
+                return ItemConsumeTargetEnum.Both;
+            }
+
+            return ItemConsumeTargetEnum.Unavailable;
+        }
+
+        private static bool IsRecoveryConsumable(ItemModel targetItem, SkillCodeAssetModel? skillInfo)
+        {
+            if (targetItem.ItemInfo?.Type != 61 && targetItem.ItemInfo?.Type != 71)
+                return false;
+
+            return skillInfo?.Apply?.Any(x =>
+                x.Type != SkillCodeApplyTypeEnum.None &&
+                (x.Attribute == SkillCodeApplyAttributeEnum.HP ||
+                 x.Attribute == SkillCodeApplyAttributeEnum.DS)) == true;
+        }
+
+        private void RefreshConsumableResources(GameClient client)
+        {
+            client.Send(
+                UtilitiesFunctions.GroupPackets(
+                    new UpdateCurrentResourcesPacket(
+                        client.Tamer.GeneralHandler,
+                        (short)client.Tamer.CurrentHp,
+                        (short)client.Tamer.CurrentDs,
+                        0).Serialize(),
+                    new UpdateCurrentResourcesPacket(
+                        client.Tamer.Partner.GeneralHandler,
+                        (short)client.Tamer.Partner.CurrentHp,
+                        (short)client.Tamer.Partner.CurrentDs,
+                        0).Serialize()
+                )
+            );
+
+            var hpRatePacket = UtilitiesFunctions.GroupPackets(
+                new UpdateCurrentHPRatePacket(
+                    client.Tamer.GeneralHandler,
+                    client.Tamer.HpRate).Serialize(),
+                new UpdateCurrentHPRatePacket(
+                    client.Tamer.Partner.GeneralHandler,
+                    client.Tamer.Partner.HpRate).Serialize()
+            );
+
+            if (client.DungeonMap)
+                _dungeonServer.BroadcastForTargetTamers(client.TamerId, hpRatePacket);
+            else
+                _mapServer.BroadcastForTargetTamers(client.TamerId, hpRatePacket);
+        }
+
         private async Task Fruits(GameClient client, short itemSlot, ItemModel targetItem)
         {
             var fruitConfig = _configs.Fruits.FirstOrDefault(x => x.ItemId == targetItem.ItemId);
@@ -1091,46 +1220,65 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         private async Task ConsumeFoodItem(GameClient client, short itemSlot, ItemModel targetItem)
         {
-            if (targetItem.ItemInfo?.SkillInfo == null)
+            var skillInfo = ResolveSkillInfo(targetItem);
+            var skillCode = ResolveItemSkillCode(targetItem);
+            if (!HasUsableSkillApply(skillInfo))
             {
                 client.Send(
                     UtilitiesFunctions.GroupPackets(
-                        new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type).Serialize(),
-                        new SystemMessagePacket($"Invalid skill info for item id {targetItem.ItemId}.").Serialize(),
+                        new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type, ItemConsumeFailEnum.NotUnlocked).Serialize(),
+                        new SystemMessagePacket($"Invalid consumable skill info for item id {targetItem.ItemId}.").Serialize(),
                         new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
                     )
                 );
 
-                _logger.Warning($"Invalid skill info for item id {targetItem.ItemId} and tamer id {client.TamerId}.");
+                _logger.Warning(
+                    "Consumable item use rejected: missing skill apply. tamer {TamerId} slot {Slot} item {ItemId} type {Type} skillCode {SkillCode}.",
+                    client.TamerId,
+                    itemSlot,
+                    targetItem.ItemId,
+                    targetItem.ItemInfo.Type,
+                    skillCode);
                 return;
             }
 
-            foreach (var apply in targetItem.ItemInfo?.SkillInfo.Apply)
+            var itemTarget = ResolveItemTarget(targetItem, skillInfo);
+            var applied = false;
+            var beforeTamerHp = client.Tamer.CurrentHp;
+            var beforeTamerDs = client.Tamer.CurrentDs;
+            var beforePartnerHp = client.Partner.CurrentHp;
+            var beforePartnerDs = client.Partner.CurrentDs;
+
+            foreach (var apply in skillInfo.Apply)
             {
                 switch (apply.Type)
                 {
                     case SkillCodeApplyTypeEnum.Percent:
                     case SkillCodeApplyTypeEnum.AlsoPercent:
+                    case SkillCodeApplyTypeEnum.Unknown105:
                         {
                             switch (apply.Attribute)
                             {
                                 case SkillCodeApplyAttributeEnum.HP:
                                     {
-                                        switch (targetItem.ItemInfo.Target)
+                                        switch (itemTarget)
                                         {
                                             case ItemConsumeTargetEnum.Both:
                                                 {
                                                     client.Tamer.RecoverHp((int)Math.Ceiling((double)(apply.Value) / 100 * client.Tamer.HP));
                                                     client.Partner.RecoverHp((int)Math.Ceiling((double)(apply.Value) / 100 * client.Partner.HP));
+                                                    applied = true;
                                                 }
                                                 break;
 
                                             case ItemConsumeTargetEnum.Digimon:
                                                 client.Partner.RecoverHp((int)Math.Ceiling((double)(apply.Value) / 100 * client.Partner.HP));
+                                                applied = true;
                                                 break;
 
                                             case ItemConsumeTargetEnum.Tamer:
                                                 client.Tamer.RecoverHp((int)Math.Ceiling((double)(apply.Value) / 100 * client.Tamer.HP));
+                                                applied = true;
                                                 break;
                                         }
                                     }
@@ -1138,21 +1286,24 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                                 case SkillCodeApplyAttributeEnum.DS:
                                     {
-                                        switch (targetItem.ItemInfo.Target)
+                                        switch (itemTarget)
                                         {
                                             case ItemConsumeTargetEnum.Both:
                                                 {
                                                     client.Tamer.RecoverDs((int)Math.Ceiling((double)(apply.Value) / 100 * client.Tamer.DS));
                                                     client.Partner.RecoverDs((int)Math.Ceiling((double)(apply.Value) / 100 * client.Partner.DS));
+                                                    applied = true;
                                                 }
                                                 break;
 
                                             case ItemConsumeTargetEnum.Digimon:
                                                 client.Partner.RecoverDs((int)Math.Ceiling((double)(apply.Value) / 100 * client.Partner.DS));
+                                                applied = true;
                                                 break;
 
                                             case ItemConsumeTargetEnum.Tamer:
-                                                client.Partner.RecoverDs((int)Math.Ceiling((double)(apply.Value) / 100 * client.Partner.DS));
+                                                client.Tamer.RecoverDs((int)Math.Ceiling((double)(apply.Value) / 100 * client.Tamer.DS));
+                                                applied = true;
                                                 break;
                                         }
                                     }
@@ -1167,21 +1318,24 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                             {
                                 case SkillCodeApplyAttributeEnum.HP:
                                     {
-                                        switch (targetItem.ItemInfo.Target)
+                                        switch (itemTarget)
                                         {
                                             case ItemConsumeTargetEnum.Both:
                                                 {
                                                     client.Tamer.RecoverHp(apply.Value);
                                                     client.Partner.RecoverHp(apply.Value);
+                                                    applied = true;
                                                 }
                                                 break;
 
                                             case ItemConsumeTargetEnum.Digimon:
                                                 client.Partner.RecoverHp(apply.Value);
+                                                applied = true;
                                                 break;
 
                                             case ItemConsumeTargetEnum.Tamer:
                                                 client.Tamer.RecoverHp(apply.Value);
+                                                applied = true;
                                                 break;
                                         }
                                     }
@@ -1189,12 +1343,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                                 case SkillCodeApplyAttributeEnum.DS:
                                     {
-                                        switch (targetItem.ItemInfo.Target)
+                                        switch (itemTarget)
                                         {
                                             case ItemConsumeTargetEnum.Both:
                                                 {
                                                     client.Tamer.RecoverDs(apply.Value);
                                                     client.Partner.RecoverDs(apply.Value);
+                                                    applied = true;
                                                     client.Send(new UpdateCurrentResourcesPacket(client.Tamer.GeneralHandler, (short)client.Tamer.CurrentHp, (short)client.Tamer.CurrentDs, (short)0));
                                                     client.Send(new UpdateCurrentResourcesPacket(client.Tamer.Partner.GeneralHandler, (short)client.Tamer.Partner.CurrentHp, (short)client.Tamer.Partner.CurrentDs, (short)0));
 
@@ -1229,6 +1384,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                                             case ItemConsumeTargetEnum.Digimon:
                                                 client.Partner.RecoverDs(apply.Value);
+                                                applied = true;
                                                 client.Send(new UpdateCurrentResourcesPacket(client.Tamer.Partner.GeneralHandler, (short)client.Tamer.Partner.CurrentHp, (short)client.Tamer.Partner.CurrentDs, (short)0));
 
                                                 if (client.DungeonMap)
@@ -1243,6 +1399,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                                             case ItemConsumeTargetEnum.Tamer:
                                                 client.Tamer.RecoverDs(apply.Value);
+                                                applied = true;
                                                 client.Send(new UpdateCurrentResourcesPacket(client.Tamer.GeneralHandler, (short)client.Tamer.CurrentHp, (short)client.Tamer.CurrentDs, (short)0));
 
                                                 if (client.DungeonMap)
@@ -1260,12 +1417,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                                 case SkillCodeApplyAttributeEnum.XG:
                                     {
-                                        switch (targetItem.ItemInfo.Target)
+                                        switch (itemTarget)
                                         {
                                             case ItemConsumeTargetEnum.Both:
                                                 {
                                                     client.Tamer.SetXGauge(apply.Value);
                                                     client.Send(new TamerXaiResourcesPacket(client.Tamer.XGauge, client.Tamer.XCrystals));
+                                                    applied = true;
                                                 }
                                                 break;                                    
                                         }
@@ -1280,7 +1438,50 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
 
 
+            if (!applied)
+            {
+                var applySummary = string.Join(
+                    ",",
+                    skillInfo.Apply.Select(x => $"{x.Type}/{x.Attribute}/{x.Value}"));
+
+                _logger.Warning(
+                    "Consumable item use rejected: unsupported applies. tamer {TamerId} slot {Slot} item {ItemId} type {Type} target {Target} skillCode {SkillCode} applies [{Applies}].",
+                    client.TamerId,
+                    itemSlot,
+                    targetItem.ItemId,
+                    targetItem.ItemInfo.Type,
+                    itemTarget,
+                    skillCode,
+                    applySummary);
+
+                client.Send(
+                    UtilitiesFunctions.GroupPackets(
+                        new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type, ItemConsumeFailEnum.NotUnlocked).Serialize(),
+                        new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
+                    )
+                );
+
+                return;
+            }
+
             _logger.Verbose($"Character {client.TamerId} consumed {targetItem.ItemId}.");
+            _logger.Information(
+                "Consumable item applied: tamer {TamerId} slot {Slot} item {ItemId} skillCode {SkillCode} target {Target}; tamer HP/DS {BeforeTamerHp}/{BeforeTamerDs}->{AfterTamerHp}/{AfterTamerDs}, partner HP/DS {BeforePartnerHp}/{BeforePartnerDs}->{AfterPartnerHp}/{AfterPartnerDs}.",
+                client.TamerId,
+                itemSlot,
+                targetItem.ItemId,
+                skillCode,
+                itemTarget,
+                beforeTamerHp,
+                beforeTamerDs,
+                client.Tamer.CurrentHp,
+                client.Tamer.CurrentDs,
+                beforePartnerHp,
+                beforePartnerDs,
+                client.Partner.CurrentHp,
+                client.Partner.CurrentDs);
+
+            RefreshConsumableResources(client);
 
             client.Tamer.Inventory.RemoveOrReduceItem(targetItem, 1, itemSlot);
 

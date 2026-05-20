@@ -146,6 +146,10 @@ namespace DigitalWorldOnline.Commons.Models.Asset
         public SkillCodeAssetModel? SkillInfo { get; private set; }
         public int TimeInSeconds => (UsageTimeMinutes * 60) + 10;
         public bool TemporaryItem => UsageTimeMinutes > 0;
-        public void SetSkillInfo(SkillCodeAssetModel? skillCode) => SkillInfo ??= skillCode;
+        public void SetSkillInfo(SkillCodeAssetModel? skillCode)
+        {
+            if (skillCode != null || SkillInfo == null)
+                SkillInfo = skillCode;
+        }
     }
 }

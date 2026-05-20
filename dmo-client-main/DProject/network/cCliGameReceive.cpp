@@ -4016,6 +4016,8 @@ void cCliGame::RecvCrossItemUseFailure(void)
 	pop(nItemType);
 	pop(nErrCode);
 
+	nsCSDEBUG::CrashLogger::LogMessage( "CROSS_ITEM_USE failure slot=%u type=%u err=%u", nInvenPos, nItemType, nErrCode );
+
 	switch(nErrCode)
 	{
 	case nItem::USE_FAIL_NOT_USE_AREA :	// 사용 불가능 위치입니다.
@@ -4065,6 +4067,8 @@ void cCliGame::RecvItemUseFailure(void)
 	pop(nItemType);
 	pop(nErrCode);
 
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEM_USE failure slot=%u type=%u err=%u", nInvenPos, nItemType, nErrCode );
+
 	switch(nErrCode)
 	{
 	case nItem::USE_FAIL_EXPIRE :	// 시간 제한 종료로 아이템 사용 불가능
@@ -4090,7 +4094,7 @@ void cCliGame::RecvItemUseFailure(void)
 		cPrintMsg::PrintMsg( 17005 );
 		break;
 	case nItem::USE_FAIL_NOT_USE_TERMS :
-		cPrintMsg::PrintMsg( 11015 );
+		cPrintMsg::PrintMsg( 11009 );
 		break;
 	case nItem::USE_FAIL_LIMIT :
 		cPrintMsg::PrintMsg( 30505 );	// 한번만(디지몬) 사용 가능한 아이템입니다.

@@ -165,6 +165,11 @@ namespace DigitalWorldOnline.Commons.Enums.PacketProcessor
         SkillLevelUp = 1104,
 
         /// <summary>
+        /// Sends the All Area/tamer jump booster request.
+        /// </summary>
+        TamerJumpBooster = 1113,
+
+        /// <summary>
         /// Sends the Summon Player
         /// </summary>
         TamerSummon = 1114,

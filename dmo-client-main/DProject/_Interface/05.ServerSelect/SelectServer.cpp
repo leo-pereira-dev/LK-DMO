@@ -143,7 +143,7 @@ void CSelectServer::_MakeListControl( size_t const& nServerCount )
 
 	CsPoint uiSize(154, 314);
 	uiSize.x = (uiSize.x * nServerCount) + (5 * (nServerCount - 1));
-	m_pServerListBox->Init( GetRoot(), CsPoint( (1024 / 2) - (uiSize.x / 2), 35 ), uiSize
+	m_pServerListBox->Init( m_SelectListWindow.GetRoot(), CsPoint( (1024 / 2) - (uiSize.x / 2), 35 ), uiSize
 		, CsPoint(5,0), CsPoint(154, 314), cGridListBox::LowRightDown, cGridListBox::LeftTop, NULL, false, 0 );
 	m_pServerListBox->SetMouseOverImg( "Lobby\\SelectServer\\lobby_server_window_glow.tga" );
 	m_pServerListBox->SetSelectedImg( "Lobby\\SelectServer\\lobby_server_window_glow.tga" );
@@ -155,8 +155,15 @@ void CSelectServer::_MakeListControl( size_t const& nServerCount )
 void CSelectServer::_ChangeListSize( size_t const& nServerCount )
 {
 	SAFE_POINTER_RET( m_pServerListBox );
+	if( nServerCount <= 0 )
+	{
+		m_pServerListBox->RemoveAllItem();
+		return;
+	}
+
 	CsPoint uiSize(154, 314);
 	uiSize.x = (uiSize.x * nServerCount) + (5 * (nServerCount - 1));
+	m_pServerListBox->SetParentWindow( m_SelectListWindow.GetRoot() );
 	m_pServerListBox->SetPos( CsPoint( (1024 / 2) - (uiSize.x / 2), 35 ) );
 	m_pServerListBox->SetSize( uiSize );
 	m_pServerListBox->ResetItemExtendSize();

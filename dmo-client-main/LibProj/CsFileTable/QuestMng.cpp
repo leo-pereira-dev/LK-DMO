@@ -21,8 +21,6 @@ void CsQuestMng::Delete()
 
 bool CsQuestMng::Init( char* cPath )
 {
-	return true; // DATAFILE_DISABLE_FOR_NOW
-
 	assert_cs( m_mapQuest.empty() == true );
 	assert_cs( nsCsFileTable::g_bUseQuest );
 
@@ -1360,6 +1358,8 @@ bool CsQuestMng::Reload( char* cPath )
 	//ofstream QuestdataFile;
 	//QuestdataFile.open("example.txt");
 	//
+	Delete();
+
 	char cName[ MAX_PATH ];
 	sprintf_s( cName, MAX_PATH, "%s\\%s", cPath, QUEST_BIN );
 

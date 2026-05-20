@@ -121,6 +121,26 @@ Schema: dso
 - Fixed character selection/loading issues that originally caused a white screen
   or non-responsive client after selecting a character.
 - Added and later reduced diagnostics as packet formats became clear.
+- Investigated an intermittent Server Select UI issue where the server card
+  appeared near the upper-left of the screen instead of inside the centered
+  server list window.
+  - Root cause was in
+    `DProject/_Interface/05.ServerSelect/SelectServer.cpp`.
+  - `m_pServerListBox` was initialized against the main `CSelectServer`
+    `GetRoot()` even though it is attached to `m_SelectListWindow`.
+  - On wider resolutions or repeated enter/leave cycles, the list box could
+    calculate its client position against the 1024x768 root instead of the
+    centered list window.
+  - Fix: initialize and resize the grid with
+    `m_SelectListWindow.GetRoot()` as parent, and call `SetParentWindow(...)`
+    during list-size refresh.
+  - Added a defensive empty-list guard in `_ChangeListSize(...)` so an empty
+    server list does not underflow the `size_t` width calculation.
+  - A temporary `m_SelectListWindow.SetWindowPosition(...)` call inside
+    `ResetServerList()` caused a `CsAssert` in `ScriptUI.cpp:173` during stress
+    testing, because it could hit the UI region recalculation at a bad point in
+    the screen lifecycle. That temporary call was removed; the final fix keeps
+    only the list-box parent/empty-list changes.
 - Added a user-facing "Remember PW" checkbox to the login box.
   - Runtime setting is stored in `dmo.ini` under `[login]`, not under `[DEBUG]`,
     because this is a user feature rather than a debug/server environment flag.
@@ -159,6 +179,19 @@ Schema: dso
   - inventory expansion item incorrectly reporting "Inventory is full".
 - Added logs in character/game server areas where crashes or state desyncs were
   hard to reproduce.
+
+### Quest data loading
+
+- Investigated the quest UI/NPC issue where no quests appeared on NPCs.
+- Found that the client quest table manager had quest data loading disabled:
+  `CsQuestMng::Init(...)` returned early with `DATAFILE_DISABLE_FOR_NOW`.
+- Re-enabled quest loading in
+  `dmo-client-main/LibProj/CsFileTable/QuestMng.cpp` by removing that early
+  return so the client loads `Quest.bin` again.
+- Updated `CsQuestMng::Reload(...)` to call `Delete()` before reloading, so
+  repeated reloads clear old quest state instead of appending or asserting on
+  existing entries.
+- Client build verification was done with `Release_English|Win32`.
 
 ### GM tools / GM panel
 

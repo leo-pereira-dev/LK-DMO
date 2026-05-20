@@ -267,6 +267,8 @@ Schema: dso
     `ž`, the Hangul artifact `촫`, and comma-zero suffixes like `, 0`.
   - Added runtime log `Log\TextRenderTrace_client.txt`; it records blocked text
     render attempts and throttled comma-containing samples as codepoints.
+  - User later confirmed that this last lower-level render guard stopped the
+    repeated malformed chat text from being displayed.
 - Latest successful client build/copy for this follow-up:
   - `C:\Release\GSP\DProject_R_ENG.exe`
   - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`

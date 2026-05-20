@@ -70,68 +70,71 @@ void cPopUpWindow::Init()
 	#pragma region ---------- WAREHOUSE POPUP IMAGES ----------
 
 	m_pSprMainBar[MAINBAR_CASHWAREHOUSE] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_CASHWAREHOUSE]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_cashWarehouse.png", true);
+	m_pSprMainBar[MAINBAR_CASHWAREHOUSE]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 3, 26 * 0), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
+
+	m_pSprMainBar[MAINBAR_CASHSHOP] = NiNew cSprite;
+	m_pSprMainBar[MAINBAR_CASHSHOP]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 2, 26 * 0), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
 
 	#pragma endregion
 
 	#pragma region ---------- COMMUNITY POPUP IMAGES ----------
  
 	m_pSprMainBar[MAINBAR_GUILD] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_GUILD]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_community.png", true);
+	m_pSprMainBar[MAINBAR_GUILD]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 0, 26 * 1), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
 
 	m_pSprMainBar[MAINBAR_FRIEND] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_FRIEND]->Init( NULL, CsPoint::ZERO, CsPoint( 26, 26 ), "QuickMenu\\Button_friend.png" , true );
+	m_pSprMainBar[MAINBAR_FRIEND]->Init( NULL, CsPoint::ZERO, CsPoint( 26, 26 ), CsRect(CsPoint(26 * 4, 26 * 0), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png" , true );
 
 	m_pSprMainBar[MAINBAR_MAIL] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_MAIL]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_mail.png", true);
+	m_pSprMainBar[MAINBAR_MAIL]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 2, 26 * 1), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
 
 	#pragma endregion
 
 	#pragma region ---------- INVENTORY POPUP IMAGES ----------
 
 	m_pSprMainBar[MAINBAR_INV] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_INV]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_inventory.png", true);
+	m_pSprMainBar[MAINBAR_INV]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 0, 26 * 3), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
 
 	m_pSprMainBar[MAINBAR_EXCLUSIVEINV] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_EXCLUSIVEINV]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_exclusive_inventory.png", true);
+	m_pSprMainBar[MAINBAR_EXCLUSIVEINV]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 1, 26 * 4), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
 	
 	#pragma endregion
 
 	#pragma region ---------- DATA POPUP IMAGES ----------
 
 	m_pSprMainBar[MAINBAR_SEAL] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_SEAL]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_seal.png", true);
+	m_pSprMainBar[MAINBAR_SEAL]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint::ZERO, CsSIZE(74, 74)), "MainMenu\\mainmenu_button_seal.png", true);
 	
 	m_pSprMainBar[MAINBAR_ENCYCLOPEDIA] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_ENCYCLOPEDIA]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_encyclopedia.png", true);
+	m_pSprMainBar[MAINBAR_ENCYCLOPEDIA]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 1, 26 * 2), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
 	
 	m_pSprMainBar[MAINBAR_EVOLUTIONHELPS] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_EVOLUTIONHELPS]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_evolution.png", true);
+	m_pSprMainBar[MAINBAR_EVOLUTIONHELPS]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 1, 26 * 1), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
 	
 	m_pSprMainBar[MAINBAR_BATTLE] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_BATTLE]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_battle.png", true);
+	m_pSprMainBar[MAINBAR_BATTLE]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 1, 26 * 0), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
 
 	#pragma endregion
 
 	#pragma region ---------- CHARACTER POPUP IMAGES ----------
 
 	m_pSprMainBar[MAINBAR_POTION] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_POTION]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_potion.png", true);
+	m_pSprMainBar[MAINBAR_POTION]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 1, 26 * 3), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
 
 	m_pSprMainBar[MAINBAR_TAMER] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_TAMER]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_tamer.png", true);
+	m_pSprMainBar[MAINBAR_TAMER]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\button_tamer.png", true);
 
 	m_pSprMainBar[MAINBAR_DIGIMON] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_DIGIMON]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_digimon.png", true);
+	m_pSprMainBar[MAINBAR_DIGIMON]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\button_digimon.png", true);
 
 	m_pSprMainBar[MAINBAR_ACHIEVEMENT] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_ACHIEVEMENT]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_achievement.png", true);
+	m_pSprMainBar[MAINBAR_ACHIEVEMENT]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 0, 26 * 0), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
 
 	m_pSprMainBar[MAINBAR_QUEST] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_QUEST]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_quest.png", true);
+	m_pSprMainBar[MAINBAR_QUEST]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 3, 26 * 1), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
 
 	m_pSprMainBar[MAINBAR_EXCHANGE] = NiNew cSprite;
-	m_pSprMainBar[MAINBAR_EXCHANGE]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), "QuickMenu\\Button_exchange.png", true);
+	m_pSprMainBar[MAINBAR_EXCHANGE]->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), CsRect(CsPoint(26 * 3, 26 * 2), CsSIZE(26, 26)), "QuickMenu\\quickmenu_sub_icon.png", true);
 
 	#pragma endregion
 
@@ -1806,6 +1809,15 @@ void cPopUpWindow::_Make_Mainbar_Store()
 	pString->SetValue1( cBaseWindow::WT_NEW_CASH_WAREHOUSE );
 
 	pString->AddSprite_Head( m_pSprMainBar[ MAINBAR_CASHWAREHOUSE ] );
+
+	m_StringList.AddTail( pString );
+
+	ti.SetText( UISTRING_TEXT( "COMMON_TXT_CASHSHOP" ).c_str() );
+	pString = NiNew cString;
+	pString->AddText( &ti, CsPoint( 4, 4 ) );
+	pString->SetValue1( cBaseWindow::WT_NEW_CASHSHOP );
+
+	pString->AddSprite_Head( m_pSprMainBar[ MAINBAR_CASHSHOP ] );
 
 	m_StringList.AddTail( pString );
 

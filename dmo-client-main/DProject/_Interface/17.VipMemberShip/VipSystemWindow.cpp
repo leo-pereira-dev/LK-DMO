@@ -32,7 +32,7 @@ void CVipSystemWindow::Create(int nValue /* = 0  */)
 	if( cBaseWindow::Init() == false )
 		return; 
 
-	InitScript(NULL, CsPoint(765, 40), CsPoint(64, 51), false, IFREGION_X::RIGHT, IFREGION_Y::BOTTOM, true);
+	InitScript(NULL, CsPoint(759, 39), CsPoint(64, 51), false, IFREGION_X::RIGHT, IFREGION_Y::TOP, true);
 
 	m_pOpenButton = AddButton( CsPoint::ZERO, CsPoint( 64, 51 ), CsPoint( 0, 51 ), "MemberShip\\membership_Button_Icon.tga" );
 	if( m_pOpenButton )

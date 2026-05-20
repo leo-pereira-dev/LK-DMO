@@ -2,7 +2,12 @@
 #include "stdafx.h"
 #include "MainBar.h"
 
-cMainBar::cMainBar():m_pMainBarGrid(NULL),m_pMainBarBg(NULL),m_pMainBarSubBg(NULL)
+cMainBar::cMainBar()
+: m_pMainBarGrid(NULL)
+, m_pMainBarBg(NULL)
+, m_pMainBarSubBg(NULL)
+, m_pAutoPotionButton(NULL)
+, m_pAutoCropButton(NULL)
 {
 }
 
@@ -63,17 +68,54 @@ void cMainBar::Create(int nValue /* = 0  */)
 	if( !cBaseWindow::Init() )
 		return;
 
-	InitScript( NULL, CsPoint(0,g_nScreenHeight - 33), CsPoint(g_nScreenWidth, 33), false );
-	m_pMainBarBg = AddSprite( CsPoint(0, 33-16), CsPoint(g_nScreenWidth, 16), "MainBar\\Main_Bar.tga" );
+	const int nUtilityHeight = 28;
+	InitScript( NULL, CsPoint(0,g_nScreenHeight - 33 - nUtilityHeight), CsPoint(g_nScreenWidth, 33 + nUtilityHeight), false );
+	m_pMainBarBg = AddSprite( CsPoint(0, nUtilityHeight + 33-16), CsPoint(g_nScreenWidth, 16), "MainBar\\Main_Bar.tga" );
 
 	int nGridWidth = MAIN_BT_MAX * (32 + 5);	// 32 is the icon size
-	m_pMainBarSubBg = AddSprite( CsPoint( m_ptRootSize.x-nGridWidth - 8, 0 ), CsPoint(nGridWidth + 8, 33), "MainBar\\Main_SubBar.tga" );
+	m_pMainBarSubBg = AddSprite( CsPoint( m_ptRootSize.x-nGridWidth - 8, nUtilityHeight ), CsPoint(nGridWidth + 8, 33), "MainBar\\Main_SubBar.tga" );
 
 	m_pMainBarGrid = NiNew cGridListBox;
-	m_pMainBarGrid->Init( GetRoot(), CsPoint( m_ptRootSize.x - nGridWidth - 5, 0 ), CsPoint(nGridWidth, 33), CsPoint(5,0), CsPoint(32, 32), cGridListBox::LowLeftDown, cGridListBox::RightBottom, NULL, false, 0 );
+	m_pMainBarGrid->Init( GetRoot(), CsPoint( m_ptRootSize.x - nGridWidth - 5, nUtilityHeight ), CsPoint(nGridWidth, 33), CsPoint(5,0), CsPoint(32, 32), cGridListBox::LowLeftDown, cGridListBox::RightBottom, NULL, false, 0 );
 	m_pMainBarGrid->AddEvent( cGridListBox::GRID_CLICKED_ITEM, this, &cMainBar::_MainBarBtnClick );
 	AddChildControl(m_pMainBarGrid);
+	_CreateUtilityButtons();
 	_CreateMainBarBtn();
+}
+
+void cMainBar::_CreateUtilityButtons()
+{
+	const CsPoint utilitySize( 78, 26 );
+
+	m_pAutoPotionButton = NiNew cButton;
+	if( m_pAutoPotionButton )
+	{
+		m_pAutoPotionButton->Init( GetRoot(), CsPoint::ZERO, utilitySize, "autopotion\\ui_simplification_on.tga", false );
+		m_pAutoPotionButton->SetTexToken( CsPoint( 0, 26 ) );
+		AddChildControl( m_pAutoPotionButton );
+	}
+
+	m_pAutoCropButton = NiNew cButton;
+	if( m_pAutoCropButton )
+	{
+		m_pAutoCropButton->Init( GetRoot(), CsPoint::ZERO, utilitySize, "autocrop\\autocrop_on_btn.tga", false );
+		m_pAutoCropButton->SetTexToken( CsPoint( 0, 26 ) );
+		AddChildControl( m_pAutoCropButton );
+	}
+
+	_UpdateUtilityButtonPos();
+}
+
+void cMainBar::_UpdateUtilityButtonPos()
+{
+	const int nGridWidth = MAIN_BT_MAX * (32 + 5);
+	const int nStartX = m_ptRootSize.x - nGridWidth - 171;
+	const int nStartY = 32;
+
+	if( m_pAutoPotionButton )
+		m_pAutoPotionButton->SetPos( CsPoint( nStartX, nStartY ) );
+	if( m_pAutoCropButton )
+		m_pAutoCropButton->SetPos( CsPoint( nStartX + 83, nStartY ) );
 }
 
 // Create the MainBar Buttons
@@ -193,6 +235,11 @@ cBaseWindow::eMU_TYPE cMainBar::Update_ForMouse()
 		return muReturn;
 	}
 
+	if( m_pAutoPotionButton )
+		m_pAutoPotionButton->Update_ForMouse();
+	if( m_pAutoCropButton )
+		m_pAutoCropButton->Update_ForMouse();
+
 	return MUT_OUT_WINDOW;
 }
 
@@ -284,14 +331,19 @@ void cMainBar::Render()
 
 void cMainBar::ResetDevice()
 {
-	SetPosSize( CsPoint(0,g_nScreenHeight - 33), CsPoint(g_nScreenWidth, 33) );
+	const int nUtilityHeight = 28;
+	SetPosSize( CsPoint(0,g_nScreenHeight - 33 - nUtilityHeight), CsPoint(g_nScreenWidth, 33 + nUtilityHeight) );
 	if( m_pMainBarBg )
+	{
+		m_pMainBarBg->SetPos( CsPoint(0, nUtilityHeight + 33-16) );
 		m_pMainBarBg->SetSize( CsPoint(g_nScreenWidth, 16) );
-	int nGridWidth = MAIN_BT_MAX * (26+5);
+	}
+	int nGridWidth = MAIN_BT_MAX * (32+5);
 	if( m_pMainBarSubBg )
-		m_pMainBarSubBg->SetPos( CsPoint( m_ptRootSize.x - nGridWidth - 8, 0 ));
+		m_pMainBarSubBg->SetPos( CsPoint( m_ptRootSize.x - nGridWidth - 8, nUtilityHeight ));
 	if( m_pMainBarGrid )
-		m_pMainBarGrid->SetPos( CsPoint( m_ptRootSize.x - nGridWidth - 5, 0 ) );
+		m_pMainBarGrid->SetPos( CsPoint( m_ptRootSize.x - nGridWidth - 5, nUtilityHeight ) );
+	_UpdateUtilityButtonPos();
 	ResetDeviceScript();
 }
 

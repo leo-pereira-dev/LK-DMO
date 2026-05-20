@@ -36,7 +36,7 @@ void cChannel::Create(int nValue /* = 0  */)
 	if( cBaseWindow::Init() == false )
 		return;
 
-	InitScript( "Channel\\Ch_Bar.tga", CsPoint( 714, 2 ), CsPoint( 128, 28 ), false, IFREGION_X::RIGHT, IFREGION_Y::TOP );
+	InitScript( "Channel\\Ch_Bar.tga", CsPoint( 690, 4 ), CsPoint( 128, 28 ), false, IFREGION_X::RIGHT, IFREGION_Y::TOP );
 	m_pChannelChangeBtn = AddButton( CsPoint( 101, 5 ), CsPoint( 19, 18 ), CsPoint( 0, 18 ), "Channel\\Ch_But.tga" );
 	if( m_pChannelChangeBtn )
 		m_pChannelChangeBtn->AddEvent( cButton::BUTTON_LBUP_EVENT, this, &cChannel::ShowChannelList );
@@ -134,4 +134,3 @@ void cChannel::SetChannelTxt()
 	DmCS::StringFn::Format( sz, L"%s %d", UISTRING_TEXT( "COMMON_TXT_CHANNEL" ).c_str(), GetSystem()->GetCurrentChannelIdx() );
 	m_pText->SetText( sz.c_str() );
 }
-

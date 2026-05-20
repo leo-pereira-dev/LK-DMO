@@ -52,6 +52,8 @@ public:
 
 private:
 	void						_CreateMainBarBtn();
+	void						_CreateUtilityButtons();
+	void						_UpdateUtilityButtonPos();
 	void						_SetToolTip( int const& hotkeytype, std::wstring const& pText, CsPoint pos, CsPoint patch );
 	void						_MainBarBtnClick( void* pSender, void* pData );
 #ifdef UI_INVENTORY_RENEWAL
@@ -61,6 +63,8 @@ private:
 private:
 	cSprite*							m_pMainBarBg;
 	cSprite*							m_pMainBarSubBg;
+	cButton*							m_pAutoPotionButton;
+	cButton*							m_pAutoCropButton;
 	cGridListBox*						m_pMainBarGrid;
 	std::map<int,cGridListBoxItem*>		m_pmapControls;
 };

@@ -38,3 +38,6 @@
 docker-data/
 postgres-data/
 mysql-data/
+
+# Local decompiled exe dumps used only as analysis input
+/unpacked_exe_all/

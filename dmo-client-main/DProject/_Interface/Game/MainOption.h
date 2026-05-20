@@ -1,5 +1,4 @@
-
-#pragma once  
+#pragma once
 
 class cMainOption : public cBaseWindow
 {
@@ -21,17 +20,59 @@ public:
 
 	virtual bool			OnEscapeKey(){ Close(); return true; }
 
-	// 포인터만 있는 컨트롤
+protected:
+	enum eMENU_ACTION
+	{
+		MA_NONE,
+		MA_MAP,
+		MA_SMALLMAP,
+		MA_TAMER,
+		MA_DIGIMON,
+		MA_INVENTORY,
+		MA_QUEST,
+		MA_SEAL,
+		MA_ENCYCLOPEDIA,
+		MA_EVOLUTION_HELP,
+		MA_CASH_WAREHOUSE,
+		MA_CASHSHOP,
+		MA_GUILD,
+		MA_FRIEND,
+		MA_MAIL,
+		MA_REWARD_BOX,
+		MA_INTERFACE,
+		MA_GRAPHIC,
+		MA_SOUND,
+		MA_SHORTCUT,
+		MA_GM_PANEL,
+		MA_LOGOUT,
+		MA_EXIT
+	};
+
+	enum
+	{
+		MAIN_BUTTON_COUNT = 16,
+		OPTION_BUTTON_COUNT = 6
+	};
+
+	struct sMENU_BUTTON
+	{
+		cButton*		s_pButton;
+		eMENU_ACTION	s_eAction;
+	};
+
+	cButton*		_AddMenuButton( CsPoint pos, CsPoint size, CsPoint texToken, char const* path, eMENU_ACTION action );
+	void			_UpdateMenuButton( sMENU_BUTTON& buttonInfo, eMU_TYPE muReturn );
+	void			_OnMenuAction( eMENU_ACTION action );
+	void			_ToggleInventory();
+	void			_ToggleZoneMap();
+	void			_ToggleSmallMap();
+	void			_OpenEncyclopedia();
+	void			_RequestExit( int msgType );
+
 protected:
 	cButton*		m_pCancelButton;
-	cButton*		m_pInterface;
-	cButton*		m_pGraphicBtn;	
-	cButton*		m_pSoundBtn;
-	cButton*		m_pMacroKeyBtn;
-	cButton*		m_pGMPanelBtn;
-#ifdef VERSION_KOR
-	cButton*		m_pUserGradeBtn;
-#endif
-	cButton*		m_pLogOutBtn;
-	cButton*		m_pGameExitBtn;
+	sMENU_BUTTON	m_MainButtons[ MAIN_BUTTON_COUNT ];
+	sMENU_BUTTON	m_OptionButtons[ OPTION_BUTTON_COUNT ];
+	int				m_nMainButtonCount;
+	int				m_nOptionButtonCount;
 };

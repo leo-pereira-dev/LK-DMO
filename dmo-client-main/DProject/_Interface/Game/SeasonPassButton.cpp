@@ -37,9 +37,9 @@ void cSeasonPassButton::Create(int nValue /* = 0  */)
 	if (!cBaseWindow::Init())
 		return;
 
-	InitScript(NULL, CsPoint(770, -15), CsPoint(50, 50), false, IFREGION_X::RIGHT, IFREGION_Y::BOTTOM, true);
+	InitScript(NULL, CsPoint(765, 84), CsPoint(60, 60), false, IFREGION_X::RIGHT, IFREGION_Y::TOP, true);
 
-	m_pOpenButton = AddButton(CsPoint::ZERO, CsPoint(64, 64), CsPoint(0, 64), "SeasonPass\\Pass_HUD_Btn.png");
+	m_pOpenButton = AddButton(CsPoint::ZERO, CsPoint(60, 60), CsPoint(0, 64), "SeasonPass\\Pass_HUD_Btn.png");
 
 	if (m_pOpenButton)
 	{

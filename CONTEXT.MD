@@ -758,6 +758,88 @@ When a packet breaks:
    - decoded key fields.
 8. Remove or reduce raw hex logs after the format is confirmed.
 
+## Recent client UI work - quick menu, main menu, and HUD polish
+
+Completed on 2026-05-20:
+
+- Reworked the bottom quick menu to use the newer GDMO-style `QuickMenu`
+  button atlases:
+  - `quickmenu_button_menu.png`
+  - `quickmenu_button_box.png`
+  - `quickmenu_button_community.png`
+  - `quickmenu_button_inventory.png`
+  - `quickmenu_button_data.png`
+  - `quickmenu_button_character.png`
+  - `quickmenu_button_event.png`
+- Main quick menu implementation lives mainly in:
+  - `dmo-client-main/DProject/_Interface/Game/MainBar.cpp`
+  - `dmo-client-main/DProject/_Interface/Game/MainBar.h`
+- Added two placeholder HUD buttons beside the bottom quick menu:
+  - auto potion uses `autopotion\ui_simplification_on.tga`
+  - auto magnetic uses `autocrop\autocrop_on_btn.tga`
+  - both are currently visual-only/no gameplay function wired yet.
+- Expanded the `MainBar` root height to safely contain the new buttons and keep
+  them clickable/rendered inside the UI window instead of relying on negative
+  child coordinates.
+- Aligned the auto potion/auto magnetic buttons with the bottom quick menu and
+  standardized spacing between them and the first quick menu icon.
+- Rebuilt the client with `Release_English|Win32` and copied the output to
+  `ClientDist\DProject_R_ENG.exe` after each visual adjustment.
+
+Main menu refactor:
+
+- Replaced the old vertical `Option` window with the newer large icon menu using
+  `MainMenu\mainmenu_*` assets.
+- The main menu now follows the modern two-row icon layout and bottom option
+  row, matching the newer reference screenshots more closely.
+- Current action wiring includes existing useful actions where available:
+  map, Digimon, inventory, quest, seal, graphic/options, cash warehouse,
+  tamer, guild, friend, mailbox, cash shop, reward/box, encyclopedia, logout,
+  exit, interface, sound, shortcut.
+- GM Panel access was intentionally placed on one of the otherwise unused menu
+  icons so the function is still reachable.
+- Main menu files:
+  - `dmo-client-main/DProject/_Interface/Game/MainOption.cpp`
+  - `dmo-client-main/DProject/_Interface/Game/MainOption.h`
+
+Quick menu popup/submenu polish:
+
+- Updated popup/submenu icon sets and labels to better match the current GDMO
+  references.
+- Added/adjusted entries such as Cash Shop, Cash Warehouse, Seal Master,
+  Encyclopedia, Battle Statistics, Evolution Helps, Bag, Exclusive Inventory,
+  skin inventory, D-Unit, and related submenu actions where client functions
+  already existed.
+- Popup menu files:
+  - `dmo-client-main/DProject/_Interface/Game/Popup.cpp`
+  - `dmo-client-main/DProject/_Interface/Game/Popup.h`
+
+HUD near minimap/channel:
+
+- Replaced/adjusted the event/news button to use the newer megaphone-style event
+  popup asset: `EventPopup\event_popup_openbtn.png`.
+- Repositioned the event/news, VIP/membership, and Season Pass icons to sit
+  under the channel selector with more uniform spacing and less overlap with the
+  minimap.
+- Repositioned the channel selector itself slightly left/down so it no longer
+  touches the minimap edge as tightly.
+- Reduced Season Pass subtly from `64x64` to `60x60` and moved it slightly down
+  to better match the newer HUD reference.
+- HUD files touched:
+  - `dmo-client-main/DProject/_Interface/Game/Channel.cpp`
+  - `dmo-client-main/DProject/_Interface/Game/EventNoticeButton.cpp`
+  - `dmo-client-main/DProject/_Interface/17.VipMemberShip/VipSystemWindow.cpp`
+  - `dmo-client-main/DProject/_Interface/Game/SeasonPassButton.cpp`
+
+Decompiler/reference notes:
+
+- `quickmenu_png_functions/` contains the small extracted function references
+  copied from `unpacked_exe_all` for quick menu `.png` discovery.
+- `unpacked_exe_all/` is a large local decompiled dump, useful only as analysis
+  input, and is intentionally ignored by Git.
+- `quickmenu_png_functions/README.md` documents the copied functions and the
+  asset name references found in the original executable.
+
 ## Known risky areas
 
 - PostgreSQL migration can change behavior where old MySQL code relied on:

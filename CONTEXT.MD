@@ -840,6 +840,94 @@ Decompiler/reference notes:
 - `quickmenu_png_functions/README.md` documents the copied functions and the
   asset name references found in the original executable.
 
+## Recent client UI work - Encyclopedia and inventory renewal
+
+Completed on 2026-05-21:
+
+### Encyclopedia
+
+- Reworked the encyclopedia window around the newer
+  `Encyclopedia\newencyclopedia\...` visual set.
+  - Main files:
+    - `dmo-client-main/DProject/_Interface/Game/Encyclopedia.cpp`
+    - `dmo-client-main/DProject/_Interface/Game/Encyclopedia.h`
+    - `dmo-client-main/DProject/_Interface/Game/EncyclopediaContents.cpp`
+  - The main window uses the same large `886x768` centered layout later reused
+    by the D-Unit screen.
+  - Added modern top-level tabs:
+    - `Encyclopedia`
+    - `Deck`
+  - Added submenu buttons for:
+    - `Series`
+    - `All`
+    - `Class`
+    - `Stats`
+  - The original radio/tab data is still reused internally, but the visible UI
+    is driven by the new buttons.
+- Added encyclopedia search UI.
+  - Uses the new encyclopedia search bar/button/reset assets.
+  - Stores the current keyword in `m_wsSearchKeyword`.
+  - Search/reset visibility follows the active tab/submenu.
+- Added card/list hover tracking.
+  - Card hover data is tracked through `m_vCardHoverInfo`.
+  - Deck panel hover data is tracked through `m_vDeckPanelHoverInfo`.
+  - Deck favorite/bookmark visuals are tracked through
+    `m_vDeckBookmarkInfo` and `m_setDeckFavoriteGroup`.
+- Added the Digimon overview/detail panel opened from encyclopedia cards.
+  - Uses render texture support through `cRenderTex`.
+  - Renders the selected Digimon model in the overview.
+  - Tracks selected/hovered skill entries and displays skill detail text.
+  - Includes model view controls for zoom, rotation, arrows, and reset view.
+  - Resolves visible growth/stat values through `_ResolveOverviewGrowthData`.
+- Deck state handling was made safer.
+  - `mUseDeck` now starts at `INT_MIN` instead of `0` so "no deck selected" is
+    explicit.
+  - Group-info lookups now guard against missing/null map entries before reading
+    conditions.
+  - `SetUseDeck(...)` clears previous deck usage flags before enabling a new
+    deck and triggers a Digimon stat refresh event.
+
+### Encyclopedia server packet support
+
+- Added a server-side packet processor for encyclopedia deck selection.
+  - File:
+    `dmo-server-main-postgres/src/Source/Distribution/DigitalWorldOnline.Game.Host/PacketProcessors/EncyclopediaDeckUsePacketProcessor.cs`
+  - Packet enum:
+    `GameServerPacketEnum.EncyclopediaDeckUse = 3236`.
+  - The current processor reads the requested deck id and logs it. The passive
+    deck state is still applied client-side by the current client flow.
+
+### Inventory renewal
+
+- Updated the renewed inventory UI with filtering/search support.
+  - Main files:
+    - `dmo-client-main/DProject/_Interface/Game/Inventory.cpp`
+    - `dmo-client-main/DProject/_Interface/Game/Inventory.h`
+    - `dmo-client-main/DProject/_Interface/Game/InventoryContents.cpp`
+    - `dmo-client-main/DProject/_Interface/Game/InventoryContents.h`
+  - Added search edit/reset controls.
+  - Added filter tabs for equipment, consumables, Digimon-related items, and
+    miscellaneous items.
+  - Added filtered item index mapping so rendering, tooltip, and mouse handling
+    point back to the real inventory slot.
+  - Added inventory count text and helper tooltip support.
+  - Closing the inventory clears filter/search state and resets the selected tab.
+- Inventory filtering now combines:
+  - item type category,
+  - case-insensitive item-name search,
+  - open slot count and scroll position.
+- Inventory sort packet alignment was adjusted on the server side.
+  - File:
+    `dmo-server-main-postgres/src/Source/Domain/DigitalWorldOnline.Commons/Packets/Items/InventorySortPacket.cs`
+  - The integer after inventory type is now written as `0` instead of `1`,
+    matching the current client expectation for the sort result payload.
+
+### D-Unit hotkey
+
+- Added a keyboard toggle for the D-Unit/Union window in `GlobalInput`.
+  - `Shift + U` toggles `WT_UNION`.
+  - `m_bUnionHotKeyDown` prevents repeated toggles while the key is held.
+
 ## Recent client UI work - D-Unit / Union window
 
 Completed on 2026-05-21:

@@ -11,7 +11,6 @@ cGlobalInput::cGlobalInput()
 	mHotKey = NULL;
 
 	iModifier = DMKEYBOARD::KMOD_NONE;
-	m_bUnionHotKeyDown = false;
 	m_bXmlUnionHotKeyDown = false;
 
 	for(int i=0; i<4; ++i)
@@ -695,14 +694,8 @@ bool cGlobalInput::KeyBoardMenu(const MSG& p_kMsg)
 	case WM_KEYDOWN:
 	case WM_SYSKEYDOWN:
 		{
-			if( wParam == DMKEYBOARD::KEY_U &&
-				( iModifier == DMKEYBOARD::KMOD_LSHIFT || iModifier == DMKEYBOARD::KMOD_RSHIFT ) )
-			{
-				m_bUnionHotKeyDown = true;
-			}
-
 			if( wParam == DMKEYBOARD::KEY_O &&
-				( iModifier == DMKEYBOARD::KMOD_LCONTROL || iModifier == DMKEYBOARD::KMOD_RCONTROL ) )
+				( iModifier == DMKEYBOARD::KMOD_LSHIFT || iModifier == DMKEYBOARD::KMOD_RSHIFT ) )
 			{
 				m_bXmlUnionHotKeyDown = true;
 			}
@@ -814,17 +807,6 @@ bool cGlobalInput::KeyBoardMenu(const MSG& p_kMsg)
 	case WM_KEYUP:
 	case WM_SYSKEYUP:
 		{
-			if( wParam == DMKEYBOARD::KEY_U && m_bUnionHotKeyDown )
-			{
-				if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_UNION ) )
-					g_pGameIF->CloseDynamicIF( cBaseWindow::WT_UNION );
-				else
-					g_pGameIF->GetDynamicIF( cBaseWindow::WT_UNION );
-
-				m_bUnionHotKeyDown = false;
-				return true;
-			}
-
 			if( wParam == DMKEYBOARD::KEY_O && m_bXmlUnionHotKeyDown )
 			{
 				if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_XML_UNION ) )

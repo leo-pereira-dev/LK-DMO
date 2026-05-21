@@ -32,6 +32,7 @@
 #include "../Flow/Flow.h"
 #include "../Flow/FlowMgr.h"
 #include "../../LibProj/CsFunc/CrashLogger.h"
+#include "../_Interface/Game/_GameIF.h"
 
 #include "common_vs2019/pEvent.h"
 
@@ -42,6 +43,62 @@
 #ifdef SDM_DEF_XIGNCODE3_20181107
 #include "../xigncode3/Client_Xigncode3.h"
 #endif
+
+void cCliGame::RecvXmlUnionProgress()
+{
+	u1 nLevel = 0;
+	n4 nCurrentExperience = 0;
+	n4 nRequiredExperience = 0;
+	u2 nProgressPercentBasisPoints = 0;
+	u2 nClaimedRewardMask = 0;
+
+	pop( nLevel );
+	pop( nCurrentExperience );
+	pop( nRequiredExperience );
+	pop( nProgressPercentBasisPoints );
+	pop( nClaimedRewardMask );
+
+	if( g_pGameIF && g_pGameIF->GetXmlUnionDUnit() )
+	{
+		g_pGameIF->GetXmlUnionDUnit()->RecvServerProgress(
+			nLevel,
+			nCurrentExperience,
+			nRequiredExperience,
+			nProgressPercentBasisPoints,
+			nClaimedRewardMask );
+	}
+}
+
+void cCliGame::RecvXmlUnionRewardClaimResult()
+{
+	u1 nResult = 0;
+	u1 nRewardIndex = 0;
+	u2 nClaimedRewardMask = 0;
+	u1 nLevel = 0;
+	u2 nProgressPercentBasisPoints = 0;
+
+	pop( nResult );
+	pop( nRewardIndex );
+	pop( nClaimedRewardMask );
+	pop( nLevel );
+	pop( nProgressPercentBasisPoints );
+
+	if( g_pGameIF && g_pGameIF->GetXmlUnionDUnit() )
+	{
+		g_pGameIF->GetXmlUnionDUnit()->RecvRewardClaimResult(
+			nResult,
+			nRewardIndex,
+			nClaimedRewardMask,
+			nLevel,
+			nProgressPercentBasisPoints );
+	}
+}
+
+void cCliGame::RecvXmlUnionCollectionInfo()
+{
+	if( g_pGameIF && g_pGameIF->GetXmlUnionDUnit() )
+		g_pGameIF->GetXmlUnionDUnit()->RecvCollectionInfo();
+}
 
 // Receive Channel info
 void cCliGame::RecvChannelInfo(void)

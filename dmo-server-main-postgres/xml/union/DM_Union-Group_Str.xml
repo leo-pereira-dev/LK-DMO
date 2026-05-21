@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UnionGroupStrings>
+  <String id="1" type="Line" text="Agumon Line 1" />
+  <String id="2" type="Line" text="Agumon Line 2" />
+  <String id="3" type="Line" text="Agumon Black Line 1" />
+  <String id="4" type="Line" text="Agumon Black Line 2" />
+  <String id="5" type="Line" text="Agumon Black Blitz 1" />
+  <String id="6" type="Line" text="Agumon Black Blitz 2" />
+  <String id="7" type="Line" text="Agumon Black Millenium" />
+  <String id="8" type="Line" text="ToyAgumon SS+" />
+  <String id="9" type="Line" text="ToyAgumon" />
+  <String id="10" type="Line" text="Gabumon 1" />
+  <String id="11" type="Line" text="Gabumon 2" />
+  <String id="12" type="Line" text="Gabumon Cres 1" />
+  <String id="13" type="Line" text="Gabumon Cres 2" />
+  <String id="14" type="Line" text="Gabumon Black 1" />
+  <String id="15" type="Line" text="Gabumon Black 2" />
+  <String id="16" type="Line" text="Salamon Ordine 1" />
+  <String id="17" type="Line" text="Salamon Ordine 2" />
+  <String id="18" type="Line" text="Salamon Ordine 3" />
+  <String id="19" type="Line" text="Salamon Lilith" />
+  <String id="20" type="Line" text="Salamon Merva 1" />
+  <String id="21" type="Line" text="Salamon Merva 2" />
+  <String id="22" type="Line" text="Salamon Valk" />
+  <String id="23" type="Line" text="Patamon" />
+  <String id="24" type="Line" text="Patamon Slash" />
+  <String id="25" type="Line" text="Palmon original" />
+  <String id="26" type="Line" text="Palmon Woodmon" />
+  <String id="27" type="Line" text="Palmon MarineAnge" />
+  <String id="28" type="Line" text="Palmon Apocaly" />
+  <String id="29" type="Line" text="Piyomon" />
+  <String id="30" type="Line" text="Gomamon 1" />
+  <String id="31" type="Line" text="Gomamon 2" />
+  <String id="32" type="Line" text="Gomamon JiJi" />
+  <String id="33" type="Line" text="Tentomon" />
+  <String id="34" type="Line" text="Veemon Ulforce" />
+  <String id="35" type="Line" text="Veemon Jogress" />
+  <String id="36" type="Line" text="Veemon Imperial" />
+  <String id="37" type="Line" text="Wormmon Grandis" />
+  <String id="38" type="Line" text="Wormmon Jogress" />
+  <String id="39" type="Line" text="Hawkmon" />
+  <String id="40" type="Line" text="Hawk Valk" />
+  <String id="41" type="Line" text="Armadimon" />
+  <String id="42" type="Line" text="Armadimon Slash" />
+  <String id="43" type="Line" text="Guilmon 1" />
+  <String id="44" type="Line" text="Guilmon 2" />
+  <String id="45" type="Line" text="Guilmon Chaos" />
+  <String id="46" type="Line" text="Renamon" />
+  <String id="47" type="Line" text="Shoutmon" />
+  <String id="48" type="Line" text="Mailbirdramon" />
+  <String id="49" type="Line" text="Greymon (c)" />
+  <String id="50" type="Line" text="Dorumon Doruga" />
+  <String id="51" type="Line" text="Dorumon Dex" />
+  <String id="52" type="Line" text="Dorumon Alpha" />
+  <String id="53" type="Line" text="Demidevimon" />
+  <String id="54" type="Line" text="Demidevimon Pied 1" />
+  <String id="55" type="Line" text="Demidevimon Pied 2" />
+  <String id="56" type="Line" text="Demidevimon Myotis 1" />
+  <String id="57" type="Line" text="Demidevimon Myotis 2" />
+  <String id="58" type="Line" text="Demidevimon [Apoc]" />
+  <String id="59" type="Line" text="Betamon" />
+  <String id="60" type="Line" text="Betamon [Apoc]" />
+  <String id="61" type="Line" text="Hagurumon (Gardro)" />
+  <String id="62" type="Line" text="Hagurumon (Mekanori)" />
+  <String id="63" type="Line" text="Hagurumon [Apoc]" />
+  <String id="64" type="Line" text="Qinglongmon" />
+  <String id="65" type="Line" text="xuanwumon" />
+  <String id="66" type="Line" text="zhuqiaomon" />
+  <String id="67" type="Line" text="baihumon" />
+  <String id="68" type="Line" text="Lucemon" />
+  <String id="69" type="Line" text="Impmon" />
+  <String id="70" type="Line" text="Impmon Baal" />
+  <String id="71" type="Line" text="Elecmon" />
+  <String id="72" type="Line" text="Elecmon Duft" />
+  <String id="73" type="Line" text="Drimogemon" />
+  <String id="74" type="Line" text="Gotsumon" />
+  <String id="75" type="Line" text="Deputymon" />
+  <String id="76" type="Line" text="Starmon" />
+  <String id="77" type="Line" text="Doggymon" />
+  <String id="78" type="Line" text="Demi meramon" />
+  <String id="79" type="Line" text="Kiwimon" />
+  <String id="80" type="Line" text="Dobermon" />
+  <String id="81" type="Line" text="Terriermon" />
+  <String id="82" type="Line" text="Gizumon" />
+  <String id="83" type="Line" text="Pawnchessmon W" />
+  <String id="84" type="Line" text="Tanemon" />
+  <String id="85" type="Line" text="Pawnchessmon B" />
+  <String id="86" type="Line" text="Kotemon LordKnightmon" />
+  <String id="87" type="Line" text="Candlemon" />
+  <String id="88" type="Line" text="Bearmon" />
+  <String id="89" type="Line" text="Dracomon B" />
+  <String id="90" type="Line" text="Dracomon G" />
+  <String id="91" type="Line" text="Monodramon" />
+  <String id="92" type="Line" text="Lopmon" />
+  <String id="93" type="Line" text="FanBeemon" />
+  <String id="94" type="Line" text="Keramon" />
+  <String id="95" type="Line" text="Kamemon" />
+  <String id="96" type="Line" text="Goblimon" />
+  <String id="97" type="Line" text="Sharmamon" />
+  <String id="98" type="Line" text="Dokunemon" />
+  <String id="99" type="Line" text="Commandramon" />
+  <String id="100" type="Line" text="Kudamon" />
+  <String id="101" type="Line" text="Ryudamon" />
+  <String id="102" type="Line" text="Kotemon Musyamon" />
+  <String id="103" type="Line" text="Mushroomon" />
+  <String id="104" type="Line" text="Dracmon" />
+  <String id="105" type="Line" text="Arkadimon" />
+  <String id="106" type="Line" text="Gazimon" />
+  <String id="107" type="Line" text="Tsukaimon" />
+  <String id="108" type="Line" text="Swimmon" />
+  <String id="109" type="Line" text="Ballistamon" />
+  <String id="110" type="Line" text="Psychemon" />
+  <String id="111" type="Line" text="Dorulumon" />
+  <String id="112" type="Line" text="Syakomon" />
+  <String id="113" type="Line" text="Tsukaimon Murmukusmon" />
+  <String id="114" type="Line" text="Otamon" />
+  <String id="115" type="Line" text="Tsukaimon Barbamon" />
+  <String id="116" type="Line" text="Gazimon Millenium" />
+  <String id="117" type="Line" text="Kokuwamon" />
+  <String id="118" type="Line" text="Raremon" />
+  <String id="119" type="Line" text="Hackmon" />
+  <String id="120" type="Line" text="Leomon (Destiny)" />
+  <String id="121" type="Line" text="Floramon" />
+  <String id="122" type="Line" text="Meicoomon 1" />
+  <String id="123" type="Line" text="Meicoomon 2" />
+  <String id="124" type="Line" text="Starsmon" />
+  <String id="125" type="Line" text="Sparrowmon" />
+  <String id="126" type="Line" text="Gizamon" />
+  <String id="127" type="Line" text="Deadlyaxemon" />
+  <String id="128" type="Line" text="Skullknightmon" />
+  <String id="129" type="Line" text="Bagramon" />
+  <String id="130" type="Line" text="Gammamon" />
+  <String id="131" type="Line" text="Angoramon" />
+  <String id="132" type="Line" text="Jellymon" />
+  <String id="133" type="Line" text="Eosmon" />
+  <String id="134" type="Line" text="Agnimon" />
+  <String id="135" type="Line" text="Vritramon" />
+  <String id="136" type="Line" text="Fairimon" />
+  <String id="137" type="Line" text="Shutsmon" />
+  <String id="138" type="Line" text="Chakkumon" />
+  <String id="139" type="Line" text="Blizzarmon" />
+  <String id="140" type="Line" text="Arbormon" />
+  <String id="141" type="Line" text="Petaldramon" />
+  <String id="142" type="Line" text="Grotmon" />
+  <String id="143" type="Line" text="Gigasmon" />
+  <String id="144" type="Line" text="KaiserGreymon" />
+  <String id="145" type="Line" text="Wolfmon" />
+  <String id="146" type="Line" text="Garmmon" />
+  <String id="147" type="Line" text="Blitzmon" />
+  <String id="148" type="Line" text="Bolgmon" />
+  <String id="149" type="Line" text="Lanamon" />
+  <String id="150" type="Line" text="Calamaramon" />
+  <String id="151" type="Line" text="Lowemon" />
+  <String id="152" type="Line" text="KaiserLeomon" />
+  <String id="153" type="Line" text="Mercuremon" />
+  <String id="154" type="Line" text="Sefirotmon" />
+  <String id="155" type="Line" text="MagnaGarurumon" />
+  <String id="156" type="Collection" text="Fanglo" />
+  <String id="157" type="Collection" text="Angels" />
+  <String id="158" type="Collection" text="Fallen Angels" />
+  <String id="159" type="Collection" text="Adventure Rookies" />
+  <String id="160" type="Collection" text="Adventure Evolutions" />
+  <String id="161" type="Collection" text="7 Deadly Sins" />
+  <String id="162" type="Collection" text="Angel Corps" />
+  <String id="163" type="Collection" text="Crack Team" />
+  <String id="164" type="Collection" text="Burst Ultimate Wings" />
+  <String id="165" type="Collection" text="Checkmate" />
+  <String id="166" type="Collection" text="Giga Whale" />
+  <String id="167" type="Collection" text="Two Guys" />
+  <String id="168" type="Collection" text="Villains" />
+  <String id="169" type="Collection" text="Bare In Black?" />
+  <String id="170" type="Collection" text="Black Agu &amp; Gabus" />
+  <String id="171" type="Collection" text="Ghost Games" />
+  <String id="172" type="Collection" text="Ghost Game 2" />
+  <String id="173" type="Collection" text="Greek Letters" />
+  <String id="174" type="Collection" text="Skeleton Gang" />
+  <String id="175" type="Collection" text="Primal" />
+  <String id="176" type="Collection" text="Trees" />
+  <String id="177" type="Collection" text="02 Jogress Rookies" />
+  <String id="178" type="Collection" text="02 Jogress Evolutions" />
+  <String id="179" type="Collection" text="Dark Evolution" />
+  <String id="180" type="Collection" text="Ladies" />
+  <String id="181" type="Collection" text="Dudes" />
+  <String id="182" type="Collection" text="Greymons" />
+  <String id="183" type="Collection" text="Garurumon" />
+  <String id="184" type="Collection" text="M O D E" />
+  <String id="185" type="Collection" text="Bugs" />
+  <String id="186" type="Collection" text="Advanced Spirit Evo" />
+  <String id="187" type="Collection" text="Omega: VA" />
+  <String id="188" type="Collection" text="Omega: VI" />
+  <String id="189" type="Collection" text="Under Sea" />
+  <String id="190" type="Collection" text="Hybrid H" />
+  <String id="191" type="Collection" text="Hybrid B" />
+  <String id="192" type="Collection" text="Capsul" />
+  <String id="193" type="Collection" text="Dog?" />
+  <String id="194" type="Collection" text="Cat?" />
+  <String id="195" type="Collection" text="High Noon" />
+  <String id="196" type="Collection" text="Transcendental Ultimate Wings 1" />
+  <String id="197" type="Collection" text="Transcendental Ultimate Wings 2" />
+  <String id="198" type="Collection" text="Only Real Ones?" />
+  <String id="199" type="Collection" text="Tamers" />
+  <String id="200" type="Collection" text="Tamers Evolutions" />
+  <String id="201" type="Collection" text="Bonds" />
+  <String id="202" type="Collection" text="Variants" />
+  <String id="203" type="Collection" text="Soldiers" />
+  <String id="204" type="Collection" text="Leomons" />
+  <String id="205" type="Collection" text="Duke" />
+  <String id="206" type="Collection" text="Resistance" />
+  <String id="207" type="Collection" text="Xros Wars" />
+  <String id="208" type="Collection" text="Bagra Leaders" />
+  <String id="209" type="Collection" text="Bagra Army Members" />
+  <String id="210" type="Collection" text="02 Villains?" />
+  <String id="211" type="Collection" text="Frontier Villains?" />
+  <String id="212" type="Collection" text="Dark Masters" />
+  <String id="213" type="Collection" text="Something Vaccine" />
+  <String id="214" type="Collection" text="Royal Knights" />
+  <String id="215" type="Collection" text="Ordine" />
+  <String id="216" type="Collection" text="Miracle, Wake Up!" />
+</UnionGroupStrings>

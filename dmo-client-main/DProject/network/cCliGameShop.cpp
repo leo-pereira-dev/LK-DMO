@@ -691,6 +691,23 @@ void cCliGame::SendRequestRewardAll()
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::REWARD_SEND_ACCPET_DATA, &recv );
 }
 
+void cCliGame::SendXmlUnionProgressRequest()
+{
+	cPacket p;
+	p.newp( 11050 );
+	p.endp( 11050 );
+	DoSend( p );
+}
+
+void cCliGame::SendXmlUnionRewardClaim( u1 nRewardIndex )
+{
+	cPacket p;
+	p.newp( 11051 );
+	p.push( nRewardIndex );
+	p.endp( 11051 );
+	DoSend( p );
+}
+
 #ifdef REPURCHASE
 void cCliGame::SendItemRepurchaseOpen( u4 nNpcID )
 {
@@ -764,7 +781,6 @@ void cCliGame::RecvItemRepurchase()
 	}
 }
 #endif
-
 
 
 

@@ -569,6 +569,16 @@ namespace DigitalWorldOnline.Commons.Enums.PacketProcessor
         /// </summary>
         ProgressUpdate = 11007,
 
+        /// <summary>
+        /// Requests the current XML D-Unit progress.
+        /// </summary>
+        XmlUnionProgressRequest = 11050,
+
+        /// <summary>
+        /// Claims an XML D-Unit reward tier.
+        /// </summary>
+        XmlUnionRewardClaim = 11051,
+
 
         /// <summary>
         /// Consumes an item.

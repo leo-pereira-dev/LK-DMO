@@ -2542,7 +2542,6 @@
     <ClCompile Include="_Interface\Game\PersonStoreContents.cpp" />
     <ClCompile Include="_Interface\Game\UnionStore.cpp" />
     <ClCompile Include="_Interface\Game\UnionStoreContents.cpp" />
-    <ClCompile Include="_Interface\Game\UnionDUnit.cpp" />
     <ClCompile Include="_Interface\Game\UnionXmlTools.cpp" />
     <ClCompile Include="_Interface\Game\XmlUnionDUnit.cpp" />
     <ClCompile Include="_Interface\Game\SealMaster.cpp" />
@@ -3385,7 +3384,6 @@
     <ClInclude Include="_Interface\Game\PersonStoreContents.h" />
     <ClInclude Include="_Interface\Game\UnionStore.h" />
     <ClInclude Include="_Interface\Game\UnionStoreContents.h" />
-    <ClInclude Include="_Interface\Game\UnionDUnit.h" />
     <ClInclude Include="_Interface\Game\UnionXmlTools.h" />
     <ClInclude Include="_Interface\Game\XmlUnionDUnit.h" />
     <ClInclude Include="_Interface\Game\SealMaster.h" />

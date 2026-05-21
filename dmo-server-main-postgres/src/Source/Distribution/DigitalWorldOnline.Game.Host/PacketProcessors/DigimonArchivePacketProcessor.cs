@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DigitalWorldOnline.Application.Separar.Queries;
+using DigitalWorldOnline.Application.GameAssets.Xml;
 using DigitalWorldOnline.Application.GameAssets.Queries;
 using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
@@ -18,17 +19,20 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         private readonly StatusManager _statusManager;
         private readonly IMapper _mapper;
+        private readonly DUnitCollectionService _dUnitCollections;
         private readonly ILogger _logger;
         private readonly ISender _sender;
 
         public DigimonArchivePacketProcessor(
             StatusManager statusManager,
             IMapper mapper,
+            DUnitCollectionService dUnitCollections,
             ILogger logger,
             ISender sender)
         {
             _statusManager = statusManager;
             _mapper = mapper;
+            _dUnitCollections = dUnitCollections;
             _logger = logger;
             _sender = sender;
         }
@@ -49,6 +53,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     )
                 );
 
+                digimonArchive.Digimon?.SetTamer(client.Tamer);
+
                 digimonArchive.Digimon?.SetBaseStatus(
                     _statusManager.GetDigimonBaseStatus(
                         digimonArchive.Digimon.BaseType,
@@ -59,6 +65,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
 
             _logger.Debug($"Character {client.TamerId} loaded digimon archive info.");
+
+            _dUnitCollections.ApplyBonuses(client.Tamer);
+            client.Send(new UpdateStatusPacket(client.Tamer));
 
             client.Send(new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive));
         }

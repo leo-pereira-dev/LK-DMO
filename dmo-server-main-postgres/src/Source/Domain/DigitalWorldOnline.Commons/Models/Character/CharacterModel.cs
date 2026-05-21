@@ -176,6 +176,16 @@ namespace DigitalWorldOnline.Commons.Models.Character
         public CharacterProgressModel Progress { get; private set; }
 
         /// <summary>
+        /// XML D-Unit progression details.
+        /// </summary>
+        public CharacterXmlUnionProgressModel XmlUnionProgress { get; private set; }
+
+        /// <summary>
+        /// Runtime-only collection bonuses granted by the D-Unit/Union system.
+        /// </summary>
+        public DUnitCollectionBonusModel DUnitCollectionBonus { get; private set; }
+
+        /// <summary>
         /// Character time reward event details.
         /// </summary>
         public TimeReward TimeReward { get; private set; }
@@ -272,6 +282,8 @@ namespace DigitalWorldOnline.Commons.Models.Character
             ActiveEvolution = new CharacterActiveEvolutionModel();
             DigimonArchive = new CharacterDigimonArchiveModel();
             Progress = new CharacterProgressModel();
+            XmlUnionProgress = new CharacterXmlUnionProgressModel();
+            DUnitCollectionBonus = new DUnitCollectionBonusModel();
             TargetPartners = new List<DigimonModel>();
             TargetMobs = new List<MobConfigModel>();
             TargetSummonMobs = new List<SummonMobModel>();
@@ -316,6 +328,12 @@ namespace DigitalWorldOnline.Commons.Models.Character
         {
             AfkNotifications = 0;
             LastAfkNotification = DateTime.Now;
+        }
+
+        public void EnsureXmlUnionProgress()
+        {
+            XmlUnionProgress ??= new CharacterXmlUnionProgressModel();
+            XmlUnionProgress.SetCharacter(Id);
         }
 
         public void RemoveDigimon(byte slot, bool updateSlots = true)

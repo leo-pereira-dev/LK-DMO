@@ -99,6 +99,7 @@ services:
       - "17608:7608"
     volumes:
       - ./Bins:/app/Bins:ro
+      - ./xml:/app/xml:ro
     restart: unless-stopped
 
   routine:
@@ -117,6 +118,7 @@ services:
       DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
     volumes:
       - ./Bins:/app/Bins:ro
+      - ./xml:/app/xml:ro
     restart: unless-stopped
 
   api:

@@ -211,6 +211,11 @@ namespace DigitalWorldOnline.Infraestructure.ContextConfiguration.Character
                 .HasForeignKey<CharacterProgressDTO>(x => x.CharacterId);
 
             builder
+                .HasOne(x => x.XmlUnionProgress)
+                .WithOne(x => x.Character)
+                .HasForeignKey<CharacterXmlUnionProgressDTO>(x => x.CharacterId);
+
+            builder
                 .HasOne(x => x.ActiveEvolution)
                 .WithOne(x => x.Character)
                 .HasForeignKey<CharacterActiveEvolutionDTO>(x => x.CharacterId);

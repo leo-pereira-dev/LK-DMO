@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UnionDigimonCollections source="DMO Union - DigimonCollections.csv" count="61">
+  <Collection id="1" name="Fanglo" levelReq1="560" levelReq2="710" membersRequired="5" ownedInSource="4" allTranscended="FALSE" iconCandidateId="71082" iconStatus="matched" iconFolder="qinglongmon">
+    <Members>
+      <Member slot="1" name="Qinglongmon" iconCandidateId="71082" iconStatus="matched" iconFolder="qinglongmon" />
+      <Member slot="2" name="Zhuqiaomon" iconCandidateId="71083" iconStatus="matched" iconFolder="zhuqiaomon" />
+      <Member slot="3" name="Ebonwumon" iconStatus="missing" />
+      <Member slot="4" name="Baihumon" iconCandidateId="71084" iconStatus="matched" iconFolder="baihumon" />
+      <Member slot="5" name="Fanglo Shin" iconStatus="missing" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="54" raw="HP +500" stat="HP" sign="+" value="500" unit="flat" />
+      <Reward slot="2" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="3" effectId="45" raw="Data 2%" stat="Data" value="2" unit="percent" />
+      <Reward slot="4" effectId="58" raw="Land 2%" stat="Land" value="2" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="1" type="HP" value="2000" />
+  </Collection>
+  <Collection id="2" name="Angels" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="3" allTranscended="TRUE" iconCandidateId="61031" iconStatus="matched" iconFolder="seraphimon">
+    <Members>
+      <Member slot="1" name="Seraphimon" iconCandidateId="61031" iconStatus="matched" iconFolder="seraphimon" />
+      <Member slot="2" name="Ophanimon" iconCandidateId="71019" iconStatus="matched" iconFolder="ophanimon" />
+      <Member slot="3" name="Cherubimon" iconCandidateId="61051" iconStatus="partial" iconFolder="cherubimonvaccinemon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="40" raw="DE +100" stat="DE" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="4" raw="Light 1%" stat="Light" value="1" unit="percent" />
+      <Reward slot="4" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="2" type="DS" value="720" />
+  </Collection>
+  <Collection id="3" name="Fallen Angels" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="3" allTranscended="TRUE" iconCandidateId="61031" iconStatus="partial" iconFolder="seraphimon">
+    <Members>
+      <Member slot="1" name="ShadowSeraphimon" iconCandidateId="61031" iconStatus="partial" iconFolder="seraphimon" />
+      <Member slot="2" name="Ophanimon Falldown" iconCandidateId="71019" iconStatus="partial" iconFolder="ophanimon" />
+      <Member slot="3" name="Cherubimon Virus" iconStatus="missing" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="2" effectId="59" raw="EV +130" stat="EV" sign="+" value="130" unit="flat" />
+      <Reward slot="3" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="3" type="AT" value="120" />
+  </Collection>
+  <Collection id="4" name="Adventure Rookies" levelReq1="880" levelReq2="1120" membersRequired="8" ownedInSource="8" allTranscended="FALSE" iconCandidateId="1031001" iconStatus="matched" iconFolder="agumon">
+    <Members>
+      <Member slot="1" name="Agumon" iconCandidateId="1031001" iconStatus="matched" iconFolder="agumon" />
+      <Member slot="2" name="Gabumon" iconCandidateId="31138" iconStatus="matched" iconFolder="gabumon" />
+      <Member slot="3" name="Tentomon" iconStatus="missing" />
+      <Member slot="4" name="Gomamon" iconStatus="missing" />
+      <Member slot="5" name="Patamon" iconCandidateId="31012" iconStatus="matched" iconFolder="patamon" />
+      <Member slot="6" name="Palmon" iconCandidateId="1131041" iconStatus="matched" iconFolder="palmon" />
+      <Member slot="7" name="Piyomon" iconCandidateId="1431048" iconStatus="matched" iconFolder="piyomon" />
+      <Member slot="8" name="Gatomon" iconCandidateId="41021" iconStatus="matched" iconFolder="tailmon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="54" raw="HP +500" stat="HP" sign="+" value="500" unit="flat" />
+      <Reward slot="2" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="3" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+      <Reward slot="4" effectId="4" raw="Light 1%" stat="Light" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="4" type="DE" value="800" />
+  </Collection>
+  <Collection id="5" name="Adventure Evolutions" levelReq1="880" levelReq2="1120" membersRequired="8" ownedInSource="8" allTranscended="FALSE" iconCandidateId="1061042" iconStatus="matched" iconFolder="wargreymon">
+    <Members>
+      <Member slot="1" name="Wargreymon" iconCandidateId="1061042" iconStatus="matched" iconFolder="wargreymon" />
+      <Member slot="2" name="MetalGarurumon" iconCandidateId="67012" iconStatus="matched" iconFolder="metalgarurumon" />
+      <Member slot="3" name="MegaKabuterimon" iconStatus="missing" />
+      <Member slot="4" name="Zudomon" iconCandidateId="51050" iconStatus="matched" iconFolder="zudomon" />
+      <Member slot="5" name="Angemon" iconCandidateId="41014" iconStatus="matched" iconFolder="angemon" />
+      <Member slot="6" name="Lilymon" iconCandidateId="1151045" iconStatus="matched" iconFolder="lilymon" />
+      <Member slot="7" name="Garudamon" iconCandidateId="1451064" iconStatus="matched" iconFolder="garudamon" />
+      <Member slot="8" name="Angewoman" iconStatus="missing" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+      <Reward slot="2" effectId="7" raw="SCD 1%" stat="SCD" value="1" unit="percent" />
+      <Reward slot="3" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="5" type="HT" value="0" />
+  </Collection>
+  <Collection id="6" name="7 Deadly Sins" levelReq1="770" levelReq2="980" membersRequired="7" ownedInSource="7" allTranscended="FALSE" iconCandidateId="45160" iconStatus="matched" iconFolder="lucemon">
+    <Members>
+      <Member slot="1" name="Lucemon" iconCandidateId="45160" iconStatus="matched" iconFolder="lucemon" />
+      <Member slot="2" name="Leviamon" iconCandidateId="61155" iconStatus="matched" iconFolder="leviamon" />
+      <Member slot="3" name="Beelzemon" iconCandidateId="1561037" iconStatus="matched" iconFolder="beelzebumon" />
+      <Member slot="4" name="Daemon" iconStatus="missing" />
+      <Member slot="5" name="Belphemon" iconCandidateId="71090" iconStatus="partial" iconFolder="belphemon_ragemode" />
+      <Member slot="6" name="Barbamon" iconCandidateId="63005" iconStatus="matched" iconFolder="barbamon" />
+      <Member slot="7" name="Lilithmon" iconCandidateId="62077" iconStatus="matched" iconFolder="lilithmon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="40" raw="DE +100" stat="DE" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="6" type="CT" value="80" />
+  </Collection>
+  <Collection id="7" name="Angel Corps" levelReq1="440" levelReq2="560" membersRequired="4" ownedInSource="4" allTranscended="FALSE" iconCandidateId="41014" iconStatus="matched" iconFolder="angemon">
+    <Members>
+      <Member slot="1" name="Angemon" iconCandidateId="41014" iconStatus="matched" iconFolder="angemon" />
+      <Member slot="2" name="MagnaAngemon" iconCandidateId="41014" iconStatus="partial" iconFolder="angemon" />
+      <Member slot="3" name="SlashAngemon" iconCandidateId="63018" iconStatus="matched" iconFolder="slashangemon" />
+      <Member slot="4" name="Angewomon" iconCandidateId="51025" iconStatus="matched" iconFolder="angewomon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="40" raw="DE +100" stat="DE" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="7" type="EV" value="1020" />
+  </Collection>
+  <Collection id="8" name="Crack Team" levelReq1="550" levelReq2="700" membersRequired="5" ownedInSource="5" allTranscended="FALSE" iconCandidateId="51063" iconStatus="partial" iconFolder="metal greymon_black">
+    <Members>
+      <Member slot="1" name="Metalgreymon" iconCandidateId="51063" iconStatus="partial" iconFolder="metal greymon_black" />
+      <Member slot="2" name="Megadramon" iconCandidateId="51040" iconStatus="matched" iconFolder="megadramon" />
+      <Member slot="3" name="MetalTyrannomon" iconStatus="missing" />
+      <Member slot="4" name="Andromon" iconCandidateId="51038" iconStatus="matched" iconFolder="andromon" />
+      <Member slot="5" name="Boltmon" iconCandidateId="61151" iconStatus="matched" iconFolder="boltmon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="55" raw="BL +70" stat="BL" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="8" type="BL" value="430" />
+  </Collection>
+  <Collection id="9" name="Burst Ultimate Wings" levelReq1="880" levelReq2="1120" membersRequired="8" ownedInSource="8" allTranscended="FALSE" iconCandidateId="71020" iconStatus="matched" iconFolder="victorygreymon">
+    <Members>
+      <Member slot="1" name="VictoryGreymon" iconCandidateId="71020" iconStatus="matched" iconFolder="victorygreymon" />
+      <Member slot="2" name="TyrantKabuterimon" iconStatus="missing" />
+      <Member slot="3" name="Ornismon" iconCandidateId="71031" iconStatus="matched" iconFolder="ornismon" />
+      <Member slot="4" name="Valdurmon" iconStatus="missing" />
+      <Member slot="5" name="Gallantmon Crimson" iconStatus="missing" />
+      <Member slot="6" name="Imperialdramon Paladin" iconCandidateId="71076" iconStatus="partial" iconFolder="imperialdramonpaladinmode" />
+      <Member slot="7" name="Venom Myotismon" iconCandidateId="61069" iconStatus="matched" iconFolder="venommyotismon" />
+      <Member slot="8" name="Lucemon Satan" iconCandidateId="45160" iconStatus="partial" iconFolder="lucemon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="52" raw="EV +100" stat="EV" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="9" type="EXP" value="470" />
+  </Collection>
+  <Collection id="10" name="Checkmate" levelReq1="880" levelReq2="1120" membersRequired="8" ownedInSource="8" allTranscended="FALSE" iconCandidateId="31013" iconStatus="matched" iconFolder="pawnchessmon">
+    <Members>
+      <Member slot="1" name="PawnChessmon (B &amp;W)" iconCandidateId="31013" iconStatus="matched" iconFolder="pawnchessmon" />
+      <Member slot="2" name="KnightChessmon (B &amp;W)" iconCandidateId="41012" iconStatus="matched" iconFolder="knightchessmon" />
+      <Member slot="3" name="RookChessmon" iconCandidateId="51011" iconStatus="matched" iconFolder="rookchessmon" />
+      <Member slot="4" name="BishopChessmon KingChessmon" iconCandidateId="51015" iconStatus="partial" iconFolder="bishopchessmon" />
+      <Member slot="5" name="QueenChessmon" iconCandidateId="61016" iconStatus="matched" iconFolder="queenchessmon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="26" raw="CT +50" stat="CT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="10" type="Basic Attribute" value="0" />
+  </Collection>
+  <Collection id="11" name="Giga Whale" levelReq1="650" levelReq2="800" membersRequired="5" ownedInSource="0" allTranscended="FALSE" iconCandidateId="71072" iconStatus="partial" iconFolder="omegamon">
+    <Members>
+      <Member slot="1" name="Omegamon Merciful" iconCandidateId="71072" iconStatus="partial" iconFolder="omegamon" />
+      <Member slot="2" name="Miko Mode" iconCandidateId="71133" iconStatus="partial" iconFolder="kuzuhamon_mikomode" />
+      <Member slot="3" name="X7 Superior" iconCandidateId="79004" iconStatus="partial" iconFolder="shoutmon_x7_superior_mode" />
+      <Member slot="4" name="Crimson Mode Awaken" iconCandidateId="71074" iconStatus="partial" iconFolder="dukemon_crimsonmode" />
+      <Member slot="5" name="Eosmon U" iconStatus="missing" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="60" raw="SCD 5%" stat="SCD" value="5" unit="percent" />
+      <Reward slot="2" effectId="61" raw="Basic 5%" stat="Basic" value="5" unit="percent" />
+      <Reward slot="3" effectId="25" raw="Light 2%" stat="Light" value="2" unit="percent" />
+      <Reward slot="4" effectId="48" raw="Dark 2%" stat="Dark" value="2" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="11" type="SCD" value="2" />
+  </Collection>
+  <Collection id="12" name="Two Guys" levelReq1="220" levelReq2="280" membersRequired="2" ownedInSource="2" allTranscended="FALSE" iconCandidateId="1631018" iconStatus="matched" iconFolder="gotsumon">
+    <Members>
+      <Member slot="1" name="Pumpkinmon" iconStatus="missing" />
+      <Member slot="2" name="Gotsumon" iconCandidateId="1631018" iconStatus="matched" iconFolder="gotsumon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="54" raw="HP +500" stat="HP" sign="+" value="500" unit="flat" />
+      <Reward slot="2" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="41" raw="DS +150" stat="DS" sign="+" value="150" unit="flat" />
+    </Rewards>
+    <TotalStat filterId="12" type="Vaccine" value="4" />
+  </Collection>
+  <Collection id="13" name="Villains" levelReq1="880" levelReq2="1120" membersRequired="8" ownedInSource="8" allTranscended="FALSE" iconCandidateId="41068" iconStatus="matched" iconFolder="devimon">
+    <Members>
+      <Member slot="1" name="Devimon" iconCandidateId="41068" iconStatus="matched" iconFolder="devimon" />
+      <Member slot="2" name="Etemon" iconCandidateId="51039" iconStatus="matched" iconFolder="etemon" />
+      <Member slot="3" name="Puppetmon" iconCandidateId="61088" iconStatus="matched" iconFolder="pinokimon" />
+      <Member slot="4" name="Machinedramon" iconCandidateId="61043" iconStatus="matched" iconFolder="mugendramon" />
+      <Member slot="5" name="MetalSeadramon" iconCandidateId="61029" iconStatus="matched" iconFolder="metalseadramon" />
+      <Member slot="6" name="Piedmon" iconCandidateId="71095" iconStatus="partial" iconFolder="apocalymon_piedmon" />
+      <Member slot="7" name="Myotismon" iconCandidateId="51068" iconStatus="matched" iconFolder="vamdemon" />
+      <Member slot="8" name="Venom Myotismon" iconCandidateId="61069" iconStatus="matched" iconFolder="venommyotismon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="13" type="Data" value="0" />
+  </Collection>
+  <Collection id="14" name="Bare In Black?" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="3" allTranscended="FALSE" iconCandidateId="41056" iconStatus="matched" iconFolder="blackgatomon">
+    <Members>
+      <Member slot="1" name="BlackGatomon" iconCandidateId="41056" iconStatus="matched" iconFolder="blackgatomon" />
+      <Member slot="2" name="ShadowSeraphimon" iconCandidateId="61031" iconStatus="partial" iconFolder="seraphimon" />
+      <Member slot="3" name="BlackSaintGargomon" iconCandidateId="41010" iconStatus="partial" iconFolder="gargomon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="14" type="Virus" value="2" />
+  </Collection>
+  <Collection id="15" name="Black Agu &amp; Gabus" levelReq1="990" levelReq2="1260" membersRequired="9" ownedInSource="9" allTranscended="FALSE" iconCandidateId="41140" iconStatus="matched" iconFolder="garurumon_black">
+    <Members>
+      <Member slot="1" name="Gabu Zwart" iconStatus="missing" />
+      <Member slot="2" name="Garurumon Black" iconCandidateId="41140" iconStatus="matched" iconFolder="garurumon_black" />
+      <Member slot="3" name="WereGarurumon Black" iconCandidateId="51149" iconStatus="matched" iconFolder="weregarurumon_black" />
+      <Member slot="4" name="MetalGarurumon Black" iconCandidateId="61153" iconStatus="matched" iconFolder="metalgarurumon_black" />
+      <Member slot="5" name="Agumon Zwart" iconCandidateId="1031001" iconStatus="partial" iconFolder="agumon" />
+      <Member slot="6" name="Greymon Blk" iconCandidateId="63006" iconStatus="partial" iconFolder="blitzgreymon" />
+      <Member slot="7" name="MetalGreymon Blk" iconCandidateId="51063" iconStatus="partial" iconFolder="metal greymon_black" />
+      <Member slot="8" name="Wargreymon Blk" iconCandidateId="1061042" iconStatus="matched" iconFolder="wargreymon" />
+      <Member slot="9" name="Agumon Blk (Millenium)" iconCandidateId="1031001" iconStatus="matched" iconFolder="agumon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="41" raw="DS +150" stat="DS" sign="+" value="150" unit="flat" />
+      <Reward slot="2" effectId="41" raw="DS +150" stat="DS" sign="+" value="150" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="15" type="Unknown" value="1" />
+  </Collection>
+  <Collection id="16" name="Ghost Games" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="3" allTranscended="TRUE" iconCandidateId="35148" iconStatus="matched" iconFolder="gammamon">
+    <Members>
+      <Member slot="1" name="Gammamon" iconCandidateId="35148" iconStatus="matched" iconFolder="gammamon" />
+      <Member slot="2" name="Angormon" iconStatus="missing" />
+      <Member slot="3" name="Jellymon" iconCandidateId="35149" iconStatus="matched" iconFolder="jellymon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="3" effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="16" type="Fire" value="2" />
+  </Collection>
+  <Collection id="17" name="Ghost Game 2" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="3" allTranscended="TRUE" iconCandidateId="63021" iconStatus="matched" iconFolder="siriusmon">
+    <Members>
+      <Member slot="1" name="Siriusmon" iconCandidateId="63021" iconStatus="matched" iconFolder="siriusmon" />
+      <Member slot="2" name="Diarbbitmon" iconCandidateId="63028" iconStatus="matched" iconFolder="diarbbitmon" />
+      <Member slot="3" name="Amphimon" iconCandidateId="63027" iconStatus="matched" iconFolder="amphimon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="17" type="Water" value="0" />
+  </Collection>
+  <Collection id="18" name="Greek Letters" levelReq1="440" levelReq2="560" membersRequired="4" ownedInSource="4" allTranscended="FALSE" iconCandidateId="71072" iconStatus="matched" iconFolder="omegamon">
+    <Members>
+      <Member slot="1" name="Omegamon" iconCandidateId="71072" iconStatus="matched" iconFolder="omegamon" />
+      <Member slot="2" name="Gammamon" iconCandidateId="35148" iconStatus="matched" iconFolder="gammamon" />
+      <Member slot="3" name="Alphamon" iconCandidateId="61070" iconStatus="matched" iconFolder="alphamon" />
+      <Member slot="4" name="Betamon" iconCandidateId="31026" iconStatus="matched" iconFolder="betamon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="18" type="Ice" value="1" />
+  </Collection>
+  <Collection id="19" name="Skeleton Gang" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="3" allTranscended="TRUE" iconCandidateId="1551022" iconStatus="matched" iconFolder="skullsatamon">
+    <Members>
+      <Member slot="1" name="SkullSatamon" iconCandidateId="1551022" iconStatus="matched" iconFolder="skullsatamon" />
+      <Member slot="2" name="SkullMammothmon" iconStatus="missing" />
+      <Member slot="3" name="SkullKnightmon" iconCandidateId="45189" iconStatus="matched" iconFolder="skullknightmon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="19" type="Land" value="0" />
+  </Collection>
+  <Collection id="20" name="Primal" levelReq1="440" levelReq2="560" membersRequired="4" ownedInSource="4" allTranscended="TRUE" iconCandidateId="31032" iconStatus="matched" iconFolder="sharmamon">
+    <Members>
+      <Member slot="1" name="Sharmamon" iconCandidateId="31032" iconStatus="matched" iconFolder="sharmamon" />
+      <Member slot="2" name="Goblimon" iconCandidateId="31033" iconStatus="matched" iconFolder="goblimon" />
+      <Member slot="3" name="Apemon" iconStatus="missing" />
+      <Member slot="4" name="Ogremon" iconCandidateId="41038" iconStatus="matched" iconFolder="ogremon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="62" raw="DS +30" stat="DS" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="20" type="Wood" value="0" />
+  </Collection>
+  <Collection id="21" name="Trees" levelReq1="660" levelReq2="840" membersRequired="6" ownedInSource="5" allTranscended="FALSE" iconCandidateId="1141039" iconStatus="matched" iconFolder="woodmon">
+    <Members>
+      <Member slot="1" name="Woodmon" iconCandidateId="1141039" iconStatus="matched" iconFolder="woodmon" />
+      <Member slot="2" name="Tanemon" iconCandidateId="21137" iconStatus="matched" iconFolder="tanemon" />
+      <Member slot="3" name="Palmon" iconCandidateId="1131041" iconStatus="matched" iconFolder="palmon" />
+      <Member slot="4" name="Floramon" iconCandidateId="33085" iconStatus="partial" iconFolder="floramon_re" />
+      <Member slot="5" name="Blossomon" iconCandidateId="1151036" iconStatus="matched" iconFolder="blossomon" />
+      <Member slot="6" name="Cherrymon" iconStatus="missing" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="21" type="Wind" value="0" />
+  </Collection>
+  <Collection id="22" name="02 Jogress Rookies" levelReq1="880" levelReq2="1120" membersRequired="8" ownedInSource="8" allTranscended="FALSE" iconCandidateId="41021" iconStatus="matched" iconFolder="tailmon">
+    <Members>
+      <Member slot="1" name="Gatomon" iconCandidateId="41021" iconStatus="matched" iconFolder="tailmon" />
+      <Member slot="2" name="Patamon" iconCandidateId="31012" iconStatus="matched" iconFolder="patamon" />
+      <Member slot="3" name="Patamon(Jogress)" iconCandidateId="31012" iconStatus="matched" iconFolder="patamon" />
+      <Member slot="4" name="Veemon(Imperialdramon)" iconCandidateId="31008" iconStatus="matched" iconFolder="vmon" />
+      <Member slot="5" name="Veemon(jogress)" iconCandidateId="31008" iconStatus="matched" iconFolder="vmon" />
+      <Member slot="6" name="Hawkmon(Jogress)" iconCandidateId="31020" iconStatus="matched" iconFolder="hawkmon" />
+      <Member slot="7" name="Wormon(jogress)" iconStatus="missing" />
+      <Member slot="8" name="Armadimon(jogress)" iconStatus="missing" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="3" effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="22" type="Thunder" value="1" />
+  </Collection>
+  <Collection id="23" name="02 Jogress Evolutions" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="3" allTranscended="FALSE" iconCandidateId="71089" iconStatus="matched" iconFolder="silphymon">
+    <Members>
+      <Member slot="1" name="Shakkoumon" iconStatus="missing" />
+      <Member slot="2" name="Imperialdramon Dragon" iconStatus="missing" />
+      <Member slot="3" name="Silphymon" iconCandidateId="71089" iconStatus="matched" iconFolder="silphymon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="59" raw="EV +130" stat="EV" sign="+" value="130" unit="flat" />
+      <Reward slot="3" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+      <Reward slot="4" effectId="4" raw="Light 1%" stat="Light" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="23" type="Steel" value="0" />
+  </Collection>
+  <Collection id="24" name="Dark Evolution" levelReq1="660" levelReq2="840" membersRequired="6" ownedInSource="6" allTranscended="FALSE" iconCandidateId="61051" iconStatus="partial" iconFolder="cherubimonvaccinemon">
+    <Members>
+      <Member slot="1" name="Cherubimon" iconCandidateId="61051" iconStatus="partial" iconFolder="cherubimonvaccinemon" />
+      <Member slot="2" name="ShadowSeraphimon" iconCandidateId="61031" iconStatus="partial" iconFolder="seraphimon" />
+      <Member slot="3" name="Wendigomon" iconCandidateId="41025" iconStatus="matched" iconFolder="wendigomon" />
+      <Member slot="4" name="Ophanimon Falldown" iconCandidateId="71019" iconStatus="partial" iconFolder="ophanimon" />
+      <Member slot="5" name="Megidramon" iconCandidateId="71043" iconStatus="matched" iconFolder="megidramon" />
+      <Member slot="6" name="Raguelmon" iconCandidateId="71047" iconStatus="matched" iconFolder="raguelmon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="3" effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="24" type="Light" value="5" />
+  </Collection>
+  <Collection id="25" name="Ladies" levelReq1="790" levelReq2="1000" membersRequired="7" ownedInSource="5" allTranscended="FALSE" iconCandidateId="61026" iconStatus="matched" iconFolder="lordknightmon">
+    <Members>
+      <Member slot="1" name="LordKnightmon" iconCandidateId="61026" iconStatus="matched" iconFolder="lordknightmon" />
+      <Member slot="2" name="Lilymon" iconCandidateId="1151045" iconStatus="matched" iconFolder="lilymon" />
+      <Member slot="3" name="Miko Mode" iconCandidateId="71133" iconStatus="partial" iconFolder="kuzuhamon_mikomode" />
+      <Member slot="4" name="QueenChessmon" iconCandidateId="61016" iconStatus="matched" iconFolder="queenchessmon" />
+      <Member slot="5" name="Angewomon" iconCandidateId="51025" iconStatus="matched" iconFolder="angewomon" />
+      <Member slot="6" name="Lilithmon" iconCandidateId="62077" iconStatus="matched" iconFolder="lilithmon" />
+      <Member slot="7" name="Lotusmon" iconCandidateId="61156" iconStatus="matched" iconFolder="lotusmon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+      <Reward slot="3" effectId="7" raw="SCD 1%" stat="SCD" value="1" unit="percent" />
+      <Reward slot="4" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="25" type="Dark" value="6" />
+  </Collection>
+  <Collection id="26" name="Dudes" levelReq1="1000" levelReq2="1270" membersRequired="9" ownedInSource="8" allTranscended="FALSE" iconCandidateId="41014" iconStatus="matched" iconFolder="angemon">
+    <Members>
+      <Member slot="1" name="Angemon" iconCandidateId="41014" iconStatus="matched" iconFolder="angemon" />
+      <Member slot="2" name="MetalEtemon" iconCandidateId="61045" iconStatus="matched" iconFolder="metaletemon" />
+      <Member slot="3" name="Beelze Shin" iconStatus="missing" />
+      <Member slot="4" name="Gankoomon" iconCandidateId="63011" iconStatus="matched" iconFolder="gankoomon" />
+      <Member slot="5" name="Justimon" iconCandidateId="61019" iconStatus="matched" iconFolder="justimon" />
+      <Member slot="6" name="Leomon" iconCandidateId="1341058" iconStatus="matched" iconFolder="leomon" />
+      <Member slot="7" name="Myotismon" iconCandidateId="51068" iconStatus="matched" iconFolder="vamdemon" />
+      <Member slot="8" name="Baalmon" iconCandidateId="53013" iconStatus="matched" iconFolder="baalmon" />
+      <Member slot="9" name="Astamon" iconCandidateId="52155" iconStatus="matched" iconFolder="astamon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="27" name="Greymons" levelReq1="550" levelReq2="700" membersRequired="5" ownedInSource="5" allTranscended="FALSE" iconCandidateId="63006" iconStatus="partial" iconFolder="blitzgreymon">
+    <Members>
+      <Member slot="1" name="Greymon" iconCandidateId="63006" iconStatus="partial" iconFolder="blitzgreymon" />
+      <Member slot="2" name="Greymon Black" iconCandidateId="51063" iconStatus="partial" iconFolder="metal greymon_black" />
+      <Member slot="3" name="KaiserGreymon" iconStatus="missing" />
+      <Member slot="4" name="MetalGreymon (c)" iconCandidateId="71122" iconStatus="matched" iconFolder="metalgreymonc" />
+      <Member slot="5" name="MailBirdramon" iconCandidateId="33004" iconStatus="matched" iconFolder="mailbirdramon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="28" name="Garurumon" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="3" allTranscended="TRUE" iconCandidateId="63007" iconStatus="partial" iconFolder="cresgarurumon">
+    <Members>
+      <Member slot="1" name="Garurumon" iconCandidateId="63007" iconStatus="partial" iconFolder="cresgarurumon" />
+      <Member slot="2" name="Garurumon Black" iconCandidateId="41140" iconStatus="matched" iconFolder="garurumon_black" />
+      <Member slot="3" name="MagnaGarurumon" iconCandidateId="75041" iconStatus="matched" iconFolder="magnagarurumon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="31" raw="Ice 1%" stat="Ice" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="29" name="M O D E" levelReq1="1270" levelReq2="1600" membersRequired="11" ownedInSource="6" allTranscended="FALSE" iconCandidateId="61027" iconStatus="matched" iconFolder="imperialdramonfightermode">
+    <Members>
+      <Member slot="1" name="Beelze Blast Mode" iconStatus="missing" />
+      <Member slot="2" name="ImperialDramon Fighter Mode" iconCandidateId="61027" iconStatus="matched" iconFolder="imperialdramonfightermode" />
+      <Member slot="3" name="ImperialDramon Paladin Mode" iconCandidateId="71076" iconStatus="matched" iconFolder="imperialdramonpaladinmode" />
+      <Member slot="4" name="Ophanimon Falldown Mode" iconCandidateId="71019" iconStatus="partial" iconFolder="ophanimon" />
+      <Member slot="5" name="Meicrackmon Vicious Mode" iconCandidateId="51158" iconStatus="matched" iconFolder="meicrackmon_vicious" />
+      <Member slot="6" name="Demon Beast Mode" iconCandidateId="71077" iconStatus="matched" iconFolder="demonbeastmode" />
+      <Member slot="7" name="Belphemon Rage Mode" iconCandidateId="71090" iconStatus="matched" iconFolder="belphemon_ragemode" />
+      <Member slot="8" name="Omegamon Merciful Mode" iconCandidateId="71126" iconStatus="matched" iconFolder="omegamon_mercifulmode" />
+      <Member slot="9" name="Sakuyamon Miko Mode" iconCandidateId="61018" iconStatus="partial" iconFolder="sakuyamon" />
+      <Member slot="10" name="ShoutmonX7 Superior Mode" iconCandidateId="79004" iconStatus="matched" iconFolder="shoutmon_x7_superior_mode" />
+      <Member slot="11" name="Lucemon Satan Mode" iconCandidateId="71088" iconStatus="matched" iconFolder="lucemon_satanmode" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="52" raw="EV +100" stat="EV" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="63" raw="SCD 3%" stat="SCD" value="3" unit="percent" />
+      <Reward slot="4" effectId="64" raw="Basic 2%" stat="Basic" value="2" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="30" name="Bugs" levelReq1="660" levelReq2="840" membersRequired="6" ownedInSource="6" allTranscended="FALSE" iconCandidateId="1831029" iconStatus="matched" iconFolder="kunemon">
+    <Members>
+      <Member slot="1" name="Tentomon" iconStatus="missing" />
+      <Member slot="2" name="Kunemon" iconCandidateId="1831029" iconStatus="matched" iconFolder="kunemon" />
+      <Member slot="3" name="Dokunemon" iconCandidateId="31038" iconStatus="matched" iconFolder="dokunemon" />
+      <Member slot="4" name="Wormon" iconStatus="missing" />
+      <Member slot="5" name="Wormon (Jogress)" iconStatus="missing" />
+      <Member slot="6" name="Waspmon" iconCandidateId="41028" iconStatus="matched" iconFolder="waspmon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="26" raw="CT +50" stat="CT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="31" name="Advanced Spirit Evo" levelReq1="340" levelReq2="430" membersRequired="3" ownedInSource="3" allTranscended="TRUE" iconCandidateId="75041" iconStatus="matched" iconFolder="magnagarurumon">
+    <Members>
+      <Member slot="1" name="KaiserGreymon" iconStatus="missing" />
+      <Member slot="2" name="MagnaGarurumon" iconCandidateId="75041" iconStatus="matched" iconFolder="magnagarurumon" />
+      <Member slot="3" name="Susanomon" iconCandidateId="75042" iconStatus="matched" iconFolder="susanomon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="32" name="Omega: VA" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="3" allTranscended="TRUE" iconCandidateId="71072" iconStatus="matched" iconFolder="omegamon">
+    <Members>
+      <Member slot="1" name="Omegamon" iconCandidateId="71072" iconStatus="matched" iconFolder="omegamon" />
+      <Member slot="2" name="Zwart" iconCandidateId="71073" iconStatus="partial" iconFolder="omegamonzwart" />
+      <Member slot="3" name="Alter S" iconCandidateId="71104" iconStatus="partial" iconFolder="omegamon_alter_s" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="7" raw="SCD 1%" stat="SCD" value="1" unit="percent" />
+      <Reward slot="3" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="33" name="Omega: VI" levelReq1="240" levelReq2="300" membersRequired="2" ownedInSource="0" allTranscended="FALSE" iconCandidateId="71106" iconStatus="partial" iconFolder="omegamonzwartd">
+    <Members>
+      <Member slot="1" name="Zwart D" iconCandidateId="71106" iconStatus="partial" iconFolder="omegamonzwartd" />
+      <Member slot="2" name="Alter B" iconCandidateId="71109" iconStatus="partial" iconFolder="omegamon_alterb" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+      <Reward slot="3" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+      <Reward slot="4" effectId="44" raw="Virus 2%" stat="Virus" value="2" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="34" name="Under Sea" levelReq1="770" levelReq2="980" membersRequired="7" ownedInSource="7" allTranscended="FALSE" iconCandidateId="51061" iconStatus="matched" iconFolder="whamon">
+    <Members>
+      <Member slot="1" name="Geckomon" iconStatus="missing" />
+      <Member slot="2" name="Whamon" iconCandidateId="51061" iconStatus="matched" iconFolder="whamon" />
+      <Member slot="3" name="Lanamon" iconCandidateId="75035" iconStatus="matched" iconFolder="lanamon" />
+      <Member slot="4" name="MegaSeadramon" iconCandidateId="51029" iconStatus="matched" iconFolder="megaseadramon" />
+      <Member slot="5" name="Gesomon" iconCandidateId="41176" iconStatus="matched" iconFolder="gesomon" />
+      <Member slot="6" name="Zudomon" iconCandidateId="51050" iconStatus="matched" iconFolder="zudomon" />
+      <Member slot="7" name="Jellymon" iconCandidateId="35149" iconStatus="matched" iconFolder="jellymon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="3" effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="35" name="Hybrid H" levelReq1="1210" levelReq2="1540" membersRequired="11" ownedInSource="2" allTranscended="FALSE" iconCandidateId="75020" iconStatus="matched" iconFolder="agnimon">
+    <Members>
+      <Member slot="1" name="Agnimon" iconCandidateId="75020" iconStatus="matched" iconFolder="agnimon" />
+      <Member slot="2" name="Fairimon" iconStatus="missing" />
+      <Member slot="3" name="Chakkumon" iconStatus="missing" />
+      <Member slot="4" name="Arbormon" iconCandidateId="75026" iconStatus="matched" iconFolder="arbormon" />
+      <Member slot="5" name="Grotmon" iconStatus="missing" />
+      <Member slot="6" name="Wolfmon" iconCandidateId="75031" iconStatus="matched" iconFolder="wolfmon" />
+      <Member slot="7" name="Blitzmon" iconCandidateId="75033" iconStatus="matched" iconFolder="blitzmon" />
+      <Member slot="8" name="Lanamon" iconCandidateId="75035" iconStatus="matched" iconFolder="lanamon" />
+      <Member slot="9" name="Mercuremon" iconCandidateId="75039" iconStatus="matched" iconFolder="mercuremon" />
+      <Member slot="10" name="KaiserGreymon" iconStatus="missing" />
+      <Member slot="11" name="MagnaGarurumon" iconCandidateId="75041" iconStatus="matched" iconFolder="magnagarurumon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="36" name="Hybrid B" levelReq1="1210" levelReq2="1540" membersRequired="11" ownedInSource="0" allTranscended="FALSE" iconCandidateId="75025" iconStatus="matched" iconFolder="blizzarmon">
+    <Members>
+      <Member slot="1" name="Vritramon" iconStatus="missing" />
+      <Member slot="2" name="Shutsmon" iconStatus="missing" />
+      <Member slot="3" name="Blizzarmon" iconCandidateId="75025" iconStatus="matched" iconFolder="blizzarmon" />
+      <Member slot="4" name="Petaldramon" iconCandidateId="75027" iconStatus="matched" iconFolder="petaldramon" />
+      <Member slot="5" name="Gigasmon" iconCandidateId="75029" iconStatus="matched" iconFolder="gigasmon" />
+      <Member slot="6" name="Garmmon" iconStatus="missing" />
+      <Member slot="7" name="Bolgmon" iconCandidateId="75034" iconStatus="matched" iconFolder="bolgmon" />
+      <Member slot="8" name="Calamaramon" iconStatus="missing" />
+      <Member slot="9" name="Sefirotmon" iconCandidateId="75040" iconStatus="matched" iconFolder="sefirotmon" />
+      <Member slot="10" name="KaiserLeomon" iconCandidateId="75038" iconStatus="matched" iconFolder="kaiserleomon" />
+      <Member slot="11" name="Lowemon" iconCandidateId="75037" iconStatus="matched" iconFolder="lowemon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="41" raw="DS +150" stat="DS" sign="+" value="150" unit="flat" />
+      <Reward slot="2" effectId="41" raw="DS +150" stat="DS" sign="+" value="150" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="37" name="Capsul" levelReq1="1650" levelReq2="2100" membersRequired="15" ownedInSource="15" allTranscended="FALSE" iconCandidateId="75007" iconStatus="matched" iconFolder="allomon">
+    <Members>
+      <Member slot="1" name="Allomon" iconCandidateId="75007" iconStatus="matched" iconFolder="allomon" />
+      <Member slot="2" name="Digmon" iconCandidateId="1741023" iconStatus="matched" iconFolder="digmon" />
+      <Member slot="3" name="Flamedramon" iconStatus="missing" />
+      <Member slot="4" name="Flybeemon" iconCandidateId="75012" iconStatus="matched" iconFolder="flybeemon" />
+      <Member slot="5" name="Gargoylemon" iconStatus="missing" />
+      <Member slot="6" name="Goatmon" iconCandidateId="75014" iconStatus="matched" iconFolder="goatmon" />
+      <Member slot="7" name="Halsemon" iconCandidateId="75001" iconStatus="matched" iconFolder="halsemon" />
+      <Member slot="8" name="Magnamon" iconCandidateId="75004" iconStatus="matched" iconFolder="magnamon" />
+      <Member slot="9" name="Nefertimon" iconCandidateId="75003" iconStatus="matched" iconFolder="nefertimon" />
+      <Member slot="10" name="Pegasusmon" iconStatus="missing" />
+      <Member slot="11" name="Raidramon" iconStatus="missing" />
+      <Member slot="12" name="Shurimon" iconCandidateId="75010" iconStatus="matched" iconFolder="shurimon" />
+      <Member slot="13" name="Submarimon" iconCandidateId="75006" iconStatus="matched" iconFolder="submarimon" />
+      <Member slot="14" name="Toucanmon" iconStatus="missing" />
+      <Member slot="15" name="Yasyamon" iconStatus="missing" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="38" name="Dog?" levelReq1="440" levelReq2="560" membersRequired="4" ownedInSource="4" allTranscended="FALSE" iconCandidateId="1241033" iconStatus="matched" iconFolder="dobermon">
+    <Members>
+      <Member slot="1" name="Doggymon" iconStatus="missing" />
+      <Member slot="2" name="Dobermon" iconCandidateId="1241033" iconStatus="matched" iconFolder="dobermon" />
+      <Member slot="3" name="Cerberusmon" iconStatus="missing" />
+      <Member slot="4" name="Anubismon?" iconStatus="missing" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="39" name="Cat?" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="3" allTranscended="FALSE" iconCandidateId="41021" iconStatus="matched" iconFolder="tailmon">
+    <Members>
+      <Member slot="1" name="Gatomon" iconCandidateId="41021" iconStatus="matched" iconFolder="tailmon" />
+      <Member slot="2" name="BlackGatomon" iconCandidateId="41056" iconStatus="matched" iconFolder="blackgatomon" />
+      <Member slot="3" name="Meicoomon" iconCandidateId="41178" iconStatus="matched" iconFolder="meicoomon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="3" effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="40" name="High Noon" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="2" allTranscended="FALSE" iconCandidateId="41088" iconStatus="matched" iconFolder="starmon">
+    <Members>
+      <Member slot="1" name="Deputymon" iconStatus="missing" />
+      <Member slot="2" name="Starmon" iconCandidateId="41088" iconStatus="matched" iconFolder="starmon" />
+      <Member slot="3" name="SuperStarmon" iconCandidateId="51089" iconStatus="matched" iconFolder="superstarmon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="41" name="Transcendental Ultimate Wings 1" levelReq1="220" levelReq2="280" membersRequired="2" ownedInSource="0" allTranscended="FALSE" iconCandidateId="71112" iconStatus="matched" iconFolder="boltboutamon">
+    <Members>
+      <Member slot="1" name="Boltboutamon" iconCandidateId="71112" iconStatus="matched" iconFolder="boltboutamon" />
+      <Member slot="2" name="Mastemon" iconCandidateId="71111" iconStatus="matched" iconFolder="mastemon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="3" effectId="65" raw="Basic 1%" stat="Basic" value="1" unit="percent" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="42" name="Transcendental Ultimate Wings 2" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="3" allTranscended="FALSE" iconCandidateId="71088" iconStatus="matched" iconFolder="lucemon_satanmode">
+    <Members>
+      <Member slot="1" name="Lucemon Satanmode" iconCandidateId="71088" iconStatus="matched" iconFolder="lucemon_satanmode" />
+      <Member slot="2" name="Valkyrimon" iconCandidateId="71108" iconStatus="matched" iconFolder="valkyrimon" />
+      <Member slot="3" name="Megidramon" iconCandidateId="71043" iconStatus="matched" iconFolder="megidramon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="3" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="4" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="43" name="Only Real Ones?" levelReq1="1330" levelReq2="1660" membersRequired="11" ownedInSource="4" allTranscended="FALSE" iconCandidateId="75042" iconStatus="partial" iconFolder="susanomon">
+    <Members>
+      <Member slot="1" name="Susanomon Shin" iconCandidateId="75042" iconStatus="partial" iconFolder="susanomon" />
+      <Member slot="2" name="Crimson Mode Shin" iconStatus="missing" />
+      <Member slot="3" name="Lucemon Shin" iconCandidateId="45160" iconStatus="partial" iconFolder="lucemon" />
+      <Member slot="4" name="Gallantmon Shin" iconStatus="missing" />
+      <Member slot="5" name="Gargomon Shin" iconCandidateId="41010" iconStatus="partial" iconFolder="gargomon" />
+      <Member slot="6" name="Beelze Shin" iconStatus="missing" />
+      <Member slot="7" name="Sakuyamon Shin" iconCandidateId="61018" iconStatus="partial" iconFolder="sakuyamon" />
+      <Member slot="8" name="AOA" iconStatus="missing" />
+      <Member slot="9" name="Fanglo Shin" iconStatus="missing" />
+      <Member slot="10" name="Fighter Mode Shin" iconStatus="missing" />
+      <Member slot="11" name="Rage Mode" iconCandidateId="71090" iconStatus="partial" iconFolder="belphemon_ragemode" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="47" raw="AT +100" stat="AT" sign="+" value="100" unit="flat" />
+      <Reward slot="2" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+      <Reward slot="3" effectId="66" raw="SCD 2%" stat="SCD" value="2" unit="percent" />
+      <Reward slot="4" effectId="65" raw="Basic 1%" stat="Basic" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="44" name="Tamers" levelReq1="990" levelReq2="1260" membersRequired="9" ownedInSource="9" allTranscended="FALSE" iconCandidateId="75108" iconStatus="partial" iconFolder="guilmonx">
+    <Members>
+      <Member slot="1" name="Guilmon" iconCandidateId="75108" iconStatus="partial" iconFolder="guilmonx" />
+      <Member slot="2" name="Renamon" iconCandidateId="31006" iconStatus="matched" iconFolder="renamon" />
+      <Member slot="3" name="Terriermon" iconStatus="missing" />
+      <Member slot="4" name="Gardromon" iconStatus="missing" />
+      <Member slot="5" name="Lopmon" iconCandidateId="31015" iconStatus="matched" iconFolder="lopmon" />
+      <Member slot="6" name="Leomon" iconCandidateId="1341058" iconStatus="matched" iconFolder="leomon" />
+      <Member slot="7" name="Marine Angemon" iconCandidateId="41014" iconStatus="partial" iconFolder="angemon" />
+      <Member slot="8" name="Impmon" iconCandidateId="1531066" iconStatus="matched" iconFolder="impmon" />
+      <Member slot="9" name="Cyberdramon" iconCandidateId="51016" iconStatus="matched" iconFolder="cyberdramon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="45" name="Tamers Evolutions" levelReq1="990" levelReq2="1260" membersRequired="9" ownedInSource="9" allTranscended="FALSE" iconCandidateId="61074" iconStatus="matched" iconFolder="dukemon">
+    <Members>
+      <Member slot="1" name="Gallantmon" iconCandidateId="61074" iconStatus="matched" iconFolder="dukemon" />
+      <Member slot="2" name="Sakuyamon" iconCandidateId="61018" iconStatus="matched" iconFolder="sakuyamon" />
+      <Member slot="3" name="St.Gargomon" iconCandidateId="41010" iconStatus="partial" iconFolder="gargomon" />
+      <Member slot="4" name="Leomon" iconCandidateId="1341058" iconStatus="matched" iconFolder="leomon" />
+      <Member slot="5" name="Justimon" iconCandidateId="61019" iconStatus="matched" iconFolder="justimon" />
+      <Member slot="6" name="Marine Angemon" iconCandidateId="41014" iconStatus="partial" iconFolder="angemon" />
+      <Member slot="7" name="Antylamon" iconCandidateId="51031" iconStatus="matched" iconFolder="antylamon" />
+      <Member slot="8" name="Andromon" iconCandidateId="51038" iconStatus="matched" iconFolder="andromon" />
+      <Member slot="9" name="Beelze Blast Mode" iconStatus="missing" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="46" name="Bonds" levelReq1="240" levelReq2="300" membersRequired="2" ownedInSource="0" allTranscended="FALSE" iconCandidateId="31138" iconStatus="partial" iconFolder="gabumon">
+    <Members>
+      <Member slot="1" name="Gabumon Bond of Friendship" iconCandidateId="31138" iconStatus="partial" iconFolder="gabumon" />
+      <Member slot="2" name="Agumon Bond of Bravery" iconCandidateId="1031001" iconStatus="partial" iconFolder="agumon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="65" raw="Basic 1%" stat="Basic" value="1" unit="percent" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="47" name="Variants" levelReq1="450" levelReq2="570" membersRequired="4" ownedInSource="0" allTranscended="FALSE" iconCandidateId="62076" iconStatus="partial" iconFolder="demon">
+    <Members>
+      <Member slot="1" name="Armageddemon (Conflation)" iconCandidateId="62076" iconStatus="partial" iconFolder="demon" />
+      <Member slot="2" name="Ogudomon (Weaken)" iconCandidateId="71113" iconStatus="matched" iconFolder="ogudomon" />
+      <Member slot="3" name="Ogudomon" iconCandidateId="71113" iconStatus="matched" iconFolder="ogudomon" />
+      <Member slot="4" name="Apocalymon (Psychic)" iconCandidateId="71093" iconStatus="partial" iconFolder="apocalymon_metalseadramon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="48" name="Soldiers" levelReq1="220" levelReq2="280" membersRequired="2" ownedInSource="2" allTranscended="FALSE" iconCandidateId="51052" iconStatus="matched" iconFolder="tankdramon">
+    <Members>
+      <Member slot="1" name="Tankdramon" iconCandidateId="51052" iconStatus="matched" iconFolder="tankdramon" />
+      <Member slot="2" name="Sparrowmon" iconCandidateId="33005" iconStatus="matched" iconFolder="sparrowmon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="49" name="Leomons" levelReq1="770" levelReq2="980" membersRequired="7" ownedInSource="5" allTranscended="FALSE" iconCandidateId="1341058" iconStatus="matched" iconFolder="leomon">
+    <Members>
+      <Member slot="1" name="Leomon" iconCandidateId="1341058" iconStatus="matched" iconFolder="leomon" />
+      <Member slot="2" name="Panjyamon" iconStatus="missing" />
+      <Member slot="3" name="SaberLeomon" iconCandidateId="1361061" iconStatus="matched" iconFolder="saberleomon" />
+      <Member slot="4" name="BanchouLeomon" iconCandidateId="1341058" iconStatus="partial" iconFolder="leomon" />
+      <Member slot="5" name="GrapLeomon" iconCandidateId="51125" iconStatus="matched" iconFolder="grapleomon" />
+      <Member slot="6" name="KaiserLeomon" iconCandidateId="75038" iconStatus="matched" iconFolder="kaiserleomon" />
+      <Member slot="7" name="Leomon (Event?)" iconCandidateId="1341058" iconStatus="matched" iconFolder="leomon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="50" name="Duke" levelReq1="690" levelReq2="870" membersRequired="6" ownedInSource="4" allTranscended="FALSE" iconCandidateId="61074" iconStatus="matched" iconFolder="dukemon">
+    <Members>
+      <Member slot="1" name="Gallantmon" iconCandidateId="61074" iconStatus="matched" iconFolder="dukemon" />
+      <Member slot="2" name="Gallantmon Shin" iconStatus="missing" />
+      <Member slot="3" name="Gallantmon Crimson Mode Shin" iconStatus="missing" />
+      <Member slot="4" name="ChaosGallantmon" iconStatus="missing" />
+      <Member slot="5" name="Gallantmon Crimson Mode" iconStatus="missing" />
+      <Member slot="6" name="MedievalGallantmon" iconStatus="missing" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="53" raw="BL +50" stat="BL" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="4" raw="Light 1%" stat="Light" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="51" name="Resistance" levelReq1="330" levelReq2="420" membersRequired="3" ownedInSource="3" allTranscended="FALSE" iconCandidateId="71089" iconStatus="matched" iconFolder="silphymon">
+    <Members>
+      <Member slot="1" name="Silphymon" iconCandidateId="71089" iconStatus="matched" iconFolder="silphymon" />
+      <Member slot="2" name="Wizardmon" iconCandidateId="41024" iconStatus="matched" iconFolder="wizardmon" />
+      <Member slot="3" name="Mushroomon" iconCandidateId="31042" iconStatus="matched" iconFolder="mushroomon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="3" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="52" name="Xros Wars" levelReq1="880" levelReq2="1120" membersRequired="8" ownedInSource="8" allTranscended="FALSE" iconCandidateId="33001" iconStatus="matched" iconFolder="shoutmon">
+    <Members>
+      <Member slot="1" name="Shoutmon" iconCandidateId="33001" iconStatus="matched" iconFolder="shoutmon" />
+      <Member slot="2" name="Dorulumon" iconCandidateId="33003" iconStatus="matched" iconFolder="dorulumon" />
+      <Member slot="3" name="Ballistamon" iconCandidateId="33002" iconStatus="matched" iconFolder="ballistamon" />
+      <Member slot="4" name="Starmons" iconCandidateId="45159" iconStatus="matched" iconFolder="starmons" />
+      <Member slot="5" name="Greymon (c)?" iconCandidateId="43005" iconStatus="matched" iconFolder="greymonc" />
+      <Member slot="6" name="Mailbirdramon" iconCandidateId="33004" iconStatus="matched" iconFolder="mailbirdramon" />
+      <Member slot="7" name="Sparrowmon" iconCandidateId="33005" iconStatus="matched" iconFolder="sparrowmon" />
+      <Member slot="8" name="Mervamon" iconCandidateId="63019" iconStatus="matched" iconFolder="mervamon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="40" raw="DE +100" stat="DE" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="53" name="Bagra Leaders" levelReq1="450" levelReq2="570" membersRequired="4" ownedInSource="4" allTranscended="FALSE" iconCandidateId="51026" iconStatus="partial" iconFolder="knightmon">
+    <Members>
+      <Member slot="1" name="DarkKnightmon" iconCandidateId="51026" iconStatus="partial" iconFolder="knightmon" />
+      <Member slot="2" name="Bagramon" iconCandidateId="63020" iconStatus="matched" iconFolder="bagramon" />
+      <Member slot="3" name="DarknessBagramon" iconCandidateId="71132" iconStatus="matched" iconFolder="darkness_bagramon" />
+      <Member slot="4" name="Lilithmon" iconCandidateId="62077" iconStatus="matched" iconFolder="lilithmon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="54" name="Bagra Army Members" levelReq1="1100" levelReq2="1400" membersRequired="10" ownedInSource="8" allTranscended="FALSE" iconCandidateId="71088" iconStatus="matched" iconFolder="lucemon_satanmode">
+    <Members>
+      <Member slot="1" name="Lucemon Satanmode" iconCandidateId="71088" iconStatus="matched" iconFolder="lucemon_satanmode" />
+      <Member slot="2" name="Fanglomon" iconStatus="missing" />
+      <Member slot="3" name="IceDevimon" iconCandidateId="1541031" iconStatus="matched" iconFolder="icedevimon" />
+      <Member slot="4" name="Machinedramon" iconCandidateId="61043" iconStatus="matched" iconFolder="mugendramon" />
+      <Member slot="5" name="Andromon" iconCandidateId="51038" iconStatus="matched" iconFolder="andromon" />
+      <Member slot="6" name="Skullmeramon" iconCandidateId="41170" iconStatus="partial" iconFolder="meramon" />
+      <Member slot="7" name="Neptunemon" iconCandidateId="61068" iconStatus="matched" iconFolder="neptunemon" />
+      <Member slot="8" name="MetalTyrannomon" iconStatus="missing" />
+      <Member slot="9" name="Arkadimon Ultimate" iconCandidateId="61057" iconStatus="matched" iconFolder="arkadimonultimate" />
+      <Member slot="10" name="__" iconStatus="missing" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="55" name="02 Villains?" levelReq1="440" levelReq2="560" membersRequired="4" ownedInSource="4" allTranscended="FALSE" iconCandidateId="1061042" iconStatus="matched" iconFolder="wargreymon">
+    <Members>
+      <Member slot="1" name="Arukenimon" iconStatus="missing" />
+      <Member slot="2" name="Wargreymon Black" iconCandidateId="1061042" iconStatus="matched" iconFolder="wargreymon" />
+      <Member slot="3" name="Demon" iconCandidateId="62076" iconStatus="matched" iconFolder="demon" />
+      <Member slot="4" name="MaloMyotismon" iconCandidateId="71078" iconStatus="matched" iconFolder="belialvamdemon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="56" name="Frontier Villains?" levelReq1="770" levelReq2="980" membersRequired="7" ownedInSource="7" allTranscended="FALSE" iconCandidateId="61051" iconStatus="partial" iconFolder="cherubimonvaccinemon">
+    <Members>
+      <Member slot="1" name="Cherubimon" iconCandidateId="61051" iconStatus="partial" iconFolder="cherubimonvaccinemon" />
+      <Member slot="2" name="Phantomon" iconCandidateId="51042" iconStatus="matched" iconFolder="phantomon" />
+      <Member slot="3" name="Lucemon" iconCandidateId="45160" iconStatus="matched" iconFolder="lucemon" />
+      <Member slot="4" name="Lucemon Falldown" iconCandidateId="62078" iconStatus="matched" iconFolder="lucemonfalldown" />
+      <Member slot="5" name="Lucemon Satan" iconCandidateId="45160" iconStatus="partial" iconFolder="lucemon" />
+      <Member slot="6" name="LordKnightmon" iconCandidateId="61026" iconStatus="matched" iconFolder="lordknightmon" />
+      <Member slot="7" name="Dynasmon" iconCandidateId="61028" iconStatus="matched" iconFolder="dynasmon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="57" name="Dark Masters" levelReq1="440" levelReq2="560" membersRequired="4" ownedInSource="4" allTranscended="FALSE" iconCandidateId="71095" iconStatus="partial" iconFolder="apocalymon_piedmon">
+    <Members>
+      <Member slot="1" name="Piedmon" iconCandidateId="71095" iconStatus="partial" iconFolder="apocalymon_piedmon" />
+      <Member slot="2" name="Metal Seadramon" iconCandidateId="61029" iconStatus="matched" iconFolder="metalseadramon" />
+      <Member slot="3" name="Machinedramon" iconCandidateId="61043" iconStatus="matched" iconFolder="mugendramon" />
+      <Member slot="4" name="Puppetmon (Might all be Apocylamon versions)" iconCandidateId="61088" iconStatus="matched" iconFolder="pinokimon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="3" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="58" name="Something Vaccine" levelReq1="320" levelReq2="430" membersRequired="3" ownedInSource="3" allTranscended="TRUE" iconCandidateId="75042" iconStatus="matched" iconFolder="susanomon">
+    <Members>
+      <Member slot="1" name="Susanomon" iconCandidateId="75042" iconStatus="matched" iconFolder="susanomon" />
+      <Member slot="2" name="Omegamon Zwart" iconCandidateId="71073" iconStatus="matched" iconFolder="omegamonzwart" />
+      <Member slot="3" name="Magnamon" iconCandidateId="75004" iconStatus="matched" iconFolder="magnamon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="52" raw="EV +100" stat="EV" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="4" raw="Light 1%" stat="Light" value="1" unit="percent" />
+      <Reward slot="4" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="59" name="Royal Knights" levelReq1="1300" levelReq2="1820" membersRequired="13" ownedInSource="13" allTranscended="FALSE" iconCandidateId="71072" iconStatus="matched" iconFolder="omegamon">
+    <Members>
+      <Member slot="1" name="Omegamon" iconCandidateId="71072" iconStatus="matched" iconFolder="omegamon" />
+      <Member slot="2" name="Alphamon Ouryuken" iconCandidateId="71075" iconStatus="matched" iconFolder="alphamonouryuken" />
+      <Member slot="3" name="Examon" iconCandidateId="71024" iconStatus="matched" iconFolder="examon" />
+      <Member slot="4" name="Gallantmon" iconCandidateId="61074" iconStatus="matched" iconFolder="dukemon" />
+      <Member slot="5" name="UlforceVeedramon" iconCandidateId="61058" iconStatus="matched" iconFolder="ulforceveedramon" />
+      <Member slot="6" name="Magnamon" iconCandidateId="75004" iconStatus="matched" iconFolder="magnamon" />
+      <Member slot="7" name="Dynasmon" iconCandidateId="61028" iconStatus="matched" iconFolder="dynasmon" />
+      <Member slot="8" name="Lordknightmon" iconCandidateId="61026" iconStatus="matched" iconFolder="lordknightmon" />
+      <Member slot="9" name="Sleipmon" iconCandidateId="61039" iconStatus="matched" iconFolder="sleipmon" />
+      <Member slot="10" name="Craniamon" iconStatus="missing" />
+      <Member slot="11" name="Duftmon" iconCandidateId="63009" iconStatus="matched" iconFolder="duftmon" />
+      <Member slot="12" name="Gankoomon" iconCandidateId="63011" iconStatus="matched" iconFolder="gankoomon" />
+      <Member slot="13" name="Jessmon" iconStatus="missing" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="52" raw="EV +100" stat="EV" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+      <Reward slot="4" effectId="4" raw="Light 1%" stat="Light" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="60" name="Ordine" levelReq1="240" levelReq2="300" membersRequired="2" ownedInSource="0" allTranscended="FALSE" iconCandidateId="71119" iconStatus="matched" iconFolder="ordinemon">
+    <Members>
+      <Member slot="1" name="Ordinemon" iconCandidateId="71119" iconStatus="matched" iconFolder="ordinemon" />
+      <Member slot="2" name="Ordinemon(Awaken)" iconCandidateId="71119" iconStatus="matched" iconFolder="ordinemon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+  <Collection id="61" name="Miracle, Wake Up!" levelReq1="460" levelReq2="580" membersRequired="4" ownedInSource="2" allTranscended="FALSE" iconCandidateId="41014" iconStatus="matched" iconFolder="angemon">
+    <Members>
+      <Member slot="1" name="Angemon" iconCandidateId="41014" iconStatus="matched" iconFolder="angemon" />
+      <Member slot="2" name="Angewomon" iconCandidateId="51025" iconStatus="matched" iconFolder="angewomon" />
+      <Member slot="3" name="Wargreymon(Awaken)" iconCandidateId="1061042" iconStatus="matched" iconFolder="wargreymon" />
+      <Member slot="4" name="MetalGarurumon(Awaken)" iconCandidateId="67012" iconStatus="matched" iconFolder="metalgarurumon" />
+    </Members>
+    <Rewards>
+      <Reward slot="1" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="2" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+      <Reward slot="4" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+    </Rewards>
+  </Collection>
+</UnionDigimonCollections>

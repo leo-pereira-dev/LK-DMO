@@ -922,106 +922,27 @@ Completed on 2026-05-21:
   - The integer after inventory type is now written as `0` instead of `1`,
     matching the current client expectation for the sort result payload.
 
-### D-Unit hotkey
+## XML Union D-Unit window
 
-- Added a keyboard toggle for the D-Unit/Union window in `GlobalInput`.
-  - `Shift + U` toggles `WT_UNION`.
-  - `m_bUnionHotKeyDown` prevents repeated toggles while the key is held.
-
-## Recent client UI work - D-Unit / Union window
-
-Completed on 2026-05-21:
-
-- Added a new D-Unit/Union window registered as `WT_UNION`.
-  - Window entry point is `cUnionDUnit`.
-  - Main files:
-    - `dmo-client-main/DProject/_Interface/Game/UnionDUnit.cpp`
-    - `dmo-client-main/DProject/_Interface/Game/UnionDUnit.h`
-  - The window is included through `_GameIF.h`, created from
-    `_BaseWindow.cpp`, and added to `DProject.vcxproj`.
-- Added `CsUnionTableMng` for reading Union/D-Unit bin data from the client
-  packs.
-  - Main files:
-    - `dmo-client-main/LibProj/CsFileTable/UnionTableMng.cpp`
-    - `dmo-client-main/LibProj/CsFileTable/UnionTableMng.h`
-  - The manager is wired through `FileTableMng.cpp`, `nsCsFileTable.*`,
-    `stdafx.h`, and the `CsFileTable` project files.
-  - It loads the Union table bins from `Data\Bin\Table` and string bins from
-    the active language path.
-  - It detects zlib-compressed payloads, extracts the internal payload/key area,
-    and exposes parsed groups, effects, rewards, filters, and localized names.
-- The D-Unit screen uses the same large encyclopedia-style window sizing:
-  `886x768`, centered on screen, built for `Release_English|Win32`.
-- Visual assets currently referenced by the D-Unit screen include:
-  - `Union\side_bg_a.png`
-  - `Union\center_bg.png`
-  - `Union\side_bg.png`
-  - `Union\side_bg_b.png`
-  - `Union\list_bg.png`
-  - `Union\collection_bg_new.tga`
-  - `Union\collection_frame_rank1_new.png`
-  - `Union\collection_frame_rank2_new.png`
-  - `Union\collection_frame_rank3_new.png`
-  - `Union\digimon_hold_gauge.png`
-  - `Union\treasure_box_icon.png`
-  - `DungeonUI\dungeon_result_simple_ui.png`
-  - encyclopedia search/list/close/bookmark button assets reused for matching
-    UI style.
-- The right-side digivice panel was aligned and scaled using the available
-  extracted assets.
-  - `DungeonUI\dungeon_result_simple_ui.png` provides the blue digivice body.
-  - `Union\digimon_hold_gauge.png` provides the inner gauge ring.
-  - `Union\treasure_box_icon.png` uses a `56x61` frame crop; earlier `40x44`
-    cropping cut the icon.
-- Card Digimon portraits are rendered behind the card frame.
-  - The portrait is cropped into a circle by drawing horizontal sprite slices
-    whose width follows the circle radius.
-  - This avoids the original square icon bleeding outside the card's circular
-    portrait ring.
-  - Final portrait center was tuned downward to sit inside the ring.
-- The D-Unit title is rendered slightly above the card area and uses a two-pass
-  text draw with a 1px horizontal offset, because the built-in bold level made
-  this font look thinner instead of heavier.
-- Verified build command:
-
-  ```powershell
-  & "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" `
-    "C:\0-NewDmo\dmo-client-main\DProject.sln" `
-    /p:Configuration=Release_English /p:Platform=Win32 /m:1 /nologo /verbosity:minimal
-  ```
-
-  Expected output:
-
-  ```text
-  C:\Release\GSP\DProject_R_ENG.exe
-  ```
-
-Notes for future cleanup:
-
-- Some visible D-Unit values are still fallback/mock display values while the
-  parse/layout work is stabilized.
-- The local root `union/` folder is an extracted/decompiled analysis folder and
-  is ignored by Git. Keep source changes in the client tree instead.
-
-## XML Union D-Unit test window
-
-The client now has a separate XML-only Union/D-Unit window for testing the new
-Union data without touching the old Union implementation:
+The client D-Unit now uses the XML Union implementation as the active D-Unit
+window. The previous standalone `UnionDUnit` implementation was removed from
+source, project files, includes, factory registration, and hotkey handling.
 
 - Parser: `dmo-client-main/DProject/_Interface/Game/UnionXmlTools.*`
 - Window: `dmo-client-main/DProject/_Interface/Game/XmlUnionDUnit.*`
 - Window type: `WT_XML_UNION`
-- Hotkey: `Ctrl+O`
+- Hotkey: `Shift+O`
 - Registration: `cBaseWindow::NewWindow()` creates `cXmlUnionDUnit` for
   `WT_XML_UNION`.
 - Include/helper access: `_GameIF.h` includes `XmlUnionDUnit.h` and exposes
   `GetXmlUnionDUnit()`.
-- Important: keep this path independent from `cUnionDUnit`/`WT_UNION`. The old
-  Union window remains available separately for comparison.
+- Main title text is `D-Unit`.
+- The collection stat panel title is `Efeito Total de Coleta`; display labels
+  normalize XML `HP`/`DS` totals to `MaxHP`/`MaxDS`.
 
-Input behavior while the XML Union window is open:
+Input behavior while the D-Unit window is open:
 
-- `GlobalInput` tracks a separate `m_bXmlUnionHotKeyDown` latch for `Ctrl+O`.
+- `GlobalInput` tracks a separate `m_bXmlUnionHotKeyDown` latch for `Shift+O`.
 - When `WT_XML_UNION` is active, macro/mouse input is consumed by the window so
   outside camera zoom, movement, and other external commands do not leak through.
 - Mouse wheel is reset after the window consumes it. This prevents the old bug
@@ -1030,12 +951,20 @@ Input behavior while the XML Union window is open:
 Runtime XML data location:
 
 - The window loads from `Data\union`.
+- For this workspace, the authoritative loose runtime XML folder is:
+
+  ```text
+  C:\0-NewDmo\ClientDist\Data\union
+  ```
+
+- Do not edit or test against a different `Data\union` folder unless that path
+  is explicitly called out first. The user is running the local client from
+  `ClientDist`, so Union XML fixes must land there.
 - `UnionXmlTools::_LoadDocument()` tries loose disk XML first with
   `TiXmlDocument::LoadFile()`, then falls back to `CsFPSystem` pack lookup. This
-  lets `C:\Release\GSP\Data\union` override packed files during testing.
-- Runtime XML copies were placed under:
-  - `C:\0-NewDmo\ClientDist\Data\union`
-  - `C:\Release\GSP\Data\union`
+  lets `ClientDist\Data\union` override packed files during testing.
+- If the client is already open, restart it after XML changes. The XML Union
+  window caches loaded groups/card data for the session.
 
 Current Union XML staging lives in:
 
@@ -1106,7 +1035,10 @@ contain item group, rank, ceil, or hacking-info table fields:
 
 XML Union layout:
 
-- Window size is `886x675`.
+- Window size is `896x675`.
+- The right-side digivice/totals panel is intentionally shifted `10px` to the
+  right through `XML_UNION_RIGHT_PANEL_SHIFT` so the digivice and text do not sit
+  against the card scrollbar.
 - Left list shows `15` group buttons (`IF_XML_UNION_FILTER_COUNT`).
 - Card area shows `8` cards at a time (`2x4`), with up to `32` cached cards per
   selected group.
@@ -1115,6 +1047,17 @@ XML Union layout:
 - Card names are hidden by default and shown only in the hover tooltip.
 - Filter rows use hover fill, yellow selected borders, cyan hover borders, and
   bookmark icons.
+- Filter bookmark stars are functional favorites:
+  - dim/gray star means not favorited,
+  - bright yellow star means favorited,
+  - clicking the star toggles only the favorite state, not the selected line,
+  - favorited rows are shown at the top of the list,
+  - a newly favorited row is appended after rows that were already favorited,
+  - favorite state is stored in `Temp\XmlUnionDUnitFavorites_<windows-user>.cache`
+    beside the running client.
+- Favorite cache values are Union `groupId` values, in favorite order, not
+  visible names, because displayed filter names can repeat (`Agumon`,
+  `Agumon (Black)`, etc.).
 - The list scrollbar uses the client assets:
   - `Encyclopedia\Scroll\ScrollUpBtn.tga`
   - `Encyclopedia\Scroll\ScrollDownBtn.tga`
@@ -1170,21 +1113,21 @@ Rank icon atlas:
   D:\LK-DMO TOOLS\EXTRATOR-Copiar Daqui\Decryptorv2\data11\interface\encyclopedia\newencyclopedia\icon\encyclopedia_512.png
   ```
 
-- `XmlUnionDUnit` creates a `cImage` for each card rank badge with size `82x66`
-  and `SetTexToken(CsPoint(102, 102))`.
+- `XmlUnionDUnit` creates a `cSprite` for each card rank badge with size `82x66`
+  and changes the texture using explicit `CsRect` crops from the atlas.
 - Do not use the `CommonUI\digimon_rank.tga` mapping here. That older atlas is
   used by other status UIs and has different indexing.
-- Runtime-observed `encyclopedia_512.png` render indexes in this client:
-  - `9`: `SSS`
-  - `10`: `SSS+` Korean badge
-  - `11`: `U+`
+- `encyclopedia_512.png` is treated as a `102x102` tile atlas.
+- Current critical crop: SSS+ must use tile index `9`, rect
+  `CsRect(408, 102, 510, 204)`. This is the cyan/pink Korean SSS+ badge from the
+  reference screenshot.
 - Current XML Union mapping:
-  - rank `<= 0` shows the `N` badge state.
-  - rank `>= 10` is forced to state `10`, the Korean `SSS+` badge.
-  - rank `1..9` maps to `rank - 1`.
+  - rank `<= 0` shows tile `1`, the `N` badge.
+  - rank `1..7` maps to `rank - 1`.
+  - rank `>= 8` is forced to tile `9`, the Korean `SSS+` badge.
 - This mapping was tuned from in-game screenshots. Be careful before changing it:
-  switching to the Encyclopedia helper-style `rank + 1` made rank `10` display
-  as `U+`, and switching to state `9` made it display as normal `SSS`.
+  the earlier `cImage`/state approach selected the wrong SSS+ tile and could show
+  the normal SSS/U+ style badge instead of the Korean badge.
 
 Evolution/card population rules:
 
@@ -1213,6 +1156,173 @@ Performance/lag notes:
 - The hover animation only updates while visible.
 - The active XML Union window consumes global input to prevent outside camera
   work from competing with the window scroll/input code.
+
+## XML Union line maintenance notes
+
+Updated on 2026-05-21 after the Agumon/Gabumon/Black/X line fixes.
+
+### Files that matter
+
+- Runtime XML to edit:
+  `C:\0-NewDmo\ClientDist\Data\union\DM_Union-DigimonLines.xml`
+- Client parser/window code:
+  - `dmo-client-main/DProject/_Interface/Game/UnionXmlTools.*`
+  - `dmo-client-main/DProject/_Interface/Game/XmlUnionDUnit.*`
+- Bin references used for validation:
+  - `dmo-server-main-postgres\Bins\data\bin\english\Digimon_List.bin`
+  - `dmo-server-main-postgres\Bins\data\bin\english\DigimonEvo.bin`
+- Server-side bin parsers that document the binary layouts:
+  - `dmo-server-main-postgres/src/Source/Application/DigitalWorldOnline.Application.GameAssets/Bins/DigimonListBinLoader.cs`
+  - `dmo-server-main-postgres/src/Source/Application/DigitalWorldOnline.Application.GameAssets/Bins/DigimonEvoBinLoader.cs`
+
+### What `Digimon_List.bin` and `DigimonEvo.bin` mean
+
+- `Digimon_List.bin` identifies each Digimon form:
+  - `Type` / `s_dwDigimonID`: unique Digimon form id. Use this as the safest
+    identity for a Union member when several forms share a model.
+  - `Model` / `s_dwModelID`: visual model/icon identity. This can repeat across
+    different forms. Example: `31043` is used as the model for both normal
+    `Agumon(Black)` and `Agumon(Black)[BlitzGreymon]`.
+  - `Name`: display/source name.
+  - `Rank`: client rank value used for the badge.
+- `DigimonEvo.bin` identifies evolution trees:
+  - top-level key is the base `Type`.
+  - each evolution form has `Type`, `EvoSlot`, `EnableSlot`, open requirements,
+    and up to nine outgoing target ids.
+  - `EnableSlot=0` means that form exists in the tree but is not an enabled
+    progression for that line. Do not blindly add disabled forms to a Union line
+    unless the line is intentionally meant to expose hidden/unused evolutions.
+
+### Bin comparison results used for the current XML
+
+- `31001 Agumon` is the normal DATS Agumon line. Enabled forms are:
+  `Agumon -> GeoGreymon -> RizeGreymon -> ShineGreymon -> ShineGreymon:
+  BurstMode`.
+  - `DigimonEvo.bin` also contains disabled classic branches under this base:
+    `Greymon`, `MetalGreymon`, `WarGreymon`, and `SkullGreymon` have
+    `EnableSlot=0` in the `31001` tree.
+  - Therefore the normal `Agumon Line 2` in Union XML must not show
+    `MetalGreymon`, `SkullGreymon`, or `WarGreymon`.
+- `31007 Agumon(Classic)` is the classic Agumon line. Enabled forms are:
+  `Agumon(Classic) -> Greymon -> MetalGreymon -> WarGreymon`, plus
+  `VictoryGreymon`, `Omegamon`, and the X branch:
+  `Agumon X -> Greymon X -> MetalGreymon X -> WarGreymon X -> Omegamon X`.
+- `33080 Agumon(Black)[BlitzGreymon]` uses model `31043`, but it is not the same
+  base as normal `31043 Agumon(Black)`. Its enabled tree is:
+  `Agumon(Black)[BlitzGreymon] -> Greymon(Black) -> MetalGreymon(Black) ->
+  Blitz Greymon -> Omegamon Alter-S -> Omegamon Alter-B`.
+- `31043 Agumon(Black)` is the normal black Agumon/Zwart tree:
+  `Agumon(Black) -> Greymon(Black) -> MetalGreymon(Black) ->
+  WarGreymon(Black) -> Omegamon Zwart -> Omegamon ZwartD`.
+- `31068 Gabumon(Black)` mirrors the black Gabumon/Zwart side:
+  `Gabumon(Black) -> Garurumon(Black) -> WereGarurumon(Black) ->
+  MetalGarurumon(Black) -> Omegamon Zwart -> Omegamon ZwartD`.
+- `33082 Gabumon[CresGarurumon]` is the Cres/Alter side:
+  `Gabumon[CresGarurumon] -> Garurumon -> WereGarurumon -> Cres Garurumon ->
+  Omegamon Alter-S -> Omegamon Alter-B`.
+- `71109` is the Alter-B id used by the active `33080/33082` evolution trees.
+  `71105` also exists in `Digimon_List.bin`, but it is not the target used by
+  these trees.
+
+### Current hand-authored line fixes
+
+- `count` in `DM_Union-DigimonLines.xml` is `156` and must match the actual
+  number of `<Line>` elements.
+- First lines are intentionally ordered:
+  - `Agumon Line 1`: classic Agumon with X evolutions, base icon `31007`.
+  - `Agumon Line 2`: normal DATS Agumon, base icon `31001`, no classic/Skull/X
+    forms.
+  - `Agumon Line 3`: classic Agumon displayed as `Agumon`, same classic
+    non-X members as line 1, placed third for UI order.
+- Agumon Black/Gabumon Black duplicate groups were split with explicit members
+  so the two list entries do not resolve to the same inferred line:
+  - `Agumon Black Line 1`: ends at `Omegamon Zwart`.
+  - `Agumon Black Line 2`: ends at `Omegamon ZwartD`.
+  - `Gabumon Black 1`: ends at `Omegamon Zwart`.
+  - `Gabumon Black 2`: ends at `Omegamon ZwartD`.
+- Blitz/Cres/Alter groups are separate from the normal black Zwart groups:
+  - `Agumon Black Blitz 1`: ends at `Omegamon Alter-S`.
+  - `Agumon Black Blitz 2`: ends at `Omegamon Alter-B`.
+- X-antibody entries were removed as standalone new Union lines. They are now
+  inserted into the respective base Digimon groups:
+  - `Agumon Line 1`
+  - `Gabumon 1`
+  - `Guilmon 1`
+  - `Dorumon Doruga`
+  - `Dorumon Dex`
+  - `Dorumon Alpha`
+  - `FanBeemon`
+  - `Ryudamon`
+  - `Dracmon`
+
+### How to add a new Digimon Union line
+
+1. Find the Digimon in `Digimon_List.bin` by name.
+   - Record both `Type` and `Model`.
+   - If multiple rows have similar names or the same model, prefer `Type` for
+     line identity and use the exact bin name to avoid collisions.
+2. Open the matching base entry in `DigimonEvo.bin`.
+   - Use the base `Type`, not the model id.
+   - Sort forms by `EvoSlot`.
+   - Include only enabled forms (`EnableSlot != 0`) unless the desired Union
+     line explicitly needs disabled/hidden forms.
+3. Compare the outgoing targets from each enabled form.
+   - This catches side branches such as Burst Mode, Jogress, X evolutions, and
+     Alter/Zwart paths.
+   - If a target belongs to a different base tree, verify it against both trees
+     before adding it.
+4. Add a `<Line>` in `ClientDist\Data\union\DM_Union-DigimonLines.xml`.
+   - Choose a unique `id`.
+   - Keep `name` user-facing and searchable.
+   - Set `iconCandidateId` to the base form identity that resolves the right
+     portrait. If the form shares model with another form, use explicit members
+     and exact names.
+   - Add a `<Members>` block with one `<Member>` per visible card:
+
+     ```xml
+     <Member slot="1" name="Agumon" iconCandidateId="31001" iconStatus="matched" iconFolder="" />
+     ```
+
+5. Update the root `count` attribute if the number of `<Line>` elements changed.
+6. Restart the client before validating. The XML window may reuse cached card
+   data until the process reloads.
+
+### How to add evolutions to an existing Union line
+
+1. Verify the evolution belongs to that exact base in `DigimonEvo.bin`.
+   - Do not rely on the displayed name alone.
+   - Do not rely on `Model` alone; repeated models caused the Agumon Black Blitz
+     bug.
+2. Insert the new `<Member>` into the existing line's `<Members>` block.
+   - Keep slots sequential and in UI order.
+   - For X forms, add them inside the original base line unless the target data
+     really has a separate Union group.
+3. Adjust line metadata if needed:
+   - `unlocks`, `myUnlocks`, and `levelReq*` are display/progress fields.
+   - Keep them consistent with the intended number of cards.
+4. If two Union entries have the same visible name, force both lines to use
+   explicit `<Members>`. The fallback duplicate-name resolver is useful, but it
+   should not be trusted for ambiguous families like Agumon/Gabumon Black.
+
+### Quick validation commands
+
+Check the first Agumon/Black lines:
+
+```powershell
+rg -n "Agumon Line|Agumon Black|Gabumon Black|Omegamon Alter|Omegamon Zwart|ShineGreymon" `
+  "C:\0-NewDmo\ClientDist\Data\union\DM_Union-DigimonLines.xml"
+```
+
+Build and copy the client after C++ layout/parser changes:
+
+```powershell
+& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" `
+  "C:\0-NewDmo\dmo-client-main\DProject.sln" `
+  /p:Configuration=Release_English /p:Platform=Win32 /m:1 /nologo /verbosity:minimal
+
+Copy-Item -LiteralPath "C:\Release\GSP\DProject_R_ENG.exe" `
+  -Destination "C:\0-NewDmo\ClientDist\DProject_R_ENG.exe" -Force
+```
 
 ## Known risky areas
 
@@ -1269,6 +1379,205 @@ Check active containers:
 docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 ```
 
+## XML Union backend foundation
+
+The backend now has a lightweight persistence layer for D-Unit/XML Union
+progress. Keep the large Digimon/collection definitions in XML files and send
+only compact progress fields through packets.
+
+Database state:
+
+- Table: `Character_XmlUnionProgress`.
+- One row per character, linked by `CharacterId` to `Character_Tamer`.
+- Stored fields:
+  - `Level`: current XML Union level.
+  - `CurrentExperience`: current progress inside the level.
+  - `RequiredExperience`: target amount for the current level.
+  - `ClaimedRewardMask`: bit mask for claimed reward tiers.
+  - `CreatedAt` / `UpdatedAt`.
+- Migration: `20260521143000_AddCharacterXmlUnionProgress`.
+- The game schema validator now requires this table before server startup, so
+  apply the migration before enabling the feature on a live database.
+
+Server model/files:
+
+- DTO: `CharacterXmlUnionProgressDTO`.
+- Domain model: `CharacterXmlUnionProgressModel`.
+- EF mapping: `CharacterXmlUnionProgressConfiguration`.
+- Repository update method:
+  `ICharacterCommandsRepository.UpdateCharacterXmlUnionProgressAsync`.
+- MediatR command:
+  `UpdateCharacterXmlUnionProgressCommand`.
+- `CharacterModel.EnsureXmlUnionProgress()` creates/defaults the model when an
+  old character has no row yet.
+- `CharacterQueriesRepository.GetCharacterByIdAsync()` includes
+  `XmlUnionProgress`, so login loads the current state with the character.
+
+Backend XML data:
+
+- Preferred folder: `dmo-server-main-postgres\xml\union`.
+- Loader: `UnionXmlAssetLoader`.
+- Search fallback, in order:
+  - `xml\union`
+  - `Data\union`
+  - `ClientDist\Data\union`
+- Parsed files:
+  - `DM_Union-DigimonLines.xml`
+  - `DM_Union-DigimonCollections.xml`
+  - `DM_Union-Effect.xml`
+  - optional `DM_Union-Level.xml`
+- The loader reads `<TotalStat type="" value="">` from lines/collections and
+  stores totals as `UnionXmlStatusBonus`. This prepares the status reward data
+  without sending the whole XML to the client.
+- The loader also builds validated D-Unit collection groups for server-side
+  bonus calculation. Invalid groups are skipped with `[DUnit]` warnings instead
+  of blocking server startup.
+- Optional level format:
+
+  ```xml
+  <UnionLevels>
+    <Level id="0" requiredExperience="10000" />
+    <Level id="1" requiredExperience="15000" />
+  </UnionLevels>
+  ```
+
+Lightweight packet design:
+
+- Client request opcode: `XmlUnionProgressRequest = 11050`.
+- Client claim opcode: `XmlUnionRewardClaim = 11051`.
+- Server collection state response packet: `XmlUnionCollectionInfoPacket`,
+  packet number `11053`.
+- Server progress response packet: `XmlUnionProgressPacket`, packet number
+  `11050`.
+- Server claim result packet: `XmlUnionRewardClaimResultPacket`, packet number
+  `11052`.
+- Progress response payload is intentionally small:
+  - `byte Level`
+  - `int CurrentExperience`
+  - `int RequiredExperience`
+  - `ushort ProgressPercentBasisPoints` (`10000` = `100.00%`)
+  - `ushort ClaimedRewardMask`
+- Do not send XML line/member definitions through these packets. The client
+  still loads the collection structure from `ClientDist\Data\union`; packet
+  `11053` only overlays server-owned state and calculated bonuses:
+  - group id using the same client id space (`Collection` ids are sent as
+    `id + 100000`, matching `UnionXmlTools`);
+  - group completed flag, owned/valid member count, total owned level, and
+    transcendence summary;
+  - per required Digimon: Digimon id, XML slot, owned flag, owned level,
+    evolution unlocked flag, transcended flag, and requirement pass flags;
+  - per effect: condition index, active flag, effect type, and value;
+  - aggregate bonus values in the display order `HP`, `DS`, `AT`, `DE`, `EV`,
+    `HT`, `CT`, `EXP`, `BL`, `SCD`, `Basic`, followed by attribute/element
+    bonus totals for future UI expansion.
+
+Important client/server safety note:
+
+- The C++ client now handles server packets `11050`, `11052`, and `11053`.
+- `cXmlUnionDUnit::Create()` sends `SendXmlUnionProgressRequest()` when the
+  D-Unit opens.
+- Clicking a reward button sends `SendXmlUnionRewardClaim(rewardIndex)` for
+  opcode `11051`.
+- The receive handlers are in `network/cCliGameReceive.cpp` and dispatch into
+  `cXmlUnionDUnit::RecvServerProgress()` /
+  `cXmlUnionDUnit::RecvRewardClaimResult()` /
+  `cXmlUnionDUnit::RecvCollectionInfo()`.
+- `XmlUnionDUnit` no longer trusts local XML totals/currentLevel values for
+  visible progress: cards are always drawn from XML, but the Digimon icon and
+  level only light up from server state. Missing/locked Digimon remain as a
+  dim empty frame with the normal name/tier context available from the local
+  XML/card data.
+- The active docker compose mounts `dmo-server-main-postgres\xml` as
+  `/app/xml` for `game` and `routine`, so backend XML files should be added
+  under `dmo-server-main-postgres\xml\union`.
+- On 2026-05-21 the PostgreSQL database `dso` was updated manually with the SQL
+  equivalent of migration `20260521143000_AddCharacterXmlUnionProgress`, and
+  `dmo-pg-game` / `dmo-pg-routine` were rebuilt/recreated.
+
+Collection bonus behavior:
+
+- Existing status systems, such as seal/title/buff logic, recalculate model
+  status server-side and then send `UpdateStatusPacket`.
+- D-Unit collection bonuses are calculated server-side by
+  `DUnitCollectionService`.
+- Runtime bonus storage lives in `CharacterModel.DUnitCollectionBonus`.
+- Partner final stats now include D-Unit bonuses for `HP`, `DS`, `AT`, `DE`,
+  `HT`, `CT`, `EV`, and `BL`.
+- `SCD` is applied through the partner SCD path using the same scale as the
+  existing SCD bonuses.
+- `EXP` is added to the character EXP bonus path.
+- Attribute/element skill damage bonuses are kept separate from raw stats and
+  only apply when the partner base attribute/element matches the effect type.
+- Recalculation currently runs:
+  - during initial character load/login, after archive Digimon are hydrated;
+  - when the Digimon Archive packet loads archive Digimon, followed by
+    `UpdateStatusPacket`;
+  - when the D-Unit window requests progress (`11050`), which recalculates
+    once, clears/reapplies runtime bonuses through `ApplyBonuses(...)`, sends
+    `UpdateStatusPacket`, then sends `XmlUnionCollectionInfoPacket` (`11053`).
+- Still add future event hooks for level up, transcendence, evolution unlock,
+  new Digimon acquisition, deletion/removal, and config reload.
+
+D-Unit collection XML analysis from 2026-05-21:
+
+- Backend XML source copied from `ClientDist\Data\union` to
+  `dmo-server-main-postgres\xml\union`, which Docker mounts as `/app/xml/union`.
+- `DM_Union-DigimonLines.xml` contains `156` line groups, `126` explicit member
+  entries, `155` rewards blocks, `620` reward entries, and `25` `TotalStat`
+  entries.
+- Only `17` line groups currently have explicit `<Members>`. The remaining
+  line groups are not safe for server bonus validation because there is no
+  authoritative required-Digimon list.
+- `Line id=156` / `Agumon Line 3` has members but no rewards, so the backend
+  skips it for collection bonuses until effects are added.
+- `DM_Union-DigimonCollections.xml` contains `61` collection groups, `343`
+  member entries, `244` rewards, and `25` `TotalStat` entries.
+- Collection member `iconCandidateId` values are often icon/model-style ids,
+  not `Digimon_List.bin` type ids. The backend resolves a member by valid
+  `Digimon_List.bin` type first, then by exact normalized Digimon name if unique.
+- Many collection names are shorthand or inconsistent with `Digimon_List.bin`
+  names, so unresolved members are logged as `DigimonId not found`.
+- `DM_Union-Effect.xml` contains `66` effects. Stats/effect types currently
+  seen: `HP`, `DS`, `AT`, `DE`, `HT`, `CT`, `EV`, `BL`, `EXP`, `SCD`, `Basic`,
+  `Vaccine`, `Data`, `Virus`, `Unknown`, `Fire`, `Water`, `Ice`, `Wind`,
+  `Thunder`, `Light`, `Dark`, `Land`, `Wood`, and `Steel`.
+- `DM_Union-Group.xml` contains `216` groups with no duplicate group ids.
+- `DM_Union-Reward.xml` contains `864` rewards, matching `216` groups with
+  `4` rewards each.
+- Current Docker load result after validation:
+  `[DUnit] XML summary: files=17, groupsTotal=217, groupsValid=73, groupsInvalid=144, members=469, effects=66, unknownEffects=0, missingDigimonIds=102, source=/app/xml/union`.
+- The loader still emits the shorter compatibility line:
+  `[DUnit] Loaded groups: 73. Effects: 66. Invalid groups: 144. Source: /app/xml/union`.
+
+Persistence decision:
+
+- No new database table was added for completed D-Unit collection groups or
+  active collection bonus cache in this step.
+- The current server calculation is dynamic from real owned Digimon state:
+  active/inventory Digimon plus hydrated Digimon Archive entries.
+- Recalculation is not cumulative: `DUnitCollectionService.ApplyBonuses()` builds
+  a fresh aggregate result, then calls `ClearDUnitCollectionBonus()` before
+  `SetDUnitCollectionBonus()`.
+- `DUnitCollectionService.CalculateDUnitCollectionBonus()` also guards applied
+  completed groups by `SourceType:GroupId`; if a duplicate complete group ever
+  slips past XML validation, it logs a warning and ignores the duplicate in the
+  same calculation.
+- This matches the desired rule that a card only lights up when the player
+  actually owns that Digimon, and the displayed level should come from the owned
+  Digimon in active inventory or archive/warehouse data.
+- If the calculation becomes heavy later, add cache tables such as
+  `DUnitCollectionProgress` and `DUnitCollectionBonusCache`, but keep the server
+  able to rebuild them from real Digimon ownership.
+
+Manual validation commands:
+
+```powershell
+dotnet build "C:\0-NewDmo\dmo-server-main-postgres\src\Source\Distribution\DigitalWorldOnline.Game.Host\DigitalWorldOnline.Game.csproj" -v:minimal
+dotnet build "C:\0-NewDmo\dmo-server-main-postgres\src\Source\Distribution\DigitalWorldOnline.Routine.Host\DigitalWorldOnline.Routine\DigitalWorldOnline.Routine.csproj" -v:minimal
+docker compose -f "C:\0-NewDmo\dmo-server-main-postgres\docker-compose.yml" up -d --build game routine
+docker logs --tail 300 dmo-pg-game | Select-String "DUnit|Loaded Digimon_List|Loaded DigimonEvo|GameServer started"
+```
+
 ## Maintenance notes
 
 - Treat `dmo-server-main-postgres` as the only active server tree.
@@ -1280,3 +1589,81 @@ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
   - document the processor,
   - include one known-good payload shape.
 - Do not commit local compiled client executables. Rebuild them from source.
+
+## D-Unit follow-up fixes from 2026-05-21
+
+Agumon Line 2 test requirements:
+
+- The non-classic `Agumon Line 2` is the normal Agumon route with
+  `Agumon -> GeoGreymon -> RizeGreymon -> ShineGreymon ->
+  ShineGreymon: BurstMode`.
+- Runtime XMLs were synchronized in both places:
+  - client: `ClientDist\Data\union`
+  - server: `dmo-server-main-postgres\xml\union`
+- Updated files:
+  - `DM_Union-DigimonLines.xml`
+  - `DM_Union-Group.xml`
+- The line now uses:
+
+  ```xml
+  unlocks="4"
+  membersRequired="4"
+  levelReq1="480"
+  levelReq2="480"
+  ```
+
+- `unlocks` is kept for the client text/goal display.
+- `membersRequired` is required server-side because
+  `UnionXmlAssetLoader` reads `membersRequired`; if it is missing, the server
+  falls back to the full required member count.
+- `myUnlocks` was not changed because it is display/source sample data, not the
+  server-side requirement.
+
+Important D-Unit evolution-display fix:
+
+- A bug appeared where evolving Agumon into one form made another required form
+  disappear from D-Unit.
+- Root cause: the server calculation accepted `CurrentType` as proof of a form,
+  but starter partners can evolve through normal starter routes without every
+  normal form being persisted as `Unlocked > 0` in the same way as item-unlocked
+  evolutions.
+- Correct behavior matches the Digimon Information `Evolution & Riding` screen:
+  the D-Unit should care whether the evolution slot/route is available for the
+  owned Digimon, not whether that form is the current evolved body.
+- `DUnitCollectionService.IsEvolutionUnlocked(...)` now:
+  - returns true for base/current type as before;
+  - returns true for persisted unlocked evolutions as before;
+  - additionally treats normal starter evolutions for base types
+    `31001`, `31002`, `31003`, and `31004` as available when the target form is
+    in the starter's evolution tree and the Digimon level meets the tree
+    `UnlockLevel`.
+- The starter fallback is intentionally limited to normal ranks
+  `Rookie` through `Mega`; it does not auto-unlock `BurstMode`, `Jogress`,
+  `X`, `Capsule`, `Spirit`, or other special routes.
+
+Server packet refresh after evolution:
+
+- `PartnerEvolutionPacketProcessor` now injects `DUnitCollectionService`.
+- After a successful evolve/devolve flow and after status is recalculated, the
+  server recalculates D-Unit collection bonuses, clears/reapplies runtime bonus
+  state through `ApplyBonuses(...)`, sends `UpdateStatusPacket`, and also sends
+  `XmlUnionCollectionInfoPacket`.
+- This keeps the D-Unit UI synchronized immediately after changing evolution
+  form, without relying on closing/reopening the window.
+- This also protects against duplicated D-Unit bonuses because the normal
+  `ApplyBonuses(...)` path always clears old D-Unit bonus state before applying
+  the fresh aggregate.
+
+Validation done after the follow-up:
+
+```powershell
+dotnet build .\DigitalWorldOnline.sln -c Release
+docker compose up -d --build game routine
+docker compose logs --tail=80 game | Select-String "DUnit|error|fail|exception|Applied bonuses|XML summary|Loaded groups"
+```
+
+- Server solution build passed in `Release`.
+- `game` and `routine` containers rebuilt and started.
+- Boot logs showed D-Unit XML loading successfully with the known validation
+  summary:
+  `[DUnit] XML summary: files=17, groupsTotal=217, groupsValid=73, groupsInvalid=144, members=469, effects=66, unknownEffects=0, missingDigimonIds=102, source=/app/xml/union`.

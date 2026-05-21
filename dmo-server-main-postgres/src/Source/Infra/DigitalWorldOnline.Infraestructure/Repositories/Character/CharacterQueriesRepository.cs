@@ -92,6 +92,7 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
                 .ThenInclude(y => y.Location)
                 .Include(x => x.Progress)
                     .ThenInclude(x => x.InProgressQuestData)
+                .Include(x => x.XmlUnionProgress)
                 .Include(y => y.MapRegions)
                 .Include(x => x.Points)
                 .Include(x => x.BuffList)

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UnionFilterStrings>
+  <String id="1" text="HP" />
+  <String id="2" text="DS" />
+  <String id="3" text="AT" />
+  <String id="4" text="DE" />
+  <String id="5" text="HT" />
+  <String id="6" text="CT" />
+  <String id="7" text="EV" />
+  <String id="8" text="BL" />
+  <String id="9" text="EXP" />
+  <String id="10" text="Basic Attribute" />
+  <String id="11" text="SCD" />
+  <String id="12" text="Vaccine" />
+  <String id="13" text="Data" />
+  <String id="14" text="Virus" />
+  <String id="15" text="Unknown" />
+  <String id="16" text="Fire" />
+  <String id="17" text="Water" />
+  <String id="18" text="Ice" />
+  <String id="19" text="Land" />
+  <String id="20" text="Wood" />
+  <String id="21" text="Wind" />
+  <String id="22" text="Thunder" />
+  <String id="23" text="Steel" />
+  <String id="24" text="Light" />
+  <String id="25" text="Dark" />
+</UnionFilterStrings>

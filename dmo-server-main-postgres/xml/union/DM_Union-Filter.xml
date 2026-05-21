@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UnionFilters count="25">
+  <Filter filterId="1" name="HP" />
+  <Filter filterId="2" name="DS" />
+  <Filter filterId="3" name="AT" />
+  <Filter filterId="4" name="DE" />
+  <Filter filterId="5" name="HT" />
+  <Filter filterId="6" name="CT" />
+  <Filter filterId="7" name="EV" />
+  <Filter filterId="8" name="BL" />
+  <Filter filterId="9" name="EXP" />
+  <Filter filterId="10" name="Basic Attribute" />
+  <Filter filterId="11" name="SCD" />
+  <Filter filterId="12" name="Vaccine" />
+  <Filter filterId="13" name="Data" />
+  <Filter filterId="14" name="Virus" />
+  <Filter filterId="15" name="Unknown" />
+  <Filter filterId="16" name="Fire" />
+  <Filter filterId="17" name="Water" />
+  <Filter filterId="18" name="Ice" />
+  <Filter filterId="19" name="Land" />
+  <Filter filterId="20" name="Wood" />
+  <Filter filterId="21" name="Wind" />
+  <Filter filterId="22" name="Thunder" />
+  <Filter filterId="23" name="Steel" />
+  <Filter filterId="24" name="Light" />
+  <Filter filterId="25" name="Dark" />
+</UnionFilters>

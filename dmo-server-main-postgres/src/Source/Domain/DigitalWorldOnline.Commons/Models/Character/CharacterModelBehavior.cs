@@ -454,7 +454,8 @@ namespace DigitalWorldOnline.Commons.Models.Character
 
         public int KillExp => _baseExp +
                         EquipmentAttribute(_baseExp, SkillCodeApplyAttributeEnum.EXP) +
-                        BuffAttribute(_baseExp, SkillCodeApplyAttributeEnum.EXP);
+                        BuffAttribute(_baseExp, SkillCodeApplyAttributeEnum.EXP) +
+                        DUnitCollectionBonus.EXP;
 
         public int DS => _baseDs +
                         EquipmentAttribute(_baseDs, SkillCodeApplyAttributeEnum.MaxDS) +
@@ -490,7 +491,8 @@ namespace DigitalWorldOnline.Commons.Models.Character
         public short BonusEXP => (short)
             (0 +
             EquipmentAttribute(0, SkillCodeApplyAttributeEnum.EXP) +
-            BuffAttribute(0, SkillCodeApplyAttributeEnum.EXP));
+            BuffAttribute(0, SkillCodeApplyAttributeEnum.EXP) +
+            DUnitCollectionBonus.EXP);
         /// <summary>
         /// Sets the default basic character information.
         /// </summary>
@@ -1014,6 +1016,38 @@ namespace DigitalWorldOnline.Commons.Models.Character
 
             return false;
         }
+
+        public void SetDUnitCollectionBonus(DUnitCollectionBonusModel bonus)
+        {
+            DUnitCollectionBonus.Set(
+                bonus.HP,
+                bonus.DS,
+                bonus.AT,
+                bonus.DE,
+                bonus.HT,
+                bonus.CT,
+                bonus.EV,
+                bonus.BL,
+                bonus.EXP,
+                bonus.SCD,
+                bonus.Basic,
+                bonus.Vaccine,
+                bonus.Data,
+                bonus.Virus,
+                bonus.Unknown,
+                bonus.Fire,
+                bonus.Water,
+                bonus.Ice,
+                bonus.Wind,
+                bonus.Thunder,
+                bonus.Light,
+                bonus.Dark,
+                bonus.Land,
+                bonus.Wood,
+                bonus.Steel);
+        }
+
+        public void ClearDUnitCollectionBonus() => DUnitCollectionBonus.Reset();
 
         public short DigiviceAccessoryStatus(AccessoryStatusTypeEnum type, int baseValue = 0)
         {

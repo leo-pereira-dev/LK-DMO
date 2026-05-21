@@ -61,6 +61,9 @@ namespace DigitalWorldOnline.Infraestructure.Mapping
 
             CreateMap<CharacterProgressModel, CharacterProgressDTO>()
                 .ReverseMap();
+
+            CreateMap<CharacterXmlUnionProgressModel, CharacterXmlUnionProgressDTO>()
+                .ReverseMap();
             
             CreateMap<InProgressQuestModel, InProgressQuestDTO>()
                 .ReverseMap();

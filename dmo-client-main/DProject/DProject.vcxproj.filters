@@ -1537,9 +1537,6 @@
     <ClCompile Include="_Interface\Game\UnionStoreContents.cpp">
       <Filter>03.Interface\Game\02_기본팝업\18_개인상점</Filter>
     </ClCompile>
-    <ClCompile Include="_Interface\Game\UnionDUnit.cpp">
-      <Filter>03.Interface\Game\02_기본팝업\18_개인상점</Filter>
-    </ClCompile>
     <ClCompile Include="_Interface\Game\UnionXmlTools.cpp">
       <Filter>03.Interface\Game\02_기본팝업\18_개인상점</Filter>
     </ClCompile>
@@ -3055,9 +3052,6 @@
       <Filter>03.Interface\Game\02_기본팝업\18_개인상점</Filter>
     </ClInclude>
     <ClInclude Include="_Interface\Game\UnionStoreContents.h">
-      <Filter>03.Interface\Game\02_기본팝업\18_개인상점</Filter>
-    </ClInclude>
-    <ClInclude Include="_Interface\Game\UnionDUnit.h">
       <Filter>03.Interface\Game\02_기본팝업\18_개인상점</Filter>
     </ClInclude>
     <ClInclude Include="_Interface\Game\UnionXmlTools.h">

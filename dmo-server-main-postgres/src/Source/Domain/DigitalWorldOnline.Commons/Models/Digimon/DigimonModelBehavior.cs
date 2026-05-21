@@ -136,6 +136,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
                     _fsAt +
                     GetSealStatus(StatusTypeEnum.AT) +
                     GetTitleStatus(StatusTypeEnum.AT) +
+                    (Character?.DUnitCollectionBonus.AT ?? 0) +
                     (Character?.AccessoryStatus(AccessoryStatusTypeEnum.AT) ?? 0) +
                     (Character?.ChipsetStatus(AccessoryStatusTypeEnum.AT) ?? 0) +
                     BuffAttribute(_baseAt, SkillCodeApplyAttributeEnum.AT, SkillCodeApplyAttributeEnum.DA));
@@ -157,6 +158,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             _baseBl +
             (Digiclone.BLValue) +
             GetSealStatus(StatusTypeEnum.BL) +
+            (Character?.DUnitCollectionBonus.BL ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.BL) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.BL) ?? 0) +
             BuffAttribute(_baseBl, SkillCodeApplyAttributeEnum.BL));
@@ -167,6 +169,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (Character?.EquipmentAttributeForPartner(_baseCc, SkillCodeApplyAttributeEnum.CA) ?? 0) +
             GetSealStatus(StatusTypeEnum.CT) +
             GetTitleStatus(StatusTypeEnum.CT) +
+            (Character?.DUnitCollectionBonus.CT ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.CT, _baseCc) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.CT) ?? 0) +
             BuffAttribute(_baseCc, SkillCodeApplyAttributeEnum.CA));
@@ -188,6 +191,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         public int SkillDamagePercent =>
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.ATT) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.ATT) ?? 0) +
+            (Character?.DUnitCollectionBonus.AttributeSkillDamage(BaseInfo.Attribute, BaseInfo.Element) ?? 0) +
             BuffAttribute(0, SkillCodeApplyAttributeEnum.SkillDamageByAttribute);
 
         public short DE => (short)
@@ -195,6 +199,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             _fsDe +
             GetSealStatus(StatusTypeEnum.DE) +
             GetTitleStatus(StatusTypeEnum.DE) +
+            (Character?.DUnitCollectionBonus.DE ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DE) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DE) ?? 0) +
             BuffAttribute(_baseDe, SkillCodeApplyAttributeEnum.DP));
@@ -204,6 +209,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             _fsDs +
             GetSealStatus(StatusTypeEnum.DS) +
             GetTitleStatus(StatusTypeEnum.DS) +
+            (Character?.DUnitCollectionBonus.DS ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DS) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DS) ?? 0) +
             BuffAttribute(_baseDs, SkillCodeApplyAttributeEnum.MaxDS, SkillCodeApplyAttributeEnum.DS);
@@ -213,6 +219,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (_baseEv * Digiclone.EVValue / 100) +
             GetSealStatus(StatusTypeEnum.EV) +
             GetTitleStatus(StatusTypeEnum.EV) +
+            (Character?.DUnitCollectionBonus.EV ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.EV) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.EV) ?? 0) +
             BuffAttribute(_baseEv, SkillCodeApplyAttributeEnum.EV, SkillCodeApplyAttributeEnum.ER)); //100 = 1%
@@ -221,6 +228,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             _baseHt +
             GetSealStatus(StatusTypeEnum.HT) +
             GetTitleStatus(StatusTypeEnum.HT) +
+            (Character?.DUnitCollectionBonus.HT ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HT) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HT) ?? 0) +
             BuffAttribute(_baseHt, SkillCodeApplyAttributeEnum.HT));
@@ -232,6 +240,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
 
         public short SCD => (short)
         (BuffAttribute(0, SkillCodeApplyAttributeEnum.SCD)+
+        ((Character?.DUnitCollectionBonus.SCD ?? 0) * 100) +
         (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.Data) ?? 0)+
         (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.Vacina) ?? 0)+
         (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.Virus) ?? 0)+
@@ -255,6 +264,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (_baseHp * Digiclone.HPValue / 100) +
             GetSealStatus(StatusTypeEnum.HP) +
             GetTitleStatus(StatusTypeEnum.HP) +
+            (Character?.DUnitCollectionBonus.HP ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HP) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HP) ?? 0) +
             BuffAttribute(_baseHp, SkillCodeApplyAttributeEnum.MaxHP);

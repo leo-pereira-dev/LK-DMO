@@ -1,6 +1,7 @@
 ﻿using DigitalWorldOnline.Application;
 using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Application.GameAssets.Bins;
+using DigitalWorldOnline.Application.GameAssets.Xml;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums;
@@ -31,6 +32,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private readonly MapServer _mapServer;
         private readonly DungeonsServer _dungeonServer;
         private readonly MapBinLoader _mapBin;
+        private readonly DUnitCollectionService _dUnitCollections;
         private readonly ISender _sender;
         private readonly ILogger _logger;
 
@@ -39,6 +41,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             StatusManager statusManager,
             AssetsLoader assets,
             MapBinLoader mapBin,
+            DUnitCollectionService dUnitCollections,
             MapServer mapServer,
             ISender sender,
             ILogger logger,
@@ -48,6 +51,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _statusManager = statusManager;
             _assets = assets;
             _mapBin = mapBin;
+            _dUnitCollections = dUnitCollections;
             _mapServer = mapServer;
             _sender = sender;
             _logger = logger;
@@ -517,7 +521,11 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 }
             }
 
+            var dUnitResult = _dUnitCollections.CalculateDUnitCollectionBonus(client.Tamer);
+            _dUnitCollections.ApplyBonuses(client.Tamer, dUnitResult);
+
             client.Send(new UpdateStatusPacket(client.Tamer));
+            client.Send(new XmlUnionCollectionInfoPacket(dUnitResult));
 
 
             client.Send(new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory));

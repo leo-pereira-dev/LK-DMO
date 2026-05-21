@@ -148,6 +148,8 @@ bool cUnionXmlTools::_LoadLines( char const* pPath )
 		group.s_dwGroupID = _AttrDword( pLine, "id" );
 		group.s_dwIconCandidateID = _AttrDword( pLine, "iconCandidateId" );
 		group.s_nLevel = _AttrInt( pLine, "currentLevel", 120 );
+		group.s_nLevelReq1 = _AttrInt( pLine, "levelReq1" );
+		group.s_nLevelReq2 = _AttrInt( pLine, "levelReq2" );
 		group.s_nRank = -1;
 		group.s_nMemberCount = _AttrInt( pLine, "unlocks" );
 		group.s_wsType = _T( "Line" );
@@ -182,6 +184,8 @@ bool cUnionXmlTools::_LoadCollections( char const* pPath )
 		group.s_dwGroupID = _AttrDword( pCollection, "id" ) + 100000;
 		group.s_dwIconCandidateID = _AttrDword( pCollection, "iconCandidateId" );
 		group.s_nLevel = _AttrInt( pCollection, "levelReq2", _AttrInt( pCollection, "levelReq1", 120 ) );
+		group.s_nLevelReq1 = _AttrInt( pCollection, "levelReq1" );
+		group.s_nLevelReq2 = _AttrInt( pCollection, "levelReq2" );
 		group.s_nRank = -1;
 		group.s_nMemberCount = _AttrInt( pCollection, "membersRequired" );
 		group.s_wsType = _T( "Collection" );
@@ -248,6 +252,7 @@ void cUnionXmlTools::_ReadRewards( TiXmlElement* pGroupEl, sGROUP& outGroup )
 	{
 		sREWARD reward;
 		reward.s_dwEffectID = _AttrDword( pReward, "effectId" );
+		reward.s_nSlot = _AttrInt( pReward, "slot" );
 		reward.s_wsRaw = _AttrWide( pReward, "raw" );
 		reward.s_wsStat = _AttrWide( pReward, "stat" );
 		reward.s_nValue = _AttrInt( pReward, "value" );

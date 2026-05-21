@@ -2,6 +2,7 @@
 using DigitalWorldOnline.Application;
 using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Application.GameAssets.Bins;
+using DigitalWorldOnline.Application.GameAssets.Xml;
 using DigitalWorldOnline.Application.Separar.Commands.Create;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
@@ -41,6 +42,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         private readonly AssetsLoader _assets;
         private readonly DigimonEvoBinLoader _digimonEvo;
+        private readonly DUnitCollectionService _dUnitCollections;
         private readonly ILogger _logger;
         private readonly ISender _sender;
         private readonly IMapper _mapper;
@@ -53,6 +55,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             DungeonsServer dungeonsServer,
             AssetsLoader assets,
             DigimonEvoBinLoader digimonEvo,
+            DUnitCollectionService dUnitCollections,
             ILogger logger,
             ISender sender,
             IMapper mapper)
@@ -64,6 +67,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _dungeonsServer = dungeonsServer;
             _assets = assets;
             _digimonEvo = digimonEvo;
+            _dUnitCollections = dUnitCollections;
             _logger = logger;
             _sender = sender;
             _mapper = mapper;
@@ -215,6 +219,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 digimon.SetSealStatus(_assets.SealInfo);
             }
 
+            await HydrateArchiveDigimonsForDUnit(character);
+
             _logger.Debug($"Getting character status information...");
             // Per-model tamer "base status" retired — DMBase.bin §1 carries the full per-level
             // stat block, equipment/socket/buff add on top in CharacterModelBehavior. v487 client
@@ -231,6 +237,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     character.Level
                 )
             );
+
+            _dUnitCollections.ApplyBonuses(character);
 
             character.NewViewLocation(character.Location.X, character.Location.Y);
             character.RemovePartnerPassiveBuff();
@@ -283,11 +291,17 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             // otherwise.
 
             character.UpdateState(CharacterStateEnum.Loading);
+            character.EnsureXmlUnionProgress();
+            character.XmlUnionProgress.SetProgress(
+                character.XmlUnionProgress.Level,
+                character.XmlUnionProgress.CurrentExperience,
+                _assets.XmlUnion.GetRequiredExperience(character.XmlUnionProgress.Level));
 
             client.SetCharacter(character);
 
             _logger.Debug($"Updating character state...");
             await _sender.Send(new UpdateCharacterStateCommand(character.Id, CharacterStateEnum.Loading));
+            await _sender.Send(new UpdateCharacterXmlUnionProgressCommand(character.XmlUnionProgress));
 
             if (character.Location.MapId == 9101)
             {
@@ -378,6 +392,35 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             _logger.Debug($"Updating character channel...");
             await _sender.Send(new UpdateCharacterChannelCommand(character.Id, character.Channel));
+        }
+
+        private async Task HydrateArchiveDigimonsForDUnit(CharacterModel character)
+        {
+            foreach (var digimonArchive in character.DigimonArchive.DigimonArchives.Where(x => x.DigimonId > 0))
+            {
+                if (digimonArchive.Digimon != null)
+                    continue;
+
+                digimonArchive.SetDigimonInfo(_mapper.Map<DigitalWorldOnline.Commons.Models.Digimon.DigimonModel>(
+                    await _sender.Send(new GetDigimonByIdQuery(digimonArchive.DigimonId))));
+
+                if (digimonArchive.Digimon == null)
+                    continue;
+
+                digimonArchive.Digimon.SetTamer(character);
+                digimonArchive.Digimon.SetBaseInfo(
+                    _statusManager.GetDigimonBaseInfo(digimonArchive.Digimon.BaseType));
+                digimonArchive.Digimon.SetBaseStatus(
+                    _statusManager.GetDigimonBaseStatus(
+                        digimonArchive.Digimon.BaseType,
+                        digimonArchive.Digimon.Level,
+                        digimonArchive.Digimon.Size));
+            }
+
+            _logger.Information(
+                "[DUnit] Character {CharacterId} archive digimons available for collection calculation: {Count}",
+                character.Id,
+                character.DigimonArchive.DigimonArchives.Count(x => x.Digimon != null));
         }
 
         private async Task ReceiveArenaPoints(GameClient client)

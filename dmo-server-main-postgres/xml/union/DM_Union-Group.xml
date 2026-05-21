@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UnionGroup lineCount="155" collectionCount="61">
+  <Group groupId="1" type="Line" nameId="1" name="Agumon Line 1" iconCandidateId="1031001" iconStatus="matched" levelReq1="960" levelReq2="1200" />
+  <Group groupId="2" type="Line" nameId="2" name="Agumon Line 2" iconCandidateId="1031001" iconStatus="matched" levelReq1="480" levelReq2="480" membersRequired="4" />
+  <Group groupId="3" type="Line" nameId="3" name="Agumon Black Line 1" iconCandidateId="1031001" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="4" type="Line" nameId="4" name="Agumon Black Line 2" iconCandidateId="1031001" iconStatus="matched" levelReq1="600" levelReq2="750" />
+  <Group groupId="5" type="Line" nameId="5" name="Agumon Black Blitz 1" iconCandidateId="1031001" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="6" type="Line" nameId="6" name="Agumon Black Blitz 2" iconCandidateId="1031001" iconStatus="matched" levelReq1="600" levelReq2="750" />
+  <Group groupId="7" type="Line" nameId="7" name="Agumon Black Millenium" iconCandidateId="1031001" iconStatus="matched" levelReq1="840" levelReq2="1050" />
+  <Group groupId="8" type="Line" nameId="8" name="ToyAgumon SS+" iconCandidateId="1031001" iconStatus="partial" levelReq1="330" levelReq2="420" />
+  <Group groupId="9" type="Line" nameId="9" name="ToyAgumon" iconCandidateId="1031001" iconStatus="partial" levelReq1="220" levelReq2="280" />
+  <Group groupId="10" type="Line" nameId="10" name="Gabumon 1" iconCandidateId="31138" iconStatus="matched" levelReq1="840" levelReq2="1050" />
+  <Group groupId="11" type="Line" nameId="11" name="Gabumon 2" iconCandidateId="31138" iconStatus="matched" levelReq1="910" levelReq2="1120" />
+  <Group groupId="12" type="Line" nameId="12" name="Gabumon Cres 1" iconCandidateId="31138" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="13" type="Line" nameId="13" name="Gabumon Cres 2" iconCandidateId="31138" iconStatus="matched" levelReq1="600" levelReq2="750" />
+  <Group groupId="14" type="Line" nameId="14" name="Gabumon Black 1" iconCandidateId="31138" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="15" type="Line" nameId="15" name="Gabumon Black 2" iconCandidateId="31138" iconStatus="matched" levelReq1="600" levelReq2="750" />
+  <Group groupId="16" type="Line" nameId="16" name="Salamon Ordine 1" iconStatus="missing" levelReq1="880" levelReq2="1120" />
+  <Group groupId="17" type="Line" nameId="17" name="Salamon Ordine 2" iconStatus="missing" levelReq1="960" levelReq2="1200" />
+  <Group groupId="18" type="Line" nameId="18" name="Salamon Ordine 3" iconStatus="missing" levelReq1="960" levelReq2="1200" />
+  <Group groupId="19" type="Line" nameId="19" name="Salamon Lilith" iconStatus="missing" levelReq1="440" levelReq2="560" />
+  <Group groupId="20" type="Line" nameId="20" name="Salamon Merva 1" iconStatus="missing" levelReq1="960" levelReq2="1200" />
+  <Group groupId="21" type="Line" nameId="21" name="Salamon Merva 2" iconStatus="missing" levelReq1="960" levelReq2="1200" />
+  <Group groupId="22" type="Line" nameId="22" name="Salamon Valk" iconStatus="missing" levelReq1="880" levelReq2="1120" />
+  <Group groupId="23" type="Line" nameId="23" name="Patamon" iconCandidateId="31012" iconStatus="matched" levelReq1="660" levelReq2="840" />
+  <Group groupId="24" type="Line" nameId="24" name="Patamon Slash" iconCandidateId="31012" iconStatus="matched" levelReq1="770" levelReq2="980" />
+  <Group groupId="25" type="Line" nameId="25" name="Palmon original" iconCandidateId="1131041" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="26" type="Line" nameId="26" name="Palmon Woodmon" iconCandidateId="1131041" iconStatus="partial" levelReq1="660" levelReq2="840" />
+  <Group groupId="27" type="Line" nameId="27" name="Palmon MarineAnge" iconCandidateId="1131041" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="28" type="Line" nameId="28" name="Palmon Apocaly" iconCandidateId="1131041" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="29" type="Line" nameId="29" name="Piyomon" iconCandidateId="1431048" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="30" type="Line" nameId="30" name="Gomamon 1" iconStatus="missing" levelReq1="660" levelReq2="840" />
+  <Group groupId="31" type="Line" nameId="31" name="Gomamon 2" iconStatus="missing" levelReq1="660" levelReq2="840" />
+  <Group groupId="32" type="Line" nameId="32" name="Gomamon JiJi" iconStatus="missing" levelReq1="440" levelReq2="560" />
+  <Group groupId="33" type="Line" nameId="33" name="Tentomon" iconStatus="missing" levelReq1="550" levelReq2="700" />
+  <Group groupId="34" type="Line" nameId="34" name="Veemon Ulforce" iconCandidateId="31008" iconStatus="matched" levelReq1="770" levelReq2="980" />
+  <Group groupId="35" type="Line" nameId="35" name="Veemon Jogress" iconCandidateId="31008" iconStatus="matched" levelReq1="840" levelReq2="1050" />
+  <Group groupId="36" type="Line" nameId="36" name="Veemon Imperial" iconCandidateId="31008" iconStatus="matched" levelReq1="880" levelReq2="1120" />
+  <Group groupId="37" type="Line" nameId="37" name="Wormmon Grandis" iconCandidateId="31142" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="38" type="Line" nameId="38" name="Wormmon Jogress" iconCandidateId="31142" iconStatus="matched" levelReq1="840" levelReq2="1050" />
+  <Group groupId="39" type="Line" nameId="39" name="Hawkmon" iconCandidateId="31020" iconStatus="matched" levelReq1="880" levelReq2="1120" />
+  <Group groupId="40" type="Line" nameId="40" name="Hawk Valk" iconCandidateId="31020" iconStatus="partial" levelReq1="990" levelReq2="1260" />
+  <Group groupId="41" type="Line" nameId="41" name="Armadimon" iconStatus="missing" levelReq1="550" levelReq2="700" />
+  <Group groupId="42" type="Line" nameId="42" name="Armadimon Slash" iconStatus="missing" levelReq1="770" levelReq2="980" />
+  <Group groupId="43" type="Line" nameId="43" name="Guilmon 1" iconCandidateId="75108" iconStatus="partial" levelReq1="910" levelReq2="1120" />
+  <Group groupId="44" type="Line" nameId="44" name="Guilmon 2" iconCandidateId="75108" iconStatus="partial" levelReq1="1040" levelReq2="1280" />
+  <Group groupId="45" type="Line" nameId="45" name="Guilmon Chaos" iconStatus="missing" levelReq1="550" levelReq2="700" />
+  <Group groupId="46" type="Line" nameId="46" name="Renamon" iconCandidateId="31006" iconStatus="matched" levelReq1="910" levelReq2="1120" />
+  <Group groupId="47" type="Line" nameId="47" name="Shoutmon" iconCandidateId="33001" iconStatus="matched" levelReq1="1300" levelReq2="1600" />
+  <Group groupId="48" type="Line" nameId="48" name="Mailbirdramon" iconCandidateId="33004" iconStatus="matched" levelReq1="910" levelReq2="1120" />
+  <Group groupId="49" type="Line" nameId="49" name="Greymon (c)" iconCandidateId="43005" iconStatus="matched" levelReq1="910" levelReq2="1120" />
+  <Group groupId="50" type="Line" nameId="50" name="Dorumon Doruga" iconCandidateId="31036" iconStatus="partial" levelReq1="440" levelReq2="560" />
+  <Group groupId="51" type="Line" nameId="51" name="Dorumon Dex" iconCandidateId="32036" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="52" type="Line" nameId="52" name="Dorumon Alpha" iconCandidateId="31036" iconStatus="partial" levelReq1="720" levelReq2="900" />
+  <Group groupId="53" type="Line" nameId="53" name="Demidevimon" iconCandidateId="41068" iconStatus="partial" levelReq1="440" levelReq2="560" />
+  <Group groupId="54" type="Line" nameId="54" name="Demidevimon Pied 1" iconCandidateId="41068" iconStatus="partial" levelReq1="660" levelReq2="840" />
+  <Group groupId="55" type="Line" nameId="55" name="Demidevimon Pied 2" iconCandidateId="41068" iconStatus="partial" levelReq1="770" levelReq2="980" />
+  <Group groupId="56" type="Line" nameId="56" name="Demidevimon Myotis 1" iconCandidateId="41068" iconStatus="partial" levelReq1="550" levelReq2="700" />
+  <Group groupId="57" type="Line" nameId="57" name="Demidevimon Myotis 2" iconCandidateId="41068" iconStatus="partial" levelReq1="660" levelReq2="840" />
+  <Group groupId="58" type="Line" nameId="58" name="Demidevimon [Apoc]" iconCandidateId="41068" iconStatus="partial" levelReq1="440" levelReq2="560" />
+  <Group groupId="59" type="Line" nameId="59" name="Betamon" iconCandidateId="31026" iconStatus="matched" levelReq1="660" levelReq2="840" />
+  <Group groupId="60" type="Line" nameId="60" name="Betamon [Apoc]" iconCandidateId="31026" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="61" type="Line" nameId="61" name="Hagurumon (Gardro)" iconCandidateId="31034" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="62" type="Line" nameId="62" name="Hagurumon (Mekanori)" iconCandidateId="31034" iconStatus="matched" levelReq1="660" levelReq2="840" />
+  <Group groupId="63" type="Line" nameId="63" name="Hagurumon [Apoc]" iconCandidateId="31034" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="64" type="Line" nameId="64" name="Qinglongmon" iconCandidateId="71082" iconStatus="matched" levelReq1="480" levelReq2="600" />
+  <Group groupId="65" type="Line" nameId="65" name="xuanwumon" iconCandidateId="71085" iconStatus="matched" levelReq1="480" levelReq2="600" />
+  <Group groupId="66" type="Line" nameId="66" name="zhuqiaomon" iconCandidateId="71083" iconStatus="matched" levelReq1="480" levelReq2="600" />
+  <Group groupId="67" type="Line" nameId="67" name="baihumon" iconCandidateId="71084" iconStatus="matched" levelReq1="480" levelReq2="600" />
+  <Group groupId="68" type="Line" nameId="68" name="Lucemon" iconCandidateId="45160" iconStatus="matched" levelReq1="600" levelReq2="750" />
+  <Group groupId="69" type="Line" nameId="69" name="Impmon" iconCandidateId="1531066" iconStatus="matched" levelReq1="720" levelReq2="900" />
+  <Group groupId="70" type="Line" nameId="70" name="Impmon Baal" iconCandidateId="1531066" iconStatus="partial" levelReq1="600" levelReq2="750" />
+  <Group groupId="71" type="Line" nameId="71" name="Elecmon" iconCandidateId="1331049" iconStatus="matched" levelReq1="660" levelReq2="840" />
+  <Group groupId="72" type="Line" nameId="72" name="Elecmon Duft" iconCandidateId="1331049" iconStatus="partial" levelReq1="440" levelReq2="560" />
+  <Group groupId="73" type="Line" nameId="73" name="Drimogemon" iconStatus="missing" levelReq1="550" levelReq2="700" />
+  <Group groupId="74" type="Line" nameId="74" name="Gotsumon" iconCandidateId="1631018" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="75" type="Line" nameId="75" name="Deputymon" iconStatus="missing" levelReq1="440" levelReq2="560" />
+  <Group groupId="76" type="Line" nameId="76" name="Starmon" iconCandidateId="41088" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="77" type="Line" nameId="77" name="Doggymon" iconStatus="missing" levelReq1="330" levelReq2="420" />
+  <Group groupId="78" type="Line" nameId="78" name="Demi meramon" iconCandidateId="41170" iconStatus="partial" levelReq1="550" levelReq2="700" />
+  <Group groupId="79" type="Line" nameId="79" name="Kiwimon" iconCandidateId="41132" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="80" type="Line" nameId="80" name="Dobermon" iconCandidateId="1241033" iconStatus="matched" levelReq1="330" levelReq2="420" />
+  <Group groupId="81" type="Line" nameId="81" name="Terriermon" iconStatus="missing" levelReq1="720" levelReq2="900" />
+  <Group groupId="82" type="Line" nameId="82" name="Gizumon" iconStatus="missing" levelReq1="110" levelReq2="140" />
+  <Group groupId="83" type="Line" nameId="83" name="Pawnchessmon W" iconCandidateId="31013" iconStatus="partial" levelReq1="440" levelReq2="560" />
+  <Group groupId="84" type="Line" nameId="84" name="Tanemon" iconCandidateId="21137" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="85" type="Line" nameId="85" name="Pawnchessmon B" iconCandidateId="31009" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="86" type="Line" nameId="86" name="Kotemon LordKnightmon" iconCandidateId="51026" iconStatus="partial" levelReq1="440" levelReq2="560" />
+  <Group groupId="87" type="Line" nameId="87" name="Candlemon" iconStatus="missing" levelReq1="440" levelReq2="560" />
+  <Group groupId="88" type="Line" nameId="88" name="Bearmon" iconCandidateId="31121" iconStatus="matched" levelReq1="660" levelReq2="840" />
+  <Group groupId="89" type="Line" nameId="89" name="Dracomon B" iconCandidateId="31014" iconStatus="partial" levelReq1="550" levelReq2="700" />
+  <Group groupId="90" type="Line" nameId="90" name="Dracomon G" iconCandidateId="31014" iconStatus="partial" levelReq1="550" levelReq2="700" />
+  <Group groupId="91" type="Line" nameId="91" name="Monodramon" iconCandidateId="31011" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="92" type="Line" nameId="92" name="Lopmon" iconCandidateId="31015" iconStatus="matched" levelReq1="770" levelReq2="980" />
+  <Group groupId="93" type="Line" nameId="93" name="FanBeemon" iconCandidateId="31016" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="94" type="Line" nameId="94" name="Keramon" iconCandidateId="31017" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="95" type="Line" nameId="95" name="Kamemon" iconCandidateId="31051" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="96" type="Line" nameId="96" name="Goblimon" iconCandidateId="31033" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="97" type="Line" nameId="97" name="Sharmamon" iconCandidateId="31032" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="98" type="Line" nameId="98" name="Dokunemon" iconCandidateId="31038" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="99" type="Line" nameId="99" name="Commandramon" iconCandidateId="31035" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="100" type="Line" nameId="100" name="Kudamon" iconCandidateId="31023" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="101" type="Line" nameId="101" name="Ryudamon" iconStatus="missing" levelReq1="720" levelReq2="900" />
+  <Group groupId="102" type="Line" nameId="102" name="Kotemon Musyamon" iconCandidateId="31021" iconStatus="partial" levelReq1="440" levelReq2="560" />
+  <Group groupId="103" type="Line" nameId="103" name="Mushroomon" iconCandidateId="31042" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="104" type="Line" nameId="104" name="Dracmon" iconCandidateId="31039" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="105" type="Line" nameId="105" name="Arkadimon" iconCandidateId="31037" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="106" type="Line" nameId="106" name="Gazimon" iconCandidateId="33068" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="107" type="Line" nameId="107" name="Tsukaimon" iconCandidateId="33069" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="108" type="Line" nameId="108" name="Swimmon" iconCandidateId="31040" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="109" type="Line" nameId="109" name="Ballistamon" iconCandidateId="33002" iconStatus="matched" levelReq1="660" levelReq2="840" />
+  <Group groupId="110" type="Line" nameId="110" name="Psychemon" iconCandidateId="35145" iconStatus="matched" levelReq1="600" levelReq2="750" />
+  <Group groupId="111" type="Line" nameId="111" name="Dorulumon" iconCandidateId="33003" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="112" type="Line" nameId="112" name="Syakomon" iconStatus="missing" levelReq1="440" levelReq2="560" />
+  <Group groupId="113" type="Line" nameId="113" name="Tsukaimon Murmukusmon" iconCandidateId="61044" iconStatus="partial" levelReq1="440" levelReq2="560" />
+  <Group groupId="114" type="Line" nameId="114" name="Otamon" iconStatus="missing" levelReq1="440" levelReq2="560" />
+  <Group groupId="115" type="Line" nameId="115" name="Tsukaimon Barbamon" iconCandidateId="63005" iconStatus="partial" levelReq1="440" levelReq2="560" />
+  <Group groupId="116" type="Line" nameId="116" name="Gazimon Millenium" iconCandidateId="33068" iconStatus="matched" levelReq1="720" levelReq2="900" />
+  <Group groupId="117" type="Line" nameId="117" name="Kokuwamon" iconCandidateId="31069" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="118" type="Line" nameId="118" name="Raremon" iconCandidateId="45172" iconStatus="matched" levelReq1="220" levelReq2="280" />
+  <Group groupId="119" type="Line" nameId="119" name="Hackmon" iconCandidateId="35147" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="120" type="Line" nameId="120" name="Leomon (Destiny)" iconCandidateId="1341058" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="121" type="Line" nameId="121" name="Floramon" iconCandidateId="33085" iconStatus="partial" levelReq1="550" levelReq2="700" />
+  <Group groupId="122" type="Line" nameId="122" name="Meicoomon 1" iconCandidateId="41178" iconStatus="matched" levelReq1="480" levelReq2="600" />
+  <Group groupId="123" type="Line" nameId="123" name="Meicoomon 2" iconCandidateId="41178" iconStatus="matched" levelReq1="480" levelReq2="600" />
+  <Group groupId="124" type="Line" nameId="124" name="Starsmon" iconStatus="missing" levelReq1="440" levelReq2="560" />
+  <Group groupId="125" type="Line" nameId="125" name="Sparrowmon" iconCandidateId="33005" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="126" type="Line" nameId="126" name="Gizamon" iconCandidateId="33086" iconStatus="matched" levelReq1="550" levelReq2="700" />
+  <Group groupId="127" type="Line" nameId="127" name="Deadlyaxemon" iconStatus="missing" levelReq1="360" levelReq2="450" />
+  <Group groupId="128" type="Line" nameId="128" name="Skullknightmon" iconCandidateId="45189" iconStatus="matched" levelReq1="360" levelReq2="450" />
+  <Group groupId="129" type="Line" nameId="129" name="Bagramon" iconCandidateId="63020" iconStatus="matched" levelReq1="360" levelReq2="450" />
+  <Group groupId="130" type="Line" nameId="130" name="Gammamon" iconCandidateId="35148" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="131" type="Line" nameId="131" name="Angoramon" iconCandidateId="35150" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="132" type="Line" nameId="132" name="Jellymon" iconCandidateId="35149" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="133" type="Line" nameId="133" name="Eosmon" iconCandidateId="35153" iconStatus="partial" levelReq1="390" levelReq2="480" />
+  <Group groupId="134" type="Line" nameId="134" name="Agnimon" iconCandidateId="75020" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="135" type="Line" nameId="135" name="Vritramon" iconStatus="missing" levelReq1="110" levelReq2="140" />
+  <Group groupId="136" type="Line" nameId="136" name="Fairimon" iconStatus="missing" levelReq1="110" levelReq2="140" />
+  <Group groupId="137" type="Line" nameId="137" name="Shutsmon" iconStatus="missing" levelReq1="110" levelReq2="140" />
+  <Group groupId="138" type="Line" nameId="138" name="Chakkumon" iconStatus="missing" levelReq1="110" levelReq2="140" />
+  <Group groupId="139" type="Line" nameId="139" name="Blizzarmon" iconCandidateId="75025" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="140" type="Line" nameId="140" name="Arbormon" iconCandidateId="75026" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="141" type="Line" nameId="141" name="Petaldramon" iconCandidateId="75027" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="142" type="Line" nameId="142" name="Grotmon" iconStatus="missing" levelReq1="110" levelReq2="140" />
+  <Group groupId="143" type="Line" nameId="143" name="Gigasmon" iconCandidateId="75029" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="144" type="Line" nameId="144" name="KaiserGreymon" iconStatus="missing" levelReq1="110" levelReq2="140" />
+  <Group groupId="145" type="Line" nameId="145" name="Wolfmon" iconCandidateId="75031" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="146" type="Line" nameId="146" name="Garmmon" iconStatus="missing" levelReq1="110" levelReq2="140" />
+  <Group groupId="147" type="Line" nameId="147" name="Blitzmon" iconCandidateId="75033" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="148" type="Line" nameId="148" name="Bolgmon" iconCandidateId="75034" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="149" type="Line" nameId="149" name="Lanamon" iconCandidateId="75035" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="150" type="Line" nameId="150" name="Calamaramon" iconStatus="missing" levelReq1="110" levelReq2="140" />
+  <Group groupId="151" type="Line" nameId="151" name="Lowemon" iconCandidateId="75037" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="152" type="Line" nameId="152" name="KaiserLeomon" iconCandidateId="75038" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="153" type="Line" nameId="153" name="Mercuremon" iconCandidateId="75039" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="154" type="Line" nameId="154" name="Sefirotmon" iconCandidateId="75040" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="155" type="Line" nameId="155" name="MagnaGarurumon" iconCandidateId="75041" iconStatus="matched" levelReq1="110" levelReq2="140" />
+  <Group groupId="156" type="Collection" nameId="156" name="Fanglo" iconCandidateId="71082" iconStatus="matched" levelReq1="560" levelReq2="710" />
+  <Group groupId="157" type="Collection" nameId="157" name="Angels" iconCandidateId="61031" iconStatus="matched" levelReq1="330" levelReq2="420" />
+  <Group groupId="158" type="Collection" nameId="158" name="Fallen Angels" iconCandidateId="61031" iconStatus="partial" levelReq1="330" levelReq2="420" />
+  <Group groupId="159" type="Collection" nameId="159" name="Adventure Rookies" iconCandidateId="1031001" iconStatus="matched" levelReq1="880" levelReq2="1120" />
+  <Group groupId="160" type="Collection" nameId="160" name="Adventure Evolutions" iconCandidateId="1061042" iconStatus="matched" levelReq1="880" levelReq2="1120" />
+  <Group groupId="161" type="Collection" nameId="161" name="7 Deadly Sins" iconCandidateId="45160" iconStatus="matched" levelReq1="770" levelReq2="980" />
+  <Group groupId="162" type="Collection" nameId="162" name="Angel Corps" iconCandidateId="41014" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="163" type="Collection" nameId="163" name="Crack Team" iconCandidateId="51063" iconStatus="partial" levelReq1="550" levelReq2="700" />
+  <Group groupId="164" type="Collection" nameId="164" name="Burst Ultimate Wings" iconCandidateId="71020" iconStatus="matched" levelReq1="880" levelReq2="1120" />
+  <Group groupId="165" type="Collection" nameId="165" name="Checkmate" iconCandidateId="31013" iconStatus="matched" levelReq1="880" levelReq2="1120" />
+  <Group groupId="166" type="Collection" nameId="166" name="Giga Whale" iconCandidateId="71072" iconStatus="partial" levelReq1="650" levelReq2="800" />
+  <Group groupId="167" type="Collection" nameId="167" name="Two Guys" iconCandidateId="1631018" iconStatus="matched" levelReq1="220" levelReq2="280" />
+  <Group groupId="168" type="Collection" nameId="168" name="Villains" iconCandidateId="41068" iconStatus="matched" levelReq1="880" levelReq2="1120" />
+  <Group groupId="169" type="Collection" nameId="169" name="Bare In Black?" iconCandidateId="41056" iconStatus="matched" levelReq1="330" levelReq2="420" />
+  <Group groupId="170" type="Collection" nameId="170" name="Black Agu &amp; Gabus" iconCandidateId="41140" iconStatus="matched" levelReq1="990" levelReq2="1260" />
+  <Group groupId="171" type="Collection" nameId="171" name="Ghost Games" iconCandidateId="35148" iconStatus="matched" levelReq1="330" levelReq2="420" />
+  <Group groupId="172" type="Collection" nameId="172" name="Ghost Game 2" iconCandidateId="63021" iconStatus="matched" levelReq1="330" levelReq2="420" />
+  <Group groupId="173" type="Collection" nameId="173" name="Greek Letters" iconCandidateId="71072" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="174" type="Collection" nameId="174" name="Skeleton Gang" iconCandidateId="1551022" iconStatus="matched" levelReq1="330" levelReq2="420" />
+  <Group groupId="175" type="Collection" nameId="175" name="Primal" iconCandidateId="31032" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="176" type="Collection" nameId="176" name="Trees" iconCandidateId="1141039" iconStatus="matched" levelReq1="660" levelReq2="840" />
+  <Group groupId="177" type="Collection" nameId="177" name="02 Jogress Rookies" iconCandidateId="41021" iconStatus="matched" levelReq1="880" levelReq2="1120" />
+  <Group groupId="178" type="Collection" nameId="178" name="02 Jogress Evolutions" iconCandidateId="71089" iconStatus="matched" levelReq1="330" levelReq2="420" />
+  <Group groupId="179" type="Collection" nameId="179" name="Dark Evolution" iconCandidateId="61051" iconStatus="partial" levelReq1="660" levelReq2="840" />
+  <Group groupId="180" type="Collection" nameId="180" name="Ladies" iconCandidateId="61026" iconStatus="matched" levelReq1="790" levelReq2="1000" />
+  <Group groupId="181" type="Collection" nameId="181" name="Dudes" iconCandidateId="41014" iconStatus="matched" levelReq1="1000" levelReq2="1270" />
+  <Group groupId="182" type="Collection" nameId="182" name="Greymons" iconCandidateId="63006" iconStatus="partial" levelReq1="550" levelReq2="700" />
+  <Group groupId="183" type="Collection" nameId="183" name="Garurumon" iconCandidateId="63007" iconStatus="partial" levelReq1="330" levelReq2="420" />
+  <Group groupId="184" type="Collection" nameId="184" name="M O D E" iconCandidateId="61027" iconStatus="matched" levelReq1="1270" levelReq2="1600" />
+  <Group groupId="185" type="Collection" nameId="185" name="Bugs" iconCandidateId="1831029" iconStatus="matched" levelReq1="660" levelReq2="840" />
+  <Group groupId="186" type="Collection" nameId="186" name="Advanced Spirit Evo" iconCandidateId="75041" iconStatus="matched" levelReq1="340" levelReq2="430" />
+  <Group groupId="187" type="Collection" nameId="187" name="Omega: VA" iconCandidateId="71072" iconStatus="matched" levelReq1="330" levelReq2="420" />
+  <Group groupId="188" type="Collection" nameId="188" name="Omega: VI" iconCandidateId="71106" iconStatus="partial" levelReq1="240" levelReq2="300" />
+  <Group groupId="189" type="Collection" nameId="189" name="Under Sea" iconCandidateId="51061" iconStatus="matched" levelReq1="770" levelReq2="980" />
+  <Group groupId="190" type="Collection" nameId="190" name="Hybrid H" iconCandidateId="75020" iconStatus="matched" levelReq1="1210" levelReq2="1540" />
+  <Group groupId="191" type="Collection" nameId="191" name="Hybrid B" iconCandidateId="75025" iconStatus="matched" levelReq1="1210" levelReq2="1540" />
+  <Group groupId="192" type="Collection" nameId="192" name="Capsul" iconCandidateId="75007" iconStatus="matched" levelReq1="1650" levelReq2="2100" />
+  <Group groupId="193" type="Collection" nameId="193" name="Dog?" iconCandidateId="1241033" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="194" type="Collection" nameId="194" name="Cat?" iconCandidateId="41021" iconStatus="matched" levelReq1="330" levelReq2="420" />
+  <Group groupId="195" type="Collection" nameId="195" name="High Noon" iconCandidateId="41088" iconStatus="matched" levelReq1="330" levelReq2="420" />
+  <Group groupId="196" type="Collection" nameId="196" name="Transcendental Ultimate Wings 1" iconCandidateId="71112" iconStatus="matched" levelReq1="220" levelReq2="280" />
+  <Group groupId="197" type="Collection" nameId="197" name="Transcendental Ultimate Wings 2" iconCandidateId="71088" iconStatus="matched" levelReq1="330" levelReq2="420" />
+  <Group groupId="198" type="Collection" nameId="198" name="Only Real Ones?" iconCandidateId="75042" iconStatus="partial" levelReq1="1330" levelReq2="1660" />
+  <Group groupId="199" type="Collection" nameId="199" name="Tamers" iconCandidateId="75108" iconStatus="partial" levelReq1="990" levelReq2="1260" />
+  <Group groupId="200" type="Collection" nameId="200" name="Tamers Evolutions" iconCandidateId="61074" iconStatus="matched" levelReq1="990" levelReq2="1260" />
+  <Group groupId="201" type="Collection" nameId="201" name="Bonds" iconCandidateId="31138" iconStatus="partial" levelReq1="240" levelReq2="300" />
+  <Group groupId="202" type="Collection" nameId="202" name="Variants" iconCandidateId="62076" iconStatus="partial" levelReq1="450" levelReq2="570" />
+  <Group groupId="203" type="Collection" nameId="203" name="Soldiers" iconCandidateId="51052" iconStatus="matched" levelReq1="220" levelReq2="280" />
+  <Group groupId="204" type="Collection" nameId="204" name="Leomons" iconCandidateId="1341058" iconStatus="matched" levelReq1="770" levelReq2="980" />
+  <Group groupId="205" type="Collection" nameId="205" name="Duke" iconCandidateId="61074" iconStatus="matched" levelReq1="690" levelReq2="870" />
+  <Group groupId="206" type="Collection" nameId="206" name="Resistance" iconCandidateId="71089" iconStatus="matched" levelReq1="330" levelReq2="420" />
+  <Group groupId="207" type="Collection" nameId="207" name="Xros Wars" iconCandidateId="33001" iconStatus="matched" levelReq1="880" levelReq2="1120" />
+  <Group groupId="208" type="Collection" nameId="208" name="Bagra Leaders" iconCandidateId="51026" iconStatus="partial" levelReq1="450" levelReq2="570" />
+  <Group groupId="209" type="Collection" nameId="209" name="Bagra Army Members" iconCandidateId="71088" iconStatus="matched" levelReq1="1100" levelReq2="1400" />
+  <Group groupId="210" type="Collection" nameId="210" name="02 Villains?" iconCandidateId="1061042" iconStatus="matched" levelReq1="440" levelReq2="560" />
+  <Group groupId="211" type="Collection" nameId="211" name="Frontier Villains?" iconCandidateId="61051" iconStatus="partial" levelReq1="770" levelReq2="980" />
+  <Group groupId="212" type="Collection" nameId="212" name="Dark Masters" iconCandidateId="71095" iconStatus="partial" levelReq1="440" levelReq2="560" />
+  <Group groupId="213" type="Collection" nameId="213" name="Something Vaccine" iconCandidateId="75042" iconStatus="matched" levelReq1="320" levelReq2="430" />
+  <Group groupId="214" type="Collection" nameId="214" name="Royal Knights" iconCandidateId="71072" iconStatus="matched" levelReq1="1300" levelReq2="1820" />
+  <Group groupId="215" type="Collection" nameId="215" name="Ordine" iconCandidateId="71119" iconStatus="matched" levelReq1="240" levelReq2="300" />
+  <Group groupId="216" type="Collection" nameId="216" name="Miracle, Wake Up!" iconCandidateId="41014" iconStatus="matched" levelReq1="460" levelReq2="580" />
+</UnionGroup>

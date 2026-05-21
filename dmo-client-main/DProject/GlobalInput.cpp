@@ -12,6 +12,7 @@ cGlobalInput::cGlobalInput()
 
 	iModifier = DMKEYBOARD::KMOD_NONE;
 	m_bUnionHotKeyDown = false;
+	m_bXmlUnionHotKeyDown = false;
 
 	for(int i=0; i<4; ++i)
 	{
@@ -74,6 +75,14 @@ bool cGlobalInput::_MacroKey( const MSG& p_kMsg )
 	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_WEBWIN ) )
 	{
 		return false;
+	}
+
+	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_XML_UNION ) )
+	{
+		KeyBoardMenu( p_kMsg );
+		if( g_pGameIF->OnMacroKey( p_kMsg ) == true )
+			return true;
+		return true;
 	}
 
 	if( g_pMngCollector->GetSceneState() == CMngCollector::eSCENE_EVENT )
@@ -174,6 +183,13 @@ void cGlobalInput::_Mouse_Input( eMOUSE_INPUT eMouse )
 	//2017-04-12-nova	포탈이동시 마우스입력안되도록
 	if(g_pResist->IsMovePortal())
 	{
+		return;
+	}
+
+	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_XML_UNION ) )
+	{
+		if( CURSOR_ST.GetWheel() != INVALIDE_WHEEL )
+			CURSOR_ST.ResetWheel();
 		return;
 	}
 
@@ -685,6 +701,12 @@ bool cGlobalInput::KeyBoardMenu(const MSG& p_kMsg)
 				m_bUnionHotKeyDown = true;
 			}
 
+			if( wParam == DMKEYBOARD::KEY_O &&
+				( iModifier == DMKEYBOARD::KMOD_LCONTROL || iModifier == DMKEYBOARD::KMOD_RCONTROL ) )
+			{
+				m_bXmlUnionHotKeyDown = true;
+			}
+
 			//2016-03-03-nova	채팅창 입력과 독립적 체크를 위해서
 			if( wParam		== mHotKey->m_MKey[DMKEY::MENU_TAMER].s_nKey &&
 				iModifier	== mHotKey->m_MKey[DMKEY::MENU_TAMER].s_nModifier)
@@ -800,6 +822,17 @@ bool cGlobalInput::KeyBoardMenu(const MSG& p_kMsg)
 					g_pGameIF->GetDynamicIF( cBaseWindow::WT_UNION );
 
 				m_bUnionHotKeyDown = false;
+				return true;
+			}
+
+			if( wParam == DMKEYBOARD::KEY_O && m_bXmlUnionHotKeyDown )
+			{
+				if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_XML_UNION ) )
+					g_pGameIF->CloseDynamicIF( cBaseWindow::WT_XML_UNION );
+				else
+					g_pGameIF->GetDynamicIF( cBaseWindow::WT_XML_UNION );
+
+				m_bXmlUnionHotKeyDown = false;
 				return true;
 			}
 

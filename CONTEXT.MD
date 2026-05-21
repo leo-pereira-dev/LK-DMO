@@ -1003,6 +1003,217 @@ Notes for future cleanup:
 - The local root `union/` folder is an extracted/decompiled analysis folder and
   is ignored by Git. Keep source changes in the client tree instead.
 
+## XML Union D-Unit test window
+
+The client now has a separate XML-only Union/D-Unit window for testing the new
+Union data without touching the old Union implementation:
+
+- Parser: `dmo-client-main/DProject/_Interface/Game/UnionXmlTools.*`
+- Window: `dmo-client-main/DProject/_Interface/Game/XmlUnionDUnit.*`
+- Window type: `WT_XML_UNION`
+- Hotkey: `Ctrl+O`
+- Registration: `cBaseWindow::NewWindow()` creates `cXmlUnionDUnit` for
+  `WT_XML_UNION`.
+- Include/helper access: `_GameIF.h` includes `XmlUnionDUnit.h` and exposes
+  `GetXmlUnionDUnit()`.
+- Important: keep this path independent from `cUnionDUnit`/`WT_UNION`. The old
+  Union window remains available separately for comparison.
+
+Input behavior while the XML Union window is open:
+
+- `GlobalInput` tracks a separate `m_bXmlUnionHotKeyDown` latch for `Ctrl+O`.
+- When `WT_XML_UNION` is active, macro/mouse input is consumed by the window so
+  outside camera zoom, movement, and other external commands do not leak through.
+- Mouse wheel is reset after the window consumes it. This prevents the old bug
+  where scrolling the Union list also zoomed or moved the game camera.
+
+Runtime XML data location:
+
+- The window loads from `Data\union`.
+- `UnionXmlTools::_LoadDocument()` tries loose disk XML first with
+  `TiXmlDocument::LoadFile()`, then falls back to `CsFPSystem` pack lookup. This
+  lets `C:\Release\GSP\Data\union` override packed files during testing.
+- Runtime XML copies were placed under:
+  - `C:\0-NewDmo\ClientDist\Data\union`
+  - `C:\Release\GSP\Data\union`
+
+Current Union XML staging lives in:
+
+```text
+C:\0-NewDmo\union\xml_generated
+```
+
+Source CSVs currently used:
+
+- `C:\0-NewDmo\union\DMO Union - DigimonLines.csv`
+- `C:\0-NewDmo\union\DMO Union - DigimonCollections.csv`
+- `C:\0-NewDmo\union\DMO Union - Changelog.csv`
+- `C:\0-NewDmo\union\DMO Union - Intro.csv`
+
+Generated XMLs currently include line data, collection data, groups, strings,
+effects, rewards, filters, source changelog/intro preservation, and an icon
+validation report. Important files:
+
+- `DM_Union-DigimonLines.xml`
+- `DM_Union-DigimonCollections.xml`
+- `DM_Union-Group.xml`
+- `DM_Union-Group_Str.xml`
+- `DM_Union-Effect.xml`
+- `DM_Union-Reward.xml`
+- `DM_Union-Reward_Str.xml`
+- `DM_Union-Filter.xml`
+- `DM_Union-Filter_Str.xml`
+- `DM_Union-IconValidation.xml`
+- `DM_Union-IconValidation.csv`
+
+XML parser behavior:
+
+- `DM_Union-DigimonLines.xml` produces `Line` groups.
+- `DM_Union-DigimonCollections.xml` produces `Collection` groups. Collection IDs
+  are offset by `+100000` in the test loader so they cannot collide with line
+  IDs.
+- `DM_Union-Filter_Str.xml` contributes filter strings, but group names are also
+  added as filters so the list is usable even when the string XML is incomplete.
+- `<Members>` are read as explicit card entries with `slot`, `name`,
+  `iconCandidateId`, and `iconFolder`.
+- `<Rewards>` are displayed in the center effects panel.
+- `<TotalStat>` values are accumulated by stat name and displayed in the right
+  totals panel.
+- Empty member names and the `__` placeholder are ignored.
+
+Icon IDs are inferred from unpacked pack03/data11 Digimon assets under:
+
+```text
+D:\LK-DMO TOOLS\EXTRATOR-Copiar Daqui\Decryptorv2\data11
+```
+
+The CSVs do not currently provide explicit icon IDs, so generated
+`iconCandidateId` values are best-effort matches by Digimon/member name. Always
+review `DM_Union-IconValidation.csv` before converting XML back to bin:
+
+- `matched`: direct normalized asset-name match.
+- `partial`: existing pack03 asset ID, but inferred by partial name; review it.
+- `missing`: no matching asset found in the unpacked pack03/data11 tree.
+
+The combine/hacking XMLs are still placeholders because the current CSVs do not
+contain item group, rank, ceil, or hacking-info table fields:
+
+- `DM_Union-HackingInfo.xml`
+- `DM_UnionCombine-ItemList.xml`
+- `DM_UnionCombine-RankList.xml`
+- `DM_UnionCombine-ItemGroup.xml`
+- `DM_UnionCombine-CeilGroup.xml`
+
+XML Union layout:
+
+- Window size is `886x675`.
+- Left list shows `15` group buttons (`IF_XML_UNION_FILTER_COUNT`).
+- Card area shows `8` cards at a time (`2x4`), with up to `32` cached cards per
+  selected group.
+- The selected group title is drawn as a green slanted tab above the card grid.
+  The tab width is calculated from the selected name and capped to avoid overlap.
+- Card names are hidden by default and shown only in the hover tooltip.
+- Filter rows use hover fill, yellow selected borders, cyan hover borders, and
+  bookmark icons.
+- The list scrollbar uses the client assets:
+  - `Encyclopedia\Scroll\ScrollUpBtn.tga`
+  - `Encyclopedia\Scroll\ScrollDownBtn.tga`
+- The card scrollbar appears only when a selected group has more than eight
+  cards. Card scrolling moves by whole pages of `8` cards so the card grid does
+  not shift by partial rows.
+
+Key UI assets used by `XmlUnionDUnit`:
+
+- `Union\side_bg_a.png`
+- `Union\center_bg.png`
+- `Union\side_bg.png`
+- `Union\side_bg_b.png`
+- `Union\list_bg.png`
+- `Union\collection_bg_new.tga`
+- `Union\collection_frame_rank1_new.png`
+- `Union\collection_frame_rank2_new.png`
+- `Union\collection_frame_rank3_new.png`
+- `Union\digimon_hold_gauge.png`
+- `Union\treasure_box_icon.png`
+- `Union\filter_icon.png`
+- `DungeonUI\dungeon_result_simple_ui.png`
+- `System\MoveWindow.tga`
+- `Encyclopedia\newencyclopedia\main\exit_btn.png`
+- `Encyclopedia\newencyclopedia\main\serch bar.png`
+- `Encyclopedia\newencyclopedia\main\sarch.png`
+- `Encyclopedia\newencyclopedia\detail\button\top_button.png`
+- `Encyclopedia\newencyclopedia\detail\button\bookmark.png`
+- `Encyclopedia\newencyclopedia\collection_effect_frame01.png` through
+  `collection_effect_frame07.png` for card hover animation.
+
+Digimon portraits:
+
+- The window resolves icon paths from `iconCandidateId`/`iconFolder` first using
+  `Data\Digimon\<folder>\<id>_<folder>_small.tga`, `.png`, `.dds`, `.tga`, then
+  falls back to `g_pModelDataMng->GetEvoModelIconFile()` and
+  `GetSmallModelIconFile()`.
+- Icon paths are cached in a static map to avoid repeated pack/file checks while
+  scrolling.
+- Card portraits are cropped into the circular card ring by drawing horizontal
+  sprite slices. This avoids square icon bleed outside the circle.
+- Card controls are pre-created once and updated by visibility/state. This was
+  done to avoid lag and repeated sprite allocation while scrolling or switching
+  groups.
+
+Rank icon atlas:
+
+- The rank badge atlas is
+  `Encyclopedia\newencyclopedia\icon\encyclopedia_512.png`.
+- The unpacked reference copy was found at:
+
+  ```text
+  D:\LK-DMO TOOLS\EXTRATOR-Copiar Daqui\Decryptorv2\data11\interface\encyclopedia\newencyclopedia\icon\encyclopedia_512.png
+  ```
+
+- `XmlUnionDUnit` creates a `cImage` for each card rank badge with size `82x66`
+  and `SetTexToken(CsPoint(102, 102))`.
+- Do not use the `CommonUI\digimon_rank.tga` mapping here. That older atlas is
+  used by other status UIs and has different indexing.
+- Runtime-observed `encyclopedia_512.png` render indexes in this client:
+  - `9`: `SSS`
+  - `10`: `SSS+` Korean badge
+  - `11`: `U+`
+- Current XML Union mapping:
+  - rank `<= 0` shows the `N` badge state.
+  - rank `>= 10` is forced to state `10`, the Korean `SSS+` badge.
+  - rank `1..9` maps to `rank - 1`.
+- This mapping was tuned from in-game screenshots. Be careful before changing it:
+  switching to the Encyclopedia helper-style `rank + 1` made rank `10` display
+  as `U+`, and switching to state `9` made it display as normal `SSS`.
+
+Evolution/card population rules:
+
+- For groups with explicit XML `<Members>`, the cards come from those members.
+- For line groups without explicit members, the window resolves the selected
+  group to a base Digimon using normalized names and the client evolution table
+  (`g_pEvolMng`).
+- Duplicate group names, such as repeated `Agumon` or `Gabumon` lines, are
+  resolved by duplicate index so each duplicate can bind to a different matching
+  evolution base.
+- X-antibody line groups are detected by the `Line` type plus X naming, and they
+  can resolve directly from `iconCandidateId`/model ID.
+- Non-X line groups append related X lines when matching X groups exist in the
+  XML. The X entries are treated as normal evolutions once the XML declares the
+  X line.
+- Collections only display Digimon/evolutions that are declared somewhere in the
+  Union XML by group name, member name, or member `iconCandidateId`.
+- Card data is cached by `groupId:selectedName` in `m_mapCardCache` to reduce
+  the micro-delay when switching between groups.
+
+Performance/lag notes:
+
+- The card frame, portrait slices, hover effect, rank icon, filter row controls,
+  and scrollbars are created once and reused.
+- Scrolling updates existing controls instead of rebuilding the full layout.
+- The hover animation only updates while visible.
+- The active XML Union window consumes global input to prevent outside camera
+  work from competing with the window scroll/input code.
+
 ## Known risky areas
 
 - PostgreSQL migration can change behavior where old MySQL code relied on:

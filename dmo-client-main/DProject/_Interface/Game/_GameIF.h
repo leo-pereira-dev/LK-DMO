@@ -95,6 +95,7 @@
 #include "MyLooting.h"
 #include "UnionStore.h"
 #include "UnionDUnit.h"
+#include "XmlUnionDUnit.h"
 #include "PersonStore.h"
 #include "PcbangInven.h"
 #include "Shout.h"
@@ -342,6 +343,7 @@ public:
 	cAchieve*				GetAchieve() { return (cAchieve*)_GetPointer( cBaseWindow::WT_ACHIEVE, 0 ); }
 	cUnionStore*			GetUnionStore(){ return (cUnionStore*)_GetPointer( cBaseWindow::WT_UNIONSTORE, 0 ); }
 	cUnionDUnit*			GetUnionDUnit(){ return (cUnionDUnit*)_GetPointer( cBaseWindow::WT_UNION, 0 ); }
+	cXmlUnionDUnit*			GetXmlUnionDUnit(){ return (cXmlUnionDUnit*)_GetPointer( cBaseWindow::WT_XML_UNION, 0 ); }
 	
 	cCenterbar*				GetCenterBar( int nIndex ) { return (cCenterbar*)_GetPointer( cBaseWindow::WT_CENTERBAR, nIndex ); }	
 

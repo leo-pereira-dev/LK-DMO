@@ -8,7 +8,8 @@
 cInventory::cInventory():m_pMoney(NULL),m_pBlock(NULL),m_pBlockInItem(NULL)
 ,m_pCancelButton(NULL),m_pSort(NULL),m_nInvenIndex(0),m_nDataStartIndex(NULL)
 #ifdef UI_INVENTORY_RENEWAL
-,m_pFilterTab(NULL), m_pScrollBar(NULL), m_pNewMark(NULL), m_bIsFiltering(false)
+,m_pFilterTab(NULL), m_pScrollBar(NULL), m_pNewMark(NULL), m_pSearchEdit(NULL)
+,m_pSearchResetButton(NULL), m_pHelpButton(NULL), m_pSlotCountText(NULL), m_eCurrentTab(eTabNone), m_bIsFiltering(false)
 #endif
 {
 }
@@ -85,12 +86,23 @@ void cInventory::Create(int nValue /* = 0  */)
 		SetRootClient( CsPoint( g_nScreenWidth - 400, g_nScreenHeight - 668 ) );
 
 		InitScript( "NewInventory\\new_inventory_win.tga", m_ptRootClient, CsPoint( 398, 456 ), true, IFREGION_X::LEFT, IFREGION_Y::TOP, false );
-		AddTitle( UISTRING_TEXT( "INVENTORY_TITLE_TEXT" ).c_str() );
+		AddTitle( _T( "Bag" ) );
 
 		SAFE_POINTER_RET( g_pDataMng );
 
+		{
+			cText::sTEXTINFO ti;
+			ti.Init( &g_pEngine->m_FontText, CFont::FS_11, NiColor( 0.0f, 1.0f, 0.35f ) );
+			ti.s_eTextAlign = DT_RIGHT;
+			ti.SetText( _T( "" ) );
+			m_pSlotCountText = AddText( &ti, CsPoint( 345, 9 ) );
+		}
+
+		m_pHelpButton = AddButton( CsPoint( 7, 6 ), CsPoint( 22, 22 ), cButton::IMAGE_ALPHA_1, _T( "?" ) );
+
 		// create filter button
 		_MakeFilterTab();
+		_CreateSearchBox();
 
 		// set item pos
 		CsPoint ptStart( 11, 66 );
@@ -135,6 +147,8 @@ void cInventory::Create(int nValue /* = 0  */)
 		m_pCancelButton = AddButton( CsPoint( 372, 7 ), CsPoint( 16, 16 ), CsPoint( 0, 16 ), "System\\Ch_Close.tga" );
 		if( m_pCancelButton )
 			m_pCancelButton->AddEvent( cButton::BUTTON_LBUP_EVENT, this, &cInventory::CloseInvenBtnClick );
+
+		_UpdateInventoryCountText();
 	}
 
 #else
@@ -236,8 +250,15 @@ bool cInventory::Close( bool bSound /* = true  */ )
 	}
 #ifdef UI_INVENTORY_RENEWAL
 	m_bIsFiltering = false;
+	m_eCurrentTab = eTabNone;
+	GetSystem()->SetSearchText( L"" );
+	GetSystem()->SetFilterMode( SystemType::eNone );
 	if( m_pFilterTab )
 		m_pFilterTab->SetCheckIndex( 0 );
+	if( m_pSearchEdit )
+		m_pSearchEdit->SetText( _T( "" ) );
+	if( m_pSearchResetButton )
+		m_pSearchResetButton->SetVisible( false );
 #endif
 	SetShowWindow( false );
 
@@ -257,6 +278,9 @@ void cInventory::Update(float const& fDeltaTime)
 	SAFE_POINTER_RET( pInven );
 	if( m_pMoney )
 		m_pMoney->SetMoney( pInven->GetMoney() );
+#ifdef UI_INVENTORY_RENEWAL
+	_UpdateInventoryCountText();
+#endif
 
 	SAFE_POINTER_RET( g_pGameIF );
 	SAFE_POINTER_RET( g_pCharMng );
@@ -300,6 +324,11 @@ cInventory::Update_ForMouse()
 	if( muReturn == MUT_OUT_WINDOW )	
 		return muReturn;
 #ifdef UI_INVENTORY_RENEWAL
+	if( m_pSearchEdit && m_pSearchEdit->Update_ForMouse( CsPoint::ZERO ) == cEditBox::ACTION_CLICK )
+		return muReturn;
+
+	_UpdateHelpTooltip();
+
 	if( m_pFilterTab && m_pFilterTab->Update_ForMouse() != cRadioButton::INVALIDE_RADIO_CLICK )
 		return muReturn;
 
@@ -307,6 +336,12 @@ cInventory::Update_ForMouse()
 		return muReturn;
 #endif
 	if( m_pSort && m_pSort->Update_ForMouse() != cButton::ACTION_NONE )
+		return muReturn;
+
+	if( m_pSearchResetButton && m_pSearchResetButton->Update_ForMouse() != cButton::ACTION_NONE )
+		return muReturn;
+
+	if( m_pHelpButton && m_pHelpButton->Update_ForMouse() != cButton::ACTION_NONE )
 		return muReturn;
 
 	if( m_pCancelButton && m_pCancelButton->Update_ForMouse() != cButton::ACTION_NONE )
@@ -1206,6 +1241,35 @@ void cInventory::_AddFilterTab(eTabType eTab, CsPoint pos, CsPoint size, std::ws
 	}
 }
 
+void cInventory::_CreateSearchBox()
+{
+	AddSprite( CsPoint( 12, 432 ), CsPoint( 160, 22 ), "TacticsHouse\\Storage_search.tga" );
+
+	m_pSearchEdit = NiNew cEditBox;
+	if( m_pSearchEdit )
+	{
+		cText::sTEXTINFO ti;
+		ti.Init( &g_pEngine->m_FontText, CFont::FS_11, NiColor::WHITE );
+		ti.SetText( _T( "" ) );
+		ti.s_bOutLine = false;
+
+		m_pSearchEdit->Init( GetRoot(), CsPoint( 18, 435 ), CsPoint( 148, 18 ), &ti, false );
+		m_pSearchEdit->SetEmptyMsgText( _T( "Search item" ), NiColor( 0.45f, 0.60f, 0.72f ) );
+		m_pSearchEdit->SetFontLength( 40 );
+		m_pSearchEdit->EnableUnderline( ti.s_Color );
+		m_pSearchEdit->SetEnableSound( true );
+		m_pSearchEdit->AddEvent( cEditBox::eEditbox_ChangeText, this, &cInventory::OnSearchTextChanged );
+		AddChildControl( m_pSearchEdit );
+	}
+
+	m_pSearchResetButton = AddButton( CsPoint( 177, 433 ), CsPoint( 20, 20 ), CsPoint( 0, 20 ), "inventory\\Invensort.tga" );
+	if( m_pSearchResetButton )
+	{
+		m_pSearchResetButton->AddEvent( cButton::BUTTON_LBUP_EVENT, this, &cInventory::OnSearchResetClick );
+		m_pSearchResetButton->SetVisible( false );
+	}
+}
+
 std::wstring cInventory::_GetFilterName(eTabType eTab)
 {
 	switch( eTab )
@@ -1239,13 +1303,37 @@ void cInventory::OnClickFilterTab(void* pSender, void* pData)
 	}
 
 	CURSOR_ST.ReleaseIcon();
-	m_bIsFiltering = true;
+	m_eCurrentTab = pUserData->eType;
+	_UpdateFilter();
+}
 
-	switch( pUserData->eType )
+void cInventory::OnSearchTextChanged(void* pSender, void* pData)
+{
+	_UpdateFilter();
+}
+
+void cInventory::OnSearchResetClick(void* pSender, void* pData)
+{
+	if( m_pSearchEdit )
+		m_pSearchEdit->SetText( _T( "" ) );
+
+	_UpdateFilter();
+}
+
+void cInventory::_UpdateFilter()
+{
+	std::wstring wsSearch;
+	if( m_pSearchEdit )
+		wsSearch = m_pSearchEdit->GetTextAll();
+
+	GetSystem()->SetSearchText( wsSearch );
+	if( m_pSearchResetButton )
+		m_pSearchResetButton->SetVisible( !wsSearch.empty() );
+
+	switch( m_eCurrentTab )
 	{
 	case eTabNone:
 		GetSystem()->SetFilterMode( SystemType::eNone );
-		m_bIsFiltering = false;
 		break;
 	case eTabEquip:
 		GetSystem()->SetFilterMode( SystemType::eEquip );
@@ -1261,7 +1349,72 @@ void cInventory::OnClickFilterTab(void* pSender, void* pData)
 		break;
 	}
 
-	m_pScrollBar->SetCurPosIndex( 0 );
+	m_bIsFiltering = GetSystem()->IsFiltering();
+	_UpdateScrollRange();
+
+	if( m_pScrollBar )
+		m_pScrollBar->SetCurPosIndex( 0 );
+}
+
+void cInventory::_UpdateScrollRange()
+{
+	SAFE_POINTER_RET( m_pScrollBar );
+
+	int nSlotCount = nLimit::Inven;
+	if( m_bIsFiltering )
+		nSlotCount = GetSystem()->GetFilteringItemCount();
+
+	int nRowCount = ( nSlotCount + IF_INVENTORY_COL - 1 ) / IF_INVENTORY_COL;
+	if( nRowCount < IF_INVENTORY_ROW )
+		nRowCount = IF_INVENTORY_ROW;
+
+	m_pScrollBar->SetRange( CsPoint( 0, nRowCount ) );
+}
+
+void cInventory::_UpdateInventoryCountText()
+{
+	SAFE_POINTER_RET( m_pSlotCountText );
+
+	TCHAR szCount[ 32 ] = { 0, };
+	_stprintf_s( szCount, _countof( szCount ), _T( "%d / %d" ), _GetUsedSlotCount(), GetSystem()->GetInvenSlotCount() );
+	m_pSlotCountText->SetText( szCount );
+}
+
+int cInventory::_GetUsedSlotCount() const
+{
+	SAFE_POINTER_RETVAL( g_pDataMng, 0 );
+	cData_Inven* pInven = g_pDataMng->GetInven();
+	SAFE_POINTER_RETVAL( pInven, 0 );
+
+	int nUsedCount = 0;
+	int nSlotCount = pInven->GetInvenSlotCount();
+	for( int i = 0; i < nSlotCount; ++i )
+	{
+		cItemInfo* pItem = pInven->GetData( i );
+		if( pItem && pItem->IsEnable() )
+			++nUsedCount;
+	}
+
+	return nUsedCount;
+}
+
+void cInventory::_UpdateHelpTooltip()
+{
+	SAFE_POINTER_RET( TOOLTIPMNG_STPTR );
+
+	CsPoint ptMouseLocalPos = MousePosToWindowPos( CURSOR_ST.GetPos() );
+	CsRect rcHelp( CsPoint( 7, 6 ), CsPoint( 29, 28 ) );
+	if( !rcHelp.PtInRect( ptMouseLocalPos ) )
+		return;
+
+	cTooltip* pTooltip = TOOLTIPMNG_STPTR->GetTooltip();
+	SAFE_POINTER_RET( pTooltip );
+
+	pTooltip->SetTooltip_Text(
+		GetRootClient() + CsPoint( 24, 22 ),
+		CsPoint::ZERO,
+		_T( "Inventory\n\nCtrl + left click toggles item sort lock.\nItems with sort lock cannot be split." ),
+		CFont::FS_10 );
 }
 
 void cInventory::_SetNewMark(int nIndex, bool bIsNew)
@@ -1269,7 +1422,7 @@ void cInventory::_SetNewMark(int nIndex, bool bIsNew)
 	SAFE_POINTER_RET( m_pScrollBar );
 	int nSlotIndex = nIndex + m_pScrollBar->GetCurPosIndex() * IF_INVENTORY_COL;
 	if( m_bIsFiltering )
-		nSlotIndex = GetSystem()->GetFilteringItemIdx(nIndex);
+		nSlotIndex = GetSystem()->GetFilteringItemIdx( nSlotIndex );
 
 	if( -1 == nSlotIndex )
 		return;

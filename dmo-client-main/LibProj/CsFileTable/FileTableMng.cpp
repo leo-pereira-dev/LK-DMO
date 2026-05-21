@@ -52,6 +52,7 @@ void CsFileTableMng::Delete()
 	DELETE_MNG(	nsCsFileTable::g_pExtraEvolutionTBMng );
 	DELETE_MNG(	nsCsFileTable::g_pEffectTBMng );
 	DELETE_MNG(	nsCsFileTable::g_pTimeChargeMng );
+	DELETE_MNG(	nsCsFileTable::g_pUnionTableMng );
 }
 
 char* CsFileTableMng::GetLanguagePath( nsCsFileTable::eLANGUAGE eLanguage, char* cBuffer )
@@ -168,6 +169,7 @@ bool CsFileTableMng::Init( nsCsFileTable::eFILE_TYPE eFileType, nsCsFileTable::e
 	INIT_MNG_PATH( CsExtraEvolutionMng, nsCsFileTable::g_pExtraEvolutionTBMng, nsCsFileTable::g_bExtraEvolutionTBMng);
 	INIT_MNG_PATH( CsEffectMng, nsCsFileTable::g_pEffectTBMng, nsCsFileTable::g_bEffectTBMng);
 	INIT_MNG_PATH( CsTimeChargeMng, nsCsFileTable::g_pTimeChargeMng, nsCsFileTable::g_bTimeChargeMng );
+	INIT_MNG_PATH( CsUnionTableMng, nsCsFileTable::g_pUnionTableMng, nsCsFileTable::g_bUnionTableMng );
 	return true;
 }
 
@@ -301,4 +303,3 @@ void CsFileTableMng::StringChange( nsCsFileTable::eLANGUAGE eLanguage )
 
 	sc.Delete();
 }
-

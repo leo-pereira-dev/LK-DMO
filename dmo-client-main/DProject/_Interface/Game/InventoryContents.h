@@ -41,6 +41,7 @@ private:
 	int							m_nPreRankNo;
 #ifdef UI_INVENTORY_RENEWAL
 	bool						m_bRecvInvenInfo;
+	std::wstring				m_wsSearchText;
 #endif
 
 public:
@@ -90,11 +91,15 @@ public:
 	uint				GetInvenSlotCount() const;
 #ifdef UI_INVENTORY_RENEWAL
 	const int			GetFilteringItemIdx( int nIndex ) const;
+	int					GetFilteringItemCount() const;
 
 	void				SetNewItem( int nInvenIndex, bool bIsNew );
 	void				SetFilterMode( eFilterMode eMode );
+	void				SetSearchText( std::wstring const& wsText );
 
 	bool				IsEqualItemType( eFilterMode eMode, int const& nType ) const;
+	bool				IsEqualSearchText( CsItem::sINFO const* pFTInfo ) const;
+	bool				IsFiltering() const;
 	bool				IsOpenInventory() const;
 	bool				IsMapNewItem() const;
 	bool				IsNewItem( int nInvenIndex );

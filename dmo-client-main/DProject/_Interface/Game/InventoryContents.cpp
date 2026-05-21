@@ -2,6 +2,18 @@
 #include "InventoryContents.h"
 #include "../../ContentsSystem/ContentsSystemDef.h"
 #include "../Adapt/AdaptTutorialQuest.h"
+#include <algorithm>
+
+#ifdef UI_INVENTORY_RENEWAL
+namespace
+{
+	std::wstring ToLowerText( std::wstring text )
+	{
+		std::transform( text.begin(), text.end(), text.begin(), _totlower );
+		return text;
+	}
+}
+#endif
 
 #define INVEN_IS_NOT_ENOUGTH_MSG_ID 11015	// 가방에 공간이 부족합니다.
 
@@ -9,6 +21,7 @@ cInventoryContents::cInventoryContents() : m_eCurFilter( eNone ), m_eState( eClo
 , m_nPreRankNo( 0 )
 #ifdef UI_INVENTORY_RENEWAL
 , m_bRecvInvenInfo( true )
+, m_wsSearchText( L"" )
 , m_AdaptTutorialQuest( 0 )
 #endif
 {
@@ -134,6 +147,7 @@ void cInventoryContents::CloseInventory(void* pData)
 	
 	m_mapFilterItem.clear();
 	m_eCurFilter = eNone;
+	m_wsSearchText.clear();
 #else
 	SAFE_POINTER_RET( g_pDataMng );
 	cData_Inven* pInven = g_pDataMng->GetInven();
@@ -194,11 +208,8 @@ void cInventoryContents::AddNewItem(void* pData)
 		SetNewItem( pairRecv->first, pairRecv->second );
 
 		// 필터 중에 추가된 아이템 보여준다 - 필터된 아이템 아님
-		if( eNone != m_eCurFilter )
-		{
-			if( !IsFilteringItem( pairRecv->first ) )
-				m_mapFilterItem.insert( std::make_pair( m_mapFilterItem.size(), pairRecv->first ) );
-		}
+		if( IsFiltering() )
+			SetFilterMode( m_eCurFilter );
 		bool bIsEnable = pairRecv->second;
 		ContentsStream kSend;
 		kSend << bIsEnable;
@@ -258,6 +269,14 @@ void cInventoryContents::RecvInvenReqResult(void* pData)
 	_UpdateInventory( pRecv->m_lItems );
 	_CheckUserQuickSlot();
 
+	if( g_pGameIF && g_pGameIF->IsActiveWindow( cBaseWindow::WT_INVENTORY ) )
+	{
+		bool bIsEnable = true;
+		ContentsStream kSend;
+		kSend << bIsEnable;
+		Notify( eEnableWindow, kSend );
+	}
+
 	// 퀘스트 아이템 체크
 	SAFE_POINTER_RET( g_pDataMng );
 	cData_Quest* pQuestData = g_pDataMng->GetQuest();
@@ -311,6 +330,7 @@ void cInventoryContents::CloseWindow()
 
 	m_mapFilterItem.clear();
 	m_eCurFilter = eNone;
+	m_wsSearchText.clear();
 #else
 	SAFE_POINTER_RET( g_pDataMng );
 	cData_Inven* pInven = g_pDataMng->GetInven();
@@ -506,6 +526,11 @@ const int cInventoryContents::GetFilteringItemIdx(int nIndex) const
 	return -1;
 }
 
+int cInventoryContents::GetFilteringItemCount() const
+{
+	return static_cast< int >( m_mapFilterItem.size() );
+}
+
 void cInventoryContents::SetNewItem(int nInvenIndex, bool bIsNew)
 {
 	bool bIsEnable = false;
@@ -546,7 +571,7 @@ void cInventoryContents::SetFilterMode(eFilterMode eMode)
 	m_mapFilterItem.clear();
 
 	m_eCurFilter = eMode;
-	if( eNone == m_eCurFilter )
+	if( !IsFiltering() )
 		return;
 
 	int nIndex = 0;
@@ -562,13 +587,22 @@ void cInventoryContents::SetFilterMode(eFilterMode eMode)
 		CsItem::sINFO* pFTInfo = GetFTItemInfo( pItemInfo->GetType() );
 		SAFE_POINTER_CON( pFTInfo );
 
-		if( IsEqualItemType( m_eCurFilter, pFTInfo->s_nType_L ) )
+		if( IsEqualItemType( m_eCurFilter, pFTInfo->s_nType_L ) && IsEqualSearchText( pFTInfo ) )
 			m_mapFilterItem.insert( std::make_pair( nIndex++, i ) );
 	}
 }
 
+void cInventoryContents::SetSearchText(std::wstring const& wsText)
+{
+	m_wsSearchText = ToLowerText( wsText );
+	SetFilterMode( m_eCurFilter );
+}
+
 bool cInventoryContents::IsEqualItemType(eFilterMode eMode, int const& nType) const
 {
+	if( eNone == eMode )
+		return true;
+
 	switch( eMode )
 	{
 	case eEquip:
@@ -719,6 +753,21 @@ bool cInventoryContents::IsEqualItemType(eFilterMode eMode, int const& nType) co
 	}
 
 	return false;
+}
+
+bool cInventoryContents::IsEqualSearchText(CsItem::sINFO const* pFTInfo) const
+{
+	if( m_wsSearchText.empty() )
+		return true;
+
+	SAFE_POINTER_RETVAL( pFTInfo, false );
+	std::wstring wsItemName = ToLowerText( pFTInfo->s_szName );
+	return wsItemName.find( m_wsSearchText ) != std::wstring::npos;
+}
+
+bool cInventoryContents::IsFiltering() const
+{
+	return ( eNone != m_eCurFilter ) || !m_wsSearchText.empty();
 }
 
 bool cInventoryContents::IsOpenInventory() const

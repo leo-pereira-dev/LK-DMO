@@ -175,6 +175,9 @@
     <Filter Include="TimeCharge">
       <UniqueIdentifier>{eea420a8-9c01-4a61-a64f-f529f55cbb9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Union">
+      <UniqueIdentifier>{4d8e63a9-c9e7-45e0-9c52-d1d5c63aa921}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FileTableMng.cpp">
@@ -521,6 +524,9 @@
     </ClCompile>
     <ClCompile Include="TimeChargeMng.cpp">
       <Filter>TimeCharge</Filter>
+    </ClCompile>
+    <ClCompile Include="UnionTableMng.cpp">
+      <Filter>Union</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -988,6 +994,9 @@
     </ClInclude>
     <ClInclude Include="TimeChargeMng.h">
       <Filter>TimeCharge</Filter>
+    </ClInclude>
+    <ClInclude Include="UnionTableMng.h">
+      <Filter>Union</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

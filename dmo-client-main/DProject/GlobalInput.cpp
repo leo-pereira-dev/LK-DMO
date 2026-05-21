@@ -11,6 +11,7 @@ cGlobalInput::cGlobalInput()
 	mHotKey = NULL;
 
 	iModifier = DMKEYBOARD::KMOD_NONE;
+	m_bUnionHotKeyDown = false;
 
 	for(int i=0; i<4; ++i)
 	{
@@ -678,6 +679,12 @@ bool cGlobalInput::KeyBoardMenu(const MSG& p_kMsg)
 	case WM_KEYDOWN:
 	case WM_SYSKEYDOWN:
 		{
+			if( wParam == DMKEYBOARD::KEY_U &&
+				( iModifier == DMKEYBOARD::KMOD_LSHIFT || iModifier == DMKEYBOARD::KMOD_RSHIFT ) )
+			{
+				m_bUnionHotKeyDown = true;
+			}
+
 			//2016-03-03-nova	채팅창 입력과 독립적 체크를 위해서
 			if( wParam		== mHotKey->m_MKey[DMKEY::MENU_TAMER].s_nKey &&
 				iModifier	== mHotKey->m_MKey[DMKEY::MENU_TAMER].s_nModifier)
@@ -785,6 +792,17 @@ bool cGlobalInput::KeyBoardMenu(const MSG& p_kMsg)
 	case WM_KEYUP:
 	case WM_SYSKEYUP:
 		{
+			if( wParam == DMKEYBOARD::KEY_U && m_bUnionHotKeyDown )
+			{
+				if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_UNION ) )
+					g_pGameIF->CloseDynamicIF( cBaseWindow::WT_UNION );
+				else
+					g_pGameIF->GetDynamicIF( cBaseWindow::WT_UNION );
+
+				m_bUnionHotKeyDown = false;
+				return true;
+			}
+
 			if( wParam		== mHotKey->m_MKey[DMKEY::MENU_TAMER].s_nKey &&
 				iModifier	== mHotKey->m_MKey[DMKEY::MENU_TAMER].s_nModifier &&
 				mHotKey->m_MKey[DMKEY::MENU_TAMER].s_nKeyDown )

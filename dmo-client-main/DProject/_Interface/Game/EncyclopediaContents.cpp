@@ -43,7 +43,7 @@ EncyclopediaContents::EncyclopediaContents(void)
 	mGroupStr.clear();
 	mGroupInfoMap.clear();
 
-	mUseDeck = 0;
+	mUseDeck = INT_MIN;
 	iDeckIdx = 0;
 	mbIsRecv = false;
 
@@ -239,7 +239,13 @@ void EncyclopediaContents::Recv_GroupInfoCondition(void* pData)
 	SAFE_POINTER_RET(pData);
 	GS2C_RECV_ENCYCLOPEDIA_OPTIDX* pRecv = static_cast<GS2C_RECV_ENCYCLOPEDIA_OPTIDX*>(pData);
 
-	EncyclopediaContents::sGROUP_INFO* pGroupInfo = mGroupInfoMap[ mUseDeck ];
+	MAP_GROUP_IT itGroupInfo = mGroupInfoMap.find( mUseDeck );
+	if( itGroupInfo == mGroupInfoMap.end() || itGroupInfo->second == NULL )
+		return;
+
+	EncyclopediaContents::sGROUP_INFO* pGroupInfo = itGroupInfo->second;
+	if( pRecv->nOptIdx >= ENCY_MAX_OPTION )
+		return;
 
 	switch( pGroupInfo->s_nCondition[pRecv->nOptIdx] )
 	{
@@ -415,18 +421,11 @@ void EncyclopediaContents::Get_GroupInfoNullCheck(void* pData)
 	SAFE_POINTER_RET(pData);
 	bool* pGetData = static_cast<bool*>(pData);
 
-	EncyclopediaContents::sGROUP_INFO* pGroupInfo = mGroupInfoMap[ mUseDeck ];
-
-	if( pGroupInfo == NULL )
+	MAP_GROUP_IT itGroupInfo = mGroupInfoMap.find( mUseDeck );
+	if( mUseDeck == INT_MIN || itGroupInfo == mGroupInfoMap.end() || itGroupInfo->second == NULL )
 	{
-		ST_CHAT_PROTOCOL	CProtocol;
-		CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
-		//CProtocol.m_wStr = GetVAString(_T("GroupInfo is NULL - UsingDeck:%d"), mUseDeck);
-		DmCS::StringFn::Format(CProtocol.m_wStr, _T("GroupInfo is NULL - UsingDeck:%d"), mUseDeck);
-
-		GAME_EVENT_STPTR->OnEvent( EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol );
-
 		*pGetData = true;
+		return;
 	}
 	*pGetData = false;
 }
@@ -798,21 +797,32 @@ void EncyclopediaContents::SetGroupInfoMap()
 
 void EncyclopediaContents::SetUseDeck( int nDeckIdx, bool bUse )
 {
-	if( nDeckIdx != 0 )
-		mGroupInfoMap[nDeckIdx]->s_bUse = bUse;
-	else	// nDeckIdx == 0 ( 선택 해제 )
+	MAP_GROUP_IT it = mGroupInfoMap.begin();
+	MAP_GROUP_IT itEnd = mGroupInfoMap.end();
+	for( ; it != itEnd ; ++it )
 	{
-		MAP_GROUP_IT it = mGroupInfoMap.begin();
-		MAP_GROUP_IT itEnd = mGroupInfoMap.end();
-
-		for( ; it != itEnd ; ++it )
+		if( it->second )
 			it->second->s_bUse = false;
+	}
+
+	if( nDeckIdx != 0 )
+	{
+		MAP_GROUP_IT itDeck = mGroupInfoMap.find( nDeckIdx );
+		if( itDeck == mGroupInfoMap.end() || itDeck->second == NULL )
+		{
+			mUseDeck = INT_MIN;
+			return;
+		}
+
+		itDeck->second->s_bUse = bUse;
 	}
 
 	if( bUse )
 		mUseDeck = nDeckIdx;
 	else
 		mUseDeck = INT_MIN;
+
+	GAME_EVENT_ST.OnEvent( EVENT_CODE::UPDATE_STAT_DIGIMONSTATUS, NULL );
 
 	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_ENCYCLOPEDIA ) )
 	{

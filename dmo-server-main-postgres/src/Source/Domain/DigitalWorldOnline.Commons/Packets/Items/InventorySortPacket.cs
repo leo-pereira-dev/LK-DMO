@@ -17,7 +17,7 @@ namespace DigitalWorldOnline.Commons.Packets.Items
         {
             Type(PacketNumber);
             WriteByte((byte)inventoryType);
-            WriteInt(1);
+            WriteInt(0);
             WriteShort(inventory.Size);
             WriteBytes(inventory.ToArray());
         }

@@ -86,6 +86,11 @@ private:
 	cRadioButton*	m_pFilterTab;
 	cScrollBar*		m_pScrollBar;
 	cSprite*		m_pNewMark;
+	cEditBox*		m_pSearchEdit;
+	cButton*		m_pSearchResetButton;
+	cButton*		m_pHelpButton;
+	cText*			m_pSlotCountText;
+	eTabType		m_eCurrentTab;
 	bool			m_bIsFiltering;
 
 private:
@@ -93,10 +98,16 @@ private:
 	void			_AddFilterTab( eTabType eTab, CsPoint pos, CsPoint size, std::wstring wsText );
 	std::wstring	_GetFilterName( eTabType eTab );
 	void			_SetNewMark( int nIndex, bool bIsNew );
+	void			_CreateSearchBox();
+	void			_UpdateFilter();
+	void			_UpdateScrollRange();
+	void			_UpdateInventoryCountText();
+	void			_UpdateHelpTooltip();
+	int				_GetUsedSlotCount() const;
 
 	// button event
 	void		OnClickFilterTab( void* pSender, void* pData );
+	void		OnSearchTextChanged( void* pSender, void* pData );
+	void		OnSearchResetClick( void* pSender, void* pData );
 #endif
 };
-
-

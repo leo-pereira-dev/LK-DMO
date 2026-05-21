@@ -763,6 +763,11 @@ namespace DigitalWorldOnline.Commons.Enums.PacketProcessor
         EncyclopediaLoad = 3234,
 
         /// <summary>
+        /// Enable or disable Digimon encyclopedia deck effects.
+        /// </summary>
+        EncyclopediaDeckUse = 3236,
+
+        /// <summary>
         /// Return an item.
         /// </summary>
         ItemReturn = 3923,

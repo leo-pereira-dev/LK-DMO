@@ -573,6 +573,7 @@
     <ClCompile Include="ExtraEvolutionTable.cpp" />
     <ClCompile Include="EffectMng.cpp" />
     <ClCompile Include="TimeChargeMng.cpp" />
+    <ClCompile Include="UnionTableMng.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileTableMng.h" />
@@ -730,6 +731,7 @@
     <ClInclude Include="EffectMng.h" />
     <ClInclude Include="TimeCharge.h" />
     <ClInclude Include="TimeChargeMng.h" />
+    <ClInclude Include="UnionTableMng.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="QuestCompRequire.inl" />

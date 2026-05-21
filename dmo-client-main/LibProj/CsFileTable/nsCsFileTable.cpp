@@ -119,6 +119,9 @@ extern CsEffectMng*				nsCsFileTable::g_pEffectTBMng = NULL;
 extern bool						nsCsFileTable::g_bTimeChargeMng = true;
 extern CsTimeChargeMng*			nsCsFileTable::g_pTimeChargeMng = NULL;
 
+extern bool						nsCsFileTable::g_bUnionTableMng = true;
+extern CsUnionTableMng*			nsCsFileTable::g_pUnionTableMng = NULL;
+
 // 경로
 char							nsCsFileTable::_g_cExcelPath[ MAX_PATH ] = {0, };
 
@@ -160,6 +163,7 @@ void nsCsFileTable::AllFalse()
 	g_bExtraEvolutionTBMng = false;
 	g_bEffectTBMng = false;
 	g_bTimeChargeMng = false;
+	g_bUnionTableMng = false;
 }
 
 #define __PATH_DM( kor, eng_A, eng, thai, taiwan, hongkong )	{\

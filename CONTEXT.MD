@@ -1,6 +1,6 @@
 # LK-DMO Technical Context
 
-Last updated: 2026-05-20
+Last updated: 2026-05-21
 
 This document is the working memory for the LK-DMO workspace in `C:\0-NewDmo`.
 It summarizes the main fixes, migration work, build notes, and packet/protocol
@@ -839,6 +839,81 @@ Decompiler/reference notes:
   input, and is intentionally ignored by Git.
 - `quickmenu_png_functions/README.md` documents the copied functions and the
   asset name references found in the original executable.
+
+## Recent client UI work - D-Unit / Union window
+
+Completed on 2026-05-21:
+
+- Added a new D-Unit/Union window registered as `WT_UNION`.
+  - Window entry point is `cUnionDUnit`.
+  - Main files:
+    - `dmo-client-main/DProject/_Interface/Game/UnionDUnit.cpp`
+    - `dmo-client-main/DProject/_Interface/Game/UnionDUnit.h`
+  - The window is included through `_GameIF.h`, created from
+    `_BaseWindow.cpp`, and added to `DProject.vcxproj`.
+- Added `CsUnionTableMng` for reading Union/D-Unit bin data from the client
+  packs.
+  - Main files:
+    - `dmo-client-main/LibProj/CsFileTable/UnionTableMng.cpp`
+    - `dmo-client-main/LibProj/CsFileTable/UnionTableMng.h`
+  - The manager is wired through `FileTableMng.cpp`, `nsCsFileTable.*`,
+    `stdafx.h`, and the `CsFileTable` project files.
+  - It loads the Union table bins from `Data\Bin\Table` and string bins from
+    the active language path.
+  - It detects zlib-compressed payloads, extracts the internal payload/key area,
+    and exposes parsed groups, effects, rewards, filters, and localized names.
+- The D-Unit screen uses the same large encyclopedia-style window sizing:
+  `886x768`, centered on screen, built for `Release_English|Win32`.
+- Visual assets currently referenced by the D-Unit screen include:
+  - `Union\side_bg_a.png`
+  - `Union\center_bg.png`
+  - `Union\side_bg.png`
+  - `Union\side_bg_b.png`
+  - `Union\list_bg.png`
+  - `Union\collection_bg_new.tga`
+  - `Union\collection_frame_rank1_new.png`
+  - `Union\collection_frame_rank2_new.png`
+  - `Union\collection_frame_rank3_new.png`
+  - `Union\digimon_hold_gauge.png`
+  - `Union\treasure_box_icon.png`
+  - `DungeonUI\dungeon_result_simple_ui.png`
+  - encyclopedia search/list/close/bookmark button assets reused for matching
+    UI style.
+- The right-side digivice panel was aligned and scaled using the available
+  extracted assets.
+  - `DungeonUI\dungeon_result_simple_ui.png` provides the blue digivice body.
+  - `Union\digimon_hold_gauge.png` provides the inner gauge ring.
+  - `Union\treasure_box_icon.png` uses a `56x61` frame crop; earlier `40x44`
+    cropping cut the icon.
+- Card Digimon portraits are rendered behind the card frame.
+  - The portrait is cropped into a circle by drawing horizontal sprite slices
+    whose width follows the circle radius.
+  - This avoids the original square icon bleeding outside the card's circular
+    portrait ring.
+  - Final portrait center was tuned downward to sit inside the ring.
+- The D-Unit title is rendered slightly above the card area and uses a two-pass
+  text draw with a 1px horizontal offset, because the built-in bold level made
+  this font look thinner instead of heavier.
+- Verified build command:
+
+  ```powershell
+  & "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" `
+    "C:\0-NewDmo\dmo-client-main\DProject.sln" `
+    /p:Configuration=Release_English /p:Platform=Win32 /m:1 /nologo /verbosity:minimal
+  ```
+
+  Expected output:
+
+  ```text
+  C:\Release\GSP\DProject_R_ENG.exe
+  ```
+
+Notes for future cleanup:
+
+- Some visible D-Unit values are still fallback/mock display values while the
+  parse/layout work is stabilized.
+- The local root `union/` folder is an extracted/decompiled analysis folder and
+  is ignored by Git. Keep source changes in the client tree instead.
 
 ## Known risky areas
 

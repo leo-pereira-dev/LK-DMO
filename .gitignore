@@ -1,6 +1,7 @@
 # Root workspace outputs
 /build-temp/
 /ClientDist/
+/clientdist/
 
 # Local build/package outputs outside the nested project ignores
 /Release/
@@ -33,6 +34,17 @@
 *.tlog
 *.lastbuildstate
 *.exe
+_tmp_*.png
+
+# Local client packs / extracted data used only as analysis input
+/union/
+/unpacke_full/
+/unpacked_full/
+/unpack_full/
+pack*.hf
+pack*.pf
+dm_union-*.bin
+DM_Union*.bin
 
 # Docker/local database volumes or dumps generated during experiments
 docker-data/

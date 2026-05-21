@@ -89,6 +89,7 @@ public:
 private:
 	HotKey*				mHotKey;		//2016-01-25-nova	키설정
 	uint				iModifier;		//2016-01-25-nova	Ctrl,Alt,Shift키 상태
+	bool				m_bUnionHotKeyDown;
 	CsPoint				m_ClickPos;		//2016-02-03-nova	오른쪽 마우스 버튼 클릭 회전시 클릭위치 저장	
 	MSG					m_Msg;			//2016-02-16-nova	윈도우MSG 저장
 	

@@ -48,6 +48,7 @@ class CsDigimonParcelMng;
 class CsExtraEvolutionMng;
 class CsEffectMng;
 class CsTimeChargeMng;
+class CsUnionTableMng;
 
 namespace nsCsFileTable
 {
@@ -169,6 +170,9 @@ namespace nsCsFileTable
 
 	extern bool						g_bTimeChargeMng;
 	extern CsTimeChargeMng*			g_pTimeChargeMng;
+
+	extern bool						g_bUnionTableMng;
+	extern CsUnionTableMng*			g_pUnionTableMng;
 
 	// 경로
 	char*		GetPath_DM_CUID();

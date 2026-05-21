@@ -67,3 +67,4 @@
 #include "EffectMng.h"
 #include "TimeCharge.h"
 #include "TimeChargeMng.h"
+#include "UnionTableMng.h"

@@ -100,9 +100,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 }
             }
 
-            //TODO: desbloquear corretamente na criação
-            var starterPartners = new List<int>() { 31001, 31002, 31003, 31004 };
-            if (!client.Partner.BaseType.IsBetween(starterPartners.ToArray()))
+            if (evoLine[evoStage].Type != client.Partner.BaseType)
             {
                 var targetEvo = client.Partner.Evolutions.FirstOrDefault(x => x.Type == evoLine[evoStage].Type);
 

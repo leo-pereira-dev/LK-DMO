@@ -54,12 +54,28 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var dropHandler = packet.ReadInt();
 
             var targetDrop = _mapServer.GetDrop(client.Tamer.Location.MapId, dropHandler);
+            Drop? targetdungeonDrop = null;
+            if (targetDrop == null)
+                targetdungeonDrop = _dungeonServer.GetDrop(client.Tamer.Location.MapId, dropHandler, client.TamerId);
+
+            _logger.Information(
+                "[LOOT-TRACE] request tamer={TamerId} map={MapId} handler={DropHandler} mapFound={MapFound} dungeonFound={DungeonFound}",
+                client.TamerId,
+                client.Tamer.Location.MapId,
+                dropHandler,
+                targetDrop != null,
+                targetdungeonDrop != null);
 
             if (targetDrop == null)
             {
-                var targetdungeonDrop = _dungeonServer.GetDrop(client.Tamer.Location.MapId, dropHandler, client.TamerId);
                 if (targetdungeonDrop == null)
                 {
+                    _logger.Warning(
+                        "[LOOT-TRACE] missing drop tamer={TamerId} map={MapId} handler={DropHandler}",
+                        client.TamerId,
+                        client.Tamer.Location.MapId,
+                        dropHandler);
+
                     client.Send(
                         UtilitiesFunctions.GroupPackets(
                             new SystemMessagePacket($"Drop has no data.").Serialize(),
@@ -185,10 +201,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                             if (dungeonOrderType != PartyLootShareTypeEnum.Order)
                             {
 
-                                if (client.Tamer.Inventory.AddItem(aquireClone))
+                                if (client.Tamer.Inventory.AddItem(aquireClone, out var changedItems))
                                 {
 
-                                    await UpdateItemsTask(client);
+                                    await UpdateItemsTask(client, changedItems);
 
                                     _logger.Verbose($"Character {client.TamerId} looted item {dropDungeonClone.ItemId} x{dropDungeonClone.Amount}.");
 
@@ -203,6 +219,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                                     );
 
                                     _dungeonServer.RemoveDrop(targetdungeonDrop, client.TamerId);
+                                    SendLootInventoryRefresh(client);
 
                                     if (dungeonParty != null)
                                     {
@@ -231,10 +248,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                                 if (sortedClient != null)
                                 {
-                                    if (sortedClient.Tamer.Inventory.AddItem(aquireClone))
+                                    if (sortedClient.Tamer.Inventory.AddItem(aquireClone, out var changedItems))
                                     {
 
-                                        await UpdateItemsTask(sortedClient);
+                                        await UpdateItemsTask(sortedClient, changedItems);
 
                                         _logger.Verbose($"Character {client.TamerId} looted item {dropDungeonClone.ItemId} x{dropDungeonClone.Amount}.");
 
@@ -244,11 +261,12 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                                                 new PickItemPacket(
                                                     client.Tamer.AppearenceHandler,
                                                     aquireClone).Serialize(),
-                                                new UnloadDropsPacket(targetDrop).Serialize()
+                                                new UnloadDropsPacket(targetdungeonDrop).Serialize()
                                             )
                                         );
 
-                                        _dungeonServer.RemoveDrop(targetDrop, client.TamerId);
+                                        _dungeonServer.RemoveDrop(targetdungeonDrop, client.TamerId);
+                                        SendLootInventoryRefresh(sortedClient);
 
                                         if (dungeonParty != null)
                                         {
@@ -261,7 +279,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                                     else
                                     {
                                         _logger.Verbose($"Character {client.TamerId} has not enough free space to loot drop handler {dropHandler} " +
-                                            $"with item {targetDrop.DropInfo.ItemId} x{targetDrop.DropInfo.Amount}.");
+                                            $"with item {targetdungeonDrop.DropInfo.ItemId} x{targetdungeonDrop.DropInfo.Amount}.");
 
                                         client.Send(new PickItemFailPacket(PickItemFailReasonEnum.InventoryFull));
                                     }
@@ -272,7 +290,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     }
                     else
                     {
-                        _logger.Verbose($"Character {client.TamerId} has no right to loot drop handler {dropHandler} with item {targetDrop.DropInfo.ItemId} x{targetDrop.DropInfo.Amount}.");
+                        _logger.Verbose($"Character {client.TamerId} has no right to loot drop handler {dropHandler} with item {targetdungeonDrop.DropInfo.ItemId} x{targetdungeonDrop.DropInfo.Amount}.");
                         client.Send(new PickItemFailPacket(PickItemFailReasonEnum.NotTheOwner));
                     }
                 }
@@ -393,10 +411,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         if (OrderType != PartyLootShareTypeEnum.Order)
                         {
 
-                            if (client.Tamer.Inventory.AddItem(aquireClone))
+                            if (client.Tamer.Inventory.AddItem(aquireClone, out var changedItems))
                             {
 
-                                await UpdateItemsTask(client);
+                                await UpdateItemsTask(client, changedItems);
 
                                 _logger.Verbose($"Character {client.TamerId} looted item {dropClone.ItemId} x{dropClone.Amount}.");
 
@@ -411,6 +429,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                                 );
 
                                 _mapServer.RemoveDrop(targetDrop);
+                                SendLootInventoryRefresh(client);
 
                                 if (party != null)
                                 {
@@ -439,10 +458,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                             if (sortedClient != null)
                             {
-                                if (sortedClient.Tamer.Inventory.AddItem(aquireClone))
+                                if (sortedClient.Tamer.Inventory.AddItem(aquireClone, out var changedItems))
                                 {
 
-                                    await UpdateItemsTask(sortedClient);
+                                    await UpdateItemsTask(sortedClient, changedItems);
 
                                     _logger.Verbose($"Character {client.TamerId} looted item {dropClone.ItemId} x{dropClone.Amount}.");
 
@@ -457,6 +476,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                                     );
 
                                     _mapServer.RemoveDrop(targetDrop);
+                                    SendLootInventoryRefresh(sortedClient);
 
                                     if (party != null)
                                     {
@@ -486,21 +506,30 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
         }
 
-        public async Task UpdateItemsTask(GameClient client)
+        public async Task UpdateItemsTask(GameClient client, IReadOnlyCollection<ItemModel>? changedItems = null)
         {
-            await Task.Run(async () =>
-            {
-                // Coloque seu código aqui para enviar o comando
-                await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
-            });
+            var itemsToPersist = changedItems?.Where(x => x != null).ToList();
+            if (itemsToPersist == null || !itemsToPersist.Any())
+                itemsToPersist = client.Tamer.Inventory.Items;
+
+            _logger.Information(
+                "[LOOT-PERSIST] tamer={TamerId} listId={ItemListId} itemCount={ItemCount} slots={Slots}",
+                client.TamerId,
+                client.Tamer.Inventory.Id,
+                itemsToPersist.Count,
+                string.Join(",", itemsToPersist.Select(x => x.Slot)));
+
+            await _sender.Send(new UpdateItemsCommand(itemsToPersist));
         }
+
+        private static void SendLootInventoryRefresh(GameClient client)
+        {
+            client.Send(new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory));
+        }
+
         public async Task UpdateItemListBits(GameClient client)
         {
-            await Task.Run(async () =>
-            {
-                // Coloque seu código aqui para enviar o comando
-                await _sender.Send(new UpdateItemListBitsCommand(client.Tamer.Inventory));
-            });
+            await _sender.Send(new UpdateItemListBitsCommand(client.Tamer.Inventory));
         }
 
 

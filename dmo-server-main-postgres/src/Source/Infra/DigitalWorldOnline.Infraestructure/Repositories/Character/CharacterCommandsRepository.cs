@@ -1117,8 +1117,14 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
                     }
                 }
 
+                var referencedInstanceIds = slotsByPosition.Values
+                    .Where(x => x.ItemInstanceId.HasValue)
+                    .Select(x => x.ItemInstanceId!.Value)
+                    .Distinct()
+                    .ToList();
+
                 var orphanedInstanceIds = existingInstanceIds
-                    .Except(payloadInstanceIds)
+                    .Except(referencedInstanceIds)
                     .ToList();
 
                 if (orphanedInstanceIds.Count > 0)

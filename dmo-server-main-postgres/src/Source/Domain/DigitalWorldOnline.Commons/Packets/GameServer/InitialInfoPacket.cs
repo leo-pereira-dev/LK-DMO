@@ -62,8 +62,8 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteShort((short)character.BuffList.ActiveBuffs.Count);
             foreach (var buff in character.BuffList.ActiveBuffs)
             {
-                WriteShort((short)buff.BuffId);
-                WriteShort((short)buff.TypeN);
+                WriteInt(buff.BuffId);
+                WriteInt(buff.TypeN);
                 // See partner-buff loop below for the rationale: v487 _TIME_TS=0 forever,
                 // so client interprets this field as raw-seconds-remaining, NOT a Unix
                 // timestamp.  Always-on (Duration==0) buffs need UINT_MAX sentinel.
@@ -132,8 +132,11 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteShort((short)character.Partner.BuffList.ActiveBuffs.Count);
             foreach (var buff in character.Partner.BuffList.ActiveBuffs)
             {
-                WriteShort((short)buff.BuffId);
-                WriteShort((short)buff.TypeN);
+                WriteInt(buff.BuffId);
+                // COMPAT_487 RecvInitGameData does not read BuffClassLevel for the
+                // partner buff block. Sending it here shifts EndTS/SkillCode and corrupts
+                // every field after the first active Digimon buff.
+                //
                 // v487 nlib's cClient::m_timets is initialized to 0 and never set, so the
                 // client computes "remaining = nEndTS - _TIME_TS = nEndTS - 0".  Sending a
                 // Unix-epoch absolute timestamp here makes the client display 56 years.

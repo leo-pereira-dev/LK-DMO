@@ -56,7 +56,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             var targetType = packet.ReadInt();
 
-            var digiName = packet.ReadString();
+            var digiName = NormalizeHatchName(packet.ReadString(), client.Tamer.Name);
 
             var NpcId = 90005; // TODO: Ajustar leitura do packet.
 
@@ -184,7 +184,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             var digimonInfo = await _sender.Send(new CreateDigimonCommand(newDigimon));
 
-            client.Send(new HatchFinishPacket(newDigimon, (ushort)(client.Partner.GeneralHandler + 1000), client.Tamer.Digimons.FindIndex(x => x == newDigimon)));
+            client.Send(new HatchFinishPacket(newDigimon, (uint)(client.Partner.GeneralHandler + 1000), client.Tamer.Digimons.FindIndex(x => x == newDigimon)));
 
             client.Send(new HatchSpiritEvolutionPacket(targetType, (int)client.Tamer.Inventory.Bits, materialToPacket, requiredsToPacket));
             client.Send(new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory));
@@ -221,6 +221,29 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
 
             _logger.Verbose($"Character {client.TamerId} hatched spirit {newDigimon.Id}({newDigimon.BaseType}) with grade {newDigimon.HatchGrade} and size {newDigimon.Size}.");
+        }
+
+        private static string NormalizeHatchName(string? value, string fallbackName)
+        {
+            var name = string.IsNullOrEmpty(value)
+                ? string.Empty
+                : value.Replace("\0", string.Empty).Trim();
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                name = string.IsNullOrWhiteSpace(fallbackName)
+                    ? "Digimon"
+                    : fallbackName.Replace("\0", string.Empty).Trim();
+            }
+
+            if (string.IsNullOrWhiteSpace(name))
+                name = "Digimon";
+
+            const int maxDigimonNameLength = 20;
+            if (name.Length > maxDigimonNameLength)
+                name = name.Substring(0, maxDigimonNameLength);
+
+            return name;
         }
     }
 }

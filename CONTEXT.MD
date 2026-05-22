@@ -1,6 +1,6 @@
 # LK-DMO Technical Context
 
-Last updated: 2026-05-21
+Last updated: 2026-05-22
 
 This document is the working memory for the LK-DMO workspace in `C:\0-NewDmo`.
 It summarizes the main fixes, migration work, build notes, and packet/protocol
@@ -1589,6 +1589,68 @@ docker logs --tail 300 dmo-pg-game | Select-String "DUnit|Loaded Digimon_List|Lo
   - document the processor,
   - include one known-good payload shape.
 - Do not commit local compiled client executables. Rebuild them from source.
+
+## GM panel, hatch, and archive status from 2026-05-22
+
+Current PR:
+
+- Open PR: https://github.com/leo-pereira-dev/LK-DMO/pull/1
+- Branch: `Branch_dunit-union-system`
+- Base: `main`
+
+GM panel:
+
+- The client GM panel work is in progress in the `DProject/_Interface/Game`
+  UI code.
+- The panel was expanded from a single Make Item screen toward a broader
+  administration panel with tabbed actions such as Make Item, debug character,
+  level actions, AllEvo, and Bits.
+- Keep future GM panel additions aligned with existing client UI assets and
+  avoid introducing runtime-only assets into source control.
+
+Hatch system:
+
+- Hatch packet handling was adjusted server-side so successful hatches refresh
+  the client state without requiring a channel swap.
+- Client/server validation used:
+
+  ```powershell
+  dotnet build "C:\0-NewDmo\dmo-server-main-postgres\src\Source\Distribution\DigitalWorldOnline.Game.Host\DigitalWorldOnline.Game.csproj"
+  docker compose -f "C:\0-NewDmo\dmo-server-main-postgres\docker-compose.yml" up -d --build account character game
+  & "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" `
+    "C:\0-NewDmo\dmo-client-main\DProject.sln" `
+    /p:Configuration=Release_English /p:Platform=Win32 /m
+  ```
+
+Digimon Archive / Warehouse:
+
+- The local test account `test2` had an archived test Digimon removed from the
+  local PostgreSQL database on 2026-05-22:
+  - `Digimon_Digimon.Id = 3`
+  - `Name = test2`
+  - `BaseType = 31001`
+  - archive row removed from `Character_DigimonArchiveItem`
+  - dependent evolution, attribute, clone, location, and buff rows removed.
+- The archive capacity row remains; the local archive has no occupied Digimon
+  row after cleanup.
+- The Transcend/Academy training tab is temporarily disabled in
+  `DProject/_Interface/Game/DigimonArchiveViewer.cpp`.
+- The tab button is disabled, and any accidental call to
+  `OnClickShowTranscendViewer()` returns to the normal Storage view instead of
+  opening training.
+- This is intentionally temporary. Re-enable training only after the archive
+  packet/data flow is stable end-to-end.
+
+Build state after the temporary training disable:
+
+- Client build: `Release_English|Win32` passed with `0` errors.
+- The built exe was copied locally to
+  `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`.
+- Server Docker rebuild of `account`, `character`, and `game` passed and all
+  three containers were observed `Up`:
+  - `dmo-pg-account` on host port `17029`
+  - `dmo-pg-character` on host port `17050`
+  - `dmo-pg-game` on host port `17608`
 
 ## D-Unit follow-up fixes from 2026-05-21
 

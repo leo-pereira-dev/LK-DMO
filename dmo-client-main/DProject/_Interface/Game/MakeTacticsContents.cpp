@@ -12,7 +12,8 @@ int const MakeTacticsContents::IsContentsIdentity(void)
 }
 
 MakeTacticsContents::MakeTacticsContents(void):m_AdaptTutorialQuest(0),iSuccessLevel(0),iDigimonEggIdx(0),iBackupDiskIdx(0)
-,bWaitRecvServer(false),iRequireDataCnt(0)
+,iRequireDataCnt(0),iDataFlag(CsTactics::DATA_LV1),iDataFlagMax(CsTactics::DATA_MAX),iEnableGradeMax(0)
+,bWaitRecvServer(false)
 #ifdef MINIGAME
 ,iMinigame_StartBarTime(0)
 ,iMiniGame_ClickResult_NextBarIdx(0)
@@ -431,21 +432,36 @@ bool MakeTacticsContents::GetWaitRecvServer()
 void MakeTacticsContents::AddDataFlag()
 {
 	++iDataFlag;
+
+	if( iDataFlag < CsTactics::DATA_LV1 || iDataFlag >= iDataFlagMax || iDataFlag >= CsTactics::DATA_MAX )
+		iDataFlag = CsTactics::DATA_LV1;
 }
 
 void MakeTacticsContents::SetDataFlag(int flag)
 {
+	if( flag < CsTactics::DATA_LV1 || flag >= CsTactics::DATA_MAX )
+		flag = CsTactics::DATA_LV1;
+
 	iDataFlag = flag;
 }
 
 int MakeTacticsContents::GetDataFlag()
 {
+	if( iDataFlag < CsTactics::DATA_LV1 || iDataFlag >= CsTactics::DATA_MAX )
+		iDataFlag = CsTactics::DATA_LV1;
+
 	return iDataFlag;
 }
 
 void MakeTacticsContents::SetDataFlagMax(int max)
 {
+	if( max <= CsTactics::DATA_LV1 || max > CsTactics::DATA_MAX )
+		max = CsTactics::DATA_MAX;
+
 	iDataFlagMax = max;
+
+	if( iDataFlag >= iDataFlagMax )
+		iDataFlag = CsTactics::DATA_LV1;
 }
 
 int MakeTacticsContents::GetDataFlagMax()
@@ -856,4 +872,3 @@ void MakeTacticsContents::ShowMinigameResultMsg(const int& ResultCnt)
 
 
 #endif
-

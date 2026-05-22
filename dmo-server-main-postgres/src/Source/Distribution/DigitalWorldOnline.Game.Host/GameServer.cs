@@ -403,6 +403,18 @@ namespace DigitalWorldOnline.Game
             }
             catch (Exception ex)
             {
+                if (IsIgnorableTransitionPacket(gameClientEvent.Client, data, ex))
+                {
+                    _logger.Warning(
+                        "Ignoring malformed transition packet from tamer {TamerId}: opcode={Opcode} len={Length} state={State} loading={Loading}.",
+                        gameClientEvent.Client.TamerId,
+                        data.Length >= 4 ? BitConverter.ToUInt16(data, 2) : 0,
+                        data.Length >= 2 ? BitConverter.ToUInt16(data, 0) : data.Length,
+                        gameClientEvent.Client.Tamer?.State,
+                        gameClientEvent.Client.Loading);
+                    return;
+                }
+
                 gameClientEvent.Client.SetGameQuit(true);
                 PacketRingTrace.DumpAndForget(gameClientEvent.Client, $"processor-exception-{ex.GetType().Name}");
                 gameClientEvent.Client.Disconnect();
@@ -420,6 +432,23 @@ namespace DigitalWorldOnline.Game
 
                 //TODO: Salvar no banco com os parametros
             }
+        }
+
+        private static bool IsIgnorableTransitionPacket(GameClient client, byte[] data, Exception exception)
+        {
+            if (!exception.Message.Contains("Invalid packet checksum", StringComparison.OrdinalIgnoreCase))
+                return false;
+
+            if (client.Tamer?.State != CharacterStateEnum.Loading && !client.Loading)
+                return false;
+
+            if (data.Length < 4)
+                return false;
+
+            var packetLength = BitConverter.ToUInt16(data, 0);
+            var packetType = BitConverter.ToUInt16(data, 2);
+
+            return packetType == 1016 && packetLength <= 6;
         }
 
         /// <summary>

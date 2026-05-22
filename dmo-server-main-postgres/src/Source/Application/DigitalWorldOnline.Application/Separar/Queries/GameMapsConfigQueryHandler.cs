@@ -1,4 +1,4 @@
-﻿using DigitalWorldOnline.Application.GameAssets.Bins;
+using DigitalWorldOnline.Application.GameAssets.Bins;
 using DigitalWorldOnline.Commons.DTOs.Config;
 using DigitalWorldOnline.Commons.Enums;
 using DigitalWorldOnline.Commons.Enums.ClientEnums;
@@ -62,25 +62,25 @@ namespace DigitalWorldOnline.Application.Separar.Queries
                         continue;
 
                     long mobId = id++;
-                        var digimon = _digimonListBin.Data.FindByType(spawn.MonsterTableId);
-                        var attribute = digimon != null && Enum.IsDefined(typeof(DigimonAttributeEnum), digimon.Attribute)
-                            ? (DigimonAttributeEnum)digimon.Attribute
-                            : DigimonAttributeEnum.None;
-                        var element = digimon != null && Enum.IsDefined(typeof(DigimonElementEnum), digimon.Element)
-                            ? (DigimonElementEnum)digimon.Element
-                            : DigimonElementEnum.Neutral;
-                        var family1 = digimon != null && Enum.IsDefined(typeof(DigimonFamilyEnum), digimon.Family1)
-                            ? (DigimonFamilyEnum)digimon.Family1
-                            : DigimonFamilyEnum.None;
-                        var family2 = digimon != null && Enum.IsDefined(typeof(DigimonFamilyEnum), digimon.Family2)
-                            ? (DigimonFamilyEnum)digimon.Family2
-                            : DigimonFamilyEnum.None;
-                        var family3 = digimon != null && Enum.IsDefined(typeof(DigimonFamilyEnum), digimon.Family3)
-                            ? (DigimonFamilyEnum)digimon.Family3
-                            : DigimonFamilyEnum.None;
+                    var digimon = _digimonListBin.Data.FindByType(spawn.MonsterTableId);
+                    var attribute = digimon != null && Enum.IsDefined(typeof(DigimonAttributeEnum), digimon.Attribute)
+                        ? (DigimonAttributeEnum)digimon.Attribute
+                        : DigimonAttributeEnum.None;
+                    var element = digimon != null && Enum.IsDefined(typeof(DigimonElementEnum), digimon.Element)
+                        ? (DigimonElementEnum)digimon.Element
+                        : DigimonElementEnum.Neutral;
+                    var family1 = digimon != null && Enum.IsDefined(typeof(DigimonFamilyEnum), digimon.Family1)
+                        ? (DigimonFamilyEnum)digimon.Family1
+                        : DigimonFamilyEnum.None;
+                    var family2 = digimon != null && Enum.IsDefined(typeof(DigimonFamilyEnum), digimon.Family2)
+                        ? (DigimonFamilyEnum)digimon.Family2
+                        : DigimonFamilyEnum.None;
+                    var family3 = digimon != null && Enum.IsDefined(typeof(DigimonFamilyEnum), digimon.Family3)
+                        ? (DigimonFamilyEnum)digimon.Family3
+                        : DigimonFamilyEnum.None;
 
-                        result.Add(new MobConfigDTO
-                        {
+                    result.Add(new MobConfigDTO
+                    {
                         Id = mobId,
                         Type = spawn.MonsterTableId,
                         Model = mon.ModelId,

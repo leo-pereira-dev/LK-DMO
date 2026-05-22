@@ -244,7 +244,7 @@ void CDigimonArchiveViewer::Create( int nValue)
 			ti.SetText( UISTRING_TEXT( "Digimon_Storage_Menu3" ).c_str() );
 			ti.s_eTextAlign = DT_CENTER;
 			pAddBtn->SetCheckBoxText( &ti );
-			pAddBtn->SetEnable(true);
+			pAddBtn->SetEnable(false);
 			pAddBtn->SetUserData( new sTabType( eTranscend ) );
 		}
 #endif
@@ -947,7 +947,7 @@ void CDigimonArchiveViewer::OnClickShowIncuViewer(void)
 
 void CDigimonArchiveViewer::OnClickShowTranscendViewer(void)
 {
-	GetSystem()->Req_ShowTranscendViewer();
+	OnClickShowInfoViewer();
 }
 
 void	CDigimonArchiveViewer::OnClickChangeFilterMode(void* pSender, void* pData)
@@ -1154,4 +1154,3 @@ void CDigimonArchiveViewer::OnRClick_Inventory_Item(void* pkInvenSlotIdx)
 }
 
 // #pragma warning( default : 4311 )
-

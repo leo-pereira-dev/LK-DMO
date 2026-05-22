@@ -148,7 +148,10 @@ namespace DigitalWorldOnline.Commons.Entities
 
                 if (bytesRecv >= 6 && bytesRecv <= short.MaxValue)
                 {
-                    OnDataReceived(new GameClientDataEvent(client, client.ReceiveBuffer));
+                    var received = new byte[bytesRecv];
+                    Buffer.BlockCopy(client.ReceiveBuffer, 0, received, 0, bytesRecv);
+
+                    OnDataReceived(new GameClientDataEvent(client, received));
 
                     if (client.IsConnected)
                         client.BeginReceive(ReceiveCallback, client);

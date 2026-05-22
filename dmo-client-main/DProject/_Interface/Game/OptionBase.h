@@ -131,7 +131,7 @@ public:
 
 	struct sOP_CHECK_BOX : public sOP_BASE
 	{
-		sOP_CHECK_BOX( cOptionBase* pParent ):sOP_BASE( pParent ){ for( int i = 0; i < IF_OP_CHECKBOX_MAX_COUNT ; i++ ) { s_pCheck[i] = NULL; s_pCheckText[i]; } }
+		sOP_CHECK_BOX( cOptionBase* pParent ):sOP_BASE( pParent ){ for( int i = 0; i < IF_OP_CHECKBOX_MAX_COUNT ; i++ ) { s_pCheck[i] = NULL; s_pCheckText[i] = NULL; } }
 		virtual eTYPE	GetType(){ return CHECK_BOX; }
 
 		virtual void	Delete();
@@ -195,4 +195,3 @@ protected:
 	cScrollBar*		m_pScrollBar;
 	cText*			m_pWinName;
 };
-

@@ -49,8 +49,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         {
             var packet = new GamePacketReader(packetData);
 
-            packet.Skip(5);
-            var digiName = packet.ReadString();
+            packet.Skip(4); // Portable incubator inventory slot.
+            var digiName = NormalizeHatchName(packet.ReadString(), client.Tamer.Name);
 
             var hatchInfo = _assets.Hatchs.FirstOrDefault(x => x.ItemId == client.Tamer.Incubator.EggId);
             if (hatchInfo == null)
@@ -60,13 +60,28 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return;
             }
 
-            byte i = 0;
-            while (i < client.Tamer.DigimonSlots)
+            if (client.Tamer.Incubator.HatchLevel < 3)
             {
-                if (client.Tamer.Digimons.FirstOrDefault(x => x.Slot == i) == null)
-                    break;
+                _logger.Warning($"Character {client.TamerId} tried to finish hatch with egg {client.Tamer.Incubator.EggId} at level {client.Tamer.Incubator.HatchLevel}.");
+                client.Send(new SystemMessagePacket("DigiEgg must be at least level 3 to hatch."));
+                return;
+            }
 
-                i++;
+            byte targetSlot = 0;
+            for (byte slot = 1; slot < client.Tamer.DigimonSlots; slot++)
+            {
+                if (client.Tamer.Digimons.All(x => x.Slot != slot))
+                {
+                    targetSlot = slot;
+                    break;
+                }
+            }
+
+            if (targetSlot == 0)
+            {
+                _logger.Warning($"Character {client.TamerId} tried to hatch {client.Tamer.Incubator.EggId} without an available digivice slot.");
+                client.Send(new SystemMessagePacket("No available digivice slot for the hatched Digimon."));
+                return;
             }
 
             var newDigimon = DigimonModel.Create(
@@ -75,7 +90,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 hatchInfo.HatchType,
                 (DigimonHatchGradeEnum)client.Tamer.Incubator.HatchLevel,
                 client.Tamer.Incubator.GetLevelSize(),
-                i
+                targetSlot
             );
 
             newDigimon.NewLocation(
@@ -111,9 +126,48 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             newDigimon.SetTamer(client.Tamer);
 
+            var digimonInfo = await _sender.Send(new CreateDigimonCommand(newDigimon));
+            if (digimonInfo == null)
+            {
+                _logger.Warning($"Could not persist hatched digimon {newDigimon.BaseType} for character {client.TamerId}.");
+                client.Send(new SystemMessagePacket($"Could not hatch digimon {newDigimon.BaseType}."));
+                return;
+            }
+
+            newDigimon.SetId(digimonInfo.Id);
+            var evolutionSlot = -1;
+
+            foreach (var digimon in newDigimon.Evolutions)
+            {
+                evolutionSlot++;
+
+                var evolution = digimonInfo.Evolutions[evolutionSlot];
+
+                if (evolution != null)
+                {
+                    digimon.SetId(evolution.Id);
+
+                    var skillSlot = -1;
+
+                    foreach (var skill in digimon.Skills)
+                    {
+                        skillSlot++;
+
+                        var dtoSkill = evolution.Skills[skillSlot];
+
+                        skill.SetId(dtoSkill.Id);
+                    }
+                }
+            }
+
+            client.Tamer.Incubator.RemoveEgg();
+            client.Tamer.Incubator.RemoveBackupDisk();
+
+            await _sender.Send(new UpdateIncubatorCommand(client.Tamer.Incubator));
+
             client.Tamer.AddDigimon(newDigimon);
 
-            client.Send(new HatchFinishPacket(newDigimon, (ushort)(client.Partner.GeneralHandler + 1000), client.Tamer.Digimons.FindIndex(x => x == newDigimon)));
+            client.Send(new HatchFinishPacket(newDigimon, (uint)(client.Partner.GeneralHandler + 1000), newDigimon.Slot));
 
             if (client.Tamer.Incubator.PerfectSize(newDigimon.HatchGrade, newDigimon.Size))
             {
@@ -121,42 +175,30 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 _dungeonServer.BroadcastGlobal(new NeonMessagePacket(NeonMessageTypeEnum.Scale, client.Tamer.Name, newDigimon.BaseType, newDigimon.Size).Serialize());
             }
 
-            var digimonInfo = await _sender.Send(new CreateDigimonCommand(newDigimon));
+            _logger.Verbose($"Character {client.TamerId} hatched {newDigimon.Id}({newDigimon.BaseType}) with grade {newDigimon.HatchGrade} and size {newDigimon.Size}.");
+        }
 
-            if (digimonInfo != null)
+        private static string NormalizeHatchName(string? value, string fallbackName)
+        {
+            var name = string.IsNullOrEmpty(value)
+                ? string.Empty
+                : value.Replace("\0", string.Empty).Trim();
+
+            if (string.IsNullOrWhiteSpace(name))
             {
-                newDigimon.SetId(digimonInfo.Id);
-                var slot = -1;
-
-                foreach (var digimon in newDigimon.Evolutions)
-                {
-                    slot++;
-
-                    var evolution = digimonInfo.Evolutions[slot];
-
-                    if (evolution != null)
-                    {
-                        digimon.SetId(evolution.Id);
-
-                        var skillSlot = -1;
-
-                        foreach (var skill in digimon.Skills)
-                        {
-                            skillSlot++;
-
-                            var dtoSkill = evolution.Skills[skillSlot];
-
-                            skill.SetId(dtoSkill.Id);
-                        }
-                    }
-                }
+                name = string.IsNullOrWhiteSpace(fallbackName)
+                    ? "Digimon"
+                    : fallbackName.Replace("\0", string.Empty).Trim();
             }
 
-            _logger.Verbose($"Character {client.TamerId} hatched {newDigimon.Id}({newDigimon.BaseType}) with grade {newDigimon.HatchGrade} and size {newDigimon.Size}.");
+            if (string.IsNullOrWhiteSpace(name))
+                name = "Digimon";
 
-            client.Tamer.Incubator.RemoveEgg();
+            const int maxDigimonNameLength = 20;
+            if (name.Length > maxDigimonNameLength)
+                name = name.Substring(0, maxDigimonNameLength);
 
-            await _sender.Send(new UpdateIncubatorCommand(client.Tamer.Incubator));
+            return name;
         }
     }
 }

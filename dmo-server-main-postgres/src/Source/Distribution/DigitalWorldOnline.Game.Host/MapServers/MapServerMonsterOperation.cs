@@ -1,4 +1,5 @@
 ﻿using DigitalWorldOnline.Application.Separar.Commands.Update;
+using DigitalWorldOnline.Application.Separar.Queries;
 using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums;
 using DigitalWorldOnline.Commons.Enums.ClientEnums;
@@ -1019,6 +1020,8 @@ namespace DigitalWorldOnline.GameHost
         }
         private void DropReward(MapInstance map, MobConfigModel mob)
         {
+            EnsureDropReward(mob);
+
             var targetClient = map.Clients.FirstOrDefault(x => x.TamerId == mob.TargetTamer?.Id);
             if (targetClient == null)
                 return;
@@ -1026,6 +1029,23 @@ namespace DigitalWorldOnline.GameHost
             BitDropReward(map, mob, targetClient);
 
             ItemDropReward(map, mob, targetClient);
+        }
+
+        private void EnsureDropReward(MobConfigModel mob)
+        {
+            if (mob.DropReward != null &&
+                (mob.DropReward.Drops.Any() || (mob.DropReward.BitsDrop != null && mob.DropReward.BitsDrop.Chance > 0)))
+                return;
+
+            var dropReward = _sender.Send(new MobDropRewardByMobQuery(
+                mob.CurrentLocation.MapId,
+                mob.Type,
+                mob.CurrentLocation.X,
+                mob.CurrentLocation.Y,
+                mob.Id)).GetAwaiter().GetResult();
+
+            if (dropReward != null)
+                mob.SetDropReward(_mapper.Map<MobDropRewardConfigModel>(dropReward));
         }
 
         private void BitDropReward(MapInstance map, MobConfigModel mob, GameClient? targetClient)

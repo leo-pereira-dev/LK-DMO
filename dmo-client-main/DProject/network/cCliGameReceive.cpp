@@ -405,6 +405,7 @@ void cCliGame::RecvInitGameData(void)
 	cData_PostLoad::sPostBuff pInfo;
 
 	pop(nBuffCount);
+	nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData tamer buff count=%u", (unsigned)nBuffCount );
 
 	if (nBuffCount > 1000)
 	{
@@ -419,6 +420,12 @@ void cCliGame::RecvInitGameData(void)
 			pop(pInfo.s_nBuffClassLevel);	// 버프 클래스 레벨
 			pop(pInfo.s_nBuffEndTS);		// 버프 만료 시간	
 			pop(pInfo.s_dwSkillCode);		// 버프코드가 같은 것이 있어 구분을 위해 스킬코드 저장
+			nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData tamer buff[%d] code=%u class=%u end=%u skill=%u",
+				i,
+				(unsigned)pInfo.s_nBuffCode,
+				(unsigned)pInfo.s_nBuffClassLevel,
+				(unsigned)pInfo.s_nBuffEndTS,
+				(unsigned)pInfo.s_dwSkillCode );
 			g_pDataMng->GetPostLoad()->GetTBuffList()->push_back(pInfo);
 		}
 	}
@@ -518,6 +525,7 @@ void cCliGame::RecvInitGameData(void)
 	}
 
 	pop(nBuffCount);
+	nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData partner buff count=%u", (unsigned)nBuffCount );
 
 	if (nBuffCount > 1000)
 	{
@@ -533,13 +541,22 @@ void cCliGame::RecvInitGameData(void)
 
 #ifndef COMPAT_487
 			pop(pInfo.s_nBuffClassLevel);	// 버프 클래스 레벨
+#else
+			pInfo.s_nBuffClassLevel = 0;
 #endif
 			pop(pInfo.s_nBuffEndTS);		// 버프 만료 시간	
 			pop(pInfo.s_dwSkillCode);
 					// 버프코드가 같은 것이 있어 구분을 위해 스킬코드 저장
+			nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData partner buff[%d] code=%u class=%u end=%u skill=%u",
+				i,
+				(unsigned)pInfo.s_nBuffCode,
+				(unsigned)pInfo.s_nBuffClassLevel,
+				(unsigned)pInfo.s_nBuffEndTS,
+				(unsigned)pInfo.s_dwSkillCode );
 			g_pDataMng->GetPostLoad()->GetDBuffList()->push_back(pInfo);
 		}
 	}
+	nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData partner buffs parsed" );
 
 #ifdef BATTLE_MATCH
 	u1 nBattleGrade;
@@ -586,6 +603,10 @@ void cCliGame::RecvInitGameData(void)
 
 	pop(pDigimonData->s_nUID);
 	pop(nDSkillCnt);
+	nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData partner memory uid=%u count=%u max=%u",
+		(unsigned)pDigimonData->s_nUID,
+		(unsigned)nDSkillCnt,
+		(unsigned)(nLimit::EvoUnit * nLimit::MAX_ItemSkillDigimon) );
 
 	assert_cs(nDSkillCnt <= (nLimit::EvoUnit * nLimit::MAX_ItemSkillDigimon));
 
@@ -594,15 +615,30 @@ void cCliGame::RecvInitGameData(void)
 		pop(pDigimonData->s_DCashSkill[i].s_nDigimonEvoStatus);
 		pop(pDigimonData->s_DCashSkill[i].s_nDigimonCashSkillCode, sizeof(u4) * nLimit::MAX_ItemSkillDigimon);
 		pop(pDigimonData->s_DCashSkill[i].s_nSkillCoolTime, sizeof(u4) * nLimit::MAX_ItemSkillDigimon);
+		nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData partner memory[%d] evoStatus=%u skill0=%u skill1=%u cd0=%u cd1=%u",
+			i,
+			(unsigned)pDigimonData->s_DCashSkill[i].s_nDigimonEvoStatus,
+			(unsigned)pDigimonData->s_DCashSkill[i].s_nDigimonCashSkillCode[0],
+			(unsigned)pDigimonData->s_DCashSkill[i].s_nDigimonCashSkillCode[1],
+			(unsigned)pDigimonData->s_DCashSkill[i].s_nSkillCoolTime[0],
+			(unsigned)pDigimonData->s_DCashSkill[i].s_nSkillCoolTime[1] );
 	}
+	nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData partner memory parsed" );
 
 	u1 slot;
 	pop(slot);
+	nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData tactics first slot=%u", (unsigned)slot );
 
 	cData_Tactics* pTacticsData = g_pDataMng->GetTactics();
 
 	while (slot != 99)
 	{
+		if (slot == 0)
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData invalid tactics slot=0; stopping tactics parse to avoid loop" );
+			break;
+		}
+		nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData tactics slot begin=%u", (unsigned)slot );
 		cData_PostLoad::sDATA* pTactics = pTacticsData->GetTactics(slot - 1);
 //#ifdef COMPAT_487
 //	
@@ -704,6 +740,10 @@ void cCliGame::RecvInitGameData(void)
 
 		pop(pTactics->s_nUID);
 		pop(nDSkillCnt);
+		nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData tactics slot=%u memory uid=%u count=%u",
+			(unsigned)slot,
+			(unsigned)pTactics->s_nUID,
+			(unsigned)nDSkillCnt );
 
 		assert_cs(nDSkillCnt <= (nLimit::EvoUnit * nLimit::MAX_ItemSkillDigimon));
 
@@ -715,6 +755,7 @@ void cCliGame::RecvInitGameData(void)
 		}
 
 		pop(slot);
+		nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData tactics next slot=%u", (unsigned)slot );
 	}
 	nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData tactics parsed" );
 
@@ -1628,6 +1669,7 @@ void cCliGame::RecvSelectPortalFailure(void)
 void cCliGame::RecvSelectPortalSuccess(void)//인맵포탈, 일반포탈이용시
 {
 	net::receive_active = false;
+	m_bPortalRequesting = true;
 
 	// 인터페이스 초기화
 	assert_cs( g_pGameIF );
@@ -5695,11 +5737,20 @@ void cCliGame::RecvDigimonCareSlotList(void)
 		pop( pTactics->s_dwBaseDigimonID );
 		DBG("nBaseEvoUnitIDX : %d", pTactics->s_dwBaseDigimonID );
 		pop( pTactics->s_nMaxEvoUnit);
+		if( pTactics->s_nMaxEvoUnit < 0 || pTactics->s_nMaxEvoUnit >= nLimit::EvoUnit )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "RECV Archive invalid evo max=%d slot=%d type=%d; stopping parse",
+				(int)pTactics->s_nMaxEvoUnit,
+				nSlotNo,
+				pTactics->s_Type.m_nType );
+			delete pTactics;
+			break;
+		}
 		pop( &pTactics->s_EvoUnit[ 1 ], sizeof(cEvoUnit)*pTactics->s_nMaxEvoUnit );
 
 		pop( pTactics->s_nEnchantLevel );
 		pop( pTactics->s_ExtendAttribute, sizeof( pTactics->s_ExtendAttribute ) );
-		pop( pTactics->s_ExtendAttributeLV );
+		pop( pTactics->s_ExtendAttributeLV, sizeof( pTactics->s_ExtendAttributeLV ) );
 
 		// 기본 속성 경험치
 		for( int i=0; i < NewAttribute::MaxDigitalType; i++)
@@ -5723,7 +5774,14 @@ void cCliGame::RecvDigimonCareSlotList(void)
 		pop( pTactics->s_nUID );
 		pop( nDSkillCnt );
 
-		assert_cs( nDSkillCnt <= (nLimit::EvoUnit * nLimit::MAX_ItemSkillDigimon) );
+		if( nDSkillCnt > (nLimit::EvoUnit * nLimit::MAX_ItemSkillDigimon) )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "RECV Archive invalid memory skill count=%u slot=%d type=%d; ignoring memory block",
+				(unsigned)nDSkillCnt,
+				nSlotNo,
+				pTactics->s_Type.m_nType );
+			nDSkillCnt = 0;
+		}
 
 		for( int i=0; i< nDSkillCnt; ++i )
 		{

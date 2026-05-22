@@ -5,6 +5,7 @@
 
 #include "../Global.h"
 #include "../Engine.h"
+#include "../../LibProj/CsFunc/CrashLogger.h"
 
 
 void cCliGame::RecvTradeLimitedTimeOut(void)
@@ -112,7 +113,12 @@ void cCliGame::RecvItemTimeout(void)
 #endif	
 	if( nsCsFileTable::g_pItemMng->IsItem( nItemType ) )
 	{
-		cPrintMsg::PrintMsg( 20029, nsCsFileTable::g_pItemMng->GetItem( nItemType )->GetInfo()->s_szName );
+		CsItem::sINFO* pFTInfo = nsCsFileTable::g_pItemMng->GetItem( nItemType )->GetInfo();
+		SAFE_POINTER_RET( pFTInfo );
+
+		nsCSDEBUG::CrashLogger::LogMessage( "ITEM_TIMEOUT packet timeoutType=%d slotType=%d slot=%d item=%d itemType=%d useTimeType=%d useTimeMin=%d", nTimeoutType, nSlotType, nSlotNo, nItemType, pFTInfo->s_nType_L, pFTInfo->s_btUseTimeType, pFTInfo->s_nUseTime_Min );
+
+		cPrintMsg::PrintMsg( 20029, pFTInfo->s_szName );
 
 		cMessageBox::GetFirstMessageBox()->SetValue1( nTimeoutType );	
 		cMessageBox::GetFirstMessageBox()->SetValue2( nSlotType );

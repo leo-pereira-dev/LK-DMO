@@ -20,6 +20,12 @@
         /// </summary>
         public byte SlotLevel { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public byte EnableSlot { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public byte OpenQualification { get; set; }
+
         /// <summary>
         /// Required partner level to unlock.
         /// </summary>

@@ -411,16 +411,16 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         /// <param name="evolution">The evolutions to add</param>
         public void AddEvolutions(EvolutionAssetModel evolution)
         {
-            var i = 2;
-            foreach (var evolutionLine in evolution.Lines)
+            for (var i = 0; i < evolution.Lines.Count; i++)
             {
+                var evolutionLine = evolution.Lines[i];
                 var evo = new DigimonEvolutionModel(evolutionLine.Type);
                 if (evolutionLine.SkillMaxLevels != null)
                     evo.SetSkillMaxLevels(evolutionLine.SkillMaxLevels);
                 Evolutions.Add(evo);
 
-                if (i > 0) Evolutions.Last().Unlock();
-                i--;
+                if (ShouldAutoUnlockEvolution(evolutionLine, i))
+                    Evolutions.Last().Unlock();
             }
         }
 
@@ -430,17 +430,41 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         /// <param name="evolution">The evolutions to add</param>
         public void AddEvolutions(EvolutionAssetDTO evolution)
         {
-            var i = 2;
-            foreach (var evolutionLine in evolution.Lines)
+            for (var i = 0; i < evolution.Lines.Count; i++)
             {
+                var evolutionLine = evolution.Lines[i];
                 var evo = new DigimonEvolutionModel(evolutionLine.Type);
                 if (evolutionLine.SkillMaxLevels != null)
                     evo.SetSkillMaxLevels(evolutionLine.SkillMaxLevels);
                 Evolutions.Add(evo);
 
-                if (i > 0) Evolutions.Last().Unlock();
-                i--;
+                if (ShouldAutoUnlockEvolution(evolutionLine, i))
+                    Evolutions.Last().Unlock();
             }
+        }
+
+        private static bool ShouldAutoUnlockEvolution(EvolutionLineAssetModel evolutionLine, int index)
+        {
+            if (index < 2)
+                return true;
+
+            return evolutionLine.EnableSlot > 0 &&
+                   evolutionLine.OpenQualification == 0 &&
+                   evolutionLine.UnlockQuestId <= 0 &&
+                   evolutionLine.UnlockItemSection <= 0 &&
+                   evolutionLine.UnlockItemSectionAmount <= 0;
+        }
+
+        private static bool ShouldAutoUnlockEvolution(EvolutionLineAssetDTO evolutionLine, int index)
+        {
+            if (index < 2)
+                return true;
+
+            return evolutionLine.EnableSlot > 0 &&
+                   evolutionLine.OpenQualification == 0 &&
+                   evolutionLine.UnlockQuestId <= 0 &&
+                   evolutionLine.UnlockItemSection <= 0 &&
+                   evolutionLine.UnlockItemSectionAmount <= 0;
         }
 
         /// <summary>

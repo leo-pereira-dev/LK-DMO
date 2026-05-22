@@ -149,6 +149,23 @@ namespace DigitalWorldOnline.GameHost
 
                     foreach (var item in tamer.Inventory.EquippedItems)
                     {
+                        if (item.ItemId == 72006)
+                            _logger.Warning(
+                                "[ITEM-EXP-TRACE] dungeon inventory check tamer={TamerId} slot={Slot} item={ItemId} amount={Amount} type={Type} useTimeType={UseTimeType} usageMinutes={UsageMinutes} isTemporary={IsTemporary} expired={Expired} firstExpired={FirstExpired} duration={Duration} endDate={EndDate:o} remaining={Remaining}",
+                                tamer.Id,
+                                item.Slot,
+                                item.ItemId,
+                                item.Amount,
+                                item.ItemInfo?.Type,
+                                item.ItemInfo?.UseTimeType,
+                                item.ItemInfo?.UsageTimeMinutes,
+                                item.IsTemporary,
+                                item.Expired,
+                                item.FirstExpired,
+                                item.Duration,
+                                item.EndDate,
+                                item.RemainingMinutes());
+
                         if (item.ItemInfo != null && item.IsTemporary && item.Expired)
                         {
 
@@ -156,13 +173,17 @@ namespace DigitalWorldOnline.GameHost
                             {
                                 item.SetFirstExpired(false);
 
+                                _logger.Warning("[ITEM-EXP-TRACE] dungeon SEND ItemExpiredPacket source=inventory expiredType={ExpiredType} tamer={TamerId} slot={Slot} item={ItemId} useTimeType={UseTimeType} usageMinutes={UsageMinutes}",
+                                    ExpiredTypeEnum.Quit, tamer.Id, item.Slot, item.ItemId, item.ItemInfo.UseTimeType, item.ItemInfo.UsageTimeMinutes);
                                 client.Send(new ItemExpiredPacket(InventorySlotTypeEnum.TabInven, item.Slot, item.ItemId, ExpiredTypeEnum.Quit));
                             }
                             else
                             {
 
+                                _logger.Warning("[ITEM-EXP-TRACE] dungeon SEND ItemExpiredPacket source=inventory expiredType={ExpiredType} tamer={TamerId} slot={Slot} item={ItemId} useTimeType={UseTimeType} usageMinutes={UsageMinutes}",
+                                    ExpiredTypeEnum.Remove, tamer.Id, item.Slot, item.ItemId, item.ItemInfo.UseTimeType, item.ItemInfo.UsageTimeMinutes);
                                 client.Send(new ItemExpiredPacket(InventorySlotTypeEnum.TabInven, item.Slot, item.ItemId, ExpiredTypeEnum.Remove));
-                                tamer.Warehouse.RemoveOrReduceItem(item, item.Amount);
+                                tamer.Inventory.RemoveOrReduceItem(item, item.Amount, item.Slot);
                             }
                         }
                     }
@@ -182,7 +203,7 @@ namespace DigitalWorldOnline.GameHost
                             {
 
                                 client.Send(new ItemExpiredPacket(InventorySlotTypeEnum.TabWarehouse, item.Slot, item.ItemId, ExpiredTypeEnum.Remove));
-                                tamer.Warehouse.RemoveOrReduceItem(item, item.Amount);
+                                tamer.Warehouse.RemoveOrReduceItem(item, item.Amount, item.Slot);
                             }
                         }
                     }
@@ -202,7 +223,7 @@ namespace DigitalWorldOnline.GameHost
                             {
 
                                 client.Send(new ItemExpiredPacket(InventorySlotTypeEnum.TabShareStash, item.Slot, item.ItemId, ExpiredTypeEnum.Remove));
-                                tamer.AccountWarehouse.RemoveOrReduceItem(item, item.Amount);
+                                tamer.AccountWarehouse.RemoveOrReduceItem(item, item.Amount, item.Slot);
                             }
                         }
                     }
@@ -222,7 +243,7 @@ namespace DigitalWorldOnline.GameHost
                             {
 
                                 client.Send(new ItemExpiredPacket(InventorySlotTypeEnum.TabEquip, item.Slot, item.ItemId, ExpiredTypeEnum.Remove));
-                                tamer.Equipment.RemoveOrReduceItem(item, item.Amount);
+                                tamer.Equipment.RemoveOrReduceItem(item, item.Amount, item.Slot);
                             }
                         }
                     }
@@ -242,7 +263,7 @@ namespace DigitalWorldOnline.GameHost
                             {
 
                                 client.Send(new ItemExpiredPacket(InventorySlotTypeEnum.TabChipset, item.Slot, item.ItemId, ExpiredTypeEnum.Remove));
-                                tamer.ChipSets.RemoveOrReduceItem(item, item.Amount);
+                                tamer.ChipSets.RemoveOrReduceItem(item, item.Amount, item.Slot);
                             }
                         }
                     }

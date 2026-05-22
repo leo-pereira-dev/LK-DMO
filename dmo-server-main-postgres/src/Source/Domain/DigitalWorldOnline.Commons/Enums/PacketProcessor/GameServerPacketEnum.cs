@@ -427,6 +427,11 @@ namespace DigitalWorldOnline.Commons.Enums.PacketProcessor
         /// Loads the digimon archive/storage.
         /// </summary>
         DigimonArchive = 3204,
+
+        /// <summary>
+        /// Loads the digimon archive academy/incubator slots.
+        /// </summary>
+        DigimonArchiveIncubatorList = 3226,
         
         /// <summary>
         /// Loads the remaining membership timer.

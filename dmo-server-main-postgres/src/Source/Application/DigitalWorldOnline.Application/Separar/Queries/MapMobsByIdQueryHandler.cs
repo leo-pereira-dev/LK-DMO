@@ -1,4 +1,4 @@
-﻿using DigitalWorldOnline.Application.GameAssets.Bins;
+using DigitalWorldOnline.Application.GameAssets.Bins;
 using DigitalWorldOnline.Commons.DTOs.Config;
 using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using MediatR;

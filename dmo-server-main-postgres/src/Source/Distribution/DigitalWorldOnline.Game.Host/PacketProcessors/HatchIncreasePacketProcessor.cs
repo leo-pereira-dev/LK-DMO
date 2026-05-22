@@ -46,15 +46,16 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         {
             var packet = new GamePacketReader(packetData);
 
-            var vipEnabled = packet.ReadByte();
             var npcId = packet.ReadInt();
             var dataTier = packet.ReadByte();
+            var consumeBackupDisk = false;
 
             var targetItem = client.Tamer.Incubator.EggId;
             var hatchInfo = _assets.Hatchs.FirstOrDefault(x => x.ItemId == targetItem);
             if (hatchInfo == null)
             {
                 _logger.Warning($"Unknown hatch info for egg {targetItem}.");
+                client.Send(new HatchIncreaseFailedPacket(client.Tamer.GeneralHandler, HatchIncreaseResultEnum.Failled));
                 client.Send(new SystemMessagePacket($"Unknown hatch info for egg {targetItem}."));
                 return;
             }
@@ -122,6 +123,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 {
                     if (client.Tamer.Incubator.BackupDiskId > 0)
                     {
+                        consumeBackupDisk = true;
+
                         if (client.DungeonMap)
                         {
                             _dungeonServer.BroadcastForTamerViewsAndSelf(client.TamerId,
@@ -196,7 +199,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 }
             }
 
-            client.Tamer.Incubator.RemoveBackupDisk();
+            if (consumeBackupDisk)
+                client.Tamer.Incubator.RemoveBackupDisk();
 
             await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
             await _sender.Send(new UpdateIncubatorCommand(client.Tamer.Incubator));

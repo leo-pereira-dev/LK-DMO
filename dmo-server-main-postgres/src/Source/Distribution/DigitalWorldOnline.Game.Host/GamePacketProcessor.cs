@@ -36,6 +36,20 @@ namespace DigitalWorldOnline.Game
             while (_assets.Loading || _configs.Loading) await Task.Delay(1000);
 
             var packet = new GamePacketReader(data);
+            if (client.TamerId == 3 ||
+                packet.Enum == GameServerPacketEnum.InitialInformation ||
+                packet.Enum == GameServerPacketEnum.ComplementarInformation ||
+                packet.Enum == GameServerPacketEnum.PostLoadComplete)
+            {
+                _logger.Information(
+                    "[PKT-TRACE] recv tamer={TamerId} packet={PacketType} enum={PacketEnum} len={Length} loading={Loading} state={State}",
+                    client.TamerId,
+                    packet.Type,
+                    packet.Enum,
+                    packet.Length,
+                    client.Loading,
+                    client.Tamer?.State);
+            }
 
             switch (packet.Enum)
             {

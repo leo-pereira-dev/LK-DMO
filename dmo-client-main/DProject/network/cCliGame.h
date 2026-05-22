@@ -1076,6 +1076,11 @@ public:
 	void RecvRequestRewards();
 
 	void RecvRequestRewardFail();
+	void SendXmlUnionProgressRequest();
+	void SendXmlUnionRewardClaim( u1 nRewardIndex );
+	void RecvXmlUnionProgress();
+	void RecvXmlUnionRewardClaimResult();
+	void RecvXmlUnionCollectionInfo();
 
 	void SendMastersMatchOpen( u4 nTamerIDX, u4 nNPCIDX );
 	void RecvMastersMatchOpen();
@@ -1288,4 +1293,3 @@ public:
 	void NTF_DigimonEffectChange();
 
 };
-

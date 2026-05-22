@@ -2749,6 +2749,53 @@ namespace DigitalWorldOnline.Infraestructure.Migrations
                     b.ToTable("Character_Progress", (string)null);
                 });
 
+            modelBuilder.Entity("DigitalWorldOnline.Commons.DTOs.Character.CharacterXmlUnionProgressDTO", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("CharacterId")
+                        .HasColumnType("bigint");
+
+                    b.Property<ushort>("ClaimedRewardMask")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint unsigned")
+                        .HasDefaultValue((ushort)0);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+                    b.Property<int>("CurrentExperience")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<byte>("Level")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint unsigned")
+                        .HasDefaultValue((byte)0);
+
+                    b.Property<int>("RequiredExperience")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(10000);
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CharacterId")
+                        .IsUnique();
+
+                    b.ToTable("Character_XmlUnionProgress", (string)null);
+                });
+
             modelBuilder.Entity("DigitalWorldOnline.Commons.DTOs.Character.CharacterSealDTO", b =>
                 {
                     b.Property<Guid>("Id")
@@ -5612,6 +5659,17 @@ namespace DigitalWorldOnline.Infraestructure.Migrations
                     b.Navigation("Character");
                 });
 
+            modelBuilder.Entity("DigitalWorldOnline.Commons.DTOs.Character.CharacterXmlUnionProgressDTO", b =>
+                {
+                    b.HasOne("DigitalWorldOnline.Commons.DTOs.Character.CharacterDTO", "Character")
+                        .WithOne("XmlUnionProgress")
+                        .HasForeignKey("DigitalWorldOnline.Commons.DTOs.Character.CharacterXmlUnionProgressDTO", "CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Character");
+                });
+
             modelBuilder.Entity("DigitalWorldOnline.Commons.DTOs.Character.CharacterSealDTO", b =>
                 {
                     b.HasOne("DigitalWorldOnline.Commons.DTOs.Character.CharacterSealListDTO", "SealList")
@@ -6256,6 +6314,9 @@ namespace DigitalWorldOnline.Infraestructure.Migrations
                         .IsRequired();
 
                     b.Navigation("TimeReward")
+                        .IsRequired();
+
+                    b.Navigation("XmlUnionProgress")
                         .IsRequired();
 
                     b.Navigation("Xai")

@@ -2,6 +2,7 @@
 using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Application.GameAssets.Bins;
 using DigitalWorldOnline.Application.GameAssets.Mapping;
+using DigitalWorldOnline.Application.GameAssets.Xml;
 using DigitalWorldOnline.Application.Admin.Repositories;
 using DigitalWorldOnline.Application.Extensions;
 using DigitalWorldOnline.Application.Routines.Commands;
@@ -129,6 +130,8 @@ namespace DigitalWorldOnline.Routine
                     services.AddSingleton<MonsterBinLoader>();
                     services.AddSingleton<MapBinLoader>();
                     services.AddSingleton<ItemListBinLoader>();
+                    services.AddSingleton<UnionXmlAssetLoader>();
+                    services.AddSingleton<DUnitCollectionService>();
                     services.AddSingleton<AssetsLoader>();
                     services.AddScoped<StoragePersistenceDualWriteCoordinator>();
                     services.AddMediatR(

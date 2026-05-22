@@ -23,6 +23,7 @@ namespace DigitalWorldOnline.Infraestructure
         public DbSet<CharacterTamerSkillDTO> ActiveSkills { get; set; }
         public DbSet<ConsignedShopDTO> CharacterConsignedShop { get; set; }
         public DbSet<CharacterProgressDTO> CharacterProgress { get; set; }
+        public DbSet<CharacterXmlUnionProgressDTO> CharacterXmlUnionProgress { get; set; }
         public DbSet<InProgressQuestDTO> InProgressQuest { get; set; }
         public DbSet<CharacterBuffListDTO> CharacterBuffList { get; set; }
         public DbSet<CharacterLocationDTO> CharacterLocation { get; set; }
@@ -43,6 +44,7 @@ namespace DigitalWorldOnline.Infraestructure
             builder.ApplyConfiguration(new CharacterArenaPointsConfiguration());
             builder.ApplyConfiguration(new CharacterArenaDailyPointsConfiguration());
             builder.ApplyConfiguration(new CharacterProgressConfiguration());
+            builder.ApplyConfiguration(new CharacterXmlUnionProgressConfiguration());
             builder.ApplyConfiguration(new InProgressQuestConfiguration());
             builder.ApplyConfiguration(new CharacterBuffListConfiguration());
             builder.ApplyConfiguration(new CharacterBuffConfiguration());

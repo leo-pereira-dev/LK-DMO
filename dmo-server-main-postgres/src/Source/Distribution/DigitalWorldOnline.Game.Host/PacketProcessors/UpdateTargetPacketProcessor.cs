@@ -23,6 +23,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         {
             var packet = new GamePacketReader(packetData);
 
+            if (packet.Length < 14)
+                return Task.CompletedTask;
+
             packet.Skip(4);
 
             var targetHandler = packet.ReadInt();

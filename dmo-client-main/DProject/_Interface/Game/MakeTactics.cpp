@@ -1458,6 +1458,8 @@ void cMakeTactics::ProcessResult()
 		{
 			SetNpcAnimation( ANI::NPC_OPEN_IDLE1 ); 
 			cPrintMsg::PrintMsg( 30503 );
+			GetSystem()->ResetBackupDisk();
+			_ResistBackupDiskDisableControl();
 			#ifdef MINIGAME
 			GetSystem()->SetMinigameComp(false);
 			#endif

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DigitalWorldOnline.Application.GameAssets.Bins;
 using DigitalWorldOnline.Application.GameAssets.Queries;
+using DigitalWorldOnline.Application.GameAssets.Xml;
 using DigitalWorldOnline.Commons.DTOs.Assets;
 using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Models.Asset;
@@ -17,10 +18,12 @@ namespace DigitalWorldOnline.Application.GameAssets
         private readonly ISender _sender;
         private readonly IMapper _mapper;
         private readonly MonsterBinLoader _monster;
+        private readonly UnionXmlAssetLoader _xmlUnion;
         private bool? _loading;
 
         /// <summary>Catalog access for runtime mob factory (SUMMON_MONSTER, CALL_UP, SummonPos).</summary>
         public MonsterBinLoader Monster => _monster;
+        public UnionXmlAssetLoader XmlUnion => _xmlUnion;
 
         public bool Loading => _loading == null || _loading.Value;
 
@@ -66,11 +69,13 @@ namespace DigitalWorldOnline.Application.GameAssets
         public AssetsLoader(
             ISender sender,
             IMapper mapper,
-            MonsterBinLoader monster)
+            MonsterBinLoader monster,
+            UnionXmlAssetLoader xmlUnion)
         {
             _sender = sender;
             _mapper = mapper;
             _monster = monster;
+            _xmlUnion = xmlUnion;
         }
 
         public AssetsLoader Load()
@@ -86,6 +91,7 @@ namespace DigitalWorldOnline.Application.GameAssets
                 return;
 
             _loading = true;
+            _xmlUnion.Load();
 
             ItemInfo = _mapper.Map<List<ItemAssetModel>>(await _sender.Send(new ItemAssetsQuery()));
             SummonInfo = _mapper.Map<List<SummonModel>>(await _sender.Send(new SummonAssetsQuery()));

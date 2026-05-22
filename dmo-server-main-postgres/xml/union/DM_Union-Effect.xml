@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UnionEffects count="66">
+  <Effect effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+  <Effect effectId="2" raw="DE +150" stat="DE" sign="+" value="150" unit="flat" />
+  <Effect effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+  <Effect effectId="4" raw="Light 1%" stat="Light" value="1" unit="percent" />
+  <Effect effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+  <Effect effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+  <Effect effectId="7" raw="SCD 1%" stat="SCD" value="1" unit="percent" />
+  <Effect effectId="8" raw="Vaccine 2%" stat="Vaccine" value="2" unit="percent" />
+  <Effect effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+  <Effect effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+  <Effect effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+  <Effect effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+  <Effect effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+  <Effect effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+  <Effect effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+  <Effect effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+  <Effect effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+  <Effect effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+  <Effect effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+  <Effect effectId="20" raw="AT +20" stat="AT" sign="+" value="20" unit="flat" />
+  <Effect effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+  <Effect effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+  <Effect effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+  <Effect effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+  <Effect effectId="25" raw="Light 2%" stat="Light" value="2" unit="percent" />
+  <Effect effectId="26" raw="CT +50" stat="CT" sign="+" value="50" unit="flat" />
+  <Effect effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+  <Effect effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+  <Effect effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+  <Effect effectId="30" raw="Unknown 2%" stat="Unknown" value="2" unit="percent" />
+  <Effect effectId="31" raw="Ice 1%" stat="Ice" value="1" unit="percent" />
+  <Effect effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+  <Effect effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+  <Effect effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+  <Effect effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+  <Effect effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+  <Effect effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+  <Effect effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+  <Effect effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+  <Effect effectId="40" raw="DE +100" stat="DE" sign="+" value="100" unit="flat" />
+  <Effect effectId="41" raw="DS +150" stat="DS" sign="+" value="150" unit="flat" />
+  <Effect effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+  <Effect effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+  <Effect effectId="44" raw="Virus 2%" stat="Virus" value="2" unit="percent" />
+  <Effect effectId="45" raw="Data 2%" stat="Data" value="2" unit="percent" />
+  <Effect effectId="46" raw="EV +150" stat="EV" sign="+" value="150" unit="flat" />
+  <Effect effectId="47" raw="AT +100" stat="AT" sign="+" value="100" unit="flat" />
+  <Effect effectId="48" raw="Dark 2%" stat="Dark" value="2" unit="percent" />
+  <Effect effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+  <Effect effectId="50" raw="DS +500" stat="DS" sign="+" value="500" unit="flat" />
+  <Effect effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+  <Effect effectId="52" raw="EV +100" stat="EV" sign="+" value="100" unit="flat" />
+  <Effect effectId="53" raw="BL +50" stat="BL" sign="+" value="50" unit="flat" />
+  <Effect effectId="54" raw="HP +500" stat="HP" sign="+" value="500" unit="flat" />
+  <Effect effectId="55" raw="BL +70" stat="BL" sign="+" value="70" unit="flat" />
+  <Effect effectId="56" raw="EXP 30%" stat="EXP" value="30" unit="percent" />
+  <Effect effectId="57" raw="EXP 50%" stat="EXP" value="50" unit="percent" />
+  <Effect effectId="58" raw="Land 2%" stat="Land" value="2" unit="percent" />
+  <Effect effectId="59" raw="EV +130" stat="EV" sign="+" value="130" unit="flat" />
+  <Effect effectId="60" raw="SCD 5%" stat="SCD" value="5" unit="percent" />
+  <Effect effectId="61" raw="Basic 5%" stat="Basic" value="5" unit="percent" />
+  <Effect effectId="62" raw="DS +30" stat="DS" sign="+" value="30" unit="flat" />
+  <Effect effectId="63" raw="SCD 3%" stat="SCD" value="3" unit="percent" />
+  <Effect effectId="64" raw="Basic 2%" stat="Basic" value="2" unit="percent" />
+  <Effect effectId="65" raw="Basic 1%" stat="Basic" value="1" unit="percent" />
+  <Effect effectId="66" raw="SCD 2%" stat="SCD" value="2" unit="percent" />
+</UnionEffects>

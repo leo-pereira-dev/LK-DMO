@@ -364,8 +364,8 @@ void CDigimonTanscendenceViewer::CreateTaticsDigimonUI()
 #else
 	const CsPoint kAccomGridPos = CsPoint(118, 31);
 #endif
-	const CsPoint kAccomGridSize = CsPoint(230, 60);
-	const CsPoint kAccomGap = CsPoint(14, 0);
+	const CsPoint kAccomGridSize = CsPoint(230, 104);
+	const CsPoint kAccomGap = CsPoint(14, 6);
 	m_pkAccompanies = NiNew cGridListBox;
 	if( m_pkAccompanies )
 	{
@@ -390,7 +390,7 @@ void CDigimonTanscendenceViewer::CreateTaticsDigimonUI()
 			cString::sSPRITE* sSprite = pItem->AddSprite( pImage, CsPoint( 11, 5 ), CsPoint( 24, 34)  );	
 			if( sSprite )
 				sSprite->SetAutoPointerDelete(true);
-			cGridListBoxItem * addItem  = NiNew cGridListBoxItem(i, CsPoint( 33, 41));
+			cGridListBoxItem * addItem  = NiNew cGridListBoxItem(i, CsPoint( 46, 46));
 			addItem->SetItem( pItem );
 			m_pkAccompanies->AddItem( addItem );
 		}

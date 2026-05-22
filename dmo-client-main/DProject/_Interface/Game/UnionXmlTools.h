@@ -13,6 +13,7 @@ public:
 	struct sREWARD
 	{
 		DWORD		s_dwEffectID;
+		int			s_nSlot;
 		std::wstring s_wsRaw;
 		std::wstring s_wsStat;
 		int			s_nValue;
@@ -38,6 +39,8 @@ public:
 		DWORD						s_dwGroupID;
 		DWORD						s_dwIconCandidateID;
 		int							s_nLevel;
+		int							s_nLevelReq1;
+		int							s_nLevelReq2;
 		int							s_nRank;
 		int							s_nMemberCount;
 		std::wstring				s_wsType;

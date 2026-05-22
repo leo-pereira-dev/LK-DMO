@@ -59,7 +59,7 @@ namespace DigitalWorldOnline.Commons.Models.Base
 
         public uint RemainingMinutes()
         {
-            if (!ItemInfo.TemporaryItem)
+            if (!IsTemporary)
                 return 0;
 
             if ((EndDate - DateTime.Now).TotalMinutes <= 0)
@@ -81,7 +81,7 @@ namespace DigitalWorldOnline.Commons.Models.Base
         {
             get
             {
-                return ItemInfo != null && ItemInfo.UseTimeType > 0 && RemainingMinutes() == 0xFFFFFFFF && FirstExpired;
+                return IsTemporary && RemainingMinutes() == 0xFFFFFFFF && FirstExpired;
             }
         }
 
@@ -94,7 +94,7 @@ namespace DigitalWorldOnline.Commons.Models.Base
         /// <summary>
         /// Returns the flag with the information about item duration.
         /// </summary>
-        public bool IsTemporary => ItemInfo?.UseTimeType > 0;
+        public bool IsTemporary => ItemInfo?.TemporaryItem == true;
 
         /// <summary>
         /// Sets the current remaining time of the target item to the base value, if possible.
@@ -125,6 +125,9 @@ namespace DigitalWorldOnline.Commons.Models.Base
         {
             if (remainingTime == 4294967280)
                 remainingTime = 0;
+
+            if (remainingTime > 0 && !IsTemporary)
+                return;
 
             Duration = (int)remainingTime;
             EndDate = DateTime.Now.AddMinutes(remainingTime);

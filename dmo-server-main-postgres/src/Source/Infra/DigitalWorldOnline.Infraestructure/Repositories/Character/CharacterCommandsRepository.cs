@@ -480,6 +480,34 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
             }
         }
 
+        public async Task UpdateCharacterXmlUnionProgressAsync(CharacterXmlUnionProgressModel progress)
+        {
+            var dto = await _context.CharacterXmlUnionProgress
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == progress.Id || x.CharacterId == progress.CharacterId);
+
+            if (dto != null)
+            {
+                dto.Level = progress.Level;
+                dto.CurrentExperience = progress.CurrentExperience;
+                dto.RequiredExperience = progress.RequiredExperience;
+                dto.ClaimedRewardMask = progress.ClaimedRewardMask;
+                dto.UpdatedAt = DateTime.UtcNow;
+
+                _context.CharacterXmlUnionProgress.Update(dto);
+            }
+            else
+            {
+                dto = _mapper.Map<CharacterXmlUnionProgressDTO>(progress);
+                dto.CreatedAt = DateTime.UtcNow;
+                dto.UpdatedAt = dto.CreatedAt;
+
+                _context.CharacterXmlUnionProgress.Add(dto);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
 
 
         public async Task UpdateCharacterBuffListAsync(CharacterBuffListModel buffList)
@@ -1089,8 +1117,14 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
                     }
                 }
 
+                var referencedInstanceIds = slotsByPosition.Values
+                    .Where(x => x.ItemInstanceId.HasValue)
+                    .Select(x => x.ItemInstanceId!.Value)
+                    .Distinct()
+                    .ToList();
+
                 var orphanedInstanceIds = existingInstanceIds
-                    .Except(payloadInstanceIds)
+                    .Except(referencedInstanceIds)
                     .ToList();
 
                 if (orphanedInstanceIds.Count > 0)

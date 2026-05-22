@@ -56,6 +56,8 @@ namespace DigitalWorldOnline.Application.CharacterAssets.Queries
                 {
                     Type = line.Type,
                     SlotLevel = (byte)Math.Min(line.EvoSlot, byte.MaxValue),
+                    EnableSlot = (byte)Math.Min(line.EnableSlot, byte.MaxValue),
+                    OpenQualification = (byte)Math.Min(line.OpenQualification, byte.MaxValue),
                     UnlockLevel = (byte)Math.Min(line.OpenLevel, byte.MaxValue),
                     UnlockQuestId = (short)line.OpenQuest,
                     UnlockItemSection = line.UseItem,

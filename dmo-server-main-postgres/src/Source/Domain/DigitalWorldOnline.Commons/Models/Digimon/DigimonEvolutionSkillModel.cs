@@ -30,6 +30,8 @@
         public DigimonEvolutionSkillModel()
         {
             CurrentLevel = 1;
+            Duration = 0;
+            EndDate = DateTime.MaxValue;
             MaxLevel = 10; // default for serialization paths; the real value is plumbed via SetMaxLevel from DMBase.bin section 12 (DigimonEvoMaxLevel) — caps differ by evolution stage and skill slot.
         }
 

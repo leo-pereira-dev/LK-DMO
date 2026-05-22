@@ -17,6 +17,10 @@
         /// </summary>
         public byte SlotLevel { get; private set; }
 
+        public byte EnableSlot { get; private set; }
+
+        public byte OpenQualification { get; private set; }
+
         /// <summary>
         /// Required partner level to unlock.
         /// </summary>

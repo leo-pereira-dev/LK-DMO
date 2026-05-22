@@ -33,6 +33,8 @@ namespace DigitalWorldOnline.Commons.Interfaces
 
         Task UpdateCharacterProgressCompleteAsync(CharacterProgressModel progress);
 
+        Task UpdateCharacterXmlUnionProgressAsync(CharacterXmlUnionProgressModel progress);
+
         Task UpdateCharacterSealsAsync(CharacterSealListModel sealList);
 
         Task UpdateCharacterTitleByIdAsync(long characterId, short titleId);

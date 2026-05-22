@@ -209,6 +209,9 @@ void cCliGame::OnExecute(void)
 
 	case pGame::Sync				: RecvSyncData();				return;
 	case pGame::DiedAlready			: RecvDiedAlready();			return;
+	case 11050						: RecvXmlUnionProgress();		return;
+	case 11052						: RecvXmlUnionRewardClaimResult(); return;
+	case 11053						: RecvXmlUnionCollectionInfo();	return;
 	case pItem::Buy					: RecvItemBuySuccess();			return;
 	case pItem::Make				: RecvItemMake();				return;
 	case pItem::Sell				: RecvItemSellSuccess();		return;

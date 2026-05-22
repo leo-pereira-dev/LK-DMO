@@ -9,26 +9,33 @@ namespace DigitalWorldOnline.Application.GameAssets.Queries
     /// 1:1 to a <c>BuffAssetDTO</c>; the only field with no bin source is <c>Name</c> (string,
     /// skipped on the server side per <c>reference_bin_string_framing.md</c>) and the legacy
     /// sequential <c>Id</c> primary key (server consumers don't read it). Records flagged
-    /// <c>s_bDelete</c> in the bin are dropped at load time.
+    /// <c>s_bDelete</c> are usually dropped, except when a consumable buff item references
+    /// that skill code. Many v487 EXP/AT/DS booster items point at records flagged deleted
+    /// even though the client still expects those item buffs to work.
     /// </summary>
     public class BuffInfoAssetsQueryHandler : IRequestHandler<BuffInfoAssetsQuery, List<BuffAssetDTO>>
     {
         private readonly BuffBinLoader _loader;
+        private readonly ItemListBinLoader _itemList;
 
-        public BuffInfoAssetsQueryHandler(BuffBinLoader loader)
+        public BuffInfoAssetsQueryHandler(BuffBinLoader loader, ItemListBinLoader itemList)
         {
             _loader = loader;
+            _itemList = itemList;
         }
 
         public Task<List<BuffAssetDTO>> Handle(BuffInfoAssetsQuery request, CancellationToken cancellationToken)
         {
+            var itemBuffSkillCodes = _itemList.Data.Items
+                .Where(item => (item.Type == 63 || item.Type == 64) && item.SkillCode > 0)
+                .Select(item => (uint)item.SkillCode)
+                .ToHashSet();
+
             var list = new List<BuffAssetDTO>(_loader.Data.ById.Count);
             foreach (var rec in _loader.Data.ById.Values)
             {
-                // Existing semantics: drop deleted records from the asset list.  Memory-
-                // skill cast queries the raw bin loader directly so it can still pick
-                // up the regionally-disabled buffs (skillCode 9000xxx with s_bDelete=1).
-                if (rec.IsDeleted) continue;
+                if (rec.IsDeleted && !itemBuffSkillCodes.Contains(rec.SkillCode))
+                    continue;
 
                 list.Add(new BuffAssetDTO
                 {

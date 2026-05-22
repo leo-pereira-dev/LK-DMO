@@ -48,6 +48,7 @@ namespace DigitalWorldOnline.Commons.DTOs.Character
         public AttendanceRewardDTO AttendanceReward { get; set; }
         public ConsignedShopDTO ConsignedShop { get; set; }
         public CharacterProgressDTO Progress { get; set; }
+        public CharacterXmlUnionProgressDTO XmlUnionProgress { get; set; }
         public CharacterActiveEvolutionDTO ActiveEvolution { get; set; }
         public CharacterDigimonArchiveDTO DigimonArchive { get; set; }
         public CharacterArenaDailyPointsDTO DailyPoints { get; set; }

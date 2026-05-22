@@ -125,14 +125,22 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return;
 
             _logger.Information(
-                "Item use request: tamer {TamerId} slot {Slot} item {ItemId} amount {Amount} type {Type} typeN {TypeN} section {Section}.",
+                "Item use request: tamer {TamerId} slot {Slot} item {ItemId} amount {Amount} type {Type} typeN {TypeN} section {Section} useTimeType {UseTimeType} usageMinutes {UsageMinutes} isTemporary {IsTemporary} expired {Expired} firstExpired {FirstExpired} duration {Duration} endDate {EndDate:o} remaining {Remaining}.",
                 client.TamerId,
                 itemSlot,
                 targetItem.ItemId,
                 targetItem.Amount,
                 targetItem.ItemInfo?.Type,
                 targetItem.ItemInfo?.TypeN,
-                targetItem.ItemInfo?.Section);
+                targetItem.ItemInfo?.Section,
+                targetItem.ItemInfo?.UseTimeType,
+                targetItem.ItemInfo?.UsageTimeMinutes,
+                targetItem.IsTemporary,
+                targetItem.Expired,
+                targetItem.FirstExpired,
+                targetItem.Duration,
+                targetItem.EndDate,
+                targetItem.RemainingMinutes());
 
             if (targetItem.ItemInfo.Type == 60 || targetItem.ItemInfo.Type == 78)
             {
@@ -1893,6 +1901,26 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             if (buff != null)
             {
+                if (buff.SkillInfo?.Apply?.Any() != true)
+                {
+                    _logger.Warning(
+                        "Buff item use failed: missing skill apply data. tamer={TamerId} slot={Slot} item={ItemId} itemSkillCode={ItemSkillCode} buffId={BuffId} buffSkillCode={BuffSkillCode}",
+                        client.TamerId,
+                        itemSlot,
+                        targetItem.ItemId,
+                        targetItem.ItemInfo.SkillCode,
+                        buff.BuffId,
+                        buff.SkillCode);
+
+                    client.Send(
+                        UtilitiesFunctions.GroupPackets(
+                            new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type).Serialize(),
+                            new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
+                        )
+                    );
+                    return;
+                }
+
                 var duration = Math.Max(1, targetItem.ItemInfo.TimeInSeconds);
 
                 var newCharacterBuff = CharacterBuffModel.Create(buff.BuffId, buff.SkillId, targetItem.ItemInfo.TypeN, targetItem.ItemInfo.TimeInSeconds);
@@ -2010,6 +2038,16 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
             else
             {
+                _logger.Warning(
+                    "Buff item use failed: buff not found. tamer={TamerId} slot={Slot} item={ItemId} itemSkillCode={ItemSkillCode} type={Type} typeN={TypeN} section={Section}",
+                    client.TamerId,
+                    itemSlot,
+                    targetItem.ItemId,
+                    targetItem.ItemInfo.SkillCode,
+                    targetItem.ItemInfo.Type,
+                    targetItem.ItemInfo.TypeN,
+                    targetItem.ItemInfo.Section);
+
                 client.Send(
                     UtilitiesFunctions.GroupPackets(
                         new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type).Serialize(),

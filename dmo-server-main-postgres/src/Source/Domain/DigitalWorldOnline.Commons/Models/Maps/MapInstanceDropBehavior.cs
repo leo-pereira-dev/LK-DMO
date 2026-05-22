@@ -149,7 +149,12 @@ namespace DigitalWorldOnline.Commons.Models.Map
 
         public Drop? GetDrop(int dropHandler)
         {
-            return Drops.FirstOrDefault(x => x.GeneralHandler == dropHandler);
+            const int itemClassUidBase = 3 << 14;
+
+            return Drops.FirstOrDefault(x =>
+                x.GeneralHandler == dropHandler ||
+                (dropHandler > 0 && x.GeneralHandler == itemClassUidBase + dropHandler) ||
+                (dropHandler > 0 && (x.GeneralHandler & 0x3FFF) == dropHandler));
         }
 
         public void RemoveMapDrop(Drop drop)

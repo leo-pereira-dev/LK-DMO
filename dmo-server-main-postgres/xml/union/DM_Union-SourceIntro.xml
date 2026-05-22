@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UnionSourceIntro source="DMO Union - Intro.csv" lineCount="27">
+  <Line id="1" raw=",&quot;Hello, this is a rough tool for determining the stats from the upcoming Union system. I've broken it down into two separate tabs seen below. One is for individual digimon lines, and the other is for the collections that consider your collection of multiple different digimon. To use this tool, first make your own copy (I believe you need to be signed in for this). Then simply fill in the lighter gray columns, and click the refresh toggle to see what stat rewards you currently have unlocked. The Unlocks column refers to how many evolutions for that particular digimon do you have unlocked.&quot;,,,,,,,,,,," />
+  <Line id="2" raw=",,,,,,,,Stats,,,,By: MagmaScythe | Alphamon - DramonX" />
+  <Line id="3" raw=",,,,,,,,HP,3950,,," />
+  <Line id="4" raw=",,,,,,,,DS,5050,,," />
+  <Line id="5" raw=",,,,,,,,AT,390,,," />
+  <Line id="6" raw=",,,,,,,,DE,2390,,," />
+  <Line id="7" raw=",,,,,,,,HT,310,,," />
+  <Line id="8" raw=",,,,,,,,CT,430,,," />
+  <Line id="9" raw=",&quot;This tool currently calculates your unlocked stat increases when you click the Refresh Toggle checkbox on the separate tabs. The rewards follow a uniform system. Reward 1 requires all evolutions of a line or all members of a collection to be unlocked. Rewards 2 &amp; 4 require meeting certain level requirements. And Reward 3 requires all members to be transcended. The levels of each evolution in a digimon's line are equal to that digimon's level, and for Jogress evolutions it is equal to the highest level member of that jogress. Example: A level 100 Deadly Axemon with a level 150 Skullknightmon and Bagramon would have the following levels: 100 Deadly Axemon-&gt;150 DarkKnightmon-&gt;150DarknessBagramon for a total of level 400 for the level requirements. Additionally, if one member of a Jogress is transcended, that shared Jogress evolution will count as being transcended even if the lower level member is the transcended digimon.&quot;,,,,,,,EV,2010,,," />
+  <Line id="10" raw=",,,,,,,,BL,1070,,," />
+  <Line id="11" raw=",,,,,,,,EXP,1100,,," />
+  <Line id="12" raw=",,,,,,,,Basic Attribute,0,,," />
+  <Line id="13" raw=",,,,,,,,SCD,3,,," />
+  <Line id="14" raw=",,,,,,,,Vaccine,6,,," />
+  <Line id="15" raw=",,,,,,,,Data,2,,," />
+  <Line id="16" raw=",,,,,,,,Virus,7,,," />
+  <Line id="17" raw=",,,,,,,,Unknown,2,,," />
+  <Line id="18" raw=",,,,,,,,Fire,7,,," />
+  <Line id="19" raw=",,,,,,,,Water,1,,," />
+  <Line id="20" raw=",,,,,,,,Ice,4,,," />
+  <Line id="21" raw=",,,,,,,,Land,0,,," />
+  <Line id="22" raw=",,,,,,,,Wood,0,,," />
+  <Line id="23" raw=",&quot;Note that the collections tab has incomplete data as I was not able to determine every digimon in some collections. My method was watching Abir's video and u/Snorkymon's post, using yandex to translate screenshots of each section as they showed them, and combing through DMO wiki to try and match the silhouettes and ranks(Which was painful). Many Digimon that are discontinued or no longer available are still present in this system. X digimon that have the X in their name are not included, but digimon that use the X system without the X in their name remain. Example: Gaiomon, AOA, and MedievalGallantmon remain in the system despite the latter not being available outside of extraction, but available X digimon like AOX, Wargreymon X, and GranDracmon X don't appear.&quot;,,,,,,,Wind,4,,," />
+  <Line id="24" raw=",,,,,,,,Thunder,3,,," />
+  <Line id="25" raw=",,,,,,,,Steel,0,,," />
+  <Line id="26" raw=",,,,,,,,Light,6,,," />
+  <Line id="27" raw=",,,,,,,,Dark,8,,," />
+</UnionSourceIntro>

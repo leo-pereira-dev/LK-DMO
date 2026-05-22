@@ -364,6 +364,45 @@ namespace DigitalWorldOnline.Commons.Models.Base
             return true;
         }
 
+        public bool AddItem(ItemModel newItem, out List<ItemModel> changedItems)
+        {
+            changedItems = new List<ItemModel>();
+
+            var before = Items.ToDictionary(x => x.Slot, BuildItemPersistenceSignature);
+
+            if (!AddItem(newItem))
+                return false;
+
+            changedItems = Items
+                .Where(item => !before.TryGetValue(item.Slot, out var signature) ||
+                               signature != BuildItemPersistenceSignature(item))
+                .ToList();
+
+            if (!changedItems.Any())
+            {
+                var targetItem = FindItemBySlot(newItem.Slot);
+                if (targetItem != null)
+                    changedItems.Add(targetItem);
+            }
+
+            return true;
+        }
+
+        private static string BuildItemPersistenceSignature(ItemModel item)
+        {
+            if (item.ItemId <= 0 || item.Amount <= 0)
+                return "empty";
+
+            var accessoryStatus = string.Join(',', item.AccessoryStatus
+                .Select(x => $"{x.Slot}:{(short)x.Type}:{x.Value}"));
+            var socketStatus = string.Join(',', item.SocketStatus
+                .Select(x => $"{x.Slot}:{(short)x.Type}:{x.AttributeId}:{x.Value}"));
+
+            return $"{item.Id}|{item.ItemId}|{item.Amount}|{item.Power}|{item.RerollLeft}|{item.FamilyType}|" +
+                   $"{item.Duration}|{item.EndDate.Ticks}|{item.FirstExpired}|{item.TamerShopSellPrice}|" +
+                   $"{item.ItemListId}|{accessoryStatus}|{socketStatus}";
+        }
+
         /// <summary>
         /// Drops a single gift entry into the next empty slot, preserving the input
         /// <paramref name="newItem"/>'s full <c>Amount</c> in one slot regardless of the
@@ -510,7 +549,8 @@ namespace DigitalWorldOnline.Commons.Models.Base
                 }
 
                 targetItem.SetItemId(itemToAdd.ItemId);
-                targetItem.SetRemainingTime((uint)itemToAdd.ItemInfo.UsageTimeMinutes);
+                if (itemToAdd.IsTemporary)
+                    targetItem.SetRemainingTime((uint)itemToAdd.ItemInfo.UsageTimeMinutes);
             }
         }
 

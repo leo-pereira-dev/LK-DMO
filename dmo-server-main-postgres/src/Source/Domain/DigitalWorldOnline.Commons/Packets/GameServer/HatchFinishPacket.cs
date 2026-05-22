@@ -13,7 +13,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         /// </summary>
         /// <param name="newDigimon">Partner info</param>
         /// <param name="slot">Digivice slot</param>
-        public HatchFinishPacket(DigimonModel newDigimon, ushort temporaryHandler, int slot)
+        public HatchFinishPacket(DigimonModel newDigimon, uint temporaryHandler, int slot)
         {
             Type(PacketNumber);
             WriteInt(slot);
@@ -21,9 +21,8 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteInt(newDigimon.BaseType);
             WriteString(newDigimon.Name);
             WriteShort(newDigimon.Size);
-            WriteInt64(newDigimon.CurrentExperience);
-            WriteInt(0);
-            WriteInt(0);
+            WriteInt64(newDigimon.CurrentExperience * 100);
+            WriteInt64(newDigimon.TranscendenceExperience);
             WriteShort(newDigimon.Level);
 
             WriteInt(newDigimon.HP);
@@ -54,8 +53,21 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
                 WriteBytes(form.ToArray());
             }
 
-            WriteByte(1);
-            WriteBytes(new byte[29]);
+            WriteShort(newDigimon.Digiclone.CloneLevel);
+            WriteShort(newDigimon.Digiclone.ATValue);
+            WriteShort(newDigimon.Digiclone.BLValue);
+            WriteShort(newDigimon.Digiclone.CTValue);
+            WriteShort(0); // AS
+            WriteShort(newDigimon.Digiclone.EVValue);
+            WriteShort(0); // HT
+            WriteShort(newDigimon.Digiclone.HPValue);
+            WriteShort(newDigimon.Digiclone.ATLevel);
+            WriteShort(newDigimon.Digiclone.BLLevel);
+            WriteShort(newDigimon.Digiclone.CTLevel);
+            WriteShort(0); // AS
+            WriteShort(newDigimon.Digiclone.EVLevel);
+            WriteShort(0); // HT
+            WriteShort(newDigimon.Digiclone.HPLevel);
         }
     }
 }

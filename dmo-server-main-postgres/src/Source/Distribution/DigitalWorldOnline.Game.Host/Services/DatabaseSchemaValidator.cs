@@ -13,7 +13,12 @@ namespace DigitalWorldOnline.Game.Services
             new("Shared_ItemStorageCharacterSlot", "UpdatedAt"),
             new("Shared_ItemStorageAccount", "UpdatedAt"),
             new("Shared_ItemStorageAccountSlot", "UpdatedAt"),
-            new("Shared_ItemStorageInstance", "Id")
+            new("Shared_ItemStorageInstance", "Id"),
+            new("Character_XmlUnionProgress", "CharacterId"),
+            new("Character_XmlUnionProgress", "Level"),
+            new("Character_XmlUnionProgress", "CurrentExperience"),
+            new("Character_XmlUnionProgress", "RequiredExperience"),
+            new("Character_XmlUnionProgress", "ClaimedRewardMask")
         };
 
         private readonly IServiceProvider _serviceProvider;

@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "XmlUnionDUnit.h"
+#include "../../network/cNetwork.h"
+#include <ctype.h>
 #include <math.h>
+#include <stdlib.h>
 #include <wctype.h>
 
 namespace
@@ -32,6 +35,9 @@ namespace
 	int const XML_UNION_FILTER_ROW_W = 174;
 	int const XML_UNION_FILTER_ROW_H = 30;
 	int const XML_UNION_FILTER_ROW_STEP = 34;
+	int const XML_UNION_FILTER_BOOKMARK_SIZE = 21;
+	int const XML_UNION_FILTER_BOOKMARK_RIGHT_PAD = 17;
+	int const XML_UNION_FILTER_BOOKMARK_Y_OFFSET = -1;
 	int const XML_UNION_FILTER_SCROLL_X = 197;
 	int const XML_UNION_FILTER_SCROLL_Y = 84;
 	int const XML_UNION_FILTER_SCROLL_W = 14;
@@ -47,6 +53,38 @@ namespace
 	int const XML_UNION_CARD_SCROLL_TRACK_Y = XML_UNION_CARD_SCROLL_Y + XML_UNION_CARD_SCROLL_ARROW_H;
 	int const XML_UNION_CARD_SCROLL_TRACK_H = XML_UNION_CARD_SCROLL_H - ( XML_UNION_CARD_SCROLL_ARROW_H * 2 );
 	int const XML_UNION_CARD_SCROLL_PAGE = IF_XML_UNION_CARD_COUNT;
+	int const XML_UNION_RIGHT_PANEL_SHIFT = 10;
+	int const XML_UNION_TREASURE_X = 828;
+	int const XML_UNION_TREASURE_Y = 282;
+	int const XML_UNION_TREASURE_W = 35;
+	int const XML_UNION_TREASURE_H = 38;
+	int const XML_UNION_TREASURE_HOVER_GROW = 6;
+	int const XML_UNION_REWARD_MODAL_X = 128;
+	int const XML_UNION_REWARD_MODAL_Y = 36;
+	int const XML_UNION_REWARD_MODAL_W = 640;
+	int const XML_UNION_REWARD_MODAL_H = 610;
+	int const XML_UNION_REWARD_SCROLL_W = 14;
+	int const XML_UNION_REWARD_SCROLL_H = XML_UNION_REWARD_MODAL_H - 46;
+	int const XML_UNION_REWARD_SCROLL_ARROW_H = 14;
+	int const XML_UNION_REWARD_SCROLL_TRACK_H = XML_UNION_REWARD_SCROLL_H - ( XML_UNION_REWARD_SCROLL_ARROW_H * 2 );
+	int const XML_UNION_REWARD_VISIBLE_ROWS = 2;
+
+	struct sREWARD_MODAL_OPTION
+	{
+		TCHAR const*	s_pName;
+		NiColorA	s_GlowColor;
+	};
+
+	sREWARD_MODAL_OPTION const REWARD_MODAL_OPTIONS[ IF_XML_UNION_REWARD_COUNT ] =
+	{
+		{ _T( "Bronze" ), NiColorA( 0.83f, 0.50f, 0.32f, 0.88f ) },
+		{ _T( "Prata" ), NiColorA( 0.92f, 0.92f, 0.86f, 0.88f ) },
+		{ _T( "Ouro" ), NiColorA( 0.92f, 1.00f, 0.12f, 0.88f ) },
+		{ _T( "Platinum" ), NiColorA( 1.00f, 0.10f, 1.00f, 0.88f ) },
+		{ _T( "Diamante" ), NiColorA( 0.04f, 1.00f, 1.00f, 0.88f ) },
+		{ _T( "Master" ), NiColorA( 1.00f, 0.04f, 0.42f, 0.88f ) },
+		{ _T( "Mestre Digimon" ), NiColorA( 0.20f, 1.00f, 0.10f, 0.88f ) },
+	};
 
 	CsPoint const CARD_POS[ IF_XML_UNION_CARD_COUNT ] =
 	{
@@ -57,8 +95,13 @@ namespace
 	wchar_t const* const STAT_LABEL[ IF_XML_UNION_STAT_COUNT ] =
 	{
 		L"MaxHP", L"MaxDS", L"AT", L"DE", L"EV", L"HT",
-		L"CT", L"EXP", L"BL", L"SCD", L"Other",
+		L"CT", L"EXP", L"BL", L"SCD", L"Basic Attribute",
 	};
+
+	bool _IsPercentStatIndex( int nIndex )
+	{
+		return nIndex == 7 || nIndex == 9 || nIndex == 10;
+	}
 
 	void _CopyWideToTChar( std::wstring const& wsText, TCHAR* pOut, size_t nOutCount )
 	{
@@ -139,6 +182,15 @@ namespace
 		return _ToLower( wsText ).find( _ToLower( wsNeedle ) ) != std::wstring::npos;
 	}
 
+	std::wstring _GetDisplayStatName( std::wstring wsName )
+	{
+		if( wsName == L"HP" )
+			return L"MaxHP";
+		if( wsName == L"DS" )
+			return L"MaxDS";
+		return wsName;
+	}
+
 	std::wstring _NormalizeDigimonName( std::wstring wsText )
 	{
 		std::wstring wsResult;
@@ -190,15 +242,22 @@ namespace
 		return true;
 	}
 
-	int _GetUnionRankIconIndex( int nDigimonRank )
+	CsRect _GetUnionRankIconRect( int nDigimonRank )
 	{
-		// Runtime render indexes observed in this client:
-		// 9:SSS, 10:SSS+ (Korean badge), 11:U+.
-		if( nDigimonRank <= 0 )
-			return 1;
-		if( nDigimonRank >= 10 )
-			return 10;
-		return nDigimonRank - 1;
+		// encyclopedia_512.png is a 102x102 atlas. Use explicit source rects
+		// instead of cImage state math so SSS+ always crops the Korean badge.
+		int nTile = 1; // N
+		if( nDigimonRank > 0 )
+		{
+			nTile = nDigimonRank - 1;
+			if( nDigimonRank >= 8 )
+				nTile = 9; // SSS+
+		}
+
+		int const nTileSize = 102;
+		int const nCol = nTile % 5;
+		int const nRow = nTile / 5;
+		return CsRect( nCol * nTileSize, nRow * nTileSize, ( nCol + 1 ) * nTileSize, ( nRow + 1 ) * nTileSize );
 	}
 
 	class cXmlUnionHoverEffectSprite : public cSprite
@@ -252,6 +311,9 @@ cXmlUnionDUnit::cXmlUnionDUnit()
 	: m_pCloseButton( NULL )
 	, m_pMoveButton( NULL )
 	, m_pStatusText( NULL )
+	, m_pProgressPercentText( NULL )
+	, m_pProgressLevelValueText( NULL )
+	, m_pEffectCompletedText( NULL )
 	, m_pFilterScrollBorder( NULL )
 	, m_pFilterScrollBg( NULL )
 	, m_pFilterScrollTrack( NULL )
@@ -275,6 +337,35 @@ cXmlUnionDUnit::cXmlUnionDUnit()
 	, m_pCardScrollThumb( NULL )
 	, m_pCardScrollUp( NULL )
 	, m_pCardScrollDown( NULL )
+	, m_pRewardTreasureIcon( NULL )
+	, m_pRewardModalBg( NULL )
+	, m_pRewardModalTitleBg( NULL )
+	, m_pRewardModalBorderTop( NULL )
+	, m_pRewardModalBorderBottom( NULL )
+	, m_pRewardModalBorderLeft( NULL )
+	, m_pRewardModalBorderRight( NULL )
+	, m_pRewardModalContentLine( NULL )
+	, m_pRewardModalTitleText( NULL )
+	, m_pRewardScrollBorder( NULL )
+	, m_pRewardScrollBg( NULL )
+	, m_pRewardScrollTrack( NULL )
+	, m_pRewardScrollThumb( NULL )
+	, m_pRewardScrollUp( NULL )
+	, m_pRewardScrollDown( NULL )
+	, m_pRewardModalCloseButton( NULL )
+	, m_bRewardModalVisible( false )
+	, m_bRewardTreasureIconHover( false )
+	, m_bRewardModalDragging( false )
+	, m_ptRewardModalPos( XML_UNION_REWARD_MODAL_X, XML_UNION_REWARD_MODAL_Y )
+	, m_ptRewardModalDragOffset( 0, 0 )
+	, m_nRewardModalScrollRow( 0 )
+	, m_nRewardReceiveHoverIndex( -1 )
+	, m_bServerProgressLoaded( false )
+	, m_nServerXmlUnionLevel( 0 )
+	, m_nServerCurrentExperience( 0 )
+	, m_nServerRequiredExperience( 0 )
+	, m_nServerProgressPercentBasisPoints( 0 )
+	, m_nServerClaimedRewardMask( 0 )
 	, m_pSearchEdit( NULL )
 	, m_nFilterScroll( 0 )
 	, m_nCardScroll( 0 )
@@ -314,10 +405,42 @@ cXmlUnionDUnit::cXmlUnionDUnit()
 	}
 
 	for( int i = 0; i < IF_XML_UNION_EFFECT_COUNT; ++i )
+	{
 		m_pEffectText[ i ] = NULL;
+		m_pEffectCheckBg[ i ] = NULL;
+		m_pEffectCheckTop[ i ] = NULL;
+		m_pEffectCheckBottom[ i ] = NULL;
+		m_pEffectCheckLeft[ i ] = NULL;
+		m_pEffectCheckRight[ i ] = NULL;
+		m_pEffectCheckMark[ i ] = NULL;
+		m_pEffectStateButton[ i ] = NULL;
+		m_pEffectStateTop[ i ] = NULL;
+		m_pEffectStateBottom[ i ] = NULL;
+		m_pEffectStateLeft[ i ] = NULL;
+		m_pEffectStateRight[ i ] = NULL;
+		m_pEffectStateText[ i ] = NULL;
+	}
 
 	for( int i = 0; i < IF_XML_UNION_STAT_COUNT; ++i )
+	{
 		m_pStatValueText[ i ] = NULL;
+		m_nServerBonusValue[ i ] = 0;
+	}
+
+	for( int i = 0; i < IF_XML_UNION_REWARD_COUNT; ++i )
+	{
+		m_pRewardOptionGlow[ i ] = NULL;
+		m_pRewardOptionBody[ i ] = NULL;
+		m_pRewardOptionGauge[ i ] = NULL;
+		m_pRewardReceiveHoverBg[ i ] = NULL;
+		m_pRewardReceiveBorderTop[ i ] = NULL;
+		m_pRewardReceiveBorderBottom[ i ] = NULL;
+		m_pRewardReceiveBorderLeft[ i ] = NULL;
+		m_pRewardReceiveBorderRight[ i ] = NULL;
+		m_pRewardOptionNameText[ i ] = NULL;
+		m_pRewardReceiveText[ i ] = NULL;
+		m_pRewardReceiveButton[ i ] = NULL;
+	}
 }
 
 cXmlUnionDUnit::~cXmlUnionDUnit()
@@ -341,6 +464,9 @@ void cXmlUnionDUnit::DeleteResource()
 	m_pCloseButton = NULL;
 	m_pMoveButton = NULL;
 	m_pStatusText = NULL;
+	m_pProgressPercentText = NULL;
+	m_pProgressLevelValueText = NULL;
+	m_pEffectCompletedText = NULL;
 	m_pSearchEdit = NULL;
 	m_pFilterScrollBorder = NULL;
 	m_pFilterScrollBg = NULL;
@@ -365,6 +491,39 @@ void cXmlUnionDUnit::DeleteResource()
 	m_pCardScrollThumb = NULL;
 	m_pCardScrollUp = NULL;
 	m_pCardScrollDown = NULL;
+	m_pRewardTreasureIcon = NULL;
+	m_pRewardModalBg = NULL;
+	m_pRewardModalTitleBg = NULL;
+	m_pRewardModalBorderTop = NULL;
+	m_pRewardModalBorderBottom = NULL;
+	m_pRewardModalBorderLeft = NULL;
+	m_pRewardModalBorderRight = NULL;
+	m_pRewardModalContentLine = NULL;
+	m_pRewardModalTitleText = NULL;
+	m_pRewardScrollBorder = NULL;
+	m_pRewardScrollBg = NULL;
+	m_pRewardScrollTrack = NULL;
+	m_pRewardScrollThumb = NULL;
+	m_pRewardScrollUp = NULL;
+	m_pRewardScrollDown = NULL;
+	m_pRewardModalCloseButton = NULL;
+	m_bRewardModalVisible = false;
+	m_bRewardTreasureIconHover = false;
+	m_bRewardModalDragging = false;
+	m_ptRewardModalPos = CsPoint( XML_UNION_REWARD_MODAL_X, XML_UNION_REWARD_MODAL_Y );
+	m_ptRewardModalDragOffset = CsPoint( 0, 0 );
+	m_nRewardModalScrollRow = 0;
+	m_nRewardReceiveHoverIndex = -1;
+	m_bServerProgressLoaded = false;
+	m_nServerXmlUnionLevel = 0;
+	m_nServerCurrentExperience = 0;
+	m_nServerRequiredExperience = 0;
+	m_nServerProgressPercentBasisPoints = 0;
+	m_nServerClaimedRewardMask = 0;
+	m_mapServerGroups.clear();
+	m_vRewardModalSprites.clear();
+	m_vRewardModalTexts.clear();
+	m_vRewardModalButtons.clear();
 	for( int i = 0; i < IF_XML_UNION_TAB_SLANT_COUNT; ++i )
 	{
 		m_pTabSlant[ i ] = NULL;
@@ -392,9 +551,40 @@ void cXmlUnionDUnit::DeleteResource()
 		m_pFilterText[ i ] = NULL;
 	}
 	for( int i = 0; i < IF_XML_UNION_EFFECT_COUNT; ++i )
+	{
 		m_pEffectText[ i ] = NULL;
+		m_pEffectCheckBg[ i ] = NULL;
+		m_pEffectCheckTop[ i ] = NULL;
+		m_pEffectCheckBottom[ i ] = NULL;
+		m_pEffectCheckLeft[ i ] = NULL;
+		m_pEffectCheckRight[ i ] = NULL;
+		m_pEffectCheckMark[ i ] = NULL;
+		m_pEffectStateButton[ i ] = NULL;
+		m_pEffectStateTop[ i ] = NULL;
+		m_pEffectStateBottom[ i ] = NULL;
+		m_pEffectStateLeft[ i ] = NULL;
+		m_pEffectStateRight[ i ] = NULL;
+		m_pEffectStateText[ i ] = NULL;
+	}
 	for( int i = 0; i < IF_XML_UNION_STAT_COUNT; ++i )
+	{
 		m_pStatValueText[ i ] = NULL;
+		m_nServerBonusValue[ i ] = 0;
+	}
+	for( int i = 0; i < IF_XML_UNION_REWARD_COUNT; ++i )
+	{
+		m_pRewardOptionGlow[ i ] = NULL;
+		m_pRewardOptionBody[ i ] = NULL;
+		m_pRewardOptionGauge[ i ] = NULL;
+		m_pRewardReceiveHoverBg[ i ] = NULL;
+		m_pRewardReceiveBorderTop[ i ] = NULL;
+		m_pRewardReceiveBorderBottom[ i ] = NULL;
+		m_pRewardReceiveBorderLeft[ i ] = NULL;
+		m_pRewardReceiveBorderRight[ i ] = NULL;
+		m_pRewardOptionNameText[ i ] = NULL;
+		m_pRewardReceiveText[ i ] = NULL;
+		m_pRewardReceiveButton[ i ] = NULL;
+	}
 }
 
 void cXmlUnionDUnit::Create( int nValue )
@@ -402,6 +592,7 @@ void cXmlUnionDUnit::Create( int nValue )
 	if( cBaseWindow::Init() == false )
 		return;
 
+	_LoadFavoriteCache();
 	_BuildViewData();
 
 	int nPosX = ( g_nScreenWidth / 2 ) - ( IF_XML_UNION_WIDTH / 2 );
@@ -412,6 +603,10 @@ void cXmlUnionDUnit::Create( int nValue )
 	_CreateCardSprites();
 	_CreateCardScrollBar();
 	_CreateHoverTooltipControls();
+	_CreateRewardModalControls();
+
+	if( net::game )
+		net::game->SendXmlUnionProgressRequest();
 }
 
 void cXmlUnionDUnit::Update(float const& fDeltaTime)
@@ -423,11 +618,164 @@ void cXmlUnionDUnit::Update(float const& fDeltaTime)
 cBaseWindow::eMU_TYPE cXmlUnionDUnit::Update_ForMouse()
 {
 	cBaseWindow::eMU_TYPE muReturn = cBaseWindow::Update_ForMouse();
-	if( muReturn == MUT_OUT_WINDOW )
+	if( muReturn == MUT_OUT_WINDOW && m_bRewardModalVisible == false )
 		return muReturn;
 
 	if( m_pCloseButton && m_pCloseButton->Update_ForMouse() == cButton::ACTION_CLICK )
 		return muReturn;
+
+	CsPoint const ptRoot = GetRootClient();
+	CsPoint const ptCursor = CURSOR_ST.GetPos();
+	CsRect const rcTreasure( CsPoint( ptRoot.x + XML_UNION_TREASURE_X + XML_UNION_RIGHT_PANEL_SHIFT - 4, ptRoot.y + XML_UNION_TREASURE_Y - 4 ), CsSIZE( XML_UNION_TREASURE_W + 8, XML_UNION_TREASURE_H + 8 ) );
+	bool const bTreasureHover = m_bRewardModalVisible == false &&
+		ptCursor.x >= rcTreasure.left && ptCursor.x <= rcTreasure.right &&
+		ptCursor.y >= rcTreasure.top && ptCursor.y <= rcTreasure.bottom;
+	if( m_pRewardTreasureIcon && bTreasureHover != m_bRewardTreasureIconHover )
+	{
+		m_bRewardTreasureIconHover = bTreasureHover;
+		int const nGrow = bTreasureHover ? XML_UNION_TREASURE_HOVER_GROW : 0;
+		m_pRewardTreasureIcon->SetPosSize(
+			CsPoint( XML_UNION_TREASURE_X + XML_UNION_RIGHT_PANEL_SHIFT - ( nGrow / 2 ), XML_UNION_TREASURE_Y - ( nGrow / 2 ) ),
+			CsPoint( XML_UNION_TREASURE_W + nGrow, XML_UNION_TREASURE_H + nGrow ) );
+		m_pRewardTreasureIcon->SetColorA( bTreasureHover ? NiColorA( 0.85f, 1.0f, 1.0f, 1.0f ) : NiColorA( 1.0f, 1.0f, 1.0f, 1.0f ) );
+	}
+
+	if( m_bRewardModalVisible )
+	{
+		int const nModalX = m_ptRewardModalPos.x;
+		int const nModalY = m_ptRewardModalPos.y;
+		int const nRewardScrollX = nModalX + XML_UNION_REWARD_MODAL_W - 17;
+		int const nRewardScrollY = nModalY + 38;
+		int const nRewardScrollTrackY = nRewardScrollY + XML_UNION_REWARD_SCROLL_ARROW_H;
+
+		if( m_pRewardModalCloseButton && m_pRewardModalCloseButton->Update_ForMouse() == cButton::ACTION_CLICK )
+		{
+			_SetRewardModalVisible( false );
+			return muReturn;
+		}
+
+		CsRect const rcRewardTitle( CsPoint( ptRoot.x + nModalX, ptRoot.y + nModalY ), CsSIZE( XML_UNION_REWARD_MODAL_W - 42, 34 ) );
+		CURSOR::eTYPE const eTitleMouse = CURSOR_ST.CheckClickBox( rcRewardTitle );
+		if( m_bRewardModalDragging == false && eTitleMouse == CURSOR::LBUTTON_DOWN )
+		{
+			m_bRewardModalDragging = true;
+			m_ptRewardModalDragOffset = CsPoint( ptCursor.x - ( ptRoot.x + nModalX ), ptCursor.y - ( ptRoot.y + nModalY ) );
+		}
+		if( m_bRewardModalDragging )
+		{
+			CURSOR::eTYPE const eButtonState = CURSOR_ST.GetButtonState();
+			if( eButtonState == CURSOR::LBUTTON_DOWN || eButtonState == CURSOR::LBUTTON_PRESS )
+			{
+				int nNewX = ptCursor.x - ptRoot.x - m_ptRewardModalDragOffset.x;
+				int nNewY = ptCursor.y - ptRoot.y - m_ptRewardModalDragOffset.y;
+				nNewX = max( -ptRoot.x, min( g_nScreenWidth - ptRoot.x - XML_UNION_REWARD_MODAL_W, nNewX ) );
+				nNewY = max( -ptRoot.y, min( g_nScreenHeight - ptRoot.y - XML_UNION_REWARD_MODAL_H, nNewY ) );
+				if( nNewX != m_ptRewardModalPos.x || nNewY != m_ptRewardModalPos.y )
+				{
+					m_ptRewardModalPos = CsPoint( nNewX, nNewY );
+					_UpdateRewardModalFrameControls();
+					_UpdateRewardModalOptionControls();
+					_UpdateRewardModalScrollControls();
+				}
+			}
+			else
+			{
+				m_bRewardModalDragging = false;
+			}
+			return muReturn;
+		}
+
+		int nRewardHover = -1;
+		for( int i = 0; i < IF_XML_UNION_REWARD_COUNT; ++i )
+		{
+			int const nOriginalRow = i / 3;
+			int const nDisplayRow = nOriginalRow - m_nRewardModalScrollRow;
+			if( nDisplayRow < 0 || nDisplayRow >= XML_UNION_REWARD_VISIBLE_ROWS )
+				continue;
+
+			int const nCol = i % 3;
+			int const nCenterX = nModalX + 98 + ( nCol * 200 );
+			int const nIconY = nModalY + 62 + ( nDisplayRow * 245 );
+			CsRect const rcReceive( CsPoint( ptRoot.x + nCenterX - 52, ptRoot.y + nIconY + 178 ), CsSIZE( 104, 36 ) );
+			if( CURSOR_ST.CheckClickBox( rcReceive ) != CURSOR::BUTTON_OUTWINDOW )
+			{
+				nRewardHover = i;
+				break;
+			}
+		}
+		_UpdateRewardReceiveButtonHover( nRewardHover );
+
+		CsRect const rcRewardScrollUp( CsPoint( ptRoot.x + nRewardScrollX, ptRoot.y + nRewardScrollY ), CsSIZE( XML_UNION_REWARD_SCROLL_W, XML_UNION_REWARD_SCROLL_ARROW_H ) );
+		CsRect const rcRewardScrollDown( CsPoint( ptRoot.x + nRewardScrollX, ptRoot.y + nRewardScrollY + XML_UNION_REWARD_SCROLL_H - XML_UNION_REWARD_SCROLL_ARROW_H ), CsSIZE( XML_UNION_REWARD_SCROLL_W, XML_UNION_REWARD_SCROLL_ARROW_H ) );
+		if( CURSOR_ST.CheckClickBox( rcRewardScrollUp ) == CURSOR::LBUTTON_UP )
+		{
+			if( m_nRewardModalScrollRow > 0 )
+			{
+				--m_nRewardModalScrollRow;
+				_UpdateRewardModalOptionControls();
+				_UpdateRewardModalScrollControls();
+			}
+			return muReturn;
+		}
+		if( CURSOR_ST.CheckClickBox( rcRewardScrollDown ) == CURSOR::LBUTTON_UP )
+		{
+			if( m_nRewardModalScrollRow < 1 )
+			{
+				++m_nRewardModalScrollRow;
+				_UpdateRewardModalOptionControls();
+				_UpdateRewardModalScrollControls();
+			}
+			return muReturn;
+		}
+
+		CsRect const rcRewardTrack( CsPoint( ptRoot.x + nRewardScrollX, ptRoot.y + nRewardScrollTrackY ), CsSIZE( XML_UNION_REWARD_SCROLL_W, XML_UNION_REWARD_SCROLL_TRACK_H ) );
+		if( CURSOR_ST.CheckClickBox( rcRewardTrack ) == CURSOR::LBUTTON_DOWN )
+		{
+			int const nNewScroll = ptCursor.y > rcRewardTrack.top + ( XML_UNION_REWARD_SCROLL_TRACK_H / 2 ) ? 1 : 0;
+			if( nNewScroll != m_nRewardModalScrollRow )
+			{
+				m_nRewardModalScrollRow = nNewScroll;
+				_UpdateRewardModalOptionControls();
+				_UpdateRewardModalScrollControls();
+			}
+			return muReturn;
+		}
+
+		CsRect const rcRewardWindow( CsPoint( ptRoot.x + nModalX, ptRoot.y + nModalY ), CsSIZE( XML_UNION_REWARD_MODAL_W, XML_UNION_REWARD_MODAL_H ) );
+		if( CURSOR_ST.GetWheel() != INVALIDE_WHEEL && CURSOR_ST.CheckClickBox( rcRewardWindow ) != CURSOR::BUTTON_OUTWINDOW )
+		{
+			int const nOldScroll = m_nRewardModalScrollRow;
+			if( CURSOR_ST.GetWheel() < 0 && m_nRewardModalScrollRow < 1 )
+				++m_nRewardModalScrollRow;
+			else if( CURSOR_ST.GetWheel() > 0 && m_nRewardModalScrollRow > 0 )
+				--m_nRewardModalScrollRow;
+
+			if( nOldScroll != m_nRewardModalScrollRow )
+			{
+				_UpdateRewardModalOptionControls();
+				_UpdateRewardModalScrollControls();
+			}
+			CURSOR_ST.ResetWheel();
+			return muReturn;
+		}
+
+		for( int i = 0; i < IF_XML_UNION_REWARD_COUNT; ++i )
+		{
+			int const nOriginalRow = i / 3;
+			int const nDisplayRow = nOriginalRow - m_nRewardModalScrollRow;
+			if( nDisplayRow < 0 || nDisplayRow >= XML_UNION_REWARD_VISIBLE_ROWS )
+				continue;
+
+			if( m_pRewardReceiveButton[ i ] && m_pRewardReceiveButton[ i ]->Update_ForMouse() == cButton::ACTION_CLICK )
+			{
+				if( net::game && _IsRewardClaimed( i ) == false )
+					net::game->SendXmlUnionRewardClaim( (u1)i );
+				return muReturn;
+			}
+		}
+
+		return muReturn;
+	}
 
 	if( m_pSearchEdit )
 	{
@@ -445,11 +793,30 @@ cBaseWindow::eMU_TYPE cXmlUnionDUnit::Update_ForMouse()
 		}
 	}
 
+	if( CURSOR_ST.CheckClickBox( rcTreasure ) == CURSOR::LBUTTON_UP )
+	{
+		_SetRewardModalVisible( true );
+		return muReturn;
+	}
+
 	for( int i = 0; i < IF_XML_UNION_FILTER_COUNT; ++i )
 	{
+		int const nFilteredIndex = m_nFilterScroll + i;
+		int const nFavoriteIndex = nFilteredIndex >= 0 && nFilteredIndex < (int)m_vFilteredFilterIndices.size() ? m_vFilteredFilterIndices[ nFilteredIndex ] : -1;
+		if( nFavoriteIndex >= 0 )
+		{
+			CsPoint const ptStar( ptRoot.x + XML_UNION_FILTER_ROW_X + XML_UNION_FILTER_ROW_W - XML_UNION_FILTER_BOOKMARK_SIZE - XML_UNION_FILTER_BOOKMARK_RIGHT_PAD,
+				ptRoot.y + XML_UNION_FILTER_ROW_Y + ( i * XML_UNION_FILTER_ROW_STEP ) + ( ( XML_UNION_FILTER_ROW_H - XML_UNION_FILTER_BOOKMARK_SIZE ) / 2 ) + XML_UNION_FILTER_BOOKMARK_Y_OFFSET );
+			CsRect const rcStar( ptStar, CsSIZE( XML_UNION_FILTER_BOOKMARK_SIZE + 4, XML_UNION_FILTER_BOOKMARK_SIZE + 4 ) );
+			if( CURSOR_ST.CheckClickBox( rcStar ) == CURSOR::LBUTTON_UP )
+			{
+				_ToggleFilterFavorite( nFavoriteIndex );
+				return muReturn;
+			}
+		}
+
 		if( m_pFilterButtons[ i ] && m_pFilterButtons[ i ]->Update_ForMouse() == cButton::ACTION_CLICK )
 		{
-			int const nFilteredIndex = m_nFilterScroll + i;
 			int const nNewSelected = nFilteredIndex >= 0 && nFilteredIndex < (int)m_vFilteredFilterIndices.size() ? m_vFilteredFilterIndices[ nFilteredIndex ] : -1;
 			if( nNewSelected >= 0 && nNewSelected < (int)m_vAllFilters.size() && nNewSelected != m_nSelectedFilter )
 			{
@@ -461,8 +828,6 @@ cBaseWindow::eMU_TYPE cXmlUnionDUnit::Update_ForMouse()
 		}
 	}
 
-	CsPoint const ptRoot = GetRootClient();
-	CsPoint const ptCursor = CURSOR_ST.GetPos();
 	int nHoverFilter = -1;
 	for( int i = 0; i < IF_XML_UNION_FILTER_COUNT; ++i )
 	{
@@ -592,6 +957,22 @@ cBaseWindow::eMU_TYPE cXmlUnionDUnit::Update_ForMouse()
 
 void cXmlUnionDUnit::Render()
 {
+	if( m_bRewardModalVisible )
+	{
+		std::vector< bool > vSpriteVisible;
+		std::vector< bool > vTextVisible;
+		std::vector< bool > vButtonVisible;
+		_CaptureRewardModalVisibility( vSpriteVisible, vTextVisible, vButtonVisible );
+		_SetRewardModalControlsVisible( false );
+
+		RenderScript();
+		EndRenderScript();
+
+		_RestoreRewardModalVisibility( vSpriteVisible, vTextVisible, vButtonVisible );
+		_RenderRewardModalControls();
+		return;
+	}
+
 	RenderScript();
 	EndRenderScript();
 }
@@ -609,6 +990,146 @@ void cXmlUnionDUnit::OnMoveWindow()
 void cXmlUnionDUnit::PressCloseButton( void* pSender, void* pData )
 {
 	Close();
+}
+
+void cXmlUnionDUnit::RecvServerProgress( u1 nLevel, n4 nCurrentExperience, n4 nRequiredExperience, u2 nProgressPercentBasisPoints, u2 nClaimedRewardMask )
+{
+	m_bServerProgressLoaded = true;
+	m_nServerXmlUnionLevel = nLevel;
+	m_nServerCurrentExperience = nCurrentExperience;
+	m_nServerRequiredExperience = nRequiredExperience;
+	m_nServerProgressPercentBasisPoints = nProgressPercentBasisPoints;
+	m_nServerClaimedRewardMask = nClaimedRewardMask;
+	_UpdateServerProgressControls();
+	_UpdateRewardModalOptionControls();
+}
+
+void cXmlUnionDUnit::RecvRewardClaimResult( u1 nResult, u1 nRewardIndex, u2 nClaimedRewardMask, u1 nLevel, u2 nProgressPercentBasisPoints )
+{
+	m_bServerProgressLoaded = true;
+	m_nServerXmlUnionLevel = nLevel;
+	m_nServerProgressPercentBasisPoints = nProgressPercentBasisPoints;
+	m_nServerClaimedRewardMask = nClaimedRewardMask;
+
+	if( nRewardIndex < IF_XML_UNION_REWARD_COUNT && m_pRewardReceiveText[ nRewardIndex ] )
+	{
+		if( nResult == 0 || nResult == 1 )
+			m_pRewardReceiveText[ nRewardIndex ]->SetText( _T( "Recebido" ) );
+		else
+			m_pRewardReceiveText[ nRewardIndex ]->SetText( _T( "Indisponivel" ) );
+	}
+
+	_UpdateServerProgressControls();
+	_UpdateRewardModalOptionControls();
+}
+
+void cXmlUnionDUnit::RecvCollectionInfo()
+{
+	if( net::game == NULL )
+		return;
+
+	m_mapServerGroups.clear();
+
+	u2 nGroupCount = 0;
+	net::game->pop( nGroupCount );
+	for( u2 nGroup = 0; nGroup < nGroupCount; ++nGroup )
+	{
+		u4 nGroupID = 0;
+		u1 nCompleted = 0;
+		u1 nOwnedCount = 0;
+		u2 nTotalLevel = 0;
+		u1 nAllTranscended = 0;
+		u1 nMemberCount = 0;
+
+		net::game->pop( nGroupID );
+		net::game->pop( nCompleted );
+		net::game->pop( nOwnedCount );
+		net::game->pop( nTotalLevel );
+		net::game->pop( nAllTranscended );
+		net::game->pop( nMemberCount );
+
+		sSERVER_GROUP_STATE groupState;
+		groupState.s_bCompleted = nCompleted != 0;
+		groupState.s_nOwnedCount = nOwnedCount;
+		groupState.s_nTotalLevel = nTotalLevel;
+		groupState.s_bAllTranscended = nAllTranscended != 0;
+
+		for( u1 nMember = 0; nMember < nMemberCount; ++nMember )
+		{
+			u4 nDigimonID = 0;
+			u1 nSlot = 0;
+			u1 nOwned = 0;
+			u2 nLevel = 0;
+			u1 nEvolutionUnlocked = 0;
+			u1 nTranscended = 0;
+			u1 nMeetsLevel = 0;
+			u1 nMeetsEvolution = 0;
+			u1 nMeetsTranscendence = 0;
+
+			net::game->pop( nDigimonID );
+			net::game->pop( nSlot );
+			net::game->pop( nOwned );
+			net::game->pop( nLevel );
+			net::game->pop( nEvolutionUnlocked );
+			net::game->pop( nTranscended );
+			net::game->pop( nMeetsLevel );
+			net::game->pop( nMeetsEvolution );
+			net::game->pop( nMeetsTranscendence );
+
+			sSERVER_MEMBER_STATE memberState;
+			memberState.s_dwDigimonID = nDigimonID;
+			memberState.s_nSlot = nSlot;
+			memberState.s_bOwned = nOwned != 0;
+			memberState.s_nLevel = nLevel;
+			memberState.s_bEvolutionUnlocked = nEvolutionUnlocked != 0;
+			memberState.s_bTranscended = nTranscended != 0;
+			memberState.s_bMeetsLevel = nMeetsLevel != 0;
+			memberState.s_bMeetsEvolution = nMeetsEvolution != 0;
+			memberState.s_bMeetsTranscendence = nMeetsTranscendence != 0;
+			groupState.s_vMembers.push_back( memberState );
+		}
+
+		u1 nEffectCount = 0;
+		net::game->pop( nEffectCount );
+		for( u1 nEffect = 0; nEffect < nEffectCount; ++nEffect )
+		{
+			u1 nConditionIndex = 0;
+			u1 nActive = 0;
+			u1 nEffectType = 0;
+			n4 nValue = 0;
+
+			net::game->pop( nConditionIndex );
+			net::game->pop( nActive );
+			net::game->pop( nEffectType );
+			net::game->pop( nValue );
+
+			sSERVER_EFFECT_STATE effectState;
+			effectState.s_nConditionIndex = nConditionIndex;
+			effectState.s_bActive = nActive != 0;
+			effectState.s_nEffectType = nEffectType;
+			effectState.s_nValue = nValue;
+			groupState.s_vEffects.push_back( effectState );
+		}
+
+		m_mapServerGroups[ nGroupID ] = groupState;
+	}
+
+	for( int i = 0; i < IF_XML_UNION_STAT_COUNT; ++i )
+	{
+		n4 nValue = 0;
+		net::game->pop( nValue );
+		m_nServerBonusValue[ i ] = nValue;
+	}
+
+	for( int i = 0; i < 14; ++i )
+	{
+		n4 nIgnored = 0;
+		net::game->pop( nIgnored );
+	}
+
+	m_mapCardCache.clear();
+	_RefreshView();
+	_UpdateServerProgressControls();
 }
 
 bool cXmlUnionDUnit::_FileExists( char const* pPath ) const
@@ -792,6 +1313,7 @@ void cXmlUnionDUnit::_BuildViewData()
 	m_vCards.clear();
 	m_vFilters.clear();
 	m_vEffects.clear();
+	m_vEffectActive.clear();
 	m_vTotals.clear();
 	m_vFilteredFilterIndices.clear();
 
@@ -814,9 +1336,24 @@ void cXmlUnionDUnit::_BuildViewData()
 	if( m_nSelectedFilter >= (int)m_vAllFilters.size() )
 		m_nSelectedFilter = 0;
 
+	std::set< int > setInsertedFilters;
+	for( size_t nFav = 0; nFav < m_vFavoriteGroupOrder.size(); ++nFav )
+	{
+		DWORD const dwFavoriteGroupID = m_vFavoriteGroupOrder[ nFav ];
+		for( size_t i = 0; i < m_vAllGroups.size() && i < m_vAllFilters.size(); ++i )
+		{
+			if( m_vAllGroups[ i ].s_dwGroupID == dwFavoriteGroupID && _ContainsNoCase( m_vAllFilters[ i ], m_wsSearchKeyword ) )
+			{
+				m_vFilteredFilterIndices.push_back( (int)i );
+				setInsertedFilters.insert( (int)i );
+				break;
+			}
+		}
+	}
+
 	for( size_t i = 0; i < m_vAllFilters.size(); ++i )
 	{
-		if( _ContainsNoCase( m_vAllFilters[ i ], m_wsSearchKeyword ) )
+		if( setInsertedFilters.find( (int)i ) == setInsertedFilters.end() && _ContainsNoCase( m_vAllFilters[ i ], m_wsSearchKeyword ) )
 			m_vFilteredFilterIndices.push_back( (int)i );
 	}
 
@@ -864,7 +1401,10 @@ void cXmlUnionDUnit::_BuildViewData()
 	{
 		cUnionXmlTools::sGROUP const& selectedGroup = m_vAllGroups[ m_nSelectedFilter ];
 		for( size_t r = 0; r < selectedGroup.s_vRewards.size() && m_vEffects.size() < IF_XML_UNION_EFFECT_COUNT; ++r )
-			m_vEffects.push_back( _FormatReward( selectedGroup.s_vRewards[ r ] ) );
+		{
+			m_vEffects.push_back( _FormatRewardGoal( selectedGroup, selectedGroup.s_vRewards[ r ], (int)r ) );
+			m_vEffectActive.push_back( _IsRewardMetaActive( selectedGroup, selectedGroup.s_vRewards[ r ], (int)r ) );
+		}
 	}
 }
 
@@ -884,12 +1424,14 @@ void cXmlUnionDUnit::_FillCardFromGroup( sCARD_VIEW& card, cUnionXmlTools::sGROU
 	card.s_dwGroupID = group.s_dwGroupID;
 	card.s_dwDigimonID = 0;
 	card.s_dwIconCandidateID = group.s_dwIconCandidateID;
-	card.s_nLevel = group.s_nLevel;
+	card.s_nLevel = 0;
 	card.s_nRank = group.s_nRank;
+	card.s_nSlot = 0;
 	card.s_wsName = group.s_wsName;
 	card.s_wsOptionName = _MakeOptionText( group.s_wsName );
 	card.s_strIconFolder = group.s_strIconFolder;
 	card.s_strIconPath = _ResolveIconPath( group );
+	_ApplyServerStateToCard( card );
 }
 
 bool cXmlUnionDUnit::_FillCardFromDigimon( sCARD_VIEW& card, DWORD dwDigimonID, cUnionXmlTools::sGROUP const* pGroup ) const
@@ -905,8 +1447,9 @@ bool cXmlUnionDUnit::_FillCardFromDigimon( sCARD_VIEW& card, DWORD dwDigimonID, 
 	card.s_dwDigimonID = dwDigimonID;
 	card.s_dwGroupID = pGroup ? pGroup->s_dwGroupID : 0;
 	card.s_dwIconCandidateID = pInfo->s_dwModelID;
-	card.s_nLevel = pGroup ? pGroup->s_nLevel : 0;
+	card.s_nLevel = 0;
 	card.s_nRank = pInfo->s_nDigimonRank;
+	card.s_nSlot = 0;
 	card.s_wsName = pInfo->s_szName;
 	card.s_wsOptionName = pGroup ? _MakeOptionText( pGroup->s_wsName ) : card.s_wsName;
 	card.s_strIconFolder = pGroup ? pGroup->s_strIconFolder : std::string();
@@ -919,6 +1462,7 @@ bool cXmlUnionDUnit::_FillCardFromDigimon( sCARD_VIEW& card, DWORD dwDigimonID, 
 			card.s_strIconPath = g_pModelDataMng->GetSmallModelIconFile( pInfo->s_dwModelID );
 	}
 
+	_ApplyServerStateToCard( card );
 	return true;
 }
 
@@ -927,6 +1471,7 @@ bool cXmlUnionDUnit::_FillCardFromMember( sCARD_VIEW& card, cUnionXmlTools::sMEM
 	DWORD const dwDigimonID = _FindDigimonByMember( member );
 	if( dwDigimonID != 0 && _FillCardFromDigimon( card, dwDigimonID, &group ) )
 	{
+		card.s_nSlot = member.s_nSlot;
 		if( member.s_strIconFolder.empty() == false )
 			card.s_strIconFolder = member.s_strIconFolder;
 		if( member.s_dwIconCandidateID != 0 )
@@ -940,14 +1485,16 @@ bool cXmlUnionDUnit::_FillCardFromMember( sCARD_VIEW& card, cUnionXmlTools::sMEM
 		std::string const strMemberIcon = _ResolveIconPath( iconGroup );
 		if( strMemberIcon.empty() == false )
 			card.s_strIconPath = strMemberIcon;
+		_ApplyServerStateToCard( card );
 		return true;
 	}
 
 	card.s_dwGroupID = group.s_dwGroupID;
 	card.s_dwDigimonID = 0;
 	card.s_dwIconCandidateID = member.s_dwIconCandidateID;
-	card.s_nLevel = group.s_nLevel;
+	card.s_nLevel = 0;
 	card.s_nRank = group.s_nRank;
+	card.s_nSlot = member.s_nSlot;
 	card.s_wsName = member.s_wsName;
 	card.s_wsOptionName = _MakeOptionText( group.s_wsName );
 	card.s_strIconFolder = member.s_strIconFolder.empty() ? group.s_strIconFolder : member.s_strIconFolder;
@@ -968,6 +1515,7 @@ bool cXmlUnionDUnit::_FillCardFromMember( sCARD_VIEW& card, cUnionXmlTools::sMEM
 		card.s_strIconPath = _ResolveIconPath( iconGroup );
 	}
 
+	_ApplyServerStateToCard( card );
 	return card.s_wsName.empty() == false;
 }
 
@@ -1023,6 +1571,36 @@ DWORD cXmlUnionDUnit::_FindDigimonByMember( cUnionXmlTools::sMEMBER const& membe
 	if( pMap == NULL )
 		return 0;
 
+	std::wstring const wsNeedle = _NormalizeDigimonName( member.s_wsName );
+	if( member.s_dwIconCandidateID != 0 && wsNeedle.empty() == false )
+	{
+		for( CsDigimon::MAP_CIT it = pMap->begin(); it != pMap->end(); ++it )
+		{
+			if( it->second == NULL || it->second->GetInfo() == NULL )
+				continue;
+
+			CsDigimon::sINFO* pInfo = it->second->GetInfo();
+			if( pInfo->s_dwModelID == member.s_dwIconCandidateID && _NormalizeDigimonName( pInfo->s_szName ) == wsNeedle )
+				return it->first;
+		}
+	}
+
+	if( member.s_wsName.empty() )
+	{
+		if( member.s_dwIconCandidateID != 0 )
+		{
+			for( CsDigimon::MAP_CIT it = pMap->begin(); it != pMap->end(); ++it )
+			{
+				if( it->second == NULL || it->second->GetInfo() == NULL )
+					continue;
+
+				if( it->second->GetInfo()->s_dwModelID == member.s_dwIconCandidateID )
+					return it->first;
+			}
+		}
+		return 0;
+	}
+
 	if( member.s_dwIconCandidateID != 0 )
 	{
 		for( CsDigimon::MAP_CIT it = pMap->begin(); it != pMap->end(); ++it )
@@ -1034,9 +1612,6 @@ DWORD cXmlUnionDUnit::_FindDigimonByMember( cUnionXmlTools::sMEMBER const& membe
 				return it->first;
 		}
 	}
-
-	if( member.s_wsName.empty() )
-		return 0;
 
 	DWORD dwByName = _FindDigimonByName( member.s_wsName );
 	if( dwByName != 0 )
@@ -1768,26 +2343,26 @@ void cXmlUnionDUnit::_CreateLayout()
 	_AddAssetSprite( CsPoint( 8, 47 ), CsPoint( 207, IF_XML_UNION_HEIGHT - 70 ), XML_UNION_BG_LEFT, NiColorA( 0.02f, 0.10f, 0.16f, 0.88f ) );
 	_AddAssetSprite( CsPoint( 13, 55 ), CsPoint( 199, IF_XML_UNION_HEIGHT - 91 ), XML_UNION_LIST_BG, NiColorA( 0.01f, 0.09f, 0.15f, 0.9f ) );
 	_AddAssetSprite( CsPoint( 194, 47 ), CsPoint( 497, 300 ), XML_UNION_BG_CENTER, NiColorA( 0.02f, 0.05f, 0.10f, 0.88f ) );
-	_AddAssetSprite( CsPoint( 690, 47 ), CsPoint( 188, 273 ), XML_UNION_BG_RIGHT, NiColorA( 0.02f, 0.10f, 0.16f, 0.88f ) );
-	_AddAssetSprite( CsPoint( 690, 323 ), CsPoint( 188, 291 ), XML_UNION_BG_RIGHT, NiColorA( 0.02f, 0.10f, 0.16f, 0.88f ) );
+	_AddAssetSprite( CsPoint( 690 + XML_UNION_RIGHT_PANEL_SHIFT, 47 ), CsPoint( 188, 273 ), XML_UNION_BG_RIGHT, NiColorA( 0.02f, 0.10f, 0.16f, 0.88f ) );
+	_AddAssetSprite( CsPoint( 690 + XML_UNION_RIGHT_PANEL_SHIFT, 323 ), CsPoint( 188, 291 ), XML_UNION_BG_RIGHT, NiColorA( 0.02f, 0.10f, 0.16f, 0.88f ) );
 	_AddAssetSprite( CsPoint( 209, 350 ), CsPoint( 468, 202 ), XML_UNION_BG_INFO, NiColorA( 0.02f, 0.05f, 0.14f, 0.86f ) );
-	_AddAssetSprite( CsPoint( 702, 74 ), CsPoint( 165, 150 ), DUNGEON_RESULT_SIMPLE, NiColorA( 0.01f, 0.05f, 0.10f, 0.75f ) );
-	_AddAssetSprite( CsPoint( 752, 117 ), CsPoint( 64, 64 ), XML_UNION_DIGIMON_HOLD_GAUGE, NiColorA( 0.0f, 0.9f, 1.0f, 0.65f ) );
+	_AddAssetSprite( CsPoint( 702 + XML_UNION_RIGHT_PANEL_SHIFT, 74 ), CsPoint( 165, 150 ), DUNGEON_RESULT_SIMPLE, NiColorA( 0.01f, 0.05f, 0.10f, 0.75f ) );
+	_AddAssetSprite( CsPoint( 752 + XML_UNION_RIGHT_PANEL_SHIFT, 117 ), CsPoint( 64, 64 ), XML_UNION_DIGIMON_HOLD_GAUGE, NiColorA( 0.0f, 0.9f, 1.0f, 0.65f ) );
 
-	cSprite* pTreasureIcon = NiNew cSprite;
-	if( pTreasureIcon )
+	m_pRewardTreasureIcon = NiNew cSprite;
+	if( m_pRewardTreasureIcon )
 	{
-		pTreasureIcon->Init( GetRoot(), CsPoint( 828, 282 ), CsPoint( 35, 38 ), CsRect( 0, 0, 56, 61 ), XML_UNION_TREASURE_ICON, false );
-		AddChildControl( pTreasureIcon );
+		m_pRewardTreasureIcon->Init( GetRoot(), CsPoint( XML_UNION_TREASURE_X + XML_UNION_RIGHT_PANEL_SHIFT, XML_UNION_TREASURE_Y ), CsPoint( XML_UNION_TREASURE_W, XML_UNION_TREASURE_H ), CsRect( 0, 0, 56, 61 ), XML_UNION_TREASURE_ICON, false );
+		AddChildControl( m_pRewardTreasureIcon );
 	}
 
-	m_pMoveButton = AddButton( CsPoint( 827, 5 ), CsPoint( 22, 22 ), CsPoint( 0, 22 ), XML_UNION_MOVE_BTN );
-	m_pCloseButton = AddButton( CsPoint( 852, 3 ), CsPoint( 32, 32 ), CsPoint( 0, 32 ), XML_UNION_CLOSE_BTN );
+	m_pMoveButton = AddButton( CsPoint( 827 + XML_UNION_RIGHT_PANEL_SHIFT, 5 ), CsPoint( 22, 22 ), CsPoint( 0, 22 ), XML_UNION_MOVE_BTN );
+	m_pCloseButton = AddButton( CsPoint( 852 + XML_UNION_RIGHT_PANEL_SHIFT, 3 ), CsPoint( 32, 32 ), CsPoint( 0, 32 ), XML_UNION_CLOSE_BTN );
 	if( m_pCloseButton )
 		m_pCloseButton->AddEvent( cButton::BUTTON_LBUP_EVENT, this, &cXmlUnionDUnit::PressCloseButton );
 
-	_AddLabel( _T( "XML D-Unit" ), CsPoint( 443, 14 ), CFont::FS_12, NiColor( 0.92f, 0.95f, 1.0f ), DT_CENTER );
-	m_pStatusText = _AddLabel( m_XmlData.IsLoaded() ? _T( "Data\\union" ) : _T( "XML nao carregado" ), CsPoint( 443, 30 ), CFont::FS_8, NiColor( 0.4f, 1.0f, 0.8f ), DT_CENTER );
+	_AddLabel( _T( "D-Unit" ), CsPoint( IF_XML_UNION_WIDTH / 2, 14 ), CFont::FS_12, NiColor( 0.92f, 0.95f, 1.0f ), DT_CENTER );
+	m_pStatusText = _AddLabel( m_XmlData.IsLoaded() ? _T( "Data\\union" ) : _T( "XML nao carregado" ), CsPoint( IF_XML_UNION_WIDTH / 2, 30 ), CFont::FS_8, NiColor( 0.4f, 1.0f, 0.8f ), DT_CENTER );
 
 	cSprite* pLeftFilterIcon = NiNew cSprite;
 	if( pLeftFilterIcon )
@@ -1827,7 +2402,7 @@ void cXmlUnionDUnit::_CreateLayout()
 
 		m_pFilterHoverBg[ i ] = _AddSolidSprite( CsPoint( ptRow.x + 1, ptRow.y + 1 ), CsPoint( XML_UNION_FILTER_ROW_W - 2, XML_UNION_FILTER_ROW_H - 2 ), NiColorA( 0.0f, 0.50f, 0.72f, 0.55f ) );
 		m_pFilterText[ i ] = _AddLabel( _T( "" ), CsPoint( ptRow.x + 10, ptRow.y + 10 ), CFont::FS_8, NiColor( 0.96f, 0.97f, 1.0f ), DT_LEFT );
-		m_pFilterBookmark[ i ] = _AddAssetSpriteRect( CsPoint( ptRow.x + XML_UNION_FILTER_ROW_W - 22, ptRow.y + 6 ), CsPoint( 18, 18 ), CsRect( 0, 0, 21, 21 ), XML_UNION_BOOKMARK_ICON, NiColorA( 0.7f, 0.72f, 0.70f, 0.75f ) );
+		m_pFilterBookmark[ i ] = _AddAssetSpriteRect( CsPoint( ptRow.x + XML_UNION_FILTER_ROW_W - XML_UNION_FILTER_BOOKMARK_SIZE - XML_UNION_FILTER_BOOKMARK_RIGHT_PAD, ptRow.y + ( ( XML_UNION_FILTER_ROW_H - XML_UNION_FILTER_BOOKMARK_SIZE ) / 2 ) + XML_UNION_FILTER_BOOKMARK_Y_OFFSET ), CsPoint( XML_UNION_FILTER_BOOKMARK_SIZE, XML_UNION_FILTER_BOOKMARK_SIZE ), CsRect( 0, 0, 28, 28 ), XML_UNION_BOOKMARK_ICON, NiColorA( 0.25f, 0.27f, 0.30f, 0.55f ) );
 		m_pFilterBorderTop[ i ] = _AddSolidSprite( CsPoint( ptRow.x, ptRow.y ), CsPoint( XML_UNION_FILTER_ROW_W, 1 ), NiColorA( 0.0f, 0.35f, 0.75f, 0.75f ) );
 		m_pFilterBorderBottom[ i ] = _AddSolidSprite( CsPoint( ptRow.x, ptRow.y + XML_UNION_FILTER_ROW_H - 1 ), CsPoint( XML_UNION_FILTER_ROW_W, 1 ), NiColorA( 0.0f, 0.35f, 0.75f, 0.75f ) );
 		m_pFilterBorderLeft[ i ] = _AddSolidSprite( CsPoint( ptRow.x, ptRow.y ), CsPoint( 1, XML_UNION_FILTER_ROW_H ), NiColorA( 0.0f, 0.35f, 0.75f, 0.75f ) );
@@ -1852,33 +2427,48 @@ void cXmlUnionDUnit::_CreateLayout()
 	m_pTabText = _AddBoldLabel( _T( "" ), CsPoint( nTabX + 7, nTabY + 5 ), CFont::FS_12, NiColor( 0.96f, 1.0f, 0.96f ), DT_LEFT );
 	_UpdateTabControls();
 
-	_AddLabel( _T( "0.0%" ), CsPoint( 784, 148 ), CFont::FS_10, NiColor( 0.92f, 0.95f, 1.0f ), DT_CENTER );
-	_AddSolidSprite( CsPoint( 714, 258 ), CsPoint( 142, 1 ), NiColorA( 0.0f, 0.95f, 1.0f, 0.95f ) );
-	_AddLabel( _T( "Nivel" ), CsPoint( 722, 241 ), CFont::FS_12, NiColor( 0.3f, 1.0f, 1.0f ), DT_CENTER );
-	_AddLabel( _T( "Desconhecido" ), CsPoint( 816, 241 ), CFont::FS_12, NiColor( 0.3f, 1.0f, 1.0f ), DT_CENTER );
+	m_pProgressPercentText = _AddLabel( _T( "0.0%" ), CsPoint( 784 + XML_UNION_RIGHT_PANEL_SHIFT, 142 ), CFont::FS_10, NiColor( 0.92f, 0.95f, 1.0f ), DT_CENTER );
+	_AddSolidSprite( CsPoint( 714 + XML_UNION_RIGHT_PANEL_SHIFT, 258 ), CsPoint( 142, 1 ), NiColorA( 0.0f, 0.95f, 1.0f, 0.95f ) );
+	_AddLabel( _T( "Nivel" ), CsPoint( 722 + XML_UNION_RIGHT_PANEL_SHIFT, 241 ), CFont::FS_12, NiColor( 0.3f, 1.0f, 1.0f ), DT_CENTER );
+	m_pProgressLevelValueText = _AddLabel( _T( "Desconhecido" ), CsPoint( 816 + XML_UNION_RIGHT_PANEL_SHIFT, 241 ), CFont::FS_12, NiColor( 0.3f, 1.0f, 1.0f ), DT_CENTER );
+	_UpdateServerProgressControls();
 
 	_AddLabel( _T( "Efeitos das Metas" ), CsPoint( 443, 369 ), CFont::FS_10, NiColor( 0.0f, 1.0f, 0.25f ), DT_CENTER );
+	m_pEffectCompletedText = _AddLabel( _T( "0 / 0" ), CsPoint( 484, 369 ), CFont::FS_9, NiColor( 0.92f, 0.95f, 1.0f ), DT_LEFT );
 	for( int i = 0; i < IF_XML_UNION_EFFECT_COUNT; ++i )
 	{
+		int const nRowY = 398 + ( i * 23 );
 		TCHAR szText[ 160 ] = { 0, };
 		if( i < (int)m_vEffects.size() )
 			_CopyWideToTChar( m_vEffects[ i ], szText, _countof( szText ) );
-		m_pEffectText[ i ] = _AddLabel( szText, CsPoint( 220, 398 + ( i * 23 ) ), CFont::FS_9, NiColor( 0.88f, 0.92f, 1.0f ), DT_LEFT );
+		m_pEffectCheckBg[ i ] = _AddSolidSprite( CsPoint( 220, nRowY + 2 ), CsPoint( 14, 14 ), NiColorA( 0.0f, 0.13f, 0.32f, 0.94f ) );
+		m_pEffectCheckTop[ i ] = _AddSolidSprite( CsPoint( 220, nRowY + 2 ), CsPoint( 14, 1 ), NiColorA( 0.0f, 0.85f, 1.0f, 0.95f ) );
+		m_pEffectCheckBottom[ i ] = _AddSolidSprite( CsPoint( 220, nRowY + 15 ), CsPoint( 14, 1 ), NiColorA( 0.0f, 0.45f, 0.90f, 0.95f ) );
+		m_pEffectCheckLeft[ i ] = _AddSolidSprite( CsPoint( 220, nRowY + 2 ), CsPoint( 1, 14 ), NiColorA( 0.0f, 0.65f, 1.0f, 0.95f ) );
+		m_pEffectCheckRight[ i ] = _AddSolidSprite( CsPoint( 233, nRowY + 2 ), CsPoint( 1, 14 ), NiColorA( 0.0f, 0.65f, 1.0f, 0.95f ) );
+		m_pEffectCheckMark[ i ] = _AddLabel( _T( "V" ), CsPoint( 227, nRowY ), CFont::FS_10, NiColor( 0.25f, 1.0f, 0.20f ), DT_CENTER );
+		m_pEffectStateButton[ i ] = _AddSolidSprite( CsPoint( 240, nRowY ), CsPoint( 32, 16 ), NiColorA( 0.0f, 0.34f, 0.72f, 0.98f ) );
+		m_pEffectStateTop[ i ] = _AddSolidSprite( CsPoint( 240, nRowY ), CsPoint( 32, 1 ), NiColorA( 0.0f, 0.85f, 1.0f, 0.95f ) );
+		m_pEffectStateBottom[ i ] = _AddSolidSprite( CsPoint( 240, nRowY + 15 ), CsPoint( 32, 1 ), NiColorA( 0.0f, 0.42f, 0.85f, 0.95f ) );
+		m_pEffectStateLeft[ i ] = _AddSolidSprite( CsPoint( 240, nRowY ), CsPoint( 1, 16 ), NiColorA( 0.0f, 0.65f, 1.0f, 0.95f ) );
+		m_pEffectStateRight[ i ] = _AddSolidSprite( CsPoint( 271, nRowY ), CsPoint( 1, 16 ), NiColorA( 0.0f, 0.65f, 1.0f, 0.95f ) );
+		m_pEffectStateText[ i ] = _AddLabel( _T( "PLAY" ), CsPoint( 256, nRowY + 2 ), CFont::FS_8, NiColor( 0.72f, 1.0f, 1.0f ), DT_CENTER );
+		m_pEffectText[ i ] = _AddLabel( szText, CsPoint( 280, nRowY ), CFont::FS_9, NiColor( 0.88f, 0.92f, 1.0f ), DT_LEFT );
 	}
+	_UpdateEffectControls();
 
-	_AddLabel( _T( "Total dos XMLs" ), CsPoint( 784, 357 ), CFont::FS_9, NiColor( 0.0f, 1.0f, 0.25f ), DT_CENTER );
-	for( int i = 0; i < IF_XML_UNION_STAT_COUNT && i < (int)m_vTotals.size(); ++i )
+	_AddLabel( _T( "Efeito Total de Coleta" ), CsPoint( 784 + XML_UNION_RIGHT_PANEL_SHIFT, 357 ), CFont::FS_9, NiColor( 0.0f, 1.0f, 0.25f ), DT_CENTER );
+	for( int i = 0; i < IF_XML_UNION_STAT_COUNT; ++i )
 	{
 		TCHAR szName[ 48 ] = { 0, };
 		TCHAR szValue[ 48 ] = { 0, };
-		std::wstring wsName = m_vTotals[ i ].s_wsName;
-		if( wsName.empty() )
-			wsName = STAT_LABEL[ i ];
+		std::wstring wsName = STAT_LABEL[ i ];
+		wsName = _GetDisplayStatName( wsName );
 		_CopyWideToTChar( wsName, szName, _countof( szName ) );
-		_stprintf_s( szValue, _countof( szValue ), m_vTotals[ i ].s_bPercent ? _T( "+ %d%%" ) : _T( "+ %d" ), m_vTotals[ i ].s_nValue );
+		_stprintf_s( szValue, _countof( szValue ), _IsPercentStatIndex( i ) ? _T( "+ %d%%" ) : _T( "+ %d" ), m_nServerBonusValue[ i ] );
 
-		_AddLabel( szName, CsPoint( 724, 397 + ( i * 24 ) ), CFont::FS_9, NiColor( 0.88f, 0.92f, 1.0f ), DT_LEFT );
-		m_pStatValueText[ i ] = _AddLabel( szValue, CsPoint( 861, 397 + ( i * 24 ) ), CFont::FS_9, NiColor( 0.88f, 0.92f, 1.0f ), DT_RIGHT );
+		_AddLabel( szName, CsPoint( 724 + XML_UNION_RIGHT_PANEL_SHIFT, 397 + ( i * 24 ) ), CFont::FS_9, NiColor( 0.88f, 0.92f, 1.0f ), DT_LEFT );
+		m_pStatValueText[ i ] = _AddLabel( szValue, CsPoint( 861 + XML_UNION_RIGHT_PANEL_SHIFT, 397 + ( i * 24 ) ), CFont::FS_9, NiColor( 0.88f, 0.92f, 1.0f ), DT_RIGHT );
 	}
 }
 
@@ -1918,11 +2508,10 @@ void cXmlUnionDUnit::_CreateCardSprites()
 
 		if( _FileExists( XML_UNION_RANK_ICON ) )
 		{
-			cImage* pRankIcon = NiNew cImage;
+			cSprite* pRankIcon = NiNew cSprite;
 			if( pRankIcon )
 			{
-				pRankIcon->Init( GetRoot(), CsPoint( ptCard.x + 11, ptCard.y + 75 ), CsPoint( 82, 66 ), XML_UNION_RANK_ICON, false );
-				pRankIcon->SetTexToken( CsPoint( 102, 102 ) );
+				pRankIcon->Init( GetRoot(), CsPoint( ptCard.x + 11, ptCard.y + 75 ), CsPoint( 82, 66 ), _GetUnionRankIconRect( 0 ), XML_UNION_RANK_ICON, false );
 				pRankIcon->SetVisible( false );
 				AddChildControl( pRankIcon );
 				m_pCardRankIcon[ i ] = pRankIcon;
@@ -1965,15 +2554,101 @@ void cXmlUnionDUnit::_UpdateTabControls()
 
 void cXmlUnionDUnit::_UpdateEffectControls()
 {
+	int nCompletedGoals = 0;
+	int nTotalGoals = min( (int)m_vEffects.size(), IF_XML_UNION_EFFECT_COUNT );
+	for( int i = 0; i < nTotalGoals && i < (int)m_vEffectActive.size(); ++i )
+	{
+		if( m_vEffectActive[ i ] )
+			++nCompletedGoals;
+	}
+
+	if( m_pEffectCompletedText )
+	{
+		TCHAR szCompleted[ 32 ] = { 0, };
+		_stprintf_s( szCompleted, _countof( szCompleted ), _T( "%d / %d" ), nCompletedGoals, nTotalGoals );
+		m_pEffectCompletedText->SetText( szCompleted );
+		m_pEffectCompletedText->SetVisible( nTotalGoals > 0 );
+	}
+
 	for( int i = 0; i < IF_XML_UNION_EFFECT_COUNT; ++i )
 	{
 		if( m_pEffectText[ i ] == NULL )
 			continue;
 
+		bool const bHasEffect = i < (int)m_vEffects.size();
+		bool const bActive = i < (int)m_vEffectActive.size() && m_vEffectActive[ i ];
 		TCHAR szText[ 160 ] = { 0, };
-		if( i < (int)m_vEffects.size() )
-			_CopyWideToTChar( m_vEffects[ i ], szText, _countof( szText ) );
+		if( bHasEffect )
+		{
+			std::wstring wsEffectText = m_vEffects[ i ];
+			if( wsEffectText.size() >= 2 && wsEffectText[ 0 ] == L'-' && wsEffectText[ 1 ] == L' ' )
+				wsEffectText.erase( 0, 2 );
+			_CopyWideToTChar( wsEffectText, szText, _countof( szText ) );
+		}
 		m_pEffectText[ i ]->SetText( szText );
+		m_pEffectText[ i ]->SetColor( bActive ? NiColor( 0.30f, 1.0f, 0.35f ) : NiColor( 0.52f, 0.57f, 0.62f ) );
+
+		if( m_pEffectCheckBg[ i ] )
+		{
+			m_pEffectCheckBg[ i ]->SetVisible( bHasEffect );
+			m_pEffectCheckBg[ i ]->SetColorA( bActive ? NiColorA( 0.0f, 0.18f, 0.42f, 1.0f ) : NiColorA( 0.0f, 0.13f, 0.32f, 0.94f ) );
+		}
+		if( m_pEffectCheckTop[ i ] )
+		{
+			m_pEffectCheckTop[ i ]->SetVisible( bHasEffect );
+			m_pEffectCheckTop[ i ]->SetColorA( bActive ? NiColorA( 0.20f, 1.0f, 0.28f, 0.95f ) : NiColorA( 0.0f, 0.85f, 1.0f, 0.95f ) );
+		}
+		if( m_pEffectCheckBottom[ i ] )
+		{
+			m_pEffectCheckBottom[ i ]->SetVisible( bHasEffect );
+			m_pEffectCheckBottom[ i ]->SetColorA( bActive ? NiColorA( 0.10f, 0.72f, 0.18f, 0.95f ) : NiColorA( 0.0f, 0.45f, 0.90f, 0.95f ) );
+		}
+		if( m_pEffectCheckLeft[ i ] )
+		{
+			m_pEffectCheckLeft[ i ]->SetVisible( bHasEffect );
+			m_pEffectCheckLeft[ i ]->SetColorA( bActive ? NiColorA( 0.16f, 0.90f, 0.24f, 0.95f ) : NiColorA( 0.0f, 0.65f, 1.0f, 0.95f ) );
+		}
+		if( m_pEffectCheckRight[ i ] )
+		{
+			m_pEffectCheckRight[ i ]->SetVisible( bHasEffect );
+			m_pEffectCheckRight[ i ]->SetColorA( bActive ? NiColorA( 0.16f, 0.90f, 0.24f, 0.95f ) : NiColorA( 0.0f, 0.65f, 1.0f, 0.95f ) );
+		}
+		if( m_pEffectCheckMark[ i ] )
+		{
+			m_pEffectCheckMark[ i ]->SetVisible( bHasEffect && bActive );
+			m_pEffectCheckMark[ i ]->SetColor( NiColor( 0.25f, 1.0f, 0.20f ) );
+		}
+		if( m_pEffectStateButton[ i ] )
+		{
+			m_pEffectStateButton[ i ]->SetVisible( bHasEffect );
+			m_pEffectStateButton[ i ]->SetColorA( bActive ? NiColorA( 0.54f, 0.16f, 0.0f, 0.98f ) : NiColorA( 0.0f, 0.34f, 0.72f, 0.98f ) );
+		}
+		if( m_pEffectStateTop[ i ] )
+		{
+			m_pEffectStateTop[ i ]->SetVisible( bHasEffect );
+			m_pEffectStateTop[ i ]->SetColorA( bActive ? NiColorA( 1.0f, 0.72f, 0.16f, 0.95f ) : NiColorA( 0.0f, 0.85f, 1.0f, 0.95f ) );
+		}
+		if( m_pEffectStateBottom[ i ] )
+		{
+			m_pEffectStateBottom[ i ]->SetVisible( bHasEffect );
+			m_pEffectStateBottom[ i ]->SetColorA( bActive ? NiColorA( 0.78f, 0.28f, 0.0f, 0.95f ) : NiColorA( 0.0f, 0.42f, 0.85f, 0.95f ) );
+		}
+		if( m_pEffectStateLeft[ i ] )
+		{
+			m_pEffectStateLeft[ i ]->SetVisible( bHasEffect );
+			m_pEffectStateLeft[ i ]->SetColorA( bActive ? NiColorA( 0.95f, 0.48f, 0.04f, 0.95f ) : NiColorA( 0.0f, 0.65f, 1.0f, 0.95f ) );
+		}
+		if( m_pEffectStateRight[ i ] )
+		{
+			m_pEffectStateRight[ i ]->SetVisible( bHasEffect );
+			m_pEffectStateRight[ i ]->SetColorA( bActive ? NiColorA( 0.95f, 0.48f, 0.04f, 0.95f ) : NiColorA( 0.0f, 0.65f, 1.0f, 0.95f ) );
+		}
+		if( m_pEffectStateText[ i ] )
+		{
+			m_pEffectStateText[ i ]->SetVisible( bHasEffect );
+			m_pEffectStateText[ i ]->SetText( bActive ? _T( "OK" ) : _T( "PLAY" ) );
+			m_pEffectStateText[ i ]->SetColor( bActive ? NiColor( 1.0f, 0.96f, 0.20f ) : NiColor( 0.72f, 1.0f, 1.0f ) );
+		}
 	}
 }
 
@@ -1984,8 +2659,13 @@ void cXmlUnionDUnit::_UpdateCardControls()
 		CsPoint const ptCard = CARD_POS[ i ];
 		int const nCardIndex = m_nCardScroll + i;
 		bool const bHasCard = nCardIndex >= 0 && nCardIndex < (int)m_vCards.size();
+		bool const bOwnedCard = bHasCard && m_vCards[ nCardIndex ].s_bOwned;
 
-		if( m_pCardBg[ i ] ) m_pCardBg[ i ]->SetVisible( true );
+		if( m_pCardBg[ i ] )
+		{
+			m_pCardBg[ i ]->SetVisible( true );
+			m_pCardBg[ i ]->SetAlpha( bOwnedCard ? 1.0f : 0.42f );
+		}
 		if( m_pCardFrame[ i ] )
 		{
 			char const* pFrame = XML_UNION_FRAME_N;
@@ -2002,9 +2682,10 @@ void cXmlUnionDUnit::_UpdateCardControls()
 				m_strCardFramePath[ i ] = pFrame;
 			}
 			m_pCardFrame[ i ]->SetVisible( true );
+			m_pCardFrame[ i ]->SetAlpha( bHasCard ? ( bOwnedCard ? 1.0f : 0.58f ) : 0.35f );
 		}
 
-		bool const bShowIcon = bHasCard && m_vCards[ nCardIndex ].s_strIconPath.empty() == false && _FileExists( m_vCards[ nCardIndex ].s_strIconPath.c_str() );
+		bool const bShowIcon = bOwnedCard && m_vCards[ nCardIndex ].s_strIconPath.empty() == false && _FileExists( m_vCards[ nCardIndex ].s_strIconPath.c_str() );
 		std::string const strIconPath = bShowIcon ? m_vCards[ nCardIndex ].s_strIconPath : std::string();
 		bool const bIconChanged = m_strCardIconPath[ i ] != strIconPath;
 		int const nIconSize = IF_XML_UNION_ICON_SLICE_COUNT;
@@ -2065,8 +2746,9 @@ void cXmlUnionDUnit::_UpdateCardControls()
 		if( m_pCardRankIcon[ i ] )
 		{
 			m_pCardRankIcon[ i ]->SetVisible( bHasCard );
+			m_pCardRankIcon[ i ]->SetAlpha( bHasCard ? 1.0f : 0.0f );
 			if( bHasCard )
-				m_pCardRankIcon[ i ]->SetState( _GetUnionRankIconIndex( m_vCards[ nCardIndex ].s_nRank ) );
+				m_pCardRankIcon[ i ]->ChangeTexture( XML_UNION_RANK_ICON, _GetUnionRankIconRect( m_vCards[ nCardIndex ].s_nRank ) );
 		}
 	}
 
@@ -2083,6 +2765,520 @@ void cXmlUnionDUnit::_CreateHoverTooltipControls()
 	m_pHoverTooltipRight = _AddSolidSprite( CsPoint( 0, 0 ), CsPoint( 1, 1 ), NiColorA( 0.0f, 0.12f, 0.24f, 0.95f ) );
 	m_pHoverTooltipText = _AddLabel( _T( "" ), CsPoint( 0, 0 ), CFont::FS_8, NiColor( 0.96f, 0.97f, 1.0f ), DT_CENTER );
 	_UpdateHoverTooltipControls();
+}
+
+void cXmlUnionDUnit::_CreateRewardModalControls()
+{
+	m_vRewardModalSprites.clear();
+	m_vRewardModalTexts.clear();
+	m_vRewardModalButtons.clear();
+	m_pRewardModalBg = NULL;
+	m_pRewardModalTitleBg = NULL;
+	m_pRewardModalBorderTop = NULL;
+	m_pRewardModalBorderBottom = NULL;
+	m_pRewardModalBorderLeft = NULL;
+	m_pRewardModalBorderRight = NULL;
+	m_pRewardModalContentLine = NULL;
+	m_pRewardModalTitleText = NULL;
+	m_pRewardModalCloseButton = NULL;
+	for( int i = 0; i < IF_XML_UNION_REWARD_COUNT; ++i )
+	{
+		m_pRewardOptionGlow[ i ] = NULL;
+		m_pRewardOptionBody[ i ] = NULL;
+		m_pRewardOptionGauge[ i ] = NULL;
+		m_pRewardReceiveHoverBg[ i ] = NULL;
+		m_pRewardReceiveBorderTop[ i ] = NULL;
+		m_pRewardReceiveBorderBottom[ i ] = NULL;
+		m_pRewardReceiveBorderLeft[ i ] = NULL;
+		m_pRewardReceiveBorderRight[ i ] = NULL;
+		m_pRewardOptionNameText[ i ] = NULL;
+		m_pRewardReceiveText[ i ] = NULL;
+		m_pRewardReceiveButton[ i ] = NULL;
+	}
+	m_pRewardScrollBorder = NULL;
+	m_pRewardScrollBg = NULL;
+	m_pRewardScrollTrack = NULL;
+	m_pRewardScrollThumb = NULL;
+	m_pRewardScrollUp = NULL;
+	m_pRewardScrollDown = NULL;
+	m_nRewardModalScrollRow = 0;
+	m_nRewardReceiveHoverIndex = -1;
+	m_bRewardModalDragging = false;
+	m_ptRewardModalPos = CsPoint( XML_UNION_REWARD_MODAL_X, XML_UNION_REWARD_MODAL_Y );
+
+	int const nX = m_ptRewardModalPos.x;
+	int const nY = m_ptRewardModalPos.y;
+	int const nW = XML_UNION_REWARD_MODAL_W;
+	int const nH = XML_UNION_REWARD_MODAL_H;
+
+	m_pRewardModalBg = _AddSolidSprite( CsPoint( nX, nY ), CsPoint( nW, nH ), NiColorA( 0.00f, 0.018f, 0.038f, 1.0f ) );
+	m_pRewardModalTitleBg = _AddSolidSprite( CsPoint( nX, nY ), CsPoint( nW, 34 ), NiColorA( 0.00f, 0.36f, 0.62f, 1.0f ) );
+	m_pRewardModalBorderTop = _AddSolidSprite( CsPoint( nX, nY ), CsPoint( nW, 1 ), NiColorA( 0.15f, 0.95f, 1.0f, 0.95f ) );
+	m_pRewardModalBorderBottom = _AddSolidSprite( CsPoint( nX, nY + nH - 1 ), CsPoint( nW, 1 ), NiColorA( 0.02f, 0.36f, 0.65f, 0.95f ) );
+	m_pRewardModalBorderLeft = _AddSolidSprite( CsPoint( nX, nY ), CsPoint( 1, nH ), NiColorA( 0.02f, 0.36f, 0.65f, 0.95f ) );
+	m_pRewardModalBorderRight = _AddSolidSprite( CsPoint( nX + nW - 1, nY ), CsPoint( 1, nH ), NiColorA( 0.02f, 0.36f, 0.65f, 0.95f ) );
+	m_pRewardModalContentLine = _AddSolidSprite( CsPoint( nX + 18, nY + 46 ), CsPoint( nW - 50, 1 ), NiColorA( 0.0f, 0.22f, 0.36f, 0.85f ) );
+	m_vRewardModalSprites.push_back( m_pRewardModalBg );
+	m_vRewardModalSprites.push_back( m_pRewardModalTitleBg );
+	m_vRewardModalSprites.push_back( m_pRewardModalBorderTop );
+	m_vRewardModalSprites.push_back( m_pRewardModalBorderBottom );
+	m_vRewardModalSprites.push_back( m_pRewardModalBorderLeft );
+	m_vRewardModalSprites.push_back( m_pRewardModalBorderRight );
+	m_vRewardModalSprites.push_back( m_pRewardModalContentLine );
+
+	m_pRewardModalTitleText = _AddLabel( _T( "Recompensa" ), CsPoint( nX + ( nW / 2 ), nY + 8 ), CFont::FS_12, NiColor( 0.78f, 1.0f, 1.0f ), DT_CENTER );
+	m_vRewardModalTexts.push_back( m_pRewardModalTitleText );
+
+	m_pRewardModalCloseButton = AddButton( CsPoint( nX + nW - 37, nY + 1 ), CsPoint( 32, 32 ), CsPoint( 0, 32 ), XML_UNION_CLOSE_BTN );
+	if( m_pRewardModalCloseButton )
+		m_vRewardModalButtons.push_back( m_pRewardModalCloseButton );
+
+	int const nScrollX = nX + nW - 17;
+	int const nScrollY = nY + 38;
+	int const nScrollTrackY = nScrollY + XML_UNION_REWARD_SCROLL_ARROW_H;
+	m_pRewardScrollBorder = _AddSolidSprite( CsPoint( nScrollX - 1, nScrollY - 1 ), CsPoint( XML_UNION_REWARD_SCROLL_W + 2, XML_UNION_REWARD_SCROLL_H + 2 ), NiColorA( 0.0f, 0.65f, 1.0f, 0.70f ) );
+	m_pRewardScrollBg = _AddSolidSprite( CsPoint( nScrollX, nScrollY ), CsPoint( XML_UNION_REWARD_SCROLL_W, XML_UNION_REWARD_SCROLL_H ), NiColorA( 0.00f, 0.04f, 0.08f, 0.95f ) );
+	m_pRewardScrollUp = _AddAssetSprite( CsPoint( nScrollX, nScrollY ), CsPoint( XML_UNION_REWARD_SCROLL_W, XML_UNION_REWARD_SCROLL_ARROW_H ), XML_UNION_SCROLL_UP, NiColorA( 0.0f, 0.55f, 0.85f, 0.95f ) );
+	m_pRewardScrollTrack = _AddSolidSprite( CsPoint( nScrollX + 3, nScrollTrackY ), CsPoint( XML_UNION_REWARD_SCROLL_W - 6, XML_UNION_REWARD_SCROLL_TRACK_H ), NiColorA( 0.0f, 0.22f, 0.40f, 0.90f ) );
+	m_pRewardScrollThumb = _AddSolidSprite( CsPoint( nScrollX + 1, nScrollTrackY ), CsPoint( XML_UNION_REWARD_SCROLL_W - 2, XML_UNION_REWARD_SCROLL_TRACK_H / 2 ), NiColorA( 0.0f, 0.72f, 1.0f, 0.95f ) );
+	m_pRewardScrollDown = _AddAssetSprite( CsPoint( nScrollX, nScrollY + XML_UNION_REWARD_SCROLL_H - XML_UNION_REWARD_SCROLL_ARROW_H ), CsPoint( XML_UNION_REWARD_SCROLL_W, XML_UNION_REWARD_SCROLL_ARROW_H ), XML_UNION_SCROLL_DOWN, NiColorA( 0.0f, 0.55f, 0.85f, 0.95f ) );
+	m_vRewardModalSprites.push_back( m_pRewardScrollBorder );
+	m_vRewardModalSprites.push_back( m_pRewardScrollBg );
+	m_vRewardModalSprites.push_back( m_pRewardScrollUp );
+	m_vRewardModalSprites.push_back( m_pRewardScrollTrack );
+	m_vRewardModalSprites.push_back( m_pRewardScrollThumb );
+	m_vRewardModalSprites.push_back( m_pRewardScrollDown );
+
+	for( int i = 0; i < IF_XML_UNION_REWARD_COUNT; ++i )
+	{
+		NiColorA const& glow = REWARD_MODAL_OPTIONS[ i ].s_GlowColor;
+
+		m_pRewardOptionBody[ i ] = _AddAssetSprite( CsPoint( 0, 0 ), CsPoint( 140, 128 ), DUNGEON_RESULT_SIMPLE, NiColorA( 0.01f, 0.06f, 0.12f, 1.0f ) );
+		m_pRewardOptionGlow[ i ] = _AddAssetSprite( CsPoint( 0, 0 ), CsPoint( 164, 150 ), DUNGEON_RESULT_SIMPLE, glow );
+		if( m_pRewardOptionGlow[ i ] )
+			m_pRewardOptionGlow[ i ]->SetColorA( glow );
+		m_pRewardOptionGauge[ i ] = _AddAssetSprite( CsPoint( 0, 0 ), CsPoint( 66, 66 ), XML_UNION_DIGIMON_HOLD_GAUGE, NiColorA( 0.0f, 0.9f, 1.0f, 0.70f ) );
+		m_pRewardReceiveHoverBg[ i ] = _AddSolidSprite( CsPoint( 0, 0 ), CsPoint( 108, 38 ), NiColorA( 0.02f, 0.22f, 0.36f, 1.0f ) );
+		m_pRewardReceiveBorderTop[ i ] = _AddSolidSprite( CsPoint( 0, 0 ), CsPoint( 104, 1 ), NiColorA( 0.28f, 0.78f, 1.0f, 0.95f ) );
+		m_pRewardReceiveBorderBottom[ i ] = _AddSolidSprite( CsPoint( 0, 0 ), CsPoint( 104, 1 ), NiColorA( 0.02f, 0.38f, 0.72f, 0.95f ) );
+		m_pRewardReceiveBorderLeft[ i ] = _AddSolidSprite( CsPoint( 0, 0 ), CsPoint( 1, 34 ), NiColorA( 0.18f, 0.58f, 0.92f, 0.88f ) );
+		m_pRewardReceiveBorderRight[ i ] = _AddSolidSprite( CsPoint( 0, 0 ), CsPoint( 1, 34 ), NiColorA( 0.18f, 0.58f, 0.92f, 0.88f ) );
+		m_pRewardOptionNameText[ i ] = _AddLabel( REWARD_MODAL_OPTIONS[ i ].s_pName, CsPoint( 0, 0 ), CFont::FS_10, NiColor( 0.98f, 0.98f, 1.0f ), DT_CENTER );
+		m_pRewardReceiveButton[ i ] = AddButton( CsPoint( 0, 0 ), CsPoint( 98, 34 ), CsPoint( 0, 28 ), XML_UNION_LIST_BUTTON );
+		m_pRewardReceiveText[ i ] = _AddLabel( _T( "Receber" ), CsPoint( 0, 0 ), CFont::FS_10, NiColor( 0.98f, 0.98f, 1.0f ), DT_CENTER );
+
+		m_vRewardModalSprites.push_back( m_pRewardOptionBody[ i ] );
+		m_vRewardModalSprites.push_back( m_pRewardOptionGlow[ i ] );
+		m_vRewardModalSprites.push_back( m_pRewardOptionGauge[ i ] );
+		m_vRewardModalSprites.push_back( m_pRewardReceiveHoverBg[ i ] );
+		m_vRewardModalSprites.push_back( m_pRewardReceiveBorderTop[ i ] );
+		m_vRewardModalSprites.push_back( m_pRewardReceiveBorderBottom[ i ] );
+		m_vRewardModalSprites.push_back( m_pRewardReceiveBorderLeft[ i ] );
+		m_vRewardModalSprites.push_back( m_pRewardReceiveBorderRight[ i ] );
+		m_vRewardModalTexts.push_back( m_pRewardOptionNameText[ i ] );
+		if( m_pRewardReceiveButton[ i ] )
+			m_vRewardModalButtons.push_back( m_pRewardReceiveButton[ i ] );
+		m_vRewardModalTexts.push_back( m_pRewardReceiveText[ i ] );
+	}
+
+	_UpdateRewardModalFrameControls();
+	_UpdateRewardModalOptionControls();
+	_UpdateRewardModalScrollControls();
+	_SetRewardModalVisible( false );
+}
+
+void cXmlUnionDUnit::_SetRewardModalVisible( bool bVisible )
+{
+	m_bRewardModalVisible = bVisible;
+	m_bRewardModalDragging = false;
+
+	if( bVisible )
+	{
+		_UpdateRewardModalFrameControls();
+		_UpdateRewardModalOptionControls();
+		_UpdateRewardModalScrollControls();
+	}
+	else
+	{
+		m_nRewardReceiveHoverIndex = -1;
+	}
+
+	for( size_t i = 0; i < m_vRewardModalSprites.size(); ++i )
+	{
+		if( m_vRewardModalSprites[ i ] )
+			m_vRewardModalSprites[ i ]->SetVisible( bVisible );
+	}
+	for( size_t i = 0; i < m_vRewardModalTexts.size(); ++i )
+	{
+		if( m_vRewardModalTexts[ i ] )
+			m_vRewardModalTexts[ i ]->SetVisible( bVisible );
+	}
+	for( size_t i = 0; i < m_vRewardModalButtons.size(); ++i )
+	{
+		if( m_vRewardModalButtons[ i ] )
+			m_vRewardModalButtons[ i ]->SetVisible( bVisible );
+	}
+
+	if( bVisible )
+	{
+		_UpdateRewardModalFrameControls();
+		_UpdateRewardModalOptionControls();
+		_UpdateRewardModalScrollControls();
+		_UpdateRewardReceiveButtonHover( -1 );
+	}
+}
+
+void cXmlUnionDUnit::_SetRewardModalControlsVisible( bool bVisible )
+{
+	for( size_t i = 0; i < m_vRewardModalSprites.size(); ++i )
+	{
+		if( m_vRewardModalSprites[ i ] )
+			m_vRewardModalSprites[ i ]->SetVisible( bVisible );
+	}
+	for( size_t i = 0; i < m_vRewardModalTexts.size(); ++i )
+	{
+		if( m_vRewardModalTexts[ i ] )
+			m_vRewardModalTexts[ i ]->SetVisible( bVisible );
+	}
+	for( size_t i = 0; i < m_vRewardModalButtons.size(); ++i )
+	{
+		if( m_vRewardModalButtons[ i ] )
+			m_vRewardModalButtons[ i ]->SetVisible( bVisible );
+	}
+}
+
+void cXmlUnionDUnit::_CaptureRewardModalVisibility( std::vector< bool >& vSprites, std::vector< bool >& vTexts, std::vector< bool >& vButtons ) const
+{
+	vSprites.clear();
+	vTexts.clear();
+	vButtons.clear();
+	vSprites.reserve( m_vRewardModalSprites.size() );
+	vTexts.reserve( m_vRewardModalTexts.size() );
+	vButtons.reserve( m_vRewardModalButtons.size() );
+
+	for( size_t i = 0; i < m_vRewardModalSprites.size(); ++i )
+		vSprites.push_back( m_vRewardModalSprites[ i ] && m_vRewardModalSprites[ i ]->GetVisible() );
+	for( size_t i = 0; i < m_vRewardModalTexts.size(); ++i )
+		vTexts.push_back( m_vRewardModalTexts[ i ] && m_vRewardModalTexts[ i ]->GetVisible() );
+	for( size_t i = 0; i < m_vRewardModalButtons.size(); ++i )
+		vButtons.push_back( m_vRewardModalButtons[ i ] && m_vRewardModalButtons[ i ]->GetVisible() );
+}
+
+void cXmlUnionDUnit::_RestoreRewardModalVisibility( std::vector< bool > const& vSprites, std::vector< bool > const& vTexts, std::vector< bool > const& vButtons )
+{
+	for( size_t i = 0; i < m_vRewardModalSprites.size() && i < vSprites.size(); ++i )
+	{
+		if( m_vRewardModalSprites[ i ] )
+			m_vRewardModalSprites[ i ]->SetVisible( vSprites[ i ] );
+	}
+	for( size_t i = 0; i < m_vRewardModalTexts.size() && i < vTexts.size(); ++i )
+	{
+		if( m_vRewardModalTexts[ i ] )
+			m_vRewardModalTexts[ i ]->SetVisible( vTexts[ i ] );
+	}
+	for( size_t i = 0; i < m_vRewardModalButtons.size() && i < vButtons.size(); ++i )
+	{
+		if( m_vRewardModalButtons[ i ] )
+			m_vRewardModalButtons[ i ]->SetVisible( vButtons[ i ] );
+	}
+}
+
+void cXmlUnionDUnit::_RenderRewardModalControls()
+{
+	if( g_pEngine )
+		g_pEngine->ScreenSpace();
+
+	for( size_t i = 0; i < m_vRewardModalSprites.size(); ++i )
+	{
+		if( m_vRewardModalSprites[ i ] && m_vRewardModalSprites[ i ]->GetVisible() )
+			m_vRewardModalSprites[ i ]->Render();
+	}
+	for( size_t i = 0; i < m_vRewardModalButtons.size(); ++i )
+	{
+		if( m_vRewardModalButtons[ i ] && m_vRewardModalButtons[ i ]->GetVisible() )
+			m_vRewardModalButtons[ i ]->Render();
+	}
+	for( size_t i = 0; i < m_vRewardModalTexts.size(); ++i )
+	{
+		if( m_vRewardModalTexts[ i ] && m_vRewardModalTexts[ i ]->GetVisible() )
+			m_vRewardModalTexts[ i ]->Render();
+	}
+}
+
+void cXmlUnionDUnit::_UpdateRewardModalFrameControls()
+{
+	int const nX = m_ptRewardModalPos.x;
+	int const nY = m_ptRewardModalPos.y;
+	int const nW = XML_UNION_REWARD_MODAL_W;
+	int const nH = XML_UNION_REWARD_MODAL_H;
+	int const nScrollX = nX + nW - 17;
+	int const nScrollY = nY + 38;
+	int const nScrollTrackY = nScrollY + XML_UNION_REWARD_SCROLL_ARROW_H;
+
+	if( m_pRewardModalBg ) m_pRewardModalBg->SetPosSize( CsPoint( nX, nY ), CsPoint( nW, nH ) );
+	if( m_pRewardModalTitleBg ) m_pRewardModalTitleBg->SetPosSize( CsPoint( nX, nY ), CsPoint( nW, 34 ) );
+	if( m_pRewardModalBorderTop ) m_pRewardModalBorderTop->SetPosSize( CsPoint( nX, nY ), CsPoint( nW, 1 ) );
+	if( m_pRewardModalBorderBottom ) m_pRewardModalBorderBottom->SetPosSize( CsPoint( nX, nY + nH - 1 ), CsPoint( nW, 1 ) );
+	if( m_pRewardModalBorderLeft ) m_pRewardModalBorderLeft->SetPosSize( CsPoint( nX, nY ), CsPoint( 1, nH ) );
+	if( m_pRewardModalBorderRight ) m_pRewardModalBorderRight->SetPosSize( CsPoint( nX + nW - 1, nY ), CsPoint( 1, nH ) );
+	if( m_pRewardModalContentLine ) m_pRewardModalContentLine->SetPosSize( CsPoint( nX + 18, nY + 46 ), CsPoint( nW - 50, 1 ) );
+	if( m_pRewardModalTitleText ) m_pRewardModalTitleText->SetPos( CsPoint( nX + ( nW / 2 ), nY + 8 ) );
+	if( m_pRewardModalCloseButton ) m_pRewardModalCloseButton->SetPos( CsPoint( nX + nW - 37, nY + 1 ) );
+
+	if( m_pRewardScrollBorder ) m_pRewardScrollBorder->SetPosSize( CsPoint( nScrollX - 1, nScrollY - 1 ), CsPoint( XML_UNION_REWARD_SCROLL_W + 2, XML_UNION_REWARD_SCROLL_H + 2 ) );
+	if( m_pRewardScrollBg ) m_pRewardScrollBg->SetPosSize( CsPoint( nScrollX, nScrollY ), CsPoint( XML_UNION_REWARD_SCROLL_W, XML_UNION_REWARD_SCROLL_H ) );
+	if( m_pRewardScrollUp ) m_pRewardScrollUp->SetPosSize( CsPoint( nScrollX, nScrollY ), CsPoint( XML_UNION_REWARD_SCROLL_W, XML_UNION_REWARD_SCROLL_ARROW_H ) );
+	if( m_pRewardScrollTrack ) m_pRewardScrollTrack->SetPosSize( CsPoint( nScrollX + 3, nScrollTrackY ), CsPoint( XML_UNION_REWARD_SCROLL_W - 6, XML_UNION_REWARD_SCROLL_TRACK_H ) );
+	if( m_pRewardScrollDown ) m_pRewardScrollDown->SetPosSize( CsPoint( nScrollX, nScrollY + XML_UNION_REWARD_SCROLL_H - XML_UNION_REWARD_SCROLL_ARROW_H ), CsPoint( XML_UNION_REWARD_SCROLL_W, XML_UNION_REWARD_SCROLL_ARROW_H ) );
+}
+
+void cXmlUnionDUnit::_UpdateRewardModalOptionControls()
+{
+	for( int i = 0; i < IF_XML_UNION_REWARD_COUNT; ++i )
+	{
+		int const nOriginalRow = i / 3;
+		int const nDisplayRow = nOriginalRow - m_nRewardModalScrollRow;
+		bool const bVisible = m_bRewardModalVisible && nDisplayRow >= 0 && nDisplayRow < XML_UNION_REWARD_VISIBLE_ROWS;
+		int const nCol = i % 3;
+		int const nCenterX = m_ptRewardModalPos.x + 98 + ( nCol * 200 );
+		int const nIconY = m_ptRewardModalPos.y + 67 + ( nDisplayRow * 245 );
+
+		if( m_pRewardOptionGlow[ i ] )
+		{
+			m_pRewardOptionGlow[ i ]->SetPos( CsPoint( nCenterX - 82, nIconY - 11 ) );
+			m_pRewardOptionGlow[ i ]->SetVisible( bVisible );
+		}
+		if( m_pRewardOptionBody[ i ] )
+		{
+			m_pRewardOptionBody[ i ]->SetPos( CsPoint( nCenterX - 70, nIconY ) );
+			m_pRewardOptionBody[ i ]->SetVisible( bVisible );
+		}
+		if( m_pRewardOptionGauge[ i ] )
+		{
+			m_pRewardOptionGauge[ i ]->SetPos( CsPoint( nCenterX - 33, nIconY + 32 ) );
+			m_pRewardOptionGauge[ i ]->SetVisible( bVisible );
+		}
+		if( m_pRewardReceiveHoverBg[ i ] )
+		{
+			m_pRewardReceiveHoverBg[ i ]->SetPos( CsPoint( nCenterX - 54, nIconY + 176 ) );
+			m_pRewardReceiveHoverBg[ i ]->SetVisible( bVisible );
+			m_pRewardReceiveHoverBg[ i ]->SetColorA( i == m_nRewardReceiveHoverIndex ? NiColorA( 0.06f, 0.36f, 0.58f, 1.0f ) : NiColorA( 0.02f, 0.22f, 0.36f, 1.0f ) );
+		}
+		if( m_pRewardReceiveBorderTop[ i ] )
+		{
+			m_pRewardReceiveBorderTop[ i ]->SetPos( CsPoint( nCenterX - 52, nIconY + 176 ) );
+			m_pRewardReceiveBorderTop[ i ]->SetVisible( bVisible );
+		}
+		if( m_pRewardReceiveBorderBottom[ i ] )
+		{
+			m_pRewardReceiveBorderBottom[ i ]->SetPos( CsPoint( nCenterX - 52, nIconY + 213 ) );
+			m_pRewardReceiveBorderBottom[ i ]->SetVisible( bVisible );
+		}
+		if( m_pRewardReceiveBorderLeft[ i ] )
+		{
+			m_pRewardReceiveBorderLeft[ i ]->SetPos( CsPoint( nCenterX - 54, nIconY + 178 ) );
+			m_pRewardReceiveBorderLeft[ i ]->SetVisible( bVisible );
+		}
+		if( m_pRewardReceiveBorderRight[ i ] )
+		{
+			m_pRewardReceiveBorderRight[ i ]->SetPos( CsPoint( nCenterX + 53, nIconY + 178 ) );
+			m_pRewardReceiveBorderRight[ i ]->SetVisible( bVisible );
+		}
+		if( m_pRewardOptionNameText[ i ] )
+		{
+			m_pRewardOptionNameText[ i ]->SetPos( CsPoint( nCenterX, nIconY + 149 ) );
+			m_pRewardOptionNameText[ i ]->SetVisible( bVisible );
+		}
+		if( m_pRewardReceiveButton[ i ] )
+		{
+			m_pRewardReceiveButton[ i ]->SetPos( CsPoint( nCenterX - 49, nIconY + 179 ) );
+			m_pRewardReceiveButton[ i ]->SetVisible( bVisible );
+		}
+		if( m_pRewardReceiveText[ i ] )
+		{
+			m_pRewardReceiveText[ i ]->SetText( _IsRewardClaimed( i ) ? _T( "Recebido" ) : _T( "Receber" ) );
+			m_pRewardReceiveText[ i ]->SetPos( CsPoint( nCenterX, nIconY + 189 ) );
+			m_pRewardReceiveText[ i ]->SetVisible( bVisible );
+		}
+	}
+}
+
+void cXmlUnionDUnit::_UpdateRewardModalScrollControls()
+{
+	bool const bVisible = m_bRewardModalVisible;
+	if( m_pRewardScrollBorder ) m_pRewardScrollBorder->SetVisible( bVisible );
+	if( m_pRewardScrollBg ) m_pRewardScrollBg->SetVisible( bVisible );
+	if( m_pRewardScrollTrack ) m_pRewardScrollTrack->SetVisible( bVisible );
+	if( m_pRewardScrollUp ) m_pRewardScrollUp->SetVisible( bVisible );
+	if( m_pRewardScrollDown ) m_pRewardScrollDown->SetVisible( bVisible );
+	if( m_pRewardScrollThumb )
+	{
+		int const nScrollX = m_ptRewardModalPos.x + XML_UNION_REWARD_MODAL_W - 17;
+		int const nScrollY = m_ptRewardModalPos.y + 38;
+		int const nScrollTrackY = nScrollY + XML_UNION_REWARD_SCROLL_ARROW_H;
+		int const nThumbH = XML_UNION_REWARD_SCROLL_TRACK_H / 2;
+		int const nThumbY = nScrollTrackY + ( m_nRewardModalScrollRow > 0 ? XML_UNION_REWARD_SCROLL_TRACK_H - nThumbH : 0 );
+		m_pRewardScrollThumb->SetPosSize( CsPoint( nScrollX + 1, nThumbY ), CsPoint( XML_UNION_REWARD_SCROLL_W - 2, nThumbH ) );
+		m_pRewardScrollThumb->SetVisible( bVisible );
+	}
+}
+
+void cXmlUnionDUnit::_UpdateServerProgressControls()
+{
+	if( m_pProgressPercentText )
+	{
+		TCHAR szPercent[ 32 ] = { 0, };
+		_stprintf_s( szPercent, _countof( szPercent ), _T( "%u.%02u%%" ),
+			(unsigned int)( m_nServerProgressPercentBasisPoints / 100 ),
+			(unsigned int)( m_nServerProgressPercentBasisPoints % 100 ) );
+		m_pProgressPercentText->SetText( szPercent );
+	}
+
+	if( m_pProgressLevelValueText )
+	{
+		TCHAR szLevel[ 32 ] = { 0, };
+		if( m_bServerProgressLoaded )
+			_stprintf_s( szLevel, _countof( szLevel ), _T( "%u" ), (unsigned int)m_nServerXmlUnionLevel );
+		else
+			_tcscpy_s( szLevel, _countof( szLevel ), _T( "Desconhecido" ) );
+		m_pProgressLevelValueText->SetText( szLevel );
+	}
+
+	for( int i = 0; i < IF_XML_UNION_STAT_COUNT; ++i )
+	{
+		if( m_pStatValueText[ i ] == NULL )
+			continue;
+
+		TCHAR szValue[ 48 ] = { 0, };
+		_stprintf_s( szValue, _countof( szValue ), _IsPercentStatIndex( i ) ? _T( "+ %d%%" ) : _T( "+ %d" ), m_nServerBonusValue[ i ] );
+		m_pStatValueText[ i ]->SetText( szValue );
+	}
+}
+
+bool cXmlUnionDUnit::_IsRewardClaimed( int nRewardIndex ) const
+{
+	if( nRewardIndex < 0 || nRewardIndex >= 16 )
+		return false;
+
+	return ( m_nServerClaimedRewardMask & ( 1 << nRewardIndex ) ) != 0;
+}
+
+cXmlUnionDUnit::sSERVER_MEMBER_STATE const* cXmlUnionDUnit::_FindServerMemberState( DWORD dwGroupID, DWORD dwDigimonID, int nSlot ) const
+{
+	std::map< DWORD, sSERVER_GROUP_STATE >::const_iterator itGroup = m_mapServerGroups.find( dwGroupID );
+	if( itGroup == m_mapServerGroups.end() )
+		return NULL;
+
+	for( size_t i = 0; i < itGroup->second.s_vMembers.size(); ++i )
+	{
+		sSERVER_MEMBER_STATE const& state = itGroup->second.s_vMembers[ i ];
+		if( dwDigimonID != 0 && state.s_dwDigimonID == dwDigimonID )
+			return &state;
+	}
+
+	for( size_t i = 0; i < itGroup->second.s_vMembers.size(); ++i )
+	{
+		sSERVER_MEMBER_STATE const& state = itGroup->second.s_vMembers[ i ];
+		if( nSlot > 0 && state.s_nSlot == nSlot )
+			return &state;
+	}
+
+	return NULL;
+}
+
+bool cXmlUnionDUnit::_IsRewardMetaActive( cUnionXmlTools::sGROUP const& group, cUnionXmlTools::sREWARD const& reward, int nRewardIndex ) const
+{
+	std::map< DWORD, sSERVER_GROUP_STATE >::const_iterator itGroup = m_mapServerGroups.find( group.s_dwGroupID );
+	if( itGroup == m_mapServerGroups.end() )
+		return false;
+
+	int const nSlot = reward.s_nSlot > 0 ? reward.s_nSlot : nRewardIndex + 1;
+	for( size_t i = 0; i < itGroup->second.s_vEffects.size(); ++i )
+	{
+		sSERVER_EFFECT_STATE const& state = itGroup->second.s_vEffects[ i ];
+		if( state.s_nConditionIndex == nSlot )
+			return state.s_bActive;
+	}
+
+	if( nRewardIndex >= 0 && nRewardIndex < (int)itGroup->second.s_vEffects.size() )
+		return itGroup->second.s_vEffects[ nRewardIndex ].s_bActive;
+
+	return false;
+}
+
+std::wstring cXmlUnionDUnit::_FormatRewardGoal( cUnionXmlTools::sGROUP const& group, cUnionXmlTools::sREWARD const& reward, int nRewardIndex ) const
+{
+	std::wstring wsReward = _FormatReward( reward );
+	if( wsReward.size() >= 2 && wsReward[ 0 ] == L'-' && wsReward[ 1 ] == L' ' )
+		wsReward.erase( 0, 2 );
+
+	int const nSlot = reward.s_nSlot > 0 ? reward.s_nSlot : nRewardIndex + 1;
+	int const nMemberCount = group.s_nMemberCount > 0 ? group.s_nMemberCount : (int)group.s_vMembers.size();
+	int const nLevelReq1 = group.s_nLevelReq1 > 0 ? group.s_nLevelReq1 : group.s_nLevel;
+	int const nLevelReq2 = group.s_nLevelReq2 > 0 ? group.s_nLevelReq2 : nLevelReq1;
+
+	wchar_t szText[ 256 ] = { 0, };
+	switch( nSlot )
+	{
+	case 1:
+		swprintf_s( szText, _countof( szText ), L"Obtido %d Digimons, %s", nMemberCount, wsReward.c_str() );
+		break;
+	case 2:
+		swprintf_s( szText, _countof( szText ), L"Nível Total dos Digimons %d, %s", nLevelReq1, wsReward.c_str() );
+		break;
+	case 3:
+		swprintf_s( szText, _countof( szText ), L"Obtido %d Digimons Transcendidos, %s", nMemberCount, wsReward.c_str() );
+		break;
+	case 4:
+		swprintf_s( szText, _countof( szText ), L"Nível Total dos Digimons %d, %s", nLevelReq2, wsReward.c_str() );
+		break;
+	default:
+		swprintf_s( szText, _countof( szText ), L"%s", wsReward.c_str() );
+		break;
+	}
+
+	return szText;
+}
+
+void cXmlUnionDUnit::_ApplyServerStateToCard( sCARD_VIEW& card ) const
+{
+	sSERVER_MEMBER_STATE const* pState = _FindServerMemberState( card.s_dwGroupID, card.s_dwDigimonID, card.s_nSlot );
+	if( pState == NULL )
+	{
+		card.s_bOwned = false;
+		card.s_bEvolutionUnlocked = false;
+		card.s_bMeetsLevel = false;
+		card.s_bMeetsEvolution = false;
+		card.s_bMeetsTranscendence = false;
+		card.s_nLevel = 0;
+		return;
+	}
+
+	card.s_bOwned = pState->s_bOwned && pState->s_bEvolutionUnlocked;
+	card.s_bEvolutionUnlocked = pState->s_bEvolutionUnlocked;
+	card.s_bMeetsLevel = pState->s_bMeetsLevel;
+	card.s_bMeetsEvolution = pState->s_bMeetsEvolution;
+	card.s_bMeetsTranscendence = pState->s_bMeetsTranscendence;
+	card.s_nLevel = card.s_bOwned ? pState->s_nLevel : 0;
+}
+
+void cXmlUnionDUnit::_UpdateRewardReceiveButtonHover( int nHoverIndex )
+{
+	if( nHoverIndex == m_nRewardReceiveHoverIndex )
+		return;
+
+	m_nRewardReceiveHoverIndex = nHoverIndex;
+	for( int i = 0; i < IF_XML_UNION_REWARD_COUNT; ++i )
+	{
+		if( m_pRewardReceiveHoverBg[ i ] == NULL )
+			continue;
+
+		int const nOriginalRow = i / 3;
+		int const nDisplayRow = nOriginalRow - m_nRewardModalScrollRow;
+		bool const bVisible = m_bRewardModalVisible && nDisplayRow >= 0 && nDisplayRow < XML_UNION_REWARD_VISIBLE_ROWS;
+		m_pRewardReceiveHoverBg[ i ]->SetVisible( bVisible );
+		m_pRewardReceiveHoverBg[ i ]->SetColorA( i == m_nRewardReceiveHoverIndex ? NiColorA( 0.06f, 0.36f, 0.58f, 1.0f ) : NiColorA( 0.02f, 0.22f, 0.36f, 1.0f ) );
+	}
 }
 
 void cXmlUnionDUnit::_UpdateHoverTooltipControls()
@@ -2160,6 +3356,112 @@ void cXmlUnionDUnit::_UpdateVisibleFilters()
 	}
 }
 
+bool cXmlUnionDUnit::_IsFilterFavorite( int nFilterIndex ) const
+{
+	if( nFilterIndex < 0 || nFilterIndex >= (int)m_vAllGroups.size() )
+		return false;
+
+	return _IsFavoriteGroupID( m_vAllGroups[ nFilterIndex ].s_dwGroupID );
+}
+
+bool cXmlUnionDUnit::_IsFavoriteGroupID( DWORD dwGroupID ) const
+{
+	return m_setFavoriteGroupIDs.find( dwGroupID ) != m_setFavoriteGroupIDs.end();
+}
+
+void cXmlUnionDUnit::_ToggleFilterFavorite( int nFilterIndex )
+{
+	if( nFilterIndex < 0 || nFilterIndex >= (int)m_vAllGroups.size() )
+		return;
+
+	DWORD const dwGroupID = m_vAllGroups[ nFilterIndex ].s_dwGroupID;
+	std::set< DWORD >::iterator it = m_setFavoriteGroupIDs.find( dwGroupID );
+	if( it != m_setFavoriteGroupIDs.end() )
+	{
+		m_setFavoriteGroupIDs.erase( it );
+		for( std::vector< DWORD >::iterator itOrder = m_vFavoriteGroupOrder.begin(); itOrder != m_vFavoriteGroupOrder.end(); )
+		{
+			if( *itOrder == dwGroupID )
+				itOrder = m_vFavoriteGroupOrder.erase( itOrder );
+			else
+				++itOrder;
+		}
+	}
+	else
+	{
+		m_setFavoriteGroupIDs.insert( dwGroupID );
+		m_vFavoriteGroupOrder.push_back( dwGroupID );
+	}
+
+	_SaveFavoriteCache();
+	m_nFilterScroll = 0;
+	_RefreshView();
+}
+
+std::string cXmlUnionDUnit::_GetFavoriteCachePath() const
+{
+	CreateDirectoryA( "Temp", NULL );
+
+	char szUser[ 64 ] = { 0, };
+	DWORD const dwEnvLen = GetEnvironmentVariableA( "USERNAME", szUser, _countof( szUser ) );
+	if( dwEnvLen == 0 || dwEnvLen >= _countof( szUser ) || szUser[ 0 ] == 0 )
+		strcpy_s( szUser, _countof( szUser ), "default" );
+
+	std::string strSafeUser;
+	for( int i = 0; szUser[ i ] != 0; ++i )
+	{
+		unsigned char const ch = (unsigned char)szUser[ i ];
+		strSafeUser.push_back( isalnum( ch ) || ch == '_' || ch == '-' ? (char)ch : '_' );
+	}
+	if( strSafeUser.empty() )
+		strSafeUser = "default";
+
+	return std::string( "Temp\\XmlUnionDUnitFavorites_" ) + strSafeUser + ".cache";
+}
+
+void cXmlUnionDUnit::_LoadFavoriteCache()
+{
+	m_setFavoriteGroupIDs.clear();
+	m_vFavoriteGroupOrder.clear();
+
+	std::string const strPath = _GetFavoriteCachePath();
+	FILE* fp = NULL;
+	if( fopen_s( &fp, strPath.c_str(), "rt" ) != 0 || fp == NULL )
+		return;
+
+	char szLine[ 128 ] = { 0, };
+	while( fgets( szLine, _countof( szLine ), fp ) )
+	{
+		char* pEnd = NULL;
+		unsigned long const ulGroupID = strtoul( szLine, &pEnd, 10 );
+		if( ulGroupID > 0 && m_setFavoriteGroupIDs.find( (DWORD)ulGroupID ) == m_setFavoriteGroupIDs.end() )
+		{
+			m_setFavoriteGroupIDs.insert( (DWORD)ulGroupID );
+			m_vFavoriteGroupOrder.push_back( (DWORD)ulGroupID );
+		}
+	}
+
+	fclose( fp );
+}
+
+void cXmlUnionDUnit::_SaveFavoriteCache() const
+{
+	std::string const strPath = _GetFavoriteCachePath();
+	FILE* fp = NULL;
+	if( fopen_s( &fp, strPath.c_str(), "wt" ) != 0 || fp == NULL )
+		return;
+
+	fprintf( fp, "# XmlUnionDUnit favorite group ids\n" );
+	for( size_t i = 0; i < m_vFavoriteGroupOrder.size(); ++i )
+	{
+		DWORD const dwGroupID = m_vFavoriteGroupOrder[ i ];
+		if( _IsFavoriteGroupID( dwGroupID ) )
+			fprintf( fp, "%lu\n", (unsigned long)dwGroupID );
+	}
+
+	fclose( fp );
+}
+
 void cXmlUnionDUnit::_UpdateFilterRowControls()
 {
 	for( int i = 0; i < IF_XML_UNION_FILTER_COUNT; ++i )
@@ -2169,10 +3471,15 @@ void cXmlUnionDUnit::_UpdateFilterRowControls()
 		bool const bVisible = i < (int)m_vFilters.size();
 		bool const bSelected = nAbsoluteIndex == m_nSelectedFilter;
 		bool const bHover = bVisible && nFilteredIndex == m_nHoverFilter;
+		bool const bFavorite = bVisible && _IsFilterFavorite( nAbsoluteIndex );
 
 		if( m_pFilterButtons[ i ] ) m_pFilterButtons[ i ]->SetVisible( bVisible );
 		if( m_pFilterHoverBg[ i ] ) m_pFilterHoverBg[ i ]->SetVisible( bHover && bSelected == false );
-		if( m_pFilterBookmark[ i ] ) m_pFilterBookmark[ i ]->SetVisible( bVisible );
+		if( m_pFilterBookmark[ i ] )
+		{
+			m_pFilterBookmark[ i ]->SetVisible( bVisible );
+			m_pFilterBookmark[ i ]->SetColorA( bFavorite ? NiColorA( 1.0f, 0.92f, 0.08f, 1.0f ) : ( bHover ? NiColorA( 0.50f, 0.53f, 0.56f, 0.72f ) : NiColorA( 0.25f, 0.27f, 0.30f, 0.55f ) ) );
+		}
 
 		TCHAR szText[ 96 ] = { 0, };
 		if( bVisible )

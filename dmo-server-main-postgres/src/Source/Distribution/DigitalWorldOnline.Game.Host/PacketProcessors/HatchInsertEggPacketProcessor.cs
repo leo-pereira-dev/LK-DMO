@@ -26,10 +26,15 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         {
             var packet = new GamePacketReader(packetData);
 
-            var vipEnabled = packet.ReadByte();
             var itemSlot = packet.ReadInt();
+            _ = packet.ReadInt(); // NPC id; the current client sends it after the slot.
 
             var inventoryItem = client.Tamer.Inventory.FindItemBySlot(itemSlot);
+            if (inventoryItem == null)
+            {
+                _logger.Warning($"Invalid hatch egg slot {itemSlot} for character {client.TamerId}.");
+                return;
+            }
 
             client.Tamer.Incubator.InsertEgg(inventoryItem.ItemId);
 

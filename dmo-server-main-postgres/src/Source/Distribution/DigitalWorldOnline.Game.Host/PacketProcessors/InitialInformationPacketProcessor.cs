@@ -2,6 +2,7 @@
 using DigitalWorldOnline.Application;
 using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Application.GameAssets.Bins;
+using DigitalWorldOnline.Application.GameAssets.Xml;
 using DigitalWorldOnline.Application.Separar.Commands.Create;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
@@ -41,6 +42,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         private readonly AssetsLoader _assets;
         private readonly DigimonEvoBinLoader _digimonEvo;
+        private readonly DUnitCollectionService _dUnitCollections;
         private readonly ILogger _logger;
         private readonly ISender _sender;
         private readonly IMapper _mapper;
@@ -53,6 +55,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             DungeonsServer dungeonsServer,
             AssetsLoader assets,
             DigimonEvoBinLoader digimonEvo,
+            DUnitCollectionService dUnitCollections,
             ILogger logger,
             ISender sender,
             IMapper mapper)
@@ -64,6 +67,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _dungeonsServer = dungeonsServer;
             _assets = assets;
             _digimonEvo = digimonEvo;
+            _dUnitCollections = dUnitCollections;
             _logger = logger;
             _sender = sender;
             _mapper = mapper;
@@ -188,6 +192,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 character.Inventory.Items.Count,
                 character.Inventory.Count);
 
+            await RecoverInvalidEvolutionState(character);
+            await RecoverAutoUnlockedEvolutions(character);
+
             foreach (var digimon in character.Digimons)
             {
                 digimon.SetTamer(character);
@@ -215,6 +222,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 digimon.SetSealStatus(_assets.SealInfo);
             }
 
+            await HydrateArchiveDigimonsForDUnit(character);
+
             _logger.Debug($"Getting character status information...");
             // Per-model tamer "base status" retired — DMBase.bin §1 carries the full per-level
             // stat block, equipment/socket/buff add on top in CharacterModelBehavior. v487 client
@@ -231,6 +240,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     character.Level
                 )
             );
+
+            _dUnitCollections.ApplyBonuses(character);
 
             character.NewViewLocation(character.Location.X, character.Location.Y);
             character.RemovePartnerPassiveBuff();
@@ -283,11 +294,17 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             // otherwise.
 
             character.UpdateState(CharacterStateEnum.Loading);
+            character.EnsureXmlUnionProgress();
+            character.XmlUnionProgress.SetProgress(
+                character.XmlUnionProgress.Level,
+                character.XmlUnionProgress.CurrentExperience,
+                _assets.XmlUnion.GetRequiredExperience(character.XmlUnionProgress.Level));
 
             client.SetCharacter(character);
 
             _logger.Debug($"Updating character state...");
             await _sender.Send(new UpdateCharacterStateCommand(character.Id, CharacterStateEnum.Loading));
+            await _sender.Send(new UpdateCharacterXmlUnionProgressCommand(character.XmlUnionProgress));
 
             if (character.Location.MapId == 9101)
             {
@@ -354,18 +371,28 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return 0;
             }
 
+            LogInitialInfoDiagnostics(character, EvoSlotFor);
+
             var __pkt = new InitialInfoPacket(character, party, EvoSlotFor, account.AccessLevel);
             var __bytes = __pkt.Serialize();
 
             client.Send(__bytes);
             PortalTrace.Write($"InitialInfoPacket sent tamer={character.Id} bytes={__bytes.Length} map={character.Location.MapId}");
+            _logger.Information(
+                "[INIT-TRACE] sent tamer={TamerId} bytes={Bytes} map={MapId} channel={Channel} tamerHandler={TamerHandler} partnerHandler={PartnerHandler}",
+                character.Id,
+                __bytes.Length,
+                character.Location.MapId,
+                character.Channel,
+                character.GeneralHandler,
+                character.Partner.GeneralHandler);
 
             // Diagnostic dump — failure must never block gameplay
             try
             {
                 var dumpDir = "PacketDumps";
                 Directory.CreateDirectory(dumpDir);
-                var dumpPath = Path.Combine(dumpDir, "initgamedata_dump.bin");
+                var dumpPath = Path.Combine(dumpDir, $"initgamedata_tamer{character.Id}_{DateTime.UtcNow:yyyyMMddHHmmssfff}.bin");
                 File.WriteAllBytes(dumpPath, __bytes);
                 _logger.Information($"Dumped InitialInfoPacket: {__bytes.Length} bytes -> {dumpPath}");
             }
@@ -378,6 +405,88 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             _logger.Debug($"Updating character channel...");
             await _sender.Send(new UpdateCharacterChannelCommand(character.Id, character.Channel));
+        }
+
+        private void LogInitialInfoDiagnostics(CharacterModel character, Func<int, byte> evoSlotFor)
+        {
+            _logger.Information(
+                "[INIT-TRACE] build tamer={TamerId} name={Name} map={MapId} pos={X},{Y} state={State} level={Level} hp={Hp}/{MaxHp} ds={Ds}/{MaxDs} partner={PartnerId}:{PartnerName} base={BaseType} current={CurrentType} level={PartnerLevel} slots={DigimonSlots} activeEvoDs={ActiveEvoDs} activeEvoXg={ActiveEvoXg}",
+                character.Id,
+                character.Name,
+                character.Location.MapId,
+                character.Location.X,
+                character.Location.Y,
+                character.State,
+                character.Level,
+                character.CurrentHp,
+                character.HP,
+                character.CurrentDs,
+                character.DS,
+                character.Partner.Id,
+                character.Partner.Name,
+                character.Partner.BaseType,
+                character.Partner.CurrentType,
+                character.Partner.Level,
+                character.DigimonSlots,
+                character.ActiveEvolution.DsPerSecond,
+                character.ActiveEvolution.XgPerSecond);
+
+            _logger.Information(
+                "[INIT-TRACE] tamerBuffs count={Count} data={Buffs}",
+                character.BuffList.ActiveBuffs.Count,
+                BuildBuffSummary(character.BuffList.ActiveBuffs));
+
+            _logger.Information(
+                "[INIT-TRACE] partnerBuffs count={Count} data={Buffs}",
+                character.Partner.BuffList.ActiveBuffs.Count,
+                BuildBuffSummary(character.Partner.BuffList.ActiveBuffs));
+
+            _logger.Information(
+                "[INIT-TRACE] partnerEvos count={Count} data={Evos}",
+                character.Partner.Evolutions.Count,
+                string.Join("|", character.Partner.Evolutions.Select(x =>
+                    $"{x.Type}:unlocked={x.Unlocked}:slot={evoSlotFor(x.Type)}:skills={x.Skills.Count}:mem={x.MemorySkills.Count}")));
+
+            _logger.Information(
+                "[INIT-TRACE] activeSkills count={Count} data={Skills}",
+                character.ActiveSkill.Count,
+                string.Join("|", character.ActiveSkill.Select(x =>
+                    $"{x.Type}:{x.SkillId}:cd={x.RemainingCooldownSeconds}:min={x.RemainingMinutes}:dur={x.Duration}:cool={x.Cooldown}")));
+        }
+
+        private static string BuildBuffSummary(IEnumerable<DigitalWorldOnline.Commons.Models.Buff> buffs)
+        {
+            return string.Join("|", buffs.Select(x =>
+                $"{x.BuffId}:{x.SkillId}:type={x.TypeN}:dur={x.Duration}:remain={x.RemainingSeconds}:buffInfo={(x.BuffInfo == null ? 0 : 1)}"));
+        }
+
+        private async Task HydrateArchiveDigimonsForDUnit(CharacterModel character)
+        {
+            foreach (var digimonArchive in character.DigimonArchive.DigimonArchives.Where(x => x.DigimonId > 0))
+            {
+                if (digimonArchive.Digimon != null)
+                    continue;
+
+                digimonArchive.SetDigimonInfo(_mapper.Map<DigitalWorldOnline.Commons.Models.Digimon.DigimonModel>(
+                    await _sender.Send(new GetDigimonByIdQuery(digimonArchive.DigimonId))));
+
+                if (digimonArchive.Digimon == null)
+                    continue;
+
+                digimonArchive.Digimon.SetTamer(character);
+                digimonArchive.Digimon.SetBaseInfo(
+                    _statusManager.GetDigimonBaseInfo(digimonArchive.Digimon.BaseType));
+                digimonArchive.Digimon.SetBaseStatus(
+                    _statusManager.GetDigimonBaseStatus(
+                        digimonArchive.Digimon.BaseType,
+                        digimonArchive.Digimon.Level,
+                        digimonArchive.Digimon.Size));
+            }
+
+            _logger.Information(
+                "[DUnit] Character {CharacterId} archive digimons available for collection calculation: {Count}",
+                character.Id,
+                character.DigimonArchive.DigimonArchives.Count(x => x.Digimon != null));
         }
 
         private async Task ReceiveArenaPoints(GameClient client)
@@ -417,6 +526,76 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 client.Tamer.Points.SetCurrentStage(0);
                 await _sender.Send(new UpdateCharacterArenaPointsCommand(client.Tamer.Points));
             }
+        }
+
+        private async Task RecoverInvalidEvolutionState(CharacterModel character)
+        {
+            var recovered = false;
+
+            foreach (var digimon in character.Digimons)
+            {
+                if (digimon.CurrentType == digimon.BaseType)
+                    continue;
+
+                var currentEvolution = digimon.Evolutions.FirstOrDefault(x => x.Type == digimon.CurrentType);
+                if (currentEvolution != null && currentEvolution.Unlocked > 0)
+                    continue;
+
+                _logger.Warning(
+                    "Character {CharacterId} digimon {DigimonId} had invalid current evolution {CurrentType} (base {BaseType}, unlocked={Unlocked}); reverting to base type.",
+                    character.Id,
+                    digimon.Id,
+                    digimon.CurrentType,
+                    digimon.BaseType,
+                    currentEvolution?.Unlocked ?? 0);
+
+                digimon.UpdateCurrentType(digimon.BaseType);
+                await _sender.Send(new UpdatePartnerCurrentTypeCommand(digimon));
+                recovered = true;
+            }
+
+            if (!recovered)
+                return;
+
+            character.ActiveEvolution.SetDs(0);
+            character.ActiveEvolution.SetXg(0);
+            await _sender.Send(new UpdateCharacterActiveEvolutionCommand(character.ActiveEvolution));
+        }
+
+        private async Task RecoverAutoUnlockedEvolutions(CharacterModel character)
+        {
+            foreach (var digimon in character.Digimons)
+            {
+                foreach (var evolution in digimon.Evolutions.Where(x => x.Unlocked == 0))
+                {
+                    var line = _digimonEvo.Data.FindByType(digimon.BaseType)?.Lines.FirstOrDefault(x => x.Type == evolution.Type);
+                    if (line == null || !ShouldAutoUnlockEvolution(line))
+                        continue;
+
+                    evolution.Unlock();
+                    await _sender.Send(new UpdateEvolutionCommand(evolution));
+
+                    _logger.Information(
+                        "[EVO-REPAIR] character={CharacterId} digimon={DigimonId} base={BaseType} unlocked={EvolutionType} slot={SlotLevel}",
+                        character.Id,
+                        digimon.Id,
+                        digimon.BaseType,
+                        evolution.Type,
+                        line.EvoSlot);
+                }
+            }
+        }
+
+        private static bool ShouldAutoUnlockEvolution(DigimonEvoLine line)
+        {
+            if (line.EvoSlot <= 2)
+                return true;
+
+            return line.EnableSlot > 0 &&
+                   line.OpenQualification == 0 &&
+                   line.OpenQuest <= 0 &&
+                   line.UseItem <= 0 &&
+                   line.UseItemNum <= 0;
         }
     }
 }

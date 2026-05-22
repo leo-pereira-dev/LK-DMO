@@ -21,7 +21,6 @@ namespace DigitalWorldOnline.Infraestructure.ContextConfiguration.Digimon
             builder
                 .Property(x => x.EndDate)
                 .HasColumnType("datetime(6)")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)")
                 .IsRequired();
 
             builder

@@ -1,0 +1,1429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UnionDigimonLines source="DMO Union - DigimonLines.csv" count="156">
+  <Line id="1" name="Agumon Line 1" unlocks="11" levelReq1="960" levelReq2="1200" myUnlocks="11" currentLevel="150" transcended="TRUE" iconCandidateId="31007" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Agumon(Classic)" iconCandidateId="31007" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Greymon" iconCandidateId="41046" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="MetalGreymon" iconCandidateId="51047" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="WarGreymon" iconCandidateId="61042" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="VictoryGreymon" iconCandidateId="71020" iconStatus="matched" iconFolder="" />
+      <Member slot="6" name="Omegamon" iconCandidateId="71072" iconStatus="matched" iconFolder="" />
+      <Member slot="7" name="Agumon X" iconCandidateId="75100" iconStatus="matched" iconFolder="" />
+      <Member slot="8" name="Greymon X" iconCandidateId="75300" iconStatus="matched" iconFolder="" />
+      <Member slot="9" name="MetalGreymon X" iconCandidateId="75500" iconStatus="matched" iconFolder="" />
+      <Member slot="10" name="WarGreymon X" iconCandidateId="75700" iconStatus="matched" iconFolder="" />
+      <Member slot="11" name="Omegamon X" iconCandidateId="75902" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="2" raw="DE +150" stat="DE" sign="+" value="150" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="4" raw="Light 1%" stat="Light" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="1" type="HP" value="1950" />
+  </Line>
+  <Line id="2" name="Agumon Line 2" unlocks="4" membersRequired="4" levelReq1="480" levelReq2="480" myUnlocks="5" currentLevel="150" transcended="TRUE" iconCandidateId="31001" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Agumon" iconCandidateId="31001" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="GeoGreymon" iconCandidateId="41004" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="RizeGreymon" iconCandidateId="51007" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="ShineGreymon" iconCandidateId="61011" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="ShineGreymon: BurstMode" iconCandidateId="71015" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="7" raw="SCD 1%" stat="SCD" value="1" unit="percent" />
+      <Reward slot="4" effectId="8" raw="Vaccine 2%" stat="Vaccine" value="2" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="2" type="DS" value="4330" />
+  </Line>
+  <Line id="156" name="Agumon Line 3" unlocks="6" levelReq1="550" levelReq2="700" myUnlocks="6" currentLevel="150" transcended="TRUE" iconCandidateId="31007" iconStatus="matched" iconFolder="">
+    
+  <Members>
+      <Member slot="1" name="Agumon" iconCandidateId="31007" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Greymon" iconCandidateId="41046" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="MetalGreymon" iconCandidateId="51047" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="WarGreymon" iconCandidateId="61042" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="VictoryGreymon" iconCandidateId="71020" iconStatus="matched" iconFolder="" />
+      <Member slot="6" name="Omegamon" iconCandidateId="71072" iconStatus="matched" iconFolder="" />
+    </Members></Line><Line id="3" name="Agumon Black Line 1" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="150" transcended="FALSE" iconCandidateId="31043" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Agumon(Black)" iconCandidateId="31043" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Greymon(Black)" iconCandidateId="41061" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="MetalGreymon(Black)" iconCandidateId="51063" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="WarGreymon(Black)" iconCandidateId="61154" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Omegamon Zwart" iconCandidateId="71073" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="2" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="3" type="AT" value="270" />
+  </Line>
+  <Line id="4" name="Agumon Black Line 2" unlocks="5" levelReq1="600" levelReq2="750" myUnlocks="5" currentLevel="150" transcended="FALSE" iconCandidateId="31043" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Agumon(Black)" iconCandidateId="31043" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Greymon(Black)" iconCandidateId="41061" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="MetalGreymon(Black)" iconCandidateId="51063" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="WarGreymon(Black)" iconCandidateId="61154" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Omegamon ZwartD" iconCandidateId="71107" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="4" type="DE" value="1590" />
+  </Line>
+  <Line id="5" name="Agumon Black Blitz 1" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="140" transcended="TRUE" iconCandidateId="31043" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Agumon(Black)[BlitzGreymon]" iconCandidateId="31043" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Greymon(Black)" iconCandidateId="41061" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="MetalGreymon(Black)" iconCandidateId="51063" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="Blitz Greymon" iconCandidateId="63006" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Omegamon Alter-S" iconCandidateId="71104" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="3" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="5" type="HT" value="310" />
+  </Line>
+  <Line id="6" name="Agumon Black Blitz 2" unlocks="5" levelReq1="600" levelReq2="750" myUnlocks="5" currentLevel="140" transcended="FALSE" iconCandidateId="31043" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Agumon(Black)[BlitzGreymon]" iconCandidateId="31043" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Greymon(Black)" iconCandidateId="41061" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="MetalGreymon(Black)" iconCandidateId="51063" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="Blitz Greymon" iconCandidateId="63006" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Omegamon Alter-B" iconCandidateId="71109" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="20" raw="AT +20" stat="AT" sign="+" value="20" unit="flat" />
+      <Reward slot="3" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="6" type="CT" value="350" />
+  </Line>
+  <Line id="7" name="Agumon Black Millenium" unlocks="7" levelReq1="840" levelReq2="1050" myUnlocks="6" currentLevel="110" transcended="FALSE" iconCandidateId="1031001" iconStatus="matched" iconFolder="agumon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="7" type="EV" value="990" />
+  </Line>
+  <Line id="8" name="ToyAgumon SS+" unlocks="3" levelReq1="330" levelReq2="420" myUnlocks="3" currentLevel="110" transcended="FALSE" iconCandidateId="1031001" iconStatus="partial" iconFolder="agumon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="8" type="BL" value="640" />
+  </Line>
+  <Line id="9" name="ToyAgumon" unlocks="2" levelReq1="220" levelReq2="280" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="1031001" iconStatus="partial" iconFolder="agumon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="9" type="EXP" value="630" />
+  </Line>
+  <Line id="10" name="Gabumon 1" unlocks="11" levelReq1="840" levelReq2="1050" myUnlocks="11" currentLevel="150" transcended="TRUE" iconCandidateId="31138" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Gabumon" iconCandidateId="31138" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Garurumon" iconCandidateId="41139" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="WereGarurumon" iconCandidateId="51148" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="MetalGarurumon" iconCandidateId="61148" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Z'dGarurumon" iconCandidateId="71021" iconStatus="matched" iconFolder="" />
+      <Member slot="6" name="Omegamon" iconCandidateId="71072" iconStatus="matched" iconFolder="" />
+      <Member slot="7" name="Gabumon X" iconCandidateId="75101" iconStatus="matched" iconFolder="" />
+      <Member slot="8" name="Garurumon X" iconCandidateId="75301" iconStatus="matched" iconFolder="" />
+      <Member slot="9" name="WereGarurumon X" iconCandidateId="75501" iconStatus="matched" iconFolder="" />
+      <Member slot="10" name="MetalGarurumon X" iconCandidateId="75701" iconStatus="matched" iconFolder="" />
+      <Member slot="11" name="Omegamon X" iconCandidateId="75902" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="2" raw="DE +150" stat="DE" sign="+" value="150" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="25" raw="Light 2%" stat="Light" value="2" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="10" type="Basic Attribute" value="0" />
+  </Line>
+  <Line id="11" name="Gabumon 2" unlocks="7" levelReq1="910" levelReq2="1120" myUnlocks="6" currentLevel="150" transcended="TRUE" iconCandidateId="31138" iconStatus="matched" iconFolder="gabumon">
+    <Rewards>
+      <Reward slot="1" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="7" raw="SCD 1%" stat="SCD" value="1" unit="percent" />
+      <Reward slot="4" effectId="8" raw="Vaccine 2%" stat="Vaccine" value="2" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="11" type="SCD" value="1" />
+  </Line>
+  <Line id="12" name="Gabumon Cres 1" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="150" transcended="FALSE" iconCandidateId="31138" iconStatus="matched" iconFolder="gabumon">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="3" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="12" type="Vaccine" value="2" />
+  </Line>
+  <Line id="13" name="Gabumon Cres 2" unlocks="5" levelReq1="600" levelReq2="750" myUnlocks="4" currentLevel="150" transcended="FALSE" iconCandidateId="31138" iconStatus="matched" iconFolder="gabumon">
+    <Rewards>
+      <Reward slot="1" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="20" raw="AT +20" stat="AT" sign="+" value="20" unit="flat" />
+      <Reward slot="3" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="13" type="Data" value="2" />
+  </Line>
+  <Line id="14" name="Gabumon Black 1" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="150" transcended="TRUE" iconCandidateId="31068" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Gabumon(Black)" iconCandidateId="31068" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Garurumon(Black)" iconCandidateId="41140" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="WereGarurumon(Black)" iconCandidateId="51149" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="MetalGarurumon(Black)" iconCandidateId="61153" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Omegamon Zwart" iconCandidateId="71073" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="26" raw="CT +50" stat="CT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="14" type="Virus" value="5" />
+  </Line>
+  <Line id="15" name="Gabumon Black 2" unlocks="5" levelReq1="600" levelReq2="750" myUnlocks="5" currentLevel="150" transcended="TRUE" iconCandidateId="31068" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Gabumon(Black)" iconCandidateId="31068" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Garurumon(Black)" iconCandidateId="41140" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="WereGarurumon(Black)" iconCandidateId="51149" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="MetalGarurumon(Black)" iconCandidateId="61153" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Omegamon ZwartD" iconCandidateId="71107" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="8" raw="Vaccine 2%" stat="Vaccine" value="2" unit="percent" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="15" type="Unknown" value="1" />
+  </Line>
+  <Line id="16" name="Salamon Ordine 1" unlocks="8" levelReq1="880" levelReq2="1120" myUnlocks="7" currentLevel="150" transcended="TRUE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="3" effectId="4" raw="Light 1%" stat="Light" value="1" unit="percent" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="16" type="Fire" value="5" />
+  </Line>
+  <Line id="17" name="Salamon Ordine 2" unlocks="8" levelReq1="960" levelReq2="1200" myUnlocks="7" currentLevel="150" transcended="TRUE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="17" type="Water" value="1" />
+  </Line>
+  <Line id="18" name="Salamon Ordine 3" unlocks="8" levelReq1="960" levelReq2="1200" myUnlocks="7" currentLevel="150" transcended="TRUE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="2" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="30" raw="Unknown 2%" stat="Unknown" value="2" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="18" type="Ice" value="3" />
+  </Line>
+  <Line id="19" name="Salamon Lilith" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="150" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="19" type="Land" value="0" />
+  </Line>
+  <Line id="20" name="Salamon Merva 1" unlocks="7" levelReq1="960" levelReq2="1200" myUnlocks="6" currentLevel="110" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="20" type="Wood" value="0" />
+  </Line>
+  <Line id="21" name="Salamon Merva 2" unlocks="8" levelReq1="960" levelReq2="1200" myUnlocks="6" currentLevel="110" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="3" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="21" type="Wind" value="4" />
+  </Line>
+  <Line id="22" name="Salamon Valk" unlocks="8" levelReq1="880" levelReq2="1120" myUnlocks="8" currentLevel="150" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="2" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="3" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="31" raw="Ice 1%" stat="Ice" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="22" type="Thunder" value="2" />
+  </Line>
+  <Line id="23" name="Patamon" unlocks="6" levelReq1="660" levelReq2="840" myUnlocks="6" currentLevel="150" transcended="TRUE" iconCandidateId="31012" iconStatus="matched" iconFolder="patamon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="26" raw="CT +50" stat="CT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="23" type="Steel" value="0" />
+  </Line>
+  <Line id="24" name="Patamon Slash" unlocks="7" levelReq1="770" levelReq2="980" myUnlocks="7" currentLevel="140" transcended="FALSE" iconCandidateId="31012" iconStatus="matched" iconFolder="patamon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="24" type="Light" value="1" />
+  </Line>
+  <Line id="25" name="Palmon original" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="1131041" iconStatus="matched" iconFolder="palmon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+    <TotalStat filterId="25" type="Dark" value="2" />
+  </Line>
+  <Line id="26" name="Palmon Woodmon" unlocks="6" levelReq1="660" levelReq2="840" myUnlocks="6" currentLevel="110" transcended="FALSE" iconCandidateId="1131041" iconStatus="partial" iconFolder="palmon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="27" name="Palmon MarineAnge" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="150" transcended="TRUE" iconCandidateId="1131041" iconStatus="matched" iconFolder="palmon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="28" name="Palmon Apocaly" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="1131041" iconStatus="matched" iconFolder="palmon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="29" name="Piyomon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="110" transcended="TRUE" iconCandidateId="1431048" iconStatus="matched" iconFolder="piyomon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="30" name="Gomamon 1" unlocks="6" levelReq1="660" levelReq2="840" myUnlocks="5" currentLevel="110" transcended="TRUE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="31" name="Gomamon 2" unlocks="6" levelReq1="660" levelReq2="840" myUnlocks="5" currentLevel="110" transcended="TRUE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="32" name="Gomamon JiJi" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="0" currentLevel="0" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="33" name="Tentomon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="150" transcended="TRUE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="3" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="34" name="Veemon Ulforce" unlocks="7" levelReq1="770" levelReq2="980" myUnlocks="7" currentLevel="150" transcended="TRUE" iconCandidateId="31008" iconStatus="matched" iconFolder="vmon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="40" raw="DE +100" stat="DE" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="35" name="Veemon Jogress" unlocks="7" levelReq1="840" levelReq2="1050" myUnlocks="6" currentLevel="110" transcended="FALSE" iconCandidateId="31008" iconStatus="matched" iconFolder="vmon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="40" raw="DE +100" stat="DE" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="36" name="Veemon Imperial" unlocks="8" levelReq1="880" levelReq2="1120" myUnlocks="8" currentLevel="110" transcended="FALSE" iconCandidateId="31008" iconStatus="matched" iconFolder="vmon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="37" name="Wormmon Grandis" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="31142" iconStatus="matched" iconFolder="wormmon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="26" raw="CT +50" stat="CT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="38" name="Wormmon Jogress" unlocks="7" levelReq1="840" levelReq2="1050" myUnlocks="6" currentLevel="150" transcended="FALSE" iconCandidateId="31142" iconStatus="matched" iconFolder="wormmon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="4" raw="Light 1%" stat="Light" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="39" name="Hawkmon" unlocks="8" levelReq1="880" levelReq2="1120" myUnlocks="8" currentLevel="110" transcended="FALSE" iconCandidateId="31020" iconStatus="matched" iconFolder="hawkmon">
+    <Rewards>
+      <Reward slot="1" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="2" effectId="41" raw="DS +150" stat="DS" sign="+" value="150" unit="flat" />
+      <Reward slot="3" effectId="40" raw="DE +100" stat="DE" sign="+" value="100" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="40" name="Hawk Valk" unlocks="9" levelReq1="990" levelReq2="1260" myUnlocks="9" currentLevel="110" transcended="FALSE" iconCandidateId="31020" iconStatus="partial" iconFolder="hawkmon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="41" name="Armadimon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="110" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="42" name="Armadimon Slash" unlocks="7" levelReq1="770" levelReq2="980" myUnlocks="7" currentLevel="110" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="41" raw="DS +150" stat="DS" sign="+" value="150" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="43" name="Guilmon 1" unlocks="9" levelReq1="910" levelReq2="1120" myUnlocks="9" currentLevel="152" transcended="TRUE" iconCandidateId="31005" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Guilmon" iconCandidateId="31005" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Growmon" iconCandidateId="41074" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="WarGrowlmon" iconCandidateId="51074" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="Gallantmon" iconCandidateId="61074" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Gallantmon Crimson Mode" iconCandidateId="71074" iconStatus="matched" iconFolder="" />
+      <Member slot="6" name="Guilmon X" iconCandidateId="75108" iconStatus="matched" iconFolder="" />
+      <Member slot="7" name="Growlmon X" iconCandidateId="75308" iconStatus="matched" iconFolder="" />
+      <Member slot="8" name="WarGrowlmon X" iconCandidateId="75508" iconStatus="matched" iconFolder="" />
+      <Member slot="9" name="Gallantmon X" iconCandidateId="75709" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="26" raw="CT +50" stat="CT" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="44" raw="Virus 2%" stat="Virus" value="2" unit="percent" />
+      <Reward slot="4" effectId="25" raw="Light 2%" stat="Light" value="2" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="44" name="Guilmon 2" unlocks="8" levelReq1="1040" levelReq2="1280" myUnlocks="6" currentLevel="152" transcended="FALSE" iconCandidateId="75108" iconStatus="partial" iconFolder="guilmonx">
+    <Rewards>
+      <Reward slot="1" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="7" raw="SCD 1%" stat="SCD" value="1" unit="percent" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="45" name="Guilmon Chaos" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="144" transcended="TRUE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="3" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="46" name="Renamon" unlocks="7" levelReq1="910" levelReq2="1120" myUnlocks="5" currentLevel="150" transcended="FALSE" iconCandidateId="31006" iconStatus="matched" iconFolder="renamon">
+    <Rewards>
+      <Reward slot="1" effectId="45" raw="Data 2%" stat="Data" value="2" unit="percent" />
+      <Reward slot="2" effectId="46" raw="EV +150" stat="EV" sign="+" value="150" unit="flat" />
+      <Reward slot="3" effectId="47" raw="AT +100" stat="AT" sign="+" value="100" unit="flat" />
+      <Reward slot="4" effectId="48" raw="Dark 2%" stat="Dark" value="2" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="47" name="Shoutmon" unlocks="10" levelReq1="1300" levelReq2="1600" myUnlocks="7" currentLevel="155" transcended="FALSE" iconCandidateId="33001" iconStatus="matched" iconFolder="shoutmon">
+    <Rewards>
+      <Reward slot="1" effectId="2" raw="DE +150" stat="DE" sign="+" value="150" unit="flat" />
+      <Reward slot="2" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="48" name="Mailbirdramon" unlocks="7" levelReq1="910" levelReq2="1120" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="33004" iconStatus="matched" iconFolder="mailbirdramon">
+    <Rewards>
+      <Reward slot="1" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="46" raw="EV +150" stat="EV" sign="+" value="150" unit="flat" />
+      <Reward slot="3" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="49" name="Greymon (c)" unlocks="7" levelReq1="910" levelReq2="1120" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="43005" iconStatus="matched" iconFolder="greymonc">
+    <Rewards>
+      <Reward slot="1" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="50" raw="DS +500" stat="DS" sign="+" value="500" unit="flat" />
+      <Reward slot="3" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="50" name="Dorumon Doruga" unlocks="8" levelReq1="440" levelReq2="560" myUnlocks="8" currentLevel="110" transcended="TRUE" iconCandidateId="31036" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Dorumon" iconCandidateId="31036" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Dorugamon" iconCandidateId="41043" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="DoruGreymon" iconCandidateId="51053" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="Dorugoramon" iconCandidateId="61055" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Dorumon (X-anti)" iconCandidateId="75103" iconStatus="matched" iconFolder="" />
+      <Member slot="6" name="Dorugamon (X-anti)" iconCandidateId="75303" iconStatus="matched" iconFolder="" />
+      <Member slot="7" name="DoruGreymon (X-anti)" iconCandidateId="75503" iconStatus="matched" iconFolder="" />
+      <Member slot="8" name="Dorugoramon (X-anti)" iconCandidateId="75703" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="3" effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="51" name="Dorumon Dex" unlocks="10" levelReq1="550" levelReq2="700" myUnlocks="10" currentLevel="110" transcended="FALSE" iconCandidateId="32036" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Dorumon[Dex]" iconCandidateId="32036" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="DexDorugamon" iconCandidateId="41049" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="DexDoruGreymon" iconCandidateId="51054" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="Death-X-DORUgoramon" iconCandidateId="61056" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Death-X-mon" iconCandidateId="71081" iconStatus="matched" iconFolder="" />
+      <Member slot="6" name="Dorumon (X-anti)" iconCandidateId="75104" iconStatus="matched" iconFolder="" />
+      <Member slot="7" name="DexDorugamon (X-anti)" iconCandidateId="75304" iconStatus="matched" iconFolder="" />
+      <Member slot="8" name="DexDoruGreymon (X-anti)" iconCandidateId="75504" iconStatus="matched" iconFolder="" />
+      <Member slot="9" name="DexDorugoramon (X-anti)" iconCandidateId="75704" iconStatus="matched" iconFolder="" />
+      <Member slot="10" name="Death-X-mon (X-anti)" iconCandidateId="75901" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="52" name="Dorumon Alpha" unlocks="10" levelReq1="720" levelReq2="900" myUnlocks="10" currentLevel="150" transcended="TRUE" iconCandidateId="33036" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Dorumon" iconCandidateId="33036" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="RaptorDramon" iconCandidateId="41060" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="Grademon" iconCandidateId="51062" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="Alphamon" iconCandidateId="61070" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Alphamon Ouryuken" iconCandidateId="71075" iconStatus="matched" iconFolder="" />
+      <Member slot="6" name="Dorumon (X-anti)" iconCandidateId="75102" iconStatus="matched" iconFolder="" />
+      <Member slot="7" name="Reptiledramon (X-anti)" iconCandidateId="75302" iconStatus="matched" iconFolder="" />
+      <Member slot="8" name="Grademon (X-anti)" iconCandidateId="75502" iconStatus="matched" iconFolder="" />
+      <Member slot="9" name="Alphamon (X-anti)" iconCandidateId="75702" iconStatus="matched" iconFolder="" />
+      <Member slot="10" name="Alphamon Ouryuken (X-anti)" iconCandidateId="75900" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="52" raw="EV +100" stat="EV" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+      <Reward slot="4" effectId="4" raw="Light 1%" stat="Light" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="53" name="Demidevimon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="41068" iconStatus="partial" iconFolder="devimon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="54" name="Demidevimon Pied 1" unlocks="6" levelReq1="660" levelReq2="840" myUnlocks="6" currentLevel="110" transcended="FALSE" iconCandidateId="41068" iconStatus="partial" iconFolder="devimon">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="55" name="Demidevimon Pied 2" unlocks="7" levelReq1="770" levelReq2="980" myUnlocks="6" currentLevel="110" transcended="FALSE" iconCandidateId="41068" iconStatus="partial" iconFolder="devimon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="3" effectId="40" raw="DE +100" stat="DE" sign="+" value="100" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="56" name="Demidevimon Myotis 1" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="110" transcended="FALSE" iconCandidateId="41068" iconStatus="partial" iconFolder="devimon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="57" name="Demidevimon Myotis 2" unlocks="6" levelReq1="660" levelReq2="840" myUnlocks="5" currentLevel="110" transcended="FALSE" iconCandidateId="41068" iconStatus="partial" iconFolder="devimon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="3" effectId="40" raw="DE +100" stat="DE" sign="+" value="100" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="58" name="Demidevimon [Apoc]" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="41068" iconStatus="partial" iconFolder="devimon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="53" raw="BL +50" stat="BL" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="59" name="Betamon" unlocks="6" levelReq1="660" levelReq2="840" myUnlocks="6" currentLevel="110" transcended="FALSE" iconCandidateId="31026" iconStatus="matched" iconFolder="betamon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="60" name="Betamon [Apoc]" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="31026" iconStatus="matched" iconFolder="betamon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="61" name="Hagurumon (Gardro)" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="150" transcended="FALSE" iconCandidateId="31034" iconStatus="matched" iconFolder="hagurumon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="62" name="Hagurumon (Mekanori)" unlocks="6" levelReq1="660" levelReq2="840" myUnlocks="6" currentLevel="110" transcended="FALSE" iconCandidateId="31034" iconStatus="matched" iconFolder="hagurumon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="63" name="Hagurumon [Apoc]" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="31034" iconStatus="matched" iconFolder="hagurumon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="64" name="Qinglongmon" unlocks="4" levelReq1="480" levelReq2="600" myUnlocks="3" currentLevel="110" transcended="FALSE" iconCandidateId="71082" iconStatus="matched" iconFolder="qinglongmon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="65" name="xuanwumon" unlocks="4" levelReq1="480" levelReq2="600" myUnlocks="3" currentLevel="110" transcended="FALSE" iconCandidateId="71085" iconStatus="matched" iconFolder="xuanwumon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="66" name="zhuqiaomon" unlocks="4" levelReq1="480" levelReq2="600" myUnlocks="3" currentLevel="110" transcended="FALSE" iconCandidateId="71083" iconStatus="matched" iconFolder="zhuqiaomon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="67" name="baihumon" unlocks="4" levelReq1="480" levelReq2="600" myUnlocks="3" currentLevel="110" transcended="FALSE" iconCandidateId="71084" iconStatus="matched" iconFolder="baihumon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="68" name="Lucemon" unlocks="5" levelReq1="600" levelReq2="750" myUnlocks="4" currentLevel="150" transcended="FALSE" iconCandidateId="45160" iconStatus="matched" iconFolder="lucemon">
+    <Rewards>
+      <Reward slot="1" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="2" effectId="41" raw="DS +150" stat="DS" sign="+" value="150" unit="flat" />
+      <Reward slot="3" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="69" name="Impmon" unlocks="6" levelReq1="720" levelReq2="900" myUnlocks="6" currentLevel="151" transcended="TRUE" iconCandidateId="1531066" iconStatus="matched" iconFolder="impmon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="26" raw="CT +50" stat="CT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="31" raw="Ice 1%" stat="Ice" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="70" name="Impmon Baal" unlocks="5" levelReq1="600" levelReq2="750" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="1531066" iconStatus="partial" iconFolder="impmon">
+    <Rewards>
+      <Reward slot="1" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="2" effectId="41" raw="DS +150" stat="DS" sign="+" value="150" unit="flat" />
+      <Reward slot="3" effectId="31" raw="Ice 1%" stat="Ice" value="1" unit="percent" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="71" name="Elecmon" unlocks="6" levelReq1="660" levelReq2="840" myUnlocks="6" currentLevel="110" transcended="FALSE" iconCandidateId="1331049" iconStatus="matched" iconFolder="elecmon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="72" name="Elecmon Duft" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="1331049" iconStatus="partial" iconFolder="elecmon">
+    <Rewards>
+      <Reward slot="1" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="2" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="73" name="Drimogemon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="110" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="2" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="74" name="Gotsumon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="110" transcended="FALSE" iconCandidateId="1631018" iconStatus="matched" iconFolder="gotsumon">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="75" name="Deputymon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="0" currentLevel="0" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="76" name="Starmon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="41088" iconStatus="matched" iconFolder="starmon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="77" name="Doggymon" unlocks="3" levelReq1="330" levelReq2="420" myUnlocks="3" currentLevel="110" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="78" name="Demi meramon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="150" transcended="FALSE" iconCandidateId="41170" iconStatus="partial" iconFolder="meramon">
+    <Rewards>
+      <Reward slot="1" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="2" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="79" name="Kiwimon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="41132" iconStatus="matched" iconFolder="kiwimon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="80" name="Dobermon" unlocks="3" levelReq1="330" levelReq2="420" myUnlocks="3" currentLevel="110" transcended="FALSE" iconCandidateId="1241033" iconStatus="matched" iconFolder="dobermon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="52" raw="EV +100" stat="EV" sign="+" value="100" unit="flat" />
+    </Rewards>
+  </Line>
+  <Line id="81" name="Terriermon" unlocks="6" levelReq1="720" levelReq2="900" myUnlocks="6" currentLevel="150" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="82" name="Gizumon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="83" name="Pawnchessmon W" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="31013" iconStatus="partial" iconFolder="pawnchessmon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="84" name="Tanemon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="21137" iconStatus="matched" iconFolder="tanemon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="85" name="Pawnchessmon B" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="31009" iconStatus="matched" iconFolder="pawnchessmon_b">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="86" name="Kotemon LordKnightmon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="150" transcended="FALSE" iconCandidateId="51026" iconStatus="partial" iconFolder="knightmon">
+    <Rewards>
+      <Reward slot="1" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="53" raw="BL +50" stat="BL" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="87" name="Candlemon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="150" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="26" raw="CT +50" stat="CT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="88" name="Bearmon" unlocks="6" levelReq1="660" levelReq2="840" myUnlocks="6" currentLevel="110" transcended="FALSE" iconCandidateId="31121" iconStatus="matched" iconFolder="bearmon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="89" name="Dracomon B" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="150" transcended="FALSE" iconCandidateId="31014" iconStatus="partial" iconFolder="dracomon">
+    <Rewards>
+      <Reward slot="1" effectId="54" raw="HP +500" stat="HP" sign="+" value="500" unit="flat" />
+      <Reward slot="2" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="3" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+      <Reward slot="4" effectId="4" raw="Light 1%" stat="Light" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="90" name="Dracomon G" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="150" transcended="FALSE" iconCandidateId="31014" iconStatus="partial" iconFolder="dracomon">
+    <Rewards>
+      <Reward slot="1" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="53" raw="BL +50" stat="BL" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="91" name="Monodramon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="110" transcended="FALSE" iconCandidateId="31011" iconStatus="matched" iconFolder="monodramon">
+    <Rewards>
+      <Reward slot="1" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="2" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="92" name="Lopmon" unlocks="7" levelReq1="770" levelReq2="980" myUnlocks="7" currentLevel="142" transcended="TRUE" iconCandidateId="31015" iconStatus="matched" iconFolder="lopmon">
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="3" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="4" effectId="31" raw="Ice 1%" stat="Ice" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="93" name="FanBeemon" unlocks="8" levelReq1="440" levelReq2="560" myUnlocks="8" currentLevel="110" transcended="FALSE" iconCandidateId="31016" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="FanBeemon" iconCandidateId="31016" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Waspmon" iconCandidateId="41028" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="CannonBeemon" iconCandidateId="51033" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="TigerVespamon" iconCandidateId="61040" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="FanBeemon (X-anti)" iconCandidateId="75106" iconStatus="matched" iconFolder="" />
+      <Member slot="6" name="Waspmon (X-anti)" iconCandidateId="75307" iconStatus="matched" iconFolder="" />
+      <Member slot="7" name="CannonBeemon (X-anti)" iconCandidateId="75507" iconStatus="matched" iconFolder="" />
+      <Member slot="8" name="TigerVespamon (X-anti)" iconCandidateId="75708" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="26" raw="CT +50" stat="CT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="94" name="Keramon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="110" transcended="FALSE" iconCandidateId="31017" iconStatus="matched" iconFolder="keramon">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="95" name="Kamemon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="31051" iconStatus="matched" iconFolder="kamemon">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="96" name="Goblimon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="110" transcended="TRUE" iconCandidateId="31033" iconStatus="matched" iconFolder="goblimon">
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="3" effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="97" name="Sharmamon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="TRUE" iconCandidateId="31032" iconStatus="matched" iconFolder="sharmamon">
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="3" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="4" effectId="31" raw="Ice 1%" stat="Ice" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="98" name="Dokunemon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="31038" iconStatus="matched" iconFolder="dokunemon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="99" name="Commandramon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="110" transcended="FALSE" iconCandidateId="31035" iconStatus="matched" iconFolder="commandramon">
+    <Rewards>
+      <Reward slot="1" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="2" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="100" name="Kudamon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="31023" iconStatus="matched" iconFolder="kudamon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="31" raw="Ice 1%" stat="Ice" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="101" name="Ryudamon" unlocks="10" levelReq1="720" levelReq2="900" myUnlocks="10" currentLevel="150" transcended="FALSE" iconStatus="matched" iconCandidateId="31027" iconFolder="">
+    <Members>
+      <Member slot="1" name="Ryudamon" iconCandidateId="31027" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="GinRyuumon" iconCandidateId="41037" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="HishaRyuumon" iconCandidateId="51041" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="OuRyuumon" iconCandidateId="61048" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Alphamon Ouryuken" iconCandidateId="71075" iconStatus="matched" iconFolder="" />
+      <Member slot="6" name="Ryuudamon (X-anti)" iconCandidateId="75105" iconStatus="matched" iconFolder="" />
+      <Member slot="7" name="GinRyuumon( X-anti)" iconCandidateId="75305" iconStatus="matched" iconFolder="" />
+      <Member slot="8" name="HishaRyuumon (X-anti)" iconCandidateId="75505" iconStatus="matched" iconFolder="" />
+      <Member slot="9" name="OuRyuumon (X-anti)" iconCandidateId="75705" iconStatus="matched" iconFolder="" />
+      <Member slot="10" name="Alphamon Ouryuken (X-anti)" iconCandidateId="75900" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="53" raw="BL +50" stat="BL" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="14" raw="Vaccine 1%" stat="Vaccine" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="102" name="Kotemon Musyamon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="31021" iconStatus="partial" iconFolder="kotemon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="103" name="Mushroomon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="31042" iconStatus="matched" iconFolder="mushroomon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="104" name="Dracmon" unlocks="8" levelReq1="440" levelReq2="560" myUnlocks="8" currentLevel="110" transcended="FALSE" iconCandidateId="31039" iconStatus="matched" iconFolder="">
+    <Members>
+      <Member slot="1" name="Dracmon" iconCandidateId="31039" iconStatus="matched" iconFolder="" />
+      <Member slot="2" name="Sangloupmon" iconCandidateId="41055" iconStatus="matched" iconFolder="" />
+      <Member slot="3" name="Matadormon" iconCandidateId="51058" iconStatus="matched" iconFolder="" />
+      <Member slot="4" name="GranDracmon" iconCandidateId="61067" iconStatus="matched" iconFolder="" />
+      <Member slot="5" name="Dracmon (X-anti)" iconCandidateId="75107" iconStatus="matched" iconFolder="" />
+      <Member slot="6" name="Sangloupmon (X-anti)" iconCandidateId="75306" iconStatus="matched" iconFolder="" />
+      <Member slot="7" name="Matadormon (X-anti)" iconCandidateId="75506" iconStatus="matched" iconFolder="" />
+      <Member slot="8" name="GranDracmon (X-anti)" iconCandidateId="75706" iconStatus="matched" iconFolder="" />
+    </Members><Rewards>
+      <Reward slot="1" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="2" effectId="41" raw="DS +150" stat="DS" sign="+" value="150" unit="flat" />
+      <Reward slot="3" effectId="3" raw="AT +70" stat="AT" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="105" name="Arkadimon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="31037" iconStatus="matched" iconFolder="arkadimon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="106" name="Gazimon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="33068" iconStatus="matched" iconFolder="gazimon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="107" name="Tsukaimon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="5" currentLevel="150" transcended="FALSE" iconCandidateId="33069" iconStatus="matched" iconFolder="tsukaimon">
+    <Rewards>
+      <Reward slot="1" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="2" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="108" name="Swimmon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="31040" iconStatus="matched" iconFolder="swimmon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="109" name="Ballistamon" unlocks="6" levelReq1="660" levelReq2="840" myUnlocks="6" currentLevel="110" transcended="FALSE" iconCandidateId="33002" iconStatus="matched" iconFolder="ballistamon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="52" raw="EV +100" stat="EV" sign="+" value="100" unit="flat" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="110" name="Psychemon" unlocks="5" levelReq1="600" levelReq2="750" myUnlocks="4" currentLevel="150" transcended="FALSE" iconCandidateId="35145" iconStatus="matched" iconFolder="psychemon">
+    <Rewards>
+      <Reward slot="1" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="2" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="111" name="Dorulumon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="3" currentLevel="110" transcended="FALSE" iconCandidateId="33003" iconStatus="matched" iconFolder="dorulumon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="112" name="Syakomon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="113" name="Tsukaimon Murmukusmon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="61044" iconStatus="partial" iconFolder="murmukusmon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="114" name="Otamon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="115" name="Tsukaimon Barbamon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="63005" iconStatus="partial" iconFolder="barbamon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="116" name="Gazimon Millenium" unlocks="6" levelReq1="720" levelReq2="900" myUnlocks="5" currentLevel="110" transcended="FALSE" iconCandidateId="33068" iconStatus="matched" iconFolder="gazimon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="6" raw="HT +50" stat="HT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="117" name="Kokuwamon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="4" currentLevel="41" transcended="FALSE" iconCandidateId="31069" iconStatus="matched" iconFolder="kokuwamon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="31" raw="Ice 1%" stat="Ice" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="118" name="Raremon" unlocks="2" levelReq1="220" levelReq2="280" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="45172" iconStatus="matched" iconFolder="raremon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="119" name="Hackmon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="FALSE" iconCandidateId="35147" iconStatus="matched" iconFolder="hackmon">
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="21" raw="EXP +30%" stat="EXP" sign="+" value="30" unit="percent" />
+      <Reward slot="3" effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+      <Reward slot="4" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="120" name="Leomon (Destiny)" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="1341058" iconStatus="matched" iconFolder="leomon">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="42" raw="HP +200" stat="HP" sign="+" value="200" unit="flat" />
+      <Reward slot="4" effectId="31" raw="Ice 1%" stat="Ice" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="121" name="Floramon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="33085" iconStatus="partial" iconFolder="floramon_re">
+    <Rewards>
+      <Reward slot="1" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="2" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="122" name="Meicoomon 1" unlocks="4" levelReq1="480" levelReq2="600" myUnlocks="3" currentLevel="110" transcended="FALSE" iconCandidateId="41178" iconStatus="matched" iconFolder="meicoomon">
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="55" raw="BL +70" stat="BL" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="29" raw="Unknown 1%" stat="Unknown" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="123" name="Meicoomon 2" unlocks="4" levelReq1="480" levelReq2="600" myUnlocks="3" currentLevel="110" transcended="FALSE" iconCandidateId="41178" iconStatus="matched" iconFolder="meicoomon">
+    <Rewards>
+      <Reward slot="1" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="51" raw="EXP +50%" stat="EXP" sign="+" value="50" unit="percent" />
+      <Reward slot="4" effectId="30" raw="Unknown 2%" stat="Unknown" value="2" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="124" name="Starsmon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="3" currentLevel="110" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="125" name="Sparrowmon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="150" transcended="FALSE" iconCandidateId="33005" iconStatus="matched" iconFolder="sparrowmon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="126" name="Gizamon" unlocks="5" levelReq1="550" levelReq2="700" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="33086" iconStatus="matched" iconFolder="gizamon">
+    <Rewards>
+      <Reward slot="1" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="2" effectId="10" raw="DS +120" stat="DS" sign="+" value="120" unit="flat" />
+      <Reward slot="3" effectId="1" raw="AT +50" stat="AT" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="127" name="Deadlyaxemon" unlocks="3" levelReq1="360" levelReq2="450" myUnlocks="3" currentLevel="150" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="27" raw="Dark 1%" stat="Dark" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="128" name="Skullknightmon" unlocks="3" levelReq1="360" levelReq2="450" myUnlocks="3" currentLevel="150" transcended="TRUE" iconCandidateId="45189" iconStatus="matched" iconFolder="skullknightmon">
+    <Rewards>
+      <Reward slot="1" effectId="12" raw="EXP +20%" stat="EXP" sign="+" value="20" unit="percent" />
+      <Reward slot="2" effectId="56" raw="EXP 30%" stat="EXP" value="30" unit="percent" />
+      <Reward slot="3" effectId="57" raw="EXP 50%" stat="EXP" value="50" unit="percent" />
+      <Reward slot="4" effectId="15" raw="Virus 1%" stat="Virus" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="129" name="Bagramon" unlocks="3" levelReq1="360" levelReq2="450" myUnlocks="3" currentLevel="150" transcended="TRUE" iconCandidateId="63020" iconStatus="matched" iconFolder="bagramon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="35" raw="BL +30" stat="BL" sign="+" value="30" unit="flat" />
+      <Reward slot="3" effectId="13" raw="HT +30" stat="HT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="7" raw="SCD 1%" stat="SCD" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="130" name="Gammamon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="TRUE" iconCandidateId="35148" iconStatus="matched" iconFolder="gammamon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="131" name="Angoramon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="TRUE" iconCandidateId="35150" iconStatus="matched" iconFolder="angoramon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="132" name="Jellymon" unlocks="4" levelReq1="440" levelReq2="560" myUnlocks="4" currentLevel="110" transcended="TRUE" iconCandidateId="35149" iconStatus="matched" iconFolder="jellymon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="133" name="Eosmon" unlocks="3" levelReq1="390" levelReq2="480" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="35153" iconStatus="partial" iconFolder="eosmon_lv4">
+    <Rewards>
+      <Reward slot="1" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="47" raw="AT +100" stat="AT" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+      <Reward slot="4" effectId="30" raw="Unknown 2%" stat="Unknown" value="2" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="134" name="Agnimon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="75020" iconStatus="matched" iconFolder="agnimon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="20" raw="AT +20" stat="AT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="135" name="Vritramon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="20" raw="AT +20" stat="AT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="136" name="Fairimon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="53" raw="BL +50" stat="BL" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="20" raw="AT +20" stat="AT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="137" name="Shutsmon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="32" raw="Wind 1%" stat="Wind" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="138" name="Chakkumon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="20" raw="AT +20" stat="AT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="31" raw="Ice 1%" stat="Ice" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="139" name="Blizzarmon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="75025" iconStatus="matched" iconFolder="blizzarmon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="53" raw="BL +50" stat="BL" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="31" raw="Ice 1%" stat="Ice" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="140" name="Arbormon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="75026" iconStatus="matched" iconFolder="arbormon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="20" raw="AT +20" stat="AT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="141" name="Petaldramon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="75027" iconStatus="matched" iconFolder="petaldramon">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="142" name="Grotmon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="53" raw="BL +50" stat="BL" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="143" name="Gigasmon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="75029" iconStatus="matched" iconFolder="gigasmon">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="144" name="KaiserGreymon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="1" currentLevel="160" transcended="TRUE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="28" raw="AT +30" stat="AT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="24" raw="Fire 1%" stat="Fire" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="145" name="Wolfmon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="75031" iconStatus="matched" iconFolder="wolfmon">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="146" name="Garmmon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="36" raw="Wood 1%" stat="Wood" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="147" name="Blitzmon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="75033" iconStatus="matched" iconFolder="blitzmon">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="148" name="Bolgmon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="75034" iconStatus="matched" iconFolder="bolgmon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="4" effectId="11" raw="Thunder 1%" stat="Thunder" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="149" name="Lanamon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="1" currentLevel="110" transcended="FALSE" iconCandidateId="75035" iconStatus="matched" iconFolder="lanamon">
+    <Rewards>
+      <Reward slot="1" effectId="22" raw="DE +30" stat="DE" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="23" raw="DE +50" stat="DE" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="150" name="Calamaramon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconStatus="missing">
+    <Rewards>
+      <Reward slot="1" effectId="33" raw="EV +30" stat="EV" sign="+" value="30" unit="flat" />
+      <Reward slot="2" effectId="34" raw="EV +70" stat="EV" sign="+" value="70" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="37" raw="Water 1%" stat="Water" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="151" name="Lowemon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="75037" iconStatus="matched" iconFolder="lowemon">
+    <Rewards>
+      <Reward slot="1" effectId="17" raw="BL +20" stat="BL" sign="+" value="20" unit="flat" />
+      <Reward slot="2" effectId="53" raw="BL +50" stat="BL" sign="+" value="50" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="43" raw="Land 1%" stat="Land" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="152" name="KaiserLeomon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="75038" iconStatus="matched" iconFolder="kaiserleomon">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+    </Rewards>
+  </Line>
+  <Line id="153" name="Mercuremon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="75039" iconStatus="matched" iconFolder="mercuremon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="19" raw="CT +20" stat="CT" sign="+" value="20" unit="flat" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="154" name="Sefirotmon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="0" currentLevel="0" transcended="FALSE" iconCandidateId="75040" iconStatus="matched" iconFolder="sefirotmon">
+    <Rewards>
+      <Reward slot="1" effectId="16" raw="HP +50" stat="HP" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="18" raw="HP +100" stat="HP" sign="+" value="100" unit="flat" />
+      <Reward slot="3" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="4" effectId="39" raw="Steel 1%" stat="Steel" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  <Line id="155" name="MagnaGarurumon" unlocks="1" levelReq1="110" levelReq2="140" myUnlocks="1" currentLevel="150" transcended="TRUE" iconCandidateId="75041" iconStatus="matched" iconFolder="magnagarurumon">
+    <Rewards>
+      <Reward slot="1" effectId="38" raw="DS +50" stat="DS" sign="+" value="50" unit="flat" />
+      <Reward slot="2" effectId="9" raw="DS +80" stat="DS" sign="+" value="80" unit="flat" />
+      <Reward slot="3" effectId="5" raw="CT +30" stat="CT" sign="+" value="30" unit="flat" />
+      <Reward slot="4" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
+    </Rewards>
+  </Line>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</UnionDigimonLines>

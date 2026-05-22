@@ -12,6 +12,8 @@ using DigitalWorldOnline.Game.Managers;
 using MediatR;
 using Serilog;
 
+using DigitalWorldOnline.Application.Separar.Commands.Create;
+
 namespace DigitalWorldOnline.Game.PacketProcessors
 {
     public class DigimonArchiveInsertPacketProcessor : IGamePacketProcessor
@@ -39,13 +41,52 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         {
             var packet = new GamePacketReader(packetData);
 
-            var vipEnabled = Convert.ToBoolean(packet.ReadByte());
+            // Some client builds do not include the optional VIP byte in this packet.
+            // Packet length 18 is the non-VIP shape: slot, archive slot, npc id.
+            var vipEnabled = false;
+            if (packetData.Length > 18)
+                vipEnabled = Convert.ToBoolean(packet.ReadByte());
+
             var digiviceSlot = packet.ReadInt();
             var archiveSlot = packet.ReadInt() - 1000;
+            var npcId = packet.ReadInt();
 
             var digivicePartner = client.Tamer.Digimons.FirstOrDefault(x => x.Slot == digiviceSlot);
-            var archivePartner = client.Tamer.DigimonArchive.DigimonArchives.First(x => x.Slot == archiveSlot);
+            var archivePartner = client.Tamer.DigimonArchive.DigimonArchives.FirstOrDefault(x => x.Slot == archiveSlot);
+
+            _logger.Verbose(
+                "Digimon archive move request: tamer={TamerId} vip={Vip} digiviceSlot={DigiviceSlot} archiveSlot={ArchiveSlot} npc={NpcId} packetLen={PacketLength}.",
+                client.TamerId, vipEnabled, digiviceSlot, archiveSlot, npcId, packetData.Length);
+
+            if (archiveSlot < 0 || archiveSlot >= client.Tamer.DigimonArchive.Slots)
+            {
+                _logger.Warning(
+                    "Character {TamerId} requested invalid digimon archive slot {ArchiveSlot}; opened slots={OpenedSlots}.",
+                    client.TamerId, archiveSlot, client.Tamer.DigimonArchive.Slots);
+                client.Send(new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive));
+                return;
+            }
+
+            if (archivePartner == null)
+            {
+                archivePartner = new CharacterDigimonArchiveItemModel(archiveSlot);
+                client.Tamer.DigimonArchive.DigimonArchives.Add(archivePartner);
+                await _sender.Send(new CreateCharacterDigimonArchiveSlotCommand(
+                    archivePartner,
+                    client.Tamer.DigimonArchive.Id
+                ));
+            }
+
             var price = client.Tamer.DigimonArchive.ArchivePrice(digivicePartner?.Level);
+
+            if (digivicePartner == null && archivePartner.DigimonId == 0)
+            {
+                _logger.Warning(
+                    "Character {TamerId} tried to move empty digivice slot {DigiviceSlot} with empty archive slot {ArchiveSlot}.",
+                    client.TamerId, digiviceSlot, archiveSlot);
+                client.Send(new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive));
+                return;
+            }
 
             if (digivicePartner == null)
             {

@@ -74,7 +74,7 @@ namespace DigitalWorldOnline.Commons.Models.Asset
         /// <remarks>1 - Unique use</remarks>
         /// <remarks>2 - Remove buff (?)</remarks>
         /// <remarks>3 - Remove buff and delete (?)</remarks>
-        /// <remarks>4 - Timed buff and delete (?)</remarks>
+        /// <remarks>4 - Timed buff duration only; not an inventory expiration timer.</remarks>
         public int UseTimeType { get; private set; }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace DigitalWorldOnline.Commons.Models.Asset
         //TODO: Behavior + Summary
         public SkillCodeAssetModel? SkillInfo { get; private set; }
         public int TimeInSeconds => (UsageTimeMinutes * 60) + 10;
-        public bool TemporaryItem => UsageTimeMinutes > 0;
+        public bool TemporaryItem => UsageTimeMinutes > 0 && UseTimeType is 1 or 2 or 3;
         public void SetSkillInfo(SkillCodeAssetModel? skillCode)
         {
             if (skillCode != null || SkillInfo == null)

@@ -216,7 +216,6 @@ cBaseWindow* cBaseWindow::NewWindow( cBaseWindow::eWINDOW_TYPE wt, int nPointerI
 	case WT_NOTICE_WINDOW:					return CreateNewWindow<EventNoticeWindow>("EventNoticeWindow", nPointerIndex);
 	case WT_SEASONPASS_BUTTON:				return CreateNewWindow<cSeasonPassButton>("SeasonPassButton", nPointerIndex);
 	case WT_SEASONPASS_WINDOW:				return CreateNewWindow<SeasonPassWindow>("SeasonPassWindow", nPointerIndex);
-	case WT_UNION:							return CreateNewWindow<cUnionDUnit>("UnionDUnit", nPointerIndex);
 	case WT_XML_UNION:						return CreateNewWindow<cXmlUnionDUnit>("XmlUnionDUnit", nPointerIndex);
 
 	default:

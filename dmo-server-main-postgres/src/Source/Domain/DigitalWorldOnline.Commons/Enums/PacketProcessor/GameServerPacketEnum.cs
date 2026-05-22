@@ -427,6 +427,11 @@ namespace DigitalWorldOnline.Commons.Enums.PacketProcessor
         /// Loads the digimon archive/storage.
         /// </summary>
         DigimonArchive = 3204,
+
+        /// <summary>
+        /// Loads the digimon archive academy/incubator slots.
+        /// </summary>
+        DigimonArchiveIncubatorList = 3226,
         
         /// <summary>
         /// Loads the remaining membership timer.
@@ -568,6 +573,16 @@ namespace DigitalWorldOnline.Commons.Enums.PacketProcessor
         /// Receives a new achievement.
         /// </summary>
         ProgressUpdate = 11007,
+
+        /// <summary>
+        /// Requests the current XML D-Unit progress.
+        /// </summary>
+        XmlUnionProgressRequest = 11050,
+
+        /// <summary>
+        /// Claims an XML D-Unit reward tier.
+        /// </summary>
+        XmlUnionRewardClaim = 11051,
 
 
         /// <summary>

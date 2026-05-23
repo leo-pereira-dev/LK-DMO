@@ -7,6 +7,7 @@
 #include <initializer_list>
 #include <utility>
 #include <cwctype>
+#include <cmath>
 
 #ifndef CLIENT_LOG_INFO
 #define CLIENT_LOG_INFO( ... ) ((void)0)
@@ -132,6 +133,150 @@ namespace
 			nDigimonRank = 10;
 
 		return nDigimonRank + 1;
+	}
+
+	const char* const ENCY_UNION_CARD_BG = "Union\\collection_bg_new.tga";
+	const char* const ENCY_UNION_FRAME_N = "Union\\collection_frame_rank1_new.png";
+	const char* const ENCY_UNION_FRAME_S = "Union\\collection_frame_rank2_new.png";
+	const char* const ENCY_UNION_FRAME_U = "Union\\collection_frame_rank3_new.png";
+	bool const ENCY_OVERVIEW_USE_FIGURE_BASE = false;
+	const char* const ENCY_OVERVIEW_FIGURE_BASE = "Data\\EtcObject\\FigureDigimon.nif";
+	float const ENCY_OVERVIEW_FIGURE_BASE_MIN_Z = 58.0f;
+	float const ENCY_OVERVIEW_FIGURE_BASE_MAX_Z = 86.0f;
+	int const ENCY_CARD_ICON_SRC_SIZE = 32;
+
+	float _GetOverviewFigureBaseZ( CDigimon* pDigimon )
+	{
+		float fBaseZ = 72.0f;
+		if( pDigimon )
+		{
+			float fHeight = pDigimon->CsC_AvObject::GetToolHeight();
+			if( fHeight > 0.0f )
+				fBaseZ = fHeight * 0.62f;
+		}
+		if( fBaseZ < ENCY_OVERVIEW_FIGURE_BASE_MIN_Z )
+			fBaseZ = ENCY_OVERVIEW_FIGURE_BASE_MIN_Z;
+		if( fBaseZ > ENCY_OVERVIEW_FIGURE_BASE_MAX_Z )
+			fBaseZ = ENCY_OVERVIEW_FIGURE_BASE_MAX_Z;
+		return -fBaseZ;
+	}
+
+	float _GetOverviewFigureBaseScale( CDigimon* pDigimon )
+	{
+		float fBaseScale = 1.20f;
+		if( pDigimon )
+		{
+			float fWidth = pDigimon->GetToolWidth();
+			if( fWidth > 0.0f )
+				fBaseScale = fWidth / 96.0f;
+		}
+		if( fBaseScale < 1.00f )
+			fBaseScale = 1.00f;
+		if( fBaseScale > 1.55f )
+			fBaseScale = 1.55f;
+		return fBaseScale;
+	}
+
+	cSprite* _CreateEncySolidSprite( CsPoint ptSize, NiColorA const& color )
+	{
+		cSprite* pSprite = NiNew cSprite;
+		SAFE_POINTER_RETVAL( pSprite, NULL );
+		pSprite->Init( NULL, CsPoint::ZERO, ptSize, color, false );
+		return pSprite;
+	}
+
+	const char* _GetEncyCardFrameTexture( int nDigimonRank )
+	{
+		if( nDigimonRank >= 9 )
+			return ENCY_UNION_FRAME_U;
+		if( nDigimonRank >= 3 )
+			return ENCY_UNION_FRAME_S;
+		return ENCY_UNION_FRAME_N;
+	}
+
+	cString::sSPRITE* _AddEncySpriteRect( cString* pItem, char const* pTexture, CsPoint ptPos, CsPoint ptSize, CsRect const& rtTexture, NiColor color = FONT_WHITE, bool bUseWorkingFolder = true )
+	{
+		SAFE_POINTER_RETVAL( pItem, NULL );
+		SAFE_POINTER_RETVAL( pTexture, NULL );
+
+		cSprite* pSprite = NiNew cSprite;
+		SAFE_POINTER_RETVAL( pSprite, NULL );
+		pSprite->Init( NULL, CsPoint::ZERO, ptSize, rtTexture, pTexture, false, color, bUseWorkingFolder );
+
+		cString::sSPRITE* pSpriteInfo = pItem->AddSprite( pSprite, ptPos );
+		SAFE_POINTER_RETVAL( pSpriteInfo, NULL );
+		pSpriteInfo->SetAutoPointerDelete( true );
+		return pSpriteInfo;
+	}
+
+	cString::sIMAGE* _AddEncyFrameImage( cString* pItem, char const* pTexture, CsPoint ptPos, CsPoint ptSize, bool bVisible )
+	{
+		SAFE_POINTER_RETVAL( pItem, NULL );
+		SAFE_POINTER_RETVAL( pTexture, NULL );
+
+		cImage* pFrame = NiNew cImage;
+		SAFE_POINTER_RETVAL( pFrame, NULL );
+		pFrame->Init( NULL, CsPoint::ZERO, ptSize, pTexture, false, true );
+		pFrame->SetTexToken( CsPoint( 126, 150 ) );
+
+		cString::sIMAGE* pFrameSprite = pItem->AddImage( pFrame, (cImage::eSTATE)cImage::NORMAL0, ptPos );
+		SAFE_POINTER_RETVAL( pFrameSprite, NULL );
+		pFrameSprite->SetAutoPointerDelete( true );
+		pFrameSprite->SetVisible( bVisible );
+		return pFrameSprite;
+	}
+
+	void _AddEncyCircularPortrait( cString* pItem, std::string const& strIconPath, CsPoint ptIcon, int nIconSize, bool bClosed )
+	{
+		if( pItem == NULL || strIconPath.empty() || nIconSize <= 0 )
+			return;
+
+		NiColor const color = bClosed ? NiColor( 0.05f, 0.05f, 0.05f ) : FONT_WHITE;
+		int const nIconRadius = nIconSize / 2;
+		for( int nSliceY = 0 ; nSliceY < nIconSize ; ++nSliceY )
+		{
+			float const fDy = (float)nSliceY + 0.5f - (float)nIconRadius;
+			float const fRadiusSq = (float)( nIconRadius * nIconRadius );
+			float const fWidthSq = fRadiusSq - ( fDy * fDy );
+			if( fWidthSq <= 0.0f )
+				continue;
+
+			int const nHalfWidth = (int)sqrtf( fWidthSq );
+			if( nHalfWidth <= 0 )
+				continue;
+
+			int const nDestX = ptIcon.x + nIconRadius - nHalfWidth;
+			int const nDestW = nHalfWidth * 2;
+			int const nSrcLeft = ( ( nIconRadius - nHalfWidth ) * ENCY_CARD_ICON_SRC_SIZE ) / nIconSize;
+			int const nSrcRight = ( ( nIconRadius + nHalfWidth ) * ENCY_CARD_ICON_SRC_SIZE ) / nIconSize;
+			int const nSrcTop = ( nSliceY * ENCY_CARD_ICON_SRC_SIZE ) / nIconSize;
+			int nSrcBottom = ( ( nSliceY + 1 ) * ENCY_CARD_ICON_SRC_SIZE ) / nIconSize;
+			if( nSrcBottom <= nSrcTop )
+				nSrcBottom = nSrcTop + 1;
+
+			_AddEncySpriteRect(
+				pItem,
+				strIconPath.c_str(),
+				CsPoint( nDestX, ptIcon.y + nSliceY ),
+				CsPoint( nDestW, 1 ),
+				CsRect( nSrcLeft, nSrcTop, nSrcRight, nSrcBottom ),
+				color,
+				false );
+		}
+	}
+
+	void _AddEncyCardName( cString* pItem, TCHAR const* pName, CsPoint ptCard, int nCardWidth )
+	{
+		if( pItem == NULL || pName == NULL || pName[ 0 ] == 0 )
+			return;
+
+		cText::sTEXTINFO nameInfo;
+		nameInfo.Init( CFont::FS_8, NiColor( 0.96f, 0.97f, 1.0f ) );
+		nameInfo.s_eTextAlign = DT_CENTER;
+		nameInfo.s_bOutLine = true;
+		int const nMaxLen = nCardWidth < 90 ? 10 : ( nCardWidth < 110 ? 13 : 16 );
+		nameInfo.SetText_Reduce( pName, nMaxLen, 2 );
+		pItem->AddText( &nameInfo, ptCard + CsPoint( nCardWidth / 2, 7 ) );
 	}
 
 bool _ReplaceDeckIconSuffix( std::string& ioPath, char const* pFrom, char const* pTo )
@@ -352,6 +497,19 @@ cEncyclopedia::cEncyclopedia() : m_bIsMouseOn(false)
 	m_pSearchResetBtn = NULL;
 	m_wsSearchKeyword.clear();
 	m_bSearchFocusVisualOn = false;
+	m_pCardHoverEffect = NULL;
+	m_bCardHoverEffectVisible = false;
+	m_ptCardHoverEffectPos = CsPoint::ZERO;
+	m_ptCardHoverEffectSize = CsPoint::ZERO;
+	m_pCardNameTooltipBg = NULL;
+	m_pCardNameTooltipTop = NULL;
+	m_pCardNameTooltipBottom = NULL;
+	m_pCardNameTooltipLeft = NULL;
+	m_pCardNameTooltipRight = NULL;
+	m_pCardNameTooltipText = NULL;
+	m_bCardNameTooltipVisible = false;
+	m_ptCardNameTooltipPos = CsPoint::ZERO;
+	m_ptCardNameTooltipSize = CsPoint::ZERO;
 
 	m_pTooltipBG			= NULL;
 	m_szName				= NULL;
@@ -381,6 +539,7 @@ cEncyclopedia::cEncyclopedia() : m_bIsMouseOn(false)
 	m_nOverviewHoverSkillIdx = -1;
 	m_pOverviewRenderTex = NULL;
 	m_pOverviewRenderDigimon = NULL;
+	m_pOverviewFigureBase = NULL;
 	m_pOverviewName = NULL;
 	m_pOverviewGrowthTitle = NULL;
 	m_pOverviewInfoTitle = NULL;
@@ -393,6 +552,8 @@ cEncyclopedia::cEncyclopedia() : m_bIsMouseOn(false)
 		m_pOverviewStatText[ i ] = NULL;
 	m_pOverviewSkillName = NULL;
 	m_pOverviewSkillTabFrame = NULL;
+	m_pOverviewBackBtn = NULL;
+	m_pOverviewBackText = NULL;
 	m_pOverviewCloseBtn = NULL;
 	m_pOverviewScrollBtn = NULL;
 	m_pOverviewZoomInBtn = NULL;
@@ -433,6 +594,9 @@ cEncyclopedia::cEncyclopedia() : m_bIsMouseOn(false)
 	m_nOverviewZoomSliderDragOffsetX = 0;
 	m_bOverviewModelDragRotate = false;
 	m_ptOverviewModelDragPrev = CsPoint::ZERO;
+	m_fOverviewPreviewAniTimer = 0.0f;
+	m_bOverviewPreviewAltAni = false;
+	m_bOverviewPreviewAniStarted = false;
 }
 
 cEncyclopedia::~cEncyclopedia()
@@ -484,8 +648,49 @@ void cEncyclopedia::Destroy()
 	cBaseWindow::Delete();
 }
 
+void cEncyclopedia::Open( int nValue, bool bSound )
+{
+	if( IsLive() )
+	{
+		UNREFERENCED_PARAMETER( nValue );
+		if( bSound )
+			PlayOpenSound();
+
+		SetEnableWindow( true );
+		SetShowWindow( true );
+		_RefreshSearchUI();
+		return;
+	}
+
+	cBaseWindow::Open( nValue, bSound );
+}
+
+bool cEncyclopedia::Close( bool bSound )
+{
+	if( IsEnableWindow() == false )
+		return false;
+
+	if( bSound )
+		PlayCloseSound();
+
+	if( g_pGameIF && g_pGameIF->IsActiveWindow( cBaseWindow::WT_ENCYCLOPEDIA_STATS ) )
+		g_pGameIF->CloseDynamicIF( cBaseWindow::WT_ENCYCLOPEDIA_STATS );
+
+	_CloseOverview();
+	m_bIsMouseOn = false;
+	_SetCardHoverVisible( false );
+	SetShowWindow( false );
+	return true;
+}
+
 void cEncyclopedia::DeleteResource()
 {
+	_ReleaseOverviewRenderDigimon();
+	_ClearIconList();
+	m_vCardHoverInfo.clear();
+	m_vDeckPanelHoverInfo.clear();
+	m_vDeckBookmarkInfo.clear();
+
 	//툴팁
 	NISAFE_DELETE( m_pTooltipBG );
 	NISAFE_DELETE( m_szName );
@@ -502,7 +707,25 @@ void cEncyclopedia::DeleteResource()
 		NISAFE_DELETE( m_szEnchantVal[ i ] );
 	}
 	NISAFE_DELETE( m_szExplain );
+	NISAFE_DELETE( m_pCardHoverEffect );
+	m_bCardHoverEffectVisible = false;
+	m_ptCardHoverEffectPos = CsPoint::ZERO;
+	m_ptCardHoverEffectSize = CsPoint::ZERO;
+	NISAFE_DELETE( m_pCardNameTooltipBg );
+	NISAFE_DELETE( m_pCardNameTooltipTop );
+	NISAFE_DELETE( m_pCardNameTooltipBottom );
+	NISAFE_DELETE( m_pCardNameTooltipLeft );
+	NISAFE_DELETE( m_pCardNameTooltipRight );
+	NISAFE_DELETE( m_pCardNameTooltipText );
+	m_bCardNameTooltipVisible = false;
+	m_ptCardNameTooltipPos = CsPoint::ZERO;
+	m_ptCardNameTooltipSize = CsPoint::ZERO;
 	NISAFE_DELETE( m_pOverviewRenderTex );
+	if( m_pOverviewFigureBase )
+	{
+		m_pOverviewFigureBase->Delete();
+		NISAFE_DELETE( m_pOverviewFigureBase );
+	}
 	NISAFE_DELETE( m_pOverviewName );
 	NISAFE_DELETE( m_pOverviewGrowthTitle );
 	NISAFE_DELETE( m_pOverviewInfoTitle );
@@ -515,6 +738,8 @@ void cEncyclopedia::DeleteResource()
 		NISAFE_DELETE( m_pOverviewStatText[ i ] );
 	NISAFE_DELETE( m_pOverviewSkillName );
 	NISAFE_DELETE( m_pOverviewSkillTabFrame );
+	NISAFE_DELETE( m_pOverviewBackBtn );
+	NISAFE_DELETE( m_pOverviewBackText );
 	NISAFE_DELETE( m_pOverviewCloseBtn );
 	NISAFE_DELETE( m_pOverviewScrollBtn );
 	NISAFE_DELETE( m_pOverviewZoomInBtn );
@@ -544,10 +769,12 @@ void cEncyclopedia::DeleteResource()
 	NISAFE_DELETE( m_pOverviewStatusArrow );
 	NISAFE_DELETE( m_pOverviewStatusArrow2 );
 	NISAFE_DELETE( m_pOverviewActionCardFrame );
-	m_pOverviewRenderDigimon = NULL;
 	m_bOverviewVisible = false;
 	m_nOverviewDigimonId = 0;
 	m_nOverviewTooltipDigimonId = 0;
+	m_fOverviewPreviewAniTimer = 0.0f;
+	m_bOverviewPreviewAltAni = false;
+	m_bOverviewPreviewAniStarted = false;
 
 	DeleteScript();
 }
@@ -629,8 +856,43 @@ void cEncyclopedia::Create( int nValue /*= 0 */ )
 	m_pEncyListBox->SetMouseOverImg( (cImage*)NULL, true );
 	m_pEncyListBox->SetSelectedImg( (cImage*)NULL, true );
 	m_pEncyListBox->SetBackOverAndSelectedImgRender(false);
+	m_pEncyListBox->AddEvent( cListBox::LIST_SELECT_CHANGE_ITEM, this, &cEncyclopedia::_OnClickEncyclopediaItem );
 	m_pEncyListBox->AddEvent( cListBox::LIST_SELECTED_ITEM, this, &cEncyclopedia::_OnClickEncyclopediaItem );
 	AddChildControl( m_pEncyListBox );
+
+	NISAFE_DELETE( m_pCardHoverEffect );
+	m_pCardHoverEffect = NiNew cEncyHoverEffectSprite;
+	if( m_pCardHoverEffect )
+		static_cast< cEncyHoverEffectSprite* >( m_pCardHoverEffect )->InitHoverEffect( CsPoint( 116, 146 ) );
+	m_bCardHoverEffectVisible = false;
+	m_ptCardHoverEffectPos = CsPoint::ZERO;
+	m_ptCardHoverEffectSize = CsPoint::ZERO;
+
+	NISAFE_DELETE( m_pCardNameTooltipBg );
+	NISAFE_DELETE( m_pCardNameTooltipTop );
+	NISAFE_DELETE( m_pCardNameTooltipBottom );
+	NISAFE_DELETE( m_pCardNameTooltipLeft );
+	NISAFE_DELETE( m_pCardNameTooltipRight );
+	NISAFE_DELETE( m_pCardNameTooltipText );
+	m_pCardNameTooltipBg = _CreateEncySolidSprite( CsPoint( 1, 1 ), NiColorA( 0.0f, 0.02f, 0.05f, 0.92f ) );
+	m_pCardNameTooltipTop = _CreateEncySolidSprite( CsPoint( 1, 1 ), NiColorA( 0.0f, 0.12f, 0.24f, 0.95f ) );
+	m_pCardNameTooltipBottom = _CreateEncySolidSprite( CsPoint( 1, 1 ), NiColorA( 0.0f, 0.12f, 0.24f, 0.95f ) );
+	m_pCardNameTooltipLeft = _CreateEncySolidSprite( CsPoint( 1, 1 ), NiColorA( 0.0f, 0.12f, 0.24f, 0.95f ) );
+	m_pCardNameTooltipRight = _CreateEncySolidSprite( CsPoint( 1, 1 ), NiColorA( 0.0f, 0.12f, 0.24f, 0.95f ) );
+	m_pCardNameTooltipText = NiNew cText;
+	if( m_pCardNameTooltipText )
+	{
+		cText::sTEXTINFO tooltipTextInfo;
+		tooltipTextInfo.Init( &g_pEngine->m_FontSystem );
+		tooltipTextInfo.s_eFontSize = CFont::FS_8;
+		tooltipTextInfo.s_eTextAlign = DT_CENTER;
+		tooltipTextInfo.s_Color = NiColor( 0.96f, 0.97f, 1.0f );
+		tooltipTextInfo.SetText( _T( "" ) );
+		m_pCardNameTooltipText->Init( NULL, CsPoint::ZERO, &tooltipTextInfo, false );
+	}
+	m_bCardNameTooltipVisible = false;
+	m_ptCardNameTooltipPos = CsPoint::ZERO;
+	m_ptCardNameTooltipSize = CsPoint::ZERO;
 
 	cText::sTEXTINFO titleInfo;
 	titleInfo.Init( &g_pEngine->m_FontSystem );
@@ -740,6 +1002,28 @@ void cEncyclopedia::Create( int nValue /*= 0 */ )
 		SAFE_NIDELETE( m_pOverviewRenderTex );
 	}
 
+	if( ENCY_OVERVIEW_USE_FIGURE_BASE )
+	{
+		NiStream kStream;
+		if( kStream.Load( ENCY_OVERVIEW_FIGURE_BASE ) )
+		{
+			NiNodePtr pNode = (NiNode*)kStream.GetObjectAt( 0 );
+			if( pNode )
+			{
+				nsCSGBFUNC::InitAnimation( pNode, NiTimeController::APP_TIME, NiTimeController::LOOP );
+				m_pOverviewFigureBase = NiNew CsNodeObj;
+				m_pOverviewFigureBase->SetNiObject( pNode, CGeometry::Normal );
+				m_pOverviewFigureBase->m_pNiNode->DetachAllEffects();
+				if( nsCsGBTerrain::g_pCurRoot && nsCsGBTerrain::g_pCurRoot->GetLightMng() )
+					nsCsGBTerrain::g_pCurRoot->GetLightMng()->ApplyChar( m_pOverviewFigureBase->m_pNiNode );
+				m_pOverviewFigureBase->m_pNiNode->UpdateEffects();
+				m_pOverviewFigureBase->m_pNiNode->SetTranslate( NiPoint3( -20.0f, 0.0f, _GetOverviewFigureBaseZ( NULL ) ) );
+				m_pOverviewFigureBase->m_pNiNode->SetRotate( -0.1f, 0, 0, 1 );
+				m_pOverviewFigureBase->m_pNiNode->SetScale( _GetOverviewFigureBaseScale( NULL ) );
+				m_pOverviewFigureBase->m_pNiNode->Update( 0.0f );
+			}
+		}
+	}
 	m_pOverviewBg = NiNew cSprite;
 	m_pOverviewBg->Init( NULL, CsPoint::ZERO, CsPoint( 896, 746 ), "Encyclopedia\\newencyclopedia\\detail\\blind_bg_noalpha.png", false );
 	m_pOverviewInfoTextBg = NiNew cSprite;
@@ -766,6 +1050,9 @@ void cEncyclopedia::Create( int nValue /*= 0 */ )
 	m_pOverviewSkillTabFrame->Init( NULL, CsPoint::ZERO, CsPoint( 96, 46 ), "Encyclopedia\\newencyclopedia\\detail\\button\\tab_mini.png", false, true );
 	m_pOverviewSkillTabFrame->SetTexToken( CsPoint( 96, 46 ) );
 	m_pOverviewSkillTabFrame->SetState( 1 );
+	m_pOverviewBackBtn = NiNew cImage;
+	m_pOverviewBackBtn->Init( NULL, CsPoint::ZERO, CsPoint( 32, 32 ), "Encyclopedia\\newencyclopedia\\detail\\button\\arrow_l.png", false, true );
+	m_pOverviewBackBtn->SetTexToken( CsPoint( 0, 32 ) );
 	m_pOverviewCloseBtn = NiNew cImage;
 	m_pOverviewCloseBtn->Init( NULL, CsPoint::ZERO, CsPoint( 32, 32 ), "Encyclopedia\\newencyclopedia\\main\\exit_btn.png", false, true );
 	m_pOverviewCloseBtn->SetTexToken( CsPoint( 0, 32 ) );
@@ -851,6 +1138,14 @@ void cEncyclopedia::Create( int nValue /*= 0 */ )
 	tiOverviewSkillName.s_Color = NiColor( 0.50f, 0.58f, 1.0f );
 	m_pOverviewSkillName = NiNew cText;
 	m_pOverviewSkillName->Init( NULL, CsPoint::ZERO, &tiOverviewSkillName, false );
+	cText::sTEXTINFO tiOverviewBack;
+	tiOverviewBack.Init( &g_pEngine->m_FontSystem );
+	tiOverviewBack.s_eFontSize = CFont::FS_12;
+	tiOverviewBack.s_eTextAlign = DT_LEFT;
+	tiOverviewBack.s_Color = NiColor( 0.82f, 0.88f, 1.0f );
+	tiOverviewBack.SetText( _T( "Back" ) );
+	m_pOverviewBackText = NiNew cText;
+	m_pOverviewBackText->Init( NULL, CsPoint::ZERO, &tiOverviewBack, false );
 
 	cText::sTEXTINFO tiOverviewStat;
 	tiOverviewStat.Init( &g_pEngine->m_FontSystem );
@@ -906,21 +1201,21 @@ void cEncyclopedia::Update(float const& fDeltaTime)
 		m_pSearchEdit->SetEmptyMsgText( _T( "Search Digimon..." ), NiColor( 0.6f, 0.65f, 0.85f ) );
 	}
 
-	for( size_t i = 0; i < m_vCardHoverInfo.size(); ++i )
+	if( m_pCardHoverEffect )
 	{
-		if( m_vCardHoverInfo[ i ].s_pEffect == NULL || m_vCardHoverInfo[ i ].s_pEffect->s_pSprite == NULL )
-			continue;
-
 		__try
 		{
-			m_vCardHoverInfo[ i ].s_pEffect->s_pSprite->Update( fDeltaTime );
+			m_pCardHoverEffect->SetVisible( m_bCardHoverEffectVisible );
+			if( m_bCardHoverEffectVisible )
+			{
+				m_pCardHoverEffect->SetSize( m_ptCardHoverEffectSize );
+				m_pCardHoverEffect->Update( fDeltaTime );
+			}
 		}
 		__except( EXCEPTION_EXECUTE_HANDLER )
 		{
-			CLIENT_LOG_WARN( "ENCY", "Update hover effect failed at index=%u, disabling effect.", (u4)i );
-			m_vCardHoverInfo[ i ].s_pEffect = NULL;
-			m_vCardHoverInfo[ i ].s_pOverFrame = NULL;
-			m_vCardHoverInfo[ i ].s_pItem = NULL;
+			CLIENT_LOG_WARN( "ENCY", "Update shared hover effect failed; disabling effect." );
+			m_bCardHoverEffectVisible = false;
 		}
 	}
 
@@ -952,6 +1247,7 @@ cBaseWindow::eMU_TYPE cEncyclopedia::Update_ForMouse()
 		m_nOverviewHoverSkillIdx = -1;
 		CsPoint ptOverview = GetRootClient() + CsPoint( 0, 118 );
 		const int nOverviewLayoutYOffset = 40;
+		CsRect rtOverviewBack( ptOverview + CsPoint( 18, 14 ), CsSIZE( 100, 32 ) );
 		CsRect rtOverviewClose( ptOverview + CsPoint( 856, 6 ), CsSIZE( 32, 32 ) );
 		CsRect rtTopArrowL( ptOverview + CsPoint( 460, 71 ), CsSIZE( 32, 32 ) );
 		CsRect rtTopArrowR( ptOverview + CsPoint( 836, 71 ), CsSIZE( 32, 32 ) );
@@ -971,17 +1267,25 @@ cBaseWindow::eMU_TYPE cEncyclopedia::Update_ForMouse()
 		CsRect rtSliderTrack( ptOverview + CsPoint( nSliderMinX, nSliderY ), CsSIZE( ( nSliderMaxX - nSliderMinX ) + 32, 35 ) );
 		CsRect rtSliderKnob( ptOverview + CsPoint( nSliderX, nSliderRenderY ), CsSIZE( 32, 17 ) );
 
+		_SetEncyImageButtonState( m_pOverviewBackBtn, rtOverviewBack );
 		_SetEncyImageButtonState( m_pOverviewCloseBtn, rtOverviewClose );
 		_SetEncyImageButtonState( m_pOverviewArrowLBtn, rtTopArrowL );
 		_SetEncyImageButtonState( m_pOverviewArrowRBtn, rtTopArrowR );
 		_SetEncyImageButtonState( m_pOverviewRotateLBtn, rtRotateL );
 		_SetEncyImageButtonState( m_pOverviewRotateRBtn, rtRotateR );
-		_SetEncyImageButtonState( m_pOverviewRotateUpBtn, rtRotateUp );
-		_SetEncyImageButtonState( m_pOverviewRotateDownBtn, rtRotateDown );
 		_SetEncyImageButtonState( m_pOverviewResetViewBtn, rtResetView );
 		_SetEncyImageButtonState( m_pOverviewZoomOutBtn, rtZoomOut );
 		_SetEncyImageButtonState( m_pOverviewZoomInBtn, rtZoomIn );
 		_SetEncyImageButtonState( m_pOverviewScrollBtn, rtSliderKnob );
+
+		if( CURSOR_ST.CheckClickBox( rtOverviewBack ) != CURSOR::BUTTON_OUTWINDOW )
+		{
+			m_bIsMouseOn = false;
+			_SetCardHoverVisible( false );
+			if( CURSOR_ST.GetButtonState() == CURSOR::LBUTTON_DOWN )
+				_CloseOverview();
+			return MUT_CLICK_FOCUS;
+		}
 
 		if( CURSOR_ST.CheckClickBox( rtOverviewClose ) != CURSOR::BUTTON_OUTWINDOW )
 		{
@@ -1047,8 +1351,6 @@ cBaseWindow::eMU_TYPE cEncyclopedia::Update_ForMouse()
 					( CURSOR_ST.CheckClickBox( rtTopArrowR ) != CURSOR::BUTTON_OUTWINDOW ) ||
 					( CURSOR_ST.CheckClickBox( rtRotateL ) != CURSOR::BUTTON_OUTWINDOW ) ||
 					( CURSOR_ST.CheckClickBox( rtRotateR ) != CURSOR::BUTTON_OUTWINDOW ) ||
-					( CURSOR_ST.CheckClickBox( rtRotateUp ) != CURSOR::BUTTON_OUTWINDOW ) ||
-					( CURSOR_ST.CheckClickBox( rtRotateDown ) != CURSOR::BUTTON_OUTWINDOW ) ||
 					( CURSOR_ST.CheckClickBox( rtResetView ) != CURSOR::BUTTON_OUTWINDOW ) ||
 					( CURSOR_ST.CheckClickBox( rtZoomOut ) != CURSOR::BUTTON_OUTWINDOW ) ||
 					( CURSOR_ST.CheckClickBox( rtZoomIn ) != CURSOR::BUTTON_OUTWINDOW ) ||
@@ -1059,25 +1361,13 @@ cBaseWindow::eMU_TYPE cEncyclopedia::Update_ForMouse()
 					if( m_fOverviewZoomTargetRate < 0.0f ) m_fOverviewZoomTargetRate = 0.0f;
 					if( m_fOverviewZoomTargetRate > 1.0f ) m_fOverviewZoomTargetRate = 1.0f;
 				};
-				auto RateToOverviewDist = [this]( float fRate )->float
+				auto SetOverviewZoomFromSlider = [this, nSliderMinX, nSliderMaxX]( int nMouseX, int nDragOffsetX )
 				{
-					if( fRate < 0.0f ) fRate = 0.0f;
-					if( fRate > 1.0f ) fRate = 1.0f;
-					return m_fOverviewZoomDistMax - ( ( m_fOverviewZoomDistMax - m_fOverviewZoomDistMin ) * fRate );
-				};
-				auto SetOverviewZoomFromSlider = [this, &RateToOverviewDist, nSliderMinX, nSliderMaxX]( int nMouseX, int nDragOffsetX, char const* pSource )
-				{
-					const float fPrevRate = m_fOverviewZoomRate;
-					const float fPrevTarget = m_fOverviewZoomTargetRate;
 					int nKnobX = nMouseX - nDragOffsetX;
 					if( nKnobX < nSliderMinX ) nKnobX = nSliderMinX;
 					if( nKnobX > nSliderMaxX ) nKnobX = nSliderMaxX;
 					float fRange = (float)( nSliderMaxX - nSliderMinX );
 					m_fOverviewZoomTargetRate = ( fRange > 0.0f ) ? ( (float)( nKnobX - nSliderMinX ) / fRange ) : 0.5f;
-					CLIENT_LOG_INFO( "ENCYZOOM", "%s: rate %.4f -> %.4f, target %.4f -> %.4f, distNow %.4f distTarget %.4f, mouseX=%d knobX=%d offset=%d",
-						pSource, fPrevRate, m_fOverviewZoomRate, fPrevTarget, m_fOverviewZoomTargetRate,
-						RateToOverviewDist( m_fOverviewZoomRate ), RateToOverviewDist( m_fOverviewZoomTargetRate ),
-						nMouseX, nKnobX, nDragOffsetX );
 				};
 
 				auto NavigateOverview = [this]( bool bNext )
@@ -1154,14 +1444,12 @@ cBaseWindow::eMU_TYPE cEncyclopedia::Update_ForMouse()
 						CsPoint ptDelta = ptCur - m_ptOverviewModelDragPrev;
 						m_ptOverviewModelDragPrev = ptCur;
 
-						// Natural drag direction: mouse right -> model right, mouse up -> model up.
+						// Keep the vertical axis locked; only horizontal preview rotation is interactive.
 						m_fOverviewRenderYaw -= (float)( ptDelta.x ) * 0.012f;
-						m_fOverviewRenderPitch += (float)( ptDelta.y ) * 0.012f;
+						m_fOverviewRenderPitch = 0.0f;
 
 						while( m_fOverviewRenderYaw > 6.2831853f ) m_fOverviewRenderYaw -= 6.2831853f;
 						while( m_fOverviewRenderYaw < 0.0f ) m_fOverviewRenderYaw += 6.2831853f;
-						while( m_fOverviewRenderPitch > 6.2831853f ) m_fOverviewRenderPitch -= 6.2831853f;
-						while( m_fOverviewRenderPitch < 0.0f ) m_fOverviewRenderPitch += 6.2831853f;
 					}
 				}
 				else if( CURSOR_ST.CheckClickBox( rtRotateL ) != CURSOR::BUTTON_OUTWINDOW )
@@ -1172,37 +1460,15 @@ cBaseWindow::eMU_TYPE cEncyclopedia::Update_ForMouse()
 				{
 					m_fOverviewRenderYaw -= 0.12f;
 				}
-				else if( CURSOR_ST.CheckClickBox( rtRotateUp ) != CURSOR::BUTTON_OUTWINDOW )
-				{
-					m_fOverviewRenderPitch += 0.08f;
-					if( m_fOverviewRenderPitch > 6.2831853f )
-						m_fOverviewRenderPitch -= 6.2831853f;
-				}
-				else if( CURSOR_ST.CheckClickBox( rtRotateDown ) != CURSOR::BUTTON_OUTWINDOW )
-				{
-					m_fOverviewRenderPitch -= 0.08f;
-					if( m_fOverviewRenderPitch < 0.0f )
-						m_fOverviewRenderPitch += 6.2831853f;
-				}
 				else if( bLButtonDown && CURSOR_ST.CheckClickBox( rtZoomOut ) != CURSOR::BUTTON_OUTWINDOW )
 				{
-					const float fPrevRate = m_fOverviewZoomRate;
-					const float fPrevTarget = m_fOverviewZoomTargetRate;
 					m_fOverviewZoomTargetRate = m_fOverviewZoomRate - m_fOverviewZoomStep;
 					ClampOverviewZoomTarget();
-					CLIENT_LOG_INFO( "ENCYZOOM", "ZoomOut(-) click: rate %.4f -> %.4f, target %.4f -> %.4f, distNow %.4f distTarget %.4f",
-						fPrevRate, m_fOverviewZoomRate, fPrevTarget, m_fOverviewZoomTargetRate,
-						RateToOverviewDist( m_fOverviewZoomRate ), RateToOverviewDist( m_fOverviewZoomTargetRate ) );
 				}
 				else if( bLButtonDown && CURSOR_ST.CheckClickBox( rtZoomIn ) != CURSOR::BUTTON_OUTWINDOW )
 				{
-					const float fPrevRate = m_fOverviewZoomRate;
-					const float fPrevTarget = m_fOverviewZoomTargetRate;
 					m_fOverviewZoomTargetRate = m_fOverviewZoomRate + m_fOverviewZoomStep;
 					ClampOverviewZoomTarget();
-					CLIENT_LOG_INFO( "ENCYZOOM", "ZoomIn(+) click: rate %.4f -> %.4f, target %.4f -> %.4f, distNow %.4f distTarget %.4f",
-						fPrevRate, m_fOverviewZoomRate, fPrevTarget, m_fOverviewZoomTargetRate,
-						RateToOverviewDist( m_fOverviewZoomRate ), RateToOverviewDist( m_fOverviewZoomTargetRate ) );
 				}
 				else if( bLButtonDown && CURSOR_ST.CheckClickBox( rtSliderKnob ) != CURSOR::BUTTON_OUTWINDOW )
 				{
@@ -1211,19 +1477,19 @@ cBaseWindow::eMU_TYPE cEncyclopedia::Update_ForMouse()
 					m_nOverviewZoomSliderDragOffsetX = nMouseX - nSliderX;
 					if( m_nOverviewZoomSliderDragOffsetX < 0 ) m_nOverviewZoomSliderDragOffsetX = 0;
 					if( m_nOverviewZoomSliderDragOffsetX > 32 ) m_nOverviewZoomSliderDragOffsetX = 32;
-					SetOverviewZoomFromSlider( nMouseX, m_nOverviewZoomSliderDragOffsetX, "Slider knob down" );
+					SetOverviewZoomFromSlider( nMouseX, m_nOverviewZoomSliderDragOffsetX );
 				}
 				else if( bLButtonDown && CURSOR_ST.CheckClickBox( rtSliderTrack ) != CURSOR::BUTTON_OUTWINDOW )
 				{
 					int nMouseX = CURSOR_ST.GetPos().x - ptOverview.x;
 					m_bOverviewZoomSliderDrag = true;
 					m_nOverviewZoomSliderDragOffsetX = 16;
-					SetOverviewZoomFromSlider( nMouseX, m_nOverviewZoomSliderDragOffsetX, "Slider track down" );
+					SetOverviewZoomFromSlider( nMouseX, m_nOverviewZoomSliderDragOffsetX );
 				}
 				else if( bLButtonHold && m_bOverviewZoomSliderDrag )
 				{
 					int nMouseX = CURSOR_ST.GetPos().x - ptOverview.x;
-					SetOverviewZoomFromSlider( nMouseX, m_nOverviewZoomSliderDragOffsetX, "Slider drag" );
+					SetOverviewZoomFromSlider( nMouseX, m_nOverviewZoomSliderDragOffsetX );
 				}
 			}
 
@@ -1294,9 +1560,21 @@ cBaseWindow::eMU_TYPE cEncyclopedia::Update_ForMouse()
 	if( m_nMainTab == MAIN_TAB_DECK )
 		_UpdateDeckBookmarkVisuals();
 
-	if( m_pEncyListBox && m_pEncyListBox->Update_ForMouse( CURSOR_ST.GetPos() ) )
+	bool const bListMouseUpdated = ( m_pEncyListBox && m_pEncyListBox->Update_ForMouse( CURSOR_ST.GetPos() ) );
+	if( m_nMainTab == MAIN_TAB_ENCYCLOPEDIA )
 	{
 		_UpdateCardHover();
+		if( bListMouseUpdated == false )
+			return muReturn;
+	}
+	else if( bListMouseUpdated == false )
+	{
+		_SetCardHoverVisible( false );
+		return muReturn;
+	}
+
+	if( m_pEncyListBox && bListMouseUpdated )
+	{
 		cListBoxItem const* pOverItem = m_pEncyListBox->GetMouseOverItem();
 		SAFE_POINTER_RETVAL(pOverItem, muReturn);
 		SAFE_POINTER_RETVAL(g_pGameIF, muReturn);
@@ -1315,31 +1593,31 @@ cBaseWindow::eMU_TYPE cEncyclopedia::Update_ForMouse()
 
 		if( m_nMainTab == MAIN_TAB_ENCYCLOPEDIA )
 		{
-			int nTooltipDigimonId = pInfo->iDigimonId;
-			if( m_nSubMenu == SUBMENU_ALL || m_nSubMenu == SUBMENU_CLASS )
+			int nTooltipDigimonId = 0;
+			CsPoint ptLocalMouse = m_pEncyListBox->GetItemtoMousePos( CURSOR_ST.GetPos(), const_cast<cListBoxItem*>( pOverItem ) );
+			CsPoint ptItemScreen = CURSOR_ST.GetPos() - ptLocalMouse;
+			CsRect rtTooltipCardScreen;
+			for( size_t i = 0; i < m_vCardHoverInfo.size(); ++i )
 			{
-				CsPoint ptLocalMouse = m_pEncyListBox->GetItemtoMousePos( CURSOR_ST.GetPos(), const_cast<cListBoxItem*>( pOverItem ) );
-				for( size_t i = 0; i < m_vCardHoverInfo.size(); ++i )
-				{
-					if( m_vCardHoverInfo[ i ].s_pItem != pOverItem )
-						continue;
+				if( m_vCardHoverInfo[ i ].s_pItem != pOverItem )
+					continue;
 
-					CsRect rtHover = m_vCardHoverInfo[ i ].s_LocalRect;
-					CsPoint ptHoverMouse = ptLocalMouse;
-					if( rtHover.PtInRect( ptHoverMouse ) == FALSE )
-						continue;
+				CsRect rtHover = m_vCardHoverInfo[ i ].s_LocalRect;
+				CsPoint ptHoverMouse = ptLocalMouse;
+				if( rtHover.PtInRect( ptHoverMouse ) == FALSE )
+					continue;
 
-					nTooltipDigimonId = m_vCardHoverInfo[ i ].s_nTooltipDigimonID;
-					break;
-				}
+				nTooltipDigimonId = ( m_vCardHoverInfo[ i ].s_nTooltipDigimonID > 0 ) ? m_vCardHoverInfo[ i ].s_nTooltipDigimonID : m_vCardHoverInfo[ i ].s_nDigimonID;
+				rtTooltipCardScreen = CsRect( ptItemScreen + rtHover.GetPos(), rtHover.GetSize() );
+				break;
 			}
 
 			if( nTooltipDigimonId <= 0 )
 			{
-				CLIENT_LOG_WARN( "ENCY", "Update_ForMouse skipped tooltip for invalid digimon id=%d.", nTooltipDigimonId );
+				m_bIsMouseOn = false;
 				return muReturn;
 			}
-			_SetTooltip( nTooltipDigimonId );
+			_SetCardNameTooltip( nTooltipDigimonId, rtTooltipCardScreen );
 		}
 		else
 		{
@@ -1355,13 +1633,15 @@ cBaseWindow::eMU_TYPE cEncyclopedia::Update_ForMouse()
 		return muReturn;
 	}
 
-	_SetCardHoverVisible( false );
 	return muReturn;
 }
 
 void cEncyclopedia::Render()
 {
 	RenderScript();
+
+	if( m_pCardHoverEffect && m_bCardHoverEffectVisible && !m_bOverviewVisible )
+		m_pCardHoverEffect->Render( m_ptCardHoverEffectPos, m_ptCardHoverEffectSize );
 
 	if( m_bOverviewVisible )
 		_RenderOverview();
@@ -1373,6 +1653,9 @@ void cEncyclopedia::Render()
 		if( m_nMainTab == MAIN_TAB_ENCYCLOPEDIA )
 			_RenderTooltip(ptMousePos);
 	}
+
+	if( !m_bOverviewVisible )
+		_RenderCardNameTooltip();
 
 	EndRenderScript();
 }
@@ -1470,8 +1753,9 @@ void cEncyclopedia::_SetTabList( int nCurRadioIdx )
 		{
 			if( nsCsFileTable::g_pDigimonMng->_IsExceptionDigimon( it->first ) == false )	// 제외 디지몬인지 확인
 			{
-				EncyclopediaContents::sEVOL_INFO* pInfo = csnew EncyclopediaContents::sEVOL_INFO;
-				memcpy( pInfo, it->second, sizeof(EncyclopediaContents::sEVOL_INFO) );
+				EncyclopediaContents::sEVOL_INFO* pInfo = it->second;
+				if( pInfo == NULL )
+					continue;
 
 				if( m_nSubMenu == SUBMENU_SERIES )
 				{
@@ -1505,7 +1789,7 @@ void cEncyclopedia::_SetTabList( int nCurRadioIdx )
 		EncyclopediaContents::MAP_IT itCurList = m_pCurTabList_map.begin();
 		EncyclopediaContents::MAP_IT itCurListEnd = m_pCurTabList_map.end();
 
-		for( int i = 0 ; i < 5 ; i++ )
+		for( int i = 0 ; i < 5 && itCurList != itCurListEnd ; i++ )
 		{
 			itCurListEnd--;
 
@@ -1609,23 +1893,35 @@ void cEncyclopedia::_RefreshList()
 
 void cEncyclopedia::_SetCardHoverVisible( bool bVisible )
 {
-	for( size_t i = 0; i < m_vCardHoverInfo.size(); ++i )
-	{
-		__try
-		{
-			if( m_vCardHoverInfo[ i ].s_pOverFrame )
-				m_vCardHoverInfo[ i ].s_pOverFrame->SetVisible( bVisible );
-			if( m_vCardHoverInfo[ i ].s_pEffect )
-				m_vCardHoverInfo[ i ].s_pEffect->SetVisible( bVisible );
-		}
-		__except( EXCEPTION_EXECUTE_HANDLER )
-		{
-			CLIENT_LOG_WARN( "ENCY", "_SetCardHoverVisible failed at index=%u, clearing stale hover refs.", (u4)i );
-			m_vCardHoverInfo[ i ].s_pOverFrame = NULL;
-			m_vCardHoverInfo[ i ].s_pEffect = NULL;
-			m_vCardHoverInfo[ i ].s_pItem = NULL;
-		}
-	}
+	m_bCardHoverEffectVisible = bVisible;
+	if( m_pCardHoverEffect )
+		m_pCardHoverEffect->SetVisible( bVisible );
+	if( bVisible == false )
+		m_bCardNameTooltipVisible = false;
+}
+
+void cEncyclopedia::_RenderCardNameTooltip()
+{
+	if( m_bCardNameTooltipVisible == false )
+		return;
+
+	CsPoint const ptPos = m_ptCardNameTooltipPos;
+	CsPoint const ptSize = m_ptCardNameTooltipSize;
+	if( ptSize.x <= 0 || ptSize.y <= 0 )
+		return;
+
+	if( m_pCardNameTooltipBg )
+		m_pCardNameTooltipBg->Render( ptPos, ptSize );
+	if( m_pCardNameTooltipTop )
+		m_pCardNameTooltipTop->Render( ptPos, CsPoint( ptSize.x, 1 ) );
+	if( m_pCardNameTooltipBottom )
+		m_pCardNameTooltipBottom->Render( CsPoint( ptPos.x, ptPos.y + ptSize.y - 1 ), CsPoint( ptSize.x, 1 ) );
+	if( m_pCardNameTooltipLeft )
+		m_pCardNameTooltipLeft->Render( ptPos, CsPoint( 1, ptSize.y ) );
+	if( m_pCardNameTooltipRight )
+		m_pCardNameTooltipRight->Render( CsPoint( ptPos.x + ptSize.x - 1, ptPos.y ), CsPoint( 1, ptSize.y ) );
+	if( m_pCardNameTooltipText )
+		m_pCardNameTooltipText->Render( CsPoint( ptPos.x + ( ptSize.x / 2 ), ptPos.y + 5 ), DT_CENTER );
 }
 
 void cEncyclopedia::_UpdateCardHover()
@@ -1659,10 +1955,18 @@ void cEncyclopedia::_UpdateCardHover()
 		if( m_vCardHoverInfo[ i ].s_LocalRect.PtInRect( ptLocalMouse ) == FALSE )
 			continue;
 
-		if( m_vCardHoverInfo[ i ].s_pEffect )
-			m_vCardHoverInfo[ i ].s_pEffect->SetVisible( true );
-		if( m_vCardHoverInfo[ i ].s_pOverFrame )
-			m_vCardHoverInfo[ i ].s_pOverFrame->SetVisible( true );
+		CsRect const& rtHover = m_vCardHoverInfo[ i ].s_LocalRect;
+		CsPoint ptItemScreen = CURSOR_ST.GetPos() - ptLocalMouse;
+		m_ptCardHoverEffectPos = ptItemScreen + rtHover.GetPos();
+		m_ptCardHoverEffectSize = rtHover.GetSize();
+		m_bCardHoverEffectVisible = true;
+		if( m_pCardHoverEffect )
+		{
+			m_pCardHoverEffect->SetSize( m_ptCardHoverEffectSize );
+			m_pCardHoverEffect->SetVisible( true );
+		}
+		int const nTooltipDigimonId = ( m_vCardHoverInfo[ i ].s_nTooltipDigimonID > 0 ) ? m_vCardHoverInfo[ i ].s_nTooltipDigimonID : m_vCardHoverInfo[ i ].s_nDigimonID;
+		_SetCardNameTooltip( nTooltipDigimonId, CsRect( m_ptCardHoverEffectPos, m_ptCardHoverEffectSize ) );
 		break;
 	}
 }
@@ -1761,6 +2065,8 @@ void cEncyclopedia::_OpenOverview( int nDigimonId, int nTooltipDigimonId )
 	CsDigimon::sINFO* pInfo = pDigimon->GetInfo();
 	SAFE_POINTER_RET( pInfo );
 
+	_ReleaseOverviewRenderDigimon();
+
 	m_nOverviewDigimonId = nDigimonId;
 	m_nOverviewTooltipDigimonId = nTooltipDigimonId > 0 ? nTooltipDigimonId : nDigimonId;
 	m_nOverviewHoverSkillIdx = -1;
@@ -1769,6 +2075,9 @@ void cEncyclopedia::_OpenOverview( int nDigimonId, int nTooltipDigimonId )
 	m_fOverviewZoomTargetRate = 0.5f;
 	m_fOverviewRenderYaw = 0.0f;
 	m_fOverviewRenderPitch = 0.0f;
+	m_fOverviewPreviewAniTimer = 0.0f;
+	m_bOverviewPreviewAltAni = false;
+	m_bOverviewPreviewAniStarted = false;
 
 	std::wstring wsName = pInfo->s_szName;
 	if( m_pOverviewName )
@@ -1834,6 +2143,8 @@ void cEncyclopedia::_OpenOverview( int nDigimonId, int nTooltipDigimonId )
 			m_pOverviewRenderTex->SetDistConstant( m_fOverviewZoomDistMax - ( fDistRange * fZoomRateForDist ) );
 			m_pOverviewRenderDigimon->SetScale( 1.0f );
 			m_pOverviewRenderDigimon->GetProp_Alpha()->SetUseDistAlpha( false );
+			if( m_pOverviewRenderDigimon->GetProp_Animation() )
+				m_pOverviewRenderDigimon->GetProp_Animation()->SetUseIdleAni( false );
 			m_pOverviewRenderDigimon->SetViewSight( true );
 		}
 	}
@@ -1961,6 +2272,7 @@ void cEncyclopedia::_UpdateOverviewSkillSection()
 
 void cEncyclopedia::_CloseOverview()
 {
+	_ReleaseOverviewRenderDigimon();
 	m_bOverviewVisible = false;
 	m_nOverviewDigimonId = 0;
 	m_nOverviewTooltipDigimonId = 0;
@@ -1973,6 +2285,15 @@ void cEncyclopedia::_CloseOverview()
 	m_bOverviewModelDragRotate = false;
 	m_bOverviewZoomSliderDrag = false;
 	m_nOverviewZoomSliderDragOffsetX = 0;
+	m_fOverviewPreviewAniTimer = 0.0f;
+	m_bOverviewPreviewAltAni = false;
+	m_bOverviewPreviewAniStarted = false;
+}
+
+void cEncyclopedia::_ReleaseOverviewRenderDigimon()
+{
+	if( m_pOverviewRenderDigimon && g_pCharMng )
+		g_pCharMng->DeleteTempChar( m_pOverviewRenderDigimon );
 	m_pOverviewRenderDigimon = NULL;
 }
 
@@ -2009,15 +2330,55 @@ void cEncyclopedia::_UpdateOverviewRenderDigimon()
 		CsNodeObj* pCsNode = m_pOverviewRenderDigimon->GetCsNode();
 		if( pCsNode && pCsNode->m_pNiNode )
 		{
-			m_pOverviewRenderDigimon->GetProp_Animation()->Update( g_fDeltaTime );
+			CsC_AniProp* pAniProp = m_pOverviewRenderDigimon->GetProp_Animation();
+			if( pAniProp )
+			{
+				if( m_bOverviewPreviewAniStarted == false )
+				{
+					pAniProp->SetUseIdleAni( false );
+					pAniProp->SetAnimation( ANI::IDLE_NORMAL, false, 0.85f );
+					m_fOverviewPreviewAniTimer = 3.4f;
+					m_bOverviewPreviewAltAni = false;
+					m_bOverviewPreviewAniStarted = true;
+				}
+				else
+				{
+					m_fOverviewPreviewAniTimer -= g_fDeltaTime;
+					if( m_fOverviewPreviewAniTimer <= 0.0f )
+					{
+						if( m_bOverviewPreviewAltAni )
+						{
+							pAniProp->SetAnimation( ANI::IDLE_NORMAL, false, 0.85f );
+							m_fOverviewPreviewAniTimer = 4.0f;
+							m_bOverviewPreviewAltAni = false;
+						}
+						else
+						{
+							DWORD const dwPrevAni = pAniProp->GetAnimationID();
+							pAniProp->SetAnimation( ANI::IDLE_CHAR, false, 0.85f );
+							if( pAniProp->GetAnimationID() == dwPrevAni )
+								pAniProp->SetAnimation( ANI::IDLE_SHAKE, false, 0.85f );
+							m_fOverviewPreviewAniTimer = 2.3f;
+							m_bOverviewPreviewAltAni = true;
+						}
+					}
+				}
+				pAniProp->Update( g_fDeltaTime );
+			}
 			m_pOverviewRenderDigimon->GetProp_Alpha()->Update( g_fDeltaTime );
 			float fAniTime = m_pOverviewRenderDigimon->GetAniTime();
 			pCsNode->m_pNiNode->Update( fAniTime );
-			NiMatrix3 matX;
+			m_fOverviewRenderPitch = 0.0f;
 			NiMatrix3 matZ;
-			matX.MakeXRotation( -m_fOverviewRenderPitch );
 			matZ.MakeZRotation( m_fOverviewRenderYaw );
-			pCsNode->m_pNiNode->SetRotate( matZ * matX );
+			pCsNode->m_pNiNode->SetRotate( matZ );
+			if( ENCY_OVERVIEW_USE_FIGURE_BASE && m_pOverviewFigureBase && m_pOverviewFigureBase->m_pNiNode )
+			{
+				m_pOverviewFigureBase->m_pNiNode->SetTranslate( NiPoint3( -20.0f, 0.0f, _GetOverviewFigureBaseZ( m_pOverviewRenderDigimon ) ) );
+				m_pOverviewFigureBase->m_pNiNode->SetRotate( -0.1f, 0, 0, 1 );
+				m_pOverviewFigureBase->m_pNiNode->SetScale( _GetOverviewFigureBaseScale( m_pOverviewRenderDigimon ) );
+				m_pOverviewFigureBase->m_pNiNode->Update( fAniTime );
+			}
 			m_pOverviewRenderDigimon->SetViewSight( true );
 		}
 	}
@@ -2049,6 +2410,10 @@ void cEncyclopedia::_RenderOverview()
 		m_pOverviewBg->Render( GetRootClient() + ptPanel );
 
 	CsPoint ptRoot = GetRootClient() + ptPanel;
+	if( m_pOverviewBackBtn )
+		m_pOverviewBackBtn->Render( ptRoot + CsPoint( 18, 14 ) );
+	if( m_pOverviewBackText )
+		m_pOverviewBackText->Render( ptRoot + CsPoint( 54, 23 ), DT_LEFT );
 	if( m_pOverviewCloseBtn )
 		m_pOverviewCloseBtn->Render( ptRoot + CsPoint( 856, 6 ) );
 	if( m_pOverviewInfoTextBg )
@@ -2096,8 +2461,11 @@ void cEncyclopedia::_RenderOverview()
 
 	if( m_pOverviewRenderTex )
 	{
+		bool const bRenderFigureBase = ( ENCY_OVERVIEW_USE_FIGURE_BASE && m_pOverviewRenderDigimon && m_pOverviewRenderDigimon->GetCsNode() != NULL );
 		m_pOverviewRenderTex->BeginRender();
 		m_pOverviewRenderTex->RenderObject( GET_SUBCAMERA(CAMERA_06), m_pOverviewRenderDigimon, true );
+		if( bRenderFigureBase && m_pOverviewFigureBase && m_pOverviewFigureBase->m_pNiNode )
+			m_pOverviewFigureBase->RenderAbsolute();
 		m_pOverviewRenderTex->EndRender( GET_SUBCAMERA(CAMERA_06), ptRoot + ptModel );
 	}
 	const int nControlYRotate = 585 + nLayoutYOffset;
@@ -2121,10 +2489,6 @@ void cEncyclopedia::_RenderOverview()
 		m_pOverviewZoomInBtn->Render( ptRoot + CsPoint( nControlZoomInX, nControlYZoom ) );
 	if( m_pOverviewRotateRBtn )
 		m_pOverviewRotateRBtn->Render( ptRoot + CsPoint( nControlRotateRX, nControlYRotate ) );
-	if( m_pOverviewRotateUpBtn )
-		m_pOverviewRotateUpBtn->Render( ptRoot + CsPoint( 405, 430 + nLayoutYOffset ) );
-	if( m_pOverviewRotateDownBtn )
-		m_pOverviewRotateDownBtn->Render( ptRoot + CsPoint( 405, 484 + nLayoutYOffset ) );
 	if( m_pOverviewResetViewBtn )
 		m_pOverviewResetViewBtn->Render( ptRoot + CsPoint( 405, 538 + nLayoutYOffset ) );
 
@@ -2274,7 +2638,11 @@ void cEncyclopedia::_RenderOverview()
 
 void cEncyclopedia::SetTabListData()
 {
+	_ClearIconList();
 	m_vCardHoverInfo.clear();
+	m_vDeckPanelHoverInfo.clear();
+	m_vDeckBookmarkInfo.clear();
+	m_vCardHoverInfo.reserve( m_pCurTabList_map.size() * nLimit::EvoUnit );
 	m_pEncyListBox->RemoveAllItem();
 	std::wstring wsSearch = m_wsSearchKeyword;
 	std::transform( wsSearch.begin(), wsSearch.end(), wsSearch.begin(),
@@ -2296,10 +2664,10 @@ void cEncyclopedia::SetTabListData()
 	};
 	auto IsSeriesLineMatched = [&]( EncyclopediaContents::sEVOL_INFO* pLine )->bool
 	{
-		if( !bUseSearch )
-			return true;
 		if( pLine == NULL )
 			return false;
+		if( !bUseSearch )
+			return true;
 		for( int i = 0; i < nLimit::EvoUnit; ++i )
 		{
 			if( pLine->s_sInfo[ i ].s_nDigimonID == -1 )
@@ -2319,12 +2687,14 @@ void cEncyclopedia::SetTabListData()
 			int			s_nDigimonID;
 			int			s_nTooltipDigimonID;
 			std::string s_ImgFileName;
+			TCHAR		s_szName[ MAX_FILENAME ];
 			int			s_nImgState;
 			bool		s_bSeriesAllOpen;
 			int			s_nRankSort;
 		};
 
 		std::vector< sFLAT_CARD > vFlatCards;
+		vFlatCards.reserve( m_pCurTabList_map.size() * nLimit::EvoUnit );
 		for( EncyclopediaContents::MAP_IT itFlat = m_pCurTabList_map.begin() ; itFlat != m_pCurTabList_map.end() ; ++itFlat )
 		{
 			EncyclopediaContents::sEVOL_INFO* pLine = itFlat->second;
@@ -2363,8 +2733,11 @@ void cEncyclopedia::SetTabListData()
 
 				sFLAT_CARD addCard;
 				addCard.s_nDigimonID = pLine->s_sInfo[ i ].s_nDigimonID;
-				addCard.s_nTooltipDigimonID = nLineTooltipId;
+				addCard.s_nTooltipDigimonID = pLine->s_sInfo[ i ].s_nDigimonID;
 				addCard.s_ImgFileName = pLine->s_sInfo[ i ].s_ImgFileName;
+				addCard.s_szName[ 0 ] = 0;
+				if( pDigimonInfo )
+					_tcscpy_s( addCard.s_szName, pDigimonInfo->s_szName );
 				addCard.s_nImgState = pLine->s_sInfo[ i ].s_eImgState;
 				addCard.s_bSeriesAllOpen = pLine->s_bIsAllOpen;
 				addCard.s_nRankSort = nRankSort;
@@ -2465,53 +2838,27 @@ void cEncyclopedia::SetTabListData()
 						CsDigimon* pFTDigimon = nsCsFileTable::g_pDigimonMng->GetDigimon( kCard.s_nDigimonID );
 						CsDigimon::sINFO* pFTInfo = pFTDigimon ? pFTDigimon->GetInfo() : NULL;
 
-						const char* pFrameTexture = "Encyclopedia\\newencyclopedia\\rate_frame\\collection_frame_rank1.png";
-						if( kCard.s_nImgState == EncyclopediaContents::sINFO::S_OPEN )
-						{
-							pFrameTexture = kCard.s_bSeriesAllOpen
-								? "Encyclopedia\\newencyclopedia\\rate_frame\\collection_frame_rank3.png"
-								: "Encyclopedia\\newencyclopedia\\rate_frame\\collection_frame_rank2.png";
-						}
+						const char* pFrameTexture = _GetEncyCardFrameTexture( kCard.s_nRankSort );
 
-						int nCardBgIndex = 0;
-						if( kCard.s_nImgState == EncyclopediaContents::sINFO::S_OPEN )
-							nCardBgIndex = kCard.s_bSeriesAllOpen ? 2 : 1;
-
-						cImage* pCardBG = NiNew cImage;
-						pCardBG->Init( NULL, CsPoint::ZERO, CsPoint( nCardBgWidth, nCardBgHeight ), "Encyclopedia\\newencyclopedia\\rate_frame\\collection_bg.tga", false, true );
-						pCardBG->SetTexToken( CsPoint( 120, 150 ) );
-						cString::sIMAGE* pCardBGSprite = pItem->AddImage( pCardBG, (cImage::eSTATE)nCardBgIndex, ptCard + ptCardBgOffset );
+						cString::sSPRITE* pCardBGSprite = _AddEncySpriteRect(
+							pItem,
+							ENCY_UNION_CARD_BG,
+							ptCard + ptCardBgOffset,
+							CsPoint( nCardBgWidth, nCardBgHeight ),
+							CsRect( 0, 0, 102, 128 ) );
 						SAFE_POINTER_RET( pCardBGSprite );
-						pCardBGSprite->SetAutoPointerDelete( true );
 
-						cImage* pCardFrame = NiNew cImage;
-						pCardFrame->Init( NULL, CsPoint::ZERO, CsPoint( nCardWidth, nCardHeight ), pFrameTexture, false, true );
-						pCardFrame->SetTexToken( CsPoint( 138, 174 ) );
-						cString::sIMAGE* pCardFrameSprite = pItem->AddImage( pCardFrame, (cImage::eSTATE)(cImage::NORMAL0), ptCard );
+						_AddEncyCircularPortrait(
+							pItem,
+							kCard.s_ImgFileName,
+							ptCard + ptIconOffset,
+							ptIconSize.x,
+							kCard.s_nImgState == EncyclopediaContents::sINFO::S_CLOSE );
+
+						cString::sIMAGE* pCardFrameSprite = _AddEncyFrameImage( pItem, pFrameTexture, ptCard, CsPoint( nCardWidth, nCardHeight ), true );
 						SAFE_POINTER_RET( pCardFrameSprite );
-						pCardFrameSprite->SetAutoPointerDelete( true );
 
-						cImage* pCardOverFrame = NiNew cImage;
-						pCardOverFrame->Init( NULL, CsPoint::ZERO, CsPoint( nCardWidth, nCardHeight ), pFrameTexture, false, true );
-						pCardOverFrame->SetTexToken( CsPoint( 138, 174 ) );
-						cString::sIMAGE* pCardOverFrameSprite = pItem->AddImage( pCardOverFrame, (cImage::eSTATE)(cImage::NORMAL1), ptCard );
-						SAFE_POINTER_RET( pCardOverFrameSprite );
-						pCardOverFrameSprite->SetAutoPointerDelete( true );
-						pCardOverFrameSprite->SetVisible( false );
-
-						cEncyHoverEffectSprite* pHoverEffect = NiNew cEncyHoverEffectSprite;
-						pHoverEffect->InitHoverEffect( CsPoint( nCardWidth, nCardHeight ) );
-						cString::sSPRITE* pHoverEffectSprite = pItem->AddSprite( pHoverEffect, ptCard );
-						SAFE_POINTER_RET( pHoverEffectSprite );
-						pHoverEffectSprite->SetAutoPointerDelete( true );
-						pHoverEffectSprite->SetVisible( false );
-
-						cImage* IconIMG = NiNew cImage;
-						IconIMG->Init( NULL, CsPoint::ZERO, ptIconSize, kCard.s_ImgFileName.c_str(), false, false );
-						cString::sIMAGE* pImage = pItem->AddImage( IconIMG, (cImage::eSTATE)(cImage::NORMAL1), ptCard + ptIconOffset );
-						pImage->SetAutoPointerDelete( true );
-						if( kCard.s_nImgState == EncyclopediaContents::sINFO::S_CLOSE )
-							pImage->SetColor( NiColor( 0.05f, 0.05f, 0.05f ) );
+						_AddEncyCardName( pItem, kCard.s_szName, ptCard, nCardWidth );
 
 						cSprite* pAttributeBar = NiNew cSprite;
 						pAttributeBar->Init( NULL, CsPoint::ZERO, ptAttrBarSize, "Encyclopedia\\newencyclopedia\\rate_frame\\attribute_bar.png", false );
@@ -2564,8 +2911,6 @@ void cEncyclopedia::SetTabListData()
 						sCARD_HOVER_INFO kHoverInfo;
 						kHoverInfo.s_pItem = addItem;
 						kHoverInfo.s_LocalRect = CsRect( ptCard, CsSIZE( nCardWidth, nCardHeight ) );
-						kHoverInfo.s_pOverFrame = pCardOverFrameSprite;
-						kHoverInfo.s_pEffect = pHoverEffectSprite;
 						kHoverInfo.s_nDigimonID = kCard.s_nDigimonID;
 						kHoverInfo.s_nTooltipDigimonID = kCard.s_nTooltipDigimonID;
 						m_vCardHoverInfo.push_back( kHoverInfo );
@@ -2605,53 +2950,27 @@ void cEncyclopedia::SetTabListData()
 					CsDigimon* pFTDigimon = nsCsFileTable::g_pDigimonMng->GetDigimon( kCard.s_nDigimonID );
 					CsDigimon::sINFO* pFTInfo = pFTDigimon ? pFTDigimon->GetInfo() : NULL;
 
-					const char* pFrameTexture = "Encyclopedia\\newencyclopedia\\rate_frame\\collection_frame_rank1.png";
-					if( kCard.s_nImgState == EncyclopediaContents::sINFO::S_OPEN )
-					{
-						pFrameTexture = kCard.s_bSeriesAllOpen
-							? "Encyclopedia\\newencyclopedia\\rate_frame\\collection_frame_rank3.png"
-							: "Encyclopedia\\newencyclopedia\\rate_frame\\collection_frame_rank2.png";
-					}
+					const char* pFrameTexture = _GetEncyCardFrameTexture( kCard.s_nRankSort );
 
-					int nCardBgIndex = 0;
-					if( kCard.s_nImgState == EncyclopediaContents::sINFO::S_OPEN )
-						nCardBgIndex = kCard.s_bSeriesAllOpen ? 2 : 1;
-
-					cImage* pCardBG = NiNew cImage;
-					pCardBG->Init( NULL, CsPoint::ZERO, CsPoint( nCardBgWidth, nCardBgHeight ), "Encyclopedia\\newencyclopedia\\rate_frame\\collection_bg.tga", false, true );
-					pCardBG->SetTexToken( CsPoint( 120, 150 ) );
-					cString::sIMAGE* pCardBGSprite = pItem->AddImage( pCardBG, (cImage::eSTATE)nCardBgIndex, ptCard + ptCardBgOffset );
+					cString::sSPRITE* pCardBGSprite = _AddEncySpriteRect(
+						pItem,
+						ENCY_UNION_CARD_BG,
+						ptCard + ptCardBgOffset,
+						CsPoint( nCardBgWidth, nCardBgHeight ),
+						CsRect( 0, 0, 102, 128 ) );
 					SAFE_POINTER_RET( pCardBGSprite );
-					pCardBGSprite->SetAutoPointerDelete( true );
 
-					cImage* pCardFrame = NiNew cImage;
-					pCardFrame->Init( NULL, CsPoint::ZERO, CsPoint( nCardWidth, nCardHeight ), pFrameTexture, false, true );
-					pCardFrame->SetTexToken( CsPoint( 138, 174 ) );
-					cString::sIMAGE* pCardFrameSprite = pItem->AddImage( pCardFrame, (cImage::eSTATE)(cImage::NORMAL0), ptCard );
+					_AddEncyCircularPortrait(
+						pItem,
+						kCard.s_ImgFileName,
+						ptCard + ptIconOffset,
+						ptIconSize.x,
+						kCard.s_nImgState == EncyclopediaContents::sINFO::S_CLOSE );
+
+					cString::sIMAGE* pCardFrameSprite = _AddEncyFrameImage( pItem, pFrameTexture, ptCard, CsPoint( nCardWidth, nCardHeight ), true );
 					SAFE_POINTER_RET( pCardFrameSprite );
-					pCardFrameSprite->SetAutoPointerDelete( true );
 
-					cImage* pCardOverFrame = NiNew cImage;
-					pCardOverFrame->Init( NULL, CsPoint::ZERO, CsPoint( nCardWidth, nCardHeight ), pFrameTexture, false, true );
-					pCardOverFrame->SetTexToken( CsPoint( 138, 174 ) );
-					cString::sIMAGE* pCardOverFrameSprite = pItem->AddImage( pCardOverFrame, (cImage::eSTATE)(cImage::NORMAL1), ptCard );
-					SAFE_POINTER_RET( pCardOverFrameSprite );
-					pCardOverFrameSprite->SetAutoPointerDelete( true );
-					pCardOverFrameSprite->SetVisible( false );
-
-					cEncyHoverEffectSprite* pHoverEffect = NiNew cEncyHoverEffectSprite;
-					pHoverEffect->InitHoverEffect( CsPoint( nCardWidth, nCardHeight ) );
-					cString::sSPRITE* pHoverEffectSprite = pItem->AddSprite( pHoverEffect, ptCard );
-					SAFE_POINTER_RET( pHoverEffectSprite );
-					pHoverEffectSprite->SetAutoPointerDelete( true );
-					pHoverEffectSprite->SetVisible( false );
-
-					cImage* IconIMG = NiNew cImage;
-					IconIMG->Init( NULL, CsPoint::ZERO, ptIconSize, kCard.s_ImgFileName.c_str(), false, false );
-					cString::sIMAGE* pImage = pItem->AddImage( IconIMG, (cImage::eSTATE)(cImage::NORMAL1), ptCard + ptIconOffset );
-					pImage->SetAutoPointerDelete( true );
-					if( kCard.s_nImgState == EncyclopediaContents::sINFO::S_CLOSE )
-						pImage->SetColor( NiColor( 0.05f, 0.05f, 0.05f ) );
+					_AddEncyCardName( pItem, kCard.s_szName, ptCard, nCardWidth );
 
 					cSprite* pAttributeBar = NiNew cSprite;
 					pAttributeBar->Init( NULL, CsPoint::ZERO, ptAttrBarSize, "Encyclopedia\\newencyclopedia\\rate_frame\\attribute_bar.png", false );
@@ -2704,8 +3023,6 @@ void cEncyclopedia::SetTabListData()
 					sCARD_HOVER_INFO kHoverInfo;
 					kHoverInfo.s_pItem = addItem;
 					kHoverInfo.s_LocalRect = CsRect( ptCard, CsSIZE( nCardWidth, nCardHeight ) );
-					kHoverInfo.s_pOverFrame = pCardOverFrameSprite;
-					kHoverInfo.s_pEffect = pHoverEffectSprite;
 					kHoverInfo.s_nDigimonID = kCard.s_nDigimonID;
 					kHoverInfo.s_nTooltipDigimonID = kCard.s_nTooltipDigimonID;
 					m_vCardHoverInfo.push_back( kHoverInfo );
@@ -2851,54 +3168,28 @@ void cEncyclopedia::SetTabListData()
 			CsDigimon* pFTDigimon = nsCsFileTable::g_pDigimonMng->GetDigimon( it->second->s_sInfo[ nInfoIdx ].s_nDigimonID );
 			CsDigimon::sINFO* pFTInfo = pFTDigimon ? pFTDigimon->GetInfo() : NULL;
 
-			const char* pFrameTexture = "Encyclopedia\\newencyclopedia\\rate_frame\\collection_frame_rank1.png";
-			if( it->second->s_sInfo[ nInfoIdx ].s_eImgState == EncyclopediaContents::sINFO::S_OPEN )
-			{
-				pFrameTexture = it->second->s_bIsAllOpen
-					? "Encyclopedia\\newencyclopedia\\rate_frame\\collection_frame_rank3.png"
-					: "Encyclopedia\\newencyclopedia\\rate_frame\\collection_frame_rank2.png";
-			}
+			const char* pFrameTexture = _GetEncyCardFrameTexture( pFTInfo ? pFTInfo->s_nDigimonRank : 0 );
 
-			int nCardBgIndex = 0;
-			if( it->second->s_sInfo[ nInfoIdx ].s_eImgState == EncyclopediaContents::sINFO::S_OPEN )
-				nCardBgIndex = it->second->s_bIsAllOpen ? 2 : 1;
-
-			cImage* pCardBG = NiNew cImage;
-			pCardBG->Init( NULL, CsPoint::ZERO, CsPoint( nCardBgWidth, nCardBgHeight ), "Encyclopedia\\newencyclopedia\\rate_frame\\collection_bg.tga", false, true );
-			pCardBG->SetTexToken( CsPoint( 120, 150 ) );
-			cString::sIMAGE* pCardBGSprite = pRowItem->AddImage( pCardBG, (cImage::eSTATE)nCardBgIndex, ptCard + ptCardBgOffset );
+			cString::sSPRITE* pCardBGSprite = _AddEncySpriteRect(
+				pRowItem,
+				ENCY_UNION_CARD_BG,
+				ptCard + ptCardBgOffset,
+				CsPoint( nCardBgWidth, nCardBgHeight ),
+				CsRect( 0, 0, 102, 128 ) );
 			SAFE_POINTER_RET( pCardBGSprite );
-			pCardBGSprite->SetAutoPointerDelete( true );
 
-			cImage* pCardFrame = NiNew cImage;
-			pCardFrame->Init( NULL, CsPoint::ZERO, CsPoint( nCardWidth, nCardHeight ), pFrameTexture, false, true );
-			pCardFrame->SetTexToken( CsPoint( 138, 174 ) );
-			cString::sIMAGE* pCardFrameSprite = pRowItem->AddImage( pCardFrame, (cImage::eSTATE)(cImage::NORMAL0), ptCard );
+			_AddEncyCircularPortrait(
+				pRowItem,
+				it->second->s_sInfo[ nInfoIdx ].s_ImgFileName,
+				ptCard + ptIconOffset,
+				ptIconSize.x,
+				it->second->s_sInfo[ nInfoIdx ].s_eImgState == EncyclopediaContents::sINFO::S_CLOSE );
+
+			cString::sIMAGE* pCardFrameSprite = _AddEncyFrameImage( pRowItem, pFrameTexture, ptCard, CsPoint( nCardWidth, nCardHeight ), true );
 			SAFE_POINTER_RET( pCardFrameSprite );
-			pCardFrameSprite->SetAutoPointerDelete( true );
 
-			cImage* pCardOverFrame = NiNew cImage;
-			pCardOverFrame->Init( NULL, CsPoint::ZERO, CsPoint( nCardWidth, nCardHeight ), pFrameTexture, false, true );
-			pCardOverFrame->SetTexToken( CsPoint( 138, 174 ) );
-			cString::sIMAGE* pCardOverFrameSprite = pRowItem->AddImage( pCardOverFrame, (cImage::eSTATE)(cImage::NORMAL1), ptCard );
-			SAFE_POINTER_RET( pCardOverFrameSprite );
-			pCardOverFrameSprite->SetAutoPointerDelete( true );
-			pCardOverFrameSprite->SetVisible( false );
-
-			cEncyHoverEffectSprite* pHoverEffect = NiNew cEncyHoverEffectSprite;
-			pHoverEffect->InitHoverEffect( CsPoint( nCardWidth, nCardHeight ) );
-			cString::sSPRITE* pHoverEffectSprite = pRowItem->AddSprite( pHoverEffect, ptCard );
-			SAFE_POINTER_RET( pHoverEffectSprite );
-			pHoverEffectSprite->SetAutoPointerDelete( true );
-			pHoverEffectSprite->SetVisible( false );
-
-			cImage* IconIMG = NiNew cImage;
-			IconIMG->Init( NULL, CsPoint::ZERO, ptIconSize, it->second->s_sInfo[ nInfoIdx ].s_ImgFileName.c_str(), false, false );
-
-			cString::sIMAGE* pImage = pRowItem->AddImage( IconIMG, (cImage::eSTATE)(cImage::NORMAL1), ptCard + ptIconOffset );
-			pImage->SetAutoPointerDelete(true);
-			if( it->second->s_sInfo[ nInfoIdx ].s_eImgState == EncyclopediaContents::sINFO::S_CLOSE )
-				pImage->SetColor( NiColor( 0.05f, 0.05f, 0.05f ) );
+			if( pFTInfo )
+				_AddEncyCardName( pRowItem, pFTInfo->s_szName, ptCard, nCardWidth );
 
 			cSprite* pAttributeBar = NiNew cSprite;
 			pAttributeBar->Init( NULL, CsPoint::ZERO, ptAttrBarSize, "Encyclopedia\\newencyclopedia\\rate_frame\\attribute_bar.png", false );
@@ -2950,8 +3241,6 @@ void cEncyclopedia::SetTabListData()
 			sCARD_HOVER_INFO kHoverInfo;
 			kHoverInfo.s_pItem = pRowListItem;
 			kHoverInfo.s_LocalRect = CsRect( ptCard, CsSIZE( nCardWidth, nCardHeight ) );
-			kHoverInfo.s_pOverFrame = pCardOverFrameSprite;
-			kHoverInfo.s_pEffect = pHoverEffectSprite;
 			kHoverInfo.s_nDigimonID = it->second->s_sInfo[ nInfoIdx ].s_nDigimonID;
 			kHoverInfo.s_nTooltipDigimonID = it->second->s_sInfo[ nInfoIdx ].s_nDigimonID;
 			m_vCardHoverInfo.push_back( kHoverInfo );
@@ -3217,8 +3506,8 @@ void cEncyclopedia::SetTabListData()
 
 void cEncyclopedia::SetTabGroupListData()
 {
+	_ClearIconList();
 	m_pEncyListBox->RemoveAllItem();
-	m_IconList.clear();
 	m_vDeckPanelHoverInfo.clear();
 	m_vDeckBookmarkInfo.clear();
 	CLIENT_LOG_INFO( "ENCYDECK", "SetTabGroupListData begin. mainTab=%d subMenu=%d groupCount=%d useDeck=%d",
@@ -3900,6 +4189,56 @@ void cEncyclopedia::_SetTooltip( int nDigimonID )
 	TCHAR szExplain[ 512 ];
 	_tcsncpy_s( szExplain, _countof( szExplain ), pTactics->GetInfo()->s_szTacticsExplain, _TRUNCATE );
 	g_pStringAnalysis->Cut( m_szExplain, 205, szExplain, &ti );
+}
+
+void cEncyclopedia::_SetCardNameTooltip( int nDigimonID, CsRect const& rtCardScreen )
+{
+	m_bIsMouseOn = false;
+	m_bCardNameTooltipVisible = false;
+	if( nDigimonID <= 0 )
+		return;
+
+	SAFE_POINTER_RET( nsCsFileTable::g_pDigimonMng );
+	CsDigimon* pDigimon = nsCsFileTable::g_pDigimonMng->GetDigimon( nDigimonID );
+	SAFE_POINTER_RET( pDigimon );
+	CsDigimon::sINFO* pInfo = pDigimon->GetInfo();
+	SAFE_POINTER_RET( pInfo );
+
+	int const nNameLen = (int)_tcslen( pInfo->s_szName );
+	int const nTooltipW = min( 150, max( 72, ( nNameLen * 7 ) + 14 ) );
+	int const nTooltipH = 22;
+	int const nCardW = rtCardScreen.right - rtCardScreen.left;
+	int nX = rtCardScreen.left + ( nCardW / 2 ) - ( nTooltipW / 2 );
+	int nY = rtCardScreen.top - nTooltipH - 6;
+	if( nY < 0 )
+		nY = rtCardScreen.bottom + 6;
+
+	if( nX < 0 )
+		nX = 0;
+	if( nX + nTooltipW > g_nScreenWidth )
+		nX = g_nScreenWidth - nTooltipW;
+	if( nX < 0 )
+		nX = 0;
+	if( nY + nTooltipH > g_nScreenHeight )
+		nY = g_nScreenHeight - nTooltipH;
+	if( nY < 0 )
+		nY = 0;
+
+	if( m_pCardNameTooltipText )
+		m_pCardNameTooltipText->SetText( pInfo->s_szName );
+	m_ptCardNameTooltipPos = CsPoint( nX, nY );
+	m_ptCardNameTooltipSize = CsPoint( nTooltipW, nTooltipH );
+	m_bCardNameTooltipVisible = true;
+}
+
+void cEncyclopedia::_ClearIconList()
+{
+	std::list<sICON_INFO*>::iterator it = m_IconList.begin();
+	for( ; it != m_IconList.end(); ++it )
+	{
+		SAFE_DELETE( *it );
+	}
+	m_IconList.clear();
 }
 
 void cEncyclopedia::_Updata_ForMouse_Group( int count )

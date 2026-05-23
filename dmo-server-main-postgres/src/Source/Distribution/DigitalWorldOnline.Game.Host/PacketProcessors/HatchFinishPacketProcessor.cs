@@ -167,7 +167,11 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             client.Tamer.AddDigimon(newDigimon);
 
-            client.Send(new HatchFinishPacket(newDigimon, (uint)(client.Partner.GeneralHandler + 1000), newDigimon.Slot));
+            var displaySlot = client.Tamer.ActiveDigimons.FindIndex(x => x.Id == newDigimon.Id) + 1;
+            if (displaySlot <= 0)
+                displaySlot = newDigimon.Slot;
+
+            client.Send(new HatchFinishPacket(newDigimon, (uint)(client.Partner.GeneralHandler + 1000), displaySlot));
 
             if (client.Tamer.Incubator.PerfectSize(newDigimon.HatchGrade, newDigimon.Size))
             {

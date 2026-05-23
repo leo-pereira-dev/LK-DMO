@@ -39,8 +39,26 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         public async Task Process(GameClient client, byte[] packetData)
         {
-            foreach (var digimonArchive in client.Tamer.DigimonArchive.DigimonArchives.Where(x => x.DigimonId > 0))
+            var archiveItems = client.Tamer.DigimonArchive.DigimonArchives
+                .Where(x => x.DigimonId > 0)
+                .OrderBy(x => x.Slot)
+                .ToList();
+
+            _logger.Information(
+                "ARCHIVE 3204 request begin tamer={TamerId} slots={Slots} archiveItems={ArchiveItems} filledItems={FilledItems}",
+                client.TamerId,
+                client.Tamer.DigimonArchive.Slots,
+                client.Tamer.DigimonArchive.DigimonArchives.Count,
+                archiveItems.Count);
+
+            foreach (var digimonArchive in archiveItems)
             {
+                _logger.Information(
+                    "ARCHIVE 3204 loading digimon tamer={TamerId} archiveSlot={ArchiveSlot} digimonId={DigimonId}",
+                    client.TamerId,
+                    digimonArchive.Slot,
+                    digimonArchive.DigimonId);
+
                 digimonArchive.SetDigimonInfo(_mapper.Map<DigimonModel>(
                     await _sender.Send(
                         new GetDigimonByIdQuery(digimonArchive.DigimonId))
@@ -62,6 +80,19 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         digimonArchive.Digimon.Size
                     )
                 );
+
+                _logger.Information(
+                    "ARCHIVE 3204 loaded digimon tamer={TamerId} archiveSlot={ArchiveSlot} digimonId={DigimonId} name={Name} currentType={CurrentType} baseType={BaseType} level={Level} size={Size} evoCount={EvoCount} transExp={TransExp}",
+                    client.TamerId,
+                    digimonArchive.Slot,
+                    digimonArchive.DigimonId,
+                    digimonArchive.Digimon?.Name,
+                    digimonArchive.Digimon?.CurrentType,
+                    digimonArchive.Digimon?.BaseType,
+                    digimonArchive.Digimon?.Level,
+                    digimonArchive.Digimon?.Size,
+                    digimonArchive.Digimon?.Evolutions.Count,
+                    digimonArchive.Digimon?.TranscendenceExperience);
             }
 
             _logger.Debug($"Character {client.TamerId} loaded digimon archive info.");
@@ -69,7 +100,18 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _dUnitCollections.ApplyBonuses(client.Tamer);
             client.Send(new UpdateStatusPacket(client.Tamer));
 
-            client.Send(new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive));
+            var packet = new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive).Serialize();
+            _logger.Information(
+                "ARCHIVE 3204 send tamer={TamerId} packetBytes={PacketBytes} slots={Slots} filledItems={FilledItems} items={Items}",
+                client.TamerId,
+                packet.Length,
+                client.Tamer.DigimonArchive.Slots,
+                archiveItems.Count,
+                string.Join(",",
+                    archiveItems.Select(x =>
+                        $"{x.Slot}:{x.DigimonId}:{x.Digimon?.CurrentType}/{x.Digimon?.BaseType}:evo{x.Digimon?.Evolutions.Count}")));
+
+            client.Send(packet);
         }
     }
 }

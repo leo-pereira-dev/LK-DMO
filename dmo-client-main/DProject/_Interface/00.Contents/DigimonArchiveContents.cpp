@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "DigimonArchiveContents.h"
 #include "../../ContentsSystem/ContentsSystemDef.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 CDigimonArchiveContents::DigimonInArchive::DigimonInArchive()
 :miSlotIndex(0),
@@ -273,6 +274,18 @@ void CDigimonArchiveContents::OnShowViewer(void)
 
 void CDigimonArchiveContents::OnRecvEndArchiveInfo(void* pkData)
 {
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd begin max=%d opened=%d digimons=%d sorted=%d receive=%d npc=%p openedPos=%.2f,%.2f filter=%d sort=%d",
+		MaxArchiveCount,
+		OpenedArchiveCount,
+		(int)mDigimons.size(),
+		(int)mSorted.size(),
+		m_bisReceiveData ? 1 : 0,
+		m_pOpenNPC,
+		mOpenedPos.x,
+		mOpenedPos.y,
+		FilterMode,
+		SortMode);
+
 	m_bisReceiveData = true;
 
 	if(m_pOpenNPC != NULL){
@@ -289,16 +302,49 @@ void CDigimonArchiveContents::OnRecvEndArchiveInfo(void* pkData)
 // 		return;
 // 	}
 	Notify(Initailze_Archive);
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd after Initailze_Archive max=%d opened=%d digimons=%d sorted=%d",
+		MaxArchiveCount,
+		OpenedArchiveCount,
+		(int)mDigimons.size(),
+		(int)mSorted.size());
 	OnShowPartnerDigimonInfo();
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd after OnShowPartnerDigimonInfo selected=%d selectedPtr=%p",
+		SelectedDigimonIdx,
+		mpkSelectedDigimon);
+	UpdateSlotData();
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd after UpdateSlotData max=%d opened=%d digimons=%d sorted=%d",
+		MaxArchiveCount,
+		OpenedArchiveCount,
+		(int)mDigimons.size(),
+		(int)mSorted.size());
+	Notify(Update_Viewer);
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd after Update_Viewer max=%d opened=%d digimons=%d sorted=%d",
+		MaxArchiveCount,
+		OpenedArchiveCount,
+		(int)mDigimons.size(),
+		(int)mSorted.size());
 
 	//데이터 수신중 메세지
 	cMessageBox::DelMsg( 10019, false );
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd end");
 }
 
 
 void CDigimonArchiveContents::OnRecvArchiveInfo(void* pkData)
 {
 	ArchiveInitInfo* kRecvData = static_cast<ArchiveInitInfo*>(pkData);
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvArchiveInfo begin recv=%p slotType=%d recvMax=%d recvOpened=%d recvCount=%d currentMax=%d currentOpened=%d currentDigimons=%d currentSorted=%d",
+		kRecvData,
+		kRecvData ? kRecvData->GetSlotType() : -1,
+		kRecvData ? kRecvData->GetMaxArchiveCnt() : -1,
+		kRecvData ? kRecvData->GetOpenedArchiveCnt() : -1,
+		(kRecvData && kRecvData->GetRecvInfo()) ? (int)kRecvData->GetRecvInfo()->size() : -1,
+		MaxArchiveCount,
+		OpenedArchiveCount,
+		(int)mDigimons.size(),
+		(int)mSorted.size());
+
+	SAFE_POINTER_RET(kRecvData);
 	if(kRecvData->GetSlotType() == 0)
 	{
 		MaxArchiveCount = kRecvData->GetMaxArchiveCnt();
@@ -329,9 +375,38 @@ void CDigimonArchiveContents::OnRecvArchiveInfo(void* pkData)
 		else
 			pkInfo->mbIsInIncubator = true;
 
+		DigimonsIter kExistingDigimon = mDigimons.find(kIter->first);
+		if(kExistingDigimon != mDigimons.end())
+		{
+			nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT replacing existing slot=%d oldInfo=%p oldData=%p",
+				kIter->first,
+				kExistingDigimon->second,
+				kExistingDigimon->second ? kExistingDigimon->second->mpData : NULL);
+			SAFE_DELETE(kExistingDigimon->second);
+			mDigimons.erase(kExistingDigimon);
+		}
+
 		mDigimons.insert(Digimons::value_type(kIter->first, pkInfo));
+		nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT stored slot=%d data=%p base=%u level=%d scale=%.4f countNow=%d inIncu=%d",
+			kIter->first,
+			pkInfo->mpData,
+			pkInfo->mpData ? pkInfo->mpData->s_dwBaseDigimonID : 0,
+			pkInfo->mpData ? pkInfo->mpData->s_nLevel : 0,
+			pkInfo->mpData ? pkInfo->mpData->s_fScale : 0.0f,
+			(int)mDigimons.size(),
+			pkInfo->mbIsInIncubator ? 1 : 0);
 	}
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT before UpdateSlotData max=%d opened=%d digimons=%d sorted=%d",
+		MaxArchiveCount,
+		OpenedArchiveCount,
+		(int)mDigimons.size(),
+		(int)mSorted.size());
 	UpdateSlotData();
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvArchiveInfo end max=%d opened=%d digimons=%d sorted=%d",
+		MaxArchiveCount,
+		OpenedArchiveCount,
+		(int)mDigimons.size(),
+		(int)mSorted.size());
 
 }
 void CDigimonArchiveContents::OnRecvMoveResultInArchive(void* pkDtata)
@@ -718,6 +793,14 @@ const std::wstring CDigimonArchiveContents::GetSerchingKeyword(void)
 
 void CDigimonArchiveContents::UpdateSlotData()
 {
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT UpdateSlotData begin digimons=%d filter=%d sort=%d keywordLen=%d max=%d opened=%d",
+		(int)mDigimons.size(),
+		FilterMode,
+		SortMode,
+		(int)SerchingKeyword.size(),
+		MaxArchiveCount,
+		OpenedArchiveCount);
+
 	Digimons kFiltered;
 	std::wstring szKey;
 	cData_PostLoad::sDATA* pData = NULL;
@@ -728,13 +811,21 @@ void CDigimonArchiveContents::UpdateSlotData()
 	{
 		cData_PostLoad::sDATA* pkInfo = kIter->second->GetDigimonData();
 		if(pkInfo != NULL){
+			nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT UpdateSlotData source slot=%d data=%p base=%u level=%d filter=%d",
+				kIter->first,
+				pkInfo,
+				pkInfo->s_dwBaseDigimonID,
+				pkInfo->s_nLevel,
+				FilterMode);
+
 			if(FilterMode == 0)
 			{
 				kFiltered.insert(Digimons::value_type(kIter->first, kIter->second ));
 			}
 			else
 			{
-				CsDigimon::sINFO* pFTDigimon = nsCsFileTable::g_pDigimonMng->GetDigimon( pkInfo->s_dwBaseDigimonID )->GetInfo();
+				CsDigimon* pDigimon = nsCsFileTable::g_pDigimonMng->GetDigimon( pkInfo->s_dwBaseDigimonID );
+				CsDigimon::sINFO* pFTDigimon = pDigimon ? pDigimon->GetInfo() : NULL;
 				if(pFTDigimon != NULL)
 				{
 					//디지몬 속성 필터
@@ -787,14 +878,32 @@ void CDigimonArchiveContents::UpdateSlotData()
 	{
 		cData_PostLoad::sDATA* pkData = kFilterIter->second->GetDigimonData();
 		if(pkData == NULL || pkData->s_dwBaseDigimonID ==0)
+		{
+			nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT UpdateSlotData erase invalid filtered slot=%d data=%p base=%u",
+				kFilterIter->first,
+				pkData,
+				pkData ? pkData->s_dwBaseDigimonID : 0);
+			kFilterIter = kFiltered.erase(kFilterIter);
 			continue;
+		}
 
-		CsTacticsExplain* pkExplain = nsCsFileTable::g_pTacticsMng->GetTacticsExplain( pkData->s_dwBaseDigimonID );
-		if(pkExplain == NULL || pkExplain->GetInfo() == NULL)
-			continue;
+		CsTacticsExplain* pkExplain = NULL;
+		if(nsCsFileTable::g_pTacticsMng != NULL &&
+			nsCsFileTable::g_pTacticsMng->IsTacticsExplain( pkData->s_dwBaseDigimonID ) )
+		{
+			pkExplain = nsCsFileTable::g_pTacticsMng->GetTacticsExplain( pkData->s_dwBaseDigimonID );
+		}
+		else
+		{
+			nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT UpdateSlotData no tactics explain base=%u tacticsMng=%p",
+				pkData->s_dwBaseDigimonID,
+				nsCsFileTable::g_pTacticsMng);
+		}
 
 		wstring kName = pkData->s_szName;
-		wstring kTypeName = pkExplain->GetInfo()->s_szTacticsName;
+		wstring kTypeName;
+		if(pkExplain != NULL && pkExplain->GetInfo() != NULL)
+			kTypeName = pkExplain->GetInfo()->s_szTacticsName;
 		DmCS::StringFn::Lwr(kName);
 		DmCS::StringFn::Lwr(kTypeName);
 		DmCS::StringFn::Lwr(SerchingKeyword);
@@ -908,6 +1017,10 @@ void CDigimonArchiveContents::UpdateSlotData()
 			}
 		}
 	}
+
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT UpdateSlotData end filtered=%d sorted=%d",
+		(int)kFiltered.size(),
+		(int)mSorted.size());
 
 	
 }

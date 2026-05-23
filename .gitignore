@@ -38,6 +38,7 @@ _tmp_*.png
 
 # Local client packs / extracted data used only as analysis input
 /union/
+/Dcommerce/
 /unpacke_full/
 /unpacked_full/
 /unpack_full/

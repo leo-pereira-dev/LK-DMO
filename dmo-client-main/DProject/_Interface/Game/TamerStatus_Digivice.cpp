@@ -51,25 +51,19 @@ void cTamerStatus::_CreateDigivice()
 	}
 
 	// 용병
-	assert_cs( nLimit::Memory == 6 );		// 이값이 아니라면 아래 들어갈 위치 변경	
-	for( int y=0; y<3; ++y )
+	const int memoryColumnCount = 4;
+	const CsPoint memoryStart = start;
+	for( int i=0; i<nLimit::Memory; ++i )
 	{
-		for( int x=0; x<2; ++x )
-		{
+		const int x = i % memoryColumnCount;
+		const int y = i / memoryColumnCount;
+		start = memoryStart;
 #ifdef UI_POSMOVE_RENEWAL_20190109
-			m_IFIcon_vice_Memory[ y*2+x ].Init( CsRect( start + CsPoint( 11, 12 ), (CsSIZE)IF_TAMER_DIGI_ICON_SIZE ) );
-			start.x += 165;
+		start += CsPoint( 11 + x * 59, 12 + y * 60 );
 #else
-			m_IFIcon_vice_Memory[ y*2+x ].Init( CsRect( start, (CsSIZE)IF_TAMER_DIGI_ICON_SIZE ) );
-			start.x += 188;
+		start += CsPoint( x * 47, y * 49 );
 #endif
-		}
-		start.x = 18;
-#ifdef UI_POSMOVE_RENEWAL_20190109
-		start.y += 60;
-#else
-		start.y += 49;
-#endif
+		m_IFIcon_vice_Memory[ i ].Init( CsRect( start, (CsSIZE)IF_TAMER_DIGI_ICON_SIZE ) );
 	}
 
 	// 테이머 스킬

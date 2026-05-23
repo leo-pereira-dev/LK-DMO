@@ -13,7 +13,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         public TradeAcceptPacket(int TargetHandle)
         {
             Type(PacketNumber);
-            WriteInt((int)TargetHandle);
+            WriteUShort((ushort)TargetHandle);
         }
     }
 }

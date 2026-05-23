@@ -2570,7 +2570,6 @@ void cCliGame::SendDigimonTranscendenceChargeExp(u1 const& nIsVip, u4 const& inv
 												 , u1 const& nChargeDigimonTaticsIdx, std::list<u2> const& listMaterialDigimons
 												 , std::list<stTranscendenceItem> const& nSubMaterialItems )
 {
-#ifdef SDM_DIGIMON_TRANSCENDENCE_CONTENTS_20190507
 	C2GS_SEND_DigimonTranscendenceChargeEXP packet;
 	packet.m_u1VIPMemberMode = nIsVip;           // VIP Mode
 	packet.m_uInvenActiveItemSlot = invenSlotIdx;
@@ -2605,12 +2604,10 @@ void cCliGame::SendDigimonTranscendenceChargeExp(u1 const& nIsVip, u4 const& inv
 
 	endp( packet.GetProtocol() );
 	send();
-#endif
 }
 
 void cCliGame::SendDigimonTranscendence(u1 const& nIsVip, u4 const& invenSlotIdx, DWORD const& dwNpcIDX, u1 const& nDigimonTaticsIdx,u8 const& nNeedMoney)
 {
-#ifdef SDM_DIGIMON_TRANSCENDENCE_CONTENTS_20190507
 	C2GS_SEND_DigimonTranscendence packet;
 	packet.m_u1VIPMemberMode = nIsVip;
 	packet.m_uInvenActiveItemSlot = invenSlotIdx;
@@ -2630,7 +2627,6 @@ void cCliGame::SendDigimonTranscendence(u1 const& nIsVip, u4 const& invenSlotIdx
 	push( packet.m_n8Money );
 	endp( packet.GetProtocol() );
 	send();
-#endif
 }
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////

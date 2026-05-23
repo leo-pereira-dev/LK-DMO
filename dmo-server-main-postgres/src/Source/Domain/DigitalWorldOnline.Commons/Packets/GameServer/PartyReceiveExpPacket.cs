@@ -15,7 +15,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteInt64(tamerExp * 100);
             WriteInt64(bonusTamerExp * 100);
             WriteInt64(tamerFinalExp * 100);
-            WriteUInt(partnerHandle);
+            WriteUShort((ushort)partnerHandle);
             WriteInt64(partnerExp * 100);
             WriteInt64(bonusPartnerExp * 100);
             WriteInt64(partnerFinalExp * 100);

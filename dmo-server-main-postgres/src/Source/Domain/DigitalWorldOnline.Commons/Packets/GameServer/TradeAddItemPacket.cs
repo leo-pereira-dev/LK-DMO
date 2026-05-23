@@ -17,10 +17,10 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         public TradeAddItemPacket(int targetHandle, byte[] item, byte tradeSlot, int inventorySlot)
         {
             Type(PacketNumber);
-            WriteInt(targetHandle);
+            WriteUShort((ushort)targetHandle);
             WriteBytes(item);
             WriteByte(tradeSlot);
-            WriteInt(inventorySlot);
+            WriteUShort((ushort)inventorySlot);
         }
     }
 }

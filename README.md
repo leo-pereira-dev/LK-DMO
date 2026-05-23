@@ -1,7 +1,6 @@
-a
 # LK-DMO Technical Context
 
-Last updated: 2026-05-19
+Last updated: 2026-05-22
 
 This document is the working memory for the LK-DMO workspace in `C:\0-NewDmo`.
 It summarizes the main fixes, migration work, build notes, and packet/protocol
@@ -26,6 +25,12 @@ Primary build used during the fixes:
   "C:\0-NewDmo\dmo-client-main\DProject.sln" `
   /m /p:Configuration=Release_English /p:Platform=Win32 /v:minimal
 ```
+
+Build the client through `DProject.sln` only. Do not compile
+`DProject\DProject.vcxproj` directly; the solution carries the correct
+configuration/dependency mapping for this workspace. If parallel compilation
+hits `C1041`/PDB contention, keep using the solution and set `$env:CL="/FS"`
+for that build.
 
 Expected output:
 
@@ -87,8 +92,8 @@ Schema: dso
 
 ### Client/server bootstrap
 
-- Read `source-client` context and used the compiling source under `D:\OpenDmo`
-  as a reference for client library/build behavior.
+- Read earlier `source-client` notes as historical reference only. The active
+  project root for build/test work is `C:\0-NewDmo`.
 - Confirmed that `Release_English|Win32` is the relevant client target for
   `DProject_R_ENG.exe`.
 - Avoided relying on the `Give_English` target for final testing after it caused
@@ -278,10 +283,8 @@ Schema: dso
 - Latest successful client build after the lower render guard:
   - `C:\Release\GSP\DProject_R_ENG.exe`
   - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`
+  - `D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe`
   - timestamp `2026-05-19 21:30:56`, size `10842624`.
-  - Copy to `D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe`
-    failed because the running client process held the file open and could not be
-    stopped from the current PowerShell session (`Access denied`).
 - Last successful client build/copy for this fix:
   - `C:\Release\GSP\DProject_R_ENG.exe`
   - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`

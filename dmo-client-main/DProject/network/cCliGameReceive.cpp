@@ -485,6 +485,7 @@ void cCliGame::RecvInitGameData(void)
 #ifdef COMPAT_487
 	u8 ExpPt2 = 0;
 	pop(ExpPt2);
+	pDigimonData->s_nTranscendenceExp = ExpPt2;
 #endif
 
 #ifdef SDM_DIGIMON_TRANSCENDENCE_CONTENTS_20190507
@@ -505,10 +506,11 @@ void cCliGame::RecvInitGameData(void)
 	// 서버로부터 현재 디지몬 진화 정보를 얻는다.
 	pop(pDigimonData->s_nMaxEvoUnit);
 	pop(&pDigimonData->s_EvoUnit[1], sizeof(cEvoUnit) * pDigimonData->s_nMaxEvoUnit);
-	nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData partner evo max=%d base=%u level=%u",
+	nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData partner evo max=%d base=%u level=%u transExp=%I64u",
 		(int)pDigimonData->s_nMaxEvoUnit,
 		(unsigned)pDigimonData->s_dwBaseDigimonID,
-		(unsigned)pDigimonData->s_nLevel );
+		(unsigned)pDigimonData->s_nLevel,
+		(unsigned __int64)pDigimonData->s_nTranscendenceExp );
 
 	// 디지몬 확장 능력치 수신
 	// 수신 순서 1: AP(AT) 공격 2: DE 방어 3: CR 크리티컬 확률 4: AS 공격 스피드 5: EV 회피 6: HT 공격 성공률 1
@@ -608,7 +610,13 @@ void cCliGame::RecvInitGameData(void)
 		(unsigned)nDSkillCnt,
 		(unsigned)(nLimit::EvoUnit * nLimit::MAX_ItemSkillDigimon) );
 
-	assert_cs(nDSkillCnt <= (nLimit::EvoUnit * nLimit::MAX_ItemSkillDigimon));
+	if( nDSkillCnt > nLimit::EvoUnit )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData invalid partner memory skill count=%u limit=%u; aborting packet",
+			(unsigned)nDSkillCnt,
+			(unsigned)nLimit::EvoUnit );
+		return;
+	}
 
 	for (int i = 0; i < nDSkillCnt; ++i)
 	{
@@ -673,6 +681,7 @@ void cCliGame::RecvInitGameData(void)
 #ifdef COMPAT_487
 		ExpPt2 = 0;
 		pop(ExpPt2);
+		pTactics->s_nTranscendenceExp = ExpPt2;
 #endif
 
 #ifdef SDM_DIGIMON_TRANSCENDENCE_CONTENTS_20190507
@@ -745,7 +754,14 @@ void cCliGame::RecvInitGameData(void)
 			(unsigned)pTactics->s_nUID,
 			(unsigned)nDSkillCnt );
 
-		assert_cs(nDSkillCnt <= (nLimit::EvoUnit * nLimit::MAX_ItemSkillDigimon));
+		if( nDSkillCnt > nLimit::EvoUnit )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData invalid tactics memory skill count slot=%u count=%u limit=%u; aborting packet",
+				(unsigned)slot,
+				(unsigned)nDSkillCnt,
+				(unsigned)nLimit::EvoUnit );
+			return;
+		}
 
 		for (int i = 0; i < nDSkillCnt; ++i)
 		{
@@ -4728,9 +4744,7 @@ void cCliGame::RecvHatchOut(void)	// 부화 확인 결과
 	pop( Tactics.s_nExp);
 	Tactics.s_nExp = Tactics.s_nExp / 100;
 
-#ifdef SDM_DIGIMON_TRANSCENDENCE_CONTENTS_20190507
 	pop( Tactics.s_nTranscendenceExp );
-#endif
 	pop( Tactics.s_nLevel );
 	pop( Tactics.s_Attribute, sizeof( Tactics.s_Attribute ) );
 	
@@ -5666,23 +5680,35 @@ void cCliGame::RecvInvenSlotSize(void)
 
 void cCliGame::RecvDigimonCareSlotList(void)
 {
+	const char* kTrace = "ARCHIVE RECV 3204";
+	nsCSDEBUG::CrashLogger::LogMessage("%s begin", kTrace);
+
 	CDigimonArchiveContents::ArchiveInitInfo kRecvData;
 	int nType = 0;
 	pop(nType);
 	kRecvData.SetType(nType);
+	nsCSDEBUG::CrashLogger::LogMessage("%s header type=%d", kTrace, nType);
 		
 	if( nType == 0 )
 	{
 		int nOpenSlotSize = 0;
 		pop(nOpenSlotSize);	// 열려있는 용병 보관소 슬롯 갯수
 		kRecvData.SetOpenedArchiveSlotCount(nOpenSlotSize);
+		u4 nIncuSlots[3] = {0,};
 
 		u4 nSlot = 0;	// 인큐베이터 안에 들어있는 디지몬의 디보 슬롯 번호 ( 1000~ )
 		for( int i = 0 ; i < 3 ; i++ )
 		{
 			pop( nSlot );
+			nIncuSlots[i] = nSlot;
 			kRecvData.AddIncuInfo(i, nSlot);
 		}
+		nsCSDEBUG::CrashLogger::LogMessage("%s storage header opened=%d incu=%u,%u,%u",
+			kTrace,
+			nOpenSlotSize,
+			nIncuSlots[0],
+			nIncuSlots[1],
+			nIncuSlots[2]);
 	}	
 
 
@@ -5694,7 +5720,9 @@ void cCliGame::RecvDigimonCareSlotList(void)
 
 	int nTHouseCnt = nsCsFileTable::g_pBaseMng->GetLimit()->s_nMaxTacticsHouse;
 	kRecvData.SetMaxArchiveCnt(nTHouseCnt);
+	nsCSDEBUG::CrashLogger::LogMessage("%s clientMax=%d", kTrace, nTHouseCnt);
 	bool isEndPacket = false;
+	int nLoopCount = 0;
 	while(nSlotNo < nTHouseCnt)
 	{
 		pop(nSlotNo);		// 용병이 들어가 있는 슬롯의 번호
@@ -5709,48 +5737,77 @@ void cCliGame::RecvDigimonCareSlotList(void)
 		}
 		cData_PostLoad::sDATA* pTactics = new cData_PostLoad::sDATA();// pDataTH->GetTactics( nSlotNo );
 		pTactics->s_SlotIdx = nSlotNo;
+		nsCSDEBUG::CrashLogger::LogMessage("%s slot=%d parse begin", kTrace, nSlotNo);
 
 		u2 nLevel = 0;
 		u2 nScale = 0;
 
 		pop( pTactics->s_Type );
+		nsCSDEBUG::CrashLogger::LogMessage("%s slot=%d typeAll=%I64u",
+			kTrace,
+			nSlotNo,
+			(unsigned __int64)pTactics->s_Type.GetTypeAll());
 
 		std::wstring name;
 		pop( name );
 		_tcscpy_s( pTactics->s_szName, name.c_str() );
+		nsCSDEBUG::CrashLogger::LogMessage("%s slot=%d nameLen=%d", kTrace, nSlotNo, (int)name.size());
 
 		pop( nScale );
 		pTactics->s_fScale = nScale*0.0001f;
 
 		pop( pTactics->s_nExp);
 
-#ifdef SDM_DIGIMON_TRANSCENDENCE_CONTENTS_20190507
 		pop( pTactics->s_nTranscendenceExp );
-#endif 
 
 		pTactics->s_nExp = pTactics->s_nExp / 100;
 		pop( pTactics->s_nLevel );
 		pop( pTactics->s_Attribute, sizeof( pTactics->s_Attribute ) );
+		nsCSDEBUG::CrashLogger::LogMessage("%s slot=%d stats scaleRaw=%u scale=%.4f exp=%I64u transExp=%I64u level=%d",
+			kTrace,
+			nSlotNo,
+			nScale,
+			pTactics->s_fScale,
+			(unsigned __int64)pTactics->s_nExp,
+			(unsigned __int64)pTactics->s_nTranscendenceExp,
+			pTactics->s_nLevel);
 
 		pop(pTactics->s_HatchLevel);
 
 		pop( pTactics->s_dwBaseDigimonID );
 		DBG("nBaseEvoUnitIDX : %d", pTactics->s_dwBaseDigimonID );
 		pop( pTactics->s_nMaxEvoUnit);
+		nsCSDEBUG::CrashLogger::LogMessage("%s slot=%d hatch=%u base=%u maxEvo=%d evoUnitSize=%d",
+			kTrace,
+			nSlotNo,
+			pTactics->s_HatchLevel,
+			pTactics->s_dwBaseDigimonID,
+			(int)pTactics->s_nMaxEvoUnit,
+			(int)sizeof(cEvoUnit));
 		if( pTactics->s_nMaxEvoUnit < 0 || pTactics->s_nMaxEvoUnit >= nLimit::EvoUnit )
 		{
-			nsCSDEBUG::CrashLogger::LogMessage( "RECV Archive invalid evo max=%d slot=%d type=%d; stopping parse",
+			nsCSDEBUG::CrashLogger::LogMessage( "%s invalid evo max=%d slot=%d type=%d; stopping parse",
+				kTrace,
 				(int)pTactics->s_nMaxEvoUnit,
 				nSlotNo,
 				pTactics->s_Type.m_nType );
 			delete pTactics;
+			isEndPacket = true;
 			break;
 		}
 		pop( &pTactics->s_EvoUnit[ 1 ], sizeof(cEvoUnit)*pTactics->s_nMaxEvoUnit );
+		nsCSDEBUG::CrashLogger::LogMessage("%s slot=%d evo parsed bytes=%d",
+			kTrace,
+			nSlotNo,
+			(int)(sizeof(cEvoUnit)*pTactics->s_nMaxEvoUnit));
 
 		pop( pTactics->s_nEnchantLevel );
 		pop( pTactics->s_ExtendAttribute, sizeof( pTactics->s_ExtendAttribute ) );
 		pop( pTactics->s_ExtendAttributeLV, sizeof( pTactics->s_ExtendAttributeLV ) );
+		nsCSDEBUG::CrashLogger::LogMessage("%s slot=%d clone enchant=%d",
+			kTrace,
+			nSlotNo,
+			(int)pTactics->s_nEnchantLevel);
 
 		// 기본 속성 경험치
 		for( int i=0; i < NewAttribute::MaxDigitalType; i++)
@@ -5773,14 +5830,22 @@ void cCliGame::RecvDigimonCareSlotList(void)
 
 		pop( pTactics->s_nUID );
 		pop( nDSkillCnt );
+		nsCSDEBUG::CrashLogger::LogMessage("%s slot=%d uid=%u dSkillCnt=%u",
+			kTrace,
+			nSlotNo,
+			pTactics->s_nUID,
+			nDSkillCnt);
 
-		if( nDSkillCnt > (nLimit::EvoUnit * nLimit::MAX_ItemSkillDigimon) )
+		if( nDSkillCnt > nLimit::EvoUnit )
 		{
-			nsCSDEBUG::CrashLogger::LogMessage( "RECV Archive invalid memory skill count=%u slot=%d type=%d; ignoring memory block",
+			nsCSDEBUG::CrashLogger::LogMessage( "ARCHIVE RECV 3204 invalid memory skill count=%u slot=%d limit=%d type=%d; aborting packet",
 				(unsigned)nDSkillCnt,
 				nSlotNo,
+				nLimit::EvoUnit,
 				pTactics->s_Type.m_nType );
-			nDSkillCnt = 0;
+			delete pTactics;
+			isEndPacket = true;
+			break;
 		}
 
 		for( int i=0; i< nDSkillCnt; ++i )
@@ -5791,12 +5856,26 @@ void cCliGame::RecvDigimonCareSlotList(void)
 		}
 
 		kRecvData.AddData(nSlotNo, pTactics);
+		nsCSDEBUG::CrashLogger::LogMessage("%s slot=%d parse end recvCount=%d",
+			kTrace,
+			nSlotNo,
+			(int)kRecvData.GetRecvInfo()->size());
+		++nLoopCount;
 	}
+	nsCSDEBUG::CrashLogger::LogMessage("%s before RECV_ARCHIEVE_DIGIMONS recvCount=%d isEnd=%d max=%d",
+		kTrace,
+		(int)kRecvData.GetRecvInfo()->size(),
+		isEndPacket ? 1 : 0,
+		nTHouseCnt);
 	GAME_EVENT_STPTR->OnEvent(EVENT_CODE::RECV_ARCHIEVE_DIGIMONS, &kRecvData);
+	nsCSDEBUG::CrashLogger::LogMessage("%s after RECV_ARCHIEVE_DIGIMONS", kTrace);
 	if(isEndPacket == true)
 	{
+		nsCSDEBUG::CrashLogger::LogMessage("%s before RECV_END_ARCHIEVE_DIGIMONS", kTrace);
 		GAME_EVENT_STPTR->OnEvent(EVENT_CODE::RECV_END_ARCHIEVE_DIGIMONS, &kRecvData);
+		nsCSDEBUG::CrashLogger::LogMessage("%s after RECV_END_ARCHIEVE_DIGIMONS", kTrace);
 	}
+	nsCSDEBUG::CrashLogger::LogMessage("%s end", kTrace);
 }
 
 void cCliGame::RecvDigimonCareSlotSize(void) 

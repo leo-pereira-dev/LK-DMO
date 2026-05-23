@@ -107,6 +107,7 @@ void CDigimonTanscendenceViewer::sSubMaterialCtr::UpdateMaterialCount( int const
 //////////////////////////////////////////////////////////////////////////
 CDigimonTanscendenceViewer::CDigimonTanscendenceViewer()
 :m_pkPlayer(NULL),m_pkAccompanies(NULL),m_pkGridMaterial(NULL)
+,m_pAccompanyPrevBtn(NULL),m_pAccompanyNextBtn(NULL),m_nAccompanyPage(0)
 ,m_pNormalExpAddBtn(NULL),m_pAdvancedExpAddBtn(NULL),m_pTranscendBtn(NULL),m_pkInsertDigimon(NULL)
 ,m_pSpendMoney(NULL),m_pProgressbar(NULL),m_pOverProgressbar(NULL),m_pEffect(NULL),m_pResultEffect(NULL)
 ,m_pExpGuageText(NULL),m_pSuccessEffect(NULL),m_pExcellentEffect(NULL), m_pHelpBtn(NULL)
@@ -163,7 +164,7 @@ void CDigimonTanscendenceViewer::Create(  cWindow* pkRoot, int nValue /*= 0 */ )
 	m_pkInsertDigimon = NiNew cGridListBox;
 	if( m_pkInsertDigimon )
 	{
-		m_pkInsertDigimon->Init( GetRoot(), CsPoint(151, 104), CsPoint(50, 60), CsPoint::ZERO, CsPoint( 46, 46), cGridListBox::LowRightDown, cGridListBox::LeftTop, NULL, false, 0 );
+		m_pkInsertDigimon->Init( GetRoot(), CsPoint(151, 126), CsPoint(50, 60), CsPoint::ZERO, CsPoint( 46, 46), cGridListBox::LowRightDown, cGridListBox::LeftTop, NULL, false, 0 );
 		AddChildControl(m_pkInsertDigimon);
 		cString * pItem = NiNew cString;
 		cSprite* pImage = NiNew cSprite;	// 1
@@ -300,6 +301,12 @@ BOOL CDigimonTanscendenceViewer::UpdateMouse()
 	if(m_pkAccompanies && m_pkAccompanies->Update_ForMouse(CURSOR_ST.GetPos()) )
 		return TRUE;
 
+	if( m_pAccompanyPrevBtn && m_pAccompanyPrevBtn->Update_ForMouse() != cButton::ACTION_NONE )
+		return TRUE;
+
+	if( m_pAccompanyNextBtn && m_pAccompanyNextBtn->Update_ForMouse() != cButton::ACTION_NONE )
+		return TRUE;
+
 	if( m_pkGridMaterial && m_pkGridMaterial->Update_ForMouse( CURSOR_ST.GetPos() ) )
 		return TRUE;
 
@@ -364,8 +371,8 @@ void CDigimonTanscendenceViewer::CreateTaticsDigimonUI()
 #else
 	const CsPoint kAccomGridPos = CsPoint(118, 31);
 #endif
-	const CsPoint kAccomGridSize = CsPoint(230, 104);
-	const CsPoint kAccomGap = CsPoint(14, 6);
+	const CsPoint kAccomGridSize = CsPoint(230, 60);
+	const CsPoint kAccomGap = CsPoint(14, 0);
 	m_pkAccompanies = NiNew cGridListBox;
 	if( m_pkAccompanies )
 	{
@@ -382,12 +389,24 @@ void CDigimonTanscendenceViewer::CreateTaticsDigimonUI()
 		m_pkAccompanies->SetSelectedImg( "TacticsHouse\\Storage_Insert.tga", CsPoint( -2, -21 ), CsPoint( 50,68 ));
 		m_pkAccompanies->SetBackOverAndSelectedImgRender(false);	
 
+		m_pAccompanyPrevBtn = AddButton( CsPoint( 270, 89 ), CsPoint( 9, 17 ), CsPoint( 9, 0 ), "Control_G\\Slider\\Lbtn.tga" );
+		if( m_pAccompanyPrevBtn )
+			m_pAccompanyPrevBtn->AddEvent( cButton::BUTTON_LBUP_EVENT, this, &CDigimonTanscendenceViewer::OnClickAccompanyPrev );
+		m_pAccompanyNextBtn = AddButton( CsPoint( 297, 89 ), CsPoint( 9, 17 ), CsPoint( 9, 0 ), "Control_G\\Slider\\Rbtn.tga" );
+		if( m_pAccompanyNextBtn )
+			m_pAccompanyNextBtn->AddEvent( cButton::BUTTON_LBUP_EVENT, this, &CDigimonTanscendenceViewer::OnClickAccompanyNext );
+
 		for(int i =0 ; i < nLimit::DigimonBaseSlot - 1; ++i)
 		{	
 			cString * pItem = NiNew cString;
-			cSprite* pImage = NiNew cSprite;	// 1
-			pImage->Init( NULL, CsPoint::ZERO,CsPoint( 24, 34),  "TacticsHouse\\Storage_lock.tga", false );
-			cString::sSPRITE* sSprite = pItem->AddSprite( pImage, CsPoint( 11, 5 ), CsPoint( 24, 34)  );	
+			cSprite* pSlotImage = NiNew cSprite;
+			pSlotImage->Init( NULL, CsPoint::ZERO, CsPoint( 46, 46), "TacticsHouse\\Storage_slot.tga", false );
+			cString::sSPRITE* sSprite = pItem->AddSprite( pSlotImage, CsPoint::ZERO, CsPoint( 46, 46) );
+			if( sSprite )
+				sSprite->SetAutoPointerDelete(true);
+			cSprite* pLockImage = NiNew cSprite;	// 1
+			pLockImage->Init( NULL, CsPoint::ZERO,CsPoint( 24, 34),  "TacticsHouse\\Storage_lock.tga", false );
+			sSprite = pItem->AddSprite( pLockImage, CsPoint( 11, 5 ), CsPoint( 24, 34)  );
 			if( sSprite )
 				sSprite->SetAutoPointerDelete(true);
 			cGridListBoxItem * addItem  = NiNew cGridListBoxItem(i, CsPoint( 46, 46));
@@ -448,14 +467,40 @@ void CDigimonTanscendenceViewer::UpdateViewer(void)
 	cGridListBoxItem* pkItem = const_cast<cGridListBoxItem*>(m_pkPlayer->GetItemFormPos(USING));
 	UpdateSlotIcon(UsingDigimonID, pkItem);
 
-	for(int i= ACCOMPANY1; i <= GetSystem()->GetOpenedAccompanySlotCnt(); ++i)
-	{
-		pkItem = const_cast<cGridListBoxItem*>( m_pkAccompanies->GetItemFormPos(i - 1) );
+	const int kSlotsPerPage = 4;
+	const int nOpenedSlotCount = GetSystem()->GetOpenedAccompanySlotCnt();
+	const int nMaxPage = ( nLimit::DigimonBaseSlot - 2 ) / kSlotsPerPage;
+	if( m_nAccompanyPage > nMaxPage )
+		m_nAccompanyPage = nMaxPage;
+	if( m_nAccompanyPage < 0 )
+		m_nAccompanyPage = 0;
 
-		DWORD dwCompanyID = GetSystem()->GetCompanyID(i);
+	for( int i = 0; i < nLimit::DigimonBaseSlot - 1; ++i )
+	{
+		pkItem = const_cast<cGridListBoxItem*>( m_pkAccompanies->GetItemFormPos(i) );
+		if( pkItem )
+			pkItem->SetVisible( i < kSlotsPerPage );
+	}
+
+	for(int i = 0; i < kSlotsPerPage; ++i)
+	{
+		pkItem = const_cast<cGridListBoxItem*>( m_pkAccompanies->GetItemFormPos(i) );
+		if( pkItem == NULL )
+			continue;
+
+		const int nAccompanySlot = m_nAccompanyPage * kSlotsPerPage + i + 1;
+		pkItem->setID( nAccompanySlot - 1 );
+		pkItem->SetEnable( nAccompanySlot <= nOpenedSlotCount );
+
+		DWORD dwCompanyID = nAccompanySlot <= nOpenedSlotCount ? GetSystem()->GetCompanyID(nAccompanySlot) : 0;
 		UpdateSlotIcon(dwCompanyID, pkItem );
 		UpdateLevelIcon(dwCompanyID, pkItem);
 	}
+
+	if( m_pAccompanyPrevBtn )
+		m_pAccompanyPrevBtn->SetEnable( m_nAccompanyPage > 0 );
+	if( m_pAccompanyNextBtn )
+		m_pAccompanyNextBtn->SetEnable( m_nAccompanyPage < nMaxPage );
 
 	const cData_PostLoad::sDATA* pkDATA = GetSystem()->GetSelectedDigimon();
 
@@ -496,7 +541,14 @@ void CDigimonTanscendenceViewer::UpdateSlotIcon(DWORD dwDigimonID, cGridListBoxI
 	pItems->Delete();
 
 	if( 0 == dwDigimonID )
+	{
+		cSprite* pSlotImage = NiNew cSprite;
+		pSlotImage->Init( NULL, CsPoint::ZERO, CsPoint( 46, 46), "TacticsHouse\\Storage_slot.tga", false );
+		cString::sSPRITE* sSprite = pItems->AddSprite( pSlotImage, CsPoint::ZERO, CsPoint( 46, 46) );
+		if( sSprite )
+			sSprite->SetAutoPointerDelete(true);
 		return;
+	}
 
 	const CsPoint kSlotSizeTest = CsPoint( 44, 44 );
 	const CsPoint kSlotDelta = CsPoint( 1, 1);
@@ -609,6 +661,26 @@ void CDigimonTanscendenceViewer::OnMouseMoveOnAccompanyItem(void* pSender, void*
 		return;
 
 	GetSystem()->OnShowToolTip(CDigimonArchiveContents::ACCOMPANY_DIGIMON, pItem->getID()+1);
+}
+
+void CDigimonTanscendenceViewer::OnClickAccompanyPrev(void* pSender, void* pData)
+{
+	if( m_nAccompanyPage <= 0 )
+		return;
+
+	--m_nAccompanyPage;
+	UpdateViewer();
+}
+
+void CDigimonTanscendenceViewer::OnClickAccompanyNext(void* pSender, void* pData)
+{
+	const int kSlotsPerPage = 4;
+	const int nMaxPage = ( nLimit::DigimonBaseSlot - 2 ) / kSlotsPerPage;
+	if( m_nAccompanyPage >= nMaxPage )
+		return;
+
+	++m_nAccompanyPage;
+	UpdateViewer();
 }
 
 void CDigimonTanscendenceViewer::ReleaseSelect(void)

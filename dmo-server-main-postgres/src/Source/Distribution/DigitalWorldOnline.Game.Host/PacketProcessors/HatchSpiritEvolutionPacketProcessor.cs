@@ -184,7 +184,11 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             var digimonInfo = await _sender.Send(new CreateDigimonCommand(newDigimon));
 
-            client.Send(new HatchFinishPacket(newDigimon, (uint)(client.Partner.GeneralHandler + 1000), client.Tamer.Digimons.FindIndex(x => x == newDigimon)));
+            var displaySlot = client.Tamer.ActiveDigimons.FindIndex(x => x == newDigimon) + 1;
+            if (displaySlot <= 0)
+                displaySlot = newDigimon.Slot;
+
+            client.Send(new HatchFinishPacket(newDigimon, (uint)(client.Partner.GeneralHandler + 1000), displaySlot));
 
             client.Send(new HatchSpiritEvolutionPacket(targetType, (int)client.Tamer.Inventory.Bits, materialToPacket, requiredsToPacket));
             client.Send(new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory));

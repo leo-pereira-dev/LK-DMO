@@ -22,7 +22,7 @@ namespace DigitalWorldOnline.Commons.Packets.Items
             WriteByte((byte)inventoryType);
             WriteByte((byte)slot);
             WriteInt(ItemId);
-            WriteInt((int)expired);
+            WriteByte((byte)expired);
         }
     }
 }

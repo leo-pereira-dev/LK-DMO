@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DigitalWorldOnline.Application.Separar.Commands.Create;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
 using DigitalWorldOnline.Application.GameAssets.Queries;
@@ -11,8 +12,6 @@ using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Game.Managers;
 using MediatR;
 using Serilog;
-
-using DigitalWorldOnline.Application.Separar.Commands.Create;
 
 namespace DigitalWorldOnline.Game.PacketProcessors
 {
@@ -54,9 +53,20 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var digivicePartner = client.Tamer.Digimons.FirstOrDefault(x => x.Slot == digiviceSlot);
             var archivePartner = client.Tamer.DigimonArchive.DigimonArchives.FirstOrDefault(x => x.Slot == archiveSlot);
 
-            _logger.Verbose(
-                "Digimon archive move request: tamer={TamerId} vip={Vip} digiviceSlot={DigiviceSlot} archiveSlot={ArchiveSlot} npc={NpcId} packetLen={PacketLength}.",
-                client.TamerId, vipEnabled, digiviceSlot, archiveSlot, npcId, packetData.Length);
+            _logger.Information(
+                "ARCHIVE 3201 request tamer={TamerId} vip={Vip} digiviceSlot={DigiviceSlot} archiveSlot={ArchiveSlot} npc={NpcId} packetLen={PacketLength} digivicePartner={DigivicePartnerId}:{DigivicePartnerName}:{DigivicePartnerSlot} archiveItem={ArchiveItemId}:{ArchiveDigimonId}:{ArchiveDigimonName}",
+                client.TamerId,
+                vipEnabled,
+                digiviceSlot,
+                archiveSlot,
+                npcId,
+                packetData.Length,
+                digivicePartner?.Id,
+                digivicePartner?.Name,
+                digivicePartner?.Slot,
+                archivePartner?.Id,
+                archivePartner?.DigimonId,
+                archivePartner?.Digimon?.Name);
 
             if (archiveSlot < 0 || archiveSlot >= client.Tamer.DigimonArchive.Slots)
             {
@@ -69,6 +79,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             if (archivePartner == null)
             {
+                _logger.Warning(
+                    "Character {TamerId} requested opened digimon archive slot {ArchiveSlot}, but no archive item row exists. opened slots={OpenedSlots}; creating missing row.",
+                    client.TamerId, archiveSlot, client.Tamer.DigimonArchive.Slots);
                 archivePartner = new CharacterDigimonArchiveItemModel(archiveSlot);
                 client.Tamer.DigimonArchive.DigimonArchives.Add(archivePartner);
                 await _sender.Send(new CreateCharacterDigimonArchiveSlotCommand(
@@ -98,24 +111,44 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
             else
             {
+                var archivedDigimon = await EnsureArchiveDigimonLoaded(archivePartner);
+                if (archivedDigimon == null)
+                {
+                    _logger.Warning(
+                        "ARCHIVE 3201 swap failed because archive digimon could not be loaded. tamer={TamerId} archiveSlot={ArchiveSlot} archiveDigimonId={ArchiveDigimonId}",
+                        client.TamerId,
+                        archiveSlot,
+                        archivePartner.DigimonId);
+                    client.Send(new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive));
+                    return;
+                }
+
                 client.Tamer.RemoveDigimon((byte)digiviceSlot, false);
-                archivePartner.AddDigimon(digivicePartner.Id);
+                archivePartner.AddDigimon(digivicePartner);
 
                 digivicePartner.SetSlot(byte.MaxValue);
                 await _sender.Send(new UpdateDigimonSlotCommand(digivicePartner.Id, digivicePartner.Slot));
 
-                archivePartner.Digimon!.SetSlot((byte)digiviceSlot);
+                archivedDigimon.SetSlot((byte)digiviceSlot);
                 
-                client.Tamer.AddDigimon(archivePartner.Digimon);
+                client.Tamer.AddDigimon(archivedDigimon);
                 
                 client.Tamer.Inventory.RemoveBits(price);
 
                 await _sender.Send(new UpdateItemListBitsCommand(client.Tamer.Inventory));
-                await _sender.Send(new UpdateCharacterDigimonsOrderCommand(client.Tamer));
+                await _sender.Send(new UpdateDigimonSlotCommand(archivedDigimon.Id, archivedDigimon.Slot));
                 await _sender.Send(new UpdateCharacterDigimonArchiveItemCommand(archivePartner));
 
-                _logger.Verbose($"Character {client.Tamer} swapped partner {digivicePartner.Id}({digivicePartner.BaseType}) with partner " +
-                    $"{archivePartner.Id}({archivePartner.Digimon!.BaseType}) on digivice slot {digiviceSlot} and archive slot {archiveSlot} for {price} bits.");
+                _logger.Information(
+                    "ARCHIVE 3201 swapped tamer={TamerId} outgoing={OutgoingId}:{OutgoingName} incoming={IncomingId}:{IncomingName} digiviceSlot={DigiviceSlot} archiveSlot={ArchiveSlot} price={Price}",
+                    client.TamerId,
+                    digivicePartner.Id,
+                    digivicePartner.Name,
+                    archivedDigimon.Id,
+                    archivedDigimon.Name,
+                    digiviceSlot,
+                    archiveSlot,
+                    price);
             }
 
             client.Send(new DigimonArchiveManagePacket(digiviceSlot, archiveSlot, price));
@@ -128,25 +161,17 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             DigimonModel? digivicePartner,
             CharacterDigimonArchiveItemModel archivePartner)
         {
-            digivicePartner = _mapper.Map<DigimonModel>(
-                await _sender.Send(
-                    new GetDigimonByIdQuery(archivePartner.DigimonId)
-                )
-            );
-
-            digivicePartner.SetBaseInfo(
-                _statusManager.GetDigimonBaseInfo(
-                    digivicePartner.BaseType
-                )
-            );
-
-            digivicePartner.SetBaseStatus(
-                _statusManager.GetDigimonBaseStatus(
-                    digivicePartner.BaseType,
-                    digivicePartner.Level,
-                    digivicePartner.Size
-                )
-            );
+            digivicePartner = await EnsureArchiveDigimonLoaded(archivePartner);
+            if (digivicePartner == null)
+            {
+                _logger.Warning(
+                    "ARCHIVE 3201 move to digivice failed because archive digimon could not be loaded. tamer={TamerId} archiveSlot={ArchiveSlot} archiveDigimonId={ArchiveDigimonId}",
+                    client.TamerId,
+                    archiveSlot,
+                    archivePartner.DigimonId);
+                client.Send(new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive));
+                return;
+            }
 
             digivicePartner.SetSlot((byte)digiviceSlot);
 
@@ -154,11 +179,16 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             client.Tamer.AddDigimon(digivicePartner);
 
-            await _sender.Send(new UpdateCharacterDigimonsOrderCommand(client.Tamer));
+            await _sender.Send(new UpdateDigimonSlotCommand(digivicePartner.Id, digivicePartner.Slot));
             await _sender.Send(new UpdateCharacterDigimonArchiveItemCommand(archivePartner));
 
-            _logger.Verbose($"Character {client.Tamer} moved partner {digivicePartner.Id}({digivicePartner.BaseType}) " +
-                $"from archive slot {archiveSlot} to digivice slot {digiviceSlot}.");
+            _logger.Information(
+                "ARCHIVE 3201 moved to digivice tamer={TamerId} digimon={DigimonId}:{DigimonName} archiveSlot={ArchiveSlot} digiviceSlot={DigiviceSlot}",
+                client.TamerId,
+                digivicePartner.Id,
+                digivicePartner.Name,
+                archiveSlot,
+                digiviceSlot);
         }
 
         private async Task MovePartnerToArchive(
@@ -169,20 +199,49 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             CharacterDigimonArchiveItemModel archivePartner,
             int price)
         {
-            archivePartner.AddDigimon(digivicePartner.Id);
+            archivePartner.AddDigimon(digivicePartner);
+            client.Tamer.RemoveDigimon((byte)digiviceSlot, false);
             digivicePartner.SetSlot(byte.MaxValue);
 
             client.Tamer.Inventory.RemoveBits(price);
 
             await _sender.Send(new UpdateItemListBitsCommand(client.Tamer.Inventory));
-            await _sender.Send(new UpdateCharacterDigimonsOrderCommand(client.Tamer));
+            await _sender.Send(new UpdateDigimonSlotCommand(digivicePartner.Id, digivicePartner.Slot));
             await _sender.Send(new UpdateCharacterDigimonArchiveItemCommand(archivePartner));
 
-            _logger.Verbose($"Character {client.Tamer} moved partner {digivicePartner.Id}({digivicePartner.BaseType}) " +
-                $"to digimon archive at slot {archiveSlot} for {price} bits.");
+            _logger.Information(
+                "ARCHIVE 3201 moved to archive tamer={TamerId} digimon={DigimonId}:{DigimonName} digiviceSlot={DigiviceSlot} archiveSlot={ArchiveSlot} price={Price}",
+                client.TamerId,
+                digivicePartner.Id,
+                digivicePartner.Name,
+                digiviceSlot,
+                archiveSlot,
+                price);
+        }
 
-            client.Tamer.RemoveDigimon(byte.MaxValue);
-            await _sender.Send(new UpdateCharacterDigimonsOrderCommand(client.Tamer));
+        private async Task<DigimonModel?> EnsureArchiveDigimonLoaded(CharacterDigimonArchiveItemModel archivePartner)
+        {
+            if (archivePartner.Digimon != null && archivePartner.Digimon.Id == archivePartner.DigimonId)
+                return archivePartner.Digimon;
+
+            if (archivePartner.DigimonId <= 0)
+                return null;
+
+            var digimon = _mapper.Map<DigimonModel>(
+                await _sender.Send(new GetDigimonByIdQuery(archivePartner.DigimonId)));
+
+            if (digimon == null)
+                return null;
+
+            digimon.SetBaseInfo(_statusManager.GetDigimonBaseInfo(digimon.BaseType));
+            digimon.SetBaseStatus(_statusManager.GetDigimonBaseStatus(
+                digimon.BaseType,
+                digimon.Level,
+                digimon.Size));
+
+            archivePartner.SetDigimonInfo(digimon);
+
+            return digimon;
         }
     }
 }

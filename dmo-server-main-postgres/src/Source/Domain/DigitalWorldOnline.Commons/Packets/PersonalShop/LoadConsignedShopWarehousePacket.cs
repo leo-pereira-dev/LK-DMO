@@ -19,10 +19,9 @@ namespace DigitalWorldOnline.Commons.Packets.PersonalShop
             WriteInt64(consignedWarehouse.Bits);
             WriteUInt(consignedWarehouse.Count);
 
-            foreach (var item in consignedWarehouse.Items.Where(x => x.ItemId > 0))
+            foreach (var item in consignedWarehouse.Items.Where(x => x.ItemId > 0 && x.Amount > 0))
             {
-                WriteInt(item.ItemId);
-                WriteInt(item.Amount);
+                WriteBytes(item.ToArray());
             }
         }
     }

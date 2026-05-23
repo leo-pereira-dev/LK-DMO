@@ -45,7 +45,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (remaining < 6)
             {
                 client.Send(UtilitiesFunctions.GroupPackets(
-                    new ItemSocketIdentifyPacket(new ItemModel(), (int)client.Tamer.Inventory.Bits).Serialize(),
+                    new ItemSocketIdentifyPacket(new ItemModel(), client.Tamer.Inventory.Bits).Serialize(),
                     new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()));
                 return;
             }
@@ -96,7 +96,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 {
                     client.Send(
                         UtilitiesFunctions.GroupPackets(
-                            new ItemSocketIdentifyPacket(itemInfo, (int)client.Tamer.Inventory.Bits).Serialize(),
+                            new ItemSocketIdentifyPacket(itemInfo, client.Tamer.Inventory.Bits).Serialize(),
                             new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
                         )
                     );
@@ -140,7 +140,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 await _sender.Send(new UpdateItemListBitsCommand(client.Tamer.Inventory));
                 client.Send(
                     UtilitiesFunctions.GroupPackets(
-                        new ItemSocketIdentifyPacket(itemInfo, (int)client.Tamer.Inventory.Bits).Serialize(),
+                        new ItemSocketIdentifyPacket(itemInfo, client.Tamer.Inventory.Bits).Serialize(),
                         new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
                     )
                 );
@@ -150,7 +150,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             {
                 client.Send(
                     UtilitiesFunctions.GroupPackets(
-                        new ItemSocketIdentifyPacket(new ItemModel(), (int)client.Tamer.Inventory.Bits).Serialize(),
+                        new ItemSocketIdentifyPacket(new ItemModel(), client.Tamer.Inventory.Bits).Serialize(),
                         new SystemMessagePacket($"Invalid item.").Serialize(),
                         new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
                     )

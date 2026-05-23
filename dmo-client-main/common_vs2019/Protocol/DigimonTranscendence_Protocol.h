@@ -24,7 +24,7 @@ public:
 	u4 m_uInvenActiveItemSlot;
 	u4 m_uNpcIDX;                   // NPC
 	u1 m_u1Flag;                    // 선택 (일반 충전, 고급 충전)
-	u1 m_u1DigimonTranscendencePos; // 초월하는 디지몬 슬롯 번호 0, 1, 2, 3
+	u1 m_u1DigimonTranscendencePos; // 초월하는 디지몬 슬롯 번호 0..8
 	u2 m_u2DigimonCount;            // 초월 재료 디지몬 수
 	std::list<u2> m_listDigimonPos; // 초월 재료 디지몬 위치
 	u2 m_u2ItemCount;               // 초월 재료 아이템 수
@@ -44,7 +44,7 @@ public:
 	WORD nProtocol;
 	n4	 m_nResult;									// 결과 값
 	u1	 m_u1Flag;									// 선택 (일반 충전, 고급 충전)
-	u1 m_u1DigimonTranscendencePos;					// 초월하는 디지몬 슬롯 번호 0, 1, 2, 3
+	u1 m_u1DigimonTranscendencePos;					// 초월하는 디지몬 슬롯 번호 0..8
 	u2   m_u2DigimonCount;							// 재료 디지몬 수
 	std::list<u2> m_listDigimonPos;					// 재료 디지몬 위치
 	u2 m_u2ItemCount;							    // 재료 아이템 수
@@ -67,7 +67,7 @@ public:
 	u1 m_u1VIPMemberMode;           // VIP Mode
 	u4 m_uInvenActiveItemSlot;
 	u4 m_uNpcIDX;                   // NPC
-	u1 m_u1DigimonTranscendencePos; // 초월하는 디지몬 슬롯 번호 0, 1, 2, 3
+	u1 m_u1DigimonTranscendencePos; // 초월하는 디지몬 슬롯 번호 0..8
 	n8 m_n8Money;                   // 초월 비용
 };
 
@@ -82,7 +82,7 @@ public:
 public:
 	WORD nProtocol;
 	n4	 m_nResult;
-	u1	 m_u1DigimonTranscendencePos;   // 초월하는 디지몬 슬롯 번호 0, 1, 2, 3
+	u1	 m_u1DigimonTranscendencePos;   // 초월하는 디지몬 슬롯 번호 0..8
 	u1   m_u1HatchLevel;
 	n8	 m_n8DigimonTranscendenceMoney; // 초월 요청한 비용
 	n8	 m_n8Money;					    // 현재 소유 돈

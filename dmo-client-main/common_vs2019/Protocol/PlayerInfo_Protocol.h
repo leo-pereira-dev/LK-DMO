@@ -14,7 +14,7 @@ public:
 public:
 	WORD nProtocol;
 
-	u2 m_nTamerIDX;
+	u4 m_nTamerIDX;
 	u1 m_nEquipSlot;
 	u4 m_nItemType;
 	u4 m_nEndTime;

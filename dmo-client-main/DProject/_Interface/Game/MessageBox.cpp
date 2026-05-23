@@ -26,6 +26,7 @@ void cMessageBox::DeleteList( bool bCalEndMessage )
 		NiDelete *it;
 	}
 	g_MessageBoxList.clear();
+	g_pendingDismissals.clear();
 }
 
 bool cMessageBox::DelMsg( int nMsgType, bool bCallEndMsg )
@@ -42,6 +43,9 @@ bool cMessageBox::DelMsg( int nMsgType, bool bCallEndMsg )
 			break;
 		}
 	}
+
+	if( bReturn == false )
+		return false;
 
 	std::map<int, bool>::iterator pendIt = g_pendingDismissals.find( nMsgType );
 	if( pendIt == g_pendingDismissals.end() )

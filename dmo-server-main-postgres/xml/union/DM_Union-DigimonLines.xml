@@ -37,7 +37,7 @@
     <TotalStat filterId="2" type="DS" value="4330" />
   </Line>
   <Line id="156" name="Agumon Line 3" unlocks="6" levelReq1="550" levelReq2="700" myUnlocks="6" currentLevel="150" transcended="TRUE" iconCandidateId="31007" iconStatus="matched" iconFolder="">
-    
+
   <Members>
       <Member slot="1" name="Agumon" iconCandidateId="31007" iconStatus="matched" iconFolder="" />
       <Member slot="2" name="Greymon" iconCandidateId="41046" iconStatus="matched" iconFolder="" />
@@ -1410,20 +1410,4 @@
       <Reward slot="4" effectId="49" raw="Data 1%" stat="Data" value="1" unit="percent" />
     </Rewards>
   </Line>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 </UnionDigimonLines>

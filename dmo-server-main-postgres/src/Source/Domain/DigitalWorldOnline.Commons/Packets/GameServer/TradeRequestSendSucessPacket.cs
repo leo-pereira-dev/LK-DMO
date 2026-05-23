@@ -14,7 +14,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         public TradeRequestSucessPacket(int TargetHandle)
         {
             Type(PacketNumber);
-            WriteInt((int)TargetHandle);
+            WriteUShort((ushort)TargetHandle);
         }
     }
 }

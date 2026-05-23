@@ -342,7 +342,10 @@ namespace DigitalWorldOnline.Commons.Models.Character
         /// <summary>
         /// Returns all the tamer's active digimons.
         /// </summary>
-        public List<DigimonModel> ActiveDigimons => Digimons.Where(x => x.Id != Partner.Id).ToList();
+        public List<DigimonModel> ActiveDigimons => Digimons
+            .Where(x => x.Slot != byte.MaxValue && x.Id != Partner.Id)
+            .OrderBy(x => x.Slot)
+            .ToList();
 
         /// <summary>
         /// Swaps the current partner.

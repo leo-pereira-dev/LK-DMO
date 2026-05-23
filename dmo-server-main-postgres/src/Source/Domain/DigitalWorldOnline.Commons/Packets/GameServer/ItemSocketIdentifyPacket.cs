@@ -8,13 +8,11 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
     {
         private const int PacketNumber = 3929;
 
-        public ItemSocketIdentifyPacket(ItemModel item, int Money)
+        public ItemSocketIdentifyPacket(ItemModel item, long money)
         {
             Type(PacketNumber);
             WriteByte(item.Power);
-            WriteInt(Money);
-            WriteInt(0);
-
+            WriteInt64(money);
         }
     }
 }

@@ -7,23 +7,22 @@ namespace DigitalWorldOnline.Commons.Packets.Items
     {
         private const int PacketNumber = 3239;
 
-        public HatchSpiritEvolutionPacket(int targetType,int currencyBits,List<ExtraEvolutionMaterialAssetModel> Material,List<ExtraEvolutionRequiredAssetModel> Required)
+        public HatchSpiritEvolutionPacket(int targetType, long currencyBits,List<ExtraEvolutionMaterialAssetModel> Material,List<ExtraEvolutionRequiredAssetModel> Required)
         {
             Type(PacketNumber);
             WriteInt(targetType);
-            WriteInt(currencyBits);
-            WriteInt(0);
+            WriteInt64(currencyBits);
 
             foreach (var material in Material)
             {
-                WriteByte(1);
+                WriteByte((byte)material.Amount);
                 WriteInt(material.ItemId);
   
             }
 
             foreach (var material in Required)
             {
-                WriteByte(1);
+                WriteByte((byte)material.Amount);
                 WriteInt(material.ItemId);
             }
 

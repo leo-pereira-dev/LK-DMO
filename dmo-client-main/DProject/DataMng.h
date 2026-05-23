@@ -204,6 +204,9 @@ public:
 	void			_NextSort();
 	int				_GetMoveInvenSlot( DWORD dwItemID );
 	void			_ReleaseSort(bool	Check=true);
+#ifdef CROSSWARS_SYSTEM
+	void			_ReleaseCrossSort();
+#endif
 	
 	bool			IsSort() { return ( m_ListItem.empty() == false ); }
 
@@ -271,8 +274,14 @@ public:
 	//==============================================================================================
 protected:
 	cData_Inven		m_Inven;
+#ifdef CROSSWARS_SYSTEM
+	cData_Inven_Cross	m_InvenCross;
+#endif
 public:
 	cData_Inven*	GetInven(){ return &m_Inven; }
+#ifdef CROSSWARS_SYSTEM
+	cData_Inven_Cross*	GetInvenCross(){ return &m_InvenCross; }
+#endif
 
 protected:
 	cData_PostLoad	m_PostLoad;
@@ -289,6 +298,9 @@ protected:
 	cData_Quest			m_Quest;
 	cData_QuestOwner	m_QuestOwner;
 	cData_Tactics		m_Tactics;
+#ifdef CROSSWARS_SYSTEM
+	cData_CrossTactics	m_CrossTatics;
+#endif
 	cData_MapRegion		m_MapRegion;
 	cData_ServerSync	m_ServerSync;
 	cData_Cash			m_Cash;
@@ -312,6 +324,7 @@ public:
 	cData_Tactics*		GetTactics(){ return &m_Tactics; }
 #ifdef CROSSWARS_SYSTEM
 	cData_CrossTactics*		GetCrossTactics(){ return &m_CrossTatics; }
+	cData_CrossTactics*		GetCrossTatics(){ return &m_CrossTatics; }
 #endif
 	cData_MapRegion*	GetMapRegion(){ return &m_MapRegion; }
 	cData_ServerSync*	GetServerSync(){ return &m_ServerSync; }

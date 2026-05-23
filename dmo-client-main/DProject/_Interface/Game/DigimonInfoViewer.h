@@ -49,6 +49,8 @@ public:
 	void			OnMouseUpOnAccompanyItem(void* pSender, void* pData);
 	void			OnMouseMoveOnAccompanyItem(void* pSender, void* pData);
 	void			OnMouseRClickInAccompany(void* pSender, void* pData);
+	void			OnClickAccompanyPrev(void* pSender, void* pData);
+	void			OnClickAccompanyNext(void* pSender, void* pData);
 
 	void			RenderSelectedDigimon(const cData_PostLoad::sDATA* pkDATA );
 	void			RenderEmpty( void );
@@ -68,6 +70,9 @@ protected:
 	cRenderTex*		m_pRenderTex;
 	cGridListBox*		m_pkPlayer;
 	cGridListBox*		m_pkAccompanies;
+	cButton*			m_pAccompanyPrevBtn;
+	cButton*			m_pAccompanyNextBtn;
+	int					m_nAccompanyPage;
 
 	cString			m_DigimonElement;
 	CsPoint mSelectedDigPos;

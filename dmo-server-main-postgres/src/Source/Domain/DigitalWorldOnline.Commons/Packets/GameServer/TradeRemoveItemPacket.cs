@@ -5,7 +5,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
 {
     public class TradeRemoveItemPacket : PacketWriter
     {
-        private const int PacketNumber = 1519;
+        private const int PacketNumber = 1531;
 
         /// <summary>
         /// Party request sent.
@@ -15,7 +15,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         public TradeRemoveItemPacket(int targetHandle,  byte tradeSlot)
         {
             Type(PacketNumber);
-            WriteInt(targetHandle);
+            WriteUShort((ushort)targetHandle);
             WriteByte(tradeSlot);
         }
     }

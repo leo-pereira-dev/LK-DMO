@@ -12,12 +12,12 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         /// <param name="questId">Quest unique identifier</param>
         /// <param name="goalIndex">Goal index</param>
         /// <param name="currentGoalValue">Goal current value</param>
-        public QuestGoalUpdatePacket(short questId, byte goalIndex, short currentGoalValue)
+        public QuestGoalUpdatePacket(short questId, byte goalIndex, byte currentGoalValue)
         {
             Type(PacketNumber);
             WriteShort(questId);
             WriteByte(goalIndex);
-            WriteShort(currentGoalValue);
+            WriteByte(currentGoalValue);
         }
     }
 }

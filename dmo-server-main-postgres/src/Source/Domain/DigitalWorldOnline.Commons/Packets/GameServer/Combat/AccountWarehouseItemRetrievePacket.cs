@@ -1,6 +1,7 @@
 ﻿using DigitalWorldOnline.Commons.Models.Base;
 using DigitalWorldOnline.Commons.Utils;
 using DigitalWorldOnline.Commons.Writers;
+using DigitalWorldOnline.Commons.Enums.ClientEnums;
 
 namespace DigitalWorldOnline.Commons.Packets.GameServer.Combat
 {
@@ -13,12 +14,14 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer.Combat
         public AccountWarehouseItemRetrievePacket(ItemModel item,int wareSlot)
         {
             Type(PacketNumber);
-            WriteInt(item.Slot);
+            WriteInt(100);
             WriteInt(0);
-            WriteInt(wareSlot);
+            WriteUShort((ushort)wareSlot);
+            WriteByte((byte)InventorySlotTypeEnum.TabInven);
+            WriteByte((byte)item.Slot);
             WriteInt(item.ItemId);
             WriteInt(item.Amount);
-            WriteByte(0);
+            WriteByte(item.Power);
             if (item.RemainingMinutes() == 4294967280)
             {
                 WriteUInt(item.RemainingMinutes());

@@ -7,17 +7,33 @@ namespace DigitalWorldOnline.Commons.Models.Character
         /// <summary>
         /// Set digimon info.
         /// </summary>
-        public void SetDigimonInfo(DigimonModel digimon) => Digimon = digimon;
+        public void SetDigimonInfo(DigimonModel? digimon) => Digimon = digimon;
 
         /// <summary>
         /// Adds a digimon to the target slot.
         /// </summary>
         /// <param name="digimonId">Target digimon identifier</param>
-        public void AddDigimon(long digimonId) => DigimonId = digimonId;
+        public void AddDigimon(long digimonId)
+        {
+            DigimonId = digimonId;
+
+            if (Digimon?.Id != digimonId)
+                Digimon = null;
+        }
+
+        public void AddDigimon(DigimonModel digimon)
+        {
+            DigimonId = digimon.Id;
+            Digimon = digimon;
+        }
         
         /// <summary>
         /// Removes a digimon from the target slot.
         /// </summary>
-        public void RemoveDigimon() => DigimonId = 0;
+        public void RemoveDigimon()
+        {
+            DigimonId = 0;
+            Digimon = null;
+        }
     }
 }

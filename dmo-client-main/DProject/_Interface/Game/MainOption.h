@@ -35,12 +35,10 @@ protected:
 		MA_EVOLUTION_HELP,
 		MA_CASH_WAREHOUSE,
 		MA_CASHSHOP,
-		MA_PARTY,
 		MA_GUILD,
 		MA_FRIEND,
 		MA_MAIL,
 		MA_REWARD_BOX,
-		MA_MEMBERSHIP,
 		MA_INTERFACE,
 		MA_GRAPHIC,
 		MA_SOUND,
@@ -60,20 +58,19 @@ protected:
 	{
 		cButton*		s_pButton;
 		eMENU_ACTION	s_eAction;
-		TCHAR const*	s_pTooltip;
+		TCHAR const*	s_pszTooltip;
 	};
 
 	cButton*		_AddMenuButton( CsPoint pos, CsPoint size, CsPoint texToken, char const* path, eMENU_ACTION action );
-	bool			_UpdateMenuButton( sMENU_BUTTON& buttonInfo, eMU_TYPE muReturn );
+	bool			_UpdateMenuButton( sMENU_BUTTON& buttonInfo );
 	void			_OnMenuAction( eMENU_ACTION action );
-	void			_ShowMenuTooltip( sMENU_BUTTON const& buttonInfo );
-	void			_ToggleWindow( eWINDOW_TYPE windowType );
+	void			_SetMenuTooltip( TCHAR const* pszTooltip );
+	void			_RenderMenuTooltip();
 	void			_ToggleInventory();
 	void			_ToggleZoneMap();
 	void			_ToggleSmallMap();
 	void			_OpenEncyclopedia();
 	void			_RequestExit( int msgType );
-	bool			_IsGmPanelEnabled() const;
 
 protected:
 	cButton*		m_pCancelButton;
@@ -81,4 +78,13 @@ protected:
 	sMENU_BUTTON	m_OptionButtons[ OPTION_BUTTON_COUNT ];
 	int				m_nMainButtonCount;
 	int				m_nOptionButtonCount;
+	cSprite*		m_pTooltipBg;
+	cSprite*		m_pTooltipTop;
+	cSprite*		m_pTooltipBottom;
+	cSprite*		m_pTooltipLeft;
+	cSprite*		m_pTooltipRight;
+	cText*			m_pTooltipText;
+	bool			m_bTooltipVisible;
+	CsPoint			m_ptTooltipPos;
+	CsPoint			m_ptTooltipSize;
 };

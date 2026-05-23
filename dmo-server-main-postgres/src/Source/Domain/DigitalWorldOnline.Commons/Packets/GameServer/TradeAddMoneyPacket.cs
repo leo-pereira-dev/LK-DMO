@@ -14,7 +14,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         public TradeAddMoneyPacket(int targetHandle, int TargetMoney)
         {
             Type(PacketNumber);
-            WriteInt(targetHandle);
+            WriteUShort((ushort)targetHandle);
             WriteInt(TargetMoney);
         }
     }

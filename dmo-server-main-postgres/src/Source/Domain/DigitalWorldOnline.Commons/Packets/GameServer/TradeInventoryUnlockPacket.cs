@@ -13,8 +13,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         public TradeInventoryUnlockPacket(int targetHandler)
         {
             Type(PacketNumber);
-            WriteInt((int)targetHandler);
-            WriteByte(0);
+            WriteUShort((ushort)targetHandler);
         }
     }
 }

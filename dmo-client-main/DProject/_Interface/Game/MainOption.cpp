@@ -14,27 +14,42 @@ namespace
 	const int OPTION_BUTTON_START_X = 200;
 	const int OPTION_BUTTON_START_Y = 230;
 	const int OPTION_BUTTON_GAP_X = 62;
-	const CsPoint MENU_TOOLTIP_CURSOR_OFFSET( 13, 0 );
-	const int MENU_TOOLTIP_SCREEN_MARGIN = 4;
+
+	cSprite* _CreateMainMenuSolidSprite( NiColorA const& color )
+	{
+		cSprite* pSprite = NiNew cSprite;
+		SAFE_POINTER_RETVAL( pSprite, NULL );
+		pSprite->Init( NULL, CsPoint::ZERO, CsPoint( 1, 1 ), color, false );
+		return pSprite;
+	}
 }
 
 cMainOption::cMainOption()
 : m_pCancelButton( NULL )
 , m_nMainButtonCount( 0 )
 , m_nOptionButtonCount( 0 )
+, m_pTooltipBg( NULL )
+, m_pTooltipTop( NULL )
+, m_pTooltipBottom( NULL )
+, m_pTooltipLeft( NULL )
+, m_pTooltipRight( NULL )
+, m_pTooltipText( NULL )
+, m_bTooltipVisible( false )
+, m_ptTooltipPos( CsPoint::ZERO )
+, m_ptTooltipSize( CsPoint::ZERO )
 {
 	for( int i = 0; i < MAIN_BUTTON_COUNT; ++i )
 	{
 		m_MainButtons[ i ].s_pButton = NULL;
 		m_MainButtons[ i ].s_eAction = MA_NONE;
-		m_MainButtons[ i ].s_pTooltip = _T( "" );
+		m_MainButtons[ i ].s_pszTooltip = NULL;
 	}
 
 	for( int i = 0; i < OPTION_BUTTON_COUNT; ++i )
 	{
 		m_OptionButtons[ i ].s_pButton = NULL;
 		m_OptionButtons[ i ].s_eAction = MA_NONE;
-		m_OptionButtons[ i ].s_pTooltip = _T( "" );
+		m_OptionButtons[ i ].s_pszTooltip = NULL;
 	}
 }
 
@@ -46,6 +61,28 @@ void cMainOption::Destroy()
 void cMainOption::DeleteResource()
 {
 	DeleteScript();
+	NISAFE_DELETE( m_pTooltipBg );
+	NISAFE_DELETE( m_pTooltipTop );
+	NISAFE_DELETE( m_pTooltipBottom );
+	NISAFE_DELETE( m_pTooltipLeft );
+	NISAFE_DELETE( m_pTooltipRight );
+	NISAFE_DELETE( m_pTooltipText );
+	m_bTooltipVisible = false;
+	m_ptTooltipPos = CsPoint::ZERO;
+	m_ptTooltipSize = CsPoint::ZERO;
+	m_pCancelButton = NULL;
+	for( int i = 0; i < MAIN_BUTTON_COUNT; ++i )
+	{
+		m_MainButtons[ i ].s_pButton = NULL;
+		m_MainButtons[ i ].s_pszTooltip = NULL;
+	}
+	for( int i = 0; i < OPTION_BUTTON_COUNT; ++i )
+	{
+		m_OptionButtons[ i ].s_pButton = NULL;
+		m_OptionButtons[ i ].s_pszTooltip = NULL;
+	}
+	m_nMainButtonCount = 0;
+	m_nOptionButtonCount = 0;
 }
 
 cButton* cMainOption::_AddMenuButton( CsPoint pos, CsPoint size, CsPoint texToken, char const* path, eMENU_ACTION action )
@@ -68,6 +105,32 @@ void cMainOption::Create(int nValue /* = 0  */)
 
 	m_pCancelButton = AddButton( CsPoint( MENU_WINDOW_SIZE.x - 30, 7 ), CsPoint( 16, 16 ), CsPoint( 0, 16 ), "System\\Ch_Close.tga" );
 
+	NISAFE_DELETE( m_pTooltipBg );
+	NISAFE_DELETE( m_pTooltipTop );
+	NISAFE_DELETE( m_pTooltipBottom );
+	NISAFE_DELETE( m_pTooltipLeft );
+	NISAFE_DELETE( m_pTooltipRight );
+	NISAFE_DELETE( m_pTooltipText );
+	m_pTooltipBg = _CreateMainMenuSolidSprite( NiColorA( 0.0f, 0.02f, 0.05f, 0.92f ) );
+	m_pTooltipTop = _CreateMainMenuSolidSprite( NiColorA( 0.0f, 0.12f, 0.24f, 0.95f ) );
+	m_pTooltipBottom = _CreateMainMenuSolidSprite( NiColorA( 0.0f, 0.12f, 0.24f, 0.95f ) );
+	m_pTooltipLeft = _CreateMainMenuSolidSprite( NiColorA( 0.0f, 0.12f, 0.24f, 0.95f ) );
+	m_pTooltipRight = _CreateMainMenuSolidSprite( NiColorA( 0.0f, 0.12f, 0.24f, 0.95f ) );
+	m_pTooltipText = NiNew cText;
+	if( m_pTooltipText )
+	{
+		cText::sTEXTINFO tooltipTextInfo;
+		tooltipTextInfo.Init( &g_pEngine->m_FontSystem );
+		tooltipTextInfo.s_eFontSize = CFont::FS_8;
+		tooltipTextInfo.s_eTextAlign = DT_CENTER;
+		tooltipTextInfo.s_Color = NiColor( 0.96f, 0.97f, 1.0f );
+		tooltipTextInfo.SetText( _T( "" ) );
+		m_pTooltipText->Init( NULL, CsPoint::ZERO, &tooltipTextInfo, false );
+	}
+	m_bTooltipVisible = false;
+	m_ptTooltipPos = CsPoint::ZERO;
+	m_ptTooltipSize = CsPoint::ZERO;
+
 	struct sINIT_BUTTON
 	{
 		char const*		path;
@@ -77,23 +140,23 @@ void cMainOption::Create(int nValue /* = 0  */)
 
 	const sINIT_BUTTON mainButtons[] =
 	{
-		{ "MainMenu\\mainmenu_button_map.png", MA_MAP, _T( "Mapa" ) },
+		{ "MainMenu\\mainmenu_button_map.png", MA_MAP, _T( "Map" ) },
 		{ "MainMenu\\mainmenu_button_digimon.png", MA_DIGIMON, _T( "Digimon" ) },
-		{ "MainMenu\\mainmenu_button_inventory.png", MA_INVENTORY, _T( "Inventario" ) },
-		{ "MainMenu\\mainmenu_button_quest.png", MA_QUEST, _T( "Missoes" ) },
-		{ "MainMenu\\mainmenu_button_seal.png", MA_SEAL, _T( "Seal Master" ) },
-		{ "MainMenu\\mainmenu_button_graphic.png", MA_GRAPHIC, _T( "Opcoes graficas" ) },
+		{ "MainMenu\\mainmenu_button_inventory.png", MA_INVENTORY, _T( "Inventory" ) },
+		{ "MainMenu\\mainmenu_button_quest.png", MA_QUEST, _T( "Quest" ) },
+		{ "MainMenu\\mainmenu_button_seal.png", MA_SEAL, _T( "Seal" ) },
+		{ "MainMenu\\mainmenu_button_graphic.png", MA_GRAPHIC, _T( "Graphic" ) },
 		{ "MainMenu\\mainmenu_button_cashwarehouse.png", MA_CASH_WAREHOUSE, _T( "Cash Warehouse" ) },
 		{ "MainMenu\\mainmenu_button_tamer.png", MA_TAMER, _T( "Tamer" ) },
 
-		{ "MainMenu\\mainmenu_button_partyfind.png", MA_PARTY, _T( "Party" ) },
+		{ "MainMenu\\mainmenu_button_partyfind.png", MA_NONE, _T( "Party Find" ) },
 		{ "MainMenu\\mainmenu_button_guild.png", MA_GUILD, _T( "Guild" ) },
-		{ "MainMenu\\mainmenu_button_friend.png", MA_FRIEND, _T( "Amigos" ) },
-		{ "MainMenu\\mainmenu_button_mailbox.png", MA_MAIL, _T( "Correio" ) },
+		{ "MainMenu\\mainmenu_button_friend.png", MA_FRIEND, _T( "Friend" ) },
+		{ "MainMenu\\mainmenu_button_mailbox.png", MA_MAIL, _T( "Mailbox" ) },
 		{ "MainMenu\\mainmenu_button_cashshop.png", MA_CASHSHOP, _T( "Cash Shop" ) },
-		{ "MainMenu\\mainmenu_button_consignbox.png", MA_REWARD_BOX, _T( "Gift/Reward Storage" ) },
-		{ "MainMenu\\mainmenu_button_membership.png", MA_MEMBERSHIP, _T( "Membership / GM Panel" ) },
-		{ "MainMenu\\mainmenu_button_book.png", MA_ENCYCLOPEDIA, _T( "Enciclopedia" ) }
+		{ "MainMenu\\mainmenu_button_consignbox.png", MA_REWARD_BOX, _T( "Reward Box" ) },
+		{ "MainMenu\\mainmenu_button_membership.png", MA_GM_PANEL, _T( "GM Panel" ) },
+		{ "MainMenu\\mainmenu_button_book.png", MA_ENCYCLOPEDIA, _T( "Encyclopedia" ) }
 	};
 
 	for( int i = 0; i < MAIN_BUTTON_COUNT; ++i )
@@ -106,18 +169,18 @@ void cMainOption::Create(int nValue /* = 0  */)
 		CsPoint const texToken = mainButtons[ i ].action == MA_GRAPHIC ? OPTION_BUTTON_TOKEN : MAIN_BUTTON_TOKEN;
 		m_MainButtons[ i ].s_pButton = _AddMenuButton( pos, MAIN_BUTTON_SIZE, texToken, mainButtons[ i ].path, mainButtons[ i ].action );
 		m_MainButtons[ i ].s_eAction = mainButtons[ i ].action;
-		m_MainButtons[ i ].s_pTooltip = mainButtons[ i ].tooltip;
+		m_MainButtons[ i ].s_pszTooltip = mainButtons[ i ].tooltip;
 	}
 	m_nMainButtonCount = MAIN_BUTTON_COUNT;
 
 	const sINIT_BUTTON optionButtons[] =
 	{
 		{ "MainMenu\\mainmenu_button_interface.png", MA_INTERFACE, _T( "Interface" ) },
-		{ "MainMenu\\mainmenu_button_graphic.png", MA_GRAPHIC, _T( "Graficos" ) },
-		{ "MainMenu\\mainmenu_button_sound.png", MA_SOUND, _T( "Som" ) },
-		{ "MainMenu\\mainmenu_button_keyset.png", MA_SHORTCUT, _T( "Atalhos" ) },
-		{ "MainMenu\\mainmenu_button_logout.png", MA_LOGOUT, _T( "Logout: voltar para selecao de servidor" ) },
-		{ "MainMenu\\mainmenu_button_gameoff.png", MA_EXIT, _T( "Sair do jogo" ) }
+		{ "MainMenu\\mainmenu_button_graphic.png", MA_GRAPHIC, _T( "Graphic" ) },
+		{ "MainMenu\\mainmenu_button_sound.png", MA_SOUND, _T( "Sound" ) },
+		{ "MainMenu\\mainmenu_button_keyset.png", MA_SHORTCUT, _T( "Shortcut" ) },
+		{ "MainMenu\\mainmenu_button_logout.png", MA_LOGOUT, _T( "Logout" ) },
+		{ "MainMenu\\mainmenu_button_gameoff.png", MA_EXIT, _T( "Exit" ) }
 	};
 
 	m_nOptionButtonCount = OPTION_BUTTON_COUNT;
@@ -126,7 +189,7 @@ void cMainOption::Create(int nValue /* = 0  */)
 		CsPoint pos( OPTION_BUTTON_START_X + i * OPTION_BUTTON_GAP_X, OPTION_BUTTON_START_Y );
 		m_OptionButtons[ i ].s_pButton = _AddMenuButton( pos, CsPoint( 52, 52 ), OPTION_BUTTON_TOKEN, optionButtons[ i ].path, optionButtons[ i ].action );
 		m_OptionButtons[ i ].s_eAction = optionButtons[ i ].action;
-		m_OptionButtons[ i ].s_pTooltip = optionButtons[ i ].tooltip;
+		m_OptionButtons[ i ].s_pszTooltip = optionButtons[ i ].tooltip;
 	}
 }
 
@@ -135,63 +198,39 @@ void cMainOption::Update(float const& fDeltaTime)
 	_UpdateMoveWindow();
 }
 
-bool cMainOption::_UpdateMenuButton( sMENU_BUTTON& buttonInfo, eMU_TYPE muReturn )
+bool cMainOption::_UpdateMenuButton( sMENU_BUTTON& buttonInfo )
 {
 	if( buttonInfo.s_pButton == NULL )
 		return false;
 
 	switch( buttonInfo.s_pButton->Update_ForMouse() )
 	{
+	case cButton::ACTION_ON:
+		_SetMenuTooltip( buttonInfo.s_pszTooltip );
+		return false;
+	case cButton::ACTION_PRESS:
+		_SetMenuTooltip( buttonInfo.s_pszTooltip );
+		return true;
 	case cButton::ACTION_CLICK:
 		_OnMenuAction( buttonInfo.s_eAction );
 		return true;
 	case cButton::ACTION_DOWN:
+		_SetMenuTooltip( buttonInfo.s_pszTooltip );
 		return true;
-	case cButton::ACTION_ON:
-	case cButton::ACTION_PRESS:
-		_ShowMenuTooltip( buttonInfo );
-		return false;
 	}
 
 	return false;
 }
 
-void cMainOption::_ShowMenuTooltip( sMENU_BUTTON const& buttonInfo )
-{
-	if( buttonInfo.s_pTooltip == NULL || buttonInfo.s_pTooltip[ 0 ] == _T( '\0' ) )
-		return;
-
-	CToolTipMng* pTooltipMng = TOOLTIPMNG_STPTR;
-	SAFE_POINTER_RET( pTooltipMng );
-
-	cTooltip* pTooltip = pTooltipMng->GetTooltip();
-	SAFE_POINTER_RET( pTooltip );
-
-	CsPoint cursorPos = CURSOR_ST.GetPos();
-	pTooltip->SetTooltip_Text( cursorPos, CsPoint::ZERO, buttonInfo.s_pTooltip, CFont::FS_10 );
-
-	int const tooltipW = pTooltip->GetMaxSizeX();
-	int const tooltipH = pTooltip->GetMaxSizeY();
-	CsPoint targetPos( cursorPos.x + MENU_TOOLTIP_CURSOR_OFFSET.x, cursorPos.y - tooltipH - MENU_TOOLTIP_CURSOR_OFFSET.y );
-	targetPos.x = CsMax( MENU_TOOLTIP_SCREEN_MARGIN, CsMin( targetPos.x, g_nScreenWidth - tooltipW - MENU_TOOLTIP_SCREEN_MARGIN ) );
-	targetPos.y = CsMax( MENU_TOOLTIP_SCREEN_MARGIN, CsMin( targetPos.y, g_nScreenHeight - tooltipH - MENU_TOOLTIP_SCREEN_MARGIN ) );
-
-	CsPoint renderPos = targetPos;
-	if( renderPos.x > g_nScreenWidth / 2 )
-		renderPos.x += tooltipW;
-	if( renderPos.y > g_nScreenHeight / 2 )
-		renderPos.y += tooltipH;
-
-	pTooltip->SetTooltip_Text( renderPos, CsPoint::ZERO, buttonInfo.s_pTooltip, CFont::FS_10 );
-}
-
 cBaseWindow::eMU_TYPE cMainOption::Update_ForMouse()
 {
 	cBaseWindow::eMU_TYPE muReturn = cBaseWindow::Update_ForMouse();
+	m_bTooltipVisible = false;
 
 	if( muReturn == MUT_OUT_WINDOW )
 	{
-		m_pCancelButton->Update_ForMouse();
+		if( m_pCancelButton )
+			m_pCancelButton->Update_ForMouse();
 		for( int i = 0; i < m_nMainButtonCount; ++i )
 			if( m_MainButtons[ i ].s_pButton )
 				m_MainButtons[ i ].s_pButton->Update_ForMouse();
@@ -201,28 +240,82 @@ cBaseWindow::eMU_TYPE cMainOption::Update_ForMouse()
 		return muReturn;
 	}
 
-	switch( m_pCancelButton->Update_ForMouse() )
+	if( m_pCancelButton )
 	{
-	case cButton::ACTION_CLICK:
-		Close();
-	case cButton::ACTION_DOWN:
-		return muReturn;
+		switch( m_pCancelButton->Update_ForMouse() )
+		{
+		case cButton::ACTION_CLICK:
+			Close();
+		case cButton::ACTION_DOWN:
+			return muReturn;
+		}
 	}
 
 	for( int i = 0; i < m_nMainButtonCount; ++i )
 	{
-		if( _UpdateMenuButton( m_MainButtons[ i ], muReturn ) )
+		if( _UpdateMenuButton( m_MainButtons[ i ] ) )
 			return muReturn;
 	}
 
 	for( int i = 0; i < m_nOptionButtonCount; ++i )
 	{
-		if( _UpdateMenuButton( m_OptionButtons[ i ], muReturn ) )
+		if( _UpdateMenuButton( m_OptionButtons[ i ] ) )
 			return muReturn;
 	}
 
 	_UpdateMoveWindow_ForMouse();
 	return muReturn;
+}
+
+void cMainOption::_SetMenuTooltip( TCHAR const* pszTooltip )
+{
+	if( pszTooltip == NULL || pszTooltip[ 0 ] == 0 )
+		return;
+
+	int const nTextLen = (int)_tcslen( pszTooltip );
+	int const nTooltipW = min( 180, max( 64, nTextLen * 7 + 18 ) );
+	int const nTooltipH = 22;
+	CsPoint const ptCursor = CURSOR_ST.GetPos();
+	int nX = ptCursor.x + 12;
+	int nY = ptCursor.y - nTooltipH - 8;
+
+	if( nX + nTooltipW > g_nScreenWidth )
+		nX = ptCursor.x - nTooltipW - 8;
+	if( nX < 0 )
+		nX = 0;
+	if( nY < 0 )
+		nY = ptCursor.y + 18;
+	if( nY + nTooltipH > g_nScreenHeight )
+		nY = g_nScreenHeight - nTooltipH;
+	if( nY < 0 )
+		nY = 0;
+
+	if( m_pTooltipText )
+		m_pTooltipText->SetText( pszTooltip );
+	m_ptTooltipPos = CsPoint( nX, nY );
+	m_ptTooltipSize = CsPoint( nTooltipW, nTooltipH );
+	m_bTooltipVisible = true;
+}
+
+void cMainOption::_RenderMenuTooltip()
+{
+	if( m_bTooltipVisible == false )
+		return;
+	if( m_ptTooltipSize.x <= 0 || m_ptTooltipSize.y <= 0 )
+		return;
+
+	if( m_pTooltipBg )
+		m_pTooltipBg->Render( m_ptTooltipPos, m_ptTooltipSize );
+	if( m_pTooltipTop )
+		m_pTooltipTop->Render( m_ptTooltipPos, CsPoint( m_ptTooltipSize.x, 1 ) );
+	if( m_pTooltipBottom )
+		m_pTooltipBottom->Render( CsPoint( m_ptTooltipPos.x, m_ptTooltipPos.y + m_ptTooltipSize.y - 1 ), CsPoint( m_ptTooltipSize.x, 1 ) );
+	if( m_pTooltipLeft )
+		m_pTooltipLeft->Render( m_ptTooltipPos, CsPoint( 1, m_ptTooltipSize.y ) );
+	if( m_pTooltipRight )
+		m_pTooltipRight->Render( CsPoint( m_ptTooltipPos.x + m_ptTooltipSize.x - 1, m_ptTooltipPos.y ), CsPoint( 1, m_ptTooltipSize.y ) );
+	if( m_pTooltipText )
+		m_pTooltipText->Render( CsPoint( m_ptTooltipPos.x + ( m_ptTooltipSize.x / 2 ), m_ptTooltipPos.y + 5 ), DT_CENTER );
 }
 
 void cMainOption::_OnMenuAction( eMENU_ACTION action )
@@ -238,17 +331,11 @@ void cMainOption::_OnMenuAction( eMENU_ACTION action )
 		Close( false );
 		break;
 	case MA_TAMER:
-		{
-			bool bSetTab = true;
-			int nTabNo = 0;
-			ContentsStream kTmp;
-			kTmp << bSetTab << nTabNo;
-			GAME_EVENT_ST.OnEvent( EVENT_CODE::OPEN_CLOSE_TAMERSTATUS, &kTmp );
-		}
+		g_pGameIF->GetDynamicIF( cBaseWindow::WT_NEW_TAMERSTATUS );
 		Close( false );
 		break;
 	case MA_DIGIMON:
-		GAME_EVENT_ST.OnEvent( EVENT_CODE::OPEN_CLOSE_DIGIMONSTATUS, NULL );
+		g_pGameIF->GetDynamicIF( cBaseWindow::WT_NEW_DIGIMONSTATUS );
 		Close( false );
 		break;
 	case MA_INVENTORY:
@@ -284,40 +371,11 @@ void cMainOption::_OnMenuAction( eMENU_ACTION action )
 		GAME_EVENT_ST.OnEvent( EVENT_CODE::CASHSHOP_TOGGLE, NULL );
 		Close( false );
 		break;
-	case MA_PARTY:
-		_ToggleWindow( cBaseWindow::WT_PARTY_WINDOW );
-		Close( false );
-		break;
 	case MA_GUILD:
-		if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_COMMUNITY ) == false )
-		{
-			g_pGameIF->GetDynamicIF( cBaseWindow::WT_COMMUNITY );
-			g_pGameIF->GetCommunity()->SetTab( cCommunity::TAB_GUILD );
-		}
-		else
-		{
-			bool const bWasGuildTab = g_pGameIF->GetCommunity()->GetTab() == cCommunity::TAB_GUILD;
+		if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_COMMUNITY ) )
 			g_pGameIF->CloseDynamicIF( cBaseWindow::WT_COMMUNITY );
-			if( bWasGuildTab == false )
-			{
-				g_pGameIF->GetDynamicIF( cBaseWindow::WT_COMMUNITY );
-				g_pGameIF->GetCommunity()->SetTab( cCommunity::TAB_GUILD );
-			}
-		}
-		Close( false );
-		break;
-	case MA_MEMBERSHIP:
-		if( _IsGmPanelEnabled() )
-		{
-			g_pGameIF->GetDynamicIF( cBaseWindow::WT_GM_PANEL );
-		}
 		else
-		{
-#ifdef SDM_VIP_SYSTEM_20181105
-			net::game->Send_VipMemberShipData();
-#endif
-			GAME_EVENT_ST.OnEvent( EVENT_CODE::CASHSHOP_TOGGLE, NULL );
-		}
+			g_pGameIF->GetDynamicIF( cBaseWindow::WT_COMMUNITY );
 		Close( false );
 		break;
 	case MA_FRIEND:
@@ -355,8 +413,7 @@ void cMainOption::_OnMenuAction( eMENU_ACTION action )
 		Close( false );
 		break;
 	case MA_GM_PANEL:
-		if( _IsGmPanelEnabled() )
-			g_pGameIF->GetDynamicIF( cBaseWindow::WT_GM_PANEL );
+		g_pGameIF->GetDynamicIF( cBaseWindow::WT_GM_PANEL );
 		Close( false );
 		break;
 	case MA_LOGOUT:
@@ -368,14 +425,6 @@ void cMainOption::_OnMenuAction( eMENU_ACTION action )
 	default:
 		break;
 	}
-}
-
-void cMainOption::_ToggleWindow( eWINDOW_TYPE windowType )
-{
-	if( g_pGameIF->IsActiveWindow( windowType ) )
-		g_pGameIF->CloseDynamicIF( windowType );
-	else
-		g_pGameIF->GetDynamicIF( windowType );
 }
 
 void cMainOption::_ToggleInventory()
@@ -466,17 +515,10 @@ void cMainOption::_RequestExit( int msgType )
 	Close( false );
 }
 
-bool cMainOption::_IsGmPanelEnabled() const
-{
-	SAFE_POINTER_RETVAL( g_pCharMng, false );
-	CTamerUser* pTamerUser = g_pCharMng->GetTamerUser();
-	SAFE_POINTER_RETVAL( pTamerUser, false );
-	return ( pTamerUser->GetServerOption() & CTamerUser::SO_GM_PANEL ) != 0;
-}
-
 void cMainOption::Render()
 {
 	RenderScript();
+	_RenderMenuTooltip();
 }
 
 void cMainOption::ResetDevice()

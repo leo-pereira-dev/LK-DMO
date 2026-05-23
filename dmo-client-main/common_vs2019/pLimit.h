@@ -26,7 +26,7 @@ namespace nLimit
 		Digivice		=    1, // digivice 내의 디지바이스 아이템 슬롯
 
 		//Capsule		=    3,	// 클라이언트에서 사용
-		Memory			=    6, // 클라이언트에서 사용, 용병 슬롯 갯수
+		Memory			=    DigimonBaseSlot - 1, // 클라이언트에서 사용, 용병 슬롯 갯수
 
 		Equip			=   nTamer::MaxParts, // Equipaments Slots
 

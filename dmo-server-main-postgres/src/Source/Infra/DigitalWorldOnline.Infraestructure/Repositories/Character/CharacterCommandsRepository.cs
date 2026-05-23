@@ -1329,18 +1329,15 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
             foreach (var digimon in character.Digimons)
             {
                 var dto = await _context.Digimon
-                    .AsNoTracking()
                     .FirstOrDefaultAsync(x => x.Id == digimon.Id);
 
                 if (dto != null)
                 {
                     dto.Slot = digimon.Slot;
-
-                    _context.Update(dto);
                 }
             }
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteDigimonAsync(long digimonId)
@@ -1359,30 +1356,26 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
         public async Task UpdateCharacterDigimonArchiveItemAsync(CharacterDigimonArchiveItemModel characterDigimonArchiveItem)
         {
             var dto = await _context.CharacterDigimonArchiveItem
-                .AsNoTracking()
                 .SingleOrDefaultAsync(x => x.Id == characterDigimonArchiveItem.Id);
 
             if (dto != null)
             {
                 dto.DigimonId = characterDigimonArchiveItem.DigimonId;
 
-                _context.Update(dto);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
         public async Task UpdateDigimonSlotAsync(long digimonId, byte digimonSlot)
         {
             var dto = await _context.Digimon
-                .AsNoTracking()
                 .SingleOrDefaultAsync(x => x.Id == digimonId);
 
             if (dto != null)
             {
                 dto.Slot = digimonSlot;
 
-                _context.Update(dto);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
@@ -1406,7 +1399,6 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
         public async Task AddDigimonArchiveSlotAsync(Guid archiveId, CharacterDigimonArchiveItemModel archiveItem)
         {
             var archiveDto = await _context.CharacterDigimonArchive
-                .AsNoTracking()
                 .Include(x => x.DigimonArchives)
                 .SingleOrDefaultAsync(x => x.Id == archiveId);
 
@@ -1417,8 +1409,7 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
                 _context.CharacterDigimonArchiveItem.Add(dto);
                 archiveDto.Slots++;
 
-                _context.Update(archiveDto);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 

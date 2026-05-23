@@ -23,7 +23,7 @@ namespace DigitalWorldOnline.Commons.Packets.PersonalShop
             WriteString(ownerName);
             WriteInt(consignedShopItems.Count);
 
-            foreach (var item in consignedShopItems.Items.Where(x => x.ItemId > 0))
+            foreach (var item in consignedShopItems.Items.Where(x => x.ItemId > 0 && x.Amount > 0))
             {
                 WriteBytes(item.ToArray());
                 WriteInt64(item.TamerShopSellPrice);
@@ -31,11 +31,13 @@ namespace DigitalWorldOnline.Commons.Packets.PersonalShop
 
             WriteInt(consignedShopItems.Count);
 
-            foreach (var item in consignedShopItems.Items.Where(x => x.ItemId > 0))
+            foreach (var item in consignedShopItems.Items.Where(x => x.ItemId > 0 && x.Amount > 0))
             {
                 WriteBytes(item.ToArray());
                 WriteInt64(item.TamerShopSellPrice);
             }
+
+            WriteByte(0);
         }
 
         public ConsignedShopItemsViewPacket()

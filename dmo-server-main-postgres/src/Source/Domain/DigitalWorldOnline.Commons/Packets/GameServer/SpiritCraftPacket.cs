@@ -10,13 +10,15 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         /// Deletes the target partner.
         /// </summary>
         /// <param name="slot">Target digivice slot</param>
-        public SpiritCraftPacket(int slot,int price,int itemId,int amount = 1)
+        public SpiritCraftPacket(int slot, long remainingBits, int itemId, int amount = 1)
         {
             Type(PacketNumber);
             WriteByte((byte)slot);
-            WriteInt(price);
-            WriteInt(amount);
+            WriteInt64(remainingBits);
+            WriteByte(0);
+            WriteByte((byte)amount);
             WriteInt(itemId);
+            WriteByte(0);
         }
     }
 }

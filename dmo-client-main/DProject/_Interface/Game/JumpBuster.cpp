@@ -1,8 +1,71 @@
 
 #include "stdafx.h"
 #include "JumpBuster.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 #define IF_JUMPBUSTER_DELTA_STRING		18
+
+namespace
+{
+	bool IsBattleMatchRegisteredForJumpBuster()
+	{
+		bool bIsBattleRegisted = false;
+		GAME_EVENT_ST.OnEvent( EVENT_CODE::IS_BATTLEMATCH_REGISTED, &bIsBattleRegisted );
+		return bIsBattleRegisted;
+	}
+
+	void SendJumpBusterWithoutMessageBox( int nItemInvenPos, DWORD dwDestMapID, bool bVipMemberShip )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"JUMPBUSTER fallback send itemSlot=%d destMap=%u vip=%d",
+			nItemInvenPos,
+			(unsigned)dwDestMapID,
+			(int)bVipMemberShip );
+
+		if( IsBattleMatchRegisteredForJumpBuster() )
+		{
+			cPrintMsg::PrintMsg( 40013 );
+			return;
+		}
+
+		if( net::game == NULL )
+			return;
+
+#ifdef SDM_VIP_SYSTEM_20181105
+		if( bVipMemberShip )
+			net::game->SendJumpGate( 0, (u2)dwDestMapID, true );
+		else
+#endif
+		if( nItemInvenPos >= 0 )
+			net::game->SendJumpGate( (u2)nItemInvenPos, (u2)dwDestMapID );
+		else
+			nsCSDEBUG::CrashLogger::LogMessage( "JUMPBUSTER fallback blocked invalid itemSlot=%d destMap=%u", nItemInvenPos, (unsigned)dwDestMapID );
+	}
+
+	void SendTamerJumpBusterWithoutMessageBox( DWORD dwDestMapID )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "JUMPBUSTER tamer fallback send destMap=%u", (unsigned)dwDestMapID );
+
+		cSkill* pSkillMng = g_pCharMng->GetTamerUser()->GetSkillMng();
+		if( pSkillMng->GetSkill_Inex() == -1 )
+		{
+			cPrintMsg::PrintMsg( 30586 );
+			return;
+		}
+
+		if( IsBattleMatchRegisteredForJumpBuster() )
+		{
+			cPrintMsg::PrintMsg( 40013 );
+			return;
+		}
+
+		if( net::game )
+		{
+			net::game->SendTamerActiveSkill( pSkillMng->GetSkill_Inex() );
+			net::game->SendTamerJumpGate( 9801, (u2)dwDestMapID );
+		}
+	}
+}
 
 cJumpBuster::cJumpBuster():m_pZoneScrollBar(NULL),m_pMapScrollBar(NULL),m_pCancelButton(NULL)
 ,m_pAcceptButton(NULL),m_pMouseOnMask(NULL),m_pSelectMask(NULL)
@@ -226,27 +289,80 @@ cJumpBuster::Update_ForMouse()
 		break;
 	case cButton::ACTION_CLICK:
 		{
-			DWORD dwDestMapID = m_MapList.GetString( m_nSelectMaskIndex_Map )->GetValue1();
+			if( m_nSelectMaskIndex_Map < 0 || m_nSelectMaskIndex_Map >= m_MapList.GetSize() )
+			{
+				nsCSDEBUG::CrashLogger::LogMessage(
+					"JUMPBUSTER Move ignored invalid selectedMapIndex=%d mapCount=%d",
+					m_nSelectMaskIndex_Map,
+					m_MapList.GetSize() );
+				cPrintMsg::PrintMsg( 10004 );
+				return muReturn;
+			}
+
+			cString* pSelectedMap = m_MapList.GetString( m_nSelectMaskIndex_Map );
+			if( pSelectedMap == NULL )
+			{
+				nsCSDEBUG::CrashLogger::LogMessage(
+					"JUMPBUSTER Move ignored null selected map string index=%d mapCount=%d",
+					m_nSelectMaskIndex_Map,
+					m_MapList.GetSize() );
+				cPrintMsg::PrintMsg( 10004 );
+				return muReturn;
+			}
+
+			DWORD dwDestMapID = pSelectedMap->GetValue1();
+			if( nsCsGBTerrain::g_pCurRoot == NULL || nsCsGBTerrain::g_pCurRoot->GetInfo() == NULL )
+			{
+				nsCSDEBUG::CrashLogger::LogMessage( "JUMPBUSTER Move ignored null current terrain destMap=%u", (unsigned)dwDestMapID );
+				cPrintMsg::PrintMsg( 10004 );
+				return muReturn;
+			}
+
 			if( dwDestMapID != nsCsGBTerrain::g_pCurRoot->GetInfo()->s_dwMapID )
 			{
+				if( nsCsMapTable::g_pMapListMng == NULL ||
+					nsCsMapTable::g_pMapListMng->GetList( dwDestMapID ) == NULL ||
+					nsCsMapTable::g_pMapListMng->GetList( dwDestMapID )->GetInfo() == NULL )
+				{
+					nsCSDEBUG::CrashLogger::LogMessage( "JUMPBUSTER Move ignored missing map info destMap=%u", (unsigned)dwDestMapID );
+					cPrintMsg::PrintMsg( 10004 );
+					return muReturn;
+				}
+
 				std::wstring mapDiscrip = nsCsMapTable::g_pMapListMng->GetList( dwDestMapID )->GetInfo()->s_szMapDiscript;
 				if( m_nJumpBusterItemID == 9801 && !m_bVipMemberShip )
 				{
 					cPrintMsg::PrintMsg( 30544, const_cast<TCHAR*>(mapDiscrip.c_str()) );
-					cMessageBox* pMBox = cMessageBox::GetFirstMessageBox();
-					pMBox->SetValue1( m_nItemInvenPos );
-					pMBox->SetValue2( dwDestMapID );
+					cMessageBox* pMBox = cMessageBox::GetMessageBox( 30544 );
+					if( pMBox != NULL )
+					{
+						pMBox->SetValue1( m_nItemInvenPos );
+						pMBox->SetValue2( dwDestMapID );
+					}
+					else
+					{
+						nsCSDEBUG::CrashLogger::LogMessage( "JUMPBUSTER missing message box msg=30544 itemSlot=%d destMap=%u", m_nItemInvenPos, (unsigned)dwDestMapID );
+						SendTamerJumpBusterWithoutMessageBox( dwDestMapID );
+					}
 
 					return muReturn;
 				}
 
 				cPrintMsg::PrintMsg( 30055, const_cast<TCHAR*>(mapDiscrip.c_str()));
-				cMessageBox* pMBox = cMessageBox::GetFirstMessageBox();
-				if( m_bVipMemberShip )
-					pMBox->SetValue1( -1 );
+				cMessageBox* pMBox = cMessageBox::GetMessageBox( 30055 );
+				if( pMBox != NULL )
+				{
+					if( m_bVipMemberShip )
+						pMBox->SetValue1( -1 );
+					else
+						pMBox->SetValue1( m_nItemInvenPos );
+					pMBox->SetValue2( dwDestMapID );
+				}
 				else
-					pMBox->SetValue1( m_nItemInvenPos );
-				pMBox->SetValue2( dwDestMapID );
+				{
+					nsCSDEBUG::CrashLogger::LogMessage( "JUMPBUSTER missing message box msg=30055 itemSlot=%d destMap=%u vip=%d", m_nItemInvenPos, (unsigned)dwDestMapID, (int)m_bVipMemberShip );
+					SendJumpBusterWithoutMessageBox( m_nItemInvenPos, dwDestMapID, m_bVipMemberShip );
+				}
 			}
 			else
 			{

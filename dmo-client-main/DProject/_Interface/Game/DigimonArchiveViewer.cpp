@@ -4,6 +4,7 @@
 #include "DigimonInfoViewer.h"
 #include "DigimonIncubatorViewer.h"
 #include "DigimonTranscendenceViewer.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 CDigimonArchiveViewer::CDigimonArchiveViewer()
 :
@@ -235,7 +236,6 @@ void CDigimonArchiveViewer::Create( int nValue)
 			pAddBtn->SetUserData( new sTabType( eIncubator ) );
 		}
 
-#ifdef SDM_DIGIMON_TRANSCENDENCE_CONTENTS_20190507
 		pAddBtn = m_pTabMenu->AddNode( CsPoint(354,64), CsPoint( 168, 38 ), CsPoint(0, 38), "CommonUI\\Menu_tap_btn.tga" );
 		if( pAddBtn )
 		{
@@ -247,7 +247,6 @@ void CDigimonArchiveViewer::Create( int nValue)
 			pAddBtn->SetEnable(false);
 			pAddBtn->SetUserData( new sTabType( eTranscend ) );
 		}
-#endif
 		
 		m_pTabMenu->SetCheckIndex(0);
 	}
@@ -417,8 +416,18 @@ cBaseWindow::eMU_TYPE CDigimonArchiveViewer::Update_ForMouse(void)
 
 void	CDigimonArchiveViewer::RecvInitializeArchive(void)
 {
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW RecvInitializeArchive begin grid=%p info=%p max=%d opened=%d digimons=%d sorted=%d",
+		m_pkGridArchive,
+		m_pkInfoViewer,
+		GetSystem() ? GetSystem()->GetMaxArchiveCount() : -1,
+		GetSystem() ? GetSystem()->GetOpenedArchiveCount() : -1,
+		GetSystem() ? GetSystem()->GetDigimonCntInArchive() : -1,
+		(GetSystem() && GetSystem()->GetSortedDigimons()) ? (int)GetSystem()->GetSortedDigimons()->size() : -1);
 	if(m_pkGridArchive == NULL)
+	{
+		nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW RecvInitializeArchive abort grid null");
 		return;
+	}
 	if(m_pkInfoViewer)
 		m_pkInfoViewer->UpdateViewer();
 	//==========================================================================================================
@@ -426,6 +435,7 @@ void	CDigimonArchiveViewer::RecvInitializeArchive(void)
 	//==========================================================================================================
 	const int MaxSlotCnt = GetSystem()->GetMaxArchiveCount();
 	const int OpenedCnt = GetSystem()->GetOpenedArchiveCount();
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW RecvInitializeArchive counts max=%d opened=%d", MaxSlotCnt, OpenedCnt);
 	int GridX = 6;
 	int GridY = (MaxSlotCnt / GridX) + 1;
 	const int StartPosX = 445;
@@ -478,13 +488,22 @@ void	CDigimonArchiveViewer::RecvInitializeArchive(void)
 	//==========================================================================================================
 	const CDigimonArchiveContents::Digimons* pkArchiveslotInfo = GetSystem()->GetDigimonsInArchive();
 	if(pkArchiveslotInfo == NULL)
+	{
+		nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW RecvInitializeArchive abort archive info null");
 		return;
+	}
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW RecvInitializeArchive archiveInfo count=%d", (int)pkArchiveslotInfo->size());
 
 	CDigimonArchiveContents::DigimonsConstIter kIter = pkArchiveslotInfo->begin();
 	for(; kIter != pkArchiveslotInfo->end(); ++kIter)
 	{
 		cGridListBoxItem* pkItem = const_cast<cGridListBoxItem*>(m_pkGridArchive->GetItemFormPos(kIter->first));
 		const cData_PostLoad::sDATA* pkInfo = kIter->second->GetDigimonData();
+		nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW RecvInitializeArchive apply slot=%d item=%p data=%p base=%u",
+			kIter->first,
+			pkItem,
+			pkInfo,
+			pkInfo ? pkInfo->s_dwBaseDigimonID : 0);
 		if(pkInfo)
 		{
 			DWORD kBaseDigimonID =pkInfo->s_dwBaseDigimonID;
@@ -505,6 +524,10 @@ void	CDigimonArchiveViewer::RecvInitializeArchive(void)
 		mTTDigimonOpenedCnt->SetColor(mDefaultColor_OpenedSlotCnt);
 
 	OnClickShowInfoViewer();
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW RecvInitializeArchive end max=%d opened=%d digimons=%d",
+		MaxSlotCnt,
+		OpenedCnt,
+		GetSystem()->GetDigimonCntInArchive());
 }
 
 void CDigimonArchiveViewer::ResetSlotIcon(cGridListBoxItem* pkItem)
@@ -544,6 +567,19 @@ void CDigimonArchiveViewer::ResetSlotIcon(cGridListBoxItem* pkItem)
 
 void CDigimonArchiveViewer::UpdateSlotIcon(CDigimonArchiveContents::DigimonInArchive* pkArchiveInfo, cGridListBoxItem* pkItem)
 {	
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW UpdateSlotIcon begin info=%p item=%p data=%p base=%u level=%d",
+		pkArchiveInfo,
+		pkItem,
+		(pkArchiveInfo ? pkArchiveInfo->GetDigimonData() : NULL),
+		(pkArchiveInfo && pkArchiveInfo->GetDigimonData()) ? pkArchiveInfo->GetDigimonData()->s_dwBaseDigimonID : 0,
+		(pkArchiveInfo && pkArchiveInfo->GetDigimonData()) ? pkArchiveInfo->GetDigimonData()->s_nLevel : 0);
+
+	if(pkItem == NULL || pkItem->GetItem() == NULL)
+	{
+		nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW UpdateSlotIcon abort invalid item item=%p", pkItem);
+		return;
+	}
+
 	if(pkArchiveInfo && pkArchiveInfo->GetDigimonData() && pkArchiveInfo->GetDigimonData()->s_dwBaseDigimonID != 0)
 	{
 		CsPoint kInnerSlotSize =  CsPoint( 40, 40 );
@@ -554,11 +590,21 @@ void CDigimonArchiveViewer::UpdateSlotIcon(CDigimonArchiveContents::DigimonInArc
 			if(pkTableInfo != NULL &&  pkTableInfo->GetInfo() != NULL)
 			{
 				std::string kPath = g_pModelDataMng->GetSmallModelIconFile( pkTableInfo->GetInfo()->s_dwModelID );
+				nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW UpdateSlotIcon icon base=%u model=%u path=%s",
+					pkArchiveInfo->mpData->s_dwBaseDigimonID,
+					pkTableInfo->GetInfo()->s_dwModelID,
+					kPath.c_str());
 				cSprite* pkSlotIcon = NiNew cSprite;	// 1
 				pkSlotIcon->Init( NULL, CsPoint::ZERO, kInnerSlotSize, kPath.c_str(), false, NiColor::WHITE, false );
 				cString::sSPRITE* sSprite = pkItem->GetItem()->AddSprite( pkSlotIcon, kDelta, kInnerSlotSize  );	
 				if( sSprite )
 					sSprite->SetAutoPointerDelete(true);
+			}
+			else
+			{
+				nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW UpdateSlotIcon missing table base=%u table=%p",
+					pkArchiveInfo->mpData->s_dwBaseDigimonID,
+					pkTableInfo);
 			}
 			std::string kPath = GetLVToPath(pkArchiveInfo->mpData->s_nLevel);
 			cSprite* pGrade = NiNew cSprite;	// 1
@@ -617,15 +663,27 @@ void CDigimonArchiveViewer::UpdateOpenNPC(void)
 
 void CDigimonArchiveViewer::RecvUpdateArchive(void)
 {	
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW RecvUpdateArchive begin grid=%p max=%d opened=%d digimons=%d sorted=%d filter=%d sort=%d keywordLen=%d",
+		m_pkGridArchive,
+		GetSystem() ? GetSystem()->GetMaxArchiveCount() : -1,
+		GetSystem() ? GetSystem()->GetOpenedArchiveCount() : -1,
+		GetSystem() ? GetSystem()->GetDigimonCntInArchive() : -1,
+		(GetSystem() && GetSystem()->GetSortedDigimons()) ? (int)GetSystem()->GetSortedDigimons()->size() : -1,
+		GetSystem() ? GetSystem()->GetFilterMode() : -1,
+		GetSystem() ? GetSystem()->GetSortMode() : -1,
+		GetSystem() ? (int)GetSystem()->GetSerchingKeyword().size() : -1);
+
 	if( m_pkGridArchive )
 	{
 		const CDigimonArchiveContents::Sorted* pkSortedList = GetSystem()->GetSortedDigimons();
 		if(pkSortedList != NULL )
 		{
+			nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW RecvUpdateArchive before ResetGridList sorted=%d", (int)pkSortedList->size());
 			if(GetSystem()->GetFilterMode() == 0)
 				ResetGridList(GetSystem()->GetMaxArchiveCount());
 			else
 				ResetGridList(pkSortedList->size());
+			nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW RecvUpdateArchive after ResetGridList");
 		}
 		m_pkGridArchive->VisibleSort();
 	}
@@ -652,16 +710,24 @@ void CDigimonArchiveViewer::RecvUpdateArchive(void)
 
 	if(m_pkCurrViewer)
 		m_pkCurrViewer->UpdateViewer();
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW RecvUpdateArchive end currViewer=%p", m_pkCurrViewer);
 }
 
 void CDigimonArchiveViewer::ResetGridList(int iViewerCnt)
 {
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW ResetGridList begin viewerCnt=%d max=%d opened=%d digimons=%d",
+		iViewerCnt,
+		GetSystem() ? GetSystem()->GetMaxArchiveCount() : -1,
+		GetSystem() ? GetSystem()->GetOpenedArchiveCount() : -1,
+		GetSystem() ? GetSystem()->GetDigimonCntInArchive() : -1);
 	const CDigimonArchiveContents::Sorted* pkSortedList = GetSystem()->GetSortedDigimons();
 	SAFE_POINTER_RET(pkSortedList);
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW ResetGridList sortedCount=%d", (int)pkSortedList->size());
 
 	SAFE_POINTER_RET(m_pkGridArchive);
 	std::list<cGridListBoxItem*>* pkAllList = m_pkGridArchive->GetListItem();
 	SAFE_POINTER_RET(pkAllList);
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW ResetGridList gridItems=%d", (int)pkAllList->size());
 	std::list<cGridListBoxItem*>::iterator kIter = pkAllList->begin();
 
 
@@ -681,6 +747,9 @@ void CDigimonArchiveViewer::ResetGridList(int iViewerCnt)
 		for(;kSortedIter != pkSortedList->end(); ++kSortedIter)
 		{
 			cGridListBoxItem* pkItem =	 const_cast<cGridListBoxItem*>(m_pkGridArchive->GetItemFormPos(kSortedIter->second.iArchiveSlotIdx));
+			nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW ResetGridList sorted slot=%d item=%p",
+				kSortedIter->second.iArchiveSlotIdx,
+				pkItem);
 			if(pkItem != NULL){
 				SlotInfo* pkSlotInfo =	dynamic_cast<SlotInfo*>(pkItem->GetUserData());
 				pkSlotInfo->SetSlotIdx(kSortedIter->second.iArchiveSlotIdx);
@@ -758,6 +827,9 @@ void CDigimonArchiveViewer::ResetGridList(int iViewerCnt)
 	}
 	m_pkGridArchive->releaseSelection();
 	//GetSystem()->OnShowPartnerDigimonInfo();
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW ResetGridList end viewerCnt=%d gridItems=%d",
+		iViewerCnt,
+		(int)pkAllList->size());
 }
 
 void CDigimonArchiveViewer::OnLButtonDown( CsPoint pos )

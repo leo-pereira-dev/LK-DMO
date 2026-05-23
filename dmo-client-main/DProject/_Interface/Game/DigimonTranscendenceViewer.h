@@ -81,6 +81,8 @@ private:
 	void					OnMouseMoveOnAccompanyItem(void* pSender, void* pData);
 	void					OnMouseDownOnAccompanyItem(void* pSender, void* pData);
 	void					OnMouseUpOnAccompanyItem(void* pSender, void* pData);
+	void					OnClickAccompanyPrev(void* pSender, void* pData);
+	void					OnClickAccompanyNext(void* pSender, void* pData);
 	void					OnMouseMoveOnMaterialDigimon(void* pSender, void* pData);
 	void					OnMouseMoveOnSubMaterialItem(void* pSender, void* pData);
 
@@ -117,6 +119,9 @@ private:
 	cGridListBox*			m_pkAccompanies;
 	cGridListBox*			m_pkGridMaterial;
 	cGridListBox*			m_pkInsertDigimon;
+	cButton*				m_pAccompanyPrevBtn;
+	cButton*				m_pAccompanyNextBtn;
+	int						m_nAccompanyPage;
 	cButton*				m_pNormalExpAddBtn;
 	cButton*				m_pAdvancedExpAddBtn;
 	cButton*				m_pTranscendBtn;

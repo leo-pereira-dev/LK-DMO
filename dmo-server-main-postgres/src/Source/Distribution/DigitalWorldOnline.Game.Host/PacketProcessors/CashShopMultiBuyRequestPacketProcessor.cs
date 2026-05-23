@@ -19,18 +19,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
     /// <code>
     ///   n1 nItemCnt           ; 1..MAX_CASHITEM_COUNT (=12)
     ///   n4 nTotalPrice        ; client-asserted total — server validates against catalog
-    ///   u2 ui64OrderID        ; Steam order ID — only 2 bytes on the wire (!!)
+    ///   u8 ui64OrderID        ; Steam order ID, ignored by this server
     ///   nItemCnt × n4 productID
     /// </code>
     /// <para>
-    /// <c>ui64OrderID</c> looks like a uint64_t in the protocol struct but is in fact
-    /// only 2 bytes on the wire. v487 nlib/base.h has a typedef quirk:
-    /// <c>typedef uint16_t uint64;</c> — the parameter type <c>uint64</c> resolves to
-    /// uint16_t, so <c>cPacket::push(uint64)</c> emits <c>sizeof(uint16_t) = 2 bytes</c>.
-    /// Reading 8 bytes here would eat 6 bytes from the next productID and the whole
-    /// item list reads garbage; observed productID 704717338 / 31020088 ratio depending
-    /// on the offset slip. The 11-byte body length on the wire (Length=17 - 4 header -
-    /// 2 checksum) is the smoking gun: 1 + 4 + 2 + 4 = 11 ✓; 1 + 4 + 8 + 4 = 17 ✗.
+    /// <c>ui64OrderID</c> is pushed by the v487 client as the full <c>uint64_t</c>
+    /// argument passed to <c>SendBuyCashItem</c>. The server ignores the value, but must
+    /// consume all 8 bytes before reading the productID list.
     /// </para>
     /// <para>
     /// The single-item <c>pCashShop::Buy</c> (3402) is unused in v487 — the client's
@@ -87,7 +82,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             int nItemCnt = packet.ReadByte();
             int nTotalPrice = packet.ReadInt();
-            _ = packet.ReadUShort();                  // ui64OrderID — Steam, ignored. 2 bytes; see class header.
+            _ = packet.ReadInt64();                   // ui64OrderID - Steam, ignored.
 
             if (nItemCnt <= 0 || nItemCnt > MaxCashItemCount)
             {

@@ -6,6 +6,7 @@ class cRenderTex;
 class CDigimon;
 class cImage;
 class cEditBox;
+class CsNodeObj;
 
 #define ENCY_DISABLE_ALPHA			0.65f
 #define ENCY_ENABLE_ALPHA			1.0f
@@ -60,6 +61,8 @@ public:
 	virtual eWINDOW_TYPE	GetWindowType(){ return WT_ENCYCLOPEDIA; }
 	virtual void			Destroy();
 	virtual void			DeleteResource();
+	virtual void			Open( int nValue = 0, bool bSound = true );
+	virtual bool			Close( bool bSound = true );
 	virtual void			Create( int nValue = 0 );
 
 	virtual void			Update(float const& fDeltaTime);
@@ -137,6 +140,19 @@ protected:
 		int					s_nTooltipDigimonID;
 	};
 	std::vector<sCARD_HOVER_INFO>						m_vCardHoverInfo;
+	cSprite*											m_pCardHoverEffect;
+	bool												m_bCardHoverEffectVisible;
+	CsPoint												m_ptCardHoverEffectPos;
+	CsPoint												m_ptCardHoverEffectSize;
+	cSprite*											m_pCardNameTooltipBg;
+	cSprite*											m_pCardNameTooltipTop;
+	cSprite*											m_pCardNameTooltipBottom;
+	cSprite*											m_pCardNameTooltipLeft;
+	cSprite*											m_pCardNameTooltipRight;
+	cText*												m_pCardNameTooltipText;
+	bool												m_bCardNameTooltipVisible;
+	CsPoint												m_ptCardNameTooltipPos;
+	CsPoint												m_ptCardNameTooltipSize;
 
 	struct sDECK_PANEL_HOVER_INFO
 	{
@@ -170,15 +186,18 @@ protected:
 	void				_RefreshList();
 	void				_UpdateCardHover();
 	void				_SetCardHoverVisible( bool bVisible );
+	void				_RenderCardNameTooltip();
 	int					_GetDeckHoverGroupIdx( cListBoxItem* pItem, CsPoint const& ptLocalMouse ) const;
 	void				_OnClickEncyclopediaItem( void* pSender, void* pData );
 	void				_OpenOverview( int nDigimonId, int nTooltipDigimonId );
 	void				_CloseOverview();
+	void				_ReleaseOverviewRenderDigimon();
 	void				_RenderOverview();
 	void				_UpdateOverviewRenderDigimon();
 	void				_UpdateOverviewSkillSection();
 	void				_ResolveOverviewGrowthData( int nDigimonId, int& nLevel, int& nScale, int& nCloneLevel,
 									   int& nCloneAT, int& nCloneCT, int& nCloneBL, int& nCloneEV, int& nCloneHP ) const;
+	void				_ClearIconList();
 
 	void				SetTabListData();
 	//void				SetTabListDataRenderCount();									//2017-05-24-nova Scroll 마지막페이지 리스트 크기에 따른 렌더카운트 설정
@@ -212,6 +231,7 @@ protected:
 	std::map <int, int> m_pEnchantVal;								// 강화수치
 
 	void				_SetTooltip( int nDigimonID );				// 도감 툴팁
+	void				_SetCardNameTooltip( int nDigimonID, CsRect const& rtCardScreen );
 	void				_RenderTooltip( CsPoint ptMousePos );
 	void				_Updata_ForMouse_Group( int count );		// 덱 마우스 업데이트
 	void				_SetGroupTooltip( int nGroupIdx );			// 덱 툴팁	
@@ -235,6 +255,7 @@ protected:
 	int					m_nOverviewHoverSkillIdx;
 	cRenderTex*			m_pOverviewRenderTex;
 	CDigimon*			m_pOverviewRenderDigimon;
+	CsNodeObj*			m_pOverviewFigureBase;
 	cText*				m_pOverviewName;
 	cText*				m_pOverviewGrowthTitle;
 	cText*				m_pOverviewInfoTitle;
@@ -246,6 +267,8 @@ protected:
 	cText*				m_pOverviewStatText[ 8 ];
 	cText*				m_pOverviewSkillName;
 	cImage*				m_pOverviewSkillTabFrame;
+	cImage*				m_pOverviewBackBtn;
+	cText*				m_pOverviewBackText;
 	cImage*				m_pOverviewCloseBtn;
 	cImage*				m_pOverviewScrollBtn;
 	cImage*				m_pOverviewZoomInBtn;
@@ -286,6 +309,9 @@ protected:
 	int					m_nOverviewZoomSliderDragOffsetX;
 	bool				m_bOverviewModelDragRotate;
 	CsPoint				m_ptOverviewModelDragPrev;
+	float				m_fOverviewPreviewAniTimer;
+	bool				m_bOverviewPreviewAltAni;
+	bool				m_bOverviewPreviewAniStarted;
 
 public:
 	int					_GetSelectDigimonID(){ return m_nSelectDigimonID; }	// 보상아이템 받을 계열체 디지몬 번호

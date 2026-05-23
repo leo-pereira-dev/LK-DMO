@@ -18,6 +18,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             Type(PacketNumber);
             WriteUInt((uint)handler);
             WriteShort((short)buff.BuffId);
+            WriteShort((short)buff.BuffId);
             WriteShort(TypeN);
             WriteInt(duration);
             WriteInt(buff.SkillCode);

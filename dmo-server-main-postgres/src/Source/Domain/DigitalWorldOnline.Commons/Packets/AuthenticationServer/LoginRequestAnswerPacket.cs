@@ -13,14 +13,9 @@ namespace DigitalWorldOnline.Commons.Packets.AuthenticationServer
         /// <param name="failReason">The fail reason enumeration</param>
         public LoginRequestAnswerPacket(LoginFailReasonEnum failReason)
         {
-            //TODO: try to use int/short instead of bytes
-
             Type(PacketNumber);
-            WriteByte((byte)failReason.GetHashCode());
+            WriteInt(failReason.GetHashCode());
             WriteByte(39);
-            WriteByte(0);
-            WriteByte(0);
-            WriteByte(0);
         }
 
         /// <summary>

@@ -20,14 +20,14 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteInt(0);
             WriteInt(0);
 
-            foreach (var digimonArchiveItem in digimonArchive.DigimonArchives.Where(x => x.Digimon != null))
+            foreach (var digimonArchiveItem in digimonArchive.DigimonArchives.Where(x => x.DigimonId > 0 && x.Digimon != null))
             {
                 var digimon = digimonArchiveItem.Digimon!;
 
                 WriteInt(digimonArchiveItem.Slot);
 
                 WriteUInt(digimon.GeneralHandler);
-                WriteInt(digimon.BaseType);
+                WriteInt(digimon.CurrentType);
                 WriteString(digimon.Name);
                 WriteShort(digimon.Size);
                 WriteInt64(digimon.CurrentExperience * 100);

@@ -28,7 +28,6 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteBytes(targetItem.ToArray());
             WriteShort((short)successRate);
             WriteInt64(chargeExp);
-            WriteShort(0);
             WriteInt64(targetPartnerFinalExp);
         }
     }

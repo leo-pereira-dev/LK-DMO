@@ -100,9 +100,9 @@ public:
 public:
 	WORD nProtocol;
 
+	n1 nItemCnt;
 	n4 nTotalPrice;	// 모든 아이템 가격
 	u8 nOrderID;	// Steam용
-	n1 nItemCnt;
 	// x nItemCnt
 	std::list<n4> nCashItemNo;
 };

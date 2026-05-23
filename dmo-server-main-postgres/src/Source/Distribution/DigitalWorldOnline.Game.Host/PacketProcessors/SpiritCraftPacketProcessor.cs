@@ -83,7 +83,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 client.Tamer.RemoveDigimon(slot);
 
 
-                client.Send(new SpiritCraftPacket(slot, (int)extraEvolution.Price,extraEvolution.DigimonId));
+                client.Send(new SpiritCraftPacket(slot, client.Tamer.Inventory.Bits, extraEvolution.DigimonId));
                 client.Send(new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory));
 
                 await _sender.Send(new DeleteDigimonCommand(digimonId));

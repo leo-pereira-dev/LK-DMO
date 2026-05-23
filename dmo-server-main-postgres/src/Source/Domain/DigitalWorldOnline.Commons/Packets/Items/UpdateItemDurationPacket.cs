@@ -17,7 +17,7 @@ namespace DigitalWorldOnline.Commons.Packets.Items
             WriteByte(0);
             WriteByte(12);
             WriteInt(102);
-            WriteInt(2);
+            WriteByte(2);
 
             foreach (var itemList in expiredItemList)
             {
@@ -27,7 +27,7 @@ namespace DigitalWorldOnline.Commons.Packets.Items
                     WriteByte((byte)itemList.Type);
                     WriteByte(2);
                     WriteInt(expiredItem.ItemId);
-                    WriteInt(1);
+                    WriteByte(1);
                 }
             }
         }

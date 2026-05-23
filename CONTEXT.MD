@@ -6,6 +6,49 @@ This document is the working memory for the LK-DMO workspace in `C:\0-NewDmo`.
 It summarizes the main fixes, migration work, build notes, and packet/protocol
 map discovered while adapting the client and server.
 
+## Non-negotiable client build target
+
+The active test client is the English release build. Unless the user explicitly
+asks for another locale, always build:
+
+```powershell
+& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" `
+  "C:\0-NewDmo\dmo-client-main\DProject.sln" `
+  /m /p:Configuration=Release_English /p:Platform=Win32 /v:minimal
+```
+
+Use the solution file for client builds. Do not compile
+`C:\0-NewDmo\dmo-client-main\DProject\DProject.vcxproj` directly: it does not
+carry the same solution configuration/dependency mapping and has repeatedly
+caused false build failures around `Release_English|Win32`, PCH, and PDB locks.
+If MSBuild reports `C1041` or another PDB contention issue, stop orphaned
+`MSBuild`/`cl` processes if needed, then rebuild the same solution with `/FS`
+in the compiler environment:
+
+```powershell
+$env:CL="/FS"
+& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" `
+  "C:\0-NewDmo\dmo-client-main\DProject.sln" `
+  /m /p:Configuration=Release_English /p:Platform=Win32 /v:minimal
+```
+
+Do not use `Release|Win32` for normal testing; that produces the Korean binary
+under `C:\Release\Kor\DProject_R.exe`.
+
+Expected English output and local test copies:
+
+```text
+C:\Release\GSP\DProject_R_ENG.exe
+C:\0-NewDmo\ClientDist\DProject_R_ENG.exe
+D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe
+```
+
+After a successful English build, copy `C:\Release\GSP\DProject_R_ENG.exe` to
+both `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe` and
+`D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe`.
+If either destination is locked by a running client, stop the blocking
+`DProject_R_ENG.exe` process and retry the copy.
+
 ## Repository layout
 
 - `dmo-client-main/`: C++ client source. Main game project is `DProject.sln`.
@@ -25,6 +68,9 @@ Primary build used during the fixes:
   "C:\0-NewDmo\dmo-client-main\DProject.sln" `
   /m /p:Configuration=Release_English /p:Platform=Win32 /v:minimal
 ```
+
+Important: run the command against `DProject.sln`, not
+`DProject\DProject.vcxproj`.
 
 Expected output:
 
@@ -84,10 +130,63 @@ Schema: dso
 
 ## Changelog / work completed
 
+### 2026-05-22 archive, transcendence, D-Unit, and packet stabilization
+
+- Digimon Archive UI was aligned back toward the official layout: five visible
+  top slots with arrow paging, support for the local eight mercenary slots, and
+  Storage/Academy/Transcendence tab flow without the temporary stretched slot
+  layout that pushed the detail panel into the wrong position.
+- Archive packet handling was hardened around client/server bin mismatches:
+  - server load packet `3204` only serializes archive rows with both `DigimonId`
+    and a loaded `Digimon` object;
+  - server manage packet `3201` accepts the observed non-VIP and VIP payload
+    shapes, validates target archive slots, and logs tamer, digivice slot,
+    archive slot, NPC, partner IDs, and packet length;
+  - archived digimon use `Slot = 255` (`byte.MaxValue`) and active digimon are
+    filtered from that archive slot before building the active mercenary list.
+- Archive persistence now avoids the broad `UpdateCharacterDigimonsOrderCommand`
+  in archive move/swap paths. Individual digimon slots and archive rows are
+  updated directly, and stale archive navigation references are cleared when
+  moving a digimon out of the archive. This was the key fix for the Gabumon/slot
+  disappearance after repeated open, close, move, and channel tests.
+- Transcendence was kept packet-aware without enabling the global Korean DNS
+  transcendence define in the USA client. The server fixes now match the current
+  English client layouts for charge EXP `16039` and final transcendence `16040`,
+  including material order, EXP fields, and processor registration.
+- Added detailed archive diagnostics on the server under `ARCHIVE 3201` and
+  `ARCHIVE 3204`, plus protocol audit notes in
+  `PROTOCOL_AUDIT_2026-05-22.md`. Use these logs first when the archive opens
+  empty, shows a wrong slot count, or a digimon visually moves but is lost after
+  reload.
+- Jump Booster / All Area crash was traced to a client-side message box lifetime
+  issue. `cMessageBox::DelMsg()` no longer leaves a pending dismissal when no
+  live box exists, `DeleteList()` clears pending dismissals, and
+  `JumpBuster.cpp` now validates selected map data and falls back to a direct
+  send if the confirmation box cannot be recovered.
+- GM Panel was restored to the wider modern panel with side actions for Make
+  Item, Debug Char, Level Up, LevelUp-Digi, AllEvo, and Bits. The main menu GM
+  button/icon state was also corrected.
+- The old client `UnionDUnit.*` project entries were removed from the active
+  project in favor of the XML Union implementation. `XmlUnionDUnit.*` now owns
+  the D-Unit test window, card population, rank/icon rendering, input capture,
+  and client-side XML loading from `Data\union`.
+- Server-side XML Union/D-Unit work added XML asset loading, packet processors,
+  progress/reward packets, character progress DTO/model/configuration, and the
+  `20260521143000_AddCharacterXmlUnionProgress` migration. Runtime XML assets
+  live under `dmo-server-main-postgres\xml\union`.
+- `Dcommerce/` is a large local extraction/tooling workspace, about 983 MB of
+  XML dumps, DLL/runtime files, executables, and a portable tool archive. It is
+  intentionally ignored by Git and should be regenerated or copied locally when
+  needed, not committed as source.
+- Latest known client verification for this round used the English release
+  solution build and copied `DProject_R_ENG.exe` to both local test targets. The
+  JumpBuster build hash observed after the crash fix was
+  `F8EA7AAC5BD77F9F12ABBB3F2EAE23B962D7AFE4E6A4915B7A9B796CD4C4E59A`.
+
 ### Client/server bootstrap
 
-- Read `source-client` context and used the compiling source under `D:\OpenDmo`
-  as a reference for client library/build behavior.
+- Read earlier `source-client` notes as historical reference only. The active
+  project root for build/test work is `C:\0-NewDmo`.
 - Confirmed that `Release_English|Win32` is the relevant client target for
   `DProject_R_ENG.exe`.
 - Avoided relying on the `Give_English` target for final testing after it caused
@@ -464,10 +563,8 @@ Schema: dso
 - Latest successful client build after the lower render guard:
   - `C:\Release\GSP\DProject_R_ENG.exe`
   - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`
+  - `D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe`
   - timestamp `2026-05-19 21:30:56`, size `10842624`.
-  - Copy to `D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe`
-    failed because the running client process held the file open and could not be
-    stopped from the current PowerShell session (`Access denied`).
 - Last successful client build/copy for this fix:
   - `C:\Release\GSP\DProject_R_ENG.exe`
   - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`

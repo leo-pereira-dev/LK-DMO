@@ -21,6 +21,8 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteInt(guild.CurrentExperience);
             WriteString(guild.Notice);
             WriteInt(guild.ExtraSlots);
+            WriteUInt(0);
+            WriteByte(0);
 
             foreach (var authority in guild.Authority)
             {
@@ -41,13 +43,18 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
                 WriteInt(member.Contribution);
                 WriteByte(member.CharacterInfo.Level);
 
-                if (member.CharacterInfo.State == CharacterStateEnum.Connected || member.CharacterInfo.State == CharacterStateEnum.Ready)
+                if ((member.CharacterInfo.State == CharacterStateEnum.Connected || member.CharacterInfo.State == CharacterStateEnum.Ready) &&
+                    member.CharacterInfo.Location.MapId > 0)
                 {
                     WriteShort(member.CharacterInfo.Location.MapId);
                     WriteByte(member.CharacterInfo.Channel);
                 }
                 else
                     WriteShort(0);
+
+                WriteByte(1);
+                WriteUInt(0);
+                WriteString(string.Empty);
             }
 
             WriteByte(0);

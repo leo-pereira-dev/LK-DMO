@@ -13,8 +13,8 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         {
             Type(PacketNumber);
             WriteUInt(handler);
-            WriteInt(size);
-            WriteShort(0); //ChangeType
+            WriteUShort((ushort)size);
+            WriteUInt(0); //EndTick
         }
         public UpdateSizePacket(string OfferName, int MapID)
         {

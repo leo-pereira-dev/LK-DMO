@@ -158,9 +158,9 @@
         MinActiveDigimonList = 3,
 
         /// <summary>
-        /// Max value for active digimon slots.
+        /// Max value for active digimon slots (partner + mercenary slots).
         /// </summary>
-        MaxActiveDigimonList = 5,
+        MaxActiveDigimonList = 9,
 
         /// <summary>
         /// ConsignedShopWarehouse maximum size.

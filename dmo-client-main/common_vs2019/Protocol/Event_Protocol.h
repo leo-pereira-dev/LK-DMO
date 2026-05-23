@@ -114,7 +114,7 @@ public:
 	WORD GetProtocol(){return nProtocol;}
 public:
 	WORD				nProtocol;
-	n1 nTableIdx ;
+	n4 nTableIdx ;
 };
 
 

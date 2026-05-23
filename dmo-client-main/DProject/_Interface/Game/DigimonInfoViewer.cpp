@@ -28,6 +28,9 @@ m_pDig_St_Height(NULL),
 m_pkPlayer(NULL),
 m_pkAccompanies(NULL),
 m_pDigimonRankImg(NULL),
+m_pAccompanyPrevBtn(NULL),
+m_pAccompanyNextBtn(NULL),
+m_nAccompanyPage(0),
 mSelectedDigPos(CsPoint::ZERO),
 mptLevelPos(CsPoint::ZERO),
 mptElementPos(CsPoint::ZERO),
@@ -192,8 +195,8 @@ void CDigimonInfoViewer::Create( cWindow* pkRoot,  int nValue /*=0*/ )
 #else
 	const CsPoint kAccomGridPos = CsPoint(98, 21);
 #endif
-	const CsPoint kAccomGridSize = CsPoint(230, 104);
-	const CsPoint kAccomGap = CsPoint(14, 6);
+	const CsPoint kAccomGridSize = CsPoint(230, 60);
+	const CsPoint kAccomGap = CsPoint(14, 0);
 	m_pkAccompanies = NiNew cGridListBox;
 	SAFE_POINTER_RET( m_pkAccompanies );
 
@@ -210,16 +213,28 @@ void CDigimonInfoViewer::Create( cWindow* pkRoot,  int nValue /*=0*/ )
 	m_pkAccompanies->SetMouseOverImg( "Lobby\\CharacterCreate\\digimon_glow.tga" );
 	m_pkAccompanies->SetSelectedImg( "TacticsHouse\\Storage_select.tga" );
 	m_pkAccompanies->SetBackOverAndSelectedImgRender(false);	
+
+	m_pAccompanyPrevBtn = AddButton( CsPoint( 225, 79 ), CsPoint( 9, 17 ), CsPoint( 9, 0 ), "Control_G\\Slider\\Lbtn.tga" );
+	if( m_pAccompanyPrevBtn )
+		m_pAccompanyPrevBtn->AddEvent( cButton::BUTTON_LBUP_EVENT, this, &CDigimonInfoViewer::OnClickAccompanyPrev );
+	m_pAccompanyNextBtn = AddButton( CsPoint( 252, 79 ), CsPoint( 9, 17 ), CsPoint( 9, 0 ), "Control_G\\Slider\\Rbtn.tga" );
+	if( m_pAccompanyNextBtn )
+		m_pAccompanyNextBtn->AddEvent( cButton::BUTTON_LBUP_EVENT, this, &CDigimonInfoViewer::OnClickAccompanyNext );
 	
 	for(int i = 0; i < nLimit::DigimonBaseSlot - 1; ++i)
 	{	
 		cString * pItem = NiNew cString;
-		cSprite* pImage = NiNew cSprite;	// 1
-		pImage->Init( NULL, CsPoint::ZERO,CsPoint( 24, 34),  "TacticsHouse\\Storage_lock.tga", false );
-		cString::sSPRITE* sSprite = pItem->AddSprite( pImage, CsPoint( 11, 5 ), CsPoint( 24, 34)  );	
+		cSprite* pSlotImage = NiNew cSprite;
+		pSlotImage->Init( NULL, CsPoint::ZERO, kSlotSizeTest, "TacticsHouse\\Storage_slot.tga", false );
+		cString::sSPRITE* sSprite = pItem->AddSprite( pSlotImage, CsPoint::ZERO, kSlotSizeTest );
 		if( sSprite )
 			sSprite->SetAutoPointerDelete(true);
-		cGridListBoxItem * addItem  = NiNew cGridListBoxItem(i, CsPoint( 46, 46));
+		cSprite* pLockImage = NiNew cSprite;
+		pLockImage->Init( NULL, CsPoint::ZERO,CsPoint( 24, 34),  "TacticsHouse\\Storage_lock.tga", false );
+		sSprite = pItem->AddSprite( pLockImage, CsPoint( 11, 5 ), CsPoint( 24, 34)  );
+		if( sSprite )
+			sSprite->SetAutoPointerDelete(true);
+		cGridListBoxItem * addItem  = NiNew cGridListBoxItem(i, kSlotSizeTest);
 		addItem->SetItem( pItem );
 		m_pkAccompanies->AddItem( addItem );
 	}
@@ -277,6 +292,12 @@ BOOL CDigimonInfoViewer::UpdateMouse()
 		return TRUE;
 
 	if(m_pkAccompanies && m_pkAccompanies->Update_ForMouse(CURSOR_ST.GetPos()) )
+		return TRUE;
+
+	if( m_pAccompanyPrevBtn && m_pAccompanyPrevBtn->Update_ForMouse() != cButton::ACTION_NONE )
+		return TRUE;
+
+	if( m_pAccompanyNextBtn && m_pAccompanyNextBtn->Update_ForMouse() != cButton::ACTION_NONE )
 		return TRUE;
 
 	return FALSE;
@@ -444,19 +465,48 @@ void CDigimonInfoViewer::UpdateViewer(void)
 	cGridListBoxItem* pkItem = const_cast<cGridListBoxItem*>(m_pkPlayer->GetItemFormPos(DIGIMON::USING));
 	UpdateSlotIcon(UsingDigimonID, pkItem);
 
-	for(int i= DIGIMON::ACCOMPANY1; i <= GetSystem()->GetOpenedAccompanySlotCnt(); ++i)
-	{
-		pkItem = const_cast<cGridListBoxItem*>( m_pkAccompanies->GetItemFormPos(i - 1) );
+	const int kSlotsPerPage = 4;
+	const int nOpenedSlotCount = GetSystem()->GetOpenedAccompanySlotCnt();
+	const int nMaxPage = ( nLimit::DigimonBaseSlot - 2 ) / kSlotsPerPage;
+	if( m_nAccompanyPage > nMaxPage )
+		m_nAccompanyPage = nMaxPage;
+	if( m_nAccompanyPage < 0 )
+		m_nAccompanyPage = 0;
 
-		DWORD dwCompanyID = GetSystem()->GetCompanyID(i);
+	for( int i = 0; i < nLimit::DigimonBaseSlot - 1; ++i )
+	{
+		pkItem = const_cast<cGridListBoxItem*>( m_pkAccompanies->GetItemFormPos(i) );
+		if( pkItem )
+			pkItem->SetVisible( i < kSlotsPerPage );
+	}
+
+	for(int i = 0; i < kSlotsPerPage; ++i)
+	{
+		pkItem = const_cast<cGridListBoxItem*>( m_pkAccompanies->GetItemFormPos(i) );
+		if( pkItem == NULL )
+			continue;
+
+		const int nAccompanySlot = m_nAccompanyPage * kSlotsPerPage + i + 1;
+		pkItem->setID( nAccompanySlot - 1 );
+		pkItem->SetEnable( nAccompanySlot <= nOpenedSlotCount );
+
+		DWORD dwCompanyID = nAccompanySlot <= nOpenedSlotCount ? GetSystem()->GetCompanyID(nAccompanySlot) : 0;
 		UpdateSlotIcon(dwCompanyID, pkItem );
 		UpdateLevelIcon(dwCompanyID, pkItem);
 	}
+
+	if( m_pAccompanyPrevBtn )
+		m_pAccompanyPrevBtn->SetEnable( m_nAccompanyPage > 0 );
+	if( m_pAccompanyNextBtn )
+		m_pAccompanyNextBtn->SetEnable( m_nAccompanyPage < nMaxPage );
 }
 
 void CDigimonInfoViewer::UpdateSlotIcon(DWORD dwDigimonID, cGridListBoxItem* pkItem)
 {
-	pkItem->GetItem()->Delete();
+	SAFE_POINTER_RET( pkItem );
+	cString* pItems = pkItem->GetItem();
+	SAFE_POINTER_RET( pItems );
+	pItems->Delete();
 	if(dwDigimonID != 0)
 	{
 		const CsPoint kSlotSizeTest = CsPoint( 44, 44 );
@@ -468,13 +518,19 @@ void CDigimonInfoViewer::UpdateSlotIcon(DWORD dwDigimonID, cGridListBoxItem* pkI
 			std::string kPath = g_pModelDataMng->GetSmallModelIconFile( pkTableInfo->GetInfo()->s_dwModelID );
 			cSprite* pkSlotIcon = NiNew cSprite;	// 1
 			pkSlotIcon->Init( NULL, CsPoint::ZERO, kSlotSizeTest, kPath.c_str(), false, NiColor::WHITE, false  );
-			cString::sSPRITE* sSprite = pkItem->GetItem()->AddSprite( pkSlotIcon, kSlotDelta, kSlotSizeTest  );	
+			cString::sSPRITE* sSprite = pItems->AddSprite( pkSlotIcon, kSlotDelta, kSlotSizeTest  );
 			if( sSprite )
 				sSprite->SetAutoPointerDelete(true);
 		}
 	}
 	else
 	{
+		const CsPoint kSlotSize = CsPoint( 46, 46 );
+		cSprite* pSlotImage = NiNew cSprite;
+		pSlotImage->Init( NULL, CsPoint::ZERO, kSlotSize, "TacticsHouse\\Storage_slot.tga", false );
+		cString::sSPRITE* sSprite = pItems->AddSprite( pSlotImage, CsPoint::ZERO, kSlotSize );
+		if( sSprite )
+			sSprite->SetAutoPointerDelete(true);
 	}
 
 }
@@ -622,6 +678,27 @@ void	CDigimonInfoViewer::OnMouseRClickInAccompany(void* pSender, void* pData)
 	GetSystem()->OnRClick_AccompanyDigimon(pItem->getID());
 
 }
+
+void CDigimonInfoViewer::OnClickAccompanyPrev(void* pSender, void* pData)
+{
+	if( m_nAccompanyPage <= 0 )
+		return;
+
+	--m_nAccompanyPage;
+	UpdateViewer();
+}
+
+void CDigimonInfoViewer::OnClickAccompanyNext(void* pSender, void* pData)
+{
+	const int kSlotsPerPage = 4;
+	const int nMaxPage = ( nLimit::DigimonBaseSlot - 2 ) / kSlotsPerPage;
+	if( m_nAccompanyPage >= nMaxPage )
+		return;
+
+	++m_nAccompanyPage;
+	UpdateViewer();
+}
+
 void	CDigimonInfoViewer::ReleaseSelect(void)
 {
 	if(m_pkPlayer != NULL)

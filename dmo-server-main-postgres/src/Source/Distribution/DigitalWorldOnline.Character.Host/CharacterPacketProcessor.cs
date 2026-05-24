@@ -112,10 +112,10 @@ namespace DigitalWorldOnline.Character
                         DebugLog("Reading packet parameters...");
                         var position = packet.ReadByte();
                         var tamerModel = packet.ReadInt();
-                        var tamerName = packet.ReadZString();
+                        var tamerName = SanitizeCharacterName(packet.ReadZString());
                         packet.Seek(42);
                         var digimonModel = packet.ReadInt();
-                        var digimonName = packet.ReadZString();
+                        var digimonName = SanitizeCharacterName(packet.ReadZString());
 
                         // Validate against CharCreateTable.bin. The client UI shows entries with
                         // bShow=true but only lets the player actually pick entries with
@@ -184,6 +184,7 @@ namespace DigitalWorldOnline.Character
                                     new TamerLevelStatusQuery(character.Model,
                                     character.Level)
                                 )));
+                        character.FullHeal();
 
                         character.Partner.SetBaseInfo(
                             _mapper.Map<DigimonBaseInfoAssetModel>(
@@ -200,7 +201,7 @@ namespace DigitalWorldOnline.Character
                 case CharacterServerPacketEnum.CheckNameDuplicity:
                     {
                         DebugLog("Getting parameters...");
-                        var tamerName = packet.ReadString();
+                        var tamerName = SanitizeCharacterName(packet.ReadString());
 
                         DebugLog($"{tamerName}");
 
@@ -308,6 +309,11 @@ namespace DigitalWorldOnline.Character
                 ItemListEnum.RewardWarehouse,
                 ItemListEnum.GiftWarehouse,
                 ItemListEnum.ConsignedWarehouse,
+                ItemListEnum.ExtraInventorySeal,
+                ItemListEnum.ExtraInventoryTicket,
+                ItemListEnum.ExtraInventoryEvolution,
+                ItemListEnum.ExtraInventoryDigitama,
+                ItemListEnum.ExtraInventoryMaterial,
                 ItemListEnum.TamerShop,
                 ItemListEnum.ConsignedShop
             };
@@ -363,6 +369,11 @@ namespace DigitalWorldOnline.Character
         private void InfoLog(string message)
         {
             _logger?.Information($"{message}");
+        }
+
+        private static string SanitizeCharacterName(string name)
+        {
+            return (name ?? string.Empty).Replace("\0", string.Empty).Trim();
         }
 
         /// <summary>

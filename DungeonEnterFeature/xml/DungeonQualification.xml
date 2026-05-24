@@ -1,0 +1,1520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonQualification schema="DungeonQualification.struct" bin="DungeonQualification.bin" byteLength="2848">
+  <Qualifications kind="Section" offset="0" length="2848">
+    <_0 kind="Record" offset="4" length="34">
+      <DungeonId kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="5001" />
+      <FieldA kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="16" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="18" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="24" length="14" count="1">
+        <_0_ kind="Struct" offset="24" length="14">
+          <RequirementType kind="Leaf" offset="24" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="26" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="30" length="8" count="2">
+            <_0_ kind="Leaf" offset="30" length="4" type="Scalar { Kind = U32 }" value="150" />
+            <_1_ kind="Leaf" offset="34" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_0>
+    <_1 kind="Record" offset="38" length="20">
+      <DungeonId kind="Leaf" offset="38" length="4" type="Scalar { Kind = U32 }" value="5201" />
+      <FieldA kind="Leaf" offset="42" length="4" type="Scalar { Kind = U32 }" value="1310545" />
+      <FieldB kind="Leaf" offset="46" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="50" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="52" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="54" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="58" length="0" count="0" />
+    </_1>
+    <_2 kind="Record" offset="58" length="30">
+      <DungeonId kind="Leaf" offset="58" length="4" type="Scalar { Kind = U32 }" value="5301" />
+      <FieldA kind="Leaf" offset="62" length="4" type="Scalar { Kind = U32 }" value="1310545" />
+      <FieldB kind="Leaf" offset="66" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="70" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="72" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="74" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="78" length="10" count="1">
+        <_0_ kind="Struct" offset="78" length="10">
+          <RequirementType kind="Leaf" offset="78" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="80" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="84" length="4" count="1">
+            <_0_ kind="Leaf" offset="84" length="4" type="Scalar { Kind = U32 }" value="4795" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_2>
+    <_3 kind="Record" offset="88" length="30">
+      <DungeonId kind="Leaf" offset="88" length="4" type="Scalar { Kind = U32 }" value="5401" />
+      <FieldA kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="1310545" />
+      <FieldB kind="Leaf" offset="96" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="100" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="102" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="104" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="108" length="10" count="1">
+        <_0_ kind="Struct" offset="108" length="10">
+          <RequirementType kind="Leaf" offset="108" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="110" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="114" length="4" count="1">
+            <_0_ kind="Leaf" offset="114" length="4" type="Scalar { Kind = U32 }" value="4796" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_3>
+    <_4 kind="Record" offset="118" length="34">
+      <DungeonId kind="Leaf" offset="118" length="4" type="Scalar { Kind = U32 }" value="7001" />
+      <FieldA kind="Leaf" offset="122" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="126" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="130" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="132" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="134" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="138" length="14" count="1">
+        <_0_ kind="Struct" offset="138" length="14">
+          <RequirementType kind="Leaf" offset="138" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="140" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="144" length="8" count="2">
+            <_0_ kind="Leaf" offset="144" length="4" type="Scalar { Kind = U32 }" value="160" />
+            <_1_ kind="Leaf" offset="148" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_4>
+    <_5 kind="Record" offset="152" length="34">
+      <DungeonId kind="Leaf" offset="152" length="4" type="Scalar { Kind = U32 }" value="7002" />
+      <FieldA kind="Leaf" offset="156" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="160" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="164" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="166" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="168" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="172" length="14" count="1">
+        <_0_ kind="Struct" offset="172" length="14">
+          <RequirementType kind="Leaf" offset="172" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="174" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="178" length="8" count="2">
+            <_0_ kind="Leaf" offset="178" length="4" type="Scalar { Kind = U32 }" value="150" />
+            <_1_ kind="Leaf" offset="182" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_5>
+    <_6 kind="Record" offset="186" length="44">
+      <DungeonId kind="Leaf" offset="186" length="4" type="Scalar { Kind = U32 }" value="7201" />
+      <FieldA kind="Leaf" offset="190" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="194" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="198" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="200" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="202" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="206" length="24" count="2">
+        <_0_ kind="Struct" offset="206" length="10">
+          <RequirementType kind="Leaf" offset="206" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="208" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="212" length="4" count="1">
+            <_0_ kind="Leaf" offset="212" length="4" type="Scalar { Kind = U32 }" value="6471" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="216" length="14">
+          <RequirementType kind="Leaf" offset="216" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="218" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="222" length="8" count="2">
+            <_0_ kind="Leaf" offset="222" length="4" type="Scalar { Kind = U32 }" value="160" />
+            <_1_ kind="Leaf" offset="226" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_6>
+    <_7 kind="Record" offset="230" length="20">
+      <DungeonId kind="Leaf" offset="230" length="4" type="Scalar { Kind = U32 }" value="8701" />
+      <FieldA kind="Leaf" offset="234" length="4" type="Scalar { Kind = U32 }" value="152085" />
+      <FieldB kind="Leaf" offset="238" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="242" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="244" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="246" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="250" length="0" count="0" />
+    </_7>
+    <_8 kind="Record" offset="250" length="20">
+      <DungeonId kind="Leaf" offset="250" length="4" type="Scalar { Kind = U32 }" value="8801" />
+      <FieldA kind="Leaf" offset="254" length="4" type="Scalar { Kind = U32 }" value="152093" />
+      <FieldB kind="Leaf" offset="258" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="262" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="264" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="266" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="270" length="0" count="0" />
+    </_8>
+    <_9 kind="Record" offset="270" length="20">
+      <DungeonId kind="Leaf" offset="270" length="4" type="Scalar { Kind = U32 }" value="8901" />
+      <FieldA kind="Leaf" offset="274" length="4" type="Scalar { Kind = U32 }" value="128379" />
+      <FieldB kind="Leaf" offset="278" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="282" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="284" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="286" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="290" length="0" count="0" />
+    </_9>
+    <_10 kind="Record" offset="290" length="20">
+      <DungeonId kind="Leaf" offset="290" length="4" type="Scalar { Kind = U32 }" value="9001" />
+      <FieldA kind="Leaf" offset="294" length="4" type="Scalar { Kind = U32 }" value="151732" />
+      <FieldB kind="Leaf" offset="298" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="302" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="304" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="306" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="310" length="0" count="0" />
+    </_10>
+    <_11 kind="Record" offset="310" length="20">
+      <DungeonId kind="Leaf" offset="310" length="4" type="Scalar { Kind = U32 }" value="9101" />
+      <FieldA kind="Leaf" offset="314" length="4" type="Scalar { Kind = U32 }" value="151828" />
+      <FieldB kind="Leaf" offset="318" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="322" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="324" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="326" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="330" length="0" count="0" />
+    </_11>
+    <_12 kind="Record" offset="330" length="20">
+      <DungeonId kind="Leaf" offset="330" length="4" type="Scalar { Kind = U32 }" value="9201" />
+      <FieldA kind="Leaf" offset="334" length="4" type="Scalar { Kind = U32 }" value="152155" />
+      <FieldB kind="Leaf" offset="338" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="342" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="344" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="346" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="350" length="0" count="0" />
+    </_12>
+    <_13 kind="Record" offset="350" length="20">
+      <DungeonId kind="Leaf" offset="350" length="4" type="Scalar { Kind = U32 }" value="9301" />
+      <FieldA kind="Leaf" offset="354" length="4" type="Scalar { Kind = U32 }" value="128355" />
+      <FieldB kind="Leaf" offset="358" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="362" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="364" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="366" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="370" length="0" count="0" />
+    </_13>
+    <_14 kind="Record" offset="370" length="20">
+      <DungeonId kind="Leaf" offset="370" length="4" type="Scalar { Kind = U32 }" value="9401" />
+      <FieldA kind="Leaf" offset="374" length="4" type="Scalar { Kind = U32 }" value="141054" />
+      <FieldB kind="Leaf" offset="378" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="382" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="384" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="386" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="390" length="0" count="0" />
+    </_14>
+    <_15 kind="Record" offset="390" length="30">
+      <DungeonId kind="Leaf" offset="390" length="4" type="Scalar { Kind = U32 }" value="11401" />
+      <FieldA kind="Leaf" offset="394" length="4" type="Scalar { Kind = U32 }" value="47440" />
+      <FieldB kind="Leaf" offset="398" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="402" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="404" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="406" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="410" length="10" count="1">
+        <_0_ kind="Struct" offset="410" length="10">
+          <RequirementType kind="Leaf" offset="410" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="412" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="416" length="4" count="1">
+            <_0_ kind="Leaf" offset="416" length="4" type="Scalar { Kind = U32 }" value="4403" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_15>
+    <_16 kind="Record" offset="420" length="20">
+      <DungeonId kind="Leaf" offset="420" length="4" type="Scalar { Kind = U32 }" value="20501" />
+      <FieldA kind="Leaf" offset="424" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="428" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="432" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="434" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="436" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="440" length="0" count="0" />
+    </_16>
+    <_17 kind="Record" offset="440" length="20">
+      <DungeonId kind="Leaf" offset="440" length="4" type="Scalar { Kind = U32 }" value="20502" />
+      <FieldA kind="Leaf" offset="444" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="448" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="452" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="454" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="456" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="460" length="0" count="0" />
+    </_17>
+    <_18 kind="Record" offset="460" length="30">
+      <DungeonId kind="Leaf" offset="460" length="4" type="Scalar { Kind = U32 }" value="21001" />
+      <FieldA kind="Leaf" offset="464" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="468" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="472" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="474" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="476" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="480" length="10" count="1">
+        <_0_ kind="Struct" offset="480" length="10">
+          <RequirementType kind="Leaf" offset="480" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="482" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="486" length="4" count="1">
+            <_0_ kind="Leaf" offset="486" length="4" type="Scalar { Kind = U32 }" value="3996" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_18>
+    <_19 kind="Record" offset="490" length="30">
+      <DungeonId kind="Leaf" offset="490" length="4" type="Scalar { Kind = U32 }" value="21002" />
+      <FieldA kind="Leaf" offset="494" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="498" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="502" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="504" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="506" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="510" length="10" count="1">
+        <_0_ kind="Struct" offset="510" length="10">
+          <RequirementType kind="Leaf" offset="510" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="512" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="516" length="4" count="1">
+            <_0_ kind="Leaf" offset="516" length="4" type="Scalar { Kind = U32 }" value="3996" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_19>
+    <_20 kind="Record" offset="520" length="30">
+      <DungeonId kind="Leaf" offset="520" length="4" type="Scalar { Kind = U32 }" value="21101" />
+      <FieldA kind="Leaf" offset="524" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="528" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="532" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="534" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="536" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="540" length="10" count="1">
+        <_0_ kind="Struct" offset="540" length="10">
+          <RequirementType kind="Leaf" offset="540" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="542" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="546" length="4" count="1">
+            <_0_ kind="Leaf" offset="546" length="4" type="Scalar { Kind = U32 }" value="4012" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_20>
+    <_21 kind="Record" offset="550" length="30">
+      <DungeonId kind="Leaf" offset="550" length="4" type="Scalar { Kind = U32 }" value="21102" />
+      <FieldA kind="Leaf" offset="554" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="558" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="562" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="564" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="566" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="570" length="10" count="1">
+        <_0_ kind="Struct" offset="570" length="10">
+          <RequirementType kind="Leaf" offset="570" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="572" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="576" length="4" count="1">
+            <_0_ kind="Leaf" offset="576" length="4" type="Scalar { Kind = U32 }" value="4012" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_21>
+    <_22 kind="Record" offset="580" length="44">
+      <DungeonId kind="Leaf" offset="580" length="4" type="Scalar { Kind = U32 }" value="21201" />
+      <FieldA kind="Leaf" offset="584" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="588" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="592" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="594" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="596" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="600" length="24" count="2">
+        <_0_ kind="Struct" offset="600" length="10">
+          <RequirementType kind="Leaf" offset="600" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="602" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="606" length="4" count="1">
+            <_0_ kind="Leaf" offset="606" length="4" type="Scalar { Kind = U32 }" value="4146" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="610" length="14">
+          <RequirementType kind="Leaf" offset="610" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="612" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="616" length="8" count="2">
+            <_0_ kind="Leaf" offset="616" length="4" type="Scalar { Kind = U32 }" value="100" />
+            <_1_ kind="Leaf" offset="620" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_22>
+    <_23 kind="Record" offset="624" length="44">
+      <DungeonId kind="Leaf" offset="624" length="4" type="Scalar { Kind = U32 }" value="25201" />
+      <FieldA kind="Leaf" offset="628" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="632" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="636" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="638" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="640" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="644" length="24" count="2">
+        <_0_ kind="Struct" offset="644" length="10">
+          <RequirementType kind="Leaf" offset="644" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="646" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="650" length="4" count="1">
+            <_0_ kind="Leaf" offset="650" length="4" type="Scalar { Kind = U32 }" value="4614" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="654" length="14">
+          <RequirementType kind="Leaf" offset="654" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="656" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="660" length="8" count="2">
+            <_0_ kind="Leaf" offset="660" length="4" type="Scalar { Kind = U32 }" value="100" />
+            <_1_ kind="Leaf" offset="664" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_23>
+    <_24 kind="Record" offset="668" length="44">
+      <DungeonId kind="Leaf" offset="668" length="4" type="Scalar { Kind = U32 }" value="25301" />
+      <FieldA kind="Leaf" offset="672" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="676" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="680" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="682" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="684" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="688" length="24" count="2">
+        <_0_ kind="Struct" offset="688" length="10">
+          <RequirementType kind="Leaf" offset="688" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="690" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="694" length="4" count="1">
+            <_0_ kind="Leaf" offset="694" length="4" type="Scalar { Kind = U32 }" value="4633" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="698" length="14">
+          <RequirementType kind="Leaf" offset="698" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="700" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="704" length="8" count="2">
+            <_0_ kind="Leaf" offset="704" length="4" type="Scalar { Kind = U32 }" value="110" />
+            <_1_ kind="Leaf" offset="708" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_24>
+    <_25 kind="Record" offset="712" length="44">
+      <DungeonId kind="Leaf" offset="712" length="4" type="Scalar { Kind = U32 }" value="25601" />
+      <FieldA kind="Leaf" offset="716" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="720" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="724" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="726" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="728" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="732" length="24" count="2">
+        <_0_ kind="Struct" offset="732" length="10">
+          <RequirementType kind="Leaf" offset="732" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="734" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="738" length="4" count="1">
+            <_0_ kind="Leaf" offset="738" length="4" type="Scalar { Kind = U32 }" value="4614" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="742" length="14">
+          <RequirementType kind="Leaf" offset="742" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="744" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="748" length="8" count="2">
+            <_0_ kind="Leaf" offset="748" length="4" type="Scalar { Kind = U32 }" value="100" />
+            <_1_ kind="Leaf" offset="752" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_25>
+    <_26 kind="Record" offset="756" length="44">
+      <DungeonId kind="Leaf" offset="756" length="4" type="Scalar { Kind = U32 }" value="25701" />
+      <FieldA kind="Leaf" offset="760" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="764" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="768" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="770" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="772" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="776" length="24" count="2">
+        <_0_ kind="Struct" offset="776" length="10">
+          <RequirementType kind="Leaf" offset="776" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="778" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="782" length="4" count="1">
+            <_0_ kind="Leaf" offset="782" length="4" type="Scalar { Kind = U32 }" value="4633" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="786" length="14">
+          <RequirementType kind="Leaf" offset="786" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="788" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="792" length="8" count="2">
+            <_0_ kind="Leaf" offset="792" length="4" type="Scalar { Kind = U32 }" value="110" />
+            <_1_ kind="Leaf" offset="796" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_26>
+    <_27 kind="Record" offset="800" length="44">
+      <DungeonId kind="Leaf" offset="800" length="4" type="Scalar { Kind = U32 }" value="26302" />
+      <FieldA kind="Leaf" offset="804" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="808" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="812" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="814" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="816" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="820" length="24" count="2">
+        <_0_ kind="Struct" offset="820" length="10">
+          <RequirementType kind="Leaf" offset="820" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="822" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="826" length="4" count="1">
+            <_0_ kind="Leaf" offset="826" length="4" type="Scalar { Kind = U32 }" value="2025" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="830" length="14">
+          <RequirementType kind="Leaf" offset="830" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="832" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="836" length="8" count="2">
+            <_0_ kind="Leaf" offset="836" length="4" type="Scalar { Kind = U32 }" value="105" />
+            <_1_ kind="Leaf" offset="840" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_27>
+    <_28 kind="Record" offset="844" length="44">
+      <DungeonId kind="Leaf" offset="844" length="4" type="Scalar { Kind = U32 }" value="26402" />
+      <FieldA kind="Leaf" offset="848" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="852" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="856" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="858" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="860" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="864" length="24" count="2">
+        <_0_ kind="Struct" offset="864" length="10">
+          <RequirementType kind="Leaf" offset="864" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="866" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="870" length="4" count="1">
+            <_0_ kind="Leaf" offset="870" length="4" type="Scalar { Kind = U32 }" value="2032" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="874" length="14">
+          <RequirementType kind="Leaf" offset="874" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="876" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="880" length="8" count="2">
+            <_0_ kind="Leaf" offset="880" length="4" type="Scalar { Kind = U32 }" value="105" />
+            <_1_ kind="Leaf" offset="884" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_28>
+    <_29 kind="Record" offset="888" length="44">
+      <DungeonId kind="Leaf" offset="888" length="4" type="Scalar { Kind = U32 }" value="26602" />
+      <FieldA kind="Leaf" offset="892" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="896" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="900" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="902" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="904" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="908" length="24" count="2">
+        <_0_ kind="Struct" offset="908" length="10">
+          <RequirementType kind="Leaf" offset="908" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="910" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="914" length="4" count="1">
+            <_0_ kind="Leaf" offset="914" length="4" type="Scalar { Kind = U32 }" value="2073" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="918" length="14">
+          <RequirementType kind="Leaf" offset="918" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="920" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="924" length="8" count="2">
+            <_0_ kind="Leaf" offset="924" length="4" type="Scalar { Kind = U32 }" value="105" />
+            <_1_ kind="Leaf" offset="928" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_29>
+    <_30 kind="Record" offset="932" length="34">
+      <DungeonId kind="Leaf" offset="932" length="4" type="Scalar { Kind = U32 }" value="30001" />
+      <FieldA kind="Leaf" offset="936" length="4" type="Scalar { Kind = U32 }" value="47500" />
+      <FieldB kind="Leaf" offset="940" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="944" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="946" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="948" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="952" length="14" count="1">
+        <_0_ kind="Struct" offset="952" length="14">
+          <RequirementType kind="Leaf" offset="952" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="954" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="958" length="8" count="2">
+            <_0_ kind="Leaf" offset="958" length="4" type="Scalar { Kind = U32 }" value="110" />
+            <_1_ kind="Leaf" offset="962" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_30>
+    <_31 kind="Record" offset="966" length="34">
+      <DungeonId kind="Leaf" offset="966" length="4" type="Scalar { Kind = U32 }" value="30101" />
+      <FieldA kind="Leaf" offset="970" length="4" type="Scalar { Kind = U32 }" value="47500" />
+      <FieldB kind="Leaf" offset="974" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="978" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="980" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="982" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="986" length="14" count="1">
+        <_0_ kind="Struct" offset="986" length="14">
+          <RequirementType kind="Leaf" offset="986" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="988" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="992" length="8" count="2">
+            <_0_ kind="Leaf" offset="992" length="4" type="Scalar { Kind = U32 }" value="140" />
+            <_1_ kind="Leaf" offset="996" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_31>
+    <_32 kind="Record" offset="1000" length="34">
+      <DungeonId kind="Leaf" offset="1000" length="4" type="Scalar { Kind = U32 }" value="32801" />
+      <FieldA kind="Leaf" offset="1004" length="4" type="Scalar { Kind = U32 }" value="47325" />
+      <FieldB kind="Leaf" offset="1008" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="1012" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="1014" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="1016" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="1020" length="14" count="1">
+        <_0_ kind="Struct" offset="1020" length="14">
+          <RequirementType kind="Leaf" offset="1020" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1022" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1026" length="8" count="2">
+            <_0_ kind="Leaf" offset="1026" length="4" type="Scalar { Kind = U32 }" value="120" />
+            <_1_ kind="Leaf" offset="1030" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_32>
+    <_33 kind="Record" offset="1034" length="44">
+      <DungeonId kind="Leaf" offset="1034" length="4" type="Scalar { Kind = U32 }" value="40101" />
+      <FieldA kind="Leaf" offset="1038" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1042" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1046" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1048" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1050" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1054" length="24" count="2">
+        <_0_ kind="Struct" offset="1054" length="10">
+          <RequirementType kind="Leaf" offset="1054" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1056" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1060" length="4" count="1">
+            <_0_ kind="Leaf" offset="1060" length="4" type="Scalar { Kind = U32 }" value="6554" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1064" length="14">
+          <RequirementType kind="Leaf" offset="1064" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1066" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1070" length="8" count="2">
+            <_0_ kind="Leaf" offset="1070" length="4" type="Scalar { Kind = U32 }" value="160" />
+            <_1_ kind="Leaf" offset="1074" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_33>
+    <_34 kind="Record" offset="1078" length="44">
+      <DungeonId kind="Leaf" offset="1078" length="4" type="Scalar { Kind = U32 }" value="40201" />
+      <FieldA kind="Leaf" offset="1082" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1086" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1090" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1092" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1094" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1098" length="24" count="2">
+        <_0_ kind="Struct" offset="1098" length="10">
+          <RequirementType kind="Leaf" offset="1098" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1100" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1104" length="4" count="1">
+            <_0_ kind="Leaf" offset="1104" length="4" type="Scalar { Kind = U32 }" value="6554" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1108" length="14">
+          <RequirementType kind="Leaf" offset="1108" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1110" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1114" length="8" count="2">
+            <_0_ kind="Leaf" offset="1114" length="4" type="Scalar { Kind = U32 }" value="150" />
+            <_1_ kind="Leaf" offset="1118" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_34>
+    <_35 kind="Record" offset="1122" length="44">
+      <DungeonId kind="Leaf" offset="1122" length="4" type="Scalar { Kind = U32 }" value="40501" />
+      <FieldA kind="Leaf" offset="1126" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1130" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1134" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1136" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1138" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1142" length="24" count="2">
+        <_0_ kind="Struct" offset="1142" length="10">
+          <RequirementType kind="Leaf" offset="1142" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1144" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1148" length="4" count="1">
+            <_0_ kind="Leaf" offset="1148" length="4" type="Scalar { Kind = U32 }" value="6453" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1152" length="14">
+          <RequirementType kind="Leaf" offset="1152" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1154" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1158" length="8" count="2">
+            <_0_ kind="Leaf" offset="1158" length="4" type="Scalar { Kind = U32 }" value="150" />
+            <_1_ kind="Leaf" offset="1162" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_35>
+    <_36 kind="Record" offset="1166" length="44">
+      <DungeonId kind="Leaf" offset="1166" length="4" type="Scalar { Kind = U32 }" value="40701" />
+      <FieldA kind="Leaf" offset="1170" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1174" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1178" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1180" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1182" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1186" length="24" count="2">
+        <_0_ kind="Struct" offset="1186" length="10">
+          <RequirementType kind="Leaf" offset="1186" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1188" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1192" length="4" count="1">
+            <_0_ kind="Leaf" offset="1192" length="4" type="Scalar { Kind = U32 }" value="6475" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1196" length="14">
+          <RequirementType kind="Leaf" offset="1196" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1198" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1202" length="8" count="2">
+            <_0_ kind="Leaf" offset="1202" length="4" type="Scalar { Kind = U32 }" value="160" />
+            <_1_ kind="Leaf" offset="1206" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_36>
+    <_37 kind="Record" offset="1210" length="34">
+      <DungeonId kind="Leaf" offset="1210" length="4" type="Scalar { Kind = U32 }" value="41001" />
+      <FieldA kind="Leaf" offset="1214" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1218" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1222" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="1224" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="1226" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="1230" length="14" count="1">
+        <_0_ kind="Struct" offset="1230" length="14">
+          <RequirementType kind="Leaf" offset="1230" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1232" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1236" length="8" count="2">
+            <_0_ kind="Leaf" offset="1236" length="4" type="Scalar { Kind = U32 }" value="150" />
+            <_1_ kind="Leaf" offset="1240" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_37>
+    <_38 kind="Record" offset="1244" length="44">
+      <DungeonId kind="Leaf" offset="1244" length="4" type="Scalar { Kind = U32 }" value="41101" />
+      <FieldA kind="Leaf" offset="1248" length="4" type="Scalar { Kind = U32 }" value="47439" />
+      <FieldB kind="Leaf" offset="1252" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="1256" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1258" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1260" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1264" length="24" count="2">
+        <_0_ kind="Struct" offset="1264" length="10">
+          <RequirementType kind="Leaf" offset="1264" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1266" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1270" length="4" count="1">
+            <_0_ kind="Leaf" offset="1270" length="4" type="Scalar { Kind = U32 }" value="6500" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1274" length="14">
+          <RequirementType kind="Leaf" offset="1274" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1276" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1280" length="8" count="2">
+            <_0_ kind="Leaf" offset="1280" length="4" type="Scalar { Kind = U32 }" value="140" />
+            <_1_ kind="Leaf" offset="1284" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_38>
+    <_39 kind="Record" offset="1288" length="44">
+      <DungeonId kind="Leaf" offset="1288" length="4" type="Scalar { Kind = U32 }" value="41201" />
+      <FieldA kind="Leaf" offset="1292" length="4" type="Scalar { Kind = U32 }" value="47439" />
+      <FieldB kind="Leaf" offset="1296" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="1300" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1302" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1304" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1308" length="24" count="2">
+        <_0_ kind="Struct" offset="1308" length="10">
+          <RequirementType kind="Leaf" offset="1308" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1310" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1314" length="4" count="1">
+            <_0_ kind="Leaf" offset="1314" length="4" type="Scalar { Kind = U32 }" value="6500" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1318" length="14">
+          <RequirementType kind="Leaf" offset="1318" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1320" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1324" length="8" count="2">
+            <_0_ kind="Leaf" offset="1324" length="4" type="Scalar { Kind = U32 }" value="140" />
+            <_1_ kind="Leaf" offset="1328" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_39>
+    <_40 kind="Record" offset="1332" length="20">
+      <DungeonId kind="Leaf" offset="1332" length="4" type="Scalar { Kind = U32 }" value="51001" />
+      <FieldA kind="Leaf" offset="1336" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1340" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1344" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="1346" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="1348" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="1352" length="0" count="0" />
+    </_40>
+    <_41 kind="Record" offset="1352" length="20">
+      <DungeonId kind="Leaf" offset="1352" length="4" type="Scalar { Kind = U32 }" value="51101" />
+      <FieldA kind="Leaf" offset="1356" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1360" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1364" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="1366" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="1368" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="1372" length="0" count="0" />
+    </_41>
+    <_42 kind="Record" offset="1372" length="30">
+      <DungeonId kind="Leaf" offset="1372" length="4" type="Scalar { Kind = U32 }" value="51201" />
+      <FieldA kind="Leaf" offset="1376" length="4" type="Scalar { Kind = U32 }" value="47691" />
+      <FieldB kind="Leaf" offset="1380" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="1384" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="1386" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="1388" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="1392" length="10" count="1">
+        <_0_ kind="Struct" offset="1392" length="10">
+          <RequirementType kind="Leaf" offset="1392" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1394" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1398" length="4" count="1">
+            <_0_ kind="Leaf" offset="1398" length="4" type="Scalar { Kind = U32 }" value="7128" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_42>
+    <_43 kind="Record" offset="1402" length="34">
+      <DungeonId kind="Leaf" offset="1402" length="4" type="Scalar { Kind = U32 }" value="110901" />
+      <FieldA kind="Leaf" offset="1406" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1410" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1414" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="1416" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="1418" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="1422" length="14" count="1">
+        <_0_ kind="Struct" offset="1422" length="14">
+          <RequirementType kind="Leaf" offset="1422" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1424" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1428" length="8" count="2">
+            <_0_ kind="Leaf" offset="1428" length="4" type="Scalar { Kind = U32 }" value="70" />
+            <_1_ kind="Leaf" offset="1432" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_43>
+    <_44 kind="Record" offset="1436" length="34">
+      <DungeonId kind="Leaf" offset="1436" length="4" type="Scalar { Kind = U32 }" value="110902" />
+      <FieldA kind="Leaf" offset="1440" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1444" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1448" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="1450" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="1452" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="1456" length="14" count="1">
+        <_0_ kind="Struct" offset="1456" length="14">
+          <RequirementType kind="Leaf" offset="1456" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1458" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1462" length="8" count="2">
+            <_0_ kind="Leaf" offset="1462" length="4" type="Scalar { Kind = U32 }" value="90" />
+            <_1_ kind="Leaf" offset="1466" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_44>
+    <_45 kind="Record" offset="1470" length="34">
+      <DungeonId kind="Leaf" offset="1470" length="4" type="Scalar { Kind = U32 }" value="110903" />
+      <FieldA kind="Leaf" offset="1474" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1478" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1482" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="1484" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="1486" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="1490" length="14" count="1">
+        <_0_ kind="Struct" offset="1490" length="14">
+          <RequirementType kind="Leaf" offset="1490" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1492" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1496" length="8" count="2">
+            <_0_ kind="Leaf" offset="1496" length="4" type="Scalar { Kind = U32 }" value="110" />
+            <_1_ kind="Leaf" offset="1500" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_45>
+    <_46 kind="Record" offset="1504" length="34">
+      <DungeonId kind="Leaf" offset="1504" length="4" type="Scalar { Kind = U32 }" value="130402" />
+      <FieldA kind="Leaf" offset="1508" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1512" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1516" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="1518" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="1520" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="1524" length="14" count="1">
+        <_0_ kind="Struct" offset="1524" length="14">
+          <RequirementType kind="Leaf" offset="1524" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1526" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1530" length="8" count="2">
+            <_0_ kind="Leaf" offset="1530" length="4" type="Scalar { Kind = U32 }" value="60" />
+            <_1_ kind="Leaf" offset="1534" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_46>
+    <_47 kind="Record" offset="1538" length="44">
+      <DungeonId kind="Leaf" offset="1538" length="4" type="Scalar { Kind = U32 }" value="130403" />
+      <FieldA kind="Leaf" offset="1542" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1546" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1550" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1552" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1554" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1558" length="24" count="2">
+        <_0_ kind="Struct" offset="1558" length="10">
+          <RequirementType kind="Leaf" offset="1558" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1560" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1564" length="4" count="1">
+            <_0_ kind="Leaf" offset="1564" length="4" type="Scalar { Kind = U32 }" value="1050" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1568" length="14">
+          <RequirementType kind="Leaf" offset="1568" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1570" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1574" length="8" count="2">
+            <_0_ kind="Leaf" offset="1574" length="4" type="Scalar { Kind = U32 }" value="90" />
+            <_1_ kind="Leaf" offset="1578" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_47>
+    <_48 kind="Record" offset="1582" length="44">
+      <DungeonId kind="Leaf" offset="1582" length="4" type="Scalar { Kind = U32 }" value="130803" />
+      <FieldA kind="Leaf" offset="1586" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1590" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1594" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1596" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1598" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1602" length="24" count="2">
+        <_0_ kind="Struct" offset="1602" length="10">
+          <RequirementType kind="Leaf" offset="1602" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1604" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1608" length="4" count="1">
+            <_0_ kind="Leaf" offset="1608" length="4" type="Scalar { Kind = U32 }" value="1076" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1612" length="14">
+          <RequirementType kind="Leaf" offset="1612" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1614" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1618" length="8" count="2">
+            <_0_ kind="Leaf" offset="1618" length="4" type="Scalar { Kind = U32 }" value="99" />
+            <_1_ kind="Leaf" offset="1622" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_48>
+    <_49 kind="Record" offset="1626" length="44">
+      <DungeonId kind="Leaf" offset="1626" length="4" type="Scalar { Kind = U32 }" value="130804" />
+      <FieldA kind="Leaf" offset="1630" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1634" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1638" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1640" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1642" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1646" length="24" count="2">
+        <_0_ kind="Struct" offset="1646" length="10">
+          <RequirementType kind="Leaf" offset="1646" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1648" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1652" length="4" count="1">
+            <_0_ kind="Leaf" offset="1652" length="4" type="Scalar { Kind = U32 }" value="1093" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1656" length="14">
+          <RequirementType kind="Leaf" offset="1656" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1658" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1662" length="8" count="2">
+            <_0_ kind="Leaf" offset="1662" length="4" type="Scalar { Kind = U32 }" value="120" />
+            <_1_ kind="Leaf" offset="1666" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_49>
+    <_50 kind="Record" offset="1670" length="34">
+      <DungeonId kind="Leaf" offset="1670" length="4" type="Scalar { Kind = U32 }" value="131201" />
+      <FieldA kind="Leaf" offset="1674" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1678" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1682" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="1684" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="1686" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="1690" length="14" count="1">
+        <_0_ kind="Struct" offset="1690" length="14">
+          <RequirementType kind="Leaf" offset="1690" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1692" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1696" length="8" count="2">
+            <_0_ kind="Leaf" offset="1696" length="4" type="Scalar { Kind = U32 }" value="140" />
+            <_1_ kind="Leaf" offset="1700" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_50>
+    <_51 kind="Record" offset="1704" length="44">
+      <DungeonId kind="Leaf" offset="1704" length="4" type="Scalar { Kind = U32 }" value="140301" />
+      <FieldA kind="Leaf" offset="1708" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1712" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1716" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1718" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1720" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1724" length="24" count="2">
+        <_0_ kind="Struct" offset="1724" length="10">
+          <RequirementType kind="Leaf" offset="1724" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1726" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1730" length="4" count="1">
+            <_0_ kind="Leaf" offset="1730" length="4" type="Scalar { Kind = U32 }" value="1416" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1734" length="14">
+          <RequirementType kind="Leaf" offset="1734" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1736" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1740" length="8" count="2">
+            <_0_ kind="Leaf" offset="1740" length="4" type="Scalar { Kind = U32 }" value="93" />
+            <_1_ kind="Leaf" offset="1744" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_51>
+    <_52 kind="Record" offset="1748" length="44">
+      <DungeonId kind="Leaf" offset="1748" length="4" type="Scalar { Kind = U32 }" value="140302" />
+      <FieldA kind="Leaf" offset="1752" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1756" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1760" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1762" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1764" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1768" length="24" count="2">
+        <_0_ kind="Struct" offset="1768" length="10">
+          <RequirementType kind="Leaf" offset="1768" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1770" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1774" length="4" count="1">
+            <_0_ kind="Leaf" offset="1774" length="4" type="Scalar { Kind = U32 }" value="1422" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1778" length="14">
+          <RequirementType kind="Leaf" offset="1778" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1780" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1784" length="8" count="2">
+            <_0_ kind="Leaf" offset="1784" length="4" type="Scalar { Kind = U32 }" value="93" />
+            <_1_ kind="Leaf" offset="1788" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_52>
+    <_53 kind="Record" offset="1792" length="44">
+      <DungeonId kind="Leaf" offset="1792" length="4" type="Scalar { Kind = U32 }" value="140303" />
+      <FieldA kind="Leaf" offset="1796" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1800" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1804" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1806" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1808" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1812" length="24" count="2">
+        <_0_ kind="Struct" offset="1812" length="10">
+          <RequirementType kind="Leaf" offset="1812" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1814" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1818" length="4" count="1">
+            <_0_ kind="Leaf" offset="1818" length="4" type="Scalar { Kind = U32 }" value="1422" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1822" length="14">
+          <RequirementType kind="Leaf" offset="1822" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1824" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1828" length="8" count="2">
+            <_0_ kind="Leaf" offset="1828" length="4" type="Scalar { Kind = U32 }" value="93" />
+            <_1_ kind="Leaf" offset="1832" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_53>
+    <_54 kind="Record" offset="1836" length="30">
+      <DungeonId kind="Leaf" offset="1836" length="4" type="Scalar { Kind = U32 }" value="150001" />
+      <FieldA kind="Leaf" offset="1840" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1844" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1848" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="1850" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="1852" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="1856" length="10" count="1">
+        <_0_ kind="Struct" offset="1856" length="10">
+          <RequirementType kind="Leaf" offset="1856" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1858" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1862" length="4" count="1">
+            <_0_ kind="Leaf" offset="1862" length="4" type="Scalar { Kind = U32 }" value="1095" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_54>
+    <_55 kind="Record" offset="1866" length="30">
+      <DungeonId kind="Leaf" offset="1866" length="4" type="Scalar { Kind = U32 }" value="150002" />
+      <FieldA kind="Leaf" offset="1870" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1874" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1878" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="1880" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="1882" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="1886" length="10" count="1">
+        <_0_ kind="Struct" offset="1886" length="10">
+          <RequirementType kind="Leaf" offset="1886" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1888" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1892" length="4" count="1">
+            <_0_ kind="Leaf" offset="1892" length="4" type="Scalar { Kind = U32 }" value="1095" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_55>
+    <_56 kind="Record" offset="1896" length="44">
+      <DungeonId kind="Leaf" offset="1896" length="4" type="Scalar { Kind = U32 }" value="150101" />
+      <FieldA kind="Leaf" offset="1900" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1904" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1908" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="1910" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="1912" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="1916" length="24" count="2">
+        <_0_ kind="Struct" offset="1916" length="10">
+          <RequirementType kind="Leaf" offset="1916" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="1918" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="1922" length="4" count="1">
+            <_0_ kind="Leaf" offset="1922" length="4" type="Scalar { Kind = U32 }" value="1252" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="1926" length="14">
+          <RequirementType kind="Leaf" offset="1926" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="1928" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="1932" length="8" count="2">
+            <_0_ kind="Leaf" offset="1932" length="4" type="Scalar { Kind = U32 }" value="60" />
+            <_1_ kind="Leaf" offset="1936" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_56>
+    <_57 kind="Record" offset="1940" length="20">
+      <DungeonId kind="Leaf" offset="1940" length="4" type="Scalar { Kind = U32 }" value="150301" />
+      <FieldA kind="Leaf" offset="1944" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1948" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1952" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="1954" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="1956" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="1960" length="0" count="0" />
+    </_57>
+    <_58 kind="Record" offset="1960" length="20">
+      <DungeonId kind="Leaf" offset="1960" length="4" type="Scalar { Kind = U32 }" value="160001" />
+      <FieldA kind="Leaf" offset="1964" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1968" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1972" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="1974" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="1976" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="1980" length="0" count="0" />
+    </_58>
+    <_59 kind="Record" offset="1980" length="20">
+      <DungeonId kind="Leaf" offset="1980" length="4" type="Scalar { Kind = U32 }" value="160002" />
+      <FieldA kind="Leaf" offset="1984" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="1988" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="1992" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="1994" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="1996" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2000" length="0" count="0" />
+    </_59>
+    <_60 kind="Record" offset="2000" length="20">
+      <DungeonId kind="Leaf" offset="2000" length="4" type="Scalar { Kind = U32 }" value="160003" />
+      <FieldA kind="Leaf" offset="2004" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2008" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2012" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2014" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2016" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2020" length="0" count="0" />
+    </_60>
+    <_61 kind="Record" offset="2020" length="20">
+      <DungeonId kind="Leaf" offset="2020" length="4" type="Scalar { Kind = U32 }" value="160101" />
+      <FieldA kind="Leaf" offset="2024" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2028" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2032" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2034" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2036" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2040" length="0" count="0" />
+    </_61>
+    <_62 kind="Record" offset="2040" length="20">
+      <DungeonId kind="Leaf" offset="2040" length="4" type="Scalar { Kind = U32 }" value="160102" />
+      <FieldA kind="Leaf" offset="2044" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2048" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2052" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2054" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2056" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2060" length="0" count="0" />
+    </_62>
+    <_63 kind="Record" offset="2060" length="20">
+      <DungeonId kind="Leaf" offset="2060" length="4" type="Scalar { Kind = U32 }" value="160103" />
+      <FieldA kind="Leaf" offset="2064" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2068" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2072" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2074" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2076" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2080" length="0" count="0" />
+    </_63>
+    <_64 kind="Record" offset="2080" length="20">
+      <DungeonId kind="Leaf" offset="2080" length="4" type="Scalar { Kind = U32 }" value="160201" />
+      <FieldA kind="Leaf" offset="2084" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2088" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2092" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2094" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2096" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2100" length="0" count="0" />
+    </_64>
+    <_65 kind="Record" offset="2100" length="20">
+      <DungeonId kind="Leaf" offset="2100" length="4" type="Scalar { Kind = U32 }" value="160202" />
+      <FieldA kind="Leaf" offset="2104" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2108" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2112" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2114" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2116" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2120" length="0" count="0" />
+    </_65>
+    <_66 kind="Record" offset="2120" length="20">
+      <DungeonId kind="Leaf" offset="2120" length="4" type="Scalar { Kind = U32 }" value="160203" />
+      <FieldA kind="Leaf" offset="2124" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2128" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2132" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2134" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2136" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2140" length="0" count="0" />
+    </_66>
+    <_67 kind="Record" offset="2140" length="20">
+      <DungeonId kind="Leaf" offset="2140" length="4" type="Scalar { Kind = U32 }" value="160301" />
+      <FieldA kind="Leaf" offset="2144" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2148" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2152" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2154" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2156" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2160" length="0" count="0" />
+    </_67>
+    <_68 kind="Record" offset="2160" length="20">
+      <DungeonId kind="Leaf" offset="2160" length="4" type="Scalar { Kind = U32 }" value="160302" />
+      <FieldA kind="Leaf" offset="2164" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2168" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2172" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2174" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2176" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2180" length="0" count="0" />
+    </_68>
+    <_69 kind="Record" offset="2180" length="20">
+      <DungeonId kind="Leaf" offset="2180" length="4" type="Scalar { Kind = U32 }" value="160303" />
+      <FieldA kind="Leaf" offset="2184" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2188" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2192" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2194" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2196" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2200" length="0" count="0" />
+    </_69>
+    <_70 kind="Record" offset="2200" length="20">
+      <DungeonId kind="Leaf" offset="2200" length="4" type="Scalar { Kind = U32 }" value="160801" />
+      <FieldA kind="Leaf" offset="2204" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2208" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2212" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2214" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2216" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2220" length="0" count="0" />
+    </_70>
+    <_71 kind="Record" offset="2220" length="20">
+      <DungeonId kind="Leaf" offset="2220" length="4" type="Scalar { Kind = U32 }" value="161401" />
+      <FieldA kind="Leaf" offset="2224" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2228" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2232" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2234" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2236" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2240" length="0" count="0" />
+    </_71>
+    <_72 kind="Record" offset="2240" length="20">
+      <DungeonId kind="Leaf" offset="2240" length="4" type="Scalar { Kind = U32 }" value="161601" />
+      <FieldA kind="Leaf" offset="2244" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2248" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2252" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2254" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2256" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2260" length="0" count="0" />
+    </_72>
+    <_73 kind="Record" offset="2260" length="34">
+      <DungeonId kind="Leaf" offset="2260" length="4" type="Scalar { Kind = U32 }" value="170101" />
+      <FieldA kind="Leaf" offset="2264" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2268" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2272" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="2274" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="2276" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="2280" length="14" count="1">
+        <_0_ kind="Struct" offset="2280" length="14">
+          <RequirementType kind="Leaf" offset="2280" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="2282" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="2286" length="8" count="2">
+            <_0_ kind="Leaf" offset="2286" length="4" type="Scalar { Kind = U32 }" value="99" />
+            <_1_ kind="Leaf" offset="2290" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_73>
+    <_74 kind="Record" offset="2294" length="34">
+      <DungeonId kind="Leaf" offset="2294" length="4" type="Scalar { Kind = U32 }" value="170401" />
+      <FieldA kind="Leaf" offset="2298" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2302" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2306" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="2308" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="2310" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="2314" length="14" count="1">
+        <_0_ kind="Struct" offset="2314" length="14">
+          <RequirementType kind="Leaf" offset="2314" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="2316" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="2320" length="8" count="2">
+            <_0_ kind="Leaf" offset="2320" length="4" type="Scalar { Kind = U32 }" value="99" />
+            <_1_ kind="Leaf" offset="2324" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_74>
+    <_75 kind="Record" offset="2328" length="34">
+      <DungeonId kind="Leaf" offset="2328" length="4" type="Scalar { Kind = U32 }" value="170701" />
+      <FieldA kind="Leaf" offset="2332" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2336" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2340" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="2342" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="2344" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="2348" length="14" count="1">
+        <_0_ kind="Struct" offset="2348" length="14">
+          <RequirementType kind="Leaf" offset="2348" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="2350" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="2354" length="8" count="2">
+            <_0_ kind="Leaf" offset="2354" length="4" type="Scalar { Kind = U32 }" value="140" />
+            <_1_ kind="Leaf" offset="2358" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_75>
+    <_76 kind="Record" offset="2362" length="44">
+      <DungeonId kind="Leaf" offset="2362" length="4" type="Scalar { Kind = U32 }" value="180901" />
+      <FieldA kind="Leaf" offset="2366" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2370" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2374" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="2376" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="2378" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="2382" length="24" count="2">
+        <_0_ kind="Struct" offset="2382" length="10">
+          <RequirementType kind="Leaf" offset="2382" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="2384" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="2388" length="4" count="1">
+            <_0_ kind="Leaf" offset="2388" length="4" type="Scalar { Kind = U32 }" value="4781" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="2392" length="14">
+          <RequirementType kind="Leaf" offset="2392" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="2394" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="2398" length="8" count="2">
+            <_0_ kind="Leaf" offset="2398" length="4" type="Scalar { Kind = U32 }" value="110" />
+            <_1_ kind="Leaf" offset="2402" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_76>
+    <_77 kind="Record" offset="2406" length="44">
+      <DungeonId kind="Leaf" offset="2406" length="4" type="Scalar { Kind = U32 }" value="181001" />
+      <FieldA kind="Leaf" offset="2410" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2414" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2418" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="2420" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="2422" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="2426" length="24" count="2">
+        <_0_ kind="Struct" offset="2426" length="10">
+          <RequirementType kind="Leaf" offset="2426" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="2428" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="2432" length="4" count="1">
+            <_0_ kind="Leaf" offset="2432" length="4" type="Scalar { Kind = U32 }" value="4782" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="2436" length="14">
+          <RequirementType kind="Leaf" offset="2436" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="2438" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="2442" length="8" count="2">
+            <_0_ kind="Leaf" offset="2442" length="4" type="Scalar { Kind = U32 }" value="110" />
+            <_1_ kind="Leaf" offset="2446" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_77>
+    <_78 kind="Record" offset="2450" length="44">
+      <DungeonId kind="Leaf" offset="2450" length="4" type="Scalar { Kind = U32 }" value="191102" />
+      <FieldA kind="Leaf" offset="2454" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2458" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2462" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="2464" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="2466" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="2470" length="24" count="2">
+        <_0_ kind="Struct" offset="2470" length="10">
+          <RequirementType kind="Leaf" offset="2470" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="2472" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="2476" length="4" count="1">
+            <_0_ kind="Leaf" offset="2476" length="4" type="Scalar { Kind = U32 }" value="4189" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="2480" length="14">
+          <RequirementType kind="Leaf" offset="2480" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="2482" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="2486" length="8" count="2">
+            <_0_ kind="Leaf" offset="2486" length="4" type="Scalar { Kind = U32 }" value="110" />
+            <_1_ kind="Leaf" offset="2490" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_78>
+    <_79 kind="Record" offset="2494" length="44">
+      <DungeonId kind="Leaf" offset="2494" length="4" type="Scalar { Kind = U32 }" value="191202" />
+      <FieldA kind="Leaf" offset="2498" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2502" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2506" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="2508" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="2510" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="2514" length="24" count="2">
+        <_0_ kind="Struct" offset="2514" length="10">
+          <RequirementType kind="Leaf" offset="2514" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="2516" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="2520" length="4" count="1">
+            <_0_ kind="Leaf" offset="2520" length="4" type="Scalar { Kind = U32 }" value="4238" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="2524" length="14">
+          <RequirementType kind="Leaf" offset="2524" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="2526" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="2530" length="8" count="2">
+            <_0_ kind="Leaf" offset="2530" length="4" type="Scalar { Kind = U32 }" value="110" />
+            <_1_ kind="Leaf" offset="2534" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_79>
+    <_80 kind="Record" offset="2538" length="44">
+      <DungeonId kind="Leaf" offset="2538" length="4" type="Scalar { Kind = U32 }" value="191302" />
+      <FieldA kind="Leaf" offset="2542" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2546" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2550" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="2552" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="2554" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="2558" length="24" count="2">
+        <_0_ kind="Struct" offset="2558" length="10">
+          <RequirementType kind="Leaf" offset="2558" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="2560" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="2564" length="4" count="1">
+            <_0_ kind="Leaf" offset="2564" length="4" type="Scalar { Kind = U32 }" value="4307" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="2568" length="14">
+          <RequirementType kind="Leaf" offset="2568" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="2570" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="2574" length="8" count="2">
+            <_0_ kind="Leaf" offset="2574" length="4" type="Scalar { Kind = U32 }" value="110" />
+            <_1_ kind="Leaf" offset="2578" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_80>
+    <_81 kind="Record" offset="2582" length="44">
+      <DungeonId kind="Leaf" offset="2582" length="4" type="Scalar { Kind = U32 }" value="191402" />
+      <FieldA kind="Leaf" offset="2586" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2590" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2594" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="2596" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="2598" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="2602" length="24" count="2">
+        <_0_ kind="Struct" offset="2602" length="10">
+          <RequirementType kind="Leaf" offset="2602" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="2604" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="2608" length="4" count="1">
+            <_0_ kind="Leaf" offset="2608" length="4" type="Scalar { Kind = U32 }" value="4370" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="2612" length="14">
+          <RequirementType kind="Leaf" offset="2612" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="2614" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="2618" length="8" count="2">
+            <_0_ kind="Leaf" offset="2618" length="4" type="Scalar { Kind = U32 }" value="110" />
+            <_1_ kind="Leaf" offset="2622" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_81>
+    <_82 kind="Record" offset="2626" length="44">
+      <DungeonId kind="Leaf" offset="2626" length="4" type="Scalar { Kind = U32 }" value="191502" />
+      <FieldA kind="Leaf" offset="2630" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2634" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2638" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldD kind="Leaf" offset="2640" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <RequirementCount kind="Leaf" offset="2642" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Requirements kind="Array" offset="2646" length="24" count="2">
+        <_0_ kind="Struct" offset="2646" length="10">
+          <RequirementType kind="Leaf" offset="2646" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="2648" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="2652" length="4" count="1">
+            <_0_ kind="Leaf" offset="2652" length="4" type="Scalar { Kind = U32 }" value="4382" />
+          </Values>
+        </_0_>
+        <_1_ kind="Struct" offset="2656" length="14">
+          <RequirementType kind="Leaf" offset="2656" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="2658" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="2662" length="8" count="2">
+            <_0_ kind="Leaf" offset="2662" length="4" type="Scalar { Kind = U32 }" value="110" />
+            <_1_ kind="Leaf" offset="2666" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_1_>
+      </Requirements>
+    </_82>
+    <_83 kind="Record" offset="2670" length="34">
+      <DungeonId kind="Leaf" offset="2670" length="4" type="Scalar { Kind = U32 }" value="200101" />
+      <FieldA kind="Leaf" offset="2674" length="4" type="Scalar { Kind = U32 }" value="75508" />
+      <FieldB kind="Leaf" offset="2678" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="2682" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="2684" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="2686" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="2690" length="14" count="1">
+        <_0_ kind="Struct" offset="2690" length="14">
+          <RequirementType kind="Leaf" offset="2690" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="2692" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="2696" length="8" count="2">
+            <_0_ kind="Leaf" offset="2696" length="4" type="Scalar { Kind = U32 }" value="70" />
+            <_1_ kind="Leaf" offset="2700" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_83>
+    <_84 kind="Record" offset="2704" length="34">
+      <DungeonId kind="Leaf" offset="2704" length="4" type="Scalar { Kind = U32 }" value="200201" />
+      <FieldA kind="Leaf" offset="2708" length="4" type="Scalar { Kind = U32 }" value="75508" />
+      <FieldB kind="Leaf" offset="2712" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="2716" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="2718" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="2720" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="2724" length="14" count="1">
+        <_0_ kind="Struct" offset="2724" length="14">
+          <RequirementType kind="Leaf" offset="2724" length="2" type="Scalar { Kind = U16 }" value="3" />
+          <ValueCount kind="Leaf" offset="2726" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Values kind="Array" offset="2730" length="8" count="2">
+            <_0_ kind="Leaf" offset="2730" length="4" type="Scalar { Kind = U32 }" value="90" />
+            <_1_ kind="Leaf" offset="2734" length="4" type="Scalar { Kind = U32 }" value="0" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_84>
+    <_85 kind="Record" offset="2738" length="20">
+      <DungeonId kind="Leaf" offset="2738" length="4" type="Scalar { Kind = U32 }" value="300001" />
+      <FieldA kind="Leaf" offset="2742" length="4" type="Scalar { Kind = U32 }" value="50155" />
+      <FieldB kind="Leaf" offset="2746" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="2750" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2752" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2754" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2758" length="0" count="0" />
+    </_85>
+    <_86 kind="Record" offset="2758" length="20">
+      <DungeonId kind="Leaf" offset="2758" length="4" type="Scalar { Kind = U32 }" value="300301" />
+      <FieldA kind="Leaf" offset="2762" length="4" type="Scalar { Kind = U32 }" value="50157" />
+      <FieldB kind="Leaf" offset="2766" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldC kind="Leaf" offset="2770" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2772" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2774" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2778" length="0" count="0" />
+    </_86>
+    <_87 kind="Record" offset="2778" length="20">
+      <DungeonId kind="Leaf" offset="2778" length="4" type="Scalar { Kind = U32 }" value="300701" />
+      <FieldA kind="Leaf" offset="2782" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2786" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2790" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2792" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2794" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2798" length="0" count="0" />
+    </_87>
+    <_88 kind="Record" offset="2798" length="30">
+      <DungeonId kind="Leaf" offset="2798" length="4" type="Scalar { Kind = U32 }" value="300801" />
+      <FieldA kind="Leaf" offset="2802" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2806" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2810" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldD kind="Leaf" offset="2812" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <RequirementCount kind="Leaf" offset="2814" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Requirements kind="Array" offset="2818" length="10" count="1">
+        <_0_ kind="Struct" offset="2818" length="10">
+          <RequirementType kind="Leaf" offset="2818" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <ValueCount kind="Leaf" offset="2820" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Values kind="Array" offset="2824" length="4" count="1">
+            <_0_ kind="Leaf" offset="2824" length="4" type="Scalar { Kind = U32 }" value="6918" />
+          </Values>
+        </_0_>
+      </Requirements>
+    </_88>
+    <_89 kind="Record" offset="2828" length="20">
+      <DungeonId kind="Leaf" offset="2828" length="4" type="Scalar { Kind = U32 }" value="300901" />
+      <FieldA kind="Leaf" offset="2832" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldB kind="Leaf" offset="2836" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldC kind="Leaf" offset="2840" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="2842" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <RequirementCount kind="Leaf" offset="2844" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Requirements kind="Array" offset="2848" length="0" count="0" />
+    </_89>
+  </Qualifications>
+</DungeonQualification>

@@ -9,6 +9,7 @@ using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Models.Character;
 using DigitalWorldOnline.Commons.Models.Digimon;
 using DigitalWorldOnline.Commons.Packets.GameServer;
+using DigitalWorldOnline.Commons.Utils;
 using DigitalWorldOnline.Game.Managers;
 using MediatR;
 using Serilog;
@@ -46,18 +47,20 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (packetData.Length > 18)
                 vipEnabled = Convert.ToBoolean(packet.ReadByte());
 
-            var digiviceSlot = packet.ReadInt();
+            var clientDigiviceSlot = packet.ReadInt();
             var archiveSlot = packet.ReadInt() - 1000;
             var npcId = packet.ReadInt();
 
-            var digivicePartner = client.Tamer.Digimons.FirstOrDefault(x => x.Slot == digiviceSlot);
+            var digivicePartner = ClientDigimonSlotResolver.Resolve(client, clientDigiviceSlot, out var resolvedDigiviceSlot);
+
             var archivePartner = client.Tamer.DigimonArchive.DigimonArchives.FirstOrDefault(x => x.Slot == archiveSlot);
 
             _logger.Information(
-                "ARCHIVE 3201 request tamer={TamerId} vip={Vip} digiviceSlot={DigiviceSlot} archiveSlot={ArchiveSlot} npc={NpcId} packetLen={PacketLength} digivicePartner={DigivicePartnerId}:{DigivicePartnerName}:{DigivicePartnerSlot} archiveItem={ArchiveItemId}:{ArchiveDigimonId}:{ArchiveDigimonName}",
+                "ARCHIVE 3201 request tamer={TamerId} vip={Vip} clientDigiviceSlot={ClientDigiviceSlot} resolvedDigiviceSlot={ResolvedDigiviceSlot} slotContract=0-active/1-N-mercenary archiveSlot={ArchiveSlot} npc={NpcId} packetLen={PacketLength} digivicePartner={DigivicePartnerId}:{DigivicePartnerName}:{DigivicePartnerSlot} archiveItem={ArchiveItemId}:{ArchiveDigimonId}:{ArchiveDigimonName} tamerSlots=[{TamerSlots}]",
                 client.TamerId,
                 vipEnabled,
-                digiviceSlot,
+                clientDigiviceSlot,
+                resolvedDigiviceSlot,
                 archiveSlot,
                 npcId,
                 packetData.Length,
@@ -66,7 +69,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 digivicePartner?.Slot,
                 archivePartner?.Id,
                 archivePartner?.DigimonId,
-                archivePartner?.Digimon?.Name);
+                archivePartner?.Digimon?.Name,
+                string.Join(",", client.Tamer.Digimons.Select(x => $"{x.Id}:{x.Slot}:{x.BaseType}:{x.Name}")));
 
             if (archiveSlot < 0 || archiveSlot >= client.Tamer.DigimonArchive.Slots)
             {
@@ -95,19 +99,42 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (digivicePartner == null && archivePartner.DigimonId == 0)
             {
                 _logger.Warning(
-                    "Character {TamerId} tried to move empty digivice slot {DigiviceSlot} with empty archive slot {ArchiveSlot}.",
-                    client.TamerId, digiviceSlot, archiveSlot);
+                    "Character {TamerId} tried to move empty digivice slot client={ClientDigiviceSlot} resolved={ResolvedDigiviceSlot} with empty archive slot {ArchiveSlot}.",
+                    client.TamerId, clientDigiviceSlot, resolvedDigiviceSlot, archiveSlot);
                 client.Send(new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive));
                 return;
             }
 
+            if (digivicePartner != null &&
+                resolvedDigiviceSlot == 0 &&
+                archivePartner.DigimonId == 0 &&
+                client.Tamer.Digimons.Count(x => x.Slot != byte.MaxValue && x.Slot < client.Tamer.DigimonSlots) <= 1)
+            {
+                _logger.Warning(
+                    "ARCHIVE 3201 rejected last active partner move. tamer={TamerId} digimon={DigimonId}:{DigimonName} clientDigiviceSlot={ClientDigiviceSlot} resolvedDigiviceSlot={ResolvedDigiviceSlot} archiveSlot={ArchiveSlot}",
+                    client.TamerId,
+                    digivicePartner.Id,
+                    digivicePartner.Name,
+                    clientDigiviceSlot,
+                    resolvedDigiviceSlot,
+                    archiveSlot);
+                client.Send(new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive));
+                return;
+            }
+
+            var responseClientDigiviceSlot = clientDigiviceSlot;
+
             if (digivicePartner == null)
             {
-                await MovePartnerToDigivice(client, digiviceSlot, archiveSlot, digivicePartner, archivePartner);
+                resolvedDigiviceSlot = await MovePartnerToDigivice(client, archiveSlot, archivePartner);
+                if (resolvedDigiviceSlot < 0)
+                    return;
+
+                responseClientDigiviceSlot = resolvedDigiviceSlot;
             }
             else if (archivePartner.DigimonId == 0)
             {
-                await MovePartnerToArchive(client, digiviceSlot, archiveSlot, digivicePartner, archivePartner, price);
+                await MovePartnerToArchive(client, resolvedDigiviceSlot, archiveSlot, digivicePartner, archivePartner, price);
             }
             else
             {
@@ -123,13 +150,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     return;
                 }
 
-                client.Tamer.RemoveDigimon((byte)digiviceSlot, false);
+                client.Tamer.RemoveDigimon((byte)resolvedDigiviceSlot, false);
                 archivePartner.AddDigimon(digivicePartner);
 
                 digivicePartner.SetSlot(byte.MaxValue);
                 await _sender.Send(new UpdateDigimonSlotCommand(digivicePartner.Id, digivicePartner.Slot));
 
-                archivedDigimon.SetSlot((byte)digiviceSlot);
+                archivedDigimon.SetSlot((byte)resolvedDigiviceSlot);
                 
                 client.Tamer.AddDigimon(archivedDigimon);
                 
@@ -146,22 +173,22 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     digivicePartner.Name,
                     archivedDigimon.Id,
                     archivedDigimon.Name,
-                    digiviceSlot,
+                    resolvedDigiviceSlot,
                     archiveSlot,
                     price);
             }
 
-            client.Send(new DigimonArchiveManagePacket(digiviceSlot, archiveSlot, price));
+            client.Send(UtilitiesFunctions.GroupPackets(
+                new DigimonArchiveManagePacket(responseClientDigiviceSlot, archiveSlot, price).Serialize(),
+                new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive).Serialize()));
         }
 
-        private async Task MovePartnerToDigivice(
+        private async Task<int> MovePartnerToDigivice(
             GameClient client,
-            int digiviceSlot,
             int archiveSlot,
-            DigimonModel? digivicePartner,
             CharacterDigimonArchiveItemModel archivePartner)
         {
-            digivicePartner = await EnsureArchiveDigimonLoaded(archivePartner);
+            var digivicePartner = await EnsureArchiveDigimonLoaded(archivePartner);
             if (digivicePartner == null)
             {
                 _logger.Warning(
@@ -170,7 +197,23 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     archiveSlot,
                     archivePartner.DigimonId);
                 client.Send(new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive));
-                return;
+                return -1;
+            }
+
+            client.Tamer.CompactActiveDigimonSlots();
+            await _sender.Send(new UpdateCharacterDigimonsOrderCommand(client.Tamer));
+
+            var digiviceSlot = client.Tamer.GetNextActiveDigimonSlot();
+            if (digiviceSlot >= client.Tamer.DigimonSlots)
+            {
+                _logger.Warning(
+                    "ARCHIVE 3201 move to digivice failed because tamer has no available active slot. tamer={TamerId} archiveSlot={ArchiveSlot} openedSlots={OpenedSlots} activeSlots={ActiveSlots}",
+                    client.TamerId,
+                    archiveSlot,
+                    client.Tamer.DigimonSlots,
+                    digiviceSlot);
+                client.Send(new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive));
+                return -1;
             }
 
             digivicePartner.SetSlot((byte)digiviceSlot);
@@ -189,6 +232,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 digivicePartner.Name,
                 archiveSlot,
                 digiviceSlot);
+
+            return digiviceSlot;
         }
 
         private async Task MovePartnerToArchive(
@@ -200,12 +245,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             int price)
         {
             archivePartner.AddDigimon(digivicePartner);
-            client.Tamer.RemoveDigimon((byte)digiviceSlot, false);
+            client.Tamer.RemoveDigimon((byte)digiviceSlot);
             digivicePartner.SetSlot(byte.MaxValue);
 
             client.Tamer.Inventory.RemoveBits(price);
 
             await _sender.Send(new UpdateItemListBitsCommand(client.Tamer.Inventory));
+            await _sender.Send(new UpdateCharacterDigimonsOrderCommand(client.Tamer));
             await _sender.Send(new UpdateDigimonSlotCommand(digivicePartner.Id, digivicePartner.Slot));
             await _sender.Send(new UpdateCharacterDigimonArchiveItemCommand(archivePartner));
 

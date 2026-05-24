@@ -1,0 +1,25 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/ItemRankData.bin]
+// ItemRankData.bin — Pack03 v487 client.
+// Route: FUN_01619f40 -> FUN_0161a2a0 -> FUN_01619530 -> FUN_0161a050.
+// Cursor layout: count, keyed rank rows, two u16s, then a nested count of rank values.
+
+bin ItemRankData {
+    section Ranks {
+        count  u32;
+        record ItemRankRecord;
+    }
+}
+
+struct ItemRankRecord {
+    u32  ItemCode;
+    u16  DropType;
+    u16  DropCount;
+    u32  ValueCount;
+    ItemRankValue[ValueCount] Values;
+}
+
+struct ItemRankValue size=10 {
+    u32  ItemCode;
+    u16  IconNo;
+    u32  Rank;
+}

@@ -1026,6 +1026,7 @@ bool cInventory::CursorIconLBtnUp( CURSOR_ICON::eTYPE eIconType, int nIconSlot, 
 			{			
 			case CURSOR_ICON::CI_INVEN:
 			case CURSOR_ICON::CI_WAREHOUSE:
+			case CURSOR_ICON::CI_EXTRAINVEN:
 			case CURSOR_ICON::CI_CARDINVEN:		// 카드 아이템을 이벤간 이동 가능 처리합니다.
 #ifdef NEW_SHARESTASH
 			case CURSOR_ICON::CI_SHARESTASH:

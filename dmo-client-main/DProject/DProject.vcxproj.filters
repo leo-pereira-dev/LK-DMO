@@ -1375,6 +1375,9 @@
     <ClCompile Include="_Interface\Game\Inventory.cpp">
       <Filter>03.Interface\Game\02_기본팝업\03_인벤토리</Filter>
     </ClCompile>
+    <ClCompile Include="_Interface\Game\ExtraInventory.cpp">
+      <Filter>03.Interface\Game\02_기본팝업\03_인벤토리</Filter>
+    </ClCompile>
     <ClCompile Include="_Interface\Game\InventoryContents.cpp">
       <Filter>03.Interface\Game\02_기본팝업\03_인벤토리</Filter>
     </ClCompile>
@@ -2899,6 +2902,12 @@
       <Filter>03.Interface\Game\02_기본팝업\03_인벤토리</Filter>
     </ClInclude>
     <ClInclude Include="_Interface\Game\Inventory.h">
+      <Filter>03.Interface\Game\02_기본팝업\03_인벤토리</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtraInventoryDebugLog.h">
+      <Filter>03.Interface\Game\02_기본팝업\03_인벤토리</Filter>
+    </ClInclude>
+    <ClInclude Include="_Interface\Game\ExtraInventory.h">
       <Filter>03.Interface\Game\02_기본팝업\03_인벤토리</Filter>
     </ClInclude>
     <ClInclude Include="_Interface\Game\InventoryContents.h">

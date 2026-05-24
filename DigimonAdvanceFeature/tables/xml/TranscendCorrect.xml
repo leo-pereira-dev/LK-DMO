@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TranscendCorrect schema="TranscendCorrect.struct" bin="TranscendCorrect.bin" byteLength="42">
+  <Config kind="Section" offset="0" length="42">
+    <_0 kind="Record" offset="0" length="42">
+      <DifferentTypeCorrectCount kind="Leaf" offset="0" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <DifferentTypeCorrections kind="Array" offset="4" length="15" count="3">
+        <_0_ kind="Struct" offset="4" length="5">
+          <Growth kind="Leaf" offset="4" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <CorrectValue kind="Leaf" offset="5" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_0_>
+        <_1_ kind="Struct" offset="9" length="5">
+          <Growth kind="Leaf" offset="9" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <CorrectValue kind="Leaf" offset="10" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_1_>
+        <_2_ kind="Struct" offset="14" length="5">
+          <Growth kind="Leaf" offset="14" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <CorrectValue kind="Leaf" offset="15" length="4" type="Scalar { Kind = U32 }" value="40" />
+        </_2_>
+      </DifferentTypeCorrections>
+      <SameTypeCorrectCount kind="Leaf" offset="19" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <SameTypeCorrections kind="Array" offset="23" length="15" count="3">
+        <_0_ kind="Struct" offset="23" length="5">
+          <Growth kind="Leaf" offset="23" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <CorrectValue kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_0_>
+        <_1_ kind="Struct" offset="28" length="5">
+          <Growth kind="Leaf" offset="28" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <CorrectValue kind="Leaf" offset="29" length="4" type="Scalar { Kind = U32 }" value="30" />
+        </_1_>
+        <_2_ kind="Struct" offset="33" length="5">
+          <Growth kind="Leaf" offset="33" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <CorrectValue kind="Leaf" offset="34" length="4" type="Scalar { Kind = U32 }" value="120" />
+        </_2_>
+      </SameTypeCorrections>
+      <EnchantDefaultCorrect kind="Leaf" offset="38" length="4" type="Scalar { Kind = U32 }" value="5" />
+    </_0>
+  </Config>
+</TranscendCorrect>

@@ -10,17 +10,21 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         private const int PacketNumber = 16040;
 
 
-        public DigimonTranscendenceSuccessPacket(int Result, byte targetSlot, DigimonHatchGradeEnum scale, int tamerMoney)
+        public DigimonTranscendenceSuccessPacket(int result)
         {
             Type(PacketNumber);
-            WriteInt(Result);
+            WriteInt(result);
+        }
+
+        public DigimonTranscendenceSuccessPacket(int result, byte targetSlot, DigimonHatchGradeEnum scale, long transcendenceCost, long tamerMoney, long transcendenceExperience)
+        {
+            Type(PacketNumber);
+            WriteInt(result);
             WriteByte(targetSlot);
             WriteByte((byte)scale);
-            WriteInt((int)50000);
-            WriteInt(0);
-            WriteInt(tamerMoney);
-            WriteInt(0);
-            WriteInt64(0);
+            WriteInt64(transcendenceCost);
+            WriteInt64(tamerMoney);
+            WriteInt64(transcendenceExperience);
         }
     }
 }

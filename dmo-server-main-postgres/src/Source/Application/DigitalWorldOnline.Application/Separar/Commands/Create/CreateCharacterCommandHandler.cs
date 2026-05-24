@@ -31,6 +31,11 @@ namespace DigitalWorldOnline.Application.Separar.Commands.Create
                 ItemListEnum.RewardWarehouse,
                 ItemListEnum.GiftWarehouse,
                 ItemListEnum.ConsignedWarehouse,
+                ItemListEnum.ExtraInventorySeal,
+                ItemListEnum.ExtraInventoryTicket,
+                ItemListEnum.ExtraInventoryEvolution,
+                ItemListEnum.ExtraInventoryDigitama,
+                ItemListEnum.ExtraInventoryMaterial,
                 ItemListEnum.TamerShop,
                 ItemListEnum.ConsignedShop
             };

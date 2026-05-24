@@ -1,0 +1,2 @@
+﻿"Name","Bin","Xml","OfficialStringAddress","Status","RequiredFor"
+"DM_Luckydraw_Info-LuckyDrawInfo","DM_Luckydraw_Info-LuckyDrawInfo.bin","DM_Luckydraw_Info-LuckyDrawInfo.xml","01a1dc40","Referenced by EXE/CLuckyDrawTable but not found under Dcommerce XML/BIN extraction","Digital Draw ticket/product definitions and likely dynamic card art/name data"

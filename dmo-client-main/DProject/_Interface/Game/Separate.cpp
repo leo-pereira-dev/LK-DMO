@@ -361,6 +361,9 @@ void cSeparate::OnOk()
 	case cBaseWindow::WT_INVENTORY:
 		CURSOR_ST.SetIcon( CURSOR_ICON::CI_INVEN, m_nIconValue1, m_nCurCount, m_pIFIcon );
 		break;
+	case cBaseWindow::WT_EXTRAINVENTORY:
+		CURSOR_ST.SetIcon( CURSOR_ICON::CI_EXTRAINVEN, m_nIconValue1, m_nCurCount, m_pIFIcon );
+		break;
 	case cBaseWindow::WT_WAREHOUSE:
 #ifdef NEW_SHARESTASH
 	{	

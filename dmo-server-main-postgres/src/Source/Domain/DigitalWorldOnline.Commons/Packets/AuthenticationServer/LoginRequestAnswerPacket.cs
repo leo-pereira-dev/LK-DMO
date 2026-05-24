@@ -14,7 +14,7 @@ namespace DigitalWorldOnline.Commons.Packets.AuthenticationServer
         public LoginRequestAnswerPacket(LoginFailReasonEnum failReason)
         {
             Type(PacketNumber);
-            WriteInt(failReason.GetHashCode());
+            WriteInt((int)failReason);
             WriteByte(39);
         }
 
@@ -26,7 +26,7 @@ namespace DigitalWorldOnline.Commons.Packets.AuthenticationServer
         {
             Type(PacketNumber);
             WriteInt(0);
-            WriteByte((byte)secPassScreen.GetHashCode());
+            WriteByte((byte)secPassScreen);
         }
     }
 }

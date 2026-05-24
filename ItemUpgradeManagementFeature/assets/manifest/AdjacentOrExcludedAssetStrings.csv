@@ -1,0 +1,7 @@
+﻿"AssetPath","Address","Reason"
+"System\Btn_Nor13_R.tga","01ae623c","generic/right-button state from another function, not the copied upgrade management set"
+"EquipSystem\Recharge_slot.tga","01aeab5c","cElementManagement/normal charge adjacent system, not this management window screenshot"
+"EquipSystem\Recharge_gauge.tga","01aeaca4","cElementManagement/normal charge adjacent system, not this management window screenshot"
+"EquipSystem\Recharge_win.tga","01aeadac","cElementManagement/normal charge adjacent system, not this management window screenshot"
+"Item_Make\Make_ani_gauge_bg.tga","01aec874","item make animation asset in nearby dump, no xref to this copied set"
+"Item_Make\Make_ani_Sequence.dds","01aec9c4","item make animation asset in nearby dump, no xref to this copied set"

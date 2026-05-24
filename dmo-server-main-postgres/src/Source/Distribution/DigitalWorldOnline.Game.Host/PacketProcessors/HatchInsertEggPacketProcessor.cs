@@ -27,18 +27,34 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var packet = new GamePacketReader(packetData);
 
             var itemSlot = packet.ReadInt();
-            _ = packet.ReadInt(); // NPC id; the current client sends it after the slot.
+            var npcId = packet.ReadInt(); // NPC id; the current client sends it after the slot.
+            _logger.Information(
+                "Hatch insert request: tamer {TamerId} itemSlot {ItemSlot} npc {NpcId} currentEgg {CurrentEggId} hatchLevel {HatchLevel}.",
+                client.TamerId,
+                itemSlot,
+                npcId,
+                client.Tamer.Incubator.EggId,
+                client.Tamer.Incubator.HatchLevel);
 
             var inventoryItem = client.Tamer.Inventory.FindItemBySlot(itemSlot);
             if (inventoryItem == null)
             {
-                _logger.Warning($"Invalid hatch egg slot {itemSlot} for character {client.TamerId}.");
+                _logger.Warning(
+                    "Invalid hatch egg slot {ItemSlot} for character {TamerId}; packetLength {PacketLength}.",
+                    itemSlot,
+                    client.TamerId,
+                    packetData.Length);
                 return;
             }
 
             client.Tamer.Incubator.InsertEgg(inventoryItem.ItemId);
 
-            _logger.Verbose($"Character {client.TamerId} inserted egg {inventoryItem.ItemId} into incubator.");
+            _logger.Information(
+                "Hatch insert accepted: tamer {TamerId} itemSlot {ItemSlot} egg {EggId} amountBefore {Amount}.",
+                client.TamerId,
+                itemSlot,
+                inventoryItem.ItemId,
+                inventoryItem.Amount);
 
             client.Tamer.Inventory.RemoveOrReduceItem(inventoryItem, 1, itemSlot);
 

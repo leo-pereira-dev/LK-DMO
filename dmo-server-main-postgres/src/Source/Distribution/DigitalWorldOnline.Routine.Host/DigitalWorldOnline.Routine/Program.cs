@@ -130,6 +130,7 @@ namespace DigitalWorldOnline.Routine
                     services.AddSingleton<MonsterBinLoader>();
                     services.AddSingleton<MapBinLoader>();
                     services.AddSingleton<ItemListBinLoader>();
+                    services.AddSingleton<QuestBinLoader>();
                     services.AddSingleton<UnionXmlAssetLoader>();
                     services.AddSingleton<DUnitCollectionService>();
                     services.AddSingleton<AssetsLoader>();
@@ -163,6 +164,7 @@ namespace DigitalWorldOnline.Routine
             var nature = host.Services.GetRequiredService<NatureBinLoader>().Load();
             var monster = host.Services.GetRequiredService<MonsterBinLoader>().Load();
             var map = host.Services.GetRequiredService<MapBinLoader>().Load();
+            var quest = host.Services.GetRequiredService<QuestBinLoader>().Load();
 
             return host;
         }

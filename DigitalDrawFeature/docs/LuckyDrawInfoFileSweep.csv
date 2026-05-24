@@ -1,0 +1,6 @@
+Check,Scope,Result,Notes
+"Exact XML filename","C:\0-NewDmo recursive forced file scan","not found","No loose extracted file named DM_Luckydraw_Info-LuckyDrawInfo.xml exists in the project tree."
+"Luckydraw/LuckyDrawInfo filename variants","C:\0-NewDmo recursive forced file scan","only DigitalDrawFeature decompiled copies","Matches are the copied LuckyDrawTable .c files created for this subproject; no XML/BIN table file was found."
+"rg --files -uuu filename sweep","C:\0-NewDmo","only DigitalDrawFeature decompiled copies","No extracted Dcommerce/XML/BIN path matched DM_Luckydraw_Info-LuckyDrawInfo or LuckyDrawInfo."
+"Dcommerce XML/BIN/struct/csv filename sweep","C:\0-NewDmo\Dcommerce","not found","No LuckyDrawInfo/Luckydraw table file in the current Dcommerce extraction."
+"Archive tool availability","System PATH","7z/rar/unrar not available","Compressed RAR archives were listed but not inspected internally in this sweep."

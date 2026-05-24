@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DMDigiSummonList schema="DM_DigiSummon-List.struct" bin="DM_DigiSummon-List.bin" byteLength="1173">
+  <Summons kind="Section" offset="0" length="1173">
+    <_0 kind="Record" offset="4" length="61">
+      <SummonKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldA kind="Leaf" offset="8" length="1" type="Scalar { Kind = U8 }" value="13" />
+      <FieldB kind="Leaf" offset="9" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="10" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="12" length="2" type="Scalar { Kind = U16 }" value="11" />
+      <FieldE kind="Leaf" offset="14" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <IconPath kind="Leaf" offset="18" length="19" type="LString { }">Legend_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="37" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Entries kind="Array" offset="41" length="24" count="2">
+        <_0_ kind="Struct" offset="41" length="12">
+          <ItemOrKey kind="Leaf" offset="41" length="4" type="Scalar { Kind = U32 }" value="79567" />
+          <FieldA kind="Leaf" offset="45" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <FieldB kind="Leaf" offset="49" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="53" length="12">
+          <ItemOrKey kind="Leaf" offset="53" length="4" type="Scalar { Kind = U32 }" value="79668" />
+          <FieldA kind="Leaf" offset="57" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <FieldB kind="Leaf" offset="61" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+      </Entries>
+    </_0>
+    <_1 kind="Record" offset="65" length="59">
+      <SummonKey kind="Leaf" offset="65" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <FieldA kind="Leaf" offset="69" length="1" type="Scalar { Kind = U8 }" value="14" />
+      <FieldB kind="Leaf" offset="70" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="71" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="73" length="2" type="Scalar { Kind = U16 }" value="11" />
+      <FieldE kind="Leaf" offset="75" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <IconPath kind="Leaf" offset="79" length="17" type="LString { }">Epic_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="96" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Entries kind="Array" offset="100" length="24" count="2">
+        <_0_ kind="Struct" offset="100" length="12">
+          <ItemOrKey kind="Leaf" offset="100" length="4" type="Scalar { Kind = U32 }" value="79568" />
+          <FieldA kind="Leaf" offset="104" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <FieldB kind="Leaf" offset="108" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="112" length="12">
+          <ItemOrKey kind="Leaf" offset="112" length="4" type="Scalar { Kind = U32 }" value="79669" />
+          <FieldA kind="Leaf" offset="116" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <FieldB kind="Leaf" offset="120" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+      </Entries>
+    </_1>
+    <_2 kind="Record" offset="124" length="61">
+      <SummonKey kind="Leaf" offset="124" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <FieldA kind="Leaf" offset="128" length="1" type="Scalar { Kind = U8 }" value="15" />
+      <FieldB kind="Leaf" offset="129" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="130" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="132" length="2" type="Scalar { Kind = U16 }" value="11" />
+      <FieldE kind="Leaf" offset="134" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <IconPath kind="Leaf" offset="138" length="19" type="LString { }">Unique_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="157" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Entries kind="Array" offset="161" length="24" count="2">
+        <_0_ kind="Struct" offset="161" length="12">
+          <ItemOrKey kind="Leaf" offset="161" length="4" type="Scalar { Kind = U32 }" value="79569" />
+          <FieldA kind="Leaf" offset="165" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <FieldB kind="Leaf" offset="169" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="173" length="12">
+          <ItemOrKey kind="Leaf" offset="173" length="4" type="Scalar { Kind = U32 }" value="79670" />
+          <FieldA kind="Leaf" offset="177" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <FieldB kind="Leaf" offset="181" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+      </Entries>
+    </_2>
+    <_3 kind="Record" offset="185" length="59">
+      <SummonKey kind="Leaf" offset="185" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <FieldA kind="Leaf" offset="189" length="1" type="Scalar { Kind = U8 }" value="16" />
+      <FieldB kind="Leaf" offset="190" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="191" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="193" length="2" type="Scalar { Kind = U16 }" value="11" />
+      <FieldE kind="Leaf" offset="195" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <IconPath kind="Leaf" offset="199" length="17" type="LString { }">Rare_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="216" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Entries kind="Array" offset="220" length="24" count="2">
+        <_0_ kind="Struct" offset="220" length="12">
+          <ItemOrKey kind="Leaf" offset="220" length="4" type="Scalar { Kind = U32 }" value="79570" />
+          <FieldA kind="Leaf" offset="224" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <FieldB kind="Leaf" offset="228" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="232" length="12">
+          <ItemOrKey kind="Leaf" offset="232" length="4" type="Scalar { Kind = U32 }" value="79671" />
+          <FieldA kind="Leaf" offset="236" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <FieldB kind="Leaf" offset="240" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+      </Entries>
+    </_3>
+    <_4 kind="Record" offset="244" length="49">
+      <SummonKey kind="Leaf" offset="244" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <FieldA kind="Leaf" offset="248" length="1" type="Scalar { Kind = U8 }" value="17" />
+      <FieldB kind="Leaf" offset="249" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="250" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="252" length="2" type="Scalar { Kind = U16 }" value="11" />
+      <FieldE kind="Leaf" offset="254" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <IconPath kind="Leaf" offset="258" length="19" type="LString { }">Normal_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="277" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="281" length="12" count="1">
+        <_0_ kind="Struct" offset="281" length="12">
+          <ItemOrKey kind="Leaf" offset="281" length="4" type="Scalar { Kind = U32 }" value="152795" />
+          <FieldA kind="Leaf" offset="285" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="289" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_4>
+    <_5 kind="Record" offset="293" length="49">
+      <SummonKey kind="Leaf" offset="293" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <FieldA kind="Leaf" offset="297" length="1" type="Scalar { Kind = U8 }" value="18" />
+      <FieldB kind="Leaf" offset="298" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="299" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="301" length="2" type="Scalar { Kind = U16 }" value="11" />
+      <FieldE kind="Leaf" offset="303" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <IconPath kind="Leaf" offset="307" length="19" type="LString { }">Legend_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="326" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="330" length="12" count="1">
+        <_0_ kind="Struct" offset="330" length="12">
+          <ItemOrKey kind="Leaf" offset="330" length="4" type="Scalar { Kind = U32 }" value="160039" />
+          <FieldA kind="Leaf" offset="334" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="338" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_5>
+    <_6 kind="Record" offset="342" length="49">
+      <SummonKey kind="Leaf" offset="342" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <FieldA kind="Leaf" offset="346" length="1" type="Scalar { Kind = U8 }" value="19" />
+      <FieldB kind="Leaf" offset="347" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="348" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="350" length="2" type="Scalar { Kind = U16 }" value="11" />
+      <FieldE kind="Leaf" offset="352" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <IconPath kind="Leaf" offset="356" length="19" type="LString { }">Legend_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="375" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="379" length="12" count="1">
+        <_0_ kind="Struct" offset="379" length="12">
+          <ItemOrKey kind="Leaf" offset="379" length="4" type="Scalar { Kind = U32 }" value="160594" />
+          <FieldA kind="Leaf" offset="383" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="387" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_6>
+    <_7 kind="Record" offset="391" length="64">
+      <SummonKey kind="Leaf" offset="391" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <FieldA kind="Leaf" offset="395" length="1" type="Scalar { Kind = U8 }" value="6" />
+      <FieldB kind="Leaf" offset="396" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="397" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="399" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="401" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <IconPath kind="Leaf" offset="405" length="34" type="LString { }">Omegamon-Mercifulmode_Slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="439" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="443" length="12" count="1">
+        <_0_ kind="Struct" offset="443" length="12">
+          <ItemOrKey kind="Leaf" offset="443" length="4" type="Scalar { Kind = U32 }" value="75865" />
+          <FieldA kind="Leaf" offset="447" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="451" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_7>
+    <_8 kind="Record" offset="455" length="66">
+      <SummonKey kind="Leaf" offset="455" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <FieldA kind="Leaf" offset="459" length="1" type="Scalar { Kind = U8 }" value="7" />
+      <FieldB kind="Leaf" offset="460" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="461" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="463" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="465" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <IconPath kind="Leaf" offset="469" length="36" type="LString { }">ShoutmonX7-SuperiorMode_Slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="505" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="509" length="12" count="1">
+        <_0_ kind="Struct" offset="509" length="12">
+          <ItemOrKey kind="Leaf" offset="509" length="4" type="Scalar { Kind = U32 }" value="75866" />
+          <FieldA kind="Leaf" offset="513" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="517" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_8>
+    <_9 kind="Record" offset="521" length="61">
+      <SummonKey kind="Leaf" offset="521" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <FieldA kind="Leaf" offset="525" length="1" type="Scalar { Kind = U8 }" value="8" />
+      <FieldB kind="Leaf" offset="526" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="527" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="529" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="531" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <IconPath kind="Leaf" offset="535" length="31" type="LString { }">Kuzuhamon-MikoMode_Slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="566" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="570" length="12" count="1">
+        <_0_ kind="Struct" offset="570" length="12">
+          <ItemOrKey kind="Leaf" offset="570" length="4" type="Scalar { Kind = U32 }" value="75867" />
+          <FieldA kind="Leaf" offset="574" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="578" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_9>
+    <_10 kind="Record" offset="582" length="62">
+      <SummonKey kind="Leaf" offset="582" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <FieldA kind="Leaf" offset="586" length="1" type="Scalar { Kind = U8 }" value="9" />
+      <FieldB kind="Leaf" offset="587" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="588" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="590" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="592" length="4" type="Scalar { Kind = U32 }" value="14" />
+      <IconPath kind="Leaf" offset="596" length="32" type="LString { }">Dukemon_Crimsonmode_Slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="628" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="632" length="12" count="1">
+        <_0_ kind="Struct" offset="632" length="12">
+          <ItemOrKey kind="Leaf" offset="632" length="4" type="Scalar { Kind = U32 }" value="75868" />
+          <FieldA kind="Leaf" offset="636" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="640" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_10>
+    <_11 kind="Record" offset="644" length="55">
+      <SummonKey kind="Leaf" offset="644" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <FieldA kind="Leaf" offset="648" length="1" type="Scalar { Kind = U8 }" value="10" />
+      <FieldB kind="Leaf" offset="649" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="650" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="652" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="654" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <IconPath kind="Leaf" offset="658" length="25" type="LString { }">DarknessB_Slot_02.png</IconPath>
+      <EntryCount kind="Leaf" offset="683" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="687" length="12" count="1">
+        <_0_ kind="Struct" offset="687" length="12">
+          <ItemOrKey kind="Leaf" offset="687" length="4" type="Scalar { Kind = U32 }" value="75869" />
+          <FieldA kind="Leaf" offset="691" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="695" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_11>
+    <_12 kind="Record" offset="699" length="55">
+      <SummonKey kind="Leaf" offset="699" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <FieldA kind="Leaf" offset="703" length="1" type="Scalar { Kind = U8 }" value="5" />
+      <FieldB kind="Leaf" offset="704" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="705" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="707" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="709" length="4" type="Scalar { Kind = U32 }" value="16" />
+      <IconPath kind="Leaf" offset="713" length="25" type="LString { }">BLOOMLORDMON_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="738" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="742" length="12" count="1">
+        <_0_ kind="Struct" offset="742" length="12">
+          <ItemOrKey kind="Leaf" offset="742" length="4" type="Scalar { Kind = U32 }" value="75870" />
+          <FieldA kind="Leaf" offset="746" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="750" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_12>
+    <_13 kind="Record" offset="754" length="60">
+      <SummonKey kind="Leaf" offset="754" length="4" type="Scalar { Kind = U32 }" value="14" />
+      <FieldA kind="Leaf" offset="758" length="1" type="Scalar { Kind = U8 }" value="4" />
+      <FieldB kind="Leaf" offset="759" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="760" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="762" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="764" length="4" type="Scalar { Kind = U32 }" value="17" />
+      <IconPath kind="Leaf" offset="768" length="30" type="LString { }">Zeedmillenniummon_Slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="798" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="802" length="12" count="1">
+        <_0_ kind="Struct" offset="802" length="12">
+          <ItemOrKey kind="Leaf" offset="802" length="4" type="Scalar { Kind = U32 }" value="75871" />
+          <FieldA kind="Leaf" offset="806" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="810" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_13>
+    <_14 kind="Record" offset="814" length="49">
+      <SummonKey kind="Leaf" offset="814" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <FieldA kind="Leaf" offset="818" length="1" type="Scalar { Kind = U8 }" value="11" />
+      <FieldB kind="Leaf" offset="819" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="820" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="822" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="824" length="4" type="Scalar { Kind = U32 }" value="21" />
+      <IconPath kind="Leaf" offset="828" length="19" type="LString { }">Legend_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="847" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="851" length="12" count="1">
+        <_0_ kind="Struct" offset="851" length="12">
+          <ItemOrKey kind="Leaf" offset="851" length="4" type="Scalar { Kind = U32 }" value="75915" />
+          <FieldA kind="Leaf" offset="855" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="859" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_14>
+    <_15 kind="Record" offset="863" length="57">
+      <SummonKey kind="Leaf" offset="863" length="4" type="Scalar { Kind = U32 }" value="16" />
+      <FieldA kind="Leaf" offset="867" length="1" type="Scalar { Kind = U8 }" value="3" />
+      <FieldB kind="Leaf" offset="868" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="869" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="871" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="873" length="4" type="Scalar { Kind = U32 }" value="23" />
+      <IconPath kind="Leaf" offset="877" length="27" type="LString { }">IMPERIALDRAMON_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="904" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="908" length="12" count="1">
+        <_0_ kind="Struct" offset="908" length="12">
+          <ItemOrKey kind="Leaf" offset="908" length="4" type="Scalar { Kind = U32 }" value="75917" />
+          <FieldA kind="Leaf" offset="912" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="916" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_15>
+    <_16 kind="Record" offset="920" length="51">
+      <SummonKey kind="Leaf" offset="920" length="4" type="Scalar { Kind = U32 }" value="17" />
+      <FieldA kind="Leaf" offset="924" length="1" type="Scalar { Kind = U8 }" value="2" />
+      <FieldB kind="Leaf" offset="925" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="926" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="928" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="930" length="4" type="Scalar { Kind = U32 }" value="24" />
+      <IconPath kind="Leaf" offset="934" length="21" type="LString { }">ALPHAMON_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="955" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="959" length="12" count="1">
+        <_0_ kind="Struct" offset="959" length="12">
+          <ItemOrKey kind="Leaf" offset="959" length="4" type="Scalar { Kind = U32 }" value="75918" />
+          <FieldA kind="Leaf" offset="963" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="967" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_16>
+    <_17 kind="Record" offset="971" length="49">
+      <SummonKey kind="Leaf" offset="971" length="4" type="Scalar { Kind = U32 }" value="18" />
+      <FieldA kind="Leaf" offset="975" length="1" type="Scalar { Kind = U8 }" value="12" />
+      <FieldB kind="Leaf" offset="976" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="977" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="979" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldE kind="Leaf" offset="981" length="4" type="Scalar { Kind = U32 }" value="22" />
+      <IconPath kind="Leaf" offset="985" length="19" type="LString { }">Legend_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="1004" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="1008" length="12" count="1">
+        <_0_ kind="Struct" offset="1008" length="12">
+          <ItemOrKey kind="Leaf" offset="1008" length="4" type="Scalar { Kind = U32 }" value="155052" />
+          <FieldA kind="Leaf" offset="1012" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="1016" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_17>
+    <_18 kind="Record" offset="1020" length="49">
+      <SummonKey kind="Leaf" offset="1020" length="4" type="Scalar { Kind = U32 }" value="19" />
+      <FieldA kind="Leaf" offset="1024" length="1" type="Scalar { Kind = U8 }" value="20" />
+      <FieldB kind="Leaf" offset="1025" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="1026" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="1028" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="1030" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <IconPath kind="Leaf" offset="1034" length="19" type="LString { }">Legend_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="1053" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="1057" length="12" count="1">
+        <_0_ kind="Struct" offset="1057" length="12">
+          <ItemOrKey kind="Leaf" offset="1057" length="4" type="Scalar { Kind = U32 }" value="180390" />
+          <FieldA kind="Leaf" offset="1061" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="1065" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_18>
+    <_19 kind="Record" offset="1069" length="49">
+      <SummonKey kind="Leaf" offset="1069" length="4" type="Scalar { Kind = U32 }" value="20" />
+      <FieldA kind="Leaf" offset="1073" length="1" type="Scalar { Kind = U8 }" value="1" />
+      <FieldB kind="Leaf" offset="1074" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="1075" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="1077" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="1079" length="4" type="Scalar { Kind = U32 }" value="26" />
+      <IconPath kind="Leaf" offset="1083" length="19" type="LString { }">Legend_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="1102" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="1106" length="12" count="1">
+        <_0_ kind="Struct" offset="1106" length="12">
+          <ItemOrKey kind="Leaf" offset="1106" length="4" type="Scalar { Kind = U32 }" value="181258" />
+          <FieldA kind="Leaf" offset="1110" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="1114" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_19>
+    <_20 kind="Record" offset="1118" length="55">
+      <SummonKey kind="Leaf" offset="1118" length="4" type="Scalar { Kind = U32 }" value="21" />
+      <FieldA kind="Leaf" offset="1122" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldB kind="Leaf" offset="1123" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <FieldC kind="Leaf" offset="1124" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldD kind="Leaf" offset="1126" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldE kind="Leaf" offset="1128" length="4" type="Scalar { Kind = U32 }" value="27" />
+      <IconPath kind="Leaf" offset="1132" length="25" type="LString { }">X_Evolution2_slot.png</IconPath>
+      <EntryCount kind="Leaf" offset="1157" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Entries kind="Array" offset="1161" length="12" count="1">
+        <_0_ kind="Struct" offset="1161" length="12">
+          <ItemOrKey kind="Leaf" offset="1161" length="4" type="Scalar { Kind = U32 }" value="181321" />
+          <FieldA kind="Leaf" offset="1165" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <FieldB kind="Leaf" offset="1169" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+      </Entries>
+    </_20>
+  </Summons>
+</DMDigiSummonList>

@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "MainFrame_Contents.h"
 #include "../../ContentsSystem/ContentsSystemDef.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 #include "../Adapt/AdaptTutorialQuest.h"
 
@@ -2447,9 +2448,30 @@ void CMainFrameContents::GetDigimonSizeInfo(int& nTall, float& fPercent, bool& b
 	CDigimonUser* pUser = g_pCharMng->GetDigimonUser( 0 );
 	SAFE_POINTER_RET( pUser );
 	
+	float fGameScale = pUser->GetGameScale();
+	if( fGameScale <= 0.0f )
+	{
+		float fPostScale = 0.0f;
+		if( g_pDataMng && g_pDataMng->GetPostLoad() && g_pDataMng->GetPostLoad()->GetDigimonData() )
+			fPostScale = g_pDataMng->GetPostLoad()->GetDigimonData()->s_fScale;
+
+		float fOrgScale = pUser->GetOrgGameScale();
+		float fRepairScale = ( fPostScale > 0.0f ) ? fPostScale : fOrgScale;
+		if( fRepairScale <= 0.0f )
+			fRepairScale = 1.0f;
+
+		nsCSDEBUG::CrashLogger::LogMessage( "DIGIMON_SIZE repaired invalid scale game=%.4f org=%.4f post=%.4f repair=%.4f uid=%u ftid=%u",
+			(double)fGameScale, (double)fOrgScale, (double)fPostScale, (double)fRepairScale, pUser->GetUniqID(), pUser->GetFTID() );
+
+		pUser->SetScale( fRepairScale, true );
+		fGameScale = pUser->GetGameScale();
+		if( fGameScale <= 0.0f )
+			fGameScale = fRepairScale;
+	}
+
 	float fToolHeight = pUser->GetToolHeight_Int();
 	nTall = DmCS::StringFn::FloatRounding( fToolHeight );
-	fPercent = DmCS::StringFn::FloatRounding(pUser->GetGameScale()*100.0f, 3);
+	fPercent = DmCS::StringFn::FloatRounding(fGameScale*100.0f, 3);
 	
 	cBuffData* pBuff = pUser->GetBuff();
 	if( !pBuff )

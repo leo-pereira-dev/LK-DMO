@@ -3,6 +3,52 @@
 #include "../../ContentsSystem/ContentsSystemDef.h"
 #include "../../../LibProj/CsFunc/CrashLogger.h"
 
+namespace
+{
+	const DWORD kRaremonBaseDigimonId = 45172;
+	const DWORD kRaremonBingeEatingDigimonId = 99692;
+
+	bool IsRaremonTranscendenceExpDigimon(DWORD const& dwDigimonId)
+	{
+		return dwDigimonId == kRaremonBaseDigimonId || dwDigimonId == kRaremonBingeEatingDigimonId;
+	}
+
+	DWORD GetRaremonTranscendenceFixedExp(int const& nHatchLevel)
+	{
+		switch(nHatchLevel)
+		{
+		case 3:
+			return 3140;
+		case 4:
+			return 23550;
+		case 5:
+			return 62800;
+		default:
+			return 0;
+		}
+	}
+
+	DWORD GetTranscendenceExpMaterialFixedExp(DWORD const& dwDigimonId, int const& nHatchLevel)
+	{
+		if( nsCsFileTable::g_pTacticsMng )
+		{
+			DWORD dwTableExp = nsCsFileTable::g_pTacticsMng->GetExpDigimonFixedFigure( dwDigimonId, nHatchLevel );
+			if( 0 != dwTableExp )
+				return dwTableExp;
+		}
+
+		if( IsRaremonTranscendenceExpDigimon( dwDigimonId ) )
+			return GetRaremonTranscendenceFixedExp( nHatchLevel );
+
+		return 0;
+	}
+
+	bool IsTranscendenceExpMaterialDigimon(DWORD const& dwDigimonId, int const& nHatchLevel)
+	{
+		return GetTranscendenceExpMaterialFixedExp( dwDigimonId, nHatchLevel ) != 0;
+	}
+}
+
 CDigimonArchiveContents::DigimonInArchive::DigimonInArchive()
 :miSlotIndex(0),
 mdwModelID(0),
@@ -274,6 +320,7 @@ void CDigimonArchiveContents::OnShowViewer(void)
 
 void CDigimonArchiveContents::OnRecvEndArchiveInfo(void* pkData)
 {
+	const bool bWasReceived = m_bisReceiveData;
 	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd begin max=%d opened=%d digimons=%d sorted=%d receive=%d npc=%p openedPos=%.2f,%.2f filter=%d sort=%d",
 		MaxArchiveCount,
 		OpenedArchiveCount,
@@ -301,29 +348,31 @@ void CDigimonArchiveContents::OnRecvEndArchiveInfo(void* pkData)
 // 		m_bisReceiveData = true;
 // 		return;
 // 	}
-	Notify(Initailze_Archive);
-	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd after Initailze_Archive max=%d opened=%d digimons=%d sorted=%d",
-		MaxArchiveCount,
-		OpenedArchiveCount,
-		(int)mDigimons.size(),
-		(int)mSorted.size());
-	OnShowPartnerDigimonInfo();
-	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd after OnShowPartnerDigimonInfo selected=%d selectedPtr=%p",
-		SelectedDigimonIdx,
-		mpkSelectedDigimon);
-	UpdateSlotData();
-	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd after UpdateSlotData max=%d opened=%d digimons=%d sorted=%d",
-		MaxArchiveCount,
-		OpenedArchiveCount,
-		(int)mDigimons.size(),
-		(int)mSorted.size());
-	Notify(Update_Viewer);
-	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd after Update_Viewer max=%d opened=%d digimons=%d sorted=%d",
-		MaxArchiveCount,
-		OpenedArchiveCount,
-		(int)mDigimons.size(),
-		(int)mSorted.size());
-
+	if( bWasReceived )
+	{
+		UpdateSlotData();
+		Notify(Update_Viewer);
+		nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd refresh-only update max=%d opened=%d digimons=%d sorted=%d selected=%d selectedPtr=%p",
+			MaxArchiveCount,
+			OpenedArchiveCount,
+			(int)mDigimons.size(),
+			(int)mSorted.size(),
+			SelectedDigimonIdx,
+			mpkSelectedDigimon);
+	}
+	else
+	{
+		Notify(Initailze_Archive);
+		nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd after Initailze_Archive max=%d opened=%d digimons=%d sorted=%d",
+			MaxArchiveCount,
+			OpenedArchiveCount,
+			(int)mDigimons.size(),
+			(int)mSorted.size());
+		OnShowPartnerDigimonInfo();
+		nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd after OnShowPartnerDigimonInfo selected=%d selectedPtr=%p",
+			SelectedDigimonIdx,
+			mpkSelectedDigimon);
+	}
 	//데이터 수신중 메세지
 	cMessageBox::DelMsg( 10019, false );
 	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvEnd end");
@@ -347,6 +396,25 @@ void CDigimonArchiveContents::OnRecvArchiveInfo(void* pkData)
 	SAFE_POINTER_RET(kRecvData);
 	if(kRecvData->GetSlotType() == 0)
 	{
+		nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvArchiveInfo full refresh clearing old slots count=%d",
+			(int)mDigimons.size());
+		DigimonsIter kClearIter = mDigimons.begin();
+		for(; kClearIter != mDigimons.end(); )
+		{
+			if(kClearIter->second && kClearIter->second->GetDigimonData() == mpkSelectedDigimon)
+			{
+				nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvArchiveInfo cleared selected archive digimon slot=%d data=%p",
+					kClearIter->first,
+					mpkSelectedDigimon);
+				SelectedDigimonIdx = -1;
+				mpkSelectedDigimon = NULL;
+			}
+			SAFE_DELETE(kClearIter->second);
+			kClearIter = mDigimons.erase(kClearIter);
+		}
+		mDigimons.clear();
+		mSorted.clear();
+
 		MaxArchiveCount = kRecvData->GetMaxArchiveCnt();
 		OpenedArchiveCount = kRecvData->GetOpenedArchiveCnt();
 
@@ -421,26 +489,39 @@ void CDigimonArchiveContents::OnRecvMoveResultInArchive(void* pkDtata)
 void CDigimonArchiveContents::OnRecvChangeResult(void* pkData)
 {
 	GS2C_RECV_ARCHIVE_CHANGE* pkRecvData = static_cast<GS2C_RECV_ARCHIVE_CHANGE*>(pkData);
+	SAFE_POINTER_RET(pkRecvData);
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvChangeResult src=%d dst=%d price=%d selected=%p selectedIdx=%d digimons=%d sorted=%d",
+		pkRecvData->Src,
+		pkRecvData->Dst,
+		pkRecvData->Price,
+		mpkSelectedDigimon,
+		SelectedDigimonIdx,
+		(int)mDigimons.size(),
+		(int)mSorted.size());
 	// 조그레스 퀘스트 진행중이면 
 	// 파트너 창고이동이 성공후 조그레스 퀘스트는 "취소"상태가 된다.
 	if(0 != pkRecvData->Dst)
 	{
-		DigimonInArchive* pkDigimonInfo = GetArchiveSlotInfo(pkRecvData->Dst);
+		int iQuestArchiveSlot = pkRecvData->Dst;
+		if(iQuestArchiveSlot >= 1000)
+			iQuestArchiveSlot -= 1000;
+		DigimonInArchive* pkDigimonInfo = GetArchiveSlotInfo(iQuestArchiveSlot);
 		if(pkDigimonInfo != NULL && pkDigimonInfo->GetDigimonData() != NULL)
 		{
 			CDigimonEvolveInfo* pFTEvolInfo = nsCsFileTable::g_pEvolMng->GetEvolveInfo( pkDigimonInfo->GetDigimonData()->s_dwBaseDigimonID );	
-			if(!pFTEvolInfo)
-				return;
-			for( int i=1; i<nLimit::EvoUnit; ++i )
+			if(pFTEvolInfo != NULL)
 			{
-				CDigimonEvolveObj* pFTEvolObj = pFTEvolInfo->GetEvolveObjByEvoSlot( i );
-				if( pFTEvolObj == NULL )
-					continue;	
-				if( pFTEvolObj->m_nChipsetType != 0 && pFTEvolObj->m_nOpenQuest != 0 ){
-					if(g_pDataMng->GetQuest()->IsProcess(pFTEvolObj->m_nOpenQuest))
-					{
-						g_pDataMng->GetQuest()->DropProcQuest( pFTEvolObj->m_nOpenQuest );
-					}			
+				for( int i=1; i<nLimit::EvoUnit; ++i )
+				{
+					CDigimonEvolveObj* pFTEvolObj = pFTEvolInfo->GetEvolveObjByEvoSlot( i );
+					if( pFTEvolObj == NULL )
+						continue;	
+					if( pFTEvolObj->m_nChipsetType != 0 && pFTEvolObj->m_nOpenQuest != 0 ){
+						if(g_pDataMng->GetQuest()->IsProcess(pFTEvolObj->m_nOpenQuest))
+						{
+							g_pDataMng->GetQuest()->DropProcQuest( pFTEvolObj->m_nOpenQuest );
+						}			
+					}
 				}
 			}
 		}
@@ -451,8 +532,11 @@ void CDigimonArchiveContents::OnRecvChangeResult(void* pkData)
 
 	// 데이터 교환
 	SwapDigimon(pkRecvData->Src, pkRecvData->Dst);
-	UpdateSlotData();
-	Notify(Update_Viewer);
+	nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE CONTENT OnRecvChangeResult local swap applied; defer viewer refresh to 3204 src=%d dst=%d digimons=%d sorted=%d",
+		pkRecvData->Src,
+		pkRecvData->Dst,
+		(int)mDigimons.size(),
+		(int)mSorted.size());
 }
 
 void CDigimonArchiveContents::OnRecvIncubatorChanged(void* pkData)
@@ -2356,6 +2440,20 @@ void CDigimonArchiveContents::OnRClick_Archive_Digimon_In_TranscendMode( int Arc
  	DigimonInArchive* pkArchiveInfo = GetArchiveSlotInfo(ArchiveSlotIdx);
 	SAFE_POINTER_RET( pkArchiveInfo );
 
+	nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND material click archiveSlot=%d targetBase=%u targetLv=%d targetHatch=%d targetScale=%.4f materialData=%p materialBase=%u materialLv=%d materialHatch=%d inIncu=%d inTrans=%d registered=%u",
+		ArchiveSlotIdx,
+		mpkSelectedDigimon ? mpkSelectedDigimon->s_dwBaseDigimonID : 0,
+		mpkSelectedDigimon ? mpkSelectedDigimon->s_nLevel : 0,
+		mpkSelectedDigimon ? mpkSelectedDigimon->s_HatchLevel : 0,
+		mpkSelectedDigimon ? mpkSelectedDigimon->s_fScale : 0.0f,
+		pkArchiveInfo->mpData,
+		pkArchiveInfo->mpData ? pkArchiveInfo->mpData->s_dwBaseDigimonID : 0,
+		pkArchiveInfo->mpData ? pkArchiveInfo->mpData->s_nLevel : 0,
+		pkArchiveInfo->mpData ? pkArchiveInfo->mpData->s_HatchLevel : 0,
+		pkArchiveInfo->mbIsInIncubator ? 1 : 0,
+		pkArchiveInfo->mbIsInTranscend ? 1 : 0,
+		(unsigned int)mTransMaterialInfos.size());
+
 	// 성장 촉진 중인 디지몬은 재료 등록 못함.
 	if( pkArchiveInfo->mbIsInIncubator )
 		return;
@@ -2493,6 +2591,15 @@ bool CDigimonArchiveContents::IsEnableTranscend_MaterialDigimon( cData_PostLoad:
 
 	SAFE_POINTER_RETVAL( nsCsFileTable::g_pTacticsMng, false );
 
+	if( IsTranscendenceExpMaterialDigimon( pDigimonInfo->s_dwBaseDigimonID, pDigimonInfo->s_HatchLevel ) )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND material accepted as exp digimon base=%u hatch=%d fixedExp=%u",
+			pDigimonInfo->s_dwBaseDigimonID,
+			pDigimonInfo->s_HatchLevel,
+			GetTranscendenceExpMaterialFixedExp( pDigimonInfo->s_dwBaseDigimonID, pDigimonInfo->s_HatchLevel ));
+		return true;
+	}
+
 	CsDigimon* pSelDigimon = nsCsFileTable::g_pDigimonMng->GetDigimon( mpkSelectedDigimon->s_dwBaseDigimonID );
 	SAFE_POINTER_RETVAL( pSelDigimon, false );
 
@@ -2508,6 +2615,12 @@ bool CDigimonArchiveContents::IsEnableTranscend_MaterialDigimon( cData_PostLoad:
 
 	if( !pInfos->sNeedValue.IsEnableEvoType( pTInfo->s_eEvolutionType ) )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND material rejected evoType materialBase=%u evoType=%d needMin=%d needMax=%d targetBase=%u",
+			pDigimonInfo->s_dwBaseDigimonID,
+			pTInfo->s_eEvolutionType,
+			pInfos->sNeedValue.nNeedEvoMinType,
+			pInfos->sNeedValue.nNeedEvoMaxType,
+			mpkSelectedDigimon->s_dwBaseDigimonID);
 		cPrintMsg::PrintMsg( nsDigimonTranscendenceResult::Not_UseDigimonMaterial );// 초월하려는 대상의 재료로 사용할 수 없는 디지몬 타입입니다.
 		return false;// 진화 재료에 사용할 수 없는 디지몬 진화 타입
 	}
@@ -2515,6 +2628,12 @@ bool CDigimonArchiveContents::IsEnableTranscend_MaterialDigimon( cData_PostLoad:
 	// 부화 단계 조건 확인
 	if( !pInfos->sNeedValue.IsEnableHatchLv( pDigimonInfo->s_HatchLevel ) )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND material rejected hatch materialBase=%u hatch=%d needMin=%d needMax=%d targetBase=%u",
+			pDigimonInfo->s_dwBaseDigimonID,
+			pDigimonInfo->s_HatchLevel,
+			pInfos->sNeedValue.nNeedHatchLvMin,
+			pInfos->sNeedValue.nNeedHatchLvMax,
+			mpkSelectedDigimon->s_dwBaseDigimonID);
 		cPrintMsg::PrintMsg( 20116 );
 		return false;
 	}
@@ -2560,9 +2679,9 @@ DWORD CDigimonArchiveContents::GetMaterialDigimonExp( cData_PostLoad::sDATA cons
 	SAFE_POINTER_RETVAL( nsCsFileTable::g_pTacticsMng, 0 );
 
 	// 경험치용 디지몬인지 검사
-	bool bExpDigimon = nsCsFileTable::g_pTacticsMng->IsExpDigimon( pData->s_dwBaseDigimonID, pData->s_HatchLevel );
-	if( bExpDigimon )
-		return nsCsFileTable::g_pTacticsMng->GetExpDigimonFixedFigure( pData->s_dwBaseDigimonID, pData->s_HatchLevel );
+	DWORD dwExpDigimonFixedExp = GetTranscendenceExpMaterialFixedExp( pData->s_dwBaseDigimonID, pData->s_HatchLevel );
+	if( 0 != dwExpDigimonFixedExp )
+		return dwExpDigimonFixedExp;
 
 	sTranscendCorrect const& pInfo = nsCsFileTable::g_pTacticsMng->GetTranscend_Correct();
 	bool bSeamType = IsSameDigimonType( mpkSelectedDigimon, pData );
@@ -2816,6 +2935,17 @@ bool CDigimonArchiveContents::SendExpCharge(int const& nChargeType)
 {
 	SAFE_POINTER_RETVAL( net::game, false );
 
+	nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND SendExpCharge begin chargeType=%d selectedIdx=%d selected=%p base=%u level=%d hatch=%d transExp=%llu registeredMaterials=%u overExp=%d",
+		nChargeType,
+		SelectedDigimonIdx,
+		mpkSelectedDigimon,
+		mpkSelectedDigimon ? mpkSelectedDigimon->s_dwBaseDigimonID : 0,
+		mpkSelectedDigimon ? mpkSelectedDigimon->s_nLevel : 0,
+		mpkSelectedDigimon ? mpkSelectedDigimon->s_HatchLevel : 0,
+		mpkSelectedDigimon ? (unsigned long long)mpkSelectedDigimon->s_nTranscendenceExp : 0,
+		(unsigned int)mTransMaterialInfos.size(),
+		m_bTranscendenceOverExp ? 1 : 0);
+
 	// 현재 선택된 디지몬은 초월을 할 수 없는 상태인지 검사 함.
 	if( !IsEnableTranscendDigimon(mpkSelectedDigimon))
 		return false;
@@ -2838,6 +2968,16 @@ bool CDigimonArchiveContents::SendExpCharge(int const& nChargeType)
 
 		DigimonInArchive* pMaterial = kRegisteredIter->second;
 		SAFE_POINTER_RETVAL( pMaterial, false );
+		nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND SendExpCharge material archiveSlot=%d rawSlot=%d data=%p base=%u level=%d hatch=%d inIncu=%d inTrans=%d exp=%u",
+			nArchiveSlotIdx,
+			(*it).RegisteredDigimonArchiveSlotIdx,
+			pMaterial->mpData,
+			pMaterial->mpData ? pMaterial->mpData->s_dwBaseDigimonID : 0,
+			pMaterial->mpData ? pMaterial->mpData->s_nLevel : 0,
+			pMaterial->mpData ? pMaterial->mpData->s_HatchLevel : 0,
+			pMaterial->mbIsInIncubator ? 1 : 0,
+			pMaterial->mbIsInTranscend ? 1 : 0,
+			(*it).RegisteredExp);
 		if( pMaterial->mbIsInIncubator )
 			return false;
 
@@ -2874,6 +3014,10 @@ bool CDigimonArchiveContents::SendExpCharge(int const& nChargeType)
 		addItem.m_u2ItemCount = it2->second.GetCount();
 		addItem.m_uItemType = it2->second.m_nType;
 		m_lItemList.push_back( addItem );
+		nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND SendExpCharge item invenSlot=%d itemType=%u count=%d",
+			addItem.m_u2ItemPos,
+			addItem.m_uItemType,
+			addItem.m_u2ItemCount);
 	}
 
 	bool bIsVipMode = false;
@@ -2890,6 +3034,13 @@ bool CDigimonArchiveContents::SendExpCharge(int const& nChargeType)
 		bIsVipMode = true;
 
 	net::game->SendDigimonTranscendenceChargeExp( bIsVipMode, nItemInvenPos, dwNpcIDX, nChargeType, SelectedDigimonIdx, materialDigimonSlotIdx, m_lItemList );
+	nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND SendExpCharge sent vip=%d portable=%d npc=%u selectedIdx=%d materialCount=%d itemCount=%u",
+		bIsVipMode ? 1 : 0,
+		nItemInvenPos,
+		dwNpcIDX,
+		SelectedDigimonIdx,
+		nMaterialCount,
+		(unsigned int)m_lItemList.size());
 	return true;
 }
 
@@ -2901,6 +3052,16 @@ void CDigimonArchiveContents::RecvExpCharge(void* pData)
 	SAFE_POINTER_RET( pData );
 	GS2C_RECV_DigimonTranscendenceChargeEXP* pRecv = static_cast<GS2C_RECV_DigimonTranscendenceChargeEXP*>(pData);
 	SetWindowLock(false);
+
+	nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND RecvExpCharge result=%d pos=%d flag=%d deleted=%u items=%u successRate=%d chargeExp=%llu totalExp=%llu",
+		pRecv->m_nResult,
+		pRecv->m_u1DigimonTranscendencePos,
+		pRecv->m_u1Flag,
+		(unsigned int)pRecv->m_listDigimonPos.size(),
+		(unsigned int)pRecv->m_lItemList.size(),
+		pRecv->m_u2SuccessRate,
+		(unsigned long long)pRecv->m_u8ChargeEXP,
+		(unsigned long long)pRecv->m_u8TotalEXP);
 
 	bool bSuccess = true;
 	bool bOverExp = false;
@@ -2950,6 +3111,14 @@ void CDigimonArchiveContents::SendDigimonTranscendence()
 {
 	SAFE_POINTER_RET( net::game );
 
+	nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND SendDigimonTranscendence begin selectedIdx=%d selected=%p base=%u level=%d hatch=%d transExp=%llu",
+		SelectedDigimonIdx,
+		mpkSelectedDigimon,
+		mpkSelectedDigimon ? mpkSelectedDigimon->s_dwBaseDigimonID : 0,
+		mpkSelectedDigimon ? mpkSelectedDigimon->s_nLevel : 0,
+		mpkSelectedDigimon ? mpkSelectedDigimon->s_HatchLevel : 0,
+		mpkSelectedDigimon ? (unsigned long long)mpkSelectedDigimon->s_nTranscendenceExp : 0);
+
 	// 현재 선택된 디지몬은 초월을 할 수 없는 상태인지 검사 함.
 	if( !IsEnableTranscendDigimon(mpkSelectedDigimon))
 		return;
@@ -2957,6 +3126,10 @@ void CDigimonArchiveContents::SendDigimonTranscendence()
 	DWORD dwCurrentExp = 0;
 	DWORD dwMaxExp = 0;
 	GetCurrentDigimonMaxNExp( mpkSelectedDigimon, dwCurrentExp, dwMaxExp );
+	nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND SendDigimonTranscendence expCheck current=%u max=%u registeredMaterialExp=%u",
+		dwCurrentExp,
+		dwMaxExp,
+		GetRegistMaterialExp());
 	if( dwCurrentExp < dwMaxExp )
 	{// 초월 하려는 디지몬의 경험치 부족
 		cPrintMsg::PrintMsg( nsDigimonTranscendenceResult::Not_Exp );
@@ -3000,6 +3173,12 @@ void CDigimonArchiveContents::SendDigimonTranscendence()
 		bIsVipMode = true;
 
 	net::game->SendDigimonTranscendence( bIsVipMode, nItemInvenPos, dwNpcIDX, SelectedDigimonIdx, dwNeedMoney );
+	nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND SendDigimonTranscendence sent vip=%d portable=%d npc=%u selectedIdx=%d needMoney=%u",
+		bIsVipMode ? 1 : 0,
+		nItemInvenPos,
+		dwNpcIDX,
+		SelectedDigimonIdx,
+		dwNeedMoney);
 	SetWindowLock(true);
 }
 
@@ -3011,6 +3190,13 @@ void CDigimonArchiveContents::RecvDigimonHatchUp(void* pData)
 	SAFE_POINTER_RET( pData );
 	GS2C_RECV_DigimonTranscendence * pRecv = static_cast<GS2C_RECV_DigimonTranscendence*>(pData);
 	SetWindowLock(false);
+
+	nsCSDEBUG::CrashLogger::LogMessage("TRANSCEND RecvDigimonHatchUp result=%d pos=%d hatch=%d money=%llu exp=%llu",
+		pRecv->m_nResult,
+		pRecv->m_u1DigimonTranscendencePos,
+		pRecv->m_u1HatchLevel,
+		(unsigned long long)pRecv->m_n8Money,
+		(unsigned long long)pRecv->m_u8Exp);
 
 	if( nsDigimonTranscendenceResult::Success != pRecv->m_nResult )
 	{

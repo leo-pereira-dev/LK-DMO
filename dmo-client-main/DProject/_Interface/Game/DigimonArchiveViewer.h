@@ -115,6 +115,7 @@ private:
 	cText*						mTTDigimonOpenedCnt;
 	NiColor						mDefaultColor_OpenedSlotCnt;
 	bool						m_bisDragable;
+	bool						m_bPendingArchiveUpdate;
 
 	DigimonArchiveSubViewer*	m_pkCurrViewer;
 	DigimonArchiveSubViewer*	m_pkInfoViewer;

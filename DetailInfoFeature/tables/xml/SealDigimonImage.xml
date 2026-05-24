@@ -1,0 +1,1565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SealDigimonImage schema="SealDigimonImage.struct" bin="SealDigimonImage.bin" byteLength="26389">
+  <Images kind="Section" offset="0" length="26389">
+    <_0 kind="Record" offset="4" length="71">
+      <DigimonId kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="21133" />
+      <SealImagePath kind="Leaf" offset="8" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Tsunomon.dds</SealImagePath>
+    </_0>
+    <_1 kind="Record" offset="75" length="74">
+      <DigimonId kind="Leaf" offset="75" length="4" type="Scalar { Kind = U32 }" value="21134" />
+      <SealImagePath kind="Leaf" offset="79" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Demimeramon.dds</SealImagePath>
+    </_1>
+    <_2 kind="Record" offset="149" length="69">
+      <DigimonId kind="Leaf" offset="149" length="4" type="Scalar { Kind = U32 }" value="21135" />
+      <SealImagePath kind="Leaf" offset="153" length="65" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Upamon.dds</SealImagePath>
+    </_2>
+    <_3 kind="Record" offset="218" length="70">
+      <DigimonId kind="Leaf" offset="218" length="4" type="Scalar { Kind = U32 }" value="21136" />
+      <SealImagePath kind="Leaf" offset="222" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Koromon.dds</SealImagePath>
+    </_3>
+    <_4 kind="Record" offset="288" length="70">
+      <DigimonId kind="Leaf" offset="288" length="4" type="Scalar { Kind = U32 }" value="21137" />
+      <SealImagePath kind="Leaf" offset="292" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Tanemon.dds</SealImagePath>
+    </_4>
+    <_5 kind="Record" offset="358" length="70">
+      <DigimonId kind="Leaf" offset="358" length="4" type="Scalar { Kind = U32 }" value="21138" />
+      <SealImagePath kind="Leaf" offset="362" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Culumon.dds</SealImagePath>
+    </_5>
+    <_6 kind="Record" offset="428" length="56">
+      <DigimonId kind="Leaf" offset="428" length="4" type="Scalar { Kind = U32 }" value="25003" />
+      <SealImagePath kind="Leaf" offset="432" length="52" type="LString { }">data\interface\SealMaster\SealImage\Okuwamon.dds</SealImagePath>
+    </_6>
+    <_7 kind="Record" offset="484" length="59">
+      <DigimonId kind="Leaf" offset="484" length="4" type="Scalar { Kind = U32 }" value="25004" />
+      <SealImagePath kind="Leaf" offset="488" length="55" type="LString { }">data\interface\SealMaster\SealImage\Groundramon.dds</SealImagePath>
+    </_7>
+    <_8 kind="Record" offset="543" length="71">
+      <DigimonId kind="Leaf" offset="543" length="4" type="Scalar { Kind = U32 }" value="25007" />
+      <SealImagePath kind="Leaf" offset="547" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Shellmon.dds</SealImagePath>
+    </_8>
+    <_9 kind="Record" offset="614" length="62">
+      <DigimonId kind="Leaf" offset="614" length="4" type="Scalar { Kind = U32 }" value="25010" />
+      <SealImagePath kind="Leaf" offset="618" length="58" type="LString { }">data\interface\SealMaster\SealImage\ANOMALOCARIMON.dds</SealImagePath>
+    </_9>
+    <_10 kind="Record" offset="676" length="62">
+      <DigimonId kind="Leaf" offset="676" length="4" type="Scalar { Kind = U32 }" value="25011" />
+      <SealImagePath kind="Leaf" offset="680" length="58" type="LString { }">data\Interface\SealMaster\SealImage\MetalSeadramon.dds</SealImagePath>
+    </_10>
+    <_11 kind="Record" offset="738" length="56">
+      <DigimonId kind="Leaf" offset="738" length="4" type="Scalar { Kind = U32 }" value="25012" />
+      <SealImagePath kind="Leaf" offset="742" length="52" type="LString { }">data\interface\SealMaster\SealImage\GERBEMON.dds</SealImagePath>
+    </_11>
+    <_12 kind="Record" offset="794" length="59">
+      <DigimonId kind="Leaf" offset="794" length="4" type="Scalar { Kind = U32 }" value="25015" />
+      <SealImagePath kind="Leaf" offset="798" length="55" type="LString { }">data\interface\SealMaster\SealImage\MetalEtemon.dds</SealImagePath>
+    </_12>
+    <_13 kind="Record" offset="853" length="58">
+      <DigimonId kind="Leaf" offset="853" length="4" type="Scalar { Kind = U32 }" value="25018" />
+      <SealImagePath kind="Leaf" offset="857" length="54" type="LString { }">data\interface\SealMaster\SealImage\MEGADRAMON.dds</SealImagePath>
+    </_13>
+    <_14 kind="Record" offset="911" length="59">
+      <DigimonId kind="Leaf" offset="911" length="4" type="Scalar { Kind = U32 }" value="25022" />
+      <SealImagePath kind="Leaf" offset="915" length="55" type="LString { }">data\interface\SealMaster\SealImage\LadyDevimon.dds</SealImagePath>
+    </_14>
+    <_15 kind="Record" offset="970" length="81">
+      <DigimonId kind="Leaf" offset="970" length="4" type="Scalar { Kind = U32 }" value="25501" />
+      <SealImagePath kind="Leaf" offset="974" length="77" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Vajiramon_RaidBoss.dds</SealImagePath>
+    </_15>
+    <_16 kind="Record" offset="1051" length="72">
+      <DigimonId kind="Leaf" offset="1051" length="4" type="Scalar { Kind = U32 }" value="25505" />
+      <SealImagePath kind="Leaf" offset="1055" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Orochimon.dds</SealImagePath>
+    </_16>
+    <_17 kind="Record" offset="1123" length="61">
+      <DigimonId kind="Leaf" offset="1123" length="4" type="Scalar { Kind = U32 }" value="25520" />
+      <SealImagePath kind="Leaf" offset="1127" length="57" type="LString { }">data\interface\SealMaster\SealImage\Gulusgammamon.dds</SealImagePath>
+    </_17>
+    <_18 kind="Record" offset="1184" length="61">
+      <DigimonId kind="Leaf" offset="1184" length="4" type="Scalar { Kind = U32 }" value="25521" />
+      <SealImagePath kind="Leaf" offset="1188" length="57" type="LString { }">data\interface\SealMaster\SealImage\Susanoomon_RE.dds</SealImagePath>
+    </_18>
+    <_19 kind="Record" offset="1245" length="76">
+      <DigimonId kind="Leaf" offset="1245" length="4" type="Scalar { Kind = U32 }" value="31000" />
+      <SealImagePath kind="Leaf" offset="1249" length="72" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_DATS_founding.dds</SealImagePath>
+    </_19>
+    <_20 kind="Record" offset="1321" length="72">
+      <DigimonId kind="Leaf" offset="1321" length="4" type="Scalar { Kind = U32 }" value="31001" />
+      <SealImagePath kind="Leaf" offset="1325" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Agumon(S).dds</SealImagePath>
+    </_20>
+    <_21 kind="Record" offset="1393" length="70">
+      <DigimonId kind="Leaf" offset="1393" length="4" type="Scalar { Kind = U32 }" value="31002" />
+      <SealImagePath kind="Leaf" offset="1397" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Lalamon.dds</SealImagePath>
+    </_21>
+    <_22 kind="Record" offset="1463" length="69">
+      <DigimonId kind="Leaf" offset="1463" length="4" type="Scalar { Kind = U32 }" value="31003" />
+      <SealImagePath kind="Leaf" offset="1467" length="65" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Gaomon.dds</SealImagePath>
+    </_22>
+    <_23 kind="Record" offset="1532" length="71">
+      <DigimonId kind="Leaf" offset="1532" length="4" type="Scalar { Kind = U32 }" value="31004" />
+      <SealImagePath kind="Leaf" offset="1536" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Falcomon.dds</SealImagePath>
+    </_23>
+    <_24 kind="Record" offset="1603" length="70">
+      <DigimonId kind="Leaf" offset="1603" length="4" type="Scalar { Kind = U32 }" value="31005" />
+      <SealImagePath kind="Leaf" offset="1607" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Guilmon.dds</SealImagePath>
+    </_24>
+    <_25 kind="Record" offset="1673" length="70">
+      <DigimonId kind="Leaf" offset="1673" length="4" type="Scalar { Kind = U32 }" value="31006" />
+      <SealImagePath kind="Leaf" offset="1677" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Renamon.dds</SealImagePath>
+    </_25>
+    <_26 kind="Record" offset="1743" length="69">
+      <DigimonId kind="Leaf" offset="1743" length="4" type="Scalar { Kind = U32 }" value="31007" />
+      <SealImagePath kind="Leaf" offset="1747" length="65" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Agumon.dds</SealImagePath>
+    </_26>
+    <_27 kind="Record" offset="1812" length="67">
+      <DigimonId kind="Leaf" offset="1812" length="4" type="Scalar { Kind = U32 }" value="31008" />
+      <SealImagePath kind="Leaf" offset="1816" length="63" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Vmon.dds</SealImagePath>
+    </_27>
+    <_28 kind="Record" offset="1879" length="81">
+      <DigimonId kind="Leaf" offset="1879" length="4" type="Scalar { Kind = U32 }" value="31009" />
+      <SealImagePath kind="Leaf" offset="1883" length="77" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_PawnChessmon Black.dds</SealImagePath>
+    </_28>
+    <_29 kind="Record" offset="1960" length="73">
+      <DigimonId kind="Leaf" offset="1960" length="4" type="Scalar { Kind = U32 }" value="31011" />
+      <SealImagePath kind="Leaf" offset="1964" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Monodramon.dds</SealImagePath>
+    </_29>
+    <_30 kind="Record" offset="2033" length="70">
+      <DigimonId kind="Leaf" offset="2033" length="4" type="Scalar { Kind = U32 }" value="31012" />
+      <SealImagePath kind="Leaf" offset="2037" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Patamon.dds</SealImagePath>
+    </_30>
+    <_31 kind="Record" offset="2103" length="81">
+      <DigimonId kind="Leaf" offset="2103" length="4" type="Scalar { Kind = U32 }" value="31013" />
+      <SealImagePath kind="Leaf" offset="2107" length="77" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_PawnChessmon White.dds</SealImagePath>
+    </_31>
+    <_32 kind="Record" offset="2184" length="69">
+      <DigimonId kind="Leaf" offset="2184" length="4" type="Scalar { Kind = U32 }" value="31015" />
+      <SealImagePath kind="Leaf" offset="2188" length="65" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Lopmon.dds</SealImagePath>
+    </_32>
+    <_33 kind="Record" offset="2253" length="72">
+      <DigimonId kind="Leaf" offset="2253" length="4" type="Scalar { Kind = U32 }" value="31016" />
+      <SealImagePath kind="Leaf" offset="2257" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Fanbeemon.dds</SealImagePath>
+    </_33>
+    <_34 kind="Record" offset="2325" length="70">
+      <DigimonId kind="Leaf" offset="2325" length="4" type="Scalar { Kind = U32 }" value="31017" />
+      <SealImagePath kind="Leaf" offset="2329" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Keramon.dds</SealImagePath>
+    </_34>
+    <_35 kind="Record" offset="2395" length="71">
+      <DigimonId kind="Leaf" offset="2395" length="4" type="Scalar { Kind = U32 }" value="31018" />
+      <SealImagePath kind="Leaf" offset="2399" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Gotsumon.dds</SealImagePath>
+    </_35>
+    <_36 kind="Record" offset="2466" length="71">
+      <DigimonId kind="Leaf" offset="2466" length="4" type="Scalar { Kind = U32 }" value="31019" />
+      <SealImagePath kind="Leaf" offset="2470" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_plutomon.dds</SealImagePath>
+    </_36>
+    <_37 kind="Record" offset="2537" length="70">
+      <DigimonId kind="Leaf" offset="2537" length="4" type="Scalar { Kind = U32 }" value="31020" />
+      <SealImagePath kind="Leaf" offset="2541" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Hawkmon.dds</SealImagePath>
+    </_37>
+    <_38 kind="Record" offset="2607" length="72">
+      <DigimonId kind="Leaf" offset="2607" length="4" type="Scalar { Kind = U32 }" value="31022" />
+      <SealImagePath kind="Leaf" offset="2611" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Candlemon.dds</SealImagePath>
+    </_38>
+    <_39 kind="Record" offset="2679" length="70">
+      <DigimonId kind="Leaf" offset="2679" length="4" type="Scalar { Kind = U32 }" value="31023" />
+      <SealImagePath kind="Leaf" offset="2683" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_kudamon.dds</SealImagePath>
+    </_39>
+    <_40 kind="Record" offset="2749" length="70">
+      <DigimonId kind="Leaf" offset="2749" length="4" type="Scalar { Kind = U32 }" value="31024" />
+      <SealImagePath kind="Leaf" offset="2753" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Bokomon.dds</SealImagePath>
+    </_40>
+    <_41 kind="Record" offset="2819" length="71">
+      <DigimonId kind="Leaf" offset="2819" length="4" type="Scalar { Kind = U32 }" value="31025" />
+      <SealImagePath kind="Leaf" offset="2823" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Labramon.dds</SealImagePath>
+    </_41>
+    <_42 kind="Record" offset="2890" length="55">
+      <DigimonId kind="Leaf" offset="2890" length="4" type="Scalar { Kind = U32 }" value="31026" />
+      <SealImagePath kind="Leaf" offset="2894" length="51" type="LString { }">data\interface\SealMaster\SealImage\Betamon.dds</SealImagePath>
+    </_42>
+    <_43 kind="Record" offset="2945" length="73">
+      <DigimonId kind="Leaf" offset="2945" length="4" type="Scalar { Kind = U32 }" value="31028" />
+      <SealImagePath kind="Leaf" offset="2949" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Drimogemon.dds</SealImagePath>
+    </_43>
+    <_44 kind="Record" offset="3018" length="70">
+      <DigimonId kind="Leaf" offset="3018" length="4" type="Scalar { Kind = U32 }" value="31029" />
+      <SealImagePath kind="Leaf" offset="3022" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Kunemon.dds</SealImagePath>
+    </_44>
+    <_45 kind="Record" offset="3088" length="72">
+      <DigimonId kind="Leaf" offset="3088" length="4" type="Scalar { Kind = U32 }" value="31030" />
+      <SealImagePath kind="Leaf" offset="3092" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Armadimon.dds</SealImagePath>
+    </_45>
+    <_46 kind="Record" offset="3160" length="71">
+      <DigimonId kind="Leaf" offset="3160" length="4" type="Scalar { Kind = U32 }" value="31031" />
+      <SealImagePath kind="Leaf" offset="3164" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Tentomon.dds</SealImagePath>
+    </_46>
+    <_47 kind="Record" offset="3231" length="72">
+      <DigimonId kind="Leaf" offset="3231" length="4" type="Scalar { Kind = U32 }" value="31032" />
+      <SealImagePath kind="Leaf" offset="3235" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Sharmamon.dds</SealImagePath>
+    </_47>
+    <_48 kind="Record" offset="3303" length="71">
+      <DigimonId kind="Leaf" offset="3303" length="4" type="Scalar { Kind = U32 }" value="31033" />
+      <SealImagePath kind="Leaf" offset="3307" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Goblimon.dds</SealImagePath>
+    </_48>
+    <_49 kind="Record" offset="3374" length="57">
+      <DigimonId kind="Leaf" offset="3374" length="4" type="Scalar { Kind = U32 }" value="31034" />
+      <SealImagePath kind="Leaf" offset="3378" length="53" type="LString { }">data\Interface\SealMaster\SealImage\Hagurumon.dds</SealImagePath>
+    </_49>
+    <_50 kind="Record" offset="3431" length="75">
+      <DigimonId kind="Leaf" offset="3431" length="4" type="Scalar { Kind = U32 }" value="31035" />
+      <SealImagePath kind="Leaf" offset="3435" length="71" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Commandramon.dds</SealImagePath>
+    </_50>
+    <_51 kind="Record" offset="3506" length="57">
+      <DigimonId kind="Leaf" offset="3506" length="4" type="Scalar { Kind = U32 }" value="31038" />
+      <SealImagePath kind="Leaf" offset="3510" length="53" type="LString { }">data\interface\SealMaster\SealImage\Dokunemon.dds</SealImagePath>
+    </_51>
+    <_52 kind="Record" offset="3563" length="70">
+      <DigimonId kind="Leaf" offset="3563" length="4" type="Scalar { Kind = U32 }" value="31039" />
+      <SealImagePath kind="Leaf" offset="3567" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Dracmon.dds</SealImagePath>
+    </_52>
+    <_53 kind="Record" offset="3633" length="69">
+      <DigimonId kind="Leaf" offset="3633" length="4" type="Scalar { Kind = U32 }" value="31041" />
+      <SealImagePath kind="Leaf" offset="3637" length="65" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Palmon.dds</SealImagePath>
+    </_53>
+    <_54 kind="Record" offset="3702" length="73">
+      <DigimonId kind="Leaf" offset="3702" length="4" type="Scalar { Kind = U32 }" value="31042" />
+      <SealImagePath kind="Leaf" offset="3706" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Mushroomon.dds</SealImagePath>
+    </_54>
+    <_55 kind="Record" offset="3775" length="70">
+      <DigimonId kind="Leaf" offset="3775" length="4" type="Scalar { Kind = U32 }" value="31048" />
+      <SealImagePath kind="Leaf" offset="3779" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_piyomon.dds</SealImagePath>
+    </_55>
+    <_56 kind="Record" offset="3845" length="70">
+      <DigimonId kind="Leaf" offset="3845" length="4" type="Scalar { Kind = U32 }" value="31049" />
+      <SealImagePath kind="Leaf" offset="3849" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Elecmon.dds</SealImagePath>
+    </_56>
+    <_57 kind="Record" offset="3915" length="70">
+      <DigimonId kind="Leaf" offset="3915" length="4" type="Scalar { Kind = U32 }" value="31050" />
+      <SealImagePath kind="Leaf" offset="3919" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Gomamon.dds</SealImagePath>
+    </_57>
+    <_58 kind="Record" offset="3985" length="70">
+      <DigimonId kind="Leaf" offset="3985" length="4" type="Scalar { Kind = U32 }" value="31051" />
+      <SealImagePath kind="Leaf" offset="3989" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Kamemon.dds</SealImagePath>
+    </_58>
+    <_59 kind="Record" offset="4055" length="69">
+      <DigimonId kind="Leaf" offset="4055" length="4" type="Scalar { Kind = U32 }" value="31066" />
+      <SealImagePath kind="Leaf" offset="4059" length="65" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Impmon.dds</SealImagePath>
+    </_59>
+    <_60 kind="Record" offset="4124" length="59">
+      <DigimonId kind="Leaf" offset="4124" length="4" type="Scalar { Kind = U32 }" value="31067" />
+      <SealImagePath kind="Leaf" offset="4128" length="55" type="LString { }">data\Interface\SealMaster\SealImage\PicoDevimon.dds</SealImagePath>
+    </_60>
+    <_61 kind="Record" offset="4183" length="61">
+      <DigimonId kind="Leaf" offset="4183" length="4" type="Scalar { Kind = U32 }" value="31068" />
+      <SealImagePath kind="Leaf" offset="4187" length="57" type="LString { }">data\Interface\SealMaster\SealImage\Gabumon_Black.dds</SealImagePath>
+    </_61>
+    <_62 kind="Record" offset="4244" length="72">
+      <DigimonId kind="Leaf" offset="4244" length="4" type="Scalar { Kind = U32 }" value="31069" />
+      <SealImagePath kind="Leaf" offset="4248" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Kokuwamon.dds</SealImagePath>
+    </_62>
+    <_63 kind="Record" offset="4316" length="70">
+      <DigimonId kind="Leaf" offset="4316" length="4" type="Scalar { Kind = U32 }" value="31138" />
+      <SealImagePath kind="Leaf" offset="4320" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Gabumon.dds</SealImagePath>
+    </_63>
+    <_64 kind="Record" offset="4386" length="71">
+      <DigimonId kind="Leaf" offset="4386" length="4" type="Scalar { Kind = U32 }" value="31147" />
+      <SealImagePath kind="Leaf" offset="4390" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Shakomon.dds</SealImagePath>
+    </_64>
+    <_65 kind="Record" offset="4457" length="56">
+      <DigimonId kind="Leaf" offset="4457" length="4" type="Scalar { Kind = U32 }" value="33001" />
+      <SealImagePath kind="Leaf" offset="4461" length="52" type="LString { }">data\interface\SealMaster\SealImage\Shoutmon.dds</SealImagePath>
+    </_65>
+    <_66 kind="Record" offset="4513" length="59">
+      <DigimonId kind="Leaf" offset="4513" length="4" type="Scalar { Kind = U32 }" value="33002" />
+      <SealImagePath kind="Leaf" offset="4517" length="55" type="LString { }">data\interface\SealMaster\SealImage\Ballistamon.dds</SealImagePath>
+    </_66>
+    <_67 kind="Record" offset="4572" length="57">
+      <DigimonId kind="Leaf" offset="4572" length="4" type="Scalar { Kind = U32 }" value="33003" />
+      <SealImagePath kind="Leaf" offset="4576" length="53" type="LString { }">data\interface\SealMaster\SealImage\Dorulumon.dds</SealImagePath>
+    </_67>
+    <_68 kind="Record" offset="4629" length="70">
+      <DigimonId kind="Leaf" offset="4629" length="4" type="Scalar { Kind = U32 }" value="33036" />
+      <SealImagePath kind="Leaf" offset="4633" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Dorumon.dds</SealImagePath>
+    </_68>
+    <_69 kind="Record" offset="4699" length="70">
+      <DigimonId kind="Leaf" offset="4699" length="4" type="Scalar { Kind = U32 }" value="33068" />
+      <SealImagePath kind="Leaf" offset="4703" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Gazimon.dds</SealImagePath>
+    </_69>
+    <_70 kind="Record" offset="4769" length="71">
+      <DigimonId kind="Leaf" offset="4769" length="4" type="Scalar { Kind = U32 }" value="33085" />
+      <SealImagePath kind="Leaf" offset="4773" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Floramon.dds</SealImagePath>
+    </_70>
+    <_71 kind="Record" offset="4840" length="56">
+      <DigimonId kind="Leaf" offset="4840" length="4" type="Scalar { Kind = U32 }" value="35143" />
+      <SealImagePath kind="Leaf" offset="4844" length="52" type="LString { }">data\interface\SealMaster\SealImage\Otamamon.dds</SealImagePath>
+    </_71>
+    <_72 kind="Record" offset="4896" length="73">
+      <DigimonId kind="Leaf" offset="4896" length="4" type="Scalar { Kind = U32 }" value="35144" />
+      <SealImagePath kind="Leaf" offset="4900" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Toy Agumon.dds</SealImagePath>
+    </_72>
+    <_73 kind="Record" offset="4969" length="72">
+      <DigimonId kind="Leaf" offset="4969" length="4" type="Scalar { Kind = U32 }" value="35145" />
+      <SealImagePath kind="Leaf" offset="4973" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Psychemon.dds</SealImagePath>
+    </_73>
+    <_74 kind="Record" offset="5041" length="55">
+      <DigimonId kind="Leaf" offset="5041" length="4" type="Scalar { Kind = U32 }" value="35147" />
+      <SealImagePath kind="Leaf" offset="5045" length="51" type="LString { }">data\Interface\SealMaster\SealImage\Hackmon.dds</SealImagePath>
+    </_74>
+    <_75 kind="Record" offset="5096" length="56">
+      <DigimonId kind="Leaf" offset="5096" length="4" type="Scalar { Kind = U32 }" value="35148" />
+      <SealImagePath kind="Leaf" offset="5100" length="52" type="LString { }">data\interface\SealMaster\SealImage\Gammamon.dds</SealImagePath>
+    </_75>
+    <_76 kind="Record" offset="5152" length="71">
+      <DigimonId kind="Leaf" offset="5152" length="4" type="Scalar { Kind = U32 }" value="35149" />
+      <SealImagePath kind="Leaf" offset="5156" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Jellymon.dds</SealImagePath>
+    </_76>
+    <_77 kind="Record" offset="5223" length="57">
+      <DigimonId kind="Leaf" offset="5223" length="4" type="Scalar { Kind = U32 }" value="35150" />
+      <SealImagePath kind="Leaf" offset="5227" length="53" type="LString { }">data\interface\SealMaster\SealImage\Angoramon.dds</SealImagePath>
+    </_77>
+    <_78 kind="Record" offset="5280" length="73">
+      <DigimonId kind="Leaf" offset="5280" length="4" type="Scalar { Kind = U32 }" value="41004" />
+      <SealImagePath kind="Leaf" offset="5284" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_GeoGreymon.dds</SealImagePath>
+    </_78>
+    <_79 kind="Record" offset="5353" length="73">
+      <DigimonId kind="Leaf" offset="5353" length="4" type="Scalar { Kind = U32 }" value="41005" />
+      <SealImagePath kind="Leaf" offset="5357" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_SunFlowmon.dds</SealImagePath>
+    </_79>
+    <_80 kind="Record" offset="5426" length="71">
+      <DigimonId kind="Leaf" offset="5426" length="4" type="Scalar { Kind = U32 }" value="41006" />
+      <SealImagePath kind="Leaf" offset="5430" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Gaogamon.dds</SealImagePath>
+    </_80>
+    <_81 kind="Record" offset="5497" length="70">
+      <DigimonId kind="Leaf" offset="5497" length="4" type="Scalar { Kind = U32 }" value="41007" />
+      <SealImagePath kind="Leaf" offset="5501" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Peckmon.dds</SealImagePath>
+    </_81>
+    <_82 kind="Record" offset="5567" length="71">
+      <DigimonId kind="Leaf" offset="5567" length="4" type="Scalar { Kind = U32 }" value="41011" />
+      <SealImagePath kind="Leaf" offset="5571" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Kyubimon.dds</SealImagePath>
+    </_82>
+    <_83 kind="Record" offset="5638" length="55">
+      <DigimonId kind="Leaf" offset="5638" length="4" type="Scalar { Kind = U32 }" value="41014" />
+      <SealImagePath kind="Leaf" offset="5642" length="51" type="LString { }">data\Interface\SealMaster\SealImage\Angemon.dds</SealImagePath>
+    </_83>
+    <_84 kind="Record" offset="5693" length="74">
+      <DigimonId kind="Leaf" offset="5693" length="4" type="Scalar { Kind = U32 }" value="41015" />
+      <SealImagePath kind="Leaf" offset="5697" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_CoredramonB.dds</SealImagePath>
+    </_84>
+    <_85 kind="Record" offset="5767" length="74">
+      <DigimonId kind="Leaf" offset="5767" length="4" type="Scalar { Kind = U32 }" value="41016" />
+      <SealImagePath kind="Leaf" offset="5771" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_CoredramonG.dds</SealImagePath>
+    </_85>
+    <_86 kind="Record" offset="5841" length="71">
+      <DigimonId kind="Leaf" offset="5841" length="4" type="Scalar { Kind = U32 }" value="41017" />
+      <SealImagePath kind="Leaf" offset="5845" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Reppamon.dds</SealImagePath>
+    </_86>
+    <_87 kind="Record" offset="5912" length="69">
+      <DigimonId kind="Leaf" offset="5912" length="4" type="Scalar { Kind = U32 }" value="41019" />
+      <SealImagePath kind="Leaf" offset="5916" length="65" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Icemon.dds</SealImagePath>
+    </_87>
+    <_88 kind="Record" offset="5981" length="72">
+      <DigimonId kind="Leaf" offset="5981" length="4" type="Scalar { Kind = U32 }" value="41020" />
+      <SealImagePath kind="Leaf" offset="5985" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Aquilamon.dds</SealImagePath>
+    </_88>
+    <_89 kind="Record" offset="6053" length="70">
+      <DigimonId kind="Leaf" offset="6053" length="4" type="Scalar { Kind = U32 }" value="41021" />
+      <SealImagePath kind="Leaf" offset="6057" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Gatomon.dds</SealImagePath>
+    </_89>
+    <_90 kind="Record" offset="6123" length="56">
+      <DigimonId kind="Leaf" offset="6123" length="4" type="Scalar { Kind = U32 }" value="41022" />
+      <SealImagePath kind="Leaf" offset="6127" length="52" type="LString { }">data\Interface\SealMaster\SealImage\Gladimon.dds</SealImagePath>
+    </_90>
+    <_91 kind="Record" offset="6179" length="69">
+      <DigimonId kind="Leaf" offset="6179" length="4" type="Scalar { Kind = U32 }" value="41023" />
+      <SealImagePath kind="Leaf" offset="6183" length="65" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Digmon.dds</SealImagePath>
+    </_91>
+    <_92 kind="Record" offset="6248" length="72">
+      <DigimonId kind="Leaf" offset="6248" length="4" type="Scalar { Kind = U32 }" value="41024" />
+      <SealImagePath kind="Leaf" offset="6252" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Wizardmon.dds</SealImagePath>
+    </_92>
+    <_93 kind="Record" offset="6320" length="58">
+      <DigimonId kind="Leaf" offset="6320" length="4" type="Scalar { Kind = U32 }" value="41025" />
+      <SealImagePath kind="Leaf" offset="6324" length="54" type="LString { }">data\interface\SealMaster\SealImage\Wendigomon.dds</SealImagePath>
+    </_93>
+    <_94 kind="Record" offset="6378" length="70">
+      <DigimonId kind="Leaf" offset="6378" length="4" type="Scalar { Kind = U32 }" value="41026" />
+      <SealImagePath kind="Leaf" offset="6382" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Rockmon.dds</SealImagePath>
+    </_94>
+    <_95 kind="Record" offset="6448" length="72">
+      <DigimonId kind="Leaf" offset="6448" length="4" type="Scalar { Kind = U32 }" value="41027" />
+      <SealImagePath kind="Leaf" offset="6452" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Seadramon.dds</SealImagePath>
+    </_95>
+    <_96 kind="Record" offset="6520" length="70">
+      <DigimonId kind="Leaf" offset="6520" length="4" type="Scalar { Kind = U32 }" value="41028" />
+      <SealImagePath kind="Leaf" offset="6524" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Waspmon.dds</SealImagePath>
+    </_96>
+    <_97 kind="Record" offset="6590" length="74">
+      <DigimonId kind="Leaf" offset="6590" length="4" type="Scalar { Kind = U32 }" value="41029" />
+      <SealImagePath kind="Leaf" offset="6594" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Chrysalimon.dds</SealImagePath>
+    </_97>
+    <_98 kind="Record" offset="6664" length="72">
+      <DigimonId kind="Leaf" offset="6664" length="4" type="Scalar { Kind = U32 }" value="41030" />
+      <SealImagePath kind="Leaf" offset="6668" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Ankylomon.dds</SealImagePath>
+    </_98>
+    <_99 kind="Record" offset="6736" length="69">
+      <DigimonId kind="Leaf" offset="6736" length="4" type="Scalar { Kind = U32 }" value="41032" />
+      <SealImagePath kind="Leaf" offset="6740" length="65" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Flymon.dds</SealImagePath>
+    </_99>
+    <_100 kind="Record" offset="6805" length="72">
+      <DigimonId kind="Leaf" offset="6805" length="4" type="Scalar { Kind = U32 }" value="41034" />
+      <SealImagePath kind="Leaf" offset="6809" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Gardromon.dds</SealImagePath>
+    </_100>
+    <_101 kind="Record" offset="6877" length="73">
+      <DigimonId kind="Leaf" offset="6877" length="4" type="Scalar { Kind = U32 }" value="41035" />
+      <SealImagePath kind="Leaf" offset="6881" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Gawappamon.dds</SealImagePath>
+    </_101>
+    <_102 kind="Record" offset="6950" length="70">
+      <DigimonId kind="Leaf" offset="6950" length="4" type="Scalar { Kind = U32 }" value="41038" />
+      <SealImagePath kind="Leaf" offset="6954" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Ogremon.dds</SealImagePath>
+    </_102>
+    <_103 kind="Record" offset="7020" length="70">
+      <DigimonId kind="Leaf" offset="7020" length="4" type="Scalar { Kind = U32 }" value="41039" />
+      <SealImagePath kind="Leaf" offset="7024" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Woodmon.dds</SealImagePath>
+    </_103>
+    <_104 kind="Record" offset="7090" length="70">
+      <DigimonId kind="Leaf" offset="7090" length="4" type="Scalar { Kind = U32 }" value="41040" />
+      <SealImagePath kind="Leaf" offset="7094" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Soulmon.dds</SealImagePath>
+    </_104>
+    <_105 kind="Record" offset="7160" length="72">
+      <DigimonId kind="Leaf" offset="7160" length="4" type="Scalar { Kind = U32 }" value="41041" />
+      <SealImagePath kind="Leaf" offset="7164" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Turuiemon.dds</SealImagePath>
+    </_105>
+    <_106 kind="Record" offset="7232" length="72">
+      <DigimonId kind="Leaf" offset="7232" length="4" type="Scalar { Kind = U32 }" value="41043" />
+      <SealImagePath kind="Leaf" offset="7236" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Dorugamon.dds</SealImagePath>
+    </_106>
+    <_107 kind="Record" offset="7304" length="70">
+      <DigimonId kind="Leaf" offset="7304" length="4" type="Scalar { Kind = U32 }" value="41044" />
+      <SealImagePath kind="Leaf" offset="7308" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Togemon.dds</SealImagePath>
+    </_107>
+    <_108 kind="Record" offset="7374" length="74">
+      <DigimonId kind="Leaf" offset="7374" length="4" type="Scalar { Kind = U32 }" value="41045" />
+      <SealImagePath kind="Leaf" offset="7378" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_KABUTERIMON.dds</SealImagePath>
+    </_108>
+    <_109 kind="Record" offset="7448" length="70">
+      <DigimonId kind="Leaf" offset="7448" length="4" type="Scalar { Kind = U32 }" value="41046" />
+      <SealImagePath kind="Leaf" offset="7452" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Greymon.dds</SealImagePath>
+    </_109>
+    <_110 kind="Record" offset="7518" length="57">
+      <DigimonId kind="Leaf" offset="7518" length="4" type="Scalar { Kind = U32 }" value="41048" />
+      <SealImagePath kind="Leaf" offset="7522" length="53" type="LString { }">data\interface\SealMaster\SealImage\Dokugumon.dds</SealImagePath>
+    </_110>
+    <_111 kind="Record" offset="7575" length="72">
+      <DigimonId kind="Leaf" offset="7575" length="4" type="Scalar { Kind = U32 }" value="41050" />
+      <SealImagePath kind="Leaf" offset="7579" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_ikkakumon.dds</SealImagePath>
+    </_111>
+    <_112 kind="Record" offset="7647" length="57">
+      <DigimonId kind="Leaf" offset="7647" length="4" type="Scalar { Kind = U32 }" value="41052" />
+      <SealImagePath kind="Leaf" offset="7651" length="53" type="LString { }">data\interface\SealMaster\SealImage\Birdramon.dds</SealImagePath>
+    </_112>
+    <_113 kind="Record" offset="7704" length="72">
+      <DigimonId kind="Leaf" offset="7704" length="4" type="Scalar { Kind = U32 }" value="41053" />
+      <SealImagePath kind="Leaf" offset="7708" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Veedramon.dds</SealImagePath>
+    </_113>
+    <_114 kind="Record" offset="7776" length="74">
+      <DigimonId kind="Leaf" offset="7776" length="4" type="Scalar { Kind = U32 }" value="41055" />
+      <SealImagePath kind="Leaf" offset="7780" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Sangloupmon.dds</SealImagePath>
+    </_114>
+    <_115 kind="Record" offset="7850" length="75">
+      <DigimonId kind="Leaf" offset="7850" length="4" type="Scalar { Kind = U32 }" value="41056" />
+      <SealImagePath kind="Leaf" offset="7854" length="71" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_BLACKTAILMON.dds</SealImagePath>
+    </_115>
+    <_116 kind="Record" offset="7925" length="70">
+      <DigimonId kind="Leaf" offset="7925" length="4" type="Scalar { Kind = U32 }" value="41057" />
+      <SealImagePath kind="Leaf" offset="7929" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Tyromon.dds</SealImagePath>
+    </_116>
+    <_117 kind="Record" offset="7995" length="69">
+      <DigimonId kind="Leaf" offset="7995" length="4" type="Scalar { Kind = U32 }" value="41058" />
+      <SealImagePath kind="Leaf" offset="7999" length="65" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Leomon.dds</SealImagePath>
+    </_117>
+    <_118 kind="Record" offset="8064" length="76">
+      <DigimonId kind="Leaf" offset="8064" length="4" type="Scalar { Kind = U32 }" value="41060" />
+      <SealImagePath kind="Leaf" offset="8068" length="72" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Reptiledramon.dds</SealImagePath>
+    </_118>
+    <_119 kind="Record" offset="8140" length="70">
+      <DigimonId kind="Leaf" offset="8140" length="4" type="Scalar { Kind = U32 }" value="41068" />
+      <SealImagePath kind="Leaf" offset="8144" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Devimon.dds</SealImagePath>
+    </_119>
+    <_120 kind="Record" offset="8210" length="80">
+      <DigimonId kind="Leaf" offset="8210" length="4" type="Scalar { Kind = U32 }" value="41069" />
+      <SealImagePath kind="Leaf" offset="8214" length="76" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Thunderballmonpsd.dds</SealImagePath>
+    </_120>
+    <_121 kind="Record" offset="8290" length="70">
+      <DigimonId kind="Leaf" offset="8290" length="4" type="Scalar { Kind = U32 }" value="41074" />
+      <SealImagePath kind="Leaf" offset="8294" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_graumon.dds</SealImagePath>
+    </_121>
+    <_122 kind="Record" offset="8360" length="70">
+      <DigimonId kind="Leaf" offset="8360" length="4" type="Scalar { Kind = U32 }" value="41088" />
+      <SealImagePath kind="Leaf" offset="8364" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Starmon.dds</SealImagePath>
+    </_122>
+    <_123 kind="Record" offset="8430" length="70">
+      <DigimonId kind="Leaf" offset="8430" length="4" type="Scalar { Kind = U32 }" value="41132" />
+      <SealImagePath kind="Leaf" offset="8434" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Kiwimon.dds</SealImagePath>
+    </_123>
+    <_124 kind="Record" offset="8500" length="72">
+      <DigimonId kind="Leaf" offset="8500" length="4" type="Scalar { Kind = U32 }" value="41139" />
+      <SealImagePath kind="Leaf" offset="8504" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Garurumon.dds</SealImagePath>
+    </_124>
+    <_125 kind="Record" offset="8572" length="73">
+      <DigimonId kind="Leaf" offset="8572" length="4" type="Scalar { Kind = U32 }" value="41140" />
+      <SealImagePath kind="Leaf" offset="8576" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_GarurumonB.dds</SealImagePath>
+    </_125>
+    <_126 kind="Record" offset="8645" length="71">
+      <DigimonId kind="Leaf" offset="8645" length="4" type="Scalar { Kind = U32 }" value="41146" />
+      <SealImagePath kind="Leaf" offset="8649" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Doggymon.dds</SealImagePath>
+    </_126>
+    <_127 kind="Record" offset="8716" length="56">
+      <DigimonId kind="Leaf" offset="8716" length="4" type="Scalar { Kind = U32 }" value="41165" />
+      <SealImagePath kind="Leaf" offset="8720" length="52" type="LString { }">data\interface\SealMaster\SealImage\Roachmon.dds</SealImagePath>
+    </_127>
+    <_128 kind="Record" offset="8772" length="57">
+      <DigimonId kind="Leaf" offset="8772" length="4" type="Scalar { Kind = U32 }" value="41167" />
+      <SealImagePath kind="Leaf" offset="8776" length="53" type="LString { }">data\interface\SealMaster\SealImage\veggiemon.dds</SealImagePath>
+    </_128>
+    <_129 kind="Record" offset="8829" length="70">
+      <DigimonId kind="Leaf" offset="8829" length="4" type="Scalar { Kind = U32 }" value="41170" />
+      <SealImagePath kind="Leaf" offset="8833" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Meramon.dds</SealImagePath>
+    </_129>
+    <_130 kind="Record" offset="8899" length="55">
+      <DigimonId kind="Leaf" offset="8899" length="4" type="Scalar { Kind = U32 }" value="41172" />
+      <SealImagePath kind="Leaf" offset="8903" length="51" type="LString { }">data\interface\SealMaster\SealImage\Ghosmon.dds</SealImagePath>
+    </_130>
+    <_131 kind="Record" offset="8954" length="70">
+      <DigimonId kind="Leaf" offset="8954" length="4" type="Scalar { Kind = U32 }" value="41173" />
+      <SealImagePath kind="Leaf" offset="8958" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_ExV-mon.dds</SealImagePath>
+    </_131>
+    <_132 kind="Record" offset="9024" length="70">
+      <DigimonId kind="Leaf" offset="9024" length="4" type="Scalar { Kind = U32 }" value="41176" />
+      <SealImagePath kind="Leaf" offset="9028" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Gesomon.dds</SealImagePath>
+    </_132>
+    <_133 kind="Record" offset="9094" length="76">
+      <DigimonId kind="Leaf" offset="9094" length="4" type="Scalar { Kind = U32 }" value="41177" />
+      <SealImagePath kind="Leaf" offset="9098" length="72" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Darktyranomon.dds</SealImagePath>
+    </_133>
+    <_134 kind="Record" offset="9170" length="61">
+      <DigimonId kind="Leaf" offset="9170" length="4" type="Scalar { Kind = U32 }" value="43004" />
+      <SealImagePath kind="Leaf" offset="9174" length="57" type="LString { }">data\interface\SealMaster\SealImage\Mailbirdramon.dds</SealImagePath>
+    </_134>
+    <_135 kind="Record" offset="9231" length="57">
+      <DigimonId kind="Leaf" offset="9231" length="4" type="Scalar { Kind = U32 }" value="43005" />
+      <SealImagePath kind="Leaf" offset="9235" length="53" type="LString { }">data\interface\SealMaster\SealImage\Greymon_C.dds</SealImagePath>
+    </_135>
+    <_136 kind="Record" offset="9288" length="70">
+      <DigimonId kind="Leaf" offset="9288" length="4" type="Scalar { Kind = U32 }" value="45142" />
+      <SealImagePath kind="Leaf" offset="9292" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Mikemon.dds</SealImagePath>
+    </_136>
+    <_137 kind="Record" offset="9358" length="74">
+      <DigimonId kind="Leaf" offset="9358" length="4" type="Scalar { Kind = U32 }" value="45151" />
+      <SealImagePath kind="Leaf" offset="9362" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Monochromon.dds</SealImagePath>
+    </_137>
+    <_138 kind="Record" offset="9432" length="73">
+      <DigimonId kind="Leaf" offset="9432" length="4" type="Scalar { Kind = U32 }" value="45152" />
+      <SealImagePath kind="Leaf" offset="9436" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Kentarumon.dds</SealImagePath>
+    </_138>
+    <_139 kind="Record" offset="9505" length="70">
+      <DigimonId kind="Leaf" offset="9505" length="4" type="Scalar { Kind = U32 }" value="45160" />
+      <SealImagePath kind="Leaf" offset="9509" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Lucemon.dds</SealImagePath>
+    </_139>
+    <_140 kind="Record" offset="9575" length="55">
+      <DigimonId kind="Leaf" offset="9575" length="4" type="Scalar { Kind = U32 }" value="45161" />
+      <SealImagePath kind="Leaf" offset="9579" length="51" type="LString { }">data\interface\SealMaster\SealImage\Gekomon.dds</SealImagePath>
+    </_140>
+    <_141 kind="Record" offset="9630" length="74">
+      <DigimonId kind="Leaf" offset="9630" length="4" type="Scalar { Kind = U32 }" value="45167" />
+      <SealImagePath kind="Leaf" offset="9634" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Yukidarumon.dds</SealImagePath>
+    </_141>
+    <_142 kind="Record" offset="9704" length="56">
+      <DigimonId kind="Leaf" offset="9704" length="4" type="Scalar { Kind = U32 }" value="45168" />
+      <SealImagePath kind="Leaf" offset="9708" length="52" type="LString { }">data\interface\SealMaster\SealImage\Mojyamon.dds</SealImagePath>
+    </_142>
+    <_143 kind="Record" offset="9760" length="71">
+      <DigimonId kind="Leaf" offset="9760" length="4" type="Scalar { Kind = U32 }" value="45170" />
+      <SealImagePath kind="Leaf" offset="9764" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_witchmon.dds</SealImagePath>
+    </_143>
+    <_144 kind="Record" offset="9831" length="56">
+      <DigimonId kind="Leaf" offset="9831" length="4" type="Scalar { Kind = U32 }" value="45171" />
+      <SealImagePath kind="Leaf" offset="9835" length="52" type="LString { }">data\interface\SealMaster\SealImage\Deltamon.dds</SealImagePath>
+    </_144>
+    <_145 kind="Record" offset="9887" length="58">
+      <DigimonId kind="Leaf" offset="9887" length="4" type="Scalar { Kind = U32 }" value="45173" />
+      <SealImagePath kind="Leaf" offset="9891" length="54" type="LString { }">data\Interface\SealMaster\SealImage\Baohackmon.dds</SealImagePath>
+    </_145>
+    <_146 kind="Record" offset="9945" length="55">
+      <DigimonId kind="Leaf" offset="9945" length="4" type="Scalar { Kind = U32 }" value="45178" />
+      <SealImagePath kind="Leaf" offset="9949" length="51" type="LString { }">data\interface\SealMaster\SealImage\Numemon.dds</SealImagePath>
+    </_146>
+    <_147 kind="Record" offset="10000" length="61">
+      <DigimonId kind="Leaf" offset="10000" length="4" type="Scalar { Kind = U32 }" value="45181" />
+      <SealImagePath kind="Leaf" offset="10004" length="57" type="LString { }">data\interface\SealMaster\SealImage\BetelGammamon.dds</SealImagePath>
+    </_147>
+    <_148 kind="Record" offset="10061" length="62">
+      <DigimonId kind="Leaf" offset="10061" length="4" type="Scalar { Kind = U32 }" value="45182" />
+      <SealImagePath kind="Leaf" offset="10065" length="58" type="LString { }">data\interface\SealMaster\SealImage\Tesla_Jellymon.dds</SealImagePath>
+    </_148>
+    <_149 kind="Record" offset="10123" length="64">
+      <DigimonId kind="Leaf" offset="10123" length="4" type="Scalar { Kind = U32 }" value="45183" />
+      <SealImagePath kind="Leaf" offset="10127" length="60" type="LString { }">data\interface\SealMaster\SealImage\SymbareAngoramon.dds</SealImagePath>
+    </_149>
+    <_150 kind="Record" offset="10187" length="61">
+      <DigimonId kind="Leaf" offset="10187" length="4" type="Scalar { Kind = U32 }" value="45184" />
+      <SealImagePath kind="Leaf" offset="10191" length="57" type="LString { }">data\interface\SealMaster\SealImage\WezenGammamon.dds</SealImagePath>
+    </_150>
+    <_151 kind="Record" offset="10248" length="60">
+      <DigimonId kind="Leaf" offset="10248" length="4" type="Scalar { Kind = U32 }" value="45185" />
+      <SealImagePath kind="Leaf" offset="10252" length="56" type="LString { }">data\interface\SealMaster\SealImage\KausGammamon.dds</SealImagePath>
+    </_151>
+    <_152 kind="Record" offset="10308" length="61">
+      <DigimonId kind="Leaf" offset="10308" length="4" type="Scalar { Kind = U32 }" value="45188" />
+      <SealImagePath kind="Leaf" offset="10312" length="57" type="LString { }">data\interface\SealMaster\SealImage\Deadly_Axemon.dds</SealImagePath>
+    </_152>
+    <_153 kind="Record" offset="10369" length="62">
+      <DigimonId kind="Leaf" offset="10369" length="4" type="Scalar { Kind = U32 }" value="45189" />
+      <SealImagePath kind="Leaf" offset="10373" length="58" type="LString { }">data\interface\SealMaster\SealImage\SkullKnightmon.dds</SealImagePath>
+    </_153>
+    <_154 kind="Record" offset="10431" length="74">
+      <DigimonId kind="Leaf" offset="10431" length="4" type="Scalar { Kind = U32 }" value="51007" />
+      <SealImagePath kind="Leaf" offset="10435" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_RizeGreymon.dds</SealImagePath>
+    </_154>
+    <_155 kind="Record" offset="10505" length="70">
+      <DigimonId kind="Leaf" offset="10505" length="4" type="Scalar { Kind = U32 }" value="51008" />
+      <SealImagePath kind="Leaf" offset="10509" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Lilamon.dds</SealImagePath>
+    </_155>
+    <_156 kind="Record" offset="10575" length="75">
+      <DigimonId kind="Leaf" offset="10575" length="4" type="Scalar { Kind = U32 }" value="51009" />
+      <SealImagePath kind="Leaf" offset="10579" length="71" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_MachGaogamon.dds</SealImagePath>
+    </_156>
+    <_157 kind="Record" offset="10650" length="70">
+      <DigimonId kind="Leaf" offset="10650" length="4" type="Scalar { Kind = U32 }" value="51010" />
+      <SealImagePath kind="Leaf" offset="10654" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Crowmon.dds</SealImagePath>
+    </_157>
+    <_158 kind="Record" offset="10720" length="73">
+      <DigimonId kind="Leaf" offset="10720" length="4" type="Scalar { Kind = U32 }" value="51012" />
+      <SealImagePath kind="Leaf" offset="10724" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Paildramon.dds</SealImagePath>
+    </_158>
+    <_159 kind="Record" offset="10793" length="69">
+      <DigimonId kind="Leaf" offset="10793" length="4" type="Scalar { Kind = U32 }" value="51013" />
+      <SealImagePath kind="Leaf" offset="10797" length="65" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Taomon.dds</SealImagePath>
+    </_159>
+    <_160 kind="Record" offset="10862" length="71">
+      <DigimonId kind="Leaf" offset="10862" length="4" type="Scalar { Kind = U32 }" value="51014" />
+      <SealImagePath kind="Leaf" offset="10866" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_rapidmon.dds</SealImagePath>
+    </_160>
+    <_161 kind="Record" offset="10933" length="74">
+      <DigimonId kind="Leaf" offset="10933" length="4" type="Scalar { Kind = U32 }" value="51017" />
+      <SealImagePath kind="Leaf" offset="10937" length="70" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_HOLYANGEMON.dds</SealImagePath>
+    </_161>
+    <_162 kind="Record" offset="11007" length="57">
+      <DigimonId kind="Leaf" offset="11007" length="4" type="Scalar { Kind = U32 }" value="51020" />
+      <SealImagePath kind="Leaf" offset="11011" length="53" type="LString { }">data\Interface\SealMaster\SealImage\Silphymon.dds</SealImagePath>
+    </_162>
+    <_163 kind="Record" offset="11064" length="72">
+      <DigimonId kind="Leaf" offset="11064" length="4" type="Scalar { Kind = U32 }" value="51021" />
+      <SealImagePath kind="Leaf" offset="11068" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Meteormon.dds</SealImagePath>
+    </_163>
+    <_164 kind="Record" offset="11136" length="75">
+      <DigimonId kind="Leaf" offset="11136" length="4" type="Scalar { Kind = U32 }" value="51022" />
+      <SealImagePath kind="Leaf" offset="11140" length="71" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_SkullSatamon.dds</SealImagePath>
+    </_164>
+    <_165 kind="Record" offset="11211" length="75">
+      <DigimonId kind="Leaf" offset="11211" length="4" type="Scalar { Kind = U32 }" value="51024" />
+      <SealImagePath kind="Leaf" offset="11215" length="71" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Skullgreymon.dds</SealImagePath>
+    </_165>
+    <_166 kind="Record" offset="11286" length="72">
+      <DigimonId kind="Leaf" offset="11286" length="4" type="Scalar { Kind = U32 }" value="51025" />
+      <SealImagePath kind="Leaf" offset="11290" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Angewomon.dds</SealImagePath>
+    </_166>
+    <_167 kind="Record" offset="11358" length="72">
+      <DigimonId kind="Leaf" offset="11358" length="4" type="Scalar { Kind = U32 }" value="51026" />
+      <SealImagePath kind="Leaf" offset="11362" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Knightmon.dds</SealImagePath>
+    </_167>
+    <_168 kind="Record" offset="11430" length="71">
+      <DigimonId kind="Leaf" offset="11430" length="4" type="Scalar { Kind = U32 }" value="51027" />
+      <SealImagePath kind="Leaf" offset="11434" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Volcamon.dds</SealImagePath>
+    </_168>
+    <_169 kind="Record" offset="11501" length="71">
+      <DigimonId kind="Leaf" offset="11501" length="4" type="Scalar { Kind = U32 }" value="51028" />
+      <SealImagePath kind="Leaf" offset="11505" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Mystimon.dds</SealImagePath>
+    </_169>
+    <_170 kind="Record" offset="11572" length="73">
+      <DigimonId kind="Leaf" offset="11572" length="4" type="Scalar { Kind = U32 }" value="51030" />
+      <SealImagePath kind="Leaf" offset="11576" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Shakkoumon.dds</SealImagePath>
+    </_170>
+    <_171 kind="Record" offset="11645" length="57">
+      <DigimonId kind="Leaf" offset="11645" length="4" type="Scalar { Kind = U32 }" value="51031" />
+      <SealImagePath kind="Leaf" offset="11649" length="53" type="LString { }">data\Interface\SealMaster\SealImage\Antylamon.dds</SealImagePath>
+    </_171>
+    <_172 kind="Record" offset="11702" length="74">
+      <DigimonId kind="Leaf" offset="11702" length="4" type="Scalar { Kind = U32 }" value="51035" />
+      <SealImagePath kind="Leaf" offset="11706" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Vikaralamon.dds</SealImagePath>
+    </_172>
+    <_173 kind="Record" offset="11776" length="57">
+      <DigimonId kind="Leaf" offset="11776" length="4" type="Scalar { Kind = U32 }" value="51036" />
+      <SealImagePath kind="Leaf" offset="11780" length="53" type="LString { }">data\Interface\SealMaster\SealImage\Blossomon.dds</SealImagePath>
+    </_173>
+    <_174 kind="Record" offset="11833" length="70">
+      <DigimonId kind="Leaf" offset="11833" length="4" type="Scalar { Kind = U32 }" value="51037" />
+      <SealImagePath kind="Leaf" offset="11837" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_ATLURKA.dds</SealImagePath>
+    </_174>
+    <_175 kind="Record" offset="11903" length="69">
+      <DigimonId kind="Leaf" offset="11903" length="4" type="Scalar { Kind = U32 }" value="51039" />
+      <SealImagePath kind="Leaf" offset="11907" length="65" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Etemon.dds</SealImagePath>
+    </_175>
+    <_176 kind="Record" offset="11972" length="72">
+      <DigimonId kind="Leaf" offset="11972" length="4" type="Scalar { Kind = U32 }" value="51042" />
+      <SealImagePath kind="Leaf" offset="11976" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Phantomon.dds</SealImagePath>
+    </_176>
+    <_177 kind="Record" offset="12044" length="72">
+      <DigimonId kind="Leaf" offset="12044" length="4" type="Scalar { Kind = U32 }" value="51043" />
+      <SealImagePath kind="Leaf" offset="12048" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Cherrymon.dds</SealImagePath>
+    </_177>
+    <_178 kind="Record" offset="12116" length="74">
+      <DigimonId kind="Leaf" offset="12116" length="4" type="Scalar { Kind = U32 }" value="51044" />
+      <SealImagePath kind="Leaf" offset="12120" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Chimairamon.dds</SealImagePath>
+    </_178>
+    <_179 kind="Record" offset="12190" length="71">
+      <DigimonId kind="Leaf" offset="12190" length="4" type="Scalar { Kind = U32 }" value="51045" />
+      <SealImagePath kind="Leaf" offset="12194" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Lillymon.dds</SealImagePath>
+    </_179>
+    <_180 kind="Record" offset="12261" length="68">
+      <DigimonId kind="Leaf" offset="12261" length="4" type="Scalar { Kind = U32 }" value="51047" />
+      <SealImagePath kind="Leaf" offset="12265" length="64" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Metal.dds</SealImagePath>
+    </_180>
+    <_181 kind="Record" offset="12329" length="72">
+      <DigimonId kind="Leaf" offset="12329" length="4" type="Scalar { Kind = U32 }" value="51048" />
+      <SealImagePath kind="Leaf" offset="12333" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Tyilinmon.dds</SealImagePath>
+    </_181>
+    <_182 kind="Record" offset="12401" length="73">
+      <DigimonId kind="Leaf" offset="12401" length="4" type="Scalar { Kind = U32 }" value="51052" />
+      <SealImagePath kind="Leaf" offset="12405" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Tankdramon.dds</SealImagePath>
+    </_182>
+    <_183 kind="Record" offset="12474" length="77">
+      <DigimonId kind="Leaf" offset="12474" length="4" type="Scalar { Kind = U32 }" value="51054" />
+      <SealImagePath kind="Leaf" offset="12478" length="73" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Dexdorugreymon.dds</SealImagePath>
+    </_183>
+    <_184 kind="Record" offset="12551" length="71">
+      <DigimonId kind="Leaf" offset="12551" length="4" type="Scalar { Kind = U32 }" value="51057" />
+      <SealImagePath kind="Leaf" offset="12555" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Asuramon.dds</SealImagePath>
+    </_184>
+    <_185 kind="Record" offset="12622" length="54">
+      <DigimonId kind="Leaf" offset="12622" length="4" type="Scalar { Kind = U32 }" value="51061" />
+      <SealImagePath kind="Leaf" offset="12626" length="50" type="LString { }">data\Interface\SealMaster\SealImage\Whamon.dds</SealImagePath>
+    </_185>
+    <_186 kind="Record" offset="12676" length="69">
+      <DigimonId kind="Leaf" offset="12676" length="4" type="Scalar { Kind = U32 }" value="51063" />
+      <SealImagePath kind="Leaf" offset="12680" length="65" type="LString { }">data\interface\SealMaster\SealImage\Metal Greymon (Black).dds</SealImagePath>
+    </_186>
+    <_187 kind="Record" offset="12745" length="72">
+      <DigimonId kind="Leaf" offset="12745" length="4" type="Scalar { Kind = U32 }" value="51064" />
+      <SealImagePath kind="Leaf" offset="12749" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Garudamon.dds</SealImagePath>
+    </_187>
+    <_188 kind="Record" offset="12817" length="70">
+      <DigimonId kind="Leaf" offset="12817" length="4" type="Scalar { Kind = U32 }" value="51065" />
+      <SealImagePath kind="Leaf" offset="12821" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Nanomon.dds</SealImagePath>
+    </_188>
+    <_189 kind="Record" offset="12887" length="73">
+      <DigimonId kind="Leaf" offset="12887" length="4" type="Scalar { Kind = U32 }" value="51069" />
+      <SealImagePath kind="Leaf" offset="12891" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Neodevimon.dds</SealImagePath>
+    </_189>
+    <_190 kind="Record" offset="12960" length="76">
+      <DigimonId kind="Leaf" offset="12960" length="4" type="Scalar { Kind = U32 }" value="51070" />
+      <SealImagePath kind="Leaf" offset="12964" length="72" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_MegaSeadramon.dds</SealImagePath>
+    </_190>
+    <_191 kind="Record" offset="13036" length="76">
+      <DigimonId kind="Leaf" offset="13036" length="4" type="Scalar { Kind = U32 }" value="51071" />
+      <SealImagePath kind="Leaf" offset="13040" length="72" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Marin Devimon.dds</SealImagePath>
+    </_191>
+    <_192 kind="Record" offset="13112" length="70">
+      <DigimonId kind="Leaf" offset="13112" length="4" type="Scalar { Kind = U32 }" value="51079" />
+      <SealImagePath kind="Leaf" offset="13116" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Mamemon.dds</SealImagePath>
+    </_192>
+    <_193 kind="Record" offset="13182" length="71">
+      <DigimonId kind="Leaf" offset="13182" length="4" type="Scalar { Kind = U32 }" value="51089" />
+      <SealImagePath kind="Leaf" offset="13186" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_SuperSta.dds</SealImagePath>
+    </_193>
+    <_194 kind="Record" offset="13253" length="73">
+      <DigimonId kind="Leaf" offset="13253" length="4" type="Scalar { Kind = U32 }" value="51093" />
+      <SealImagePath kind="Leaf" offset="13257" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_griffonmon.dds</SealImagePath>
+    </_194>
+    <_195 kind="Record" offset="13326" length="70">
+      <DigimonId kind="Leaf" offset="13326" length="4" type="Scalar { Kind = U32 }" value="51112" />
+      <SealImagePath kind="Leaf" offset="13330" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Raremon.dds</SealImagePath>
+    </_195>
+    <_196 kind="Record" offset="13396" length="71">
+      <DigimonId kind="Leaf" offset="13396" length="4" type="Scalar { Kind = U32 }" value="51115" />
+      <SealImagePath kind="Leaf" offset="13400" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Vamdemon.dds</SealImagePath>
+    </_196>
+    <_197 kind="Record" offset="13467" length="77">
+      <DigimonId kind="Leaf" offset="13467" length="4" type="Scalar { Kind = U32 }" value="51117" />
+      <SealImagePath kind="Leaf" offset="13471" length="73" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Venommyotismon.dds</SealImagePath>
+    </_197>
+    <_198 kind="Record" offset="13544" length="76">
+      <DigimonId kind="Leaf" offset="13544" length="4" type="Scalar { Kind = U32 }" value="51124" />
+      <SealImagePath kind="Leaf" offset="13548" length="72" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Warumonzaemon.dds</SealImagePath>
+    </_198>
+    <_199 kind="Record" offset="13620" length="74">
+      <DigimonId kind="Leaf" offset="13620" length="4" type="Scalar { Kind = U32 }" value="51129" />
+      <SealImagePath kind="Leaf" offset="13624" length="70" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_JewelBeemon.dds</SealImagePath>
+    </_199>
+    <_200 kind="Record" offset="13694" length="73">
+      <DigimonId kind="Leaf" offset="13694" length="4" type="Scalar { Kind = U32 }" value="51131" />
+      <SealImagePath kind="Leaf" offset="13698" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Sinduramon.dds</SealImagePath>
+    </_200>
+    <_201 kind="Record" offset="13767" length="76">
+      <DigimonId kind="Leaf" offset="13767" length="4" type="Scalar { Kind = U32 }" value="51148" />
+      <SealImagePath kind="Leaf" offset="13771" length="72" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Weregarurumon.dds</SealImagePath>
+    </_201>
+    <_202 kind="Record" offset="13843" length="72">
+      <DigimonId kind="Leaf" offset="13843" length="4" type="Scalar { Kind = U32 }" value="51149" />
+      <SealImagePath kind="Leaf" offset="13847" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_blackwere.dds</SealImagePath>
+    </_202>
+    <_203 kind="Record" offset="13915" length="69">
+      <DigimonId kind="Leaf" offset="13915" length="4" type="Scalar { Kind = U32 }" value="51150" />
+      <SealImagePath kind="Leaf" offset="13919" length="65" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Pummon.dds</SealImagePath>
+    </_203>
+    <_204 kind="Record" offset="13984" length="70">
+      <DigimonId kind="Leaf" offset="13984" length="4" type="Scalar { Kind = U32 }" value="51152" />
+      <SealImagePath kind="Leaf" offset="13988" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_DeathMe.dds</SealImagePath>
+    </_204>
+    <_205 kind="Record" offset="14054" length="70">
+      <DigimonId kind="Leaf" offset="14054" length="4" type="Scalar { Kind = U32 }" value="51154" />
+      <SealImagePath kind="Leaf" offset="14058" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Giromon.dds</SealImagePath>
+    </_205>
+    <_206 kind="Record" offset="14124" length="61">
+      <DigimonId kind="Leaf" offset="14124" length="4" type="Scalar { Kind = U32 }" value="51157" />
+      <SealImagePath kind="Leaf" offset="14128" length="57" type="LString { }">data\Interface\SealMaster\SealImage\SaviorHuckmon.dds</SealImagePath>
+    </_206>
+    <_207 kind="Record" offset="14185" length="56">
+      <DigimonId kind="Leaf" offset="14185" length="4" type="Scalar { Kind = U32 }" value="52152" />
+      <SealImagePath kind="Leaf" offset="14189" length="52" type="LString { }">data\interface\SealMaster\SealImage\Bastemon.dds</SealImagePath>
+    </_207>
+    <_208 kind="Record" offset="14241" length="63">
+      <DigimonId kind="Leaf" offset="14241" length="4" type="Scalar { Kind = U32 }" value="52153" />
+      <SealImagePath kind="Leaf" offset="14245" length="59" type="LString { }">data\interface\SealMaster\SealImage\TonosamaGekomon.dds</SealImagePath>
+    </_208>
+    <_209 kind="Record" offset="14304" length="77">
+      <DigimonId kind="Leaf" offset="14304" length="4" type="Scalar { Kind = U32 }" value="52156" />
+      <SealImagePath kind="Leaf" offset="14308" length="73" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Metaltyranomon.dds</SealImagePath>
+    </_209>
+    <_210 kind="Record" offset="14381" length="73">
+      <DigimonId kind="Leaf" offset="14381" length="4" type="Scalar { Kind = U32 }" value="53004" />
+      <SealImagePath kind="Leaf" offset="14385" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Piccolomon.dds</SealImagePath>
+    </_210>
+    <_211 kind="Record" offset="14454" length="60">
+      <DigimonId kind="Leaf" offset="14454" length="4" type="Scalar { Kind = U32 }" value="53009" />
+      <SealImagePath kind="Leaf" offset="14458" length="56" type="LString { }">data\interface\SealMaster\SealImage\Canoweissmon.dds</SealImagePath>
+    </_211>
+    <_212 kind="Record" offset="14514" length="55">
+      <DigimonId kind="Leaf" offset="14514" length="4" type="Scalar { Kind = U32 }" value="53013" />
+      <SealImagePath kind="Leaf" offset="14518" length="51" type="LString { }">data\interface\SealMaster\SealImage\Baalmon.dds</SealImagePath>
+    </_212>
+    <_213 kind="Record" offset="14569" length="58">
+      <DigimonId kind="Leaf" offset="14569" length="4" type="Scalar { Kind = U32 }" value="53015" />
+      <SealImagePath kind="Leaf" offset="14573" length="54" type="LString { }">data\interface\SealMaster\SealImage\Eosmon_LV5.dds</SealImagePath>
+    </_213>
+    <_214 kind="Record" offset="14627" length="75">
+      <DigimonId kind="Leaf" offset="14627" length="4" type="Scalar { Kind = U32 }" value="61011" />
+      <SealImagePath kind="Leaf" offset="14631" length="71" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_ShineGreymon.dds</SealImagePath>
+    </_214>
+    <_215 kind="Record" offset="14702" length="70">
+      <DigimonId kind="Leaf" offset="14702" length="4" type="Scalar { Kind = U32 }" value="61013" />
+      <SealImagePath kind="Leaf" offset="14706" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Rosemon.dds</SealImagePath>
+    </_215>
+    <_216 kind="Record" offset="14772" length="77">
+      <DigimonId kind="Leaf" offset="14772" length="4" type="Scalar { Kind = U32 }" value="61014" />
+      <SealImagePath kind="Leaf" offset="14776" length="73" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_MirageGaogamon.dds</SealImagePath>
+    </_216>
+    <_217 kind="Record" offset="14849" length="70">
+      <DigimonId kind="Leaf" offset="14849" length="4" type="Scalar { Kind = U32 }" value="61015" />
+      <SealImagePath kind="Leaf" offset="14853" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Ravemon.dds</SealImagePath>
+    </_217>
+    <_218 kind="Record" offset="14919" length="77">
+      <DigimonId kind="Leaf" offset="14919" length="4" type="Scalar { Kind = U32 }" value="61017" />
+      <SealImagePath kind="Leaf" offset="14923" length="73" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_ImperialDramon.dds</SealImagePath>
+    </_218>
+    <_219 kind="Record" offset="14996" length="57">
+      <DigimonId kind="Leaf" offset="14996" length="4" type="Scalar { Kind = U32 }" value="61018" />
+      <SealImagePath kind="Leaf" offset="15000" length="53" type="LString { }">data\Interface\SealMaster\SealImage\Sakuyamon.dds</SealImagePath>
+    </_219>
+    <_220 kind="Record" offset="15053" length="64">
+      <DigimonId kind="Leaf" offset="15053" length="4" type="Scalar { Kind = U32 }" value="61022" />
+      <SealImagePath kind="Leaf" offset="15057" length="60" type="LString { }">data\Interface\SealMaster\SealImage\GrandisKuwagamon.dds</SealImagePath>
+    </_220>
+    <_221 kind="Record" offset="15117" length="76">
+      <DigimonId kind="Leaf" offset="15117" length="4" type="Scalar { Kind = U32 }" value="61024" />
+      <SealImagePath kind="Leaf" offset="15121" length="72" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_BanchouLeomon.dds</SealImagePath>
+    </_221>
+    <_222 kind="Record" offset="15193" length="73">
+      <DigimonId kind="Leaf" offset="15193" length="4" type="Scalar { Kind = U32 }" value="61025" />
+      <SealImagePath kind="Leaf" offset="15197" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_holydramon.dds</SealImagePath>
+    </_222>
+    <_223 kind="Record" offset="15266" length="76">
+      <DigimonId kind="Leaf" offset="15266" length="4" type="Scalar { Kind = U32 }" value="61026" />
+      <SealImagePath kind="Leaf" offset="15270" length="72" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_LordKnightmon.dds</SealImagePath>
+    </_223>
+    <_224 kind="Record" offset="15342" length="91">
+      <DigimonId kind="Leaf" offset="15342" length="4" type="Scalar { Kind = U32 }" value="61027" />
+      <SealImagePath kind="Leaf" offset="15346" length="87" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_IMPERIALDRAMON  FIGHTER MODE.dds</SealImagePath>
+    </_224>
+    <_225 kind="Record" offset="15433" length="71">
+      <DigimonId kind="Leaf" offset="15433" length="4" type="Scalar { Kind = U32 }" value="61028" />
+      <SealImagePath kind="Leaf" offset="15437" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Dynasmon.dds</SealImagePath>
+    </_225>
+    <_226 kind="Record" offset="15504" length="73">
+      <DigimonId kind="Leaf" offset="15504" length="4" type="Scalar { Kind = U32 }" value="61031" />
+      <SealImagePath kind="Leaf" offset="15508" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Seraphimon.dds</SealImagePath>
+    </_226>
+    <_227 kind="Record" offset="15577" length="72">
+      <DigimonId kind="Leaf" offset="15577" length="4" type="Scalar { Kind = U32 }" value="61035" />
+      <SealImagePath kind="Leaf" offset="15581" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Diablomon.dds</SealImagePath>
+    </_227>
+    <_228 kind="Record" offset="15649" length="74">
+      <DigimonId kind="Leaf" offset="15649" length="4" type="Scalar { Kind = U32 }" value="61037" />
+      <SealImagePath kind="Leaf" offset="15653" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_BEELZEBUMON.dds</SealImagePath>
+    </_228>
+    <_229 kind="Record" offset="15723" length="68">
+      <DigimonId kind="Leaf" offset="15723" length="4" type="Scalar { Kind = U32 }" value="61038" />
+      <SealImagePath kind="Leaf" offset="15727" length="64" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Jumbo.dds</SealImagePath>
+    </_229>
+    <_230 kind="Record" offset="15791" length="71">
+      <DigimonId kind="Leaf" offset="15791" length="4" type="Scalar { Kind = U32 }" value="61039" />
+      <SealImagePath kind="Leaf" offset="15795" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Sleipmon.dds</SealImagePath>
+    </_230>
+    <_231 kind="Record" offset="15862" length="73">
+      <DigimonId kind="Leaf" offset="15862" length="4" type="Scalar { Kind = U32 }" value="61042" />
+      <SealImagePath kind="Leaf" offset="15866" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_WarGreymon.dds</SealImagePath>
+    </_231>
+    <_232 kind="Record" offset="15935" length="77">
+      <DigimonId kind="Leaf" offset="15935" length="4" type="Scalar { Kind = U32 }" value="61043" />
+      <SealImagePath kind="Leaf" offset="15939" length="73" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_mugendendramon.dds</SealImagePath>
+    </_232>
+    <_233 kind="Record" offset="16012" length="61">
+      <DigimonId kind="Leaf" offset="16012" length="4" type="Scalar { Kind = U32 }" value="61046" />
+      <SealImagePath kind="Leaf" offset="16016" length="57" type="LString { }">data\interface\SealMaster\SealImage\MarineAngemon.dds</SealImagePath>
+    </_233>
+    <_234 kind="Record" offset="16073" length="69">
+      <DigimonId kind="Leaf" offset="16073" length="4" type="Scalar { Kind = U32 }" value="61049" />
+      <SealImagePath kind="Leaf" offset="16077" length="65" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Piemon.dds</SealImagePath>
+    </_234>
+    <_235 kind="Record" offset="16142" length="73">
+      <DigimonId kind="Leaf" offset="16142" length="4" type="Scalar { Kind = U32 }" value="61051" />
+      <SealImagePath kind="Leaf" offset="16146" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_CHERUBIMON.dds</SealImagePath>
+    </_235>
+    <_236 kind="Record" offset="16215" length="72">
+      <DigimonId kind="Leaf" offset="16215" length="4" type="Scalar { Kind = U32 }" value="61053" />
+      <SealImagePath kind="Leaf" offset="16219" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Parasimon.dds</SealImagePath>
+    </_236>
+    <_237 kind="Record" offset="16287" length="77">
+      <DigimonId kind="Leaf" offset="16287" length="4" type="Scalar { Kind = U32 }" value="61056" />
+      <SealImagePath kind="Leaf" offset="16291" length="73" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_DexDorugoramon.dds</SealImagePath>
+    </_237>
+    <_238 kind="Record" offset="16364" length="79">
+      <DigimonId kind="Leaf" offset="16364" length="4" type="Scalar { Kind = U32 }" value="61058" />
+      <SealImagePath kind="Leaf" offset="16368" length="75" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_UlforceVeedramon.dds</SealImagePath>
+    </_238>
+    <_239 kind="Record" offset="16443" length="74">
+      <DigimonId kind="Leaf" offset="16443" length="4" type="Scalar { Kind = U32 }" value="61061" />
+      <SealImagePath kind="Leaf" offset="16447" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Saberleomon.dds</SealImagePath>
+    </_239>
+    <_240 kind="Record" offset="16517" length="81">
+      <DigimonId kind="Leaf" offset="16517" length="4" type="Scalar { Kind = U32 }" value="61063" />
+      <SealImagePath kind="Leaf" offset="16521" length="77" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_heraklekabuterimon.dds</SealImagePath>
+    </_240>
+    <_241 kind="Record" offset="16598" length="71">
+      <DigimonId kind="Leaf" offset="16598" length="4" type="Scalar { Kind = U32 }" value="61070" />
+      <SealImagePath kind="Leaf" offset="16602" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_ALPHAMON.dds</SealImagePath>
+    </_241>
+    <_242 kind="Record" offset="16669" length="73">
+      <DigimonId kind="Leaf" offset="16669" length="4" type="Scalar { Kind = U32 }" value="61079" />
+      <SealImagePath kind="Leaf" offset="16673" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_BigMamemon.dds</SealImagePath>
+    </_242>
+    <_243 kind="Record" offset="16742" length="73">
+      <DigimonId kind="Leaf" offset="16742" length="4" type="Scalar { Kind = U32 }" value="61088" />
+      <SealImagePath kind="Leaf" offset="16746" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_pinochimon.dds</SealImagePath>
+    </_243>
+    <_244 kind="Record" offset="16815" length="71">
+      <DigimonId kind="Leaf" offset="16815" length="4" type="Scalar { Kind = U32 }" value="61145" />
+      <SealImagePath kind="Leaf" offset="16819" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_ANUBIMON.dds</SealImagePath>
+    </_244>
+    <_245 kind="Record" offset="16886" length="77">
+      <DigimonId kind="Leaf" offset="16886" length="4" type="Scalar { Kind = U32 }" value="61148" />
+      <SealImagePath kind="Leaf" offset="16890" length="73" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_MetalGarurumon.dds</SealImagePath>
+    </_245>
+    <_246 kind="Record" offset="16963" length="70">
+      <DigimonId kind="Leaf" offset="16963" length="4" type="Scalar { Kind = U32 }" value="61151" />
+      <SealImagePath kind="Leaf" offset="16967" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Boltmon.dds</SealImagePath>
+    </_246>
+    <_247 kind="Record" offset="17033" length="71">
+      <DigimonId kind="Leaf" offset="17033" length="4" type="Scalar { Kind = U32 }" value="61156" />
+      <SealImagePath kind="Leaf" offset="17037" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Lotusmon.dds</SealImagePath>
+    </_247>
+    <_248 kind="Record" offset="17104" length="72">
+      <DigimonId kind="Leaf" offset="17104" length="4" type="Scalar { Kind = U32 }" value="62019" />
+      <SealImagePath kind="Leaf" offset="17108" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_JJUSTIMON.dds</SealImagePath>
+    </_248>
+    <_249 kind="Record" offset="17176" length="65">
+      <DigimonId kind="Leaf" offset="17176" length="4" type="Scalar { Kind = U32 }" value="62078" />
+      <SealImagePath kind="Leaf" offset="17180" length="61" type="LString { }">data\interface\SealMaster\SealImage\Lucemon_Chaosmode.dds</SealImagePath>
+    </_249>
+    <_250 kind="Record" offset="17241" length="71">
+      <DigimonId kind="Leaf" offset="17241" length="4" type="Scalar { Kind = U32 }" value="63007" />
+      <SealImagePath kind="Leaf" offset="17245" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_CresGaru.dds</SealImagePath>
+    </_250>
+    <_251 kind="Record" offset="17312" length="70">
+      <DigimonId kind="Leaf" offset="17312" length="4" type="Scalar { Kind = U32 }" value="63009" />
+      <SealImagePath kind="Leaf" offset="17316" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Duftmon.dds</SealImagePath>
+    </_251>
+    <_252 kind="Record" offset="17382" length="72">
+      <DigimonId kind="Leaf" offset="17382" length="4" type="Scalar { Kind = U32 }" value="63011" />
+      <SealImagePath kind="Leaf" offset="17386" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Gankoomon.dds</SealImagePath>
+    </_252>
+    <_253 kind="Record" offset="17454" length="68">
+      <DigimonId kind="Leaf" offset="17454" length="4" type="Scalar { Kind = U32 }" value="63017" />
+      <SealImagePath kind="Leaf" offset="17458" length="64" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Omega.dds</SealImagePath>
+    </_253>
+    <_254 kind="Record" offset="17522" length="56">
+      <DigimonId kind="Leaf" offset="17522" length="4" type="Scalar { Kind = U32 }" value="63019" />
+      <SealImagePath kind="Leaf" offset="17526" length="52" type="LString { }">data\interface\SealMaster\SealImage\Mervamon.dds</SealImagePath>
+    </_254>
+    <_255 kind="Record" offset="17578" length="57">
+      <DigimonId kind="Leaf" offset="17578" length="4" type="Scalar { Kind = U32 }" value="63021" />
+      <SealImagePath kind="Leaf" offset="17582" length="53" type="LString { }">data\interface\SealMaster\SealImage\Siriusmon.dds</SealImagePath>
+    </_255>
+    <_256 kind="Record" offset="17635" length="56">
+      <DigimonId kind="Leaf" offset="17635" length="4" type="Scalar { Kind = U32 }" value="63027" />
+      <SealImagePath kind="Leaf" offset="17639" length="52" type="LString { }">data\interface\SealMaster\SealImage\Amphimon.dds</SealImagePath>
+    </_256>
+    <_257 kind="Record" offset="17691" length="59">
+      <DigimonId kind="Leaf" offset="17691" length="4" type="Scalar { Kind = U32 }" value="63028" />
+      <SealImagePath kind="Leaf" offset="17695" length="55" type="LString { }">data\interface\SealMaster\SealImage\Diarbbitmon.dds</SealImagePath>
+    </_257>
+    <_258 kind="Record" offset="17750" length="61">
+      <DigimonId kind="Leaf" offset="17750" length="4" type="Scalar { Kind = U32 }" value="67001" />
+      <SealImagePath kind="Leaf" offset="17754" length="57" type="LString { }">data\interface\SealMaster\SealImage\Gallantmon_RE.dds</SealImagePath>
+    </_258>
+    <_259 kind="Record" offset="17811" length="64">
+      <DigimonId kind="Leaf" offset="17811" length="4" type="Scalar { Kind = U32 }" value="67002" />
+      <SealImagePath kind="Leaf" offset="17815" length="60" type="LString { }">data\interface\SealMaster\SealImage\Saintgalgomon_RE.dds</SealImagePath>
+    </_259>
+    <_260 kind="Record" offset="17875" length="60">
+      <DigimonId kind="Leaf" offset="17875" length="4" type="Scalar { Kind = U32 }" value="67003" />
+      <SealImagePath kind="Leaf" offset="17879" length="56" type="LString { }">data\interface\SealMaster\SealImage\Sakuyamon_RE.dds</SealImagePath>
+    </_260>
+    <_261 kind="Record" offset="17935" length="73">
+      <DigimonId kind="Leaf" offset="17935" length="4" type="Scalar { Kind = U32 }" value="67005" />
+      <SealImagePath kind="Leaf" offset="17939" length="69" type="LString { }">data\interface\SealMaster\SealImage\Gallantmon_Crimsonmode_RE.dds</SealImagePath>
+    </_261>
+    <_262 kind="Record" offset="18008" length="85">
+      <DigimonId kind="Leaf" offset="18008" length="4" type="Scalar { Kind = U32 }" value="71015" />
+      <SealImagePath kind="Leaf" offset="18012" length="81" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_ShineGreymon BurstMode.dds</SealImagePath>
+    </_262>
+    <_263 kind="Record" offset="18093" length="80">
+      <DigimonId kind="Leaf" offset="18093" length="4" type="Scalar { Kind = U32 }" value="71016" />
+      <SealImagePath kind="Leaf" offset="18097" length="76" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Rosemon_BurstMode.dds</SealImagePath>
+    </_263>
+    <_264 kind="Record" offset="18173" length="86">
+      <DigimonId kind="Leaf" offset="18173" length="4" type="Scalar { Kind = U32 }" value="71017" />
+      <SealImagePath kind="Leaf" offset="18177" length="82" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_imgMirageGaogamon BurstMode.dds</SealImagePath>
+    </_264>
+    <_265 kind="Record" offset="18259" length="80">
+      <DigimonId kind="Leaf" offset="18259" length="4" type="Scalar { Kind = U32 }" value="71018" />
+      <SealImagePath kind="Leaf" offset="18263" length="76" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Ravemon_BurstMode.dds</SealImagePath>
+    </_265>
+    <_266 kind="Record" offset="18339" length="72">
+      <DigimonId kind="Leaf" offset="18339" length="4" type="Scalar { Kind = U32 }" value="71019" />
+      <SealImagePath kind="Leaf" offset="18343" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_OPHANIMON.dds</SealImagePath>
+    </_266>
+    <_267 kind="Record" offset="18411" length="74">
+      <DigimonId kind="Leaf" offset="18411" length="4" type="Scalar { Kind = U32 }" value="71021" />
+      <SealImagePath kind="Leaf" offset="18415" length="70" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_ZdGarurumon.dds</SealImagePath>
+    </_267>
+    <_268 kind="Record" offset="18485" length="57">
+      <DigimonId kind="Leaf" offset="18485" length="4" type="Scalar { Kind = U32 }" value="71022" />
+      <SealImagePath kind="Leaf" offset="18489" length="53" type="LString { }">data\interface\SealMaster\SealImage\Armagemon.dds</SealImagePath>
+    </_268>
+    <_269 kind="Record" offset="18542" length="69">
+      <DigimonId kind="Leaf" offset="18542" length="4" type="Scalar { Kind = U32 }" value="71024" />
+      <SealImagePath kind="Leaf" offset="18546" length="65" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Examon.dds</SealImagePath>
+    </_269>
+    <_270 kind="Record" offset="18611" length="57">
+      <DigimonId kind="Leaf" offset="18611" length="4" type="Scalar { Kind = U32 }" value="71025" />
+      <SealImagePath kind="Leaf" offset="18615" length="53" type="LString { }">data\Interface\SealMaster\SealImage\Kuzuhamon.dds</SealImagePath>
+    </_270>
+    <_271 kind="Record" offset="18668" length="73">
+      <DigimonId kind="Leaf" offset="18668" length="4" type="Scalar { Kind = U32 }" value="71027" />
+      <SealImagePath kind="Leaf" offset="18672" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Craniummon.dds</SealImagePath>
+    </_271>
+    <_272 kind="Record" offset="18741" length="71">
+      <DigimonId kind="Leaf" offset="18741" length="4" type="Scalar { Kind = U32 }" value="71028" />
+      <SealImagePath kind="Leaf" offset="18745" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_AncientT.dds</SealImagePath>
+    </_272>
+    <_273 kind="Record" offset="18812" length="80">
+      <DigimonId kind="Leaf" offset="18812" length="4" type="Scalar { Kind = U32 }" value="71029" />
+      <SealImagePath kind="Leaf" offset="18816" length="76" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_TyrantKabuterimon.dds</SealImagePath>
+    </_273>
+    <_274 kind="Record" offset="18892" length="78">
+      <DigimonId kind="Leaf" offset="18892" length="4" type="Scalar { Kind = U32 }" value="71030" />
+      <SealImagePath kind="Leaf" offset="18896" length="74" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_BlackSeraphimon.dds</SealImagePath>
+    </_274>
+    <_275 kind="Record" offset="18970" length="72">
+      <DigimonId kind="Leaf" offset="18970" length="4" type="Scalar { Kind = U32 }" value="71033" />
+      <SealImagePath kind="Leaf" offset="18974" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_VALDURMON.dds</SealImagePath>
+    </_275>
+    <_276 kind="Record" offset="19042" length="75">
+      <DigimonId kind="Leaf" offset="19042" length="4" type="Scalar { Kind = U32 }" value="71035" />
+      <SealImagePath kind="Leaf" offset="19046" length="71" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Huanglongmon.dds</SealImagePath>
+    </_276>
+    <_277 kind="Record" offset="19117" length="70">
+      <DigimonId kind="Leaf" offset="19117" length="4" type="Scalar { Kind = U32 }" value="71038" />
+      <SealImagePath kind="Leaf" offset="19121" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Marsmon.dds</SealImagePath>
+    </_277>
+    <_278 kind="Record" offset="19187" length="75">
+      <DigimonId kind="Leaf" offset="19187" length="4" type="Scalar { Kind = U32 }" value="71040" />
+      <SealImagePath kind="Leaf" offset="19191" length="71" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_ChaosPiedmon.dds</SealImagePath>
+    </_278>
+    <_279 kind="Record" offset="19262" length="67">
+      <DigimonId kind="Leaf" offset="19262" length="4" type="Scalar { Kind = U32 }" value="71042" />
+      <SealImagePath kind="Leaf" offset="19266" length="63" type="LString { }">data\interface\SealMaster\SealImage\Moonmillenniumon_RE.dds</SealImagePath>
+    </_279>
+    <_280 kind="Record" offset="19329" length="73">
+      <DigimonId kind="Leaf" offset="19329" length="4" type="Scalar { Kind = U32 }" value="71043" />
+      <SealImagePath kind="Leaf" offset="19333" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_MEGIDRAMON.dds</SealImagePath>
+    </_280>
+    <_281 kind="Record" offset="19402" length="54">
+      <DigimonId kind="Leaf" offset="19402" length="4" type="Scalar { Kind = U32 }" value="71044" />
+      <SealImagePath kind="Leaf" offset="19406" length="50" type="LString { }">data\Interface\SealMaster\SealImage\Jesmon.dds</SealImagePath>
+    </_281>
+    <_282 kind="Record" offset="19456" length="71">
+      <DigimonId kind="Leaf" offset="19456" length="4" type="Scalar { Kind = U32 }" value="71045" />
+      <SealImagePath kind="Leaf" offset="19460" length="67" type="LString { }">data\interface\SealMaster\SealImage\Ophanimon_Falldown_Mode.dds</SealImagePath>
+    </_282>
+    <_283 kind="Record" offset="19527" length="57">
+      <DigimonId kind="Leaf" offset="19527" length="4" type="Scalar { Kind = U32 }" value="71047" />
+      <SealImagePath kind="Leaf" offset="19531" length="53" type="LString { }">data\interface\SealMaster\SealImage\Raguelmon.dds</SealImagePath>
+    </_283>
+    <_284 kind="Record" offset="19584" length="72">
+      <DigimonId kind="Leaf" offset="19584" length="4" type="Scalar { Kind = U32 }" value="71048" />
+      <SealImagePath kind="Leaf" offset="19588" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Plesiomon.dds</SealImagePath>
+    </_284>
+    <_285 kind="Record" offset="19656" length="69">
+      <DigimonId kind="Leaf" offset="19656" length="4" type="Scalar { Kind = U32 }" value="71050" />
+      <SealImagePath kind="Leaf" offset="19660" length="65" type="LString { }">data\interface\SealMaster\SealImage\Agumon_Yuki_no_Kizuna.dds</SealImagePath>
+    </_285>
+    <_286 kind="Record" offset="19725" length="70">
+      <DigimonId kind="Leaf" offset="19725" length="4" type="Scalar { Kind = U32 }" value="71051" />
+      <SealImagePath kind="Leaf" offset="19729" length="66" type="LString { }">data\interface\SealMaster\SealImage\Gabumon_Yujo_no_Kizuna.dds</SealImagePath>
+    </_286>
+    <_287 kind="Record" offset="19795" length="70">
+      <DigimonId kind="Leaf" offset="19795" length="4" type="Scalar { Kind = U32 }" value="71071" />
+      <SealImagePath kind="Leaf" offset="19799" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Omnimon.dds</SealImagePath>
+    </_287>
+    <_288 kind="Record" offset="19865" length="76">
+      <DigimonId kind="Leaf" offset="19865" length="4" type="Scalar { Kind = U32 }" value="71073" />
+      <SealImagePath kind="Leaf" offset="19869" length="72" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_omegamonzwart.dds</SealImagePath>
+    </_288>
+    <_289 kind="Record" offset="19941" length="71">
+      <DigimonId kind="Leaf" offset="19941" length="4" type="Scalar { Kind = U32 }" value="71074" />
+      <SealImagePath kind="Leaf" offset="19945" length="67" type="LString { }">data\Interface\SealMaster\SealImage\Gallantmon Crimson Mode.dds</SealImagePath>
+    </_289>
+    <_290 kind="Record" offset="20012" length="82">
+      <DigimonId kind="Leaf" offset="20012" length="4" type="Scalar { Kind = U32 }" value="71075" />
+      <SealImagePath kind="Leaf" offset="20016" length="78" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_ALPHAMON OURYUKEN X.dds</SealImagePath>
+    </_290>
+    <_291 kind="Record" offset="20094" length="78">
+      <DigimonId kind="Leaf" offset="20094" length="4" type="Scalar { Kind = U32 }" value="71078" />
+      <SealImagePath kind="Leaf" offset="20098" length="74" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Belial Vamdemon.dds</SealImagePath>
+    </_291>
+    <_292 kind="Record" offset="20172" length="58">
+      <DigimonId kind="Leaf" offset="20172" length="4" type="Scalar { Kind = U32 }" value="71080" />
+      <SealImagePath kind="Leaf" offset="20176" length="54" type="LString { }">data\Interface\SealMaster\SealImage\ShoutmonX2.dds</SealImagePath>
+    </_292>
+    <_293 kind="Record" offset="20230" length="74">
+      <DigimonId kind="Leaf" offset="20230" length="4" type="Scalar { Kind = U32 }" value="71081" />
+      <SealImagePath kind="Leaf" offset="20234" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Death-X-mon.dds</SealImagePath>
+    </_293>
+    <_294 kind="Record" offset="20304" length="74">
+      <DigimonId kind="Leaf" offset="20304" length="4" type="Scalar { Kind = U32 }" value="71082" />
+      <SealImagePath kind="Leaf" offset="20308" length="70" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Qinglongmon.dds</SealImagePath>
+    </_294>
+    <_295 kind="Record" offset="20378" length="73">
+      <DigimonId kind="Leaf" offset="20378" length="4" type="Scalar { Kind = U32 }" value="71083" />
+      <SealImagePath kind="Leaf" offset="20382" length="69" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Zhuqiaomon.dds</SealImagePath>
+    </_295>
+    <_296 kind="Record" offset="20451" length="71">
+      <DigimonId kind="Leaf" offset="20451" length="4" type="Scalar { Kind = U32 }" value="71084" />
+      <SealImagePath kind="Leaf" offset="20455" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Baihumon.dds</SealImagePath>
+    </_296>
+    <_297 kind="Record" offset="20522" length="72">
+      <DigimonId kind="Leaf" offset="20522" length="4" type="Scalar { Kind = U32 }" value="71085" />
+      <SealImagePath kind="Leaf" offset="20526" length="68" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Xuanwumon.dds</SealImagePath>
+    </_297>
+    <_298 kind="Record" offset="20594" length="79">
+      <DigimonId kind="Leaf" offset="20594" length="4" type="Scalar { Kind = U32 }" value="71088" />
+      <SealImagePath kind="Leaf" offset="20598" length="75" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_lucemonsatanmode.dds</SealImagePath>
+    </_298>
+    <_299 kind="Record" offset="20673" length="76">
+      <DigimonId kind="Leaf" offset="20673" length="4" type="Scalar { Kind = U32 }" value="71096" />
+      <SealImagePath kind="Leaf" offset="20677" length="72" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_PrinceMamemon.dds</SealImagePath>
+    </_299>
+    <_300 kind="Record" offset="20749" length="73">
+      <DigimonId kind="Leaf" offset="20749" length="4" type="Scalar { Kind = U32 }" value="71102" />
+      <SealImagePath kind="Leaf" offset="20753" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Apocalymon.dds</SealImagePath>
+    </_300>
+    <_301 kind="Record" offset="20822" length="79">
+      <DigimonId kind="Leaf" offset="20822" length="4" type="Scalar { Kind = U32 }" value="71104" />
+      <SealImagePath kind="Leaf" offset="20826" length="75" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Omegamon Alter-S.dds</SealImagePath>
+    </_301>
+    <_302 kind="Record" offset="20901" length="63">
+      <DigimonId kind="Leaf" offset="20901" length="4" type="Scalar { Kind = U32 }" value="71107" />
+      <SealImagePath kind="Leaf" offset="20905" length="59" type="LString { }">data\interface\SealMaster\SealImage\Omegamon_ZwartD.dds</SealImagePath>
+    </_302>
+    <_303 kind="Record" offset="20964" length="64">
+      <DigimonId kind="Leaf" offset="20964" length="4" type="Scalar { Kind = U32 }" value="71109" />
+      <SealImagePath kind="Leaf" offset="20968" length="60" type="LString { }">data\interface\SealMaster\SealImage\Omegamon_Alter-B.dds</SealImagePath>
+    </_303>
+    <_304 kind="Record" offset="21028" length="60">
+      <DigimonId kind="Leaf" offset="21028" length="4" type="Scalar { Kind = U32 }" value="71112" />
+      <SealImagePath kind="Leaf" offset="21032" length="56" type="LString { }">data\Interface\SealMaster\SealImage\Boltboutamon.dds</SealImagePath>
+    </_304>
+    <_305 kind="Record" offset="21088" length="71">
+      <DigimonId kind="Leaf" offset="21088" length="4" type="Scalar { Kind = U32 }" value="71114" />
+      <SealImagePath kind="Leaf" offset="21092" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_chaosmon.dds</SealImagePath>
+    </_305>
+    <_306 kind="Record" offset="21159" length="74">
+      <DigimonId kind="Leaf" offset="21159" length="4" type="Scalar { Kind = U32 }" value="71115" />
+      <SealImagePath kind="Leaf" offset="21163" length="70" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Rafflesimon.dds</SealImagePath>
+    </_306>
+    <_307 kind="Record" offset="21233" length="73">
+      <DigimonId kind="Leaf" offset="21233" length="4" type="Scalar { Kind = U32 }" value="71124" />
+      <SealImagePath kind="Leaf" offset="21237" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_SHOUTMONDX.dds</SealImagePath>
+    </_307>
+    <_308 kind="Record" offset="21306" length="73">
+      <DigimonId kind="Leaf" offset="21306" length="4" type="Scalar { Kind = U32 }" value="71125" />
+      <SealImagePath kind="Leaf" offset="21310" length="69" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_SHOUTMONX7.dds</SealImagePath>
+    </_308>
+    <_309 kind="Record" offset="21379" length="84">
+      <DigimonId kind="Leaf" offset="21379" length="4" type="Scalar { Kind = U32 }" value="71127" />
+      <SealImagePath kind="Leaf" offset="21383" length="80" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Omegamon_Mercifulmode.dds</SealImagePath>
+    </_309>
+    <_310 kind="Record" offset="21463" length="59">
+      <DigimonId kind="Leaf" offset="21463" length="4" type="Scalar { Kind = U32 }" value="71128" />
+      <SealImagePath kind="Leaf" offset="21467" length="55" type="LString { }">data\interface\SealMaster\SealImage\JetMervamon.dds</SealImagePath>
+    </_310>
+    <_311 kind="Record" offset="21522" length="63">
+      <DigimonId kind="Leaf" offset="21522" length="4" type="Scalar { Kind = U32 }" value="71129" />
+      <SealImagePath kind="Leaf" offset="21526" length="59" type="LString { }">data\interface\SealMaster\SealImage\Xrosup_Mervamon.dds</SealImagePath>
+    </_311>
+    <_312 kind="Record" offset="21585" length="64">
+      <DigimonId kind="Leaf" offset="21585" length="4" type="Scalar { Kind = U32 }" value="71133" />
+      <SealImagePath kind="Leaf" offset="21589" length="60" type="LString { }">data\interface\SealMaster\SealImage\Darknessbagramon.dds</SealImagePath>
+    </_312>
+    <_313 kind="Record" offset="21649" length="66">
+      <DigimonId kind="Leaf" offset="21649" length="4" type="Scalar { Kind = U32 }" value="72001" />
+      <SealImagePath kind="Leaf" offset="21653" length="62" type="LString { }">data\interface\SealMaster\SealImage\Kuzuhamon Mikomode.dds</SealImagePath>
+    </_313>
+    <_314 kind="Record" offset="21715" length="63">
+      <DigimonId kind="Leaf" offset="21715" length="4" type="Scalar { Kind = U32 }" value="72002" />
+      <SealImagePath kind="Leaf" offset="21719" length="59" type="LString { }">data\interface\SealMaster\SealImage\Bloomlordmon_RE.dds</SealImagePath>
+    </_314>
+    <_315 kind="Record" offset="21778" length="71">
+      <DigimonId kind="Leaf" offset="21778" length="4" type="Scalar { Kind = U32 }" value="75001" />
+      <SealImagePath kind="Leaf" offset="21782" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_halsemon.dds</SealImagePath>
+    </_315>
+    <_316 kind="Record" offset="21849" length="70">
+      <DigimonId kind="Leaf" offset="21849" length="4" type="Scalar { Kind = U32 }" value="75007" />
+      <SealImagePath kind="Leaf" offset="21853" length="66" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Allomon.dds</SealImagePath>
+    </_316>
+    <_317 kind="Record" offset="21919" length="71">
+      <DigimonId kind="Leaf" offset="21919" length="4" type="Scalar { Kind = U32 }" value="75009" />
+      <SealImagePath kind="Leaf" offset="21923" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Tocanmon.dds</SealImagePath>
+    </_317>
+    <_318 kind="Record" offset="21990" length="71">
+      <DigimonId kind="Leaf" offset="21990" length="4" type="Scalar { Kind = U32 }" value="75010" />
+      <SealImagePath kind="Leaf" offset="21994" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_ShuriMon.dds</SealImagePath>
+    </_318>
+    <_319 kind="Record" offset="22061" length="71">
+      <DigimonId kind="Leaf" offset="22061" length="4" type="Scalar { Kind = U32 }" value="75011" />
+      <SealImagePath kind="Leaf" offset="22065" length="67" type="LString { }">data\interface\SealMaster\SealImage\sealmaster_img_Yaksamon.dds</SealImagePath>
+    </_319>
+    <_320 kind="Record" offset="22132" length="72">
+      <DigimonId kind="Leaf" offset="22132" length="4" type="Scalar { Kind = U32 }" value="75012" />
+      <SealImagePath kind="Leaf" offset="22136" length="68" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Flybeemon.dds</SealImagePath>
+    </_320>
+    <_321 kind="Record" offset="22204" length="55">
+      <DigimonId kind="Leaf" offset="22204" length="4" type="Scalar { Kind = U32 }" value="75020" />
+      <SealImagePath kind="Leaf" offset="22208" length="51" type="LString { }">data\interface\SealMaster\SealImage\Agnimon.dds</SealImagePath>
+    </_321>
+    <_322 kind="Record" offset="22259" length="57">
+      <DigimonId kind="Leaf" offset="22259" length="4" type="Scalar { Kind = U32 }" value="75021" />
+      <SealImagePath kind="Leaf" offset="22263" length="53" type="LString { }">data\interface\SealMaster\SealImage\Vritramon.dds</SealImagePath>
+    </_322>
+    <_323 kind="Record" offset="22316" length="56">
+      <DigimonId kind="Leaf" offset="22316" length="4" type="Scalar { Kind = U32 }" value="75022" />
+      <SealImagePath kind="Leaf" offset="22320" length="52" type="LString { }">data\interface\SealMaster\SealImage\Fairimon.dds</SealImagePath>
+    </_323>
+    <_324 kind="Record" offset="22372" length="56">
+      <DigimonId kind="Leaf" offset="22372" length="4" type="Scalar { Kind = U32 }" value="75023" />
+      <SealImagePath kind="Leaf" offset="22376" length="52" type="LString { }">data\interface\SealMaster\SealImage\Shutumon.dds</SealImagePath>
+    </_324>
+    <_325 kind="Record" offset="22428" length="56">
+      <DigimonId kind="Leaf" offset="22428" length="4" type="Scalar { Kind = U32 }" value="75024" />
+      <SealImagePath kind="Leaf" offset="22432" length="52" type="LString { }">data\interface\SealMaster\SealImage\Chackmon.dds</SealImagePath>
+    </_325>
+    <_326 kind="Record" offset="22484" length="58">
+      <DigimonId kind="Leaf" offset="22484" length="4" type="Scalar { Kind = U32 }" value="75025" />
+      <SealImagePath kind="Leaf" offset="22488" length="54" type="LString { }">data\interface\SealMaster\SealImage\Blizzarmon.dds</SealImagePath>
+    </_326>
+    <_327 kind="Record" offset="22542" length="56">
+      <DigimonId kind="Leaf" offset="22542" length="4" type="Scalar { Kind = U32 }" value="75026" />
+      <SealImagePath kind="Leaf" offset="22546" length="52" type="LString { }">data\interface\SealMaster\SealImage\Arbormon.dds</SealImagePath>
+    </_327>
+    <_328 kind="Record" offset="22598" length="59">
+      <DigimonId kind="Leaf" offset="22598" length="4" type="Scalar { Kind = U32 }" value="75027" />
+      <SealImagePath kind="Leaf" offset="22602" length="55" type="LString { }">data\interface\SealMaster\SealImage\Petaldramon.dds</SealImagePath>
+    </_328>
+    <_329 kind="Record" offset="22657" length="57">
+      <DigimonId kind="Leaf" offset="22657" length="4" type="Scalar { Kind = U32 }" value="75028" />
+      <SealImagePath kind="Leaf" offset="22661" length="53" type="LString { }">data\interface\SealMaster\SealImage\Grottomon.dds</SealImagePath>
+    </_329>
+    <_330 kind="Record" offset="22714" length="56">
+      <DigimonId kind="Leaf" offset="22714" length="4" type="Scalar { Kind = U32 }" value="75029" />
+      <SealImagePath kind="Leaf" offset="22718" length="52" type="LString { }">data\interface\SealMaster\SealImage\Gigasmon.dds</SealImagePath>
+    </_330>
+    <_331 kind="Record" offset="22770" length="62">
+      <DigimonId kind="Leaf" offset="22770" length="4" type="Scalar { Kind = U32 }" value="75030" />
+      <SealImagePath kind="Leaf" offset="22774" length="58" type="LString { }">data\interface\SealMaster\SealImage\Kaiser_Greymon.dds</SealImagePath>
+    </_331>
+    <_332 kind="Record" offset="22832" length="55">
+      <DigimonId kind="Leaf" offset="22832" length="4" type="Scalar { Kind = U32 }" value="75031" />
+      <SealImagePath kind="Leaf" offset="22836" length="51" type="LString { }">data\interface\SealMaster\SealImage\Wolfmon.dds</SealImagePath>
+    </_332>
+    <_333 kind="Record" offset="22887" length="56">
+      <DigimonId kind="Leaf" offset="22887" length="4" type="Scalar { Kind = U32 }" value="75032" />
+      <SealImagePath kind="Leaf" offset="22891" length="52" type="LString { }">data\interface\SealMaster\SealImage\Garummon.dds</SealImagePath>
+    </_333>
+    <_334 kind="Record" offset="22943" length="56">
+      <DigimonId kind="Leaf" offset="22943" length="4" type="Scalar { Kind = U32 }" value="75033" />
+      <SealImagePath kind="Leaf" offset="22947" length="52" type="LString { }">data\interface\SealMaster\SealImage\Blitzmon.dds</SealImagePath>
+    </_334>
+    <_335 kind="Record" offset="22999" length="55">
+      <DigimonId kind="Leaf" offset="22999" length="4" type="Scalar { Kind = U32 }" value="75034" />
+      <SealImagePath kind="Leaf" offset="23003" length="51" type="LString { }">data\interface\SealMaster\SealImage\Bolgmon.dds</SealImagePath>
+    </_335>
+    <_336 kind="Record" offset="23054" length="55">
+      <DigimonId kind="Leaf" offset="23054" length="4" type="Scalar { Kind = U32 }" value="75035" />
+      <SealImagePath kind="Leaf" offset="23058" length="51" type="LString { }">data\interface\SealMaster\SealImage\Lanamon.dds</SealImagePath>
+    </_336>
+    <_337 kind="Record" offset="23109" length="59">
+      <DigimonId kind="Leaf" offset="23109" length="4" type="Scalar { Kind = U32 }" value="75036" />
+      <SealImagePath kind="Leaf" offset="23113" length="55" type="LString { }">data\interface\SealMaster\SealImage\Calamaramon.dds</SealImagePath>
+    </_337>
+    <_338 kind="Record" offset="23168" length="55">
+      <DigimonId kind="Leaf" offset="23168" length="4" type="Scalar { Kind = U32 }" value="75037" />
+      <SealImagePath kind="Leaf" offset="23172" length="51" type="LString { }">data\interface\SealMaster\SealImage\Lowemon.dds</SealImagePath>
+    </_338>
+    <_339 kind="Record" offset="23223" length="61">
+      <DigimonId kind="Leaf" offset="23223" length="4" type="Scalar { Kind = U32 }" value="75038" />
+      <SealImagePath kind="Leaf" offset="23227" length="57" type="LString { }">data\interface\SealMaster\SealImage\Kaiser_Leomon.dds</SealImagePath>
+    </_339>
+    <_340 kind="Record" offset="23284" length="58">
+      <DigimonId kind="Leaf" offset="23284" length="4" type="Scalar { Kind = U32 }" value="75039" />
+      <SealImagePath kind="Leaf" offset="23288" length="54" type="LString { }">data\interface\SealMaster\SealImage\Mercuremon.dds</SealImagePath>
+    </_340>
+    <_341 kind="Record" offset="23342" length="60">
+      <DigimonId kind="Leaf" offset="23342" length="4" type="Scalar { Kind = U32 }" value="75040" />
+      <SealImagePath kind="Leaf" offset="23346" length="56" type="LString { }">data\interface\SealMaster\SealImage\Sephirothmon.dds</SealImagePath>
+    </_341>
+    <_342 kind="Record" offset="23402" length="70">
+      <DigimonId kind="Leaf" offset="23402" length="4" type="Scalar { Kind = U32 }" value="75041" />
+      <SealImagePath kind="Leaf" offset="23406" length="66" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_MagnaGa.dds</SealImagePath>
+    </_342>
+    <_343 kind="Record" offset="23472" length="57">
+      <DigimonId kind="Leaf" offset="23472" length="4" type="Scalar { Kind = U32 }" value="75300" />
+      <SealImagePath kind="Leaf" offset="23476" length="53" type="LString { }">data\interface\SealMaster\SealImage\Greymon_X.dds</SealImagePath>
+    </_343>
+    <_344 kind="Record" offset="23529" length="59">
+      <DigimonId kind="Leaf" offset="23529" length="4" type="Scalar { Kind = U32 }" value="75301" />
+      <SealImagePath kind="Leaf" offset="23533" length="55" type="LString { }">data\interface\SealMaster\SealImage\Garurumon_X.dds</SealImagePath>
+    </_344>
+    <_345 kind="Record" offset="23588" length="57">
+      <DigimonId kind="Leaf" offset="23588" length="4" type="Scalar { Kind = U32 }" value="75309" />
+      <SealImagePath kind="Leaf" offset="23592" length="53" type="LString { }">data\interface\SealMaster\SealImage\Togemon_X.dds</SealImagePath>
+    </_345>
+    <_346 kind="Record" offset="23645" length="62">
+      <DigimonId kind="Leaf" offset="23645" length="4" type="Scalar { Kind = U32 }" value="75500" />
+      <SealImagePath kind="Leaf" offset="23649" length="58" type="LString { }">data\interface\SealMaster\SealImage\MetalGreymon_X.dds</SealImagePath>
+    </_346>
+    <_347 kind="Record" offset="23707" length="63">
+      <DigimonId kind="Leaf" offset="23707" length="4" type="Scalar { Kind = U32 }" value="75501" />
+      <SealImagePath kind="Leaf" offset="23711" length="59" type="LString { }">data\interface\SealMaster\SealImage\WereGarurumon_X.dds</SealImagePath>
+    </_347>
+    <_348 kind="Record" offset="23770" length="57">
+      <DigimonId kind="Leaf" offset="23770" length="4" type="Scalar { Kind = U32 }" value="75509" />
+      <SealImagePath kind="Leaf" offset="23774" length="53" type="LString { }">data\interface\SealMaster\SealImage\Lilimon_X.dds</SealImagePath>
+    </_348>
+    <_349 kind="Record" offset="23827" length="60">
+      <DigimonId kind="Leaf" offset="23827" length="4" type="Scalar { Kind = U32 }" value="75700" />
+      <SealImagePath kind="Leaf" offset="23831" length="56" type="LString { }">data\interface\SealMaster\SealImage\WarGreymon_X.dds</SealImagePath>
+    </_349>
+    <_350 kind="Record" offset="23887" length="64">
+      <DigimonId kind="Leaf" offset="23887" length="4" type="Scalar { Kind = U32 }" value="75701" />
+      <SealImagePath kind="Leaf" offset="23891" length="60" type="LString { }">data\interface\SealMaster\SealImage\MetalGarurumon_X.dds</SealImagePath>
+    </_350>
+    <_351 kind="Record" offset="23951" length="71">
+      <DigimonId kind="Leaf" offset="23951" length="4" type="Scalar { Kind = U32 }" value="75702" />
+      <SealImagePath kind="Leaf" offset="23955" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_ALPHAMON.dds</SealImagePath>
+    </_351>
+    <_352 kind="Record" offset="24022" length="61">
+      <DigimonId kind="Leaf" offset="24022" length="4" type="Scalar { Kind = U32 }" value="75708" />
+      <SealImagePath kind="Leaf" offset="24026" length="57" type="LString { }">data\interface\SealMaster\SealImage\TigerVespamon.dds</SealImagePath>
+    </_352>
+    <_353 kind="Record" offset="24083" length="57">
+      <DigimonId kind="Leaf" offset="24083" length="4" type="Scalar { Kind = U32 }" value="75709" />
+      <SealImagePath kind="Leaf" offset="24087" length="53" type="LString { }">data\interface\SealMaster\SealImage\Dukemon_X.dds</SealImagePath>
+    </_353>
+    <_354 kind="Record" offset="24140" length="57">
+      <DigimonId kind="Leaf" offset="24140" length="4" type="Scalar { Kind = U32 }" value="75710" />
+      <SealImagePath kind="Leaf" offset="24144" length="53" type="LString { }">data\interface\SealMaster\SealImage\Duftmon_X.dds</SealImagePath>
+    </_354>
+    <_355 kind="Record" offset="24197" length="58">
+      <DigimonId kind="Leaf" offset="24197" length="4" type="Scalar { Kind = U32 }" value="75711" />
+      <SealImagePath kind="Leaf" offset="24201" length="54" type="LString { }">data\interface\SealMaster\SealImage\Magnamon_X.dds</SealImagePath>
+    </_355>
+    <_356 kind="Record" offset="24255" length="58">
+      <DigimonId kind="Leaf" offset="24255" length="4" type="Scalar { Kind = U32 }" value="75712" />
+      <SealImagePath kind="Leaf" offset="24259" length="54" type="LString { }">data\interface\SealMaster\SealImage\Dynasmon_X.dds</SealImagePath>
+    </_356>
+    <_357 kind="Record" offset="24313" length="66">
+      <DigimonId kind="Leaf" offset="24313" length="4" type="Scalar { Kind = U32 }" value="75713" />
+      <SealImagePath kind="Leaf" offset="24317" length="62" type="LString { }">data\interface\SealMaster\SealImage\Ulforce V-Dramon_X.dds</SealImagePath>
+    </_357>
+    <_358 kind="Record" offset="24379" length="58">
+      <DigimonId kind="Leaf" offset="24379" length="4" type="Scalar { Kind = U32 }" value="75714" />
+      <SealImagePath kind="Leaf" offset="24383" length="54" type="LString { }">data\interface\SealMaster\SealImage\Sleipmon_X.dds</SealImagePath>
+    </_358>
+    <_359 kind="Record" offset="24437" length="61">
+      <DigimonId kind="Leaf" offset="24437" length="4" type="Scalar { Kind = U32 }" value="75715" />
+      <SealImagePath kind="Leaf" offset="24441" length="57" type="LString { }">data\interface\SealMaster\SealImage\Beelzebumon_X.dds</SealImagePath>
+    </_359>
+    <_360 kind="Record" offset="24498" length="57">
+      <DigimonId kind="Leaf" offset="24498" length="4" type="Scalar { Kind = U32 }" value="75716" />
+      <SealImagePath kind="Leaf" offset="24502" length="53" type="LString { }">data\interface\SealMaster\SealImage\Rosemon_X.dds</SealImagePath>
+    </_360>
+    <_361 kind="Record" offset="24555" length="56">
+      <DigimonId kind="Leaf" offset="24555" length="4" type="Scalar { Kind = U32 }" value="75717" />
+      <SealImagePath kind="Leaf" offset="24559" length="52" type="LString { }">data\interface\SealMaster\SealImage\Gaioumon.dds</SealImagePath>
+    </_361>
+    <_362 kind="Record" offset="24611" length="63">
+      <DigimonId kind="Leaf" offset="24611" length="4" type="Scalar { Kind = U32 }" value="75718" />
+      <SealImagePath kind="Leaf" offset="24615" length="59" type="LString { }">data\interface\SealMaster\SealImage\LordKnightmon_X.dds</SealImagePath>
+    </_362>
+    <_363 kind="Record" offset="24674" length="63">
+      <DigimonId kind="Leaf" offset="24674" length="4" type="Scalar { Kind = U32 }" value="75719" />
+      <SealImagePath kind="Leaf" offset="24678" length="59" type="LString { }">data\interface\SealMaster\SealImage\MedievalDukemon.dds</SealImagePath>
+    </_363>
+    <_364 kind="Record" offset="24737" length="60">
+      <DigimonId kind="Leaf" offset="24737" length="4" type="Scalar { Kind = U32 }" value="75720" />
+      <SealImagePath kind="Leaf" offset="24741" length="56" type="LString { }">data\interface\SealMaster\SealImage\Minervamon_X.dds</SealImagePath>
+    </_364>
+    <_365 kind="Record" offset="24797" length="59">
+      <DigimonId kind="Leaf" offset="24797" length="4" type="Scalar { Kind = U32 }" value="75721" />
+      <SealImagePath kind="Leaf" offset="24801" length="55" type="LString { }">data\interface\SealMaster\SealImage\Lilithmon_X.dds</SealImagePath>
+    </_365>
+    <_366 kind="Record" offset="24856" length="58">
+      <DigimonId kind="Leaf" offset="24856" length="4" type="Scalar { Kind = U32 }" value="75722" />
+      <SealImagePath kind="Leaf" offset="24860" length="54" type="LString { }">data\interface\SealMaster\SealImage\Barbamon_X.dds</SealImagePath>
+    </_366>
+    <_367 kind="Record" offset="24914" length="82">
+      <DigimonId kind="Leaf" offset="24914" length="4" type="Scalar { Kind = U32 }" value="75900" />
+      <SealImagePath kind="Leaf" offset="24918" length="78" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_ALPHAMON OURYUKEN X.dds</SealImagePath>
+    </_367>
+    <_368 kind="Record" offset="24996" length="71">
+      <DigimonId kind="Leaf" offset="24996" length="4" type="Scalar { Kind = U32 }" value="75902" />
+      <SealImagePath kind="Leaf" offset="25000" length="67" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_OMEGAMON.dds</SealImagePath>
+    </_368>
+    <_369 kind="Record" offset="25067" length="56">
+      <DigimonId kind="Leaf" offset="25067" length="4" type="Scalar { Kind = U32 }" value="75904" />
+      <SealImagePath kind="Leaf" offset="25071" length="52" type="LString { }">data\interface\SealMaster\SealImage\Jesmon_X.dds</SealImagePath>
+    </_369>
+    <_370 kind="Record" offset="25123" length="60">
+      <DigimonId kind="Leaf" offset="25123" length="4" type="Scalar { Kind = U32 }" value="75906" />
+      <SealImagePath kind="Leaf" offset="25127" length="56" type="LString { }">data\interface\SealMaster\SealImage\Megidramon_X.dds</SealImagePath>
+    </_370>
+    <_371 kind="Record" offset="25183" length="60">
+      <DigimonId kind="Leaf" offset="25183" length="4" type="Scalar { Kind = U32 }" value="75907" />
+      <SealImagePath kind="Leaf" offset="25187" length="56" type="LString { }">data\interface\SealMaster\SealImage\Craniummon_X.dds</SealImagePath>
+    </_371>
+    <_372 kind="Record" offset="25243" length="83">
+      <DigimonId kind="Leaf" offset="25243" length="4" type="Scalar { Kind = U32 }" value="75908" />
+      <SealImagePath kind="Leaf" offset="25247" length="79" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_ALPHAMON OURYUKEN_Re.dds</SealImagePath>
+    </_372>
+    <_373 kind="Record" offset="25326" length="61">
+      <DigimonId kind="Leaf" offset="25326" length="4" type="Scalar { Kind = U32 }" value="75909" />
+      <SealImagePath kind="Leaf" offset="25330" length="57" type="LString { }">data\interface\SealMaster\SealImage\Chaosdramon_X.dds</SealImagePath>
+    </_373>
+    <_374 kind="Record" offset="25387" length="56">
+      <DigimonId kind="Leaf" offset="25387" length="4" type="Scalar { Kind = U32 }" value="75910" />
+      <SealImagePath kind="Leaf" offset="25391" length="52" type="LString { }">data\interface\SealMaster\SealImage\Examon_X.dds</SealImagePath>
+    </_374>
+    <_375 kind="Record" offset="25443" length="55">
+      <DigimonId kind="Leaf" offset="25443" length="4" type="Scalar { Kind = U32 }" value="75911" />
+      <SealImagePath kind="Leaf" offset="25447" length="51" type="LString { }">data\interface\SealMaster\SealImage\Demon_X.dds</SealImagePath>
+    </_375>
+    <_376 kind="Record" offset="25498" length="57">
+      <DigimonId kind="Leaf" offset="25498" length="4" type="Scalar { Kind = U32 }" value="75912" />
+      <SealImagePath kind="Leaf" offset="25502" length="53" type="LString { }">data\interface\SealMaster\SealImage\Gankoon_X.dds</SealImagePath>
+    </_376>
+    <_377 kind="Record" offset="25555" length="77">
+      <DigimonId kind="Leaf" offset="25555" length="4" type="Scalar { Kind = U32 }" value="77004" />
+      <SealImagePath kind="Leaf" offset="25559" length="73" type="LString { }">data\interface\SealMaster\SealImage\ImperialDramon_PaladinMode_Re.dds</SealImagePath>
+    </_377>
+    <_378 kind="Record" offset="25632" length="67">
+      <DigimonId kind="Leaf" offset="25632" length="4" type="Scalar { Kind = U32 }" value="77005" />
+      <SealImagePath kind="Leaf" offset="25636" length="63" type="LString { }">data\interface\SealMaster\SealImage\Zeedmillenniumon_RE.dds</SealImagePath>
+    </_378>
+    <_379 kind="Record" offset="25699" length="69">
+      <DigimonId kind="Leaf" offset="25699" length="4" type="Scalar { Kind = U32 }" value="77017" />
+      <SealImagePath kind="Leaf" offset="25703" length="65" type="LString { }">data\interface\SealMaster\SealImage\Last_Evolusion_Kizuna.dds</SealImagePath>
+    </_379>
+    <_380 kind="Record" offset="25768" length="68">
+      <DigimonId kind="Leaf" offset="25768" length="4" type="Scalar { Kind = U32 }" value="77020" />
+      <SealImagePath kind="Leaf" offset="25772" length="64" type="LString { }">data\interface\SealMaster\SealImage\Lilithmon_X-Antibody.dds</SealImagePath>
+    </_380>
+    <_381 kind="Record" offset="25836" length="58">
+      <DigimonId kind="Leaf" offset="25836" length="4" type="Scalar { Kind = U32 }" value="79003" />
+      <SealImagePath kind="Leaf" offset="25840" length="54" type="LString { }">data\interface\SealMaster\SealImage\Eosmon_Lv6.dds</SealImagePath>
+    </_381>
+    <_382 kind="Record" offset="25894" length="88">
+      <DigimonId kind="Leaf" offset="25894" length="4" type="Scalar { Kind = U32 }" value="79004" />
+      <SealImagePath kind="Leaf" offset="25898" length="84" type="LString { }">data\Interface\SealMaster\SealImage\sealmaster_img_Shoutmon_X7_Superior_Mode.dds</SealImagePath>
+    </_382>
+    <_383 kind="Record" offset="25982" length="60">
+      <DigimonId kind="Leaf" offset="25982" length="4" type="Scalar { Kind = U32 }" value="79007" />
+      <SealImagePath kind="Leaf" offset="25986" length="56" type="LString { }">data\interface\SealMaster\SealImage\Ordinemon_RE.dds</SealImagePath>
+    </_383>
+    <_384 kind="Record" offset="26042" length="60">
+      <DigimonId kind="Leaf" offset="26042" length="4" type="Scalar { Kind = U32 }" value="93821" />
+      <SealImagePath kind="Leaf" offset="26046" length="56" type="LString { }">data\interface\SealMaster\SealImage\Yamato_Tamer.dds</SealImagePath>
+    </_384>
+    <_385 kind="Record" offset="26102" length="62">
+      <DigimonId kind="Leaf" offset="26102" length="4" type="Scalar { Kind = U32 }" value="93822" />
+      <SealImagePath kind="Leaf" offset="26106" length="58" type="LString { }">data\interface\SealMaster\SealImage\Takaishi_Tamer.dds</SealImagePath>
+    </_385>
+    <_386 kind="Record" offset="26164" length="58">
+      <DigimonId kind="Leaf" offset="26164" length="4" type="Scalar { Kind = U32 }" value="93910" />
+      <SealImagePath kind="Leaf" offset="26168" length="54" type="LString { }">data\interface\SealMaster\SealImage\Mimi_Tamer.dds</SealImagePath>
+    </_386>
+    <_387 kind="Record" offset="26222" length="60">
+      <DigimonId kind="Leaf" offset="26222" length="4" type="Scalar { Kind = U32 }" value="94097" />
+      <SealImagePath kind="Leaf" offset="26226" length="56" type="LString { }">data\interface\SealMaster\SealImage\Kamiya_Tamer.dds</SealImagePath>
+    </_387>
+    <_388 kind="Record" offset="26282" length="52">
+      <DigimonId kind="Leaf" offset="26282" length="4" type="Scalar { Kind = U32 }" value="96017" />
+      <SealImagePath kind="Leaf" offset="26286" length="48" type="LString { }">data\interface\SealMaster\SealImage\cake.dds</SealImagePath>
+    </_388>
+    <_389 kind="Record" offset="26334" length="55">
+      <DigimonId kind="Leaf" offset="26334" length="4" type="Scalar { Kind = U32 }" value="96019" />
+      <SealImagePath kind="Leaf" offset="26338" length="51" type="LString { }">data\interface\SealMaster\SealImage\Rudolph.dds</SealImagePath>
+    </_389>
+  </Images>
+</SealDigimonImage>

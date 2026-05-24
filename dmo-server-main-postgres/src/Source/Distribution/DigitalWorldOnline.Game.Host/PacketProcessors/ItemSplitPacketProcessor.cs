@@ -151,6 +151,66 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         await _sender.Send(new UpdateItemsCommand(client.Tamer.Warehouse));
                     }
                     break;
+
+                case ItemListMovimentationEnum.InventoryToExtraSeal:
+                    await SplitExtraInventoryAsync(client, client.Tamer.Inventory, client.Tamer.ExtraInventorySeal, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.ExtraSealMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.ExtraSealToInventory:
+                    await SplitExtraInventoryAsync(client, client.Tamer.ExtraInventorySeal, client.Tamer.Inventory, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.ExtraSealMinSlot, GeneralSizeEnum.InventoryMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.ExtraSealToExtraSeal:
+                    await SplitExtraInventoryAsync(client, client.Tamer.ExtraInventorySeal, client.Tamer.ExtraInventorySeal, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.ExtraSealMinSlot, GeneralSizeEnum.ExtraSealMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.InventoryToExtraTicket:
+                    await SplitExtraInventoryAsync(client, client.Tamer.Inventory, client.Tamer.ExtraInventoryTicket, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.ExtraTicketMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.ExtraTicketToInventory:
+                    await SplitExtraInventoryAsync(client, client.Tamer.ExtraInventoryTicket, client.Tamer.Inventory, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.ExtraTicketMinSlot, GeneralSizeEnum.InventoryMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.ExtraTicketToExtraTicket:
+                    await SplitExtraInventoryAsync(client, client.Tamer.ExtraInventoryTicket, client.Tamer.ExtraInventoryTicket, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.ExtraTicketMinSlot, GeneralSizeEnum.ExtraTicketMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.InventoryToExtraEvolution:
+                    await SplitExtraInventoryAsync(client, client.Tamer.Inventory, client.Tamer.ExtraInventoryEvolution, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.ExtraEvolutionMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.ExtraEvolutionToInventory:
+                    await SplitExtraInventoryAsync(client, client.Tamer.ExtraInventoryEvolution, client.Tamer.Inventory, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.ExtraEvolutionMinSlot, GeneralSizeEnum.InventoryMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.ExtraEvolutionToExtraEvolution:
+                    await SplitExtraInventoryAsync(client, client.Tamer.ExtraInventoryEvolution, client.Tamer.ExtraInventoryEvolution, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.ExtraEvolutionMinSlot, GeneralSizeEnum.ExtraEvolutionMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.InventoryToExtraDigitama:
+                    await SplitExtraInventoryAsync(client, client.Tamer.Inventory, client.Tamer.ExtraInventoryDigitama, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.ExtraDigitamaMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.ExtraDigitamaToInventory:
+                    await SplitExtraInventoryAsync(client, client.Tamer.ExtraInventoryDigitama, client.Tamer.Inventory, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.ExtraDigitamaMinSlot, GeneralSizeEnum.InventoryMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.ExtraDigitamaToExtraDigitama:
+                    await SplitExtraInventoryAsync(client, client.Tamer.ExtraInventoryDigitama, client.Tamer.ExtraInventoryDigitama, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.ExtraDigitamaMinSlot, GeneralSizeEnum.ExtraDigitamaMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.InventoryToExtraMaterial:
+                    await SplitExtraInventoryAsync(client, client.Tamer.Inventory, client.Tamer.ExtraInventoryMaterial, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.ExtraMaterialMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.ExtraMaterialToInventory:
+                    await SplitExtraInventoryAsync(client, client.Tamer.ExtraInventoryMaterial, client.Tamer.Inventory, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.ExtraMaterialMinSlot, GeneralSizeEnum.InventoryMinSlot);
+                    break;
+
+                case ItemListMovimentationEnum.ExtraMaterialToExtraMaterial:
+                    await SplitExtraInventoryAsync(client, client.Tamer.ExtraInventoryMaterial, client.Tamer.ExtraInventoryMaterial, originSlot, destinationSlot, amountToSplit, GeneralSizeEnum.ExtraMaterialMinSlot, GeneralSizeEnum.ExtraMaterialMinSlot);
+                    break;
             }
 
             SendItemListRefresh(client, itemListMovimentation);
@@ -185,7 +245,68 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 packets.Add(new LoadInventoryPacket(client.Tamer.AccountWarehouse, InventoryTypeEnum.AccountWarehouse).Serialize());
             }
 
+            AppendExtraInventoryRefresh(packets, client, movimentation);
+
             client.Send(UtilitiesFunctions.GroupPackets(packets.ToArray()));
+        }
+
+        private async Task SplitExtraInventoryAsync(
+            GameClient client,
+            ItemListModel source,
+            ItemListModel destination,
+            short originSlot,
+            short destinationSlot,
+            short amountToSplit,
+            GeneralSizeEnum originBase,
+            GeneralSizeEnum destinationBase)
+        {
+            var srcSlot = originSlot - originBase.GetHashCode();
+            var dstSlot = destinationSlot - destinationBase.GetHashCode();
+            var success = source.TrySplitAcrossLists(destination, srcSlot, dstSlot, amountToSplit);
+            client.Send(new SplitItemPacket(originSlot, destinationSlot, success ? amountToSplit : (short)0));
+
+            await _sender.Send(new UpdateItemsCommand(source));
+            if (!ReferenceEquals(source, destination))
+                await _sender.Send(new UpdateItemsCommand(destination));
+        }
+
+        private static void AppendExtraInventoryRefresh(
+            List<byte[]> packets,
+            GameClient client,
+            ItemListMovimentationEnum movimentation)
+        {
+            switch (movimentation)
+            {
+                case ItemListMovimentationEnum.InventoryToExtraSeal:
+                case ItemListMovimentationEnum.ExtraSealToInventory:
+                case ItemListMovimentationEnum.ExtraSealToExtraSeal:
+                    packets.Add(new LoadInventoryPacket(client.Tamer.ExtraInventorySeal, InventoryTypeEnum.ExtraSeal).Serialize());
+                    break;
+
+                case ItemListMovimentationEnum.InventoryToExtraTicket:
+                case ItemListMovimentationEnum.ExtraTicketToInventory:
+                case ItemListMovimentationEnum.ExtraTicketToExtraTicket:
+                    packets.Add(new LoadInventoryPacket(client.Tamer.ExtraInventoryTicket, InventoryTypeEnum.ExtraTicket).Serialize());
+                    break;
+
+                case ItemListMovimentationEnum.InventoryToExtraEvolution:
+                case ItemListMovimentationEnum.ExtraEvolutionToInventory:
+                case ItemListMovimentationEnum.ExtraEvolutionToExtraEvolution:
+                    packets.Add(new LoadInventoryPacket(client.Tamer.ExtraInventoryEvolution, InventoryTypeEnum.ExtraEvolution).Serialize());
+                    break;
+
+                case ItemListMovimentationEnum.InventoryToExtraDigitama:
+                case ItemListMovimentationEnum.ExtraDigitamaToInventory:
+                case ItemListMovimentationEnum.ExtraDigitamaToExtraDigitama:
+                    packets.Add(new LoadInventoryPacket(client.Tamer.ExtraInventoryDigitama, InventoryTypeEnum.ExtraDigitama).Serialize());
+                    break;
+
+                case ItemListMovimentationEnum.InventoryToExtraMaterial:
+                case ItemListMovimentationEnum.ExtraMaterialToInventory:
+                case ItemListMovimentationEnum.ExtraMaterialToExtraMaterial:
+                    packets.Add(new LoadInventoryPacket(client.Tamer.ExtraInventoryMaterial, InventoryTypeEnum.ExtraMaterial).Serialize());
+                    break;
+            }
         }
     }
 }

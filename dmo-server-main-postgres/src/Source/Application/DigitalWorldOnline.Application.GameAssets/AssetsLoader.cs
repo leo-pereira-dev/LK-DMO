@@ -18,6 +18,7 @@ namespace DigitalWorldOnline.Application.GameAssets
         private readonly ISender _sender;
         private readonly IMapper _mapper;
         private readonly MonsterBinLoader _monster;
+        private readonly QuestBinLoader _questBin;
         private readonly UnionXmlAssetLoader _xmlUnion;
         private bool? _loading;
 
@@ -70,11 +71,13 @@ namespace DigitalWorldOnline.Application.GameAssets
             ISender sender,
             IMapper mapper,
             MonsterBinLoader monster,
+            QuestBinLoader questBin,
             UnionXmlAssetLoader xmlUnion)
         {
             _sender = sender;
             _mapper = mapper;
             _monster = monster;
+            _questBin = questBin;
             _xmlUnion = xmlUnion;
         }
 
@@ -115,7 +118,7 @@ namespace DigitalWorldOnline.Application.GameAssets
             Portal = _mapper.Map<List<PortalAssetModel>>(await _sender.Send(new PortalAssetsQuery()));
             Npcs = _mapper.Map<List<NpcAssetModel>>(await _sender.Send(new NpcAssetsQuery()));
             NpcColiseum = _mapper.Map<List<NpcColiseumAssetModel>>(await _sender.Send(new NpcColiseumAssetsQuery()));
-            Quest = _mapper.Map<List<QuestAssetModel>>(await _sender.Send(new QuestAssetsQuery()));
+            Quest = _questBin.Load().Quests.ToList();
             Hatchs = _mapper.Map<List<HatchAssetModel>>(await _sender.Send(new HatchAssetsQuery()));
             Maps = _mapper.Map<List<MapAssetModel>>(await _sender.Send(new MapAssetsQuery()));
             Clones = _mapper.Map<List<CloneAssetModel>>(await _sender.Send(new CloneAssetsQuery()));

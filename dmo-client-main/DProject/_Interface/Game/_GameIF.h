@@ -19,6 +19,7 @@
 #include "QuickEvol.h"
 #include "ChatOption.h"
 #include "Inventory.h"
+#include "ExtraInventory.h"
 #include "Talk.h"
 #include "Store.h"
 #include "Digitama_Sell.h"

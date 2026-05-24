@@ -76,7 +76,11 @@ namespace DigitalWorldOnline.Account
                         }
                         catch (InvalidDataException ex)
                         {
-                            _logger.Warning(ex, "Rejected malformed login request from {Address}.", client.ClientAddress);
+                            _logger.Warning(
+                                ex,
+                                "Rejected malformed login request from {Address}. {PacketDetails}",
+                                client.ClientAddress,
+                                DescribeLoginRequestPacket(packet.ToArray(), packet.Length));
                             client.Send(new LoginRequestAnswerPacket(LoginFailReasonEnum.UserNotFound));
                             break;
                         }
@@ -86,12 +90,23 @@ namespace DigitalWorldOnline.Account
                         var cpu = loginRequest.Cpu;
                         var gpu = loginRequest.Gpu;
 
+                        _logger.Information(
+                            "Login request parsed from {Address}: username={Username} userLen={UserLength} passLen={PasswordLength} cpuLen={CpuLength} gpuLen={GpuLength} packetLength={PacketLength}.",
+                            client.ClientAddress,
+                            username,
+                            username.Length,
+                            password.Length,
+                            cpu.Length,
+                            gpu.Length,
+                            packet.Length);
+
                         if (!IsValidUsername(username))
                         {
                             _logger.Warning(
-                                "Rejected login request with invalid username length {Length} from {Address}.",
+                                "Rejected login request with invalid username length {Length} from {Address}. username={Username}",
                                 username.Length,
-                                client.ClientAddress);
+                                client.ClientAddress,
+                                ToLoginTryUsername(username));
 
                             await _sender.Send(
                                 new CreateLoginTryCommand(
@@ -110,7 +125,10 @@ namespace DigitalWorldOnline.Account
 
                         if (account == null)
                         {
-                            DebugLog($"Saving {username} login try for incorrect username...");
+                            _logger.Warning(
+                                "Login rejected: username {Username} was not found from {Address}.",
+                                username,
+                                client.ClientAddress);
                             await _sender.Send(
                                 new CreateLoginTryCommand(
                                     ToLoginTryUsername(username),
@@ -140,12 +158,21 @@ namespace DigitalWorldOnline.Account
 
                         if (account.Password != password.Encrypt())
                         {
-                            DebugLog($"Saving {username} login try for incorrect password...");
+                            _logger.Warning(
+                                "Login rejected: incorrect password for username {Username} from {Address}.",
+                                username,
+                                client.ClientAddress);
                             await _sender.Send(new CreateLoginTryCommand(ToLoginTryUsername(username), client.ClientAddress, LoginTryResultEnum.IncorrectPassword));
 
                             client.Send(new LoginRequestAnswerPacket(LoginFailReasonEnum.IncorrectPassword));
                             break;
                         }
+
+                        _logger.Information(
+                            "Login accepted for username {Username} accountId {AccountId}; secondaryPasswordConfigured={HasSecondaryPassword}.",
+                            username,
+                            account.Id,
+                            !string.IsNullOrEmpty(account.SecondaryPassword));
 
                         if (string.IsNullOrEmpty(account.SecondaryPassword))
                         {
@@ -330,6 +357,67 @@ namespace DigitalWorldOnline.Account
             }
 
             throw new InvalidDataException("Login request payload does not match the expected client layout.");
+        }
+
+        private static string DescribeLoginRequestPacket(byte[] data, int packetLength)
+        {
+            var end = Math.Min(packetLength - 2, data.Length);
+            var details = new StringBuilder();
+            details.Append($"packetLength={packetLength}, dataLength={data.Length}, payloadEnd={end}");
+
+            foreach (var usernameOffset in new[] { 8, 9 })
+            {
+                var offset = usernameOffset;
+                details.Append($"; offset{usernameOffset}: ");
+                details.Append(DescribeSizedAsciiField(data, ref offset, end, MaxUsernameLength, "username"));
+
+                if (offset < end && data[offset] == 0)
+                {
+                    details.Append(", separator=00");
+                    offset++;
+                }
+
+                details.Append(", ");
+                details.Append(DescribeSizedAsciiField(data, ref offset, end, 64, "password"));
+                details.Append($", next={offset}");
+            }
+
+            return details.ToString();
+        }
+
+        private static string DescribeSizedAsciiField(
+            byte[] data,
+            ref int offset,
+            int end,
+            int maxLength,
+            string fieldName)
+        {
+            if (offset >= end)
+                return $"{fieldName}=missing(at={offset})";
+
+            var sizeOffset = offset;
+            var size = data[offset++];
+
+            if (size == 0)
+                return $"{fieldName}=zero(at={sizeOffset})";
+
+            if (size > maxLength)
+                return $"{fieldName}=too-long(size={size}, max={maxLength}, at={sizeOffset})";
+
+            if (offset + size > end)
+                return $"{fieldName}=overrun(size={size}, at={sizeOffset}, end={end})";
+
+            for (var i = offset; i < offset + size; i++)
+            {
+                if (data[i] < 32 || data[i] > 126)
+                {
+                    var value = data[i].ToString("X2");
+                    return $"{fieldName}=non-ascii(size={size}, byte=0x{value}, at={i})";
+                }
+            }
+
+            offset += size;
+            return $"{fieldName}=ok(size={size}, at={sizeOffset})";
         }
 
         private static bool TryExtractLoginRequest(

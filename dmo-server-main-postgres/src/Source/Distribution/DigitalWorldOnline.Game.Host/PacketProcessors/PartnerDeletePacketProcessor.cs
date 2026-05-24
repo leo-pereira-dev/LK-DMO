@@ -41,6 +41,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 client.Send(new PartnerDeletePacket(slot));
 
                 await _sender.Send(new DeleteDigimonCommand(digimonId));
+                await _sender.Send(new DigitalWorldOnline.Application.Separar.Commands.Update.UpdateCharacterDigimonsOrderCommand(client.Tamer));
 
                 _logger.Verbose($"Character {client.TamerId} deleted partner {digimonId}.");
             }

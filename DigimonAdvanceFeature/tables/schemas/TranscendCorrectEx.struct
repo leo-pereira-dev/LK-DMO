@@ -1,0 +1,22 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/TranscendCorrectEx.bin]
+// TranscendCorrectEx.bin — Pack03 v487 client.
+// Route: FUN_0161e970 -> FUN_0161b8c0 -> FUN_0161f130.
+// Cursor layout verified from payload: count, u32 key, counted 5-byte correction rows.
+
+bin TranscendCorrectEx {
+    section Corrections {
+        count  u32;
+        record TranscendCorrectExRecord;
+    }
+}
+
+struct TranscendCorrectExRecord {
+    u32  DigimonId;
+    u32  GrowthCount;
+    TranscendCorrectExEntry[GrowthCount] GrowthExp;
+}
+
+struct TranscendCorrectExEntry size=5 {
+    u8   Growth;
+    u32  FixedExp;
+}

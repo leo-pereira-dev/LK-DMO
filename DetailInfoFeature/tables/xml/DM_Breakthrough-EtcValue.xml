@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DMBreakthroughEtcValue schema="DM_Breakthrough-EtcValue.struct" bin="DM_Breakthrough-EtcValue.bin" byteLength="68">
+  <Values kind="Section" offset="0" length="68">
+    <_0 kind="Record" offset="4" length="8">
+      <Key kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <Value kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="40" />
+    </_0>
+    <_1 kind="Record" offset="12" length="8">
+      <Key kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Value kind="Leaf" offset="16" length="4" type="Scalar { Kind = U32 }" value="75855" />
+    </_1>
+    <_2 kind="Record" offset="20" length="8">
+      <Key kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Value kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="75854" />
+    </_2>
+    <_3 kind="Record" offset="28" length="8">
+      <Key kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <Value kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="1" />
+    </_3>
+    <_4 kind="Record" offset="36" length="8">
+      <Key kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <Value kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="75857" />
+    </_4>
+    <_5 kind="Record" offset="44" length="8">
+      <Key kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Value kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="75856" />
+    </_5>
+    <_6 kind="Record" offset="52" length="8">
+      <Key kind="Leaf" offset="52" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <Value kind="Leaf" offset="56" length="4" type="Scalar { Kind = U32 }" value="1" />
+    </_6>
+    <_7 kind="Record" offset="60" length="8">
+      <Key kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <Value kind="Leaf" offset="64" length="4" type="Scalar { Kind = U32 }" value="100" />
+    </_7>
+  </Values>
+</DMBreakthroughEtcValue>

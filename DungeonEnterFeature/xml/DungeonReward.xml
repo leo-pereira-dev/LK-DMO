@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonReward schema="DungeonReward.struct" bin="DungeonReward.bin" byteLength="637">
+  <Rewards kind="Section" offset="0" length="637">
+    <_0 kind="Record" offset="4" length="21">
+      <DungeonId kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="8701" />
+      <RewardGroupCount kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="12" length="13" count="1">
+        <_0_ kind="Struct" offset="12" length="13">
+          <GroupKey kind="Leaf" offset="12" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="13" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="17" length="8" count="1">
+            <_0_ kind="Struct" offset="17" length="8">
+              <ItemId kind="Leaf" offset="17" length="4" type="Scalar { Kind = U32 }" value="6179" />
+              <Amount kind="Leaf" offset="21" length="4" type="Scalar { Kind = U32 }" value="3" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_0>
+    <_1 kind="Record" offset="25" length="21">
+      <DungeonId kind="Leaf" offset="25" length="4" type="Scalar { Kind = U32 }" value="21201" />
+      <RewardGroupCount kind="Leaf" offset="29" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="33" length="13" count="1">
+        <_0_ kind="Struct" offset="33" length="13">
+          <GroupKey kind="Leaf" offset="33" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="34" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="38" length="8" count="1">
+            <_0_ kind="Struct" offset="38" length="8">
+              <ItemId kind="Leaf" offset="38" length="4" type="Scalar { Kind = U32 }" value="76072" />
+              <Amount kind="Leaf" offset="42" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_1>
+    <_2 kind="Record" offset="46" length="21">
+      <DungeonId kind="Leaf" offset="46" length="4" type="Scalar { Kind = U32 }" value="25201" />
+      <RewardGroupCount kind="Leaf" offset="50" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="54" length="13" count="1">
+        <_0_ kind="Struct" offset="54" length="13">
+          <GroupKey kind="Leaf" offset="54" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="55" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="59" length="8" count="1">
+            <_0_ kind="Struct" offset="59" length="8">
+              <ItemId kind="Leaf" offset="59" length="4" type="Scalar { Kind = U32 }" value="76573" />
+              <Amount kind="Leaf" offset="63" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_2>
+    <_3 kind="Record" offset="67" length="21">
+      <DungeonId kind="Leaf" offset="67" length="4" type="Scalar { Kind = U32 }" value="25301" />
+      <RewardGroupCount kind="Leaf" offset="71" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="75" length="13" count="1">
+        <_0_ kind="Struct" offset="75" length="13">
+          <GroupKey kind="Leaf" offset="75" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="76" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="80" length="8" count="1">
+            <_0_ kind="Struct" offset="80" length="8">
+              <ItemId kind="Leaf" offset="80" length="4" type="Scalar { Kind = U32 }" value="76573" />
+              <Amount kind="Leaf" offset="84" length="4" type="Scalar { Kind = U32 }" value="2" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_3>
+    <_4 kind="Record" offset="88" length="21">
+      <DungeonId kind="Leaf" offset="88" length="4" type="Scalar { Kind = U32 }" value="25601" />
+      <RewardGroupCount kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="96" length="13" count="1">
+        <_0_ kind="Struct" offset="96" length="13">
+          <GroupKey kind="Leaf" offset="96" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="97" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="101" length="8" count="1">
+            <_0_ kind="Struct" offset="101" length="8">
+              <ItemId kind="Leaf" offset="101" length="4" type="Scalar { Kind = U32 }" value="76573" />
+              <Amount kind="Leaf" offset="105" length="4" type="Scalar { Kind = U32 }" value="2" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_4>
+    <_5 kind="Record" offset="109" length="21">
+      <DungeonId kind="Leaf" offset="109" length="4" type="Scalar { Kind = U32 }" value="25701" />
+      <RewardGroupCount kind="Leaf" offset="113" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="117" length="13" count="1">
+        <_0_ kind="Struct" offset="117" length="13">
+          <GroupKey kind="Leaf" offset="117" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="118" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="122" length="8" count="1">
+            <_0_ kind="Struct" offset="122" length="8">
+              <ItemId kind="Leaf" offset="122" length="4" type="Scalar { Kind = U32 }" value="76573" />
+              <Amount kind="Leaf" offset="126" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_5>
+    <_6 kind="Record" offset="130" length="29">
+      <DungeonId kind="Leaf" offset="130" length="4" type="Scalar { Kind = U32 }" value="26302" />
+      <RewardGroupCount kind="Leaf" offset="134" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="138" length="21" count="1">
+        <_0_ kind="Struct" offset="138" length="21">
+          <GroupKey kind="Leaf" offset="138" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="139" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Rewards kind="Array" offset="143" length="16" count="2">
+            <_0_ kind="Struct" offset="143" length="8">
+              <ItemId kind="Leaf" offset="143" length="4" type="Scalar { Kind = U32 }" value="76688" />
+              <Amount kind="Leaf" offset="147" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+            <_1_ kind="Struct" offset="151" length="8">
+              <ItemId kind="Leaf" offset="151" length="4" type="Scalar { Kind = U32 }" value="76688" />
+              <Amount kind="Leaf" offset="155" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_1_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_6>
+    <_7 kind="Record" offset="159" length="21">
+      <DungeonId kind="Leaf" offset="159" length="4" type="Scalar { Kind = U32 }" value="26402" />
+      <RewardGroupCount kind="Leaf" offset="163" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="167" length="13" count="1">
+        <_0_ kind="Struct" offset="167" length="13">
+          <GroupKey kind="Leaf" offset="167" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="168" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="172" length="8" count="1">
+            <_0_ kind="Struct" offset="172" length="8">
+              <ItemId kind="Leaf" offset="172" length="4" type="Scalar { Kind = U32 }" value="76688" />
+              <Amount kind="Leaf" offset="176" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_7>
+    <_8 kind="Record" offset="180" length="21">
+      <DungeonId kind="Leaf" offset="180" length="4" type="Scalar { Kind = U32 }" value="26602" />
+      <RewardGroupCount kind="Leaf" offset="184" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="188" length="13" count="1">
+        <_0_ kind="Struct" offset="188" length="13">
+          <GroupKey kind="Leaf" offset="188" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="189" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="193" length="8" count="1">
+            <_0_ kind="Struct" offset="193" length="8">
+              <ItemId kind="Leaf" offset="193" length="4" type="Scalar { Kind = U32 }" value="76689" />
+              <Amount kind="Leaf" offset="197" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_8>
+    <_9 kind="Record" offset="201" length="21">
+      <DungeonId kind="Leaf" offset="201" length="4" type="Scalar { Kind = U32 }" value="30001" />
+      <RewardGroupCount kind="Leaf" offset="205" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="209" length="13" count="1">
+        <_0_ kind="Struct" offset="209" length="13">
+          <GroupKey kind="Leaf" offset="209" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="210" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="214" length="8" count="1">
+            <_0_ kind="Struct" offset="214" length="8">
+              <ItemId kind="Leaf" offset="214" length="4" type="Scalar { Kind = U32 }" value="47323" />
+              <Amount kind="Leaf" offset="218" length="4" type="Scalar { Kind = U32 }" value="7" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_9>
+    <_10 kind="Record" offset="222" length="21">
+      <DungeonId kind="Leaf" offset="222" length="4" type="Scalar { Kind = U32 }" value="30101" />
+      <RewardGroupCount kind="Leaf" offset="226" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="230" length="13" count="1">
+        <_0_ kind="Struct" offset="230" length="13">
+          <GroupKey kind="Leaf" offset="230" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="231" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="235" length="8" count="1">
+            <_0_ kind="Struct" offset="235" length="8">
+              <ItemId kind="Leaf" offset="235" length="4" type="Scalar { Kind = U32 }" value="47324" />
+              <Amount kind="Leaf" offset="239" length="4" type="Scalar { Kind = U32 }" value="9" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_10>
+    <_11 kind="Record" offset="243" length="21">
+      <DungeonId kind="Leaf" offset="243" length="4" type="Scalar { Kind = U32 }" value="32801" />
+      <RewardGroupCount kind="Leaf" offset="247" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="251" length="13" count="1">
+        <_0_ kind="Struct" offset="251" length="13">
+          <GroupKey kind="Leaf" offset="251" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="252" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="256" length="8" count="1">
+            <_0_ kind="Struct" offset="256" length="8">
+              <ItemId kind="Leaf" offset="256" length="4" type="Scalar { Kind = U32 }" value="47327" />
+              <Amount kind="Leaf" offset="260" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_11>
+    <_12 kind="Record" offset="264" length="21">
+      <DungeonId kind="Leaf" offset="264" length="4" type="Scalar { Kind = U32 }" value="41101" />
+      <RewardGroupCount kind="Leaf" offset="268" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="272" length="13" count="1">
+        <_0_ kind="Struct" offset="272" length="13">
+          <GroupKey kind="Leaf" offset="272" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="273" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="277" length="8" count="1">
+            <_0_ kind="Struct" offset="277" length="8">
+              <ItemId kind="Leaf" offset="277" length="4" type="Scalar { Kind = U32 }" value="47398" />
+              <Amount kind="Leaf" offset="281" length="4" type="Scalar { Kind = U32 }" value="10" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_12>
+    <_13 kind="Record" offset="285" length="21">
+      <DungeonId kind="Leaf" offset="285" length="4" type="Scalar { Kind = U32 }" value="41201" />
+      <RewardGroupCount kind="Leaf" offset="289" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="293" length="13" count="1">
+        <_0_ kind="Struct" offset="293" length="13">
+          <GroupKey kind="Leaf" offset="293" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="294" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="298" length="8" count="1">
+            <_0_ kind="Struct" offset="298" length="8">
+              <ItemId kind="Leaf" offset="298" length="4" type="Scalar { Kind = U32 }" value="47398" />
+              <Amount kind="Leaf" offset="302" length="4" type="Scalar { Kind = U32 }" value="15" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_13>
+    <_14 kind="Record" offset="306" length="21">
+      <DungeonId kind="Leaf" offset="306" length="4" type="Scalar { Kind = U32 }" value="110901" />
+      <RewardGroupCount kind="Leaf" offset="310" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="314" length="13" count="1">
+        <_0_ kind="Struct" offset="314" length="13">
+          <GroupKey kind="Leaf" offset="314" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="315" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="319" length="8" count="1">
+            <_0_ kind="Struct" offset="319" length="8">
+              <ItemId kind="Leaf" offset="319" length="4" type="Scalar { Kind = U32 }" value="75195" />
+              <Amount kind="Leaf" offset="323" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_14>
+    <_15 kind="Record" offset="327" length="21">
+      <DungeonId kind="Leaf" offset="327" length="4" type="Scalar { Kind = U32 }" value="110902" />
+      <RewardGroupCount kind="Leaf" offset="331" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="335" length="13" count="1">
+        <_0_ kind="Struct" offset="335" length="13">
+          <GroupKey kind="Leaf" offset="335" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="336" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="340" length="8" count="1">
+            <_0_ kind="Struct" offset="340" length="8">
+              <ItemId kind="Leaf" offset="340" length="4" type="Scalar { Kind = U32 }" value="75196" />
+              <Amount kind="Leaf" offset="344" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_15>
+    <_16 kind="Record" offset="348" length="21">
+      <DungeonId kind="Leaf" offset="348" length="4" type="Scalar { Kind = U32 }" value="110903" />
+      <RewardGroupCount kind="Leaf" offset="352" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="356" length="13" count="1">
+        <_0_ kind="Struct" offset="356" length="13">
+          <GroupKey kind="Leaf" offset="356" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="357" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="361" length="8" count="1">
+            <_0_ kind="Struct" offset="361" length="8">
+              <ItemId kind="Leaf" offset="361" length="4" type="Scalar { Kind = U32 }" value="76158" />
+              <Amount kind="Leaf" offset="365" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_16>
+    <_17 kind="Record" offset="369" length="29">
+      <DungeonId kind="Leaf" offset="369" length="4" type="Scalar { Kind = U32 }" value="130804" />
+      <RewardGroupCount kind="Leaf" offset="373" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="377" length="21" count="1">
+        <_0_ kind="Struct" offset="377" length="21">
+          <GroupKey kind="Leaf" offset="377" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="378" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Rewards kind="Array" offset="382" length="16" count="2">
+            <_0_ kind="Struct" offset="382" length="8">
+              <ItemId kind="Leaf" offset="382" length="4" type="Scalar { Kind = U32 }" value="76146" />
+              <Amount kind="Leaf" offset="386" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+            <_1_ kind="Struct" offset="390" length="8">
+              <ItemId kind="Leaf" offset="390" length="4" type="Scalar { Kind = U32 }" value="76143" />
+              <Amount kind="Leaf" offset="394" length="4" type="Scalar { Kind = U32 }" value="3" />
+            </_1_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_17>
+    <_18 kind="Record" offset="398" length="21">
+      <DungeonId kind="Leaf" offset="398" length="4" type="Scalar { Kind = U32 }" value="140301" />
+      <RewardGroupCount kind="Leaf" offset="402" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="406" length="13" count="1">
+        <_0_ kind="Struct" offset="406" length="13">
+          <GroupKey kind="Leaf" offset="406" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="407" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="411" length="8" count="1">
+            <_0_ kind="Struct" offset="411" length="8">
+              <ItemId kind="Leaf" offset="411" length="4" type="Scalar { Kind = U32 }" value="76161" />
+              <Amount kind="Leaf" offset="415" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_18>
+    <_19 kind="Record" offset="419" length="21">
+      <DungeonId kind="Leaf" offset="419" length="4" type="Scalar { Kind = U32 }" value="140302" />
+      <RewardGroupCount kind="Leaf" offset="423" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="427" length="13" count="1">
+        <_0_ kind="Struct" offset="427" length="13">
+          <GroupKey kind="Leaf" offset="427" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="428" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="432" length="8" count="1">
+            <_0_ kind="Struct" offset="432" length="8">
+              <ItemId kind="Leaf" offset="432" length="4" type="Scalar { Kind = U32 }" value="76162" />
+              <Amount kind="Leaf" offset="436" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_19>
+    <_20 kind="Record" offset="440" length="21">
+      <DungeonId kind="Leaf" offset="440" length="4" type="Scalar { Kind = U32 }" value="140303" />
+      <RewardGroupCount kind="Leaf" offset="444" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="448" length="13" count="1">
+        <_0_ kind="Struct" offset="448" length="13">
+          <GroupKey kind="Leaf" offset="448" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="449" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="453" length="8" count="1">
+            <_0_ kind="Struct" offset="453" length="8">
+              <ItemId kind="Leaf" offset="453" length="4" type="Scalar { Kind = U32 }" value="76163" />
+              <Amount kind="Leaf" offset="457" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_20>
+    <_21 kind="Record" offset="461" length="21">
+      <DungeonId kind="Leaf" offset="461" length="4" type="Scalar { Kind = U32 }" value="180901" />
+      <RewardGroupCount kind="Leaf" offset="465" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="469" length="13" count="1">
+        <_0_ kind="Struct" offset="469" length="13">
+          <GroupKey kind="Leaf" offset="469" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="470" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="474" length="8" count="1">
+            <_0_ kind="Struct" offset="474" length="8">
+              <ItemId kind="Leaf" offset="474" length="4" type="Scalar { Kind = U32 }" value="76574" />
+              <Amount kind="Leaf" offset="478" length="4" type="Scalar { Kind = U32 }" value="2" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_21>
+    <_22 kind="Record" offset="482" length="21">
+      <DungeonId kind="Leaf" offset="482" length="4" type="Scalar { Kind = U32 }" value="181001" />
+      <RewardGroupCount kind="Leaf" offset="486" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="490" length="13" count="1">
+        <_0_ kind="Struct" offset="490" length="13">
+          <GroupKey kind="Leaf" offset="490" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="491" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="495" length="8" count="1">
+            <_0_ kind="Struct" offset="495" length="8">
+              <ItemId kind="Leaf" offset="495" length="4" type="Scalar { Kind = U32 }" value="76574" />
+              <Amount kind="Leaf" offset="499" length="4" type="Scalar { Kind = U32 }" value="2" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_22>
+    <_23 kind="Record" offset="503" length="21">
+      <DungeonId kind="Leaf" offset="503" length="4" type="Scalar { Kind = U32 }" value="191102" />
+      <RewardGroupCount kind="Leaf" offset="507" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="511" length="13" count="1">
+        <_0_ kind="Struct" offset="511" length="13">
+          <GroupKey kind="Leaf" offset="511" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="512" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="516" length="8" count="1">
+            <_0_ kind="Struct" offset="516" length="8">
+              <ItemId kind="Leaf" offset="516" length="4" type="Scalar { Kind = U32 }" value="76206" />
+              <Amount kind="Leaf" offset="520" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_23>
+    <_24 kind="Record" offset="524" length="21">
+      <DungeonId kind="Leaf" offset="524" length="4" type="Scalar { Kind = U32 }" value="191202" />
+      <RewardGroupCount kind="Leaf" offset="528" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="532" length="13" count="1">
+        <_0_ kind="Struct" offset="532" length="13">
+          <GroupKey kind="Leaf" offset="532" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="533" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="537" length="8" count="1">
+            <_0_ kind="Struct" offset="537" length="8">
+              <ItemId kind="Leaf" offset="537" length="4" type="Scalar { Kind = U32 }" value="76209" />
+              <Amount kind="Leaf" offset="541" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_24>
+    <_25 kind="Record" offset="545" length="21">
+      <DungeonId kind="Leaf" offset="545" length="4" type="Scalar { Kind = U32 }" value="191302" />
+      <RewardGroupCount kind="Leaf" offset="549" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="553" length="13" count="1">
+        <_0_ kind="Struct" offset="553" length="13">
+          <GroupKey kind="Leaf" offset="553" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="554" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="558" length="8" count="1">
+            <_0_ kind="Struct" offset="558" length="8">
+              <ItemId kind="Leaf" offset="558" length="4" type="Scalar { Kind = U32 }" value="76212" />
+              <Amount kind="Leaf" offset="562" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_25>
+    <_26 kind="Record" offset="566" length="21">
+      <DungeonId kind="Leaf" offset="566" length="4" type="Scalar { Kind = U32 }" value="191402" />
+      <RewardGroupCount kind="Leaf" offset="570" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="574" length="13" count="1">
+        <_0_ kind="Struct" offset="574" length="13">
+          <GroupKey kind="Leaf" offset="574" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="575" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="579" length="8" count="1">
+            <_0_ kind="Struct" offset="579" length="8">
+              <ItemId kind="Leaf" offset="579" length="4" type="Scalar { Kind = U32 }" value="76215" />
+              <Amount kind="Leaf" offset="583" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_26>
+    <_27 kind="Record" offset="587" length="29">
+      <DungeonId kind="Leaf" offset="587" length="4" type="Scalar { Kind = U32 }" value="191502" />
+      <RewardGroupCount kind="Leaf" offset="591" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="595" length="21" count="1">
+        <_0_ kind="Struct" offset="595" length="21">
+          <GroupKey kind="Leaf" offset="595" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="596" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Rewards kind="Array" offset="600" length="16" count="2">
+            <_0_ kind="Struct" offset="600" length="8">
+              <ItemId kind="Leaf" offset="600" length="4" type="Scalar { Kind = U32 }" value="76218" />
+              <Amount kind="Leaf" offset="604" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+            <_1_ kind="Struct" offset="608" length="8">
+              <ItemId kind="Leaf" offset="608" length="4" type="Scalar { Kind = U32 }" value="76238" />
+              <Amount kind="Leaf" offset="612" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_1_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_27>
+    <_28 kind="Record" offset="616" length="21">
+      <DungeonId kind="Leaf" offset="616" length="4" type="Scalar { Kind = U32 }" value="300701" />
+      <RewardGroupCount kind="Leaf" offset="620" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <RewardGroups kind="Array" offset="624" length="13" count="1">
+        <_0_ kind="Struct" offset="624" length="13">
+          <GroupKey kind="Leaf" offset="624" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <RewardCount kind="Leaf" offset="625" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Rewards kind="Array" offset="629" length="8" count="1">
+            <_0_ kind="Struct" offset="629" length="8">
+              <ItemId kind="Leaf" offset="629" length="4" type="Scalar { Kind = U32 }" value="155289" />
+              <Amount kind="Leaf" offset="633" length="4" type="Scalar { Kind = U32 }" value="1" />
+            </_0_>
+          </Rewards>
+        </_0_>
+      </RewardGroups>
+    </_28>
+  </Rewards>
+</DungeonReward>

@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "_GameIF.h"
+#include "ExtraInventoryDebugLog.h"
 #include "../../Flow/Flow.h"
 #include "../../Flow/FlowMgr.h"
 
@@ -1190,6 +1191,12 @@ bool cGameInterface::CursorIconLBtnDown( CsPoint pos, CURSOR_ICON::eTYPE eIconTy
 
 bool cGameInterface::CursorIconLBtnUp( CsPoint pos, CURSOR_ICON::eTYPE eIconType, int nIconSlot, int nIconCount )
 {
+	if( eIconType == CURSOR_ICON::CI_INVEN || eIconType == CURSOR_ICON::CI_EXTRAINVEN )
+	{
+		ExtraInventoryDebugLog( "[ExtraInventory][GameIF] CursorIconLBtnUp begin pos=(%d,%d) type=%d slot=%d count=%d dynamicCount=%d staticCount=%d",
+			pos.x, pos.y, eIconType, nIconSlot, nIconCount, m_vpDynamicUI.Size(), m_vpStaticUI.Size() );
+	}
+
 	if( cMessageBox::IsMessageBox() )
 		return false;
 
@@ -1208,13 +1215,27 @@ bool cGameInterface::CursorIconLBtnUp( CsPoint pos, CURSOR_ICON::eTYPE eIconType
 		if( m_vpDynamicUI[ i ]->IsInWindow( pos ) == false )
 			continue;
 
+		if( eIconType == CURSOR_ICON::CI_INVEN || eIconType == CURSOR_ICON::CI_EXTRAINVEN )
+		{
+			ExtraInventoryDebugLog( "[ExtraInventory][GameIF] CursorIconLBtnUp dynamic hit index=%d wt=%d enable=%d focus=%d",
+				i, m_vpDynamicUI[ i ]->GetWindowType(), m_vpDynamicUI[ i ]->IsEnableWindow() ? 1 : 0, m_vpDynamicUI[ i ]->IsHaveFocus() ? 1 : 0 );
+		}
+
 		if( m_vpDynamicUI[ i ]->IsEnableWindow() == false )
 			return true;
 
 		if( m_vpDynamicUI[ i ]->CursorIconLBtnUp( eIconType, nIconSlot, nIconCount ) == true )
 		{
+			if( eIconType == CURSOR_ICON::CI_INVEN || eIconType == CURSOR_ICON::CI_EXTRAINVEN )
+			{
+				ExtraInventoryDebugLog( "[ExtraInventory][GameIF] CursorIconLBtnUp handled by dynamic wt=%d", m_vpDynamicUI[ i ]->GetWindowType() );
+			}
 			SetFocusWindow( m_vpDynamicUI[ i ] );
 			return true;
+		}
+		if( eIconType == CURSOR_ICON::CI_INVEN || eIconType == CURSOR_ICON::CI_EXTRAINVEN )
+		{
+			ExtraInventoryDebugLog( "[ExtraInventory][GameIF] CursorIconLBtnUp dynamic rejected wt=%d", m_vpDynamicUI[ i ]->GetWindowType() );
 		}
 		return false;
 	}
@@ -1228,17 +1249,35 @@ bool cGameInterface::CursorIconLBtnUp( CsPoint pos, CURSOR_ICON::eTYPE eIconType
 		if( m_vpStaticUI[ i ]->IsInWindow( pos ) == false )
 			continue;
 
+		if( eIconType == CURSOR_ICON::CI_INVEN || eIconType == CURSOR_ICON::CI_EXTRAINVEN )
+		{
+			ExtraInventoryDebugLog( "[ExtraInventory][GameIF] CursorIconLBtnUp static hit index=%d wt=%d enable=%d",
+				i, m_vpStaticUI[ i ]->GetWindowType(), m_vpStaticUI[ i ]->IsEnableWindow() ? 1 : 0 );
+		}
+
 		if( m_vpStaticUI[ i ]->IsEnableWindow() == false )
 			return true;
 
 		if( m_vpStaticUI[ i ]->CursorIconLBtnUp( eIconType, nIconSlot, nIconCount ) == true )
 		{
+			if( eIconType == CURSOR_ICON::CI_INVEN || eIconType == CURSOR_ICON::CI_EXTRAINVEN )
+			{
+				ExtraInventoryDebugLog( "[ExtraInventory][GameIF] CursorIconLBtnUp handled by static wt=%d", m_vpStaticUI[ i ]->GetWindowType() );
+			}
 			SetFocusWindow( m_vpStaticUI[ i ] );
 			return true;
+		}
+		if( eIconType == CURSOR_ICON::CI_INVEN || eIconType == CURSOR_ICON::CI_EXTRAINVEN )
+		{
+			ExtraInventoryDebugLog( "[ExtraInventory][GameIF] CursorIconLBtnUp static rejected wt=%d", m_vpStaticUI[ i ]->GetWindowType() );
 		}
 		return false;
 	}
 
+	if( eIconType == CURSOR_ICON::CI_INVEN || eIconType == CURSOR_ICON::CI_EXTRAINVEN )
+	{
+		ExtraInventoryDebugLog( "[ExtraInventory][GameIF] CursorIconLBtnUp no window hit, trying drop-message path" );
+	}
 	return CURSOR_ST.IconDropMessageTry();
 }
 
@@ -1794,6 +1833,12 @@ cBaseWindow* cGameInterface::GetDynamicIF( cBaseWindow::eWINDOW_TYPE wt, int nPo
 {
 	cBaseWindow* pWindow = NULL;		
 
+	if( wt == cBaseWindow::WT_EXTRAINVENTORY )
+	{
+		ExtraInventoryDebugLog( "[ExtraInventory][GameIF] GetDynamicIF begin wt=%d pointer=%d value=%d sound=%d",
+			wt, nPointerIndex, nValue, bOpenSound ? 1 : 0 );
+	}
+
 	switch( wt )
 	{
 	case cBaseWindow::WT_STORE:
@@ -1850,37 +1895,83 @@ cBaseWindow* cGameInterface::GetDynamicIF( cBaseWindow::eWINDOW_TYPE wt, int nPo
 	pWindow = _GetPointer( wt, nPointerIndex );
 	if( pWindow == NULL )
 	{
+		if( wt == cBaseWindow::WT_EXTRAINVENTORY )
+			ExtraInventoryDebugLog( "[ExtraInventory][GameIF] existing pointer not found; creating dynamic window" );
+
 		pWindow = _NewDynamicIF( wt, true, nPointerIndex );
+		if( wt == cBaseWindow::WT_EXTRAINVENTORY )
+			ExtraInventoryDebugLog( "[ExtraInventory][GameIF] _NewDynamicIF returned=%p", pWindow );
+
 		assert_cs( pWindow != NULL );
 		SAFE_POINTER_RETVAL(pWindow, NULL);
 		pWindow->Open( nValue, bOpenSound );
+
+		if( wt == cBaseWindow::WT_EXTRAINVENTORY )
+		{
+			ExtraInventoryDebugLog( "[ExtraInventory][GameIF] Open called on new window ptr=%p live=%d show=%d active=%d",
+				pWindow,
+				pWindow->IsLive() ? 1 : 0,
+				pWindow->IsShowWindow() ? 1 : 0,
+				IsActiveWindow( wt, nPointerIndex ) ? 1 : 0 );
+		}
 	}
 	else
 	{
+		if( wt == cBaseWindow::WT_EXTRAINVENTORY )
+		{
+			ExtraInventoryDebugLog( "[ExtraInventory][GameIF] existing pointer found ptr=%p live=%d show=%d",
+				pWindow, pWindow->IsLive() ? 1 : 0, pWindow->IsShowWindow() ? 1 : 0 );
+		}
+
 		if( pWindow->IsShowWindow() == false )
 			pWindow->Open( nValue, bOpenSound );
 
 		SetFocusWindow( pWindow );
+
+		if( wt == cBaseWindow::WT_EXTRAINVENTORY )
+		{
+			ExtraInventoryDebugLog( "[ExtraInventory][GameIF] existing window handled ptr=%p live=%d show=%d active=%d",
+				pWindow,
+				pWindow->IsLive() ? 1 : 0,
+				pWindow->IsShowWindow() ? 1 : 0,
+				IsActiveWindow( wt, nPointerIndex ) ? 1 : 0 );
+		}
 	}
 	return pWindow;
 }
 
 bool cGameInterface::CloseDynamicIF( cBaseWindow::eWINDOW_TYPE wt, int nPointerIndex /*=0*/, bool bIncludeDisableWindow /*=false*/ )
 {
+	if( wt == cBaseWindow::WT_EXTRAINVENTORY )
+		ExtraInventoryDebugLog( "[ExtraInventory][GameIF] CloseDynamicIF begin pointer=%d includeDisable=%d", nPointerIndex, bIncludeDisableWindow ? 1 : 0 );
+
 	cBaseWindow* pWindow = _GetPointer( wt, nPointerIndex );
 	if( ( pWindow != NULL )&&( pWindow->IsShowWindow() == true ) )
 	{
+		if( wt == cBaseWindow::WT_EXTRAINVENTORY )
+			ExtraInventoryDebugLog( "[ExtraInventory][GameIF] CloseDynamicIF closing ptr=%p live=%d show=%d", pWindow, pWindow->IsLive() ? 1 : 0, pWindow->IsShowWindow() ? 1 : 0 );
+
 		if( bIncludeDisableWindow == true )
 			pWindow->SetEnableWindow( true );
 		pWindow->Close();
 		return true;
 	}
+
+	if( wt == cBaseWindow::WT_EXTRAINVENTORY )
+		ExtraInventoryDebugLog( "[ExtraInventory][GameIF] CloseDynamicIF skipped ptr=%p", pWindow );
+
 	return false;
 }
 
 cBaseWindow* cGameInterface::_NewDynamicIF( cBaseWindow::eWINDOW_TYPE wt, bool bFocus, int nPointerIndex )
 {
+	if( wt == cBaseWindow::WT_EXTRAINVENTORY )
+		ExtraInventoryDebugLog( "[ExtraInventory][GameIF] _NewDynamicIF begin focus=%d pointer=%d", bFocus ? 1 : 0, nPointerIndex );
+
 	cBaseWindow* pWindow = cBaseWindow::NewWindow( wt, nPointerIndex );
+	if( wt == cBaseWindow::WT_EXTRAINVENTORY )
+		ExtraInventoryDebugLog( "[ExtraInventory][GameIF] NewWindow returned=%p", pWindow );
+
 	SAFE_POINTER_RETVAL(pWindow, NULL);
 	_InsertDynamicWindow( pWindow, bFocus, nPointerIndex );
 	return pWindow;
@@ -1890,6 +1981,16 @@ void cGameInterface::_InsertDynamicWindow( cBaseWindow* pWindow, bool bFocus /*=
 {
 	DWORD dwArrayID = pWindow->GetWindowType()*100 + nPointerIndex;
 	m_mapWindowArray[ dwArrayID ] = pWindow;
+
+	if( pWindow->GetWindowType() == cBaseWindow::WT_EXTRAINVENTORY )
+	{
+		ExtraInventoryDebugLog( "[ExtraInventory][GameIF] _InsertDynamicWindow ptr=%p id=%lu focus=%d pointer=%d dynamicCountBefore=%d",
+			pWindow,
+			dwArrayID,
+			bFocus ? 1 : 0,
+			nPointerIndex,
+			m_vpDynamicUI.Size() );
+	}
 
 	pWindow->SetStaticWindow( false );
 	m_vpDynamicUI.PushBack( pWindow );

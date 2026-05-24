@@ -1,0 +1,31 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/TranscendNeed.bin]
+// TranscendNeed.bin — Pack03 v487 client.
+// Route: FUN_0161e970 -> FUN_0161b8c0 -> FUN_0161f170.
+// Cursor layout verified from payload: count, target-growth groups, then compact 35-byte requirement entries.
+
+bin TranscendNeed {
+    section Requirements {
+        count  u32;
+        record TranscendNeedRecord;
+    }
+}
+
+struct TranscendNeedRecord {
+    u8   TargetGrowth;
+    u32  CurrentGrowthCount;
+    TranscendNeedEntry[CurrentGrowthCount] CurrentGrowthRequirements;
+}
+
+struct TranscendNeedEntry size=35 {
+    u8   CurrentGrowth;
+    u32  NeedDigimonLv;
+    u32  NeedEnchantLv;
+    u32  NeedEvoMinType;
+    u32  NeedEvoMaxType;
+    u8   NeedScale;
+    u8   NextDigimonGrowth;
+    u32  NeedHatchLvMin;
+    u32  NeedHatchLvMax;
+    u32  TransCost;
+    u32  MaxExp;
+}

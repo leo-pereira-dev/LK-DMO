@@ -1,0 +1,1937 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DMItemUpgradeRestore schema="DM_ItemUpgrade-Restore.struct" bin="DM_ItemUpgrade-Restore.bin" byteLength="5380">
+  <Restores kind="Section" offset="0" length="5380">
+    <_0 kind="Record" offset="4" length="128">
+      <Key kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="47650" />
+      <EntryCount kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="12" length="120" count="5">
+        <_0_ kind="Struct" offset="12" length="24">
+          <GradeKey kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="16" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="36" length="24">
+          <GradeKey kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="52" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="56" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="60" length="24">
+          <GradeKey kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="64" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="68" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="72" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="76" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="80" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="84" length="24">
+          <GradeKey kind="Leaf" offset="84" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="88" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="96" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="100" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="104" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="108" length="24">
+          <GradeKey kind="Leaf" offset="108" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="112" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="116" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="120" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="124" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="128" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_0>
+    <_1 kind="Record" offset="132" length="128">
+      <Key kind="Leaf" offset="132" length="4" type="Scalar { Kind = U32 }" value="50161" />
+      <EntryCount kind="Leaf" offset="136" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="140" length="120" count="5">
+        <_0_ kind="Struct" offset="140" length="24">
+          <GradeKey kind="Leaf" offset="140" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="144" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="148" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="152" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="156" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="160" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="164" length="24">
+          <GradeKey kind="Leaf" offset="164" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="168" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="172" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="176" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="180" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="184" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_1_>
+        <_2_ kind="Struct" offset="188" length="24">
+          <GradeKey kind="Leaf" offset="188" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="192" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="196" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="200" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="204" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="208" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_2_>
+        <_3_ kind="Struct" offset="212" length="24">
+          <GradeKey kind="Leaf" offset="212" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="216" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="220" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="224" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="228" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="232" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="236" length="24">
+          <GradeKey kind="Leaf" offset="236" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="240" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="244" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="248" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="252" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="256" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_4_>
+      </Entries>
+    </_1>
+    <_2 kind="Record" offset="260" length="128">
+      <Key kind="Leaf" offset="260" length="4" type="Scalar { Kind = U32 }" value="47649" />
+      <EntryCount kind="Leaf" offset="264" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="268" length="120" count="5">
+        <_0_ kind="Struct" offset="268" length="24">
+          <GradeKey kind="Leaf" offset="268" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="272" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="276" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="280" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="284" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="288" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="292" length="24">
+          <GradeKey kind="Leaf" offset="292" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="296" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="300" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="304" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="308" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="312" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="316" length="24">
+          <GradeKey kind="Leaf" offset="316" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="320" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="324" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="328" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="332" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="336" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="340" length="24">
+          <GradeKey kind="Leaf" offset="340" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="344" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="348" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="352" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="356" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="360" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="364" length="24">
+          <GradeKey kind="Leaf" offset="364" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="368" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="372" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="376" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="380" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="384" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_2>
+    <_3 kind="Record" offset="388" length="128">
+      <Key kind="Leaf" offset="388" length="4" type="Scalar { Kind = U32 }" value="50162" />
+      <EntryCount kind="Leaf" offset="392" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="396" length="120" count="5">
+        <_0_ kind="Struct" offset="396" length="24">
+          <GradeKey kind="Leaf" offset="396" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="400" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="404" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="408" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="412" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="416" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="420" length="24">
+          <GradeKey kind="Leaf" offset="420" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="424" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="428" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="432" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="436" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="440" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_1_>
+        <_2_ kind="Struct" offset="444" length="24">
+          <GradeKey kind="Leaf" offset="444" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="448" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="452" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="456" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="460" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="464" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_2_>
+        <_3_ kind="Struct" offset="468" length="24">
+          <GradeKey kind="Leaf" offset="468" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="472" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="476" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="480" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="484" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="488" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="492" length="24">
+          <GradeKey kind="Leaf" offset="492" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="496" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="500" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="504" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="508" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="512" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_4_>
+      </Entries>
+    </_3>
+    <_4 kind="Record" offset="516" length="128">
+      <Key kind="Leaf" offset="516" length="4" type="Scalar { Kind = U32 }" value="50163" />
+      <EntryCount kind="Leaf" offset="520" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="524" length="120" count="5">
+        <_0_ kind="Struct" offset="524" length="24">
+          <GradeKey kind="Leaf" offset="524" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="528" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="532" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="536" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="540" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="544" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="548" length="24">
+          <GradeKey kind="Leaf" offset="548" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="552" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="556" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="560" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="564" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="568" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_1_>
+        <_2_ kind="Struct" offset="572" length="24">
+          <GradeKey kind="Leaf" offset="572" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="576" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="580" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="584" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="588" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="592" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_2_>
+        <_3_ kind="Struct" offset="596" length="24">
+          <GradeKey kind="Leaf" offset="596" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="600" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="604" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="608" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="612" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="616" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="620" length="24">
+          <GradeKey kind="Leaf" offset="620" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="624" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="628" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="632" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="636" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="640" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_4_>
+      </Entries>
+    </_4>
+    <_5 kind="Record" offset="644" length="128">
+      <Key kind="Leaf" offset="644" length="4" type="Scalar { Kind = U32 }" value="50164" />
+      <EntryCount kind="Leaf" offset="648" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="652" length="120" count="5">
+        <_0_ kind="Struct" offset="652" length="24">
+          <GradeKey kind="Leaf" offset="652" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="656" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="660" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="664" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="668" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="672" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="676" length="24">
+          <GradeKey kind="Leaf" offset="676" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="680" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="684" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="688" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="692" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="696" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_1_>
+        <_2_ kind="Struct" offset="700" length="24">
+          <GradeKey kind="Leaf" offset="700" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="704" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="708" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="712" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="716" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="720" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_2_>
+        <_3_ kind="Struct" offset="724" length="24">
+          <GradeKey kind="Leaf" offset="724" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="728" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="732" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="736" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="740" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="744" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="748" length="24">
+          <GradeKey kind="Leaf" offset="748" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="752" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="756" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="760" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="764" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="768" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_4_>
+      </Entries>
+    </_5>
+    <_6 kind="Record" offset="772" length="128">
+      <Key kind="Leaf" offset="772" length="4" type="Scalar { Kind = U32 }" value="50165" />
+      <EntryCount kind="Leaf" offset="776" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="780" length="120" count="5">
+        <_0_ kind="Struct" offset="780" length="24">
+          <GradeKey kind="Leaf" offset="780" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="784" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="788" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="792" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="796" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="800" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="804" length="24">
+          <GradeKey kind="Leaf" offset="804" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="808" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="812" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="816" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="820" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="824" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_1_>
+        <_2_ kind="Struct" offset="828" length="24">
+          <GradeKey kind="Leaf" offset="828" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="832" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="836" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="840" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="844" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="848" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_2_>
+        <_3_ kind="Struct" offset="852" length="24">
+          <GradeKey kind="Leaf" offset="852" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="856" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="860" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="864" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="868" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="872" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="876" length="24">
+          <GradeKey kind="Leaf" offset="876" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="880" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="884" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="888" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="892" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="896" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_4_>
+      </Entries>
+    </_6>
+    <_7 kind="Record" offset="900" length="128">
+      <Key kind="Leaf" offset="900" length="4" type="Scalar { Kind = U32 }" value="50166" />
+      <EntryCount kind="Leaf" offset="904" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="908" length="120" count="5">
+        <_0_ kind="Struct" offset="908" length="24">
+          <GradeKey kind="Leaf" offset="908" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="912" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="916" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="920" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="924" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="928" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="932" length="24">
+          <GradeKey kind="Leaf" offset="932" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="936" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="940" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="944" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="948" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="952" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_1_>
+        <_2_ kind="Struct" offset="956" length="24">
+          <GradeKey kind="Leaf" offset="956" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="960" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="964" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="968" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="972" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="976" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_2_>
+        <_3_ kind="Struct" offset="980" length="24">
+          <GradeKey kind="Leaf" offset="980" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="984" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="988" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="992" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="996" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1000" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="1004" length="24">
+          <GradeKey kind="Leaf" offset="1004" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="1008" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1012" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1016" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1020" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1024" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_4_>
+      </Entries>
+    </_7>
+    <_8 kind="Record" offset="1028" length="128">
+      <Key kind="Leaf" offset="1028" length="4" type="Scalar { Kind = U32 }" value="50167" />
+      <EntryCount kind="Leaf" offset="1032" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="1036" length="120" count="5">
+        <_0_ kind="Struct" offset="1036" length="24">
+          <GradeKey kind="Leaf" offset="1036" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="1040" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1044" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1048" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1052" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1056" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="1060" length="24">
+          <GradeKey kind="Leaf" offset="1060" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="1064" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1068" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1072" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1076" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1080" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_1_>
+        <_2_ kind="Struct" offset="1084" length="24">
+          <GradeKey kind="Leaf" offset="1084" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="1088" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1092" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1096" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1100" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1104" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_2_>
+        <_3_ kind="Struct" offset="1108" length="24">
+          <GradeKey kind="Leaf" offset="1108" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="1112" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1116" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1120" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1124" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1128" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="1132" length="24">
+          <GradeKey kind="Leaf" offset="1132" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="1136" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1140" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1144" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1148" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1152" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_4_>
+      </Entries>
+    </_8>
+    <_9 kind="Record" offset="1156" length="128">
+      <Key kind="Leaf" offset="1156" length="4" type="Scalar { Kind = U32 }" value="50168" />
+      <EntryCount kind="Leaf" offset="1160" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="1164" length="120" count="5">
+        <_0_ kind="Struct" offset="1164" length="24">
+          <GradeKey kind="Leaf" offset="1164" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="1168" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1172" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1176" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1180" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1184" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="1188" length="24">
+          <GradeKey kind="Leaf" offset="1188" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="1192" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1196" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1200" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1204" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1208" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_1_>
+        <_2_ kind="Struct" offset="1212" length="24">
+          <GradeKey kind="Leaf" offset="1212" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="1216" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1220" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1224" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1228" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1232" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_2_>
+        <_3_ kind="Struct" offset="1236" length="24">
+          <GradeKey kind="Leaf" offset="1236" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="1240" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1244" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1248" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1252" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1256" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="1260" length="24">
+          <GradeKey kind="Leaf" offset="1260" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="1264" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1268" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1272" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1276" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1280" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_4_>
+      </Entries>
+    </_9>
+    <_10 kind="Record" offset="1284" length="128">
+      <Key kind="Leaf" offset="1284" length="4" type="Scalar { Kind = U32 }" value="47642" />
+      <EntryCount kind="Leaf" offset="1288" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="1292" length="120" count="5">
+        <_0_ kind="Struct" offset="1292" length="24">
+          <GradeKey kind="Leaf" offset="1292" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="1296" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1300" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="1304" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1308" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1312" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="1316" length="24">
+          <GradeKey kind="Leaf" offset="1316" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="1320" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="1324" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="1328" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1332" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1336" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="1340" length="24">
+          <GradeKey kind="Leaf" offset="1340" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="1344" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1348" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1352" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1356" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1360" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="1364" length="24">
+          <GradeKey kind="Leaf" offset="1364" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="1368" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="1372" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="1376" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1380" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1384" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="1388" length="24">
+          <GradeKey kind="Leaf" offset="1388" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="1392" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1396" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="1400" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1404" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1408" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_10>
+    <_11 kind="Record" offset="1412" length="128">
+      <Key kind="Leaf" offset="1412" length="4" type="Scalar { Kind = U32 }" value="50169" />
+      <EntryCount kind="Leaf" offset="1416" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="1420" length="120" count="5">
+        <_0_ kind="Struct" offset="1420" length="24">
+          <GradeKey kind="Leaf" offset="1420" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="1424" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1428" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1432" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1436" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1440" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="1444" length="24">
+          <GradeKey kind="Leaf" offset="1444" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="1448" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1452" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1456" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1460" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1464" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_1_>
+        <_2_ kind="Struct" offset="1468" length="24">
+          <GradeKey kind="Leaf" offset="1468" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="1472" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1476" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1480" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1484" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1488" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_2_>
+        <_3_ kind="Struct" offset="1492" length="24">
+          <GradeKey kind="Leaf" offset="1492" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="1496" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1500" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1504" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1508" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1512" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="1516" length="24">
+          <GradeKey kind="Leaf" offset="1516" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="1520" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1524" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1528" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1532" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1536" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_4_>
+      </Entries>
+    </_11>
+    <_12 kind="Record" offset="1540" length="128">
+      <Key kind="Leaf" offset="1540" length="4" type="Scalar { Kind = U32 }" value="47641" />
+      <EntryCount kind="Leaf" offset="1544" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="1548" length="120" count="5">
+        <_0_ kind="Struct" offset="1548" length="24">
+          <GradeKey kind="Leaf" offset="1548" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="1552" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1556" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="1560" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1564" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1568" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="1572" length="24">
+          <GradeKey kind="Leaf" offset="1572" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="1576" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="1580" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="1584" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1588" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1592" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="1596" length="24">
+          <GradeKey kind="Leaf" offset="1596" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="1600" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1604" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1608" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1612" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1616" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="1620" length="24">
+          <GradeKey kind="Leaf" offset="1620" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="1624" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="1628" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="1632" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1636" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1640" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="1644" length="24">
+          <GradeKey kind="Leaf" offset="1644" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="1648" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1652" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="1656" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1660" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1664" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_12>
+    <_13 kind="Record" offset="1668" length="128">
+      <Key kind="Leaf" offset="1668" length="4" type="Scalar { Kind = U32 }" value="50170" />
+      <EntryCount kind="Leaf" offset="1672" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="1676" length="120" count="5">
+        <_0_ kind="Struct" offset="1676" length="24">
+          <GradeKey kind="Leaf" offset="1676" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="1680" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1684" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1688" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1692" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1696" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="1700" length="24">
+          <GradeKey kind="Leaf" offset="1700" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="1704" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1708" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1712" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1716" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1720" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_1_>
+        <_2_ kind="Struct" offset="1724" length="24">
+          <GradeKey kind="Leaf" offset="1724" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="1728" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1732" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1736" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1740" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1744" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_2_>
+        <_3_ kind="Struct" offset="1748" length="24">
+          <GradeKey kind="Leaf" offset="1748" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="1752" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1756" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1760" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1764" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1768" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="1772" length="24">
+          <GradeKey kind="Leaf" offset="1772" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="1776" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1780" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1784" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1788" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1792" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_4_>
+      </Entries>
+    </_13>
+    <_14 kind="Record" offset="1796" length="128">
+      <Key kind="Leaf" offset="1796" length="4" type="Scalar { Kind = U32 }" value="47668" />
+      <EntryCount kind="Leaf" offset="1800" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="1804" length="120" count="5">
+        <_0_ kind="Struct" offset="1804" length="24">
+          <GradeKey kind="Leaf" offset="1804" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="1808" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1812" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="1816" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1820" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1824" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="1828" length="24">
+          <GradeKey kind="Leaf" offset="1828" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="1832" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="1836" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="1840" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1844" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1848" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="1852" length="24">
+          <GradeKey kind="Leaf" offset="1852" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="1856" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1860" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1864" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1868" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1872" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="1876" length="24">
+          <GradeKey kind="Leaf" offset="1876" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="1880" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="1884" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="1888" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1892" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1896" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="1900" length="24">
+          <GradeKey kind="Leaf" offset="1900" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="1904" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1908" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="1912" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1916" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1920" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_14>
+    <_15 kind="Record" offset="1924" length="128">
+      <Key kind="Leaf" offset="1924" length="4" type="Scalar { Kind = U32 }" value="50171" />
+      <EntryCount kind="Leaf" offset="1928" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="1932" length="120" count="5">
+        <_0_ kind="Struct" offset="1932" length="24">
+          <GradeKey kind="Leaf" offset="1932" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="1936" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1940" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1944" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1948" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1952" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="1956" length="24">
+          <GradeKey kind="Leaf" offset="1956" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="1960" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1964" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1968" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1972" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="1976" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_1_>
+        <_2_ kind="Struct" offset="1980" length="24">
+          <GradeKey kind="Leaf" offset="1980" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="1984" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="1988" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="1992" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="1996" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2000" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_2_>
+        <_3_ kind="Struct" offset="2004" length="24">
+          <GradeKey kind="Leaf" offset="2004" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="2008" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2012" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2016" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2020" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2024" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="2028" length="24">
+          <GradeKey kind="Leaf" offset="2028" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="2032" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2036" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2040" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2044" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2048" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_4_>
+      </Entries>
+    </_15>
+    <_16 kind="Record" offset="2052" length="128">
+      <Key kind="Leaf" offset="2052" length="4" type="Scalar { Kind = U32 }" value="47667" />
+      <EntryCount kind="Leaf" offset="2056" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="2060" length="120" count="5">
+        <_0_ kind="Struct" offset="2060" length="24">
+          <GradeKey kind="Leaf" offset="2060" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="2064" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2068" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="2072" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2076" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2080" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="2084" length="24">
+          <GradeKey kind="Leaf" offset="2084" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="2088" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2092" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="2096" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2100" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2104" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="2108" length="24">
+          <GradeKey kind="Leaf" offset="2108" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="2112" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2116" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2120" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2124" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2128" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="2132" length="24">
+          <GradeKey kind="Leaf" offset="2132" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="2136" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2140" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="2144" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2148" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2152" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="2156" length="24">
+          <GradeKey kind="Leaf" offset="2156" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="2160" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2164" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="2168" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2172" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2176" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_16>
+    <_17 kind="Record" offset="2180" length="128">
+      <Key kind="Leaf" offset="2180" length="4" type="Scalar { Kind = U32 }" value="50172" />
+      <EntryCount kind="Leaf" offset="2184" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="2188" length="120" count="5">
+        <_0_ kind="Struct" offset="2188" length="24">
+          <GradeKey kind="Leaf" offset="2188" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="2192" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2196" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2200" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2204" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2208" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="2212" length="24">
+          <GradeKey kind="Leaf" offset="2212" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="2216" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2220" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2224" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2228" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2232" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_1_>
+        <_2_ kind="Struct" offset="2236" length="24">
+          <GradeKey kind="Leaf" offset="2236" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="2240" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2244" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2248" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2252" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2256" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_2_>
+        <_3_ kind="Struct" offset="2260" length="24">
+          <GradeKey kind="Leaf" offset="2260" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="2264" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2268" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2272" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2276" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2280" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="2284" length="24">
+          <GradeKey kind="Leaf" offset="2284" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="2288" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2292" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2296" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2300" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2304" length="4" type="Scalar { Kind = U32 }" value="1" />
+        </_4_>
+      </Entries>
+    </_17>
+    <_18 kind="Record" offset="2308" length="128">
+      <Key kind="Leaf" offset="2308" length="4" type="Scalar { Kind = U32 }" value="47640" />
+      <EntryCount kind="Leaf" offset="2312" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="2316" length="120" count="5">
+        <_0_ kind="Struct" offset="2316" length="24">
+          <GradeKey kind="Leaf" offset="2316" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="2320" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2324" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="2328" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2332" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2336" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="2340" length="24">
+          <GradeKey kind="Leaf" offset="2340" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="2344" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2348" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="2352" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2356" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2360" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="2364" length="24">
+          <GradeKey kind="Leaf" offset="2364" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="2368" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2372" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2376" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2380" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2384" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="2388" length="24">
+          <GradeKey kind="Leaf" offset="2388" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="2392" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2396" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="2400" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2404" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2408" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="2412" length="24">
+          <GradeKey kind="Leaf" offset="2412" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="2416" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2420" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="2424" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2428" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2432" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_18>
+    <_19 kind="Record" offset="2436" length="128">
+      <Key kind="Leaf" offset="2436" length="4" type="Scalar { Kind = U32 }" value="47646" />
+      <EntryCount kind="Leaf" offset="2440" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="2444" length="120" count="5">
+        <_0_ kind="Struct" offset="2444" length="24">
+          <GradeKey kind="Leaf" offset="2444" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="2448" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2452" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="2456" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2460" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2464" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="2468" length="24">
+          <GradeKey kind="Leaf" offset="2468" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="2472" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2476" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="2480" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2484" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2488" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="2492" length="24">
+          <GradeKey kind="Leaf" offset="2492" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="2496" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2500" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2504" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2508" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2512" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="2516" length="24">
+          <GradeKey kind="Leaf" offset="2516" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="2520" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2524" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="2528" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2532" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2536" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="2540" length="24">
+          <GradeKey kind="Leaf" offset="2540" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="2544" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2548" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="2552" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2556" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2560" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_19>
+    <_20 kind="Record" offset="2564" length="128">
+      <Key kind="Leaf" offset="2564" length="4" type="Scalar { Kind = U32 }" value="47652" />
+      <EntryCount kind="Leaf" offset="2568" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="2572" length="120" count="5">
+        <_0_ kind="Struct" offset="2572" length="24">
+          <GradeKey kind="Leaf" offset="2572" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="2576" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2580" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="2584" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2588" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2592" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="2596" length="24">
+          <GradeKey kind="Leaf" offset="2596" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="2600" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2604" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="2608" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2612" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2616" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="2620" length="24">
+          <GradeKey kind="Leaf" offset="2620" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="2624" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2628" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2632" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2636" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2640" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="2644" length="24">
+          <GradeKey kind="Leaf" offset="2644" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="2648" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2652" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="2656" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2660" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2664" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="2668" length="24">
+          <GradeKey kind="Leaf" offset="2668" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="2672" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2676" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="2680" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2684" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2688" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_20>
+    <_21 kind="Record" offset="2692" length="128">
+      <Key kind="Leaf" offset="2692" length="4" type="Scalar { Kind = U32 }" value="47658" />
+      <EntryCount kind="Leaf" offset="2696" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="2700" length="120" count="5">
+        <_0_ kind="Struct" offset="2700" length="24">
+          <GradeKey kind="Leaf" offset="2700" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="2704" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2708" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="2712" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2716" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2720" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="2724" length="24">
+          <GradeKey kind="Leaf" offset="2724" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="2728" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2732" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="2736" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2740" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2744" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="2748" length="24">
+          <GradeKey kind="Leaf" offset="2748" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="2752" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2756" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2760" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2764" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2768" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="2772" length="24">
+          <GradeKey kind="Leaf" offset="2772" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="2776" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2780" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="2784" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2788" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2792" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="2796" length="24">
+          <GradeKey kind="Leaf" offset="2796" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="2800" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2804" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="2808" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2812" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2816" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_21>
+    <_22 kind="Record" offset="2820" length="128">
+      <Key kind="Leaf" offset="2820" length="4" type="Scalar { Kind = U32 }" value="47664" />
+      <EntryCount kind="Leaf" offset="2824" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="2828" length="120" count="5">
+        <_0_ kind="Struct" offset="2828" length="24">
+          <GradeKey kind="Leaf" offset="2828" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="2832" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2836" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="2840" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2844" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2848" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="2852" length="24">
+          <GradeKey kind="Leaf" offset="2852" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="2856" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2860" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="2864" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2868" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2872" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="2876" length="24">
+          <GradeKey kind="Leaf" offset="2876" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="2880" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2884" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="2888" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2892" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2896" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="2900" length="24">
+          <GradeKey kind="Leaf" offset="2900" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="2904" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2908" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="2912" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2916" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2920" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="2924" length="24">
+          <GradeKey kind="Leaf" offset="2924" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="2928" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2932" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="2936" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2940" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2944" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_22>
+    <_23 kind="Record" offset="2948" length="128">
+      <Key kind="Leaf" offset="2948" length="4" type="Scalar { Kind = U32 }" value="47647" />
+      <EntryCount kind="Leaf" offset="2952" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="2956" length="120" count="5">
+        <_0_ kind="Struct" offset="2956" length="24">
+          <GradeKey kind="Leaf" offset="2956" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="2960" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="2964" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="2968" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2972" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="2976" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="2980" length="24">
+          <GradeKey kind="Leaf" offset="2980" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="2984" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="2988" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="2992" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="2996" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3000" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="3004" length="24">
+          <GradeKey kind="Leaf" offset="3004" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="3008" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3012" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="3016" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3020" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3024" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="3028" length="24">
+          <GradeKey kind="Leaf" offset="3028" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="3032" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3036" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="3040" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3044" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3048" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="3052" length="24">
+          <GradeKey kind="Leaf" offset="3052" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="3056" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3060" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="3064" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3068" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3072" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_23>
+    <_24 kind="Record" offset="3076" length="128">
+      <Key kind="Leaf" offset="3076" length="4" type="Scalar { Kind = U32 }" value="47653" />
+      <EntryCount kind="Leaf" offset="3080" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="3084" length="120" count="5">
+        <_0_ kind="Struct" offset="3084" length="24">
+          <GradeKey kind="Leaf" offset="3084" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="3088" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3092" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="3096" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3100" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3104" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="3108" length="24">
+          <GradeKey kind="Leaf" offset="3108" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="3112" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3116" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="3120" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3124" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3128" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="3132" length="24">
+          <GradeKey kind="Leaf" offset="3132" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="3136" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3140" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="3144" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3148" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3152" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="3156" length="24">
+          <GradeKey kind="Leaf" offset="3156" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="3160" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3164" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="3168" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3172" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3176" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="3180" length="24">
+          <GradeKey kind="Leaf" offset="3180" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="3184" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3188" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="3192" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3196" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3200" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_24>
+    <_25 kind="Record" offset="3204" length="128">
+      <Key kind="Leaf" offset="3204" length="4" type="Scalar { Kind = U32 }" value="47659" />
+      <EntryCount kind="Leaf" offset="3208" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="3212" length="120" count="5">
+        <_0_ kind="Struct" offset="3212" length="24">
+          <GradeKey kind="Leaf" offset="3212" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="3216" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3220" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="3224" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3228" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3232" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="3236" length="24">
+          <GradeKey kind="Leaf" offset="3236" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="3240" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3244" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="3248" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3252" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3256" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="3260" length="24">
+          <GradeKey kind="Leaf" offset="3260" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="3264" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3268" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="3272" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3276" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3280" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="3284" length="24">
+          <GradeKey kind="Leaf" offset="3284" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="3288" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3292" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="3296" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3300" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3304" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="3308" length="24">
+          <GradeKey kind="Leaf" offset="3308" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="3312" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3316" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="3320" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3324" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3328" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_25>
+    <_26 kind="Record" offset="3332" length="128">
+      <Key kind="Leaf" offset="3332" length="4" type="Scalar { Kind = U32 }" value="47665" />
+      <EntryCount kind="Leaf" offset="3336" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="3340" length="120" count="5">
+        <_0_ kind="Struct" offset="3340" length="24">
+          <GradeKey kind="Leaf" offset="3340" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="3344" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3348" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="3352" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3356" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3360" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="3364" length="24">
+          <GradeKey kind="Leaf" offset="3364" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="3368" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3372" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="3376" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3380" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3384" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="3388" length="24">
+          <GradeKey kind="Leaf" offset="3388" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="3392" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3396" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="3400" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3404" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3408" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="3412" length="24">
+          <GradeKey kind="Leaf" offset="3412" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="3416" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3420" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="3424" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3428" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3432" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="3436" length="24">
+          <GradeKey kind="Leaf" offset="3436" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="3440" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3444" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="3448" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3452" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3456" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_26>
+    <_27 kind="Record" offset="3460" length="128">
+      <Key kind="Leaf" offset="3460" length="4" type="Scalar { Kind = U32 }" value="47648" />
+      <EntryCount kind="Leaf" offset="3464" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="3468" length="120" count="5">
+        <_0_ kind="Struct" offset="3468" length="24">
+          <GradeKey kind="Leaf" offset="3468" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="3472" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3476" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="3480" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3484" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3488" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="3492" length="24">
+          <GradeKey kind="Leaf" offset="3492" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="3496" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3500" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="3504" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3508" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3512" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="3516" length="24">
+          <GradeKey kind="Leaf" offset="3516" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="3520" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3524" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="3528" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3532" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3536" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="3540" length="24">
+          <GradeKey kind="Leaf" offset="3540" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="3544" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3548" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="3552" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3556" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3560" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="3564" length="24">
+          <GradeKey kind="Leaf" offset="3564" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="3568" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3572" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="3576" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3580" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3584" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_27>
+    <_28 kind="Record" offset="3588" length="128">
+      <Key kind="Leaf" offset="3588" length="4" type="Scalar { Kind = U32 }" value="47654" />
+      <EntryCount kind="Leaf" offset="3592" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="3596" length="120" count="5">
+        <_0_ kind="Struct" offset="3596" length="24">
+          <GradeKey kind="Leaf" offset="3596" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="3600" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3604" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="3608" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3612" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3616" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="3620" length="24">
+          <GradeKey kind="Leaf" offset="3620" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="3624" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3628" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="3632" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3636" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3640" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="3644" length="24">
+          <GradeKey kind="Leaf" offset="3644" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="3648" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3652" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="3656" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3660" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3664" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="3668" length="24">
+          <GradeKey kind="Leaf" offset="3668" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="3672" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3676" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="3680" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3684" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3688" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="3692" length="24">
+          <GradeKey kind="Leaf" offset="3692" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="3696" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3700" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="3704" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3708" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3712" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_28>
+    <_29 kind="Record" offset="3716" length="128">
+      <Key kind="Leaf" offset="3716" length="4" type="Scalar { Kind = U32 }" value="47660" />
+      <EntryCount kind="Leaf" offset="3720" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="3724" length="120" count="5">
+        <_0_ kind="Struct" offset="3724" length="24">
+          <GradeKey kind="Leaf" offset="3724" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="3728" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3732" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="3736" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3740" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3744" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="3748" length="24">
+          <GradeKey kind="Leaf" offset="3748" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="3752" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3756" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="3760" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3764" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3768" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="3772" length="24">
+          <GradeKey kind="Leaf" offset="3772" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="3776" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3780" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="3784" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3788" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3792" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="3796" length="24">
+          <GradeKey kind="Leaf" offset="3796" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="3800" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3804" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="3808" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3812" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3816" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="3820" length="24">
+          <GradeKey kind="Leaf" offset="3820" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="3824" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3828" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="3832" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3836" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3840" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_29>
+    <_30 kind="Record" offset="3844" length="128">
+      <Key kind="Leaf" offset="3844" length="4" type="Scalar { Kind = U32 }" value="47666" />
+      <EntryCount kind="Leaf" offset="3848" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="3852" length="120" count="5">
+        <_0_ kind="Struct" offset="3852" length="24">
+          <GradeKey kind="Leaf" offset="3852" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="3856" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3860" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="3864" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3868" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3872" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="3876" length="24">
+          <GradeKey kind="Leaf" offset="3876" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="3880" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3884" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="3888" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3892" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3896" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="3900" length="24">
+          <GradeKey kind="Leaf" offset="3900" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="3904" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3908" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="3912" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3916" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3920" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="3924" length="24">
+          <GradeKey kind="Leaf" offset="3924" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="3928" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="3932" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="3936" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3940" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3944" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="3948" length="24">
+          <GradeKey kind="Leaf" offset="3948" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="3952" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3956" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="3960" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3964" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="3968" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_30>
+    <_31 kind="Record" offset="3972" length="128">
+      <Key kind="Leaf" offset="3972" length="4" type="Scalar { Kind = U32 }" value="47643" />
+      <EntryCount kind="Leaf" offset="3976" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="3980" length="120" count="5">
+        <_0_ kind="Struct" offset="3980" length="24">
+          <GradeKey kind="Leaf" offset="3980" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="3984" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="3988" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="3992" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="3996" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4000" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="4004" length="24">
+          <GradeKey kind="Leaf" offset="4004" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="4008" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4012" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="4016" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4020" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4024" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="4028" length="24">
+          <GradeKey kind="Leaf" offset="4028" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="4032" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4036" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="4040" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4044" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4048" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="4052" length="24">
+          <GradeKey kind="Leaf" offset="4052" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="4056" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4060" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="4064" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4068" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4072" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="4076" length="24">
+          <GradeKey kind="Leaf" offset="4076" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="4080" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4084" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="4088" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4092" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4096" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_31>
+    <_32 kind="Record" offset="4100" length="128">
+      <Key kind="Leaf" offset="4100" length="4" type="Scalar { Kind = U32 }" value="47655" />
+      <EntryCount kind="Leaf" offset="4104" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="4108" length="120" count="5">
+        <_0_ kind="Struct" offset="4108" length="24">
+          <GradeKey kind="Leaf" offset="4108" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="4112" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4116" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="4120" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4124" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4128" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="4132" length="24">
+          <GradeKey kind="Leaf" offset="4132" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="4136" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4140" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="4144" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4148" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4152" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="4156" length="24">
+          <GradeKey kind="Leaf" offset="4156" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="4160" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4164" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="4168" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4172" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4176" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="4180" length="24">
+          <GradeKey kind="Leaf" offset="4180" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="4184" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4188" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="4192" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4196" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4200" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="4204" length="24">
+          <GradeKey kind="Leaf" offset="4204" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="4208" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4212" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="4216" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4220" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4224" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_32>
+    <_33 kind="Record" offset="4228" length="128">
+      <Key kind="Leaf" offset="4228" length="4" type="Scalar { Kind = U32 }" value="47661" />
+      <EntryCount kind="Leaf" offset="4232" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="4236" length="120" count="5">
+        <_0_ kind="Struct" offset="4236" length="24">
+          <GradeKey kind="Leaf" offset="4236" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="4240" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4244" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="4248" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4252" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4256" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="4260" length="24">
+          <GradeKey kind="Leaf" offset="4260" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="4264" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4268" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="4272" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4276" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4280" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="4284" length="24">
+          <GradeKey kind="Leaf" offset="4284" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="4288" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4292" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="4296" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4300" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4304" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="4308" length="24">
+          <GradeKey kind="Leaf" offset="4308" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="4312" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4316" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="4320" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4324" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4328" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="4332" length="24">
+          <GradeKey kind="Leaf" offset="4332" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="4336" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4340" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="4344" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4348" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4352" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_33>
+    <_34 kind="Record" offset="4356" length="128">
+      <Key kind="Leaf" offset="4356" length="4" type="Scalar { Kind = U32 }" value="47644" />
+      <EntryCount kind="Leaf" offset="4360" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="4364" length="120" count="5">
+        <_0_ kind="Struct" offset="4364" length="24">
+          <GradeKey kind="Leaf" offset="4364" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="4368" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4372" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="4376" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4380" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4384" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="4388" length="24">
+          <GradeKey kind="Leaf" offset="4388" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="4392" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4396" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="4400" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4404" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4408" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="4412" length="24">
+          <GradeKey kind="Leaf" offset="4412" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="4416" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4420" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="4424" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4428" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4432" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="4436" length="24">
+          <GradeKey kind="Leaf" offset="4436" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="4440" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4444" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="4448" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4452" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4456" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="4460" length="24">
+          <GradeKey kind="Leaf" offset="4460" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="4464" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4468" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="4472" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4476" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4480" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_34>
+    <_35 kind="Record" offset="4484" length="128">
+      <Key kind="Leaf" offset="4484" length="4" type="Scalar { Kind = U32 }" value="47656" />
+      <EntryCount kind="Leaf" offset="4488" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="4492" length="120" count="5">
+        <_0_ kind="Struct" offset="4492" length="24">
+          <GradeKey kind="Leaf" offset="4492" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="4496" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4500" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="4504" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4508" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4512" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="4516" length="24">
+          <GradeKey kind="Leaf" offset="4516" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="4520" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4524" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="4528" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4532" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4536" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="4540" length="24">
+          <GradeKey kind="Leaf" offset="4540" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="4544" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4548" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="4552" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4556" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4560" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="4564" length="24">
+          <GradeKey kind="Leaf" offset="4564" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="4568" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4572" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="4576" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4580" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4584" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="4588" length="24">
+          <GradeKey kind="Leaf" offset="4588" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="4592" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4596" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="4600" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4604" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4608" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_35>
+    <_36 kind="Record" offset="4612" length="128">
+      <Key kind="Leaf" offset="4612" length="4" type="Scalar { Kind = U32 }" value="47662" />
+      <EntryCount kind="Leaf" offset="4616" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="4620" length="120" count="5">
+        <_0_ kind="Struct" offset="4620" length="24">
+          <GradeKey kind="Leaf" offset="4620" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="4624" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4628" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="4632" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4636" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4640" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="4644" length="24">
+          <GradeKey kind="Leaf" offset="4644" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="4648" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4652" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="4656" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4660" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4664" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="4668" length="24">
+          <GradeKey kind="Leaf" offset="4668" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="4672" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4676" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="4680" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4684" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4688" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="4692" length="24">
+          <GradeKey kind="Leaf" offset="4692" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="4696" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4700" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="4704" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4708" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4712" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="4716" length="24">
+          <GradeKey kind="Leaf" offset="4716" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="4720" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4724" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="4728" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4732" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4736" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_36>
+    <_37 kind="Record" offset="4740" length="128">
+      <Key kind="Leaf" offset="4740" length="4" type="Scalar { Kind = U32 }" value="47645" />
+      <EntryCount kind="Leaf" offset="4744" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="4748" length="120" count="5">
+        <_0_ kind="Struct" offset="4748" length="24">
+          <GradeKey kind="Leaf" offset="4748" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="4752" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4756" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="4760" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4764" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4768" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="4772" length="24">
+          <GradeKey kind="Leaf" offset="4772" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="4776" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4780" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="4784" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4788" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4792" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="4796" length="24">
+          <GradeKey kind="Leaf" offset="4796" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="4800" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4804" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="4808" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4812" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4816" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="4820" length="24">
+          <GradeKey kind="Leaf" offset="4820" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="4824" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4828" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="4832" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4836" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4840" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="4844" length="24">
+          <GradeKey kind="Leaf" offset="4844" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="4848" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4852" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="4856" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4860" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4864" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_37>
+    <_38 kind="Record" offset="4868" length="128">
+      <Key kind="Leaf" offset="4868" length="4" type="Scalar { Kind = U32 }" value="47651" />
+      <EntryCount kind="Leaf" offset="4872" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="4876" length="120" count="5">
+        <_0_ kind="Struct" offset="4876" length="24">
+          <GradeKey kind="Leaf" offset="4876" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="4880" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4884" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="4888" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4892" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4896" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="4900" length="24">
+          <GradeKey kind="Leaf" offset="4900" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="4904" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4908" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="4912" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4916" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4920" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="4924" length="24">
+          <GradeKey kind="Leaf" offset="4924" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="4928" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4932" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="4936" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4940" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4944" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="4948" length="24">
+          <GradeKey kind="Leaf" offset="4948" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="4952" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="4956" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="4960" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4964" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4968" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="4972" length="24">
+          <GradeKey kind="Leaf" offset="4972" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="4976" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="4980" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="4984" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="4988" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="4992" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_38>
+    <_39 kind="Record" offset="4996" length="128">
+      <Key kind="Leaf" offset="4996" length="4" type="Scalar { Kind = U32 }" value="47657" />
+      <EntryCount kind="Leaf" offset="5000" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="5004" length="120" count="5">
+        <_0_ kind="Struct" offset="5004" length="24">
+          <GradeKey kind="Leaf" offset="5004" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="5008" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="5012" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="5016" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5020" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5024" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="5028" length="24">
+          <GradeKey kind="Leaf" offset="5028" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="5032" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="5036" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="5040" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5044" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5048" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="5052" length="24">
+          <GradeKey kind="Leaf" offset="5052" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="5056" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="5060" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="5064" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5068" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5072" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="5076" length="24">
+          <GradeKey kind="Leaf" offset="5076" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="5080" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="5084" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="5088" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5092" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5096" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="5100" length="24">
+          <GradeKey kind="Leaf" offset="5100" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="5104" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="5108" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="5112" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5116" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5120" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_39>
+    <_40 kind="Record" offset="5124" length="128">
+      <Key kind="Leaf" offset="5124" length="4" type="Scalar { Kind = U32 }" value="47663" />
+      <EntryCount kind="Leaf" offset="5128" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="5132" length="120" count="5">
+        <_0_ kind="Struct" offset="5132" length="24">
+          <GradeKey kind="Leaf" offset="5132" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="5136" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="5140" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="5144" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5148" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5152" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="5156" length="24">
+          <GradeKey kind="Leaf" offset="5156" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="5160" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="5164" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="5168" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5172" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5176" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="5180" length="24">
+          <GradeKey kind="Leaf" offset="5180" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="5184" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="5188" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="5192" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5196" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5200" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="5204" length="24">
+          <GradeKey kind="Leaf" offset="5204" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="5208" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="5212" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="5216" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5220" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5224" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="5228" length="24">
+          <GradeKey kind="Leaf" offset="5228" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="5232" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="5236" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="5240" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5244" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5248" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_40>
+    <_41 kind="Record" offset="5252" length="128">
+      <Key kind="Leaf" offset="5252" length="4" type="Scalar { Kind = U32 }" value="47669" />
+      <EntryCount kind="Leaf" offset="5256" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="5260" length="120" count="5">
+        <_0_ kind="Struct" offset="5260" length="24">
+          <GradeKey kind="Leaf" offset="5260" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SuccessRateBp kind="Leaf" offset="5264" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <ComplementRateBpRaw kind="Leaf" offset="5268" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <MaterialItemIdA kind="Leaf" offset="5272" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5276" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5280" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_0_>
+        <_1_ kind="Struct" offset="5284" length="24">
+          <GradeKey kind="Leaf" offset="5284" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <SuccessRateBp kind="Leaf" offset="5288" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <ComplementRateBpRaw kind="Leaf" offset="5292" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <MaterialItemIdA kind="Leaf" offset="5296" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5300" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5304" length="4" type="Scalar { Kind = U32 }" value="7" />
+        </_1_>
+        <_2_ kind="Struct" offset="5308" length="24">
+          <GradeKey kind="Leaf" offset="5308" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <SuccessRateBp kind="Leaf" offset="5312" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <ComplementRateBpRaw kind="Leaf" offset="5316" length="4" type="Scalar { Kind = U32 }" value="5000" />
+          <MaterialItemIdA kind="Leaf" offset="5320" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5324" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5328" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="5332" length="24">
+          <GradeKey kind="Leaf" offset="5332" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SuccessRateBp kind="Leaf" offset="5336" length="4" type="Scalar { Kind = U32 }" value="5500" />
+          <ComplementRateBpRaw kind="Leaf" offset="5340" length="4" type="Scalar { Kind = U32 }" value="4500" />
+          <MaterialItemIdA kind="Leaf" offset="5344" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5348" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5352" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_3_>
+        <_4_ kind="Struct" offset="5356" length="24">
+          <GradeKey kind="Leaf" offset="5356" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SuccessRateBp kind="Leaf" offset="5360" length="4" type="Scalar { Kind = U32 }" value="6000" />
+          <ComplementRateBpRaw kind="Leaf" offset="5364" length="4" type="Scalar { Kind = U32 }" value="4000" />
+          <MaterialItemIdA kind="Leaf" offset="5368" length="4" type="Scalar { Kind = U32 }" value="75923" />
+          <MaterialItemIdB kind="Leaf" offset="5372" length="4" type="Scalar { Kind = U32 }" value="75922" />
+          <RequiredMaterialCount kind="Leaf" offset="5376" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </Entries>
+    </_41>
+  </Restores>
+</DMItemUpgradeRestore>

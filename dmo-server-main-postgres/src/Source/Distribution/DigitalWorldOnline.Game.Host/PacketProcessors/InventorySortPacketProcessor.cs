@@ -3,6 +3,7 @@ using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
+using DigitalWorldOnline.Commons.Models.Base;
 using DigitalWorldOnline.Commons.Packets.Items;
 using DigitalWorldOnline.Commons.Utils;
 using MediatR;
@@ -73,9 +74,42 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                             ));
                     }
                     break;
+
+                case InventoryTypeEnum.ExtraSeal:
+                    await SortExtraInventory(client.Tamer.ExtraInventorySeal, inventoryType, client);
+                    break;
+
+                case InventoryTypeEnum.ExtraTicket:
+                    await SortExtraInventory(client.Tamer.ExtraInventoryTicket, inventoryType, client);
+                    break;
+
+                case InventoryTypeEnum.ExtraEvolution:
+                    await SortExtraInventory(client.Tamer.ExtraInventoryEvolution, inventoryType, client);
+                    break;
+
+                case InventoryTypeEnum.ExtraDigitama:
+                    await SortExtraInventory(client.Tamer.ExtraInventoryDigitama, inventoryType, client);
+                    break;
+
+                case InventoryTypeEnum.ExtraMaterial:
+                    await SortExtraInventory(client.Tamer.ExtraInventoryMaterial, inventoryType, client);
+                    break;
             }
 
             _logger.Verbose($"Character {client.TamerId} sorted {inventoryType}.");
+        }
+
+        private async Task SortExtraInventory(ItemListModel itemList, InventoryTypeEnum inventoryType, GameClient client)
+        {
+            itemList.Sort();
+
+            await _sender.Send(new UpdateItemsCommand(itemList));
+
+            client.Send(
+                UtilitiesFunctions.GroupPackets(
+                    new InventorySortPacket(itemList, inventoryType).Serialize(),
+                    new LoadInventoryPacket(itemList, inventoryType).Serialize()
+                ));
         }
     }
 }

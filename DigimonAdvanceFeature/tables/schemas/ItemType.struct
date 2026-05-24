@@ -1,0 +1,19 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/ItemType.bin]
+// ItemType.bin — Pack03 v487 client.
+//
+// Layout recovered from unpacked_GDMO.exe:
+// FUN_015dbfb0 registers ItemType.bin -> FUN_015dcaf0 -> FUN_015da1d0.
+// FUN_015da1d0 reads [u32 count], then per row [u32 key][u32 typeValue].
+// Verified against Pack03 output: 866 rows, 6932/6932 bytes consumed.
+
+bin ItemType {
+    section ItemTypes {
+        count  u32;
+        record ItemTypeRecord;
+    }
+}
+
+struct ItemTypeRecord size=8 {
+    u32  Key;
+    u32  TypeValue;
+}

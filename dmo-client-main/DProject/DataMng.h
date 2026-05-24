@@ -34,6 +34,12 @@ class AdaptEnchantOption;
 #define SERVER_DATA_MEMORY_CONSTANT		10000
 #endif
 
+#define SERVER_DATA_EXTRAINVEN_BASE_CONSTANT	12000
+#define SERVER_DATA_EXTRA_SEAL_CONSTANT			12000
+#define SERVER_DATA_EXTRA_TICKET_CONSTANT		13000
+#define SERVER_DATA_EXTRA_EVOLUTION_CONSTANT	14000
+#define SERVER_DATA_EXTRA_DIGITAMA_CONSTANT		15000
+#define SERVER_DATA_EXTRA_MATERIAL_CONSTANT		16000
 
 
 
@@ -50,8 +56,11 @@ class AdaptEnchantOption;
 #ifdef CROSSWARS_SYSTEM
 #define TO_INVENCROSS_SID( id )			( id + SERVER_DATA_INVENCROSS_CONSTANT )
 #endif
+#define TO_EXTRAINVEN_SID( category, id )	( id + SERVER_DATA_EXTRAINVEN_BASE_CONSTANT + ( category * 1000 ) )
 #define TO_ID( sid )					( sid % 1000 )
 #define TO_CONSTANT( sid )				( sid / 1000 * 1000 )
+#define IS_EXTRAINVEN_CONSTANT( constant )	( ( constant ) >= SERVER_DATA_EXTRA_SEAL_CONSTANT && ( constant ) <= SERVER_DATA_EXTRA_MATERIAL_CONSTANT )
+#define TO_EXTRAINVEN_CATEGORY( constant )	( ( ( constant ) - SERVER_DATA_EXTRAINVEN_BASE_CONSTANT ) / 1000 )
 
 struct sCHAR_IMAGE : public NiMemObject			// 쓰레드 상에서 호출 되면 안된다.
 {
@@ -145,6 +154,8 @@ public:
 	//==============================================================================================
 protected:	
 	int					m_nItemTryCount;
+	int					m_nPendingExtraSealUseDestSrvID;
+	int					m_nPendingExtraSealUseRetry;
 	CsVectorPB< int >	m_vpItemLockIndex;
 public:
 	void			ItemAllLock();
@@ -170,6 +181,8 @@ public:
 	void			SetChangeItemLimited(u2 Itempos, u1 limit);
 protected:
 	void			_SendItemUse_Inven( int nInvenIndex );
+	void			_SendItemUse_Extra( int nExtraSrvID );
+	void			_UpdatePendingExtraSealUse();
 	bool			_CheckItemUseLevel( cItemInfo const* pItem );
 #ifdef CROSSWARS_SYSTEM
 	void			_SendItemUse_InvenCross( int nInvenIndex );
@@ -274,11 +287,18 @@ public:
 	//==============================================================================================
 protected:
 	cData_Inven		m_Inven;
+	cData_Inven		m_ExtraInven[ 5 ];
 #ifdef CROSSWARS_SYSTEM
 	cData_Inven_Cross	m_InvenCross;
 #endif
 public:
 	cData_Inven*	GetInven(){ return &m_Inven; }
+	cData_Inven*	GetExtraInven( int nCategory )
+	{
+		if( nCategory < 0 || nCategory >= 5 )
+			return NULL;
+		return &m_ExtraInven[ nCategory ];
+	}
 #ifdef CROSSWARS_SYSTEM
 	cData_Inven_Cross*	GetInvenCross(){ return &m_InvenCross; }
 #endif

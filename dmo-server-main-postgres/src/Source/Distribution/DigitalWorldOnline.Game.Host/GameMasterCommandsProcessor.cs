@@ -436,9 +436,21 @@ namespace DigitalWorldOnline.Game
                                     {
                                         case "max":
                                             {
+                                                _logger.Information(
+                                                    "GM tamer exp max begin tamer={TamerId}:{TamerName} level={Level} partner={PartnerId}:{PartnerName} partnerLevel={PartnerLevel} partnerSlot={PartnerSlot} partnerHandler={PartnerHandler}",
+                                                    client.TamerId,
+                                                    client.Tamer.Name,
+                                                    client.Tamer.Level,
+                                                    client.Partner.Id,
+                                                    client.Partner.Name,
+                                                    client.Partner.Level,
+                                                    client.Partner.Slot,
+                                                    client.Partner.GeneralHandler);
+
                                                 if (client.Tamer.Level >= 120)
                                                 {
                                                     client.Send(new SystemMessagePacket($"Tamer already at max level."));
+                                                    _logger.Information("GM tamer exp max ignored tamer={TamerId} reason=max-level level={Level}", client.TamerId, client.Tamer.Level);
                                                     break;
                                                 }
 
@@ -494,9 +506,22 @@ namespace DigitalWorldOnline.Game
 
                                         case "add":
                                             {
+                                                _logger.Information(
+                                                    "GM tamer exp add begin tamer={TamerId}:{TamerName} level={Level} value={ValueText} partner={PartnerId}:{PartnerName} partnerLevel={PartnerLevel} partnerSlot={PartnerSlot} partnerHandler={PartnerHandler}",
+                                                    client.TamerId,
+                                                    client.Tamer.Name,
+                                                    client.Tamer.Level,
+                                                    command.Length > 3 ? command[3] : "",
+                                                    client.Partner.Id,
+                                                    client.Partner.Name,
+                                                    client.Partner.Level,
+                                                    client.Partner.Slot,
+                                                    client.Partner.GeneralHandler);
+
                                                 if (client.Tamer.Level >= 120)
                                                 {
                                                     client.Send(new SystemMessagePacket($"Tamer already at max level."));
+                                                    _logger.Information("GM tamer exp add ignored tamer={TamerId} reason=max-level level={Level}", client.TamerId, client.Tamer.Level);
                                                     break;
                                                 }
 
@@ -706,9 +731,22 @@ namespace DigitalWorldOnline.Game
                                     {
                                         case "max":
                                             {
+                                                _logger.Information(
+                                                    "GM digimon exp max begin tamer={TamerId}:{TamerName} partner={PartnerId}:{PartnerName} base={BaseType} current={CurrentType} level={Level} slot={Slot} handler={Handler}",
+                                                    client.TamerId,
+                                                    client.Tamer.Name,
+                                                    client.Partner.Id,
+                                                    client.Partner.Name,
+                                                    client.Partner.BaseType,
+                                                    client.Partner.CurrentType,
+                                                    client.Partner.Level,
+                                                    client.Partner.Slot,
+                                                    client.Partner.GeneralHandler);
+
                                                 if (client.Partner.Level == 120)
                                                 {
                                                     client.Send(new SystemMessagePacket($"Partner already at max level."));
+                                                    _logger.Information("GM digimon exp max ignored tamer={TamerId} partner={PartnerId}:{PartnerName} reason=max-level level={Level}", client.TamerId, client.Partner.Id, client.Partner.Name, client.Partner.Level);
                                                     break;
                                                 }
 
@@ -765,9 +803,23 @@ namespace DigitalWorldOnline.Game
 
                                         case "add":
                                             {
+                                                _logger.Information(
+                                                    "GM digimon exp add begin tamer={TamerId}:{TamerName} partner={PartnerId}:{PartnerName} base={BaseType} current={CurrentType} level={Level} slot={Slot} handler={Handler} value={ValueText}",
+                                                    client.TamerId,
+                                                    client.Tamer.Name,
+                                                    client.Partner.Id,
+                                                    client.Partner.Name,
+                                                    client.Partner.BaseType,
+                                                    client.Partner.CurrentType,
+                                                    client.Partner.Level,
+                                                    client.Partner.Slot,
+                                                    client.Partner.GeneralHandler,
+                                                    command.Length > 3 ? command[3] : "");
+
                                                 if (client.Partner.Level == 120)
                                                 {
                                                     client.Send(new SystemMessagePacket($"Partner already at max level."));
+                                                    _logger.Information("GM digimon exp add ignored tamer={TamerId} partner={PartnerId}:{PartnerName} reason=max-level level={Level}", client.TamerId, client.Partner.Id, client.Partner.Name, client.Partner.Level);
                                                     break;
                                                 }
 

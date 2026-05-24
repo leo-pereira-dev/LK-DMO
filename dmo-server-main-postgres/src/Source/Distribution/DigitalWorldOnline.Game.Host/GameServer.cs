@@ -143,7 +143,7 @@ namespace DigitalWorldOnline.Game
                 _mapServer.RemoveClient(gameClientEvent.Client);
             }
          
-            if (gameClientEvent.Client.GameQuit)
+            if (gameClientEvent.Client.GameQuit && gameClientEvent.Client.Tamer != null)
             {
                 gameClientEvent.Client.Tamer.UpdateState(CharacterStateEnum.Disconnected);
                 _logger.Information($"Updating character {gameClientEvent.Client.TamerId} state upon disconnect...");

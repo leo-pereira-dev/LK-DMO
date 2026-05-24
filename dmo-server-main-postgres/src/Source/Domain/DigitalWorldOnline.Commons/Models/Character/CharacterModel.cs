@@ -315,6 +315,11 @@ namespace DigitalWorldOnline.Commons.Models.Character
                 new ItemListModel(ItemListEnum.RewardWarehouse),
                 new ItemListModel(ItemListEnum.GiftWarehouse),
                 new ItemListModel(ItemListEnum.ConsignedWarehouse),
+                new ItemListModel(ItemListEnum.ExtraInventorySeal),
+                new ItemListModel(ItemListEnum.ExtraInventoryTicket),
+                new ItemListModel(ItemListEnum.ExtraInventoryEvolution),
+                new ItemListModel(ItemListEnum.ExtraInventoryDigitama),
+                new ItemListModel(ItemListEnum.ExtraInventoryMaterial),
 
 
                 new ItemListModel(ItemListEnum.TamerShop),
@@ -341,14 +346,26 @@ namespace DigitalWorldOnline.Commons.Models.Character
             Digimons.RemoveAll(x => x.Slot == slot);
 
             if (updateSlots)
+                CompactActiveDigimonSlots();
+        }
+
+        public void CompactActiveDigimonSlots()
+        {
+            var nextSlot = 0;
+            foreach (var digimon in Digimons
+                .Where(x => x.Slot != byte.MaxValue && x.Slot < DigimonSlots)
+                .OrderBy(x => x.Slot)
+                .ToList())
             {
-                var count = Digimons.Count;
-                Digimons.OrderByDescending(x => x.Slot).ToList().ForEach(digimon =>
-                {
-                    count--;
-                    digimon.SetSlot((byte)count);
-                });
+                digimon.SetSlot((byte)nextSlot);
+                nextSlot++;
             }
+        }
+
+        public byte GetNextActiveDigimonSlot()
+        {
+            var activeCount = Digimons.Count(x => x.Slot != byte.MaxValue && x.Slot < DigimonSlots);
+            return (byte)activeCount;
         }
 
         public void SetGenericHandler(ushort generalHandler)

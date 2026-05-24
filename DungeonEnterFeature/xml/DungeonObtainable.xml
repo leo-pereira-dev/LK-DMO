@@ -1,0 +1,706 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonObtainable schema="DungeonObtainable.struct" bin="DungeonObtainable.bin" byteLength="1660">
+  <ObtainableItems kind="Section" offset="0" length="1660">
+    <_0 kind="Record" offset="4" length="44">
+      <DungeonId kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="5001" />
+      <ItemCount kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <ItemIds kind="Array" offset="12" length="36" count="9">
+        <_0_ kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="76446" />
+        <_1_ kind="Leaf" offset="16" length="4" type="Scalar { Kind = U32 }" value="76447" />
+        <_2_ kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="76448" />
+        <_3_ kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="76449" />
+        <_4_ kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="76450" />
+        <_5_ kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="76451" />
+        <_6_ kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="76452" />
+        <_7_ kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="76453" />
+        <_8_ kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="76454" />
+      </ItemIds>
+    </_0>
+    <_1 kind="Record" offset="48" length="32">
+      <DungeonId kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="7001" />
+      <ItemCount kind="Leaf" offset="52" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <ItemIds kind="Array" offset="56" length="24" count="6">
+        <_0_ kind="Leaf" offset="56" length="4" type="Scalar { Kind = U32 }" value="47418" />
+        <_1_ kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="47437" />
+        <_2_ kind="Leaf" offset="64" length="4" type="Scalar { Kind = U32 }" value="47422" />
+        <_3_ kind="Leaf" offset="68" length="4" type="Scalar { Kind = U32 }" value="47423" />
+        <_4_ kind="Leaf" offset="72" length="4" type="Scalar { Kind = U32 }" value="75859" />
+        <_5_ kind="Leaf" offset="76" length="4" type="Scalar { Kind = U32 }" value="47493" />
+      </ItemIds>
+    </_1>
+    <_2 kind="Record" offset="80" length="28">
+      <DungeonId kind="Leaf" offset="80" length="4" type="Scalar { Kind = U32 }" value="7002" />
+      <ItemCount kind="Leaf" offset="84" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <ItemIds kind="Array" offset="88" length="20" count="5">
+        <_0_ kind="Leaf" offset="88" length="4" type="Scalar { Kind = U32 }" value="47418" />
+        <_1_ kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="47421" />
+        <_2_ kind="Leaf" offset="96" length="4" type="Scalar { Kind = U32 }" value="47424" />
+        <_3_ kind="Leaf" offset="100" length="4" type="Scalar { Kind = U32 }" value="75859" />
+        <_4_ kind="Leaf" offset="104" length="4" type="Scalar { Kind = U32 }" value="47493" />
+      </ItemIds>
+    </_2>
+    <_3 kind="Record" offset="108" length="32">
+      <DungeonId kind="Leaf" offset="108" length="4" type="Scalar { Kind = U32 }" value="7201" />
+      <ItemCount kind="Leaf" offset="112" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <ItemIds kind="Array" offset="116" length="24" count="6">
+        <_0_ kind="Leaf" offset="116" length="4" type="Scalar { Kind = U32 }" value="47510" />
+        <_1_ kind="Leaf" offset="120" length="4" type="Scalar { Kind = U32 }" value="47537" />
+        <_2_ kind="Leaf" offset="124" length="4" type="Scalar { Kind = U32 }" value="47423" />
+        <_3_ kind="Leaf" offset="128" length="4" type="Scalar { Kind = U32 }" value="75859" />
+        <_4_ kind="Leaf" offset="132" length="4" type="Scalar { Kind = U32 }" value="47493" />
+        <_5_ kind="Leaf" offset="136" length="4" type="Scalar { Kind = U32 }" value="47534" />
+      </ItemIds>
+    </_3>
+    <_4 kind="Record" offset="140" length="12">
+      <DungeonId kind="Leaf" offset="140" length="4" type="Scalar { Kind = U32 }" value="8701" />
+      <ItemCount kind="Leaf" offset="144" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="148" length="4" count="1">
+        <_0_ kind="Leaf" offset="148" length="4" type="Scalar { Kind = U32 }" value="6179" />
+      </ItemIds>
+    </_4>
+    <_5 kind="Record" offset="152" length="20">
+      <DungeonId kind="Leaf" offset="152" length="4" type="Scalar { Kind = U32 }" value="9001" />
+      <ItemCount kind="Leaf" offset="156" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <ItemIds kind="Array" offset="160" length="12" count="3">
+        <_0_ kind="Leaf" offset="160" length="4" type="Scalar { Kind = U32 }" value="6937" />
+        <_1_ kind="Leaf" offset="164" length="4" type="Scalar { Kind = U32 }" value="9507" />
+        <_2_ kind="Leaf" offset="168" length="4" type="Scalar { Kind = U32 }" value="151734" />
+      </ItemIds>
+    </_5>
+    <_6 kind="Record" offset="172" length="16">
+      <DungeonId kind="Leaf" offset="172" length="4" type="Scalar { Kind = U32 }" value="9301" />
+      <ItemCount kind="Leaf" offset="176" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <ItemIds kind="Array" offset="180" length="8" count="2">
+        <_0_ kind="Leaf" offset="180" length="4" type="Scalar { Kind = U32 }" value="128351" />
+        <_1_ kind="Leaf" offset="184" length="4" type="Scalar { Kind = U32 }" value="128363" />
+      </ItemIds>
+    </_6>
+    <_7 kind="Record" offset="188" length="16">
+      <DungeonId kind="Leaf" offset="188" length="4" type="Scalar { Kind = U32 }" value="9401" />
+      <ItemCount kind="Leaf" offset="192" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <ItemIds kind="Array" offset="196" length="8" count="2">
+        <_0_ kind="Leaf" offset="196" length="4" type="Scalar { Kind = U32 }" value="141055" />
+        <_1_ kind="Leaf" offset="200" length="4" type="Scalar { Kind = U32 }" value="141058" />
+      </ItemIds>
+    </_7>
+    <_8 kind="Record" offset="204" length="20">
+      <DungeonId kind="Leaf" offset="204" length="4" type="Scalar { Kind = U32 }" value="11401" />
+      <ItemCount kind="Leaf" offset="208" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <ItemIds kind="Array" offset="212" length="12" count="3">
+        <_0_ kind="Leaf" offset="212" length="4" type="Scalar { Kind = U32 }" value="6179" />
+        <_1_ kind="Leaf" offset="216" length="4" type="Scalar { Kind = U32 }" value="129104" />
+        <_2_ kind="Leaf" offset="220" length="4" type="Scalar { Kind = U32 }" value="79663" />
+      </ItemIds>
+    </_8>
+    <_9 kind="Record" offset="224" length="16">
+      <DungeonId kind="Leaf" offset="224" length="4" type="Scalar { Kind = U32 }" value="20501" />
+      <ItemCount kind="Leaf" offset="228" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <ItemIds kind="Array" offset="232" length="8" count="2">
+        <_0_ kind="Leaf" offset="232" length="4" type="Scalar { Kind = U32 }" value="75621" />
+        <_1_ kind="Leaf" offset="236" length="4" type="Scalar { Kind = U32 }" value="76072" />
+      </ItemIds>
+    </_9>
+    <_10 kind="Record" offset="240" length="16">
+      <DungeonId kind="Leaf" offset="240" length="4" type="Scalar { Kind = U32 }" value="20502" />
+      <ItemCount kind="Leaf" offset="244" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <ItemIds kind="Array" offset="248" length="8" count="2">
+        <_0_ kind="Leaf" offset="248" length="4" type="Scalar { Kind = U32 }" value="75614" />
+        <_1_ kind="Leaf" offset="252" length="4" type="Scalar { Kind = U32 }" value="76072" />
+      </ItemIds>
+    </_10>
+    <_11 kind="Record" offset="256" length="16">
+      <DungeonId kind="Leaf" offset="256" length="4" type="Scalar { Kind = U32 }" value="21001" />
+      <ItemCount kind="Leaf" offset="260" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <ItemIds kind="Array" offset="264" length="8" count="2">
+        <_0_ kind="Leaf" offset="264" length="4" type="Scalar { Kind = U32 }" value="76198" />
+        <_1_ kind="Leaf" offset="268" length="4" type="Scalar { Kind = U32 }" value="76199" />
+      </ItemIds>
+    </_11>
+    <_12 kind="Record" offset="272" length="16">
+      <DungeonId kind="Leaf" offset="272" length="4" type="Scalar { Kind = U32 }" value="21002" />
+      <ItemCount kind="Leaf" offset="276" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <ItemIds kind="Array" offset="280" length="8" count="2">
+        <_0_ kind="Leaf" offset="280" length="4" type="Scalar { Kind = U32 }" value="76027" />
+        <_1_ kind="Leaf" offset="284" length="4" type="Scalar { Kind = U32 }" value="76072" />
+      </ItemIds>
+    </_12>
+    <_13 kind="Record" offset="288" length="16">
+      <DungeonId kind="Leaf" offset="288" length="4" type="Scalar { Kind = U32 }" value="21101" />
+      <ItemCount kind="Leaf" offset="292" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <ItemIds kind="Array" offset="296" length="8" count="2">
+        <_0_ kind="Leaf" offset="296" length="4" type="Scalar { Kind = U32 }" value="76201" />
+        <_1_ kind="Leaf" offset="300" length="4" type="Scalar { Kind = U32 }" value="76199" />
+      </ItemIds>
+    </_13>
+    <_14 kind="Record" offset="304" length="16">
+      <DungeonId kind="Leaf" offset="304" length="4" type="Scalar { Kind = U32 }" value="21102" />
+      <ItemCount kind="Leaf" offset="308" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <ItemIds kind="Array" offset="312" length="8" count="2">
+        <_0_ kind="Leaf" offset="312" length="4" type="Scalar { Kind = U32 }" value="76028" />
+        <_1_ kind="Leaf" offset="316" length="4" type="Scalar { Kind = U32 }" value="76072" />
+      </ItemIds>
+    </_14>
+    <_15 kind="Record" offset="320" length="20">
+      <DungeonId kind="Leaf" offset="320" length="4" type="Scalar { Kind = U32 }" value="21201" />
+      <ItemCount kind="Leaf" offset="324" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <ItemIds kind="Array" offset="328" length="12" count="3">
+        <_0_ kind="Leaf" offset="328" length="4" type="Scalar { Kind = U32 }" value="76193" />
+        <_1_ kind="Leaf" offset="332" length="4" type="Scalar { Kind = U32 }" value="76194" />
+        <_2_ kind="Leaf" offset="336" length="4" type="Scalar { Kind = U32 }" value="76195" />
+      </ItemIds>
+    </_15>
+    <_16 kind="Record" offset="340" length="12">
+      <DungeonId kind="Leaf" offset="340" length="4" type="Scalar { Kind = U32 }" value="25201" />
+      <ItemCount kind="Leaf" offset="344" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="348" length="4" count="1">
+        <_0_ kind="Leaf" offset="348" length="4" type="Scalar { Kind = U32 }" value="76573" />
+      </ItemIds>
+    </_16>
+    <_17 kind="Record" offset="352" length="12">
+      <DungeonId kind="Leaf" offset="352" length="4" type="Scalar { Kind = U32 }" value="25301" />
+      <ItemCount kind="Leaf" offset="356" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="360" length="4" count="1">
+        <_0_ kind="Leaf" offset="360" length="4" type="Scalar { Kind = U32 }" value="76573" />
+      </ItemIds>
+    </_17>
+    <_18 kind="Record" offset="364" length="12">
+      <DungeonId kind="Leaf" offset="364" length="4" type="Scalar { Kind = U32 }" value="25601" />
+      <ItemCount kind="Leaf" offset="368" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="372" length="4" count="1">
+        <_0_ kind="Leaf" offset="372" length="4" type="Scalar { Kind = U32 }" value="76573" />
+      </ItemIds>
+    </_18>
+    <_19 kind="Record" offset="376" length="12">
+      <DungeonId kind="Leaf" offset="376" length="4" type="Scalar { Kind = U32 }" value="25701" />
+      <ItemCount kind="Leaf" offset="380" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="384" length="4" count="1">
+        <_0_ kind="Leaf" offset="384" length="4" type="Scalar { Kind = U32 }" value="76573" />
+      </ItemIds>
+    </_19>
+    <_20 kind="Record" offset="388" length="12">
+      <DungeonId kind="Leaf" offset="388" length="4" type="Scalar { Kind = U32 }" value="26302" />
+      <ItemCount kind="Leaf" offset="392" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="396" length="4" count="1">
+        <_0_ kind="Leaf" offset="396" length="4" type="Scalar { Kind = U32 }" value="76688" />
+      </ItemIds>
+    </_20>
+    <_21 kind="Record" offset="400" length="12">
+      <DungeonId kind="Leaf" offset="400" length="4" type="Scalar { Kind = U32 }" value="26402" />
+      <ItemCount kind="Leaf" offset="404" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="408" length="4" count="1">
+        <_0_ kind="Leaf" offset="408" length="4" type="Scalar { Kind = U32 }" value="76688" />
+      </ItemIds>
+    </_21>
+    <_22 kind="Record" offset="412" length="12">
+      <DungeonId kind="Leaf" offset="412" length="4" type="Scalar { Kind = U32 }" value="26602" />
+      <ItemCount kind="Leaf" offset="416" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="420" length="4" count="1">
+        <_0_ kind="Leaf" offset="420" length="4" type="Scalar { Kind = U32 }" value="76689" />
+      </ItemIds>
+    </_22>
+    <_23 kind="Record" offset="424" length="12">
+      <DungeonId kind="Leaf" offset="424" length="4" type="Scalar { Kind = U32 }" value="30001" />
+      <ItemCount kind="Leaf" offset="428" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="432" length="4" count="1">
+        <_0_ kind="Leaf" offset="432" length="4" type="Scalar { Kind = U32 }" value="47323" />
+      </ItemIds>
+    </_23>
+    <_24 kind="Record" offset="436" length="12">
+      <DungeonId kind="Leaf" offset="436" length="4" type="Scalar { Kind = U32 }" value="30101" />
+      <ItemCount kind="Leaf" offset="440" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="444" length="4" count="1">
+        <_0_ kind="Leaf" offset="444" length="4" type="Scalar { Kind = U32 }" value="47324" />
+      </ItemIds>
+    </_24>
+    <_25 kind="Record" offset="448" length="12">
+      <DungeonId kind="Leaf" offset="448" length="4" type="Scalar { Kind = U32 }" value="32801" />
+      <ItemCount kind="Leaf" offset="452" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="456" length="4" count="1">
+        <_0_ kind="Leaf" offset="456" length="4" type="Scalar { Kind = U32 }" value="47327" />
+      </ItemIds>
+    </_25>
+    <_26 kind="Record" offset="460" length="32">
+      <DungeonId kind="Leaf" offset="460" length="4" type="Scalar { Kind = U32 }" value="40101" />
+      <ItemCount kind="Leaf" offset="464" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <ItemIds kind="Array" offset="468" length="24" count="6">
+        <_0_ kind="Leaf" offset="468" length="4" type="Scalar { Kind = U32 }" value="47450" />
+        <_1_ kind="Leaf" offset="472" length="4" type="Scalar { Kind = U32 }" value="47498" />
+        <_2_ kind="Leaf" offset="476" length="4" type="Scalar { Kind = U32 }" value="47471" />
+        <_3_ kind="Leaf" offset="480" length="4" type="Scalar { Kind = U32 }" value="47423" />
+        <_4_ kind="Leaf" offset="484" length="4" type="Scalar { Kind = U32 }" value="75859" />
+        <_5_ kind="Leaf" offset="488" length="4" type="Scalar { Kind = U32 }" value="47493" />
+      </ItemIds>
+    </_26>
+    <_27 kind="Record" offset="492" length="28">
+      <DungeonId kind="Leaf" offset="492" length="4" type="Scalar { Kind = U32 }" value="40201" />
+      <ItemCount kind="Leaf" offset="496" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <ItemIds kind="Array" offset="500" length="20" count="5">
+        <_0_ kind="Leaf" offset="500" length="4" type="Scalar { Kind = U32 }" value="47450" />
+        <_1_ kind="Leaf" offset="504" length="4" type="Scalar { Kind = U32 }" value="10525" />
+        <_2_ kind="Leaf" offset="508" length="4" type="Scalar { Kind = U32 }" value="47424" />
+        <_3_ kind="Leaf" offset="512" length="4" type="Scalar { Kind = U32 }" value="75859" />
+        <_4_ kind="Leaf" offset="516" length="4" type="Scalar { Kind = U32 }" value="47493" />
+      </ItemIds>
+    </_27>
+    <_28 kind="Record" offset="520" length="28">
+      <DungeonId kind="Leaf" offset="520" length="4" type="Scalar { Kind = U32 }" value="40501" />
+      <ItemCount kind="Leaf" offset="524" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <ItemIds kind="Array" offset="528" length="20" count="5">
+        <_0_ kind="Leaf" offset="528" length="4" type="Scalar { Kind = U32 }" value="47488" />
+        <_1_ kind="Leaf" offset="532" length="4" type="Scalar { Kind = U32 }" value="47499" />
+        <_2_ kind="Leaf" offset="536" length="4" type="Scalar { Kind = U32 }" value="47423" />
+        <_3_ kind="Leaf" offset="540" length="4" type="Scalar { Kind = U32 }" value="75859" />
+        <_4_ kind="Leaf" offset="544" length="4" type="Scalar { Kind = U32 }" value="47493" />
+      </ItemIds>
+    </_28>
+    <_29 kind="Record" offset="548" length="28">
+      <DungeonId kind="Leaf" offset="548" length="4" type="Scalar { Kind = U32 }" value="40701" />
+      <ItemCount kind="Leaf" offset="552" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <ItemIds kind="Array" offset="556" length="20" count="5">
+        <_0_ kind="Leaf" offset="556" length="4" type="Scalar { Kind = U32 }" value="47539" />
+        <_1_ kind="Leaf" offset="560" length="4" type="Scalar { Kind = U32 }" value="47537" />
+        <_2_ kind="Leaf" offset="564" length="4" type="Scalar { Kind = U32 }" value="47423" />
+        <_3_ kind="Leaf" offset="568" length="4" type="Scalar { Kind = U32 }" value="75859" />
+        <_4_ kind="Leaf" offset="572" length="4" type="Scalar { Kind = U32 }" value="47493" />
+      </ItemIds>
+    </_29>
+    <_30 kind="Record" offset="576" length="28">
+      <DungeonId kind="Leaf" offset="576" length="4" type="Scalar { Kind = U32 }" value="41001" />
+      <ItemCount kind="Leaf" offset="580" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <ItemIds kind="Array" offset="584" length="20" count="5">
+        <_0_ kind="Leaf" offset="584" length="4" type="Scalar { Kind = U32 }" value="47395" />
+        <_1_ kind="Leaf" offset="588" length="4" type="Scalar { Kind = U32 }" value="75810" />
+        <_2_ kind="Leaf" offset="592" length="4" type="Scalar { Kind = U32 }" value="47289" />
+        <_3_ kind="Leaf" offset="596" length="4" type="Scalar { Kind = U32 }" value="75859" />
+        <_4_ kind="Leaf" offset="600" length="4" type="Scalar { Kind = U32 }" value="47493" />
+      </ItemIds>
+    </_30>
+    <_31 kind="Record" offset="604" length="16">
+      <DungeonId kind="Leaf" offset="604" length="4" type="Scalar { Kind = U32 }" value="41101" />
+      <ItemCount kind="Leaf" offset="608" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <ItemIds kind="Array" offset="612" length="8" count="2">
+        <_0_ kind="Leaf" offset="612" length="4" type="Scalar { Kind = U32 }" value="47398" />
+        <_1_ kind="Leaf" offset="616" length="4" type="Scalar { Kind = U32 }" value="47399" />
+      </ItemIds>
+    </_31>
+    <_32 kind="Record" offset="620" length="16">
+      <DungeonId kind="Leaf" offset="620" length="4" type="Scalar { Kind = U32 }" value="41201" />
+      <ItemCount kind="Leaf" offset="624" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <ItemIds kind="Array" offset="628" length="8" count="2">
+        <_0_ kind="Leaf" offset="628" length="4" type="Scalar { Kind = U32 }" value="47398" />
+        <_1_ kind="Leaf" offset="632" length="4" type="Scalar { Kind = U32 }" value="47399" />
+      </ItemIds>
+    </_32>
+    <_33 kind="Record" offset="636" length="28">
+      <DungeonId kind="Leaf" offset="636" length="4" type="Scalar { Kind = U32 }" value="51201" />
+      <ItemCount kind="Leaf" offset="640" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <ItemIds kind="Array" offset="644" length="20" count="5">
+        <_0_ kind="Leaf" offset="644" length="4" type="Scalar { Kind = U32 }" value="47686" />
+        <_1_ kind="Leaf" offset="648" length="4" type="Scalar { Kind = U32 }" value="47692" />
+        <_2_ kind="Leaf" offset="652" length="4" type="Scalar { Kind = U32 }" value="47692" />
+        <_3_ kind="Leaf" offset="656" length="4" type="Scalar { Kind = U32 }" value="155247" />
+        <_4_ kind="Leaf" offset="660" length="4" type="Scalar { Kind = U32 }" value="155248" />
+      </ItemIds>
+    </_33>
+    <_34 kind="Record" offset="664" length="44">
+      <DungeonId kind="Leaf" offset="664" length="4" type="Scalar { Kind = U32 }" value="130402" />
+      <ItemCount kind="Leaf" offset="668" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <ItemIds kind="Array" offset="672" length="36" count="9">
+        <_0_ kind="Leaf" offset="672" length="4" type="Scalar { Kind = U32 }" value="76131" />
+        <_1_ kind="Leaf" offset="676" length="4" type="Scalar { Kind = U32 }" value="76141" />
+        <_2_ kind="Leaf" offset="680" length="4" type="Scalar { Kind = U32 }" value="46996" />
+        <_3_ kind="Leaf" offset="684" length="4" type="Scalar { Kind = U32 }" value="46997" />
+        <_4_ kind="Leaf" offset="688" length="4" type="Scalar { Kind = U32 }" value="72006" />
+        <_5_ kind="Leaf" offset="692" length="4" type="Scalar { Kind = U32 }" value="9512" />
+        <_6_ kind="Leaf" offset="696" length="4" type="Scalar { Kind = U32 }" value="76135" />
+        <_7_ kind="Leaf" offset="700" length="4" type="Scalar { Kind = U32 }" value="76136" />
+        <_8_ kind="Leaf" offset="704" length="4" type="Scalar { Kind = U32 }" value="76137" />
+      </ItemIds>
+    </_34>
+    <_35 kind="Record" offset="708" length="44">
+      <DungeonId kind="Leaf" offset="708" length="4" type="Scalar { Kind = U32 }" value="130403" />
+      <ItemCount kind="Leaf" offset="712" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <ItemIds kind="Array" offset="716" length="36" count="9">
+        <_0_ kind="Leaf" offset="716" length="4" type="Scalar { Kind = U32 }" value="76132" />
+        <_1_ kind="Leaf" offset="720" length="4" type="Scalar { Kind = U32 }" value="76141" />
+        <_2_ kind="Leaf" offset="724" length="4" type="Scalar { Kind = U32 }" value="46996" />
+        <_3_ kind="Leaf" offset="728" length="4" type="Scalar { Kind = U32 }" value="46997" />
+        <_4_ kind="Leaf" offset="732" length="4" type="Scalar { Kind = U32 }" value="72006" />
+        <_5_ kind="Leaf" offset="736" length="4" type="Scalar { Kind = U32 }" value="6166" />
+        <_6_ kind="Leaf" offset="740" length="4" type="Scalar { Kind = U32 }" value="76138" />
+        <_7_ kind="Leaf" offset="744" length="4" type="Scalar { Kind = U32 }" value="76139" />
+        <_8_ kind="Leaf" offset="748" length="4" type="Scalar { Kind = U32 }" value="76140" />
+      </ItemIds>
+    </_35>
+    <_36 kind="Record" offset="752" length="32">
+      <DungeonId kind="Leaf" offset="752" length="4" type="Scalar { Kind = U32 }" value="130803" />
+      <ItemCount kind="Leaf" offset="756" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <ItemIds kind="Array" offset="760" length="24" count="6">
+        <_0_ kind="Leaf" offset="760" length="4" type="Scalar { Kind = U32 }" value="100081" />
+        <_1_ kind="Leaf" offset="764" length="4" type="Scalar { Kind = U32 }" value="90106" />
+        <_2_ kind="Leaf" offset="768" length="4" type="Scalar { Kind = U32 }" value="98757" />
+        <_3_ kind="Leaf" offset="772" length="4" type="Scalar { Kind = U32 }" value="98758" />
+        <_4_ kind="Leaf" offset="776" length="4" type="Scalar { Kind = U32 }" value="98741" />
+        <_5_ kind="Leaf" offset="780" length="4" type="Scalar { Kind = U32 }" value="98742" />
+      </ItemIds>
+    </_36>
+    <_37 kind="Record" offset="784" length="32">
+      <DungeonId kind="Leaf" offset="784" length="4" type="Scalar { Kind = U32 }" value="130804" />
+      <ItemCount kind="Leaf" offset="788" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <ItemIds kind="Array" offset="792" length="24" count="6">
+        <_0_ kind="Leaf" offset="792" length="4" type="Scalar { Kind = U32 }" value="100081" />
+        <_1_ kind="Leaf" offset="796" length="4" type="Scalar { Kind = U32 }" value="90106" />
+        <_2_ kind="Leaf" offset="800" length="4" type="Scalar { Kind = U32 }" value="98757" />
+        <_3_ kind="Leaf" offset="804" length="4" type="Scalar { Kind = U32 }" value="98758" />
+        <_4_ kind="Leaf" offset="808" length="4" type="Scalar { Kind = U32 }" value="98741" />
+        <_5_ kind="Leaf" offset="812" length="4" type="Scalar { Kind = U32 }" value="98742" />
+      </ItemIds>
+    </_37>
+    <_38 kind="Record" offset="816" length="32">
+      <DungeonId kind="Leaf" offset="816" length="4" type="Scalar { Kind = U32 }" value="131201" />
+      <ItemCount kind="Leaf" offset="820" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <ItemIds kind="Array" offset="824" length="24" count="6">
+        <_0_ kind="Leaf" offset="824" length="4" type="Scalar { Kind = U32 }" value="47259" />
+        <_1_ kind="Leaf" offset="828" length="4" type="Scalar { Kind = U32 }" value="47700" />
+        <_2_ kind="Leaf" offset="832" length="4" type="Scalar { Kind = U32 }" value="152362" />
+        <_3_ kind="Leaf" offset="836" length="4" type="Scalar { Kind = U32 }" value="75859" />
+        <_4_ kind="Leaf" offset="840" length="4" type="Scalar { Kind = U32 }" value="75859" />
+        <_5_ kind="Leaf" offset="844" length="4" type="Scalar { Kind = U32 }" value="47493" />
+      </ItemIds>
+    </_38>
+    <_39 kind="Record" offset="848" length="48">
+      <DungeonId kind="Leaf" offset="848" length="4" type="Scalar { Kind = U32 }" value="140301" />
+      <ItemCount kind="Leaf" offset="852" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <ItemIds kind="Array" offset="856" length="40" count="10">
+        <_0_ kind="Leaf" offset="856" length="4" type="Scalar { Kind = U32 }" value="9557" />
+        <_1_ kind="Leaf" offset="860" length="4" type="Scalar { Kind = U32 }" value="27800" />
+        <_2_ kind="Leaf" offset="864" length="4" type="Scalar { Kind = U32 }" value="27801" />
+        <_3_ kind="Leaf" offset="868" length="4" type="Scalar { Kind = U32 }" value="9226" />
+        <_4_ kind="Leaf" offset="872" length="4" type="Scalar { Kind = U32 }" value="100068" />
+        <_5_ kind="Leaf" offset="876" length="4" type="Scalar { Kind = U32 }" value="92628" />
+        <_6_ kind="Leaf" offset="880" length="4" type="Scalar { Kind = U32 }" value="9508" />
+        <_7_ kind="Leaf" offset="884" length="4" type="Scalar { Kind = U32 }" value="9507" />
+        <_8_ kind="Leaf" offset="888" length="4" type="Scalar { Kind = U32 }" value="47051" />
+        <_9_ kind="Leaf" offset="892" length="4" type="Scalar { Kind = U32 }" value="20000" />
+      </ItemIds>
+    </_39>
+    <_40 kind="Record" offset="896" length="48">
+      <DungeonId kind="Leaf" offset="896" length="4" type="Scalar { Kind = U32 }" value="140302" />
+      <ItemCount kind="Leaf" offset="900" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <ItemIds kind="Array" offset="904" length="40" count="10">
+        <_0_ kind="Leaf" offset="904" length="4" type="Scalar { Kind = U32 }" value="9557" />
+        <_1_ kind="Leaf" offset="908" length="4" type="Scalar { Kind = U32 }" value="27800" />
+        <_2_ kind="Leaf" offset="912" length="4" type="Scalar { Kind = U32 }" value="27801" />
+        <_3_ kind="Leaf" offset="916" length="4" type="Scalar { Kind = U32 }" value="9226" />
+        <_4_ kind="Leaf" offset="920" length="4" type="Scalar { Kind = U32 }" value="100068" />
+        <_5_ kind="Leaf" offset="924" length="4" type="Scalar { Kind = U32 }" value="92628" />
+        <_6_ kind="Leaf" offset="928" length="4" type="Scalar { Kind = U32 }" value="9508" />
+        <_7_ kind="Leaf" offset="932" length="4" type="Scalar { Kind = U32 }" value="9507" />
+        <_8_ kind="Leaf" offset="936" length="4" type="Scalar { Kind = U32 }" value="47051" />
+        <_9_ kind="Leaf" offset="940" length="4" type="Scalar { Kind = U32 }" value="20000" />
+      </ItemIds>
+    </_40>
+    <_41 kind="Record" offset="944" length="44">
+      <DungeonId kind="Leaf" offset="944" length="4" type="Scalar { Kind = U32 }" value="140303" />
+      <ItemCount kind="Leaf" offset="948" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <ItemIds kind="Array" offset="952" length="36" count="9">
+        <_0_ kind="Leaf" offset="952" length="4" type="Scalar { Kind = U32 }" value="9557" />
+        <_1_ kind="Leaf" offset="956" length="4" type="Scalar { Kind = U32 }" value="27800" />
+        <_2_ kind="Leaf" offset="960" length="4" type="Scalar { Kind = U32 }" value="27801" />
+        <_3_ kind="Leaf" offset="964" length="4" type="Scalar { Kind = U32 }" value="100068" />
+        <_4_ kind="Leaf" offset="968" length="4" type="Scalar { Kind = U32 }" value="92628" />
+        <_5_ kind="Leaf" offset="972" length="4" type="Scalar { Kind = U32 }" value="9508" />
+        <_6_ kind="Leaf" offset="976" length="4" type="Scalar { Kind = U32 }" value="9507" />
+        <_7_ kind="Leaf" offset="980" length="4" type="Scalar { Kind = U32 }" value="47051" />
+        <_8_ kind="Leaf" offset="984" length="4" type="Scalar { Kind = U32 }" value="20000" />
+      </ItemIds>
+    </_41>
+    <_42 kind="Record" offset="988" length="44">
+      <DungeonId kind="Leaf" offset="988" length="4" type="Scalar { Kind = U32 }" value="150001" />
+      <ItemCount kind="Leaf" offset="992" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <ItemIds kind="Array" offset="996" length="36" count="9">
+        <_0_ kind="Leaf" offset="996" length="4" type="Scalar { Kind = U32 }" value="76141" />
+        <_1_ kind="Leaf" offset="1000" length="4" type="Scalar { Kind = U32 }" value="6510" />
+        <_2_ kind="Leaf" offset="1004" length="4" type="Scalar { Kind = U32 }" value="9060" />
+        <_3_ kind="Leaf" offset="1008" length="4" type="Scalar { Kind = U32 }" value="71558" />
+        <_4_ kind="Leaf" offset="1012" length="4" type="Scalar { Kind = U32 }" value="72006" />
+        <_5_ kind="Leaf" offset="1016" length="4" type="Scalar { Kind = U32 }" value="6937" />
+        <_6_ kind="Leaf" offset="1020" length="4" type="Scalar { Kind = U32 }" value="9521" />
+        <_7_ kind="Leaf" offset="1024" length="4" type="Scalar { Kind = U32 }" value="27801" />
+        <_8_ kind="Leaf" offset="1028" length="4" type="Scalar { Kind = U32 }" value="6547" />
+      </ItemIds>
+    </_42>
+    <_43 kind="Record" offset="1032" length="44">
+      <DungeonId kind="Leaf" offset="1032" length="4" type="Scalar { Kind = U32 }" value="150002" />
+      <ItemCount kind="Leaf" offset="1036" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <ItemIds kind="Array" offset="1040" length="36" count="9">
+        <_0_ kind="Leaf" offset="1040" length="4" type="Scalar { Kind = U32 }" value="76141" />
+        <_1_ kind="Leaf" offset="1044" length="4" type="Scalar { Kind = U32 }" value="6510" />
+        <_2_ kind="Leaf" offset="1048" length="4" type="Scalar { Kind = U32 }" value="9060" />
+        <_3_ kind="Leaf" offset="1052" length="4" type="Scalar { Kind = U32 }" value="71558" />
+        <_4_ kind="Leaf" offset="1056" length="4" type="Scalar { Kind = U32 }" value="72006" />
+        <_5_ kind="Leaf" offset="1060" length="4" type="Scalar { Kind = U32 }" value="6937" />
+        <_6_ kind="Leaf" offset="1064" length="4" type="Scalar { Kind = U32 }" value="9521" />
+        <_7_ kind="Leaf" offset="1068" length="4" type="Scalar { Kind = U32 }" value="27801" />
+        <_8_ kind="Leaf" offset="1072" length="4" type="Scalar { Kind = U32 }" value="6547" />
+      </ItemIds>
+    </_43>
+    <_44 kind="Record" offset="1076" length="44">
+      <DungeonId kind="Leaf" offset="1076" length="4" type="Scalar { Kind = U32 }" value="150101" />
+      <ItemCount kind="Leaf" offset="1080" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <ItemIds kind="Array" offset="1084" length="36" count="9">
+        <_0_ kind="Leaf" offset="1084" length="4" type="Scalar { Kind = U32 }" value="76141" />
+        <_1_ kind="Leaf" offset="1088" length="4" type="Scalar { Kind = U32 }" value="6510" />
+        <_2_ kind="Leaf" offset="1092" length="4" type="Scalar { Kind = U32 }" value="9060" />
+        <_3_ kind="Leaf" offset="1096" length="4" type="Scalar { Kind = U32 }" value="71558" />
+        <_4_ kind="Leaf" offset="1100" length="4" type="Scalar { Kind = U32 }" value="72006" />
+        <_5_ kind="Leaf" offset="1104" length="4" type="Scalar { Kind = U32 }" value="6937" />
+        <_6_ kind="Leaf" offset="1108" length="4" type="Scalar { Kind = U32 }" value="9521" />
+        <_7_ kind="Leaf" offset="1112" length="4" type="Scalar { Kind = U32 }" value="27801" />
+        <_8_ kind="Leaf" offset="1116" length="4" type="Scalar { Kind = U32 }" value="6547" />
+      </ItemIds>
+    </_44>
+    <_45 kind="Record" offset="1120" length="12">
+      <DungeonId kind="Leaf" offset="1120" length="4" type="Scalar { Kind = U32 }" value="160001" />
+      <ItemCount kind="Leaf" offset="1124" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="1128" length="4" count="1">
+        <_0_ kind="Leaf" offset="1128" length="4" type="Scalar { Kind = U32 }" value="48050" />
+      </ItemIds>
+    </_45>
+    <_46 kind="Record" offset="1132" length="28">
+      <DungeonId kind="Leaf" offset="1132" length="4" type="Scalar { Kind = U32 }" value="160002" />
+      <ItemCount kind="Leaf" offset="1136" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <ItemIds kind="Array" offset="1140" length="20" count="5">
+        <_0_ kind="Leaf" offset="1140" length="4" type="Scalar { Kind = U32 }" value="48049" />
+        <_1_ kind="Leaf" offset="1144" length="4" type="Scalar { Kind = U32 }" value="48043" />
+        <_2_ kind="Leaf" offset="1148" length="4" type="Scalar { Kind = U32 }" value="48047" />
+        <_3_ kind="Leaf" offset="1152" length="4" type="Scalar { Kind = U32 }" value="48038" />
+        <_4_ kind="Leaf" offset="1156" length="4" type="Scalar { Kind = U32 }" value="48020" />
+      </ItemIds>
+    </_46>
+    <_47 kind="Record" offset="1160" length="20">
+      <DungeonId kind="Leaf" offset="1160" length="4" type="Scalar { Kind = U32 }" value="160003" />
+      <ItemCount kind="Leaf" offset="1164" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <ItemIds kind="Array" offset="1168" length="12" count="3">
+        <_0_ kind="Leaf" offset="1168" length="4" type="Scalar { Kind = U32 }" value="48049" />
+        <_1_ kind="Leaf" offset="1172" length="4" type="Scalar { Kind = U32 }" value="48048" />
+        <_2_ kind="Leaf" offset="1176" length="4" type="Scalar { Kind = U32 }" value="48047" />
+      </ItemIds>
+    </_47>
+    <_48 kind="Record" offset="1180" length="12">
+      <DungeonId kind="Leaf" offset="1180" length="4" type="Scalar { Kind = U32 }" value="160101" />
+      <ItemCount kind="Leaf" offset="1184" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="1188" length="4" count="1">
+        <_0_ kind="Leaf" offset="1188" length="4" type="Scalar { Kind = U32 }" value="48051" />
+      </ItemIds>
+    </_48>
+    <_49 kind="Record" offset="1192" length="28">
+      <DungeonId kind="Leaf" offset="1192" length="4" type="Scalar { Kind = U32 }" value="160102" />
+      <ItemCount kind="Leaf" offset="1196" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <ItemIds kind="Array" offset="1200" length="20" count="5">
+        <_0_ kind="Leaf" offset="1200" length="4" type="Scalar { Kind = U32 }" value="48049" />
+        <_1_ kind="Leaf" offset="1204" length="4" type="Scalar { Kind = U32 }" value="48042" />
+        <_2_ kind="Leaf" offset="1208" length="4" type="Scalar { Kind = U32 }" value="48047" />
+        <_3_ kind="Leaf" offset="1212" length="4" type="Scalar { Kind = U32 }" value="48037" />
+        <_4_ kind="Leaf" offset="1216" length="4" type="Scalar { Kind = U32 }" value="48015" />
+      </ItemIds>
+    </_49>
+    <_50 kind="Record" offset="1220" length="20">
+      <DungeonId kind="Leaf" offset="1220" length="4" type="Scalar { Kind = U32 }" value="160103" />
+      <ItemCount kind="Leaf" offset="1224" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <ItemIds kind="Array" offset="1228" length="12" count="3">
+        <_0_ kind="Leaf" offset="1228" length="4" type="Scalar { Kind = U32 }" value="48049" />
+        <_1_ kind="Leaf" offset="1232" length="4" type="Scalar { Kind = U32 }" value="48048" />
+        <_2_ kind="Leaf" offset="1236" length="4" type="Scalar { Kind = U32 }" value="48047" />
+      </ItemIds>
+    </_50>
+    <_51 kind="Record" offset="1240" length="12">
+      <DungeonId kind="Leaf" offset="1240" length="4" type="Scalar { Kind = U32 }" value="160201" />
+      <ItemCount kind="Leaf" offset="1244" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="1248" length="4" count="1">
+        <_0_ kind="Leaf" offset="1248" length="4" type="Scalar { Kind = U32 }" value="48052" />
+      </ItemIds>
+    </_51>
+    <_52 kind="Record" offset="1252" length="28">
+      <DungeonId kind="Leaf" offset="1252" length="4" type="Scalar { Kind = U32 }" value="160202" />
+      <ItemCount kind="Leaf" offset="1256" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <ItemIds kind="Array" offset="1260" length="20" count="5">
+        <_0_ kind="Leaf" offset="1260" length="4" type="Scalar { Kind = U32 }" value="48049" />
+        <_1_ kind="Leaf" offset="1264" length="4" type="Scalar { Kind = U32 }" value="48044" />
+        <_2_ kind="Leaf" offset="1268" length="4" type="Scalar { Kind = U32 }" value="48047" />
+        <_3_ kind="Leaf" offset="1272" length="4" type="Scalar { Kind = U32 }" value="48040" />
+        <_4_ kind="Leaf" offset="1276" length="4" type="Scalar { Kind = U32 }" value="48030" />
+      </ItemIds>
+    </_52>
+    <_53 kind="Record" offset="1280" length="20">
+      <DungeonId kind="Leaf" offset="1280" length="4" type="Scalar { Kind = U32 }" value="160203" />
+      <ItemCount kind="Leaf" offset="1284" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <ItemIds kind="Array" offset="1288" length="12" count="3">
+        <_0_ kind="Leaf" offset="1288" length="4" type="Scalar { Kind = U32 }" value="48049" />
+        <_1_ kind="Leaf" offset="1292" length="4" type="Scalar { Kind = U32 }" value="48048" />
+        <_2_ kind="Leaf" offset="1296" length="4" type="Scalar { Kind = U32 }" value="48047" />
+      </ItemIds>
+    </_53>
+    <_54 kind="Record" offset="1300" length="12">
+      <DungeonId kind="Leaf" offset="1300" length="4" type="Scalar { Kind = U32 }" value="160301" />
+      <ItemCount kind="Leaf" offset="1304" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="1308" length="4" count="1">
+        <_0_ kind="Leaf" offset="1308" length="4" type="Scalar { Kind = U32 }" value="48053" />
+      </ItemIds>
+    </_54>
+    <_55 kind="Record" offset="1312" length="28">
+      <DungeonId kind="Leaf" offset="1312" length="4" type="Scalar { Kind = U32 }" value="160302" />
+      <ItemCount kind="Leaf" offset="1316" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <ItemIds kind="Array" offset="1320" length="20" count="5">
+        <_0_ kind="Leaf" offset="1320" length="4" type="Scalar { Kind = U32 }" value="48049" />
+        <_1_ kind="Leaf" offset="1324" length="4" type="Scalar { Kind = U32 }" value="48045" />
+        <_2_ kind="Leaf" offset="1328" length="4" type="Scalar { Kind = U32 }" value="48047" />
+        <_3_ kind="Leaf" offset="1332" length="4" type="Scalar { Kind = U32 }" value="48039" />
+        <_4_ kind="Leaf" offset="1336" length="4" type="Scalar { Kind = U32 }" value="48025" />
+      </ItemIds>
+    </_55>
+    <_56 kind="Record" offset="1340" length="20">
+      <DungeonId kind="Leaf" offset="1340" length="4" type="Scalar { Kind = U32 }" value="160303" />
+      <ItemCount kind="Leaf" offset="1344" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <ItemIds kind="Array" offset="1348" length="12" count="3">
+        <_0_ kind="Leaf" offset="1348" length="4" type="Scalar { Kind = U32 }" value="48049" />
+        <_1_ kind="Leaf" offset="1352" length="4" type="Scalar { Kind = U32 }" value="48048" />
+        <_2_ kind="Leaf" offset="1356" length="4" type="Scalar { Kind = U32 }" value="48047" />
+      </ItemIds>
+    </_56>
+    <_57 kind="Record" offset="1360" length="28">
+      <DungeonId kind="Leaf" offset="1360" length="4" type="Scalar { Kind = U32 }" value="160801" />
+      <ItemCount kind="Leaf" offset="1364" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <ItemIds kind="Array" offset="1368" length="20" count="5">
+        <_0_ kind="Leaf" offset="1368" length="4" type="Scalar { Kind = U32 }" value="48049" />
+        <_1_ kind="Leaf" offset="1372" length="4" type="Scalar { Kind = U32 }" value="48046" />
+        <_2_ kind="Leaf" offset="1376" length="4" type="Scalar { Kind = U32 }" value="48047" />
+        <_3_ kind="Leaf" offset="1380" length="4" type="Scalar { Kind = U32 }" value="48036" />
+        <_4_ kind="Leaf" offset="1384" length="4" type="Scalar { Kind = U32 }" value="48010" />
+      </ItemIds>
+    </_57>
+    <_58 kind="Record" offset="1388" length="8">
+      <DungeonId kind="Leaf" offset="1388" length="4" type="Scalar { Kind = U32 }" value="161401" />
+      <ItemCount kind="Leaf" offset="1392" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <ItemIds kind="Array" offset="1396" length="0" count="0" />
+    </_58>
+    <_59 kind="Record" offset="1396" length="20">
+      <DungeonId kind="Leaf" offset="1396" length="4" type="Scalar { Kind = U32 }" value="161601" />
+      <ItemCount kind="Leaf" offset="1400" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <ItemIds kind="Array" offset="1404" length="12" count="3">
+        <_0_ kind="Leaf" offset="1404" length="4" type="Scalar { Kind = U32 }" value="48049" />
+        <_1_ kind="Leaf" offset="1408" length="4" type="Scalar { Kind = U32 }" value="48048" />
+        <_2_ kind="Leaf" offset="1412" length="4" type="Scalar { Kind = U32 }" value="48047" />
+      </ItemIds>
+    </_59>
+    <_60 kind="Record" offset="1416" length="24">
+      <DungeonId kind="Leaf" offset="1416" length="4" type="Scalar { Kind = U32 }" value="170101" />
+      <ItemCount kind="Leaf" offset="1420" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <ItemIds kind="Array" offset="1424" length="16" count="4">
+        <_0_ kind="Leaf" offset="1424" length="4" type="Scalar { Kind = U32 }" value="47205" />
+        <_1_ kind="Leaf" offset="1428" length="4" type="Scalar { Kind = U32 }" value="47204" />
+        <_2_ kind="Leaf" offset="1432" length="4" type="Scalar { Kind = U32 }" value="47201" />
+        <_3_ kind="Leaf" offset="1436" length="4" type="Scalar { Kind = U32 }" value="75469" />
+      </ItemIds>
+    </_60>
+    <_61 kind="Record" offset="1440" length="16">
+      <DungeonId kind="Leaf" offset="1440" length="4" type="Scalar { Kind = U32 }" value="170401" />
+      <ItemCount kind="Leaf" offset="1444" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <ItemIds kind="Array" offset="1448" length="8" count="2">
+        <_0_ kind="Leaf" offset="1448" length="4" type="Scalar { Kind = U32 }" value="47207" />
+        <_1_ kind="Leaf" offset="1452" length="4" type="Scalar { Kind = U32 }" value="47204" />
+      </ItemIds>
+    </_61>
+    <_62 kind="Record" offset="1456" length="36">
+      <DungeonId kind="Leaf" offset="1456" length="4" type="Scalar { Kind = U32 }" value="170701" />
+      <ItemCount kind="Leaf" offset="1460" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <ItemIds kind="Array" offset="1464" length="28" count="7">
+        <_0_ kind="Leaf" offset="1464" length="4" type="Scalar { Kind = U32 }" value="47253" />
+        <_1_ kind="Leaf" offset="1468" length="4" type="Scalar { Kind = U32 }" value="47255" />
+        <_2_ kind="Leaf" offset="1472" length="4" type="Scalar { Kind = U32 }" value="152271" />
+        <_3_ kind="Leaf" offset="1476" length="4" type="Scalar { Kind = U32 }" value="201949" />
+        <_4_ kind="Leaf" offset="1480" length="4" type="Scalar { Kind = U32 }" value="130285" />
+        <_5_ kind="Leaf" offset="1484" length="4" type="Scalar { Kind = U32 }" value="75859" />
+        <_6_ kind="Leaf" offset="1488" length="4" type="Scalar { Kind = U32 }" value="47493" />
+      </ItemIds>
+    </_62>
+    <_63 kind="Record" offset="1492" length="12">
+      <DungeonId kind="Leaf" offset="1492" length="4" type="Scalar { Kind = U32 }" value="180901" />
+      <ItemCount kind="Leaf" offset="1496" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="1500" length="4" count="1">
+        <_0_ kind="Leaf" offset="1500" length="4" type="Scalar { Kind = U32 }" value="76574" />
+      </ItemIds>
+    </_63>
+    <_64 kind="Record" offset="1504" length="12">
+      <DungeonId kind="Leaf" offset="1504" length="4" type="Scalar { Kind = U32 }" value="181001" />
+      <ItemCount kind="Leaf" offset="1508" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="1512" length="4" count="1">
+        <_0_ kind="Leaf" offset="1512" length="4" type="Scalar { Kind = U32 }" value="76574" />
+      </ItemIds>
+    </_64>
+    <_65 kind="Record" offset="1516" length="12">
+      <DungeonId kind="Leaf" offset="1516" length="4" type="Scalar { Kind = U32 }" value="191102" />
+      <ItemCount kind="Leaf" offset="1520" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="1524" length="4" count="1">
+        <_0_ kind="Leaf" offset="1524" length="4" type="Scalar { Kind = U32 }" value="76206" />
+      </ItemIds>
+    </_65>
+    <_66 kind="Record" offset="1528" length="12">
+      <DungeonId kind="Leaf" offset="1528" length="4" type="Scalar { Kind = U32 }" value="191202" />
+      <ItemCount kind="Leaf" offset="1532" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="1536" length="4" count="1">
+        <_0_ kind="Leaf" offset="1536" length="4" type="Scalar { Kind = U32 }" value="76209" />
+      </ItemIds>
+    </_66>
+    <_67 kind="Record" offset="1540" length="12">
+      <DungeonId kind="Leaf" offset="1540" length="4" type="Scalar { Kind = U32 }" value="191302" />
+      <ItemCount kind="Leaf" offset="1544" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="1548" length="4" count="1">
+        <_0_ kind="Leaf" offset="1548" length="4" type="Scalar { Kind = U32 }" value="76212" />
+      </ItemIds>
+    </_67>
+    <_68 kind="Record" offset="1552" length="12">
+      <DungeonId kind="Leaf" offset="1552" length="4" type="Scalar { Kind = U32 }" value="191402" />
+      <ItemCount kind="Leaf" offset="1556" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="1560" length="4" count="1">
+        <_0_ kind="Leaf" offset="1560" length="4" type="Scalar { Kind = U32 }" value="76215" />
+      </ItemIds>
+    </_68>
+    <_69 kind="Record" offset="1564" length="40">
+      <DungeonId kind="Leaf" offset="1564" length="4" type="Scalar { Kind = U32 }" value="200101" />
+      <ItemCount kind="Leaf" offset="1568" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <ItemIds kind="Array" offset="1572" length="32" count="8">
+        <_0_ kind="Leaf" offset="1572" length="4" type="Scalar { Kind = U32 }" value="75500" />
+        <_1_ kind="Leaf" offset="1576" length="4" type="Scalar { Kind = U32 }" value="75501" />
+        <_2_ kind="Leaf" offset="1580" length="4" type="Scalar { Kind = U32 }" value="75502" />
+        <_3_ kind="Leaf" offset="1584" length="4" type="Scalar { Kind = U32 }" value="75503" />
+        <_4_ kind="Leaf" offset="1588" length="4" type="Scalar { Kind = U32 }" value="75504" />
+        <_5_ kind="Leaf" offset="1592" length="4" type="Scalar { Kind = U32 }" value="75860" />
+        <_6_ kind="Leaf" offset="1596" length="4" type="Scalar { Kind = U32 }" value="75514" />
+        <_7_ kind="Leaf" offset="1600" length="4" type="Scalar { Kind = U32 }" value="75514" />
+      </ItemIds>
+    </_69>
+    <_70 kind="Record" offset="1604" length="44">
+      <DungeonId kind="Leaf" offset="1604" length="4" type="Scalar { Kind = U32 }" value="200201" />
+      <ItemCount kind="Leaf" offset="1608" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <ItemIds kind="Array" offset="1612" length="36" count="9">
+        <_0_ kind="Leaf" offset="1612" length="4" type="Scalar { Kind = U32 }" value="6764" />
+        <_1_ kind="Leaf" offset="1616" length="4" type="Scalar { Kind = U32 }" value="75501" />
+        <_2_ kind="Leaf" offset="1620" length="4" type="Scalar { Kind = U32 }" value="75502" />
+        <_3_ kind="Leaf" offset="1624" length="4" type="Scalar { Kind = U32 }" value="75503" />
+        <_4_ kind="Leaf" offset="1628" length="4" type="Scalar { Kind = U32 }" value="75504" />
+        <_5_ kind="Leaf" offset="1632" length="4" type="Scalar { Kind = U32 }" value="75860" />
+        <_6_ kind="Leaf" offset="1636" length="4" type="Scalar { Kind = U32 }" value="75512" />
+        <_7_ kind="Leaf" offset="1640" length="4" type="Scalar { Kind = U32 }" value="75513" />
+        <_8_ kind="Leaf" offset="1644" length="4" type="Scalar { Kind = U32 }" value="75514" />
+      </ItemIds>
+    </_70>
+    <_71 kind="Record" offset="1648" length="12">
+      <DungeonId kind="Leaf" offset="1648" length="4" type="Scalar { Kind = U32 }" value="300701" />
+      <ItemCount kind="Leaf" offset="1652" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemIds kind="Array" offset="1656" length="4" count="1">
+        <_0_ kind="Leaf" offset="1656" length="4" type="Scalar { Kind = U32 }" value="155289" />
+      </ItemIds>
+    </_71>
+  </ObtainableItems>
+</DungeonObtainable>

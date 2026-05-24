@@ -160,6 +160,10 @@ void cClient::DoSend(cPacket& p)
 			auto data = static_cast<const uint8_t*>(p.m_buf.data().data());
 			memcpy_s(&packetId, sizeof(packetId), data + 2, sizeof(packetId));
 		}
+		nsCSDEBUG::CrashLogger::SetLastPacket("send-skipped-inactive",
+			static_cast<int>(packetId),
+			-1,
+			static_cast<int>(p.real_len));
 		NetTrace("send skipped inactive socket packet=%u bytes=%u",
 			static_cast<unsigned>(packetId),
 			static_cast<unsigned>(p.real_len));
@@ -197,6 +201,10 @@ void cClient::DoSend(cPacket& p)
 		localPort,
 		static_cast<unsigned>(packetId),
 		static_cast<unsigned>(p.real_len));
+	nsCSDEBUG::CrashLogger::SetLastPacket("send-begin",
+		static_cast<int>(packetId),
+		-1,
+		static_cast<int>(p.real_len));
 	asio::buffer_copy(asio::buffer(*bytes), p.m_buf.data(), p.real_len);
 	p.m_buf.consume(p.real_len);
 
@@ -366,14 +374,36 @@ void cClient::ReadAll(int b)
 				static_cast<unsigned>(m_sproto),
 				static_cast<unsigned>(bt),
 				static_cast<unsigned>(m_read.real_len));
+			nsCSDEBUG::CrashLogger::SetLastPacket("recv-body",
+				static_cast<int>(m_sproto),
+				static_cast<int>(bt),
+				static_cast<int>(m_read.real_len));
 			nsCSDEBUG::CrashLogger::LogMessage("NET recv packet=%u body_bytes=%u total_len=%u",
 				static_cast<unsigned>(m_sproto),
 				static_cast<unsigned>(bt),
 				static_cast<unsigned>(m_read.real_len));
 
 			NetTrace("execute begin packet=%u", static_cast<unsigned>(m_sproto));
+			nsCSDEBUG::CrashLogger::SetContext("network execute begin packet=%u active=%d body_bytes=%u total_len=%u",
+				static_cast<unsigned>(m_sproto),
+				m_a ? 1 : 0,
+				static_cast<unsigned>(bt),
+				static_cast<unsigned>(m_read.real_len));
+			nsCSDEBUG::CrashLogger::SetLastPacket("execute-begin",
+				static_cast<int>(m_sproto),
+				static_cast<int>(bt),
+				static_cast<int>(m_read.real_len));
 			OnExecute();
 			NetTrace("execute end packet=%u", static_cast<unsigned>(m_sproto));
+			nsCSDEBUG::CrashLogger::SetContext("network execute end packet=%u active=%d body_bytes=%u total_len=%u",
+				static_cast<unsigned>(m_sproto),
+				m_a ? 1 : 0,
+				static_cast<unsigned>(bt),
+				static_cast<unsigned>(m_read.real_len));
+			nsCSDEBUG::CrashLogger::SetLastPacket("execute-end",
+				static_cast<int>(m_sproto),
+				static_cast<int>(bt),
+				static_cast<int>(m_read.real_len));
 
 			m_read.m_buf.consume(bt); // force consume everything else
 

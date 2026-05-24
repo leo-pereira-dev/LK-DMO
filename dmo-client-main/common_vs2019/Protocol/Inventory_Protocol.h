@@ -10,6 +10,11 @@ namespace nInventoryInfo
 		eINVEN = 0,
 		eWAREHOUSE,
 		eSHARESTASH,
+		eEXTRA_SEAL,
+		eEXTRA_TICKET,
+		eEXTRA_EVOLUTION,
+		eEXTRA_DIGITAMA,
+		eEXTRA_MATERIAL,
 		eMAX,
 	};
 }

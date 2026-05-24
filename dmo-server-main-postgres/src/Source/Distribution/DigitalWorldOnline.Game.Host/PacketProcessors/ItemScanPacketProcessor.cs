@@ -131,6 +131,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             short scannedItens = 0;
             long cost = 0;
             var error = false;
+            var scannedItemId = scannedItem.ItemId;
 
             while (scannedItens < amountToScan && !error)
             {
@@ -249,24 +250,36 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             if (vipEnabled == 1)
             {
-                _logger.Verbose($"Character {client.TamerId} scanned {scannedItem.ItemId} x{scannedItens} with VIP and obtained {dropList}");
+                _logger.Information(
+                    "Scan: tamer {TamerId} scanned item {ItemId} x{Amount} with VIP. slot={Slot} portable={Portable} npc={Npc} payload={Payload} rewards=[{Rewards}]",
+                    client.TamerId,
+                    scannedItemId,
+                    scannedItens,
+                    slotToScan,
+                    portableIdx,
+                    npcId,
+                    remaining,
+                    dropList);
             }
             else
             {
-                _logger.Verbose($"Character {client.TamerId} scanned {scannedItem.ItemId} x{scannedItens} at {client.TamerLocation} with NPC {npcId} and obtained {dropList}");
+                _logger.Information(
+                    "Scan: tamer {TamerId} scanned item {ItemId} x{Amount} at {Location} with NPC {Npc}. slot={Slot} portable={Portable} payload={Payload} rewards=[{Rewards}]",
+                    client.TamerId,
+                    scannedItemId,
+                    scannedItens,
+                    client.TamerLocation,
+                    npcId,
+                    slotToScan,
+                    portableIdx,
+                    remaining,
+                    dropList);
             }
 
             client.Tamer.Inventory.RemoveBits(cost);
             client.Tamer.Inventory.RemoveOrReduceItem(scannedItem, scannedItens, slotToScan);
 
-            var scanQuest = client.Tamer.Progress.InProgressQuestData.FirstOrDefault(x => x.QuestId == 4021);
-            if (scanQuest != null && scanAsset.ItemId == 9071)
-            {
-                scanQuest.UpdateCondition(0, 1);
-                client.Send(new QuestGoalUpdatePacket(4021, 0, 1));
-                var questToUpdate = client.Tamer.Progress.InProgressQuestData.FirstOrDefault(x => x.QuestId == 4021);
-                _sender.Send(new UpdateCharacterInProgressCommand(questToUpdate));
-            }
+            await UpdateClientActionQuestProgress(client, scannedItemId, "scan");
 
             await _sender.Send(new UpdateItemListBitsCommand(client.Tamer.Inventory));
             await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
@@ -276,13 +289,96 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         cost,
                         client.Tamer.Inventory.Bits,
                         slotToScan,
-                        scannedItem.ItemId,
+                        scannedItemId,
                         scannedItens,
                         receivedRewards).Serialize(),
                     new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
                 )
             );
         }
+
+        private async Task UpdateClientActionQuestProgress(GameClient client, int itemId, string actionName)
+        {
+            if (!client.Tamer.Progress.InProgressQuestData.Any())
+            {
+                _logger.Information(
+                    "Quest {ActionName}: no in-progress quests for tamer {TamerId} while processing item {ItemId}.",
+                    actionName,
+                    client.TamerId,
+                    itemId);
+                return;
+            }
+
+            foreach (var questInProgress in client.Tamer.Progress.InProgressQuestData)
+            {
+                var questInfo = _assets.Quest.FirstOrDefault(x => x.QuestId == questInProgress.QuestId);
+                if (questInfo == null)
+                {
+                    _logger.Warning(
+                        "Quest {QuestId} is in progress for tamer {TamerId}, but no asset was loaded while processing item {ActionName}.",
+                        questInProgress.QuestId,
+                        client.TamerId,
+                        actionName);
+                    continue;
+                }
+
+                var goalIndex = questInfo.QuestGoals.FindIndex(x =>
+                    x.GoalType == QuestGoalTypeEnum.ClientAction &&
+                    x.GoalId == 6 &&
+                    x.CurTypeCount == itemId);
+
+                if (goalIndex < 0)
+                {
+                    var actionGoals = string.Join(", ", questInfo.QuestGoals
+                        .Select((goal, index) => new { goal, index })
+                        .Where(x => x.goal.GoalType == QuestGoalTypeEnum.ClientAction && x.goal.GoalId == 6)
+                        .Select(x => $"idx={x.index}/item={x.goal.CurTypeCount}/amount={x.goal.GoalAmount}"));
+
+                    _logger.Information(
+                        "Quest {ActionName}: no matching client-action goal for tamer {TamerId}, quest {QuestId}, item {ItemId}. Available item-action goals: [{Goals}]",
+                        actionName,
+                        client.TamerId,
+                        questInProgress.QuestId,
+                        itemId,
+                        actionGoals);
+                    continue;
+                }
+
+                var currentGoalValue = questInProgress.GetGoalValue(goalIndex);
+                var targetGoalValue = questInfo.QuestGoals[goalIndex].GoalAmount;
+                if (currentGoalValue >= targetGoalValue)
+                {
+                    _logger.Information(
+                        "Quest {ActionName}: goal already complete for tamer {TamerId}, quest {QuestId}, item {ItemId}, goal {GoalIndex}, value {Current}/{Target}.",
+                        actionName,
+                        client.TamerId,
+                        questInProgress.QuestId,
+                        itemId,
+                        goalIndex,
+                        currentGoalValue,
+                        targetGoalValue);
+                    return;
+                }
+
+                var updatedGoalValue = (byte)Math.Min(byte.MaxValue, Math.Min(targetGoalValue, currentGoalValue + 1));
+
+                questInProgress.UpdateCondition(goalIndex, updatedGoalValue);
+                client.Send(new QuestGoalUpdatePacket(questInProgress.QuestId, (byte)goalIndex, updatedGoalValue));
+                await _sender.Send(new UpdateCharacterInProgressCommand(questInProgress));
+
+                _logger.Information(
+                    "Quest {QuestId} {ActionName} goal updated for tamer {TamerId}: item {ItemId}, goal {GoalIndex}, value {Current}/{Target}.",
+                    questInProgress.QuestId,
+                    actionName,
+                    client.TamerId,
+                    itemId,
+                    goalIndex,
+                    updatedGoalValue,
+                    targetGoalValue);
+                return;
+            }
+        }
+
         private ItemModel? ApplyValuesChipset(ItemModel newItem)
         {
             var skillCodeInfo = _assets.SkillCodeInfo.FirstOrDefault(x => x.SkillCode == newItem.ItemInfo.SkillCode);

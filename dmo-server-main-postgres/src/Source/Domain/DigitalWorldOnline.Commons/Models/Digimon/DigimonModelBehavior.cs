@@ -92,7 +92,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         /// </summary>
         public bool CheckSkillsTime => DateTime.Now >= LastSkillsCheck;
 
-        public bool IsRaremonType => BaseType == 45172;
+        public bool IsRaremonType => BaseType == 45172 || BaseType == 99692;
 
         public bool SameType(int baseType) => BaseType == baseType;
 
@@ -609,6 +609,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         /// <param name="newY">New Y position.</param>
         public void NewLocation(int x, int y, float z = 0)
         {
+            Location ??= DigimonLocationModel.Create(0, x, y);
             Location.SetX(x);
             Location.SetY(y);
             Location.SetZ(z);
@@ -622,6 +623,8 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         /// <param name="newY">New Y position.</param>
         public void NewLocation(int mapId, int newX, int newY, bool toEvent = false)
         {
+            Location ??= DigimonLocationModel.Create((short)mapId, newX, newY);
+
             if (toEvent)
             {
                 BeforeEvent.SetMapId(Location.MapId);

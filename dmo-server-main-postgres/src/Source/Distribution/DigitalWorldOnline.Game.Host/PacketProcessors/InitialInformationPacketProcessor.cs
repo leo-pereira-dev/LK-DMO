@@ -158,6 +158,30 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 throw new InvalidOperationException($"Missing persisted character item list {type} for character {character.Id}.");
             }
 
+            async Task EnsureExtraInventoryListSizeAsync(ItemListEnum type)
+            {
+                var itemList = character.ItemList.FirstOrDefault(x => x.Type == type);
+                if (itemList == null)
+                    throw new InvalidOperationException($"Missing extra inventory item list {type} for character {character.Id}.");
+
+                var targetSize = (byte)GeneralSizeEnum.ExtraInventory;
+                if (itemList.Size >= targetSize)
+                    return;
+
+                itemList.CheckEmptyItems();
+                itemList.AddSlots((byte)(targetSize - itemList.Size));
+                itemList.CheckEmptyItems();
+
+                await _sender.Send(new UpdateItemListSizeCommand(itemList));
+                await _sender.Send(new UpdateItemsCommand(itemList));
+
+                _logger.Information(
+                    "Expanded extra inventory list for character {CharacterId}: type={Type} size={Size}.",
+                    character.Id,
+                    type,
+                    itemList.Size);
+            }
+
             await EnsureCharacterListAsync(ItemListEnum.Equipment);
             await EnsureCharacterListAsync(ItemListEnum.Inventory);
             await EnsureCharacterListAsync(ItemListEnum.Warehouse);
@@ -168,6 +192,16 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             await EnsureCharacterListAsync(ItemListEnum.RewardWarehouse);
             await EnsureCharacterListAsync(ItemListEnum.GiftWarehouse);
             await EnsureCharacterListAsync(ItemListEnum.ConsignedWarehouse);
+            await EnsureCharacterListAsync(ItemListEnum.ExtraInventorySeal);
+            await EnsureCharacterListAsync(ItemListEnum.ExtraInventoryTicket);
+            await EnsureCharacterListAsync(ItemListEnum.ExtraInventoryEvolution);
+            await EnsureCharacterListAsync(ItemListEnum.ExtraInventoryDigitama);
+            await EnsureCharacterListAsync(ItemListEnum.ExtraInventoryMaterial);
+            await EnsureExtraInventoryListSizeAsync(ItemListEnum.ExtraInventorySeal);
+            await EnsureExtraInventoryListSizeAsync(ItemListEnum.ExtraInventoryTicket);
+            await EnsureExtraInventoryListSizeAsync(ItemListEnum.ExtraInventoryEvolution);
+            await EnsureExtraInventoryListSizeAsync(ItemListEnum.ExtraInventoryDigitama);
+            await EnsureExtraInventoryListSizeAsync(ItemListEnum.ExtraInventoryMaterial);
             await EnsureCharacterListAsync(ItemListEnum.TamerShop);
             await EnsureCharacterListAsync(ItemListEnum.ConsignedShop);
 
@@ -246,6 +280,14 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             character.NewViewLocation(character.Location.X, character.Location.Y);
             character.RemovePartnerPassiveBuff();
             character.SetPartnerPassiveBuff();
+
+            var repairedInitialResources = RepairInitialTamerResources(character);
+
+            if (RepairInitialDigimonResources(character))
+                repairedInitialResources = true;
+
+            if (repairedInitialResources)
+                await _sender.Send(new UpdateCharacterBasicInfoCommand(character));
 
             await _sender.Send(new UpdateDigimonBuffListCommand(character.Partner.BuffList));
             
@@ -596,6 +638,100 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                    line.OpenQuest <= 0 &&
                    line.UseItem <= 0 &&
                    line.UseItemNum <= 0;
+        }
+
+        private bool RepairInitialTamerResources(CharacterModel character)
+        {
+            try
+            {
+                if (character.Level != 1 ||
+                    character.CurrentHp != 40 ||
+                    character.CurrentDs != 40 ||
+                    (character.HP <= character.CurrentHp && character.DS <= character.CurrentDs))
+                    return false;
+
+                _logger.Information(
+                    "Repairing initial tamer resources: character={CharacterId}:{CharacterName} level={Level} hp={CurrentHp}/{MaxHp} ds={CurrentDs}/{MaxDs}.",
+                    character.Id,
+                    character.Name,
+                    character.Level,
+                    character.CurrentHp,
+                    character.HP,
+                    character.CurrentDs,
+                    character.DS);
+
+                character.FullHeal();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.Warning(
+                    ex,
+                    "Skipping initial tamer resource repair because status calculation failed. character={CharacterId}:{CharacterName} level={Level}.",
+                    character.Id,
+                    character.Name,
+                    character.Level);
+
+                return false;
+            }
+        }
+
+        private bool RepairInitialDigimonResources(CharacterModel character)
+        {
+            var repaired = false;
+
+            foreach (var digimon in character.Digimons)
+            {
+                if (digimon == null)
+                    continue;
+
+                bool shouldRepair;
+                try
+                {
+                    shouldRepair = ShouldRepairInitialDigimonResources(digimon);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Warning(
+                        ex,
+                        "Skipping initial digimon resource repair because status calculation failed. character={CharacterId} digimon={DigimonId}:{DigimonName} base={BaseType} level={Level}.",
+                        character.Id,
+                        digimon.Id,
+                        digimon.Name,
+                        digimon.BaseType,
+                        digimon.Level);
+
+                    continue;
+                }
+
+                if (!shouldRepair)
+                    continue;
+
+                _logger.Information(
+                    "Repairing initial digimon resources: character={CharacterId} digimon={DigimonId}:{DigimonName} base={BaseType} level={Level} hp={CurrentHp}/{MaxHp} ds={CurrentDs}/{MaxDs}.",
+                    character.Id,
+                    digimon.Id,
+                    digimon.Name,
+                    digimon.BaseType,
+                    digimon.Level,
+                    digimon.CurrentHp,
+                    digimon.HP,
+                    digimon.CurrentDs,
+                    digimon.DS);
+
+                digimon.FullHeal();
+                repaired = true;
+            }
+
+            return repaired;
+        }
+
+        private static bool ShouldRepairInitialDigimonResources(DigitalWorldOnline.Commons.Models.Digimon.DigimonModel digimon)
+        {
+            return digimon.Level == 1 &&
+                   digimon.CurrentHp == 250 &&
+                   digimon.CurrentDs == 100 &&
+                   (digimon.HP > digimon.CurrentHp || digimon.DS > digimon.CurrentDs);
         }
     }
 }

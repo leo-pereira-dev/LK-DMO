@@ -1,0 +1,77 @@
+family,asset_path,asset_type,source,pack,status,notes
+Common,Random_box\bg.png,texture,EXE string 01adb0b4 + MainUI create,Pack01,mapped,Full-screen/window background used by DigiCombine and UnionCombine main UI.
+Common,Random_box\button\Repurchase.tga,texture,EXE string 01adac48 + RegisterUI buttons,Pack01,mapped,Cancel registration / repurchase-style button.
+Common,Random_box\button\Purchase_1.tga,texture,EXE string 01adaf28 + RegisterUI buttons,Pack01,mapped,Auto-register button skin.
+Common,Random_box\button\done.tga,texture,EXE string 01adac0c + RegisterUI buttons,Pack01,mapped,Combine/confirm button skin.
+Common,Cash_NewCashShop_Store_btn_G1.tga,texture,RegisterUI decompiled refs,Pack01,mapped,Rate info and exit button skin.
+DigiCombine,Digimon_Ev_UI_Ev_Btn.tga,texture,011c39f0,Pack01,mapped,Digi reward/preview button.
+UnionCombine,Unionmon_Ev_UI_Ev_Btn.tga,texture,011fdd70,Pack01,mapped,Union reward/preview button.
+Common,Random_box\popup\rate_popup\rate_popup_9.png,texture,EXE string 01ae2224 + RateInfoUI create,Pack01,mapped,Probability/rate popup panel.
+Common,Random_box\gauge.png,texture,EXE string 01adaca0 + result/register refs,Pack01,mapped,Progress/ceiling gauge texture.
+Common,CommonUI\Slot\Windows\Scroll2.tga,texture,RegisterUI/RateInfoUI decompiled refs,Pack01,mapped,Scroll texture used by list controls.
+Common,Random_box\scroll\scroll_arrow_d.tga,texture,EXE string 01ae76ec,Pack01,mapped,Down scroll arrow.
+Common,Random_box\scroll\scroll_arrow_u.tga,texture,EXE string 01ae7714,Pack01,mapped,Up scroll arrow.
+Common,Random_box\scroll\scroll_bar.tga,texture,EXE string 01ae773c,Pack01,mapped,Scroll bar texture.
+Common,Random_box\scroll\scroll_bar.png,texture,EXE string 01ae7760,Pack01,mapped,Scroll bar texture variant.
+Common,Random_box\bar_arrow.png,texture,EXE string 01ae893c,Pack01,mapped,Bar arrow texture.
+Common,Random_box\sub_title_line.png,texture,EXE string 01ada99c,Pack01,mapped,Title/subtitle divider.
+Common,Random_box\text_line.png,texture,EXE string 01adaa3c,Pack01,mapped,Text divider.
+Common,Random_box\frame.png,texture,EXE string 01adaaec,Pack01,mapped,Frame texture.
+Common,Random_box\Rate_bg_5x5.png,texture,EXE string 01adab04,Pack01,mapped,Rate grid background.
+Common,Random_box\icon\class_icon.tga,texture,EXE string 01adab30,Pack01,mapped,Rank/class icon.
+Common,Random_box\icon\Slot_rank.tga,texture,EXE string 01adac28,Pack01,mapped,Legacy/random-box slot rank icon.
+Common,Random_box\button\Tap.tga,texture,EXE string 01adaa80,Pack01,mapped,Tab button texture.
+Common,Random_box\button\arrow_r.tga,texture,EXE string 01adae20,Pack01,mapped,Right arrow button texture.
+Common,Random_box\button\arrow_l.tga,texture,EXE string 01adae40,Pack01,mapped,Left arrow button texture.
+Common,Random_box\button\definite_information.tga,texture,EXE string 01adaee8,Pack01,mapped,Probability/definite-info button.
+Common,Random_box\button\main_gatcha_popup.tga,texture,EXE string 01adb1ec,Pack01,mapped,Main gacha popup button.
+Common,Random_box\bg_big.png,texture,EXE string 01adae60,Pack01,mapped,Large random-box background variant.
+Common,Random_box\over_frame.png,texture,EXE string 01adae78,Pack01,mapped,Overlay frame.
+Common,Random_box\loding.png,texture,EXE string 01adaebc,Pack01,mapped,Loading texture.
+Common,CommonUI\arrow_Right.tga,texture,EXE string 01ad6e94 + register/result refs,Pack01,mapped,Large blue right arrow between material slots and reward card.
+Common,CommonUI\digimon_rank.dds,texture,EXE string 01ad8c38 + DigiCombine rank refs,Pack01,mapped,Rank atlas used on Digi item slots.
+Common,CommonUI\Digimon_rank_new.dds,texture,EXE string 01ae49e4 + Union/Digi rank refs,Pack01,mapped,New rank atlas used on item slots.
+Common,CommonUI\Unionmon_rank.dds,texture,EXE string 01ae4a20 + UnionCombine rank refs,Pack01,mapped,Union rank atlas used on item slots.
+Common,SealMaster\sealmaster_bg_01.tga,texture,EXE string 01ae104c + result/card refs,Pack01,mapped,Shared background referenced by copied UI code.
+Common,Random_box\popup\tooltip_popup\tooltip_popup_0,texture-prefix,EXE string 01adaa0c,Pack01,mapped,Tooltip popup texture prefix.
+Common,Random_box\popup\main_popup\main_popup_0,texture-prefix,EXE string 01adb1ac,Pack01,mapped,Main popup texture prefix.
+Common,Random_box\Slot_image\,directory-prefix,EXE string 01acfacc,Pack01,mapped,Slot image directory prefix.
+DigiCombine,DigiCombine\DigiCombine_CardFront.dds,texture,EXE string 01ae106c + scene/result refs,Pack01,mapped,Card front texture.
+DigiCombine,DigiCombine\DigiCombine_CardBack.dds,texture,EXE string 01ae1a84 + scene/result refs,Pack01,mapped,Card back texture.
+DigiCombine,DigiCombine\DigiCombine_Slot_Empty.dds,texture,EXE string 01ae228c + register slots,Pack01,mapped,Empty fusion material slot.
+DigiCombine,DigiCombine\DigiCombine_Slot_rank.dds,texture,EXE string 01ae22e8 + register/rate slots,Pack01,mapped,Rank frame for item slots.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Start.dds,texture,EXE string 01ae1a5c + scene refs,Pack01,mapped,Gacha animation start texture.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Change.dds,texture,EXE string 01ae1ad4 + scene refs,Pack01,mapped,Gacha animation change texture.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Bg_A.dds,texture,EXE string 01ae1aac,Pack01,mapped,Gacha rank background.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Bg_Aplus.dds,texture,EXE string 01ae1dc4,Pack01,mapped,Gacha rank background.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Bg_S.dds,texture,EXE string 01ae1d9c,Pack01,mapped,Gacha rank background.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Bg_Splus.dds,texture,EXE string 01ae1e18,Pack01,mapped,Gacha rank background.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Bg_SS.dds,texture,EXE string 01ae1df0,Pack01,mapped,Gacha rank background.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Bg_SSplus.dds,texture,EXE string 01ae1e70,Pack01,mapped,Gacha rank background.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Bg_SSS.dds,texture,EXE string 01ae1e44,Pack01,mapped,Gacha rank background.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Bg_SSSplus.dds,texture,EXE string 01ae1ec4,Pack01,mapped,Gacha rank background.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Bg_U.dds,texture,EXE string 01ae1e9c,Pack01,mapped,Gacha rank background.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Bg_Uplus.dds,texture,EXE string 01ae1ef4,Pack01,mapped,Gacha rank background.
+DigiCombine,DigiCombine\DigiCombine_Gacha_Bg_N.dds,texture,EXE string 01ae1d48,Pack01,mapped,Gacha rank background.
+DigiCombine,DigiCombine\DigiCombine_Gacha_End_A.dds,texture,EXE string 01ae1b28,Pack01,mapped,Gacha rank end texture.
+DigiCombine,DigiCombine\DigiCombine_Gacha_End_Aplus.dds,texture,EXE string 01ae1c10,Pack01,mapped,Gacha rank end texture.
+DigiCombine,DigiCombine\DigiCombine_Gacha_End_S.dds,texture,EXE string 01ae1be8,Pack01,mapped,Gacha rank end texture.
+DigiCombine,DigiCombine\DigiCombine_Gacha_End_Splus.dds,texture,EXE string 01ae1c68,Pack01,mapped,Gacha rank end texture.
+DigiCombine,DigiCombine\DigiCombine_Gacha_End_SS.dds,texture,EXE string 01ae1c3c,Pack01,mapped,Gacha rank end texture.
+DigiCombine,DigiCombine\DigiCombine_Gacha_End_SSplus.dds,texture,EXE string 01ae1cc0,Pack01,mapped,Gacha rank end texture.
+DigiCombine,DigiCombine\DigiCombine_Gacha_End_SSS.dds,texture,EXE string 01ae1c94,Pack01,mapped,Gacha rank end texture.
+DigiCombine,DigiCombine\DigiCombine_Gacha_End_SSSplus.dds,texture,EXE string 01ae1d18,Pack01,mapped,Gacha rank end texture.
+DigiCombine,DigiCombine\DigiCombine_Gacha_End_U.dds,texture,EXE string 01ae1cf0,Pack01,mapped,Gacha rank end texture.
+DigiCombine,DigiCombine\DigiCombine_Gacha_End_Uplus.dds,texture,EXE string 01ae1d70,Pack01,mapped,Gacha rank end texture.
+DigiCombine,DigiCombine\DigiCombine_Gacha_End_N.dds,texture,EXE string 01ae1b98,Pack01,mapped,Gacha rank end texture.
+DigiCombine,System\DigiCombine_Gacha_Progress.wav,sound,EXE string 01ae1b00 + scene sound refs,Pack01,mapped,Gacha progress sound.
+DigiCombine,System\DigiCombine_Gacha_Rare.wav,sound,EXE string 01ae1b50 + scene sound refs,Pack01,mapped,Rare result sound.
+DigiCombine,System\DigiCombine_Gacha_Change.wav,sound,EXE string 01ae1b74 + scene sound refs,Pack01,mapped,Gacha change sound.
+DigiCombine,System\DigiCombine_Gacha_Default.wav,sound,EXE string 01ae1bc0 + scene sound refs,Pack01,mapped,Default result sound.
+Common,Data\Interface\Random_box\GACHA_A.nif,model,EXE string 01acf7fc,Pack01,mapped,Gacha 3D model variant.
+Common,Data\Interface\Random_box\GACHA_B.nif,model,EXE string 01acf824,Pack01,mapped,Gacha 3D model variant.
+Common,Data\Interface\Random_box\GACHA_C.nif,model,EXE string 01acf84c,Pack01,mapped,Gacha 3D model variant.
+Common,Data\Interface\Random_box\GACHA_D.nif,model,EXE string 01acf874,Pack01,mapped,Gacha 3D model variant.
+Common,Data\Interface\Random_box\GACHA_E.nif,model,EXE string 01acf89c,Pack01,mapped,Gacha 3D model variant.
+Common,DigiCombine.mp3,music,EXE string 01acf7b4,Pack01,mapped,DigiCombine BGM.
+Common,UnionCombine.mp3,music,EXE string 01ad2dd4,Pack01,mapped,UnionCombine BGM.

@@ -87,6 +87,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 client.Send(new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory));
 
                 await _sender.Send(new DeleteDigimonCommand(digimonId));
+                await _sender.Send(new UpdateCharacterDigimonsOrderCommand(client.Tamer));
                 await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
 
                 _logger.Verbose($"Character {client.TamerId} deleted partner {digimonId}.");

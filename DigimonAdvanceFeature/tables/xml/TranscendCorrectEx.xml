@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TranscendCorrectEx schema="TranscendCorrectEx.struct" bin="TranscendCorrectEx.bin" byteLength="27">
+  <Corrections kind="Section" offset="0" length="27">
+    <_0 kind="Record" offset="4" length="23">
+      <DigimonId kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="45172" />
+      <GrowthCount kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <GrowthExp kind="Array" offset="12" length="15" count="3">
+        <_0_ kind="Struct" offset="12" length="5">
+          <Growth kind="Leaf" offset="12" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FixedExp kind="Leaf" offset="13" length="4" type="Scalar { Kind = U32 }" value="3140" />
+        </_0_>
+        <_1_ kind="Struct" offset="17" length="5">
+          <Growth kind="Leaf" offset="17" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FixedExp kind="Leaf" offset="18" length="4" type="Scalar { Kind = U32 }" value="23550" />
+        </_1_>
+        <_2_ kind="Struct" offset="22" length="5">
+          <Growth kind="Leaf" offset="22" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FixedExp kind="Leaf" offset="23" length="4" type="Scalar { Kind = U32 }" value="62800" />
+        </_2_>
+      </GrowthExp>
+    </_0>
+  </Corrections>
+</TranscendCorrectEx>

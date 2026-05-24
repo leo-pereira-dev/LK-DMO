@@ -51,6 +51,14 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             packet.Skip(4); // Portable incubator inventory slot.
             var digiName = NormalizeHatchName(packet.ReadString(), client.Tamer.Name);
+            _logger.Information(
+                "Hatch finish request: tamer {TamerId} name {DigimonName} incubatorEgg {EggId} hatchLevel {HatchLevel} backupDisk {BackupDiskId} currentSlots [{Slots}].",
+                client.TamerId,
+                digiName,
+                client.Tamer.Incubator.EggId,
+                client.Tamer.Incubator.HatchLevel,
+                client.Tamer.Incubator.BackupDiskId,
+                string.Join(",", client.Tamer.Digimons.Select(x => $"{x.Id}:{x.Slot}:{x.BaseType}:{x.Name}")));
 
             var hatchInfo = _assets.Hatchs.FirstOrDefault(x => x.ItemId == client.Tamer.Incubator.EggId);
             if (hatchInfo == null)
@@ -67,22 +75,25 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return;
             }
 
-            byte targetSlot = 0;
-            for (byte slot = 1; slot < client.Tamer.DigimonSlots; slot++)
-            {
-                if (client.Tamer.Digimons.All(x => x.Slot != slot))
-                {
-                    targetSlot = slot;
-                    break;
-                }
-            }
+            client.Tamer.CompactActiveDigimonSlots();
+            await _sender.Send(new UpdateCharacterDigimonsOrderCommand(client.Tamer));
 
-            if (targetSlot == 0)
+            var activeSlotCount = client.Tamer.GetNextActiveDigimonSlot();
+
+            _logger.Information(
+                "Hatch finish slot scan: tamer {TamerId} openedSlots {OpenedSlots} activeSlotCount {ActiveSlotCount}.",
+                client.TamerId,
+                client.Tamer.DigimonSlots,
+                activeSlotCount);
+
+            if (activeSlotCount >= client.Tamer.DigimonSlots)
             {
                 _logger.Warning($"Character {client.TamerId} tried to hatch {client.Tamer.Incubator.EggId} without an available digivice slot.");
                 client.Send(new SystemMessagePacket("No available digivice slot for the hatched Digimon."));
                 return;
             }
+
+            var targetSlot = (byte)activeSlotCount;
 
             var newDigimon = DigimonModel.Create(
                 digiName,
@@ -112,6 +123,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     newDigimon.Size
                 )
             );
+            newDigimon.FullHeal();
 
             newDigimon.AddEvolutions(
                 _assets.EvolutionInfo.First(x => x.Type == newDigimon.BaseType)
@@ -167,11 +179,30 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             client.Tamer.AddDigimon(newDigimon);
 
-            var displaySlot = client.Tamer.ActiveDigimons.FindIndex(x => x.Id == newDigimon.Id) + 1;
-            if (displaySlot <= 0)
-                displaySlot = newDigimon.Slot;
+            // Slot 0 is the active partner on the server, but the client receives
+            // only mercenary slots here and writes to slot - 1. A DB slot of 1
+            // must therefore be sent as client slot 1, not 2.
+            var displaySlot = newDigimon.Slot;
 
-            client.Send(new HatchFinishPacket(newDigimon, (uint)(client.Partner.GeneralHandler + 1000), displaySlot));
+            var hatchFinishPacket = new HatchFinishPacket(newDigimon, (uint)(client.Partner.GeneralHandler + 1000), displaySlot).Serialize();
+            _logger.Information(
+                "Hatch finish send: tamer {TamerId} digimon {DigimonId} name {DigimonName} base {BaseType} slot {Slot} clientSlot {ClientSlot} clientIndex {ClientIndex} tempHandler {TemporaryHandler} level {Level} size {Size} currentHp {CurrentHp} currentDs {CurrentDs} bytes {Bytes}.",
+                client.TamerId,
+                newDigimon.Id,
+                newDigimon.Name,
+                newDigimon.BaseType,
+                newDigimon.Slot,
+                displaySlot,
+                displaySlot - 1,
+                client.Partner.GeneralHandler + 1000,
+                newDigimon.Level,
+                newDigimon.Size,
+                newDigimon.CurrentHp,
+                newDigimon.CurrentDs,
+                hatchFinishPacket.Length);
+            client.Send(hatchFinishPacket);
+
+            await UpdateClientActionQuestProgress(client, 7, newDigimon.BaseType, "hatch");
 
             if (client.Tamer.Incubator.PerfectSize(newDigimon.HatchGrade, newDigimon.Size))
             {
@@ -180,6 +211,92 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
 
             _logger.Verbose($"Character {client.TamerId} hatched {newDigimon.Id}({newDigimon.BaseType}) with grade {newDigimon.HatchGrade} and size {newDigimon.Size}.");
+        }
+
+        private async Task UpdateClientActionQuestProgress(GameClient client, int actionId, int actionValue, string actionName)
+        {
+            if (!client.Tamer.Progress.InProgressQuestData.Any())
+            {
+                _logger.Information(
+                    "Quest {ActionName}: no in-progress quests for tamer {TamerId} while processing action {ActionId}/{ActionValue}.",
+                    actionName,
+                    client.TamerId,
+                    actionId,
+                    actionValue);
+                return;
+            }
+
+            foreach (var questInProgress in client.Tamer.Progress.InProgressQuestData)
+            {
+                var questInfo = _assets.Quest.FirstOrDefault(x => x.QuestId == questInProgress.QuestId);
+                if (questInfo == null)
+                {
+                    _logger.Warning(
+                        "Quest {QuestId} is in progress for tamer {TamerId}, but no asset was loaded while processing action {ActionName}.",
+                        questInProgress.QuestId,
+                        client.TamerId,
+                        actionName);
+                    continue;
+                }
+
+                var goalIndex = questInfo.QuestGoals.FindIndex(x =>
+                    x.GoalType == QuestGoalTypeEnum.ClientAction &&
+                    x.GoalId == actionId &&
+                    (x.CurTypeCount == 0 || x.CurTypeCount == actionValue));
+
+                if (goalIndex < 0)
+                {
+                    var actionGoals = string.Join(", ", questInfo.QuestGoals
+                        .Select((goal, index) => new { goal, index })
+                        .Where(x => x.goal.GoalType == QuestGoalTypeEnum.ClientAction)
+                        .Select(x => $"idx={x.index}/action={x.goal.GoalId}/cur={x.goal.CurTypeCount}/amount={x.goal.GoalAmount}"));
+
+                    _logger.Information(
+                        "Quest {ActionName}: no matching client-action goal for tamer {TamerId}, quest {QuestId}, action {ActionId}/{ActionValue}. Available client-action goals: [{Goals}]",
+                        actionName,
+                        client.TamerId,
+                        questInProgress.QuestId,
+                        actionId,
+                        actionValue,
+                        actionGoals);
+                    continue;
+                }
+
+                var currentGoalValue = questInProgress.GetGoalValue(goalIndex);
+                var targetGoalValue = questInfo.QuestGoals[goalIndex].GoalAmount;
+                if (currentGoalValue >= targetGoalValue)
+                {
+                    _logger.Information(
+                        "Quest {ActionName}: goal already complete for tamer {TamerId}, quest {QuestId}, action {ActionId}/{ActionValue}, goal {GoalIndex}, value {Current}/{Target}.",
+                        actionName,
+                        client.TamerId,
+                        questInProgress.QuestId,
+                        actionId,
+                        actionValue,
+                        goalIndex,
+                        currentGoalValue,
+                        targetGoalValue);
+                    return;
+                }
+
+                var updatedGoalValue = (byte)Math.Min(byte.MaxValue, Math.Min(targetGoalValue, currentGoalValue + 1));
+
+                questInProgress.UpdateCondition(goalIndex, updatedGoalValue);
+                client.Send(new QuestGoalUpdatePacket(questInProgress.QuestId, (byte)goalIndex, updatedGoalValue));
+                await _sender.Send(new UpdateCharacterInProgressCommand(questInProgress));
+
+                _logger.Information(
+                    "Quest {QuestId} {ActionName} goal updated for tamer {TamerId}: action {ActionId}/{ActionValue}, goal {GoalIndex}, value {Current}/{Target}.",
+                    questInProgress.QuestId,
+                    actionName,
+                    client.TamerId,
+                    actionId,
+                    actionValue,
+                    goalIndex,
+                    updatedGoalValue,
+                    targetGoalValue);
+                return;
+            }
         }
 
         private static string NormalizeHatchName(string? value, string fallbackName)

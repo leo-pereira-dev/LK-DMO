@@ -1,0 +1,32 @@
+#pragma once
+
+#include <array>
+#include <string_view>
+
+namespace extra_inventory_feature {
+
+struct OriginalFunctionRef {
+    std::string_view address;
+    std::string_view original_name;
+    std::string_view clean_name;
+    std::string_view copied_file;
+    std::string_view purpose;
+};
+
+struct OriginalAssetRef {
+    std::string_view asset_path;
+    std::string_view owning_function;
+    std::string_view evidence;
+};
+
+struct CategoryTextRef {
+    int category_id;
+    std::string_view text_key;
+    std::string_view screen_label_hint;
+};
+
+const std::array<OriginalFunctionRef, 31>& GetOriginalFunctionMap();
+const std::array<OriginalAssetRef, 17>& GetOriginalAssetMap();
+const std::array<CategoryTextRef, 5>& GetCategoryTextMap();
+
+} // namespace extra_inventory_feature

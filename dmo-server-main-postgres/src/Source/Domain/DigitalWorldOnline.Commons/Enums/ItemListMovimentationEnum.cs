@@ -30,6 +30,26 @@
         ChipsetToInventory = 51,
 
         InventoryToJogressChipset = 52,
-        JogressChipsetToInventory = 53
+        JogressChipsetToInventory = 53,
+
+        InventoryToExtraSeal = 60,
+        ExtraSealToInventory = 61,
+        ExtraSealToExtraSeal = 62,
+
+        InventoryToExtraTicket = 63,
+        ExtraTicketToInventory = 64,
+        ExtraTicketToExtraTicket = 65,
+
+        InventoryToExtraEvolution = 66,
+        ExtraEvolutionToInventory = 67,
+        ExtraEvolutionToExtraEvolution = 68,
+
+        InventoryToExtraDigitama = 69,
+        ExtraDigitamaToInventory = 70,
+        ExtraDigitamaToExtraDigitama = 71,
+
+        InventoryToExtraMaterial = 72,
+        ExtraMaterialToInventory = 73,
+        ExtraMaterialToExtraMaterial = 74
     }
 }

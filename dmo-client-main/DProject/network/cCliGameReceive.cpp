@@ -1,5 +1,6 @@
 
 #include "stdafx.h"
+#include "../ExtraInventoryDebugLog.h"
 
 #include "cNetwork.h"
 #include "cCliGame.h"
@@ -4078,6 +4079,10 @@ void cCliGame::RecvItemMoveFailure(void)
 	pop(nSrcPos);
 	pop(nDstPos);
 
+	if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrcPos ) ) || IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nDstPos ) ) )
+		ExtraInventoryDebugLog( "[ExtraInventory][Network] RecvItemMoveFailure src=%d dst=%d srcConst=%d dstConst=%d",
+			nSrcPos, nDstPos, TO_CONSTANT( nSrcPos ), TO_CONSTANT( nDstPos ) );
+
 	g_pDataMng->ServerItemMoveFailed( nSrcPos, nDstPos );
 }
 
@@ -4095,6 +4100,7 @@ void cCliGame::RecvChangeItemLimitedAttribute(void)
 
 void cCliGame::RecvItemMoveSuccess(void)
 {
+	ExtraInventoryDebugLog( "[ExtraInventory][Network] RecvItemMoveSuccess dispatch" );
 	RecvItemMove();
 }
 
@@ -4863,7 +4869,11 @@ void cCliGame::RecvCrossChangePartner(void) // 크로스워즈와 파트너 변�
 	pop(_tempName);
 	M2W(sync.szNextDigimonName, _tempName, Language::pLength::name + 1);
 #else
-	pop(sync.szNextDigimonName);
+	{
+		std::wstring szNextDigimonName;
+		pop(szNextDigimonName);
+		_tcsncpy_s(sync.szNextDigimonName, Language::pLength::name, szNextDigimonName.c_str(), _TRUNCATE);
+	}
 #endif
 	pop(sync.nNextScale);
 
@@ -4972,7 +4982,11 @@ void cCliGame::RecvCrossChangePartner2(void)
 	pop(_tempName);
 	M2W(sync.szNextDigimonName, _tempName, Language::pLength::name + 1);
 #else
-	pop(sync.szNextDigimonName);
+	{
+		std::wstring szNextDigimonName;
+		pop(szNextDigimonName);
+		_tcsncpy_s(sync.szNextDigimonName, Language::pLength::name, szNextDigimonName.c_str(), _TRUNCATE);
+	}
 #endif
 	pop(sync.nNextScale);
 
@@ -5159,7 +5173,11 @@ void cCliGame::RecvCrossWarsRelease(void)
 	pop(_tempName);
 	M2W(sync.szNextDigimonName, _tempName, Language::pLength::name + 1);
 #else
-	pop(sync.szNextDigimonName);
+	{
+		std::wstring szNextDigimonName;
+		pop(szNextDigimonName);
+		_tcsncpy_s(sync.szNextDigimonName, Language::pLength::name, szNextDigimonName.c_str(), _TRUNCATE);
+	}
 #endif
 	pop(sync.nNextScale);
 
@@ -5298,7 +5316,11 @@ void cCliGame::RecvCrossWarsCRRelease(void)
 	pop(_tempName);
 	M2W(sync.szNextDigimonName, _tempName, Language::pLength::name + 1);
 #else
-	pop(sync.szNextDigimonName);
+	{
+		std::wstring szNextDigimonName;
+		pop(szNextDigimonName);
+		_tcsncpy_s(sync.szNextDigimonName, Language::pLength::name, szNextDigimonName.c_str(), _TRUNCATE);
+	}
 #endif
 	pop(sync.nNextScale);
 
@@ -5480,11 +5502,25 @@ void cCliGame::RecvChangePartner(void) // 파트너 변경
 	pop(_tempName);
 	M2W(sync.szNextDigimonName, _tempName, Language::pLength::name + 1);
 #else
-	pop(sync.szNextDigimonName);
+	{
+		std::wstring szNextDigimonName;
+		pop(szNextDigimonName);
+		_tcsncpy_s(sync.szNextDigimonName, Language::pLength::name, szNextDigimonName.c_str(), _TRUNCATE);
+	}
 #endif
 	pop(sync.nNextScale);
 	u4 nEndTick = 0;		// ScaleEvent 남은시간
 	pop(nEndTick);			// 0이 아니면 ScaleEvent 버프 툴팁 세팅
+
+	nsCSDEBUG::CrashLogger::LogMessage( "PARTNER_SWITCH recv uid=%u prevType=%d arr=%u nextType=%d level=%d scale=%u endTick=%u nameLen=%d",
+		(unsigned)sync.nUID,
+		nPrevType,
+		(unsigned)sync.nNextArrIDX,
+		sync.nNextType,
+		(int)sync.nNextLevel,
+		(unsigned)sync.nNextScale,
+		(unsigned)nEndTick,
+		(int)_tcslen(sync.szNextDigimonName) );
 
 	CsC_AvObject* pObject = g_pMngCollector->GetObject( sync.nUID );
 	if( pObject == NULL )
@@ -7953,11 +7989,16 @@ void cCliGame::RecvSpirit_AncientSpiritEvolution()
 	pop( nDelSlot_2 );
 	pop( nMoney );
 
-	//cPrintMsg::PrintMsg( 20100, g_pDataMng->GetTactics()->GetTactics( nDelSlot_1 - 1 )->s_szName );
-	g_pDataMng->GetTactics()->DeleteTactics( nDelSlot_1 - 1 );
-
-	//cPrintMsg::PrintMsg( 20100, g_pDataMng->GetTactics()->GetTactics( nDelSlot_2 - 1 )->s_szName );
-	g_pDataMng->GetTactics()->DeleteTactics( nDelSlot_2 - 1 );
+	if( nDelSlot_1 > nDelSlot_2 )
+	{
+		g_pDataMng->GetTactics()->DeleteTactics( nDelSlot_1 - 1 );
+		g_pDataMng->GetTactics()->DeleteTactics( nDelSlot_2 - 1 );
+	}
+	else
+	{
+		g_pDataMng->GetTactics()->DeleteTactics( nDelSlot_2 - 1 );
+		g_pDataMng->GetTactics()->DeleteTactics( nDelSlot_1 - 1 );
+	}
 
 	g_pDataMng->GetInven()->SetMoney( nMoney, false );
 
@@ -8777,6 +8818,28 @@ void cCliGame::RecvInvenResult()
 		GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_INVEN_REQ_RESULT, &recv );
 	else if( nInventoryInfo::eWAREHOUSE == recv.m_u1InventoryFlag || nInventoryInfo::eSHARESTASH == recv.m_u1InventoryFlag )
 		GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_WAREHOUSE_REQ_RESULT, &recv );
+	else if( recv.m_u1InventoryFlag >= nInventoryInfo::eEXTRA_SEAL && recv.m_u1InventoryFlag <= nInventoryInfo::eEXTRA_MATERIAL )
+	{
+		ExtraInventoryDebugLog( "[ExtraInventory][Network] RecvInvenResult extra flag=%d slotCount=%d itemRows=%d money=%lld result=%d",
+			recv.m_u1InventoryFlag, recv.m_u2InventorySlot, (int)recv.m_lItems.size(), recv.m_n8Money, recv.m_nResult );
+
+		SAFE_POINTER_RET( g_pDataMng );
+		cData_Inven* pExtraInven = g_pDataMng->GetExtraInven( recv.m_u1InventoryFlag - nInventoryInfo::eEXTRA_SEAL );
+		SAFE_POINTER_RET( pExtraInven );
+
+		pExtraInven->SetMoney( recv.m_n8Money, false );
+		pExtraInven->SetInvenSlotCount( recv.m_u2InventorySlot );
+		pExtraInven->ResetAllItem();
+
+		std::list<cItemData>::iterator it = recv.m_lItems.begin();
+		std::list<cItemData>::iterator itEnd = recv.m_lItems.end();
+		for( int nIndex = 0; it != itEnd; ++it, ++nIndex )
+		{
+			cItemInfo* pItemInfo = pExtraInven->GetData( nIndex );
+			if( pItemInfo )
+				*pItemInfo = *it;
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

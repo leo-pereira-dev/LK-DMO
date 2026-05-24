@@ -183,6 +183,96 @@ namespace DigitalWorldOnline.Commons.Utils
             }
             else if (originSlot.IsBetween(GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.InventoryMaxSlot)
                 &&
+                destinationSlot.IsBetween(GeneralSizeEnum.ExtraSealMinSlot, GeneralSizeEnum.ExtraSealMaxSlot))
+            {
+                return ItemListMovimentationEnum.InventoryToExtraSeal;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.ExtraSealMinSlot, GeneralSizeEnum.ExtraSealMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.InventoryMaxSlot))
+            {
+                return ItemListMovimentationEnum.ExtraSealToInventory;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.ExtraSealMinSlot, GeneralSizeEnum.ExtraSealMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.ExtraSealMinSlot, GeneralSizeEnum.ExtraSealMaxSlot))
+            {
+                return ItemListMovimentationEnum.ExtraSealToExtraSeal;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.InventoryMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.ExtraTicketMinSlot, GeneralSizeEnum.ExtraTicketMaxSlot))
+            {
+                return ItemListMovimentationEnum.InventoryToExtraTicket;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.ExtraTicketMinSlot, GeneralSizeEnum.ExtraTicketMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.InventoryMaxSlot))
+            {
+                return ItemListMovimentationEnum.ExtraTicketToInventory;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.ExtraTicketMinSlot, GeneralSizeEnum.ExtraTicketMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.ExtraTicketMinSlot, GeneralSizeEnum.ExtraTicketMaxSlot))
+            {
+                return ItemListMovimentationEnum.ExtraTicketToExtraTicket;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.InventoryMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.ExtraEvolutionMinSlot, GeneralSizeEnum.ExtraEvolutionMaxSlot))
+            {
+                return ItemListMovimentationEnum.InventoryToExtraEvolution;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.ExtraEvolutionMinSlot, GeneralSizeEnum.ExtraEvolutionMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.InventoryMaxSlot))
+            {
+                return ItemListMovimentationEnum.ExtraEvolutionToInventory;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.ExtraEvolutionMinSlot, GeneralSizeEnum.ExtraEvolutionMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.ExtraEvolutionMinSlot, GeneralSizeEnum.ExtraEvolutionMaxSlot))
+            {
+                return ItemListMovimentationEnum.ExtraEvolutionToExtraEvolution;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.InventoryMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.ExtraDigitamaMinSlot, GeneralSizeEnum.ExtraDigitamaMaxSlot))
+            {
+                return ItemListMovimentationEnum.InventoryToExtraDigitama;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.ExtraDigitamaMinSlot, GeneralSizeEnum.ExtraDigitamaMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.InventoryMaxSlot))
+            {
+                return ItemListMovimentationEnum.ExtraDigitamaToInventory;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.ExtraDigitamaMinSlot, GeneralSizeEnum.ExtraDigitamaMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.ExtraDigitamaMinSlot, GeneralSizeEnum.ExtraDigitamaMaxSlot))
+            {
+                return ItemListMovimentationEnum.ExtraDigitamaToExtraDigitama;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.InventoryMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.ExtraMaterialMinSlot, GeneralSizeEnum.ExtraMaterialMaxSlot))
+            {
+                return ItemListMovimentationEnum.InventoryToExtraMaterial;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.ExtraMaterialMinSlot, GeneralSizeEnum.ExtraMaterialMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.InventoryMaxSlot))
+            {
+                return ItemListMovimentationEnum.ExtraMaterialToInventory;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.ExtraMaterialMinSlot, GeneralSizeEnum.ExtraMaterialMaxSlot)
+                &&
+                destinationSlot.IsBetween(GeneralSizeEnum.ExtraMaterialMinSlot, GeneralSizeEnum.ExtraMaterialMaxSlot))
+            {
+                return ItemListMovimentationEnum.ExtraMaterialToExtraMaterial;
+            }
+            else if (originSlot.IsBetween(GeneralSizeEnum.InventoryMinSlot, GeneralSizeEnum.InventoryMaxSlot)
+                &&
                 destinationSlot == GeneralSizeEnum.XaiSlot.GetHashCode())
             {
                 return ItemListMovimentationEnum.InventoryToEquipment;

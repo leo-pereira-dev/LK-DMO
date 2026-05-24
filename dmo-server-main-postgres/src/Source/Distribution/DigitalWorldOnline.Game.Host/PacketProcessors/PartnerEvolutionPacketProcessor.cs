@@ -9,6 +9,7 @@ using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Models;
+using DigitalWorldOnline.Commons.Models.Asset;
 using DigitalWorldOnline.Commons.Models.Character;
 using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.GameServer.Combat;
@@ -25,6 +26,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
     public class PartnerEvolutionPacketProcessor : IGamePacketProcessor
     {
         public GameServerPacketEnum Type => GameServerPacketEnum.PartnerEvolution;
+        private const byte DevolutionStage = 8;
 
         private readonly PartyManager _partyManager;
         private readonly StatusManager _statusManager;
@@ -60,58 +62,123 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         public async Task Process(GameClient client, byte[] packetData)
         {
+            try
+            {
             var packet = new GamePacketReader(packetData);
 
             if (client.Partner == null)
             {
-                client.Send(new DigimonEvolutionFailPacket());
-                return;
-            }
-
-            var evoLine = _assets.EvolutionInfo
-                .FirstOrDefault(x => x.Type == client.Partner.BaseType)?
-                .Lines.FirstOrDefault(x => x.Type == client.Partner.CurrentType)?
-                .Stages;
-
-            var evoInfo = _assets.EvolutionInfo
-                .FirstOrDefault(x => x.Type == client.Partner.BaseType)?
-                .Lines.FirstOrDefault(x => x.Type == client.Partner.CurrentType);
-
-            if (evoLine == null || !evoLine.Any())
-            {
+                _logger.Warning("Evolution request ignored because tamer {TamerId} has no active partner. PacketLength {PacketLength}.", client.TamerId, packetData.Length);
                 client.Send(new DigimonEvolutionFailPacket());
                 return;
             }
 
             var digimonHandle = packet.ReadInt();
             var evoStage = packet.ReadByte();
+            var isDevolveToBase = evoStage == DevolutionStage;
 
-            if (evoStage < evoLine.Count)
+            var evolutionTree = _assets.EvolutionInfo.FirstOrDefault(x => x.Type == client.Partner.BaseType);
+            var evoInfo = evolutionTree?
+                .Lines.FirstOrDefault(x => x.Type == client.Partner.CurrentType)
+                ?? evolutionTree?.Lines.FirstOrDefault(x => x.Type == client.Partner.BaseType)
+                ?? evolutionTree?.Lines.FirstOrDefault();
+            var evoLine = evoInfo?.Stages;
+
+            if (!isDevolveToBase && (evoInfo == null || evoLine == null || !evoLine.Any()))
             {
-                var targetType = evoLine[evoStage].Type;
+                _logger.Warning(
+                    "Evolution request rejected for tamer {TamerId}, partner {PartnerId}. Missing evolution line. BaseType {BaseType}, CurrentType {CurrentType}, Stage {Stage}, Handle {Handle}, PacketLength {PacketLength}.",
+                    client.TamerId,
+                    client.Partner.Id,
+                    client.Partner.BaseType,
+                    client.Partner.CurrentType,
+                    evoStage,
+                    digimonHandle,
+                    packetData.Length);
+                client.Send(new DigimonEvolutionFailPacket());
+                return;
+            }
+
+            int targetType;
+
+            if (isDevolveToBase)
+            {
+                targetType = client.Partner.BaseType;
+            }
+            else
+            {
+                if (evoStage >= evoLine.Count)
+                {
+                    _logger.Warning(
+                        "Evolution request rejected for tamer {TamerId}, partner {PartnerId}. Stage {Stage} is outside line count {LineCount}. BaseType {BaseType}, CurrentType {CurrentType}, Handle {Handle}.",
+                        client.TamerId,
+                        client.Partner.Id,
+                        evoStage,
+                        evoLine.Count,
+                        client.Partner.BaseType,
+                        client.Partner.CurrentType,
+                        digimonHandle);
+                    client.Send(new DigimonEvolutionFailPacket());
+                    return;
+                }
+
+                targetType = evoLine[evoStage].Type;
+
+                if (targetType <= 0)
+                {
+                    _logger.Warning(
+                        "Evolution request rejected for tamer {TamerId}, partner {PartnerId}. Empty target type at stage {Stage}. BaseType {BaseType}, CurrentType {CurrentType}, Handle {Handle}.",
+                        client.TamerId,
+                        client.Partner.Id,
+                        evoStage,
+                        client.Partner.BaseType,
+                        client.Partner.CurrentType,
+                        digimonHandle);
+                    client.Send(new DigimonEvolutionFailPacket());
+                    return;
+                }
+
                 var targetRank = (EvolutionRankEnum)(_assets.DigimonBaseInfo.FirstOrDefault(x => x.Type == targetType)?.EvolutionType ?? 0);
-                var isDevolveToBase = targetType == client.Partner.BaseType;
+                var isSameBaseEvolution = targetType == client.Partner.BaseType;
                 var isCapsuleEvo = targetRank == EvolutionRankEnum.Capsule;
 
-                if (!isDevolveToBase && !isCapsuleEvo && IsInsideLimitEvolutionRegion(client))
+                if (!isSameBaseEvolution && !isCapsuleEvo && IsInsideLimitEvolutionRegion(client))
                 {
                     client.Send(new DigimonEvolutionFailPacket());
                     return;
                 }
             }
 
-            if (evoLine[evoStage].Type != client.Partner.BaseType)
+            var targetEvoInfo = !isDevolveToBase
+                ? evolutionTree?.Lines.FirstOrDefault(x => x.Type == targetType)
+                : null;
+
+            _logger.Debug(
+                "Evolution request tamer {TamerId}, partner {PartnerId}, handle {Handle}, base {BaseType}, current {CurrentType}, stage {Stage}, target {TargetType}, devolve {Devolve}, packetLength {PacketLength}.",
+                client.TamerId,
+                client.Partner.Id,
+                digimonHandle,
+                client.Partner.BaseType,
+                client.Partner.CurrentType,
+                evoStage,
+                targetType,
+                isDevolveToBase,
+                packetData.Length);
+
+            if (targetType != client.Partner.BaseType)
             {
-                var targetEvo = client.Partner.Evolutions.FirstOrDefault(x => x.Type == evoLine[evoStage].Type);
+                var targetEvo = client.Partner.Evolutions.FirstOrDefault(x => x.Type == targetType);
 
                 if (targetEvo == null || targetEvo.Unlocked == 0)
                 {
-                    _logger.Warning($"Character {client.TamerId} tryied to evolve {client.Partner.Id} into {targetEvo?.Type} without unlocking the evo.");
+                    _logger.Warning($"Character {client.TamerId} tryied to evolve {client.Partner.Id} into {targetType} without unlocking the evo.");
                     client.Send(new DigimonEvolutionFailPacket());
                     return;
                 }
             }
 
+            if (!HasRequiredEvolutionUseItem(client, targetEvoInfo, targetType, evoStage))
+                return;
 
 
             var buffToRemove = client.Tamer.Partner.BuffList.TamerBaseSkill();
@@ -142,8 +209,23 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
             else
             {
-                var evolutionType = _assets.DigimonBaseInfo.First(x => x.Type == evoLine[evoStage].Type).EvolutionType;
-                var targetEvo = _assets.DigimonBaseInfo.First(x => x.Type == evoLine[evoStage].Type);
+                var targetBaseInfo = _assets.DigimonBaseInfo.FirstOrDefault(x => x.Type == targetType);
+
+                if (targetBaseInfo == null)
+                {
+                    _logger.Warning(
+                        "Evolution request rejected for tamer {TamerId}, partner {PartnerId}. Missing DigimonBaseInfo for target type {TargetType}. Stage {Stage}, base {BaseType}, current {CurrentType}.",
+                        client.TamerId,
+                        client.Partner.Id,
+                        targetType,
+                        evoStage,
+                        client.Partner.BaseType,
+                        client.Partner.CurrentType);
+                    client.Send(new DigimonEvolutionFailPacket());
+                    return;
+                }
+
+                var evolutionType = targetBaseInfo.EvolutionType;
                 switch ((EvolutionRankEnum)evolutionType)
                 {
                     case EvolutionRankEnum.Rookie:
@@ -378,12 +460,15 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 }
             }
 
-            if (evoStage == 8)
-                _logger.Verbose($"Character {client.TamerId} devolved partner {client.Partner.Id} from {client.Partner.CurrentType} to {evoLine[evoStage]?.Type}.");
-            else
-                _logger.Verbose($"Character {client.TamerId} evolved partner {client.Partner.Id} from {client.Partner.CurrentType} to {evoLine[evoStage]?.Type}.");
+            if (!ConsumeRequiredEvolutionUseItem(client, targetEvoInfo, targetType, evoStage))
+                return;
 
-            client.Partner.UpdateCurrentType(evoLine[evoStage].Type);
+            if (evoStage == 8)
+                _logger.Verbose($"Character {client.TamerId} devolved partner {client.Partner.Id} from {client.Partner.CurrentType} to {targetType}.");
+            else
+                _logger.Verbose($"Character {client.TamerId} evolved partner {client.Partner.Id} from {client.Partner.CurrentType} to {targetType}.");
+
+            client.Partner.UpdateCurrentType(targetType);
 
 
             if (client.DungeonMap)
@@ -547,6 +632,19 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             await _sender.Send(new UpdateCharacterActiveEvolutionCommand(client.Tamer.ActiveEvolution));
             await _sender.Send(new UpdateCharacterBasicInfoCommand(client.Tamer));
             await _sender.Send(new UpdateDigimonBuffListCommand(client.Partner.BuffList));
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(
+                    ex,
+                    "Unhandled PartnerEvolution packet for tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, packetLength {PacketLength}.",
+                    client.TamerId,
+                    client.Partner?.Id,
+                    client.Partner?.BaseType,
+                    client.Partner?.CurrentType,
+                    packetData.Length);
+                client.Send(new DigimonEvolutionFailPacket());
+            }
         }
 
         private static bool HasRequiredJogressChipsetEquipped(GameClient client, int requiredItemId)
@@ -556,6 +654,88 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             var equippedChipset = client.Tamer.JogressChipSet.FindItemBySlot(0);
             return equippedChipset is not null && equippedChipset.ItemId == requiredItemId && equippedChipset.Amount > 0;
+        }
+
+        private bool HasRequiredEvolutionUseItem(GameClient client, EvolutionLineAssetModel? targetEvoInfo, int targetType, byte evoStage)
+        {
+            if (!TryGetRequiredEvolutionUseItem(targetEvoInfo, out var itemSection, out var requiredAmount))
+                return true;
+
+            var availableAmount = client.Tamer.Inventory.FindItemsBySection(itemSection).Sum(x => x.Amount);
+
+            _logger.Debug(
+                "Evolution item check tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, target {TargetType}, stage {Stage}, itemSection {ItemSection}, required {RequiredAmount}, available {AvailableAmount}.",
+                client.TamerId,
+                client.Partner.Id,
+                client.Partner.BaseType,
+                client.Partner.CurrentType,
+                targetType,
+                evoStage,
+                itemSection,
+                requiredAmount,
+                availableAmount);
+
+            if (availableAmount >= requiredAmount)
+                return true;
+
+            _logger.Warning(
+                "Evolution request rejected because required use item is missing. Tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, target {TargetType}, stage {Stage}, itemSection {ItemSection}, required {RequiredAmount}, available {AvailableAmount}.",
+                client.TamerId,
+                client.Partner.Id,
+                client.Partner.BaseType,
+                client.Partner.CurrentType,
+                targetType,
+                evoStage,
+                itemSection,
+                requiredAmount,
+                availableAmount);
+
+            client.Send(new DigimonEvolutionFailPacket());
+            return false;
+        }
+
+        private bool ConsumeRequiredEvolutionUseItem(GameClient client, EvolutionLineAssetModel? targetEvoInfo, int targetType, byte evoStage)
+        {
+            if (!TryGetRequiredEvolutionUseItem(targetEvoInfo, out var itemSection, out var requiredAmount))
+                return true;
+
+            if (client.Tamer.Inventory.RemoveOrReduceItemsBySection(itemSection, requiredAmount))
+            {
+                _logger.Information(
+                    "Evolution consumed required use item. Tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, target {TargetType}, stage {Stage}, itemSection {ItemSection}, amount {RequiredAmount}.",
+                    client.TamerId,
+                    client.Partner.Id,
+                    client.Partner.BaseType,
+                    client.Partner.CurrentType,
+                    targetType,
+                    evoStage,
+                    itemSection,
+                    requiredAmount);
+
+                return true;
+            }
+
+            _logger.Warning(
+                "Evolution request rejected because required use item could not be consumed. Tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, target {TargetType}, stage {Stage}, itemSection {ItemSection}, required {RequiredAmount}.",
+                client.TamerId,
+                client.Partner.Id,
+                client.Partner.BaseType,
+                client.Partner.CurrentType,
+                targetType,
+                evoStage,
+                itemSection,
+                requiredAmount);
+
+            client.Send(new DigimonEvolutionFailPacket());
+            return false;
+        }
+
+        private static bool TryGetRequiredEvolutionUseItem(EvolutionLineAssetModel? targetEvoInfo, out int itemSection, out int requiredAmount)
+        {
+            itemSection = targetEvoInfo?.UnlockItemSection ?? 0;
+            requiredAmount = targetEvoInfo?.UnlockItemSectionAmount ?? 0;
+
+            return itemSection > 0 && requiredAmount > 0;
         }
 
         private bool IsInsideLimitEvolutionRegion(GameClient client)

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DMDigiCombineRankList schema="DM_DigiCombine-RankList.struct" bin="DM_DigiCombine-RankList.bin" byteLength="60">
+  <Ranks kind="Section" offset="0" length="60">
+    <_0 kind="Record" offset="4" length="7">
+      <RankKey kind="Leaf" offset="4" length="1" type="Scalar { Kind = U8 }" value="1" />
+      <FieldA kind="Leaf" offset="5" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <FieldB kind="Leaf" offset="7" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldC kind="Leaf" offset="9" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_0>
+    <_1 kind="Record" offset="11" length="7">
+      <RankKey kind="Leaf" offset="11" length="1" type="Scalar { Kind = U8 }" value="2" />
+      <FieldA kind="Leaf" offset="12" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <FieldB kind="Leaf" offset="14" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldC kind="Leaf" offset="16" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_1>
+    <_2 kind="Record" offset="18" length="7">
+      <RankKey kind="Leaf" offset="18" length="1" type="Scalar { Kind = U8 }" value="3" />
+      <FieldA kind="Leaf" offset="19" length="2" type="Scalar { Kind = U16 }" value="3" />
+      <FieldB kind="Leaf" offset="21" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldC kind="Leaf" offset="23" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_2>
+    <_3 kind="Record" offset="25" length="7">
+      <RankKey kind="Leaf" offset="25" length="1" type="Scalar { Kind = U8 }" value="4" />
+      <FieldA kind="Leaf" offset="26" length="2" type="Scalar { Kind = U16 }" value="4" />
+      <FieldB kind="Leaf" offset="28" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldC kind="Leaf" offset="30" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_3>
+    <_4 kind="Record" offset="32" length="7">
+      <RankKey kind="Leaf" offset="32" length="1" type="Scalar { Kind = U8 }" value="5" />
+      <FieldA kind="Leaf" offset="33" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <FieldB kind="Leaf" offset="35" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldC kind="Leaf" offset="37" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_4>
+    <_5 kind="Record" offset="39" length="7">
+      <RankKey kind="Leaf" offset="39" length="1" type="Scalar { Kind = U8 }" value="6" />
+      <FieldA kind="Leaf" offset="40" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <FieldB kind="Leaf" offset="42" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <FieldC kind="Leaf" offset="44" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_5>
+    <_6 kind="Record" offset="46" length="7">
+      <RankKey kind="Leaf" offset="46" length="1" type="Scalar { Kind = U8 }" value="7" />
+      <FieldA kind="Leaf" offset="47" length="2" type="Scalar { Kind = U16 }" value="7" />
+      <FieldB kind="Leaf" offset="49" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <FieldC kind="Leaf" offset="51" length="2" type="Scalar { Kind = U16 }" value="101" />
+    </_6>
+    <_7 kind="Record" offset="53" length="7">
+      <RankKey kind="Leaf" offset="53" length="1" type="Scalar { Kind = U8 }" value="8" />
+      <FieldA kind="Leaf" offset="54" length="2" type="Scalar { Kind = U16 }" value="8" />
+      <FieldB kind="Leaf" offset="56" length="2" type="Scalar { Kind = U16 }" value="10" />
+      <FieldC kind="Leaf" offset="58" length="2" type="Scalar { Kind = U16 }" value="102" />
+    </_7>
+  </Ranks>
+</DMDigiCombineRankList>

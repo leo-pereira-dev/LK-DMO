@@ -52,6 +52,25 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
                 WriteInt(buff.SkillId);
             }
 
+            WriteInt(newPartner.HP);
+            WriteInt(newPartner.DS);
+            WriteInt(newPartner.DE);
+            WriteInt(newPartner.AT);
+            WriteInt(newPartner.CurrentHp);
+            WriteInt(newPartner.CurrentDs);
+            WriteInt(newPartner.FS);
+            WriteInt(0);
+            WriteInt(newPartner.EV);
+            WriteInt(newPartner.CC);
+            WriteInt(newPartner.MS);
+            WriteInt(newPartner.AS);
+            WriteInt(newPartner.AR);
+            WriteInt(newPartner.HT);
+            WriteInt(0);
+            WriteInt(0);
+            WriteInt(0);
+            WriteInt(newPartner.BL);
+
             WriteShort(newPartner.AttributeExperience.Data);
             WriteShort(newPartner.AttributeExperience.Vaccine);
             WriteShort(newPartner.AttributeExperience.Virus);

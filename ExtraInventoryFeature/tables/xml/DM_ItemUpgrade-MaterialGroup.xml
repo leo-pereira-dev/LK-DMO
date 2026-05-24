@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DMItemUpgradeMaterialGroup schema="DM_ItemUpgrade-MaterialGroup.struct" bin="DM_ItemUpgrade-MaterialGroup.bin" byteLength="52">
+  <Groups kind="Section" offset="0" length="52">
+    <_0 kind="Record" offset="4" length="12">
+      <GroupId kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ItemA kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="75807" />
+      <ItemB kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="75806" />
+    </_0>
+    <_1 kind="Record" offset="16" length="12">
+      <GroupId kind="Leaf" offset="16" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <ItemA kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="75809" />
+      <ItemB kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="75808" />
+    </_1>
+    <_2 kind="Record" offset="28" length="12">
+      <GroupId kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <ItemA kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="75876" />
+      <ItemB kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="75875" />
+    </_2>
+    <_3 kind="Record" offset="40" length="12">
+      <GroupId kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <ItemA kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="75878" />
+      <ItemB kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="75877" />
+    </_3>
+  </Groups>
+</DMItemUpgradeMaterialGroup>

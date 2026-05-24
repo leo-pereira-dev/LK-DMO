@@ -1,0 +1,207 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/ItemData.bin]
+// ItemData.bin — Pack03 v487 client.
+// Route: FUN_015dbfb0 -> FUN_015dcad0 -> FUN_015d9f50.
+// Verified: 27320 rows, 3210660/3210660 bytes.
+
+bin ItemData {
+    section Items {
+        count  u32;
+        record ItemDataRecord;
+    }
+}
+
+enum ItemClass : u16 {
+    NothingItem = 1,
+    NormalItem = 2,
+    MagicItem = 3,
+    RareItem = 4,
+    EpicItem = 5,
+    UniqueItem = 6,
+    LegendItem = 7,
+    EventItem = 9,
+    CashItem = 10,
+    AdministratorItem = 11,
+    PCBangItem = 12,
+    CashItemAlt = 13,
+}
+
+enum ItemType : u16 {
+    Head = 21,
+    Coat = 22,
+    Glove = 23,
+    Pants = 24,
+    Shoes = 25,
+    Costume = 26,
+    Glass = 27,
+    Necklace = 28,
+    Ring = 29,
+    Earring = 30,
+    EquipAura = 31,
+    XAI = 32,
+    Bracelet = 33,
+    Memory = 50,
+    Capsule = 51,
+    Chipset = 52,
+    Digivice = 53,
+    Skill = 54,
+    TacticsEnchant = 55,
+    TacticsEnchantSub = 56,
+    TacticsEnchantReset = 57,
+    DigimonDataChange = 58,
+    LevelRequire = 60,
+    Potion = 61,
+    NoQuickConsume = 62,
+    Buff = 63,
+    SkillCard = 64,
+    Card = 65,
+    Observer = 66,
+    DigimonSkillChipATK = 67,
+    DigimonSkillChipDEF = 68,
+    DigimonSkillChipAST = 69,
+    DigimonSkillMemoryChip = 70,
+    Consume = 71,
+    Portal = 72,
+    Resurrection = 73,
+    Guild = 75,
+    PersonStore = 76,
+    PortableItem = 77,
+    NoticeItem = 78,
+    Quest = 80,
+    Material2 = 81,
+    EventItem = 82,
+    EventItem2 = 83,
+    Revision = 84,
+    UseQuest = 85,
+    Material = 86,
+    DropMoney = 87,
+    Money = 88,
+    Rescale = 89,
+    DogimonBattle = 90,
+    Digitama1 = 91,
+    Digitama2 = 92,
+    Digitama3 = 93,
+    Digitama4 = 95,
+    Digitama5 = 96,
+    Digitama6 = 97,
+    CapsuleCoin = 100,
+    AccStone = 110,
+    EItemAll = 120,
+    EItemCoat = 122,
+    EItemGlove = 123,
+    EItemPants = 124,
+    EItemShoes = 125,
+    EItemGlass = 127,
+    CashEvoluter = 150,
+    CashChangeDName = 151,
+    CashChangeTName = 152,
+    CashResetSkillPoint = 153,
+    CashBackupDisk = 154,
+    CashExtraInven = 155,
+    CashExtraWarehouse = 156,
+    CashJumpBuster = 157,
+    CashResurrection = 158,
+    DigimonSlotInc = 159,
+    CashDigimonCareSlot = 160,
+    CashDigiCore = 161,
+    Excelator = 162,
+    ChangeTamer = 163,
+    BattleTag = 164,
+    CashShouterN = 165,
+    CashShouterS = 166,
+    CashShouterNT = 167,
+    CashShouterST = 168,
+    GMShouterT = 169,
+    ScanUseItem = 170,
+    BackupDisk = 171,
+    GoldBar = 172,
+    TimeSet = 173,
+    StoreSummon = 174,
+    AttributeItem = 176,
+    RClickHatch = 177,
+    GotchaCoin = 178,
+    ItemTamerSkillConsume = 180,
+    FireWork = 181,
+    CrossWars = 182,
+    CodeCrown = 183,
+    CrossLoader = 184,
+    CashCrossInvenSlot = 185,
+    Debuff = 186,
+    BuffEvent = 187,
+    Incubater = 188,
+    CardMaster = 190,
+    UnSealCardMaster = 191,
+    ReSealCardMaster = 192,
+    EvoCapsule = 193,
+    CashShouterBan = 194,
+    Spirit = 195,
+    SpiritEXP = 196,
+    FriendShipIncrease = 197,
+    RelocateTamer = 198,
+    TamerSlotExpansion = 199,
+    AntiX = 201,
+    SkillLevelOpen = 202,
+    AntiXEvoluter = 400,
+}
+
+struct ItemDataRecord {
+    u32      ItemTableKey;
+    u32      ItemId;
+    u32      Icon;
+    u8       SkillCodeType;
+    u32      SkillCode;
+    u8       SocketCount;
+    ItemClass Class;
+    ItemType  TypeL;
+    u16      TypeS;
+    u32      TypeValue;
+    u32      TypeSection;
+    u16      SellType;
+    u8       UseMode;
+    u16      UseTimeGroup;
+    u16      Overlap;
+    ItemReqLevelRange TamerReqLevel;
+    ItemReqLevelRange DigimonReqLevel;
+    u16      Possess;
+    u16      EquipSeries;
+    u16      UseCharacter;
+    u16      Drop;
+    u32      EventItemType;
+    u16      DigiCorePrice;
+    u16      EventItemPrice;
+    u32      ScanPrice;
+    u32      SalePrice;
+    u8       ModelLoop;
+    u8       ModelShader;
+    ItemDataSmallBlock SmallBlock;
+    u16      Belonging;
+    u8       CodeTag;
+    u32      QuestRefCount;
+    u32[QuestRefCount] QuestRefs;
+    DigiviceSlotPair DigiviceSlots;
+    u32      QuestRequire;
+    u8       UseTimeType;
+    u32      UseTimeMinutes;
+    u8       UseTimePassFlag;
+    u16      DoNotUseType;
+    u8       UseBattle;
+    lstring  NifFile;
+    lstring  ModelEffectFile;
+    lstring  ModelNifFile;
+}
+
+struct ItemReqLevelRange size=4 {
+    u16  MinLevel;
+    u16  MaxLevel;
+}
+
+struct ItemDataSmallBlock size=5 {
+    u16  SoundId;
+    u8   ApplyRateMax;
+    u8   ApplyRateMin;
+    u8   ApplyElement;
+}
+
+struct DigiviceSlotPair size=2 {
+    u8  SkillSlot;
+    u8  ChipsetSlot;
+}

@@ -1,0 +1,27 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/EnchantStatInfo.bin]
+// EnchantStatInfo.bin — Pack03 v487 client.
+// Route: FUN_0161e970 -> FUN_0161b8c0 -> FUN_0161f0d0.
+// Cursor layout verified from payload: count, stat id, counted 28-byte enchant-rank rows.
+
+bin EnchantStatInfo {
+    section Stats {
+        count  u32;
+        record EnchantStatInfoRecord;
+    }
+}
+
+struct EnchantStatInfoRecord {
+    u8   StatId;
+    u32  EnchantInfoCount;
+    EnchantStatInfoEntry[EnchantInfoCount] EnchantInfo;
+}
+
+struct EnchantStatInfoEntry size=28 {
+    u32  LowEnchantLv;
+    u32  HighEnchantLv;
+    u32  DigimonGrowMinLv;
+    u32  DigimonGrowMaxLv;
+    u32  NormalEnchantMinValue;
+    u32  NormalEnchantMaxValue;
+    u32  SpecialEnchantValue;
+}

@@ -1,0 +1,26 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/EvoDigitama.bin]
+// EvoDigitama.bin — Pack03 v487 client.
+// Route: FUN_0161e970 -> FUN_0161f0f0 -> FUN_0161d960 -> FUN_0161f4a0.
+// Cursor layout: count, u32 key, u32 value, then a counted 9-byte entry list.
+
+bin EvoDigitama {
+    section Entries {
+        count  u32;
+        record EvoDigitamaRecord;
+    }
+}
+
+struct EvoDigitamaRecord {
+    u32  DigitamaId;
+    u32  DigimonId;
+    u32  GradeCount;
+    EvoDigitamaEntry[GradeCount] Grades;
+}
+
+struct EvoDigitamaEntry size=9 {
+    u8   DataGrade;
+    u32  ReqItemType;
+    u16  ReqItemCount;
+    u8   LimitLevel;
+    u8   ViewWarning;
+}

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DigitalWorldOnline.Application;
 using DigitalWorldOnline.Application.GameAssets;
+using DigitalWorldOnline.Application.GameAssets.Bins;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
 using DigitalWorldOnline.Application.GameAssets.Queries;
@@ -29,19 +30,34 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
         private readonly DungeonsServer _dungeonServer;
+        private readonly ItemListBinLoader _itemListBinLoader;
+
+        private const int CategorySeal = 0;
+        private const int CategoryTicket = 1;
+        private const int CategoryEvolution = 2;
+        private const int CategoryDigitama = 3;
+        private const int CategoryMaterial = 4;
+
+        private static readonly IReadOnlySet<int> SealTypes = new HashSet<int> { 190, 191, 192 };
+        private static readonly IReadOnlySet<int> TicketTypes = new HashSet<int> { 100, 178, 185 };
+        private static readonly IReadOnlySet<int> EvolutionTypes = new HashSet<int> { 150, 162, 193, 195, 196, 400 };
+        private static readonly IReadOnlySet<int> DigitamaTypes = new HashSet<int> { 91, 92, 93, 95, 96, 97, 177, 188 };
+        private static readonly IReadOnlySet<int> MaterialTypes = new HashSet<int> { 80, 81, 82, 83, 84, 85, 86, 161, 176, 187 };
 
         public ItemMovePacketProcessor(
             MapServer mapServer,
             ISender sender,
             ILogger logger,
             DungeonsServer dungeonsServer,
-            IMapper mapper)
+            IMapper mapper,
+            ItemListBinLoader itemListBinLoader)
         {
             _mapServer = mapServer;
             _sender = sender;
             _logger = logger;
             _dungeonServer = dungeonsServer;
             _mapper = mapper;
+            _itemListBinLoader = itemListBinLoader;
         }
 
         public async Task Process(GameClient client, byte[] packetData)
@@ -52,6 +68,15 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var destinationSlot = packet.ReadShort();
 
             var itemListMovimentation = UtilitiesFunctions.SwitchItemList(originSlot, destinationSlot);
+            if (IsExtraInventoryMovement(itemListMovimentation))
+            {
+                _logger.Information(
+                    "ExtraInventory manual move request: tamer={TamerId} origin={OriginSlot} destination={DestinationSlot} movement={Movement}",
+                    client.TamerId,
+                    originSlot,
+                    destinationSlot,
+                    itemListMovimentation);
+            }
 
             var success = SwapItems(client, originSlot, destinationSlot, itemListMovimentation);
             if (!success)
@@ -150,6 +175,36 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         }
                         break;
 
+                    case ItemListMovimentationEnum.InventoryToExtraSeal:
+                    case ItemListMovimentationEnum.ExtraSealToInventory:
+                    case ItemListMovimentationEnum.ExtraSealToExtraSeal:
+                        await UpdateExtraInventoryMoveAsync(client.Tamer.Inventory, client.Tamer.ExtraInventorySeal, itemListMovimentation);
+                        break;
+
+                    case ItemListMovimentationEnum.InventoryToExtraTicket:
+                    case ItemListMovimentationEnum.ExtraTicketToInventory:
+                    case ItemListMovimentationEnum.ExtraTicketToExtraTicket:
+                        await UpdateExtraInventoryMoveAsync(client.Tamer.Inventory, client.Tamer.ExtraInventoryTicket, itemListMovimentation);
+                        break;
+
+                    case ItemListMovimentationEnum.InventoryToExtraEvolution:
+                    case ItemListMovimentationEnum.ExtraEvolutionToInventory:
+                    case ItemListMovimentationEnum.ExtraEvolutionToExtraEvolution:
+                        await UpdateExtraInventoryMoveAsync(client.Tamer.Inventory, client.Tamer.ExtraInventoryEvolution, itemListMovimentation);
+                        break;
+
+                    case ItemListMovimentationEnum.InventoryToExtraDigitama:
+                    case ItemListMovimentationEnum.ExtraDigitamaToInventory:
+                    case ItemListMovimentationEnum.ExtraDigitamaToExtraDigitama:
+                        await UpdateExtraInventoryMoveAsync(client.Tamer.Inventory, client.Tamer.ExtraInventoryDigitama, itemListMovimentation);
+                        break;
+
+                    case ItemListMovimentationEnum.InventoryToExtraMaterial:
+                    case ItemListMovimentationEnum.ExtraMaterialToInventory:
+                    case ItemListMovimentationEnum.ExtraMaterialToExtraMaterial:
+                        await UpdateExtraInventoryMoveAsync(client.Tamer.Inventory, client.Tamer.ExtraInventoryMaterial, itemListMovimentation);
+                        break;
+
                     case ItemListMovimentationEnum.WarehouseToWarehouse:
                         {
                             client.Tamer.Warehouse.CheckEmptyItems();
@@ -233,6 +288,36 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 or ItemListMovimentationEnum.JogressChipsetToInventory;
         }
 
+        private static bool IsExtraInventoryMovement(ItemListMovimentationEnum movimentation)
+        {
+            return movimentation is ItemListMovimentationEnum.InventoryToExtraSeal
+                or ItemListMovimentationEnum.ExtraSealToInventory
+                or ItemListMovimentationEnum.ExtraSealToExtraSeal
+                or ItemListMovimentationEnum.InventoryToExtraTicket
+                or ItemListMovimentationEnum.ExtraTicketToInventory
+                or ItemListMovimentationEnum.ExtraTicketToExtraTicket
+                or ItemListMovimentationEnum.InventoryToExtraEvolution
+                or ItemListMovimentationEnum.ExtraEvolutionToInventory
+                or ItemListMovimentationEnum.ExtraEvolutionToExtraEvolution
+                or ItemListMovimentationEnum.InventoryToExtraDigitama
+                or ItemListMovimentationEnum.ExtraDigitamaToInventory
+                or ItemListMovimentationEnum.ExtraDigitamaToExtraDigitama
+                or ItemListMovimentationEnum.InventoryToExtraMaterial
+                or ItemListMovimentationEnum.ExtraMaterialToInventory
+                or ItemListMovimentationEnum.ExtraMaterialToExtraMaterial;
+        }
+
+        private async Task UpdateExtraInventoryMoveAsync(
+            ItemListModel inventory,
+            ItemListModel extraInventory,
+            ItemListMovimentationEnum movimentation)
+        {
+            inventory.CheckEmptyItems();
+            extraInventory.CheckEmptyItems();
+            await _sender.Send(new UpdateItemsCommand(inventory));
+            await _sender.Send(new UpdateItemsCommand(extraInventory));
+        }
+
         private void LogDigimonStatSnapshot(
             GameClient client,
             short originSlot,
@@ -303,7 +388,48 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 packets.Add(new LoadInventoryPacket(client.Tamer.AccountWarehouse, InventoryTypeEnum.AccountWarehouse).Serialize());
             }
 
+            AppendExtraInventoryPackets(packets, client, movimentation);
+
             return packets.ToArray();
+        }
+
+        private static void AppendExtraInventoryPackets(
+            List<byte[]> packets,
+            GameClient client,
+            ItemListMovimentationEnum movimentation)
+        {
+            switch (movimentation)
+            {
+                case ItemListMovimentationEnum.InventoryToExtraSeal:
+                case ItemListMovimentationEnum.ExtraSealToInventory:
+                case ItemListMovimentationEnum.ExtraSealToExtraSeal:
+                    packets.Add(new LoadInventoryPacket(client.Tamer.ExtraInventorySeal, InventoryTypeEnum.ExtraSeal).Serialize());
+                    break;
+
+                case ItemListMovimentationEnum.InventoryToExtraTicket:
+                case ItemListMovimentationEnum.ExtraTicketToInventory:
+                case ItemListMovimentationEnum.ExtraTicketToExtraTicket:
+                    packets.Add(new LoadInventoryPacket(client.Tamer.ExtraInventoryTicket, InventoryTypeEnum.ExtraTicket).Serialize());
+                    break;
+
+                case ItemListMovimentationEnum.InventoryToExtraEvolution:
+                case ItemListMovimentationEnum.ExtraEvolutionToInventory:
+                case ItemListMovimentationEnum.ExtraEvolutionToExtraEvolution:
+                    packets.Add(new LoadInventoryPacket(client.Tamer.ExtraInventoryEvolution, InventoryTypeEnum.ExtraEvolution).Serialize());
+                    break;
+
+                case ItemListMovimentationEnum.InventoryToExtraDigitama:
+                case ItemListMovimentationEnum.ExtraDigitamaToInventory:
+                case ItemListMovimentationEnum.ExtraDigitamaToExtraDigitama:
+                    packets.Add(new LoadInventoryPacket(client.Tamer.ExtraInventoryDigitama, InventoryTypeEnum.ExtraDigitama).Serialize());
+                    break;
+
+                case ItemListMovimentationEnum.InventoryToExtraMaterial:
+                case ItemListMovimentationEnum.ExtraMaterialToInventory:
+                case ItemListMovimentationEnum.ExtraMaterialToExtraMaterial:
+                    packets.Add(new LoadInventoryPacket(client.Tamer.ExtraInventoryMaterial, InventoryTypeEnum.ExtraMaterial).Serialize());
+                    break;
+            }
         }
 
         private bool SwapItems(GameClient client, short originSlot, short destinationSlot, ItemListMovimentationEnum itemListMovimentation)
@@ -512,9 +638,186 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         var dstSlot = destinationSlot - GeneralSizeEnum.WarehouseMinSlot.GetHashCode();
                         return client.Tamer.AccountWarehouse.TryMoveAcrossLists(client.Tamer.Warehouse, srcSlot, dstSlot);
                     }
+
+                case ItemListMovimentationEnum.InventoryToExtraSeal:
+                    return MoveInventoryToExtra(client, client.Tamer.ExtraInventorySeal, originSlot, destinationSlot, GeneralSizeEnum.ExtraSealMinSlot, CategorySeal);
+
+                case ItemListMovimentationEnum.ExtraSealToInventory:
+                    return MoveExtraToInventory(client, client.Tamer.ExtraInventorySeal, originSlot, destinationSlot, GeneralSizeEnum.ExtraSealMinSlot, "Seal");
+
+                case ItemListMovimentationEnum.ExtraSealToExtraSeal:
+                    return MoveWithinExtra(client, client.Tamer.ExtraInventorySeal, originSlot, destinationSlot, GeneralSizeEnum.ExtraSealMinSlot, "Seal");
+
+                case ItemListMovimentationEnum.InventoryToExtraTicket:
+                    return MoveInventoryToExtra(client, client.Tamer.ExtraInventoryTicket, originSlot, destinationSlot, GeneralSizeEnum.ExtraTicketMinSlot, CategoryTicket);
+
+                case ItemListMovimentationEnum.ExtraTicketToInventory:
+                    return MoveExtraToInventory(client, client.Tamer.ExtraInventoryTicket, originSlot, destinationSlot, GeneralSizeEnum.ExtraTicketMinSlot, "Ticket");
+
+                case ItemListMovimentationEnum.ExtraTicketToExtraTicket:
+                    return MoveWithinExtra(client, client.Tamer.ExtraInventoryTicket, originSlot, destinationSlot, GeneralSizeEnum.ExtraTicketMinSlot, "Ticket");
+
+                case ItemListMovimentationEnum.InventoryToExtraEvolution:
+                    return MoveInventoryToExtra(client, client.Tamer.ExtraInventoryEvolution, originSlot, destinationSlot, GeneralSizeEnum.ExtraEvolutionMinSlot, CategoryEvolution);
+
+                case ItemListMovimentationEnum.ExtraEvolutionToInventory:
+                    return MoveExtraToInventory(client, client.Tamer.ExtraInventoryEvolution, originSlot, destinationSlot, GeneralSizeEnum.ExtraEvolutionMinSlot, "Evolution");
+
+                case ItemListMovimentationEnum.ExtraEvolutionToExtraEvolution:
+                    return MoveWithinExtra(client, client.Tamer.ExtraInventoryEvolution, originSlot, destinationSlot, GeneralSizeEnum.ExtraEvolutionMinSlot, "Evolution");
+
+                case ItemListMovimentationEnum.InventoryToExtraDigitama:
+                    return MoveInventoryToExtra(client, client.Tamer.ExtraInventoryDigitama, originSlot, destinationSlot, GeneralSizeEnum.ExtraDigitamaMinSlot, CategoryDigitama);
+
+                case ItemListMovimentationEnum.ExtraDigitamaToInventory:
+                    return MoveExtraToInventory(client, client.Tamer.ExtraInventoryDigitama, originSlot, destinationSlot, GeneralSizeEnum.ExtraDigitamaMinSlot, "Digitama");
+
+                case ItemListMovimentationEnum.ExtraDigitamaToExtraDigitama:
+                    return MoveWithinExtra(client, client.Tamer.ExtraInventoryDigitama, originSlot, destinationSlot, GeneralSizeEnum.ExtraDigitamaMinSlot, "Digitama");
+
+                case ItemListMovimentationEnum.InventoryToExtraMaterial:
+                    return MoveInventoryToExtra(client, client.Tamer.ExtraInventoryMaterial, originSlot, destinationSlot, GeneralSizeEnum.ExtraMaterialMinSlot, CategoryMaterial);
+
+                case ItemListMovimentationEnum.ExtraMaterialToInventory:
+                    return MoveExtraToInventory(client, client.Tamer.ExtraInventoryMaterial, originSlot, destinationSlot, GeneralSizeEnum.ExtraMaterialMinSlot, "Material");
+
+                case ItemListMovimentationEnum.ExtraMaterialToExtraMaterial:
+                    return MoveWithinExtra(client, client.Tamer.ExtraInventoryMaterial, originSlot, destinationSlot, GeneralSizeEnum.ExtraMaterialMinSlot, "Material");
             }
 
             return false;
+        }
+
+        private bool MoveInventoryToExtra(
+            GameClient client,
+            ItemListModel targetExtraInventory,
+            short originSlot,
+            short destinationSlot,
+            GeneralSizeEnum extraMinSlot,
+            int category)
+        {
+            var srcSlot = originSlot - GeneralSizeEnum.InventoryMinSlot.GetHashCode();
+            var dstSlot = destinationSlot - extraMinSlot.GetHashCode();
+            var sourceItem = client.Tamer.Inventory.FindItemBySlot(srcSlot);
+            var sourceType = sourceItem == null ? 0 : ResolveTypeL(sourceItem);
+
+            if (sourceItem == null || sourceItem.ItemId <= 0 || sourceItem.Amount <= 0)
+            {
+                _logger.Warning(
+                    "ExtraInventory manual move rejected: tamer={TamerId} reason=EmptySource origin={OriginSlot} destination={DestinationSlot} srcSlot={SrcSlot} dstSlot={DstSlot} category={Category}",
+                    client.TamerId,
+                    originSlot,
+                    destinationSlot,
+                    srcSlot,
+                    dstSlot,
+                    category);
+                return false;
+            }
+
+            if (!IsAllowedExtraInventoryType(category, sourceType))
+            {
+                _logger.Warning(
+                    "ExtraInventory manual move rejected: tamer={TamerId} reason=WrongCategory origin={OriginSlot} destination={DestinationSlot} srcSlot={SrcSlot} dstSlot={DstSlot} itemId={ItemId} type={Type} category={Category}",
+                    client.TamerId,
+                    originSlot,
+                    destinationSlot,
+                    srcSlot,
+                    dstSlot,
+                    sourceItem.ItemId,
+                    sourceType,
+                    category);
+                return false;
+            }
+
+            var moved = client.Tamer.Inventory.TryMoveAcrossLists(targetExtraInventory, srcSlot, dstSlot);
+            _logger.Information(
+                "ExtraInventory manual move inventory-to-extra: tamer={TamerId} moved={Moved} origin={OriginSlot} destination={DestinationSlot} srcSlot={SrcSlot} dstSlot={DstSlot} itemId={ItemId} type={Type} amount={Amount} category={Category}",
+                client.TamerId,
+                moved,
+                originSlot,
+                destinationSlot,
+                srcSlot,
+                dstSlot,
+                sourceItem.ItemId,
+                sourceType,
+                sourceItem.Amount,
+                category);
+            return moved;
+        }
+
+        private bool MoveExtraToInventory(
+            GameClient client,
+            ItemListModel sourceExtraInventory,
+            short originSlot,
+            short destinationSlot,
+            GeneralSizeEnum extraMinSlot,
+            string categoryName)
+        {
+            var srcSlot = originSlot - extraMinSlot.GetHashCode();
+            var dstSlot = destinationSlot - GeneralSizeEnum.InventoryMinSlot.GetHashCode();
+            var sourceItem = sourceExtraInventory.FindItemBySlot(srcSlot);
+            var moved = sourceExtraInventory.TryMoveAcrossLists(client.Tamer.Inventory, srcSlot, dstSlot);
+            _logger.Information(
+                "ExtraInventory manual move extra-to-inventory: tamer={TamerId} moved={Moved} category={Category} origin={OriginSlot} destination={DestinationSlot} srcSlot={SrcSlot} dstSlot={DstSlot} itemId={ItemId} amount={Amount}",
+                client.TamerId,
+                moved,
+                categoryName,
+                originSlot,
+                destinationSlot,
+                srcSlot,
+                dstSlot,
+                sourceItem?.ItemId ?? 0,
+                sourceItem?.Amount ?? 0);
+            return moved;
+        }
+
+        private bool MoveWithinExtra(
+            GameClient client,
+            ItemListModel extraInventory,
+            short originSlot,
+            short destinationSlot,
+            GeneralSizeEnum extraMinSlot,
+            string categoryName)
+        {
+            var srcSlot = (short)(originSlot - extraMinSlot.GetHashCode());
+            var dstSlot = (short)(destinationSlot - extraMinSlot.GetHashCode());
+            var sourceItem = extraInventory.FindItemBySlot(srcSlot);
+            var moved = extraInventory.MoveItem(srcSlot, dstSlot);
+            _logger.Information(
+                "ExtraInventory manual move extra-to-extra: tamer={TamerId} moved={Moved} category={Category} origin={OriginSlot} destination={DestinationSlot} srcSlot={SrcSlot} dstSlot={DstSlot} itemId={ItemId} amount={Amount}",
+                client.TamerId,
+                moved,
+                categoryName,
+                originSlot,
+                destinationSlot,
+                srcSlot,
+                dstSlot,
+                sourceItem?.ItemId ?? 0,
+                sourceItem?.Amount ?? 0);
+            return moved;
+        }
+
+        private int ResolveTypeL(ItemModel item)
+        {
+            if (item.ItemInfo != null)
+                return item.ItemInfo.Type;
+
+            return _itemListBinLoader.Data.Items
+                .FirstOrDefault(x => x.ItemId == item.ItemId)
+                ?.Type ?? 0;
+        }
+
+        private static bool IsAllowedExtraInventoryType(int category, int type)
+        {
+            return category switch
+            {
+                CategorySeal => SealTypes.Contains(type),
+                CategoryTicket => TicketTypes.Contains(type),
+                CategoryEvolution => EvolutionTypes.Contains(type),
+                CategoryDigitama => DigitamaTypes.Contains(type),
+                CategoryMaterial => MaterialTypes.Contains(type),
+                _ => false
+            };
         }
 
         private void BroadcastAppearanceUpdate(GameClient client, byte slot, ItemModel item, byte mode)

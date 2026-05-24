@@ -1,0 +1,29 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/TranscendMaterial.bin]
+// TranscendMaterial.bin — Pack03 v487 client.
+// Route: FUN_0161e970 -> FUN_0161f150 -> FUN_0161db30.
+// Cursor layout: count, digimon id, then counted material-use groups.
+
+bin TranscendMaterial {
+    section Materials {
+        count  u32;
+        record TranscendMaterialRecord;
+    }
+}
+
+struct TranscendMaterialRecord {
+    u32  DigimonIndex;
+    u32  UseTypeCount;
+    TranscendMaterialUseType[UseTypeCount] UseTypes;
+}
+
+struct TranscendMaterialUseType {
+    u8   ItemUseType;
+    u32  MaterialCount;
+    TranscendMaterialEntry[MaterialCount] Materials;
+}
+
+struct TranscendMaterialEntry size=12 {
+    u32  ItemType;
+    u32  NeedCount;
+    u32  MinExp;
+}

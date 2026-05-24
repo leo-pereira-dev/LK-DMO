@@ -1,0 +1,3 @@
+﻿"AssetPath","Address","Evidence"
+"EquipSystem\ArrowBtn_Down.tga","01ae8cd0","official string in unpacked_GDMO.exe_strings/defined_data; matches screenshot yellow down arrow; no direct copied-function xref"
+"EquipSystem\ArrowBtn_Up.tga","01ae8cf0","official string in unpacked_GDMO.exe_strings/defined_data; matches screenshot yellow up arrow; no direct copied-function xref"

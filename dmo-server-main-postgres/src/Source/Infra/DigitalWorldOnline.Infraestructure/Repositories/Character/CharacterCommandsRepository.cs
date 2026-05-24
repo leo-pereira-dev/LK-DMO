@@ -61,6 +61,11 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
                 ItemListEnum.RewardWarehouse,
                 ItemListEnum.GiftWarehouse,
                 ItemListEnum.ConsignedWarehouse,
+                ItemListEnum.ExtraInventorySeal,
+                ItemListEnum.ExtraInventoryTicket,
+                ItemListEnum.ExtraInventoryEvolution,
+                ItemListEnum.ExtraInventoryDigitama,
+                ItemListEnum.ExtraInventoryMaterial,
                 ItemListEnum.TamerShop,
                 ItemListEnum.ConsignedShop
             };
@@ -1360,6 +1365,7 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
 
             if (dto != null)
             {
+                dto.Slot = characterDigimonArchiveItem.Slot;
                 dto.DigimonId = characterDigimonArchiveItem.DigimonId;
 
                 await _context.SaveChangesAsync();

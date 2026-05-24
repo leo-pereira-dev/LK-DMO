@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EnchantStatInfo schema="EnchantStatInfo.struct" bin="EnchantStatInfo.bin" byteLength="729">
+  <Stats kind="Section" offset="0" length="729">
+    <_0 kind="Record" offset="4" length="145">
+      <StatId kind="Leaf" offset="4" length="1" type="Scalar { Kind = U8 }" value="1" />
+      <EnchantInfoCount kind="Leaf" offset="5" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <EnchantInfo kind="Array" offset="9" length="140" count="5">
+        <_0_ kind="Struct" offset="9" length="28">
+          <LowEnchantLv kind="Leaf" offset="9" length="4" type="Scalar { Kind = U32 }" value="13" />
+          <HighEnchantLv kind="Leaf" offset="13" length="4" type="Scalar { Kind = U32 }" value="15" />
+          <DigimonGrowMinLv kind="Leaf" offset="17" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="21" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="25" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <NormalEnchantMaxValue kind="Leaf" offset="29" length="4" type="Scalar { Kind = U32 }" value="15" />
+          <SpecialEnchantValue kind="Leaf" offset="33" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_0_>
+        <_1_ kind="Struct" offset="37" length="28">
+          <LowEnchantLv kind="Leaf" offset="37" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <HighEnchantLv kind="Leaf" offset="41" length="4" type="Scalar { Kind = U32 }" value="12" />
+          <DigimonGrowMinLv kind="Leaf" offset="45" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="49" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="53" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <NormalEnchantMaxValue kind="Leaf" offset="57" length="4" type="Scalar { Kind = U32 }" value="15" />
+          <SpecialEnchantValue kind="Leaf" offset="61" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_1_>
+        <_2_ kind="Struct" offset="65" length="28">
+          <LowEnchantLv kind="Leaf" offset="65" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <HighEnchantLv kind="Leaf" offset="69" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <DigimonGrowMinLv kind="Leaf" offset="73" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="77" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="81" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <NormalEnchantMaxValue kind="Leaf" offset="85" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <SpecialEnchantValue kind="Leaf" offset="89" length="4" type="Scalar { Kind = U32 }" value="10" />
+        </_2_>
+        <_3_ kind="Struct" offset="93" length="28">
+          <LowEnchantLv kind="Leaf" offset="93" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <HighEnchantLv kind="Leaf" offset="97" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <DigimonGrowMinLv kind="Leaf" offset="101" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="105" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="109" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <NormalEnchantMaxValue kind="Leaf" offset="113" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <SpecialEnchantValue kind="Leaf" offset="117" length="4" type="Scalar { Kind = U32 }" value="5" />
+        </_3_>
+        <_4_ kind="Struct" offset="121" length="28">
+          <LowEnchantLv kind="Leaf" offset="121" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <HighEnchantLv kind="Leaf" offset="125" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <DigimonGrowMinLv kind="Leaf" offset="129" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="133" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="137" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <NormalEnchantMaxValue kind="Leaf" offset="141" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <SpecialEnchantValue kind="Leaf" offset="145" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_4_>
+      </EnchantInfo>
+    </_0>
+    <_1 kind="Record" offset="149" length="145">
+      <StatId kind="Leaf" offset="149" length="1" type="Scalar { Kind = U8 }" value="2" />
+      <EnchantInfoCount kind="Leaf" offset="150" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <EnchantInfo kind="Array" offset="154" length="140" count="5">
+        <_0_ kind="Struct" offset="154" length="28">
+          <LowEnchantLv kind="Leaf" offset="154" length="4" type="Scalar { Kind = U32 }" value="13" />
+          <HighEnchantLv kind="Leaf" offset="158" length="4" type="Scalar { Kind = U32 }" value="15" />
+          <DigimonGrowMinLv kind="Leaf" offset="162" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="166" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="170" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMaxValue kind="Leaf" offset="174" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SpecialEnchantValue kind="Leaf" offset="178" length="4" type="Scalar { Kind = U32 }" value="9" />
+        </_0_>
+        <_1_ kind="Struct" offset="182" length="28">
+          <LowEnchantLv kind="Leaf" offset="182" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <HighEnchantLv kind="Leaf" offset="186" length="4" type="Scalar { Kind = U32 }" value="12" />
+          <DigimonGrowMinLv kind="Leaf" offset="190" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="194" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="198" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMaxValue kind="Leaf" offset="202" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <SpecialEnchantValue kind="Leaf" offset="206" length="4" type="Scalar { Kind = U32 }" value="9" />
+        </_1_>
+        <_2_ kind="Struct" offset="210" length="28">
+          <LowEnchantLv kind="Leaf" offset="210" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <HighEnchantLv kind="Leaf" offset="214" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <DigimonGrowMinLv kind="Leaf" offset="218" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="222" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="226" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <NormalEnchantMaxValue kind="Leaf" offset="230" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <SpecialEnchantValue kind="Leaf" offset="234" length="4" type="Scalar { Kind = U32 }" value="6" />
+        </_2_>
+        <_3_ kind="Struct" offset="238" length="28">
+          <LowEnchantLv kind="Leaf" offset="238" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <HighEnchantLv kind="Leaf" offset="242" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <DigimonGrowMinLv kind="Leaf" offset="246" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="250" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="254" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <NormalEnchantMaxValue kind="Leaf" offset="258" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <SpecialEnchantValue kind="Leaf" offset="262" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_3_>
+        <_4_ kind="Struct" offset="266" length="28">
+          <LowEnchantLv kind="Leaf" offset="266" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <HighEnchantLv kind="Leaf" offset="270" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <DigimonGrowMinLv kind="Leaf" offset="274" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="278" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="282" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <NormalEnchantMaxValue kind="Leaf" offset="286" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <SpecialEnchantValue kind="Leaf" offset="290" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_4_>
+      </EnchantInfo>
+    </_1>
+    <_2 kind="Record" offset="294" length="145">
+      <StatId kind="Leaf" offset="294" length="1" type="Scalar { Kind = U8 }" value="3" />
+      <EnchantInfoCount kind="Leaf" offset="295" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <EnchantInfo kind="Array" offset="299" length="140" count="5">
+        <_0_ kind="Struct" offset="299" length="28">
+          <LowEnchantLv kind="Leaf" offset="299" length="4" type="Scalar { Kind = U32 }" value="13" />
+          <HighEnchantLv kind="Leaf" offset="303" length="4" type="Scalar { Kind = U32 }" value="15" />
+          <DigimonGrowMinLv kind="Leaf" offset="307" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="311" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="315" length="4" type="Scalar { Kind = U32 }" value="50" />
+          <NormalEnchantMaxValue kind="Leaf" offset="319" length="4" type="Scalar { Kind = U32 }" value="75" />
+          <SpecialEnchantValue kind="Leaf" offset="323" length="4" type="Scalar { Kind = U32 }" value="75" />
+        </_0_>
+        <_1_ kind="Struct" offset="327" length="28">
+          <LowEnchantLv kind="Leaf" offset="327" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <HighEnchantLv kind="Leaf" offset="331" length="4" type="Scalar { Kind = U32 }" value="12" />
+          <DigimonGrowMinLv kind="Leaf" offset="335" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="339" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="343" length="4" type="Scalar { Kind = U32 }" value="50" />
+          <NormalEnchantMaxValue kind="Leaf" offset="347" length="4" type="Scalar { Kind = U32 }" value="75" />
+          <SpecialEnchantValue kind="Leaf" offset="351" length="4" type="Scalar { Kind = U32 }" value="75" />
+        </_1_>
+        <_2_ kind="Struct" offset="355" length="28">
+          <LowEnchantLv kind="Leaf" offset="355" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <HighEnchantLv kind="Leaf" offset="359" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <DigimonGrowMinLv kind="Leaf" offset="363" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="367" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="371" length="4" type="Scalar { Kind = U32 }" value="35" />
+          <NormalEnchantMaxValue kind="Leaf" offset="375" length="4" type="Scalar { Kind = U32 }" value="50" />
+          <SpecialEnchantValue kind="Leaf" offset="379" length="4" type="Scalar { Kind = U32 }" value="50" />
+        </_2_>
+        <_3_ kind="Struct" offset="383" length="28">
+          <LowEnchantLv kind="Leaf" offset="383" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <HighEnchantLv kind="Leaf" offset="387" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <DigimonGrowMinLv kind="Leaf" offset="391" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="395" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="399" length="4" type="Scalar { Kind = U32 }" value="15" />
+          <NormalEnchantMaxValue kind="Leaf" offset="403" length="4" type="Scalar { Kind = U32 }" value="25" />
+          <SpecialEnchantValue kind="Leaf" offset="407" length="4" type="Scalar { Kind = U32 }" value="25" />
+        </_3_>
+        <_4_ kind="Struct" offset="411" length="28">
+          <LowEnchantLv kind="Leaf" offset="411" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <HighEnchantLv kind="Leaf" offset="415" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <DigimonGrowMinLv kind="Leaf" offset="419" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="423" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="427" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <NormalEnchantMaxValue kind="Leaf" offset="431" length="4" type="Scalar { Kind = U32 }" value="15" />
+          <SpecialEnchantValue kind="Leaf" offset="435" length="4" type="Scalar { Kind = U32 }" value="15" />
+        </_4_>
+      </EnchantInfo>
+    </_2>
+    <_3 kind="Record" offset="439" length="145">
+      <StatId kind="Leaf" offset="439" length="1" type="Scalar { Kind = U8 }" value="5" />
+      <EnchantInfoCount kind="Leaf" offset="440" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <EnchantInfo kind="Array" offset="444" length="140" count="5">
+        <_0_ kind="Struct" offset="444" length="28">
+          <LowEnchantLv kind="Leaf" offset="444" length="4" type="Scalar { Kind = U32 }" value="13" />
+          <HighEnchantLv kind="Leaf" offset="448" length="4" type="Scalar { Kind = U32 }" value="15" />
+          <DigimonGrowMinLv kind="Leaf" offset="452" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="456" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="460" length="4" type="Scalar { Kind = U32 }" value="40" />
+          <NormalEnchantMaxValue kind="Leaf" offset="464" length="4" type="Scalar { Kind = U32 }" value="60" />
+          <SpecialEnchantValue kind="Leaf" offset="468" length="4" type="Scalar { Kind = U32 }" value="60" />
+        </_0_>
+        <_1_ kind="Struct" offset="472" length="28">
+          <LowEnchantLv kind="Leaf" offset="472" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <HighEnchantLv kind="Leaf" offset="476" length="4" type="Scalar { Kind = U32 }" value="12" />
+          <DigimonGrowMinLv kind="Leaf" offset="480" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="484" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="488" length="4" type="Scalar { Kind = U32 }" value="40" />
+          <NormalEnchantMaxValue kind="Leaf" offset="492" length="4" type="Scalar { Kind = U32 }" value="60" />
+          <SpecialEnchantValue kind="Leaf" offset="496" length="4" type="Scalar { Kind = U32 }" value="60" />
+        </_1_>
+        <_2_ kind="Struct" offset="500" length="28">
+          <LowEnchantLv kind="Leaf" offset="500" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <HighEnchantLv kind="Leaf" offset="504" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <DigimonGrowMinLv kind="Leaf" offset="508" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="512" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="516" length="4" type="Scalar { Kind = U32 }" value="28" />
+          <NormalEnchantMaxValue kind="Leaf" offset="520" length="4" type="Scalar { Kind = U32 }" value="40" />
+          <SpecialEnchantValue kind="Leaf" offset="524" length="4" type="Scalar { Kind = U32 }" value="40" />
+        </_2_>
+        <_3_ kind="Struct" offset="528" length="28">
+          <LowEnchantLv kind="Leaf" offset="528" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <HighEnchantLv kind="Leaf" offset="532" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <DigimonGrowMinLv kind="Leaf" offset="536" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="540" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="544" length="4" type="Scalar { Kind = U32 }" value="12" />
+          <NormalEnchantMaxValue kind="Leaf" offset="548" length="4" type="Scalar { Kind = U32 }" value="20" />
+          <SpecialEnchantValue kind="Leaf" offset="552" length="4" type="Scalar { Kind = U32 }" value="20" />
+        </_3_>
+        <_4_ kind="Struct" offset="556" length="28">
+          <LowEnchantLv kind="Leaf" offset="556" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <HighEnchantLv kind="Leaf" offset="560" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <DigimonGrowMinLv kind="Leaf" offset="564" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <DigimonGrowMaxLv kind="Leaf" offset="568" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="572" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <NormalEnchantMaxValue kind="Leaf" offset="576" length="4" type="Scalar { Kind = U32 }" value="12" />
+          <SpecialEnchantValue kind="Leaf" offset="580" length="4" type="Scalar { Kind = U32 }" value="12" />
+        </_4_>
+      </EnchantInfo>
+    </_3>
+    <_4 kind="Record" offset="584" length="145">
+      <StatId kind="Leaf" offset="584" length="1" type="Scalar { Kind = U8 }" value="7" />
+      <EnchantInfoCount kind="Leaf" offset="585" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <EnchantInfo kind="Array" offset="589" length="140" count="5">
+        <_0_ kind="Struct" offset="589" length="28">
+          <LowEnchantLv kind="Leaf" offset="589" length="4" type="Scalar { Kind = U32 }" value="13" />
+          <HighEnchantLv kind="Leaf" offset="593" length="4" type="Scalar { Kind = U32 }" value="15" />
+          <DigimonGrowMinLv kind="Leaf" offset="597" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <DigimonGrowMaxLv kind="Leaf" offset="601" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="605" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <NormalEnchantMaxValue kind="Leaf" offset="609" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <SpecialEnchantValue kind="Leaf" offset="613" length="4" type="Scalar { Kind = U32 }" value="5" />
+        </_0_>
+        <_1_ kind="Struct" offset="617" length="28">
+          <LowEnchantLv kind="Leaf" offset="617" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <HighEnchantLv kind="Leaf" offset="621" length="4" type="Scalar { Kind = U32 }" value="12" />
+          <DigimonGrowMinLv kind="Leaf" offset="625" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <DigimonGrowMaxLv kind="Leaf" offset="629" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="633" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <NormalEnchantMaxValue kind="Leaf" offset="637" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <SpecialEnchantValue kind="Leaf" offset="641" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_1_>
+        <_2_ kind="Struct" offset="645" length="28">
+          <LowEnchantLv kind="Leaf" offset="645" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <HighEnchantLv kind="Leaf" offset="649" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <DigimonGrowMinLv kind="Leaf" offset="653" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <DigimonGrowMaxLv kind="Leaf" offset="657" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="661" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <NormalEnchantMaxValue kind="Leaf" offset="665" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <SpecialEnchantValue kind="Leaf" offset="669" length="4" type="Scalar { Kind = U32 }" value="4" />
+        </_2_>
+        <_3_ kind="Struct" offset="673" length="28">
+          <LowEnchantLv kind="Leaf" offset="673" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <HighEnchantLv kind="Leaf" offset="677" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <DigimonGrowMinLv kind="Leaf" offset="681" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <DigimonGrowMaxLv kind="Leaf" offset="685" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="689" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <NormalEnchantMaxValue kind="Leaf" offset="693" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <SpecialEnchantValue kind="Leaf" offset="697" length="4" type="Scalar { Kind = U32 }" value="3" />
+        </_3_>
+        <_4_ kind="Struct" offset="701" length="28">
+          <LowEnchantLv kind="Leaf" offset="701" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <HighEnchantLv kind="Leaf" offset="705" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <DigimonGrowMinLv kind="Leaf" offset="709" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <DigimonGrowMaxLv kind="Leaf" offset="713" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NormalEnchantMinValue kind="Leaf" offset="717" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <NormalEnchantMaxValue kind="Leaf" offset="721" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <SpecialEnchantValue kind="Leaf" offset="725" length="4" type="Scalar { Kind = U32 }" value="2" />
+        </_4_>
+      </EnchantInfo>
+    </_4>
+  </Stats>
+</EnchantStatInfo>

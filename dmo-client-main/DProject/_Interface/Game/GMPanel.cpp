@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GMPanel.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 namespace
 {
@@ -7,8 +8,8 @@ namespace
 	{
 		_T( "Make Item" ),
 		_T( "Desbug Char" ),
-		_T( "Level Up" ),
-		_T( "LevelUp-Digi" ),
+		_T( "Tamer EXP" ),
+		_T( "Digimon EXP" ),
 		_T( "AllEvo" ),
 		_T( "Bits" )
 	};
@@ -351,8 +352,8 @@ void cGMPanel::ResetDevice()
 
 void cGMPanel::_SetStatus( TCHAR const* szText )
 {
-	if( m_pStatusText && m_pStatusText->GetTextInfo() )
-		m_pStatusText->GetTextInfo()->SetText( szText );
+	if( m_pStatusText )
+		m_pStatusText->SetText( szText );
 }
 
 void cGMPanel::_SetPage( eGMPage ePage )
@@ -363,10 +364,10 @@ void cGMPanel::_SetPage( eGMPage ePage )
 
 void cGMPanel::_RefreshPage()
 {
-	if( m_pPageTitleText && m_pPageTitleText->GetTextInfo() )
-		m_pPageTitleText->GetTextInfo()->SetText( GM_PANEL_PAGE_NAME[m_ePage] );
-	if( m_pPageHelpText && m_pPageHelpText->GetTextInfo() )
-		m_pPageHelpText->GetTextInfo()->SetText( GM_PANEL_PAGE_HELP[m_ePage] );
+	if( m_pPageTitleText )
+		m_pPageTitleText->SetText( GM_PANEL_PAGE_NAME[m_ePage] );
+	if( m_pPageHelpText )
+		m_pPageHelpText->SetText( GM_PANEL_PAGE_HELP[m_ePage] );
 
 	for( int i = 0; i < PAGE_COUNT; ++i )
 		if( m_pPageBtn[i] ) m_pPageBtn[i]->SetMouseOnMode( i == (int)m_ePage );
@@ -395,8 +396,8 @@ void cGMPanel::_RefreshPage()
 		{
 		case PAGE_MAKE_ITEM:		m_pActionBtn->SetText( _T( "Create Item" ) );	break;
 		case PAGE_DESBUG_CHAR:	m_pActionBtn->SetText( _T( "Desbug Char" ) );	break;
-		case PAGE_LEVEL_UP:		m_pActionBtn->SetText( _T( "Level Up" ) );		break;
-		case PAGE_LEVEL_UP_DIGI:	m_pActionBtn->SetText( _T( "LevelUp-Digi" ) );	break;
+		case PAGE_LEVEL_UP:		m_pActionBtn->SetText( _T( "Tamer EXP" ) );		break;
+		case PAGE_LEVEL_UP_DIGI:	m_pActionBtn->SetText( _T( "Digimon EXP" ) );	break;
 		case PAGE_ALL_EVO:		m_pActionBtn->SetText( _T( "Unlock All Evo" ) );	break;
 		case PAGE_BITS:			m_pActionBtn->SetText( _T( "Add Bits" ) );		break;
 		}
@@ -404,16 +405,16 @@ void cGMPanel::_RefreshPage()
 
 	if( m_ePage == PAGE_LEVEL_UP || m_ePage == PAGE_LEVEL_UP_DIGI )
 	{
-		if( m_pValueLabel && m_pValueLabel->GetTextInfo() )
-			m_pValueLabel->GetTextInfo()->SetText( _T( "EXP Value" ) );
+		if( m_pValueLabel )
+			m_pValueLabel->SetText( _T( "EXP Value" ) );
 		if( m_pValueEdit )
 			m_pValueEdit->SetEmptyMsgText( _T( "blank = max level" ), NiColor(0.55f,0.55f,0.55f) );
 		_SetStatus( _T( "Blank value sends max level. A value sends EXP add." ) );
 	}
 	else if( m_ePage == PAGE_BITS )
 	{
-		if( m_pValueLabel && m_pValueLabel->GetTextInfo() )
-			m_pValueLabel->GetTextInfo()->SetText( _T( "Bits" ) );
+		if( m_pValueLabel )
+			m_pValueLabel->SetText( _T( "Bits" ) );
 		if( m_pValueEdit )
 			m_pValueEdit->SetEmptyMsgText( _T( "amount" ), NiColor(0.55f,0.55f,0.55f) );
 		_SetStatus( _T( "Type the bits amount to add." ) );
@@ -642,6 +643,14 @@ void cGMPanel::_SendCommand( TCHAR const* szCommand, TCHAR const* szStatus )
 {
 	if( szCommand == NULL || szCommand[0] == 0 )
 		return;
+
+	char szCommandLog[256] = { 0, };
+#ifdef _UNICODE
+	WideCharToMultiByte( CP_ACP, 0, szCommand, -1, szCommandLog, 256, NULL, NULL );
+#else
+	_sntprintf_s( szCommandLog, 256, _TRUNCATE, "%s", szCommand );
+#endif
+	nsCSDEBUG::CrashLogger::LogMessage( "GM_PANEL send page=%d command=%s", (int)m_ePage, szCommandLog );
 
 	net::game->SendChatMsg( (wchar_t*)szCommand );
 	_SetStatus( szStatus );

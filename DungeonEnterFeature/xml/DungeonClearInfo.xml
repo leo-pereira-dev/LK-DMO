@@ -1,0 +1,1264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonClearInfo schema="DungeonClearInfo.struct" bin="DungeonClearInfo.bin" byteLength="1578">
+  <ClearInfo kind="Section" offset="0" length="1578">
+    <_0 kind="Record" offset="4" length="20">
+      <DungeonId kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="5001" />
+      <ClearConditionCount kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="12" length="12" count="2">
+        <_0_ kind="Struct" offset="12" length="6">
+          <ConditionKey kind="Leaf" offset="12" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="13" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="17" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="18" length="6">
+          <ConditionKey kind="Leaf" offset="18" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="19" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <Flag kind="Leaf" offset="23" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_0>
+    <_1 kind="Record" offset="24" length="20">
+      <DungeonId kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="5201" />
+      <ClearConditionCount kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="32" length="12" count="2">
+        <_0_ kind="Struct" offset="32" length="6">
+          <ConditionKey kind="Leaf" offset="32" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="33" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="37" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="38" length="6">
+          <ConditionKey kind="Leaf" offset="38" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="39" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="43" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_1>
+    <_2 kind="Record" offset="44" length="20">
+      <DungeonId kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="5301" />
+      <ClearConditionCount kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="52" length="12" count="2">
+        <_0_ kind="Struct" offset="52" length="6">
+          <ConditionKey kind="Leaf" offset="52" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="53" length="4" type="Scalar { Kind = U32 }" value="1500" />
+          <Flag kind="Leaf" offset="57" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="58" length="6">
+          <ConditionKey kind="Leaf" offset="58" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="59" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="63" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_2>
+    <_3 kind="Record" offset="64" length="20">
+      <DungeonId kind="Leaf" offset="64" length="4" type="Scalar { Kind = U32 }" value="5401" />
+      <ClearConditionCount kind="Leaf" offset="68" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="72" length="12" count="2">
+        <_0_ kind="Struct" offset="72" length="6">
+          <ConditionKey kind="Leaf" offset="72" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="73" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="77" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="78" length="6">
+          <ConditionKey kind="Leaf" offset="78" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="79" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="83" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_3>
+    <_4 kind="Record" offset="84" length="14">
+      <DungeonId kind="Leaf" offset="84" length="4" type="Scalar { Kind = U32 }" value="5701" />
+      <ClearConditionCount kind="Leaf" offset="88" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Conditions kind="Array" offset="92" length="6" count="1">
+        <_0_ kind="Struct" offset="92" length="6">
+          <ConditionKey kind="Leaf" offset="92" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="93" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="97" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+      </Conditions>
+    </_4>
+    <_5 kind="Record" offset="98" length="20">
+      <DungeonId kind="Leaf" offset="98" length="4" type="Scalar { Kind = U32 }" value="7001" />
+      <ClearConditionCount kind="Leaf" offset="102" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="106" length="12" count="2">
+        <_0_ kind="Struct" offset="106" length="6">
+          <ConditionKey kind="Leaf" offset="106" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="107" length="4" type="Scalar { Kind = U32 }" value="900" />
+          <Flag kind="Leaf" offset="111" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="112" length="6">
+          <ConditionKey kind="Leaf" offset="112" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="113" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Flag kind="Leaf" offset="117" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_5>
+    <_6 kind="Record" offset="118" length="20">
+      <DungeonId kind="Leaf" offset="118" length="4" type="Scalar { Kind = U32 }" value="7002" />
+      <ClearConditionCount kind="Leaf" offset="122" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="126" length="12" count="2">
+        <_0_ kind="Struct" offset="126" length="6">
+          <ConditionKey kind="Leaf" offset="126" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="127" length="4" type="Scalar { Kind = U32 }" value="900" />
+          <Flag kind="Leaf" offset="131" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="132" length="6">
+          <ConditionKey kind="Leaf" offset="132" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="133" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Flag kind="Leaf" offset="137" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_6>
+    <_7 kind="Record" offset="138" length="20">
+      <DungeonId kind="Leaf" offset="138" length="4" type="Scalar { Kind = U32 }" value="7201" />
+      <ClearConditionCount kind="Leaf" offset="142" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="146" length="12" count="2">
+        <_0_ kind="Struct" offset="146" length="6">
+          <ConditionKey kind="Leaf" offset="146" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="147" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="151" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="152" length="6">
+          <ConditionKey kind="Leaf" offset="152" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="153" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Flag kind="Leaf" offset="157" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_7>
+    <_8 kind="Record" offset="158" length="20">
+      <DungeonId kind="Leaf" offset="158" length="4" type="Scalar { Kind = U32 }" value="8701" />
+      <ClearConditionCount kind="Leaf" offset="162" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="166" length="12" count="2">
+        <_0_ kind="Struct" offset="166" length="6">
+          <ConditionKey kind="Leaf" offset="166" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="167" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="171" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_0_>
+        <_1_ kind="Struct" offset="172" length="6">
+          <ConditionKey kind="Leaf" offset="172" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="173" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="177" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_1_>
+      </Conditions>
+    </_8>
+    <_9 kind="Record" offset="178" length="20">
+      <DungeonId kind="Leaf" offset="178" length="4" type="Scalar { Kind = U32 }" value="8801" />
+      <ClearConditionCount kind="Leaf" offset="182" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="186" length="12" count="2">
+        <_0_ kind="Struct" offset="186" length="6">
+          <ConditionKey kind="Leaf" offset="186" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="187" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="191" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_0_>
+        <_1_ kind="Struct" offset="192" length="6">
+          <ConditionKey kind="Leaf" offset="192" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="193" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Flag kind="Leaf" offset="197" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_1_>
+      </Conditions>
+    </_9>
+    <_10 kind="Record" offset="198" length="20">
+      <DungeonId kind="Leaf" offset="198" length="4" type="Scalar { Kind = U32 }" value="11401" />
+      <ClearConditionCount kind="Leaf" offset="202" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="206" length="12" count="2">
+        <_0_ kind="Struct" offset="206" length="6">
+          <ConditionKey kind="Leaf" offset="206" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="207" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="211" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="212" length="6">
+          <ConditionKey kind="Leaf" offset="212" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="213" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <Flag kind="Leaf" offset="217" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_10>
+    <_11 kind="Record" offset="218" length="20">
+      <DungeonId kind="Leaf" offset="218" length="4" type="Scalar { Kind = U32 }" value="20501" />
+      <ClearConditionCount kind="Leaf" offset="222" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="226" length="12" count="2">
+        <_0_ kind="Struct" offset="226" length="6">
+          <ConditionKey kind="Leaf" offset="226" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="227" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="231" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="232" length="6">
+          <ConditionKey kind="Leaf" offset="232" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="233" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="237" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_11>
+    <_12 kind="Record" offset="238" length="20">
+      <DungeonId kind="Leaf" offset="238" length="4" type="Scalar { Kind = U32 }" value="20502" />
+      <ClearConditionCount kind="Leaf" offset="242" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="246" length="12" count="2">
+        <_0_ kind="Struct" offset="246" length="6">
+          <ConditionKey kind="Leaf" offset="246" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="247" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="251" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="252" length="6">
+          <ConditionKey kind="Leaf" offset="252" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="253" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="257" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_12>
+    <_13 kind="Record" offset="258" length="20">
+      <DungeonId kind="Leaf" offset="258" length="4" type="Scalar { Kind = U32 }" value="21001" />
+      <ClearConditionCount kind="Leaf" offset="262" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="266" length="12" count="2">
+        <_0_ kind="Struct" offset="266" length="6">
+          <ConditionKey kind="Leaf" offset="266" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="267" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="271" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="272" length="6">
+          <ConditionKey kind="Leaf" offset="272" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="273" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="277" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_13>
+    <_14 kind="Record" offset="278" length="20">
+      <DungeonId kind="Leaf" offset="278" length="4" type="Scalar { Kind = U32 }" value="21002" />
+      <ClearConditionCount kind="Leaf" offset="282" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="286" length="12" count="2">
+        <_0_ kind="Struct" offset="286" length="6">
+          <ConditionKey kind="Leaf" offset="286" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="287" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="291" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="292" length="6">
+          <ConditionKey kind="Leaf" offset="292" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="293" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="297" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_14>
+    <_15 kind="Record" offset="298" length="20">
+      <DungeonId kind="Leaf" offset="298" length="4" type="Scalar { Kind = U32 }" value="21101" />
+      <ClearConditionCount kind="Leaf" offset="302" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="306" length="12" count="2">
+        <_0_ kind="Struct" offset="306" length="6">
+          <ConditionKey kind="Leaf" offset="306" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="307" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="311" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="312" length="6">
+          <ConditionKey kind="Leaf" offset="312" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="313" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="317" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_15>
+    <_16 kind="Record" offset="318" length="20">
+      <DungeonId kind="Leaf" offset="318" length="4" type="Scalar { Kind = U32 }" value="21102" />
+      <ClearConditionCount kind="Leaf" offset="322" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="326" length="12" count="2">
+        <_0_ kind="Struct" offset="326" length="6">
+          <ConditionKey kind="Leaf" offset="326" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="327" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="331" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="332" length="6">
+          <ConditionKey kind="Leaf" offset="332" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="333" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="337" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_16>
+    <_17 kind="Record" offset="338" length="20">
+      <DungeonId kind="Leaf" offset="338" length="4" type="Scalar { Kind = U32 }" value="21201" />
+      <ClearConditionCount kind="Leaf" offset="342" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="346" length="12" count="2">
+        <_0_ kind="Struct" offset="346" length="6">
+          <ConditionKey kind="Leaf" offset="346" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="347" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="351" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="352" length="6">
+          <ConditionKey kind="Leaf" offset="352" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="353" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Flag kind="Leaf" offset="357" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_17>
+    <_18 kind="Record" offset="358" length="20">
+      <DungeonId kind="Leaf" offset="358" length="4" type="Scalar { Kind = U32 }" value="25201" />
+      <ClearConditionCount kind="Leaf" offset="362" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="366" length="12" count="2">
+        <_0_ kind="Struct" offset="366" length="6">
+          <ConditionKey kind="Leaf" offset="366" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="367" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="371" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="372" length="6">
+          <ConditionKey kind="Leaf" offset="372" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="373" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="377" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_18>
+    <_19 kind="Record" offset="378" length="20">
+      <DungeonId kind="Leaf" offset="378" length="4" type="Scalar { Kind = U32 }" value="25301" />
+      <ClearConditionCount kind="Leaf" offset="382" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="386" length="12" count="2">
+        <_0_ kind="Struct" offset="386" length="6">
+          <ConditionKey kind="Leaf" offset="386" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="387" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="391" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="392" length="6">
+          <ConditionKey kind="Leaf" offset="392" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="393" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="397" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_19>
+    <_20 kind="Record" offset="398" length="20">
+      <DungeonId kind="Leaf" offset="398" length="4" type="Scalar { Kind = U32 }" value="25601" />
+      <ClearConditionCount kind="Leaf" offset="402" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="406" length="12" count="2">
+        <_0_ kind="Struct" offset="406" length="6">
+          <ConditionKey kind="Leaf" offset="406" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="407" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="411" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="412" length="6">
+          <ConditionKey kind="Leaf" offset="412" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="413" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="417" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_20>
+    <_21 kind="Record" offset="418" length="20">
+      <DungeonId kind="Leaf" offset="418" length="4" type="Scalar { Kind = U32 }" value="25701" />
+      <ClearConditionCount kind="Leaf" offset="422" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="426" length="12" count="2">
+        <_0_ kind="Struct" offset="426" length="6">
+          <ConditionKey kind="Leaf" offset="426" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="427" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="431" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="432" length="6">
+          <ConditionKey kind="Leaf" offset="432" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="433" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="437" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_21>
+    <_22 kind="Record" offset="438" length="20">
+      <DungeonId kind="Leaf" offset="438" length="4" type="Scalar { Kind = U32 }" value="26302" />
+      <ClearConditionCount kind="Leaf" offset="442" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="446" length="12" count="2">
+        <_0_ kind="Struct" offset="446" length="6">
+          <ConditionKey kind="Leaf" offset="446" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="447" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="451" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="452" length="6">
+          <ConditionKey kind="Leaf" offset="452" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="453" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="457" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_22>
+    <_23 kind="Record" offset="458" length="20">
+      <DungeonId kind="Leaf" offset="458" length="4" type="Scalar { Kind = U32 }" value="26402" />
+      <ClearConditionCount kind="Leaf" offset="462" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="466" length="12" count="2">
+        <_0_ kind="Struct" offset="466" length="6">
+          <ConditionKey kind="Leaf" offset="466" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="467" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="471" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="472" length="6">
+          <ConditionKey kind="Leaf" offset="472" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="473" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="477" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_23>
+    <_24 kind="Record" offset="478" length="20">
+      <DungeonId kind="Leaf" offset="478" length="4" type="Scalar { Kind = U32 }" value="26602" />
+      <ClearConditionCount kind="Leaf" offset="482" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="486" length="12" count="2">
+        <_0_ kind="Struct" offset="486" length="6">
+          <ConditionKey kind="Leaf" offset="486" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="487" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="491" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="492" length="6">
+          <ConditionKey kind="Leaf" offset="492" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="493" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="497" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_24>
+    <_25 kind="Record" offset="498" length="20">
+      <DungeonId kind="Leaf" offset="498" length="4" type="Scalar { Kind = U32 }" value="30001" />
+      <ClearConditionCount kind="Leaf" offset="502" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="506" length="12" count="2">
+        <_0_ kind="Struct" offset="506" length="6">
+          <ConditionKey kind="Leaf" offset="506" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="507" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="511" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="512" length="6">
+          <ConditionKey kind="Leaf" offset="512" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="513" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="517" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_25>
+    <_26 kind="Record" offset="518" length="20">
+      <DungeonId kind="Leaf" offset="518" length="4" type="Scalar { Kind = U32 }" value="30101" />
+      <ClearConditionCount kind="Leaf" offset="522" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="526" length="12" count="2">
+        <_0_ kind="Struct" offset="526" length="6">
+          <ConditionKey kind="Leaf" offset="526" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="527" length="4" type="Scalar { Kind = U32 }" value="900" />
+          <Flag kind="Leaf" offset="531" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="532" length="6">
+          <ConditionKey kind="Leaf" offset="532" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="533" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Flag kind="Leaf" offset="537" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_26>
+    <_27 kind="Record" offset="538" length="20">
+      <DungeonId kind="Leaf" offset="538" length="4" type="Scalar { Kind = U32 }" value="32801" />
+      <ClearConditionCount kind="Leaf" offset="542" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="546" length="12" count="2">
+        <_0_ kind="Struct" offset="546" length="6">
+          <ConditionKey kind="Leaf" offset="546" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="547" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="551" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="552" length="6">
+          <ConditionKey kind="Leaf" offset="552" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="553" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <Flag kind="Leaf" offset="557" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_27>
+    <_28 kind="Record" offset="558" length="20">
+      <DungeonId kind="Leaf" offset="558" length="4" type="Scalar { Kind = U32 }" value="40101" />
+      <ClearConditionCount kind="Leaf" offset="562" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="566" length="12" count="2">
+        <_0_ kind="Struct" offset="566" length="6">
+          <ConditionKey kind="Leaf" offset="566" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="567" length="4" type="Scalar { Kind = U32 }" value="1500" />
+          <Flag kind="Leaf" offset="571" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="572" length="6">
+          <ConditionKey kind="Leaf" offset="572" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="573" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <Flag kind="Leaf" offset="577" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_28>
+    <_29 kind="Record" offset="578" length="20">
+      <DungeonId kind="Leaf" offset="578" length="4" type="Scalar { Kind = U32 }" value="40201" />
+      <ClearConditionCount kind="Leaf" offset="582" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="586" length="12" count="2">
+        <_0_ kind="Struct" offset="586" length="6">
+          <ConditionKey kind="Leaf" offset="586" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="587" length="4" type="Scalar { Kind = U32 }" value="1500" />
+          <Flag kind="Leaf" offset="591" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="592" length="6">
+          <ConditionKey kind="Leaf" offset="592" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="593" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <Flag kind="Leaf" offset="597" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_29>
+    <_30 kind="Record" offset="598" length="20">
+      <DungeonId kind="Leaf" offset="598" length="4" type="Scalar { Kind = U32 }" value="40501" />
+      <ClearConditionCount kind="Leaf" offset="602" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="606" length="12" count="2">
+        <_0_ kind="Struct" offset="606" length="6">
+          <ConditionKey kind="Leaf" offset="606" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="607" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="611" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="612" length="6">
+          <ConditionKey kind="Leaf" offset="612" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="613" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Flag kind="Leaf" offset="617" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_30>
+    <_31 kind="Record" offset="618" length="20">
+      <DungeonId kind="Leaf" offset="618" length="4" type="Scalar { Kind = U32 }" value="40701" />
+      <ClearConditionCount kind="Leaf" offset="622" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="626" length="12" count="2">
+        <_0_ kind="Struct" offset="626" length="6">
+          <ConditionKey kind="Leaf" offset="626" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="627" length="4" type="Scalar { Kind = U32 }" value="900" />
+          <Flag kind="Leaf" offset="631" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="632" length="6">
+          <ConditionKey kind="Leaf" offset="632" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="633" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Flag kind="Leaf" offset="637" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_31>
+    <_32 kind="Record" offset="638" length="20">
+      <DungeonId kind="Leaf" offset="638" length="4" type="Scalar { Kind = U32 }" value="41001" />
+      <ClearConditionCount kind="Leaf" offset="642" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="646" length="12" count="2">
+        <_0_ kind="Struct" offset="646" length="6">
+          <ConditionKey kind="Leaf" offset="646" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="647" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="651" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="652" length="6">
+          <ConditionKey kind="Leaf" offset="652" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="653" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="657" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_32>
+    <_33 kind="Record" offset="658" length="20">
+      <DungeonId kind="Leaf" offset="658" length="4" type="Scalar { Kind = U32 }" value="41101" />
+      <ClearConditionCount kind="Leaf" offset="662" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="666" length="12" count="2">
+        <_0_ kind="Struct" offset="666" length="6">
+          <ConditionKey kind="Leaf" offset="666" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="667" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="671" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="672" length="6">
+          <ConditionKey kind="Leaf" offset="672" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="673" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="677" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_33>
+    <_34 kind="Record" offset="678" length="20">
+      <DungeonId kind="Leaf" offset="678" length="4" type="Scalar { Kind = U32 }" value="41201" />
+      <ClearConditionCount kind="Leaf" offset="682" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="686" length="12" count="2">
+        <_0_ kind="Struct" offset="686" length="6">
+          <ConditionKey kind="Leaf" offset="686" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="687" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="691" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="692" length="6">
+          <ConditionKey kind="Leaf" offset="692" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="693" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="697" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_34>
+    <_35 kind="Record" offset="698" length="20">
+      <DungeonId kind="Leaf" offset="698" length="4" type="Scalar { Kind = U32 }" value="51001" />
+      <ClearConditionCount kind="Leaf" offset="702" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="706" length="12" count="2">
+        <_0_ kind="Struct" offset="706" length="6">
+          <ConditionKey kind="Leaf" offset="706" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="707" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="711" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="712" length="6">
+          <ConditionKey kind="Leaf" offset="712" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="713" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="717" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_35>
+    <_36 kind="Record" offset="718" length="20">
+      <DungeonId kind="Leaf" offset="718" length="4" type="Scalar { Kind = U32 }" value="51101" />
+      <ClearConditionCount kind="Leaf" offset="722" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="726" length="12" count="2">
+        <_0_ kind="Struct" offset="726" length="6">
+          <ConditionKey kind="Leaf" offset="726" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="727" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="731" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="732" length="6">
+          <ConditionKey kind="Leaf" offset="732" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="733" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="737" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_36>
+    <_37 kind="Record" offset="738" length="20">
+      <DungeonId kind="Leaf" offset="738" length="4" type="Scalar { Kind = U32 }" value="51201" />
+      <ClearConditionCount kind="Leaf" offset="742" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="746" length="12" count="2">
+        <_0_ kind="Struct" offset="746" length="6">
+          <ConditionKey kind="Leaf" offset="746" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="747" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="751" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="752" length="6">
+          <ConditionKey kind="Leaf" offset="752" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="753" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="757" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_37>
+    <_38 kind="Record" offset="758" length="20">
+      <DungeonId kind="Leaf" offset="758" length="4" type="Scalar { Kind = U32 }" value="110901" />
+      <ClearConditionCount kind="Leaf" offset="762" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="766" length="12" count="2">
+        <_0_ kind="Struct" offset="766" length="6">
+          <ConditionKey kind="Leaf" offset="766" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="767" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="771" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="772" length="6">
+          <ConditionKey kind="Leaf" offset="772" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="773" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="777" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_38>
+    <_39 kind="Record" offset="778" length="20">
+      <DungeonId kind="Leaf" offset="778" length="4" type="Scalar { Kind = U32 }" value="110902" />
+      <ClearConditionCount kind="Leaf" offset="782" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="786" length="12" count="2">
+        <_0_ kind="Struct" offset="786" length="6">
+          <ConditionKey kind="Leaf" offset="786" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="787" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="791" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="792" length="6">
+          <ConditionKey kind="Leaf" offset="792" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="793" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="797" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_39>
+    <_40 kind="Record" offset="798" length="20">
+      <DungeonId kind="Leaf" offset="798" length="4" type="Scalar { Kind = U32 }" value="110903" />
+      <ClearConditionCount kind="Leaf" offset="802" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="806" length="12" count="2">
+        <_0_ kind="Struct" offset="806" length="6">
+          <ConditionKey kind="Leaf" offset="806" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="807" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="811" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="812" length="6">
+          <ConditionKey kind="Leaf" offset="812" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="813" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="817" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_40>
+    <_41 kind="Record" offset="818" length="20">
+      <DungeonId kind="Leaf" offset="818" length="4" type="Scalar { Kind = U32 }" value="130803" />
+      <ClearConditionCount kind="Leaf" offset="822" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="826" length="12" count="2">
+        <_0_ kind="Struct" offset="826" length="6">
+          <ConditionKey kind="Leaf" offset="826" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="827" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="831" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="832" length="6">
+          <ConditionKey kind="Leaf" offset="832" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="833" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="837" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_41>
+    <_42 kind="Record" offset="838" length="20">
+      <DungeonId kind="Leaf" offset="838" length="4" type="Scalar { Kind = U32 }" value="130804" />
+      <ClearConditionCount kind="Leaf" offset="842" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="846" length="12" count="2">
+        <_0_ kind="Struct" offset="846" length="6">
+          <ConditionKey kind="Leaf" offset="846" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="847" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="851" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="852" length="6">
+          <ConditionKey kind="Leaf" offset="852" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="853" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="857" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_42>
+    <_43 kind="Record" offset="858" length="20">
+      <DungeonId kind="Leaf" offset="858" length="4" type="Scalar { Kind = U32 }" value="131201" />
+      <ClearConditionCount kind="Leaf" offset="862" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="866" length="12" count="2">
+        <_0_ kind="Struct" offset="866" length="6">
+          <ConditionKey kind="Leaf" offset="866" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="867" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="871" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="872" length="6">
+          <ConditionKey kind="Leaf" offset="872" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="873" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <Flag kind="Leaf" offset="877" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_43>
+    <_44 kind="Record" offset="878" length="20">
+      <DungeonId kind="Leaf" offset="878" length="4" type="Scalar { Kind = U32 }" value="140301" />
+      <ClearConditionCount kind="Leaf" offset="882" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="886" length="12" count="2">
+        <_0_ kind="Struct" offset="886" length="6">
+          <ConditionKey kind="Leaf" offset="886" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="887" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="891" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="892" length="6">
+          <ConditionKey kind="Leaf" offset="892" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="893" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="897" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_44>
+    <_45 kind="Record" offset="898" length="20">
+      <DungeonId kind="Leaf" offset="898" length="4" type="Scalar { Kind = U32 }" value="140302" />
+      <ClearConditionCount kind="Leaf" offset="902" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="906" length="12" count="2">
+        <_0_ kind="Struct" offset="906" length="6">
+          <ConditionKey kind="Leaf" offset="906" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="907" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="911" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="912" length="6">
+          <ConditionKey kind="Leaf" offset="912" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="913" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="917" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_45>
+    <_46 kind="Record" offset="918" length="20">
+      <DungeonId kind="Leaf" offset="918" length="4" type="Scalar { Kind = U32 }" value="140303" />
+      <ClearConditionCount kind="Leaf" offset="922" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="926" length="12" count="2">
+        <_0_ kind="Struct" offset="926" length="6">
+          <ConditionKey kind="Leaf" offset="926" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="927" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="931" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="932" length="6">
+          <ConditionKey kind="Leaf" offset="932" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="933" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="937" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_46>
+    <_47 kind="Record" offset="938" length="20">
+      <DungeonId kind="Leaf" offset="938" length="4" type="Scalar { Kind = U32 }" value="160001" />
+      <ClearConditionCount kind="Leaf" offset="942" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="946" length="12" count="2">
+        <_0_ kind="Struct" offset="946" length="6">
+          <ConditionKey kind="Leaf" offset="946" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="947" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="951" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="952" length="6">
+          <ConditionKey kind="Leaf" offset="952" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="953" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="957" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_47>
+    <_48 kind="Record" offset="958" length="20">
+      <DungeonId kind="Leaf" offset="958" length="4" type="Scalar { Kind = U32 }" value="160002" />
+      <ClearConditionCount kind="Leaf" offset="962" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="966" length="12" count="2">
+        <_0_ kind="Struct" offset="966" length="6">
+          <ConditionKey kind="Leaf" offset="966" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="967" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="971" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="972" length="6">
+          <ConditionKey kind="Leaf" offset="972" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="973" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="977" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_48>
+    <_49 kind="Record" offset="978" length="20">
+      <DungeonId kind="Leaf" offset="978" length="4" type="Scalar { Kind = U32 }" value="160003" />
+      <ClearConditionCount kind="Leaf" offset="982" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="986" length="12" count="2">
+        <_0_ kind="Struct" offset="986" length="6">
+          <ConditionKey kind="Leaf" offset="986" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="987" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="991" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="992" length="6">
+          <ConditionKey kind="Leaf" offset="992" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="993" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="997" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_49>
+    <_50 kind="Record" offset="998" length="20">
+      <DungeonId kind="Leaf" offset="998" length="4" type="Scalar { Kind = U32 }" value="160101" />
+      <ClearConditionCount kind="Leaf" offset="1002" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1006" length="12" count="2">
+        <_0_ kind="Struct" offset="1006" length="6">
+          <ConditionKey kind="Leaf" offset="1006" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1007" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1011" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1012" length="6">
+          <ConditionKey kind="Leaf" offset="1012" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1013" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1017" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_50>
+    <_51 kind="Record" offset="1018" length="20">
+      <DungeonId kind="Leaf" offset="1018" length="4" type="Scalar { Kind = U32 }" value="160102" />
+      <ClearConditionCount kind="Leaf" offset="1022" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1026" length="12" count="2">
+        <_0_ kind="Struct" offset="1026" length="6">
+          <ConditionKey kind="Leaf" offset="1026" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1027" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1031" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1032" length="6">
+          <ConditionKey kind="Leaf" offset="1032" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1033" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1037" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_51>
+    <_52 kind="Record" offset="1038" length="20">
+      <DungeonId kind="Leaf" offset="1038" length="4" type="Scalar { Kind = U32 }" value="160103" />
+      <ClearConditionCount kind="Leaf" offset="1042" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1046" length="12" count="2">
+        <_0_ kind="Struct" offset="1046" length="6">
+          <ConditionKey kind="Leaf" offset="1046" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1047" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1051" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1052" length="6">
+          <ConditionKey kind="Leaf" offset="1052" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1053" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1057" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_52>
+    <_53 kind="Record" offset="1058" length="20">
+      <DungeonId kind="Leaf" offset="1058" length="4" type="Scalar { Kind = U32 }" value="160201" />
+      <ClearConditionCount kind="Leaf" offset="1062" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1066" length="12" count="2">
+        <_0_ kind="Struct" offset="1066" length="6">
+          <ConditionKey kind="Leaf" offset="1066" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1067" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1071" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1072" length="6">
+          <ConditionKey kind="Leaf" offset="1072" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1073" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1077" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_53>
+    <_54 kind="Record" offset="1078" length="20">
+      <DungeonId kind="Leaf" offset="1078" length="4" type="Scalar { Kind = U32 }" value="160202" />
+      <ClearConditionCount kind="Leaf" offset="1082" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1086" length="12" count="2">
+        <_0_ kind="Struct" offset="1086" length="6">
+          <ConditionKey kind="Leaf" offset="1086" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1087" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1091" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1092" length="6">
+          <ConditionKey kind="Leaf" offset="1092" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1093" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1097" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_54>
+    <_55 kind="Record" offset="1098" length="20">
+      <DungeonId kind="Leaf" offset="1098" length="4" type="Scalar { Kind = U32 }" value="160203" />
+      <ClearConditionCount kind="Leaf" offset="1102" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1106" length="12" count="2">
+        <_0_ kind="Struct" offset="1106" length="6">
+          <ConditionKey kind="Leaf" offset="1106" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1107" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1111" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1112" length="6">
+          <ConditionKey kind="Leaf" offset="1112" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1113" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1117" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_55>
+    <_56 kind="Record" offset="1118" length="20">
+      <DungeonId kind="Leaf" offset="1118" length="4" type="Scalar { Kind = U32 }" value="160301" />
+      <ClearConditionCount kind="Leaf" offset="1122" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1126" length="12" count="2">
+        <_0_ kind="Struct" offset="1126" length="6">
+          <ConditionKey kind="Leaf" offset="1126" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1127" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1131" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1132" length="6">
+          <ConditionKey kind="Leaf" offset="1132" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1133" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1137" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_56>
+    <_57 kind="Record" offset="1138" length="20">
+      <DungeonId kind="Leaf" offset="1138" length="4" type="Scalar { Kind = U32 }" value="160302" />
+      <ClearConditionCount kind="Leaf" offset="1142" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1146" length="12" count="2">
+        <_0_ kind="Struct" offset="1146" length="6">
+          <ConditionKey kind="Leaf" offset="1146" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1147" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1151" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1152" length="6">
+          <ConditionKey kind="Leaf" offset="1152" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1153" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1157" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_57>
+    <_58 kind="Record" offset="1158" length="20">
+      <DungeonId kind="Leaf" offset="1158" length="4" type="Scalar { Kind = U32 }" value="160303" />
+      <ClearConditionCount kind="Leaf" offset="1162" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1166" length="12" count="2">
+        <_0_ kind="Struct" offset="1166" length="6">
+          <ConditionKey kind="Leaf" offset="1166" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1167" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1171" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1172" length="6">
+          <ConditionKey kind="Leaf" offset="1172" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1173" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1177" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_58>
+    <_59 kind="Record" offset="1178" length="20">
+      <DungeonId kind="Leaf" offset="1178" length="4" type="Scalar { Kind = U32 }" value="160801" />
+      <ClearConditionCount kind="Leaf" offset="1182" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1186" length="12" count="2">
+        <_0_ kind="Struct" offset="1186" length="6">
+          <ConditionKey kind="Leaf" offset="1186" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1187" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1191" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1192" length="6">
+          <ConditionKey kind="Leaf" offset="1192" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1193" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1197" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_59>
+    <_60 kind="Record" offset="1198" length="20">
+      <DungeonId kind="Leaf" offset="1198" length="4" type="Scalar { Kind = U32 }" value="161401" />
+      <ClearConditionCount kind="Leaf" offset="1202" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1206" length="12" count="2">
+        <_0_ kind="Struct" offset="1206" length="6">
+          <ConditionKey kind="Leaf" offset="1206" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1207" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1211" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1212" length="6">
+          <ConditionKey kind="Leaf" offset="1212" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1213" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1217" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_60>
+    <_61 kind="Record" offset="1218" length="20">
+      <DungeonId kind="Leaf" offset="1218" length="4" type="Scalar { Kind = U32 }" value="161601" />
+      <ClearConditionCount kind="Leaf" offset="1222" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1226" length="12" count="2">
+        <_0_ kind="Struct" offset="1226" length="6">
+          <ConditionKey kind="Leaf" offset="1226" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1227" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1231" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1232" length="6">
+          <ConditionKey kind="Leaf" offset="1232" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1233" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1237" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_61>
+    <_62 kind="Record" offset="1238" length="20">
+      <DungeonId kind="Leaf" offset="1238" length="4" type="Scalar { Kind = U32 }" value="170101" />
+      <ClearConditionCount kind="Leaf" offset="1242" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1246" length="12" count="2">
+        <_0_ kind="Struct" offset="1246" length="6">
+          <ConditionKey kind="Leaf" offset="1246" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1247" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1251" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1252" length="6">
+          <ConditionKey kind="Leaf" offset="1252" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1253" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1257" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_62>
+    <_63 kind="Record" offset="1258" length="20">
+      <DungeonId kind="Leaf" offset="1258" length="4" type="Scalar { Kind = U32 }" value="170401" />
+      <ClearConditionCount kind="Leaf" offset="1262" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1266" length="12" count="2">
+        <_0_ kind="Struct" offset="1266" length="6">
+          <ConditionKey kind="Leaf" offset="1266" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1267" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1271" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1272" length="6">
+          <ConditionKey kind="Leaf" offset="1272" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1273" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1277" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_63>
+    <_64 kind="Record" offset="1278" length="20">
+      <DungeonId kind="Leaf" offset="1278" length="4" type="Scalar { Kind = U32 }" value="170701" />
+      <ClearConditionCount kind="Leaf" offset="1282" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1286" length="12" count="2">
+        <_0_ kind="Struct" offset="1286" length="6">
+          <ConditionKey kind="Leaf" offset="1286" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1287" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1291" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1292" length="6">
+          <ConditionKey kind="Leaf" offset="1292" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1293" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1297" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_64>
+    <_65 kind="Record" offset="1298" length="20">
+      <DungeonId kind="Leaf" offset="1298" length="4" type="Scalar { Kind = U32 }" value="180901" />
+      <ClearConditionCount kind="Leaf" offset="1302" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1306" length="12" count="2">
+        <_0_ kind="Struct" offset="1306" length="6">
+          <ConditionKey kind="Leaf" offset="1306" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1307" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1311" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1312" length="6">
+          <ConditionKey kind="Leaf" offset="1312" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1313" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1317" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_65>
+    <_66 kind="Record" offset="1318" length="20">
+      <DungeonId kind="Leaf" offset="1318" length="4" type="Scalar { Kind = U32 }" value="181001" />
+      <ClearConditionCount kind="Leaf" offset="1322" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1326" length="12" count="2">
+        <_0_ kind="Struct" offset="1326" length="6">
+          <ConditionKey kind="Leaf" offset="1326" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1327" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1331" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1332" length="6">
+          <ConditionKey kind="Leaf" offset="1332" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1333" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1337" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_66>
+    <_67 kind="Record" offset="1338" length="20">
+      <DungeonId kind="Leaf" offset="1338" length="4" type="Scalar { Kind = U32 }" value="191102" />
+      <ClearConditionCount kind="Leaf" offset="1342" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1346" length="12" count="2">
+        <_0_ kind="Struct" offset="1346" length="6">
+          <ConditionKey kind="Leaf" offset="1346" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1347" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1351" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1352" length="6">
+          <ConditionKey kind="Leaf" offset="1352" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1353" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1357" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_67>
+    <_68 kind="Record" offset="1358" length="20">
+      <DungeonId kind="Leaf" offset="1358" length="4" type="Scalar { Kind = U32 }" value="191202" />
+      <ClearConditionCount kind="Leaf" offset="1362" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1366" length="12" count="2">
+        <_0_ kind="Struct" offset="1366" length="6">
+          <ConditionKey kind="Leaf" offset="1366" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1367" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1371" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1372" length="6">
+          <ConditionKey kind="Leaf" offset="1372" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1373" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1377" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_68>
+    <_69 kind="Record" offset="1378" length="20">
+      <DungeonId kind="Leaf" offset="1378" length="4" type="Scalar { Kind = U32 }" value="191302" />
+      <ClearConditionCount kind="Leaf" offset="1382" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1386" length="12" count="2">
+        <_0_ kind="Struct" offset="1386" length="6">
+          <ConditionKey kind="Leaf" offset="1386" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1387" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1391" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1392" length="6">
+          <ConditionKey kind="Leaf" offset="1392" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1393" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1397" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_69>
+    <_70 kind="Record" offset="1398" length="20">
+      <DungeonId kind="Leaf" offset="1398" length="4" type="Scalar { Kind = U32 }" value="191402" />
+      <ClearConditionCount kind="Leaf" offset="1402" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1406" length="12" count="2">
+        <_0_ kind="Struct" offset="1406" length="6">
+          <ConditionKey kind="Leaf" offset="1406" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1407" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1411" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1412" length="6">
+          <ConditionKey kind="Leaf" offset="1412" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1413" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1417" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_70>
+    <_71 kind="Record" offset="1418" length="20">
+      <DungeonId kind="Leaf" offset="1418" length="4" type="Scalar { Kind = U32 }" value="191502" />
+      <ClearConditionCount kind="Leaf" offset="1422" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1426" length="12" count="2">
+        <_0_ kind="Struct" offset="1426" length="6">
+          <ConditionKey kind="Leaf" offset="1426" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1427" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1431" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1432" length="6">
+          <ConditionKey kind="Leaf" offset="1432" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1433" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1437" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_71>
+    <_72 kind="Record" offset="1438" length="20">
+      <DungeonId kind="Leaf" offset="1438" length="4" type="Scalar { Kind = U32 }" value="200101" />
+      <ClearConditionCount kind="Leaf" offset="1442" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1446" length="12" count="2">
+        <_0_ kind="Struct" offset="1446" length="6">
+          <ConditionKey kind="Leaf" offset="1446" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1447" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="1451" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1452" length="6">
+          <ConditionKey kind="Leaf" offset="1452" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1453" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <Flag kind="Leaf" offset="1457" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_72>
+    <_73 kind="Record" offset="1458" length="20">
+      <DungeonId kind="Leaf" offset="1458" length="4" type="Scalar { Kind = U32 }" value="200201" />
+      <ClearConditionCount kind="Leaf" offset="1462" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1466" length="12" count="2">
+        <_0_ kind="Struct" offset="1466" length="6">
+          <ConditionKey kind="Leaf" offset="1466" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1467" length="4" type="Scalar { Kind = U32 }" value="1200" />
+          <Flag kind="Leaf" offset="1471" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1472" length="6">
+          <ConditionKey kind="Leaf" offset="1472" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1473" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <Flag kind="Leaf" offset="1477" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_73>
+    <_74 kind="Record" offset="1478" length="20">
+      <DungeonId kind="Leaf" offset="1478" length="4" type="Scalar { Kind = U32 }" value="300001" />
+      <ClearConditionCount kind="Leaf" offset="1482" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1486" length="12" count="2">
+        <_0_ kind="Struct" offset="1486" length="6">
+          <ConditionKey kind="Leaf" offset="1486" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1487" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1491" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1492" length="6">
+          <ConditionKey kind="Leaf" offset="1492" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1493" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1497" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_74>
+    <_75 kind="Record" offset="1498" length="20">
+      <DungeonId kind="Leaf" offset="1498" length="4" type="Scalar { Kind = U32 }" value="300301" />
+      <ClearConditionCount kind="Leaf" offset="1502" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1506" length="12" count="2">
+        <_0_ kind="Struct" offset="1506" length="6">
+          <ConditionKey kind="Leaf" offset="1506" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1507" length="4" type="Scalar { Kind = U32 }" value="1800" />
+          <Flag kind="Leaf" offset="1511" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1512" length="6">
+          <ConditionKey kind="Leaf" offset="1512" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1513" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Flag kind="Leaf" offset="1517" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_75>
+    <_76 kind="Record" offset="1518" length="20">
+      <DungeonId kind="Leaf" offset="1518" length="4" type="Scalar { Kind = U32 }" value="300701" />
+      <ClearConditionCount kind="Leaf" offset="1522" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1526" length="12" count="2">
+        <_0_ kind="Struct" offset="1526" length="6">
+          <ConditionKey kind="Leaf" offset="1526" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1527" length="4" type="Scalar { Kind = U32 }" value="900" />
+          <Flag kind="Leaf" offset="1531" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1532" length="6">
+          <ConditionKey kind="Leaf" offset="1532" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1533" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Flag kind="Leaf" offset="1537" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_76>
+    <_77 kind="Record" offset="1538" length="20">
+      <DungeonId kind="Leaf" offset="1538" length="4" type="Scalar { Kind = U32 }" value="300801" />
+      <ClearConditionCount kind="Leaf" offset="1542" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1546" length="12" count="2">
+        <_0_ kind="Struct" offset="1546" length="6">
+          <ConditionKey kind="Leaf" offset="1546" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1547" length="4" type="Scalar { Kind = U32 }" value="900" />
+          <Flag kind="Leaf" offset="1551" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1552" length="6">
+          <ConditionKey kind="Leaf" offset="1552" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1553" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Flag kind="Leaf" offset="1557" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_77>
+    <_78 kind="Record" offset="1558" length="20">
+      <DungeonId kind="Leaf" offset="1558" length="4" type="Scalar { Kind = U32 }" value="300901" />
+      <ClearConditionCount kind="Leaf" offset="1562" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Conditions kind="Array" offset="1566" length="12" count="2">
+        <_0_ kind="Struct" offset="1566" length="6">
+          <ConditionKey kind="Leaf" offset="1566" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <Value kind="Leaf" offset="1567" length="4" type="Scalar { Kind = U32 }" value="720" />
+          <Flag kind="Leaf" offset="1571" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1572" length="6">
+          <ConditionKey kind="Leaf" offset="1572" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <Value kind="Leaf" offset="1573" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Flag kind="Leaf" offset="1577" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+      </Conditions>
+    </_78>
+  </ClearInfo>
+</DungeonClearInfo>

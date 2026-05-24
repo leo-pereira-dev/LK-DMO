@@ -315,6 +315,31 @@ namespace DigitalWorldOnline.Commons.Models.Character
         public ItemListModel AccountCashWarehouse => RequireItemList(ItemListEnum.CashWarehouse);
 
         /// <summary>
+        /// Returns the extra inventory seal items.
+        /// </summary>
+        public ItemListModel ExtraInventorySeal => RequireItemList(ItemListEnum.ExtraInventorySeal);
+
+        /// <summary>
+        /// Returns the extra inventory ticket items.
+        /// </summary>
+        public ItemListModel ExtraInventoryTicket => RequireItemList(ItemListEnum.ExtraInventoryTicket);
+
+        /// <summary>
+        /// Returns the extra inventory evolution items.
+        /// </summary>
+        public ItemListModel ExtraInventoryEvolution => RequireItemList(ItemListEnum.ExtraInventoryEvolution);
+
+        /// <summary>
+        /// Returns the extra inventory digitama items.
+        /// </summary>
+        public ItemListModel ExtraInventoryDigitama => RequireItemList(ItemListEnum.ExtraInventoryDigitama);
+
+        /// <summary>
+        /// Returns the extra inventory material items.
+        /// </summary>
+        public ItemListModel ExtraInventoryMaterial => RequireItemList(ItemListEnum.ExtraInventoryMaterial);
+
+        /// <summary>
         /// Returns the tamer shop items.
         /// </summary>
         public ItemListModel TamerShop => RequireItemList(ItemListEnum.TamerShop);
@@ -508,6 +533,7 @@ namespace DigitalWorldOnline.Commons.Models.Character
             Location = CharacterLocationModel.Create(105, 11378, 19805);//TODO: externalizar
 
             Level = 1;
+            CreateDate = DateTime.Now;
             CurrentHp = 40;
             CurrentDs = 40;
             Size = 10000; //TODO: externalizar

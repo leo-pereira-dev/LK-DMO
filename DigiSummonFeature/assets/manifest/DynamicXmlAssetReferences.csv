@@ -1,0 +1,16 @@
+asset_path,source_table,source_field,status,notes
+ALPHAMON_slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+BLOOMLORDMON_slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+DarknessB_Slot_02.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+Dukemon_Crimsonmode_Slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+Epic_slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+IMPERIALDRAMON_slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+Kuzuhamon-MikoMode_Slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+Legend_slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+Normal_slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+Omegamon-Mercifulmode_Slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+Rare_slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+ShoutmonX7-SuperiorMode_Slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+Unique_slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+X_Evolution2_slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.
+Zeedmillenniummon_Slot.png,DM_DigiSummon-List.xml,IconPath,xml-data-ref,Product/card image loaded from summon product data.

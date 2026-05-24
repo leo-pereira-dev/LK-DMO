@@ -1,0 +1,39 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/DEvolutionAdvice.bin]
+// DEvolutionAdvice.bin — Pack03 v487 client.
+// Route: FUN_01641920 -> FUN_01641c20 -> FUN_01640b90.
+// Nested parsers: FUN_01640db0 -> FUN_01640f80 -> FUN_016408f0 -> FUN_01641c40.
+// Cursor layout validated to EOF: 4 top groups, group byte keys, u32 entry keys,
+// u32 nested keys, then counted byte-keyed advice value rows.
+
+bin DEvolutionAdvice {
+    section Groups {
+        count  u32;
+        record DEvolutionAdviceGroup;
+    }
+}
+
+struct DEvolutionAdviceGroup {
+    u8   GroupKey;
+    u32  EntryCount;
+    DEvolutionAdviceEntry[EntryCount] Entries;
+}
+
+struct DEvolutionAdviceEntry {
+    u32  EntryKey;
+    u32  NestedCount;
+    DEvolutionAdviceNested[NestedCount] Nested;
+}
+
+struct DEvolutionAdviceNested {
+    u32  NestedKey;
+    u32  AdviceCount;
+    DEvolutionAdviceValue[AdviceCount] Advice;
+}
+
+struct DEvolutionAdviceValue size=13 {
+    u8   AdviceKey;
+    u16  FieldA;
+    u16  FieldB;
+    u32  FieldC;
+    u32  FieldD;
+}

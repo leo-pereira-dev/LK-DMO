@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TranscendNeed schema="TranscendNeed.struct" bin="TranscendNeed.bin" byteLength="204">
+  <Requirements kind="Section" offset="0" length="204">
+    <_0 kind="Record" offset="4" length="40">
+      <TargetGrowth kind="Leaf" offset="4" length="1" type="Scalar { Kind = U8 }" value="2" />
+      <CurrentGrowthCount kind="Leaf" offset="5" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <CurrentGrowthRequirements kind="Array" offset="9" length="35" count="1">
+        <_0_ kind="Struct" offset="9" length="35">
+          <CurrentGrowth kind="Leaf" offset="9" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <NeedDigimonLv kind="Leaf" offset="10" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NeedEnchantLv kind="Leaf" offset="14" length="4" type="Scalar { Kind = U32 }" value="100" />
+          <NeedEvoMinType kind="Leaf" offset="18" length="4" type="Scalar { Kind = U32 }" value="125" />
+          <NeedEvoMaxType kind="Leaf" offset="22" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <NeedScale kind="Leaf" offset="26" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <NextDigimonGrowth kind="Leaf" offset="27" length="1" type="Scalar { Kind = U8 }" value="17" />
+          <NeedHatchLvMin kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <NeedHatchLvMax kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <TransCost kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="5000000" />
+          <MaxExp kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="140000" />
+        </_0_>
+      </CurrentGrowthRequirements>
+    </_0>
+    <_1 kind="Record" offset="44" length="40">
+      <TargetGrowth kind="Leaf" offset="44" length="1" type="Scalar { Kind = U8 }" value="3" />
+      <CurrentGrowthCount kind="Leaf" offset="45" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <CurrentGrowthRequirements kind="Array" offset="49" length="35" count="1">
+        <_0_ kind="Struct" offset="49" length="35">
+          <CurrentGrowth kind="Leaf" offset="49" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <NeedDigimonLv kind="Leaf" offset="50" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NeedEnchantLv kind="Leaf" offset="54" length="4" type="Scalar { Kind = U32 }" value="100" />
+          <NeedEvoMinType kind="Leaf" offset="58" length="4" type="Scalar { Kind = U32 }" value="125" />
+          <NeedEvoMaxType kind="Leaf" offset="62" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <NeedScale kind="Leaf" offset="66" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <NextDigimonGrowth kind="Leaf" offset="67" length="1" type="Scalar { Kind = U8 }" value="18" />
+          <NeedHatchLvMin kind="Leaf" offset="68" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <NeedHatchLvMax kind="Leaf" offset="72" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <TransCost kind="Leaf" offset="76" length="4" type="Scalar { Kind = U32 }" value="5000000" />
+          <MaxExp kind="Leaf" offset="80" length="4" type="Scalar { Kind = U32 }" value="140000" />
+        </_0_>
+      </CurrentGrowthRequirements>
+    </_1>
+    <_2 kind="Record" offset="84" length="40">
+      <TargetGrowth kind="Leaf" offset="84" length="1" type="Scalar { Kind = U8 }" value="4" />
+      <CurrentGrowthCount kind="Leaf" offset="85" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <CurrentGrowthRequirements kind="Array" offset="89" length="35" count="1">
+        <_0_ kind="Struct" offset="89" length="35">
+          <CurrentGrowth kind="Leaf" offset="89" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <NeedDigimonLv kind="Leaf" offset="90" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NeedEnchantLv kind="Leaf" offset="94" length="4" type="Scalar { Kind = U32 }" value="100" />
+          <NeedEvoMinType kind="Leaf" offset="98" length="4" type="Scalar { Kind = U32 }" value="125" />
+          <NeedEvoMaxType kind="Leaf" offset="102" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <NeedScale kind="Leaf" offset="106" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <NextDigimonGrowth kind="Leaf" offset="107" length="1" type="Scalar { Kind = U8 }" value="18" />
+          <NeedHatchLvMin kind="Leaf" offset="108" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <NeedHatchLvMax kind="Leaf" offset="112" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <TransCost kind="Leaf" offset="116" length="4" type="Scalar { Kind = U32 }" value="5000000" />
+          <MaxExp kind="Leaf" offset="120" length="4" type="Scalar { Kind = U32 }" value="140000" />
+        </_0_>
+      </CurrentGrowthRequirements>
+    </_2>
+    <_3 kind="Record" offset="124" length="40">
+      <TargetGrowth kind="Leaf" offset="124" length="1" type="Scalar { Kind = U8 }" value="10" />
+      <CurrentGrowthCount kind="Leaf" offset="125" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <CurrentGrowthRequirements kind="Array" offset="129" length="35" count="1">
+        <_0_ kind="Struct" offset="129" length="35">
+          <CurrentGrowth kind="Leaf" offset="129" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <NeedDigimonLv kind="Leaf" offset="130" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NeedEnchantLv kind="Leaf" offset="134" length="4" type="Scalar { Kind = U32 }" value="100" />
+          <NeedEvoMinType kind="Leaf" offset="138" length="4" type="Scalar { Kind = U32 }" value="125" />
+          <NeedEvoMaxType kind="Leaf" offset="142" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <NeedScale kind="Leaf" offset="146" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <NextDigimonGrowth kind="Leaf" offset="147" length="1" type="Scalar { Kind = U8 }" value="18" />
+          <NeedHatchLvMin kind="Leaf" offset="148" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <NeedHatchLvMax kind="Leaf" offset="152" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <TransCost kind="Leaf" offset="156" length="4" type="Scalar { Kind = U32 }" value="5000000" />
+          <MaxExp kind="Leaf" offset="160" length="4" type="Scalar { Kind = U32 }" value="140000" />
+        </_0_>
+      </CurrentGrowthRequirements>
+    </_3>
+    <_4 kind="Record" offset="164" length="40">
+      <TargetGrowth kind="Leaf" offset="164" length="1" type="Scalar { Kind = U8 }" value="17" />
+      <CurrentGrowthCount kind="Leaf" offset="165" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <CurrentGrowthRequirements kind="Array" offset="169" length="35" count="1">
+        <_0_ kind="Struct" offset="169" length="35">
+          <CurrentGrowth kind="Leaf" offset="169" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <NeedDigimonLv kind="Leaf" offset="170" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <NeedEnchantLv kind="Leaf" offset="174" length="4" type="Scalar { Kind = U32 }" value="100" />
+          <NeedEvoMinType kind="Leaf" offset="178" length="4" type="Scalar { Kind = U32 }" value="125" />
+          <NeedEvoMaxType kind="Leaf" offset="182" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <NeedScale kind="Leaf" offset="186" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <NextDigimonGrowth kind="Leaf" offset="187" length="1" type="Scalar { Kind = U8 }" value="18" />
+          <NeedHatchLvMin kind="Leaf" offset="188" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <NeedHatchLvMax kind="Leaf" offset="192" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <TransCost kind="Leaf" offset="196" length="4" type="Scalar { Kind = U32 }" value="5000000" />
+          <MaxExp kind="Leaf" offset="200" length="4" type="Scalar { Kind = U32 }" value="140000" />
+        </_0_>
+      </CurrentGrowthRequirements>
+    </_4>
+  </Requirements>
+</TranscendNeed>

@@ -89,6 +89,33 @@ void cData_Tactics::LinkTactics()
 	}	
 }
 
+void cData_Tactics::CompactTactics()
+{
+	int nWriteIndex = 0;
+
+	for( int nReadIndex=0; nReadIndex<m_nTacticsCount; ++nReadIndex )
+	{
+		if( m_Tactics[ nReadIndex ].s_Type.m_nType == 0 )
+			continue;
+
+		if( nWriteIndex != nReadIndex )
+		{
+			m_Tactics[ nWriteIndex ] = m_Tactics[ nReadIndex ];
+			m_Tactics[ nReadIndex ].Delete();
+		}
+
+		++nWriteIndex;
+	}
+
+	for( int i=nWriteIndex; i<m_nTacticsCount; ++i )
+	{
+		m_Tactics[ i ].Delete();
+	}
+
+	LinkTactics();
+	GAME_EVENT_ST.OnEvent( EVENT_CODE::UPDATE_TAMERSTATUS, NULL );
+}
+
 int cData_Tactics::GetMercenaryID( DWORD dwMercenaryID )
 {
 	for( int i=0; i<m_nTacticsCount; ++i )
@@ -117,9 +144,7 @@ void cData_Tactics::DeleteTactics( int nTacticsIndex )
 {
 	assert_cs( nTacticsIndex < m_nTacticsCount );		
 	m_Tactics[ nTacticsIndex ].Delete();
-	// IF에 연결
-	g_pGameIF->GetTacticsWindow( nTacticsIndex )->SetTargetObject( 0 );	
-	GAME_EVENT_ST.OnEvent( EVENT_CODE::UPDATE_TAMERSTATUS, NULL );
+	CompactTactics();
 }
 // pScr 현재 들고있는 디지몬 // pCurData 현재들고있는 용병 정보 // 
 void cData_Tactics::ChangeTactics( CsC_AvObject* pSrc, int nDestTacticsIndex )

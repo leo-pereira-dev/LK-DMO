@@ -86,6 +86,30 @@
         /// TradeItems.
         /// </summary>
         TradeItems = 38,
-        //Obs.: 19 livre
+
+        /// <summary>
+        /// Extra inventory for seal items.
+        /// </summary>
+        ExtraInventorySeal = 39,
+
+        /// <summary>
+        /// Extra inventory for ticket items.
+        /// </summary>
+        ExtraInventoryTicket = 40,
+
+        /// <summary>
+        /// Extra inventory for evolution items.
+        /// </summary>
+        ExtraInventoryEvolution = 41,
+
+        /// <summary>
+        /// Extra inventory for digitama items.
+        /// </summary>
+        ExtraInventoryDigitama = 42,
+
+        /// <summary>
+        /// Extra inventory for material items.
+        /// </summary>
+        ExtraInventoryMaterial = 43,
     }
 }

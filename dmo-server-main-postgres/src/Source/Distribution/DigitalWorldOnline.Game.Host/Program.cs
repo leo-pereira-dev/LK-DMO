@@ -164,6 +164,7 @@ namespace DigitalWorldOnline.Game
                     services.AddSingleton<MonsterBinLoader>();
                     services.AddSingleton<MapBinLoader>();
                     services.AddSingleton<ItemListBinLoader>();
+                    services.AddSingleton<QuestBinLoader>();
                     services.AddSingleton<UnionXmlAssetLoader>();
                     services.AddSingleton<DUnitCollectionService>();
 
@@ -212,6 +213,7 @@ namespace DigitalWorldOnline.Game
             var monster = host.Services.GetRequiredService<MonsterBinLoader>().Load();
             var mapBin = host.Services.GetRequiredService<MapBinLoader>().Load();
             var itemList = host.Services.GetRequiredService<ItemListBinLoader>().Load();
+            var quest = host.Services.GetRequiredService<QuestBinLoader>().Load();
             // Element-vs-element + attribute-vs-attribute combat multipliers come from
             // Nature.bin — accessed via Utils.GetElementDelta / GetAttributePoint, which
             // drive the boolean HasElementAdvantage / HasAttributeAdvantage extension

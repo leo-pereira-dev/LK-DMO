@@ -24,7 +24,8 @@ mSlotSize(CsPoint::ZERO),
 m_pEditSerchingDigimon(NULL),
 mTTDigimonCntInArchive(NULL),
 mTTDigimonOpenedCnt(NULL),
-m_bisDragable(false)
+m_bisDragable(false),
+m_bPendingArchiveUpdate(false)
 {
 	GAME_EVENT_ST.AddEvent( EVENT_CODE::REQ_INCUBATOR_ITEM_IN_INVENTORY, this, &CDigimonArchiveViewer::OnRClick_Inventory_Item);	
 }
@@ -45,7 +46,7 @@ void CDigimonArchiveViewer::Notify(int const& iNotifiedEvt, ContentsStream const
 		break;
 	case SystemType::Update_Viewer:
 		{
-			RecvUpdateArchive();
+			m_bPendingArchiveUpdate = true;
 		}
 		break;
 	case SystemType::Selected_Digimon:
@@ -91,12 +92,12 @@ void CDigimonArchiveViewer::Notify(int const& iNotifiedEvt, ContentsStream const
 		break;
 	case SystemType::Update_IncuViewer:
 		{
-			RecvUpdateArchive();
+			m_bPendingArchiveUpdate = true;
 		}
 		break;
 	case SystemType::Update_TranscendViewer:
 		{
-			RecvUpdateArchive();
+			m_bPendingArchiveUpdate = true;
 		}
 		break;
 	case SystemType::OnShow_ByItem:
@@ -244,7 +245,7 @@ void CDigimonArchiveViewer::Create( int nValue)
 			ti.SetText( UISTRING_TEXT( "Digimon_Storage_Menu3" ).c_str() );
 			ti.s_eTextAlign = DT_CENTER;
 			pAddBtn->SetCheckBoxText( &ti );
-			pAddBtn->SetEnable(false);
+			pAddBtn->SetEnable(true);
 			pAddBtn->SetUserData( new sTabType( eTranscend ) );
 		}
 		
@@ -348,6 +349,11 @@ bool CDigimonArchiveViewer::UpdateAutoClose(void)
 void CDigimonArchiveViewer::Update(float const& fDeltaTime)
 {
 	if( UpdateAutoClose() == true){
+		if( m_bPendingArchiveUpdate )
+		{
+			m_bPendingArchiveUpdate = false;
+			RecvUpdateArchive();
+		}
 		UpdateScript(fDeltaTime);
 		_UpdateMoveWindow();
 		if(m_pkCurrViewer)
@@ -740,47 +746,32 @@ void CDigimonArchiveViewer::ResetGridList(int iViewerCnt)
 		UsingSlotIdx.insert(std::map<int, int>::value_type(AllCnt, AllCnt));
 	}
 
-	int CurrViewCount =0;
-	if(GetSystem()->GetSortMode() == 0)
+	int CurrViewCount = 0;
+	if(GetSystem()->GetSortMode() == CDigimonArchiveContents::EMPTY)
 	{
-		CDigimonArchiveContents::Sorted::const_iterator kSortedIter = pkSortedList->begin();
-		for(;kSortedIter != pkSortedList->end(); ++kSortedIter)
-		{
-			cGridListBoxItem* pkItem =	 const_cast<cGridListBoxItem*>(m_pkGridArchive->GetItemFormPos(kSortedIter->second.iArchiveSlotIdx));
-			nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW ResetGridList sorted slot=%d item=%p",
-				kSortedIter->second.iArchiveSlotIdx,
-				pkItem);
-			if(pkItem != NULL){
-				SlotInfo* pkSlotInfo =	dynamic_cast<SlotInfo*>(pkItem->GetUserData());
-				pkSlotInfo->SetSlotIdx(kSortedIter->second.iArchiveSlotIdx);
-				pkItem->SetVisible(true);
-
-				CDigimonArchiveContents::DigimonInArchive* pkDigimonInfo = GetSystem()->GetArchiveSlotInfo(kSortedIter->second.iArchiveSlotIdx);
-
-				UpdateSlotIcon(pkDigimonInfo,pkItem);
-			}
-		}
+		CurrViewCount = GetSystem()->GetOpenedArchiveCount() - GetSystem()->GetDigimonCntInArchive();
 	}
-	else
+
+	CDigimonArchiveContents::Sorted::const_iterator kSortedIter = pkSortedList->begin();
+	for(; kSortedIter != pkSortedList->end(); ++kSortedIter, ++CurrViewCount)
 	{
-		int CurrViewerCnt = 0;
-		if(GetSystem()->GetSortMode() == CDigimonArchiveContents::EMPTY){
-			CurrViewerCnt = GetSystem()->GetOpenedArchiveCount() - GetSystem()->GetDigimonCntInArchive();
-		}
-		CDigimonArchiveContents::Sorted::const_iterator kSortedIter = pkSortedList->begin();
-		for(;kSortedIter != pkSortedList->end(); ++kSortedIter, ++CurrViewerCnt)
+		cGridListBoxItem* pkItem = const_cast<cGridListBoxItem*>(m_pkGridArchive->GetItemFormPos(CurrViewCount));
+		nsCSDEBUG::CrashLogger::LogMessage("ARCHIVE VIEW ResetGridList sorted archiveSlot=%d viewSlot=%d item=%p",
+			kSortedIter->second.iArchiveSlotIdx,
+			CurrViewCount,
+			pkItem);
+		if(pkItem != NULL)
 		{
-			cGridListBoxItem* pkItem =	 const_cast<cGridListBoxItem*>(m_pkGridArchive->GetItemFormPos(CurrViewerCnt));
-			if(pkItem != NULL){
-				SlotInfo* pkSlotInfo =	dynamic_cast<SlotInfo*>(pkItem->GetUserData());
+			SlotInfo* pkSlotInfo = dynamic_cast<SlotInfo*>(pkItem->GetUserData());
+			if(pkSlotInfo != NULL)
+			{
 				pkSlotInfo->SetSlotIdx(kSortedIter->second.iArchiveSlotIdx);
-				pkItem->SetVisible(true);
-
-				CDigimonArchiveContents::DigimonInArchive* pkDigimonInfo = GetSystem()->GetArchiveSlotInfo(kSortedIter->second.iArchiveSlotIdx);
-				UsingSlotIdx.erase(kSortedIter->second.iArchiveSlotIdx);
-				UpdateSlotIcon(pkDigimonInfo,pkItem);
 			}
+			pkItem->SetVisible(true);
 
+			CDigimonArchiveContents::DigimonInArchive* pkDigimonInfo = GetSystem()->GetArchiveSlotInfo(kSortedIter->second.iArchiveSlotIdx);
+			UsingSlotIdx.erase(kSortedIter->second.iArchiveSlotIdx);
+			UpdateSlotIcon(pkDigimonInfo, pkItem);
 		}
 	}
 
@@ -789,36 +780,22 @@ void CDigimonArchiveViewer::ResetGridList(int iViewerCnt)
 	{
 		if(GetSystem()->GetFilterMode() == 0 )
 		{
-			if(GetSystem()->GetSortMode() != 0 )
+			int CurrViewCount =0;
+			std::map<int, int>::iterator usingIdxIter = UsingSlotIdx.begin();
+			kIter = pkAllList->begin();
+			for( ; kIter != pkAllList->end(); ++kIter, ++CurrViewCount)
 			{
-				int CurrViewCount =0;
-				std::map<int, int>::iterator usingIdxIter = UsingSlotIdx.begin();
-				kIter = pkAllList->begin();
-				for( ; kIter != pkAllList->end(); ++kIter, ++CurrViewCount)
+				SlotInfo* pkSlotInfo =	dynamic_cast<SlotInfo*>((*kIter)->GetUserData());
+				if(CurrViewCount < iViewerCnt)
 				{
-					SlotInfo* pkSlotInfo =	dynamic_cast<SlotInfo*>((*kIter)->GetUserData());
-					if(CurrViewCount < iViewerCnt)
+					if((*kIter)->GetVisible() == false && usingIdxIter != UsingSlotIdx.end())
 					{
-						if((*kIter)->GetVisible() == false)
+						int Usingidx = usingIdxIter->first;
+						if(pkSlotInfo != NULL)
 						{
-							int Usingidx = usingIdxIter->first;
 							pkSlotInfo->SetSlotIdx(Usingidx);
-							++usingIdxIter;
-							(*kIter)->SetVisible(true);
 						}
-					}
-				}
-			}
-			else if (GetSystem()->GetSortMode() == 0)
-			{
-				int CurrViewCount =0;
-				kIter = pkAllList->begin();
-				for( ; kIter != pkAllList->end(); ++kIter, ++CurrViewCount)
-				{
-					SlotInfo* pkSlotInfo =	dynamic_cast<SlotInfo*>((*kIter)->GetUserData());
-					if(CurrViewCount < iViewerCnt)
-					{
-						pkSlotInfo->SetSlotIdx(CurrViewCount);
+						++usingIdxIter;
 						(*kIter)->SetVisible(true);
 					}
 				}
@@ -1019,7 +996,7 @@ void CDigimonArchiveViewer::OnClickShowIncuViewer(void)
 
 void CDigimonArchiveViewer::OnClickShowTranscendViewer(void)
 {
-	OnClickShowInfoViewer();
+	GetSystem()->Req_ShowTranscendViewer();
 }
 
 void	CDigimonArchiveViewer::OnClickChangeFilterMode(void* pSender, void* pData)

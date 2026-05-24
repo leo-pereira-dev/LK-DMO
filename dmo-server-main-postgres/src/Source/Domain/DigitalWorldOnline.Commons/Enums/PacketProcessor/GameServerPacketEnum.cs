@@ -432,6 +432,11 @@ namespace DigitalWorldOnline.Commons.Enums.PacketProcessor
         /// Loads the digimon archive academy/incubator slots.
         /// </summary>
         DigimonArchiveIncubatorList = 3226,
+
+        /// <summary>
+        /// Moves a digimon between archive/storage slots.
+        /// </summary>
+        DigimonArchiveMove = 3243,
         
         /// <summary>
         /// Loads the remaining membership timer.
@@ -813,6 +818,11 @@ namespace DigitalWorldOnline.Commons.Enums.PacketProcessor
         ItemScan = 3987,
 
         /// <summary>
+        /// Moves all eligible items from normal bag into the selected extra inventory category.
+        /// </summary>
+        ExtraInventoryCollectAll = 3988,
+
+        /// <summary>
         /// Arena all ranking request info.
         /// </summary>
         ArenaRankingAllRequestInfo = 16023,
@@ -821,6 +831,7 @@ namespace DigitalWorldOnline.Commons.Enums.PacketProcessor
         /// Trancendence Partner  Exp Result.
         /// </summary>
         TranscendenceReceiveExpResult = 16039,
+        DigimonTranscendence = 16040,
 
         /// <summary>
         /// Item Recharge NPC Result.

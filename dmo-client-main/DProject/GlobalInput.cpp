@@ -1,6 +1,21 @@
 
 #include "stdafx.h"
 #include "GlobalInput.h"
+#include "ExtraInventoryDebugLog.h"
+
+namespace
+{
+	bool IsExtraInventoryDebugKeyMessage( const MSG& kMsg, UINT nMappedWParam = 0 )
+	{
+		UINT nRawWParam = static_cast<UINT>( kMsg.wParam );
+		return nRawWParam == DMKEYBOARD::KEY_I ||
+			nMappedWParam == DMKEYBOARD::KEY_I ||
+			nRawWParam == VK_CONTROL ||
+			nRawWParam == VK_LCONTROL ||
+			nRawWParam == VK_RCONTROL ||
+			nRawWParam == VK_PROCESSKEY;
+	}
+}
 
 cGlobalInput::cGlobalInput()
 {
@@ -28,9 +43,27 @@ void cGlobalInput::_Keyboard_Input( const MSG& p_kMsg )
 
 	Modified(p_kMsg);
 
+	if( IsExtraInventoryDebugKeyMessage( p_kMsg ) )
+	{
+		ExtraInventoryDebugLog(
+			"[ExtraInventory][KeyboardInput] msg=0x%04X rawWParam=0x%08X focus=%p gameHwnd=%p bEdit=%d imeEdit=%d modifier=%u ctrl=%d lctrl=%d rctrl=%d",
+			p_kMsg.message,
+			static_cast<unsigned int>( p_kMsg.wParam ),
+			GetFocus(),
+			GAMEAPP_ST.GetHWnd(),
+			bEdit ? 1 : 0,
+			g_IME.GetEdit() ? 1 : 0,
+			iModifier,
+			( GetAsyncKeyState( VK_CONTROL ) & 0x8000 ) != 0,
+			( GetAsyncKeyState( VK_LCONTROL ) & 0x8000 ) != 0,
+			( GetAsyncKeyState( VK_RCONTROL ) & 0x8000 ) != 0 );
+	}
+
 	// 메세지 박스 떠있다면 이 이후 키는 무시
 	if( ( bEdit == false )||( (bAbsoluteMacro = _IsAbsoluteMacroKey(p_kMsg)) == true ) )
 		_MacroKey( p_kMsg );
+	else if( IsExtraInventoryDebugKeyMessage( p_kMsg ) )
+		ExtraInventoryDebugLog( "[ExtraInventory][KeyboardInput] skipped before MacroKey because edit/focus is active. absoluteMacro=%d", bAbsoluteMacro ? 1 : 0 );
 }
 
 bool cGlobalInput::_MacroKey( const MSG& p_kMsg )
@@ -38,6 +71,8 @@ bool cGlobalInput::_MacroKey( const MSG& p_kMsg )
 	//2017-04-12-nova	포탈이동시 키보드입력안되도록
 	if(g_pResist->IsMovePortal())
 	{
+		if( IsExtraInventoryDebugKeyMessage( p_kMsg ) )
+			ExtraInventoryDebugLog( "[ExtraInventory][MacroKey] blocked: IsMovePortal" );
 		return false;
 	}
 
@@ -65,14 +100,24 @@ bool cGlobalInput::_MacroKey( const MSG& p_kMsg )
 	if( g_pMngCollector->GetSceneState() == CMngCollector::eSCENE_DATS )
 	{
 		if( g_pDatsCenter->GetState() > CDatsCenter::eSTATE_ENCHENT )
+		{
+			if( IsExtraInventoryDebugKeyMessage( p_kMsg ) )
+				ExtraInventoryDebugLog( "[ExtraInventory][MacroKey] blocked: DATS state=%d", g_pDatsCenter->GetState() );
 			return false;
+		}
 	}
 
 	if( g_pTacticsAni->IsPlay() == true )
+	{
+		if( IsExtraInventoryDebugKeyMessage( p_kMsg ) )
+			ExtraInventoryDebugLog( "[ExtraInventory][MacroKey] blocked: tactics animation playing" );
 		return false;
+	}
 
 	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_WEBWIN ) )
 	{
+		if( IsExtraInventoryDebugKeyMessage( p_kMsg ) )
+			ExtraInventoryDebugLog( "[ExtraInventory][MacroKey] blocked: web window active" );
 		return false;
 	}
 
@@ -689,6 +734,23 @@ bool cGlobalInput::KeyBoardMenu(const MSG& p_kMsg)
 	}
 	//
 
+	if( IsExtraInventoryDebugKeyMessage( p_kMsg, wParam ) )
+	{
+		ExtraInventoryDebugLog(
+			"[ExtraInventory][KeyBoardMenu] msg=0x%04X rawWParam=0x%08X mappedWParam=0x%08X modifier=%u hotKey=0x%08X hotModifier=%u keyDown=%d active=%d ctrl=%d lctrl=%d rctrl=%d",
+			p_kMsg.message,
+			static_cast<unsigned int>( p_kMsg.wParam ),
+			static_cast<unsigned int>( wParam ),
+			iModifier,
+			mHotKey ? mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKey : 0,
+			mHotKey ? mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nModifier : 0,
+			mHotKey ? ( mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKeyDown ? 1 : 0 ) : 0,
+			g_pGameIF ? ( g_pGameIF->IsActiveWindow( cBaseWindow::WT_EXTRAINVENTORY ) ? 1 : 0 ) : 0,
+			( GetAsyncKeyState( VK_CONTROL ) & 0x8000 ) != 0,
+			( GetAsyncKeyState( VK_LCONTROL ) & 0x8000 ) != 0,
+			( GetAsyncKeyState( VK_RCONTROL ) & 0x8000 ) != 0 );
+	}
+
 	switch(p_kMsg.message)
 	{
 	case WM_KEYDOWN:
@@ -717,6 +779,16 @@ bool cGlobalInput::KeyBoardMenu(const MSG& p_kMsg)
 				iModifier == mHotKey->m_MKey[DMKEY::MENU_TAMER_SKILL].s_nModifier )
 			{
 				mHotKey->m_MKey[DMKEY::MENU_TAMER_SKILL].s_nKeyDown = true;
+			}
+
+			if( wParam == mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKey &&
+				( ( GetAsyncKeyState( VK_CONTROL ) & 0x8000 ) != 0 ||
+				  ( GetAsyncKeyState( VK_LCONTROL ) & 0x8000 ) != 0 ||
+				  ( GetAsyncKeyState( VK_RCONTROL ) & 0x8000 ) != 0 ) )
+			{
+				mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKeyDown = true;
+				ExtraInventoryDebugLog( "[ExtraInventory][KeyBoardMenu] keydown accepted; keyDown set true" );
+				return true;
 			}
 
 			if( wParam		== mHotKey->m_MKey[DMKEY::MENU_INVENTORY_ALL].s_nKey &&
@@ -857,6 +929,29 @@ bool cGlobalInput::KeyBoardMenu(const MSG& p_kMsg)
 				GAME_EVENT_ST.OnEvent( EVENT_CODE::OPEN_CLOSE_TAMERSTATUS, &kTmp );
 
 				mHotKey->m_MKey[DMKEY::MENU_TAMER_SKILL].s_nKeyDown = false;
+				return true;
+			}
+
+			if( wParam == mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKey &&
+				mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKeyDown )
+			{
+				bool bWasActive = g_pGameIF->IsActiveWindow( cBaseWindow::WT_EXTRAINVENTORY );
+				ExtraInventoryDebugLog( "[ExtraInventory][KeyBoardMenu] keyup accepted; activeBefore=%d", bWasActive ? 1 : 0 );
+				if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_EXTRAINVENTORY ) )
+				{
+					g_pGameIF->CloseDynamicIF( cBaseWindow::WT_EXTRAINVENTORY );
+					ExtraInventoryDebugLog( "[ExtraInventory][KeyBoardMenu] CloseDynamicIF requested" );
+				}
+				else
+				{
+					cBaseWindow* pWindow = g_pGameIF->GetDynamicIF( cBaseWindow::WT_EXTRAINVENTORY );
+					ExtraInventoryDebugLog( "[ExtraInventory][KeyBoardMenu] GetDynamicIF returned=%p activeAfter=%d showAfter=%d",
+						pWindow,
+						g_pGameIF->IsActiveWindow( cBaseWindow::WT_EXTRAINVENTORY ) ? 1 : 0,
+						pWindow ? ( pWindow->IsShowWindow() ? 1 : 0 ) : 0 );
+				}
+
+				mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKeyDown = false;
 				return true;
 			}
 

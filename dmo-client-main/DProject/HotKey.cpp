@@ -111,8 +111,8 @@ void HotKey::Reset()
 	m_MKey[DMKEY::MENU_MAIL].s_nKey					= DMKEYBOARD::KEY_U;		// In-game Mail shortcut keys
 	m_MKey[DMKEY::MENU_MAIL].s_nModifier			= DMKEYBOARD::KMOD_NONE;
 
-	m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKey		= DMKEYBOARD::KEY_LCONTROL;	// In-game ExtraInventory shortcut keys
-	m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nModifier = DMKEYBOARD::KMOD_NONE;
+	m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKey		= DMKEYBOARD::KEY_I;		// In-game ExtraInventory shortcut keys
+	m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nModifier = DMKEYBOARD::KMOD_LCONTROL;
 
 	m_MKey[DMKEY::MENU_EVOLUTION_HELPS].s_nKey		= DMKEYBOARD::KEY_H;		// In-game EvolutionHelps shortcut keys
 	m_MKey[DMKEY::MENU_EVOLUTION_HELPS].s_nModifier = DMKEYBOARD::KMOD_NONE;

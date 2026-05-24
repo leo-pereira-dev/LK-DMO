@@ -142,6 +142,7 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
         {
             return await _context.Digimon
                 .AsNoTracking()
+                .Include(x => x.Location)
                 .Include(x => x.Digiclone)
                 .Include(x => x.AttributeExperience)
                 .Include(x => x.Evolutions)

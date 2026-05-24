@@ -43,10 +43,9 @@ namespace DigitalWorldOnline.Game.Managers
         {
             var baseInfo = _assets.DigimonBaseInfo.Single(x => x.Type == type);
             var statusInfo = _assets.DigimonLevelInfo.Single(x => x.StatusId == (level + baseInfo.ScaleType * 1000));
-            var statusApply = _assets.StatusApply.FirstOrDefault(x => x.StageValue == baseInfo.EvolutionType);
-
-            if (statusApply == null)
-                return default;
+            var statusApplyValue = _assets.StatusApply
+                .FirstOrDefault(x => x.StageValue == baseInfo.EvolutionType)
+                ?.ApplyValue ?? 100;
 
             var sizeMultiplier = (decimal)size / 10000;
 
@@ -55,22 +54,22 @@ namespace DigitalWorldOnline.Game.Managers
             var finalBl = baseInfo.BLValue + statusInfo.BLValue;
 
             var sizeHp = sizeMultiplier * baseInfo.HPValue + statusInfo.HPValue;
-            var applyHp = (int)(statusInfo.HPValue * (statusApply.ApplyValue - 100) * 0.01f);
+            var applyHp = (int)(statusInfo.HPValue * (statusApplyValue - 100) * 0.01f);
             var finalHp = (int)Math.Floor(sizeHp + applyHp);
 
             var sizeDs = baseInfo.DSValue + statusInfo.DSValue;
-            var applyDs = (int)(statusInfo.DSValue * (statusApply.ApplyValue - 100) * 0.01f);
+            var applyDs = (int)(statusInfo.DSValue * (statusApplyValue - 100) * 0.01f);
             var finalDs = sizeDs + applyDs;
 
             var sizeAt = sizeMultiplier * baseInfo.ATValue + statusInfo.ATValue;
-            var applyAt = (int)(statusInfo.ATValue * (statusApply.ApplyValue - 100) * 0.01f);
+            var applyAt = (int)(statusInfo.ATValue * (statusApplyValue - 100) * 0.01f);
             var finalAt = (int)Math.Floor(sizeAt + applyAt);
 
             var sizeCr = sizeMultiplier * baseInfo.CTValue + statusInfo.CTValue;
             var finalCr = (int)Math.Floor(sizeCr);
 
             var sizeDe = sizeMultiplier * baseInfo.DEValue + statusInfo.DEValue;
-            var applyDe = (int)(statusInfo.DEValue * (statusApply.ApplyValue - 100) * 0.01f);
+            var applyDe = (int)(statusInfo.DEValue * (statusApplyValue - 100) * 0.01f);
             var finalDe = (int)Math.Floor(sizeDe + applyDe);
 
             var finalEv = baseInfo.EVValue + statusInfo.EVValue;

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SealNatureImage schema="SealNatureImage.struct" bin="SealNatureImage.bin" byteLength="786">
+  <Images kind="Section" offset="0" length="786">
+    <_0 kind="Record" offset="4" length="70">
+      <NatureType kind="Leaf" offset="4" length="2" type="Scalar { Kind = U16 }" value="16" />
+      <ElementalImagePath kind="Leaf" offset="6" length="68" type="LString { }">Data\Interface\SealMaster\Elemental\sealmaster_elemental_ice.dds</ElementalImagePath>
+    </_0>
+    <_1 kind="Record" offset="74" length="72">
+      <NatureType kind="Leaf" offset="74" length="2" type="Scalar { Kind = U16 }" value="17" />
+      <ElementalImagePath kind="Leaf" offset="76" length="70" type="LString { }">Data\Interface\SealMaster\Elemental\sealmaster_elemental_water.dds</ElementalImagePath>
+    </_1>
+    <_2 kind="Record" offset="146" length="71">
+      <NatureType kind="Leaf" offset="146" length="2" type="Scalar { Kind = U16 }" value="18" />
+      <ElementalImagePath kind="Leaf" offset="148" length="69" type="LString { }">Data\Interface\SealMaster\Elemental\sealmaster_elemental_fire.dds</ElementalImagePath>
+    </_2>
+    <_3 kind="Record" offset="217" length="72">
+      <NatureType kind="Leaf" offset="217" length="2" type="Scalar { Kind = U16 }" value="19" />
+      <ElementalImagePath kind="Leaf" offset="219" length="70" type="LString { }">Data\Interface\SealMaster\Elemental\sealmaster_elemental_earth.dds</ElementalImagePath>
+    </_3>
+    <_4 kind="Record" offset="289" length="71">
+      <NatureType kind="Leaf" offset="289" length="2" type="Scalar { Kind = U16 }" value="20" />
+      <ElementalImagePath kind="Leaf" offset="291" length="69" type="LString { }">Data\Interface\SealMaster\Elemental\sealmaster_elemental_wind.dds</ElementalImagePath>
+    </_4>
+    <_5 kind="Record" offset="360" length="71">
+      <NatureType kind="Leaf" offset="360" length="2" type="Scalar { Kind = U16 }" value="21" />
+      <ElementalImagePath kind="Leaf" offset="362" length="69" type="LString { }">Data\Interface\SealMaster\Elemental\sealmaster_elemental_tree.dds</ElementalImagePath>
+    </_5>
+    <_6 kind="Record" offset="431" length="72">
+      <NatureType kind="Leaf" offset="431" length="2" type="Scalar { Kind = U16 }" value="22" />
+      <ElementalImagePath kind="Leaf" offset="433" length="70" type="LString { }">Data\Interface\SealMaster\Elemental\sealmaster_elemental_light.dds</ElementalImagePath>
+    </_6>
+    <_7 kind="Record" offset="503" length="71">
+      <NatureType kind="Leaf" offset="503" length="2" type="Scalar { Kind = U16 }" value="23" />
+      <ElementalImagePath kind="Leaf" offset="505" length="69" type="LString { }">Data\Interface\SealMaster\Elemental\sealmaster_elemental_dark.dds</ElementalImagePath>
+    </_7>
+    <_8 kind="Record" offset="574" length="71">
+      <NatureType kind="Leaf" offset="574" length="2" type="Scalar { Kind = U16 }" value="24" />
+      <ElementalImagePath kind="Leaf" offset="576" length="69" type="LString { }">Data\Interface\SealMaster\Elemental\sealmaster_elemental_elec.dds</ElementalImagePath>
+    </_8>
+    <_9 kind="Record" offset="645" length="71">
+      <NatureType kind="Leaf" offset="645" length="2" type="Scalar { Kind = U16 }" value="25" />
+      <ElementalImagePath kind="Leaf" offset="647" length="69" type="LString { }">Data\Interface\SealMaster\Elemental\sealmaster_elemental_iron.dds</ElementalImagePath>
+    </_9>
+    <_10 kind="Record" offset="716" length="70">
+      <NatureType kind="Leaf" offset="716" length="2" type="Scalar { Kind = U16 }" value="26" />
+      <ElementalImagePath kind="Leaf" offset="718" length="68" type="LString { }">Data\Interface\SealMaster\Elemental\sealmaster_elemental_non.dds</ElementalImagePath>
+    </_10>
+  </Images>
+</SealNatureImage>

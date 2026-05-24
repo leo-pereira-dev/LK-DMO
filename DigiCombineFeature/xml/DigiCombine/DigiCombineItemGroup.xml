@@ -1,0 +1,1851 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DMDigiCombineItemGroup schema="DM_DigiCombine-ItemGroup.struct" bin="DM_DigiCombine-ItemGroup.bin" byteLength="2522">
+  <Groups kind="Section" offset="0" length="2522">
+    <_0 kind="Record" offset="4" length="501">
+      <GroupKey kind="Leaf" offset="4" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <EntryCount kind="Leaf" offset="6" length="4" type="Scalar { Kind = U32 }" value="45" />
+      <Entries kind="Array" offset="10" length="495" count="45">
+        <_0_ kind="Struct" offset="10" length="11">
+          <ItemId kind="Leaf" offset="10" length="4" type="Scalar { Kind = U32 }" value="41009" />
+          <FieldA kind="Leaf" offset="14" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="16" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="18" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="19" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="20" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_0_>
+        <_1_ kind="Struct" offset="21" length="11">
+          <ItemId kind="Leaf" offset="21" length="4" type="Scalar { Kind = U32 }" value="41010" />
+          <FieldA kind="Leaf" offset="25" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="27" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="29" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="30" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="31" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="32" length="11">
+          <ItemId kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="41707" />
+          <FieldA kind="Leaf" offset="36" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="38" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="40" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="41" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="42" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="43" length="11">
+          <ItemId kind="Leaf" offset="43" length="4" type="Scalar { Kind = U32 }" value="41709" />
+          <FieldA kind="Leaf" offset="47" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="49" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="51" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="52" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="53" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="54" length="11">
+          <ItemId kind="Leaf" offset="54" length="4" type="Scalar { Kind = U32 }" value="41711" />
+          <FieldA kind="Leaf" offset="58" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="60" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="62" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="63" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="64" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="65" length="11">
+          <ItemId kind="Leaf" offset="65" length="4" type="Scalar { Kind = U32 }" value="41715" />
+          <FieldA kind="Leaf" offset="69" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="71" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="73" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="74" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="75" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="76" length="11">
+          <ItemId kind="Leaf" offset="76" length="4" type="Scalar { Kind = U32 }" value="41717" />
+          <FieldA kind="Leaf" offset="80" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="82" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="84" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="85" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="86" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_6_>
+        <_7_ kind="Struct" offset="87" length="11">
+          <ItemId kind="Leaf" offset="87" length="4" type="Scalar { Kind = U32 }" value="41721" />
+          <FieldA kind="Leaf" offset="91" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="93" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="95" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="96" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="97" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_7_>
+        <_8_ kind="Struct" offset="98" length="11">
+          <ItemId kind="Leaf" offset="98" length="4" type="Scalar { Kind = U32 }" value="41723" />
+          <FieldA kind="Leaf" offset="102" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="104" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="106" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="107" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="108" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="109" length="11">
+          <ItemId kind="Leaf" offset="109" length="4" type="Scalar { Kind = U32 }" value="41729" />
+          <FieldA kind="Leaf" offset="113" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="115" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="117" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="118" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="119" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="120" length="11">
+          <ItemId kind="Leaf" offset="120" length="4" type="Scalar { Kind = U32 }" value="41731" />
+          <FieldA kind="Leaf" offset="124" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="126" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="128" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="129" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="130" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_10_>
+        <_11_ kind="Struct" offset="131" length="11">
+          <ItemId kind="Leaf" offset="131" length="4" type="Scalar { Kind = U32 }" value="41735" />
+          <FieldA kind="Leaf" offset="135" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="137" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="139" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="140" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="141" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_11_>
+        <_12_ kind="Struct" offset="142" length="11">
+          <ItemId kind="Leaf" offset="142" length="4" type="Scalar { Kind = U32 }" value="41737" />
+          <FieldA kind="Leaf" offset="146" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="148" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="150" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="151" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="152" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_12_>
+        <_13_ kind="Struct" offset="153" length="11">
+          <ItemId kind="Leaf" offset="153" length="4" type="Scalar { Kind = U32 }" value="41741" />
+          <FieldA kind="Leaf" offset="157" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="159" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="161" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="162" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="163" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_13_>
+        <_14_ kind="Struct" offset="164" length="11">
+          <ItemId kind="Leaf" offset="164" length="4" type="Scalar { Kind = U32 }" value="41743" />
+          <FieldA kind="Leaf" offset="168" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="170" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="172" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="173" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="174" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_14_>
+        <_15_ kind="Struct" offset="175" length="11">
+          <ItemId kind="Leaf" offset="175" length="4" type="Scalar { Kind = U32 }" value="41745" />
+          <FieldA kind="Leaf" offset="179" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="181" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="183" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="184" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="185" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_15_>
+        <_16_ kind="Struct" offset="186" length="11">
+          <ItemId kind="Leaf" offset="186" length="4" type="Scalar { Kind = U32 }" value="41749" />
+          <FieldA kind="Leaf" offset="190" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="192" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="194" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="195" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="196" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_16_>
+        <_17_ kind="Struct" offset="197" length="11">
+          <ItemId kind="Leaf" offset="197" length="4" type="Scalar { Kind = U32 }" value="41753" />
+          <FieldA kind="Leaf" offset="201" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="203" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="205" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="206" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="207" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_17_>
+        <_18_ kind="Struct" offset="208" length="11">
+          <ItemId kind="Leaf" offset="208" length="4" type="Scalar { Kind = U32 }" value="41759" />
+          <FieldA kind="Leaf" offset="212" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="214" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="216" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="217" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="218" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_18_>
+        <_19_ kind="Struct" offset="219" length="11">
+          <ItemId kind="Leaf" offset="219" length="4" type="Scalar { Kind = U32 }" value="41761" />
+          <FieldA kind="Leaf" offset="223" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="225" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="227" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="228" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="229" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_19_>
+        <_20_ kind="Struct" offset="230" length="11">
+          <ItemId kind="Leaf" offset="230" length="4" type="Scalar { Kind = U32 }" value="41769" />
+          <FieldA kind="Leaf" offset="234" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="236" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="238" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="239" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="240" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_20_>
+        <_21_ kind="Struct" offset="241" length="11">
+          <ItemId kind="Leaf" offset="241" length="4" type="Scalar { Kind = U32 }" value="41771" />
+          <FieldA kind="Leaf" offset="245" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="247" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="249" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="250" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="251" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_21_>
+        <_22_ kind="Struct" offset="252" length="11">
+          <ItemId kind="Leaf" offset="252" length="4" type="Scalar { Kind = U32 }" value="41773" />
+          <FieldA kind="Leaf" offset="256" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="258" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="260" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="261" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="262" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_22_>
+        <_23_ kind="Struct" offset="263" length="11">
+          <ItemId kind="Leaf" offset="263" length="4" type="Scalar { Kind = U32 }" value="41775" />
+          <FieldA kind="Leaf" offset="267" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="269" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="271" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="272" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="273" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_23_>
+        <_24_ kind="Struct" offset="274" length="11">
+          <ItemId kind="Leaf" offset="274" length="4" type="Scalar { Kind = U32 }" value="41777" />
+          <FieldA kind="Leaf" offset="278" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="280" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="282" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="283" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="284" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_24_>
+        <_25_ kind="Struct" offset="285" length="11">
+          <ItemId kind="Leaf" offset="285" length="4" type="Scalar { Kind = U32 }" value="41779" />
+          <FieldA kind="Leaf" offset="289" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="291" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="293" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="294" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="295" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_25_>
+        <_26_ kind="Struct" offset="296" length="11">
+          <ItemId kind="Leaf" offset="296" length="4" type="Scalar { Kind = U32 }" value="41781" />
+          <FieldA kind="Leaf" offset="300" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="302" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="304" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="305" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="306" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_26_>
+        <_27_ kind="Struct" offset="307" length="11">
+          <ItemId kind="Leaf" offset="307" length="4" type="Scalar { Kind = U32 }" value="41783" />
+          <FieldA kind="Leaf" offset="311" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="313" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="315" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="316" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="317" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_27_>
+        <_28_ kind="Struct" offset="318" length="11">
+          <ItemId kind="Leaf" offset="318" length="4" type="Scalar { Kind = U32 }" value="41785" />
+          <FieldA kind="Leaf" offset="322" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="324" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="326" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="327" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="328" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_28_>
+        <_29_ kind="Struct" offset="329" length="11">
+          <ItemId kind="Leaf" offset="329" length="4" type="Scalar { Kind = U32 }" value="41787" />
+          <FieldA kind="Leaf" offset="333" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="335" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="337" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="338" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="339" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_29_>
+        <_30_ kind="Struct" offset="340" length="11">
+          <ItemId kind="Leaf" offset="340" length="4" type="Scalar { Kind = U32 }" value="41791" />
+          <FieldA kind="Leaf" offset="344" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="346" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="348" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="349" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="350" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_30_>
+        <_31_ kind="Struct" offset="351" length="11">
+          <ItemId kind="Leaf" offset="351" length="4" type="Scalar { Kind = U32 }" value="41793" />
+          <FieldA kind="Leaf" offset="355" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="357" length="2" type="Scalar { Kind = U16 }" value="265" />
+          <FieldC kind="Leaf" offset="359" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="360" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="361" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_31_>
+        <_32_ kind="Struct" offset="362" length="11">
+          <ItemId kind="Leaf" offset="362" length="4" type="Scalar { Kind = U32 }" value="41795" />
+          <FieldA kind="Leaf" offset="366" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="368" length="2" type="Scalar { Kind = U16 }" value="264" />
+          <FieldC kind="Leaf" offset="370" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="371" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="372" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_32_>
+        <_33_ kind="Struct" offset="373" length="11">
+          <ItemId kind="Leaf" offset="373" length="4" type="Scalar { Kind = U32 }" value="41797" />
+          <FieldA kind="Leaf" offset="377" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="379" length="2" type="Scalar { Kind = U16 }" value="264" />
+          <FieldC kind="Leaf" offset="381" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="382" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="383" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_33_>
+        <_34_ kind="Struct" offset="384" length="11">
+          <ItemId kind="Leaf" offset="384" length="4" type="Scalar { Kind = U32 }" value="41801" />
+          <FieldA kind="Leaf" offset="388" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="390" length="2" type="Scalar { Kind = U16 }" value="264" />
+          <FieldC kind="Leaf" offset="392" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="393" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="394" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_34_>
+        <_35_ kind="Struct" offset="395" length="11">
+          <ItemId kind="Leaf" offset="395" length="4" type="Scalar { Kind = U32 }" value="41803" />
+          <FieldA kind="Leaf" offset="399" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="401" length="2" type="Scalar { Kind = U16 }" value="264" />
+          <FieldC kind="Leaf" offset="403" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="404" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="405" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_35_>
+        <_36_ kind="Struct" offset="406" length="11">
+          <ItemId kind="Leaf" offset="406" length="4" type="Scalar { Kind = U32 }" value="41805" />
+          <FieldA kind="Leaf" offset="410" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="412" length="2" type="Scalar { Kind = U16 }" value="264" />
+          <FieldC kind="Leaf" offset="414" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="415" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="416" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_36_>
+        <_37_ kind="Struct" offset="417" length="11">
+          <ItemId kind="Leaf" offset="417" length="4" type="Scalar { Kind = U32 }" value="41807" />
+          <FieldA kind="Leaf" offset="421" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="423" length="2" type="Scalar { Kind = U16 }" value="264" />
+          <FieldC kind="Leaf" offset="425" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="426" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="427" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_37_>
+        <_38_ kind="Struct" offset="428" length="11">
+          <ItemId kind="Leaf" offset="428" length="4" type="Scalar { Kind = U32 }" value="41809" />
+          <FieldA kind="Leaf" offset="432" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="434" length="2" type="Scalar { Kind = U16 }" value="264" />
+          <FieldC kind="Leaf" offset="436" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="437" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="438" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_38_>
+        <_39_ kind="Struct" offset="439" length="11">
+          <ItemId kind="Leaf" offset="439" length="4" type="Scalar { Kind = U32 }" value="41811" />
+          <FieldA kind="Leaf" offset="443" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="445" length="2" type="Scalar { Kind = U16 }" value="264" />
+          <FieldC kind="Leaf" offset="447" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="448" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="449" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_39_>
+        <_40_ kind="Struct" offset="450" length="11">
+          <ItemId kind="Leaf" offset="450" length="4" type="Scalar { Kind = U32 }" value="41813" />
+          <FieldA kind="Leaf" offset="454" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="456" length="2" type="Scalar { Kind = U16 }" value="264" />
+          <FieldC kind="Leaf" offset="458" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="459" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="460" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_40_>
+        <_41_ kind="Struct" offset="461" length="11">
+          <ItemId kind="Leaf" offset="461" length="4" type="Scalar { Kind = U32 }" value="41815" />
+          <FieldA kind="Leaf" offset="465" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="467" length="2" type="Scalar { Kind = U16 }" value="264" />
+          <FieldC kind="Leaf" offset="469" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="470" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldE kind="Leaf" offset="471" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_41_>
+        <_42_ kind="Struct" offset="472" length="11">
+          <ItemId kind="Leaf" offset="472" length="4" type="Scalar { Kind = U32 }" value="41817" />
+          <FieldA kind="Leaf" offset="476" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="478" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="480" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="481" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="482" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_42_>
+        <_43_ kind="Struct" offset="483" length="11">
+          <ItemId kind="Leaf" offset="483" length="4" type="Scalar { Kind = U32 }" value="41819" />
+          <FieldA kind="Leaf" offset="487" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="489" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="491" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="492" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="493" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_43_>
+        <_44_ kind="Struct" offset="494" length="11">
+          <ItemId kind="Leaf" offset="494" length="4" type="Scalar { Kind = U32 }" value="41829" />
+          <FieldA kind="Leaf" offset="498" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="500" length="2" type="Scalar { Kind = U16 }" value="90" />
+          <FieldC kind="Leaf" offset="502" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="503" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="504" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_44_>
+      </Entries>
+    </_0>
+    <_1 kind="Record" offset="505" length="380">
+      <GroupKey kind="Leaf" offset="505" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <EntryCount kind="Leaf" offset="507" length="4" type="Scalar { Kind = U32 }" value="34" />
+      <Entries kind="Array" offset="511" length="374" count="34">
+        <_0_ kind="Struct" offset="511" length="11">
+          <ItemId kind="Leaf" offset="511" length="4" type="Scalar { Kind = U32 }" value="41004" />
+          <FieldA kind="Leaf" offset="515" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="517" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="519" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="520" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="521" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_0_>
+        <_1_ kind="Struct" offset="522" length="11">
+          <ItemId kind="Leaf" offset="522" length="4" type="Scalar { Kind = U32 }" value="41009" />
+          <FieldA kind="Leaf" offset="526" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="528" length="2" type="Scalar { Kind = U16 }" value="819" />
+          <FieldC kind="Leaf" offset="530" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="531" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="532" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="533" length="11">
+          <ItemId kind="Leaf" offset="533" length="4" type="Scalar { Kind = U32 }" value="41015" />
+          <FieldA kind="Leaf" offset="537" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="539" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="541" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="542" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="543" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_2_>
+        <_3_ kind="Struct" offset="544" length="11">
+          <ItemId kind="Leaf" offset="544" length="4" type="Scalar { Kind = U32 }" value="41019" />
+          <FieldA kind="Leaf" offset="548" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="550" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="552" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="553" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="554" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="555" length="11">
+          <ItemId kind="Leaf" offset="555" length="4" type="Scalar { Kind = U32 }" value="41021" />
+          <FieldA kind="Leaf" offset="559" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="561" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="563" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="564" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="565" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_4_>
+        <_5_ kind="Struct" offset="566" length="11">
+          <ItemId kind="Leaf" offset="566" length="4" type="Scalar { Kind = U32 }" value="41037" />
+          <FieldA kind="Leaf" offset="570" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="572" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="574" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="575" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="576" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_5_>
+        <_6_ kind="Struct" offset="577" length="11">
+          <ItemId kind="Leaf" offset="577" length="4" type="Scalar { Kind = U32 }" value="41059" />
+          <FieldA kind="Leaf" offset="581" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="583" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="585" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="586" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="587" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_6_>
+        <_7_ kind="Struct" offset="588" length="11">
+          <ItemId kind="Leaf" offset="588" length="4" type="Scalar { Kind = U32 }" value="41546" />
+          <FieldA kind="Leaf" offset="592" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="594" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="596" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="597" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="598" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_7_>
+        <_8_ kind="Struct" offset="599" length="11">
+          <ItemId kind="Leaf" offset="599" length="4" type="Scalar { Kind = U32 }" value="41563" />
+          <FieldA kind="Leaf" offset="603" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="605" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="607" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="608" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="609" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_8_>
+        <_9_ kind="Struct" offset="610" length="11">
+          <ItemId kind="Leaf" offset="610" length="4" type="Scalar { Kind = U32 }" value="41709" />
+          <FieldA kind="Leaf" offset="614" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="616" length="2" type="Scalar { Kind = U16 }" value="819" />
+          <FieldC kind="Leaf" offset="618" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="619" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="620" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="621" length="11">
+          <ItemId kind="Leaf" offset="621" length="4" type="Scalar { Kind = U32 }" value="41721" />
+          <FieldA kind="Leaf" offset="625" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="627" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="629" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="630" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="631" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_10_>
+        <_11_ kind="Struct" offset="632" length="11">
+          <ItemId kind="Leaf" offset="632" length="4" type="Scalar { Kind = U32 }" value="41741" />
+          <FieldA kind="Leaf" offset="636" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="638" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="640" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="641" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="642" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_11_>
+        <_12_ kind="Struct" offset="643" length="11">
+          <ItemId kind="Leaf" offset="643" length="4" type="Scalar { Kind = U32 }" value="41743" />
+          <FieldA kind="Leaf" offset="647" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="649" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="651" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="652" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="653" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_12_>
+        <_13_ kind="Struct" offset="654" length="11">
+          <ItemId kind="Leaf" offset="654" length="4" type="Scalar { Kind = U32 }" value="41775" />
+          <FieldA kind="Leaf" offset="658" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="660" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="662" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="663" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="664" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_13_>
+        <_14_ kind="Struct" offset="665" length="11">
+          <ItemId kind="Leaf" offset="665" length="4" type="Scalar { Kind = U32 }" value="41785" />
+          <FieldA kind="Leaf" offset="669" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="671" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="673" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="674" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="675" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_14_>
+        <_15_ kind="Struct" offset="676" length="11">
+          <ItemId kind="Leaf" offset="676" length="4" type="Scalar { Kind = U32 }" value="41791" />
+          <FieldA kind="Leaf" offset="680" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="682" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="684" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="685" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="686" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_15_>
+        <_16_ kind="Struct" offset="687" length="11">
+          <ItemId kind="Leaf" offset="687" length="4" type="Scalar { Kind = U32 }" value="41817" />
+          <FieldA kind="Leaf" offset="691" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="693" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="695" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="696" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="697" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_16_>
+        <_17_ kind="Struct" offset="698" length="11">
+          <ItemId kind="Leaf" offset="698" length="4" type="Scalar { Kind = U32 }" value="41819" />
+          <FieldA kind="Leaf" offset="702" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="704" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="706" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="707" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="708" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_17_>
+        <_18_ kind="Struct" offset="709" length="11">
+          <ItemId kind="Leaf" offset="709" length="4" type="Scalar { Kind = U32 }" value="41829" />
+          <FieldA kind="Leaf" offset="713" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="715" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="717" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <FieldD kind="Leaf" offset="718" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldE kind="Leaf" offset="719" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_18_>
+        <_19_ kind="Struct" offset="720" length="11">
+          <ItemId kind="Leaf" offset="720" length="4" type="Scalar { Kind = U32 }" value="41843" />
+          <FieldA kind="Leaf" offset="724" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="726" length="2" type="Scalar { Kind = U16 }" value="44" />
+          <FieldC kind="Leaf" offset="728" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="729" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="730" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_19_>
+        <_20_ kind="Struct" offset="731" length="11">
+          <ItemId kind="Leaf" offset="731" length="4" type="Scalar { Kind = U32 }" value="41847" />
+          <FieldA kind="Leaf" offset="735" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="737" length="2" type="Scalar { Kind = U16 }" value="44" />
+          <FieldC kind="Leaf" offset="739" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="740" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="741" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_20_>
+        <_21_ kind="Struct" offset="742" length="11">
+          <ItemId kind="Leaf" offset="742" length="4" type="Scalar { Kind = U32 }" value="41849" />
+          <FieldA kind="Leaf" offset="746" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="748" length="2" type="Scalar { Kind = U16 }" value="44" />
+          <FieldC kind="Leaf" offset="750" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="751" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="752" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_21_>
+        <_22_ kind="Struct" offset="753" length="11">
+          <ItemId kind="Leaf" offset="753" length="4" type="Scalar { Kind = U32 }" value="41851" />
+          <FieldA kind="Leaf" offset="757" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="759" length="2" type="Scalar { Kind = U16 }" value="44" />
+          <FieldC kind="Leaf" offset="761" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="762" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="763" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_22_>
+        <_23_ kind="Struct" offset="764" length="11">
+          <ItemId kind="Leaf" offset="764" length="4" type="Scalar { Kind = U32 }" value="41853" />
+          <FieldA kind="Leaf" offset="768" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="770" length="2" type="Scalar { Kind = U16 }" value="45" />
+          <FieldC kind="Leaf" offset="772" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="773" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="774" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_23_>
+        <_24_ kind="Struct" offset="775" length="11">
+          <ItemId kind="Leaf" offset="775" length="4" type="Scalar { Kind = U32 }" value="41859" />
+          <FieldA kind="Leaf" offset="779" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="781" length="2" type="Scalar { Kind = U16 }" value="44" />
+          <FieldC kind="Leaf" offset="783" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="784" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="785" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_24_>
+        <_25_ kind="Struct" offset="786" length="11">
+          <ItemId kind="Leaf" offset="786" length="4" type="Scalar { Kind = U32 }" value="41861" />
+          <FieldA kind="Leaf" offset="790" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="792" length="2" type="Scalar { Kind = U16 }" value="44" />
+          <FieldC kind="Leaf" offset="794" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="795" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="796" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_25_>
+        <_26_ kind="Struct" offset="797" length="11">
+          <ItemId kind="Leaf" offset="797" length="4" type="Scalar { Kind = U32 }" value="41863" />
+          <FieldA kind="Leaf" offset="801" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="803" length="2" type="Scalar { Kind = U16 }" value="44" />
+          <FieldC kind="Leaf" offset="805" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="806" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="807" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_26_>
+        <_27_ kind="Struct" offset="808" length="11">
+          <ItemId kind="Leaf" offset="808" length="4" type="Scalar { Kind = U32 }" value="41865" />
+          <FieldA kind="Leaf" offset="812" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="814" length="2" type="Scalar { Kind = U16 }" value="44" />
+          <FieldC kind="Leaf" offset="816" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="817" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="818" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_27_>
+        <_28_ kind="Struct" offset="819" length="11">
+          <ItemId kind="Leaf" offset="819" length="4" type="Scalar { Kind = U32 }" value="41867" />
+          <FieldA kind="Leaf" offset="823" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="825" length="2" type="Scalar { Kind = U16 }" value="44" />
+          <FieldC kind="Leaf" offset="827" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="828" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="829" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_28_>
+        <_29_ kind="Struct" offset="830" length="11">
+          <ItemId kind="Leaf" offset="830" length="4" type="Scalar { Kind = U32 }" value="41873" />
+          <FieldA kind="Leaf" offset="834" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="836" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="838" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="839" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="840" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_29_>
+        <_30_ kind="Struct" offset="841" length="11">
+          <ItemId kind="Leaf" offset="841" length="4" type="Scalar { Kind = U32 }" value="41875" />
+          <FieldA kind="Leaf" offset="845" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="847" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="849" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="850" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="851" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_30_>
+        <_31_ kind="Struct" offset="852" length="11">
+          <ItemId kind="Leaf" offset="852" length="4" type="Scalar { Kind = U32 }" value="41877" />
+          <FieldA kind="Leaf" offset="856" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="858" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="860" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="861" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="862" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_31_>
+        <_32_ kind="Struct" offset="863" length="11">
+          <ItemId kind="Leaf" offset="863" length="4" type="Scalar { Kind = U32 }" value="41879" />
+          <FieldA kind="Leaf" offset="867" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="869" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="871" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="872" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="873" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_32_>
+        <_33_ kind="Struct" offset="874" length="11">
+          <ItemId kind="Leaf" offset="874" length="4" type="Scalar { Kind = U32 }" value="41881" />
+          <FieldA kind="Leaf" offset="878" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="880" length="2" type="Scalar { Kind = U16 }" value="43" />
+          <FieldC kind="Leaf" offset="882" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="883" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="884" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_33_>
+      </Entries>
+    </_1>
+    <_2 kind="Record" offset="885" length="391">
+      <GroupKey kind="Leaf" offset="885" length="2" type="Scalar { Kind = U16 }" value="3" />
+      <EntryCount kind="Leaf" offset="887" length="4" type="Scalar { Kind = U32 }" value="35" />
+      <Entries kind="Array" offset="891" length="385" count="35">
+        <_0_ kind="Struct" offset="891" length="11">
+          <ItemId kind="Leaf" offset="891" length="4" type="Scalar { Kind = U32 }" value="41003" />
+          <FieldA kind="Leaf" offset="895" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="897" length="2" type="Scalar { Kind = U16 }" value="84" />
+          <FieldC kind="Leaf" offset="899" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="900" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="901" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_0_>
+        <_1_ kind="Struct" offset="902" length="11">
+          <ItemId kind="Leaf" offset="902" length="4" type="Scalar { Kind = U32 }" value="41004" />
+          <FieldA kind="Leaf" offset="906" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="908" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="910" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="911" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="912" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="913" length="11">
+          <ItemId kind="Leaf" offset="913" length="4" type="Scalar { Kind = U32 }" value="41012" />
+          <FieldA kind="Leaf" offset="917" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="919" length="2" type="Scalar { Kind = U16 }" value="84" />
+          <FieldC kind="Leaf" offset="921" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="922" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="923" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_2_>
+        <_3_ kind="Struct" offset="924" length="11">
+          <ItemId kind="Leaf" offset="924" length="4" type="Scalar { Kind = U32 }" value="41015" />
+          <FieldA kind="Leaf" offset="928" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="930" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="932" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="933" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="934" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="935" length="11">
+          <ItemId kind="Leaf" offset="935" length="4" type="Scalar { Kind = U32 }" value="41019" />
+          <FieldA kind="Leaf" offset="939" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="941" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="943" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="944" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="945" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="946" length="11">
+          <ItemId kind="Leaf" offset="946" length="4" type="Scalar { Kind = U32 }" value="41021" />
+          <FieldA kind="Leaf" offset="950" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="952" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="954" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="955" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="956" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="957" length="11">
+          <ItemId kind="Leaf" offset="957" length="4" type="Scalar { Kind = U32 }" value="41029" />
+          <FieldA kind="Leaf" offset="961" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="963" length="2" type="Scalar { Kind = U16 }" value="83" />
+          <FieldC kind="Leaf" offset="965" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="966" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="967" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_6_>
+        <_7_ kind="Struct" offset="968" length="11">
+          <ItemId kind="Leaf" offset="968" length="4" type="Scalar { Kind = U32 }" value="41031" />
+          <FieldA kind="Leaf" offset="972" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="974" length="2" type="Scalar { Kind = U16 }" value="83" />
+          <FieldC kind="Leaf" offset="976" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="977" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="978" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_7_>
+        <_8_ kind="Struct" offset="979" length="11">
+          <ItemId kind="Leaf" offset="979" length="4" type="Scalar { Kind = U32 }" value="41034" />
+          <FieldA kind="Leaf" offset="983" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="985" length="2" type="Scalar { Kind = U16 }" value="83" />
+          <FieldC kind="Leaf" offset="987" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="988" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="989" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_8_>
+        <_9_ kind="Struct" offset="990" length="11">
+          <ItemId kind="Leaf" offset="990" length="4" type="Scalar { Kind = U32 }" value="41035" />
+          <FieldA kind="Leaf" offset="994" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="996" length="2" type="Scalar { Kind = U16 }" value="83" />
+          <FieldC kind="Leaf" offset="998" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="999" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1000" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_9_>
+        <_10_ kind="Struct" offset="1001" length="11">
+          <ItemId kind="Leaf" offset="1001" length="4" type="Scalar { Kind = U32 }" value="41036" />
+          <FieldA kind="Leaf" offset="1005" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1007" length="2" type="Scalar { Kind = U16 }" value="83" />
+          <FieldC kind="Leaf" offset="1009" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1010" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1011" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_10_>
+        <_11_ kind="Struct" offset="1012" length="11">
+          <ItemId kind="Leaf" offset="1012" length="4" type="Scalar { Kind = U32 }" value="41037" />
+          <FieldA kind="Leaf" offset="1016" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1018" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="1020" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1021" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1022" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_11_>
+        <_12_ kind="Struct" offset="1023" length="11">
+          <ItemId kind="Leaf" offset="1023" length="4" type="Scalar { Kind = U32 }" value="41052" />
+          <FieldA kind="Leaf" offset="1027" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1029" length="2" type="Scalar { Kind = U16 }" value="83" />
+          <FieldC kind="Leaf" offset="1031" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1032" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1033" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_12_>
+        <_13_ kind="Struct" offset="1034" length="11">
+          <ItemId kind="Leaf" offset="1034" length="4" type="Scalar { Kind = U32 }" value="41059" />
+          <FieldA kind="Leaf" offset="1038" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1040" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="1042" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1043" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1044" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_13_>
+        <_14_ kind="Struct" offset="1045" length="11">
+          <ItemId kind="Leaf" offset="1045" length="4" type="Scalar { Kind = U32 }" value="41546" />
+          <FieldA kind="Leaf" offset="1049" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1051" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="1053" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1054" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1055" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_14_>
+        <_15_ kind="Struct" offset="1056" length="11">
+          <ItemId kind="Leaf" offset="1056" length="4" type="Scalar { Kind = U32 }" value="41563" />
+          <FieldA kind="Leaf" offset="1060" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1062" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="1064" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1065" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1066" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_15_>
+        <_16_ kind="Struct" offset="1067" length="11">
+          <ItemId kind="Leaf" offset="1067" length="4" type="Scalar { Kind = U32 }" value="41663" />
+          <FieldA kind="Leaf" offset="1071" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1073" length="2" type="Scalar { Kind = U16 }" value="84" />
+          <FieldC kind="Leaf" offset="1075" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1076" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1077" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_16_>
+        <_17_ kind="Struct" offset="1078" length="11">
+          <ItemId kind="Leaf" offset="1078" length="4" type="Scalar { Kind = U32 }" value="41843" />
+          <FieldA kind="Leaf" offset="1082" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1084" length="2" type="Scalar { Kind = U16 }" value="392" />
+          <FieldC kind="Leaf" offset="1086" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1087" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1088" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_17_>
+        <_18_ kind="Struct" offset="1089" length="11">
+          <ItemId kind="Leaf" offset="1089" length="4" type="Scalar { Kind = U32 }" value="41847" />
+          <FieldA kind="Leaf" offset="1093" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1095" length="2" type="Scalar { Kind = U16 }" value="392" />
+          <FieldC kind="Leaf" offset="1097" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1098" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1099" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_18_>
+        <_19_ kind="Struct" offset="1100" length="11">
+          <ItemId kind="Leaf" offset="1100" length="4" type="Scalar { Kind = U32 }" value="41849" />
+          <FieldA kind="Leaf" offset="1104" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1106" length="2" type="Scalar { Kind = U16 }" value="392" />
+          <FieldC kind="Leaf" offset="1108" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1109" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1110" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_19_>
+        <_20_ kind="Struct" offset="1111" length="11">
+          <ItemId kind="Leaf" offset="1111" length="4" type="Scalar { Kind = U32 }" value="41851" />
+          <FieldA kind="Leaf" offset="1115" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1117" length="2" type="Scalar { Kind = U16 }" value="392" />
+          <FieldC kind="Leaf" offset="1119" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1120" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1121" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_20_>
+        <_21_ kind="Struct" offset="1122" length="11">
+          <ItemId kind="Leaf" offset="1122" length="4" type="Scalar { Kind = U32 }" value="41853" />
+          <FieldA kind="Leaf" offset="1126" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1128" length="2" type="Scalar { Kind = U16 }" value="392" />
+          <FieldC kind="Leaf" offset="1130" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1131" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1132" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_21_>
+        <_22_ kind="Struct" offset="1133" length="11">
+          <ItemId kind="Leaf" offset="1133" length="4" type="Scalar { Kind = U32 }" value="41859" />
+          <FieldA kind="Leaf" offset="1137" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1139" length="2" type="Scalar { Kind = U16 }" value="392" />
+          <FieldC kind="Leaf" offset="1141" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1142" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1143" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_22_>
+        <_23_ kind="Struct" offset="1144" length="11">
+          <ItemId kind="Leaf" offset="1144" length="4" type="Scalar { Kind = U32 }" value="41861" />
+          <FieldA kind="Leaf" offset="1148" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1150" length="2" type="Scalar { Kind = U16 }" value="392" />
+          <FieldC kind="Leaf" offset="1152" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1153" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1154" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_23_>
+        <_24_ kind="Struct" offset="1155" length="11">
+          <ItemId kind="Leaf" offset="1155" length="4" type="Scalar { Kind = U32 }" value="41863" />
+          <FieldA kind="Leaf" offset="1159" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1161" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="1163" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1164" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1165" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_24_>
+        <_25_ kind="Struct" offset="1166" length="11">
+          <ItemId kind="Leaf" offset="1166" length="4" type="Scalar { Kind = U32 }" value="41865" />
+          <FieldA kind="Leaf" offset="1170" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1172" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="1174" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1175" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1176" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_25_>
+        <_26_ kind="Struct" offset="1177" length="11">
+          <ItemId kind="Leaf" offset="1177" length="4" type="Scalar { Kind = U32 }" value="41867" />
+          <FieldA kind="Leaf" offset="1181" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1183" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="1185" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1186" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1187" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_26_>
+        <_27_ kind="Struct" offset="1188" length="11">
+          <ItemId kind="Leaf" offset="1188" length="4" type="Scalar { Kind = U32 }" value="41873" />
+          <FieldA kind="Leaf" offset="1192" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1194" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="1196" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1197" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1198" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_27_>
+        <_28_ kind="Struct" offset="1199" length="11">
+          <ItemId kind="Leaf" offset="1199" length="4" type="Scalar { Kind = U32 }" value="41875" />
+          <FieldA kind="Leaf" offset="1203" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1205" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="1207" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1208" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1209" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_28_>
+        <_29_ kind="Struct" offset="1210" length="11">
+          <ItemId kind="Leaf" offset="1210" length="4" type="Scalar { Kind = U32 }" value="41877" />
+          <FieldA kind="Leaf" offset="1214" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1216" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="1218" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1219" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1220" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_29_>
+        <_30_ kind="Struct" offset="1221" length="11">
+          <ItemId kind="Leaf" offset="1221" length="4" type="Scalar { Kind = U32 }" value="41879" />
+          <FieldA kind="Leaf" offset="1225" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1227" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="1229" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1230" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1231" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_30_>
+        <_31_ kind="Struct" offset="1232" length="11">
+          <ItemId kind="Leaf" offset="1232" length="4" type="Scalar { Kind = U32 }" value="41881" />
+          <FieldA kind="Leaf" offset="1236" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1238" length="2" type="Scalar { Kind = U16 }" value="391" />
+          <FieldC kind="Leaf" offset="1240" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1241" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldE kind="Leaf" offset="1242" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_31_>
+        <_32_ kind="Struct" offset="1243" length="11">
+          <ItemId kind="Leaf" offset="1243" length="4" type="Scalar { Kind = U32 }" value="41883" />
+          <FieldA kind="Leaf" offset="1247" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1249" length="2" type="Scalar { Kind = U16 }" value="84" />
+          <FieldC kind="Leaf" offset="1251" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1252" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1253" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_32_>
+        <_33_ kind="Struct" offset="1254" length="11">
+          <ItemId kind="Leaf" offset="1254" length="4" type="Scalar { Kind = U32 }" value="41885" />
+          <FieldA kind="Leaf" offset="1258" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1260" length="2" type="Scalar { Kind = U16 }" value="83" />
+          <FieldC kind="Leaf" offset="1262" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1263" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1264" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_33_>
+        <_34_ kind="Struct" offset="1265" length="11">
+          <ItemId kind="Leaf" offset="1265" length="4" type="Scalar { Kind = U32 }" value="44061" />
+          <FieldA kind="Leaf" offset="1269" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1271" length="2" type="Scalar { Kind = U16 }" value="83" />
+          <FieldC kind="Leaf" offset="1273" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1274" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1275" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_34_>
+      </Entries>
+    </_2>
+    <_3 kind="Record" offset="1276" length="226">
+      <GroupKey kind="Leaf" offset="1276" length="2" type="Scalar { Kind = U16 }" value="4" />
+      <EntryCount kind="Leaf" offset="1278" length="4" type="Scalar { Kind = U32 }" value="20" />
+      <Entries kind="Array" offset="1282" length="220" count="20">
+        <_0_ kind="Struct" offset="1282" length="11">
+          <ItemId kind="Leaf" offset="1282" length="4" type="Scalar { Kind = U32 }" value="41003" />
+          <FieldA kind="Leaf" offset="1286" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1288" length="2" type="Scalar { Kind = U16 }" value="750" />
+          <FieldC kind="Leaf" offset="1290" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1291" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1292" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1293" length="11">
+          <ItemId kind="Leaf" offset="1293" length="4" type="Scalar { Kind = U32 }" value="41008" />
+          <FieldA kind="Leaf" offset="1297" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1299" length="2" type="Scalar { Kind = U16 }" value="125" />
+          <FieldC kind="Leaf" offset="1301" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1302" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1303" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_1_>
+        <_2_ kind="Struct" offset="1304" length="11">
+          <ItemId kind="Leaf" offset="1304" length="4" type="Scalar { Kind = U32 }" value="41011" />
+          <FieldA kind="Leaf" offset="1308" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1310" length="2" type="Scalar { Kind = U16 }" value="125" />
+          <FieldC kind="Leaf" offset="1312" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1313" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1314" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_2_>
+        <_3_ kind="Struct" offset="1315" length="11">
+          <ItemId kind="Leaf" offset="1315" length="4" type="Scalar { Kind = U32 }" value="41012" />
+          <FieldA kind="Leaf" offset="1319" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1321" length="2" type="Scalar { Kind = U16 }" value="750" />
+          <FieldC kind="Leaf" offset="1323" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1324" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1325" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="1326" length="11">
+          <ItemId kind="Leaf" offset="1326" length="4" type="Scalar { Kind = U32 }" value="41029" />
+          <FieldA kind="Leaf" offset="1330" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1332" length="2" type="Scalar { Kind = U16 }" value="750" />
+          <FieldC kind="Leaf" offset="1334" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1335" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1336" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="1337" length="11">
+          <ItemId kind="Leaf" offset="1337" length="4" type="Scalar { Kind = U32 }" value="41031" />
+          <FieldA kind="Leaf" offset="1341" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1343" length="2" type="Scalar { Kind = U16 }" value="750" />
+          <FieldC kind="Leaf" offset="1345" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1346" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1347" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="1348" length="11">
+          <ItemId kind="Leaf" offset="1348" length="4" type="Scalar { Kind = U32 }" value="41032" />
+          <FieldA kind="Leaf" offset="1352" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1354" length="2" type="Scalar { Kind = U16 }" value="125" />
+          <FieldC kind="Leaf" offset="1356" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1357" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1358" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_6_>
+        <_7_ kind="Struct" offset="1359" length="11">
+          <ItemId kind="Leaf" offset="1359" length="4" type="Scalar { Kind = U32 }" value="41034" />
+          <FieldA kind="Leaf" offset="1363" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1365" length="2" type="Scalar { Kind = U16 }" value="750" />
+          <FieldC kind="Leaf" offset="1367" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1368" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1369" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_7_>
+        <_8_ kind="Struct" offset="1370" length="11">
+          <ItemId kind="Leaf" offset="1370" length="4" type="Scalar { Kind = U32 }" value="41035" />
+          <FieldA kind="Leaf" offset="1374" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1376" length="2" type="Scalar { Kind = U16 }" value="750" />
+          <FieldC kind="Leaf" offset="1378" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1379" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1380" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="1381" length="11">
+          <ItemId kind="Leaf" offset="1381" length="4" type="Scalar { Kind = U32 }" value="41036" />
+          <FieldA kind="Leaf" offset="1385" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1387" length="2" type="Scalar { Kind = U16 }" value="750" />
+          <FieldC kind="Leaf" offset="1389" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1390" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1391" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="1392" length="11">
+          <ItemId kind="Leaf" offset="1392" length="4" type="Scalar { Kind = U32 }" value="41052" />
+          <FieldA kind="Leaf" offset="1396" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1398" length="2" type="Scalar { Kind = U16 }" value="750" />
+          <FieldC kind="Leaf" offset="1400" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1401" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1402" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_10_>
+        <_11_ kind="Struct" offset="1403" length="11">
+          <ItemId kind="Leaf" offset="1403" length="4" type="Scalar { Kind = U32 }" value="41548" />
+          <FieldA kind="Leaf" offset="1407" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1409" length="2" type="Scalar { Kind = U16 }" value="125" />
+          <FieldC kind="Leaf" offset="1411" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1412" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1413" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_11_>
+        <_12_ kind="Struct" offset="1414" length="11">
+          <ItemId kind="Leaf" offset="1414" length="4" type="Scalar { Kind = U32 }" value="41638" />
+          <FieldA kind="Leaf" offset="1418" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1420" length="2" type="Scalar { Kind = U16 }" value="125" />
+          <FieldC kind="Leaf" offset="1422" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1423" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1424" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_12_>
+        <_13_ kind="Struct" offset="1425" length="11">
+          <ItemId kind="Leaf" offset="1425" length="4" type="Scalar { Kind = U32 }" value="41663" />
+          <FieldA kind="Leaf" offset="1429" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1431" length="2" type="Scalar { Kind = U16 }" value="750" />
+          <FieldC kind="Leaf" offset="1433" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1434" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1435" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_13_>
+        <_14_ kind="Struct" offset="1436" length="11">
+          <ItemId kind="Leaf" offset="1436" length="4" type="Scalar { Kind = U32 }" value="41839" />
+          <FieldA kind="Leaf" offset="1440" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1442" length="2" type="Scalar { Kind = U16 }" value="125" />
+          <FieldC kind="Leaf" offset="1444" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1445" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1446" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_14_>
+        <_15_ kind="Struct" offset="1447" length="11">
+          <ItemId kind="Leaf" offset="1447" length="4" type="Scalar { Kind = U32 }" value="41841" />
+          <FieldA kind="Leaf" offset="1451" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1453" length="2" type="Scalar { Kind = U16 }" value="125" />
+          <FieldC kind="Leaf" offset="1455" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1456" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1457" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_15_>
+        <_16_ kind="Struct" offset="1458" length="11">
+          <ItemId kind="Leaf" offset="1458" length="4" type="Scalar { Kind = U32 }" value="41845" />
+          <FieldA kind="Leaf" offset="1462" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1464" length="2" type="Scalar { Kind = U16 }" value="125" />
+          <FieldC kind="Leaf" offset="1466" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1467" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1468" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_16_>
+        <_17_ kind="Struct" offset="1469" length="11">
+          <ItemId kind="Leaf" offset="1469" length="4" type="Scalar { Kind = U32 }" value="41883" />
+          <FieldA kind="Leaf" offset="1473" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1475" length="2" type="Scalar { Kind = U16 }" value="750" />
+          <FieldC kind="Leaf" offset="1477" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1478" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1479" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_17_>
+        <_18_ kind="Struct" offset="1480" length="11">
+          <ItemId kind="Leaf" offset="1480" length="4" type="Scalar { Kind = U32 }" value="41885" />
+          <FieldA kind="Leaf" offset="1484" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1486" length="2" type="Scalar { Kind = U16 }" value="750" />
+          <FieldC kind="Leaf" offset="1488" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1489" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1490" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_18_>
+        <_19_ kind="Struct" offset="1491" length="11">
+          <ItemId kind="Leaf" offset="1491" length="4" type="Scalar { Kind = U32 }" value="44061" />
+          <FieldA kind="Leaf" offset="1495" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1497" length="2" type="Scalar { Kind = U16 }" value="750" />
+          <FieldC kind="Leaf" offset="1499" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <FieldD kind="Leaf" offset="1500" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldE kind="Leaf" offset="1501" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_19_>
+      </Entries>
+    </_3>
+    <_4 kind="Record" offset="1502" length="171">
+      <GroupKey kind="Leaf" offset="1502" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <EntryCount kind="Leaf" offset="1504" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <Entries kind="Array" offset="1508" length="165" count="15">
+        <_0_ kind="Struct" offset="1508" length="11">
+          <ItemId kind="Leaf" offset="1508" length="4" type="Scalar { Kind = U32 }" value="41008" />
+          <FieldA kind="Leaf" offset="1512" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1514" length="2" type="Scalar { Kind = U16 }" value="1125" />
+          <FieldC kind="Leaf" offset="1516" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1517" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1518" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1519" length="11">
+          <ItemId kind="Leaf" offset="1519" length="4" type="Scalar { Kind = U32 }" value="41011" />
+          <FieldA kind="Leaf" offset="1523" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1525" length="2" type="Scalar { Kind = U16 }" value="1125" />
+          <FieldC kind="Leaf" offset="1527" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1528" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1529" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="1530" length="11">
+          <ItemId kind="Leaf" offset="1530" length="4" type="Scalar { Kind = U32 }" value="41032" />
+          <FieldA kind="Leaf" offset="1534" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1536" length="2" type="Scalar { Kind = U16 }" value="1125" />
+          <FieldC kind="Leaf" offset="1538" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1539" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1540" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="1541" length="11">
+          <ItemId kind="Leaf" offset="1541" length="4" type="Scalar { Kind = U32 }" value="41043" />
+          <FieldA kind="Leaf" offset="1545" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1547" length="2" type="Scalar { Kind = U16 }" value="143" />
+          <FieldC kind="Leaf" offset="1549" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1550" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1551" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="1552" length="11">
+          <ItemId kind="Leaf" offset="1552" length="4" type="Scalar { Kind = U32 }" value="41066" />
+          <FieldA kind="Leaf" offset="1556" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1558" length="2" type="Scalar { Kind = U16 }" value="143" />
+          <FieldC kind="Leaf" offset="1560" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1561" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1562" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_4_>
+        <_5_ kind="Struct" offset="1563" length="11">
+          <ItemId kind="Leaf" offset="1563" length="4" type="Scalar { Kind = U32 }" value="41540" />
+          <FieldA kind="Leaf" offset="1567" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1569" length="2" type="Scalar { Kind = U16 }" value="143" />
+          <FieldC kind="Leaf" offset="1571" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1572" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1573" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_5_>
+        <_6_ kind="Struct" offset="1574" length="11">
+          <ItemId kind="Leaf" offset="1574" length="4" type="Scalar { Kind = U32 }" value="41548" />
+          <FieldA kind="Leaf" offset="1578" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1580" length="2" type="Scalar { Kind = U16 }" value="1125" />
+          <FieldC kind="Leaf" offset="1582" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1583" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1584" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_6_>
+        <_7_ kind="Struct" offset="1585" length="11">
+          <ItemId kind="Leaf" offset="1585" length="4" type="Scalar { Kind = U32 }" value="41623" />
+          <FieldA kind="Leaf" offset="1589" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1591" length="2" type="Scalar { Kind = U16 }" value="143" />
+          <FieldC kind="Leaf" offset="1593" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1594" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1595" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_7_>
+        <_8_ kind="Struct" offset="1596" length="11">
+          <ItemId kind="Leaf" offset="1596" length="4" type="Scalar { Kind = U32 }" value="41638" />
+          <FieldA kind="Leaf" offset="1600" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1602" length="2" type="Scalar { Kind = U16 }" value="1125" />
+          <FieldC kind="Leaf" offset="1604" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1605" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1606" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="1607" length="11">
+          <ItemId kind="Leaf" offset="1607" length="4" type="Scalar { Kind = U32 }" value="41683" />
+          <FieldA kind="Leaf" offset="1611" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1613" length="2" type="Scalar { Kind = U16 }" value="143" />
+          <FieldC kind="Leaf" offset="1615" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1616" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1617" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_9_>
+        <_10_ kind="Struct" offset="1618" length="11">
+          <ItemId kind="Leaf" offset="1618" length="4" type="Scalar { Kind = U32 }" value="41839" />
+          <FieldA kind="Leaf" offset="1622" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1624" length="2" type="Scalar { Kind = U16 }" value="1125" />
+          <FieldC kind="Leaf" offset="1626" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1627" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1628" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_10_>
+        <_11_ kind="Struct" offset="1629" length="11">
+          <ItemId kind="Leaf" offset="1629" length="4" type="Scalar { Kind = U32 }" value="41841" />
+          <FieldA kind="Leaf" offset="1633" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1635" length="2" type="Scalar { Kind = U16 }" value="1125" />
+          <FieldC kind="Leaf" offset="1637" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1638" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1639" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_11_>
+        <_12_ kind="Struct" offset="1640" length="11">
+          <ItemId kind="Leaf" offset="1640" length="4" type="Scalar { Kind = U32 }" value="41845" />
+          <FieldA kind="Leaf" offset="1644" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1646" length="2" type="Scalar { Kind = U16 }" value="1125" />
+          <FieldC kind="Leaf" offset="1648" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1649" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldE kind="Leaf" offset="1650" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_12_>
+        <_13_ kind="Struct" offset="1651" length="11">
+          <ItemId kind="Leaf" offset="1651" length="4" type="Scalar { Kind = U32 }" value="41887" />
+          <FieldA kind="Leaf" offset="1655" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1657" length="2" type="Scalar { Kind = U16 }" value="143" />
+          <FieldC kind="Leaf" offset="1659" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1660" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1661" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_13_>
+        <_14_ kind="Struct" offset="1662" length="11">
+          <ItemId kind="Leaf" offset="1662" length="4" type="Scalar { Kind = U32 }" value="41889" />
+          <FieldA kind="Leaf" offset="1666" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1668" length="2" type="Scalar { Kind = U16 }" value="142" />
+          <FieldC kind="Leaf" offset="1670" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1671" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1672" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_14_>
+      </Entries>
+    </_4>
+    <_5 kind="Record" offset="1673" length="204">
+      <GroupKey kind="Leaf" offset="1673" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <EntryCount kind="Leaf" offset="1675" length="4" type="Scalar { Kind = U32 }" value="18" />
+      <Entries kind="Array" offset="1679" length="198" count="18">
+        <_0_ kind="Struct" offset="1679" length="11">
+          <ItemId kind="Leaf" offset="1679" length="4" type="Scalar { Kind = U32 }" value="41043" />
+          <FieldA kind="Leaf" offset="1683" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1685" length="2" type="Scalar { Kind = U16 }" value="1286" />
+          <FieldC kind="Leaf" offset="1687" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1688" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1689" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="1690" length="11">
+          <ItemId kind="Leaf" offset="1690" length="4" type="Scalar { Kind = U32 }" value="41066" />
+          <FieldA kind="Leaf" offset="1694" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1696" length="2" type="Scalar { Kind = U16 }" value="1286" />
+          <FieldC kind="Leaf" offset="1698" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1699" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1700" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="1701" length="11">
+          <ItemId kind="Leaf" offset="1701" length="4" type="Scalar { Kind = U32 }" value="41540" />
+          <FieldA kind="Leaf" offset="1705" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1707" length="2" type="Scalar { Kind = U16 }" value="1286" />
+          <FieldC kind="Leaf" offset="1709" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1710" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1711" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="1712" length="11">
+          <ItemId kind="Leaf" offset="1712" length="4" type="Scalar { Kind = U32 }" value="41550" />
+          <FieldA kind="Leaf" offset="1716" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1718" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="1720" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1721" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1722" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="1723" length="11">
+          <ItemId kind="Leaf" offset="1723" length="4" type="Scalar { Kind = U32 }" value="41551" />
+          <FieldA kind="Leaf" offset="1727" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1729" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="1731" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1732" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1733" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_4_>
+        <_5_ kind="Struct" offset="1734" length="11">
+          <ItemId kind="Leaf" offset="1734" length="4" type="Scalar { Kind = U32 }" value="41552" />
+          <FieldA kind="Leaf" offset="1738" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1740" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="1742" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1743" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1744" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_5_>
+        <_6_ kind="Struct" offset="1745" length="11">
+          <ItemId kind="Leaf" offset="1745" length="4" type="Scalar { Kind = U32 }" value="41553" />
+          <FieldA kind="Leaf" offset="1749" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1751" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="1753" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1754" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1755" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_6_>
+        <_7_ kind="Struct" offset="1756" length="11">
+          <ItemId kind="Leaf" offset="1756" length="4" type="Scalar { Kind = U32 }" value="41623" />
+          <FieldA kind="Leaf" offset="1760" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1762" length="2" type="Scalar { Kind = U16 }" value="1285" />
+          <FieldC kind="Leaf" offset="1764" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1765" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1766" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_7_>
+        <_8_ kind="Struct" offset="1767" length="11">
+          <ItemId kind="Leaf" offset="1767" length="4" type="Scalar { Kind = U32 }" value="41643" />
+          <FieldA kind="Leaf" offset="1771" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1773" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="1775" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1776" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1777" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_8_>
+        <_9_ kind="Struct" offset="1778" length="11">
+          <ItemId kind="Leaf" offset="1778" length="4" type="Scalar { Kind = U32 }" value="41647" />
+          <FieldA kind="Leaf" offset="1782" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1784" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="1786" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1787" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1788" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_9_>
+        <_10_ kind="Struct" offset="1789" length="11">
+          <ItemId kind="Leaf" offset="1789" length="4" type="Scalar { Kind = U32 }" value="41651" />
+          <FieldA kind="Leaf" offset="1793" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1795" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="1797" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1798" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1799" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_10_>
+        <_11_ kind="Struct" offset="1800" length="11">
+          <ItemId kind="Leaf" offset="1800" length="4" type="Scalar { Kind = U32 }" value="41683" />
+          <FieldA kind="Leaf" offset="1804" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1806" length="2" type="Scalar { Kind = U16 }" value="1286" />
+          <FieldC kind="Leaf" offset="1808" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1809" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1810" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_11_>
+        <_12_ kind="Struct" offset="1811" length="11">
+          <ItemId kind="Leaf" offset="1811" length="4" type="Scalar { Kind = U32 }" value="41691" />
+          <FieldA kind="Leaf" offset="1815" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1817" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="1819" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1820" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1821" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_12_>
+        <_13_ kind="Struct" offset="1822" length="11">
+          <ItemId kind="Leaf" offset="1822" length="4" type="Scalar { Kind = U32 }" value="41692" />
+          <FieldA kind="Leaf" offset="1826" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1828" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="1830" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1831" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1832" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_13_>
+        <_14_ kind="Struct" offset="1833" length="11">
+          <ItemId kind="Leaf" offset="1833" length="4" type="Scalar { Kind = U32 }" value="41699" />
+          <FieldA kind="Leaf" offset="1837" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1839" length="2" type="Scalar { Kind = U16 }" value="90" />
+          <FieldC kind="Leaf" offset="1841" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1842" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1843" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_14_>
+        <_15_ kind="Struct" offset="1844" length="11">
+          <ItemId kind="Leaf" offset="1844" length="4" type="Scalar { Kind = U32 }" value="41703" />
+          <FieldA kind="Leaf" offset="1848" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1850" length="2" type="Scalar { Kind = U16 }" value="91" />
+          <FieldC kind="Leaf" offset="1852" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1853" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1854" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_15_>
+        <_16_ kind="Struct" offset="1855" length="11">
+          <ItemId kind="Leaf" offset="1855" length="4" type="Scalar { Kind = U32 }" value="41887" />
+          <FieldA kind="Leaf" offset="1859" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1861" length="2" type="Scalar { Kind = U16 }" value="1286" />
+          <FieldC kind="Leaf" offset="1863" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1864" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1865" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_16_>
+        <_17_ kind="Struct" offset="1866" length="11">
+          <ItemId kind="Leaf" offset="1866" length="4" type="Scalar { Kind = U32 }" value="41889" />
+          <FieldA kind="Leaf" offset="1870" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1872" length="2" type="Scalar { Kind = U16 }" value="1285" />
+          <FieldC kind="Leaf" offset="1874" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <FieldD kind="Leaf" offset="1875" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <FieldE kind="Leaf" offset="1876" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_17_>
+      </Entries>
+    </_5>
+    <_6 kind="Record" offset="1877" length="325">
+      <GroupKey kind="Leaf" offset="1877" length="2" type="Scalar { Kind = U16 }" value="7" />
+      <EntryCount kind="Leaf" offset="1879" length="4" type="Scalar { Kind = U32 }" value="29" />
+      <Entries kind="Array" offset="1883" length="319" count="29">
+        <_0_ kind="Struct" offset="1883" length="11">
+          <ItemId kind="Leaf" offset="1883" length="4" type="Scalar { Kind = U32 }" value="41511" />
+          <FieldA kind="Leaf" offset="1887" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1889" length="2" type="Scalar { Kind = U16 }" value="55" />
+          <FieldC kind="Leaf" offset="1891" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1892" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="1893" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_0_>
+        <_1_ kind="Struct" offset="1894" length="11">
+          <ItemId kind="Leaf" offset="1894" length="4" type="Scalar { Kind = U32 }" value="41550" />
+          <FieldA kind="Leaf" offset="1898" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1900" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="1902" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1903" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1904" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="1905" length="11">
+          <ItemId kind="Leaf" offset="1905" length="4" type="Scalar { Kind = U32 }" value="41551" />
+          <FieldA kind="Leaf" offset="1909" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1911" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="1913" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1914" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1915" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="1916" length="11">
+          <ItemId kind="Leaf" offset="1916" length="4" type="Scalar { Kind = U32 }" value="41552" />
+          <FieldA kind="Leaf" offset="1920" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1922" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="1924" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1925" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1926" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="1927" length="11">
+          <ItemId kind="Leaf" offset="1927" length="4" type="Scalar { Kind = U32 }" value="41553" />
+          <FieldA kind="Leaf" offset="1931" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1933" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="1935" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1936" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1937" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="1938" length="11">
+          <ItemId kind="Leaf" offset="1938" length="4" type="Scalar { Kind = U32 }" value="41578" />
+          <FieldA kind="Leaf" offset="1942" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1944" length="2" type="Scalar { Kind = U16 }" value="57" />
+          <FieldC kind="Leaf" offset="1946" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1947" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="1948" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_5_>
+        <_6_ kind="Struct" offset="1949" length="11">
+          <ItemId kind="Leaf" offset="1949" length="4" type="Scalar { Kind = U32 }" value="41579" />
+          <FieldA kind="Leaf" offset="1953" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1955" length="2" type="Scalar { Kind = U16 }" value="57" />
+          <FieldC kind="Leaf" offset="1957" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1958" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="1959" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_6_>
+        <_7_ kind="Struct" offset="1960" length="11">
+          <ItemId kind="Leaf" offset="1960" length="4" type="Scalar { Kind = U32 }" value="41613" />
+          <FieldA kind="Leaf" offset="1964" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1966" length="2" type="Scalar { Kind = U16 }" value="55" />
+          <FieldC kind="Leaf" offset="1968" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1969" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="1970" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_7_>
+        <_8_ kind="Struct" offset="1971" length="11">
+          <ItemId kind="Leaf" offset="1971" length="4" type="Scalar { Kind = U32 }" value="41639" />
+          <FieldA kind="Leaf" offset="1975" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1977" length="2" type="Scalar { Kind = U16 }" value="56" />
+          <FieldC kind="Leaf" offset="1979" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1980" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="1981" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_8_>
+        <_9_ kind="Struct" offset="1982" length="11">
+          <ItemId kind="Leaf" offset="1982" length="4" type="Scalar { Kind = U32 }" value="41643" />
+          <FieldA kind="Leaf" offset="1986" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1988" length="2" type="Scalar { Kind = U16 }" value="819" />
+          <FieldC kind="Leaf" offset="1990" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="1991" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="1992" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="1993" length="11">
+          <ItemId kind="Leaf" offset="1993" length="4" type="Scalar { Kind = U32 }" value="41647" />
+          <FieldA kind="Leaf" offset="1997" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="1999" length="2" type="Scalar { Kind = U16 }" value="819" />
+          <FieldC kind="Leaf" offset="2001" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2002" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="2003" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_10_>
+        <_11_ kind="Struct" offset="2004" length="11">
+          <ItemId kind="Leaf" offset="2004" length="4" type="Scalar { Kind = U32 }" value="41651" />
+          <FieldA kind="Leaf" offset="2008" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2010" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="2012" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2013" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="2014" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_11_>
+        <_12_ kind="Struct" offset="2015" length="11">
+          <ItemId kind="Leaf" offset="2015" length="4" type="Scalar { Kind = U32 }" value="41655" />
+          <FieldA kind="Leaf" offset="2019" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2021" length="2" type="Scalar { Kind = U16 }" value="55" />
+          <FieldC kind="Leaf" offset="2023" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2024" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2025" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_12_>
+        <_13_ kind="Struct" offset="2026" length="11">
+          <ItemId kind="Leaf" offset="2026" length="4" type="Scalar { Kind = U32 }" value="41659" />
+          <FieldA kind="Leaf" offset="2030" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2032" length="2" type="Scalar { Kind = U16 }" value="55" />
+          <FieldC kind="Leaf" offset="2034" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2035" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2036" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_13_>
+        <_14_ kind="Struct" offset="2037" length="11">
+          <ItemId kind="Leaf" offset="2037" length="4" type="Scalar { Kind = U32 }" value="41677" />
+          <FieldA kind="Leaf" offset="2041" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2043" length="2" type="Scalar { Kind = U16 }" value="57" />
+          <FieldC kind="Leaf" offset="2045" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2046" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2047" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_14_>
+        <_15_ kind="Struct" offset="2048" length="11">
+          <ItemId kind="Leaf" offset="2048" length="4" type="Scalar { Kind = U32 }" value="41679" />
+          <FieldA kind="Leaf" offset="2052" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2054" length="2" type="Scalar { Kind = U16 }" value="57" />
+          <FieldC kind="Leaf" offset="2056" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2057" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2058" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_15_>
+        <_16_ kind="Struct" offset="2059" length="11">
+          <ItemId kind="Leaf" offset="2059" length="4" type="Scalar { Kind = U32 }" value="41691" />
+          <FieldA kind="Leaf" offset="2063" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2065" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="2067" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2068" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="2069" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_16_>
+        <_17_ kind="Struct" offset="2070" length="11">
+          <ItemId kind="Leaf" offset="2070" length="4" type="Scalar { Kind = U32 }" value="41692" />
+          <FieldA kind="Leaf" offset="2074" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2076" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="2078" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2079" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="2080" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_17_>
+        <_18_ kind="Struct" offset="2081" length="11">
+          <ItemId kind="Leaf" offset="2081" length="4" type="Scalar { Kind = U32 }" value="41699" />
+          <FieldA kind="Leaf" offset="2085" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2087" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="2089" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2090" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="2091" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_18_>
+        <_19_ kind="Struct" offset="2092" length="11">
+          <ItemId kind="Leaf" offset="2092" length="4" type="Scalar { Kind = U32 }" value="41703" />
+          <FieldA kind="Leaf" offset="2096" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2098" length="2" type="Scalar { Kind = U16 }" value="818" />
+          <FieldC kind="Leaf" offset="2100" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2101" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <FieldE kind="Leaf" offset="2102" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_19_>
+        <_20_ kind="Struct" offset="2103" length="11">
+          <ItemId kind="Leaf" offset="2103" length="4" type="Scalar { Kind = U32 }" value="41907" />
+          <FieldA kind="Leaf" offset="2107" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2109" length="2" type="Scalar { Kind = U16 }" value="55" />
+          <FieldC kind="Leaf" offset="2111" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2112" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2113" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_20_>
+        <_21_ kind="Struct" offset="2114" length="11">
+          <ItemId kind="Leaf" offset="2114" length="4" type="Scalar { Kind = U32 }" value="41909" />
+          <FieldA kind="Leaf" offset="2118" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2120" length="2" type="Scalar { Kind = U16 }" value="55" />
+          <FieldC kind="Leaf" offset="2122" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2123" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2124" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_21_>
+        <_22_ kind="Struct" offset="2125" length="11">
+          <ItemId kind="Leaf" offset="2125" length="4" type="Scalar { Kind = U32 }" value="41965" />
+          <FieldA kind="Leaf" offset="2129" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2131" length="2" type="Scalar { Kind = U16 }" value="55" />
+          <FieldC kind="Leaf" offset="2133" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2134" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2135" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_22_>
+        <_23_ kind="Struct" offset="2136" length="11">
+          <ItemId kind="Leaf" offset="2136" length="4" type="Scalar { Kind = U32 }" value="41967" />
+          <FieldA kind="Leaf" offset="2140" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2142" length="2" type="Scalar { Kind = U16 }" value="55" />
+          <FieldC kind="Leaf" offset="2144" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2145" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2146" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_23_>
+        <_24_ kind="Struct" offset="2147" length="11">
+          <ItemId kind="Leaf" offset="2147" length="4" type="Scalar { Kind = U32 }" value="41991" />
+          <FieldA kind="Leaf" offset="2151" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2153" length="2" type="Scalar { Kind = U16 }" value="55" />
+          <FieldC kind="Leaf" offset="2155" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2156" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2157" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_24_>
+        <_25_ kind="Struct" offset="2158" length="11">
+          <ItemId kind="Leaf" offset="2158" length="4" type="Scalar { Kind = U32 }" value="41993" />
+          <FieldA kind="Leaf" offset="2162" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2164" length="2" type="Scalar { Kind = U16 }" value="55" />
+          <FieldC kind="Leaf" offset="2166" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2167" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2168" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_25_>
+        <_26_ kind="Struct" offset="2169" length="11">
+          <ItemId kind="Leaf" offset="2169" length="4" type="Scalar { Kind = U32 }" value="44038" />
+          <FieldA kind="Leaf" offset="2173" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2175" length="2" type="Scalar { Kind = U16 }" value="55" />
+          <FieldC kind="Leaf" offset="2177" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2178" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2179" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_26_>
+        <_27_ kind="Struct" offset="2180" length="11">
+          <ItemId kind="Leaf" offset="2180" length="4" type="Scalar { Kind = U32 }" value="44039" />
+          <FieldA kind="Leaf" offset="2184" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2186" length="2" type="Scalar { Kind = U16 }" value="55" />
+          <FieldC kind="Leaf" offset="2188" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2189" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2190" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_27_>
+        <_28_ kind="Struct" offset="2191" length="11">
+          <ItemId kind="Leaf" offset="2191" length="4" type="Scalar { Kind = U32 }" value="44056" />
+          <FieldA kind="Leaf" offset="2195" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2197" length="2" type="Scalar { Kind = U16 }" value="56" />
+          <FieldC kind="Leaf" offset="2199" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2200" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2201" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_28_>
+      </Entries>
+    </_6>
+    <_7 kind="Record" offset="2202" length="259">
+      <GroupKey kind="Leaf" offset="2202" length="2" type="Scalar { Kind = U16 }" value="8" />
+      <EntryCount kind="Leaf" offset="2204" length="4" type="Scalar { Kind = U32 }" value="23" />
+      <Entries kind="Array" offset="2208" length="253" count="23">
+        <_0_ kind="Struct" offset="2208" length="11">
+          <ItemId kind="Leaf" offset="2208" length="4" type="Scalar { Kind = U32 }" value="41511" />
+          <FieldA kind="Leaf" offset="2212" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2214" length="2" type="Scalar { Kind = U16 }" value="500" />
+          <FieldC kind="Leaf" offset="2216" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2217" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2218" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="2219" length="11">
+          <ItemId kind="Leaf" offset="2219" length="4" type="Scalar { Kind = U32 }" value="41578" />
+          <FieldA kind="Leaf" offset="2223" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2225" length="2" type="Scalar { Kind = U16 }" value="510" />
+          <FieldC kind="Leaf" offset="2227" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2228" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2229" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="2230" length="11">
+          <ItemId kind="Leaf" offset="2230" length="4" type="Scalar { Kind = U32 }" value="41579" />
+          <FieldA kind="Leaf" offset="2234" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2236" length="2" type="Scalar { Kind = U16 }" value="510" />
+          <FieldC kind="Leaf" offset="2238" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2239" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2240" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="2241" length="11">
+          <ItemId kind="Leaf" offset="2241" length="4" type="Scalar { Kind = U32 }" value="41613" />
+          <FieldA kind="Leaf" offset="2245" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2247" length="2" type="Scalar { Kind = U16 }" value="500" />
+          <FieldC kind="Leaf" offset="2249" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2250" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2251" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="2252" length="11">
+          <ItemId kind="Leaf" offset="2252" length="4" type="Scalar { Kind = U32 }" value="41639" />
+          <FieldA kind="Leaf" offset="2256" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2258" length="2" type="Scalar { Kind = U16 }" value="500" />
+          <FieldC kind="Leaf" offset="2260" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2261" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2262" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="2263" length="11">
+          <ItemId kind="Leaf" offset="2263" length="4" type="Scalar { Kind = U32 }" value="41655" />
+          <FieldA kind="Leaf" offset="2267" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2269" length="2" type="Scalar { Kind = U16 }" value="495" />
+          <FieldC kind="Leaf" offset="2271" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2272" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2273" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="2274" length="11">
+          <ItemId kind="Leaf" offset="2274" length="4" type="Scalar { Kind = U32 }" value="41659" />
+          <FieldA kind="Leaf" offset="2278" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2280" length="2" type="Scalar { Kind = U16 }" value="495" />
+          <FieldC kind="Leaf" offset="2282" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2283" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2284" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_6_>
+        <_7_ kind="Struct" offset="2285" length="11">
+          <ItemId kind="Leaf" offset="2285" length="4" type="Scalar { Kind = U32 }" value="41677" />
+          <FieldA kind="Leaf" offset="2289" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2291" length="2" type="Scalar { Kind = U16 }" value="510" />
+          <FieldC kind="Leaf" offset="2293" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2294" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2295" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_7_>
+        <_8_ kind="Struct" offset="2296" length="11">
+          <ItemId kind="Leaf" offset="2296" length="4" type="Scalar { Kind = U32 }" value="41679" />
+          <FieldA kind="Leaf" offset="2300" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2302" length="2" type="Scalar { Kind = U16 }" value="510" />
+          <FieldC kind="Leaf" offset="2304" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2305" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2306" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="2307" length="11">
+          <ItemId kind="Leaf" offset="2307" length="4" type="Scalar { Kind = U32 }" value="41903" />
+          <FieldA kind="Leaf" offset="2311" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2313" length="2" type="Scalar { Kind = U16 }" value="200" />
+          <FieldC kind="Leaf" offset="2315" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldD kind="Leaf" offset="2316" length="1" type="Scalar { Kind = U8 }" value="9" />
+          <FieldE kind="Leaf" offset="2317" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_9_>
+        <_10_ kind="Struct" offset="2318" length="11">
+          <ItemId kind="Leaf" offset="2318" length="4" type="Scalar { Kind = U32 }" value="41907" />
+          <FieldA kind="Leaf" offset="2322" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2324" length="2" type="Scalar { Kind = U16 }" value="500" />
+          <FieldC kind="Leaf" offset="2326" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2327" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2328" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_10_>
+        <_11_ kind="Struct" offset="2329" length="11">
+          <ItemId kind="Leaf" offset="2329" length="4" type="Scalar { Kind = U32 }" value="41909" />
+          <FieldA kind="Leaf" offset="2333" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2335" length="2" type="Scalar { Kind = U16 }" value="500" />
+          <FieldC kind="Leaf" offset="2337" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2338" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2339" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_11_>
+        <_12_ kind="Struct" offset="2340" length="11">
+          <ItemId kind="Leaf" offset="2340" length="4" type="Scalar { Kind = U32 }" value="41913" />
+          <FieldA kind="Leaf" offset="2344" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2346" length="2" type="Scalar { Kind = U16 }" value="200" />
+          <FieldC kind="Leaf" offset="2348" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldD kind="Leaf" offset="2349" length="1" type="Scalar { Kind = U8 }" value="9" />
+          <FieldE kind="Leaf" offset="2350" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_12_>
+        <_13_ kind="Struct" offset="2351" length="11">
+          <ItemId kind="Leaf" offset="2351" length="4" type="Scalar { Kind = U32 }" value="41965" />
+          <FieldA kind="Leaf" offset="2355" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2357" length="2" type="Scalar { Kind = U16 }" value="495" />
+          <FieldC kind="Leaf" offset="2359" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2360" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2361" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_13_>
+        <_14_ kind="Struct" offset="2362" length="11">
+          <ItemId kind="Leaf" offset="2362" length="4" type="Scalar { Kind = U32 }" value="41967" />
+          <FieldA kind="Leaf" offset="2366" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2368" length="2" type="Scalar { Kind = U16 }" value="495" />
+          <FieldC kind="Leaf" offset="2370" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2371" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2372" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_14_>
+        <_15_ kind="Struct" offset="2373" length="11">
+          <ItemId kind="Leaf" offset="2373" length="4" type="Scalar { Kind = U32 }" value="41973" />
+          <FieldA kind="Leaf" offset="2377" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2379" length="2" type="Scalar { Kind = U16 }" value="200" />
+          <FieldC kind="Leaf" offset="2381" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldD kind="Leaf" offset="2382" length="1" type="Scalar { Kind = U8 }" value="9" />
+          <FieldE kind="Leaf" offset="2383" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_15_>
+        <_16_ kind="Struct" offset="2384" length="11">
+          <ItemId kind="Leaf" offset="2384" length="4" type="Scalar { Kind = U32 }" value="41991" />
+          <FieldA kind="Leaf" offset="2388" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2390" length="2" type="Scalar { Kind = U16 }" value="495" />
+          <FieldC kind="Leaf" offset="2392" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2393" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2394" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_16_>
+        <_17_ kind="Struct" offset="2395" length="11">
+          <ItemId kind="Leaf" offset="2395" length="4" type="Scalar { Kind = U32 }" value="41993" />
+          <FieldA kind="Leaf" offset="2399" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2401" length="2" type="Scalar { Kind = U16 }" value="495" />
+          <FieldC kind="Leaf" offset="2403" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2404" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2405" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_17_>
+        <_18_ kind="Struct" offset="2406" length="11">
+          <ItemId kind="Leaf" offset="2406" length="4" type="Scalar { Kind = U32 }" value="44038" />
+          <FieldA kind="Leaf" offset="2410" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2412" length="2" type="Scalar { Kind = U16 }" value="495" />
+          <FieldC kind="Leaf" offset="2414" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2415" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2416" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_18_>
+        <_19_ kind="Struct" offset="2417" length="11">
+          <ItemId kind="Leaf" offset="2417" length="4" type="Scalar { Kind = U32 }" value="44039" />
+          <FieldA kind="Leaf" offset="2421" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2423" length="2" type="Scalar { Kind = U16 }" value="495" />
+          <FieldC kind="Leaf" offset="2425" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2426" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2427" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_19_>
+        <_20_ kind="Struct" offset="2428" length="11">
+          <ItemId kind="Leaf" offset="2428" length="4" type="Scalar { Kind = U32 }" value="44056" />
+          <FieldA kind="Leaf" offset="2432" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2434" length="2" type="Scalar { Kind = U16 }" value="500" />
+          <FieldC kind="Leaf" offset="2436" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <FieldD kind="Leaf" offset="2437" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <FieldE kind="Leaf" offset="2438" length="1" type="Scalar { Kind = U8 }" value="0" />
+        </_20_>
+        <_21_ kind="Struct" offset="2439" length="11">
+          <ItemId kind="Leaf" offset="2439" length="4" type="Scalar { Kind = U32 }" value="79758" />
+          <FieldA kind="Leaf" offset="2443" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2445" length="2" type="Scalar { Kind = U16 }" value="200" />
+          <FieldC kind="Leaf" offset="2447" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldD kind="Leaf" offset="2448" length="1" type="Scalar { Kind = U8 }" value="9" />
+          <FieldE kind="Leaf" offset="2449" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_21_>
+        <_22_ kind="Struct" offset="2450" length="11">
+          <ItemId kind="Leaf" offset="2450" length="4" type="Scalar { Kind = U32 }" value="79969" />
+          <FieldA kind="Leaf" offset="2454" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2456" length="2" type="Scalar { Kind = U16 }" value="200" />
+          <FieldC kind="Leaf" offset="2458" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldD kind="Leaf" offset="2459" length="1" type="Scalar { Kind = U8 }" value="9" />
+          <FieldE kind="Leaf" offset="2460" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_22_>
+      </Entries>
+    </_7>
+    <_8 kind="Record" offset="2461" length="61">
+      <GroupKey kind="Leaf" offset="2461" length="2" type="Scalar { Kind = U16 }" value="9" />
+      <EntryCount kind="Leaf" offset="2463" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Entries kind="Array" offset="2467" length="55" count="5">
+        <_0_ kind="Struct" offset="2467" length="11">
+          <ItemId kind="Leaf" offset="2467" length="4" type="Scalar { Kind = U32 }" value="41903" />
+          <FieldA kind="Leaf" offset="2471" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2473" length="2" type="Scalar { Kind = U16 }" value="2000" />
+          <FieldC kind="Leaf" offset="2475" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldD kind="Leaf" offset="2476" length="1" type="Scalar { Kind = U8 }" value="9" />
+          <FieldE kind="Leaf" offset="2477" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_0_>
+        <_1_ kind="Struct" offset="2478" length="11">
+          <ItemId kind="Leaf" offset="2478" length="4" type="Scalar { Kind = U32 }" value="41913" />
+          <FieldA kind="Leaf" offset="2482" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2484" length="2" type="Scalar { Kind = U16 }" value="2000" />
+          <FieldC kind="Leaf" offset="2486" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldD kind="Leaf" offset="2487" length="1" type="Scalar { Kind = U8 }" value="9" />
+          <FieldE kind="Leaf" offset="2488" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_1_>
+        <_2_ kind="Struct" offset="2489" length="11">
+          <ItemId kind="Leaf" offset="2489" length="4" type="Scalar { Kind = U32 }" value="41973" />
+          <FieldA kind="Leaf" offset="2493" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2495" length="2" type="Scalar { Kind = U16 }" value="2000" />
+          <FieldC kind="Leaf" offset="2497" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldD kind="Leaf" offset="2498" length="1" type="Scalar { Kind = U8 }" value="9" />
+          <FieldE kind="Leaf" offset="2499" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_2_>
+        <_3_ kind="Struct" offset="2500" length="11">
+          <ItemId kind="Leaf" offset="2500" length="4" type="Scalar { Kind = U32 }" value="79758" />
+          <FieldA kind="Leaf" offset="2504" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2506" length="2" type="Scalar { Kind = U16 }" value="2000" />
+          <FieldC kind="Leaf" offset="2508" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldD kind="Leaf" offset="2509" length="1" type="Scalar { Kind = U8 }" value="9" />
+          <FieldE kind="Leaf" offset="2510" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_3_>
+        <_4_ kind="Struct" offset="2511" length="11">
+          <ItemId kind="Leaf" offset="2511" length="4" type="Scalar { Kind = U32 }" value="79969" />
+          <FieldA kind="Leaf" offset="2515" length="2" type="Scalar { Kind = U16 }" value="1" />
+          <FieldB kind="Leaf" offset="2517" length="2" type="Scalar { Kind = U16 }" value="2000" />
+          <FieldC kind="Leaf" offset="2519" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <FieldD kind="Leaf" offset="2520" length="1" type="Scalar { Kind = U8 }" value="9" />
+          <FieldE kind="Leaf" offset="2521" length="1" type="Scalar { Kind = U8 }" value="1" />
+        </_4_>
+      </Entries>
+    </_8>
+  </Groups>
+</DMDigiCombineItemGroup>

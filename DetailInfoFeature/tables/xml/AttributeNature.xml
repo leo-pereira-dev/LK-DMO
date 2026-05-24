@@ -1,0 +1,555 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AttributeNature schema="AttributeNature.struct" bin="AttributeNature.bin" byteLength="796">
+  <NatureMatrix kind="Section" offset="0" length="796">
+    <_0 kind="Record" offset="4" length="72">
+      <AttackerNature kind="Leaf" offset="4" length="2" type="Scalar { Kind = U16 }" value="16" />
+      <TargetCount kind="Leaf" offset="6" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <Targets kind="Array" offset="10" length="66" count="11">
+        <_0_ kind="Struct" offset="10" length="6">
+          <TargetNature kind="Leaf" offset="10" length="2" type="Scalar { Kind = U16 }" value="16" />
+          <Value kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="16" length="6">
+          <TargetNature kind="Leaf" offset="16" length="2" type="Scalar { Kind = U16 }" value="17" />
+          <Value kind="Leaf" offset="18" length="4" type="Scalar { Kind = U32 }" value="25" />
+        </_1_>
+        <_2_ kind="Struct" offset="22" length="6">
+          <TargetNature kind="Leaf" offset="22" length="2" type="Scalar { Kind = U16 }" value="18" />
+          <Value kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="4294967271" />
+        </_2_>
+        <_3_ kind="Struct" offset="28" length="6">
+          <TargetNature kind="Leaf" offset="28" length="2" type="Scalar { Kind = U16 }" value="19" />
+          <Value kind="Leaf" offset="30" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="34" length="6">
+          <TargetNature kind="Leaf" offset="34" length="2" type="Scalar { Kind = U16 }" value="20" />
+          <Value kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="40" length="6">
+          <TargetNature kind="Leaf" offset="40" length="2" type="Scalar { Kind = U16 }" value="21" />
+          <Value kind="Leaf" offset="42" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="46" length="6">
+          <TargetNature kind="Leaf" offset="46" length="2" type="Scalar { Kind = U16 }" value="22" />
+          <Value kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_6_>
+        <_7_ kind="Struct" offset="52" length="6">
+          <TargetNature kind="Leaf" offset="52" length="2" type="Scalar { Kind = U16 }" value="23" />
+          <Value kind="Leaf" offset="54" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_7_>
+        <_8_ kind="Struct" offset="58" length="6">
+          <TargetNature kind="Leaf" offset="58" length="2" type="Scalar { Kind = U16 }" value="24" />
+          <Value kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="64" length="6">
+          <TargetNature kind="Leaf" offset="64" length="2" type="Scalar { Kind = U16 }" value="25" />
+          <Value kind="Leaf" offset="66" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="70" length="6">
+          <TargetNature kind="Leaf" offset="70" length="2" type="Scalar { Kind = U16 }" value="26" />
+          <Value kind="Leaf" offset="72" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_10_>
+      </Targets>
+    </_0>
+    <_1 kind="Record" offset="76" length="72">
+      <AttackerNature kind="Leaf" offset="76" length="2" type="Scalar { Kind = U16 }" value="17" />
+      <TargetCount kind="Leaf" offset="78" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <Targets kind="Array" offset="82" length="66" count="11">
+        <_0_ kind="Struct" offset="82" length="6">
+          <TargetNature kind="Leaf" offset="82" length="2" type="Scalar { Kind = U16 }" value="16" />
+          <Value kind="Leaf" offset="84" length="4" type="Scalar { Kind = U32 }" value="4294967271" />
+        </_0_>
+        <_1_ kind="Struct" offset="88" length="6">
+          <TargetNature kind="Leaf" offset="88" length="2" type="Scalar { Kind = U16 }" value="17" />
+          <Value kind="Leaf" offset="90" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="94" length="6">
+          <TargetNature kind="Leaf" offset="94" length="2" type="Scalar { Kind = U16 }" value="18" />
+          <Value kind="Leaf" offset="96" length="4" type="Scalar { Kind = U32 }" value="25" />
+        </_2_>
+        <_3_ kind="Struct" offset="100" length="6">
+          <TargetNature kind="Leaf" offset="100" length="2" type="Scalar { Kind = U16 }" value="19" />
+          <Value kind="Leaf" offset="102" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="106" length="6">
+          <TargetNature kind="Leaf" offset="106" length="2" type="Scalar { Kind = U16 }" value="20" />
+          <Value kind="Leaf" offset="108" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="112" length="6">
+          <TargetNature kind="Leaf" offset="112" length="2" type="Scalar { Kind = U16 }" value="21" />
+          <Value kind="Leaf" offset="114" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="118" length="6">
+          <TargetNature kind="Leaf" offset="118" length="2" type="Scalar { Kind = U16 }" value="22" />
+          <Value kind="Leaf" offset="120" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_6_>
+        <_7_ kind="Struct" offset="124" length="6">
+          <TargetNature kind="Leaf" offset="124" length="2" type="Scalar { Kind = U16 }" value="23" />
+          <Value kind="Leaf" offset="126" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_7_>
+        <_8_ kind="Struct" offset="130" length="6">
+          <TargetNature kind="Leaf" offset="130" length="2" type="Scalar { Kind = U16 }" value="24" />
+          <Value kind="Leaf" offset="132" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="136" length="6">
+          <TargetNature kind="Leaf" offset="136" length="2" type="Scalar { Kind = U16 }" value="25" />
+          <Value kind="Leaf" offset="138" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="142" length="6">
+          <TargetNature kind="Leaf" offset="142" length="2" type="Scalar { Kind = U16 }" value="26" />
+          <Value kind="Leaf" offset="144" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_10_>
+      </Targets>
+    </_1>
+    <_2 kind="Record" offset="148" length="72">
+      <AttackerNature kind="Leaf" offset="148" length="2" type="Scalar { Kind = U16 }" value="18" />
+      <TargetCount kind="Leaf" offset="150" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <Targets kind="Array" offset="154" length="66" count="11">
+        <_0_ kind="Struct" offset="154" length="6">
+          <TargetNature kind="Leaf" offset="154" length="2" type="Scalar { Kind = U16 }" value="16" />
+          <Value kind="Leaf" offset="156" length="4" type="Scalar { Kind = U32 }" value="25" />
+        </_0_>
+        <_1_ kind="Struct" offset="160" length="6">
+          <TargetNature kind="Leaf" offset="160" length="2" type="Scalar { Kind = U16 }" value="17" />
+          <Value kind="Leaf" offset="162" length="4" type="Scalar { Kind = U32 }" value="4294967271" />
+        </_1_>
+        <_2_ kind="Struct" offset="166" length="6">
+          <TargetNature kind="Leaf" offset="166" length="2" type="Scalar { Kind = U16 }" value="18" />
+          <Value kind="Leaf" offset="168" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="172" length="6">
+          <TargetNature kind="Leaf" offset="172" length="2" type="Scalar { Kind = U16 }" value="19" />
+          <Value kind="Leaf" offset="174" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="178" length="6">
+          <TargetNature kind="Leaf" offset="178" length="2" type="Scalar { Kind = U16 }" value="20" />
+          <Value kind="Leaf" offset="180" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="184" length="6">
+          <TargetNature kind="Leaf" offset="184" length="2" type="Scalar { Kind = U16 }" value="21" />
+          <Value kind="Leaf" offset="186" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="190" length="6">
+          <TargetNature kind="Leaf" offset="190" length="2" type="Scalar { Kind = U16 }" value="22" />
+          <Value kind="Leaf" offset="192" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_6_>
+        <_7_ kind="Struct" offset="196" length="6">
+          <TargetNature kind="Leaf" offset="196" length="2" type="Scalar { Kind = U16 }" value="23" />
+          <Value kind="Leaf" offset="198" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_7_>
+        <_8_ kind="Struct" offset="202" length="6">
+          <TargetNature kind="Leaf" offset="202" length="2" type="Scalar { Kind = U16 }" value="24" />
+          <Value kind="Leaf" offset="204" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="208" length="6">
+          <TargetNature kind="Leaf" offset="208" length="2" type="Scalar { Kind = U16 }" value="25" />
+          <Value kind="Leaf" offset="210" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="214" length="6">
+          <TargetNature kind="Leaf" offset="214" length="2" type="Scalar { Kind = U16 }" value="26" />
+          <Value kind="Leaf" offset="216" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_10_>
+      </Targets>
+    </_2>
+    <_3 kind="Record" offset="220" length="72">
+      <AttackerNature kind="Leaf" offset="220" length="2" type="Scalar { Kind = U16 }" value="19" />
+      <TargetCount kind="Leaf" offset="222" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <Targets kind="Array" offset="226" length="66" count="11">
+        <_0_ kind="Struct" offset="226" length="6">
+          <TargetNature kind="Leaf" offset="226" length="2" type="Scalar { Kind = U16 }" value="16" />
+          <Value kind="Leaf" offset="228" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="232" length="6">
+          <TargetNature kind="Leaf" offset="232" length="2" type="Scalar { Kind = U16 }" value="17" />
+          <Value kind="Leaf" offset="234" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="238" length="6">
+          <TargetNature kind="Leaf" offset="238" length="2" type="Scalar { Kind = U16 }" value="18" />
+          <Value kind="Leaf" offset="240" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="244" length="6">
+          <TargetNature kind="Leaf" offset="244" length="2" type="Scalar { Kind = U16 }" value="19" />
+          <Value kind="Leaf" offset="246" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="250" length="6">
+          <TargetNature kind="Leaf" offset="250" length="2" type="Scalar { Kind = U16 }" value="20" />
+          <Value kind="Leaf" offset="252" length="4" type="Scalar { Kind = U32 }" value="25" />
+        </_4_>
+        <_5_ kind="Struct" offset="256" length="6">
+          <TargetNature kind="Leaf" offset="256" length="2" type="Scalar { Kind = U16 }" value="21" />
+          <Value kind="Leaf" offset="258" length="4" type="Scalar { Kind = U32 }" value="4294967271" />
+        </_5_>
+        <_6_ kind="Struct" offset="262" length="6">
+          <TargetNature kind="Leaf" offset="262" length="2" type="Scalar { Kind = U16 }" value="22" />
+          <Value kind="Leaf" offset="264" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_6_>
+        <_7_ kind="Struct" offset="268" length="6">
+          <TargetNature kind="Leaf" offset="268" length="2" type="Scalar { Kind = U16 }" value="23" />
+          <Value kind="Leaf" offset="270" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_7_>
+        <_8_ kind="Struct" offset="274" length="6">
+          <TargetNature kind="Leaf" offset="274" length="2" type="Scalar { Kind = U16 }" value="24" />
+          <Value kind="Leaf" offset="276" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="280" length="6">
+          <TargetNature kind="Leaf" offset="280" length="2" type="Scalar { Kind = U16 }" value="25" />
+          <Value kind="Leaf" offset="282" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="286" length="6">
+          <TargetNature kind="Leaf" offset="286" length="2" type="Scalar { Kind = U16 }" value="26" />
+          <Value kind="Leaf" offset="288" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_10_>
+      </Targets>
+    </_3>
+    <_4 kind="Record" offset="292" length="72">
+      <AttackerNature kind="Leaf" offset="292" length="2" type="Scalar { Kind = U16 }" value="20" />
+      <TargetCount kind="Leaf" offset="294" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <Targets kind="Array" offset="298" length="66" count="11">
+        <_0_ kind="Struct" offset="298" length="6">
+          <TargetNature kind="Leaf" offset="298" length="2" type="Scalar { Kind = U16 }" value="16" />
+          <Value kind="Leaf" offset="300" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="304" length="6">
+          <TargetNature kind="Leaf" offset="304" length="2" type="Scalar { Kind = U16 }" value="17" />
+          <Value kind="Leaf" offset="306" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="310" length="6">
+          <TargetNature kind="Leaf" offset="310" length="2" type="Scalar { Kind = U16 }" value="18" />
+          <Value kind="Leaf" offset="312" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="316" length="6">
+          <TargetNature kind="Leaf" offset="316" length="2" type="Scalar { Kind = U16 }" value="19" />
+          <Value kind="Leaf" offset="318" length="4" type="Scalar { Kind = U32 }" value="4294967271" />
+        </_3_>
+        <_4_ kind="Struct" offset="322" length="6">
+          <TargetNature kind="Leaf" offset="322" length="2" type="Scalar { Kind = U16 }" value="20" />
+          <Value kind="Leaf" offset="324" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="328" length="6">
+          <TargetNature kind="Leaf" offset="328" length="2" type="Scalar { Kind = U16 }" value="21" />
+          <Value kind="Leaf" offset="330" length="4" type="Scalar { Kind = U32 }" value="25" />
+        </_5_>
+        <_6_ kind="Struct" offset="334" length="6">
+          <TargetNature kind="Leaf" offset="334" length="2" type="Scalar { Kind = U16 }" value="22" />
+          <Value kind="Leaf" offset="336" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_6_>
+        <_7_ kind="Struct" offset="340" length="6">
+          <TargetNature kind="Leaf" offset="340" length="2" type="Scalar { Kind = U16 }" value="23" />
+          <Value kind="Leaf" offset="342" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_7_>
+        <_8_ kind="Struct" offset="346" length="6">
+          <TargetNature kind="Leaf" offset="346" length="2" type="Scalar { Kind = U16 }" value="24" />
+          <Value kind="Leaf" offset="348" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="352" length="6">
+          <TargetNature kind="Leaf" offset="352" length="2" type="Scalar { Kind = U16 }" value="25" />
+          <Value kind="Leaf" offset="354" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="358" length="6">
+          <TargetNature kind="Leaf" offset="358" length="2" type="Scalar { Kind = U16 }" value="26" />
+          <Value kind="Leaf" offset="360" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_10_>
+      </Targets>
+    </_4>
+    <_5 kind="Record" offset="364" length="72">
+      <AttackerNature kind="Leaf" offset="364" length="2" type="Scalar { Kind = U16 }" value="21" />
+      <TargetCount kind="Leaf" offset="366" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <Targets kind="Array" offset="370" length="66" count="11">
+        <_0_ kind="Struct" offset="370" length="6">
+          <TargetNature kind="Leaf" offset="370" length="2" type="Scalar { Kind = U16 }" value="16" />
+          <Value kind="Leaf" offset="372" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="376" length="6">
+          <TargetNature kind="Leaf" offset="376" length="2" type="Scalar { Kind = U16 }" value="17" />
+          <Value kind="Leaf" offset="378" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="382" length="6">
+          <TargetNature kind="Leaf" offset="382" length="2" type="Scalar { Kind = U16 }" value="18" />
+          <Value kind="Leaf" offset="384" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="388" length="6">
+          <TargetNature kind="Leaf" offset="388" length="2" type="Scalar { Kind = U16 }" value="19" />
+          <Value kind="Leaf" offset="390" length="4" type="Scalar { Kind = U32 }" value="25" />
+        </_3_>
+        <_4_ kind="Struct" offset="394" length="6">
+          <TargetNature kind="Leaf" offset="394" length="2" type="Scalar { Kind = U16 }" value="20" />
+          <Value kind="Leaf" offset="396" length="4" type="Scalar { Kind = U32 }" value="4294967271" />
+        </_4_>
+        <_5_ kind="Struct" offset="400" length="6">
+          <TargetNature kind="Leaf" offset="400" length="2" type="Scalar { Kind = U16 }" value="21" />
+          <Value kind="Leaf" offset="402" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="406" length="6">
+          <TargetNature kind="Leaf" offset="406" length="2" type="Scalar { Kind = U16 }" value="22" />
+          <Value kind="Leaf" offset="408" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_6_>
+        <_7_ kind="Struct" offset="412" length="6">
+          <TargetNature kind="Leaf" offset="412" length="2" type="Scalar { Kind = U16 }" value="23" />
+          <Value kind="Leaf" offset="414" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_7_>
+        <_8_ kind="Struct" offset="418" length="6">
+          <TargetNature kind="Leaf" offset="418" length="2" type="Scalar { Kind = U16 }" value="24" />
+          <Value kind="Leaf" offset="420" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="424" length="6">
+          <TargetNature kind="Leaf" offset="424" length="2" type="Scalar { Kind = U16 }" value="25" />
+          <Value kind="Leaf" offset="426" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="430" length="6">
+          <TargetNature kind="Leaf" offset="430" length="2" type="Scalar { Kind = U16 }" value="26" />
+          <Value kind="Leaf" offset="432" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_10_>
+      </Targets>
+    </_5>
+    <_6 kind="Record" offset="436" length="72">
+      <AttackerNature kind="Leaf" offset="436" length="2" type="Scalar { Kind = U16 }" value="22" />
+      <TargetCount kind="Leaf" offset="438" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <Targets kind="Array" offset="442" length="66" count="11">
+        <_0_ kind="Struct" offset="442" length="6">
+          <TargetNature kind="Leaf" offset="442" length="2" type="Scalar { Kind = U16 }" value="16" />
+          <Value kind="Leaf" offset="444" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="448" length="6">
+          <TargetNature kind="Leaf" offset="448" length="2" type="Scalar { Kind = U16 }" value="17" />
+          <Value kind="Leaf" offset="450" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="454" length="6">
+          <TargetNature kind="Leaf" offset="454" length="2" type="Scalar { Kind = U16 }" value="18" />
+          <Value kind="Leaf" offset="456" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="460" length="6">
+          <TargetNature kind="Leaf" offset="460" length="2" type="Scalar { Kind = U16 }" value="19" />
+          <Value kind="Leaf" offset="462" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="466" length="6">
+          <TargetNature kind="Leaf" offset="466" length="2" type="Scalar { Kind = U16 }" value="20" />
+          <Value kind="Leaf" offset="468" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="472" length="6">
+          <TargetNature kind="Leaf" offset="472" length="2" type="Scalar { Kind = U16 }" value="21" />
+          <Value kind="Leaf" offset="474" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="478" length="6">
+          <TargetNature kind="Leaf" offset="478" length="2" type="Scalar { Kind = U16 }" value="22" />
+          <Value kind="Leaf" offset="480" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_6_>
+        <_7_ kind="Struct" offset="484" length="6">
+          <TargetNature kind="Leaf" offset="484" length="2" type="Scalar { Kind = U16 }" value="23" />
+          <Value kind="Leaf" offset="486" length="4" type="Scalar { Kind = U32 }" value="25" />
+        </_7_>
+        <_8_ kind="Struct" offset="490" length="6">
+          <TargetNature kind="Leaf" offset="490" length="2" type="Scalar { Kind = U16 }" value="24" />
+          <Value kind="Leaf" offset="492" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="496" length="6">
+          <TargetNature kind="Leaf" offset="496" length="2" type="Scalar { Kind = U16 }" value="25" />
+          <Value kind="Leaf" offset="498" length="4" type="Scalar { Kind = U32 }" value="4294967271" />
+        </_9_>
+        <_10_ kind="Struct" offset="502" length="6">
+          <TargetNature kind="Leaf" offset="502" length="2" type="Scalar { Kind = U16 }" value="26" />
+          <Value kind="Leaf" offset="504" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_10_>
+      </Targets>
+    </_6>
+    <_7 kind="Record" offset="508" length="72">
+      <AttackerNature kind="Leaf" offset="508" length="2" type="Scalar { Kind = U16 }" value="23" />
+      <TargetCount kind="Leaf" offset="510" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <Targets kind="Array" offset="514" length="66" count="11">
+        <_0_ kind="Struct" offset="514" length="6">
+          <TargetNature kind="Leaf" offset="514" length="2" type="Scalar { Kind = U16 }" value="16" />
+          <Value kind="Leaf" offset="516" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="520" length="6">
+          <TargetNature kind="Leaf" offset="520" length="2" type="Scalar { Kind = U16 }" value="17" />
+          <Value kind="Leaf" offset="522" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="526" length="6">
+          <TargetNature kind="Leaf" offset="526" length="2" type="Scalar { Kind = U16 }" value="18" />
+          <Value kind="Leaf" offset="528" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="532" length="6">
+          <TargetNature kind="Leaf" offset="532" length="2" type="Scalar { Kind = U16 }" value="19" />
+          <Value kind="Leaf" offset="534" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="538" length="6">
+          <TargetNature kind="Leaf" offset="538" length="2" type="Scalar { Kind = U16 }" value="20" />
+          <Value kind="Leaf" offset="540" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="544" length="6">
+          <TargetNature kind="Leaf" offset="544" length="2" type="Scalar { Kind = U16 }" value="21" />
+          <Value kind="Leaf" offset="546" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="550" length="6">
+          <TargetNature kind="Leaf" offset="550" length="2" type="Scalar { Kind = U16 }" value="22" />
+          <Value kind="Leaf" offset="552" length="4" type="Scalar { Kind = U32 }" value="4294967271" />
+        </_6_>
+        <_7_ kind="Struct" offset="556" length="6">
+          <TargetNature kind="Leaf" offset="556" length="2" type="Scalar { Kind = U16 }" value="23" />
+          <Value kind="Leaf" offset="558" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_7_>
+        <_8_ kind="Struct" offset="562" length="6">
+          <TargetNature kind="Leaf" offset="562" length="2" type="Scalar { Kind = U16 }" value="24" />
+          <Value kind="Leaf" offset="564" length="4" type="Scalar { Kind = U32 }" value="25" />
+        </_8_>
+        <_9_ kind="Struct" offset="568" length="6">
+          <TargetNature kind="Leaf" offset="568" length="2" type="Scalar { Kind = U16 }" value="25" />
+          <Value kind="Leaf" offset="570" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="574" length="6">
+          <TargetNature kind="Leaf" offset="574" length="2" type="Scalar { Kind = U16 }" value="26" />
+          <Value kind="Leaf" offset="576" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_10_>
+      </Targets>
+    </_7>
+    <_8 kind="Record" offset="580" length="72">
+      <AttackerNature kind="Leaf" offset="580" length="2" type="Scalar { Kind = U16 }" value="24" />
+      <TargetCount kind="Leaf" offset="582" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <Targets kind="Array" offset="586" length="66" count="11">
+        <_0_ kind="Struct" offset="586" length="6">
+          <TargetNature kind="Leaf" offset="586" length="2" type="Scalar { Kind = U16 }" value="16" />
+          <Value kind="Leaf" offset="588" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="592" length="6">
+          <TargetNature kind="Leaf" offset="592" length="2" type="Scalar { Kind = U16 }" value="17" />
+          <Value kind="Leaf" offset="594" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="598" length="6">
+          <TargetNature kind="Leaf" offset="598" length="2" type="Scalar { Kind = U16 }" value="18" />
+          <Value kind="Leaf" offset="600" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="604" length="6">
+          <TargetNature kind="Leaf" offset="604" length="2" type="Scalar { Kind = U16 }" value="19" />
+          <Value kind="Leaf" offset="606" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="610" length="6">
+          <TargetNature kind="Leaf" offset="610" length="2" type="Scalar { Kind = U16 }" value="20" />
+          <Value kind="Leaf" offset="612" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="616" length="6">
+          <TargetNature kind="Leaf" offset="616" length="2" type="Scalar { Kind = U16 }" value="21" />
+          <Value kind="Leaf" offset="618" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="622" length="6">
+          <TargetNature kind="Leaf" offset="622" length="2" type="Scalar { Kind = U16 }" value="22" />
+          <Value kind="Leaf" offset="624" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_6_>
+        <_7_ kind="Struct" offset="628" length="6">
+          <TargetNature kind="Leaf" offset="628" length="2" type="Scalar { Kind = U16 }" value="23" />
+          <Value kind="Leaf" offset="630" length="4" type="Scalar { Kind = U32 }" value="4294967271" />
+        </_7_>
+        <_8_ kind="Struct" offset="634" length="6">
+          <TargetNature kind="Leaf" offset="634" length="2" type="Scalar { Kind = U16 }" value="24" />
+          <Value kind="Leaf" offset="636" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="640" length="6">
+          <TargetNature kind="Leaf" offset="640" length="2" type="Scalar { Kind = U16 }" value="25" />
+          <Value kind="Leaf" offset="642" length="4" type="Scalar { Kind = U32 }" value="25" />
+        </_9_>
+        <_10_ kind="Struct" offset="646" length="6">
+          <TargetNature kind="Leaf" offset="646" length="2" type="Scalar { Kind = U16 }" value="26" />
+          <Value kind="Leaf" offset="648" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_10_>
+      </Targets>
+    </_8>
+    <_9 kind="Record" offset="652" length="72">
+      <AttackerNature kind="Leaf" offset="652" length="2" type="Scalar { Kind = U16 }" value="25" />
+      <TargetCount kind="Leaf" offset="654" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <Targets kind="Array" offset="658" length="66" count="11">
+        <_0_ kind="Struct" offset="658" length="6">
+          <TargetNature kind="Leaf" offset="658" length="2" type="Scalar { Kind = U16 }" value="16" />
+          <Value kind="Leaf" offset="660" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="664" length="6">
+          <TargetNature kind="Leaf" offset="664" length="2" type="Scalar { Kind = U16 }" value="17" />
+          <Value kind="Leaf" offset="666" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="670" length="6">
+          <TargetNature kind="Leaf" offset="670" length="2" type="Scalar { Kind = U16 }" value="18" />
+          <Value kind="Leaf" offset="672" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="676" length="6">
+          <TargetNature kind="Leaf" offset="676" length="2" type="Scalar { Kind = U16 }" value="19" />
+          <Value kind="Leaf" offset="678" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="682" length="6">
+          <TargetNature kind="Leaf" offset="682" length="2" type="Scalar { Kind = U16 }" value="20" />
+          <Value kind="Leaf" offset="684" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="688" length="6">
+          <TargetNature kind="Leaf" offset="688" length="2" type="Scalar { Kind = U16 }" value="21" />
+          <Value kind="Leaf" offset="690" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="694" length="6">
+          <TargetNature kind="Leaf" offset="694" length="2" type="Scalar { Kind = U16 }" value="22" />
+          <Value kind="Leaf" offset="696" length="4" type="Scalar { Kind = U32 }" value="25" />
+        </_6_>
+        <_7_ kind="Struct" offset="700" length="6">
+          <TargetNature kind="Leaf" offset="700" length="2" type="Scalar { Kind = U16 }" value="23" />
+          <Value kind="Leaf" offset="702" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_7_>
+        <_8_ kind="Struct" offset="706" length="6">
+          <TargetNature kind="Leaf" offset="706" length="2" type="Scalar { Kind = U16 }" value="24" />
+          <Value kind="Leaf" offset="708" length="4" type="Scalar { Kind = U32 }" value="4294967271" />
+        </_8_>
+        <_9_ kind="Struct" offset="712" length="6">
+          <TargetNature kind="Leaf" offset="712" length="2" type="Scalar { Kind = U16 }" value="25" />
+          <Value kind="Leaf" offset="714" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="718" length="6">
+          <TargetNature kind="Leaf" offset="718" length="2" type="Scalar { Kind = U16 }" value="26" />
+          <Value kind="Leaf" offset="720" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_10_>
+      </Targets>
+    </_9>
+    <_10 kind="Record" offset="724" length="72">
+      <AttackerNature kind="Leaf" offset="724" length="2" type="Scalar { Kind = U16 }" value="26" />
+      <TargetCount kind="Leaf" offset="726" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <Targets kind="Array" offset="730" length="66" count="11">
+        <_0_ kind="Struct" offset="730" length="6">
+          <TargetNature kind="Leaf" offset="730" length="2" type="Scalar { Kind = U16 }" value="16" />
+          <Value kind="Leaf" offset="732" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_0_>
+        <_1_ kind="Struct" offset="736" length="6">
+          <TargetNature kind="Leaf" offset="736" length="2" type="Scalar { Kind = U16 }" value="17" />
+          <Value kind="Leaf" offset="738" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_1_>
+        <_2_ kind="Struct" offset="742" length="6">
+          <TargetNature kind="Leaf" offset="742" length="2" type="Scalar { Kind = U16 }" value="18" />
+          <Value kind="Leaf" offset="744" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_2_>
+        <_3_ kind="Struct" offset="748" length="6">
+          <TargetNature kind="Leaf" offset="748" length="2" type="Scalar { Kind = U16 }" value="19" />
+          <Value kind="Leaf" offset="750" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_3_>
+        <_4_ kind="Struct" offset="754" length="6">
+          <TargetNature kind="Leaf" offset="754" length="2" type="Scalar { Kind = U16 }" value="20" />
+          <Value kind="Leaf" offset="756" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_4_>
+        <_5_ kind="Struct" offset="760" length="6">
+          <TargetNature kind="Leaf" offset="760" length="2" type="Scalar { Kind = U16 }" value="21" />
+          <Value kind="Leaf" offset="762" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_5_>
+        <_6_ kind="Struct" offset="766" length="6">
+          <TargetNature kind="Leaf" offset="766" length="2" type="Scalar { Kind = U16 }" value="22" />
+          <Value kind="Leaf" offset="768" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_6_>
+        <_7_ kind="Struct" offset="772" length="6">
+          <TargetNature kind="Leaf" offset="772" length="2" type="Scalar { Kind = U16 }" value="23" />
+          <Value kind="Leaf" offset="774" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_7_>
+        <_8_ kind="Struct" offset="778" length="6">
+          <TargetNature kind="Leaf" offset="778" length="2" type="Scalar { Kind = U16 }" value="24" />
+          <Value kind="Leaf" offset="780" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_8_>
+        <_9_ kind="Struct" offset="784" length="6">
+          <TargetNature kind="Leaf" offset="784" length="2" type="Scalar { Kind = U16 }" value="25" />
+          <Value kind="Leaf" offset="786" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_9_>
+        <_10_ kind="Struct" offset="790" length="6">
+          <TargetNature kind="Leaf" offset="790" length="2" type="Scalar { Kind = U16 }" value="26" />
+          <Value kind="Leaf" offset="792" length="4" type="Scalar { Kind = U32 }" value="0" />
+        </_10_>
+      </Targets>
+    </_10>
+  </NatureMatrix>
+</AttributeNature>

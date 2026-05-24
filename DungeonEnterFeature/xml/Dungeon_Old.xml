@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonOld schema="Dungeon_Old.struct" bin="Dungeon_Old.bin" byteLength="9">
+  <Dungeons kind="Section" offset="0" length="9">
+    <_0 kind="Record" offset="4" length="5">
+      <DungeonId kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="9203" />
+      <FieldA kind="Leaf" offset="8" length="1" type="Scalar { Kind = U8 }" value="4" />
+    </_0>
+  </Dungeons>
+</DungeonOld>

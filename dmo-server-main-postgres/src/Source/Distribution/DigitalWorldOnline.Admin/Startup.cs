@@ -4,7 +4,6 @@ using DigitalWorldOnline.Application.Admin.Repositories;
 using DigitalWorldOnline.Application.GameAssets.Bins;
 using DigitalWorldOnline.Application.Extensions;
 using DigitalWorldOnline.Application.GameAssets;
-using DigitalWorldOnline.Application.GameAssets.Bins;
 using DigitalWorldOnline.Application.Services;
 using DigitalWorldOnline.Commons.Enums;
 using DigitalWorldOnline.Commons.Interfaces;
@@ -131,6 +130,7 @@ namespace DigitalWorldOnline.Admin
             services.AddSingleton<MonsterBinLoader>();
             services.AddSingleton<MapBinLoader>();
             services.AddSingleton<ItemListBinLoader>();
+            services.AddSingleton<QuestBinLoader>();
             services.AddScoped<StoragePersistenceDualWriteCoordinator>();
             services.AddSingleton<AssetsLoader>();
 

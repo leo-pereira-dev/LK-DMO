@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonValue schema="DungeonValue.struct" bin="DungeonValue.bin" byteLength="20">
+  <Values kind="Section" offset="0" length="20">
+    <_0 kind="Record" offset="4" length="2">
+      <Key kind="Leaf" offset="4" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <Value kind="Leaf" offset="5" length="1" type="Scalar { Kind = U8 }" value="0" />
+    </_0>
+    <_1 kind="Record" offset="6" length="2">
+      <Key kind="Leaf" offset="6" length="1" type="Scalar { Kind = U8 }" value="1" />
+      <Value kind="Leaf" offset="7" length="1" type="Scalar { Kind = U8 }" value="40" />
+    </_1>
+    <_2 kind="Record" offset="8" length="2">
+      <Key kind="Leaf" offset="8" length="1" type="Scalar { Kind = U8 }" value="2" />
+      <Value kind="Leaf" offset="9" length="1" type="Scalar { Kind = U8 }" value="50" />
+    </_2>
+    <_3 kind="Record" offset="10" length="2">
+      <Key kind="Leaf" offset="10" length="1" type="Scalar { Kind = U8 }" value="3" />
+      <Value kind="Leaf" offset="11" length="1" type="Scalar { Kind = U8 }" value="90" />
+    </_3>
+    <_4 kind="Record" offset="12" length="2">
+      <Key kind="Leaf" offset="12" length="1" type="Scalar { Kind = U8 }" value="4" />
+      <Value kind="Leaf" offset="13" length="1" type="Scalar { Kind = U8 }" value="60" />
+    </_4>
+    <_5 kind="Record" offset="14" length="2">
+      <Key kind="Leaf" offset="14" length="1" type="Scalar { Kind = U8 }" value="5" />
+      <Value kind="Leaf" offset="15" length="1" type="Scalar { Kind = U8 }" value="70" />
+    </_5>
+    <_6 kind="Record" offset="16" length="2">
+      <Key kind="Leaf" offset="16" length="1" type="Scalar { Kind = U8 }" value="6" />
+      <Value kind="Leaf" offset="17" length="1" type="Scalar { Kind = U8 }" value="80" />
+    </_6>
+    <_7 kind="Record" offset="18" length="2">
+      <Key kind="Leaf" offset="18" length="1" type="Scalar { Kind = U8 }" value="7" />
+      <Value kind="Leaf" offset="19" length="1" type="Scalar { Kind = U8 }" value="90" />
+    </_7>
+  </Values>
+</DungeonValue>

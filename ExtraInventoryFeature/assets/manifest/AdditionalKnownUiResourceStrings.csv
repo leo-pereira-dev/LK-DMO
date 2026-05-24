@@ -1,0 +1,4 @@
+﻿"Address","Value","Why"
+"01aedb8c","NewInventory\new_inventory_win.tga","Known NewInventory root window background string; no direct xref symbol in dump"
+"01aedbb0","NewInventory\new_inventory_notification.tga","Known NewInventory notification string; adjacent to button tab asset"
+"01ad7b14","SealMaster\dropdown_list_0","Dropdown resource prefix used by seal overview/stat filters; no file extension in string"

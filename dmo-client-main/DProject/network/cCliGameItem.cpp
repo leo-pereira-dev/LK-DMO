@@ -5,6 +5,7 @@
 
 #include "../Global.h"
 #include "../Engine.h"
+#include "../ExtraInventoryDebugLog.h"
 #include "../../LibProj/CsFunc/CrashLogger.h"
 
 
@@ -154,7 +155,7 @@ void cCliGame::RecvItemSplit(void)		// 아이템 분리
 	u2 nDstPos;
 
 	pop(nSrcPos);
-	pop(nDstPos);	
+	pop(nDstPos);
 
 	g_pDataMng->ServerItemMoveSuccess( nSrcPos, nDstPos );
 }
@@ -172,6 +173,10 @@ void cCliGame::RecvItemMove(void)		// 아이템 이동
 
 	pop(nSrcPos);
 	pop(nDstPos);
+
+	if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrcPos ) ) || IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nDstPos ) ) )
+		ExtraInventoryDebugLog( "[ExtraInventory][Network] RecvItemMove success src=%d dst=%d srcConst=%d dstConst=%d",
+			nSrcPos, nDstPos, TO_CONSTANT( nSrcPos ), TO_CONSTANT( nDstPos ) );
 
 	g_pDataMng->ServerItemMoveSuccess( nSrcPos, nDstPos );
 }

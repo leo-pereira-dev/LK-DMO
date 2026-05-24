@@ -4,6 +4,11 @@
     {
         Inventory = 0,
         Warehouse = 1,
-        AccountWarehouse = 2
+        AccountWarehouse = 2,
+        ExtraSeal = 3,
+        ExtraTicket = 4,
+        ExtraEvolution = 5,
+        ExtraDigitama = 6,
+        ExtraMaterial = 7
     }
 }

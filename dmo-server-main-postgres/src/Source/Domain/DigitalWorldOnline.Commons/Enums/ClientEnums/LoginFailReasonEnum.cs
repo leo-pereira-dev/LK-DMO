@@ -3,18 +3,18 @@
     public enum LoginFailReasonEnum
     {
         /// <summary>
-        /// Username not found on database
+        /// Invalid username or password. Maps to DM_Message 10002 in the English client.
         /// </summary>
-        UserNotFound = 18,
+        UserNotFound = 10002,
 
         /// <summary>
-        /// Account has been banned
+        /// Generic server/account error message. Account bans normally use LoginRequestBannedAnswerPacket.
         /// </summary>
-        BannedAccount = 68,
+        BannedAccount = 10034,
 
         /// <summary>
-        /// Wrong password for this account
+        /// Invalid username or password. Maps to DM_Message 10002 in the English client.
         /// </summary>
-        IncorrectPassword = 73
+        IncorrectPassword = 10002
     }
 }

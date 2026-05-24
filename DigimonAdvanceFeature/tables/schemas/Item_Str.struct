@@ -1,0 +1,18 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Language/English/Item_Str.bin]
+// Item_Str.bin — Pack03 v487 language bin.
+// Decompiled-exe proof only: string payloads use FUN_0100f610 length-prefixed UTF-16LE reads.
+// Cursor validation against decoded Pack03 English payload reaches EOF as flat keyed records with 3 string field(s).
+
+bin Item_Str {
+    section Entries {
+        count  u32;
+        record Item_StrRecord;
+    }
+}
+
+struct Item_StrRecord {
+    u32  TextKey;
+    wstring  TextA;
+    wstring  TextB;
+    wstring  TextC;
+}

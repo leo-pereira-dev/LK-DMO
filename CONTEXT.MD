@@ -1,6 +1,6 @@
 # LK-DMO Technical Context
 
-Last updated: 2026-05-22
+Last updated: 2026-05-23
 
 This document is the working memory for the LK-DMO workspace in `C:\0-NewDmo`.
 It summarizes the main fixes, migration work, build notes, and packet/protocol
@@ -129,6 +129,557 @@ Schema: dso
 ```
 
 ## Changelog / work completed
+
+### 2026-05-23 working tree diff consolidated before main commit
+
+Diff base for this commit:
+
+- Current branch: `main`.
+- Remote/base commit: `origin/main` / `HEAD` at `0c23f2e`
+  (`Integra archive, transcendencia e XML Union`).
+- The branch was already aligned with `origin/main`; the comparison is the
+  current working tree against that commit, not a separate feature branch.
+- Tracked-file diff before staging: 88 modified tracked files,
+  4555 insertions, 880 deletions.
+- New untracked content before staging was intentionally included because the
+  user asked to commit everything from the current work pass.
+
+New isolated reverse-map subprojects added at the repository root:
+
+- `DetailInfoFeature/` - 96 files. Official `Detalhes` / tamer and Digimon
+  detail window map, copied decompiled functions, Pack01 asset manifests,
+  language bins, status/enchant/Seal Master support tables, and sweep notes.
+- `DigiCombineFeature/` - 152 files. Official DigiCombine and UnionCombine
+  fusion maps, copied XML/BIN tables, decompiled UI/table functions, packet
+  skeleton headers, service/table source files, asset manifests, and original
+  window notes.
+- `DigiSummonFeature/` - 67 files. Official data invocation/gacha selection
+  map for `DigiSummonUI`, copied summon XML/BIN files, decompiled UI/table
+  functions, packet map, and dynamic card image manifest.
+- `DigitalDrawFeature/` - 95 files. Digital Draw / Lucky Draw map, reused
+  `DigiSummonUI`/`Random_box` visual family, LuckyDraw table references,
+  internal probability popup functions, and notes that
+  `DM_Luckydraw_Info-LuckyDrawInfo.xml/bin` was not found in current
+  extraction.
+- `DungeonEnterFeature/` - 54 files. Dungeon entry window map, official
+  dungeon XML/BIN family, copied decompiled UI/table functions, image path
+  inventory, and the `Treinamento Gankoomon` candidate notes.
+- `DigimonAdvanceFeature/` - 175 files. Digimon advance/enchant room map,
+  copied decompiled functions, scene/sound/Pack01 references, table/XML/BIN
+  dependencies, and candidate/xref CSVs for the `EnchantTactics` family.
+- `ExtraInventoryFeature/` - 103 files. Official exclusive inventory reverse
+  map with copied functions for `ExtraInventoryUI`, category UIs, Seal Master
+  shared functions, table/language bins, XML copies, and texture-pack
+  pitfalls recorded from the UI work.
+- `ItemUpgradeManagementFeature/` - 120 files. Official `Gerenciamento`
+  window map for strengthening, transfer, and recovery tabs, with copied
+  item-upgrade tables, UI functions, packet/result strings, assets, sounds,
+  and last-sweep documentation.
+- `UnionCombineFusionSelectFeature/` - 60 files. Newer Union Combine fusion
+  selection screen map, official `DM_UnionCombine-*` table copies, item lookup
+  bins/XML, decompiled UI/table functions, asset verification, and rank-list
+  comparison.
+- Root CSVs `DigimonAdvance_candidate_xrefs.csv`,
+  `DigimonAdvance_candidates.csv`, and `DigimonAdvance_seed_call_edges.csv`
+  record the wider candidate trace used before the dedicated
+  `DigimonAdvanceFeature` folder was organized.
+
+Extra Inventory client implementation added:
+
+- New active files:
+  - `dmo-client-main/DProject/_Interface/Game/ExtraInventory.cpp`
+  - `dmo-client-main/DProject/_Interface/Game/ExtraInventory.h`
+  - `dmo-client-main/DProject/ExtraInventoryDebugLog.h`
+- Registered the window in the Visual Studio project and filters.
+- Added `WT_EXTRAINVENTORY` to the base window type registry and wired
+  `cBaseWindow::NewWindow(...)` to construct `cExtraInventory`.
+- Added `_GameIF` open/close/drop-routing diagnostics for
+  `WT_EXTRAINVENTORY`, including cursor drop traces for `CI_INVEN` and
+  `CI_EXTRAINVEN`.
+- Added `Ctrl+I` menu handling in `GlobalInput.cpp` / `HotKey.cpp` so the
+  window opens and closes as a normal game UI window.
+- Implemented draggable header behavior so the exclusive inventory window can
+  be repositioned like the normal inventory.
+- Added UI layout matching the latest accepted test pass:
+  - title `Inventario Exclusivo`;
+  - left category tabs: `Inventario de Selo`, `Bolsa de Bilhete`,
+    `Itens de Evolucao`, `DigiOvos`, `Materiais`;
+  - official root/background/tab/close/scroll/button paths from Pack01;
+  - permanent scrollbar using the Seal Master scrollbar visual family;
+  - five-column item grid with category-specific item display;
+  - normal inventory-style hover highlight on empty and filled slots;
+  - Seal Master card slot background cropped from
+    `SealMaster\Sealmaster_bg_00.tga` to avoid the earlier repeated/small
+    texture problem;
+  - Seal Master combo/dropdown assets via `SealMaster\btn_combobox.tga` and
+    `SealMaster\dropdown_list_0`;
+  - search icons from
+    `Encyclopedia\NewEncyclopedia\main\sarch.png` and
+    `Encyclopedia\NewEncyclopedia\main\re.png`;
+  - search text rendered with an overlay `cText` because the local `cEditBox`
+    captured input but did not visibly draw text in this custom window.
+- Category filters implemented in the client:
+  - Seal inventory: overview/stat dropdown only.
+  - Ticket bag: search input only.
+  - Evolution items: rank dropdown plus search input.
+  - DigiOvos: search input only.
+  - Materials: search input only.
+- Client item interactions implemented:
+  - drag normal inventory item into the correct exclusive inventory category;
+  - drag exclusive inventory item out to normal inventory;
+  - drag item within the same exclusive category;
+  - right-click Seal item can call the normal item-use flow so seals can be
+    opened/used from the exclusive inventory;
+  - Shift + right-click routes to split/move behavior matching normal
+    inventory intent;
+  - collect-all button calls the new extra inventory collect-all packet.
+- Client debug logging was added around keyboard open, window creation,
+  category switches, collect-all clicks, drag/drop, right-click, filtering,
+  hover, and packet send/receive paths. These logs were useful during testing
+  but should be reduced later if they become noisy.
+
+Extra Inventory client data/protocol changes:
+
+- `Inventory_Protocol.h` gained inventory flags for:
+  - `eEXTRA_SEAL`
+  - `eEXTRA_TICKET`
+  - `eEXTRA_EVOLUTION`
+  - `eEXTRA_DIGITAMA`
+  - `eEXTRA_MATERIAL`
+- `pItem.h`, `CCursor.cpp/.h`, `DataMng.cpp/.h`, `cCliGame.h`,
+  `cCliGameItem.cpp`, `cCliGameReceive.cpp`, `cCliGameSend.cpp`, and
+  `cCliGameSync.cpp` were extended so the client can store, receive, send,
+  drag, and refresh the five exclusive inventory lists.
+- `DataMng` now owns/initializes category inventories for the exclusive
+  inventory and dispatches load/update packets into the correct list.
+- The item movement send path maps exclusive inventory slots into server slot
+  ranges so existing move/split/use packet flows can be reused.
+
+Extra Inventory server implementation added:
+
+- New packet processor:
+  - `ExtraInventoryCollectAllPacketProcessor.cs`
+- New/extended enums and slot contracts:
+  - `InventoryTypeEnum` adds `ExtraSeal`, `ExtraTicket`, `ExtraEvolution`,
+    `ExtraDigitama`, `ExtraMaterial`.
+  - `ItemListEnum`, `ItemListMovimentationEnum`, and
+    `GeneralSizeEnum` add exclusive inventory list/movement/range constants.
+  - `GameServerPacketEnum` adds the collect-all route.
+- `CharacterModel` / behavior now carry the five extra item lists:
+  - `ExtraInventorySeal`
+  - `ExtraInventoryTicket`
+  - `ExtraInventoryEvolution`
+  - `ExtraInventoryDigitama`
+  - `ExtraInventoryMaterial`
+- `DatabaseContext`, character command/query repositories, and create-character
+  flow were updated so the five extra lists are created, loaded, tracked, and
+  persisted with the character.
+- `InitialInformationPacketProcessor` now sends the five exclusive inventories
+  to the client during initial game load.
+- `ItemMovePacketProcessor` now handles:
+  - inventory -> extra category;
+  - extra category -> inventory;
+  - extra category -> same extra category;
+  - refresh packets for both normal inventory and the affected extra list.
+- `ExtraInventoryCollectAllPacketProcessor` scans the normal inventory,
+  filters by category type sets, moves eligible stacks into the target extra
+  list, persists both lists, and sends both refreshed inventory packets.
+- Extra-category validation uses type sets for Seal, Ticket, Evolution,
+  Digitama, and Material categories so the server rejects wrong-category drops.
+- Extra inventory logs include collect-all request/finish/reject details,
+  manual move details, empty/no-match diagnostics, and inventory samples when
+  no stacks are moved.
+
+Other client/server changes included in the same diff:
+
+- Digimon Archive and Transcendence stabilization continued:
+  - shared slot resolver added on the server;
+  - archive move packet/processor added;
+  - archive load packet and archive UI parsing adjusted;
+  - transcendence receive-exp and success packets/processors adjusted;
+  - client archive/transcendence logs added around slot parsing, material
+    charging, EXP packet send/receive, final transcendence, and UI refresh.
+- Hatching, partner switch, partner evolution, Growth Fruit, item consume,
+  item scan, item return, item split, inventory sort, quest give-up, and spirit
+  craft processors received fixes/logging so item and Digimon slot side effects
+  are easier to trace.
+- `PartnerSwitchFailurePacket.cs`, `QuestCanceledPacket.cs`, and
+  `DigimonArchiveMovePacket.cs` were added for explicit failure/cancel/move
+  server responses.
+- `ClientDigimonSlotResolver.cs` was added to centralize client-visible
+  digimon slot resolution for archive/transcendence style packets.
+- Authentication/account/character host processors and startup files received
+  logging/DI adjustments used during the login and packet-debug pass.
+- `CrashLogger.cpp/.h` and `nlib/client.cpp` gained extra diagnostic support.
+- `QuestBinLoader.cs` and `AssetsLoader.cs` were updated so the server-side
+  asset/bin loader can cover quest/table data needed by later features.
+- Two infrastructure migrations were added:
+  - `20260523173500_ApplyInitialTemporalDefaults.cs`
+  - `20260523181000_AlignRequiredTemporalEndDefaults.cs`
+- A new server test project was added under
+  `dmo-server-main-postgres/src/Tests/DigitalWorldOnline.Game.Tests`, covering
+  archive slot contracts and transcendence receive-exp packets.
+
+Documentation changes included in the diff:
+
+- `CONTEXT.MD` was expanded with the active build target, isolated reverse-map
+  notes, Digimon Archive/Transcendence debug state, Extra Inventory mapping,
+  Item Upgrade mapping, and this consolidated diff summary.
+- Each isolated subproject has its own README/docs with function maps, asset
+  inventories, table/language inventories, last-sweep notes, and texture-pack
+  pitfalls. These notes explicitly call out issues hit during implementation,
+  including Pack01 paths, missing extracted assets, pink placeholder texture
+  failures, repeated/cropped texture mistakes, and category-specific dropdown /
+  search differences.
+- `quickmenu_png_functions/README.md` and `imagegenerator.md` were updated or
+  added as auxiliary notes from the broader reverse-map work.
+- `.gitattributes` was added with Git LFS tracking for the large copied table
+  XML files `**/tables/xml/QuestItemData.xml` and
+  `**/tables/xml/ItemData.xml`. These repeated official XML references are
+  larger than GitHub's normal 100 MB object limit, so they must remain LFS
+  objects if they stay in the reverse-map subprojects.
+
+Latest local verification before this commit:
+
+- The client was built with `DProject.sln` using `Release_English|Win32`.
+- The last accepted client binary was copied to:
+  - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`
+  - `D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe`
+- User confirmed the final Extra Inventory UI test state was good enough to
+  leave as-is for now.
+
+Known follow-up risks:
+
+- Extra Inventory still has temporary debug logs in both client and server.
+  Keep them while validating item movement, then trim once the flow is stable.
+- Extra Inventory category type sets are server-side approximations based on
+  the current mapped data and observed item types; verify against the official
+  table rules before treating them as final production rules.
+- The isolated feature folders intentionally include copied bins/XML and
+  decompiled `.c` references. They are research/porting artifacts and are not
+  compiled into the active client unless explicitly wired later.
+- The current commit contains both active code and research subprojects. Future
+  feature work should keep active integration changes separate when possible.
+
+### 2026-05-23 isolated official UI reverse maps
+
+- `DigiCombineFeature/` remains the isolated reference for the official union
+  combine/fusion window. Its asset manifest is based on decompiled UI xrefs,
+  with XML/BIN copies kept beside the copied `.c` functions.
+- `UnionCombineFusionSelectFeature/` was split out for the newer-looking
+  fusion selection screenshot that has rank filters `N` through `SS+`. This is
+  the `UnionCombineUI` / `DM_UnionCombine-*` family, not the older
+  `DigiCombineUI` map. It copies 28 UnionCombine UI/table/adjacent BGM functions, the
+  official UnionCombine XML/BIN tables plus item lookup tables, English item
+  language bins, and a Pack01 asset/sound manifest generated from decompiled
+  function xrefs.
+- `DigitalDrawFeature/` was added for the Digital Draw/Lucky Draw ticket
+  selection screen. The fixed UI is the reused `DigiSummonUI` /
+  `Random_box` visual family, but the system has its own EXE table reference:
+  `DM_Luckydraw_Info-LuckyDrawInfo.bin` / `CLuckyDrawTable`. The subproject
+  copies 52 reused UI functions and 6 LuckyDraw table functions, including the
+  internal `info. de prob.` popup/list row chain, generates
+  xref-based Pack01 manifests, and records that the LuckyDrawInfo XML/BIN is
+  referenced by the EXE but missing from the current `Dcommerce` extraction.
+- `DigiSummonFeature/` is the isolated reference for the union summon/gacha
+  windows. It contains the copied summon XML/BIN tables, decompiled UI/table
+  functions, fixed UI asset manifest, and dynamic card image manifest.
+- `DungeonEnterFeature/` was added as the isolated reference for the official
+  dungeon entry window. It copies the dungeon XML/BIN family from `Dcommerce`
+  (`DungeonList`, `DungeonQualification`, `DungeonObtainable`, `DungeonValue`,
+  `DungeonReward`, `DungeonStepInfo`, `DungeonClearInfo`, `Dungeon_Old`, and
+  `MapDungeonRegion`), English language bins, and the decompiled UI/table
+  functions traced from `DungeonEnter`.
+- `DigimonAdvanceFeature/` was added as the isolated reference for the official
+  Digimon advance/enchant screen. The traced runtime family is
+  `EnchantTactics` plus the popups/widgets `DigiPowerEnchant`,
+  `EnchantOption`, `EnchantOptionResultUI`, `DigimonTranscendenceHelp`, and
+  page name `DigimonEnchantPage`. It copies 106 decompiled functions, the
+  official `EvoDigitama`, `EnchantItemInfo`, `EnchantStatInfo`,
+  `TranscendNeed`, `TranscendMaterial`, `TranscendCorrect`, and
+  `TranscendCorrectEx` XML/BIN tables, item lookup tables, English language
+  bins, and xref-based Pack01/scene/sound manifests.
+- Dungeon entry fixed UI assets were traced from decompiled xrefs, not guessed:
+  core references include `DungeonUI\Dungeon_Bg.tga`,
+  `DungeonUI\Dungeon_Entrance_Btn.tga`, list/reward/requirement frames, normal
+  difficulty badge, reward button, close button, and `Icon\Mask_Over.dds`.
+  Dynamic preview images come from `DungeonList.xml/ImagePath`; the manifest
+  currently records 90 dungeon records and 56 unique image paths.
+- The screenshot candidate for "Treinamento Gankoomon" is documented as
+  `DungeonId=5001`: `DungeonUI\DungeonImage\Dungeon_50.png`, Digimon level
+  requirement value `150`, and 9 obtainable reward item ids. Interface textures
+  are in Pack 01 (`ClientDist\Data\Pack01.*`); only their official paths are
+  recorded so far, because Pack 01 was not extracted into the subproject.
+- Digimon advance/enchant fixed refs were traced from decompiled xrefs. Core
+  refs include `Enchant_Room.mp3`, `EnchantTactics\card_base.tga`,
+  `EnchantTactics\card_base2.tga`, `EnchantTactics\NO.tga`,
+  `EnchantTactics\CardAni\Card_R_`, `EnchantTactics\SelectAni\Card_C_`,
+  `EnchantTactics\CardSuccess\Succes_R_`,
+  `EnchantTactics\CardFail\Fail_R_`, `EnchantTactics\SuccessAni\Succes_`,
+  `EnchantTactics\FailAni\Fail_`, `DetailInfo\Enchant_AT.tga`,
+  `DetailInfo\Enchant_bl.tga`, `DetailInfo\Enchant_ct.tga`,
+  `DetailInfo\Enchant_ev.tga`, `DetailInfo\Enchant_HP.tga`,
+  `DigimonStatus_New\Digimon_Status_Enchant_01.tga`,
+  `TacticsHouse\CheckOnline.tga`, `Breakthrough\Breakthrough_Main_BG.tga`,
+  `Breakthrough\Breakthrough_Digimon_info_BG.tga`,
+  `system\LevelEffect\Enchant_K45.nif`,
+  `system\LevelEffect\Enchant_K60.nif`, `System\transcendental.wav`,
+  `System\Tactics_enchant_fail.nif`, and `game\Enchant_Fail.mp3`.
+  Shared cluster refs such as `Accessory\Enchant\...` were kept separately in
+  `DigimonAdvanceFeature\assets\manifest\AdjacentCopiedClusterAssetReferences.csv`.
+
+### 2026-05-23 current Digimon Archive / Transcendence debug state
+
+This system is not finished yet. The current code is a stabilization pass for
+the Digimon Archive, Transcendence, mercenary slot alignment, hatching, partner
+switching, and Growth Fruit side effects. Treat this section as the active
+debug map before touching those areas again.
+
+Latest verified build/publish state for this pass:
+
+- Server project `DigitalWorldOnline.Game.csproj` builds with `0` errors.
+- Docker `game` image was rebuilt and `dmo-pg-game` restarted successfully.
+  Boot log showed `GameServer started`.
+- Client was built with `Release_English|Win32`; output
+  `C:\Release\GSP\DProject_R_ENG.exe` was copied to:
+  - `C:\0-NewDmo\ClientDist\DProject_R_ENG.exe`
+  - `D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe`
+
+Observed root cause before the latest Hyper Charge fix:
+
+- Client logs around `2026-05-23 10:45` showed `packet=16040`
+  (`DigimonTranscendence`) being sent, but no matching `packet=16039`
+  (`TranscendenceReceiveExpResult` / charge EXP request) for that click.
+- Server logs received `16040` and rejected final transcendence because the
+  target still had `0/140000` Transcendence EXP:
+  `[Transcendence] Finish rejected: digimon {DigimonId} exp {Exp}/{MaxExp}.`
+- The C++ UI previously waited for `_EffectEnd()` before sending the charge
+  packet. If the charge animation callback did not fire, the UI looked like
+  nothing happened and the server never received `16039`.
+- Current client change: `PressNormalAddExpBtn()` and
+  `PressAdvancedAddExpBtn()` now call `SendExpCharge(...)` immediately after
+  validation/lock. `_EffectEnd()` no longer sends the packet; it only keeps the
+  effect looping when needed.
+
+Current slot contract:
+
+- Server real active digimon slots are `DigimonModel.Slot = 0..DigimonSlots-1`.
+- Archived digimon use `Slot = 255` (`byte.MaxValue`).
+- `CharacterModel.RemoveDigimon(slot)` compacts active slots by default.
+  `CompactActiveDigimonSlots()` rewrites active slots contiguously from `0`.
+  `GetNextActiveDigimonSlot()` returns the current active count, so a restored
+  archived digimon goes to the last available active slot after compaction.
+- Archive packet `3201` now uses the same client slot contract as
+  Transcendence: `0 = current active partner`; `1..8 = visible
+  mercenary/real active slot`. It no longer subtracts one from mercenary
+  slots, because the client companion grid already sends `1` for the first
+  mercenary (`GetTactics(0)`), which is server slot `1`.
+- Archive packet `3201` no longer rejects the active partner unconditionally.
+  The active slot can be stored or swapped as long as the tamer is not moving
+  the only active Digimon into an empty archive slot. When slot `0` is archived,
+  server compaction promotes the next active mercenary to slot `0`.
+- Archive `3201`, Transcendence charge `16039`, and Transcendence finish
+  `16040` share `ClientDigimonSlotResolver` on the server. There is also a
+  compact visual-index fallback for older/misaligned client payloads after
+  gaps.
+
+Current server logs added for Archive and Transcendence:
+
+- `ARCHIVE 3201 request ...`
+  logs tamer, VIP flag, client digivice slot, resolved server slot, archive
+  slot, NPC, packet length, digivice partner id/name/slot, archive row
+  id/digimon/name, and current tamer slots.
+- `ARCHIVE 3201 rejected last active partner move ...`
+  confirms the server blocked only the unsafe case where a tamer would be left
+  without any active Digimon.
+- `ARCHIVE 3201 moved to archive ...`
+  logs tamer, digimon id/name, digivice slot, archive slot, and price.
+- `ARCHIVE 3201 moved to digivice ...`
+  logs tamer, digimon id/name, archive slot, and new active slot.
+- `ARCHIVE 3201 swapped ...`
+  logs outgoing/incoming digimon ids/names, active slot, archive slot, and
+  price.
+- `ARCHIVE 3201 move to digivice failed because archive digimon could not be loaded ...`
+  catches stale archive rows or missing hydrated Digimon data.
+- `ARCHIVE 3201 move to digivice failed because tamer has no available active slot ...`
+  catches full mercenary slot state.
+- `[Transcendence] Charge request ...`
+  logs tamer, target slot, charge type, NPC, active item slot, archive material
+  slots, and charge items.
+- `[Transcendence] Charge target slot resolved ...`
+  logs when the client slot differs from the resolved server slot.
+- `[Transcendence] Material planned ...`
+  logs target id, material id, archive slot, base EXP, gained EXP, planned
+  total EXP, and bonus state before consuming anything.
+- `[Transcendence] Material consumed ...`
+  logs the material that was actually removed from Archive and the EXP applied.
+- `[Transcendence] Archive compact ...`
+  logs archive-slot compaction after materials are consumed.
+- `[Transcendence] Charge finished ...`
+  logs total gained EXP, final EXP, max EXP, and deleted material slots.
+- `[Transcendence] Charge rejected ...`
+  logs server result code and rejection reason.
+- `[Transcendence] Missing base info ...`
+  logs missing Digimon base info when material/target validation cannot proceed.
+- `[Transcendence] Charge packet failed ...`
+  catches unexpected exceptions in `16039`.
+- `[Transcendence] Finish failed ...`
+  logs missing target on `16040`.
+- `[Transcendence] Finish target slot resolved ...`
+  logs final transcendence target slot remapping.
+- `[Transcendence] Finish rejected ...`
+  logs already-transcended, insufficient EXP, and insufficient money states.
+- `[Transcendence] Finish cost mismatch ...`
+  warns if client and server disagree on the final 5T cost.
+- `[Transcendence] Finished ...`
+  logs successful final transcendence, cost, and remaining bits.
+- `[Transcendence] Finish packet failed ...`
+  catches unexpected exceptions in `16040`.
+
+Current client logs added for Archive and Transcendence:
+
+- `ARCHIVE RECV 3204 ...`
+  logs packet parsing for archive load: begin/end, storage header, client max,
+  slot parse begin/end, `typeAll`, name length, raw scale, EXP,
+  Transcendence EXP, level, hatch, base, max evolution count, clone, UID,
+  memory skill count, and invalid memory/evolution count aborts.
+- `ARCHIVE CONTENT OnRecvEnd ...`
+  logs archive end refresh state, whether it is a refresh-only update, current
+  max/opened/count/sorted values, and selected archive pointer.
+- `ARCHIVE CONTENT OnRecvArchiveInfo ...`
+  logs received archive row data, full refresh clearing, replacing existing
+  slots, stored slot base/level/scale/incubator flag, and final UI counts.
+- `ARCHIVE CONTENT UpdateSlotData ...`
+  logs filtering/sorting start and end, source slots, invalid filtered slots,
+  and missing tactics explain data.
+- `ARCHIVE CONTENT OnRecvChangeResult ...`
+  logs source slot, destination slot, price, selected pointer/index, archive
+  counts, and sorted counts after `3201`.
+- `TRANSCEND material click ...`
+  logs target data, material data, archive slot, hatch level, scale,
+  incubator/transcend flags, and registered material EXP.
+- `TRANSCEND material accepted as exp digimon ...`
+  logs Raremon/fixed-EXP material acceptance.
+- `TRANSCEND material rejected evoType ...` and
+  `TRANSCEND material rejected hatch ...`
+  log why a material was refused client-side.
+- `TRANSCEND SendExpCharge begin ...`
+  logs charge type, selected index, selected pointer/base/level/hatch,
+  current Transcendence EXP, material count, and over-EXP flag.
+- `TRANSCEND SendExpCharge material ...`
+  logs each material slot, raw slot, pointer, base, level, hatch,
+  incubator/transcend flags, and EXP.
+- `TRANSCEND SendExpCharge item ...`
+  logs each charge item inventory slot, item type, and count.
+- `TRANSCEND SendExpCharge sent ...`
+  logs VIP/portable flags, NPC, selected index, material count, and item count.
+- `TRANSCEND RecvExpCharge ...`
+  logs server result, target position, charge flag, deleted materials, item
+  updates, success rate, charge EXP, and total EXP.
+- `TRANSCEND SendDigimonTranscendence begin ...`
+  logs final transcend click selected index and target data.
+- `TRANSCEND SendDigimonTranscendence expCheck ...`
+  logs client-side current EXP, max EXP, and registered material EXP.
+- `TRANSCEND SendDigimonTranscendence sent ...`
+  logs final request VIP/portable flags, NPC, selected index, and money.
+- `TRANSCEND RecvDigimonHatchUp ...`
+  logs final server result, target position, hatch level, money, and EXP.
+
+Current logs added for hatching, partner switching, Growth Fruit, and related
+slot corruption checks:
+
+- Server hatch logs:
+  - `Hatch insert request ...`
+  - `Hatch insert accepted ...`
+  - `Hatch increase request ...`
+  - `Hatch increase result: ... Success/Backuped/Broken/Failed ...`
+  - `Hatch remove request ...`
+  - `Hatch remove finished ...`
+  - `Hatch finish request ...`
+  - `Hatch finish slot scan ...`
+  - `Hatch finish send ...`
+- Server partner switch logs:
+  - `Partner switch rejected ...`
+  - `Partner switch target slot resolved ...`
+  - `Partner switch request ...`
+  - `Resetting switched-out partner ...`
+  - `Partner switch send ...`
+  - `Unhandled PartnerSwitch packet ...`
+- Server evolution logs:
+  - `Evolution request ignored ...`
+  - `Evolution request rejected ...`
+  - `Evolution request ...`
+  - `Unhandled PartnerEvolution packet ...`
+- Server Growth Fruit logs:
+  - `Growth fruit request ...`
+  - `Growth fruit consume failed ...`
+  - `Growth fruit persisted ...`
+- Server item/consumable logs that help separate Growth Fruit bugs from generic
+  item-use bugs:
+  - `Unsupported item use request ...`
+  - `Consumable item target was unavailable ...`
+  - `Consumable item use rejected: missing skill apply ...`
+  - `Consumable item use rejected: unsupported applies ...`
+  - `Consumable item applied ...`
+  - `Tamer ... tried to expand digimon archive past MaxTacticsHouse ...`
+  - `D-skill expansion item ...`
+  - `D-skill expansion: ... stat-mutation not implemented ...`
+- Account/login logs:
+  - `Login request parsed ...`
+  - `Login rejected ...`
+  - `Login accepted ...`
+  - malformed login packet dumps via `DescribeLoginRequestPacket(...)`.
+- Client partner/size logs:
+  - `PARTNER_SWITCH recv ...`
+  - `PARTNER_SCALE ignored invalid packet ...`
+  - `PARTNER_SCALE synced ...`
+  - `DIGIMON_SIZE repaired invalid scale ...`
+- Client load/init logs:
+  - `RECV InitGameData ...`
+  - especially partner/tactics sections, memory skill counts, invalid tactics
+    slot guards, inventory, quest, buff, and load-complete markers.
+
+Known current risks / TODOs:
+
+- Re-test Hyper Charge after the immediate-send fix. The expected sequence is:
+  client `network_pgsql.log` shows `send packet=16039`, server logs
+  `[Transcendence] Charge request`, then client logs `TRANSCEND RecvExpCharge`.
+- `16039` success payload now includes the two-byte `sItemInfo` padding between
+  inventory slot and `cItemData`; without it, the client parsed `successRate`
+  from the first bytes of `chargeExp` and showed huge invalid EXP values.
+- Re-test final Transcendence after a successful charge. The expected sequence
+  is `16039` first, then `16040`, with server no longer rejecting
+  `{Exp}=0/140000`.
+- Re-check whether final Transcendence updates the visible hatch level to 6.
+  Previous tests showed materials disappearing and the target becoming
+  transcended visually, but tooltip still showed Hatch Level 5.
+- Verify that the active Digimon can be archived when another active Digimon is
+  available to become slot `0`, but cannot be archived as the only active
+  Digimon into an empty archive slot.
+- Verify that removing a Digimon from active slots compacts the next slots
+  forward both server-side and client-side. The current server model compacts;
+  client refresh behavior still needs repeated UI testing.
+- The server charge EXP calculation currently uses Raremon fixed EXP fallbacks
+  plus same-type/different-type hatch-grade tables. Validate against the
+  official bin/table behavior before considering it production-ready.
+- The Archive refresh path currently sends/manage-load grouped packets after
+  `3201`. If the UI resets too much, prefer a C++ refresh-only update for slots
+  rather than reinitializing the whole archive window.
+- Keep an eye on message ids. Earlier client asserts for missing message ids
+  `1` and `73` were symptoms of result-code/message-table mismatch, not just UI
+  text issues.
+
+Useful filters for the next debug pass:
+
+```powershell
+docker logs --since 5m dmo-pg-game 2>&1 |
+  Select-String -Pattern "ARCHIVE 3201|Transcendence|Hatch|Partner switch|Growth fruit|Evolution request|error|exception" -CaseSensitive:$false
+
+Select-String -Path "C:\0-NewDmo\ClientDist\logs\*.log" `
+  -Pattern "packet=16039|packet=16040|ARCHIVE RECV 3204|ARCHIVE CONTENT|TRANSCEND|PARTNER_SWITCH|PARTNER_SCALE|DIGIMON_SIZE|RECV InitGameData" `
+  -CaseSensitive:$false |
+  Select-Object -Last 200
+```
 
 ### 2026-05-22 archive, transcendence, D-Unit, and packet stabilization
 
@@ -1130,6 +1681,122 @@ contain item group, rank, ceil, or hacking-info table fields:
 - `DM_UnionCombine-ItemGroup.xml`
 - `DM_UnionCombine-CeilGroup.xml`
 
+### 2026-05-23 DigiCombine and UnionCombine fusion window mapping
+
+The official fusion window is being mapped in the isolated folder:
+
+```text
+C:\0-NewDmo\DigiCombineFeature
+```
+
+This folder is for reverse-engineering only before porting into the active
+client. Do not wire it into the main project until the original UI asset/layout
+map is complete.
+
+Current source map:
+
+- Decompiled UI functions are copied under
+  `DigiCombineFeature\decompiled\DigiCombineUI` and
+  `DigiCombineFeature\decompiled\UnionCombineUI`.
+- Decompiled table/load functions are copied under
+  `DigiCombineFeature\decompiled\DigiCombine` and
+  `DigiCombineFeature\decompiled\UnionCombine`.
+- Official XML table copies live under `DigiCombineFeature\xml`.
+- `DigiCombineFeature\include\DigiCombineOriginalWindow.h` records the known
+  class sizes, child UI offsets, button rectangles, and official asset paths.
+- `DigiCombineFeature\docs\OriginalWindowMap.md` is the current visual/layout
+  map for matching the official window screenshot.
+- `DigiCombineFeature\assets\manifest\DecompiledUiAssetReferences.csv` is the
+  source-of-truth asset list for the port: it contains only paths referenced by
+  the copied decompiled UI functions.
+
+Important asset note:
+
+- The official interface images for this window are in `ClientDist\Data\Pack01`
+  (`Pack01.hf` / `Pack01.pf`), not Pack03.
+- The EXE references them by runtime asset paths such as
+  `Random_box\bg.png`, `Random_box\button\done.tga`,
+  `DigiCombine\DigiCombine_Slot_Empty.dds`,
+  `DigiCombine\DigiCombine_CardBack.dds`, and
+  `DigiCombine\DigiCombine_Gacha_*`.
+- The last UI asset sweep found `49` unique asset paths directly referenced by
+  the copied `.c` UI functions.
+- When porting, prefer the client asset loader / `CsFPSystem` paths directly
+  instead of adding duplicate texture files to source control, unless loose
+  override files are needed for testing.
+
+Key class names from RTTI:
+
+- `CDigiCombineMainUI`, `CUnionCombineMainUI`
+- `CDigiCombineRegisterUI`, `CUnionCombineRegisterUI`
+- `CDigiCombineRateInfoUI`, `CUnionCombineRateInfoUI`
+- `CDigiCombineResultUI`, `CUnionCombineResultUI`
+- `CDigiCombineSceneUI`, `CUnionCombineSceneUI`
+
+Known main UI composition:
+
+- Main UI allocation size: `0x144`
+- Register UI allocation size: `0x140`
+- Rate info UI allocation size: `0x80`
+- Result UI allocation size: `0x114`
+- Scene UI allocation size: `0x88`
+- Main child offsets: `0xAC` active content, `0xB0` register,
+  `0xB4` rate info, `0xB8` result, `0xBC` scene.
+
+### 2026-05-23 DigiSummon data invocation window mapping
+
+The data invocation/gacha-style window shown as "Selecione os dados a serem
+Invocados." is being mapped in a separate isolated folder:
+
+```text
+C:\0-NewDmo\DigiSummonFeature
+```
+
+Internal names from the official client/decompiled dump:
+
+- UI name: `DigiSummonUI`
+- Main class: `CDigiSummonMainUI`
+- Content/data class: `CDigiSummonContents`
+- Child UI classes: `CDigiSummonBottomUI`, `CDigiSummonSelectUI`,
+  `CDigiSummonTicketSelectUI`, `CDigiSummonRateInfoUI`,
+  `CDigiSummonResultUI`, and `CDigiSummonSceneUI`.
+- Tables: `DM_DigiSummon-List.bin`, `DM_DigiSummon-ItemList.bin`, and
+  `DM_DigiSummon-ItemGroup.bin`.
+- Packets: `C2GS_REQ_DIGI_SUMMON_SYNC`,
+  `C2GS_REQ_DIGI_SUMMON_PURCHASE`, `GS2C_RES_DIGI_SUMMON_SYNC`, and
+  `GS2C_RES_DIGI_SUMMON_PURCHASE`.
+
+Current subproject contents:
+
+- XML copies in `DigiSummonFeature\xml`.
+- BIN copies in `DigiSummonFeature\bin`.
+- Decompiled UI functions in `DigiSummonFeature\decompiled\DigiSummonUI`.
+- Decompiled table loader functions in
+  `DigiSummonFeature\decompiled\DigiSummonTable`.
+- Source-of-truth asset list in
+  `DigiSummonFeature\assets\manifest\DecompiledUiAssetReferences.csv`.
+- Dynamic product/card images from `DM_DigiSummon-List.xml` `IconPath` are
+  listed separately in
+  `DigiSummonFeature\assets\manifest\DynamicXmlAssetReferences.csv`; these do
+  not appear as hardcoded paths in the copied `.c` UI functions.
+
+Initial class layout from `011b6020` and `0128f070`:
+
+- Main UI allocation size: `0xD8`
+- Bottom UI: `0x94`
+- Select UI: `0x1E8`
+- Rate info UI: `0x80`
+- Result UI: `0x11C`
+- Scene UI: `0xA8`
+- Ticket select UI: `0xAC`
+- Main child offsets: `0xA8` contents, `0xAC` bottom, `0xB0` active content,
+  `0xB4` select, `0xB8` rate info, `0xBC` result, `0xC0` scene,
+  `0xC4` ticket select.
+
+The UI reuses many `Random_box` assets plus the existing
+`DigiCombine\DigiCombine_Gacha_*` scene textures/sounds. The confirmed asset
+paths should be loaded from `ClientDist\Data\Pack01`.
+
 XML Union layout:
 
 - Window size is `896x675`.
@@ -1826,3 +2493,299 @@ docker compose logs --tail=80 game | Select-String "DUnit|error|fail|exception|A
 - Boot logs showed D-Unit XML loading successfully with the known validation
   summary:
   `[DUnit] XML summary: files=17, groupsTotal=217, groupsValid=73, groupsInvalid=144, members=469, effects=66, unknownEffects=0, missingDigimonIds=102, source=/app/xml/union`.
+
+## DetailInfo isolated reverse map from 2026-05-23
+
+The official "Detalhes" windows shown in the latest screenshots were mapped
+into a separate root subproject:
+
+```text
+C:\0-NewDmo\DetailInfoFeature
+```
+
+Internal names found in the decompiled client:
+
+- `DetailInfo`
+- `cDetailInfoMainUI`
+- `cDetailInfoMainUI_Other`
+- `cDetailInfoContents`
+- `cDetailInfo_Tamer`
+- `cDetailInfo_Digimon`
+- `cDetailInfo_Equip`
+- `cDetailInfo_Seal`
+- `cDetailInfo_AdditionalStat`
+- `cDetailInfo_AttributeStat`
+- `cDetailInfo_PopupUI`
+- `AdaptDetailInfo`
+- related status constructors: `TamerStatusUI`, `DigimonStatusUI`,
+  `DigimonStatusUI_Help`
+
+Primary packet/string references found:
+
+- `C2GS_REQ_OTHER_TAMER_DETAIL_INFO`
+- `GS2C_RES_OTHER_TAMER_DETAIL_INFO`
+- `nsOtherTamerDetailInfo::stTamer`
+- `nsOtherTamerDetailInfo::stDigimon`
+
+Copied official decompiled functions are under:
+
+- `DetailInfoFeature\decompiled\DetailInfoUI`
+- `DetailInfoFeature\decompiled\StatusUI`
+- `DetailInfoFeature\decompiled\Shared`
+
+The copied files keep the original decompiled bodies but use clean filenames
+such as `BuildTamerDetailRoot.original.c`,
+`BuildDigimonDetailRoot.original.c`, `BuildVisibilityToggleButton.original.c`,
+and `ResolveDetailInfoStatText.original.c`. See
+`DetailInfoFeature\docs\FunctionMap.md`.
+
+Last sweep update:
+
+- A final xref sweep against `DetailInfo`, `DETAIL_INFO`, `TamerStatusUI`,
+  `DigimonStatusUI`, `OTHER_TAMER_DETAIL_INFO`, `SEALMASTER_STATE`, and related
+  window/asset strings found extra Seal Master dependencies.
+- These were added to `DetailInfoFeature\decompiled\DetailInfoUI`:
+  - `BuildSealMasterCloseButton.original.c`
+  - `BuildSealMasterStatRows.original.c`
+  - `ResolveSealMasterStatText.original.c`
+  - `ResolveSealMasterDsTextCase.original.c`
+  - `ResolveSealMasterStatValue.original.c`
+  - `BindSealMasterCloseButton.original.c`
+- The isolated map now has 31 copied decompiled functions and 36 asset
+  references.
+- `DetailInfoFeature\docs\LastSweepNotes.md` documents which wide-match hits
+  were not copied because they belong to adjacent systems like `AutocropUI`,
+  `TamerStatus_New`, or global Seal Master formatters.
+
+The official UI asset references were extracted from copied `.c` files and
+Ghidra xrefs into:
+
+- `DetailInfoFeature\assets\manifest\Pack01RequiredAssets.csv`
+- `DetailInfoFeature\assets\manifest\DecompiledXrefStringReferences.csv`
+- `DetailInfoFeature\assets\manifest\DecompiledUiStringReferences.csv`
+- `DetailInfoFeature\assets\manifest\ClassAndPacketStringReferences.csv`
+
+Important: the interface textures for this window are in Pack01 /
+`Data\Interface`; this subproject maps the official paths but does not extract
+the packed images yet.
+
+Key official paths for the shown windows:
+
+- `DetailInfo\TamerStatus_Win_03_bg.tga`
+- `DetailInfo\TamerStatus_Win_04_bg.tga`
+- `DetailInfo\TamerStatus_win_02_bg.tga`
+- `DetailInfo\Digimon_Status_Win.tga`
+- `DetailInfo\Storage_M_field_a.tga`
+- `DetailInfo\TamerStatus_Digimon_Tamer.tga`
+- `DetailInfo\RemainTimerBG.tga`
+- `DetailInfo\Autocrop_ON_Btn.bmp`
+- `DetailInfo\Autocrop_OFF_Btn.bmp`
+- `DetailInfo\Enchant_AT.tga`
+- `DetailInfo\Enchant_ct.tga`
+- `DetailInfo\Enchant_bl.tga`
+- `DetailInfo\Enchant_HP.tga`
+- `DetailInfo\Enchant_ev.tga`
+
+Supporting/reused official paths also found by xref:
+
+- `CommonUI\NinePatch\center_gradient2.tga`
+- `DigimonStatus_New\Digimon_Status_Enchant_01.tga`
+- `EquipSystem\Upgrade_Slot.tga`
+- `Icon\Mask_Over.dds`
+- `Mail\Mail_List_Box.tga`
+- `TacticsHouse\CheckOnline.tga`
+- `TacticsHouse\Storage_M_field.tga`
+
+Copied table/XML dependencies for later porting:
+
+- status: `TamerStats`, `DigimonStats`
+- enchant/equipment: `AccEnchant`, `EquipEnchant`, `EnchantItemInfo`,
+  `EnchantStatInfo`
+- Seal Master: `SealCard`, `SealLeader`, `SealDigimonImage`,
+  `SealPlateImage`, `SealNatureImage`, `SealBaseImage`, `SealFilter`
+- attributes: `AttributeReward`, `AttributeBase`, `AttributeNature`
+- breakthrough: `DM_Breakthrough-Stat`, `DM_Breakthrough-SlotInfo`,
+  `DM_Breakthrough-Rate`, `DM_Breakthrough-Cost`,
+  `DM_Breakthrough-EtcValue`
+
+## ExtraInventory isolated reverse map from 2026-05-23
+
+The official "Inventario Exclusivo" window shown in the latest screenshot was
+mapped into a separate root subproject:
+
+```text
+C:\0-NewDmo\ExtraInventoryFeature
+```
+
+Internal names found in the decompiled client:
+
+- `ExtraInventoryUI`
+- `CExtraInventoryUI`
+- `CExtraInventoryContents`
+- `CExtraInvenBaseUI`
+- `CExtraInvenSealUI`
+- `CExtraInvenTicketUI`
+- `CExtraInvenEvoUI`
+- `CExtraInvenDigitamaUI`
+- `CExtraInvenMaterialUI`
+- `CExtraInvenSealData`
+- `CExtraInvenTicketData`
+- `CExtraInvenEvoData`
+- `CExtraInvenDigitamaData`
+- `CExtraInvenMaterialData`
+
+Primary packet/string references found:
+
+- `GS2C_NTF_EXTRAINVEN_SLOTEXPANSION`
+- `GS2C_NTF_EXTRAINVEN_INFO`
+- binder/RTTI references for `cCliExtraInventory`
+
+Copied official decompiled functions are under:
+
+- `ExtraInventoryFeature\decompiled\ExtraInventoryUI`
+- `ExtraInventoryFeature\decompiled\ExtraInventoryUI\Categories`
+- `ExtraInventoryFeature\decompiled\ExtraInventoryUI\Seal`
+- `ExtraInventoryFeature\decompiled\Shared`
+
+The copied files keep the original decompiled bodies but use clean filenames
+such as `CreateExtraInventoryUI.original.c`, `BuildExtraInventoryTabs.original.c`,
+`BuildSealInventoryCategory.original.c`, `BuildSealOverviewDropdown.original.c`,
+and `LoadExtraInventoryEvoDataTable.original.c`. See
+`ExtraInventoryFeature\docs\FunctionMap.md`.
+
+The official UI asset references were extracted from copied `.c` files and
+Ghidra xrefs into:
+
+- `ExtraInventoryFeature\assets\manifest\RequiredAssets.csv`
+- `ExtraInventoryFeature\assets\manifest\AdditionalKnownUiResourceStrings.csv`
+- `ExtraInventoryFeature\assets\manifest\DecompiledXrefStringReferences.csv`
+- `ExtraInventoryFeature\assets\manifest\DecompiledUiStringReferences.csv`
+- `ExtraInventoryFeature\assets\manifest\ClassPacketAndTableStringReferences.csv`
+
+Important: `NewInventory\new_inventory_win.tga` is present as a string in the
+official dump and matches the root frame, but did not have a direct xref symbol
+inside the copied function set. It is therefore recorded separately in
+`AdditionalKnownUiResourceStrings.csv` instead of being mixed into xref-proven
+assets.
+
+Final sweep note: `ExtraInventoryFeature\docs\LastSweep_ExtraInventoryXrefs.csv`
+was generated from broad searches over `ExtraInventory`, `ExtraInven`,
+`EXTRAINVEN`, `EXTRA_INVEN`, `DM_Extra_Inven`, `EvoExInven`, `NewInventory`,
+`Invensort`, and Seal Master markers. No new direct `ExtraInventoryUI` window
+function was found missing. The remaining `Copied=NO` rows are adjacent systems:
+full Seal Master screen code, generic inventory/preset messages, macro/quick
+menu labels, shared `NewInventory` notification widgets, DetailInfo Seal helper
+functions, and generic filter/table formatters. The interpretation is documented
+in `ExtraInventoryFeature\docs\LastSweepNotes.md`.
+
+Key official UI paths for the shown window:
+
+- `NewInventory\new_inventory_win.tga`
+- `NewInventory\new_inventory_btn_tab.tga`
+- `NewInventory\new_inventory_lock.tga`
+- `NewInventory\extra_inventory_notification.tga`
+- `NewInventory\extra_red_highlight.tga`
+- `inventory\Invensort.tga`
+- `CommonUI\CommonUI_btn_s.tga`
+- `Control_G\ComboBox\Combo.tga`
+- `Control_G\Popup\N2Dlg5.tga`
+- `Talk\Common_Seletbar.tga`
+- `SealMaster\btn_combobox.tga`
+- `SealMaster\dropdown_list_0`
+- `SealMaster\sealmaster_highlight.tga`
+- `SealMaster\sealmaster_bg_01.tga`
+- `DigiCombine\DigiCombine_CardFront.dds`
+- `Mail\Mail_Item_Icon.tga`
+
+Copied table/XML dependencies for later porting:
+
+- extra inventory: `DM_Extra_Inven-Evo_Data`
+- evolution/exclusive item categories: `ExtraEvolution`, `DEvolutionList`,
+  `DEvolutionAdvice`
+- items/icons/text: `ItemData`, `ItemType`, `ItemRankData`,
+  `ItemRankEffectData`, `QuestItemData`, `DPartItemData`, `EvoDigitama`,
+  `TranscendMaterial`, `DM_ItemUpgrade-MaterialGroup`
+- Seal Master: `SealCard`, `SealLeader`, `SealDigimonImage`,
+  `SealPlateImage`, `SealNatureImage`, `SealBaseImage`, `SealFilter`
+- language: `DM_Extra_Inven-EvoExInven_Str`, `SealMasterName_Str`,
+  `Item_Str`, `ItemType_Str`, `DigitamaExplain_Str`,
+  `DEvolutionAdvice_Str`, `DigimonName_Str`, `DigimonTypeName_Str`
+
+## ItemUpgradeManagement isolated reverse map from 2026-05-23
+
+The official "Gerenciamento" window with tabs `Fortalecimento`,
+`Transferencia`, and `Recuperacao` was mapped into:
+
+```text
+C:\0-NewDmo\ItemUpgradeManagementFeature
+```
+
+Internal names and text keys found in the decompiled client:
+
+- `EquipmentUpgradeSystem`
+- `DataTradeDigimonUpgrade`
+- `cEquipUpgradeSystemViewer`
+- `CItemUpgradeTable`
+- `UPGRADESYSTEM_TITLE`
+- `EQUIPSYSTEM_UPGRADE`
+- `UPGRADESYSTEM_TAB_UPGRADE_DATA_TRANSFER`
+- `UPGRADESYSTEM_TAB_UPGRADE_DATA_RESTORE`
+
+Primary copied decompiled anchors:
+
+- `0128c370` -> `CreateEquipmentUpgradeSystemWindow.original.c`
+- `0128ac10` -> `CreateDataTradeDigimonUpgradeWindow.original.c`
+- `01278ad0` -> `BuildUpgradeManagementWindow.original.c`
+- `01276140` -> `BuildStrengthenSlotNetwork.original.c`
+- `0126d080` -> `BuildTransferTabLayout.original.c`
+- `01268e20` -> `BuildRestoreTabLayout.original.c`
+- `015ec9e0` -> `LoadItemUpgradeTables.original.c`
+
+The subproject currently contains 76 copied official `.c` functions, 27 unique
+asset/sound paths proven by xrefs in the copied functions, 2 additional visible
+official asset strings without direct copied-set xrefs, 27 unique text keys, 11
+packet/RTTI strings, 7 additional official strings without direct copied-set
+xrefs, 20 copied XML/BIN table files, and 2 copied English language bins.
+
+Key official UI paths:
+
+- `EquipSystem\Recharge_bg.tga`
+- `CommonUI\CommonUI_close.tga`
+- `CommonUI\Menu_tap_btn.tga`
+- `EquipSystem\Upgrade_Slot.tga`
+- `EquipSystem\Upgrade_IC_BG.tga`
+- `EquipSystem\Upgrade_Line_horizontal.tga`
+- `EquipSystem\Upgrade_Line_vertical.tga`
+- `Item_Make\Make_ani_gauge_pixel.tga`
+- `EquipSystem\Upgrade_Progress_Effect.dds`
+- `EquipSystem\Upgrade_Success_Effect.dds`
+- `EquipSystem\Upgrade_Fail_Effect.dds`
+- `EquipSystem\Upgrade_Destroy_Effect.dds`
+- `EquipSystem\ArrowBtn_Up.tga`
+- `EquipSystem\ArrowBtn_Down.tga`
+
+Latest asset sweep note: all 27 required direct assets/sounds have official
+xrefs. The two `ArrowBtn` textures are official strings visible in the
+screenshot but had no direct copied-function xref row, so they are stored in
+`ItemUpgradeManagementFeature\assets\manifest\AdditionalKnownAssetStrings.csv`.
+Adjacent `Recharge_slot`, `Recharge_gauge`, `Recharge_win`, `Btn_Nor13_R`, and
+extra `Item_Make` sequence/gauge assets were checked and excluded as neighboring
+systems; see `ItemUpgradeManagementFeature\docs\LastSweepNotes.md`.
+
+Copied table/XML dependencies:
+
+- item upgrade: `DM_ItemUpgrade-Data`, `DM_ItemUpgrade-EtcValue`,
+  `DM_ItemUpgrade-Transfer`, `DM_ItemUpgrade-Restore`,
+  `DM_ItemUpgrade-MaterialGroup`
+- item display: `ItemData`, `ItemType`, `ItemRankData`,
+  `ItemRankEffectData`, `QuestItemData`
+- language: `Item_Str`, `ItemType_Str`
+
+Packet/result strings recorded separately:
+
+- `C2GS_REQ_ITEM_UPGRADE`
+- `C2GS_REQ_ITEM_UPGRADE_DATA_TRANSFER`
+- `C2GS_REQ_ITEM_UPGRADE_DATA_RESTORE`
+- `GS2C_RES_ITEM_UPGRADE_DATA_TRANSFER`
+- `GS2C_RES_ITEM_UPGRADE_DATA_RESTORE`
+- `stProcessItemUpgradeResult`

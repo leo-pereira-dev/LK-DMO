@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DMBreakthroughSlotInfo schema="DM_Breakthrough-SlotInfo.struct" bin="DM_Breakthrough-SlotInfo.bin" byteLength="64">
+  <Slots kind="Section" offset="0" length="64">
+    <_0 kind="Record" offset="4" length="12">
+      <Key kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldARaw kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <ThresholdCount kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="10" />
+    </_0>
+    <_1 kind="Record" offset="16" length="12">
+      <Key kind="Leaf" offset="16" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <FieldARaw kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <ThresholdCount kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="10" />
+    </_1>
+    <_2 kind="Record" offset="28" length="12">
+      <Key kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <FieldARaw kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <ThresholdCount kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="10" />
+    </_2>
+    <_3 kind="Record" offset="40" length="12">
+      <Key kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <FieldARaw kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ThresholdCount kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="10" />
+    </_3>
+    <_4 kind="Record" offset="52" length="12">
+      <Key kind="Leaf" offset="52" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <FieldARaw kind="Leaf" offset="56" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <ThresholdCount kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="10" />
+    </_4>
+  </Slots>
+</DMBreakthroughSlotInfo>

@@ -132,6 +132,7 @@ namespace pItem
 		RelocateTamer,			// 테이머 서버 이전 아이템
 		ItemSort,
 		ItemScan,
+		ExtraInventoryCollectAll,
 		End
 	};
 

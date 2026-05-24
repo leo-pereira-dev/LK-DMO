@@ -1186,9 +1186,43 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 }
             }
 
-            client.Tamer.Inventory.RemoveOrReduceItem(targetItem, 1);
+            var oldSize = client.Partner.Size;
+            _logger.Information(
+                "Growth fruit request: tamer {TamerId} item {ItemId} slot {ItemSlot} partner {PartnerId}:{PartnerName} partnerSlot {PartnerSlot} handler {Handler} base {BaseType} current {CurrentType} hatch {HatchGrade} oldSize {OldSize} newSize {NewSize} maxSizeRoll {MaxSizeRoll} activeSlots=[{ActiveSlots}].",
+                client.TamerId,
+                targetItem.ItemId,
+                itemSlot,
+                client.Partner.Id,
+                client.Partner.Name,
+                client.Partner.Slot,
+                client.Partner.GeneralHandler,
+                client.Partner.BaseType,
+                client.Partner.CurrentType,
+                client.Partner.HatchGrade,
+                oldSize,
+                newSize,
+                rare,
+                string.Join(",", client.Tamer.Digimons.Select(x => $"{x.Id}:{x.Slot}:{x.BaseType}:{x.Name}"))
+            );
 
-            _logger.Verbose($"Character {client.TamerId} used {targetItem.ItemId} to change partner {client.Partner.Id} size from {client.Partner.Size / 100}% to {newSize / 100}%.");
+            if (!client.Tamer.Inventory.RemoveOrReduceItem(targetItem, 1, itemSlot))
+            {
+                _logger.Warning(
+                    "Growth fruit consume failed: tamer {TamerId} item {ItemId} slot {ItemSlot} amount {Amount}.",
+                    client.TamerId,
+                    targetItem.ItemId,
+                    itemSlot,
+                    targetItem.Amount
+                );
+
+                client.Send(
+                    UtilitiesFunctions.GroupPackets(
+                        new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type).Serialize(),
+                        new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
+                    )
+                );
+                return;
+            }
 
             client.Partner.SetSize(newSize);
             if (client.DungeonMap)
@@ -1216,6 +1250,19 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             await _sender.Send(new UpdateItemCommand(targetItem));
             await _sender.Send(new UpdateDigimonSizeCommand(client.Partner.Id, client.Partner.Size));
+
+            _logger.Information(
+                "Growth fruit persisted: tamer {TamerId} item {ItemId} slot {ItemSlot} partner {PartnerId}:{PartnerName} partnerSlot {PartnerSlot} handler {Handler} oldSize {OldSize} savedSize {SavedSize}.",
+                client.TamerId,
+                targetItem.ItemId,
+                itemSlot,
+                client.Partner.Id,
+                client.Partner.Name,
+                client.Partner.Slot,
+                client.Partner.GeneralHandler,
+                oldSize,
+                client.Partner.Size
+            );
 
             client.Send(
                 UtilitiesFunctions.GroupPackets(

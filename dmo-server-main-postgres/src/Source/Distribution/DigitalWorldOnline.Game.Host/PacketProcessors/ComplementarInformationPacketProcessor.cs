@@ -110,6 +110,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             LogWarehouseDiagnostics(client, "AccountWarehouse", client.Tamer.AccountWarehouse.Items);
             client.Send(new LoadInventoryPacket(client.Tamer.AccountWarehouse, InventoryTypeEnum.AccountWarehouse));
 
+            _logger.Debug($"Sending extra inventory packets for character {client.TamerId}...");
+            client.Send(new LoadInventoryPacket(client.Tamer.ExtraInventorySeal, InventoryTypeEnum.ExtraSeal));
+            client.Send(new LoadInventoryPacket(client.Tamer.ExtraInventoryTicket, InventoryTypeEnum.ExtraTicket));
+            client.Send(new LoadInventoryPacket(client.Tamer.ExtraInventoryEvolution, InventoryTypeEnum.ExtraEvolution));
+            client.Send(new LoadInventoryPacket(client.Tamer.ExtraInventoryDigitama, InventoryTypeEnum.ExtraDigitama));
+            client.Send(new LoadInventoryPacket(client.Tamer.ExtraInventoryMaterial, InventoryTypeEnum.ExtraMaterial));
+
             _logger.Debug($"Getting server exp information for character {client.TamerId}...");
             var serverInfo = _mapper.Map<ServerObject>(await _sender.Send(new ServerByIdQuery(client.ServerId)));
 

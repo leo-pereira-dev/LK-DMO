@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EnchantItemInfo schema="EnchantItemInfo.struct" bin="EnchantItemInfo.bin" byteLength="524">
+  <Items kind="Section" offset="0" length="524">
+    <_0 kind="Record" offset="4" length="20">
+      <ItemType kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="5501" />
+      <LowLevel kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <HighLevel kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <NeedMoney kind="Leaf" offset="16" length="8" type="Scalar { Kind = U64 }" value="70000" />
+    </_0>
+    <_1 kind="Record" offset="24" length="20">
+      <ItemType kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="5502" />
+      <LowLevel kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <HighLevel kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <NeedMoney kind="Leaf" offset="36" length="8" type="Scalar { Kind = U64 }" value="50000" />
+    </_1>
+    <_2 kind="Record" offset="44" length="20">
+      <ItemType kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="5503" />
+      <LowLevel kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <HighLevel kind="Leaf" offset="52" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <NeedMoney kind="Leaf" offset="56" length="8" type="Scalar { Kind = U64 }" value="30000" />
+    </_2>
+    <_3 kind="Record" offset="64" length="20">
+      <ItemType kind="Leaf" offset="64" length="4" type="Scalar { Kind = U32 }" value="5504" />
+      <LowLevel kind="Leaf" offset="68" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <HighLevel kind="Leaf" offset="72" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <NeedMoney kind="Leaf" offset="76" length="8" type="Scalar { Kind = U64 }" value="20000" />
+    </_3>
+    <_4 kind="Record" offset="84" length="20">
+      <ItemType kind="Leaf" offset="84" length="4" type="Scalar { Kind = U32 }" value="5505" />
+      <LowLevel kind="Leaf" offset="88" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <HighLevel kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <NeedMoney kind="Leaf" offset="96" length="8" type="Scalar { Kind = U64 }" value="10000" />
+    </_4>
+    <_5 kind="Record" offset="104" length="20">
+      <ItemType kind="Leaf" offset="104" length="4" type="Scalar { Kind = U32 }" value="5511" />
+      <LowLevel kind="Leaf" offset="108" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <HighLevel kind="Leaf" offset="112" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <NeedMoney kind="Leaf" offset="116" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_5>
+    <_6 kind="Record" offset="124" length="20">
+      <ItemType kind="Leaf" offset="124" length="4" type="Scalar { Kind = U32 }" value="5512" />
+      <LowLevel kind="Leaf" offset="128" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <HighLevel kind="Leaf" offset="132" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <NeedMoney kind="Leaf" offset="136" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_6>
+    <_7 kind="Record" offset="144" length="20">
+      <ItemType kind="Leaf" offset="144" length="4" type="Scalar { Kind = U32 }" value="5513" />
+      <LowLevel kind="Leaf" offset="148" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <HighLevel kind="Leaf" offset="152" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <NeedMoney kind="Leaf" offset="156" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_7>
+    <_8 kind="Record" offset="164" length="20">
+      <ItemType kind="Leaf" offset="164" length="4" type="Scalar { Kind = U32 }" value="5514" />
+      <LowLevel kind="Leaf" offset="168" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <HighLevel kind="Leaf" offset="172" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <NeedMoney kind="Leaf" offset="176" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_8>
+    <_9 kind="Record" offset="184" length="20">
+      <ItemType kind="Leaf" offset="184" length="4" type="Scalar { Kind = U32 }" value="5515" />
+      <LowLevel kind="Leaf" offset="188" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <HighLevel kind="Leaf" offset="192" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <NeedMoney kind="Leaf" offset="196" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_9>
+    <_10 kind="Record" offset="204" length="20">
+      <ItemType kind="Leaf" offset="204" length="4" type="Scalar { Kind = U32 }" value="5521" />
+      <LowLevel kind="Leaf" offset="208" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <HighLevel kind="Leaf" offset="212" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <NeedMoney kind="Leaf" offset="216" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_10>
+    <_11 kind="Record" offset="224" length="20">
+      <ItemType kind="Leaf" offset="224" length="4" type="Scalar { Kind = U32 }" value="5522" />
+      <LowLevel kind="Leaf" offset="228" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <HighLevel kind="Leaf" offset="232" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <NeedMoney kind="Leaf" offset="236" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_11>
+    <_12 kind="Record" offset="244" length="20">
+      <ItemType kind="Leaf" offset="244" length="4" type="Scalar { Kind = U32 }" value="5523" />
+      <LowLevel kind="Leaf" offset="248" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <HighLevel kind="Leaf" offset="252" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <NeedMoney kind="Leaf" offset="256" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_12>
+    <_13 kind="Record" offset="264" length="20">
+      <ItemType kind="Leaf" offset="264" length="4" type="Scalar { Kind = U32 }" value="5524" />
+      <LowLevel kind="Leaf" offset="268" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <HighLevel kind="Leaf" offset="272" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <NeedMoney kind="Leaf" offset="276" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_13>
+    <_14 kind="Record" offset="284" length="20">
+      <ItemType kind="Leaf" offset="284" length="4" type="Scalar { Kind = U32 }" value="5525" />
+      <LowLevel kind="Leaf" offset="288" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <HighLevel kind="Leaf" offset="292" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <NeedMoney kind="Leaf" offset="296" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_14>
+    <_15 kind="Record" offset="304" length="20">
+      <ItemType kind="Leaf" offset="304" length="4" type="Scalar { Kind = U32 }" value="5526" />
+      <LowLevel kind="Leaf" offset="308" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <HighLevel kind="Leaf" offset="312" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <NeedMoney kind="Leaf" offset="316" length="8" type="Scalar { Kind = U64 }" value="10" />
+    </_15>
+    <_16 kind="Record" offset="324" length="20">
+      <ItemType kind="Leaf" offset="324" length="4" type="Scalar { Kind = U32 }" value="5531" />
+      <LowLevel kind="Leaf" offset="328" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <HighLevel kind="Leaf" offset="332" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <NeedMoney kind="Leaf" offset="336" length="8" type="Scalar { Kind = U64 }" value="70000" />
+    </_16>
+    <_17 kind="Record" offset="344" length="20">
+      <ItemType kind="Leaf" offset="344" length="4" type="Scalar { Kind = U32 }" value="5532" />
+      <LowLevel kind="Leaf" offset="348" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <HighLevel kind="Leaf" offset="352" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <NeedMoney kind="Leaf" offset="356" length="8" type="Scalar { Kind = U64 }" value="50000" />
+    </_17>
+    <_18 kind="Record" offset="364" length="20">
+      <ItemType kind="Leaf" offset="364" length="4" type="Scalar { Kind = U32 }" value="5533" />
+      <LowLevel kind="Leaf" offset="368" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <HighLevel kind="Leaf" offset="372" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <NeedMoney kind="Leaf" offset="376" length="8" type="Scalar { Kind = U64 }" value="30000" />
+    </_18>
+    <_19 kind="Record" offset="384" length="20">
+      <ItemType kind="Leaf" offset="384" length="4" type="Scalar { Kind = U32 }" value="5534" />
+      <LowLevel kind="Leaf" offset="388" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <HighLevel kind="Leaf" offset="392" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <NeedMoney kind="Leaf" offset="396" length="8" type="Scalar { Kind = U64 }" value="20000" />
+    </_19>
+    <_20 kind="Record" offset="404" length="20">
+      <ItemType kind="Leaf" offset="404" length="4" type="Scalar { Kind = U32 }" value="5535" />
+      <LowLevel kind="Leaf" offset="408" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <HighLevel kind="Leaf" offset="412" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <NeedMoney kind="Leaf" offset="416" length="8" type="Scalar { Kind = U64 }" value="10000" />
+    </_20>
+    <_21 kind="Record" offset="424" length="20">
+      <ItemType kind="Leaf" offset="424" length="4" type="Scalar { Kind = U32 }" value="5536" />
+      <LowLevel kind="Leaf" offset="428" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <HighLevel kind="Leaf" offset="432" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <NeedMoney kind="Leaf" offset="436" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_21>
+    <_22 kind="Record" offset="444" length="20">
+      <ItemType kind="Leaf" offset="444" length="4" type="Scalar { Kind = U32 }" value="5537" />
+      <LowLevel kind="Leaf" offset="448" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <HighLevel kind="Leaf" offset="452" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <NeedMoney kind="Leaf" offset="456" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_22>
+    <_23 kind="Record" offset="464" length="20">
+      <ItemType kind="Leaf" offset="464" length="4" type="Scalar { Kind = U32 }" value="5538" />
+      <LowLevel kind="Leaf" offset="468" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <HighLevel kind="Leaf" offset="472" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <NeedMoney kind="Leaf" offset="476" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_23>
+    <_24 kind="Record" offset="484" length="20">
+      <ItemType kind="Leaf" offset="484" length="4" type="Scalar { Kind = U32 }" value="5539" />
+      <LowLevel kind="Leaf" offset="488" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <HighLevel kind="Leaf" offset="492" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <NeedMoney kind="Leaf" offset="496" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_24>
+    <_25 kind="Record" offset="504" length="20">
+      <ItemType kind="Leaf" offset="504" length="4" type="Scalar { Kind = U32 }" value="5540" />
+      <LowLevel kind="Leaf" offset="508" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <HighLevel kind="Leaf" offset="512" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <NeedMoney kind="Leaf" offset="516" length="8" type="Scalar { Kind = U64 }" value="1000" />
+    </_25>
+  </Items>
+</EnchantItemInfo>

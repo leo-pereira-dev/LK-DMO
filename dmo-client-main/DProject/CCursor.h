@@ -42,6 +42,7 @@ namespace CURSOR_ICON
 		CI_CENTERBAR,
 		CI_TACTICSHOUSE,
 		CI_CARDINVEN,
+		CI_EXTRAINVEN,
 		CI_INCUBATOR,		
 	};
 }
@@ -200,5 +201,4 @@ private:
 #define CURSOR_ST		CCursor::GetSingleton()
 #define CURSOR_STPTR	CCursor::GetSingletonPtr()
 //---------------------------------------------------------------------------
-
 

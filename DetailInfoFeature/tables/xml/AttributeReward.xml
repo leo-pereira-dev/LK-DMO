@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AttributeReward schema="AttributeReward.struct" bin="AttributeReward.bin" byteLength="84">
+  <Rewards kind="Section" offset="0" length="84">
+    <_0 kind="Record" offset="4" length="20">
+      <Key kind="Leaf" offset="4" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <RewardCount kind="Leaf" offset="5" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <Rewards kind="Array" offset="9" length="15" count="3">
+        <_0_ kind="Struct" offset="9" length="5">
+          <RewardKey kind="Leaf" offset="9" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <ItemId kind="Leaf" offset="10" length="4" type="Scalar { Kind = U32 }" value="28027" />
+        </_0_>
+        <_1_ kind="Struct" offset="14" length="5">
+          <RewardKey kind="Leaf" offset="14" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <ItemId kind="Leaf" offset="15" length="4" type="Scalar { Kind = U32 }" value="28028" />
+        </_1_>
+        <_2_ kind="Struct" offset="19" length="5">
+          <RewardKey kind="Leaf" offset="19" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <ItemId kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="28029" />
+        </_2_>
+      </Rewards>
+    </_0>
+    <_1 kind="Record" offset="24" length="60">
+      <Key kind="Leaf" offset="24" length="1" type="Scalar { Kind = U8 }" value="1" />
+      <RewardCount kind="Leaf" offset="25" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <Rewards kind="Array" offset="29" length="55" count="11">
+        <_0_ kind="Struct" offset="29" length="5">
+          <RewardKey kind="Leaf" offset="29" length="1" type="Scalar { Kind = U8 }" value="0" />
+          <ItemId kind="Leaf" offset="30" length="4" type="Scalar { Kind = U32 }" value="28016" />
+        </_0_>
+        <_1_ kind="Struct" offset="34" length="5">
+          <RewardKey kind="Leaf" offset="34" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <ItemId kind="Leaf" offset="35" length="4" type="Scalar { Kind = U32 }" value="28017" />
+        </_1_>
+        <_2_ kind="Struct" offset="39" length="5">
+          <RewardKey kind="Leaf" offset="39" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <ItemId kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="28018" />
+        </_2_>
+        <_3_ kind="Struct" offset="44" length="5">
+          <RewardKey kind="Leaf" offset="44" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <ItemId kind="Leaf" offset="45" length="4" type="Scalar { Kind = U32 }" value="28019" />
+        </_3_>
+        <_4_ kind="Struct" offset="49" length="5">
+          <RewardKey kind="Leaf" offset="49" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <ItemId kind="Leaf" offset="50" length="4" type="Scalar { Kind = U32 }" value="28020" />
+        </_4_>
+        <_5_ kind="Struct" offset="54" length="5">
+          <RewardKey kind="Leaf" offset="54" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <ItemId kind="Leaf" offset="55" length="4" type="Scalar { Kind = U32 }" value="28032" />
+        </_5_>
+        <_6_ kind="Struct" offset="59" length="5">
+          <RewardKey kind="Leaf" offset="59" length="1" type="Scalar { Kind = U8 }" value="6" />
+          <ItemId kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="28022" />
+        </_6_>
+        <_7_ kind="Struct" offset="64" length="5">
+          <RewardKey kind="Leaf" offset="64" length="1" type="Scalar { Kind = U8 }" value="7" />
+          <ItemId kind="Leaf" offset="65" length="4" type="Scalar { Kind = U32 }" value="28023" />
+        </_7_>
+        <_8_ kind="Struct" offset="69" length="5">
+          <RewardKey kind="Leaf" offset="69" length="1" type="Scalar { Kind = U8 }" value="8" />
+          <ItemId kind="Leaf" offset="70" length="4" type="Scalar { Kind = U32 }" value="28024" />
+        </_8_>
+        <_9_ kind="Struct" offset="74" length="5">
+          <RewardKey kind="Leaf" offset="74" length="1" type="Scalar { Kind = U8 }" value="9" />
+          <ItemId kind="Leaf" offset="75" length="4" type="Scalar { Kind = U32 }" value="28025" />
+        </_9_>
+        <_10_ kind="Struct" offset="79" length="5">
+          <RewardKey kind="Leaf" offset="79" length="1" type="Scalar { Kind = U8 }" value="10" />
+          <ItemId kind="Leaf" offset="80" length="4" type="Scalar { Kind = U32 }" value="28026" />
+        </_10_>
+      </Rewards>
+    </_1>
+  </Rewards>
+</AttributeReward>

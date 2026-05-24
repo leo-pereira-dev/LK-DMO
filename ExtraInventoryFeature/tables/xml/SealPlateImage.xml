@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SealPlateImage schema="SealPlateImage.struct" bin="SealPlateImage.bin" byteLength="1060">
+  <Images kind="Section" offset="0" length="1060">
+    <_0 kind="Record" offset="4" length="175">
+      <Grade kind="Leaf" offset="4" length="1" type="Scalar { Kind = U8 }" value="0" />
+      <NifPath kind="Leaf" offset="5" length="45" type="LString { }">Data\Interface\SealMaster\seal_normal.nif</NifPath>
+      <GradeBackImagePath kind="Leaf" offset="50" length="63" type="LString { }">Data\Interface\SealMaster\SealBack\sealmaster_bg_normal.dds</GradeBackImagePath>
+      <BlindBackImagePath kind="Leaf" offset="113" length="66" type="LString { }">Data\Interface\SealMaster\SealBack\sealmaster_blind_normal.dds</BlindBackImagePath>
+    </_0>
+    <_1 kind="Record" offset="179" length="175">
+      <Grade kind="Leaf" offset="179" length="1" type="Scalar { Kind = U8 }" value="1" />
+      <NifPath kind="Leaf" offset="180" length="45" type="LString { }">Data\Interface\SealMaster\seal_normal.nif</NifPath>
+      <GradeBackImagePath kind="Leaf" offset="225" length="63" type="LString { }">Data\Interface\SealMaster\SealBack\sealmaster_bg_bronze.dds</GradeBackImagePath>
+      <BlindBackImagePath kind="Leaf" offset="288" length="66" type="LString { }">Data\Interface\SealMaster\SealBack\sealmaster_blind_bronze.dds</BlindBackImagePath>
+    </_1>
+    <_2 kind="Record" offset="354" length="175">
+      <Grade kind="Leaf" offset="354" length="1" type="Scalar { Kind = U8 }" value="2" />
+      <NifPath kind="Leaf" offset="355" length="45" type="LString { }">Data\Interface\SealMaster\seal_normal.nif</NifPath>
+      <GradeBackImagePath kind="Leaf" offset="400" length="63" type="LString { }">Data\Interface\SealMaster\SealBack\sealmaster_bg_silver.dds</GradeBackImagePath>
+      <BlindBackImagePath kind="Leaf" offset="463" length="66" type="LString { }">Data\Interface\SealMaster\SealBack\sealmaster_blind_silver.dds</BlindBackImagePath>
+    </_2>
+    <_3 kind="Record" offset="529" length="175">
+      <Grade kind="Leaf" offset="529" length="1" type="Scalar { Kind = U8 }" value="3" />
+      <NifPath kind="Leaf" offset="530" length="45" type="LString { }">Data\Interface\SealMaster\seal_normal.nif</NifPath>
+      <GradeBackImagePath kind="Leaf" offset="575" length="63" type="LString { }">Data\Interface\SealMaster\SealBack\sealmaster_bg_master.dds</GradeBackImagePath>
+      <BlindBackImagePath kind="Leaf" offset="638" length="66" type="LString { }">Data\Interface\SealMaster\SealBack\sealmaster_blind_master.dds</BlindBackImagePath>
+    </_3>
+    <_4 kind="Record" offset="704" length="179">
+      <Grade kind="Leaf" offset="704" length="1" type="Scalar { Kind = U8 }" value="4" />
+      <NifPath kind="Leaf" offset="705" length="45" type="LString { }">Data\Interface\SealMaster\seal_normal.nif</NifPath>
+      <GradeBackImagePath kind="Leaf" offset="750" length="65" type="LString { }">Data\Interface\SealMaster\SealBack\sealmaster_bg_platinum.dds</GradeBackImagePath>
+      <BlindBackImagePath kind="Leaf" offset="815" length="68" type="LString { }">Data\Interface\SealMaster\SealBack\sealmaster_blind_platinum.dds</BlindBackImagePath>
+    </_4>
+    <_5 kind="Record" offset="883" length="177">
+      <Grade kind="Leaf" offset="883" length="1" type="Scalar { Kind = U8 }" value="5" />
+      <NifPath kind="Leaf" offset="884" length="45" type="LString { }">Data\Interface\SealMaster\seal_master.nif</NifPath>
+      <GradeBackImagePath kind="Leaf" offset="929" length="64" type="LString { }">Data\Interface\SealMaster\SealBack\sealmaster_bg_master2.dds</GradeBackImagePath>
+      <BlindBackImagePath kind="Leaf" offset="993" length="67" type="LString { }">Data\Interface\SealMaster\SealBack\sealmaster_blind_master2.dds</BlindBackImagePath>
+    </_5>
+  </Images>
+</SealPlateImage>

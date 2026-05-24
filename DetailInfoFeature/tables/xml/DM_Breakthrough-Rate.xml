@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DMBreakthroughRate schema="DM_Breakthrough-Rate.struct" bin="DM_Breakthrough-Rate.bin" byteLength="100">
+  <Rates kind="Section" offset="0" length="100">
+    <_0 kind="Record" offset="4" length="16">
+      <Key kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldA kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="5900" />
+      <FieldB kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="1500" />
+      <FieldC kind="Leaf" offset="16" length="4" type="Scalar { Kind = U32 }" value="100" />
+    </_0>
+    <_1 kind="Record" offset="20" length="16">
+      <Key kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <FieldA kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="5420" />
+      <FieldB kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="1000" />
+      <FieldC kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="80" />
+    </_1>
+    <_2 kind="Record" offset="36" length="16">
+      <Key kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <FieldA kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="4940" />
+      <FieldB kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="500" />
+      <FieldC kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="60" />
+    </_2>
+    <_3 kind="Record" offset="52" length="16">
+      <Key kind="Leaf" offset="52" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <FieldA kind="Leaf" offset="56" length="4" type="Scalar { Kind = U32 }" value="4160" />
+      <FieldB kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="300" />
+      <FieldC kind="Leaf" offset="64" length="4" type="Scalar { Kind = U32 }" value="40" />
+    </_3>
+    <_4 kind="Record" offset="68" length="16">
+      <Key kind="Leaf" offset="68" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <FieldA kind="Leaf" offset="72" length="4" type="Scalar { Kind = U32 }" value="3280" />
+      <FieldB kind="Leaf" offset="76" length="4" type="Scalar { Kind = U32 }" value="200" />
+      <FieldC kind="Leaf" offset="80" length="4" type="Scalar { Kind = U32 }" value="20" />
+    </_4>
+    <_5 kind="Record" offset="84" length="16">
+      <Key kind="Leaf" offset="84" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <FieldA kind="Leaf" offset="88" length="4" type="Scalar { Kind = U32 }" value="2390" />
+      <FieldB kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="96" length="4" type="Scalar { Kind = U32 }" value="10" />
+    </_5>
+  </Rates>
+</DMBreakthroughRate>

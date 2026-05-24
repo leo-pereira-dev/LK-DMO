@@ -55,6 +55,11 @@
         InitialInventory = 30,
 
         /// <summary>
+        /// Official extra inventory visible grid size.
+        /// </summary>
+        ExtraInventory = 80,
+
+        /// <summary>
         /// Tamer equipment size.
         /// </summary>
         Equipment = 13, //654=14
@@ -256,6 +261,21 @@
         /// Account warehouse maximum slot value.
         /// </summary>
         AccountWarehouseMaxSlot = 9014,
+
+        ExtraSealMinSlot = 12000,
+        ExtraSealMaxSlot = 12079,
+
+        ExtraTicketMinSlot = 13000,
+        ExtraTicketMaxSlot = 13079,
+
+        ExtraEvolutionMinSlot = 14000,
+        ExtraEvolutionMaxSlot = 14079,
+
+        ExtraDigitamaMinSlot = 15000,
+        ExtraDigitamaMaxSlot = 15079,
+
+        ExtraMaterialMinSlot = 16000,
+        ExtraMaterialMaxSlot = 16079,
 
         /// <summary>
         /// Jogress chipset slot value.

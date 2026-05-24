@@ -17,7 +17,7 @@ public:
 	}
 	bool IsEnableEnchantLv( int const& nCurrentEnchantLv ) const
 	{
-		return nCurrentEnchantLv >= nCurrentEnchantLv ? true : false;
+		return nCurrentEnchantLv >= nNeedEnchantLv ? true : false;
 	}
 	bool IsEnableScale( int const& nCurrentScale ) const
 	{

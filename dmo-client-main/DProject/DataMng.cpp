@@ -9,6 +9,7 @@
 #include "_Interface/Adapt/AdaptWareHouse.h"
 #include "_Interface/Adapt/AdaptDigimonAchive.h"
 #include "_Interface/Adapt/AdaptEnchantOption.h"
+#include "ExtraInventoryDebugLog.h"
 cDataMng*	g_pDataMng = NULL;
 
 #define		SORT_COOLTIME	20.0f
@@ -34,6 +35,8 @@ void cDataMng::GlobalShotdown()
 void cDataMng::Delete()
 {
 	m_Inven.Delete();
+	for( int i = 0; i < 5; ++i )
+		m_ExtraInven[ i ].Delete();
 	m_TEquip.Delete();
 	m_Digivice.Delete();
 	m_PostLoad.Delete();	
@@ -60,6 +63,8 @@ void cDataMng::Delete()
 void cDataMng::Init()
 {
 	m_Inven.Init();
+	for( int i = 0; i < 5; ++i )
+		m_ExtraInven[ i ].Init();
 	m_TEquip.Init();
 	m_Digivice.Init();
 	m_PostLoad.Init();
@@ -106,11 +111,15 @@ void cDataMng::Init()
 		m_pEnchantOptionAdapt->SetContents( CONTENTSSYSTEM_PTR->GetContents( E_CT_ENCHANT_OPTION_CONTENTS ) );
 
 	m_nItemTryCount = 0;
+	m_nPendingExtraSealUseDestSrvID = -1;
+	m_nPendingExtraSealUseRetry = 0;
 }
 
 void cDataMng::_InitNetOff()
 {
 	m_Inven.InitNetOff();
+	for( int i = 0; i < 5; ++i )
+		m_ExtraInven[ i ].InitNetOff();
 #ifdef CROSSWARS_SYSTEM
 	m_InvenCross.InitNetOff();
 	m_CrossTatics.InitNetOff();
@@ -134,6 +143,8 @@ void cDataMng::Reset()
 #ifndef UI_INVENTORY_RENEWAL
 	m_Inven.Reset();
 #endif
+	for( int i = 0; i < 5; ++i )
+		m_ExtraInven[ i ].Reset();
 	m_TEquip.Reset();
 	m_Digivice.Reset();
 	m_PostLoad.Reset();
@@ -150,6 +161,8 @@ void cDataMng::Reset()
 
 	ReleaseItemLock();
 	m_nItemTryCount = 0;
+	m_nPendingExtraSealUseDestSrvID = -1;
+	m_nPendingExtraSealUseRetry = 0;
 
 	bool bIsEnable = true;
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::SET_ENABLE_INVENTORY, &bIsEnable );
@@ -175,6 +188,7 @@ void cDataMng::LogOut()
 void cDataMng::Update()
 {
 	m_QuestOwner.Update();
+	_UpdatePendingExtraSealUse();
 
 #ifdef GUILD_MARK_DOWN
 	m_GuildMark.Update();
@@ -272,6 +286,47 @@ bool cDataMng::_IsEnableItemMove( int nSrcSrvID, int nDestSrvID )
 {
 	assert_cs( IsItemLock( nSrcSrvID ) == false );
 	assert_cs( IsItemLock( nDestSrvID ) == false );
+
+	int nSrcConstant = TO_CONSTANT( nSrcSrvID );
+	int nDestConstant = TO_CONSTANT( nDestSrvID );
+	if( IS_EXTRAINVEN_CONSTANT( nSrcConstant ) || IS_EXTRAINVEN_CONSTANT( nDestConstant ) )
+	{
+		if( nSrcConstant == SERVER_DATA_INVEN_CONSTANT )
+		{
+			if( TO_ID( nSrcSrvID ) >= (int)GetInven()->GetInvenSlotCount() )
+				return false;
+		}
+		else if( IS_EXTRAINVEN_CONSTANT( nSrcConstant ) )
+		{
+			cData_Inven* pSrcExtra = GetExtraInven( TO_EXTRAINVEN_CATEGORY( nSrcConstant ) );
+			if( !pSrcExtra || TO_ID( nSrcSrvID ) >= (int)pSrcExtra->GetInvenSlotCount() )
+				return false;
+		}
+		else
+		{
+			return false;
+		}
+
+		if( nDestConstant == SERVER_DATA_INVEN_CONSTANT )
+		{
+			if( TO_ID( nDestSrvID ) >= (int)GetInven()->GetInvenSlotCount() )
+				return false;
+		}
+		else if( IS_EXTRAINVEN_CONSTANT( nDestConstant ) )
+		{
+			cData_Inven* pDestExtra = GetExtraInven( TO_EXTRAINVEN_CATEGORY( nDestConstant ) );
+			if( !pDestExtra || TO_ID( nDestSrvID ) >= (int)pDestExtra->GetInvenSlotCount() )
+				return false;
+		}
+		else
+		{
+			return false;
+		}
+
+		ExtraInventoryDebugLog( "[ExtraInventory][DataMng] _IsEnableItemMove accepted src=%d dest=%d srcConst=%d destConst=%d",
+			nSrcSrvID, nDestSrvID, nSrcConstant, nDestConstant );
+		return true;
+	}
 
 	switch( TO_CONSTANT( nSrcSrvID ) )
 	{
@@ -670,6 +725,14 @@ bool cDataMng::IsItemUse( int nSrvIndex )
 
 cItemInfo* cDataMng::SrvID2ItemInfo( int nSrvID )
 {
+	if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrvID ) ) )
+	{
+		cData_Inven* pExtraInven = GetExtraInven( TO_EXTRAINVEN_CATEGORY( TO_CONSTANT( nSrvID ) ) );
+		if( !pExtraInven || pExtraInven->IsExistItem( TO_ID( nSrvID ) ) == false )
+			return NULL;
+		return pExtraInven->GetData( TO_ID( nSrvID ) );
+	}
+
 	switch( TO_CONSTANT( nSrvID ) )
 	{
 	case SERVER_DATA_INVEN_CONSTANT:
@@ -725,6 +788,12 @@ void cDataMng::SendItemUse( int nSrvID )
 
 	nsCSDEBUG::CrashLogger::LogMessage( "ITEM_USE request srvId=%d const=%d id=%d", nSrvID, TO_CONSTANT( nSrvID ), TO_ID( nSrvID ) );
 
+	if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrvID ) ) )
+	{
+		_SendItemUse_Extra( nSrvID );
+		return;
+	}
+
 	switch( TO_CONSTANT( nSrvID ) )
 	{
 	case SERVER_DATA_INVEN_CONSTANT:
@@ -740,6 +809,85 @@ void cDataMng::SendItemUse( int nSrvID )
 		break;
 #endif
 	}	
+}
+
+void cDataMng::_SendItemUse_Extra( int nExtraSrvID )
+{
+	if( IsItemUse( nExtraSrvID ) == false )
+		return;
+
+	cItemInfo* pItem = SrvID2ItemInfo( nExtraSrvID );
+	SAFE_POINTER_RET( pItem );
+	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+	SAFE_POINTER_RET( pFTItem );
+	CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
+	SAFE_POINTER_RET( pFTInfo );
+
+	ExtraInventoryDebugLog( "[ExtraInventory][DataMng] SendItemUse extra srv=%d item=%d typeL=%d count=%d",
+		nExtraSrvID, pItem->m_nType, pFTInfo->s_nType_L, pItem->GetCount() );
+
+	switch( pFTInfo->s_nType_L )
+	{
+	case nItem::CardMaster:
+		{
+			if( GetServerSync()->IsEmptyRefCount( cData_ServerSync::CASH_IDENTIFY_CARD ) == false )
+			{
+				cPrintMsg::PrintMsg( 10004 );
+				return;
+			}
+
+			int nEmptySlot = GetInven()->FindEmptySlot( -1 );
+			if( nEmptySlot == cData_Inven::INVALIDE_INVEN_INDEX )
+			{
+				cPrintMsg::PrintMsg( 11015 );
+				return;
+			}
+
+			m_nPendingExtraSealUseDestSrvID = TO_INVEN_SID( nEmptySlot );
+			m_nPendingExtraSealUseRetry = 180;
+			ExtraInventoryDebugLog( "[ExtraInventory][DataMng] SendItemUse extra seal move-before-open src=%d dest=%d",
+				nExtraSrvID, m_nPendingExtraSealUseDestSrvID );
+			SendItemMove( nExtraSrvID, m_nPendingExtraSealUseDestSrvID, 0 );
+		}
+		break;
+	default:
+		SendItemMoveInven( nExtraSrvID, 0 );
+		break;
+	}
+}
+
+void cDataMng::_UpdatePendingExtraSealUse()
+{
+	if( m_nPendingExtraSealUseDestSrvID < 0 )
+		return;
+
+	if( IsItemLock( m_nPendingExtraSealUseDestSrvID ) == true )
+		return;
+
+	cItemInfo* pItem = GetInven()->GetData( TO_ID( m_nPendingExtraSealUseDestSrvID ) );
+	if( pItem && pItem->IsEnable() )
+	{
+		CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+		CsItem::sINFO* pFTInfo = pFTItem ? pFTItem->GetInfo() : NULL;
+		if( pFTInfo && pFTInfo->s_nType_L == nItem::CardMaster )
+		{
+			int nInvenIndex = TO_ID( m_nPendingExtraSealUseDestSrvID );
+			ExtraInventoryDebugLog( "[ExtraInventory][DataMng] Pending extra seal open dest=%d invenIndex=%d item=%d count=%d",
+				m_nPendingExtraSealUseDestSrvID, nInvenIndex, pItem->m_nType, pItem->GetCount() );
+			m_nPendingExtraSealUseDestSrvID = -1;
+			m_nPendingExtraSealUseRetry = 0;
+			g_pGameIF->CloseDynamicIF( cBaseWindow::WT_CARDRESEAL );
+			g_pGameIF->GetDynamicIF( cBaseWindow::WT_CARDIDENTIFY, 0, nInvenIndex );
+			return;
+		}
+	}
+
+	if( --m_nPendingExtraSealUseRetry <= 0 )
+	{
+		ExtraInventoryDebugLog( "[ExtraInventory][DataMng] Pending extra seal open expired dest=%d", m_nPendingExtraSealUseDestSrvID );
+		m_nPendingExtraSealUseDestSrvID = -1;
+		m_nPendingExtraSealUseRetry = 0;
+	}
 }
 
 #ifdef CROSSWARS_SYSTEM
@@ -2814,7 +2962,7 @@ void cDataMng::SendItemMoveInven( int nSrcSrvID, int nCount /* = 0  */ )
 		cPrintMsg::PrintMsg( 11015 );
 		return;
 	}
-	SendItemMove( nSrcSrvID, TO_INVEN_SID( nEmptySlot ) );
+	SendItemMove( nSrcSrvID, TO_INVEN_SID( nEmptySlot ), nCount );
 }
 
 //==============================================================================================
@@ -3075,6 +3223,49 @@ int cDataMng::SendItemMove( int nSrcSrvID, int nDestSrvID, int nCount /*=0*/ )
 	// 아이템 롹킹
 	ItemLock( nSrcSrvID );
 	ItemLock( nDestSrvID );
+
+	if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrcSrvID ) ) || IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nDestSrvID ) ) )
+	{
+		cItemInfo* pSourceItem = NULL;
+		if( TO_CONSTANT( nSrcSrvID ) == SERVER_DATA_INVEN_CONSTANT )
+			pSourceItem = GetInven()->GetData( TO_ID( nSrcSrvID ) );
+		else if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrcSrvID ) ) )
+		{
+			cData_Inven* pExtraInven = GetExtraInven( TO_EXTRAINVEN_CATEGORY( TO_CONSTANT( nSrcSrvID ) ) );
+			if( pExtraInven )
+				pSourceItem = pExtraInven->GetData( TO_ID( nSrcSrvID ) );
+		}
+
+		if( !pSourceItem || pSourceItem->IsEnable() == false )
+		{
+			ExtraInventoryDebugLog( "[ExtraInventory][DataMng] SendItemMove rejected: source missing src=%d dest=%d", nSrcSrvID, nDestSrvID );
+			ItemUnlock( nSrcSrvID );
+			ItemUnlock( nDestSrvID );
+			return 8;
+		}
+
+		m_nItemTryCount = ( nCount == 0 ? pSourceItem->GetCount() : nCount );
+		ExtraInventoryDebugLog( "[ExtraInventory][DataMng] SendItemMove extra src=%d dest=%d item=%d count=%d srcConst=%d destConst=%d",
+			nSrcSrvID, nDestSrvID, pSourceItem->GetType(), m_nItemTryCount, TO_CONSTANT( nSrcSrvID ), TO_CONSTANT( nDestSrvID ) );
+
+		if( net::game )
+		{
+			if( m_nItemTryCount == pSourceItem->GetCount() )
+			{
+				net::game->SendItemMove( nSrcSrvID, nDestSrvID );
+			}
+			else
+			{
+				ExtraInventoryDebugLog( "[ExtraInventory][DataMng] SendItemSplit extra src=%d dest=%d count=%d sourceCount=%d",
+					nSrcSrvID, nDestSrvID, m_nItemTryCount, pSourceItem->GetCount() );
+				net::game->SendItemSplit( nSrcSrvID, nDestSrvID, m_nItemTryCount );
+			}
+		}
+		else
+			ServerItemMoveSuccess( nSrcSrvID, nDestSrvID );
+
+		return 0;
+	}
 
 	// 갯수 받아 놓는다
 	switch( TO_CONSTANT( nSrcSrvID ) )
@@ -3402,6 +3593,15 @@ void cDataMng::ServerItemMoveSuccess( int nSrcSrvID, int nDestSrvID )
 	int nSrcConstant = TO_CONSTANT( nSrcSrvID );
 	int nDestConstant = TO_CONSTANT( nDestSrvID );
 
+	if( IS_EXTRAINVEN_CONSTANT( nSrcConstant ) || IS_EXTRAINVEN_CONSTANT( nDestConstant ) )
+	{
+		ExtraInventoryDebugLog( "[ExtraInventory][DataMng] ServerItemMoveSuccess extra src=%d dest=%d srcConst=%d destConst=%d tryCount=%d",
+			nSrcSrvID, nDestSrvID, nSrcConstant, nDestConstant, m_nItemTryCount );
+		cWindow::PlaySound( cWindow::SD_At3 );
+		m_nItemTryCount = 0;
+		return;
+	}
+
 	switch( nSrcConstant )
 	{
 #ifdef CROSSWARS_SYSTEM
@@ -3630,6 +3830,17 @@ void cDataMng::ServerItemMoveFailed( int nSrcSrvID, int nDestSrvID )
 {
 	assert_cs( IsItemLock( nSrcSrvID ) == true );
 	assert_cs( IsItemLock( nDestSrvID ) == true );
+
+	if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrcSrvID ) ) || IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nDestSrvID ) ) )
+	{
+		ExtraInventoryDebugLog( "[ExtraInventory][DataMng] ServerItemMoveFailed extra src=%d dest=%d srcConst=%d destConst=%d tryCount=%d",
+			nSrcSrvID, nDestSrvID, TO_CONSTANT( nSrcSrvID ), TO_CONSTANT( nDestSrvID ), m_nItemTryCount );
+		if( nDestSrvID == m_nPendingExtraSealUseDestSrvID )
+		{
+			m_nPendingExtraSealUseDestSrvID = -1;
+			m_nPendingExtraSealUseRetry = 0;
+		}
+	}
 
 	m_nItemTryCount = 0;
 

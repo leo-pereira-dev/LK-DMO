@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DMBreakthroughCost schema="DM_Breakthrough-Cost.struct" bin="DM_Breakthrough-Cost.bin" byteLength="484">
+  <Costs kind="Section" offset="0" length="484">
+    <_0 kind="Record" offset="4" length="12">
+      <Key kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <FieldA kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_0>
+    <_1 kind="Record" offset="16" length="12">
+      <Key kind="Leaf" offset="16" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <FieldA kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_1>
+    <_2 kind="Record" offset="28" length="12">
+      <Key kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <FieldA kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_2>
+    <_3 kind="Record" offset="40" length="12">
+      <Key kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <FieldA kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_3>
+    <_4 kind="Record" offset="52" length="12">
+      <Key kind="Leaf" offset="52" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <FieldA kind="Leaf" offset="56" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_4>
+    <_5 kind="Record" offset="64" length="12">
+      <Key kind="Leaf" offset="64" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <FieldA kind="Leaf" offset="68" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="72" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_5>
+    <_6 kind="Record" offset="76" length="12">
+      <Key kind="Leaf" offset="76" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <FieldA kind="Leaf" offset="80" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="84" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_6>
+    <_7 kind="Record" offset="88" length="12">
+      <Key kind="Leaf" offset="88" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <FieldA kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="96" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_7>
+    <_8 kind="Record" offset="100" length="12">
+      <Key kind="Leaf" offset="100" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <FieldA kind="Leaf" offset="104" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="108" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_8>
+    <_9 kind="Record" offset="112" length="12">
+      <Key kind="Leaf" offset="112" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <FieldA kind="Leaf" offset="116" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="120" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_9>
+    <_10 kind="Record" offset="124" length="12">
+      <Key kind="Leaf" offset="124" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <FieldA kind="Leaf" offset="128" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="132" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_10>
+    <_11 kind="Record" offset="136" length="12">
+      <Key kind="Leaf" offset="136" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <FieldA kind="Leaf" offset="140" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="144" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_11>
+    <_12 kind="Record" offset="148" length="12">
+      <Key kind="Leaf" offset="148" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <FieldA kind="Leaf" offset="152" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="156" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_12>
+    <_13 kind="Record" offset="160" length="12">
+      <Key kind="Leaf" offset="160" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <FieldA kind="Leaf" offset="164" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="168" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_13>
+    <_14 kind="Record" offset="172" length="12">
+      <Key kind="Leaf" offset="172" length="4" type="Scalar { Kind = U32 }" value="14" />
+      <FieldA kind="Leaf" offset="176" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="180" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_14>
+    <_15 kind="Record" offset="184" length="12">
+      <Key kind="Leaf" offset="184" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <FieldA kind="Leaf" offset="188" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="192" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_15>
+    <_16 kind="Record" offset="196" length="12">
+      <Key kind="Leaf" offset="196" length="4" type="Scalar { Kind = U32 }" value="16" />
+      <FieldA kind="Leaf" offset="200" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="204" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_16>
+    <_17 kind="Record" offset="208" length="12">
+      <Key kind="Leaf" offset="208" length="4" type="Scalar { Kind = U32 }" value="17" />
+      <FieldA kind="Leaf" offset="212" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="216" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_17>
+    <_18 kind="Record" offset="220" length="12">
+      <Key kind="Leaf" offset="220" length="4" type="Scalar { Kind = U32 }" value="18" />
+      <FieldA kind="Leaf" offset="224" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="228" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_18>
+    <_19 kind="Record" offset="232" length="12">
+      <Key kind="Leaf" offset="232" length="4" type="Scalar { Kind = U32 }" value="19" />
+      <FieldA kind="Leaf" offset="236" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="240" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_19>
+    <_20 kind="Record" offset="244" length="12">
+      <Key kind="Leaf" offset="244" length="4" type="Scalar { Kind = U32 }" value="20" />
+      <FieldA kind="Leaf" offset="248" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="252" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_20>
+    <_21 kind="Record" offset="256" length="12">
+      <Key kind="Leaf" offset="256" length="4" type="Scalar { Kind = U32 }" value="21" />
+      <FieldA kind="Leaf" offset="260" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="264" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_21>
+    <_22 kind="Record" offset="268" length="12">
+      <Key kind="Leaf" offset="268" length="4" type="Scalar { Kind = U32 }" value="22" />
+      <FieldA kind="Leaf" offset="272" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="276" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_22>
+    <_23 kind="Record" offset="280" length="12">
+      <Key kind="Leaf" offset="280" length="4" type="Scalar { Kind = U32 }" value="23" />
+      <FieldA kind="Leaf" offset="284" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="288" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_23>
+    <_24 kind="Record" offset="292" length="12">
+      <Key kind="Leaf" offset="292" length="4" type="Scalar { Kind = U32 }" value="24" />
+      <FieldA kind="Leaf" offset="296" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="300" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_24>
+    <_25 kind="Record" offset="304" length="12">
+      <Key kind="Leaf" offset="304" length="4" type="Scalar { Kind = U32 }" value="25" />
+      <FieldA kind="Leaf" offset="308" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="312" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_25>
+    <_26 kind="Record" offset="316" length="12">
+      <Key kind="Leaf" offset="316" length="4" type="Scalar { Kind = U32 }" value="26" />
+      <FieldA kind="Leaf" offset="320" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="324" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_26>
+    <_27 kind="Record" offset="328" length="12">
+      <Key kind="Leaf" offset="328" length="4" type="Scalar { Kind = U32 }" value="27" />
+      <FieldA kind="Leaf" offset="332" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="336" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_27>
+    <_28 kind="Record" offset="340" length="12">
+      <Key kind="Leaf" offset="340" length="4" type="Scalar { Kind = U32 }" value="28" />
+      <FieldA kind="Leaf" offset="344" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="348" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_28>
+    <_29 kind="Record" offset="352" length="12">
+      <Key kind="Leaf" offset="352" length="4" type="Scalar { Kind = U32 }" value="29" />
+      <FieldA kind="Leaf" offset="356" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="360" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_29>
+    <_30 kind="Record" offset="364" length="12">
+      <Key kind="Leaf" offset="364" length="4" type="Scalar { Kind = U32 }" value="30" />
+      <FieldA kind="Leaf" offset="368" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="372" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_30>
+    <_31 kind="Record" offset="376" length="12">
+      <Key kind="Leaf" offset="376" length="4" type="Scalar { Kind = U32 }" value="31" />
+      <FieldA kind="Leaf" offset="380" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="384" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_31>
+    <_32 kind="Record" offset="388" length="12">
+      <Key kind="Leaf" offset="388" length="4" type="Scalar { Kind = U32 }" value="32" />
+      <FieldA kind="Leaf" offset="392" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="396" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_32>
+    <_33 kind="Record" offset="400" length="12">
+      <Key kind="Leaf" offset="400" length="4" type="Scalar { Kind = U32 }" value="33" />
+      <FieldA kind="Leaf" offset="404" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="408" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_33>
+    <_34 kind="Record" offset="412" length="12">
+      <Key kind="Leaf" offset="412" length="4" type="Scalar { Kind = U32 }" value="34" />
+      <FieldA kind="Leaf" offset="416" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="420" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_34>
+    <_35 kind="Record" offset="424" length="12">
+      <Key kind="Leaf" offset="424" length="4" type="Scalar { Kind = U32 }" value="35" />
+      <FieldA kind="Leaf" offset="428" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="432" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_35>
+    <_36 kind="Record" offset="436" length="12">
+      <Key kind="Leaf" offset="436" length="4" type="Scalar { Kind = U32 }" value="36" />
+      <FieldA kind="Leaf" offset="440" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="444" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_36>
+    <_37 kind="Record" offset="448" length="12">
+      <Key kind="Leaf" offset="448" length="4" type="Scalar { Kind = U32 }" value="37" />
+      <FieldA kind="Leaf" offset="452" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="456" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_37>
+    <_38 kind="Record" offset="460" length="12">
+      <Key kind="Leaf" offset="460" length="4" type="Scalar { Kind = U32 }" value="38" />
+      <FieldA kind="Leaf" offset="464" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="468" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_38>
+    <_39 kind="Record" offset="472" length="12">
+      <Key kind="Leaf" offset="472" length="4" type="Scalar { Kind = U32 }" value="39" />
+      <FieldA kind="Leaf" offset="476" length="4" type="Scalar { Kind = U32 }" value="10000000" />
+      <FieldB kind="Leaf" offset="480" length="4" type="Scalar { Kind = U32 }" value="0" />
+    </_39>
+  </Costs>
+</DMBreakthroughCost>

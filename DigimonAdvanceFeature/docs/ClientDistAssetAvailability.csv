@@ -1,0 +1,4 @@
+"Source","Exists","Copied","Note"
+"C:\0-NewDmo\ClientDist\Data\Music\Enchant_Room.mp3","True","True","Direct loose music file copied."
+"C:\0-NewDmo\ClientDist\Data\Pack01.hf","True","False","Interface textures are packed here; not duplicated because Pack01.pf is huge."
+"C:\0-NewDmo\ClientDist\Data\Pack01.pf","True","False","Interface textures are packed here; not duplicated because Pack01.pf is huge."

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MapDungeonRegion schema="MapDungeonRegion.struct" bin="MapDungeonRegion.bin" byteLength="52">
+  <Regions kind="Section" offset="0" length="52">
+    <_0 kind="Record" offset="4" length="16">
+      <Key kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="212001" />
+      <CenterX kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="9305" />
+      <CenterY kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="58814" />
+      <Radius kind="Leaf" offset="16" length="4" type="Scalar { Kind = U32 }" value="628" />
+    </_0>
+    <_1 kind="Record" offset="20" length="16">
+      <Key kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="212002" />
+      <CenterX kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="38314" />
+      <CenterY kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="23921" />
+      <Radius kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="628" />
+    </_1>
+    <_2 kind="Record" offset="36" length="16">
+      <Key kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="212003" />
+      <CenterX kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="69361" />
+      <CenterY kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="56464" />
+      <Radius kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="628" />
+    </_2>
+  </Regions>
+</MapDungeonRegion>

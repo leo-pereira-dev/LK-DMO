@@ -1,0 +1,34 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Language/English/DEvolutionAdvice_Str.bin]
+// DEvolutionAdvice_Str.bin — Pack03 v487 language bin.
+// Decompiled-exe proof only: FUN_0167ade0 -> FUN_0167b240 -> FUN_0167afd0 -> FUN_0167ab50 -> FUN_0100f610.
+// Cursor validation reaches EOF as four nested key levels ending in UTF-16LE advice strings.
+
+bin DEvolutionAdvice_Str {
+    section Groups {
+        count  u32;
+        record DEvolutionAdviceStringGroup;
+    }
+}
+
+struct DEvolutionAdviceStringGroup {
+    u8  GroupKey;
+    u32  EvolutionCount;
+    DEvolutionAdviceEvolution[EvolutionCount] Evolutions;
+}
+
+struct DEvolutionAdviceEvolution {
+    u32  EvolutionKey;
+    u32  RequirementCount;
+    DEvolutionAdviceRequirement[RequirementCount] Requirements;
+}
+
+struct DEvolutionAdviceRequirement {
+    u32  RequirementKey;
+    u32  AdviceCount;
+    DEvolutionAdviceEntry[AdviceCount] AdviceEntries;
+}
+
+struct DEvolutionAdviceEntry {
+    u8  AdviceKey;
+    wstring  Text;
+}

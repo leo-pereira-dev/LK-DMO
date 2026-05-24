@@ -50,6 +50,7 @@ protected:
 	cScrollBar*		m_pScrollBar;
 
 protected:
+	CRITICAL_SECTION	m_csStringList;
 	cStringList		m_StringList;
 	bool			m_bView;
 
@@ -68,5 +69,4 @@ protected:
 	void			_ResetHelperString( CsQuest::eQUEST_TYPE eType );
 	void			_AddLine( CsQuest::eQUEST_TYPE eType );
 };
-
 

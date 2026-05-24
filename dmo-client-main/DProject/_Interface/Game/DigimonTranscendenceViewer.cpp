@@ -164,7 +164,7 @@ void CDigimonTanscendenceViewer::Create(  cWindow* pkRoot, int nValue /*= 0 */ )
 	m_pkInsertDigimon = NiNew cGridListBox;
 	if( m_pkInsertDigimon )
 	{
-		m_pkInsertDigimon->Init( GetRoot(), CsPoint(151, 126), CsPoint(50, 60), CsPoint::ZERO, CsPoint( 46, 46), cGridListBox::LowRightDown, cGridListBox::LeftTop, NULL, false, 0 );
+		m_pkInsertDigimon->Init( GetRoot(), CsPoint(151, 105), CsPoint(50, 60), CsPoint::ZERO, CsPoint( 46, 46), cGridListBox::LowRightDown, cGridListBox::LeftTop, NULL, false, 0 );
 		AddChildControl(m_pkInsertDigimon);
 		cString * pItem = NiNew cString;
 		cSprite* pImage = NiNew cSprite;	// 1
@@ -803,6 +803,11 @@ void CDigimonTanscendenceViewer::PressNormalAddExpBtn(void* pSender, void* pData
 
 	_SetChargeExpStart( eDigimonTranscendenceFlag::eGeneralChargeEXP );
 	GetSystem()->SetWindowLock(true);
+	if( !GetSystem()->SendExpCharge( eDigimonTranscendenceFlag::eGeneralChargeEXP ) )
+	{
+		_SetChargeExpEnd();
+		GetSystem()->SetWindowLock(false);
+	}
 }
 
 void CDigimonTanscendenceViewer::PressAdvancedAddExpBtn(void* pSender, void* pData)
@@ -813,6 +818,11 @@ void CDigimonTanscendenceViewer::PressAdvancedAddExpBtn(void* pSender, void* pDa
 
 	_SetChargeExpStart( eDigimonTranscendenceFlag::eHighChargeEXP );
 	GetSystem()->SetWindowLock(true);
+	if( !GetSystem()->SendExpCharge( eDigimonTranscendenceFlag::eHighChargeEXP ) )
+	{
+		_SetChargeExpEnd();
+		GetSystem()->SetWindowLock(false);
+	}
 }
 
 void CDigimonTanscendenceViewer::PressTranscendBtn(void* pSender, void* pData)
@@ -1014,14 +1024,11 @@ void CDigimonTanscendenceViewer::_EffectEnd(void* pSender, void* pData)
 	sEffectType* pChargeType = dynamic_cast<sEffectType*>(pEffect->GetUserData());
 	SAFE_POINTER_RET( pChargeType );
 
-	if( !GetSystem()->SendExpCharge( pChargeType->nChargeType ) )
+	if( pChargeType->nChargeType != 0 )
 	{
-		GetSystem()->SetWindowLock(false);
-		return;
+		pEffect->SetPlayType( cSpriteAni::LOOP );
+		pEffect->PlayOn(true);
 	}
-
-	pEffect->SetPlayType( cSpriteAni::LOOP );
-	pEffect->PlayOn(true);
 }
 
 void CDigimonTanscendenceViewer::_ResultExpCharge( bool const& bSuccess, bool const& bOverExp )

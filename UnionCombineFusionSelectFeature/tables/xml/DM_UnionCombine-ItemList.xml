@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DMUnionCombineItemList schema="DM_UnionCombine-ItemList.struct" bin="DM_UnionCombine-ItemList.bin" byteLength="184">
+  <Items kind="Section" offset="0" length="184">
+    <_0 kind="Record" offset="4" length="9">
+      <ItemId kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="75832" />
+      <FlagOrType kind="Leaf" offset="8" length="1" type="Scalar { Kind = U8 }" value="1" />
+      <Value kind="Leaf" offset="9" length="4" type="Scalar { Kind = U32 }" value="450228" />
+    </_0>
+    <_1 kind="Record" offset="13" length="9">
+      <ItemId kind="Leaf" offset="13" length="4" type="Scalar { Kind = U32 }" value="75833" />
+      <FlagOrType kind="Leaf" offset="17" length="1" type="Scalar { Kind = U8 }" value="1" />
+      <Value kind="Leaf" offset="18" length="4" type="Scalar { Kind = U32 }" value="450228" />
+    </_1>
+    <_2 kind="Record" offset="22" length="9">
+      <ItemId kind="Leaf" offset="22" length="4" type="Scalar { Kind = U32 }" value="75834" />
+      <FlagOrType kind="Leaf" offset="26" length="1" type="Scalar { Kind = U8 }" value="2" />
+      <Value kind="Leaf" offset="27" length="4" type="Scalar { Kind = U32 }" value="450229" />
+    </_2>
+    <_3 kind="Record" offset="31" length="9">
+      <ItemId kind="Leaf" offset="31" length="4" type="Scalar { Kind = U32 }" value="75835" />
+      <FlagOrType kind="Leaf" offset="35" length="1" type="Scalar { Kind = U8 }" value="2" />
+      <Value kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="450229" />
+    </_3>
+    <_4 kind="Record" offset="40" length="9">
+      <ItemId kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="75836" />
+      <FlagOrType kind="Leaf" offset="44" length="1" type="Scalar { Kind = U8 }" value="3" />
+      <Value kind="Leaf" offset="45" length="4" type="Scalar { Kind = U32 }" value="450231" />
+    </_4>
+    <_5 kind="Record" offset="49" length="9">
+      <ItemId kind="Leaf" offset="49" length="4" type="Scalar { Kind = U32 }" value="75837" />
+      <FlagOrType kind="Leaf" offset="53" length="1" type="Scalar { Kind = U8 }" value="3" />
+      <Value kind="Leaf" offset="54" length="4" type="Scalar { Kind = U32 }" value="450231" />
+    </_5>
+    <_6 kind="Record" offset="58" length="9">
+      <ItemId kind="Leaf" offset="58" length="4" type="Scalar { Kind = U32 }" value="75838" />
+      <FlagOrType kind="Leaf" offset="62" length="1" type="Scalar { Kind = U8 }" value="4" />
+      <Value kind="Leaf" offset="63" length="4" type="Scalar { Kind = U32 }" value="450232" />
+    </_6>
+    <_7 kind="Record" offset="67" length="9">
+      <ItemId kind="Leaf" offset="67" length="4" type="Scalar { Kind = U32 }" value="75839" />
+      <FlagOrType kind="Leaf" offset="71" length="1" type="Scalar { Kind = U8 }" value="4" />
+      <Value kind="Leaf" offset="72" length="4" type="Scalar { Kind = U32 }" value="450232" />
+    </_7>
+    <_8 kind="Record" offset="76" length="9">
+      <ItemId kind="Leaf" offset="76" length="4" type="Scalar { Kind = U32 }" value="75840" />
+      <FlagOrType kind="Leaf" offset="80" length="1" type="Scalar { Kind = U8 }" value="5" />
+      <Value kind="Leaf" offset="81" length="4" type="Scalar { Kind = U32 }" value="450233" />
+    </_8>
+    <_9 kind="Record" offset="85" length="9">
+      <ItemId kind="Leaf" offset="85" length="4" type="Scalar { Kind = U32 }" value="75841" />
+      <FlagOrType kind="Leaf" offset="89" length="1" type="Scalar { Kind = U8 }" value="5" />
+      <Value kind="Leaf" offset="90" length="4" type="Scalar { Kind = U32 }" value="450233" />
+    </_9>
+    <_10 kind="Record" offset="94" length="9">
+      <ItemId kind="Leaf" offset="94" length="4" type="Scalar { Kind = U32 }" value="75842" />
+      <FlagOrType kind="Leaf" offset="98" length="1" type="Scalar { Kind = U8 }" value="6" />
+      <Value kind="Leaf" offset="99" length="4" type="Scalar { Kind = U32 }" value="450234" />
+    </_10>
+    <_11 kind="Record" offset="103" length="9">
+      <ItemId kind="Leaf" offset="103" length="4" type="Scalar { Kind = U32 }" value="75843" />
+      <FlagOrType kind="Leaf" offset="107" length="1" type="Scalar { Kind = U8 }" value="6" />
+      <Value kind="Leaf" offset="108" length="4" type="Scalar { Kind = U32 }" value="450234" />
+    </_11>
+    <_12 kind="Record" offset="112" length="9">
+      <ItemId kind="Leaf" offset="112" length="4" type="Scalar { Kind = U32 }" value="75844" />
+      <FlagOrType kind="Leaf" offset="116" length="1" type="Scalar { Kind = U8 }" value="7" />
+      <Value kind="Leaf" offset="117" length="4" type="Scalar { Kind = U32 }" value="450235" />
+    </_12>
+    <_13 kind="Record" offset="121" length="9">
+      <ItemId kind="Leaf" offset="121" length="4" type="Scalar { Kind = U32 }" value="75845" />
+      <FlagOrType kind="Leaf" offset="125" length="1" type="Scalar { Kind = U8 }" value="7" />
+      <Value kind="Leaf" offset="126" length="4" type="Scalar { Kind = U32 }" value="450235" />
+    </_13>
+    <_14 kind="Record" offset="130" length="9">
+      <ItemId kind="Leaf" offset="130" length="4" type="Scalar { Kind = U32 }" value="75846" />
+      <FlagOrType kind="Leaf" offset="134" length="1" type="Scalar { Kind = U8 }" value="8" />
+      <Value kind="Leaf" offset="135" length="4" type="Scalar { Kind = U32 }" value="450424" />
+    </_14>
+    <_15 kind="Record" offset="139" length="9">
+      <ItemId kind="Leaf" offset="139" length="4" type="Scalar { Kind = U32 }" value="75847" />
+      <FlagOrType kind="Leaf" offset="143" length="1" type="Scalar { Kind = U8 }" value="8" />
+      <Value kind="Leaf" offset="144" length="4" type="Scalar { Kind = U32 }" value="450424" />
+    </_15>
+    <_16 kind="Record" offset="148" length="9">
+      <ItemId kind="Leaf" offset="148" length="4" type="Scalar { Kind = U32 }" value="75848" />
+      <FlagOrType kind="Leaf" offset="152" length="1" type="Scalar { Kind = U8 }" value="9" />
+      <Value kind="Leaf" offset="153" length="4" type="Scalar { Kind = U32 }" value="450425" />
+    </_16>
+    <_17 kind="Record" offset="157" length="9">
+      <ItemId kind="Leaf" offset="157" length="4" type="Scalar { Kind = U32 }" value="75849" />
+      <FlagOrType kind="Leaf" offset="161" length="1" type="Scalar { Kind = U8 }" value="9" />
+      <Value kind="Leaf" offset="162" length="4" type="Scalar { Kind = U32 }" value="450425" />
+    </_17>
+    <_18 kind="Record" offset="166" length="9">
+      <ItemId kind="Leaf" offset="166" length="4" type="Scalar { Kind = U32 }" value="75850" />
+      <FlagOrType kind="Leaf" offset="170" length="1" type="Scalar { Kind = U8 }" value="10" />
+      <Value kind="Leaf" offset="171" length="4" type="Scalar { Kind = U32 }" value="450426" />
+    </_18>
+    <_19 kind="Record" offset="175" length="9">
+      <ItemId kind="Leaf" offset="175" length="4" type="Scalar { Kind = U32 }" value="75851" />
+      <FlagOrType kind="Leaf" offset="179" length="1" type="Scalar { Kind = U8 }" value="10" />
+      <Value kind="Leaf" offset="180" length="4" type="Scalar { Kind = U32 }" value="450426" />
+    </_19>
+  </Items>
+</DMUnionCombineItemList>

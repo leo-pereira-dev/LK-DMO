@@ -27,6 +27,7 @@
 
 #include "../Flow/Flow.h"
 #include "../Flow/FlowMgr.h"
+#include "../ExtraInventoryDebugLog.h"
 
 //extern uint g_nNetVersion;
 
@@ -722,14 +723,31 @@ void cCliGame::SendItemSplit(n2 nSrcPos, n2 nDstPos, u2 nCount)
 
 void cCliGame::SendItemMove(short nSrcItemPos, short nDstItemPos, bool bCheckBelonging /*=true*/ )
 {
+	if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrcItemPos ) ) || IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nDstItemPos ) ) )
+	{
+		ExtraInventoryDebugLog( "[ExtraInventory][Network] SendItemMove begin src=%d dst=%d srcConst=%d dstConst=%d checkBelonging=%d portal=%d trade=%d store=%d",
+			nSrcItemPos,
+			nDstItemPos,
+			TO_CONSTANT( nSrcItemPos ),
+			TO_CONSTANT( nDstItemPos ),
+			bCheckBelonging ? 1 : 0,
+			m_bPortalRequesting ? 1 : 0,
+			g_pGameIF && g_pGameIF->IsActiveWindow( cBaseWindow::WT_TRADE ) ? 1 : 0,
+			g_pGameIF && g_pGameIF->IsActiveWindow( cBaseWindow::WT_PERSONSTORE ) ? 1 : 0 );
+	}
+
 	if(m_bPortalRequesting)
 	{
+		if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrcItemPos ) ) || IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nDstItemPos ) ) )
+			ExtraInventoryDebugLog( "[ExtraInventory][Network] SendItemMove rejected: portal requesting src=%d dst=%d", nSrcItemPos, nDstItemPos );
 		g_pDataMng->ServerItemMoveFailed( nSrcItemPos, nDstItemPos );
 		return;
 	}
 
 	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_TRADE ) )
 	{
+		if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrcItemPos ) ) || IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nDstItemPos ) ) )
+			ExtraInventoryDebugLog( "[ExtraInventory][Network] SendItemMove rejected: trade window src=%d dst=%d", nSrcItemPos, nDstItemPos );
 		cPrintMsg::PrintMsg( 30028 );
 		g_pDataMng->ServerItemMoveFailed( nSrcItemPos, nDstItemPos );
 		return;
@@ -737,6 +755,8 @@ void cCliGame::SendItemMove(short nSrcItemPos, short nDstItemPos, bool bCheckBel
 
 	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_PERSONSTORE ) )
 	{
+		if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrcItemPos ) ) || IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nDstItemPos ) ) )
+			ExtraInventoryDebugLog( "[ExtraInventory][Network] SendItemMove rejected: person store src=%d dst=%d", nSrcItemPos, nDstItemPos );
 		cPrintMsg::PrintMsg( 30357 );
 		g_pDataMng->ServerItemMoveFailed( nSrcItemPos, nDstItemPos );
 		return;
@@ -1127,6 +1147,8 @@ void cCliGame::SendItemMove(short nSrcItemPos, short nDstItemPos, bool bCheckBel
 		push(nDstItemPos);
 	endp(pItem::Move);
 	send();
+	if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrcItemPos ) ) || IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nDstItemPos ) ) )
+		ExtraInventoryDebugLog( "[ExtraInventory][Network] SendItemMove sent src=%d dst=%d", nSrcItemPos, nDstItemPos );
 	// 응답 성공시 RecvItemMove, 실패시 RecvItemMoveFailure 
 }
 
@@ -2698,6 +2720,17 @@ void cCliGame::SendItemSort(u1 eSortFlag)
 	newp( sendPacket.GetProtocol() );
 	push( sendPacket.m_u1SortFlag );
 	endp( sendPacket.GetProtocol() );
+	send();
+}
+
+void cCliGame::SendExtraInventoryCollectAll( u1 eCategory )
+{
+	ExtraInventoryDebugLog( "[ExtraInventory][Network] SendExtraInventoryCollectAll category=%d protocol=%d",
+		eCategory, pItem::ExtraInventoryCollectAll );
+
+	newp( pItem::ExtraInventoryCollectAll );
+	push( eCategory );
+	endp( pItem::ExtraInventoryCollectAll );
 	send();
 }
 

@@ -581,6 +581,9 @@ bool CCursor::IconDropMessageTry()
 	case CURSOR_ICON::CI_CROSS:
 		break;
 #endif
+	case CURSOR_ICON::CI_EXTRAINVEN:
+		ReleaseIcon();
+		break;
 	default:
 		assert_cs( false );
 	}	
@@ -667,6 +670,7 @@ void CCursor::SetIcon( CURSOR_ICON::eTYPE eType, int nSlot, int nCount, void* pI
 	case CURSOR_ICON::CI_TACTICSHOUSE:
 	case CURSOR_ICON::CI_CENTERBAR:
 	case CURSOR_ICON::CI_INCUBATOR:
+	case CURSOR_ICON::CI_EXTRAINVEN:
 		m_nIconSlot = nSlot;
 		break;
 	case CURSOR_ICON::CI_INVEN:		m_nIconSlot = TO_INVEN_SID( nSlot );			break;	

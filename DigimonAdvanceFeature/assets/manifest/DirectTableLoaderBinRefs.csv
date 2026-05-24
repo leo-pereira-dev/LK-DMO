@@ -1,0 +1,8 @@
+"bin_symbol_or_string","address","ref_from","function","kind"
+"EvoDigitama.bin","01a19e88","0161e999","FUN_0161e970","string"
+"EnchantItemInfo.bin","01a19ea8","0161ea01","FUN_0161e970","string"
+"EnchantStatInfo.bin","01a19ed0","0161ea69","FUN_0161e970","string"
+"TranscendNeed.bin","01a19ef8","0161ead1","FUN_0161e970","string"
+"TranscendMaterial.bin","01a19f1c","0161eb39","FUN_0161e970","string"
+"TranscendCorrect.bin","01a19f48","0161eba1","FUN_0161e970","string"
+"TranscendCorrectEx.bin","01a19f74","0161ec05","FUN_0161e970","string"

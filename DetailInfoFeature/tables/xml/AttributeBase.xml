@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AttributeBase schema="AttributeBase.struct" bin="AttributeBase.bin" byteLength="154">
+  <AttributeMatrix kind="Section" offset="0" length="154">
+    <_0 kind="Record" offset="4" length="30">
+      <AttackerAttribute kind="Leaf" offset="4" length="1" type="Scalar { Kind = U8 }" value="1" />
+      <TargetCount kind="Leaf" offset="5" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Targets kind="Array" offset="9" length="25" count="5">
+        <_0_ kind="Struct" offset="9" length="5">
+          <TargetAttribute kind="Leaf" offset="9" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <PercentValue kind="Leaf" offset="10" length="4" type="Scalar { Kind = U32 }" value="100" />
+        </_0_>
+        <_1_ kind="Struct" offset="14" length="5">
+          <TargetAttribute kind="Leaf" offset="14" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <PercentValue kind="Leaf" offset="15" length="4" type="Scalar { Kind = U32 }" value="90" />
+        </_1_>
+        <_2_ kind="Struct" offset="19" length="5">
+          <TargetAttribute kind="Leaf" offset="19" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <PercentValue kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="90" />
+        </_2_>
+        <_3_ kind="Struct" offset="24" length="5">
+          <TargetAttribute kind="Leaf" offset="24" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <PercentValue kind="Leaf" offset="25" length="4" type="Scalar { Kind = U32 }" value="90" />
+        </_3_>
+        <_4_ kind="Struct" offset="29" length="5">
+          <TargetAttribute kind="Leaf" offset="29" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <PercentValue kind="Leaf" offset="30" length="4" type="Scalar { Kind = U32 }" value="90" />
+        </_4_>
+      </Targets>
+    </_0>
+    <_1 kind="Record" offset="34" length="30">
+      <AttackerAttribute kind="Leaf" offset="34" length="1" type="Scalar { Kind = U8 }" value="2" />
+      <TargetCount kind="Leaf" offset="35" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Targets kind="Array" offset="39" length="25" count="5">
+        <_0_ kind="Struct" offset="39" length="5">
+          <TargetAttribute kind="Leaf" offset="39" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <PercentValue kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="110" />
+        </_0_>
+        <_1_ kind="Struct" offset="44" length="5">
+          <TargetAttribute kind="Leaf" offset="44" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <PercentValue kind="Leaf" offset="45" length="4" type="Scalar { Kind = U32 }" value="100" />
+        </_1_>
+        <_2_ kind="Struct" offset="49" length="5">
+          <TargetAttribute kind="Leaf" offset="49" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <PercentValue kind="Leaf" offset="50" length="4" type="Scalar { Kind = U32 }" value="110" />
+        </_2_>
+        <_3_ kind="Struct" offset="54" length="5">
+          <TargetAttribute kind="Leaf" offset="54" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <PercentValue kind="Leaf" offset="55" length="4" type="Scalar { Kind = U32 }" value="90" />
+        </_3_>
+        <_4_ kind="Struct" offset="59" length="5">
+          <TargetAttribute kind="Leaf" offset="59" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <PercentValue kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="90" />
+        </_4_>
+      </Targets>
+    </_1>
+    <_2 kind="Record" offset="64" length="30">
+      <AttackerAttribute kind="Leaf" offset="64" length="1" type="Scalar { Kind = U8 }" value="3" />
+      <TargetCount kind="Leaf" offset="65" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Targets kind="Array" offset="69" length="25" count="5">
+        <_0_ kind="Struct" offset="69" length="5">
+          <TargetAttribute kind="Leaf" offset="69" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <PercentValue kind="Leaf" offset="70" length="4" type="Scalar { Kind = U32 }" value="110" />
+        </_0_>
+        <_1_ kind="Struct" offset="74" length="5">
+          <TargetAttribute kind="Leaf" offset="74" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <PercentValue kind="Leaf" offset="75" length="4" type="Scalar { Kind = U32 }" value="90" />
+        </_1_>
+        <_2_ kind="Struct" offset="79" length="5">
+          <TargetAttribute kind="Leaf" offset="79" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <PercentValue kind="Leaf" offset="80" length="4" type="Scalar { Kind = U32 }" value="100" />
+        </_2_>
+        <_3_ kind="Struct" offset="84" length="5">
+          <TargetAttribute kind="Leaf" offset="84" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <PercentValue kind="Leaf" offset="85" length="4" type="Scalar { Kind = U32 }" value="110" />
+        </_3_>
+        <_4_ kind="Struct" offset="89" length="5">
+          <TargetAttribute kind="Leaf" offset="89" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <PercentValue kind="Leaf" offset="90" length="4" type="Scalar { Kind = U32 }" value="90" />
+        </_4_>
+      </Targets>
+    </_2>
+    <_3 kind="Record" offset="94" length="30">
+      <AttackerAttribute kind="Leaf" offset="94" length="1" type="Scalar { Kind = U8 }" value="4" />
+      <TargetCount kind="Leaf" offset="95" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Targets kind="Array" offset="99" length="25" count="5">
+        <_0_ kind="Struct" offset="99" length="5">
+          <TargetAttribute kind="Leaf" offset="99" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <PercentValue kind="Leaf" offset="100" length="4" type="Scalar { Kind = U32 }" value="110" />
+        </_0_>
+        <_1_ kind="Struct" offset="104" length="5">
+          <TargetAttribute kind="Leaf" offset="104" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <PercentValue kind="Leaf" offset="105" length="4" type="Scalar { Kind = U32 }" value="110" />
+        </_1_>
+        <_2_ kind="Struct" offset="109" length="5">
+          <TargetAttribute kind="Leaf" offset="109" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <PercentValue kind="Leaf" offset="110" length="4" type="Scalar { Kind = U32 }" value="90" />
+        </_2_>
+        <_3_ kind="Struct" offset="114" length="5">
+          <TargetAttribute kind="Leaf" offset="114" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <PercentValue kind="Leaf" offset="115" length="4" type="Scalar { Kind = U32 }" value="100" />
+        </_3_>
+        <_4_ kind="Struct" offset="119" length="5">
+          <TargetAttribute kind="Leaf" offset="119" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <PercentValue kind="Leaf" offset="120" length="4" type="Scalar { Kind = U32 }" value="90" />
+        </_4_>
+      </Targets>
+    </_3>
+    <_4 kind="Record" offset="124" length="30">
+      <AttackerAttribute kind="Leaf" offset="124" length="1" type="Scalar { Kind = U8 }" value="5" />
+      <TargetCount kind="Leaf" offset="125" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <Targets kind="Array" offset="129" length="25" count="5">
+        <_0_ kind="Struct" offset="129" length="5">
+          <TargetAttribute kind="Leaf" offset="129" length="1" type="Scalar { Kind = U8 }" value="1" />
+          <PercentValue kind="Leaf" offset="130" length="4" type="Scalar { Kind = U32 }" value="110" />
+        </_0_>
+        <_1_ kind="Struct" offset="134" length="5">
+          <TargetAttribute kind="Leaf" offset="134" length="1" type="Scalar { Kind = U8 }" value="2" />
+          <PercentValue kind="Leaf" offset="135" length="4" type="Scalar { Kind = U32 }" value="110" />
+        </_1_>
+        <_2_ kind="Struct" offset="139" length="5">
+          <TargetAttribute kind="Leaf" offset="139" length="1" type="Scalar { Kind = U8 }" value="3" />
+          <PercentValue kind="Leaf" offset="140" length="4" type="Scalar { Kind = U32 }" value="110" />
+        </_2_>
+        <_3_ kind="Struct" offset="144" length="5">
+          <TargetAttribute kind="Leaf" offset="144" length="1" type="Scalar { Kind = U8 }" value="4" />
+          <PercentValue kind="Leaf" offset="145" length="4" type="Scalar { Kind = U32 }" value="110" />
+        </_3_>
+        <_4_ kind="Struct" offset="149" length="5">
+          <TargetAttribute kind="Leaf" offset="149" length="1" type="Scalar { Kind = U8 }" value="5" />
+          <PercentValue kind="Leaf" offset="150" length="4" type="Scalar { Kind = U32 }" value="100" />
+        </_4_>
+      </Targets>
+    </_4>
+  </AttributeMatrix>
+</AttributeBase>

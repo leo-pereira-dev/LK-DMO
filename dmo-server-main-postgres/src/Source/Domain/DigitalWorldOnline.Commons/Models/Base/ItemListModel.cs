@@ -117,6 +117,14 @@ namespace DigitalWorldOnline.Commons.Models.Base
                 case ItemListEnum.TradeItems:
                     Size = (byte)GeneralSizeEnum.TradeItems;
                     break;
+
+                case ItemListEnum.ExtraInventorySeal:
+                case ItemListEnum.ExtraInventoryTicket:
+                case ItemListEnum.ExtraInventoryEvolution:
+                case ItemListEnum.ExtraInventoryDigitama:
+                case ItemListEnum.ExtraInventoryMaterial:
+                    Size = (byte)GeneralSizeEnum.ExtraInventory;
+                    break;
             }
 
             for (var i = 0; i < Size; i++)

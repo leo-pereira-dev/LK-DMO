@@ -157,6 +157,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     newDigimon.Size
                 )
             );
+            newDigimon.FullHeal();
 
             newDigimon.AddEvolutions(
                 _assets.EvolutionInfo.First(x => x.Type == newDigimon.BaseType)

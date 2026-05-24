@@ -51,6 +51,15 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var consumeBackupDisk = false;
 
             var targetItem = client.Tamer.Incubator.EggId;
+            _logger.Information(
+                "Hatch increase request: tamer {TamerId} npc {NpcId} dataTier {DataTier} egg {EggId} hatchLevel {HatchLevel} backupDisk {BackupDiskId}.",
+                client.TamerId,
+                npcId,
+                dataTier,
+                targetItem,
+                client.Tamer.Incubator.HatchLevel,
+                client.Tamer.Incubator.BackupDiskId);
+
             var hatchInfo = _assets.Hatchs.FirstOrDefault(x => x.ItemId == targetItem);
             if (hatchInfo == null)
             {
@@ -116,6 +125,12 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 }
                 _logger.Verbose($"Character {client.TamerId} succeeded to increase egg {targetItem} to level {client.Tamer.Incubator.HatchLevel} " +
                     $"with data section {hatchInfo.LowClassDataSection} x{hatchInfo.LowClassDataAmount}.");
+                _logger.Information(
+                    "Hatch increase result: tamer {TamerId} egg {EggId} result Success hatchLevel {HatchLevel} dataTier {DataTier}.",
+                    client.TamerId,
+                    targetItem,
+                    client.Tamer.Incubator.HatchLevel,
+                    dataTier);
             }
             else
             {
@@ -145,6 +160,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         }
                         _logger.Verbose($"Character {client.TamerId} failed to increase egg {targetItem} to level {client.Tamer.Incubator.HatchLevel + 1} " +
                             $"with data section {hatchInfo.MidClassDataSection} x{hatchInfo.MidClassDataAmount} and egg was saved by {client.Tamer.Incubator.BackupDiskId}.");
+                        _logger.Information(
+                            "Hatch increase result: tamer {TamerId} egg {EggId} result Backuped hatchLevel {HatchLevel} dataTier {DataTier} backupDisk {BackupDiskId}.",
+                            client.TamerId,
+                            targetItem,
+                            client.Tamer.Incubator.HatchLevel,
+                            dataTier,
+                            client.Tamer.Incubator.BackupDiskId);
                     }
                     else
                     {
@@ -171,6 +193,12 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                             $"with data section {hatchInfo.MidClassDataSection} x{hatchInfo.MidClassDataAmount} and egg has broken.");
 
                         client.Tamer.Incubator.RemoveEgg();
+                        _logger.Information(
+                            "Hatch increase result: tamer {TamerId} egg {EggId} result Broken hatchLevelAfter {HatchLevel} dataTier {DataTier}.",
+                            client.TamerId,
+                            targetItem,
+                            client.Tamer.Incubator.HatchLevel,
+                            dataTier);
                     }
                 }
                 else
@@ -196,6 +224,12 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     }
                     _logger.Verbose($"Character {client.TamerId} failed to increase egg {targetItem} to level {client.Tamer.Incubator.HatchLevel + 1} " +
                         $"with data section {hatchInfo.MidClassDataSection} x{hatchInfo.MidClassDataAmount}.");
+                    _logger.Information(
+                        "Hatch increase result: tamer {TamerId} egg {EggId} result Failed hatchLevel {HatchLevel} dataTier {DataTier}.",
+                        client.TamerId,
+                        targetItem,
+                        client.Tamer.Incubator.HatchLevel,
+                        dataTier);
                 }
             }
 

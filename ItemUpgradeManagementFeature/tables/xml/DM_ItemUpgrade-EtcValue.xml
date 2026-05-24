@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DMItemUpgradeEtcValue schema="DM_ItemUpgrade-EtcValue.struct" bin="DM_ItemUpgrade-EtcValue.bin" byteLength="20">
+  <Values kind="Section" offset="0" length="20">
+    <_0 kind="Record" offset="4" length="8">
+      <Key kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <Value kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="1000" />
+    </_0>
+    <_1 kind="Record" offset="12" length="8">
+      <Key kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Value kind="Leaf" offset="16" length="4" type="Scalar { Kind = U32 }" value="10" />
+    </_1>
+  </Values>
+</DMItemUpgradeEtcValue>

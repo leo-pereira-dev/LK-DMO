@@ -33,6 +33,15 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         public async Task Process(GameClient client, byte[] packetData)
         {
+            _logger.Information(
+                "Hatch remove request: tamer {TamerId} egg {EggId} hatchLevel {HatchLevel} backupDisk {BackupDiskId} notDeveloped {NotDeveloped} packetLength {PacketLength}.",
+                client.TamerId,
+                client.Tamer.Incubator.EggId,
+                client.Tamer.Incubator.HatchLevel,
+                client.Tamer.Incubator.BackupDiskId,
+                client.Tamer.Incubator.NotDevelopedEgg,
+                packetData.Length);
+
             if (client.Tamer.Incubator.NotDevelopedEgg)
             {
                 var newItem = new ItemModel();
@@ -60,6 +69,12 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             client.Tamer.Incubator.RemoveEgg();
 
             await _sender.Send(new UpdateIncubatorCommand(client.Tamer.Incubator));
+
+            _logger.Information(
+                "Hatch remove finished: tamer {TamerId} incubatorEgg {EggId} hatchLevel {HatchLevel}.",
+                client.TamerId,
+                client.Tamer.Incubator.EggId,
+                client.Tamer.Incubator.HatchLevel);
         }
     }
 }

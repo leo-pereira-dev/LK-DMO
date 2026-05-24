@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EquipEnchant schema="EquipEnchant.struct" bin="EquipEnchant.bin" byteLength="676">
+  <Enchants kind="Section" offset="0" length="676">
+    <_0 kind="Record" offset="4" length="16">
+      <EnchantId kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="47640" />
+      <FieldA kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="2702918" />
+      <FieldB kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="16" length="4" type="Scalar { Kind = U32 }" value="10000552" />
+    </_0>
+    <_1 kind="Record" offset="20" length="16">
+      <EnchantId kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="47641" />
+      <FieldA kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="2702934" />
+      <FieldB kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="10000553" />
+    </_1>
+    <_2 kind="Record" offset="36" length="16">
+      <EnchantId kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="47642" />
+      <FieldA kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="2702950" />
+      <FieldB kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="10000554" />
+    </_2>
+    <_3 kind="Record" offset="52" length="16">
+      <EnchantId kind="Leaf" offset="52" length="4" type="Scalar { Kind = U32 }" value="47643" />
+      <FieldA kind="Leaf" offset="56" length="4" type="Scalar { Kind = U32 }" value="2702966" />
+      <FieldB kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="64" length="4" type="Scalar { Kind = U32 }" value="10000555" />
+    </_3>
+    <_4 kind="Record" offset="68" length="16">
+      <EnchantId kind="Leaf" offset="68" length="4" type="Scalar { Kind = U32 }" value="47644" />
+      <FieldA kind="Leaf" offset="72" length="4" type="Scalar { Kind = U32 }" value="2702982" />
+      <FieldB kind="Leaf" offset="76" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="80" length="4" type="Scalar { Kind = U32 }" value="10000556" />
+    </_4>
+    <_5 kind="Record" offset="84" length="16">
+      <EnchantId kind="Leaf" offset="84" length="4" type="Scalar { Kind = U32 }" value="47645" />
+      <FieldA kind="Leaf" offset="88" length="4" type="Scalar { Kind = U32 }" value="2702998" />
+      <FieldB kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="96" length="4" type="Scalar { Kind = U32 }" value="10000557" />
+    </_5>
+    <_6 kind="Record" offset="100" length="16">
+      <EnchantId kind="Leaf" offset="100" length="4" type="Scalar { Kind = U32 }" value="47646" />
+      <FieldA kind="Leaf" offset="104" length="4" type="Scalar { Kind = U32 }" value="2702918" />
+      <FieldB kind="Leaf" offset="108" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="112" length="4" type="Scalar { Kind = U32 }" value="10000552" />
+    </_6>
+    <_7 kind="Record" offset="116" length="16">
+      <EnchantId kind="Leaf" offset="116" length="4" type="Scalar { Kind = U32 }" value="47647" />
+      <FieldA kind="Leaf" offset="120" length="4" type="Scalar { Kind = U32 }" value="2702934" />
+      <FieldB kind="Leaf" offset="124" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="128" length="4" type="Scalar { Kind = U32 }" value="10000553" />
+    </_7>
+    <_8 kind="Record" offset="132" length="16">
+      <EnchantId kind="Leaf" offset="132" length="4" type="Scalar { Kind = U32 }" value="47648" />
+      <FieldA kind="Leaf" offset="136" length="4" type="Scalar { Kind = U32 }" value="2702950" />
+      <FieldB kind="Leaf" offset="140" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="144" length="4" type="Scalar { Kind = U32 }" value="10000554" />
+    </_8>
+    <_9 kind="Record" offset="148" length="16">
+      <EnchantId kind="Leaf" offset="148" length="4" type="Scalar { Kind = U32 }" value="47649" />
+      <FieldA kind="Leaf" offset="152" length="4" type="Scalar { Kind = U32 }" value="2702966" />
+      <FieldB kind="Leaf" offset="156" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="160" length="4" type="Scalar { Kind = U32 }" value="10000555" />
+    </_9>
+    <_10 kind="Record" offset="164" length="16">
+      <EnchantId kind="Leaf" offset="164" length="4" type="Scalar { Kind = U32 }" value="47650" />
+      <FieldA kind="Leaf" offset="168" length="4" type="Scalar { Kind = U32 }" value="2702982" />
+      <FieldB kind="Leaf" offset="172" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="176" length="4" type="Scalar { Kind = U32 }" value="10000556" />
+    </_10>
+    <_11 kind="Record" offset="180" length="16">
+      <EnchantId kind="Leaf" offset="180" length="4" type="Scalar { Kind = U32 }" value="47651" />
+      <FieldA kind="Leaf" offset="184" length="4" type="Scalar { Kind = U32 }" value="2702998" />
+      <FieldB kind="Leaf" offset="188" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="192" length="4" type="Scalar { Kind = U32 }" value="10000557" />
+    </_11>
+    <_12 kind="Record" offset="196" length="16">
+      <EnchantId kind="Leaf" offset="196" length="4" type="Scalar { Kind = U32 }" value="47652" />
+      <FieldA kind="Leaf" offset="200" length="4" type="Scalar { Kind = U32 }" value="2702918" />
+      <FieldB kind="Leaf" offset="204" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="208" length="4" type="Scalar { Kind = U32 }" value="10000552" />
+    </_12>
+    <_13 kind="Record" offset="212" length="16">
+      <EnchantId kind="Leaf" offset="212" length="4" type="Scalar { Kind = U32 }" value="47653" />
+      <FieldA kind="Leaf" offset="216" length="4" type="Scalar { Kind = U32 }" value="2702934" />
+      <FieldB kind="Leaf" offset="220" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="224" length="4" type="Scalar { Kind = U32 }" value="10000553" />
+    </_13>
+    <_14 kind="Record" offset="228" length="16">
+      <EnchantId kind="Leaf" offset="228" length="4" type="Scalar { Kind = U32 }" value="47654" />
+      <FieldA kind="Leaf" offset="232" length="4" type="Scalar { Kind = U32 }" value="2702950" />
+      <FieldB kind="Leaf" offset="236" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="240" length="4" type="Scalar { Kind = U32 }" value="10000554" />
+    </_14>
+    <_15 kind="Record" offset="244" length="16">
+      <EnchantId kind="Leaf" offset="244" length="4" type="Scalar { Kind = U32 }" value="47655" />
+      <FieldA kind="Leaf" offset="248" length="4" type="Scalar { Kind = U32 }" value="2702966" />
+      <FieldB kind="Leaf" offset="252" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="256" length="4" type="Scalar { Kind = U32 }" value="10000555" />
+    </_15>
+    <_16 kind="Record" offset="260" length="16">
+      <EnchantId kind="Leaf" offset="260" length="4" type="Scalar { Kind = U32 }" value="47656" />
+      <FieldA kind="Leaf" offset="264" length="4" type="Scalar { Kind = U32 }" value="2702982" />
+      <FieldB kind="Leaf" offset="268" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="272" length="4" type="Scalar { Kind = U32 }" value="10000556" />
+    </_16>
+    <_17 kind="Record" offset="276" length="16">
+      <EnchantId kind="Leaf" offset="276" length="4" type="Scalar { Kind = U32 }" value="47657" />
+      <FieldA kind="Leaf" offset="280" length="4" type="Scalar { Kind = U32 }" value="2702998" />
+      <FieldB kind="Leaf" offset="284" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="288" length="4" type="Scalar { Kind = U32 }" value="10000557" />
+    </_17>
+    <_18 kind="Record" offset="292" length="16">
+      <EnchantId kind="Leaf" offset="292" length="4" type="Scalar { Kind = U32 }" value="47658" />
+      <FieldA kind="Leaf" offset="296" length="4" type="Scalar { Kind = U32 }" value="2702918" />
+      <FieldB kind="Leaf" offset="300" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="304" length="4" type="Scalar { Kind = U32 }" value="10000552" />
+    </_18>
+    <_19 kind="Record" offset="308" length="16">
+      <EnchantId kind="Leaf" offset="308" length="4" type="Scalar { Kind = U32 }" value="47659" />
+      <FieldA kind="Leaf" offset="312" length="4" type="Scalar { Kind = U32 }" value="2702934" />
+      <FieldB kind="Leaf" offset="316" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="320" length="4" type="Scalar { Kind = U32 }" value="10000553" />
+    </_19>
+    <_20 kind="Record" offset="324" length="16">
+      <EnchantId kind="Leaf" offset="324" length="4" type="Scalar { Kind = U32 }" value="47660" />
+      <FieldA kind="Leaf" offset="328" length="4" type="Scalar { Kind = U32 }" value="2702950" />
+      <FieldB kind="Leaf" offset="332" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="336" length="4" type="Scalar { Kind = U32 }" value="10000554" />
+    </_20>
+    <_21 kind="Record" offset="340" length="16">
+      <EnchantId kind="Leaf" offset="340" length="4" type="Scalar { Kind = U32 }" value="47661" />
+      <FieldA kind="Leaf" offset="344" length="4" type="Scalar { Kind = U32 }" value="2702966" />
+      <FieldB kind="Leaf" offset="348" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="352" length="4" type="Scalar { Kind = U32 }" value="10000555" />
+    </_21>
+    <_22 kind="Record" offset="356" length="16">
+      <EnchantId kind="Leaf" offset="356" length="4" type="Scalar { Kind = U32 }" value="47662" />
+      <FieldA kind="Leaf" offset="360" length="4" type="Scalar { Kind = U32 }" value="2702982" />
+      <FieldB kind="Leaf" offset="364" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="368" length="4" type="Scalar { Kind = U32 }" value="10000556" />
+    </_22>
+    <_23 kind="Record" offset="372" length="16">
+      <EnchantId kind="Leaf" offset="372" length="4" type="Scalar { Kind = U32 }" value="47663" />
+      <FieldA kind="Leaf" offset="376" length="4" type="Scalar { Kind = U32 }" value="2702998" />
+      <FieldB kind="Leaf" offset="380" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="384" length="4" type="Scalar { Kind = U32 }" value="10000557" />
+    </_23>
+    <_24 kind="Record" offset="388" length="16">
+      <EnchantId kind="Leaf" offset="388" length="4" type="Scalar { Kind = U32 }" value="47664" />
+      <FieldA kind="Leaf" offset="392" length="4" type="Scalar { Kind = U32 }" value="2702918" />
+      <FieldB kind="Leaf" offset="396" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="400" length="4" type="Scalar { Kind = U32 }" value="10000552" />
+    </_24>
+    <_25 kind="Record" offset="404" length="16">
+      <EnchantId kind="Leaf" offset="404" length="4" type="Scalar { Kind = U32 }" value="47665" />
+      <FieldA kind="Leaf" offset="408" length="4" type="Scalar { Kind = U32 }" value="2702934" />
+      <FieldB kind="Leaf" offset="412" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="416" length="4" type="Scalar { Kind = U32 }" value="10000553" />
+    </_25>
+    <_26 kind="Record" offset="420" length="16">
+      <EnchantId kind="Leaf" offset="420" length="4" type="Scalar { Kind = U32 }" value="47666" />
+      <FieldA kind="Leaf" offset="424" length="4" type="Scalar { Kind = U32 }" value="2702950" />
+      <FieldB kind="Leaf" offset="428" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="432" length="4" type="Scalar { Kind = U32 }" value="10000554" />
+    </_26>
+    <_27 kind="Record" offset="436" length="16">
+      <EnchantId kind="Leaf" offset="436" length="4" type="Scalar { Kind = U32 }" value="47667" />
+      <FieldA kind="Leaf" offset="440" length="4" type="Scalar { Kind = U32 }" value="2702966" />
+      <FieldB kind="Leaf" offset="444" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="448" length="4" type="Scalar { Kind = U32 }" value="10000555" />
+    </_27>
+    <_28 kind="Record" offset="452" length="16">
+      <EnchantId kind="Leaf" offset="452" length="4" type="Scalar { Kind = U32 }" value="47668" />
+      <FieldA kind="Leaf" offset="456" length="4" type="Scalar { Kind = U32 }" value="2702982" />
+      <FieldB kind="Leaf" offset="460" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="464" length="4" type="Scalar { Kind = U32 }" value="10000556" />
+    </_28>
+    <_29 kind="Record" offset="468" length="16">
+      <EnchantId kind="Leaf" offset="468" length="4" type="Scalar { Kind = U32 }" value="47669" />
+      <FieldA kind="Leaf" offset="472" length="4" type="Scalar { Kind = U32 }" value="2702998" />
+      <FieldB kind="Leaf" offset="476" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="480" length="4" type="Scalar { Kind = U32 }" value="10000557" />
+    </_29>
+    <_30 kind="Record" offset="484" length="16">
+      <EnchantId kind="Leaf" offset="484" length="4" type="Scalar { Kind = U32 }" value="50161" />
+      <FieldA kind="Leaf" offset="488" length="4" type="Scalar { Kind = U32 }" value="2702087" />
+      <FieldB kind="Leaf" offset="492" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="496" length="4" type="Scalar { Kind = U32 }" value="10000112" />
+    </_30>
+    <_31 kind="Record" offset="500" length="16">
+      <EnchantId kind="Leaf" offset="500" length="4" type="Scalar { Kind = U32 }" value="50162" />
+      <FieldA kind="Leaf" offset="504" length="4" type="Scalar { Kind = U32 }" value="2702103" />
+      <FieldB kind="Leaf" offset="508" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="512" length="4" type="Scalar { Kind = U32 }" value="10000231" />
+    </_31>
+    <_32 kind="Record" offset="516" length="16">
+      <EnchantId kind="Leaf" offset="516" length="4" type="Scalar { Kind = U32 }" value="50163" />
+      <FieldA kind="Leaf" offset="520" length="4" type="Scalar { Kind = U32 }" value="2702119" />
+      <FieldB kind="Leaf" offset="524" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="528" length="4" type="Scalar { Kind = U32 }" value="10000273" />
+    </_32>
+    <_33 kind="Record" offset="532" length="16">
+      <EnchantId kind="Leaf" offset="532" length="4" type="Scalar { Kind = U32 }" value="50164" />
+      <FieldA kind="Leaf" offset="536" length="4" type="Scalar { Kind = U32 }" value="2702135" />
+      <FieldB kind="Leaf" offset="540" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="544" length="4" type="Scalar { Kind = U32 }" value="10000341" />
+    </_33>
+    <_34 kind="Record" offset="548" length="16">
+      <EnchantId kind="Leaf" offset="548" length="4" type="Scalar { Kind = U32 }" value="50165" />
+      <FieldA kind="Leaf" offset="552" length="4" type="Scalar { Kind = U32 }" value="2702151" />
+      <FieldB kind="Leaf" offset="556" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="560" length="4" type="Scalar { Kind = U32 }" value="10000343" />
+    </_34>
+    <_35 kind="Record" offset="564" length="16">
+      <EnchantId kind="Leaf" offset="564" length="4" type="Scalar { Kind = U32 }" value="50166" />
+      <FieldA kind="Leaf" offset="568" length="4" type="Scalar { Kind = U32 }" value="2702167" />
+      <FieldB kind="Leaf" offset="572" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="576" length="4" type="Scalar { Kind = U32 }" value="10000342" />
+    </_35>
+    <_36 kind="Record" offset="580" length="16">
+      <EnchantId kind="Leaf" offset="580" length="4" type="Scalar { Kind = U32 }" value="50167" />
+      <FieldA kind="Leaf" offset="584" length="4" type="Scalar { Kind = U32 }" value="2702183" />
+      <FieldB kind="Leaf" offset="588" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="592" length="4" type="Scalar { Kind = U32 }" value="10000344" />
+    </_36>
+    <_37 kind="Record" offset="596" length="16">
+      <EnchantId kind="Leaf" offset="596" length="4" type="Scalar { Kind = U32 }" value="50168" />
+      <FieldA kind="Leaf" offset="600" length="4" type="Scalar { Kind = U32 }" value="2702199" />
+      <FieldB kind="Leaf" offset="604" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="608" length="4" type="Scalar { Kind = U32 }" value="10000522" />
+    </_37>
+    <_38 kind="Record" offset="612" length="16">
+      <EnchantId kind="Leaf" offset="612" length="4" type="Scalar { Kind = U32 }" value="50169" />
+      <FieldA kind="Leaf" offset="616" length="4" type="Scalar { Kind = U32 }" value="2702215" />
+      <FieldB kind="Leaf" offset="620" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="624" length="4" type="Scalar { Kind = U32 }" value="10000523" />
+    </_38>
+    <_39 kind="Record" offset="628" length="16">
+      <EnchantId kind="Leaf" offset="628" length="4" type="Scalar { Kind = U32 }" value="50170" />
+      <FieldA kind="Leaf" offset="632" length="4" type="Scalar { Kind = U32 }" value="2702231" />
+      <FieldB kind="Leaf" offset="636" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="640" length="4" type="Scalar { Kind = U32 }" value="10000536" />
+    </_39>
+    <_40 kind="Record" offset="644" length="16">
+      <EnchantId kind="Leaf" offset="644" length="4" type="Scalar { Kind = U32 }" value="50171" />
+      <FieldA kind="Leaf" offset="648" length="4" type="Scalar { Kind = U32 }" value="2702247" />
+      <FieldB kind="Leaf" offset="652" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="656" length="4" type="Scalar { Kind = U32 }" value="10000535" />
+    </_40>
+    <_41 kind="Record" offset="660" length="16">
+      <EnchantId kind="Leaf" offset="660" length="4" type="Scalar { Kind = U32 }" value="50172" />
+      <FieldA kind="Leaf" offset="664" length="4" type="Scalar { Kind = U32 }" value="2702263" />
+      <FieldB kind="Leaf" offset="668" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <FieldC kind="Leaf" offset="672" length="4" type="Scalar { Kind = U32 }" value="10000551" />
+    </_41>
+  </Enchants>
+</EquipEnchant>

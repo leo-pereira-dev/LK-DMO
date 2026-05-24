@@ -31,7 +31,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
                 WriteString(digimon.Name);
                 WriteShort(digimon.Size);
                 WriteInt64(digimon.CurrentExperience * 100);
-                WriteInt64(digimon.TranscendenceExperience * 100);
+                WriteInt64(digimon.TranscendenceExperience);
                 WriteShort(digimon.Level);
 
                 WriteInt(digimon.HP);

@@ -1,0 +1,23 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/ItemRankEffectData.bin]
+// ItemRankEffectData.bin — Pack03 v487 client.
+// Route: FUN_01619f40 -> FUN_0161a2c0 -> FUN_01619780.
+// Cursor layout: count, keyed groups, each with u32-counted three-u32 effect entries.
+
+bin ItemRankEffectData {
+    section Groups {
+        count  u32;
+        record ItemRankEffectGroup;
+    }
+}
+
+struct ItemRankEffectGroup {
+    u32  ItemCode;
+    u32  EffectCount;
+    ItemRankEffectEntry[EffectCount] Effects;
+}
+
+struct ItemRankEffectEntry size=12 {
+    u32  ItemCode;
+    u32  IconNo;
+    u32  Rank;
+}

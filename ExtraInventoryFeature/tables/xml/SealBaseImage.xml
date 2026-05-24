@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SealBaseImage schema="SealBaseImage.struct" bin="SealBaseImage.bin" byteLength="319">
+  <Images kind="Section" offset="0" length="319">
+    <_0 kind="Record" offset="4" length="63">
+      <AttributeType kind="Leaf" offset="4" length="1" type="Scalar { Kind = U8 }" value="1" />
+      <AttributeImagePath kind="Leaf" offset="5" length="62" type="LString { }">Data\Interface\SealMaster\Attribute\sealmaster_type_no.dds</AttributeImagePath>
+    </_0>
+    <_1 kind="Record" offset="67" length="63">
+      <AttributeType kind="Leaf" offset="67" length="1" type="Scalar { Kind = U8 }" value="2" />
+      <AttributeImagePath kind="Leaf" offset="68" length="62" type="LString { }">Data\Interface\SealMaster\Attribute\sealmaster_type_da.dds</AttributeImagePath>
+    </_1>
+    <_2 kind="Record" offset="130" length="63">
+      <AttributeType kind="Leaf" offset="130" length="1" type="Scalar { Kind = U8 }" value="3" />
+      <AttributeImagePath kind="Leaf" offset="131" length="62" type="LString { }">Data\Interface\SealMaster\Attribute\sealmaster_type_va.dds</AttributeImagePath>
+    </_2>
+    <_3 kind="Record" offset="193" length="63">
+      <AttributeType kind="Leaf" offset="193" length="1" type="Scalar { Kind = U8 }" value="4" />
+      <AttributeImagePath kind="Leaf" offset="194" length="62" type="LString { }">Data\Interface\SealMaster\Attribute\sealmaster_type_vi.dds</AttributeImagePath>
+    </_3>
+    <_4 kind="Record" offset="256" length="63">
+      <AttributeType kind="Leaf" offset="256" length="1" type="Scalar { Kind = U8 }" value="5" />
+      <AttributeImagePath kind="Leaf" offset="257" length="62" type="LString { }">Data\Interface\SealMaster\Attribute\sealmaster_type_un.dds</AttributeImagePath>
+    </_4>
+  </Images>
+</SealBaseImage>

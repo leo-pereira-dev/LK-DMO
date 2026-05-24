@@ -25,6 +25,8 @@ static bool               g_inited       = false;
 static bool               g_symInited    = false;
 static bool               g_isWine       = false;  // skip Sym* on Wine — its dbghelp asserts internally
 static char               g_logPath[ MAX_PATH ] = { 0 };
+static char               g_lastContext[ 1024 ] = { 0 };
+static char               g_lastPacket[ 512 ] = { 0 };
 
 static bool DetectWine()
 {
@@ -159,6 +161,20 @@ static void WriteLine( const char* line )
 	fputs( line, g_fp );
 	fputc( '\n', g_fp );
 	fflush( g_fp );
+}
+
+static void WriteCrashContext()
+{
+	WriteLine( "  Context:" );
+
+	char buf[ 1280 ];
+	_snprintf_s( buf, _TRUNCATE, "    last_context=%s",
+		g_lastContext[ 0 ] ? g_lastContext : "<none>" );
+	WriteLine( buf );
+
+	_snprintf_s( buf, _TRUNCATE, "    last_packet=%s",
+		g_lastPacket[ 0 ] ? g_lastPacket : "<none>" );
+	WriteLine( buf );
 }
 
 // Write a stack trace to g_fp. If pCtx is non-null, walks that context
@@ -398,6 +414,7 @@ static LONG WINAPI OnUnhandledSEH( EXCEPTION_POINTERS* ep )
 	_snprintf_s( buf, _TRUNCATE, "[%s] CRASH (SEH): %s code=0x%08lx addr=%p",
 		ts, SEHCodeName( code ), (unsigned long)code, addr );
 	WriteLine( buf );
+	WriteCrashContext();
 
 	if( ep && ep->ContextRecord )
 		WriteStack( ep->ContextRecord, 0 );
@@ -421,7 +438,9 @@ static void OnTerminate()
 	char buf[ 256 ];
 	_snprintf_s( buf, _TRUNCATE, "[%s] TERMINATE: unhandled C++ exception", ts );
 	WriteLine( buf );
+	WriteCrashContext();
 	WriteStack( NULL, 1 );
+	WriteMiniDumpFile( NULL, "terminate" );
 	WriteLine( "" );
 	LeaveCriticalSection( &g_cs );
 
@@ -436,7 +455,9 @@ static void OnPurecall()
 	char buf[ 256 ];
 	_snprintf_s( buf, _TRUNCATE, "[%s] PURECALL: pure virtual function call", ts );
 	WriteLine( buf );
+	WriteCrashContext();
 	WriteStack( NULL, 1 );
+	WriteMiniDumpFile( NULL, "purecall" );
 	WriteLine( "" );
 	LeaveCriticalSection( &g_cs );
 
@@ -462,7 +483,9 @@ static void OnInvalidParameter( const wchar_t* expression, const wchar_t* functi
 		"[%s] CRT INVALID PARAMETER: in %s expr=\"%s\" at %s:%u",
 		ts, funcA[ 0 ] ? funcA : "<unknown>", exprA, fileA, line );
 	WriteLine( buf );
+	WriteCrashContext();
 	WriteStack( NULL, 1 );
+	WriteMiniDumpFile( NULL, "invalid-parameter" );
 	WriteLine( "" );
 	LeaveCriticalSection( &g_cs );
 
@@ -490,6 +513,7 @@ static LONG CALLBACK OnVectoredException( EXCEPTION_POINTERS* ep )
 	_snprintf_s( buf, _TRUNCATE, "[%s] CRASH (VEH): %s code=0x%08lx addr=%p",
 		ts, SEHCodeName( code ), (unsigned long)code, addr );
 	WriteLine( buf );
+	WriteCrashContext();
 
 	if( ep && ep->ContextRecord )
 		WriteStack( ep->ContextRecord, 0 );
@@ -585,6 +609,42 @@ void LogMessage( const char* fmt, ... )
 	char line[ 1280 ];
 	_snprintf_s( line, _TRUNCATE, "[%s] %s", ts, body );
 	WriteLine( line );
+
+	LeaveCriticalSection( &g_cs );
+}
+
+void SetContext( const char* fmt, ... )
+{
+	if( !g_inited || !fmt )
+		return;
+
+	EnterCriticalSection( &g_cs );
+
+	va_list args;
+	va_start( args, fmt );
+	_vsnprintf_s( g_lastContext, sizeof( g_lastContext ), _TRUNCATE, fmt, args );
+	va_end( args );
+
+	LeaveCriticalSection( &g_cs );
+}
+
+void SetLastPacket( const char* phase, int packet, int bodyBytes, int totalLen )
+{
+	if( !g_inited )
+		return;
+
+	EnterCriticalSection( &g_cs );
+
+	char ts[ 64 ];
+	Timestamp( ts, sizeof( ts ) );
+	_snprintf_s( g_lastPacket, sizeof( g_lastPacket ), _TRUNCATE,
+		"%s phase=%s packet=%d body_bytes=%d total_len=%d thread=%lu",
+		ts,
+		phase && *phase ? phase : "<unknown>",
+		packet,
+		bodyBytes,
+		totalLen,
+		(unsigned long)GetCurrentThreadId() );
 
 	LeaveCriticalSection( &g_cs );
 }

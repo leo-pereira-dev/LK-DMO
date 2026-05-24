@@ -1,63 +1,77 @@
-﻿using AutoMapper;
-using DigitalWorldOnline.Application;
-using DigitalWorldOnline.Application.GameAssets;
+using AutoMapper;
 using DigitalWorldOnline.Application.Separar.Commands.Delete;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
-using DigitalWorldOnline.Application.GameAssets.Queries;
 using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums;
 using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
-using DigitalWorldOnline.Commons.Models;
+using DigitalWorldOnline.Commons.Models.Base;
 using DigitalWorldOnline.Commons.Models.Character;
 using DigitalWorldOnline.Commons.Models.Digimon;
 using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Utils;
 using DigitalWorldOnline.Game.Managers;
-using DigitalWorldOnline.GameHost;
 using MediatR;
-using Newtonsoft.Json.Linq;
 using Serilog;
-using System.Net.Sockets;
-using System.Reflection;
 
 namespace DigitalWorldOnline.Game.PacketProcessors
 {
     public class DigimonTranscendenceExpPacketProcessor : IGamePacketProcessor
     {
-        private readonly double[,] cloneValues = {
-        { 7.17, 8.03, 8.89, 9.74, 10.6, 11.46, 12.31, 13.17, 14.03, 14.89, 15.74 },
-        { 7.43, 8.29, 9.14, 10, 10.86, 11.71, 12.57, 13.43, 14.29, 15.14, 16 },
-        { 7.71, 8.57, 9.43, 10.29, 11.14, 12, 12.86, 13.71, 14.57, 15.43, 16.29 },
-        { 8, 8.86, 9.71, 10.57, 11.43, 12.29, 13.14, 14, 14.86, 15.71, 16.57 },
-        { 8.29, 9.14, 10, 10.86, 11.71, 12.57, 13.43, 14.29, 15.14, 16, 16.86 },
-        { 8.57, 9.43, 10.29, 11.14, 12, 12.86, 13.71, 14.57, 15.43, 16.29, 17.14 },
-        { 8.86, 9.71, 10.57, 11.43, 12.29, 13.14, 14, 14.86, 15.71, 16.57, 17.43 },
-        { 9.14, 10, 10.86, 11.71, 12.57, 13.43, 14.29, 15.14, 16, 16.86, 17.71 },
-        { 9.43, 10.29, 11.14, 12, 12.86, 13.71, 14.57, 15.43, 16.29, 17.14, 18 },
-        { 9.71, 10.57, 11.43, 12.29, 13.14, 14, 14.86, 15.71, 16.57, 17.43, 18.29 },
-        { 9.97, 10.83, 11.69, 12.54, 13.4, 14.26, 15.11, 15.97, 16.83, 17.68, 18.54 },
-        { 10, 10.86, 11.71, 12.57, 13.43, 14.29, 15.14, 16, 16.86, 17.71, 18.57 },
-        { 10.29, 11.14, 12, 12.86, 13.71, 14.57, 15.43, 16.29, 17.14, 18, 18.86 },
-        { 10.57, 11.43, 12.29, 13.14, 14, 14.86, 15.71, 16.57, 17.43, 18.29, 19.14 }
-    };
+        private const long MaxTranscendenceExperience = 140000;
+        private const byte MinimumLevel = 100;
+        private const short MinimumSize = 12500;
+        private const int EnchantDefaultCorrect = 5;
+        private const int SuccessChancePercent = 15;
+
+        private const int ResultSuccess = 0;
+        private const int ResultFail = 1;
+        private const int ResultNotTermsLevel = 20103;
+        private const int ResultNotTermsScale = 20104;
+        private const int ResultNotTermsDigiclone = 20105;
+        private const int ResultNotUseAvailableMaterial = 20106;
+        private const int ResultNotUseMaterial = 20107;
+        private const int ResultItemCountShortage = 20108;
+        private const int ResultAlreadyTranscendence = 20111;
+        private const int ResultFullExp = 20112;
+        private const int ResultNotUseTranscendenceMaterial = 20116;
+
+        private static readonly IReadOnlyDictionary<DigimonHatchGradeEnum, int> DifferentTypeCorrect = new Dictionary<DigimonHatchGradeEnum, int>
+        {
+            { DigimonHatchGradeEnum.Default, 1 },
+            { DigimonHatchGradeEnum.High, 10 },
+            { DigimonHatchGradeEnum.Perfect, 40 }
+        };
+
+        private static readonly IReadOnlyDictionary<DigimonHatchGradeEnum, int> SameTypeCorrect = new Dictionary<DigimonHatchGradeEnum, int>
+        {
+            { DigimonHatchGradeEnum.Default, 3 },
+            { DigimonHatchGradeEnum.High, 30 },
+            { DigimonHatchGradeEnum.Perfect, 120 }
+        };
+
+        private static readonly IReadOnlyDictionary<DigimonHatchGradeEnum, int> RaremonFixedExp = new Dictionary<DigimonHatchGradeEnum, int>
+        {
+            { DigimonHatchGradeEnum.Default, 3140 },
+            { DigimonHatchGradeEnum.High, 23550 },
+            { DigimonHatchGradeEnum.Perfect, 62800 }
+        };
+
         public GameServerPacketEnum Type => GameServerPacketEnum.TranscendenceReceiveExpResult;
 
         private readonly StatusManager _statusManager;
         private readonly ILogger _logger;
         private readonly ISender _sender;
         private readonly IMapper _mapper;
-        private readonly List<short> _transcendSlots = new();
-        private readonly Random rand = new Random();
+        private readonly Random _random = new();
 
         public DigimonTranscendenceExpPacketProcessor(
             ILogger logger,
             ISender sender,
             IMapper mapper,
-            StatusManager statusManager
-         )
+            StatusManager statusManager)
         {
             _logger = logger;
             _sender = sender;
@@ -67,537 +81,553 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         public async Task Process(GameClient client, byte[] packetData)
         {
-
-
-            var packet = new GamePacketReader(packetData);
-
-            packet.Skip(2);
-            short targetAcademySlot = packet.ReadShort();
-            _ = packet.ReadByte();
-            _ = packet.ReadInt(); //NpcID;
-            var inputType = (AcademyInputType)packet.ReadByte();
-            byte archiveSlot = packet.ReadByte();
-            short digimonCount = packet.ReadShort();
-
-            for (int i = 0; i < digimonCount; i++)
+            try
             {
-                var academySlot = packet.ReadShort();
+                var packet = new GamePacketReader(packetData);
 
-                _transcendSlots.Add(academySlot);
-            }
+                var activeItemSlot = packet.ReadInt();
+                var npcId = packet.ReadInt();
+                var inputType = (AcademyInputType)packet.ReadByte();
+                var targetSlot = packet.ReadByte();
+                var materialCount = packet.ReadUShort();
 
-            _ = packet.ReadShort(); //Digimon Trans Slot
-            _ = packet.ReadInt(); //ItemId
-            short itemSlot = packet.ReadShort();
-            short amount = packet.ReadShort();
-            var successRate = 0;
-            long chargeExp = 0;
+                var materialSlots = new List<short>();
+                for (var i = 0; i < materialCount; i++)
+                {
+                    materialSlots.Add(packet.ReadShort());
+                }
 
-            var digivicePartner = client.Tamer.Digimons.FirstOrDefault(x => x.Slot == archiveSlot);
+                var itemCount = packet.ReadUShort();
+                var itemRequests = new List<TranscendenceItemRequest>();
+                for (var i = 0; i < itemCount; i++)
+                {
+                    itemRequests.Add(new TranscendenceItemRequest(
+                        packet.ReadInt(),
+                        packet.ReadUShort(),
+                        packet.ReadUShort()));
+                }
 
-            var targetItem = client.Tamer.Inventory.FindItemBySlot(itemSlot);
+                _logger.Information("[Transcendence] Charge request: tamer {TamerId} targetSlot {TargetSlot} input {InputType} npc {NpcId} activeItemSlot {ActiveItemSlot} materials [{MaterialSlots}] items [{Items}].",
+                    client.TamerId,
+                    targetSlot,
+                    inputType,
+                    npcId,
+                    activeItemSlot,
+                    string.Join(",", materialSlots),
+                    string.Join(",", itemRequests.Select(x => $"{x.ItemId}@{x.Slot}x{x.Amount}")));
 
-            if (targetItem == null)
-                return;
-
-            if (digivicePartner == null)
-                return;
-
-            foreach (var targetSlot in _transcendSlots)
-            {
-                var targetPartner = client.Tamer.DigimonArchive.DigimonArchives.First(x => x.Slot == targetSlot);
-
+                var targetPartner = ClientDigimonSlotResolver.Resolve(client, targetSlot, out var resolvedTargetSlot);
                 if (targetPartner == null)
+                {
+                    SendChargeFailure(client, ResultNotUseAvailableMaterial,
+                        $"target slot {targetSlot} not found. available slots [{string.Join(",", client.Tamer.Digimons.Select(x => x.Slot))}]");
                     return;
-
-                if (targetPartner.Digimon == null)
-                {
-                    targetPartner.SetDigimonInfo(_mapper.Map<DigimonModel>(
-                    await _sender.Send(
-                        new GetDigimonByIdQuery(targetPartner.DigimonId))
-                    )
-
-                );
-                    targetPartner.Digimon?.SetBaseInfo(
-                   _statusManager.GetDigimonBaseInfo(
-                       targetPartner.Digimon.BaseType
-                   )
-               );
                 }
 
-                var Chance = 15;
-                var Success = rand.Next(0, 100);
-                if (targetPartner.Digimon != null)
+                if (resolvedTargetSlot != targetSlot)
                 {
-                    if (!targetPartner.Digimon.IsRaremonType)
-                    {
-                        if (inputType == AcademyInputType.Low)
-                        {
-                            long Exp = 0;
-                            long BonusExp = 0;
-
-                            float[] values = ExperienceLowValues(targetPartner.Digimon.HatchGrade, targetPartner.Digimon.Digiclone.CloneLevel, targetPartner.Digimon.Level);
-
-                            if (digivicePartner.SameType(targetPartner.Digimon.BaseType))
-                            {
-
-                                Exp = RoundAndMultiply(values[0] * 3, 1000);
-                                BonusExp = RoundAndMultiply(values[1] * 3, 100);
-                            }
-                            else
-                            {
-                                Exp = RoundAndMultiply(values[0], 1000);
-                                BonusExp = RoundAndMultiply(values[1], 1000);
-                            }
-
-                            float initialValue = Exp;
-                            float targetPercentage = initialValue / 1000;
-
-
-                            Exp = (long)ConvertPercentageToValue(targetPercentage);
-
-                            float initialValueBonusExp = BonusExp;
-                            float BonusExptargetPercentage = initialValueBonusExp / 1000;
-
-                            BonusExp = (long)ConvertPercentageToValue(BonusExptargetPercentage);
-
-                            if (Chance >= Success)
-                            {
-                                successRate = 1;
-                                chargeExp += BonusExp;
-                                digivicePartner.UpdateTranscendenceExp((long)BonusExp);
-                            }
-
-
-                            digivicePartner.UpdateTranscendenceExp((long)Exp);
-                        }
-                        else if (inputType == AcademyInputType.High)
-                        {
-
-                            long Exp = 0;
-                            long BonusExp = 0;
-
-                            float[] values = ExperienceMidValues(targetPartner.Digimon.HatchGrade, targetPartner.Digimon.Digiclone.CloneLevel, targetPartner.Digimon.Level);
-
-                            if (digivicePartner.SameType(targetPartner.Digimon.BaseType))
-                            {
-
-                                Exp = RoundAndMultiply(values[2], 1000);
-                                BonusExp = RoundAndMultiply(values[1] * 3, 100);
-                            }
-                            else
-                            {
-                                Exp = RoundAndMultiply(values[0], 1000);
-                                BonusExp = RoundAndMultiply(values[1], 1000);
-                            }
-                            float initialValue = Exp;
-                            float targetPercentage = initialValue / 1000;
-
-                            Exp = (long)ConvertPercentageToValue(targetPercentage);
-
-                            float initialValueBonusExp = BonusExp;
-                            float BonusExptargetPercentage = initialValueBonusExp / 1000;
-
-                            BonusExp = (long)ConvertPercentageToValue(BonusExptargetPercentage);
-
-                            if (Chance >= Success)
-                            {
-                                successRate = 1;
-                                chargeExp += BonusExp;
-                                digivicePartner.UpdateTranscendenceExp((long)BonusExp);
-                            }
-
-
-                            digivicePartner.UpdateTranscendenceExp((long)Exp);
-
-                        }
-
-                    }
-                    else if (targetPartner.Digimon.IsRaremonType)
-                    {
-
-                        if (inputType == AcademyInputType.Low)
-                        {
-                            if (targetPartner.Digimon.HatchGrade == DigimonHatchGradeEnum.Default)
-                            {
-                                float NormalValue = 2.24f;
-                                float DoubleValue = NormalValue * 2;
-
-                                long Exp = 0;
-                                long BonusExp = 0;
-
-
-                                Exp = RoundAndMultiply(NormalValue, 1000);
-                                BonusExp = RoundAndMultiply(DoubleValue, 1000);
-
-                                float initialValue = Exp;
-                                float targetPercentage = initialValue / 1000;
-
-                                Exp = (long)ConvertPercentageToValue(targetPercentage);
-
-                                float initialValueBonusExp = BonusExp;
-                                float BonusExptargetPercentage = initialValueBonusExp / 1000;
-
-                                BonusExp = (long)ConvertPercentageToValue(BonusExptargetPercentage);
-
-                                if (Chance >= Success)
-                                {
-                                    successRate = 1;
-                                    chargeExp += BonusExp;
-                                    digivicePartner.UpdateTranscendenceExp((long)BonusExp);
-                                }
-
-
-                                digivicePartner.UpdateTranscendenceExp((long)Exp);
-
-                            }
-                            if (targetPartner.Digimon.HatchGrade == DigimonHatchGradeEnum.High)
-                            {
-                                float NormalValue = 16.82f;
-                                float DoubleValue = NormalValue * 2;
-
-                                long Exp = 0;
-                                long BonusExp = 0;
-
-
-                                Exp = RoundAndMultiply(NormalValue, 1000);
-                                BonusExp = RoundAndMultiply(DoubleValue, 1000);
-
-
-                                float initialValue = Exp;
-                                float targetPercentage = initialValue / 1000;
-
-                                Exp = (long)ConvertPercentageToValue(targetPercentage);
-
-                                float initialValueBonusExp = BonusExp;
-                                float BonusExptargetPercentage = initialValueBonusExp / 1000;
-
-                                BonusExp = (long)ConvertPercentageToValue(BonusExptargetPercentage);
-
-                                if (Chance >= Success)
-                                {
-                                    successRate = 1;
-                                    chargeExp += BonusExp;
-                                    digivicePartner.UpdateTranscendenceExp((long)BonusExp);
-                                }
-
-
-                                digivicePartner.UpdateTranscendenceExp((long)Exp);
-
-                            }
-                            if (targetPartner.Digimon.HatchGrade == DigimonHatchGradeEnum.Perfect)
-                            {
-                                float NormalValue = 44.85f;
-                                float DoubleValue = NormalValue * 2;
-
-                                long Exp = 0;
-                                long BonusExp = 0;
-
-                                Exp = RoundAndMultiply(NormalValue, 1000);
-                                BonusExp = RoundAndMultiply(DoubleValue, 1000);
-
-                                float initialValue = Exp;
-                                float targetPercentage = initialValue / 1000;
-
-                                Exp = (long)ConvertPercentageToValue(targetPercentage);
-
-                                float initialValueBonusExp = BonusExp;
-                                float BonusExptargetPercentage = initialValueBonusExp / 1000;
-
-                                BonusExp = (long)ConvertPercentageToValue(BonusExptargetPercentage);
-
-                                if (Chance >= Success)
-                                {
-                                    successRate = 1;
-                                    chargeExp += BonusExp;
-                                    digivicePartner.UpdateTranscendenceExp((long)BonusExp);
-                                }
-
-
-                                digivicePartner.UpdateTranscendenceExp((long)Exp);
-
-                            }
-                        }
-                        else if (inputType == AcademyInputType.High)
-                        {
-
-                            if (targetPartner.Digimon.HatchGrade == DigimonHatchGradeEnum.Default)
-                            {
-                                float NormalValue = 3.58f;
-                                float DoubleValue = NormalValue * 2;
-
-                                long Exp = 0;
-                                long BonusExp = 0;
-
-
-
-
-                                Exp = RoundAndMultiply(NormalValue, 1000);
-                                BonusExp = RoundAndMultiply(DoubleValue, 1000);
-
-
-                                float initialValue = Exp;
-                                float targetPercentage = initialValue / 1000;
-
-                                Exp = (long)ConvertPercentageToValue(targetPercentage);
-
-                                float initialValueBonusExp = BonusExp;
-                                float BonusExptargetPercentage = initialValueBonusExp / 1000;
-
-                                BonusExp = (long)ConvertPercentageToValue(BonusExptargetPercentage);
-
-                                if (Chance >= Success)
-                                {
-                                    successRate = 1;
-                                    chargeExp += BonusExp;
-                                    digivicePartner.UpdateTranscendenceExp((long)BonusExp);
-                                }
-
-
-                                digivicePartner.UpdateTranscendenceExp((long)Exp);
-
-                            }
-                            if (targetPartner.Digimon.HatchGrade == DigimonHatchGradeEnum.High)
-                            {
-                                float NormalValue = 26.91f;
-                                float DoubleValue = NormalValue * 2;
-
-                                long Exp = 0;
-                                long BonusExp = 0;
-
-
-                                Exp = RoundAndMultiply(NormalValue, 1000);
-                                BonusExp = RoundAndMultiply(DoubleValue, 1000);
-
-
-                                float initialValue = Exp;
-                                float targetPercentage = initialValue / 1000;
-
-                                Exp = (long)ConvertPercentageToValue(targetPercentage);
-
-                                float initialValueBonusExp = BonusExp;
-                                float BonusExptargetPercentage = initialValueBonusExp / 1000;
-
-                                BonusExp = (long)ConvertPercentageToValue(BonusExptargetPercentage);
-
-                                if (Chance >= Success)
-                                {
-                                    successRate = 1;
-                                    chargeExp += BonusExp;
-                                    digivicePartner.UpdateTranscendenceExp((long)BonusExp);
-                                }
-
-
-                                digivicePartner.UpdateTranscendenceExp((long)Exp);
-
-                            }
-                            if (targetPartner.Digimon.HatchGrade == DigimonHatchGradeEnum.Perfect)
-                            {
-                                float NormalValue = 71.76f;
-                                float DoubleValue = NormalValue * 2;
-
-                                long Exp = 0;
-                                long BonusExp = 0;
-
-
-
-                                Exp = RoundAndMultiply(NormalValue, 1000);
-                                BonusExp = RoundAndMultiply(DoubleValue, 1000);
-
-
-                                float initialValue = Exp;
-                                float targetPercentage = initialValue / 1000;
-
-                                Exp = (long)ConvertPercentageToValue(targetPercentage);
-
-                                float initialValueBonusExp = BonusExp;
-                                float BonusExptargetPercentage = initialValueBonusExp / 1000;
-
-                                BonusExp = (long)ConvertPercentageToValue(BonusExptargetPercentage);
-
-                                if (Chance >= Success)
-                                {
-                                    successRate = 1;
-                                    chargeExp += BonusExp;
-                                    digivicePartner.UpdateTranscendenceExp((long)BonusExp);
-                                }
-
-
-                                digivicePartner.UpdateTranscendenceExp((long)Exp);
-
-                            }
-                        }
-
-                    }
-
-
-                    targetPartner.RemoveDigimon();
-                    await _sender.Send(new UpdateCharacterDigimonArchiveItemCommand(targetPartner));
-                    await _sender.Send(new DeleteDigimonCommand(targetPartner.Digimon.Id));
-
-                    client.Tamer.RemoveDigimon((byte)targetPartner.Slot);
+                    _logger.Information("[Transcendence] Charge target slot resolved: tamer {TamerId} clientSlot {ClientSlot} realSlot {RealSlot} target {TargetId}.",
+                        client.TamerId, targetSlot, resolvedTargetSlot, targetPartner.Id);
                 }
 
+                var validationResult = ValidateTarget(targetPartner, requireFullExp: false);
+                if (validationResult != ResultSuccess)
+                {
+                    SendChargeFailure(client, validationResult, $"target validation failed for digimon {targetPartner.Id}");
+                    return;
+                }
+
+                if (targetPartner.TranscendenceExperience >= MaxTranscendenceExperience)
+                {
+                    SendChargeFailure(client, ResultFullExp, $"target {targetPartner.Id} already full exp");
+                    return;
+                }
+
+                if (!IsValidInputType(inputType) || materialSlots.Count == 0)
+                {
+                    SendChargeFailure(client, ResultNotUseAvailableMaterial, "invalid input type or empty material list");
+                    return;
+                }
+
+                if (materialSlots.Distinct().Count() != materialSlots.Count)
+                {
+                    SendChargeFailure(client, ResultNotUseAvailableMaterial, "duplicated material slots");
+                    return;
+                }
+
+                long totalGainedExp = 0;
+                short successRate = 0;
+                var plannedMaterials = new List<TranscendenceMaterialPlan>();
+                var plannedExp = targetPartner.TranscendenceExperience;
+
+                foreach (var materialSlot in materialSlots)
+                {
+                    if (plannedExp >= MaxTranscendenceExperience)
+                    {
+                        break;
+                    }
+
+                    var archiveItem = client.Tamer.DigimonArchive.DigimonArchives.FirstOrDefault(x => x.Slot == materialSlot);
+                    if (archiveItem?.DigimonId <= 0)
+                    {
+                        SendChargeFailure(client, ResultNotUseAvailableMaterial, $"archive slot {materialSlot} is empty");
+                        return;
+                    }
+
+                    if (archiveItem.Digimon == null)
+                    {
+                        var material = _mapper.Map<DigimonModel>(
+                            await _sender.Send(new GetDigimonByIdQuery(archiveItem.DigimonId)));
+
+                        if (material == null)
+                        {
+                            SendChargeFailure(client, ResultNotUseAvailableMaterial, $"digimon {archiveItem.DigimonId} was not found");
+                            return;
+                        }
+
+                        archiveItem.SetDigimonInfo(material);
+                    }
+
+                    var materialPartner = archiveItem.Digimon;
+                    if (materialPartner == null)
+                    {
+                        SendChargeFailure(client, ResultNotUseAvailableMaterial, $"archive slot {materialSlot} has no digimon data");
+                        return;
+                    }
+
+                    if (materialPartner.Id == targetPartner.Id)
+                    {
+                        _logger.Warning("[Transcendence] Ignoring selected material because it is the target digimon itself. tamer {TamerId} target {TargetId} archiveSlot {ArchiveSlot}.",
+                            client.TamerId,
+                            targetPartner.Id,
+                            materialSlot);
+                        continue;
+                    }
+
+                    if (!EnsureBaseInfo(materialPartner))
+                    {
+                        SendChargeFailure(client, ResultNotUseMaterial, $"material {materialPartner.Id} base info missing");
+                        return;
+                    }
+
+                    var materialValidation = ValidateMaterial(materialPartner);
+                    if (materialValidation != ResultSuccess)
+                    {
+                        SendChargeFailure(client, materialValidation, $"material validation failed for digimon {materialPartner.Id}");
+                        return;
+                    }
+
+                    var baseExp = CalculateMaterialExp(targetPartner, materialPartner, inputType);
+                    if (baseExp <= 0)
+                    {
+                        SendChargeFailure(client, ResultNotUseMaterial, $"material {materialPartner.Id} generated zero exp");
+                        return;
+                    }
+
+                    var bonusSuccess = _random.Next(0, 100) < SuccessChancePercent;
+                    var requestedGain = baseExp + (bonusSuccess ? baseExp * 2 : 0);
+                    var remainingExp = MaxTranscendenceExperience - plannedExp;
+                    var gainedExp = Math.Min(requestedGain, remainingExp);
+
+                    if (gainedExp <= 0)
+                    {
+                        break;
+                    }
+
+                    plannedExp += gainedExp;
+                    totalGainedExp += gainedExp;
+
+                    plannedMaterials.Add(new TranscendenceMaterialPlan(
+                        archiveItem,
+                        materialPartner,
+                        materialSlot,
+                        baseExp,
+                        gainedExp,
+                        plannedExp,
+                        bonusSuccess));
+
+                    _logger.Information("[Transcendence] Material planned: tamer {TamerId} target {TargetId} material {MaterialId} archiveSlot {ArchiveSlot} baseExp {BaseExp} gained {GainedExp} plannedTotalExp {TotalExp} bonus {Bonus}.",
+                        client.TamerId,
+                        targetPartner.Id,
+                        materialPartner.Id,
+                        materialSlot,
+                        baseExp,
+                        gainedExp,
+                        plannedExp,
+                        bonusSuccess);
+                }
+
+                if (plannedMaterials.Count == 0 || totalGainedExp <= 0)
+                {
+                    SendChargeFailure(client, ResultNotUseAvailableMaterial, "no material was consumed");
+                    return;
+                }
+
+                var requiredItemAmount = plannedMaterials.Count;
+                if (!ValidateItems(client, inputType, itemRequests, requiredItemAmount, out var inventoryItems, out var itemFailureReason))
+                {
+                    SendChargeFailure(client, ResultItemCountShortage, itemFailureReason);
+                    return;
+                }
+
+                var deletedMaterialSlots = new List<short>();
+                var changedArchiveItems = new HashSet<CharacterDigimonArchiveItemModel>();
+                foreach (var plannedMaterial in plannedMaterials)
+                {
+                    if (plannedMaterial.BonusSuccess)
+                    {
+                        successRate = 1;
+                    }
+
+                    var materialDigimonId = plannedMaterial.MaterialPartner.Id;
+                    plannedMaterial.ArchiveItem.RemoveDigimon();
+                    changedArchiveItems.Add(plannedMaterial.ArchiveItem);
+                    await _sender.Send(new DeleteDigimonCommand(materialDigimonId));
+
+                    deletedMaterialSlots.Add(plannedMaterial.ArchiveSlot);
+
+                    _logger.Information("[Transcendence] Material consumed: tamer {TamerId} target {TargetId} material {MaterialId} archiveSlot {ArchiveSlot} baseExp {BaseExp} gained {GainedExp} totalExp {TotalExp} bonus {Bonus}.",
+                        client.TamerId,
+                        targetPartner.Id,
+                        materialDigimonId,
+                        plannedMaterial.ArchiveSlot,
+                        plannedMaterial.BaseExp,
+                        plannedMaterial.GainedExp,
+                        plannedMaterial.TotalExpAfter,
+                        plannedMaterial.BonusSuccess);
+                }
+
+                foreach (var changedArchiveItem in CompactArchiveSlots(client))
+                {
+                    changedArchiveItems.Add(changedArchiveItem);
+                }
+
+                foreach (var changedArchiveItem in changedArchiveItems)
+                {
+                    await _sender.Send(new UpdateCharacterDigimonArchiveItemCommand(changedArchiveItem));
+                }
+
+                targetPartner.UpdateTranscendenceExp(plannedExp);
+
+                var updatedItems = ConsumeItems(client, inventoryItems);
+
+                await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
+                await _sender.Send(new UpdateDigimonExperienceCommand(targetPartner));
+
+                client.Send(UtilitiesFunctions.GroupPackets(
+                    new DigimonTranscendenceReceiveExpPacket(
+                        inputType,
+                        targetSlot,
+                        (short)deletedMaterialSlots.Count,
+                        deletedMaterialSlots,
+                        updatedItems,
+                        successRate,
+                        totalGainedExp,
+                        targetPartner.TranscendenceExperience).Serialize(),
+                    new DigimonArchiveLoadPacket(client.Tamer.DigimonArchive).Serialize()));
+
+                _logger.Information("[Transcendence] Charge finished: tamer {TamerId} target {TargetId} slot {TargetSlot} gained {GainedExp} total {TotalExp}/{MaxExp} deleted [{DeletedSlots}].",
+                    client.TamerId,
+                    targetPartner.Id,
+                    targetSlot,
+                    totalGainedExp,
+                    targetPartner.TranscendenceExperience,
+                    MaxTranscendenceExperience,
+                    string.Join(",", deletedMaterialSlots));
             }
-
-            client.Send(new DigimonTranscendenceReceiveExpPacket(inputType, (byte)targetAcademySlot, digimonCount, _transcendSlots, itemSlot, targetItem, (short)successRate, chargeExp, digivicePartner.TranscendenceExperience));
-
-            client.Tamer.Inventory.RemoveOrReduceItem(targetItem, amount, itemSlot);
-
-            await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
-            await _sender.Send(new UpdateDigimonExperienceCommand(digivicePartner));
-
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "[Transcendence] Charge packet failed for tamer {TamerId}.", client.TamerId);
+                client.Send(new DigimonTranscendenceReceiveExpPacket(ResultNotUseAvailableMaterial));
+            }
         }
 
-        static int RoundAndMultiply(float value, int multiplier)
+        private IReadOnlyCollection<CharacterDigimonArchiveItemModel> CompactArchiveSlots(GameClient client)
         {
-            double roundedValue = Math.Round(value, 2); // Round to two decimal places
-            int multipliedValue = (int)(roundedValue * multiplier);
-            return multipliedValue;
+            var changedItems = new List<CharacterDigimonArchiveItemModel>();
+            var archiveItems = client.Tamer.DigimonArchive.DigimonArchives
+                .Where(x => x.Slot >= 0 && x.Slot < client.Tamer.DigimonArchive.Slots)
+                .OrderBy(x => x.Slot)
+                .ToList();
+
+            var filledItems = archiveItems
+                .Where(x => x.DigimonId > 0)
+                .OrderBy(x => x.Slot)
+                .ToList();
+
+            for (var index = 0; index < filledItems.Count && index < archiveItems.Count; index++)
+            {
+                var source = filledItems[index];
+                var destination = archiveItems[index];
+
+                if (source.Id == destination.Id)
+                    continue;
+
+                _logger.Information(
+                    "[Transcendence] Archive compact: tamer {TamerId} digimon {DigimonId} fromSlot {FromSlot} toSlot {ToSlot}.",
+                    client.TamerId,
+                    source.DigimonId,
+                    source.Slot,
+                    destination.Slot);
+
+                destination.AddDigimon(source.DigimonId);
+                destination.SetDigimonInfo(source.Digimon);
+                source.RemoveDigimon();
+
+                changedItems.Add(destination);
+                changedItems.Add(source);
+            }
+
+            return changedItems;
         }
-        static long ConvertPercentageToValue(float percentage)
+
+        private int ValidateTarget(DigimonModel targetPartner, bool requireFullExp)
         {
-            // O valor máximo correspondente a 100% (140000)
-            long maxValue = 140000;
+            if (targetPartner.HatchGrade == DigimonHatchGradeEnum.Transcend)
+            {
+                return ResultAlreadyTranscendence;
+            }
 
-            // Calcula o valor correspondente à porcentagem fornecida
-            int calculatedValue = (int)(maxValue * (percentage / 100.0f));
+            if (targetPartner.Level < MinimumLevel)
+            {
+                return ResultNotTermsLevel;
+            }
 
-            // Garante que o valor calculado não exceda o valor máximo
-            long finalValue = Math.Min(calculatedValue, maxValue);
+            if (targetPartner.Size < MinimumSize)
+            {
+                return ResultNotTermsScale;
+            }
 
-            return finalValue;
+            if (targetPartner.Digiclone.CloneLevel < 1)
+            {
+                return ResultNotTermsDigiclone;
+            }
+
+            if (requireFullExp && targetPartner.TranscendenceExperience < MaxTranscendenceExperience)
+            {
+                return ResultFullExp;
+            }
+
+            if (!IsValidHatchGrade(targetPartner.HatchGrade))
+            {
+                return ResultNotUseMaterial;
+            }
+
+            return EnsureBaseInfo(targetPartner) ? ResultSuccess : ResultNotUseMaterial;
         }
-        float[] ExperienceLowValues(DigimonHatchGradeEnum Scale, short ClonLevel, int Level)
+
+        private int ValidateMaterial(DigimonModel materialPartner)
         {
-            ClonLevel -= 1;
-
-            var ReturnValue = new float[3];
-            double Value = 0;
-
-            if (Scale == DigimonHatchGradeEnum.Default)
+            if (materialPartner.HatchGrade == DigimonHatchGradeEnum.Transcend)
             {
-                Value = (ClonLevel + Level + 250) * 10 * 1.0 / 1400 / 10;
-            }
-            else if (Scale == DigimonHatchGradeEnum.High)
-            {
-                Value = (ClonLevel + Level + 250) * 20 * 1.0 / 1400 / 2;
-            }
-            else if (Scale == DigimonHatchGradeEnum.Perfect)
-            {
-                Value = (ClonLevel + Level + 250) * 40 * 1.0 / 1400;
+                return ResultNotUseTranscendenceMaterial;
             }
 
-            var BonusValue = Value * 2;
-
-            ReturnValue[0] = (float)Value;
-            ReturnValue[1] = (float)BonusValue;
-
-            return ReturnValue;
+            return IsValidHatchGrade(materialPartner.HatchGrade)
+                ? ResultSuccess
+                : ResultNotUseMaterial;
         }
-        float[] ExperienceMidValues(DigimonHatchGradeEnum Scale, short ClonLevel, int Level)
+
+        private bool ValidateItems(
+            GameClient client,
+            AcademyInputType inputType,
+            IReadOnlyList<TranscendenceItemRequest> itemRequests,
+            int requiredAmount,
+            out List<TranscendenceInventoryItem> inventoryItems,
+            out string failureReason)
         {
-            ClonLevel -= 1;
+            inventoryItems = new List<TranscendenceInventoryItem>();
+            failureReason = string.Empty;
 
-            var ReturnValue = new float[3];
-            double Value = 0;
-
-            if (Scale == DigimonHatchGradeEnum.Default)
+            if (itemRequests.Count == 0 || itemRequests.Sum(x => x.Amount) < requiredAmount)
             {
-                Value = (ClonLevel + Level + 250) * 10 * 1.0 / 1400 / 10;
-            }
-            else if (Scale == DigimonHatchGradeEnum.High)
-            {
-                Value = (ClonLevel + Level + 250) * 20 * 1.0 / 1400 / 2;
-            }
-            else if (Scale == DigimonHatchGradeEnum.Perfect)
-            {
-                Value = GetCloneValue(Level, ClonLevel);
-
+                failureReason = $"insufficient item amount requested={itemRequests.Sum(x => x.Amount)} required={requiredAmount}";
+                return false;
             }
 
-            var multiplier = Value * 0.6;
-            Value = Value + multiplier;
+            var remainingAmount = requiredAmount;
+            foreach (var request in itemRequests)
+            {
+                if (remainingAmount <= 0)
+                    break;
 
+                if (request.Amount <= 0)
+                {
+                    failureReason = $"invalid amount for item slot {request.Slot}";
+                    return false;
+                }
 
-            var BonusValue = Value * 2;
+                var amountToUse = Math.Min(request.Amount, remainingAmount);
+                var inventoryItem = client.Tamer.Inventory.FindItemBySlot(request.Slot);
+                if (inventoryItem == null || inventoryItem.ItemId != request.ItemId || inventoryItem.Amount < amountToUse)
+                {
+                    failureReason = $"inventory slot {request.Slot} item mismatch packet={request.ItemId}x{amountToUse} inventory={inventoryItem?.ItemId}x{inventoryItem?.Amount}";
+                    return false;
+                }
 
-            ReturnValue[0] = (float)Value;
-            ReturnValue[1] = (float)BonusValue;
-            ReturnValue[2] = (float)Value * 3;
+                var itemSection = inventoryItem.ItemInfo?.Section ?? 0;
+                if (!IsValidChargeItem(inputType, request.ItemId) && !IsValidChargeItem(inputType, itemSection))
+                {
+                    failureReason = $"invalid charge item {request.ItemId} section {itemSection} for input {inputType}";
+                    return false;
+                }
 
-            return ReturnValue;
+                inventoryItems.Add(new TranscendenceInventoryItem(
+                    new TranscendenceItemRequest(request.ItemId, request.Slot, amountToUse),
+                    inventoryItem));
+                remainingAmount -= amountToUse;
+            }
+
+            if (remainingAmount > 0)
+            {
+                failureReason = $"insufficient usable charge items remaining={remainingAmount}";
+                return false;
+            }
+
+            return true;
         }
-        double GetCloneValue(int level, short clone)
+
+        private List<KeyValuePair<short, ItemModel>> ConsumeItems(GameClient client, IReadOnlyList<TranscendenceInventoryItem> inventoryItems)
         {
-            if (level < 1 || level > 120 || clone < 0 || clone > 60 || clone % 6 != 0)
+            var updatedItems = new List<KeyValuePair<short, ItemModel>>();
+            foreach (var requestedItem in inventoryItems)
             {
-                throw new ArgumentException("Invalid level or clone value");
+                client.Tamer.Inventory.RemoveOrReduceItem(
+                    requestedItem.InventoryItem,
+                    requestedItem.Request.Amount,
+                    requestedItem.Request.Slot);
+
+                var updatedItem = client.Tamer.Inventory.FindItemBySlot(requestedItem.Request.Slot);
+                updatedItems.Add(new KeyValuePair<short, ItemModel>(
+                    (short)requestedItem.Request.Slot,
+                    updatedItem ?? new ItemModel { Slot = requestedItem.Request.Slot }));
             }
 
-            int levelIndex = 0;
+            return updatedItems;
+        }
 
-            if (level > 1 && level <= 10)
+        private long CalculateMaterialExp(DigimonModel targetPartner, DigimonModel materialPartner, AcademyInputType inputType)
+        {
+            var chargeCorrect = inputType == AcademyInputType.High ? 160 : 100;
+
+            if (materialPartner.IsRaremonType)
             {
-                levelIndex = 0;
-            }
-            else if (level > 10 && level <= 20)
-            {
-                levelIndex = 1;
-            }
-            else if (level > 20 && level <= 30)
-            {
-                levelIndex = 2;
-            }
-            else if (level > 30 && level <= 40)
-            {
-                levelIndex = 3;
-            }
-            else if (level > 40 && level <= 50)
-            {
-                levelIndex = 4;
-            }
-            else if (level > 50 && level <= 60)
-            {
-                levelIndex = 5;
-            }
-            else if (level > 60 && level <= 70)
-            {
-                levelIndex = 6;
-            }
-            else if (level > 70 && level <= 80)
-            {
-                levelIndex = 7;
-            }
-            else if (level > 80 && level <= 90)
-            {
-                levelIndex = 8;
-            }
-            else if (level > 90 && level <= 99)
-            {
-                levelIndex = 9;
-            }
-            else if (level == 99)
-            {
-                levelIndex = 10;
-            }
-            else if (level >= 100 && level <= 110)
-            {
-                levelIndex = 11;
-            }
-            else if (level > 110 && level < 120)
-            {
-                levelIndex = 12;
-            }
-            else
-            {
-                levelIndex = 13;
+                return RaremonFixedExp.TryGetValue(materialPartner.HatchGrade, out var fixedExp)
+                    ? (long)Math.Ceiling(fixedExp * (chargeCorrect * 0.01d))
+                    : 0;
             }
 
-            int cloneIndex = clone / 6;
+            var correctTable = targetPartner.SameType(materialPartner.BaseType) ? SameTypeCorrect : DifferentTypeCorrect;
+            if (!correctTable.TryGetValue(materialPartner.HatchGrade, out var growthCorrect))
+            {
+                return 0;
+            }
 
+            var cloneLevel = Math.Max(1, (int)materialPartner.Digiclone.CloneLevel);
+            var defaultExp = 250 + materialPartner.Level + ((cloneLevel - 1) * EnchantDefaultCorrect);
+            return (long)Math.Ceiling((defaultExp * growthCorrect) * (chargeCorrect * 0.01d));
+        }
 
-            return cloneValues[levelIndex, cloneIndex];
+        private bool EnsureBaseInfo(DigimonModel digimon)
+        {
+            try
+            {
+                if (digimon.BaseInfo == null || digimon.BaseInfo.Type != digimon.BaseType)
+                {
+                    digimon.SetBaseInfo(_statusManager.GetDigimonBaseInfo(digimon.BaseType));
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.Warning(ex, "[Transcendence] Missing base info for digimon {DigimonId} baseType {BaseType}.", digimon.Id, digimon.BaseType);
+                return false;
+            }
+        }
+
+        private static bool IsValidHatchGrade(DigimonHatchGradeEnum hatchGrade)
+        {
+            return hatchGrade == DigimonHatchGradeEnum.Default ||
+                   hatchGrade == DigimonHatchGradeEnum.High ||
+                   hatchGrade == DigimonHatchGradeEnum.Perfect;
+        }
+
+        private static bool IsValidInputType(AcademyInputType inputType)
+        {
+            return inputType == AcademyInputType.Low || inputType == AcademyInputType.High;
+        }
+
+        private static bool IsValidChargeItem(AcademyInputType inputType, int itemId)
+        {
+            return inputType switch
+            {
+                AcademyInputType.Low => itemId >= 9800 && itemId <= 9810,
+                AcademyInputType.High => itemId >= 9811 && itemId <= 9821,
+                _ => false
+            };
+        }
+
+        private void SendChargeFailure(GameClient client, int result, string reason)
+        {
+            _logger.Warning("[Transcendence] Charge rejected for tamer {TamerId}: result {Result} reason {Reason}.",
+                client.TamerId, result, reason);
+            client.Send(new DigimonTranscendenceReceiveExpPacket(result));
+        }
+
+        private sealed class TranscendenceItemRequest
+        {
+            public int ItemId { get; }
+            public int Slot { get; }
+            public int Amount { get; }
+
+            public TranscendenceItemRequest(int itemId, int slot, int amount)
+            {
+                ItemId = itemId;
+                Slot = slot;
+                Amount = amount;
+            }
+        }
+
+        private sealed class TranscendenceInventoryItem
+        {
+            public TranscendenceItemRequest Request { get; }
+            public ItemModel InventoryItem { get; }
+
+            public TranscendenceInventoryItem(TranscendenceItemRequest request, ItemModel inventoryItem)
+            {
+                Request = request;
+                InventoryItem = inventoryItem;
+            }
+        }
+
+        private sealed class TranscendenceMaterialPlan
+        {
+            public CharacterDigimonArchiveItemModel ArchiveItem { get; }
+            public DigimonModel MaterialPartner { get; }
+            public short ArchiveSlot { get; }
+            public long BaseExp { get; }
+            public long GainedExp { get; }
+            public long TotalExpAfter { get; }
+            public bool BonusSuccess { get; }
+
+            public TranscendenceMaterialPlan(
+                CharacterDigimonArchiveItemModel archiveItem,
+                DigimonModel materialPartner,
+                short archiveSlot,
+                long baseExp,
+                long gainedExp,
+                long totalExpAfter,
+                bool bonusSuccess)
+            {
+                ArchiveItem = archiveItem;
+                MaterialPartner = materialPartner;
+                ArchiveSlot = archiveSlot;
+                BaseExp = baseExp;
+                GainedExp = gainedExp;
+                TotalExpAfter = totalExpAfter;
+                BonusSuccess = bonusSuccess;
+            }
         }
     }
 }

@@ -1,15 +1,39 @@
 
 #include "stdafx.h"
 #include "QuestHelper.h"
+#include "LibProj/CsFunc/CrashLogger.h"
+
+namespace
+{
+	int g_nQuestHelperLastRenderSize = -1;
+
+	class cQuestHelperStringListGuard
+	{
+	public:
+		cQuestHelperStringListGuard( CRITICAL_SECTION& cs ) : m_cs( cs )
+		{
+			EnterCriticalSection( &m_cs );
+		}
+
+		~cQuestHelperStringListGuard()
+		{
+			LeaveCriticalSection( &m_cs );
+		}
+
+	private:
+		CRITICAL_SECTION& m_cs;
+	};
+}
 
 cQuestHelper::cQuestHelper():m_bView(false),m_pScrollBar(NULL),m_pBGWindow(NULL)
 ,m_pHelperStateImage(NULL),m_pLineLeft(NULL),m_pLineRight(NULL)
 {
+	InitializeCriticalSection( &m_csStringList );
 }
 
 cQuestHelper::~cQuestHelper()
 {
-
+	DeleteCriticalSection( &m_csStringList );
 }
 
 void cQuestHelper::Destroy()
@@ -21,6 +45,7 @@ void cQuestHelper::DeleteResource()
 {
 	DeleteScript();
 
+	cQuestHelperStringListGuard guard( m_csStringList );
 	m_StringList.Delete();
 	SAFE_NIDELETE( m_pBGWindow );
 	SAFE_NIDELETE( m_pScrollBar );
@@ -67,6 +92,7 @@ void cQuestHelper::Create(int nValue /* = 0  */)
 
 bool cQuestHelper::IsShowWindow()
 {
+	cQuestHelperStringListGuard guard( m_csStringList );
 	if( m_StringList.GetSize() == 0 )
 		return false;
 
@@ -87,6 +113,7 @@ cQuestHelper::Update_ForMouse()
 	if( muReturn == MUT_OUT_WINDOW )
 		return muReturn;
 
+	cQuestHelperStringListGuard guard( m_csStringList );
 	if( m_pScrollBar->Update_ForMouse() != cScrollBar::ACTION_NONE )
 		return muReturn;
 	 
@@ -94,6 +121,7 @@ cQuestHelper::Update_ForMouse()
 	int nActive2;
 	CsPoint ptPoint = CsPoint( 7, 5 ) + GetRootClient();			
 	cString::sELEMENT* pActiveElement = NULL;
+
 	cString::sBUTTON* pButtonInfo = (cString::sBUTTON*)m_StringList.Update_ForMouse_Control( nActive1, nActive2, ptPoint, 4, &pActiveElement );
 
 	// 버튼일 경우에만
@@ -109,9 +137,24 @@ void cQuestHelper::Render()
 	if( m_bView == false )
 		return;
 
+	cQuestHelperStringListGuard guard( m_csStringList );
 	if( m_StringList.GetSize() == 0 )
 	{
 		return;
+	}
+
+	if( g_nQuestHelperLastRenderSize != m_StringList.GetSize() )
+	{
+		g_nQuestHelperLastRenderSize = m_StringList.GetSize();
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"QUEST_HELPER render list changed size=%d scroll=%p cur=%d max=%d render=%d root=(%d,%d)",
+			m_StringList.GetSize(),
+			m_pScrollBar,
+			m_pScrollBar ? m_pScrollBar->GetCurPosIndex() : -1,
+			m_pScrollBar ? m_pScrollBar->GetMaxPosIndex() : -1,
+			m_pScrollBar ? m_pScrollBar->GetRenderCount() : -1,
+			GetRootClient().x,
+			GetRootClient().y );
 	}
 	
 	m_pBGWindow->Render();
@@ -129,6 +172,7 @@ void cQuestHelper::ResetDevice()
 	ResetDeviceScript();
 	m_pBGWindow->ResetDevice();
 	m_pScrollBar->ResetDevice();
+	cQuestHelperStringListGuard guard( m_csStringList );
 	m_StringList.ResetDevice();
 }
 
@@ -139,6 +183,7 @@ bool cQuestHelper::IsInWindow( CsPoint pos )
 		return false;
 	}
 
+	cQuestHelperStringListGuard guard( m_csStringList );
 	if( m_StringList.GetSize() == 0 )
 	{
 		return false;
@@ -158,7 +203,13 @@ void cQuestHelper::ResetHelperString()
 	if( g_pResist == NULL )
 		return;
 
+	cQuestHelperStringListGuard guard( m_csStringList );
 	int nOldPos = m_pScrollBar->GetCurPosIndex();
+
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"QUEST_HELPER reset begin oldSize=%d oldScroll=%d",
+		m_StringList.GetSize(),
+		nOldPos );
 
 	m_StringList.Delete();
 	m_StringList.SetBuddy( m_pScrollBar );
@@ -180,6 +231,13 @@ void cQuestHelper::ResetHelperString()
 		nOldPos = m_pScrollBar->GetMaxPosIndex();
 
 	m_pScrollBar->SetCurPosIndex( nOldPos );
+
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"QUEST_HELPER reset end newSize=%d scroll=%d max=%d render=%d",
+		m_StringList.GetSize(),
+		m_pScrollBar ? m_pScrollBar->GetCurPosIndex() : -1,
+		m_pScrollBar ? m_pScrollBar->GetMaxPosIndex() : -1,
+		m_pScrollBar ? m_pScrollBar->GetRenderCount() : -1 );
 }
 
 void cQuestHelper::_ResetHelperString( CsQuest::eQUEST_TYPE eType )

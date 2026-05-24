@@ -6,6 +6,7 @@
 // #include "nlib/list.h"
 // #endif
 #include "common_vs2019/pSync.h"
+#include "../../LibProj/CsFunc/CrashLogger.h"
 
 #ifdef GM_CLOCKING
 #define CLOCKING_ITEM_ID		30				//투명 아이템 아이템번호(장비아이템) chu8820
@@ -91,6 +92,12 @@ void cCliGame::RecvChangePartnerScale(void)		// 용병의 크기 변경
 	SAFE_POINTER_RET(pObject);
 
 	float fScale = nScale * 0.0001f;
+	if (nScale == 0 || fScale <= 0.0f)
+	{
+		nsCSDEBUG::CrashLogger::LogMessage("PARTNER_SCALE ignored invalid packet uid=%u raw=%u endTick=%u leaf=%d",
+			nUID, nScale, nEndTick, pObject->GetLeafRTTI());
+		return;
+	}
 
 	pObject->PlaySound(SOUND_LEVEL_UP);
 
@@ -133,6 +140,21 @@ void cCliGame::RecvChangePartnerScale(void)		// 용병의 크기 변경
 		{
 
 			pObject->SetScale(fScale, true);
+			if (pObject->GetLeafRTTI() == RTTI_DIGIMON_USER && g_pDataMng)
+			{
+				cData_PostLoad* pPostLoad = g_pDataMng->GetPostLoad();
+				if (pPostLoad)
+				{
+					cData_PostLoad::sDATA* pDigimonData = pPostLoad->GetDigimonData();
+					if (pDigimonData)
+					{
+						float fOldPostScale = pDigimonData->s_fScale;
+						pDigimonData->s_fScale = fScale;
+						nsCSDEBUG::CrashLogger::LogMessage("PARTNER_SCALE synced uid=%u raw=%u scale=%.4f oldPost=%.4f game=%.4f org=%.4f",
+							nUID, nScale, (double)fScale, (double)fOldPostScale, (double)pObject->GetGameScale(), (double)pObject->GetOrgGameScale());
+					}
+				}
+			}
 			((CDigimon*)pObject)->CheckSizeEffect();
 			((CDigimon*)pObject)->GetBuff()->ReleaseBuff(nsBuff::BK_CANDY_SIZE_CHANGE);
 			((CDigimon*)pObject)->CheckSizeEffect();

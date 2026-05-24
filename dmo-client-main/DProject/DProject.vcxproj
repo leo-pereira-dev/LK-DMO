@@ -2488,6 +2488,7 @@
     <ClCompile Include="_Interface\Game\WebWin.cpp" />
     <ClCompile Include="_Interface\14.MainFrameUI\GiftBoxUI.cpp" />
     <ClCompile Include="_Interface\Game\Inventory.cpp" />
+    <ClCompile Include="_Interface\Game\ExtraInventory.cpp" />
     <ClCompile Include="_Interface\Game\InventoryContents.cpp" />
     <ClCompile Include="_Interface\Game\CapsuleEvol.cpp" />
     <ClCompile Include="_Interface\Game\QuestFindWay.cpp" />
@@ -3333,6 +3334,8 @@
     <ClInclude Include="_Interface\Game\WebWin.h" />
     <ClInclude Include="_Interface\14.MainFrameUI\GiftBoxUI.h" />
     <ClInclude Include="_Interface\Game\Inventory.h" />
+    <ClInclude Include="ExtraInventoryDebugLog.h" />
+    <ClInclude Include="_Interface\Game\ExtraInventory.h" />
     <ClInclude Include="_Interface\Game\InventoryContents.h" />
     <ClInclude Include="_Interface\Game\CapsuleEvol.h" />
     <ClInclude Include="_Interface\Game\QuestFindWay.h" />

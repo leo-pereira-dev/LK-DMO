@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "_BaseWindow.h"
+#include "ExtraInventoryDebugLog.h"
 
 bool cBaseWindow::Construct()
 {
@@ -144,6 +145,9 @@ cBaseWindow* cBaseWindow::NewWindow( cBaseWindow::eWINDOW_TYPE wt, int nPointerI
 	case WT_MASTERS_MATCHING:				return CreateNewWindow<cMastersMatching>( "MastersMatching", nPointerIndex);
 
 	case WT_CARDINVENTORY:					return CreateNewWindow<cSealMaster>( "SealMaster", nPointerIndex);
+	case WT_EXTRAINVENTORY:
+		ExtraInventoryDebugLog( "[ExtraInventory][BaseWindow] NewWindow case WT_EXTRAINVENTORY pointer=%d", nPointerIndex );
+		return CreateNewWindow<cExtraInventory>( "ExtraInventory", nPointerIndex);
 	
 	case WT_CARDIDENTIFY:					return CreateNewWindow<cCardIdentify>( "CardIdentify", nPointerIndex);
 	case WT_CARDRESEAL:						return CreateNewWindow<cCardReSeal>( "CardReSeal", nPointerIndex);

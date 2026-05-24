@@ -28,6 +28,7 @@ public:
 
 	cData_PostLoad::sDATA*		GetEmptyTactics();
 	void						LinkTactics();
+	void						CompactTactics();
 	void						AddTactics( cData_PostLoad::sDATA* pSrcTactics, int nTacticsIndex );
 	void						DeleteTactics( int nTacticsIndex );
 #ifdef CROSSWARS_SYSTEM

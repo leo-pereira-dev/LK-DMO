@@ -1,0 +1,8 @@
+﻿"Reason","Value","Address","Kind"
+"official dump string near transfer tab/result block; no direct xref in copied set","UPGRADESYSTEM_DATA_TRANSFER_BTN","01ae8cb0","text_key"
+"official dump string; no direct xref in copied UI set","C2GS_REQ_ITEM_UPGRADE","01aeb2c0","packet_string"
+"official dump string; no direct xref in copied UI set","GS2C_RES_ITEM_UPGRADE_DATA_RESTORE","01acc3f8","packet_string"
+"official dump string; no direct xref in copied UI set","GS2C_RES_ITEM_UPGRADE_DATA_TRANSFER","01acc42c","packet_string"
+"official RTTI class string","C2GS_REQ_ITEM_UPGRADE_DATA_RESTORE","01bdd664","packet_rtti"
+"official RTTI class string","C2GS_REQ_ITEM_UPGRADE_DATA_TRANSFER","01bdd698","packet_rtti"
+"official RTTI class string","C2GS_REQ_ITEM_UPGRADE","01bdd6cc","packet_rtti"

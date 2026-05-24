@@ -1,0 +1,3 @@
+﻿"File","Purpose","Count"
+"C:\0-NewDmo\SealMasterFeature\generated\global-seal-sync\MasterCard.bin","Legacy client MasterCard.bin generated from Global Seal XML","504"
+"C:\0-NewDmo\SealMasterFeature\generated\global-seal-sync\Asset_SealDetail_Global_PostgreSQL.sql","Server Asset_SealDetail replacement data generated from Global Seal XML","3024"

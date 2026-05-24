@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DigimonTip_Str schema="DigimonTip_Str.struct" bin="DigimonTip_Str.bin" byteLength="11616">
+  <Entries kind="Section" offset="0" length="11616">
+    <_0 kind="Record" offset="4" length="194">
+      <TextKey kind="Leaf" offset="4" length="2" type="Scalar { Kind = U16 }" value="0" />
+      <Text kind="Leaf" offset="6" length="192" type="WString { }">You can freely enter the Digital World after you have been officially acknowledged as a member</Text>
+    </_0>
+    <_1 kind="Record" offset="198" length="184">
+      <TextKey kind="Leaf" offset="198" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Text kind="Leaf" offset="200" length="182" type="WString { }">Tip Conversations can be turned on or off from the Interface Setup in the Options window.</Text>
+    </_1>
+    <_2 kind="Record" offset="382" length="136">
+      <TextKey kind="Leaf" offset="382" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Text kind="Leaf" offset="384" length="134" type="WString { }">Mercenary Digimon are available when you get a Mercenary DigiEgg.</Text>
+    </_2>
+    <_3 kind="Record" offset="518" length="210">
+      <TextKey kind="Leaf" offset="518" length="2" type="Scalar { Kind = U16 }" value="3" />
+      <Text kind="Leaf" offset="520" length="208" type="WString { }">You can level up a skill with skill points, but check to see what you can do when you get skill points</Text>
+    </_3>
+    <_4 kind="Record" offset="728" length="102">
+      <TextKey kind="Leaf" offset="728" length="2" type="Scalar { Kind = U16 }" value="4" />
+      <Text kind="Leaf" offset="730" length="100" type="WString { }">All kinds of DigiEgg can be returned for refund.</Text>
+    </_4>
+    <_5 kind="Record" offset="830" length="182">
+      <TextKey kind="Leaf" offset="830" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Text kind="Leaf" offset="832" length="180" type="WString { }">You won't be acknowledged as a full DATS member unless you continually engage in quests.</Text>
+    </_5>
+    <_6 kind="Record" offset="1012" length="170">
+      <TextKey kind="Leaf" offset="1012" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <Text kind="Leaf" offset="1014" length="168" type="WString { }">The HP gauge can be set to be viewed in the Interface Setup in the Options window.</Text>
+    </_6>
+    <_7 kind="Record" offset="1182" length="90">
+      <TextKey kind="Leaf" offset="1182" length="2" type="Scalar { Kind = U16 }" value="7" />
+      <Text kind="Leaf" offset="1184" length="88" type="WString { }">Refer to the Mini Map for easier gameplay.</Text>
+    </_7>
+    <_8 kind="Record" offset="1272" length="190">
+      <TextKey kind="Leaf" offset="1272" length="2" type="Scalar { Kind = U16 }" value="8" />
+      <Text kind="Leaf" offset="1274" length="188" type="WString { }">Chief Digimon tend to attack first, so make sure not to let yourself get surrounded by them.</Text>
+    </_8>
+    <_9 kind="Record" offset="1462" length="154">
+      <TextKey kind="Leaf" offset="1462" length="2" type="Scalar { Kind = U16 }" value="9" />
+      <Text kind="Leaf" offset="1464" length="152" type="WString { }">The D-terminal in the Dats Center basement takes you to the Digital World.</Text>
+    </_9>
+    <_10 kind="Record" offset="1616" length="202">
+      <TextKey kind="Leaf" offset="1616" length="2" type="Scalar { Kind = U16 }" value="10" />
+      <Text kind="Leaf" offset="1618" length="200" type="WString { }">You need to be an official member of Dats Center to use the D-terminal to go to the Digital World.</Text>
+    </_10>
+    <_11 kind="Record" offset="1818" length="136">
+      <TextKey kind="Leaf" offset="1818" length="2" type="Scalar { Kind = U16 }" value="11" />
+      <Text kind="Leaf" offset="1820" length="134" type="WString { }">The default shortcut for the Digimon Information window is [ X ].</Text>
+    </_11>
+    <_12 kind="Record" offset="1954" length="134">
+      <TextKey kind="Leaf" offset="1954" length="2" type="Scalar { Kind = U16 }" value="12" />
+      <Text kind="Leaf" offset="1956" length="132" type="WString { }">The default shortcut for the Tamer Information window is [ C ]. </Text>
+    </_12>
+    <_13 kind="Record" offset="2088" length="248">
+      <TextKey kind="Leaf" offset="2088" length="2" type="Scalar { Kind = U16 }" value="13" />
+      <Text kind="Leaf" offset="2090" length="246" type="WString { }">Tamers and Digimon have certain attractions to each other. You can check the attractions in the Tamer Information window.</Text>
+    </_13>
+    <_14 kind="Record" offset="2336" length="304">
+      <TextKey kind="Leaf" offset="2336" length="2" type="Scalar { Kind = U16 }" value="14" />
+      <Text kind="Leaf" offset="2338" length="302" type="WString { }">The higher the attraction is to the Digimon, the more capabilities from its Tamer will be transferred to the Digimon, and this will make it stronger.</Text>
+    </_14>
+    <_15 kind="Record" offset="2640" length="116">
+      <TextKey kind="Leaf" offset="2640" length="2" type="Scalar { Kind = U16 }" value="15" />
+      <Text kind="Leaf" offset="2642" length="114" type="WString { }">The default shortcut for the Quest Log window is [ L ].</Text>
+    </_15>
+    <_16 kind="Record" offset="2756" length="132">
+      <TextKey kind="Leaf" offset="2756" length="2" type="Scalar { Kind = U16 }" value="16" />
+      <Text kind="Leaf" offset="2758" length="130" type="WString { }">You can set your own shortcut in Options &gt; Shortcut Setup menu.</Text>
+    </_16>
+    <_17 kind="Record" offset="2888" length="156">
+      <TextKey kind="Leaf" offset="2888" length="2" type="Scalar { Kind = U16 }" value="17" />
+      <Text kind="Leaf" offset="2890" length="154" type="WString { }">When the Digimon develops to level 11, Maturity Development can be applied.</Text>
+    </_17>
+    <_18 kind="Record" offset="3044" length="310">
+      <TextKey kind="Leaf" offset="3044" length="2" type="Scalar { Kind = U16 }" value="18" />
+      <Text kind="Leaf" offset="3046" length="308" type="WString { }">Foods cannot be consumed in the middle of a battle, but just one of them before or after a battle will restore the HP of both the Digimon and the Tamer.</Text>
+    </_18>
+    <_19 kind="Record" offset="3354" length="294">
+      <TextKey kind="Leaf" offset="3354" length="2" type="Scalar { Kind = U16 }" value="19" />
+      <Text kind="Leaf" offset="3356" length="292" type="WString { }">If you are not sure about the details of your current quest, press [ L ], the default shortcut for the Quest Log, and check what you have to do.</Text>
+    </_19>
+    <_20 kind="Record" offset="3648" length="250">
+      <TextKey kind="Leaf" offset="3648" length="2" type="Scalar { Kind = U16 }" value="20" />
+      <Text kind="Leaf" offset="3650" length="248" type="WString { }">For restoring HP, use the disk in a combat situation or when you're in jeopardy, and eat food when you're not in a battle.</Text>
+    </_20>
+    <_21 kind="Record" offset="3898" length="378">
+      <TextKey kind="Leaf" offset="3898" length="2" type="Scalar { Kind = U16 }" value="21" />
+      <Text kind="Leaf" offset="3900" length="376" type="WString { }">Basically, vaccines are weak against data, which is weak against a virus, and a virus is weak against vaccine. So make sure to check the attributes on the Target window before attacking.</Text>
+    </_21>
+    <_22 kind="Record" offset="4276" length="328">
+      <TextKey kind="Leaf" offset="4276" length="2" type="Scalar { Kind = U16 }" value="22" />
+      <Text kind="Leaf" offset="4278" length="326" type="WString { }">You can find Mercenary DigiEgg by defeating the corresponding Digimon in the field. For example, fight Elecmon to get a DigiEgg from which an Elecmon is hatched.</Text>
+    </_22>
+    <_23 kind="Record" offset="4604" length="114">
+      <TextKey kind="Leaf" offset="4604" length="2" type="Scalar { Kind = U16 }" value="23" />
+      <Text kind="Leaf" offset="4606" length="112" type="WString { }">[Miki] is responsible for collecting cracked DigiEggs.</Text>
+    </_23>
+    <_24 kind="Record" offset="4718" length="190">
+      <TextKey kind="Leaf" offset="4718" length="2" type="Scalar { Kind = U16 }" value="24" />
+      <Text kind="Leaf" offset="4720" length="188" type="WString { }">You need related data items to hatch Mercenary DigiEgg. Scan DigiEgg to find the data items.</Text>
+    </_24>
+    <_25 kind="Record" offset="4908" length="278">
+      <TextKey kind="Leaf" offset="4908" length="2" type="Scalar { Kind = U16 }" value="25" />
+      <Text kind="Leaf" offset="4910" length="276" type="WString { }">Insert data 3 times successfully to hatch a Mercenary DigiEgg. But inserting data 4 or 5 times will give you a bigger Mercenary Digimon.</Text>
+    </_25>
+    <_26 kind="Record" offset="5186" length="198">
+      <TextKey kind="Leaf" offset="5186" length="2" type="Scalar { Kind = U16 }" value="26" />
+      <Text kind="Leaf" offset="5188" length="196" type="WString { }">Be careful when hatching a Mercenary DigiEgg because unsuccessful data insertion may destroy it.</Text>
+    </_26>
+    <_27 kind="Record" offset="5384" length="290">
+      <TextKey kind="Leaf" offset="5384" length="2" type="Scalar { Kind = U16 }" value="27" />
+      <Text kind="Leaf" offset="5386" length="288" type="WString { }">Scan DigiEgg to get various items. For example, an HP restoring item, Tamer parts, Mercenary DigiEgg, data items to hatch the eggs, and so on.</Text>
+    </_27>
+    <_28 kind="Record" offset="5674" length="288">
+      <TextKey kind="Leaf" offset="5674" length="2" type="Scalar { Kind = U16 }" value="28" />
+      <Text kind="Leaf" offset="5676" length="286" type="WString { }">Some items are available only by scanning DigiEgg. In particular, the data items required for hatching Mercenaries cannot be found otherwise.</Text>
+    </_28>
+    <_29 kind="Record" offset="5962" length="116">
+      <TextKey kind="Leaf" offset="5962" length="2" type="Scalar { Kind = U16 }" value="29" />
+      <Text kind="Leaf" offset="5964" length="114" type="WString { }">The default shortcut for the Inventory window is [ I ].</Text>
+    </_29>
+    <_30 kind="Record" offset="6078" length="268">
+      <TextKey kind="Leaf" offset="6078" length="2" type="Scalar { Kind = U16 }" value="30" />
+      <Text kind="Leaf" offset="6080" length="266" type="WString { }">Digimon use up Tamers' DS to digivolve and live on. The higher the Tamer's level is, the longer the Digimon will remain digivolved.</Text>
+    </_30>
+    <_31 kind="Record" offset="6346" length="152">
+      <TextKey kind="Leaf" offset="6346" length="2" type="Scalar { Kind = U16 }" value="31" />
+      <Text kind="Leaf" offset="6348" length="150" type="WString { }">You can turn the Quest Notice function on or off in the Quest Log window.</Text>
+    </_31>
+    <_32 kind="Record" offset="6498" length="96">
+      <TextKey kind="Leaf" offset="6498" length="2" type="Scalar { Kind = U16 }" value="32" />
+      <Text kind="Leaf" offset="6500" length="94" type="WString { }">Currencies are T - Tera, M- Mega and B - Bit.</Text>
+    </_32>
+    <_33 kind="Record" offset="6594" length="90">
+      <TextKey kind="Leaf" offset="6594" length="2" type="Scalar { Kind = U16 }" value="33" />
+      <Text kind="Leaf" offset="6596" length="88" type="WString { }">Press ? to watch the tutorial video again.</Text>
+    </_33>
+    <_34 kind="Record" offset="6684" length="188">
+      <TextKey kind="Leaf" offset="6684" length="2" type="Scalar { Kind = U16 }" value="34" />
+      <Text kind="Leaf" offset="6686" length="186" type="WString { }">Get a cracked DigiEgg, and return it to the NPC who scans and collects DigiEgg, for refund.</Text>
+    </_34>
+    <_35 kind="Record" offset="6872" length="286">
+      <TextKey kind="Leaf" offset="6872" length="2" type="Scalar { Kind = U16 }" value="35" />
+      <Text kind="Leaf" offset="6874" length="284" type="WString { }">If your system is not up to date and you have problems with gameplay, use the "Simple Character Rendering" option under Options &gt; Interface.</Text>
+    </_35>
+    <_36 kind="Record" offset="7158" length="136">
+      <TextKey kind="Leaf" offset="7158" length="2" type="Scalar { Kind = U16 }" value="36" />
+      <Text kind="Leaf" offset="7160" length="134" type="WString { }">Press Ctrl + Z to hide the interface and take cooler screenshots.</Text>
+    </_36>
+    <_37 kind="Record" offset="7294" length="86">
+      <TextKey kind="Leaf" offset="7294" length="2" type="Scalar { Kind = U16 }" value="37" />
+      <Text kind="Leaf" offset="7296" length="84" type="WString { }">Press Print Screen to take a screenshot.</Text>
+    </_37>
+    <_38 kind="Record" offset="7380" length="374">
+      <TextKey kind="Leaf" offset="7380" length="2" type="Scalar { Kind = U16 }" value="38" />
+      <Text kind="Leaf" offset="7382" length="372" type="WString { }">While using the NPC search function,  this search function will be automatically cancelled if you use [Follow] command or if you get too far away from the Digimon you're searching for.</Text>
+    </_38>
+    <_39 kind="Record" offset="7754" length="210">
+      <TextKey kind="Leaf" offset="7754" length="2" type="Scalar { Kind = U16 }" value="39" />
+      <Text kind="Leaf" offset="7756" length="208" type="WString { }">Pay close attention to the Tamer's Fatigue Level. Tired Tamers attack and move more slowly than usual.</Text>
+    </_39>
+    <_40 kind="Record" offset="7964" length="208">
+      <TextKey kind="Leaf" offset="7964" length="2" type="Scalar { Kind = U16 }" value="40" />
+      <Text kind="Leaf" offset="7966" length="206" type="WString { }">Fatigue Level is active when you are in the field, but it will be restored when you are back in town.</Text>
+    </_40>
+    <_41 kind="Record" offset="8172" length="158">
+      <TextKey kind="Leaf" offset="8172" length="2" type="Scalar { Kind = U16 }" value="41" />
+      <Text kind="Leaf" offset="8174" length="156" type="WString { }">Click the Find NPC button in the Mini Map if you don't know where an NPC is.</Text>
+    </_41>
+    <_42 kind="Record" offset="8330" length="288">
+      <TextKey kind="Leaf" offset="8330" length="2" type="Scalar { Kind = U16 }" value="42" />
+      <Text kind="Leaf" offset="8332" length="286" type="WString { }">When the Tamer level is higher than 5 and Digimon level is higher than 11, death will mean losing XP, so be careful when you are in a battle.</Text>
+    </_42>
+    <_43 kind="Record" offset="8618" length="122">
+      <TextKey kind="Leaf" offset="8618" length="2" type="Scalar { Kind = U16 }" value="43" />
+      <Text kind="Leaf" offset="8620" length="120" type="WString { }">The default shortcut for the Friends List window is [ F ].</Text>
+    </_43>
+    <_44 kind="Record" offset="8740" length="220">
+      <TextKey kind="Leaf" offset="8740" length="2" type="Scalar { Kind = U16 }" value="44" />
+      <Text kind="Leaf" offset="8742" length="218" type="WString { }">Blocking will literally block all messages, including Whispers. So use caution when blocking other players.</Text>
+    </_44>
+    <_45 kind="Record" offset="8960" length="190">
+      <TextKey kind="Leaf" offset="8960" length="2" type="Scalar { Kind = U16 }" value="45" />
+      <Text kind="Leaf" offset="8962" length="188" type="WString { }">Cash items that are purchased on the website can be found in the Cash Warehouse in the game.</Text>
+    </_45>
+    <_46 kind="Record" offset="9150" length="148">
+      <TextKey kind="Leaf" offset="9150" length="2" type="Scalar { Kind = U16 }" value="46" />
+      <Text kind="Leaf" offset="9152" length="146" type="WString { }">Check the Menu bar in the lower righthand corner to open the Cash Shop.</Text>
+    </_46>
+    <_47 kind="Record" offset="9298" length="148">
+      <TextKey kind="Leaf" offset="9298" length="2" type="Scalar { Kind = U16 }" value="47" />
+      <Text kind="Leaf" offset="9300" length="146" type="WString { }">Open the Cash Shop and press "Refresh" to view what you have purchased.</Text>
+    </_47>
+    <_48 kind="Record" offset="9446" length="172">
+      <TextKey kind="Leaf" offset="9446" length="2" type="Scalar { Kind = U16 }" value="48" />
+      <Text kind="Leaf" offset="9448" length="170" type="WString { }">Cash items purchased on the website can be found in the Cash Warehouse in the game.</Text>
+    </_48>
+    <_49 kind="Record" offset="9618" length="148">
+      <TextKey kind="Leaf" offset="9618" length="2" type="Scalar { Kind = U16 }" value="49" />
+      <Text kind="Leaf" offset="9620" length="146" type="WString { }">Check the Menu bar in the lower righthand corner to open the Cash Shop.</Text>
+    </_49>
+    <_50 kind="Record" offset="9766" length="262">
+      <TextKey kind="Leaf" offset="9766" length="2" type="Scalar { Kind = U16 }" value="50" />
+      <Text kind="Leaf" offset="9768" length="260" type="WString { }">There are two types of quests - a main quest and a sub-quest. You have to complete main quests in order to progress in the game.</Text>
+    </_50>
+    <_51 kind="Record" offset="10028" length="196">
+      <TextKey kind="Leaf" offset="10028" length="2" type="Scalar { Kind = U16 }" value="51" />
+      <Text kind="Leaf" offset="10030" length="194" type="WString { }">Press Alt + click on the name of the other Tamer in the Chat window to send a Whisper directly.</Text>
+    </_51>
+    <_52 kind="Record" offset="10224" length="174">
+      <TextKey kind="Leaf" offset="10224" length="2" type="Scalar { Kind = U16 }" value="52" />
+      <Text kind="Leaf" offset="10226" length="172" type="WString { }">Whenever you are curious about a quest, it is always a good idea to click and check.</Text>
+    </_52>
+    <_53 kind="Record" offset="10398" length="238">
+      <TextKey kind="Leaf" offset="10398" length="2" type="Scalar { Kind = U16 }" value="53" />
+      <Text kind="Leaf" offset="10400" length="236" type="WString { }">If you don't know where the NPC is located, or where to go on the map, simply click on the name to view the details.</Text>
+    </_53>
+    <_54 kind="Record" offset="10636" length="234">
+      <TextKey kind="Leaf" offset="10636" length="2" type="Scalar { Kind = U16 }" value="54" />
+      <Text kind="Leaf" offset="10638" length="232" type="WString { }">Just click on what you're not sure about in the Quest Details. More information and locations are available there.</Text>
+    </_54>
+    <_55 kind="Record" offset="10870" length="158">
+      <TextKey kind="Leaf" offset="10870" length="2" type="Scalar { Kind = U16 }" value="55" />
+      <Text kind="Leaf" offset="10872" length="156" type="WString { }">Click the icon in the lower lefthand corner to turn off the Search function.</Text>
+    </_55>
+    <_56 kind="Record" offset="11028" length="290">
+      <TextKey kind="Leaf" offset="11028" length="2" type="Scalar { Kind = U16 }" value="56" />
+      <Text kind="Leaf" offset="11030" length="288" type="WString { }">Click on an action in a chat window to make the Tamer perform certain actions. Left click to select the action, and right click to perform it.</Text>
+    </_56>
+    <_57 kind="Record" offset="11318" length="298">
+      <TextKey kind="Leaf" offset="11318" length="2" type="Scalar { Kind = U16 }" value="57" />
+      <Text kind="Leaf" offset="11320" length="296" type="WString { }">Caution! In case of trading items acquired through actions that violate operating policies, There can be disadvantages to both sellers and buyers.</Text>
+    </_57>
+  </Entries>
+</DigimonTip_Str>

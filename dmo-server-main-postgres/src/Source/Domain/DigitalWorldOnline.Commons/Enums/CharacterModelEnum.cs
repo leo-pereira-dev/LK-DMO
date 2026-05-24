@@ -21,6 +21,10 @@
         RikaNonaka = 80012,
         HenryWong = 80013,
         KatoJeri = 80016,
-        AkiyamaRyo = 80017
+        AkiyamaRyo = 80017,
+        AmanokawaHiro = 80018,
+        TsukiyonoRuli = 80019,
+        HigashimitaraiKiyoshiro = 80020,
+        DigimonKaiser = 80021
     }
 }

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AchieveTitle_Str schema="AchieveTitle_Str.struct" bin="AchieveTitle_Str.bin" byteLength="432">
+  <Groups kind="Section" offset="0" length="432">
+    <_0 kind="Record" offset="4" length="188">
+      <GroupKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <GroupName kind="Leaf" offset="8" length="18" type="WString { }">General</GroupName>
+      <TextCount kind="Leaf" offset="26" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <Texts kind="Array" offset="30" length="162" count="8">
+        <_0_ kind="Struct" offset="30" length="24">
+          <TextKey kind="Leaf" offset="30" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Text kind="Leaf" offset="34" length="20" type="WString { }">Tamer Lv</Text>
+        </_0_>
+        <_1_ kind="Struct" offset="54" length="28">
+          <TextKey kind="Leaf" offset="54" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Text kind="Leaf" offset="58" length="24" type="WString { }">Digimon Lv</Text>
+        </_1_>
+        <_2_ kind="Struct" offset="82" length="18">
+          <TextKey kind="Leaf" offset="82" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <Text kind="Leaf" offset="86" length="14" type="WString { }">Money</Text>
+        </_2_>
+        <_3_ kind="Struct" offset="100" length="16">
+          <TextKey kind="Leaf" offset="100" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <Text kind="Leaf" offset="104" length="12" type="WString { }">Item</Text>
+        </_3_>
+        <_4_ kind="Struct" offset="116" length="22">
+          <TextKey kind="Leaf" offset="116" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Text kind="Leaf" offset="120" length="18" type="WString { }">Digimon</Text>
+        </_4_>
+        <_5_ kind="Struct" offset="138" length="14">
+          <TextKey kind="Leaf" offset="138" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <Text kind="Leaf" offset="142" length="10" type="WString { }">Etc</Text>
+        </_5_>
+        <_6_ kind="Struct" offset="152" length="22">
+          <TextKey kind="Leaf" offset="152" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <Text kind="Leaf" offset="156" length="18" type="WString { }">Ranking</Text>
+        </_6_>
+        <_7_ kind="Struct" offset="174" length="18">
+          <TextKey kind="Leaf" offset="174" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <Text kind="Leaf" offset="178" length="14" type="WString { }">Event</Text>
+        </_7_>
+      </Texts>
+    </_0>
+    <_1 kind="Record" offset="192" length="108">
+      <GroupKey kind="Leaf" offset="192" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <GroupName kind="Leaf" offset="196" length="14" type="WString { }">Quest</GroupName>
+      <TextCount kind="Leaf" offset="210" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Texts kind="Array" offset="214" length="86" count="2">
+        <_0_ kind="Struct" offset="214" length="36">
+          <TextKey kind="Leaf" offset="214" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Text kind="Leaf" offset="218" length="32" type="WString { }">Quest complete</Text>
+        </_0_>
+        <_1_ kind="Struct" offset="250" length="50">
+          <TextKey kind="Leaf" offset="250" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Text kind="Leaf" offset="254" length="46" type="WString { }">Appint Quest complete</Text>
+        </_1_>
+      </Texts>
+    </_1>
+    <_2 kind="Record" offset="300" length="132">
+      <GroupKey kind="Leaf" offset="300" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <GroupName kind="Leaf" offset="304" length="22" type="WString { }">Adventure</GroupName>
+      <TextCount kind="Leaf" offset="326" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <Texts kind="Array" offset="330" length="102" count="4">
+        <_0_ kind="Struct" offset="330" length="28">
+          <TextKey kind="Leaf" offset="330" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Text kind="Leaf" offset="334" length="24" type="WString { }">Real World</Text>
+        </_0_>
+        <_1_ kind="Struct" offset="358" length="34">
+          <TextKey kind="Leaf" offset="358" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Text kind="Leaf" offset="362" length="30" type="WString { }">Digital World</Text>
+        </_1_>
+        <_2_ kind="Struct" offset="392" length="22">
+          <TextKey kind="Leaf" offset="392" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <Text kind="Leaf" offset="396" length="18" type="WString { }">Dungeon</Text>
+        </_2_>
+        <_3_ kind="Struct" offset="414" length="18">
+          <TextKey kind="Leaf" offset="414" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <Text kind="Leaf" offset="418" length="14" type="WString { }">World</Text>
+        </_3_>
+      </Texts>
+    </_2>
+  </Groups>
+</AchieveTitle_Str>

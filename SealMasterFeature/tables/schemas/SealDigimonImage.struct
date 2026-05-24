@@ -1,0 +1,16 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/SealDigimonImage.bin]
+// SealDigimonImage.bin — Pack03 v487 client.
+// Route: FUN_01624c60 -> FUN_01625150 -> FUN_01623a10.
+// Verified: 390 rows, 26389/26389 bytes.
+
+bin SealDigimonImage {
+    section Images {
+        count  u32;
+        record SealDigimonImageRecord;
+    }
+}
+
+struct SealDigimonImageRecord {
+    u32      DigimonId;
+    lstring  SealImagePath;
+}

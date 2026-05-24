@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DM_Union_Reward_Str schema="DM_Union-Reward_Str.struct" bin="DM_Union-Reward_Str.bin" byteLength="182">
+  <Entries kind="Section" offset="0" length="182">
+    <_0 kind="Record" offset="4" length="20">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <TextA kind="Leaf" offset="8" length="16" type="WString { }">Unknow</TextA>
+    </_0>
+    <_1 kind="Record" offset="24" length="20">
+      <TextKey kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <TextA kind="Leaf" offset="28" length="16" type="WString { }">Bronze</TextA>
+    </_1>
+    <_2 kind="Record" offset="44" length="20">
+      <TextKey kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="48" length="16" type="WString { }">Silver</TextA>
+    </_2>
+    <_3 kind="Record" offset="64" length="16">
+      <TextKey kind="Leaf" offset="64" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="68" length="12" type="WString { }">Gold</TextA>
+    </_3>
+    <_4 kind="Record" offset="80" length="24">
+      <TextKey kind="Leaf" offset="80" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="84" length="20" type="WString { }">Platinum</TextA>
+    </_4>
+    <_5 kind="Record" offset="104" length="22">
+      <TextKey kind="Leaf" offset="104" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <TextA kind="Leaf" offset="108" length="18" type="WString { }">Diamond</TextA>
+    </_5>
+    <_6 kind="Record" offset="126" length="20">
+      <TextKey kind="Leaf" offset="126" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextA kind="Leaf" offset="130" length="16" type="WString { }">Master</TextA>
+    </_6>
+    <_7 kind="Record" offset="146" length="36">
+      <TextKey kind="Leaf" offset="146" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <TextA kind="Leaf" offset="150" length="32" type="WString { }">Digimon Master</TextA>
+    </_7>
+  </Entries>
+</DM_Union_Reward_Str>

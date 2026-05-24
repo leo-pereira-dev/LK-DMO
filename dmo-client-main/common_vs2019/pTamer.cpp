@@ -24,10 +24,10 @@ bool nTamer::IsValidType(uint nType)
 		case nTamer::Hiro		: return true;	// 80018 Hiro Amanokawa
 		case nTamer::Ruli		: return true;	// 80019 Ruli Tsukiyono
 		case nTamer::Kiyoshirou	: return true;	// 80020 Kiyoshirou Higashimitarai
+		case nTamer::DigimonKaiser: return true;	// 80021 Digimon Kaiser
 	}
 	return false;
 }
-
 
 
 

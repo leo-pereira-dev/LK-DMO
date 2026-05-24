@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DM_Preset_Preset_List_Str schema="DM_Preset-Preset_List_Str.struct" bin="DM_Preset-Preset_List_Str.bin" byteLength="196">
+  <Entries kind="Section" offset="0" length="196">
+    <_0 kind="Record" offset="4" length="24">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <TextA kind="Leaf" offset="8" length="20" type="WString { }">Preset 1</TextA>
+    </_0>
+    <_1 kind="Record" offset="28" length="24">
+      <TextKey kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <TextA kind="Leaf" offset="32" length="20" type="WString { }">Preset 2</TextA>
+    </_1>
+    <_2 kind="Record" offset="52" length="24">
+      <TextKey kind="Leaf" offset="52" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="56" length="20" type="WString { }">Preset 3</TextA>
+    </_2>
+    <_3 kind="Record" offset="76" length="24">
+      <TextKey kind="Leaf" offset="76" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="80" length="20" type="WString { }">Preset 4</TextA>
+    </_3>
+    <_4 kind="Record" offset="100" length="24">
+      <TextKey kind="Leaf" offset="100" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="104" length="20" type="WString { }">Preset 5</TextA>
+    </_4>
+    <_5 kind="Record" offset="124" length="24">
+      <TextKey kind="Leaf" offset="124" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <TextA kind="Leaf" offset="128" length="20" type="WString { }">Preset 6</TextA>
+    </_5>
+    <_6 kind="Record" offset="148" length="24">
+      <TextKey kind="Leaf" offset="148" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextA kind="Leaf" offset="152" length="20" type="WString { }">Preset 7</TextA>
+    </_6>
+    <_7 kind="Record" offset="172" length="24">
+      <TextKey kind="Leaf" offset="172" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <TextA kind="Leaf" offset="176" length="20" type="WString { }">Preset 8</TextA>
+    </_7>
+  </Entries>
+</DM_Preset_Preset_List_Str>

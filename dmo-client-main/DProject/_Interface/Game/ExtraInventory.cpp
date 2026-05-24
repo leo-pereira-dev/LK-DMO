@@ -2,6 +2,8 @@
 #include "ExtraInventory.h"
 #include "ExtraInventoryDebugLog.h"
 #include "Separate.h"
+#include "SealMasterContents.h"
+#include "../../ContentsSystem/ContentsSystemDef.h"
 #include <algorithm>
 
 #define IF_EXTRA_INVENTORY_ICON_SIZE	CsPoint( 32, 32 )
@@ -35,6 +37,39 @@ namespace
 	{
 		std::transform( text.begin(), text.end(), text.begin(), _totlower );
 		return text;
+	}
+
+	int GetActiveSealCount( int nItemType )
+	{
+		if( CONTENTSSYSTEM_PTR == NULL )
+			return 0;
+
+		cSealMasterContents* pSealContents = CONTENTSSYSTEM_PTR->GetContents< cSealMasterContents >( cSealMasterContents::IsContentsIdentity() );
+		if( pSealContents == NULL )
+			return 0;
+
+		cSealMasterContents::SealInfoMap const& sealInfoMap = pSealContents->GetSealInfoMap();
+		cSealMasterContents::SealInfoMap::const_iterator it = sealInfoMap.find( nItemType );
+		if( it == sealInfoMap.end() )
+			return 0;
+
+		return it->second.sSealCount;
+	}
+
+	std::string GetSealTierBackImage( int nGrade )
+	{
+		switch( nGrade )
+		{
+		case nCardGrade::Normal:		return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_normal.dds";
+		case nCardGrade::Bronze:		return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_bronze.dds";
+		case nCardGrade::Silver:		return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_silver.dds";
+		case nCardGrade::Gold:		return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_master.dds";
+		case nCardGrade::Platinum:	return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_platinum.dds";
+		case nCardGrade::Master:		return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_master2.dds";
+		default:					break;
+		}
+
+		return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_normal.dds";
 	}
 }
 
@@ -936,6 +971,19 @@ void cExtraInventory::UpdateTooltip( CsPoint ptPos, int nIndex )
 	cTooltip* pTooltip = TOOLTIPMNG_STPTR->GetTooltip();
 	SAFE_POINTER_RET( pTooltip );
 	CsPoint pos = m_IFIcon[ nIndex - GetScrollOffset() ].GetPos() + GetRootClient();
+
+	if( m_eCategory == CAT_SEAL && nsCsFileTable::g_pMaster_CardMng )
+	{
+		CsMaster_Card* pCard = nsCsFileTable::g_pMaster_CardMng->GetMasterCard( pData->GetType() );
+		if( pCard && pCard->GetInfo() )
+		{
+			int const nTotalSealCount = GetActiveSealCount( pData->GetType() ) + pData->GetCount();
+			int const nGrade = GetSealGrade( pData->GetType(), pData->GetCount() );
+			pTooltip->SetTooltip( pos, GetSlotSize(), 350, cTooltip::SEALMASTER, pData->GetType(), GetWindowType(), nGrade, nTotalSealCount, pCard->GetInfo() );
+			return;
+		}
+	}
+
 	pTooltip->SetTooltip( pos, GetSlotSize(), TOOLTIP_MAX_SIZE, cTooltip::ITEM, pData->GetType(), GetWindowType(), cTooltip::OPEN_SLOT, 0, pData );
 }
 
@@ -1462,15 +1510,19 @@ int cExtraInventory::GetSealGrade( int nItemType, int nCount ) const
 		return CsMaster_Card::FT_CARD_NORMAL;
 
 	CsMaster_Card::sINFO* pInfo = pCard->GetInfo();
-	if( nCount < pInfo->s_stGradeInfo[ CsMaster_Card::FT_CARD_BRONZE ].s_nMax )
+	int const nTotalCount = GetActiveSealCount( nItemType ) + nCount;
+	if( nTotalCount <= 0 )
 		return CsMaster_Card::FT_CARD_NORMAL;
-	if( nCount < pInfo->s_stGradeInfo[ CsMaster_Card::FT_CARD_SHILVER ].s_nMax )
+
+	if( nTotalCount < pInfo->s_stGradeInfo[ CsMaster_Card::FT_CARD_BRONZE ].s_nMax )
+		return CsMaster_Card::FT_CARD_NORMAL;
+	if( nTotalCount < pInfo->s_stGradeInfo[ CsMaster_Card::FT_CARD_SHILVER ].s_nMax )
 		return CsMaster_Card::FT_CARD_BRONZE;
-	if( nCount < pInfo->s_stGradeInfo[ CsMaster_Card::FT_CARD_GOLD ].s_nMax )
+	if( nTotalCount < pInfo->s_stGradeInfo[ CsMaster_Card::FT_CARD_GOLD ].s_nMax )
 		return CsMaster_Card::FT_CARD_SHILVER;
-	if( nCount < pInfo->s_stGradeInfo[ CsMaster_Card::FT_CARD_PLATINUM ].s_nMax )
+	if( nTotalCount < pInfo->s_stGradeInfo[ CsMaster_Card::FT_CARD_PLATINUM ].s_nMax )
 		return CsMaster_Card::FT_CARD_GOLD;
-	if( nCount < pInfo->s_stGradeInfo[ CsMaster_Card::FT_CARD_MASTER ].s_nMax )
+	if( nTotalCount < pInfo->s_stGradeInfo[ CsMaster_Card::FT_CARD_MASTER ].s_nMax )
 		return CsMaster_Card::FT_CARD_PLATINUM;
 	return CsMaster_Card::FT_CARD_MASTER;
 }
@@ -1500,7 +1552,7 @@ void cExtraInventory::RenderSealCard( cItemInfo* pItem, int nIndex, CsPoint pos 
 
 	CsMaster_Card::sINFO* pInfo = pCard->GetInfo();
 	int const nGrade = GetSealGrade( pItem->GetType(), pItem->GetCount() );
-	std::string const strBack = nsCsFileTable::g_pMaster_CardMng->GetSealGridBackFile( nGrade );
+	std::string const strBack = GetSealTierBackImage( nGrade );
 	std::string const strImage = nsCsFileTable::g_pMaster_CardMng->GetSealDigimonImgPath( pInfo->s_nDigimonID );
 
 	if( m_pSealCardBack[ nIndex ] && !strBack.empty() )

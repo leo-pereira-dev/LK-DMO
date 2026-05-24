@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DM_Union_Filter_Str schema="DM_Union-Filter_Str.struct" bin="DM_Union-Filter_Str.bin" byteLength="530">
+  <Entries kind="Section" offset="0" length="530">
+    <_0 kind="Record" offset="4" length="18">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="8" length="14" type="WString { }">MaxHP</TextA>
+    </_0>
+    <_1 kind="Record" offset="22" length="18">
+      <TextKey kind="Leaf" offset="22" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="26" length="14" type="WString { }">MaxDS</TextA>
+    </_1>
+    <_2 kind="Record" offset="40" length="12">
+      <TextKey kind="Leaf" offset="40" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <TextA kind="Leaf" offset="44" length="8" type="WString { }">AT</TextA>
+    </_2>
+    <_3 kind="Record" offset="52" length="12">
+      <TextKey kind="Leaf" offset="52" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextA kind="Leaf" offset="56" length="8" type="WString { }">CT</TextA>
+    </_3>
+    <_4 kind="Record" offset="64" length="12">
+      <TextKey kind="Leaf" offset="64" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <TextA kind="Leaf" offset="68" length="8" type="WString { }">DE</TextA>
+    </_4>
+    <_5 kind="Record" offset="76" length="12">
+      <TextKey kind="Leaf" offset="76" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <TextA kind="Leaf" offset="80" length="8" type="WString { }">EV</TextA>
+    </_5>
+    <_6 kind="Record" offset="88" length="12">
+      <TextKey kind="Leaf" offset="88" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <TextA kind="Leaf" offset="92" length="8" type="WString { }">HT</TextA>
+    </_6>
+    <_7 kind="Record" offset="100" length="14">
+      <TextKey kind="Leaf" offset="100" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <TextA kind="Leaf" offset="104" length="10" type="WString { }">EXP</TextA>
+    </_7>
+    <_8 kind="Record" offset="114" length="12">
+      <TextKey kind="Leaf" offset="114" length="4" type="Scalar { Kind = U32 }" value="17" />
+      <TextA kind="Leaf" offset="118" length="8" type="WString { }">BL</TextA>
+    </_8>
+    <_9 kind="Record" offset="126" length="14">
+      <TextKey kind="Leaf" offset="126" length="4" type="Scalar { Kind = U32 }" value="24" />
+      <TextA kind="Leaf" offset="130" length="10" type="WString { }">SCD</TextA>
+    </_9>
+    <_10 kind="Record" offset="140" length="22">
+      <TextKey kind="Leaf" offset="140" length="4" type="Scalar { Kind = U32 }" value="120" />
+      <TextA kind="Leaf" offset="144" length="18" type="WString { }">Ice SCD</TextA>
+    </_10>
+    <_11 kind="Record" offset="162" length="26">
+      <TextKey kind="Leaf" offset="162" length="4" type="Scalar { Kind = U32 }" value="121" />
+      <TextA kind="Leaf" offset="166" length="22" type="WString { }">Water SCD</TextA>
+    </_11>
+    <_12 kind="Record" offset="188" length="24">
+      <TextKey kind="Leaf" offset="188" length="4" type="Scalar { Kind = U32 }" value="122" />
+      <TextA kind="Leaf" offset="192" length="20" type="WString { }">Fire SCD</TextA>
+    </_12>
+    <_13 kind="Record" offset="212" length="26">
+      <TextKey kind="Leaf" offset="212" length="4" type="Scalar { Kind = U32 }" value="123" />
+      <TextA kind="Leaf" offset="216" length="22" type="WString { }">Earth SCD</TextA>
+    </_13>
+    <_14 kind="Record" offset="238" length="24">
+      <TextKey kind="Leaf" offset="238" length="4" type="Scalar { Kind = U32 }" value="124" />
+      <TextA kind="Leaf" offset="242" length="20" type="WString { }">Wind SCD</TextA>
+    </_14>
+    <_15 kind="Record" offset="262" length="24">
+      <TextKey kind="Leaf" offset="262" length="4" type="Scalar { Kind = U32 }" value="125" />
+      <TextA kind="Leaf" offset="266" length="20" type="WString { }">Wood SCD</TextA>
+    </_15>
+    <_16 kind="Record" offset="286" length="26">
+      <TextKey kind="Leaf" offset="286" length="4" type="Scalar { Kind = U32 }" value="126" />
+      <TextA kind="Leaf" offset="290" length="22" type="WString { }">Light SCD</TextA>
+    </_16>
+    <_17 kind="Record" offset="312" length="24">
+      <TextKey kind="Leaf" offset="312" length="4" type="Scalar { Kind = U32 }" value="127" />
+      <TextA kind="Leaf" offset="316" length="20" type="WString { }">Dark SCD</TextA>
+    </_17>
+    <_18 kind="Record" offset="336" length="32">
+      <TextKey kind="Leaf" offset="336" length="4" type="Scalar { Kind = U32 }" value="128" />
+      <TextA kind="Leaf" offset="340" length="28" type="WString { }">Electric SCD</TextA>
+    </_18>
+    <_19 kind="Record" offset="368" length="26">
+      <TextKey kind="Leaf" offset="368" length="4" type="Scalar { Kind = U32 }" value="129" />
+      <TextA kind="Leaf" offset="372" length="22" type="WString { }">Steel SCD</TextA>
+    </_19>
+    <_20 kind="Record" offset="394" length="26">
+      <TextKey kind="Leaf" offset="394" length="4" type="Scalar { Kind = U32 }" value="160" />
+      <TextA kind="Leaf" offset="398" length="22" type="WString { }">Basic SCD</TextA>
+    </_20>
+    <_21 kind="Record" offset="420" length="24">
+      <TextKey kind="Leaf" offset="420" length="4" type="Scalar { Kind = U32 }" value="161" />
+      <TextA kind="Leaf" offset="424" length="20" type="WString { }">Data SCD</TextA>
+    </_21>
+    <_22 kind="Record" offset="444" length="30">
+      <TextKey kind="Leaf" offset="444" length="4" type="Scalar { Kind = U32 }" value="162" />
+      <TextA kind="Leaf" offset="448" length="26" type="WString { }">Vaccine SCD</TextA>
+    </_22>
+    <_23 kind="Record" offset="474" length="26">
+      <TextKey kind="Leaf" offset="474" length="4" type="Scalar { Kind = U32 }" value="163" />
+      <TextA kind="Leaf" offset="478" length="22" type="WString { }">Virus SCD</TextA>
+    </_23>
+    <_24 kind="Record" offset="500" length="30">
+      <TextKey kind="Leaf" offset="500" length="4" type="Scalar { Kind = U32 }" value="164" />
+      <TextA kind="Leaf" offset="504" length="26" type="WString { }">Unknown SCD</TextA>
+    </_24>
+  </Entries>
+</DM_Union_Filter_Str>

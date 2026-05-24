@@ -1,0 +1,888 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DEvolutionAdvice_Str schema="DEvolutionAdvice_Str.struct" bin="DEvolutionAdvice_Str.bin" byteLength="41496">
+  <Groups kind="Section" offset="0" length="41496">
+    <_0 kind="Record" offset="4" length="1543">
+      <GroupKey kind="Leaf" offset="4" length="1" type="Scalar { Kind = U8 }" value="7" />
+      <EvolutionCount kind="Leaf" offset="5" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <Evolutions kind="Array" offset="9" length="1538" count="4">
+        <_0_ kind="Struct" offset="9" length="383">
+          <EvolutionKey kind="Leaf" offset="9" length="4" type="Scalar { Kind = U32 }" value="71015" />
+          <RequirementCount kind="Leaf" offset="13" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="17" length="375" count="1">
+            <_0_ kind="Struct" offset="17" length="375">
+              <RequirementKey kind="Leaf" offset="17" length="4" type="Scalar { Kind = U32 }" value="0" />
+              <AdviceCount kind="Leaf" offset="21" length="4" type="Scalar { Kind = U32 }" value="1" />
+              <AdviceEntries kind="Array" offset="25" length="367" count="1">
+                <_0_ kind="Struct" offset="25" length="367">
+                  <AdviceKey kind="Leaf" offset="25" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="26" length="366" type="WString { }">1. BanchouLeomon keeps moving on the set track.\nkeep in eyes on the moving route. \n2. If the Quest process has stoped during the progress, Please change partner Digimon to Agumon.</Text>
+                </_0_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_0_>
+        <_1_ kind="Struct" offset="392" length="385">
+          <EvolutionKey kind="Leaf" offset="392" length="4" type="Scalar { Kind = U32 }" value="71016" />
+          <RequirementCount kind="Leaf" offset="396" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="400" length="377" count="1">
+            <_0_ kind="Struct" offset="400" length="377">
+              <RequirementKey kind="Leaf" offset="400" length="4" type="Scalar { Kind = U32 }" value="0" />
+              <AdviceCount kind="Leaf" offset="404" length="4" type="Scalar { Kind = U32 }" value="1" />
+              <AdviceEntries kind="Array" offset="408" length="369" count="1">
+                <_0_ kind="Struct" offset="408" length="369">
+                  <AdviceKey kind="Leaf" offset="408" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="409" length="368" type="WString { }">1. BanchouLeomon keeps moving on the set track.\nkeep in eyes on the moving route. \n2. If the Quest process has stoped during the progress, Please change partner Digimon to Lalamon.</Text>
+                </_0_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_1_>
+        <_2_ kind="Struct" offset="777" length="383">
+          <EvolutionKey kind="Leaf" offset="777" length="4" type="Scalar { Kind = U32 }" value="71017" />
+          <RequirementCount kind="Leaf" offset="781" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="785" length="375" count="1">
+            <_0_ kind="Struct" offset="785" length="375">
+              <RequirementKey kind="Leaf" offset="785" length="4" type="Scalar { Kind = U32 }" value="0" />
+              <AdviceCount kind="Leaf" offset="789" length="4" type="Scalar { Kind = U32 }" value="1" />
+              <AdviceEntries kind="Array" offset="793" length="367" count="1">
+                <_0_ kind="Struct" offset="793" length="367">
+                  <AdviceKey kind="Leaf" offset="793" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="794" length="366" type="WString { }">1. BanchouLeomon keeps moving on the set track.\nkeep in eyes on the moving route. \n2. If the Quest process has stoped during the progress, Please change partner Digimon to Gaomon.</Text>
+                </_0_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_2_>
+        <_3_ kind="Struct" offset="1160" length="387">
+          <EvolutionKey kind="Leaf" offset="1160" length="4" type="Scalar { Kind = U32 }" value="71018" />
+          <RequirementCount kind="Leaf" offset="1164" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="1168" length="379" count="1">
+            <_0_ kind="Struct" offset="1168" length="379">
+              <RequirementKey kind="Leaf" offset="1168" length="4" type="Scalar { Kind = U32 }" value="0" />
+              <AdviceCount kind="Leaf" offset="1172" length="4" type="Scalar { Kind = U32 }" value="1" />
+              <AdviceEntries kind="Array" offset="1176" length="371" count="1">
+                <_0_ kind="Struct" offset="1176" length="371">
+                  <AdviceKey kind="Leaf" offset="1176" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="1177" length="370" type="WString { }">1. BanchouLeomon keeps moving on the set track.\nkeep in eyes on the moving route. \n2. If the Quest process has stoped during the progress, Please change partner Digimon to Falcomon.</Text>
+                </_0_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_3_>
+      </Evolutions>
+    </_0>
+    <_1 kind="Record" offset="1547" length="23807">
+      <GroupKey kind="Leaf" offset="1547" length="1" type="Scalar { Kind = U8 }" value="8" />
+      <EvolutionCount kind="Leaf" offset="1548" length="4" type="Scalar { Kind = U32 }" value="19" />
+      <Evolutions kind="Array" offset="1552" length="23802" count="19">
+        <_0_ kind="Struct" offset="1552" length="1962">
+          <EvolutionKey kind="Leaf" offset="1552" length="4" type="Scalar { Kind = U32 }" value="71024" />
+          <RequirementCount kind="Leaf" offset="1556" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Requirements kind="Array" offset="1560" length="1954" count="2">
+            <_0_ kind="Struct" offset="1560" length="976">
+              <RequirementKey kind="Leaf" offset="1560" length="4" type="Scalar { Kind = U32 }" value="31014" />
+              <AdviceCount kind="Leaf" offset="1564" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="1568" length="968" count="2">
+                <_0_ kind="Struct" offset="1568" length="703">
+                  <AdviceKey kind="Leaf" offset="1568" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="1569" length="702" type="WString { }">1. If the Quest process of Dracomon(Blue) has stopped during the progress, make sure that all of Dracomon(Green)'s Quest is completed. \n2. If the Quest process has stoped during the progress even though all of Dracomon(Blue), Dracomon(Green)'s quest have been completed, make sure that the Dracomon(Blue)'s evolution slots are open to the ultimate.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="2271" length="265">
+                  <AdviceKey kind="Leaf" offset="2271" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="2272" length="264" type="WString { }">1. Dracomon(Blue)'s Alphamon Examon Jogress repeat quest can only be progressed until the evolution slot is open to the ultimate. </Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="2536" length="978">
+              <RequirementKey kind="Leaf" offset="2536" length="4" type="Scalar { Kind = U32 }" value="32014" />
+              <AdviceCount kind="Leaf" offset="2540" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="2544" length="970" count="2">
+                <_0_ kind="Struct" offset="2544" length="703">
+                  <AdviceKey kind="Leaf" offset="2544" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="2545" length="702" type="WString { }">1. If the Quest process of Dracomon(Green) has stoped during the progress, make sure that all of Dracomon(Blue)'s Quest are completed. \n2. If the Quest process has stoped during the progress eventhough all of Dracomon(Blue), Dracomon(Green)'s quest have been completed, make sure that the Dracomon(Green)'s evolution slots are open to the ultimate.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="3247" length="267">
+                  <AdviceKey kind="Leaf" offset="3247" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="3248" length="266" type="WString { }">1. Dracomon(Green)'s Alphamon Examon Jogress repeat quest can only be progressed until the evolution slot is open to the ultimate. </Text>
+                </_1_>
+              </AdviceEntries>
+            </_1_>
+          </Requirements>
+        </_0_>
+        <_1_ kind="Struct" offset="3514" length="3144">
+          <EvolutionKey kind="Leaf" offset="3514" length="4" type="Scalar { Kind = U32 }" value="71035" />
+          <RequirementCount kind="Leaf" offset="3518" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <Requirements kind="Array" offset="3522" length="3136" count="4">
+            <_0_ kind="Struct" offset="3522" length="788">
+              <RequirementKey kind="Leaf" offset="3522" length="4" type="Scalar { Kind = U32 }" value="45163" />
+              <AdviceCount kind="Leaf" offset="3526" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="3530" length="780" count="2">
+                <_0_ kind="Struct" offset="3530" length="389">
+                  <AdviceKey kind="Leaf" offset="3530" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="3531" length="388" type="WString { }">1. If the quest progress has stopped during the progress, make sure all Zhuqiaomon's evolution slots are open to the ultimate.\n2. All quests can only be obtained in Zhuqiaomon-Champion state.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="3919" length="391">
+                  <AdviceKey kind="Leaf" offset="3919" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="3920" length="390" type="WString { }">1. Fanglongmon's Jogress repeat quest can only be progressed until the evolution slot of Zhuqiaomon is open to the ultimate.\n2. Repeat quests can only be obtained in Zhuqiaomon-Champion state.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="4310" length="796">
+              <RequirementKey kind="Leaf" offset="4310" length="4" type="Scalar { Kind = U32 }" value="45164" />
+              <AdviceCount kind="Leaf" offset="4314" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="4318" length="788" count="2">
+                <_0_ kind="Struct" offset="4318" length="393">
+                  <AdviceKey kind="Leaf" offset="4318" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="4319" length="392" type="WString { }">1. If the quest progress has stopped during the progress, make sure all Qinglongmon's evolution slots are open to the ultimate.\n2. All quests can only be obtained in Qinglongmon-Champion state.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="4711" length="395">
+                  <AdviceKey kind="Leaf" offset="4711" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="4712" length="394" type="WString { }">1. Fanglongmon's Jogress repeat quest can only be progressed until the evolution slot of Qinglongmon is open to the ultimate.\n2. Repeat quests can only be obtained in Qinglongmon-Champion state.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_1_>
+            <_2_ kind="Struct" offset="5106" length="780">
+              <RequirementKey kind="Leaf" offset="5106" length="4" type="Scalar { Kind = U32 }" value="45165" />
+              <AdviceCount kind="Leaf" offset="5110" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="5114" length="772" count="2">
+                <_0_ kind="Struct" offset="5114" length="385">
+                  <AdviceKey kind="Leaf" offset="5114" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="5115" length="384" type="WString { }">1. If the quest progress has stopped during the progress, make sure all Xuanwumon's evolution slots are open to the ultimate.\n2. All quests can only be obtained in Xuanwumon-Champion state.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="5499" length="387">
+                  <AdviceKey kind="Leaf" offset="5499" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="5500" length="386" type="WString { }">1. Fanglongmon's Jogress repeat quest can only be progressed until the evolution slot of Xuanwumon is open to the ultimate.\n2. Repeat quests can only be obtained in Xuanwumon-Champion state.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_2_>
+            <_3_ kind="Struct" offset="5886" length="772">
+              <RequirementKey kind="Leaf" offset="5886" length="4" type="Scalar { Kind = U32 }" value="45166" />
+              <AdviceCount kind="Leaf" offset="5890" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="5894" length="764" count="2">
+                <_0_ kind="Struct" offset="5894" length="381">
+                  <AdviceKey kind="Leaf" offset="5894" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="5895" length="380" type="WString { }">1. If the quest progress has stopped during the progress, make sure all Baihumon's evolution slots are open to the ultimate.\n2. All quests can only be obtained in Baihumon-Champion state.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="6275" length="383">
+                  <AdviceKey kind="Leaf" offset="6275" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="6276" length="382" type="WString { }">1. Fanglongmon's Jogress repeat quest can only be progressed until the evolution slot of Baihumon is open to the ultimate.\n2. Repeat quests can only be obtained in Baihumon-Champion state.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_3_>
+          </Requirements>
+        </_1_>
+        <_2_ kind="Struct" offset="6658" length="984">
+          <EvolutionKey kind="Leaf" offset="6658" length="4" type="Scalar { Kind = U32 }" value="71041" />
+          <RequirementCount kind="Leaf" offset="6662" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Requirements kind="Array" offset="6666" length="976" count="2">
+            <_0_ kind="Struct" offset="6666" length="504">
+              <RequirementKey kind="Leaf" offset="6666" length="4" type="Scalar { Kind = U32 }" value="31044" />
+              <AdviceCount kind="Leaf" offset="6670" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="6674" length="496" count="2">
+                <_0_ kind="Struct" offset="6674" length="261">
+                  <AdviceKey kind="Leaf" offset="6674" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="6675" length="260" type="WString { }">1. To progress through &lt;The New Evolution of Evilness&gt;, the partner digimon must be in Agumon(Black)[Millenniumon]-Rookie state.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="6935" length="235">
+                  <AdviceKey kind="Leaf" offset="6935" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="6936" length="234" type="WString { }">1. To progress through &lt;Fusion Evolution&gt;, the partner digimon must be in Agumon(Black)[Millenniumon]-Rookie state.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="7170" length="472">
+              <RequirementKey kind="Leaf" offset="7170" length="4" type="Scalar { Kind = U32 }" value="33072" />
+              <AdviceCount kind="Leaf" offset="7174" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="7178" length="464" count="2">
+                <_0_ kind="Struct" offset="7178" length="241">
+                  <AdviceKey kind="Leaf" offset="7178" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="7179" length="240" type="WString { }">1. To progress through &lt;The Creator of Chimeramon&gt;, the partner digimon must be in Gazimon[Millenniumon]-Rookie state.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="7419" length="223">
+                  <AdviceKey kind="Leaf" offset="7419" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="7420" length="222" type="WString { }">1. To progress through &lt;Fusion Evolution&gt;, the partner digimon must be in Gazimon[Millenniumon]-Rookie state.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_1_>
+          </Requirements>
+        </_2_>
+        <_3_ kind="Struct" offset="7642" length="998">
+          <EvolutionKey kind="Leaf" offset="7642" length="4" type="Scalar { Kind = U32 }" value="71042" />
+          <RequirementCount kind="Leaf" offset="7646" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Requirements kind="Array" offset="7650" length="990" count="2">
+            <_0_ kind="Struct" offset="7650" length="504">
+              <RequirementKey kind="Leaf" offset="7650" length="4" type="Scalar { Kind = U32 }" value="31044" />
+              <AdviceCount kind="Leaf" offset="7654" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="7658" length="496" count="2">
+                <_0_ kind="Struct" offset="7658" length="243">
+                  <AdviceKey kind="Leaf" offset="7658" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="7659" length="242" type="WString { }">1. To progress through &lt;Sign of Resurrection&gt;, the partner digimon must be in Agumon(Black)[Millenniumon]-Rookie state.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="7901" length="253">
+                  <AdviceKey kind="Leaf" offset="7901" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="7902" length="252" type="WString { }">1. To progress through &lt;Horrible Fusion Evolution&gt;, the partner digimon must be in Agumon(Black)[Millenniumon]-Rookie state.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="8154" length="486">
+              <RequirementKey kind="Leaf" offset="8154" length="4" type="Scalar { Kind = U32 }" value="33072" />
+              <AdviceCount kind="Leaf" offset="8158" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="8162" length="478" count="2">
+                <_0_ kind="Struct" offset="8162" length="237">
+                  <AdviceKey kind="Leaf" offset="8162" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="8163" length="236" type="WString { }">1. To progress through &lt;Immortal Energy of Evil&gt;, the partner digimon must be in Gazimon[Millenniumon]-Rookie state.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="8399" length="241">
+                  <AdviceKey kind="Leaf" offset="8399" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="8400" length="240" type="WString { }">1. To progress through &lt;Horrible Fusion Evolution&gt;, the partner digimon must be in Gazimon[Millenniumon]-Rookie state.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_1_>
+          </Requirements>
+        </_3_>
+        <_4_ kind="Struct" offset="8640" length="1640">
+          <EvolutionKey kind="Leaf" offset="8640" length="4" type="Scalar { Kind = U32 }" value="71072" />
+          <RequirementCount kind="Leaf" offset="8644" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Requirements kind="Array" offset="8648" length="1632" count="2">
+            <_0_ kind="Struct" offset="8648" length="814">
+              <RequirementKey kind="Leaf" offset="8648" length="4" type="Scalar { Kind = U32 }" value="31007" />
+              <AdviceCount kind="Leaf" offset="8652" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="8656" length="806" count="2">
+                <_0_ kind="Struct" offset="8656" length="415">
+                  <AdviceKey kind="Leaf" offset="8656" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="8657" length="414" type="WString { }">1. If the Quest process has stoped during the progress, make sure that all Agumon's evolution slots are open to the ultimate.\n2. Armagemon's tentacle can be used in the Digimon Maze Entrance "Ruins" area.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="9071" length="391">
+                  <AdviceKey kind="Leaf" offset="9071" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="9072" length="390" type="WString { }">1. Agumon's Omegamon Jogres repeat quest can only be progressed until the evolution slot is open to the ultimate. \n2. Armagemon's tentacle can be used in Digimon labyrinth in the "ruins" area.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="9462" length="818">
+              <RequirementKey kind="Leaf" offset="9462" length="4" type="Scalar { Kind = U32 }" value="31138" />
+              <AdviceCount kind="Leaf" offset="9466" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="9470" length="810" count="2">
+                <_0_ kind="Struct" offset="9470" length="417">
+                  <AdviceKey kind="Leaf" offset="9470" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="9471" length="416" type="WString { }">1. If the Quest process has stoped during the progress, make sure that all Gabumon's evolution slots are open to the ultimate.\n2. Armagemon's tentacle can be used in the Digimon Maze Entrance "Ruins" area.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="9887" length="393">
+                  <AdviceKey kind="Leaf" offset="9887" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="9888" length="392" type="WString { }">1. Gabumon's Omegamon Jogres repeat quest can only be progressed until the evolution slot is open to the ultimate. \n2. Armagemon's tentacle can be used in Digimon labyrinth in the "ruins" area.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_1_>
+          </Requirements>
+        </_4_>
+        <_5_ kind="Struct" offset="10280" length="3574">
+          <EvolutionKey kind="Leaf" offset="10280" length="4" type="Scalar { Kind = U32 }" value="71073" />
+          <RequirementCount kind="Leaf" offset="10284" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Requirements kind="Array" offset="10288" length="3566" count="2">
+            <_0_ kind="Struct" offset="10288" length="1788">
+              <RequirementKey kind="Leaf" offset="10288" length="4" type="Scalar { Kind = U32 }" value="31043" />
+              <AdviceCount kind="Leaf" offset="10292" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="10296" length="1780" count="2">
+                <_0_ kind="Struct" offset="10296" length="1043">
+                  <AdviceKey kind="Leaf" offset="10296" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="10297" length="1042" type="WString { }">1. Agumon(Black)'s Omegamon Zwart Jogres repeat quest can only be progressed until the evolution slot is open to the ultimate. \n2. Vaccine Attribute Data and Light Attribute Data can be obtained by fulfilled 100% of the experience value of a Digimon with a vaccine or light attribute, or by defeating a boss monster appearing on a specific day in the Digimon Maze. \n3. If the Quest process of Agumon(Black) has stoped during the progress, make sure that the Gabumon(Black)'s evolution slots are open to the ultimate. </Text>
+                </_0_>
+                <_1_ kind="Struct" offset="11339" length="737">
+                  <AdviceKey kind="Leaf" offset="11339" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="11340" length="736" type="WString { }">1. Agumon(Black)'s Omegamon Zwart Jogres repeat quest can only be progressed until the evolution slot is open to the ultimate. \n2. Vaccine Attribute Data and Light Attribute Data can be obtained by fulfilled 100% of the experience value of a Digimon with a vaccine or light attribute, or by defeating a boss monster appearing on a specific day in the Digimon Maze. </Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="12076" length="1778">
+              <RequirementKey kind="Leaf" offset="12076" length="4" type="Scalar { Kind = U32 }" value="31068" />
+              <AdviceCount kind="Leaf" offset="12080" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="12084" length="1770" count="2">
+                <_0_ kind="Struct" offset="12084" length="1039">
+                  <AdviceKey kind="Leaf" offset="12084" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="12085" length="1038" type="WString { }">1. Gabumon(Black)'s Omegamon Zwart Jogres repeat quest can only be progressed until the evolution slot is open to the ultimate. \n2. Data Attribute Data and Light Attribute Data can be obtained by fulfilled 100% of the experience value of a Digimon with a vaccine or light attribute, or by defeating a boss monster appearing on a specific day in the Digimon Maze. \n3. If the Quest process of Gabumon(Black) has stoped during the progress, make sure that the Agumon(Black)'s evolution slots are open to the ultimate. </Text>
+                </_0_>
+                <_1_ kind="Struct" offset="13123" length="731">
+                  <AdviceKey kind="Leaf" offset="13123" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="13124" length="730" type="WString { }">1. Gabumon(Black)'s Omegamon Zwart Jogres repeat quest can only be progressed until the evolution slot is open to the ultimate. \n2. Data Attribute Data and Light Attribute Data can be obtained by fulfilled 100% of the experience value of a Digimon with a vaccine or light attribute, or by defeating a boss monster appearing on a specific day in the Digimon Maze.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_1_>
+          </Requirements>
+        </_5_>
+        <_6_ kind="Struct" offset="13854" length="1462">
+          <EvolutionKey kind="Leaf" offset="13854" length="4" type="Scalar { Kind = U32 }" value="71075" />
+          <RequirementCount kind="Leaf" offset="13858" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Requirements kind="Array" offset="13862" length="1454" count="2">
+            <_0_ kind="Struct" offset="13862" length="522">
+              <RequirementKey kind="Leaf" offset="13862" length="4" type="Scalar { Kind = U32 }" value="31027" />
+              <AdviceCount kind="Leaf" offset="13866" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="13870" length="514" count="2">
+                <_0_ kind="Struct" offset="13870" length="259">
+                  <AdviceKey kind="Leaf" offset="13870" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="13871" length="258" type="WString { }">1. If the Quest process has stoped during the progress, make sure that all Ryudamon's evolution slots are open to the ultimate.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="14129" length="255">
+                  <AdviceKey kind="Leaf" offset="14129" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="14130" length="254" type="WString { }">1. Ryudamon's Alphamon Ouryuken Jogres repeat quest can only be progressed until the evolution slot is open to the ultimate. </Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="14384" length="932">
+              <RequirementKey kind="Leaf" offset="14384" length="4" type="Scalar { Kind = U32 }" value="33036" />
+              <AdviceCount kind="Leaf" offset="14388" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="14392" length="924" count="2">
+                <_0_ kind="Struct" offset="14392" length="671">
+                  <AdviceKey kind="Leaf" offset="14392" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="14393" length="670" type="WString { }">1. Transmission Terminal Gate A able to purchased from NPC Culumon.\n2.  Transmission Terminal GateB,  Transmission Terminal GateC,  Transmission Terminal GateD able to obtained by Summoned DexDorugoramon.\n3. If the Quest process has stoped during the progress, make sure that all Dorumon's evolution slots are open to the ultimate.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="15063" length="253">
+                  <AdviceKey kind="Leaf" offset="15063" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="15064" length="252" type="WString { }">1. Dorumon's Alphamon Ouryuken Jogres repeat quest can only be progressed until the evolution slot is open to the ultimate. </Text>
+                </_1_>
+              </AdviceEntries>
+            </_1_>
+          </Requirements>
+        </_6_>
+        <_7_ kind="Struct" offset="15316" length="1914">
+          <EvolutionKey kind="Leaf" offset="15316" length="4" type="Scalar { Kind = U32 }" value="71079" />
+          <RequirementCount kind="Leaf" offset="15320" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Requirements kind="Array" offset="15324" length="1906" count="2">
+            <_0_ kind="Struct" offset="15324" length="952">
+              <RequirementKey kind="Leaf" offset="15324" length="4" type="Scalar { Kind = U32 }" value="31143" />
+              <AdviceCount kind="Leaf" offset="15328" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="15332" length="944" count="2">
+                <_0_ kind="Struct" offset="15332" length="731">
+                  <AdviceKey kind="Leaf" offset="15332" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="15333" length="730" type="WString { }">1. For the Shakkoumon's Jogress quest, Tamers must progress both Patamon[Shakkoumon] Jogress quest and Armadimon[Shakkoumon] at the same time.\n2. If Patamon[Shakkoumon] Jogress quest has stopped during the progress, please progress through Armadimon[Shakkoumon] Jogress quest.\n3. 'Dark Tower mutant Summon card' can be purchased from NPC Culumon at Dats Center.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="16063" length="213">
+                  <AdviceKey kind="Leaf" offset="16063" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="16064" length="212" type="WString { }">1. To progress through &lt;Pincer Attack&gt;, the partner digimon must be in Patamon[Shakkoumon]-Rookie state.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="16276" length="954">
+              <RequirementKey kind="Leaf" offset="16276" length="4" type="Scalar { Kind = U32 }" value="31144" />
+              <AdviceCount kind="Leaf" offset="16280" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="16284" length="946" count="2">
+                <_0_ kind="Struct" offset="16284" length="739">
+                  <AdviceKey kind="Leaf" offset="16284" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="16285" length="738" type="WString { }">1. For the Shakkoumon's Jogress quest, Tamers must progress both Patamon[Shakkoumon] Jogress quest and Armadimon[Shakkoumon] at the same time.\n2. If Armadimon[Shakkoumon] Jogress quest has stopped during the progress, please progress through Patamon[Shakkoumon] Jogress quest.\n3. 'Arachnemon Summon card (Illusion)' can be purchased from NPC Culumon at Dats Center.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="17023" length="207">
+                  <AdviceKey kind="Leaf" offset="17023" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="17024" length="206" type="WString { }">1. To progress through &lt;Buy time&gt;, the partner digimon must be in Armadimon[Shakkoumon]-Rookie state.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_1_>
+          </Requirements>
+        </_7_>
+        <_8_ kind="Struct" offset="17230" length="1756">
+          <EvolutionKey kind="Leaf" offset="17230" length="4" type="Scalar { Kind = U32 }" value="71089" />
+          <RequirementCount kind="Leaf" offset="17234" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Requirements kind="Array" offset="17238" length="1748" count="2">
+            <_0_ kind="Struct" offset="17238" length="836">
+              <RequirementKey kind="Leaf" offset="17238" length="4" type="Scalar { Kind = U32 }" value="31145" />
+              <AdviceCount kind="Leaf" offset="17242" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="17246" length="828" count="2">
+                <_0_ kind="Struct" offset="17246" length="593">
+                  <AdviceKey kind="Leaf" offset="17246" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="17247" length="592" type="WString { }">1. To progress through the &lt;Help Request!&gt; quest, you must complete Salamon[Silphymon]'s &lt;Digimon Kaiser's Scream&gt; quest and Hawkmon[Silphymon]'s &lt;Holy Ring's Whereabout&gt; quest.\n2. To progress through the &lt;Archnemon's Plot&gt; quest the partner digimon must be in Hawkmon[Silphymon]-Rookie state.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="17839" length="235">
+                  <AdviceKey kind="Leaf" offset="17839" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="17840" length="234" type="WString { }">1. To progress through the &lt;Archnemon's Plot&gt; quest the partner digimon must be in Hawkmon[Silphymon]-Rookie state.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="18074" length="912">
+              <RequirementKey kind="Leaf" offset="18074" length="4" type="Scalar { Kind = U32 }" value="31146" />
+              <AdviceCount kind="Leaf" offset="18078" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="18082" length="904" count="2">
+                <_0_ kind="Struct" offset="18082" length="631">
+                  <AdviceKey kind="Leaf" offset="18082" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="18083" length="630" type="WString { }">1. To progress through the &lt;Help Request!&gt; quest, you must complete Salamon[Silphymon]'s &lt;Digimon Kaiser's Scream&gt; quest and Hawkmon[Silphymon]'s &lt;Holy Ring's Whereabout&gt; quest.\n2. To progress through the &lt;To Escape From the Distorted World…&gt; quest the partner digimon must be in Salamon[Silphymon]-Rookie state.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="18713" length="273">
+                  <AdviceKey kind="Leaf" offset="18713" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="18714" length="272" type="WString { }">1. To progress through the &lt;To Escape From the Distorted World…&gt; quest the partner digimon must be in Salamon[Silphymon]-Rookie state.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_1_>
+          </Requirements>
+        </_8_>
+        <_9_ kind="Struct" offset="18986" length="524">
+          <EvolutionKey kind="Leaf" offset="18986" length="4" type="Scalar { Kind = U32 }" value="71104" />
+          <RequirementCount kind="Leaf" offset="18990" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="18994" length="516" count="1">
+            <_0_ kind="Struct" offset="18994" length="516">
+              <RequirementKey kind="Leaf" offset="18994" length="4" type="Scalar { Kind = U32 }" value="33080" />
+              <AdviceCount kind="Leaf" offset="18998" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="19002" length="508" count="2">
+                <_0_ kind="Struct" offset="19002" length="333">
+                  <AdviceKey kind="Leaf" offset="19002" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="19003" length="332" type="WString { }">1. This quest can be easily progressed by hatching the Agumon (black) [BlitzGreymon] series and the Gabumon[CresGarurumon] line to evolve to the ultimate evolution.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="19335" length="175">
+                  <AdviceKey kind="Leaf" offset="19335" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="19336" length="174" type="WString { }">1. Tamers are able to obtain the evolution item by talking to Culumon at Dats Center.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_9_>
+        <_10_ kind="Struct" offset="19510" length="866">
+          <EvolutionKey kind="Leaf" offset="19510" length="4" type="Scalar { Kind = U32 }" value="71107" />
+          <RequirementCount kind="Leaf" offset="19514" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="19518" length="858" count="1">
+            <_0_ kind="Struct" offset="19518" length="858">
+              <RequirementKey kind="Leaf" offset="19518" length="4" type="Scalar { Kind = U32 }" value="31043" />
+              <AdviceCount kind="Leaf" offset="19522" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="19526" length="850" count="2">
+                <_0_ kind="Struct" offset="19526" length="675">
+                  <AdviceKey kind="Leaf" offset="19526" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="19527" length="674" type="WString { }">1. This quest is available only after completing the Omegamon Zwart Jogress quest.\n2. The item of Decisive battle! Omegamon! is able to be used at the Western Village East Area of Decisive battle! Omegamon!\n3. Akihiro Kurata's work [MugenDramon] item can be used in the hideout area of ​​Akihiro Kurata on the West Village East Area.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="20201" length="175">
+                  <AdviceKey kind="Leaf" offset="20201" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="20202" length="174" type="WString { }">1. Tamers are able to obtain the evolution item by talking to Culumon at Dats Center.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_10_>
+        <_11_ kind="Struct" offset="20376" length="870">
+          <EvolutionKey kind="Leaf" offset="20376" length="4" type="Scalar { Kind = U32 }" value="71108" />
+          <RequirementCount kind="Leaf" offset="20380" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Requirements kind="Array" offset="20384" length="862" count="2">
+            <_0_ kind="Struct" offset="20384" length="247">
+              <RequirementKey kind="Leaf" offset="20384" length="4" type="Scalar { Kind = U32 }" value="31146" />
+              <AdviceCount kind="Leaf" offset="20388" length="4" type="Scalar { Kind = U32 }" value="1" />
+              <AdviceEntries kind="Array" offset="20392" length="239" count="1">
+                <_0_ kind="Struct" offset="20392" length="239">
+                  <AdviceKey kind="Leaf" offset="20392" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="20393" length="238" type="WString { }">1. To progress through the &lt;Qualification&gt; quest the partner digimon must be in Salamon[Silphymon]-Rookie line state.</Text>
+                </_0_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="20631" length="615">
+              <RequirementKey kind="Leaf" offset="20631" length="4" type="Scalar { Kind = U32 }" value="71089" />
+              <AdviceCount kind="Leaf" offset="20635" length="4" type="Scalar { Kind = U32 }" value="1" />
+              <AdviceEntries kind="Array" offset="20639" length="607" count="1">
+                <_0_ kind="Struct" offset="20639" length="607">
+                  <AdviceKey kind="Leaf" offset="20639" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="20640" length="606" type="WString { }">1. To progress through Valkyrimon's Jogress quest, the partner digimon must be in Salamon[Silphymon]-Rookie line state.\n2. When 2 quests, &lt;Taking Part - Human Type Digimon&gt; and &lt;Taking Part - Beast Type Digimon&gt; appears while progressing through Valkyrimon's Jogress quest, you must choose one quest.</Text>
+                </_0_>
+              </AdviceEntries>
+            </_1_>
+          </Requirements>
+        </_11_>
+        <_12_ kind="Struct" offset="21246" length="352">
+          <EvolutionKey kind="Leaf" offset="21246" length="4" type="Scalar { Kind = U32 }" value="71109" />
+          <RequirementCount kind="Leaf" offset="21250" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="21254" length="344" count="1">
+            <_0_ kind="Struct" offset="21254" length="344">
+              <RequirementKey kind="Leaf" offset="21254" length="4" type="Scalar { Kind = U32 }" value="33080" />
+              <AdviceCount kind="Leaf" offset="21258" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="21262" length="336" count="2">
+                <_0_ kind="Struct" offset="21262" length="161">
+                  <AdviceKey kind="Leaf" offset="21262" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="21263" length="160" type="WString { }">1. If the progress of the quest stops in the middle, check the Digivice quest.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="21423" length="175">
+                  <AdviceKey kind="Leaf" offset="21423" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="21424" length="174" type="WString { }">1. Tamers are able to obtain the evolution item by talking to Nanomon at Dats Center.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_12_>
+        <_13_ kind="Struct" offset="21598" length="482">
+          <EvolutionKey kind="Leaf" offset="21598" length="4" type="Scalar { Kind = U32 }" value="71110" />
+          <RequirementCount kind="Leaf" offset="21602" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="21606" length="474" count="1">
+            <_0_ kind="Struct" offset="21606" length="474">
+              <RequirementKey kind="Leaf" offset="21606" length="4" type="Scalar { Kind = U32 }" value="31044" />
+              <AdviceCount kind="Leaf" offset="21610" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="21614" length="466" count="2">
+                <_0_ kind="Struct" offset="21614" length="299">
+                  <AdviceKey kind="Leaf" offset="21614" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="21615" length="298" type="WString { }">1. To progress through ZeedMillenniumon Jogress quest, Tamers must purchase &lt;Culumon's Request : ZeedMillenniumon&gt; from NPC Culumon at Dats Center.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="21913" length="167">
+                  <AdviceKey kind="Leaf" offset="21913" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="21914" length="166" type="WString { }">1. Evolution items can be obtained by talking to Nanomon, located at Dats Center.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_13_>
+        <_14_ kind="Struct" offset="22080" length="192">
+          <EvolutionKey kind="Leaf" offset="22080" length="4" type="Scalar { Kind = U32 }" value="71111" />
+          <RequirementCount kind="Leaf" offset="22084" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="22088" length="184" count="1">
+            <_0_ kind="Struct" offset="22088" length="184">
+              <RequirementKey kind="Leaf" offset="22088" length="4" type="Scalar { Kind = U32 }" value="31019" />
+              <AdviceCount kind="Leaf" offset="22092" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="22096" length="176" count="2">
+                <_0_ kind="Struct" offset="22096" length="171">
+                  <AdviceKey kind="Leaf" offset="22096" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="22097" length="170" type="WString { }">1. Monster summon cards received from NPCs can be used on the map of "Duel Sphere".</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="22267" length="5">
+                  <AdviceKey kind="Leaf" offset="22267" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="22268" length="4" type="WString { }"></Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_14_>
+        <_15_ kind="Struct" offset="22272" length="760">
+          <EvolutionKey kind="Leaf" offset="22272" length="4" type="Scalar { Kind = U32 }" value="71112" />
+          <RequirementCount kind="Leaf" offset="22276" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="22280" length="752" count="1">
+            <_0_ kind="Struct" offset="22280" length="752">
+              <RequirementKey kind="Leaf" offset="22280" length="4" type="Scalar { Kind = U32 }" value="33067" />
+              <AdviceCount kind="Leaf" offset="22284" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="22288" length="744" count="2">
+                <_0_ kind="Struct" offset="22288" length="739">
+                  <AdviceKey kind="Leaf" offset="22288" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="22289" length="738" type="WString { }">1. If the progress of the quest stops in the middle, check the Digivice Quest.\n2. If you proceed with the Zeed Millenniumon quest at the same time, you cannot proceed with the Boltboutamon quest. Please proceed with the Boltboutamon quest after completing the Zeed Millenniumon quest.\n3. Monster summon cards received from NPCs can be used on the map "Duel Sphere".</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="23027" length="5">
+                  <AdviceKey kind="Leaf" offset="23027" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="23028" length="4" type="WString { }"></Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_15_>
+        <_16_ kind="Struct" offset="23032" length="1364">
+          <EvolutionKey kind="Leaf" offset="23032" length="4" type="Scalar { Kind = U32 }" value="71114" />
+          <RequirementCount kind="Leaf" offset="23036" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Requirements kind="Array" offset="23040" length="1356" count="2">
+            <_0_ kind="Struct" offset="23040" length="621">
+              <RequirementKey kind="Leaf" offset="23040" length="4" type="Scalar { Kind = U32 }" value="31035" />
+              <AdviceCount kind="Leaf" offset="23044" length="4" type="Scalar { Kind = U32 }" value="1" />
+              <AdviceEntries kind="Array" offset="23048" length="613" count="1">
+                <_0_ kind="Struct" offset="23048" length="613">
+                  <AdviceKey kind="Leaf" offset="23048" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="23049" length="612" type="WString { }">1. CommanDramon's Chaosmon Jogress quest can be obtained by progressing through Elecmon's quest.\n2. Quest can be completed by collecting items from daily quests in certain dungeons.\n3. When the last quest is completed from Culumon at the Dats Center, Tamers can obtain CommanDramon's Chaosmon Evo item.</Text>
+                </_0_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="23661" length="735">
+              <RequirementKey kind="Leaf" offset="23661" length="4" type="Scalar { Kind = U32 }" value="31049" />
+              <AdviceCount kind="Leaf" offset="23665" length="4" type="Scalar { Kind = U32 }" value="1" />
+              <AdviceEntries kind="Array" offset="23669" length="727" count="1">
+                <_0_ kind="Struct" offset="23669" length="727">
+                  <AdviceKey kind="Leaf" offset="23669" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="23670" length="726" type="WString { }">1. Elecmon's Chaosmon Jogress quest can only be progressed when both the Tamer and Digimon reaches level 70.\n2. Chaosmon's Jogress quest will progress until Elecmon obtaining Chaosmon Evo item step and then continue to the CommanDramon Jogress quest.\n3. Upon completing the quest from Culumon at the Dats Center, Tamers can obtain Elecmon's Chaosmon Evo item.</Text>
+                </_0_>
+              </AdviceEntries>
+            </_1_>
+          </Requirements>
+        </_16_>
+        <_17_ kind="Struct" offset="24396" length="233">
+          <EvolutionKey kind="Leaf" offset="24396" length="4" type="Scalar { Kind = U32 }" value="71123" />
+          <RequirementCount kind="Leaf" offset="24400" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="24404" length="225" count="1">
+            <_0_ kind="Struct" offset="24404" length="225">
+              <RequirementKey kind="Leaf" offset="24404" length="4" type="Scalar { Kind = U32 }" value="71122" />
+              <AdviceCount kind="Leaf" offset="24408" length="4" type="Scalar { Kind = U32 }" value="1" />
+              <AdviceEntries kind="Array" offset="24412" length="217" count="1">
+                <_0_ kind="Struct" offset="24412" length="217">
+                  <AdviceKey kind="Leaf" offset="24412" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="24413" length="216" type="WString { }">1. When your partner Digimon is MetalGreymon(C), you can proceed the quest through Culumon in DATS Center.</Text>
+                </_0_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_17_>
+        <_18_ kind="Struct" offset="24629" length="725">
+          <EvolutionKey kind="Leaf" offset="24629" length="4" type="Scalar { Kind = U32 }" value="71125" />
+          <RequirementCount kind="Leaf" offset="24633" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="24637" length="717" count="1">
+            <_0_ kind="Struct" offset="24637" length="717">
+              <RequirementKey kind="Leaf" offset="24637" length="4" type="Scalar { Kind = U32 }" value="33001" />
+              <AdviceCount kind="Leaf" offset="24641" length="4" type="Scalar { Kind = U32 }" value="1" />
+              <AdviceEntries kind="Array" offset="24645" length="709" count="1">
+                <_0_ kind="Struct" offset="24645" length="709">
+                  <AdviceKey kind="Leaf" offset="24645" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="24646" length="708" type="WString { }">1. The partner Digimon is Shoutmon, and you can proceed with the quest through a conversation with Culumon located at DATS Center.
+2. Shoutmon's level must be over 70 and evolution slots are opened on both Shoutmon X5 and Omegamon.
+3. Ballistamon, Dorulumon, Starmons, Sparrowmon's level must be over 70 and Shoutmon X5's evolution slot must be opened.</Text>
+                </_0_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_18_>
+      </Evolutions>
+    </_1>
+    <_2 kind="Record" offset="25354" length="1631">
+      <GroupKey kind="Leaf" offset="25354" length="1" type="Scalar { Kind = U8 }" value="16" />
+      <EvolutionCount kind="Leaf" offset="25355" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Evolutions kind="Array" offset="25359" length="1626" count="2">
+        <_0_ kind="Struct" offset="25359" length="814">
+          <EvolutionKey kind="Leaf" offset="25359" length="4" type="Scalar { Kind = U32 }" value="75900" />
+          <RequirementCount kind="Leaf" offset="25363" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="25367" length="806" count="1">
+            <_0_ kind="Struct" offset="25367" length="806">
+              <RequirementKey kind="Leaf" offset="25367" length="4" type="Scalar { Kind = U32 }" value="75102" />
+              <AdviceCount kind="Leaf" offset="25371" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="25375" length="798" count="2">
+                <_0_ kind="Struct" offset="25375" length="621">
+                  <AdviceKey kind="Leaf" offset="25375" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="25376" length="620" type="WString { }">1. This quest can only proceed when the evolution slot of Alphamon (X-antibody) is unlocked.\n2. Examon will appear at the Versandi Terminal after a certain period of time. However, it is not known where it appeared in the Versandi Terminal. Therefore, you need to take a close look at the Versandi Terminal.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="25996" length="177">
+                  <AdviceKey kind="Leaf" offset="25996" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="25997" length="176" type="WString { }">1. Tamers are able to obtain the evolution item by talking to Omegamon at Dats Center.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_0_>
+        <_1_ kind="Struct" offset="26173" length="812">
+          <EvolutionKey kind="Leaf" offset="26173" length="4" type="Scalar { Kind = U32 }" value="75902" />
+          <RequirementCount kind="Leaf" offset="26177" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="26181" length="804" count="1">
+            <_0_ kind="Struct" offset="26181" length="804">
+              <RequirementKey kind="Leaf" offset="26181" length="4" type="Scalar { Kind = U32 }" value="31007" />
+              <AdviceCount kind="Leaf" offset="26185" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="26189" length="796" count="2">
+                <_0_ kind="Struct" offset="26189" length="311">
+                  <AdviceKey kind="Leaf" offset="26189" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="26190" length="310" type="WString { }">1. This quest can be progressed only when the evolution slot of WarGreymon X is unlocked.\n2. Death-X-mon is located in the instance dungeon'Royal Base'.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="26500" length="485">
+                  <AdviceKey kind="Leaf" offset="26500" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="26501" length="484" type="WString { }">1. Tamer can obtain material items through talking with Gallantmon X and Magnamon located in Versandi Terminal.
+2. Tamer can craft material items into evolution items through PawnChesmon W at D-Terminal and Digitamamon at Versandi Terminal.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_1_>
+      </Evolutions>
+    </_2>
+    <_3 kind="Record" offset="26985" length="14511">
+      <GroupKey kind="Leaf" offset="26985" length="1" type="Scalar { Kind = U8 }" value="17" />
+      <EvolutionCount kind="Leaf" offset="26986" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <Evolutions kind="Array" offset="26990" length="14506" count="4">
+        <_0_ kind="Struct" offset="26990" length="7846">
+          <EvolutionKey kind="Leaf" offset="26990" length="4" type="Scalar { Kind = U32 }" value="63012" />
+          <RequirementCount kind="Leaf" offset="26994" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <Requirements kind="Array" offset="26998" length="7838" count="7">
+            <_0_ kind="Struct" offset="26998" length="1084">
+              <RequirementKey kind="Leaf" offset="26998" length="4" type="Scalar { Kind = U32 }" value="31066" />
+              <AdviceCount kind="Leaf" offset="27002" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="27006" length="1076" count="2">
+                <_0_ kind="Struct" offset="27006" length="207">
+                  <AdviceKey kind="Leaf" offset="27006" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="27007" length="206" type="WString { }">1. Purchase a Impmon line Digiegg from the cash shop.\n2. Impmon can be hatched through an incubator.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="27213" length="869">
+                  <AdviceKey kind="Leaf" offset="27213" length="1" type="Scalar { Kind = U8 }" value="3" />
+                  <Text kind="Leaf" offset="27214" length="868" type="WString { }">Required item: The Source of Sin\n1. Impmon's level to 100.\n2. Purchase the item 'The Source of Sin' from the Cash Shop.\n3. Change the Impmon to Beelzebumon's Data Code through NPC White-beared Guru located in the Dats Center. \n4. Hatch the Ogudomon[weakened] by obtaining the rest of Lucemon: Falldown Mode's Data Code, Leviamon's Data Code, Demon's Data Code, Belphemon's Data Code, Lilithmon's Data Code, Barbamon's Data Code.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="28082" length="1100">
+              <RequirementKey kind="Leaf" offset="28082" length="4" type="Scalar { Kind = U32 }" value="31147" />
+              <AdviceCount kind="Leaf" offset="28086" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="28090" length="1092" count="2">
+                <_0_ kind="Struct" offset="28090" length="215">
+                  <AdviceKey kind="Leaf" offset="28090" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="28091" length="214" type="WString { }">1. Purchase a Syakomon line Digiegg from the cash shop.\n2. Syakomon can be hatched through an incubator.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="28305" length="877">
+                  <AdviceKey kind="Leaf" offset="28305" length="1" type="Scalar { Kind = U8 }" value="3" />
+                  <Text kind="Leaf" offset="28306" length="876" type="WString { }">Required item: The Source of Sin\n1. Syakomon's level to 100.\n2. Purchase the item 'The Source of Sin' from the Cash Shop.\n3. Change the Syakomon to Leviamon's Data Code through NPC White-beared Guru located in the Dats Center. \n4. Hatch the Ogudomon[weakened] by obtaining the rest of Lucemon: Falldown Mode's Data Code, Beelzebumon's Data Code, Demon's Data Code, Belphemon's Data Code, Lilithmon's Data Code, Barbamon's Data Code.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_1_>
+            <_2_ kind="Struct" offset="29182" length="1108">
+              <RequirementKey kind="Leaf" offset="29182" length="4" type="Scalar { Kind = U32 }" value="33069" />
+              <AdviceCount kind="Leaf" offset="29186" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="29190" length="1100" count="2">
+                <_0_ kind="Struct" offset="29190" length="219">
+                  <AdviceKey kind="Leaf" offset="29190" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="29191" length="218" type="WString { }">1. Purchase a Tsukaimon line Digiegg from the cash shop.\n2. Tsukaimon can be hatched through an incubator.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="29409" length="881">
+                  <AdviceKey kind="Leaf" offset="29409" length="1" type="Scalar { Kind = U8 }" value="3" />
+                  <Text kind="Leaf" offset="29410" length="880" type="WString { }">Required item: The Source of Sin\n1. Tsukaimon's level to 100.\n2. Purchase the item 'The Source of Sin' from the Cash Shop.\n3. Change the Tsukaimon to Demon's Data Code through NPC White-beared Guru located in the Dats Center. \n4. Hatch the Ogudomon[weakened] by obtaining the rest of Lucemon: Falldown Mode's Data Code, Beelzebumon's Data Code, Leviamon's Data Code, Belphemon's Data Code, Lilithmon's Data Code, Barbamon's Data Code.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_2_>
+            <_3_ kind="Struct" offset="30290" length="1188">
+              <RequirementKey kind="Leaf" offset="30290" length="4" type="Scalar { Kind = U32 }" value="33071" />
+              <AdviceCount kind="Leaf" offset="30294" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="30298" length="1180" count="2">
+                <_0_ kind="Struct" offset="30298" length="259">
+                  <AdviceKey kind="Leaf" offset="30298" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="30299" length="258" type="WString { }">1. Purchase a Tsukaimon[Barbamon] line Digiegg from the cash shop.\n2. Tsukaimon[Barbamon] can be hatched through an incubator.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="30557" length="921">
+                  <AdviceKey kind="Leaf" offset="30557" length="1" type="Scalar { Kind = U8 }" value="3" />
+                  <Text kind="Leaf" offset="30558" length="920" type="WString { }">Required item: The Source of Sin\n1. Tsukaimon[Barbamon]'s level to 100.\n2. Purchase the item 'The Source of Sin' from the Cash Shop.\n3. Change the Tsukaimon[Barbamon] to Barbamon's Data Code through NPC White-beared Guru located in the Dats Center. \n4. Hatch the Ogudomon[weakened] by obtaining the rest of Lucemon: Falldown Mode's Data Code, Leviamon's Data Code, Beelzebumon's Data Code, Demon's Data Code, Belphemon's Data Code, Lilithmon's Data Code.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_3_>
+            <_4_ kind="Struct" offset="31478" length="1158">
+              <RequirementKey kind="Leaf" offset="31478" length="4" type="Scalar { Kind = U32 }" value="35139" />
+              <AdviceCount kind="Leaf" offset="31482" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="31486" length="1150" count="2">
+                <_0_ kind="Struct" offset="31486" length="233">
+                  <AdviceKey kind="Leaf" offset="31486" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="31487" length="232" type="WString { }">1. Purchase a Salamon[Lilithmon] line Digiegg from the cash shop.\n2. Lucemon can be hatched through an incubator.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="31719" length="917">
+                  <AdviceKey kind="Leaf" offset="31719" length="1" type="Scalar { Kind = U8 }" value="3" />
+                  <Text kind="Leaf" offset="31720" length="916" type="WString { }">Required item: The Source of Sin\n1. Salamon[Lilithmon]'s level to 100.\n2. Purchase the item 'The Source of Sin' from the Cash Shop.\n3. Change the Salamon[Lilithmon] to Lilithmon's Data Code through NPC White-beared Guru located in the Dats Center. \n4. Hatch the Ogudomon[weakened] by obtaining the rest of Lucemon: Falldown Mode's Data Code, Leviamon's Data Code, Beelzebumon's Data Code, Demon's Data Code, Belphemon's Data Code, Barbamon's Data Code.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_4_>
+            <_5_ kind="Struct" offset="32636" length="1108">
+              <RequirementKey kind="Leaf" offset="32636" length="4" type="Scalar { Kind = U32 }" value="35145" />
+              <AdviceCount kind="Leaf" offset="32640" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="32644" length="1100" count="2">
+                <_0_ kind="Struct" offset="32644" length="219">
+                  <AdviceKey kind="Leaf" offset="32644" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="32645" length="218" type="WString { }">1. Purchase a Psychemon line Digiegg from the cash shop.\n2. Psychemon can be hatched through an incubator.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="32863" length="881">
+                  <AdviceKey kind="Leaf" offset="32863" length="1" type="Scalar { Kind = U8 }" value="3" />
+                  <Text kind="Leaf" offset="32864" length="880" type="WString { }">Required item: The Source of Sin\n1. Psychemon's level to 100.\n2. Purchase the item 'The Source of Sin' from the Cash Shop.\n3. Change the Psychemon to Belphemon's Data Code through NPC White-beared Guru located in the Dats Center. \n4. Hatch the Ogudomon[weakened] by obtaining the rest of Lucemon: Falldown Mode's Data Code, Leviamon's Data Code, Beelzebumon's Data Code, Demon's Data Code, Lilithmon's Data Code, Barbamon's Data Code.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_5_>
+            <_6_ kind="Struct" offset="33744" length="1092">
+              <RequirementKey kind="Leaf" offset="33744" length="4" type="Scalar { Kind = U32 }" value="45160" />
+              <AdviceCount kind="Leaf" offset="33748" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="33752" length="1084" count="2">
+                <_0_ kind="Struct" offset="33752" length="211">
+                  <AdviceKey kind="Leaf" offset="33752" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="33753" length="210" type="WString { }">1. Purchase a Lucemon line Digiegg from the cash shop.\n2. Lucemon can be hatched through an incubator.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="33963" length="873">
+                  <AdviceKey kind="Leaf" offset="33963" length="1" type="Scalar { Kind = U8 }" value="3" />
+                  <Text kind="Leaf" offset="33964" length="872" type="WString { }">Required item: The Source of Sin\n1. Lucemon's level to 100.\n2. Purchase the item 'The Source of Sin' from the Cash Shop.\n3. Change the Lucemon to Lucemon: Falldown Mode's Data Code through NPC White-beared Guru located in the Dats Center. \n4. Hatch the Ogudomon[weakened] by obtaining the rest of Leviamon's Data Code, Beelzebumon's Data Code, Demon's Data Code, Belphemon's Data Code, Lilithmon's Data Code, Barbamon's Data Code.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_6_>
+          </Requirements>
+        </_0_>
+        <_1_ kind="Struct" offset="34836" length="4330">
+          <EvolutionKey kind="Leaf" offset="34836" length="4" type="Scalar { Kind = U32 }" value="71102" />
+          <RequirementCount kind="Leaf" offset="34840" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <Requirements kind="Array" offset="34844" length="4322" count="4">
+            <_0_ kind="Struct" offset="34844" length="1070">
+              <RequirementKey kind="Leaf" offset="34844" length="4" type="Scalar { Kind = U32 }" value="33076" />
+              <AdviceCount kind="Leaf" offset="34848" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="34852" length="1062" count="2">
+                <_0_ kind="Struct" offset="34852" length="259">
+                  <AdviceKey kind="Leaf" offset="34852" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="34853" length="258" type="WString { }">1. Purchase a Betamon[Apocalymon] line Digiegg from the cash shop.\n2. Betamon[Apocalymon] can be hatched through an incubator.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="35111" length="803">
+                  <AdviceKey kind="Leaf" offset="35111" length="1" type="Scalar { Kind = U8 }" value="3" />
+                  <Text kind="Leaf" offset="35112" length="802" type="WString { }">Required item: Souls of the Left-outs\n1. Increases the level of the Betamon[Apocalymon]'s level to 99\n2.Purchase the item 'Souls of the Left-outs' from the Cash Shop.\n3. Change the Betamon[Apocalymon] to Soul under the Sea through NPC White-beared Guru located in the Dats Center.\n4. Hatch the Apocalymon [Psychic] by obtaining the rest of Soul of the Jungle, Soul of Steel, Soul in the Shadows.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_0_>
+            <_1_ kind="Struct" offset="35914" length="1062">
+              <RequirementKey kind="Leaf" offset="35914" length="4" type="Scalar { Kind = U32 }" value="33077" />
+              <AdviceCount kind="Leaf" offset="35918" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="35922" length="1054" count="2">
+                <_0_ kind="Struct" offset="35922" length="255">
+                  <AdviceKey kind="Leaf" offset="35922" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="35923" length="254" type="WString { }">1. Purchase a Palmon[Apocalymon] line Digiegg from the cash shop.\n2. Palmon[Apocalymon] can be hatched through an incubator.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="36177" length="799">
+                  <AdviceKey kind="Leaf" offset="36177" length="1" type="Scalar { Kind = U8 }" value="3" />
+                  <Text kind="Leaf" offset="36178" length="798" type="WString { }">Required item: Souls of the Left-outs\n1. Increases the level of the Palmon[Apocalymon]'s level to 99\n2.Purchase the item 'Souls of the Left-outs' from the Cash Shop.\n3. Change the Palmon[Apocalymon] to Soul of the Jungle through NPC White-beared Guru located in the Dats Center.\n4. Hatch the Apocalymon [Psychic] by obtaining the rest of Soul under the Sea, Soul of Steel, Soul in the Shadows.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_1_>
+            <_2_ kind="Struct" offset="36976" length="1086">
+              <RequirementKey kind="Leaf" offset="36976" length="4" type="Scalar { Kind = U32 }" value="33078" />
+              <AdviceCount kind="Leaf" offset="36980" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="36984" length="1078" count="2">
+                <_0_ kind="Struct" offset="36984" length="267">
+                  <AdviceKey kind="Leaf" offset="36984" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="36985" length="266" type="WString { }">1. Purchase a Hagurumon[Apocalymon] line Digiegg from the cash shop.\n2. Hagurumon[Apocalymon] can be hatched through an incubator.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="37251" length="811">
+                  <AdviceKey kind="Leaf" offset="37251" length="1" type="Scalar { Kind = U8 }" value="3" />
+                  <Text kind="Leaf" offset="37252" length="810" type="WString { }">Required item: Souls of the Left-outs\n1. Increases the level of the Hagurumon[Apocalymon]'s level to 99\n2.Purchase the item 'Souls of the Left-outs' from the Cash Shop.\n3. Change the Hagurumon[Apocalymon] to Soul of Steel through NPC White-beared Guru located in the Dats Center.\n4. Hatch the Apocalymon [Psychic] by obtaining the rest of Soul under the Sea, Soul of the Jungle, Soul in the Shadows.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_2_>
+            <_3_ kind="Struct" offset="38062" length="1104">
+              <RequirementKey kind="Leaf" offset="38062" length="4" type="Scalar { Kind = U32 }" value="33079" />
+              <AdviceCount kind="Leaf" offset="38066" length="4" type="Scalar { Kind = U32 }" value="2" />
+              <AdviceEntries kind="Array" offset="38070" length="1096" count="2">
+                <_0_ kind="Struct" offset="38070" length="275">
+                  <AdviceKey kind="Leaf" offset="38070" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="38071" length="274" type="WString { }">1. Purchase a PicoDevimon[Apocalymon] line Digiegg from the cash shop.\n2. PicoDevimon[Apocalymon] can be hatched through an incubator.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="38345" length="821">
+                  <AdviceKey kind="Leaf" offset="38345" length="1" type="Scalar { Kind = U8 }" value="3" />
+                  <Text kind="Leaf" offset="38346" length="820" type="WString { }">Required item: Souls of the Left-outs\n1. Increases the level of the PicoDevimon[Apocalymon]'s level to 99\n2.Purchase the item 'Souls of the Left-outs' from the Cash Shop.\n3. Change the PicoDevimon[Apocalymon] to Soul in the Shadows through NPC White-beared Guru located in the Dats Center.\n4. Hatch the  Apocalymon [Psychic] by obtaining the rest of Soul under the Sea, Soul of the Jungle, Soul of Steel.</Text>
+                </_1_>
+              </AdviceEntries>
+            </_3_>
+          </Requirements>
+        </_1_>
+        <_2_ kind="Struct" offset="39166" length="1281">
+          <EvolutionKey kind="Leaf" offset="39166" length="4" type="Scalar { Kind = U32 }" value="71103" />
+          <RequirementCount kind="Leaf" offset="39170" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="39174" length="1273" count="1">
+            <_0_ kind="Struct" offset="39174" length="1273">
+              <RequirementKey kind="Leaf" offset="39174" length="4" type="Scalar { Kind = U32 }" value="0" />
+              <AdviceCount kind="Leaf" offset="39178" length="4" type="Scalar { Kind = U32 }" value="3" />
+              <AdviceEntries kind="Array" offset="39182" length="1265" count="3">
+                <_0_ kind="Struct" offset="39182" length="161">
+                  <AdviceKey kind="Leaf" offset="39182" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="39183" length="160" type="WString { }">1. If the progress of the quest stops in the middle, check the Digivice quest.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="39343" length="235">
+                  <AdviceKey kind="Leaf" offset="39343" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="39344" length="234" type="WString { }">1. This repetitive quest can only be progressed by completing all quests in Extra Evolution: Armagemon[Conflation].</Text>
+                </_1_>
+                <_2_ kind="Struct" offset="39578" length="869">
+                  <AdviceKey kind="Leaf" offset="39578" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="39579" length="868" type="WString { }">Required item: Autotomy Program\n1. Complete all Quest of Extra Evolution : Armagemon[Conflation].\n2. Change the Diablomon Data, Armagemon Data to Backup Data File[Diablomon], Backup Data FileArmagemon].\n3. Purchase the item through NPC Nanomon.\n3. Purchase 'Autotomy Program' at Cash Shop.\n4. Change Item 'Autotomy Program', 'Backup Data File' to Kuramon.\n5. Hatch Armagemon with divided Kuramon through NPC White-Beared Curu.</Text>
+                </_2_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_2_>
+        <_3_ kind="Struct" offset="40447" length="1049">
+          <EvolutionKey kind="Leaf" offset="40447" length="4" type="Scalar { Kind = U32 }" value="71113" />
+          <RequirementCount kind="Leaf" offset="40451" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Requirements kind="Array" offset="40455" length="1041" count="1">
+            <_0_ kind="Struct" offset="40455" length="1041">
+              <RequirementKey kind="Leaf" offset="40455" length="4" type="Scalar { Kind = U32 }" value="63012" />
+              <AdviceCount kind="Leaf" offset="40459" length="4" type="Scalar { Kind = U32 }" value="3" />
+              <AdviceEntries kind="Array" offset="40463" length="1033" count="3">
+                <_0_ kind="Struct" offset="40463" length="199">
+                  <AdviceKey kind="Leaf" offset="40463" length="1" type="Scalar { Kind = U8 }" value="0" />
+                  <Text kind="Leaf" offset="40464" length="198" type="WString { }">1. The 7th Demon King's Summon Card can be used in each of the 7th Demon Kings' bases or battles.</Text>
+                </_0_>
+                <_1_ kind="Struct" offset="40662" length="175">
+                  <AdviceKey kind="Leaf" offset="40662" length="1" type="Scalar { Kind = U8 }" value="1" />
+                  <Text kind="Leaf" offset="40663" length="174" type="WString { }">1. Tamers are able to obtain the evolution item by talking to Nanomon at Dats Center.</Text>
+                </_1_>
+                <_2_ kind="Struct" offset="40837" length="659">
+                  <AdviceKey kind="Leaf" offset="40837" length="1" type="Scalar { Kind = U8 }" value="2" />
+                  <Text kind="Leaf" offset="40838" length="658" type="WString { }">Required item: The Source of Sin\n1. Increases the level of the 7th Demon Kings to 100. \n2. Purchase the item 'The Source of Sin' from the Cash Shop.\n3. Change the 7th Demon Kings to Data Code through NPC White-beared Guru located in the Dats Center.\n4. Hatch the Ogudomon[weakened] by Collecting 7th Demon King's Data Code.</Text>
+                </_2_>
+              </AdviceEntries>
+            </_0_>
+          </Requirements>
+        </_3_>
+      </Evolutions>
+    </_3>
+  </Groups>
+</DEvolutionAdvice_Str>

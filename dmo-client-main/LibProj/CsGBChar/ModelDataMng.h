@@ -20,6 +20,7 @@
 #define CODE_HIRO				80018	// Hiro Amanokawa
 #define CODE_RULI				80019	// Ruli Tsukiyono
 #define CODE_KIYOSHIROU			80020	// Kiyoshirou Higashimitarai
+#define CODE_DIGIMON_KAISER		80021	// Digimon Kaiser
 
 // ==================================================================================================== 
 

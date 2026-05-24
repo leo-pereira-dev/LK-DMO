@@ -1,0 +1,4 @@
+PackBasePath=C:\0-NewDmo\ClientDist\Data\Pack01
+OriginalPfLength=24471819042
+OriginalHfBackup=C:\0-NewDmo\ClientDist\Data\Pack01.hf.bak_assets_20260524_153408
+CreatedAt=20260524_153408

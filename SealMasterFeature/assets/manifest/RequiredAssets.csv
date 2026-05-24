@@ -1,0 +1,18 @@
+AssetPath,Source,Reason
+SealMaster\sealmaster_window.tga,CreateSealMasterWindow,Root Seal Master frame.
+SealMaster\Sealmaster_bg_00.tga,CreateSealMasterWindow,Old fixed background slot plate behind cards.
+SealMaster\Sealmaster_favorite_on.dds,BuildSealMasterCardGrid,Favorite enabled icon.
+SealMaster\Sealmaster_favorite_off.dds,BuildSealMasterCardGrid,Favorite disabled icon.
+SealMaster\sealmaster_belt_s.dds,BuildSealMasterCardGrid,Count belt under each seal card.
+SealMaster\Sealmaster_deco.tga,BuildSealMasterStatSummary,Bottom stat summary frame.
+SealMaster\btn_combobox.tga,BuildSealMasterStatFilterDropdown,Stat filter combo button.
+SealMaster\dropdown_list_0,BuildSealMasterStatFilterDropdown,Stat filter dropdown list.
+SealMaster\common_dropdown_glow.tga,BuildSealMasterDropdownGlow,Left filter glow/selection visual.
+Data\Interface\SealMaster\SealBack\sealmaster_bg_normal.dds,SealPlateImage,Normal/locked tier card back.
+Data\Interface\SealMaster\SealBack\sealmaster_bg_bronze.dds,SealPlateImage,Bronze tier card back.
+Data\Interface\SealMaster\SealBack\sealmaster_bg_silver.dds,SealPlateImage,Silver tier card back.
+Data\Interface\SealMaster\SealBack\sealmaster_bg_master.dds,SealPlateImage,Gold/master-named tier card back.
+Data\Interface\SealMaster\SealBack\sealmaster_bg_platinum.dds,SealPlateImage,Platinum tier card back.
+Data\Interface\SealMaster\SealBack\sealmaster_bg_master2.dds,SealPlateImage,Final master tier card back.
+Encyclopedia\newencyclopedia\main\serch bar.png,XmlUnionDUnit,Reused search field visual already used by active client.
+Encyclopedia\newencyclopedia\main\sarch.png,XmlUnionDUnit,Optional search icon/button visual already used by active client.

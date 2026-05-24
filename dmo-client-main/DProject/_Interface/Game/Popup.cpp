@@ -1934,7 +1934,7 @@ void cPopUpWindow::_Make_Mainbar_Inventory()
 	ti.SetText(sz);
 	pString = NiNew cString;
 	pString->AddText(&ti, CsPoint(4, 4));
-	pString->SetValue1(cBaseWindow::WT_INVENTORY);
+	pString->SetValue1(cBaseWindow::WT_EXTRAINVENTORY);
 
 	pString->AddSprite_Head(m_pSprMainBar[MAINBAR_EXCLUSIVEINV]);
 
@@ -1970,13 +1970,16 @@ bool cPopUpWindow::_Update_ForMouse_Mainbar_Inventory()
 			}
 		}
 		break;
-		//case cBaseWindow::WT_EXTRAINVENTORY:
-		//{
-			//ClosePopup();
-			//int opentype = 1;
-			//GAME_EVENT_STPTR->OnEvent(EVENT_CODE::TOGGLE_FRIEND_SHUTOUT_UI, &opentype);
-		//}
-		//break;
+		case cBaseWindow::WT_EXTRAINVENTORY:
+		{
+			ClosePopup();
+
+			if (g_pGameIF->IsActiveWindow(cBaseWindow::WT_EXTRAINVENTORY))
+				g_pGameIF->CloseDynamicIF(cBaseWindow::WT_EXTRAINVENTORY);
+			else
+				g_pGameIF->GetDynamicIF(cBaseWindow::WT_EXTRAINVENTORY);
+		}
+		break;
 		default:
 			assert_cs(false);
 			break;
@@ -1989,9 +1992,9 @@ bool cPopUpWindow::_Update_ForMouse_Mainbar_Inventory()
 	case cBaseWindow::WT_INVENTORY:
 		m_bRenderSelMask = true;
 		break;
-	//case cBaseWindow::WT_EXTRAINVENTORY:
-		//m_bRenderSelMask = true;
-		//break;
+	case cBaseWindow::WT_EXTRAINVENTORY:
+		m_bRenderSelMask = true;
+		break;
 	}
 
 	return true;

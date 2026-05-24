@@ -3,6 +3,45 @@
 #include "../../ContentsSystem/ContentsSystem.h"
 #include "SealMaster.h"
 
+namespace
+{
+	std::wstring _SealMasterLower( std::wstring const& text )
+	{
+		std::wstring result = text;
+		for( size_t i = 0; i < result.length(); ++i )
+			result[ i ] = (wchar_t)towlower( result[ i ] );
+
+		return result;
+	}
+
+	bool _SealMasterContainsNoCase( std::wstring const& text, std::wstring const& keyword )
+	{
+		if( keyword.empty() )
+			return true;
+
+		return _SealMasterLower( text ).find( _SealMasterLower( keyword ) ) != std::wstring::npos;
+	}
+
+	std::string _SealMasterTierBackImage( int const nGrade, std::string const& fallback )
+	{
+		switch( nGrade )
+		{
+		case nCardGrade::Normal:		return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_normal.dds";
+		case nCardGrade::Bronze:		return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_bronze.dds";
+		case nCardGrade::Silver:		return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_silver.dds";
+		case nCardGrade::Gold:		return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_master.dds";
+		case nCardGrade::Platinum:	return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_platinum.dds";
+		case nCardGrade::Master:		return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_master2.dds";
+		default:					break;
+		}
+
+		if( fallback.empty() == false )
+			return fallback;
+
+		return "Data\\Interface\\SealMaster\\SealBack\\sealmaster_bg_normal.dds";
+	}
+}
+
 void cSealMaster::sSealCardControl::SetSealDigimon( std::string const& imgFile )
 {
 	SAFE_POINTER_RET( sDigimonImg );
@@ -76,7 +115,7 @@ void cSealMaster::sSealCardControl::SetSealGrade( int const& nGrade, std::string
 //////////////////////////////////////////////////////////////////////////
 
 cSealMaster::cSealMaster():m_pRenderTex(NULL), m_bViewCard(false), m_nCurStateFilter(0),
-m_pGridListBox(NULL), m_pMapgroupTreeBox(NULL), m_pCombo(NULL), m_pSelectedTree(NULL), m_nViewGridCount(0), m_pActiveSealCountText(NULL),
+m_pGridListBox(NULL), m_pMapgroupTreeBox(NULL), m_pCombo(NULL), m_pSearchEdit(NULL), m_pSelectedTree(NULL), m_nViewGridCount(0), m_pActiveSealCountText(NULL),
 m_bCountFilter(false), m_bFavoriteFilter(false), m_bMapAllFilter(false)
 , m_bisTextCreated(false),m_fAniTime(0.0f)
 {
@@ -194,6 +233,7 @@ void cSealMaster::Create( int nValue /*= 0*/ )
 	
 	//능력치 필터링 콤보박스
 	MakeStateFilterComboBox();
+	MakeSearchEditBox();
 
 	//능력치 추가량 표시
 	MakePlusState();
@@ -251,6 +291,24 @@ cBaseWindow::eMU_TYPE cSealMaster::Update_ForMouse()
 
 	if(m_pCombo && m_pCombo->Update_ForMouse() != cComboBox::CI_INVALIDE )
 		return muReturn;
+
+	if( m_pSearchEdit )
+	{
+		if( GLOBALINPUT_ST.IsEscape() && m_pSearchEdit->IsFocus() )
+		{
+			m_pSearchEdit->SetText( _T( "" ), false );
+			m_wsSearchKeyword.clear();
+			SetFilter();
+			m_pSearchEdit->ReleaseFocus( false );
+			return cBaseWindow::MUT_NONE;
+		}
+
+		if( m_pSearchEdit->Update_ForMouse( CsPoint::ZERO ) != cEditBox::ACTION_NONE )
+			return muReturn;
+
+		if( m_pSearchEdit->IsFocus() && CURSOR_ST.GetButtonState() == CURSOR::LBUTTON_DOWN )
+			m_pSearchEdit->ReleaseFocus( false );
+	}
 
 	if(m_pMapgroupTreeBox && m_pMapgroupTreeBox->Update_ForMouse( CURSOR_ST.GetPos() ) )
 		return muReturn;
@@ -626,10 +684,11 @@ void cSealMaster::MakeSealGrid()
 		addCon.spItem  = NiNew cGridListBoxItem(i, CsPoint(86, 128),100 );
 		SAFE_POINTER_RET(addCon.spItem);
 		addCon.spItem->SetUserData( new sSealGridData(sealInfo.sSealID, sealInfo.sModelID, sealInfo.sSealCount, sealInfo.sGrade, sealInfo.sTableCode,
-			sealInfo.sEffectType, sealInfo.sFavorite) );
+			sealInfo.sEffectType, sealInfo.sFavorite, sealInfo.sSealName) );
 		addCon.spItem->SetItem(pString);
 
 		std::string backImgFile = GetSystem()->GetSealCardObjectFile_GradBack( sealInfo.sSealID );
+		backImgFile = _SealMasterTierBackImage( sealInfo.sGrade, backImgFile );
 		addCon.SetSealGrade( sealInfo.sGrade, backImgFile );
 		std::string digimonImg = GetSystem()->GetSealCardObjectFile_Digimon( sealInfo.sSealID );
 		addCon.SetSealDigimon( digimonImg );
@@ -791,8 +850,16 @@ void cSealMaster::Update_ToolTip()
 	SAFE_POINTER_RET(pUserData);
 	cSealMasterContents::SealInfoMap sealInfoMap = GetSystem()->GetSealInfoMap();
 	cSealMasterContents::SealInfoMapItr mapItr = sealInfoMap.find(pUserData->sSealID);
+	if( mapItr == sealInfoMap.end() )
+		return;
+
 	const cSealMasterContents::sSealInfo& sealInfo = mapItr->second;
-	CsMaster_Card::sINFO	sInfo = *nsCsFileTable::g_pMaster_CardMng->GetMasterCard(sealInfo.sSealID)->GetInfo();
+	SAFE_POINTER_RET( nsCsFileTable::g_pMaster_CardMng );
+	CsMaster_Card* pSealMasterInfo = nsCsFileTable::g_pMaster_CardMng->GetMasterCard(sealInfo.sSealID);
+	SAFE_POINTER_RET( pSealMasterInfo );
+	CsMaster_Card::sINFO* pSealInfo = pSealMasterInfo->GetInfo();
+	SAFE_POINTER_RET( pSealInfo );
+	CsMaster_Card::sINFO	sInfo = *pSealInfo;
 	
 	TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip(pOverGrid->GetWorldPos(),pOverGrid->getItemSize(), pOverGrid->getItemSize().x, cTooltip::SEALMASTER, 
 						sealInfo.sSealID, cBaseWindow::WT_CARDINVENTORY, sealInfo.sGrade, sealInfo.sSealCount, &sInfo);
@@ -836,7 +903,9 @@ void cSealMaster::SetFilter()
 			bMapFilter = bStateFilter = bCountFilter = true;
 		}
 
-		if ( bMapFilter && bStateFilter && bCountFilter)
+		bool bSearchFilter = _SealMasterContainsNoCase( pUserData->sSealName, m_wsSearchKeyword );
+
+		if ( bMapFilter && bStateFilter && bCountFilter && bSearchFilter)
 		{
 			pGrid->SetVisible(true);
 			m_nViewGridCount++;
@@ -928,6 +997,35 @@ void cSealMaster::MakeStateFilterComboBox()
 
 	m_pCombo->AddEvent(cComboBox::COMBO_SELECTITEM, this, &cSealMaster::SelectStateFilter);
 	AddChildControl(m_pCombo);
+}
+
+void cSealMaster::MakeSearchEditBox()
+{
+	AddSprite( CsPoint( 247, 55 ), CsPoint( 166, 24 ), "Encyclopedia\\newencyclopedia\\main\\serch bar.png" );
+
+	cText::sTEXTINFO ti;
+	ti.Init( &g_pEngine->m_FontText, CFont::FS_10, NiColor::WHITE );
+	ti.SetText( _T( "" ) );
+	ti.s_eTextAlign = DT_LEFT;
+
+	m_pSearchEdit = NiNew cEditBox;
+	SAFE_POINTER_RET( m_pSearchEdit );
+
+	m_pSearchEdit->Init( GetRoot(), CsPoint( 258, 59 ), CsPoint( 142, 18 ), &ti, false );
+	m_pSearchEdit->SetEmptyMsgText( _T( "Inserir a busca." ), NiColor( 0.55f, 0.65f, 0.78f ) );
+	m_pSearchEdit->SetFontLength( 32 );
+	m_pSearchEdit->SetEnableSound( true );
+	m_pSearchEdit->AddEvent( cEditBox::eEditbox_ChangeText, this, &cSealMaster::OnSearchTextChanged );
+	AddChildControl( m_pSearchEdit );
+}
+
+void cSealMaster::OnSearchTextChanged(void* pSender, void* pData)
+{
+	if( m_pSearchEdit == NULL )
+		return;
+
+	m_wsSearchKeyword = m_pSearchEdit->GetString();
+	SetFilter();
 }
 
 void cSealMaster::MakePlusState()
@@ -1228,6 +1326,7 @@ void cSealMaster::Notify(int const& iNotifiedEvt, ContentsStream const& kStream)
 			if( bChangeGrade )
 			{
 				std::string backImgFile = GetSystem()->GetSealCardObjectFile_GradBack( sealInfoItr->second.sSealID );
+				backImgFile = _SealMasterTierBackImage( sealInfoItr->second.sGrade, backImgFile );
 				it->second.SetSealGrade( sealInfoItr->second.sGrade, backImgFile );
 			}
 			SetFilter();

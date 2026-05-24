@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DBookDeck_Str schema="DBookDeck_Str.struct" bin="DBookDeck_Str.bin" byteLength="32126">
+  <Entries kind="Section" offset="0" length="32126">
+    <_0 kind="Record" offset="4" length="638">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1001" />
+      <TextA kind="Leaf" offset="8" length="36" type="WString { }">Four Holy Beasts</TextA>
+      <TextB kind="Leaf" offset="44" length="598" type="WString { }">The Four Holy Beasts are four Ultimate digimons that reign over the north, south, east, and west of the digital world. Qinglongmon(Lightning), Xuanwumon(Water), Zhuqiaomon(Fire), and Baihumon(Iron), the Four Holy Beasts have, unlike other normal digimons, twelve cores and four eyes respectively. </TextB>
+    </_0>
+    <_1 kind="Record" offset="642" length="442">
+      <TextKey kind="Leaf" offset="642" length="4" type="Scalar { Kind = U32 }" value="1002" />
+      <TextA kind="Leaf" offset="646" length="68" type="WString { }">Fusion to evolve into the higher</TextA>
+      <TextB kind="Leaf" offset="714" length="370" type="WString { }">Two or more Jogress digimons can be combined to evolve into an entirely different digimon. A digimon successfully jogressed has great power and an essential role in the digital world.</TextB>
+    </_1>
+    <_2 kind="Record" offset="1084" length="38">
+      <TextKey kind="Leaf" offset="1084" length="4" type="Scalar { Kind = U32 }" value="1003" />
+      <TextA kind="Leaf" offset="1088" length="12" type="WString { }">#N/A</TextA>
+      <TextB kind="Leaf" offset="1100" length="22" type="WString { }">Explain..</TextB>
+    </_2>
+    <_3 kind="Record" offset="1122" length="858">
+      <TextKey kind="Leaf" offset="1122" length="4" type="Scalar { Kind = U32 }" value="1004" />
+      <TextA kind="Leaf" offset="1126" length="36" type="WString { }">Three Archangels</TextA>
+      <TextB kind="Leaf" offset="1162" length="818" type="WString { }">They are the three great archangels who are the leaders of all the angelic digimons in the digital world. They are Seraphimon who executes god's law, Cherubimon who protects wisdom and god's area, Ophanimon who delivers god's love. Also, they lead angelic army consists of man-type, animal-type, and woman-type angelic digimons. Seraphimon is the highest of the three, and thus of all the angelic digimons. </TextB>
+    </_3>
+    <_4 kind="Record" offset="1980" length="38">
+      <TextKey kind="Leaf" offset="1980" length="4" type="Scalar { Kind = U32 }" value="1005" />
+      <TextA kind="Leaf" offset="1984" length="12" type="WString { }">#N/A</TextA>
+      <TextB kind="Leaf" offset="1996" length="22" type="WString { }">Explain..</TextB>
+    </_4>
+    <_5 kind="Record" offset="2018" length="38">
+      <TextKey kind="Leaf" offset="2018" length="4" type="Scalar { Kind = U32 }" value="1006" />
+      <TextA kind="Leaf" offset="2022" length="12" type="WString { }">#N/A</TextA>
+      <TextB kind="Leaf" offset="2034" length="22" type="WString { }">Explain..</TextB>
+    </_5>
+    <_6 kind="Record" offset="2056" length="38">
+      <TextKey kind="Leaf" offset="2056" length="4" type="Scalar { Kind = U32 }" value="1007" />
+      <TextA kind="Leaf" offset="2060" length="12" type="WString { }">#N/A</TextA>
+      <TextB kind="Leaf" offset="2072" length="22" type="WString { }">Explain..</TextB>
+    </_6>
+    <_7 kind="Record" offset="2094" length="598">
+      <TextKey kind="Leaf" offset="2094" length="4" type="Scalar { Kind = U32 }" value="1008" />
+      <TextA kind="Leaf" offset="2098" length="68" type="WString { }">Main characters of the adventure</TextA>
+      <TextB kind="Leaf" offset="2166" length="526" type="WString { }">Digimon adventure's 8 main characters' partner digimons. Tai's partner Agumon, Matthew's partner Gabumon, Izzy's partner Tentomon, Kido Jou's partner Gomamon, T.K.'s partner Patamon, Mimi's Palmon, Sora's partner Biyomon, Kari's partner Gatomon are the members.</TextB>
+    </_7>
+    <_8 kind="Record" offset="2692" length="694">
+      <TextKey kind="Leaf" offset="2692" length="4" type="Scalar { Kind = U32 }" value="1009" />
+      <TextA kind="Leaf" offset="2696" length="44" type="WString { }">Burst Ultimate Wings</TextA>
+      <TextB kind="Leaf" offset="2740" length="646" type="WString { }">This is the group of the digimons with wings who have become Burst Mode digimons overcoming the power of Mega digimons.
+Their wings influence all their actions from battle to moving.
+The wings can be the shield of the Digital World full of good will, but sometimes they can also be the blade raising the wind of darkness.</TextB>
+    </_8>
+    <_9 kind="Record" offset="3386" length="466">
+      <TextKey kind="Leaf" offset="3386" length="4" type="Scalar { Kind = U32 }" value="1010" />
+      <TextA kind="Leaf" offset="3390" length="28" type="WString { }">Seafood Stew</TextA>
+      <TextB kind="Leaf" offset="3418" length="434" type="WString { }">The digimon looks like the food one can easily see in daily life.
+Mushroom, clam, fish, squid, and pumpkin can make really great seafood stew if mixed harmoniously.
+
+※Jogress Food※
+Evolve into the best seafood stew!</TextB>
+    </_9>
+    <_10 kind="Record" offset="3852" length="636">
+      <TextKey kind="Leaf" offset="3852" length="4" type="Scalar { Kind = U32 }" value="1011" />
+      <TextA kind="Leaf" offset="3856" length="46" type="WString { }">Sharp Blue Sword Wave</TextA>
+      <TextB kind="Leaf" offset="3902" length="586" type="WString { }">This is the group of the digimons using big and nice blades to lead the battle.
+They are usually masters of swords so that it's very beautiful to watch they play with their swords.
+As the digimons walk only on the sword's way, they commonly hold fast to their justice just like sharp blades.</TextB>
+    </_10>
+    <_11 kind="Record" offset="4488" length="638">
+      <TextKey kind="Leaf" offset="4488" length="4" type="Scalar { Kind = U32 }" value="1012" />
+      <TextA kind="Leaf" offset="4492" length="44" type="WString { }">Instant Red Gun Fire</TextA>
+      <TextB kind="Leaf" offset="4536" length="590" type="WString { }">This is the group of the digimons using firearms like guns and cannons to win battles.
+Some of them unleash stylish attacks with pistols, the others deal heavy damage with huge cannon installed on their body.
+Gun using digimons are usually cheerful, whereas
+Cannon using digimons are taciturn.</TextB>
+    </_11>
+    <_12 kind="Record" offset="5126" length="508">
+      <TextKey kind="Leaf" offset="5126" length="4" type="Scalar { Kind = U32 }" value="1013" />
+      <TextA kind="Leaf" offset="5130" length="20" type="WString { }">So cute♥</TextA>
+      <TextB kind="Leaf" offset="5150" length="484" type="WString { }">This is the group of the digimons that you want to be with.
+When you come back home, if one of the digimons from the deck welcomes you, it will be your happy day.
+When you are uncomfortable, you can be calmed if you touch their shaggy hair.</TextB>
+    </_12>
+    <_13 kind="Record" offset="5634" length="38">
+      <TextKey kind="Leaf" offset="5634" length="4" type="Scalar { Kind = U32 }" value="1014" />
+      <TextA kind="Leaf" offset="5638" length="12" type="WString { }">#N/A</TextA>
+      <TextB kind="Leaf" offset="5650" length="22" type="WString { }">Explain..</TextB>
+    </_13>
+    <_14 kind="Record" offset="5672" length="38">
+      <TextKey kind="Leaf" offset="5672" length="4" type="Scalar { Kind = U32 }" value="1015" />
+      <TextA kind="Leaf" offset="5676" length="12" type="WString { }">#N/A</TextA>
+      <TextB kind="Leaf" offset="5688" length="22" type="WString { }">Explain..</TextB>
+    </_14>
+    <_15 kind="Record" offset="5710" length="418">
+      <TextKey kind="Leaf" offset="5710" length="4" type="Scalar { Kind = U32 }" value="1016" />
+      <TextA kind="Leaf" offset="5714" length="38" type="WString { }">Four Dark Masters</TextA>
+      <TextB kind="Leaf" offset="5752" length="376" type="WString { }">Appearing at the latter part of the digimon adventure, they are powerful dark forces who can compress all the areas into one place. Four dark masters have Ultimate digimons as servants. </TextB>
+    </_15>
+    <_16 kind="Record" offset="6128" length="960">
+      <TextKey kind="Leaf" offset="6128" length="4" type="Scalar { Kind = U32 }" value="1017" />
+      <TextA kind="Leaf" offset="6132" length="42" type="WString { }">Ego of the Darkness</TextA>
+      <TextB kind="Leaf" offset="6174" length="914" type="WString { }">It is the final boss of Digimon Adventure
+and came from beyond the Wall of Fire to have the final fight with the Digidestined.
+It wanted to help the world but it is a collective agent of the resentment of the Digimons that died out and are left behind by evolution.
+The egos of resentment disappeared in the darkness
+and decided to attack the Digital World to give the Digidestined and the other Digimons in the world of light "the same pain it suffered."</TextB>
+    </_16>
+    <_17 kind="Record" offset="7088" length="76">
+      <TextKey kind="Leaf" offset="7088" length="4" type="Scalar { Kind = U32 }" value="1018" />
+      <TextA kind="Leaf" offset="7092" length="36" type="WString { }">Trick or Treat!!</TextA>
+      <TextB kind="Leaf" offset="7128" length="36" type="WString { }">Trick or Treat!!</TextB>
+    </_17>
+    <_18 kind="Record" offset="7164" length="168">
+      <TextKey kind="Leaf" offset="7164" length="4" type="Scalar { Kind = U32 }" value="1019" />
+      <TextA kind="Leaf" offset="7168" length="48" type="WString { }">Hyper Spirit Evolution</TextA>
+      <TextB kind="Leaf" offset="7216" length="116" type="WString { }">The Final Sprit Evolusion
+Hyper Spirit Evolusion Digimon</TextB>
+    </_18>
+    <_19 kind="Record" offset="7332" length="386">
+      <TextKey kind="Leaf" offset="7332" length="4" type="Scalar { Kind = U32 }" value="1020" />
+      <TextA kind="Leaf" offset="7336" length="52" type="WString { }">Ancient Spirit Evolution</TextA>
+      <TextB kind="Leaf" offset="7388" length="330" type="WString { }">Digimon Group that Told of Oriental legends, strongest destructive god and the god which governs over regeneration, Susanoomon and Hyper Spirit Evolution Digimons.</TextB>
+    </_19>
+    <_20 kind="Record" offset="7718" length="256">
+      <TextKey kind="Leaf" offset="7718" length="4" type="Scalar { Kind = U32 }" value="1021" />
+      <TextA kind="Leaf" offset="7722" length="60" type="WString { }">Legendary Knights of Vaccine</TextA>
+      <TextB kind="Leaf" offset="7782" length="192" type="WString { }">A group of legendary vaccine knights that declared to be natural enemy of evil virus Digimons.</TextB>
+    </_20>
+    <_21 kind="Record" offset="7974" length="128">
+      <TextKey kind="Leaf" offset="7974" length="4" type="Scalar { Kind = U32 }" value="1022" />
+      <TextA kind="Leaf" offset="7978" length="14" type="WString { }">OMEGA</TextA>
+      <TextB kind="Leaf" offset="7992" length="110" type="WString { }">Community of 3 different Holy Knights that are alike.</TextB>
+    </_21>
+    <_22 kind="Record" offset="8102" length="202">
+      <TextKey kind="Leaf" offset="8102" length="4" type="Scalar { Kind = U32 }" value="1023" />
+      <TextA kind="Leaf" offset="8106" length="24" type="WString { }">MEGA-OMEGA</TextA>
+      <TextB kind="Leaf" offset="8130" length="174" type="WString { }">Community of 3 different Holy Knights that are alike and Digimon after transcendence.</TextB>
+    </_22>
+    <_23 kind="Record" offset="8304" length="308">
+      <TextKey kind="Leaf" offset="8304" length="4" type="Scalar { Kind = U32 }" value="1024" />
+      <TextA kind="Leaf" offset="8308" length="30" type="WString { }">Royal Knights</TextA>
+      <TextB kind="Leaf" offset="8338" length="274" type="WString { }">13 of Holy Knight Digimons were gathered by Yggdrasill in order to manage the world, and boast absolute power within the Digital World.</TextB>
+    </_23>
+    <_24 kind="Record" offset="8612" length="700">
+      <TextKey kind="Leaf" offset="8612" length="4" type="Scalar { Kind = U32 }" value="1025" />
+      <TextA kind="Leaf" offset="8616" length="50" type="WString { }">Burst Ultimate Wings II</TextA>
+      <TextB kind="Leaf" offset="8666" length="646" type="WString { }">This is the group of the digimons with wings who have become Burst Mode digimons overcoming the power of Mega digimons.
+Their wings influence all their actions from battle to moving.
+The wings can be the shield of the Digital World full of good will, but sometimes they can also be the blade raising the wind of darkness.</TextB>
+    </_24>
+    <_25 kind="Record" offset="9312" length="542">
+      <TextKey kind="Leaf" offset="9312" length="4" type="Scalar { Kind = U32 }" value="1026" />
+      <TextA kind="Leaf" offset="9316" length="34" type="WString { }">Royal Knights X</TextA>
+      <TextB kind="Leaf" offset="9350" length="504" type="WString { }">The Royal Knights, a group of thirteen Holy Knight Digimon that boast absolute power within the Digital World gathered by Yggdrasill, the host computer of the Digital World to manage the Digital World, have accepted X-Antibody to uphold their justice</TextB>
+    </_25>
+    <_26 kind="Record" offset="9854" length="330">
+      <TextKey kind="Leaf" offset="9854" length="4" type="Scalar { Kind = U32 }" value="1027" />
+      <TextA kind="Leaf" offset="9858" length="52" type="WString { }">D5 and Ultimate DigiXros</TextA>
+      <TextB kind="Leaf" offset="9910" length="274" type="WString { }">Those who want to execute D5, the last day of the human world, and those who want to stop it, the ultimate DigiXros and their showdown!</TextB>
+    </_26>
+    <_27 kind="Record" offset="10184" length="314">
+      <TextKey kind="Leaf" offset="10184" length="4" type="Scalar { Kind = U32 }" value="1028" />
+      <TextA kind="Leaf" offset="10188" length="30" type="WString { }">Never Give Up</TextA>
+      <TextB kind="Leaf" offset="10218" length="280" type="WString { }">An assembly of Digimon heavily armed with the will for world peace. No matter how strong enemy is attacked, the spirit will not be broken.</TextB>
+    </_27>
+    <_28 kind="Record" offset="10498" length="216">
+      <TextKey kind="Leaf" offset="10498" length="4" type="Scalar { Kind = U32 }" value="1029" />
+      <TextA kind="Leaf" offset="10502" length="40" type="WString { }">Knights of Vaccine</TextA>
+      <TextB kind="Leaf" offset="10542" length="172" type="WString { }">A group of vaccine knights that declared to be natural enemy of evil virus Digimons.</TextB>
+    </_28>
+    <_29 kind="Record" offset="10714" length="436">
+      <TextKey kind="Leaf" offset="10714" length="4" type="Scalar { Kind = U32 }" value="1030" />
+      <TextA kind="Leaf" offset="10718" length="72" type="WString { }">White Wings : Gurei Tou of Courage</TextA>
+      <TextB kind="Leaf" offset="10790" length="360" type="WString { }">Omegamon with white wings and looks like an angel.
+With the change in the appearance due to sadness and resolve, Grey Sword of Courage transformed into a katana called Gurei Tou.</TextB>
+    </_29>
+    <_30 kind="Record" offset="11150" length="646">
+      <TextKey kind="Leaf" offset="11150" length="4" type="Scalar { Kind = U32 }" value="1031" />
+      <TextA kind="Leaf" offset="11154" length="80" type="WString { }">White Wings : Garuru Hou of Friendship</TextA>
+      <TextB kind="Leaf" offset="11234" length="562" type="WString { }">Omegamon Merciful Mode has lines of bluish-white light Photon Spreads that runs across its whole body, temporarily increasing its power drastically. Its special move, Garuru Cannon, has transformed into Garuru Hou, which it fires cold air at absolute zero in the form of a laser.</TextB>
+    </_30>
+    <_31 kind="Record" offset="11796" length="470">
+      <TextKey kind="Leaf" offset="11796" length="4" type="Scalar { Kind = U32 }" value="1032" />
+      <TextA kind="Leaf" offset="11800" length="96" type="WString { }">The Sovereign of the Awakened Four Holy Beasts</TextA>
+      <TextB kind="Leaf" offset="11896" length="370" type="WString { }">Fanglongmon, the Digimon that oversees the Four Sovereign Digimon and governs the Earth, stands in a neutral position between good and evil. Its massive body boasts absolute hardness.</TextB>
+    </_31>
+    <_32 kind="Record" offset="12266" length="512">
+      <TextKey kind="Leaf" offset="12266" length="4" type="Scalar { Kind = U32 }" value="1033" />
+      <TextA kind="Leaf" offset="12270" length="60" type="WString { }">I'm the future Digimon king!</TextA>
+      <TextB kind="Leaf" offset="12330" length="448" type="WString { }">Shoutmon X7 turns the desire for peace into power, and every Digimon in the Digital World is in the form of a Final Xros, and the aura flowing from the gold Digizoid is getting bigger and spreading its wings of holy light.</TextB>
+    </_32>
+    <_33 kind="Record" offset="12778" length="410">
+      <TextKey kind="Leaf" offset="12778" length="4" type="Scalar { Kind = U32 }" value="1034" />
+      <TextA kind="Leaf" offset="12782" length="26" type="WString { }">Divine Will</TextA>
+      <TextB kind="Leaf" offset="12808" length="380" type="WString { }">Kuzuhamon, in the form of a shrine maiden when offering sacrifices and performing services to hear the will of the gods, rarely fights but has gained a strong power to dispel evil spirits.</TextB>
+    </_33>
+    <_34 kind="Record" offset="13188" length="1026">
+      <TextKey kind="Leaf" offset="13188" length="4" type="Scalar { Kind = U32 }" value="1035" />
+      <TextA kind="Leaf" offset="13192" length="72" type="WString { }">Holy Spear and Holy Sword of Light</TextA>
+      <TextB kind="Leaf" offset="13264" length="950" type="WString { }">The hidden form of Gallantmon, clad in armor that shines crimson. Having fully unleashed its power, the armor has absorbed the heat and turned red.
+The DigiCore, which seals the Digital Hazard, is located in its chest, and when all the power within is released, energy resembling wings can be seen emanating from its back.
+It wields the Holy Spear of Light, "Gungnir," and the Holy Sword of Light, "Blutgang," both of which are energy-based weapons without a physical form.</TextB>
+    </_34>
+    <_35 kind="Record" offset="14214" length="448">
+      <TextKey kind="Leaf" offset="14214" length="4" type="Scalar { Kind = U32 }" value="1036" />
+      <TextA kind="Leaf" offset="14218" length="62" type="WString { }">Guardian of the Digital World</TextA>
+      <TextB kind="Leaf" offset="14280" length="382" type="WString { }">A gathering of powerful Digimon who protect the Digital World.
+Even when great trials approach, these are the strongest Digimon who defend the Digital World from their respective positions.</TextB>
+    </_35>
+    <_36 kind="Record" offset="14662" length="418">
+      <TextKey kind="Leaf" offset="14662" length="4" type="Scalar { Kind = U32 }" value="1037" />
+      <TextA kind="Leaf" offset="14666" length="72" type="WString { }">The Goddess of the False Neverland</TextA>
+      <TextB kind="Leaf" offset="14738" length="342" type="WString { }">Eosmon, the Ultimate-level Digimon born as a singular entity through the actions of a rogue researcher, follows only one directive: "Destroy all that stands in the way."</TextB>
+    </_36>
+    <_37 kind="Record" offset="15080" length="420">
+      <TextKey kind="Leaf" offset="15080" length="4" type="Scalar { Kind = U32 }" value="1038" />
+      <TextA kind="Leaf" offset="15084" length="78" type="WString { }">Stop The Black Dragon of Destruction!</TextA>
+      <TextB kind="Leaf" offset="15162" length="338" type="WString { }">GulusGammamon appeared before BloomLordmon and the Chosen Children, who protect the Digital World.
+To stop The Black Dragon of Destruction, they join forces in battle.</TextB>
+    </_37>
+    <_38 kind="Record" offset="15500" length="232">
+      <TextKey kind="Leaf" offset="15500" length="4" type="Scalar { Kind = U32 }" value="1039" />
+      <TextA kind="Leaf" offset="15504" length="42" type="WString { }">Nature, and Fairies</TextA>
+      <TextB kind="Leaf" offset="15546" length="186" type="WString { }">Digimon Protecting the Forest
+These fairies guard the forest from those who disturb nature.</TextB>
+    </_38>
+    <_39 kind="Record" offset="15732" length="434">
+      <TextKey kind="Leaf" offset="15732" length="4" type="Scalar { Kind = U32 }" value="1040" />
+      <TextA kind="Leaf" offset="15736" length="66" type="WString { }">The End, The Ultimate Holy War!</TextA>
+      <TextB kind="Leaf" offset="15802" length="364" type="WString { }">In the end, ZeedMillenniummon, revived with the soul of darkness.
+The Chosen Children risk their lives to stand against ZeedMillenniummon
+before it brings destruction to the world.</TextB>
+    </_39>
+    <_40 kind="Record" offset="16166" length="676">
+      <TextKey kind="Leaf" offset="16166" length="4" type="Scalar { Kind = U32 }" value="1041" />
+      <TextA kind="Leaf" offset="16170" length="32" type="WString { }">Ancient Rise  </TextA>
+      <TextB kind="Leaf" offset="16202" length="640" type="WString { }">Imperialdramon: Fighter Mode transforms into the legendary Holy Knight form, powered up by the strength of Omegamon.
+
+It is said to be the ultimate and final form of Imperialdramon, passed down from ancient times, which descends during the great destruction of the ancient Digital World to save it from total collapse.</TextB>
+    </_40>
+    <_41 kind="Record" offset="16842" length="644">
+      <TextKey kind="Leaf" offset="16842" length="4" type="Scalar { Kind = U32 }" value="1042" />
+      <TextA kind="Leaf" offset="16846" length="42" type="WString { }">Diablomon Revenge  </TextA>
+      <TextB kind="Leaf" offset="16888" length="598" type="WString { }">As Kuramon multiply within the digital world and spill into the real world, chaos erupts.
+
+They merge and evolve into Armagemon, a being even stronger than Diablomon…
+Overwhelmed by Armagemon, Imperialdramon: Fighter Mode gains the power of Omegamon and evolves into Imperialdramon: Paladin Mode.
+</TextB>
+    </_41>
+    <_42 kind="Record" offset="17486" length="822">
+      <TextKey kind="Leaf" offset="17486" length="4" type="Scalar { Kind = U32 }" value="1043" />
+      <TextA kind="Leaf" offset="17490" length="78" type="WString { }">White Wings: Sorrow and Determination</TextA>
+      <TextB kind="Leaf" offset="17568" length="740" type="WString { }">Omegamon Merciful Mode, a being that delivers judgment and salvation to Digimon who have strayed too far from the path to return, is said to strike only those who once possessed a kind heart.
+
+Omegamon Merciful Mode buries the sorrow of parting deep within its heart and brings down the Blade of Departure — a weapon forged to sever bonds in a single, merciful strike.</TextB>
+    </_42>
+    <_43 kind="Record" offset="18308" length="664">
+      <TextKey kind="Leaf" offset="18308" length="4" type="Scalar { Kind = U32 }" value="1044" />
+      <TextA kind="Leaf" offset="18312" length="60" type="WString { }">Justice Veiled in Darkness  </TextA>
+      <TextB kind="Leaf" offset="18372" length="600" type="WString { }">Among the strongest Digimon, not all of them pursue only virtuous justice.
+
+After gathering strength to realize their own sense of justice, some carry out what they believe is justice in the world.
+For some, the justice of these beings may be seen as evil, while for others, it may be seen as good.</TextB>
+    </_43>
+    <_44 kind="Record" offset="18972" length="462">
+      <TextKey kind="Leaf" offset="18972" length="4" type="Scalar { Kind = U32 }" value="1045" />
+      <TextA kind="Leaf" offset="18976" length="58" type="WString { }">Savior Who Protects Peace  </TextA>
+      <TextB kind="Leaf" offset="19034" length="400" type="WString { }">
+There are many evils lurking in the world.
+
+In such a world, there are Guardians who protect peace from evil beings.
+Guardians use overwhelming power to overcome any trials and fight for the world.</TextB>
+    </_44>
+    <_45 kind="Record" offset="19434" length="576">
+      <TextKey kind="Leaf" offset="19434" length="4" type="Scalar { Kind = U32 }" value="1046" />
+      <TextA kind="Leaf" offset="19438" length="66" type="WString { }">Corrupted Purification Ritual  </TextA>
+      <TextB kind="Leaf" offset="19504" length="506" type="WString { }">
+Kuzuhamon, who sees the hearts of humans as inherently corrupt and impure, conducts a purification ritual to extract their defilements and turns them into wooden dolls.
+
+To stop such misguided beliefs, Siriusmon stands up to fight against Kuzuhamon.
+</TextB>
+    </_45>
+    <_46 kind="Record" offset="20010" length="484">
+      <TextKey kind="Leaf" offset="20010" length="4" type="Scalar { Kind = U32 }" value="1047" />
+      <TextA kind="Leaf" offset="20014" length="18" type="WString { }">Reunion</TextA>
+      <TextB kind="Leaf" offset="20032" length="462" type="WString { }">Alphamon seeks to send the infected Digimon that appeared before the DigiDestined back to the Digital World.
+
+Omegamon faces Alphamon with full power, as Alphamon tries to eliminate Meicoomon, the new friend of the DigiDestined.
+</TextB>
+    </_46>
+    <_47 kind="Record" offset="20494" length="532">
+      <TextKey kind="Leaf" offset="20494" length="4" type="Scalar { Kind = U32 }" value="1048" />
+      <TextA kind="Leaf" offset="20498" length="58" type="WString { }">Invasion of the Real World!</TextA>
+      <TextB kind="Leaf" offset="20556" length="470" type="WString { }">Lucemon is Lucemon : evolve to Wild 2nd Mode and threatens the real world.
+
+Chosen Children and the Ten Warriors rise to face this overwhelming evil.
+Can they stop Lucemon : Wild 2nd Mode’s real world invasion and protect the world?"</TextB>
+    </_47>
+    <_48 kind="Record" offset="21026" length="452">
+      <TextKey kind="Leaf" offset="21026" length="4" type="Scalar { Kind = U32 }" value="1049" />
+      <TextA kind="Leaf" offset="21030" length="50" type="WString { }">Last Evolution : Kizuna</TextA>
+      <TextB kind="Leaf" offset="21080" length="398" type="WString { }">We are not old enough to quietly accept the future that has been decided for us.
+
+If it’s to reach greater heights, we can do anything.
+
+This is not a memoir, but a new adventure of us and Digimon.</TextB>
+    </_48>
+    <_49 kind="Record" offset="21478" length="638">
+      <TextKey kind="Leaf" offset="21478" length="4" type="Scalar { Kind = U32 }" value="1050" />
+      <TextA kind="Leaf" offset="21482" length="42" type="WString { }">Our hope, our light</TextA>
+      <TextB kind="Leaf" offset="21524" length="592" type="WString { }">WarGreymon, who struggled against Millenniummon and MetalGarurumon, who protected the chosen children.
+
+However, the evil power was too much for WarGreymon to handle alone,
+and it was stopped by Goddramon and Holydramon, who reached their ultimate evolution through the power of hope and light.</TextB>
+    </_49>
+    <_50 kind="Record" offset="22116" length="524">
+      <TextKey kind="Leaf" offset="22116" length="4" type="Scalar { Kind = U32 }" value="1051" />
+      <TextA kind="Leaf" offset="22120" length="94" type="WString { }">Transcending Time, The Beginning of a Legend!</TextA>
+      <TextB kind="Leaf" offset="22214" length="426" type="WString { }">The peace of the Digital World was restored by the new legendary Ten Warriors.
+
+Alongside the Ten Warriors, the chosen children saved the Digital World, writing a new myth and a new legend for the Digital World.</TextB>
+    </_50>
+    <_51 kind="Record" offset="22640" length="618">
+      <TextKey kind="Leaf" offset="22640" length="4" type="Scalar { Kind = U32 }" value="1052" />
+      <TextA kind="Leaf" offset="22644" length="64" type="WString { }">Guardians of the Digital World</TextA>
+      <TextB kind="Leaf" offset="22708" length="550" type="WString { }">A gathering of powerful Digimon who protect the Digital World.
+Even in the face of great trials, they stand strong in their place, guarding the Digital World as the mightiest Digimon.
+
+With the power of Transcendence, they have gained the strength to overcome any challenge</TextB>
+    </_51>
+    <_52 kind="Record" offset="23258" length="628">
+      <TextKey kind="Leaf" offset="23258" length="4" type="Scalar { Kind = U32 }" value="1053" />
+      <TextA kind="Leaf" offset="23262" length="54" type="WString { }">Saviors Who Protect Peace</TextA>
+      <TextB kind="Leaf" offset="23316" length="570" type="WString { }">Many evils lurk in the world.
+
+Amid such darkness, guardians exist to protect peace from wicked forces.
+These guardians fight for the world with overwhelming power, overcoming all trials.
+
+With the power of Transcendence, they stand firm to protect the world with unwavering resolve.</TextB>
+    </_52>
+    <_53 kind="Record" offset="23886" length="728">
+      <TextKey kind="Leaf" offset="23886" length="4" type="Scalar { Kind = U32 }" value="1054" />
+      <TextA kind="Leaf" offset="23890" length="84" type="WString { }">Wings of Temptation and Wings of Justice</TextA>
+      <TextB kind="Leaf" offset="23974" length="640" type="WString { }">"Lilithmon X seduces her opponents with her alluring and beautiful appearance, those who fall for her temptation are destined to meet death."
+
+Alphamon: Ouryuken carries his own sense of justice and fulfills his mission as a Royal Knight.
+
+Though they share wings, the directions they strive toward unfold differently.</TextB>
+    </_53>
+    <_54 kind="Record" offset="24614" length="668">
+      <TextKey kind="Leaf" offset="24614" length="4" type="Scalar { Kind = U32 }" value="1055" />
+      <TextA kind="Leaf" offset="24618" length="52" type="WString { }">Demon of the Final Phase</TextA>
+      <TextB kind="Leaf" offset="24670" length="612" type="WString { }">A Devimon that has absorbed Minus Data to its limit, evolved into its Ultimate form.
+
+Once enraged, its intelligence disappears, transforming into a ferocious and uncontrollable form that attacks relentlessly. Digimon caught in the rampage of the berserk DoneDevimon are completely erased without a trace</TextB>
+    </_54>
+    <_55 kind="Record" offset="25282" length="838">
+      <TextKey kind="Leaf" offset="25282" length="4" type="Scalar { Kind = U32 }" value="1056" />
+      <TextA kind="Leaf" offset="25286" length="66" type="WString { }">Abnormal Status Occurred: Virus</TextA>
+      <TextB kind="Leaf" offset="25352" length="768" type="WString { }">There are Digimon born with an instinct to corrupt or destroy data on networks.
+
+These Digimon have a tendency to modify their surroundings to suit their own living conditions. Due to their capricious and impulsive nature, they are often involved in malicious activities.
+
+As a result, they can cause various abnormalities, which is why they are collectively referred to as Viruses.</TextB>
+    </_55>
+    <_56 kind="Record" offset="26120" length="700">
+      <TextKey kind="Leaf" offset="26120" length="4" type="Scalar { Kind = U32 }" value="1057" />
+      <TextA kind="Leaf" offset="26124" length="52" type="WString { }">Fight against the Virus!</TextA>
+      <TextB kind="Leaf" offset="26176" length="644" type="WString { }">Vaccine Digimon were initially artificially created to counteract Virus Digimon.
+
+Based on this origin, some Digimon have been observed to possess a natural inclination to attack Virus-type Digimon.
+
+Due to their role in combating Viruses, many of these Digimon are righteous in nature, though there are also exceptions.</TextB>
+    </_56>
+    <_57 kind="Record" offset="26820" length="856">
+      <TextKey kind="Leaf" offset="26820" length="4" type="Scalar { Kind = U32 }" value="1058" />
+      <TextA kind="Leaf" offset="26824" length="66" type="WString { }">The Crisis of Great Destruction</TextA>
+      <TextB kind="Leaf" offset="26890" length="786" type="WString { }">Abbadomon exists for a singular purpose to transcend good and evil and reduce everything to nothingness.
+
+As it erases all things into nothingness, it consumes both the Digital World and Digimon themselves, leaving behind void-like blinks of emptiness. Ultimately, when Abbadomon appears, the world is plunged into a crisis of destruction and faces inevitable ruin due to its very existence.</TextB>
+    </_57>
+    <_58 kind="Record" offset="27676" length="478">
+      <TextKey kind="Leaf" offset="27676" length="4" type="Scalar { Kind = U32 }" value="1059" />
+      <TextA kind="Leaf" offset="27680" length="28" type="WString { }">Abyssal Fear</TextA>
+      <TextB kind="Leaf" offset="27708" length="446" type="WString { }">Feeling the void, the core of Abbadomon endlessly devours fear, emptiness, thirst, deprivation, and even sorrow.
+From depths deeper than Abbadomon’s own abyss, it accumulates the power to reduce all things to nothingness.</TextB>
+    </_58>
+    <_59 kind="Record" offset="28154" length="1264">
+      <TextKey kind="Leaf" offset="28154" length="4" type="Scalar { Kind = U32 }" value="1060" />
+      <TextA kind="Leaf" offset="28158" length="84" type="WString { }">Perfect data,
+and data of unknown origin</TextA>
+      <TextB kind="Leaf" offset="28242" length="1176" type="WString { }">By nature, Digimon are born possessing their own attribute.
+
+Unlike Virus-type Digimon, which reshape their surroundings into environments suited to themselves, or Vaccine-type Digimon, which restore environments ruined by such Virus-types, Data-type Digimon are those that adapt themselves to the environments in which they reside.
+
+Data-type Digimon are an attribute that does not actively alter their environment. However, there also exist Digimon that cannot be classified into any known attribute, or that possess no data at all.
+
+Such Digimon are referred to as “Unknown” Digimon.</TextB>
+    </_59>
+    <_60 kind="Record" offset="29418" length="578">
+      <TextKey kind="Leaf" offset="29418" length="4" type="Scalar { Kind = U32 }" value="1061" />
+      <TextA kind="Leaf" offset="29422" length="64" type="WString { }">The True Form of the Destroyer</TextA>
+      <TextB kind="Leaf" offset="29486" length="510" type="WString { }">Inside Abbadomon exists its true form and core entity.
+
+It pursues nothingness, favors nothingness, and rejects everything other than nothingness.
+After turning all things into nothingness, it is said to erase itself as well, fulfilling its own purpose.</TextB>
+    </_60>
+    <_61 kind="Record" offset="29996" length="800">
+      <TextKey kind="Leaf" offset="29996" length="4" type="Scalar { Kind = U32 }" value="1062" />
+      <TextA kind="Leaf" offset="30000" length="36" type="WString { }">Wings of Justice</TextA>
+      <TextB kind="Leaf" offset="30036" length="760" type="WString { }">Omegamon X and Alphamon possess similar yet distinct powers.
+
+Omegamon X wields Omega Inforce, a power that allows it to instantly read and respond to what lies ahead.
+In contrast, Alphamon possesses Alpha Inforce, a power that can momentarily rewind past battle time.
+
+Together, these two powers unite them as members of the 13 Royal Knights, who face off against massive foes.</TextB>
+    </_61>
+    <_62 kind="Record" offset="30796" length="800">
+      <TextKey kind="Leaf" offset="30796" length="4" type="Scalar { Kind = U32 }" value="1063" />
+      <TextA kind="Leaf" offset="30800" length="54" type="WString { }">Tempting Wings of Justice</TextA>
+      <TextB kind="Leaf" offset="30854" length="742" type="WString { }">
+It is said that the influence of DigiCore caused by the X-Antibody manifests differently in each Digimon.
+
+In Omegamon’s case, it gained the ability to instantly read and react to the opponent.
+Lilithmon, on the other hand, obtained a youthful and alluring physique.
+
+Whether even the strengthened, righteous Holy Knight can resist such temptations remains uncertain.
+</TextB>
+    </_62>
+    <_63 kind="Record" offset="31596" length="530">
+      <TextKey kind="Leaf" offset="31596" length="4" type="Scalar { Kind = U32 }" value="1064" />
+      <TextA kind="Leaf" offset="31600" length="32" type="WString { }">The Nullifiers</TextA>
+      <TextB kind="Leaf" offset="31632" length="494" type="WString { }">In the Digital World, there exist beings with immense power capable of neutralizing others for their own purposes.
+
+Some of these beings are righteous, while others are evil.
+The scale of each individual’s power is said to be beyond imagination.</TextB>
+    </_63>
+  </Entries>
+</DBookDeck_Str>

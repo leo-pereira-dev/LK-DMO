@@ -17,11 +17,13 @@ namespace DigitalWorldOnline.Application.GameAssets.Queries
     {
         private readonly BuffBinLoader _loader;
         private readonly ItemListBinLoader _itemList;
+        private readonly DigimonListBinLoader _digimonList;
 
-        public BuffInfoAssetsQueryHandler(BuffBinLoader loader, ItemListBinLoader itemList)
+        public BuffInfoAssetsQueryHandler(BuffBinLoader loader, ItemListBinLoader itemList, DigimonListBinLoader digimonList)
         {
             _loader = loader;
             _itemList = itemList;
+            _digimonList = digimonList;
         }
 
         public Task<List<BuffAssetDTO>> Handle(BuffInfoAssetsQuery request, CancellationToken cancellationToken)
@@ -30,11 +32,20 @@ namespace DigitalWorldOnline.Application.GameAssets.Queries
                 .Where(item => (item.Type == 63 || item.Type == 64) && item.SkillCode > 0)
                 .Select(item => (uint)item.SkillCode)
                 .ToHashSet();
+            var digimonSkillCodes = _digimonList.Data.ByType.Values
+                .SelectMany(digimon => digimon.Skills)
+                .Where(skill => skill.SkillId > 0)
+                .Select(skill => (uint)skill.SkillId)
+                .ToHashSet();
 
             var list = new List<BuffAssetDTO>(_loader.Data.ById.Count);
             foreach (var rec in _loader.Data.ById.Values)
             {
-                if (rec.IsDeleted && !itemBuffSkillCodes.Contains(rec.SkillCode))
+                var isDigimonSkillBuff =
+                    digimonSkillCodes.Contains(rec.SkillCode) ||
+                    digimonSkillCodes.Contains(rec.DigimonSkillCode);
+
+                if (rec.IsDeleted && !itemBuffSkillCodes.Contains(rec.SkillCode) && !isDigimonSkillBuff)
                     continue;
 
                 list.Add(new BuffAssetDTO

@@ -8,6 +8,7 @@ using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Models;
+using DigitalWorldOnline.Commons.Models.Asset;
 using DigitalWorldOnline.Commons.Models.Base;
 using DigitalWorldOnline.Commons.Packets.Chat;
 using DigitalWorldOnline.Commons.Packets.GameServer;
@@ -66,9 +67,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     return;
                 }
 
-                var optionInfo = ResolveAccessoryOptionInfo(itemInfo.Type);
-                var enchantInfo = ResolveAccessoryEnchantInfo(itemInfo.Type);
-                if (optionInfo != null && enchantInfo != null)
+                var optionInfo = ResolveAccessoryOptionInfo(itemInfo);
+                if (optionInfo != null)
                 {
                     int statusAmount = Math.Max(0, Math.Min(identifiedItem.AccessoryStatus.Count, optionInfo.MaxStatusCount));
                     _logger.Information("ItemIdentify processing: tamer={TamerId} slot={Slot} item={ItemId} statusAmount={StatusAmount}", client.TamerId, slot, identifiedItem.ItemId, statusAmount);
@@ -100,7 +100,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     {
                         identifiedItem.SetPower(UtilitiesFunctions.RandomByte(95, 102));
                     }
-                    identifiedItem.SetReroll(UtilitiesFunctions.RandomByte((byte)enchantInfo.MinReroll, (byte)enchantInfo.MaxReroll));
+                    identifiedItem.SetReroll((byte)Math.Clamp(optionInfo.MaxReroll, byte.MinValue, byte.MaxValue));
 
                     await _sender.Send(new UpdateItemAccessoryStatusCommand(identifiedItem));
 
@@ -149,9 +149,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
         }
 
-        private AccessoryOptionInfo? ResolveAccessoryOptionInfo(int accessoryType)
+        private AccessoryOptionInfo? ResolveAccessoryOptionInfo(ItemAssetModel itemInfo)
         {
-            var record = _itemListBinLoader.Data.AccessoryOptions.FirstOrDefault(x => x.ItemType == (uint)accessoryType);
+            var optionKey = ResolveAccessoryOptionKey(itemInfo);
+            var record = _itemListBinLoader.Data.AccessoryOptions.FirstOrDefault(x => x.ItemType == optionKey);
             if (record == null)
                 return null;
 
@@ -169,26 +170,21 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (!grouped.Any())
                 return null;
 
-            int maxStatusCount = Math.Max(0, Math.Min(record.MaxValue, grouped.Sum(x => x.MaxAmount)));
-            return new AccessoryOptionInfo(maxStatusCount, grouped);
+            int maxStatusCount = Math.Max(0, Math.Min((int)record.MinValue, grouped.Sum(x => x.MaxAmount)));
+            int maxReroll = Math.Max(0, (int)record.MaxValue);
+            return new AccessoryOptionInfo(maxStatusCount, maxReroll, grouped);
         }
 
-        private AccessoryEnchantInfo? ResolveAccessoryEnchantInfo(int accessoryType)
+        private uint ResolveAccessoryOptionKey(ItemAssetModel itemInfo)
         {
-            var record = _itemListBinLoader.Data.AccessoryEnchants.FirstOrDefault(x => x.ItemType == (uint)accessoryType);
-            if (record == null)
-                return null;
+            if (itemInfo.SkillCode > 0 && _itemListBinLoader.Data.AccessoryOptions.Any(x => x.ItemType == (uint)itemInfo.SkillCode))
+                return (uint)itemInfo.SkillCode;
 
-            int min = Math.Max(0, (int)record.MinValue);
-            int max = Math.Max(min, (int)record.MaxValue);
-            max = Math.Min(max, byte.MaxValue);
-            return new AccessoryEnchantInfo(min, max);
+            return (uint)itemInfo.Type;
         }
 
-        private sealed record AccessoryOptionInfo(int MaxStatusCount, List<AccessoryOptionRange> Options);
+        private sealed record AccessoryOptionInfo(int MaxStatusCount, int MaxReroll, List<AccessoryOptionRange> Options);
 
         private sealed record AccessoryOptionRange(AccessoryStatusTypeEnum Type, short MinValue, short MaxValue, int MaxAmount);
-
-        private sealed record AccessoryEnchantInfo(int MinReroll, int MaxReroll);
     }
 }

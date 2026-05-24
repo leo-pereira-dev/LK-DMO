@@ -1,0 +1,761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DigimonRidingComment_Str schema="DigimonRidingComment_Str.struct" bin="DigimonRidingComment_Str.bin" byteLength="36056">
+  <Entries kind="Section" offset="0" length="36056">
+    <_0 kind="Record" offset="4" length="250">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="31028" />
+      <TextA kind="Leaf" offset="8" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_0>
+    <_1 kind="Record" offset="254" length="132">
+      <TextKey kind="Leaf" offset="254" length="4" type="Scalar { Kind = U32 }" value="33005" />
+      <TextA kind="Leaf" offset="258" length="128" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 라이더윙 1개 또는 모드셀렉터 1개</TextA>
+    </_1>
+    <_2 kind="Record" offset="386" length="240">
+      <TextKey kind="Leaf" offset="386" length="4" type="Scalar { Kind = U32 }" value="35028" />
+      <TextA kind="Leaf" offset="390" length="236" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Standard Issue Rider Wing x1</TextA>
+    </_2>
+    <_3 kind="Record" offset="626" length="250">
+      <TextKey kind="Leaf" offset="626" length="4" type="Scalar { Kind = U32 }" value="41009" />
+      <TextA kind="Leaf" offset="630" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_3>
+    <_4 kind="Record" offset="876" length="250">
+      <TextKey kind="Leaf" offset="876" length="4" type="Scalar { Kind = U32 }" value="41011" />
+      <TextA kind="Leaf" offset="880" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_4>
+    <_5 kind="Record" offset="1126" length="250">
+      <TextKey kind="Leaf" offset="1126" length="4" type="Scalar { Kind = U32 }" value="41012" />
+      <TextA kind="Leaf" offset="1130" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_5>
+    <_6 kind="Record" offset="1376" length="250">
+      <TextKey kind="Leaf" offset="1376" length="4" type="Scalar { Kind = U32 }" value="41027" />
+      <TextA kind="Leaf" offset="1380" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_6>
+    <_7 kind="Record" offset="1626" length="250">
+      <TextKey kind="Leaf" offset="1626" length="4" type="Scalar { Kind = U32 }" value="41033" />
+      <TextA kind="Leaf" offset="1630" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_7>
+    <_8 kind="Record" offset="1876" length="250">
+      <TextKey kind="Leaf" offset="1876" length="4" type="Scalar { Kind = U32 }" value="41037" />
+      <TextA kind="Leaf" offset="1880" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_8>
+    <_9 kind="Record" offset="2126" length="250">
+      <TextKey kind="Leaf" offset="2126" length="4" type="Scalar { Kind = U32 }" value="41050" />
+      <TextA kind="Leaf" offset="2130" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_9>
+    <_10 kind="Record" offset="2376" length="250">
+      <TextKey kind="Leaf" offset="2376" length="4" type="Scalar { Kind = U32 }" value="41055" />
+      <TextA kind="Leaf" offset="2380" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_10>
+    <_11 kind="Record" offset="2626" length="250">
+      <TextKey kind="Leaf" offset="2626" length="4" type="Scalar { Kind = U32 }" value="41059" />
+      <TextA kind="Leaf" offset="2630" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_11>
+    <_12 kind="Record" offset="2876" length="250">
+      <TextKey kind="Leaf" offset="2876" length="4" type="Scalar { Kind = U32 }" value="41139" />
+      <TextA kind="Leaf" offset="2880" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_12>
+    <_13 kind="Record" offset="3126" length="132">
+      <TextKey kind="Leaf" offset="3126" length="4" type="Scalar { Kind = U32 }" value="43004" />
+      <TextA kind="Leaf" offset="3130" length="128" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 라이더윙 1개 또는 모드셀렉터 1개</TextA>
+    </_13>
+    <_14 kind="Record" offset="3258" length="216">
+      <TextKey kind="Leaf" offset="3258" length="4" type="Scalar { Kind = U32 }" value="45172" />
+      <TextA kind="Leaf" offset="3262" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x1</TextA>
+    </_14>
+    <_15 kind="Record" offset="3474" length="250">
+      <TextKey kind="Leaf" offset="3474" length="4" type="Scalar { Kind = U32 }" value="51053" />
+      <TextA kind="Leaf" offset="3478" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_15>
+    <_16 kind="Record" offset="3724" length="250">
+      <TextKey kind="Leaf" offset="3724" length="4" type="Scalar { Kind = U32 }" value="51054" />
+      <TextA kind="Leaf" offset="3728" length="246" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Rider Wing x1 or Mode Selector x1</TextA>
+    </_16>
+    <_17 kind="Record" offset="3974" length="216">
+      <TextKey kind="Leaf" offset="3974" length="4" type="Scalar { Kind = U32 }" value="61017" />
+      <TextA kind="Leaf" offset="3978" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x2</TextA>
+    </_17>
+    <_18 kind="Record" offset="4190" length="216">
+      <TextKey kind="Leaf" offset="4190" length="4" type="Scalar { Kind = U32 }" value="61024" />
+      <TextA kind="Leaf" offset="4194" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_18>
+    <_19 kind="Record" offset="4406" length="216">
+      <TextKey kind="Leaf" offset="4406" length="4" type="Scalar { Kind = U32 }" value="61025" />
+      <TextA kind="Leaf" offset="4410" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x2</TextA>
+    </_19>
+    <_20 kind="Record" offset="4622" length="216">
+      <TextKey kind="Leaf" offset="4622" length="4" type="Scalar { Kind = U32 }" value="61026" />
+      <TextA kind="Leaf" offset="4626" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_20>
+    <_21 kind="Record" offset="4838" length="216">
+      <TextKey kind="Leaf" offset="4838" length="4" type="Scalar { Kind = U32 }" value="61028" />
+      <TextA kind="Leaf" offset="4842" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_21>
+    <_22 kind="Record" offset="5054" length="216">
+      <TextKey kind="Leaf" offset="5054" length="4" type="Scalar { Kind = U32 }" value="61034" />
+      <TextA kind="Leaf" offset="5058" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_22>
+    <_23 kind="Record" offset="5270" length="216">
+      <TextKey kind="Leaf" offset="5270" length="4" type="Scalar { Kind = U32 }" value="61036" />
+      <TextA kind="Leaf" offset="5274" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x2</TextA>
+    </_23>
+    <_24 kind="Record" offset="5486" length="206">
+      <TextKey kind="Leaf" offset="5486" length="4" type="Scalar { Kind = U32 }" value="61037" />
+      <TextA kind="Leaf" offset="5490" length="202" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Behemoth x1</TextA>
+    </_24>
+    <_25 kind="Record" offset="5692" length="216">
+      <TextKey kind="Leaf" offset="5692" length="4" type="Scalar { Kind = U32 }" value="61039" />
+      <TextA kind="Leaf" offset="5696" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_25>
+    <_26 kind="Record" offset="5908" length="216">
+      <TextKey kind="Leaf" offset="5908" length="4" type="Scalar { Kind = U32 }" value="61042" />
+      <TextA kind="Leaf" offset="5912" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_26>
+    <_27 kind="Record" offset="6124" length="216">
+      <TextKey kind="Leaf" offset="6124" length="4" type="Scalar { Kind = U32 }" value="61048" />
+      <TextA kind="Leaf" offset="6128" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x2</TextA>
+    </_27>
+    <_28 kind="Record" offset="6340" length="216">
+      <TextKey kind="Leaf" offset="6340" length="4" type="Scalar { Kind = U32 }" value="61050" />
+      <TextA kind="Leaf" offset="6344" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_28>
+    <_29 kind="Record" offset="6556" length="216">
+      <TextKey kind="Leaf" offset="6556" length="4" type="Scalar { Kind = U32 }" value="61053" />
+      <TextA kind="Leaf" offset="6560" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_29>
+    <_30 kind="Record" offset="6772" length="216">
+      <TextKey kind="Leaf" offset="6772" length="4" type="Scalar { Kind = U32 }" value="61057" />
+      <TextA kind="Leaf" offset="6776" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_30>
+    <_31 kind="Record" offset="6988" length="216">
+      <TextKey kind="Leaf" offset="6988" length="4" type="Scalar { Kind = U32 }" value="61058" />
+      <TextA kind="Leaf" offset="6992" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_31>
+    <_32 kind="Record" offset="7204" length="216">
+      <TextKey kind="Leaf" offset="7204" length="4" type="Scalar { Kind = U32 }" value="61059" />
+      <TextA kind="Leaf" offset="7208" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_32>
+    <_33 kind="Record" offset="7420" length="216">
+      <TextKey kind="Leaf" offset="7420" length="4" type="Scalar { Kind = U32 }" value="61061" />
+      <TextA kind="Leaf" offset="7424" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x2</TextA>
+    </_33>
+    <_34 kind="Record" offset="7636" length="216">
+      <TextKey kind="Leaf" offset="7636" length="4" type="Scalar { Kind = U32 }" value="61062" />
+      <TextA kind="Leaf" offset="7640" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x2</TextA>
+    </_34>
+    <_35 kind="Record" offset="7852" length="216">
+      <TextKey kind="Leaf" offset="7852" length="4" type="Scalar { Kind = U32 }" value="61063" />
+      <TextA kind="Leaf" offset="7856" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_35>
+    <_36 kind="Record" offset="8068" length="216">
+      <TextKey kind="Leaf" offset="8068" length="4" type="Scalar { Kind = U32 }" value="61064" />
+      <TextA kind="Leaf" offset="8072" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_36>
+    <_37 kind="Record" offset="8284" length="216">
+      <TextKey kind="Leaf" offset="8284" length="4" type="Scalar { Kind = U32 }" value="61065" />
+      <TextA kind="Leaf" offset="8288" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x2</TextA>
+    </_37>
+    <_38 kind="Record" offset="8500" length="216">
+      <TextKey kind="Leaf" offset="8500" length="4" type="Scalar { Kind = U32 }" value="61067" />
+      <TextA kind="Leaf" offset="8504" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_38>
+    <_39 kind="Record" offset="8716" length="216">
+      <TextKey kind="Leaf" offset="8716" length="4" type="Scalar { Kind = U32 }" value="61068" />
+      <TextA kind="Leaf" offset="8720" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_39>
+    <_40 kind="Record" offset="8932" length="200">
+      <TextKey kind="Leaf" offset="8932" length="4" type="Scalar { Kind = U32 }" value="61074" />
+      <TextA kind="Leaf" offset="8936" length="196" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Grani x1</TextA>
+    </_40>
+    <_41 kind="Record" offset="9132" length="216">
+      <TextKey kind="Leaf" offset="9132" length="4" type="Scalar { Kind = U32 }" value="61148" />
+      <TextA kind="Leaf" offset="9136" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x2</TextA>
+    </_41>
+    <_42 kind="Record" offset="9348" length="216">
+      <TextKey kind="Leaf" offset="9348" length="4" type="Scalar { Kind = U32 }" value="61153" />
+      <TextA kind="Leaf" offset="9352" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x2</TextA>
+    </_42>
+    <_43 kind="Record" offset="9564" length="216">
+      <TextKey kind="Leaf" offset="9564" length="4" type="Scalar { Kind = U32 }" value="61155" />
+      <TextA kind="Leaf" offset="9568" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_43>
+    <_44 kind="Record" offset="9780" length="216">
+      <TextKey kind="Leaf" offset="9780" length="4" type="Scalar { Kind = U32 }" value="62065" />
+      <TextA kind="Leaf" offset="9784" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x2</TextA>
+    </_44>
+    <_45 kind="Record" offset="9996" length="216">
+      <TextKey kind="Leaf" offset="9996" length="4" type="Scalar { Kind = U32 }" value="62075" />
+      <TextA kind="Leaf" offset="10000" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_45>
+    <_46 kind="Record" offset="10212" length="216">
+      <TextKey kind="Leaf" offset="10212" length="4" type="Scalar { Kind = U32 }" value="63006" />
+      <TextA kind="Leaf" offset="10216" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_46>
+    <_47 kind="Record" offset="10428" length="216">
+      <TextKey kind="Leaf" offset="10428" length="4" type="Scalar { Kind = U32 }" value="63007" />
+      <TextA kind="Leaf" offset="10432" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_47>
+    <_48 kind="Record" offset="10644" length="216">
+      <TextKey kind="Leaf" offset="10644" length="4" type="Scalar { Kind = U32 }" value="63009" />
+      <TextA kind="Leaf" offset="10648" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_48>
+    <_49 kind="Record" offset="10860" length="216">
+      <TextKey kind="Leaf" offset="10860" length="4" type="Scalar { Kind = U32 }" value="63010" />
+      <TextA kind="Leaf" offset="10864" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_49>
+    <_50 kind="Record" offset="11076" length="208">
+      <TextKey kind="Leaf" offset="11076" length="4" type="Scalar { Kind = U32 }" value="63011" />
+      <TextA kind="Leaf" offset="11080" length="204" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Hinukamui x1</TextA>
+    </_50>
+    <_51 kind="Record" offset="11284" length="110">
+      <TextKey kind="Leaf" offset="11284" length="4" type="Scalar { Kind = U32 }" value="63014" />
+      <TextA kind="Leaf" offset="11288" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 모드셀렉터 3개</TextA>
+    </_51>
+    <_52 kind="Record" offset="11394" length="110">
+      <TextKey kind="Leaf" offset="11394" length="4" type="Scalar { Kind = U32 }" value="63015" />
+      <TextA kind="Leaf" offset="11398" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 모드셀렉터 3개</TextA>
+    </_52>
+    <_53 kind="Record" offset="11504" length="110">
+      <TextKey kind="Leaf" offset="11504" length="4" type="Scalar { Kind = U32 }" value="63017" />
+      <TextA kind="Leaf" offset="11508" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 모드셀렉터 5개</TextA>
+    </_53>
+    <_54 kind="Record" offset="11614" length="132">
+      <TextKey kind="Leaf" offset="11614" length="4" type="Scalar { Kind = U32 }" value="63019" />
+      <TextA kind="Leaf" offset="11618" length="128" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 라이더윙 1개 또는 모드셀렉터 1개</TextA>
+    </_54>
+    <_55 kind="Record" offset="11746" length="200">
+      <TextKey kind="Leaf" offset="11746" length="4" type="Scalar { Kind = U32 }" value="63020" />
+      <TextA kind="Leaf" offset="11750" length="196" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Grani x1</TextA>
+    </_55>
+    <_56 kind="Record" offset="11946" length="200">
+      <TextKey kind="Leaf" offset="11946" length="4" type="Scalar { Kind = U32 }" value="67001" />
+      <TextA kind="Leaf" offset="11950" length="196" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Grani x1</TextA>
+    </_56>
+    <_57 kind="Record" offset="12146" length="200">
+      <TextKey kind="Leaf" offset="12146" length="4" type="Scalar { Kind = U32 }" value="67002" />
+      <TextA kind="Leaf" offset="12150" length="196" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Grani x1</TextA>
+    </_57>
+    <_58 kind="Record" offset="12346" length="200">
+      <TextKey kind="Leaf" offset="12346" length="4" type="Scalar { Kind = U32 }" value="67003" />
+      <TextA kind="Leaf" offset="12350" length="196" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Grani x1</TextA>
+    </_58>
+    <_59 kind="Record" offset="12546" length="120">
+      <TextKey kind="Leaf" offset="12546" length="4" type="Scalar { Kind = U32 }" value="67005" />
+      <TextA kind="Leaf" offset="12550" length="116" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 찬란히 빛나는 천익 1개</TextA>
+    </_59>
+    <_60 kind="Record" offset="12666" length="112">
+      <TextKey kind="Leaf" offset="12666" length="4" type="Scalar { Kind = U32 }" value="67011" />
+      <TextA kind="Leaf" offset="12670" length="108" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 용기의 기적 1개</TextA>
+    </_60>
+    <_61 kind="Record" offset="12778" length="112">
+      <TextKey kind="Leaf" offset="12778" length="4" type="Scalar { Kind = U32 }" value="67012" />
+      <TextA kind="Leaf" offset="12782" length="108" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 우정의 기적 1개</TextA>
+    </_61>
+    <_62 kind="Record" offset="12890" length="112">
+      <TextKey kind="Leaf" offset="12890" length="4" type="Scalar { Kind = U32 }" value="69009" />
+      <TextA kind="Leaf" offset="12894" length="108" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 거대한 파멸 1개</TextA>
+    </_62>
+    <_63 kind="Record" offset="13002" length="216">
+      <TextKey kind="Leaf" offset="13002" length="4" type="Scalar { Kind = U32 }" value="71020" />
+      <TextA kind="Leaf" offset="13006" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_63>
+    <_64 kind="Record" offset="13218" length="216">
+      <TextKey kind="Leaf" offset="13218" length="4" type="Scalar { Kind = U32 }" value="71022" />
+      <TextA kind="Leaf" offset="13222" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_64>
+    <_65 kind="Record" offset="13434" length="236">
+      <TextKey kind="Leaf" offset="13434" length="4" type="Scalar { Kind = U32 }" value="71024" />
+      <TextA kind="Leaf" offset="13438" length="232" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Proof of Dragon Emperor x1</TextA>
+    </_65>
+    <_66 kind="Record" offset="13670" length="198">
+      <TextKey kind="Leaf" offset="13670" length="4" type="Scalar { Kind = U32 }" value="71026" />
+      <TextA kind="Leaf" offset="13674" length="194" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Cyclone</TextA>
+    </_66>
+    <_67 kind="Record" offset="13868" length="224">
+      <TextKey kind="Leaf" offset="13868" length="4" type="Scalar { Kind = U32 }" value="71028" />
+      <TextA kind="Leaf" offset="13872" length="220" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Tree of Antiquity x1</TextA>
+    </_67>
+    <_68 kind="Record" offset="14092" length="212">
+      <TextKey kind="Leaf" offset="14092" length="4" type="Scalar { Kind = U32 }" value="71029" />
+      <TextA kind="Leaf" offset="14096" length="208" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Tyrant King x1</TextA>
+    </_68>
+    <_69 kind="Record" offset="14304" length="220">
+      <TextKey kind="Leaf" offset="14304" length="4" type="Scalar { Kind = U32 }" value="71030" />
+      <TextA kind="Leaf" offset="14308" length="216" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Black Data Wing x1</TextA>
+    </_69>
+    <_70 kind="Record" offset="14524" length="230">
+      <TextKey kind="Leaf" offset="14524" length="4" type="Scalar { Kind = U32 }" value="71031" />
+      <TextA kind="Leaf" offset="14528" length="226" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Wings of the Seabird x1</TextA>
+    </_70>
+    <_71 kind="Record" offset="14754" length="216">
+      <TextKey kind="Leaf" offset="14754" length="4" type="Scalar { Kind = U32 }" value="71032" />
+      <TextA kind="Leaf" offset="14758" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_71>
+    <_72 kind="Record" offset="14970" length="216">
+      <TextKey kind="Leaf" offset="14970" length="4" type="Scalar { Kind = U32 }" value="71033" />
+      <TextA kind="Leaf" offset="14974" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_72>
+    <_73 kind="Record" offset="15186" length="216">
+      <TextKey kind="Leaf" offset="15186" length="4" type="Scalar { Kind = U32 }" value="71034" />
+      <TextA kind="Leaf" offset="15190" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_73>
+    <_74 kind="Record" offset="15402" length="236">
+      <TextKey kind="Leaf" offset="15402" length="4" type="Scalar { Kind = U32 }" value="71035" />
+      <TextA kind="Leaf" offset="15406" length="232" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Footstep of Gold Dragon x1</TextA>
+    </_74>
+    <_75 kind="Record" offset="15638" length="206">
+      <TextKey kind="Leaf" offset="15638" length="4" type="Scalar { Kind = U32 }" value="71039" />
+      <TextA kind="Leaf" offset="15642" length="202" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Chotic Seat</TextA>
+    </_75>
+    <_76 kind="Record" offset="15844" length="212">
+      <TextKey kind="Leaf" offset="15844" length="4" type="Scalar { Kind = U32 }" value="71041" />
+      <TextA kind="Leaf" offset="15848" length="208" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Dimension Gear</TextA>
+    </_76>
+    <_77 kind="Record" offset="16056" length="212">
+      <TextKey kind="Leaf" offset="16056" length="4" type="Scalar { Kind = U32 }" value="71043" />
+      <TextA kind="Leaf" offset="16060" length="208" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Megido Seat x1</TextA>
+    </_77>
+    <_78 kind="Record" offset="16268" length="222">
+      <TextKey kind="Leaf" offset="16268" length="4" type="Scalar { Kind = U32 }" value="71044" />
+      <TextA kind="Leaf" offset="16272" length="218" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Blade of Justice x1</TextA>
+    </_78>
+    <_79 kind="Record" offset="16490" length="212">
+      <TextKey kind="Leaf" offset="16490" length="4" type="Scalar { Kind = U32 }" value="71045" />
+      <TextA kind="Leaf" offset="16494" length="208" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Megido Seat x1</TextA>
+    </_79>
+    <_80 kind="Record" offset="16702" length="212">
+      <TextKey kind="Leaf" offset="16702" length="4" type="Scalar { Kind = U32 }" value="71047" />
+      <TextA kind="Leaf" offset="16706" length="208" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Megido Seat x1</TextA>
+    </_80>
+    <_81 kind="Record" offset="16914" length="110">
+      <TextKey kind="Leaf" offset="16914" length="4" type="Scalar { Kind = U32 }" value="71048" />
+      <TextA kind="Leaf" offset="16918" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_81>
+    <_82 kind="Record" offset="17024" length="110">
+      <TextKey kind="Leaf" offset="17024" length="4" type="Scalar { Kind = U32 }" value="71049" />
+      <TextA kind="Leaf" offset="17028" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 3개</TextA>
+    </_82>
+    <_83 kind="Record" offset="17134" length="200">
+      <TextKey kind="Leaf" offset="17134" length="4" type="Scalar { Kind = U32 }" value="71050" />
+      <TextA kind="Leaf" offset="17138" length="196" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Grani x1</TextA>
+    </_83>
+    <_84 kind="Record" offset="17334" length="200">
+      <TextKey kind="Leaf" offset="17334" length="4" type="Scalar { Kind = U32 }" value="71051" />
+      <TextA kind="Leaf" offset="17338" length="196" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Grani x1</TextA>
+    </_84>
+    <_85 kind="Record" offset="17534" length="216">
+      <TextKey kind="Leaf" offset="17534" length="4" type="Scalar { Kind = U32 }" value="71072" />
+      <TextA kind="Leaf" offset="17538" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Will of Light x1</TextA>
+    </_85>
+    <_86 kind="Record" offset="17750" length="222">
+      <TextKey kind="Leaf" offset="17750" length="4" type="Scalar { Kind = U32 }" value="71073" />
+      <TextA kind="Leaf" offset="17754" length="218" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Will of Darkness x1</TextA>
+    </_86>
+    <_87 kind="Record" offset="17972" length="216">
+      <TextKey kind="Leaf" offset="17972" length="4" type="Scalar { Kind = U32 }" value="71075" />
+      <TextA kind="Leaf" offset="17976" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Code in Alpha x1</TextA>
+    </_87>
+    <_88 kind="Record" offset="18188" length="206">
+      <TextKey kind="Leaf" offset="18188" length="4" type="Scalar { Kind = U32 }" value="71076" />
+      <TextA kind="Leaf" offset="18192" length="202" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: White Blade</TextA>
+    </_88>
+    <_89 kind="Record" offset="18394" length="194">
+      <TextKey kind="Leaf" offset="18394" length="4" type="Scalar { Kind = U32 }" value="71078" />
+      <TextA kind="Leaf" offset="18398" length="190" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Sodom</TextA>
+    </_89>
+    <_90 kind="Record" offset="18588" length="208">
+      <TextKey kind="Leaf" offset="18588" length="4" type="Scalar { Kind = U32 }" value="71081" />
+      <TextA kind="Leaf" offset="18592" length="204" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Death X Seat</TextA>
+    </_90>
+    <_91 kind="Record" offset="18796" length="226">
+      <TextKey kind="Leaf" offset="18796" length="4" type="Scalar { Kind = U32 }" value="71082" />
+      <TextA kind="Leaf" offset="18800" length="222" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Qinglongmon Saddle x1</TextA>
+    </_91>
+    <_92 kind="Record" offset="19022" length="218">
+      <TextKey kind="Leaf" offset="19022" length="4" type="Scalar { Kind = U32 }" value="71083" />
+      <TextA kind="Leaf" offset="19026" length="214" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Will of Flames x1</TextA>
+    </_92>
+    <_93 kind="Record" offset="19240" length="214">
+      <TextKey kind="Leaf" offset="19240" length="4" type="Scalar { Kind = U32 }" value="71084" />
+      <TextA kind="Leaf" offset="19244" length="210" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Steel Saddle x1</TextA>
+    </_93>
+    <_94 kind="Record" offset="19454" length="222">
+      <TextKey kind="Leaf" offset="19454" length="4" type="Scalar { Kind = U32 }" value="71085" />
+      <TextA kind="Leaf" offset="19458" length="218" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Xuanwumon Saddle x1</TextA>
+    </_94>
+    <_95 kind="Record" offset="19676" length="110">
+      <TextKey kind="Leaf" offset="19676" length="4" type="Scalar { Kind = U32 }" value="71088" />
+      <TextA kind="Leaf" offset="19680" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_95>
+    <_96 kind="Record" offset="19786" length="206">
+      <TextKey kind="Leaf" offset="19786" length="4" type="Scalar { Kind = U32 }" value="71090" />
+      <TextA kind="Leaf" offset="19790" length="202" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Lampranthus</TextA>
+    </_96>
+    <_97 kind="Record" offset="19992" length="216">
+      <TextKey kind="Leaf" offset="19992" length="4" type="Scalar { Kind = U32 }" value="71099" />
+      <TextA kind="Leaf" offset="19996" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_97>
+    <_98 kind="Record" offset="20208" length="216">
+      <TextKey kind="Leaf" offset="20208" length="4" type="Scalar { Kind = U32 }" value="71101" />
+      <TextA kind="Leaf" offset="20212" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x7</TextA>
+    </_98>
+    <_99 kind="Record" offset="20424" length="214">
+      <TextKey kind="Leaf" offset="20424" length="4" type="Scalar { Kind = U32 }" value="71102" />
+      <TextA kind="Leaf" offset="20428" length="210" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Call of Doom x1</TextA>
+    </_99>
+    <_100 kind="Record" offset="20638" length="226">
+      <TextKey kind="Leaf" offset="20638" length="4" type="Scalar { Kind = U32 }" value="71103" />
+      <TextA kind="Leaf" offset="20642" length="222" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Path of Devastator x1</TextA>
+    </_100>
+    <_101 kind="Record" offset="20864" length="210">
+      <TextKey kind="Leaf" offset="20864" length="4" type="Scalar { Kind = U32 }" value="71104" />
+      <TextA kind="Leaf" offset="20868" length="206" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Empty Seat x1</TextA>
+    </_101>
+    <_102 kind="Record" offset="21074" length="234">
+      <TextKey kind="Leaf" offset="21074" length="4" type="Scalar { Kind = U32 }" value="71107" />
+      <TextA kind="Leaf" offset="21078" length="230" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Deteriorated Dark Will x1</TextA>
+    </_102>
+    <_103 kind="Record" offset="21308" length="224">
+      <TextKey kind="Leaf" offset="21308" length="4" type="Scalar { Kind = U32 }" value="71108" />
+      <TextA kind="Leaf" offset="21312" length="220" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Freyja's Blessing x1</TextA>
+    </_103>
+    <_104 kind="Record" offset="21532" length="236">
+      <TextKey kind="Leaf" offset="21532" length="4" type="Scalar { Kind = U32 }" value="71109" />
+      <TextA kind="Leaf" offset="21536" length="232" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Dark Will of Subspecies x1</TextA>
+    </_104>
+    <_105 kind="Record" offset="21768" length="230">
+      <TextKey kind="Leaf" offset="21768" length="4" type="Scalar { Kind = U32 }" value="71110" />
+      <TextA kind="Leaf" offset="21772" length="226" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Cracks on Time-Space x1</TextA>
+    </_105>
+    <_106 kind="Record" offset="21998" length="226">
+      <TextKey kind="Leaf" offset="21998" length="4" type="Scalar { Kind = U32 }" value="71111" />
+      <TextA kind="Leaf" offset="22002" length="222" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: The grace of angel x1</TextA>
+    </_106>
+    <_107 kind="Record" offset="22224" length="236">
+      <TextKey kind="Leaf" offset="22224" length="4" type="Scalar { Kind = U32 }" value="71112" />
+      <TextA kind="Leaf" offset="22228" length="232" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: The touch of the Wicked x1</TextA>
+    </_107>
+    <_108 kind="Record" offset="22460" length="236">
+      <TextKey kind="Leaf" offset="22460" length="4" type="Scalar { Kind = U32 }" value="71113" />
+      <TextA kind="Leaf" offset="22464" length="232" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: The Saddle of incarnate x1</TextA>
+    </_108>
+    <_109 kind="Record" offset="22696" length="212">
+      <TextKey kind="Leaf" offset="22696" length="4" type="Scalar { Kind = U32 }" value="71114" />
+      <TextA kind="Leaf" offset="22700" length="208" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Darkdra Arm x1</TextA>
+    </_109>
+    <_110 kind="Record" offset="22908" length="214">
+      <TextKey kind="Leaf" offset="22908" length="4" type="Scalar { Kind = U32 }" value="71115" />
+      <TextA kind="Leaf" offset="22912" length="210" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: El Evangelio x1</TextA>
+    </_110>
+    <_111 kind="Record" offset="23122" length="212">
+      <TextKey kind="Leaf" offset="23122" length="4" type="Scalar { Kind = U32 }" value="71116" />
+      <TextA kind="Leaf" offset="23126" length="208" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Megido Seat x1</TextA>
+    </_111>
+    <_112 kind="Record" offset="23334" length="110">
+      <TextKey kind="Leaf" offset="23334" length="4" type="Scalar { Kind = U32 }" value="71118" />
+      <TextA kind="Leaf" offset="23338" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_112>
+    <_113 kind="Record" offset="23444" length="110">
+      <TextKey kind="Leaf" offset="23444" length="4" type="Scalar { Kind = U32 }" value="71119" />
+      <TextA kind="Leaf" offset="23448" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_113>
+    <_114 kind="Record" offset="23554" length="110">
+      <TextKey kind="Leaf" offset="23554" length="4" type="Scalar { Kind = U32 }" value="71120" />
+      <TextA kind="Leaf" offset="23558" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 3개</TextA>
+    </_114>
+    <_115 kind="Record" offset="23664" length="110">
+      <TextKey kind="Leaf" offset="23664" length="4" type="Scalar { Kind = U32 }" value="71121" />
+      <TextA kind="Leaf" offset="23668" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_115>
+    <_116 kind="Record" offset="23774" length="110">
+      <TextKey kind="Leaf" offset="23774" length="4" type="Scalar { Kind = U32 }" value="71122" />
+      <TextA kind="Leaf" offset="23778" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 모드셀렉터 5개</TextA>
+    </_116>
+    <_117 kind="Record" offset="23884" length="110">
+      <TextKey kind="Leaf" offset="23884" length="4" type="Scalar { Kind = U32 }" value="71123" />
+      <TextA kind="Leaf" offset="23888" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 모드셀렉터 5개</TextA>
+    </_117>
+    <_118 kind="Record" offset="23994" length="110">
+      <TextKey kind="Leaf" offset="23994" length="4" type="Scalar { Kind = U32 }" value="71124" />
+      <TextA kind="Leaf" offset="23998" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_118>
+    <_119 kind="Record" offset="24104" length="110">
+      <TextKey kind="Leaf" offset="24104" length="4" type="Scalar { Kind = U32 }" value="71125" />
+      <TextA kind="Leaf" offset="24108" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_119>
+    <_120 kind="Record" offset="24214" length="110">
+      <TextKey kind="Leaf" offset="24214" length="4" type="Scalar { Kind = U32 }" value="71126" />
+      <TextA kind="Leaf" offset="24218" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_120>
+    <_121 kind="Record" offset="24324" length="218">
+      <TextKey kind="Leaf" offset="24324" length="4" type="Scalar { Kind = U32 }" value="71127" />
+      <TextA kind="Leaf" offset="24328" length="214" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Photon Spreads x1</TextA>
+    </_121>
+    <_122 kind="Record" offset="24542" length="242">
+      <TextKey kind="Leaf" offset="24542" length="4" type="Scalar { Kind = U32 }" value="71129" />
+      <TextA kind="Leaf" offset="24546" length="238" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Blessing of the Shrine Maiden</TextA>
+    </_122>
+    <_123 kind="Record" offset="24784" length="110">
+      <TextKey kind="Leaf" offset="24784" length="4" type="Scalar { Kind = U32 }" value="71130" />
+      <TextA kind="Leaf" offset="24788" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_123>
+    <_124 kind="Record" offset="24894" length="200">
+      <TextKey kind="Leaf" offset="24894" length="4" type="Scalar { Kind = U32 }" value="71133" />
+      <TextA kind="Leaf" offset="24898" length="196" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Grani x1</TextA>
+    </_124>
+    <_125 kind="Record" offset="25094" length="242">
+      <TextKey kind="Leaf" offset="25094" length="4" type="Scalar { Kind = U32 }" value="72001" />
+      <TextA kind="Leaf" offset="25098" length="238" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Blessing of the Shrine Maiden</TextA>
+    </_125>
+    <_126 kind="Record" offset="25336" length="112">
+      <TextKey kind="Leaf" offset="25336" length="4" type="Scalar { Kind = U32 }" value="72002" />
+      <TextA kind="Leaf" offset="25340" length="108" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 우정의 기적 1개</TextA>
+    </_126>
+    <_127 kind="Record" offset="25448" length="216">
+      <TextKey kind="Leaf" offset="25448" length="4" type="Scalar { Kind = U32 }" value="75001" />
+      <TextA kind="Leaf" offset="25452" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x3</TextA>
+    </_127>
+    <_128 kind="Record" offset="25664" length="216">
+      <TextKey kind="Leaf" offset="25664" length="4" type="Scalar { Kind = U32 }" value="75002" />
+      <TextA kind="Leaf" offset="25668" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x3</TextA>
+    </_128>
+    <_129 kind="Record" offset="25880" length="216">
+      <TextKey kind="Leaf" offset="25880" length="4" type="Scalar { Kind = U32 }" value="75003" />
+      <TextA kind="Leaf" offset="25884" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x3</TextA>
+    </_129>
+    <_130 kind="Record" offset="26096" length="224">
+      <TextKey kind="Leaf" offset="26096" length="4" type="Scalar { Kind = U32 }" value="75004" />
+      <TextA kind="Leaf" offset="26100" length="220" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Miracle of Magnum x1</TextA>
+    </_130>
+    <_131 kind="Record" offset="26320" length="216">
+      <TextKey kind="Leaf" offset="26320" length="4" type="Scalar { Kind = U32 }" value="75005" />
+      <TextA kind="Leaf" offset="26324" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x3</TextA>
+    </_131>
+    <_132 kind="Record" offset="26536" length="240">
+      <TextKey kind="Leaf" offset="26536" length="4" type="Scalar { Kind = U32 }" value="75030" />
+      <TextA kind="Leaf" offset="26540" length="236" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Generosity of the Emperor x1</TextA>
+    </_132>
+    <_133 kind="Record" offset="26776" length="216">
+      <TextKey kind="Leaf" offset="26776" length="4" type="Scalar { Kind = U32 }" value="75041" />
+      <TextA kind="Leaf" offset="26780" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Luminous Flux x1</TextA>
+    </_133>
+    <_134 kind="Record" offset="26992" length="216">
+      <TextKey kind="Leaf" offset="26992" length="4" type="Scalar { Kind = U32 }" value="75042" />
+      <TextA kind="Leaf" offset="26996" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Susanoo Craft x1</TextA>
+    </_134>
+    <_135 kind="Record" offset="27208" length="216">
+      <TextKey kind="Leaf" offset="27208" length="4" type="Scalar { Kind = U32 }" value="75305" />
+      <TextA kind="Leaf" offset="27212" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x3</TextA>
+    </_135>
+    <_136 kind="Record" offset="27424" length="216">
+      <TextKey kind="Leaf" offset="27424" length="4" type="Scalar { Kind = U32 }" value="75306" />
+      <TextA kind="Leaf" offset="27428" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x3</TextA>
+    </_136>
+    <_137 kind="Record" offset="27640" length="216">
+      <TextKey kind="Leaf" offset="27640" length="4" type="Scalar { Kind = U32 }" value="75503" />
+      <TextA kind="Leaf" offset="27644" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x3</TextA>
+    </_137>
+    <_138 kind="Record" offset="27856" length="216">
+      <TextKey kind="Leaf" offset="27856" length="4" type="Scalar { Kind = U32 }" value="75504" />
+      <TextA kind="Leaf" offset="27860" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x3</TextA>
+    </_138>
+    <_139 kind="Record" offset="28072" length="216">
+      <TextKey kind="Leaf" offset="28072" length="4" type="Scalar { Kind = U32 }" value="75700" />
+      <TextA kind="Leaf" offset="28076" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Brave Vernier x1</TextA>
+    </_139>
+    <_140 kind="Record" offset="28288" length="214">
+      <TextKey kind="Leaf" offset="28288" length="4" type="Scalar { Kind = U32 }" value="75701" />
+      <TextA kind="Leaf" offset="28292" length="210" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Gear-X-Storm x1</TextA>
+    </_140>
+    <_141 kind="Record" offset="28502" length="216">
+      <TextKey kind="Leaf" offset="28502" length="4" type="Scalar { Kind = U32 }" value="75705" />
+      <TextA kind="Leaf" offset="28506" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_141>
+    <_142 kind="Record" offset="28718" length="216">
+      <TextKey kind="Leaf" offset="28718" length="4" type="Scalar { Kind = U32 }" value="75706" />
+      <TextA kind="Leaf" offset="28722" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x8</TextA>
+    </_142>
+    <_143 kind="Record" offset="28934" length="216">
+      <TextKey kind="Leaf" offset="28934" length="4" type="Scalar { Kind = U32 }" value="75707" />
+      <TextA kind="Leaf" offset="28938" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Mode Selector x5</TextA>
+    </_143>
+    <_144 kind="Record" offset="29150" length="198">
+      <TextKey kind="Leaf" offset="29150" length="4" type="Scalar { Kind = U32 }" value="75709" />
+      <TextA kind="Leaf" offset="29154" length="194" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Gram x1</TextA>
+    </_144>
+    <_145 kind="Record" offset="29348" length="232">
+      <TextKey kind="Leaf" offset="29348" length="4" type="Scalar { Kind = U32 }" value="75710" />
+      <TextA kind="Leaf" offset="29352" length="228" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Tactician's Guideline x1</TextA>
+    </_145>
+    <_146 kind="Record" offset="29580" length="228">
+      <TextKey kind="Leaf" offset="29580" length="4" type="Scalar { Kind = U32 }" value="75711" />
+      <TextA kind="Leaf" offset="29584" length="224" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Miracle of Magnum X x1</TextA>
+    </_146>
+    <_147 kind="Record" offset="29808" length="216">
+      <TextKey kind="Leaf" offset="29808" length="4" type="Scalar { Kind = U32 }" value="75712" />
+      <TextA kind="Leaf" offset="29812" length="212" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Wyvern's Wing x1</TextA>
+    </_147>
+    <_148 kind="Record" offset="30024" length="214">
+      <TextKey kind="Leaf" offset="30024" length="4" type="Scalar { Kind = U32 }" value="75713" />
+      <TextA kind="Leaf" offset="30028" length="210" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Ulforce Seat x1</TextA>
+    </_148>
+    <_149 kind="Record" offset="30238" length="246">
+      <TextKey kind="Leaf" offset="30238" length="4" type="Scalar { Kind = U32 }" value="75714" />
+      <TextA kind="Leaf" offset="30242" length="242" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Bucephalus of blood and iron x1</TextA>
+    </_149>
+    <_150 kind="Record" offset="30484" length="214">
+      <TextKey kind="Leaf" offset="30484" length="4" type="Scalar { Kind = U32 }" value="75715" />
+      <TextA kind="Leaf" offset="30488" length="210" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: El Evangelio x1</TextA>
+    </_150>
+    <_151 kind="Record" offset="30698" length="110">
+      <TextKey kind="Leaf" offset="30698" length="4" type="Scalar { Kind = U32 }" value="75717" />
+      <TextA kind="Leaf" offset="30702" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_151>
+    <_152 kind="Record" offset="30808" length="110">
+      <TextKey kind="Leaf" offset="30808" length="4" type="Scalar { Kind = U32 }" value="75718" />
+      <TextA kind="Leaf" offset="30812" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 2개</TextA>
+    </_152>
+    <_153 kind="Record" offset="30918" length="110">
+      <TextKey kind="Leaf" offset="30918" length="4" type="Scalar { Kind = U32 }" value="75719" />
+      <TextA kind="Leaf" offset="30922" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 3개</TextA>
+    </_153>
+    <_154 kind="Record" offset="31028" length="110">
+      <TextKey kind="Leaf" offset="31028" length="4" type="Scalar { Kind = U32 }" value="75720" />
+      <TextA kind="Leaf" offset="31032" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 3개</TextA>
+    </_154>
+    <_155 kind="Record" offset="31138" length="110">
+      <TextKey kind="Leaf" offset="31138" length="4" type="Scalar { Kind = U32 }" value="75721" />
+      <TextA kind="Leaf" offset="31142" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_155>
+    <_156 kind="Record" offset="31248" length="110">
+      <TextKey kind="Leaf" offset="31248" length="4" type="Scalar { Kind = U32 }" value="75722" />
+      <TextA kind="Leaf" offset="31252" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_156>
+    <_157 kind="Record" offset="31358" length="210">
+      <TextKey kind="Leaf" offset="31358" length="4" type="Scalar { Kind = U32 }" value="75900" />
+      <TextA kind="Leaf" offset="31362" length="206" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Empty Seat x1</TextA>
+    </_157>
+    <_158 kind="Record" offset="31568" length="212">
+      <TextKey kind="Leaf" offset="31568" length="4" type="Scalar { Kind = U32 }" value="75901" />
+      <TextA kind="Leaf" offset="31572" length="208" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Process : R x1</TextA>
+    </_158>
+    <_159 kind="Record" offset="31780" length="222">
+      <TextKey kind="Leaf" offset="31780" length="4" type="Scalar { Kind = U32 }" value="75902" />
+      <TextA kind="Leaf" offset="31784" length="218" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Will for Justice x1</TextA>
+    </_159>
+    <_160 kind="Record" offset="32002" length="248">
+      <TextKey kind="Leaf" offset="32002" length="4" type="Scalar { Kind = U32 }" value="75904" />
+      <TextA kind="Leaf" offset="32006" length="244" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Holy Blade of Honorable Ruler x1</TextA>
+    </_160>
+    <_161 kind="Record" offset="32250" length="212">
+      <TextKey kind="Leaf" offset="32250" length="4" type="Scalar { Kind = U32 }" value="75906" />
+      <TextA kind="Leaf" offset="32254" length="208" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Megido Seat x1</TextA>
+    </_161>
+    <_162 kind="Record" offset="32462" length="214">
+      <TextKey kind="Leaf" offset="32462" length="4" type="Scalar { Kind = U32 }" value="75907" />
+      <TextA kind="Leaf" offset="32466" length="210" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: El Evangelio x1</TextA>
+    </_162>
+    <_163 kind="Record" offset="32676" length="212">
+      <TextKey kind="Leaf" offset="32676" length="4" type="Scalar { Kind = U32 }" value="75908" />
+      <TextA kind="Leaf" offset="32680" length="208" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Megido Seat x1</TextA>
+    </_163>
+    <_164 kind="Record" offset="32888" length="110">
+      <TextKey kind="Leaf" offset="32888" length="4" type="Scalar { Kind = U32 }" value="75909" />
+      <TextA kind="Leaf" offset="32892" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 3개</TextA>
+    </_164>
+    <_165 kind="Record" offset="32998" length="110">
+      <TextKey kind="Leaf" offset="32998" length="4" type="Scalar { Kind = U32 }" value="75910" />
+      <TextA kind="Leaf" offset="33002" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_165>
+    <_166 kind="Record" offset="33108" length="110">
+      <TextKey kind="Leaf" offset="33108" length="4" type="Scalar { Kind = U32 }" value="75911" />
+      <TextA kind="Leaf" offset="33112" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_166>
+    <_167 kind="Record" offset="33218" length="110">
+      <TextKey kind="Leaf" offset="33218" length="4" type="Scalar { Kind = U32 }" value="75912" />
+      <TextA kind="Leaf" offset="33222" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 히누카무이 1개</TextA>
+    </_167>
+    <_168 kind="Record" offset="33328" length="222">
+      <TextKey kind="Leaf" offset="33328" length="4" type="Scalar { Kind = U32 }" value="77001" />
+      <TextA kind="Leaf" offset="33332" length="218" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Wing of Gluttony x1</TextA>
+    </_168>
+    <_169 kind="Record" offset="33550" length="208">
+      <TextKey kind="Leaf" offset="33550" length="4" type="Scalar { Kind = U32 }" value="77002" />
+      <TextA kind="Leaf" offset="33554" length="204" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Dark Horn x1</TextA>
+    </_169>
+    <_170 kind="Record" offset="33758" length="114">
+      <TextKey kind="Leaf" offset="33758" length="4" type="Scalar { Kind = U32 }" value="77003" />
+      <TextA kind="Leaf" offset="33762" length="110" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 용전사의 날개 1개</TextA>
+    </_170>
+    <_171 kind="Record" offset="33872" length="114">
+      <TextKey kind="Leaf" offset="33872" length="4" type="Scalar { Kind = U32 }" value="77004" />
+      <TextA kind="Leaf" offset="33876" length="110" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 적흑의 쌍두룡 1개</TextA>
+    </_171>
+    <_172 kind="Record" offset="33986" length="114">
+      <TextKey kind="Leaf" offset="33986" length="4" type="Scalar { Kind = U32 }" value="77005" />
+      <TextA kind="Leaf" offset="33990" length="110" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 적흑의 쌍두룡 1개</TextA>
+    </_172>
+    <_173 kind="Record" offset="34100" length="112">
+      <TextKey kind="Leaf" offset="34100" length="4" type="Scalar { Kind = U32 }" value="77006" />
+      <TextA kind="Leaf" offset="34104" length="108" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 고고한 은자 1개</TextA>
+    </_173>
+    <_174 kind="Record" offset="34212" length="124">
+      <TextKey kind="Leaf" offset="34212" length="4" type="Scalar { Kind = U32 }" value="77007" />
+      <TextA kind="Leaf" offset="34216" length="120" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 세계를 멸망시킬 드래곤 1개</TextA>
+    </_174>
+    <_175 kind="Record" offset="34336" length="114">
+      <TextKey kind="Leaf" offset="34336" length="4" type="Scalar { Kind = U32 }" value="77008" />
+      <TextA kind="Leaf" offset="34340" length="110" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 십투사의 가호 1개</TextA>
+    </_175>
+    <_176 kind="Record" offset="34450" length="110">
+      <TextKey kind="Leaf" offset="34450" length="4" type="Scalar { Kind = U32 }" value="77009" />
+      <TextA kind="Leaf" offset="34454" length="106" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 소거의 검 1개</TextA>
+    </_176>
+    <_177 kind="Record" offset="34560" length="114">
+      <TextKey kind="Leaf" offset="34560" length="4" type="Scalar { Kind = U32 }" value="77010" />
+      <TextA kind="Leaf" offset="34564" length="110" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 최강의 4대룡 1개</TextA>
+    </_177>
+    <_178 kind="Record" offset="34674" length="118">
+      <TextKey kind="Leaf" offset="34674" length="4" type="Scalar { Kind = U32 }" value="77011" />
+      <TextA kind="Leaf" offset="34678" length="114" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 하늘을 누비는 자 1개</TextA>
+    </_178>
+    <_179 kind="Record" offset="34792" length="114">
+      <TextKey kind="Leaf" offset="34792" length="4" type="Scalar { Kind = U32 }" value="77017" />
+      <TextA kind="Leaf" offset="34796" length="110" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 우리들의 유대 1개</TextA>
+    </_179>
+    <_180 kind="Record" offset="34906" length="112">
+      <TextKey kind="Leaf" offset="34906" length="4" type="Scalar { Kind = U32 }" value="77020" />
+      <TextA kind="Leaf" offset="34910" length="108" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 암흑의 여신 1개</TextA>
+    </_180>
+    <_181 kind="Record" offset="35018" length="112">
+      <TextKey kind="Leaf" offset="35018" length="4" type="Scalar { Kind = U32 }" value="77021" />
+      <TextA kind="Leaf" offset="35022" length="108" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 종극의 악마 1개</TextA>
+    </_181>
+    <_182 kind="Record" offset="35130" length="114">
+      <TextKey kind="Leaf" offset="35130" length="4" type="Scalar { Kind = U32 }" value="77022" />
+      <TextA kind="Leaf" offset="35134" length="110" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 파멸의 그림자 1개</TextA>
+    </_182>
+    <_183 kind="Record" offset="35244" length="112">
+      <TextKey kind="Leaf" offset="35244" length="4" type="Scalar { Kind = U32 }" value="79003" />
+      <TextA kind="Leaf" offset="35248" length="108" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 새벽의 여신 1개</TextA>
+    </_183>
+    <_184 kind="Record" offset="35356" length="222">
+      <TextKey kind="Leaf" offset="35356" length="4" type="Scalar { Kind = U32 }" value="79004" />
+      <TextA kind="Leaf" offset="35360" length="218" type="WString { }">Mounts, or dismounts from, a riding digimon.  Increases the movement speed.  Open Item: Holy wings of light</TextA>
+    </_184>
+    <_185 kind="Record" offset="35578" length="112">
+      <TextKey kind="Leaf" offset="35578" length="4" type="Scalar { Kind = U32 }" value="79007" />
+      <TextA kind="Leaf" offset="35582" length="108" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 종말의 날개 1개</TextA>
+    </_185>
+    <_186 kind="Record" offset="35690" length="122">
+      <TextKey kind="Leaf" offset="35690" length="4" type="Scalar { Kind = U32 }" value="80000" />
+      <TextA kind="Leaf" offset="35694" length="118" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 던전 마스터즈 라이딩 1개</TextA>
+    </_186>
+    <_187 kind="Record" offset="35812" length="122">
+      <TextKey kind="Leaf" offset="35812" length="4" type="Scalar { Kind = U32 }" value="80001" />
+      <TextA kind="Leaf" offset="35816" length="118" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 던전 마스터즈 라이딩 1개</TextA>
+    </_187>
+    <_188 kind="Record" offset="35934" length="122">
+      <TextKey kind="Leaf" offset="35934" length="4" type="Scalar { Kind = U32 }" value="80002" />
+      <TextA kind="Leaf" offset="35938" length="118" type="WString { }">라이딩 디지몬에 올라타거나 내립니다. 이동속도가 빨라집니다. 오픈 아이템 : 던전 마스터즈 라이딩 1개</TextA>
+    </_188>
+  </Entries>
+</DigimonRidingComment_Str>

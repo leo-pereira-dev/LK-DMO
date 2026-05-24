@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tamer_Str schema="Tamer_Str.struct" bin="Tamer_Str.bin" byteLength="11070">
+  <Entries kind="Section" offset="0" length="11070">
+    <_0 kind="Record" offset="4" length="566">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="80001" />
+      <TextA kind="Leaf" offset="8" length="28" type="WString { }">Marcus Damon</TextA>
+      <TextB kind="Leaf" offset="36" length="506" type="WString { }">A 14-year-old, 8th-grade boy who wouldn't miss a chance to fight. He made Agumon his Partner Digimon after defeating it. Impressed by his distinguished performance - such as his evolving Agumen to Geo Greymon - the Commander of DATS asked him to join.</TextB>
+      <TextC kind="Leaf" offset="542" length="16" type="WString { }">Savers</TextC>
+      <TextD kind="Leaf" offset="558" length="12" type="WString { }">male</TextD>
+    </_0>
+    <_1 kind="Record" offset="570" length="746">
+      <TextKey kind="Leaf" offset="570" length="4" type="Scalar { Kind = U32 }" value="80002" />
+      <TextA kind="Leaf" offset="574" length="40" type="WString { }">Thomas H. Norstein</TextA>
+      <TextB kind="Leaf" offset="614" length="674" type="WString { }">Although he is only 14, he received his university degree at the age of 12. DATS has determined his intelligence to be very high.   He has very high self-confidence in his ability to perform tasks, based on both theory and evidence. Such a calm and rational tendency often conflicts with Marcus Damon, who tends to react compulsively. </TextB>
+      <TextC kind="Leaf" offset="1288" length="16" type="WString { }">Savers</TextC>
+      <TextD kind="Leaf" offset="1304" length="12" type="WString { }">male</TextD>
+    </_1>
+    <_2 kind="Record" offset="1316" length="596">
+      <TextKey kind="Leaf" offset="1316" length="4" type="Scalar { Kind = U32 }" value="80003" />
+      <TextA kind="Leaf" offset="1320" length="34" type="WString { }">Yoshino Fujieda</TextA>
+      <TextB kind="Leaf" offset="1354" length="526" type="WString { }">An 18-year-old girl, the oldest of the Tamers She takes care of other Tamers. She is the one who usually sorts out everything in the team.  Everyone in DATS trusts her. But she often dumps annoying or hard tasks on boys like Marcus Damon and Thomas H. Norstein.</TextB>
+      <TextC kind="Leaf" offset="1880" length="16" type="WString { }">Savers</TextC>
+      <TextD kind="Leaf" offset="1896" length="16" type="WString { }">female</TextD>
+    </_2>
+    <_3 kind="Record" offset="1912" length="598">
+      <TextKey kind="Leaf" offset="1912" length="4" type="Scalar { Kind = U32 }" value="80004" />
+      <TextA kind="Leaf" offset="1916" length="28" type="WString { }">Keenan Krier</TextA>
+      <TextB kind="Leaf" offset="1944" length="538" type="WString { }">A boy who has grown up in the Digital World. The son of Kevin Krier, he is a renowned researcher in Super Dimensions. He grew up in the Digital World after he was separated from his parents due to a tragic accident. Naturally, he came to believe that he is a Digimon.</TextB>
+      <TextC kind="Leaf" offset="2482" length="16" type="WString { }">Savers</TextC>
+      <TextD kind="Leaf" offset="2498" length="12" type="WString { }">male</TextD>
+    </_3>
+    <_4 kind="Record" offset="2510" length="766">
+      <TextKey kind="Leaf" offset="2510" length="4" type="Scalar { Kind = U32 }" value="80005" />
+      <TextA kind="Leaf" offset="2514" length="30" type="WString { }">Taichi Kamiya</TextA>
+      <TextB kind="Leaf" offset="2544" length="698" type="WString { }">Elementary 5th grader weak at studying but good at any kinds of sports. Very active, and always body moves first than the words. Sometimes weird activity causes failures, but with gifted courage that is not easily being broken and ability to lead, he always leads his colleagues. Entitled to school’s football club and an ace striker at 5th grade.</TextB>
+      <TextC kind="Leaf" offset="3242" length="22" type="WString { }">Adventure</TextC>
+      <TextD kind="Leaf" offset="3264" length="12" type="WString { }">male</TextD>
+    </_4>
+    <_5 kind="Record" offset="3276" length="770">
+      <TextKey kind="Leaf" offset="3276" length="4" type="Scalar { Kind = U32 }" value="80006" />
+      <TextA kind="Leaf" offset="3280" length="32" type="WString { }">Mimi Tachikawa</TextA>
+      <TextB kind="Leaf" offset="3312" length="696" type="WString { }">A type of person who is being loved by everyone due to nice personality. Grew up in a wealthy family without any hardships, therefore sometimes selfish and irresponsible personalities show up. Also a habit to rely and depend on others shows up because of tendency to avoid hard works and make a wrong face whenever something embarrassing happens.</TextB>
+      <TextC kind="Leaf" offset="4008" length="22" type="WString { }">Adventure</TextC>
+      <TextD kind="Leaf" offset="4030" length="16" type="WString { }">female</TextD>
+    </_5>
+    <_6 kind="Record" offset="4046" length="722">
+      <TextKey kind="Leaf" offset="4046" length="4" type="Scalar { Kind = U32 }" value="80007" />
+      <TextA kind="Leaf" offset="4050" length="26" type="WString { }">Matt Ishida</TextA>
+      <TextB kind="Leaf" offset="4076" length="658" type="WString { }">A nice boy good at both study and sports. Parents got divorced, so now father takes care of him. Strong responsibility and sincere commitment make him to think carefully during adventures. Often he conflicts with Tai who is more instinctive. Overprotects his own brother Ricky who is with mother now. Good at playing Harmonica.</TextB>
+      <TextC kind="Leaf" offset="4734" length="22" type="WString { }">Adventure</TextC>
+      <TextD kind="Leaf" offset="4756" length="12" type="WString { }">male</TextD>
+    </_6>
+    <_7 kind="Record" offset="4768" length="668">
+      <TextKey kind="Leaf" offset="4768" length="4" type="Scalar { Kind = U32 }" value="80008" />
+      <TextA kind="Leaf" offset="4772" length="42" type="WString { }">Takeru T.K Takaishi</TextA>
+      <TextB kind="Leaf" offset="4814" length="588" type="WString { }">Matt’s younger brother living with mother after parents’ divorce. Admires his brother and believes that leaving everything to his brother will be sine. Very kind and pure personality. Sometimes thinking Tai’s opinion more important than overprotective brother, Matt, making him uncomfortable.</TextB>
+      <TextC kind="Leaf" offset="5402" length="22" type="WString { }">Adventure</TextC>
+      <TextD kind="Leaf" offset="5424" length="12" type="WString { }">male</TextD>
+    </_7>
+    <_8 kind="Record" offset="5436" length="594">
+      <TextKey kind="Leaf" offset="5436" length="4" type="Scalar { Kind = U32 }" value="80009" />
+      <TextA kind="Leaf" offset="5440" length="30" type="WString { }">Hikari Kamiya</TextA>
+      <TextB kind="Leaf" offset="5470" length="522" type="WString { }">Tai's little sister. She didn't go to Digital World, even she is belong to Chosen Children because of she got a cold at the date of camp. Later, she has met Tailmon which is Vandemon(which has came to find Eighth child)'s subordinates and became Chosen Child.</TextB>
+      <TextC kind="Leaf" offset="5992" length="22" type="WString { }">Adventure</TextC>
+      <TextD kind="Leaf" offset="6014" length="16" type="WString { }">female</TextD>
+    </_8>
+    <_9 kind="Record" offset="6030" length="430">
+      <TextKey kind="Leaf" offset="6030" length="4" type="Scalar { Kind = U32 }" value="80010" />
+      <TextA kind="Leaf" offset="6034" length="36" type="WString { }">Sora Takenoushi </TextA>
+      <TextB kind="Leaf" offset="6070" length="352" type="WString { }">She is a good athlete with short hair, so even she has enough skill compare with Tai. And she seems mature than other people with strong spirit of Sacrifice &amp; responsibility.</TextB>
+      <TextC kind="Leaf" offset="6422" length="22" type="WString { }">Adventure</TextC>
+      <TextD kind="Leaf" offset="6444" length="16" type="WString { }">female</TextD>
+    </_9>
+    <_10 kind="Record" offset="6460" length="380">
+      <TextKey kind="Leaf" offset="6460" length="4" type="Scalar { Kind = U32 }" value="80011" />
+      <TextA kind="Leaf" offset="6464" length="32" type="WString { }">Takato Matsuki</TextA>
+      <TextB kind="Leaf" offset="6496" length="316" type="WString { }">A little introverted but an ordinary kid who enjoys playing Digimon card games every day at the playground with friends and drawing the Digimon he imagines.</TextB>
+      <TextC kind="Leaf" offset="6812" length="16" type="WString { }">Tamers</TextC>
+      <TextD kind="Leaf" offset="6828" length="12" type="WString { }">male</TextD>
+    </_10>
+    <_11 kind="Record" offset="6840" length="366">
+      <TextKey kind="Leaf" offset="6840" length="4" type="Scalar { Kind = U32 }" value="80012" />
+      <TextA kind="Leaf" offset="6844" length="26" type="WString { }">Rika Nonaka</TextA>
+      <TextB kind="Leaf" offset="6870" length="304" type="WString { }">A genius girl who won second place in the Digimon card game. Her character is provocative and blunt, and she has the nickname of the Queen of Digimon.</TextB>
+      <TextC kind="Leaf" offset="7174" length="16" type="WString { }">Tamers</TextC>
+      <TextD kind="Leaf" offset="7190" length="16" type="WString { }">female</TextD>
+    </_11>
+    <_12 kind="Record" offset="7206" length="196">
+      <TextKey kind="Leaf" offset="7206" length="4" type="Scalar { Kind = U32 }" value="80013" />
+      <TextA kind="Leaf" offset="7210" length="24" type="WString { }">Henry Wong</TextA>
+      <TextB kind="Leaf" offset="7234" length="140" type="WString { }">A boy who acts calmly and has an adult personality at the age of 11.</TextB>
+      <TextC kind="Leaf" offset="7374" length="16" type="WString { }">Tamers</TextC>
+      <TextD kind="Leaf" offset="7390" length="12" type="WString { }">male</TextD>
+    </_12>
+    <_13 kind="Record" offset="7402" length="588">
+      <TextKey kind="Leaf" offset="7402" length="4" type="Scalar { Kind = U32 }" value="80014" />
+      <TextA kind="Leaf" offset="7406" length="42" type="WString { }">Koushiro Izzy Izumi</TextA>
+      <TextB kind="Leaf" offset="7448" length="508" type="WString { }">The boy who loves computer so much that he always brings his own laptaop. He has so much intellecutal curiosity so that he can solve problems if he focuses on. Sometimes, his concentration on one thing makes others get mad, but he is a nice boy anyway.</TextB>
+      <TextC kind="Leaf" offset="7956" length="22" type="WString { }">Adventure</TextC>
+      <TextD kind="Leaf" offset="7978" length="12" type="WString { }">male</TextD>
+    </_13>
+    <_14 kind="Record" offset="7990" length="664">
+      <TextKey kind="Leaf" offset="7990" length="4" type="Scalar { Kind = U32 }" value="80015" />
+      <TextA kind="Leaf" offset="7994" length="20" type="WString { }">Joe Kido</TextA>
+      <TextB kind="Leaf" offset="8014" length="606" type="WString { }">He is the sixth grader, the oldest of the other children. He makes many mistakes because he thinks that he has to do something because he is a senior. He studies hard as a grinder so he is indecision sometimes, but he became a good gurdian and got good insights through the adventure in Digital World.</TextB>
+      <TextC kind="Leaf" offset="8620" length="22" type="WString { }">Adventure</TextC>
+      <TextD kind="Leaf" offset="8642" length="12" type="WString { }">male</TextD>
+    </_14>
+    <_15 kind="Record" offset="8654" length="404">
+      <TextKey kind="Leaf" offset="8654" length="4" type="Scalar { Kind = U32 }" value="80016" />
+      <TextA kind="Leaf" offset="8658" length="22" type="WString { }">Kato Jeri</TextA>
+      <TextB kind="Leaf" offset="8680" length="346" type="WString { }">A girl who is very cheerful and active in school, using finger puppets to play games. He seems to be indifferent to Digimon, but in fact, he is very interested in Digimon.</TextB>
+      <TextC kind="Leaf" offset="9026" length="16" type="WString { }">Tamers</TextC>
+      <TextD kind="Leaf" offset="9042" length="16" type="WString { }">female</TextD>
+    </_15>
+    <_16 kind="Record" offset="9058" length="280">
+      <TextKey kind="Leaf" offset="9058" length="4" type="Scalar { Kind = U32 }" value="80017" />
+      <TextA kind="Leaf" offset="9062" length="26" type="WString { }">Akiyama Ryo</TextA>
+      <TextB kind="Leaf" offset="9088" length="222" type="WString { }">Not only is the versatile Digimon King and Digimon card game, but also the ability as a tamer is outstanding.</TextB>
+      <TextC kind="Leaf" offset="9310" length="16" type="WString { }">Tamers</TextC>
+      <TextD kind="Leaf" offset="9326" length="12" type="WString { }">male</TextD>
+    </_16>
+    <_17 kind="Record" offset="9338" length="426">
+      <TextKey kind="Leaf" offset="9338" length="4" type="Scalar { Kind = U32 }" value="80018" />
+      <TextA kind="Leaf" offset="9342" length="32" type="WString { }">Amanokawa Hiro</TextA>
+      <TextB kind="Leaf" offset="9374" length="354" type="WString { }">1st year student at Hanseo Middle School, 13 years old. A reliable type who tries to handle most things on their own, is well relied on by others, and rarely refuses requests.</TextB>
+      <TextC kind="Leaf" offset="9728" length="24" type="WString { }">Ghost game</TextC>
+      <TextD kind="Leaf" offset="9752" length="12" type="WString { }">male</TextD>
+    </_17>
+    <_18 kind="Record" offset="9764" length="460">
+      <TextKey kind="Leaf" offset="9764" length="4" type="Scalar { Kind = U32 }" value="80019" />
+      <TextA kind="Leaf" offset="9768" length="32" type="WString { }">Tsukiyono Ruli</TextA>
+      <TextB kind="Leaf" offset="9800" length="384" type="WString { }">A 1st-year female student at an all-girls middle school, running a rapidly popular SNS account. Sociable, seeks the perfect fit for herself, and wants to deeply pursue whatever she takes on.</TextB>
+      <TextC kind="Leaf" offset="10184" length="24" type="WString { }">Ghost game</TextC>
+      <TextD kind="Leaf" offset="10208" length="16" type="WString { }">female</TextD>
+    </_18>
+    <_19 kind="Record" offset="10224" length="358">
+      <TextKey kind="Leaf" offset="10224" length="4" type="Scalar { Kind = U32 }" value="80020" />
+      <TextA kind="Leaf" offset="10228" length="52" type="WString { }">Higashimitarai Kiyoshiro</TextA>
+      <TextB kind="Leaf" offset="10280" length="266" type="WString { }">2nd-year male dormitory supervisor at Hanseo Middle School, 14 years old. A genius who graduated from a U.S. graduate school early.</TextB>
+      <TextC kind="Leaf" offset="10546" length="24" type="WString { }">Ghost game</TextC>
+      <TextD kind="Leaf" offset="10570" length="12" type="WString { }">male</TextD>
+    </_19>
+    <_20 kind="Record" offset="10582" length="488">
+      <TextKey kind="Leaf" offset="10582" length="4" type="Scalar { Kind = U32 }" value="80021" />
+      <TextA kind="Leaf" offset="10586" length="32" type="WString { }">Digimon Kaiser</TextA>
+      <TextB kind="Leaf" offset="10618" length="410" type="WString { }">A cruel and ruthless personality who controls countless Digimon, builds the Dark Tower to conquer the Digital World, and mercilessly overworks or abuses Digimon while playing this "game" without remorse.</TextB>
+      <TextC kind="Leaf" offset="11028" length="30" type="WString { }">Power Digimon</TextC>
+      <TextD kind="Leaf" offset="11058" length="12" type="WString { }">male</TextD>
+    </_20>
+  </Entries>
+</Tamer_Str>

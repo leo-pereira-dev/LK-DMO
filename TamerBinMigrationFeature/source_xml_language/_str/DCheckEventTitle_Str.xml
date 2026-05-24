@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DCheckEventTitle_Str schema="DCheckEventTitle_Str.struct" bin="DCheckEventTitle_Str.bin" byteLength="7348">
+  <Entries kind="Section" offset="0" length="7348">
+    <_0 kind="Record" offset="4" length="184">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <TextA kind="Leaf" offset="8" length="42" type="WString { }">100 Days of Digimon</TextA>
+      <TextB kind="Leaf" offset="50" length="70" type="WString { }">Thanksgiving! Digimon Race(100D)!</TextB>
+      <TextC kind="Leaf" offset="120" length="68" type="WString { }">Log-in everyday and get DigiEgg!</TextC>
+    </_0>
+    <_1 kind="Record" offset="188" length="224">
+      <TextKey kind="Leaf" offset="188" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="192" length="42" type="WString { }">100 Days of Digimon</TextA>
+      <TextB kind="Leaf" offset="234" length="58" type="WString { }">100Days of Digimon Journey!</TextB>
+      <TextC kind="Leaf" offset="292" length="120" type="WString { }">Log-in everyday and get DigiEgg! Reset Time: 06:00 (GMT+9)</TextC>
+    </_1>
+    <_2 kind="Record" offset="412" length="194">
+      <TextKey kind="Leaf" offset="412" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="416" length="42" type="WString { }">100 Days of Digimon</TextA>
+      <TextB kind="Leaf" offset="458" length="58" type="WString { }">100Days of Digimon Journey!</TextB>
+      <TextC kind="Leaf" offset="516" length="90" type="WString { }">DigiEgg Everyday! Reset Time: 06:00 (GMT+9)</TextC>
+    </_2>
+    <_3 kind="Record" offset="606" length="162">
+      <TextKey kind="Leaf" offset="606" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="610" length="24" type="WString { }">Easter Day</TextA>
+      <TextB kind="Leaf" offset="634" length="44" type="WString { }">Easter Day! Digiegg!</TextB>
+      <TextC kind="Leaf" offset="678" length="90" type="WString { }">DigiEgg Everyday! Reset Time: 06:00 (GMT+9)</TextC>
+    </_3>
+    <_4 kind="Record" offset="768" length="230">
+      <TextKey kind="Leaf" offset="768" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <TextA kind="Leaf" offset="772" length="52" type="WString { }">Tamer Appreciation Event</TextA>
+      <TextB kind="Leaf" offset="824" length="52" type="WString { }">Tamer Appreciation Event</TextB>
+      <TextC kind="Leaf" offset="876" length="122" type="WString { }">Attend every day and get rewards! Reset Time: 06:00 (GMT+9)</TextC>
+    </_4>
+    <_5 kind="Record" offset="998" length="232">
+      <TextKey kind="Leaf" offset="998" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextA kind="Leaf" offset="1002" length="58" type="WString { }">Let's cheer up in May, too!</TextA>
+      <TextB kind="Leaf" offset="1060" length="58" type="WString { }">Let's cheer up in May, too!</TextB>
+      <TextC kind="Leaf" offset="1118" length="112" type="WString { }">Attend every day and get rewards! Reset: 06:00 (GMT+9)</TextC>
+    </_5>
+    <_6 kind="Record" offset="1230" length="194">
+      <TextKey kind="Leaf" offset="1230" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <TextA kind="Leaf" offset="1234" length="42" type="WString { }">100 Days of Digimon</TextA>
+      <TextB kind="Leaf" offset="1276" length="58" type="WString { }">100Days of Digimon Journey!</TextB>
+      <TextC kind="Leaf" offset="1334" length="90" type="WString { }">DigiEgg Everyday! Reset Time: 06:00 (GMT+9)</TextC>
+    </_6>
+    <_7 kind="Record" offset="1424" length="226">
+      <TextKey kind="Leaf" offset="1424" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <TextA kind="Leaf" offset="1428" length="60" type="WString { }">Attendance with Fall Leaves!</TextA>
+      <TextB kind="Leaf" offset="1488" length="60" type="WString { }">Attendance with Fall Leaves!</TextB>
+      <TextC kind="Leaf" offset="1548" length="102" type="WString { }">while feeling the fall vibe! Reset: 06:00 (GMT+9)</TextC>
+    </_7>
+    <_8 kind="Record" offset="1650" length="198">
+      <TextKey kind="Leaf" offset="1650" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <TextA kind="Leaf" offset="1654" length="36" type="WString { }">Passed Down Myth</TextA>
+      <TextB kind="Leaf" offset="1690" length="58" type="WString { }">Proving the myth with Izzy!</TextB>
+      <TextC kind="Leaf" offset="1748" length="100" type="WString { }">Proving the myth with Izzy! Reset: 06:00 (GMT+9)</TextC>
+    </_8>
+    <_9 kind="Record" offset="1848" length="188">
+      <TextKey kind="Leaf" offset="1848" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <TextA kind="Leaf" offset="1852" length="42" type="WString { }">100 Days of Digimon</TextA>
+      <TextB kind="Leaf" offset="1894" length="52" type="WString { }">NEW! Digimon Race(100D)!</TextB>
+      <TextC kind="Leaf" offset="1946" length="90" type="WString { }">DigiEgg Everyday! Reset Time: 06:00 (GMT+9)</TextC>
+    </_9>
+    <_10 kind="Record" offset="2036" length="206">
+      <TextKey kind="Leaf" offset="2036" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <TextA kind="Leaf" offset="2040" length="40" type="WString { }">Appreciation Event</TextA>
+      <TextB kind="Leaf" offset="2080" length="40" type="WString { }">Appreciation Event</TextB>
+      <TextC kind="Leaf" offset="2120" length="122" type="WString { }">Attend every day and get rewards! Reset Time: 06:00 (GMT+9)</TextC>
+    </_10>
+    <_11 kind="Record" offset="2242" length="214">
+      <TextKey kind="Leaf" offset="2242" length="4" type="Scalar { Kind = U32 }" value="14" />
+      <TextA kind="Leaf" offset="2246" length="44" type="WString { }">Appreciation Event 2</TextA>
+      <TextB kind="Leaf" offset="2290" length="44" type="WString { }">Appreciation Event 2</TextB>
+      <TextC kind="Leaf" offset="2334" length="122" type="WString { }">Attend every day and get rewards! Reset Time: 06:00 (GMT+9)</TextC>
+    </_11>
+    <_12 kind="Record" offset="2456" length="202">
+      <TextKey kind="Leaf" offset="2456" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <TextA kind="Leaf" offset="2460" length="46" type="WString { }">100 Days of Digimon 2</TextA>
+      <TextB kind="Leaf" offset="2506" length="62" type="WString { }">100Days of Digimon Journey! 2</TextB>
+      <TextC kind="Leaf" offset="2568" length="90" type="WString { }">DigiEgg Everyday! Reset Time: 06:00 (GMT+9)</TextC>
+    </_12>
+    <_13 kind="Record" offset="2658" length="166">
+      <TextKey kind="Leaf" offset="2658" length="4" type="Scalar { Kind = U32 }" value="16" />
+      <TextA kind="Leaf" offset="2662" length="42" type="WString { }">Crack seal success!</TextA>
+      <TextB kind="Leaf" offset="2704" length="42" type="WString { }">Crack seal success!</TextB>
+      <TextC kind="Leaf" offset="2746" length="78" type="WString { }">Get the Crack Gift Box! 06:00 (GMT+9)</TextC>
+    </_13>
+    <_14 kind="Record" offset="2824" length="194">
+      <TextKey kind="Leaf" offset="2824" length="4" type="Scalar { Kind = U32 }" value="17" />
+      <TextA kind="Leaf" offset="2828" length="42" type="WString { }">100 Days of Digimon</TextA>
+      <TextB kind="Leaf" offset="2870" length="58" type="WString { }">100Days of Digimon Journey!</TextB>
+      <TextC kind="Leaf" offset="2928" length="90" type="WString { }">DigiEgg Everyday! Reset Time: 06:00 (GMT+9)</TextC>
+    </_14>
+    <_15 kind="Record" offset="3018" length="194">
+      <TextKey kind="Leaf" offset="3018" length="4" type="Scalar { Kind = U32 }" value="18" />
+      <TextA kind="Leaf" offset="3022" length="28" type="WString { }">Family month</TextA>
+      <TextB kind="Leaf" offset="3050" length="46" type="WString { }">Family Month Gift Box</TextB>
+      <TextC kind="Leaf" offset="3096" length="116" type="WString { }">Attend every day! get rewards! Reset Time: 06:00 (GMT+9)</TextC>
+    </_15>
+    <_16 kind="Record" offset="3212" length="194">
+      <TextKey kind="Leaf" offset="3212" length="4" type="Scalar { Kind = U32 }" value="19" />
+      <TextA kind="Leaf" offset="3216" length="42" type="WString { }">100 Days of Digimon</TextA>
+      <TextB kind="Leaf" offset="3258" length="58" type="WString { }">100Days of Digimon Journey!</TextB>
+      <TextC kind="Leaf" offset="3316" length="90" type="WString { }">DigiEgg Everyday! Reset Time: 06:00 (GMT+9)</TextC>
+    </_16>
+    <_17 kind="Record" offset="3406" length="210">
+      <TextKey kind="Leaf" offset="3406" length="4" type="Scalar { Kind = U32 }" value="20" />
+      <TextA kind="Leaf" offset="3410" length="40" type="WString { }">Summer Revel Event</TextA>
+      <TextB kind="Leaf" offset="3450" length="68" type="WString { }">Digital World Summer Revel Event</TextB>
+      <TextC kind="Leaf" offset="3518" length="98" type="WString { }">Attend and get a gift! Reset time: 6:00 (GMT+9)</TextC>
+    </_17>
+    <_18 kind="Record" offset="3616" length="194">
+      <TextKey kind="Leaf" offset="3616" length="4" type="Scalar { Kind = U32 }" value="21" />
+      <TextA kind="Leaf" offset="3620" length="42" type="WString { }">100 Days of Digimon</TextA>
+      <TextB kind="Leaf" offset="3662" length="58" type="WString { }">100Days of Digimon Journey!</TextB>
+      <TextC kind="Leaf" offset="3720" length="90" type="WString { }">DigiEgg Everyday! Reset Time: 06:00 (GMT+9)</TextC>
+    </_18>
+    <_19 kind="Record" offset="3810" length="238">
+      <TextKey kind="Leaf" offset="3810" length="4" type="Scalar { Kind = U32 }" value="22" />
+      <TextA kind="Leaf" offset="3814" length="52" type="WString { }">Celebrating New Semester</TextA>
+      <TextB kind="Leaf" offset="3866" length="58" type="WString { }">Welcome to the new semester</TextB>
+      <TextC kind="Leaf" offset="3924" length="124" type="WString { }">Attend every day and receive coins! Reset time: 6:00 (GMT+9)</TextC>
+    </_19>
+    <_20 kind="Record" offset="4048" length="238">
+      <TextKey kind="Leaf" offset="4048" length="4" type="Scalar { Kind = U32 }" value="23" />
+      <TextA kind="Leaf" offset="4052" length="52" type="WString { }">Celebrating New Semester</TextA>
+      <TextB kind="Leaf" offset="4104" length="58" type="WString { }">Welcome to the new semester</TextB>
+      <TextC kind="Leaf" offset="4162" length="124" type="WString { }">Attend every day and receive coins! Reset time: 6:00 (GMT+9)</TextC>
+    </_20>
+    <_21 kind="Record" offset="4286" length="238">
+      <TextKey kind="Leaf" offset="4286" length="4" type="Scalar { Kind = U32 }" value="24" />
+      <TextA kind="Leaf" offset="4290" length="40" type="WString { }">Examination period</TextA>
+      <TextB kind="Leaf" offset="4330" length="70" type="WString { }">Welcome to the Examination period</TextB>
+      <TextC kind="Leaf" offset="4400" length="124" type="WString { }">Attend every day and receive coins! Reset time: 6:00 (GMT+9)</TextC>
+    </_21>
+    <_22 kind="Record" offset="4524" length="228">
+      <TextKey kind="Leaf" offset="4524" length="4" type="Scalar { Kind = U32 }" value="25" />
+      <TextA kind="Leaf" offset="4528" length="50" type="WString { }">Never Ending Attendance</TextA>
+      <TextB kind="Leaf" offset="4578" length="50" type="WString { }">Never Ending Attendance</TextB>
+      <TextC kind="Leaf" offset="4628" length="124" type="WString { }">Attend every day and receive coins! Reset time: 6:00 (GMT+9)</TextC>
+    </_22>
+    <_23 kind="Record" offset="4752" length="260">
+      <TextKey kind="Leaf" offset="4752" length="4" type="Scalar { Kind = U32 }" value="26" />
+      <TextA kind="Leaf" offset="4756" length="50" type="WString { }">Never Ending Attendance</TextA>
+      <TextB kind="Leaf" offset="4806" length="82" type="WString { }">Still Unfinished Attendance Check Event</TextB>
+      <TextC kind="Leaf" offset="4888" length="124" type="WString { }">Attend every day and receive coins! Reset time: 6:00 (GMT+9)</TextC>
+    </_23>
+    <_24 kind="Record" offset="5012" length="230">
+      <TextKey kind="Leaf" offset="5012" length="4" type="Scalar { Kind = U32 }" value="27" />
+      <TextA kind="Leaf" offset="5016" length="52" type="WString { }">Jumping Attendance Event</TextA>
+      <TextB kind="Leaf" offset="5068" length="52" type="WString { }">Jumping Attendance Event</TextB>
+      <TextC kind="Leaf" offset="5120" length="122" type="WString { }">Log in daily to receive various rewards! Reward reset: 6 AM</TextC>
+    </_24>
+    <_25 kind="Record" offset="5242" length="190">
+      <TextKey kind="Leaf" offset="5242" length="4" type="Scalar { Kind = U32 }" value="28" />
+      <TextA kind="Leaf" offset="5246" length="34" type="WString { }">Easter Special!</TextA>
+      <TextB kind="Leaf" offset="5280" length="62" type="WString { }">Easter Special! 100-Day Egg  </TextB>
+      <TextC kind="Leaf" offset="5342" length="90" type="WString { }">DigiEgg Everyday! Reset Time: 06:00 (GMT+9)</TextC>
+    </_25>
+    <_26 kind="Record" offset="5432" length="234">
+      <TextKey kind="Leaf" offset="5432" length="4" type="Scalar { Kind = U32 }" value="29" />
+      <TextA kind="Leaf" offset="5436" length="34" type="WString { }">Dungeon Masters</TextA>
+      <TextB kind="Leaf" offset="5470" length="68" type="WString { }">Dungeon Masters 7-Day Attendance</TextB>
+      <TextC kind="Leaf" offset="5538" length="128" type="WString { }">Get Stronger with Limited Seals! Reward Reset: 6:00 AM (GMT+9)</TextC>
+    </_26>
+    <_27 kind="Record" offset="5666" length="224">
+      <TextKey kind="Leaf" offset="5666" length="4" type="Scalar { Kind = U32 }" value="30" />
+      <TextA kind="Leaf" offset="5670" length="34" type="WString { }">Dungeon Masters</TextA>
+      <TextB kind="Leaf" offset="5704" length="58" type="WString { }">Dungeon Masters2 Attendance</TextB>
+      <TextC kind="Leaf" offset="5762" length="128" type="WString { }">Get Stronger with Limited Seals! Reward Reset: 6:00 AM (GMT+9)</TextC>
+    </_27>
+    <_28 kind="Record" offset="5890" length="216">
+      <TextKey kind="Leaf" offset="5890" length="4" type="Scalar { Kind = U32 }" value="31" />
+      <TextA kind="Leaf" offset="5894" length="42" type="WString { }">Hot Summer Festival</TextA>
+      <TextB kind="Leaf" offset="5936" length="64" type="WString { }">Hot Summer Festival Attendance</TextB>
+      <TextC kind="Leaf" offset="6000" length="106" type="WString { }">Hot Summer Festival!! Reward Reset: 6:00 AM (GMT+9)</TextC>
+    </_28>
+    <_29 kind="Record" offset="6106" length="200">
+      <TextKey kind="Leaf" offset="6106" length="4" type="Scalar { Kind = U32 }" value="32" />
+      <TextA kind="Leaf" offset="6110" length="38" type="WString { }">Autumn Attendance</TextA>
+      <TextB kind="Leaf" offset="6148" length="38" type="WString { }">Autumn Attendance</TextB>
+      <TextC kind="Leaf" offset="6186" length="120" type="WString { }">Celebrate autumn with gifts! Reward Reset: 6:00 AM (GMT+9)</TextC>
+    </_29>
+    <_30 kind="Record" offset="6306" length="238">
+      <TextKey kind="Leaf" offset="6306" length="4" type="Scalar { Kind = U32 }" value="33" />
+      <TextA kind="Leaf" offset="6310" length="40" type="WString { }">Sweet Snack Stick!</TextA>
+      <TextB kind="Leaf" offset="6350" length="64" type="WString { }">Sweet Snack Stick!  Attendance</TextB>
+      <TextC kind="Leaf" offset="6414" length="130" type="WString { }">Sweet Chocolate Snack Stick Day!! Reward Reset: 6:00 AM (GMT+9)</TextC>
+    </_30>
+    <_31 kind="Record" offset="6544" length="182">
+      <TextKey kind="Leaf" offset="6544" length="4" type="Scalar { Kind = U32 }" value="34" />
+      <TextA kind="Leaf" offset="6548" length="22" type="WString { }">Christmas</TextA>
+      <TextB kind="Leaf" offset="6570" length="46" type="WString { }">Christmas Summon Card</TextB>
+      <TextC kind="Leaf" offset="6616" length="110" type="WString { }">Get a free summon card! Reward Reset: 6:00 AM (GMT+9)</TextC>
+    </_31>
+    <_32 kind="Record" offset="6726" length="216">
+      <TextKey kind="Leaf" offset="6726" length="4" type="Scalar { Kind = U32 }" value="35" />
+      <TextA kind="Leaf" offset="6730" length="48" type="WString { }">Life Reversal Festival</TextA>
+      <TextB kind="Leaf" offset="6778" length="54" type="WString { }">Life Reversal Summon Card</TextB>
+      <TextC kind="Leaf" offset="6832" length="110" type="WString { }">Life Reversal Festival! Reward Reset: 6:00 AM (GMT+9)</TextC>
+    </_32>
+    <_33 kind="Record" offset="6942" length="214">
+      <TextKey kind="Leaf" offset="6942" length="4" type="Scalar { Kind = U32 }" value="36" />
+      <TextA kind="Leaf" offset="6946" length="46" type="WString { }">What day is it today?</TextA>
+      <TextB kind="Leaf" offset="6992" length="48" type="WString { }">It’s April Fools’ Day~</TextB>
+      <TextC kind="Leaf" offset="7040" length="116" type="WString { }">Let’s receive April Fools’ gifts!! Reward Reset: 6:00 AM</TextC>
+    </_33>
+    <_34 kind="Record" offset="7156" length="192">
+      <TextKey kind="Leaf" offset="7156" length="4" type="Scalar { Kind = U32 }" value="37" />
+      <TextA kind="Leaf" offset="7160" length="34" type="WString { }">Spring Cleaning</TextA>
+      <TextB kind="Leaf" offset="7194" length="34" type="WString { }">Spring Cleaning</TextB>
+      <TextC kind="Leaf" offset="7228" length="120" type="WString { }">Clean up nicely and receive rewards! Reward reset: 6:00 AM</TextC>
+    </_34>
+  </Entries>
+</DCheckEventTitle_Str>

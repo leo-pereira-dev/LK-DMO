@@ -15,6 +15,12 @@
         }
 
         /// <summary>
+        /// Set unlocked amount.
+        /// </summary>
+        /// <param name="amount">Unlocked amount.</param>
+        public void SetAmount(short amount) => Amount = amount;
+
+        /// <summary>
         /// Decrease unlocked amount.
         /// </summary>
         /// <param name="amount">Amount to decrease.</param>

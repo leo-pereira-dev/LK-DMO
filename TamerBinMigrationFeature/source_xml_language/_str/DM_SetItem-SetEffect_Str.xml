@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DM_SetItem_SetEffect_Str schema="DM_SetItem-SetEffect_Str.struct" bin="DM_SetItem-SetEffect_Str.bin" byteLength="454">
+  <Entries kind="Section" offset="0" length="454">
+    <_0 kind="Record" offset="4" length="24">
+      <TextKey kind="Leaf" offset="4" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Text kind="Leaf" offset="6" length="22" type="WString { }">평타 테스트 세트</Text>
+    </_0>
+    <_1 kind="Record" offset="28" length="24">
+      <TextKey kind="Leaf" offset="28" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Text kind="Leaf" offset="30" length="22" type="WString { }">스킬 테스트 세트</Text>
+    </_1>
+    <_2 kind="Record" offset="52" length="24">
+      <TextKey kind="Leaf" offset="52" length="2" type="Scalar { Kind = U16 }" value="3" />
+      <Text kind="Leaf" offset="54" length="22" type="WString { }">피격 테스트 세트</Text>
+    </_2>
+    <_3 kind="Record" offset="76" length="38">
+      <TextKey kind="Leaf" offset="76" length="2" type="Scalar { Kind = U16 }" value="4" />
+      <Text kind="Leaf" offset="78" length="36" type="WString { }">Power of Courage</Text>
+    </_3>
+    <_4 kind="Record" offset="114" length="32">
+      <TextKey kind="Leaf" offset="114" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Text kind="Leaf" offset="116" length="30" type="WString { }">Light of Hope</Text>
+    </_4>
+    <_5 kind="Record" offset="146" length="32">
+      <TextKey kind="Leaf" offset="146" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <Text kind="Leaf" offset="148" length="30" type="WString { }">Heart of Love</Text>
+    </_5>
+    <_6 kind="Record" offset="178" length="32">
+      <TextKey kind="Leaf" offset="178" length="2" type="Scalar { Kind = U16 }" value="7" />
+      <Text kind="Leaf" offset="180" length="30" type="WString { }">Heart of Love</Text>
+    </_6>
+    <_7 kind="Record" offset="210" length="54">
+      <TextKey kind="Leaf" offset="210" length="2" type="Scalar { Kind = U16 }" value="8" />
+      <Text kind="Leaf" offset="212" length="52" type="WString { }">Four Holy Beasts's Power</Text>
+    </_7>
+    <_8 kind="Record" offset="264" length="34">
+      <TextKey kind="Leaf" offset="264" length="2" type="Scalar { Kind = U16 }" value="9" />
+      <Text kind="Leaf" offset="266" length="32" type="WString { }">Last Evolution</Text>
+    </_8>
+    <_9 kind="Record" offset="298" length="30">
+      <TextKey kind="Leaf" offset="298" length="2" type="Scalar { Kind = U16 }" value="10" />
+      <Text kind="Leaf" offset="300" length="28" type="WString { }">Fire: Spirit</Text>
+    </_9>
+    <_10 kind="Record" offset="328" length="32">
+      <TextKey kind="Leaf" offset="328" length="2" type="Scalar { Kind = U16 }" value="11" />
+      <Text kind="Leaf" offset="330" length="30" type="WString { }">Light: Spirit</Text>
+    </_10>
+    <_11 kind="Record" offset="360" length="28">
+      <TextKey kind="Leaf" offset="360" length="2" type="Scalar { Kind = U16 }" value="12" />
+      <Text kind="Leaf" offset="362" length="26" type="WString { }">Ice: Spirit</Text>
+    </_11>
+    <_12 kind="Record" offset="388" length="30">
+      <TextKey kind="Leaf" offset="388" length="2" type="Scalar { Kind = U16 }" value="13" />
+      <Text kind="Leaf" offset="390" length="28" type="WString { }">Wind: Spirit</Text>
+    </_12>
+    <_13 kind="Record" offset="418" length="36">
+      <TextKey kind="Leaf" offset="418" length="2" type="Scalar { Kind = U16 }" value="14" />
+      <Text kind="Leaf" offset="420" length="34" type="WString { }">Thunder: Spirit</Text>
+    </_13>
+  </Entries>
+</DM_SetItem_SetEffect_Str>

@@ -1798,6 +1798,18 @@ void CTamerUser::SetAttackPos( CsC_AvObject* pAttackSrc )
 {
 	if( IsRide() == false )
 	{
+#ifdef KEYBOARD_MOVE
+		if( g_pResist->m_Global.s_bMoveDigimon )
+		{
+			CDigimonUser* pDigimonUser = g_pCharMng->GetDigimonUser( 0 );
+			SAFE_POINTER_RET( pDigimonUser );
+
+			ReleaseArriveTarget();
+			SetTamerUserState( CTamerUser::TU_FOLLOW_DIGIMON );
+			pDigimonUser->SetDigimonUserState( CDigimonUser::DU_ATTACK, pAttackSrc );
+			return;
+		}
+#endif
 		//=====================================================================================
 		// 테이머 이동
 		//=====================================================================================

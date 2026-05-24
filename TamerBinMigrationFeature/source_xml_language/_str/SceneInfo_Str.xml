@@ -1,0 +1,1889 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SceneInfo_Str schema="SceneInfo_Str.struct" bin="SceneInfo_Str.bin" byteLength="23228">
+  <Entries kind="Section" offset="0" length="23228">
+    <_0 kind="Record" offset="4" length="44">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <TextA kind="Leaf" offset="8" length="40" type="WString { }">Enter Ice Devimon!</TextA>
+    </_0>
+    <_1 kind="Record" offset="48" length="50">
+      <TextKey kind="Leaf" offset="48" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="52" length="46" type="WString { }">Enter Digimon Kaiser!</TextA>
+    </_1>
+    <_2 kind="Record" offset="98" length="60">
+      <TextKey kind="Leaf" offset="98" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="102" length="56" type="WString { }">Devimon the Dark Messenger</TextA>
+    </_2>
+    <_3 kind="Record" offset="158" length="70">
+      <TextKey kind="Leaf" offset="158" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="162" length="66" type="WString { }">Deputymon from the Digimon Farm</TextA>
+    </_3>
+    <_4 kind="Record" offset="228" length="38">
+      <TextKey kind="Leaf" offset="228" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <TextA kind="Leaf" offset="232" length="34" type="WString { }">Hawkmon Returns</TextA>
+    </_4>
+    <_5 kind="Record" offset="266" length="50">
+      <TextKey kind="Leaf" offset="266" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextA kind="Leaf" offset="270" length="46" type="WString { }">Brainwashed Pajiramon</TextA>
+    </_5>
+    <_6 kind="Record" offset="316" length="46">
+      <TextKey kind="Leaf" offset="316" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <TextA kind="Leaf" offset="320" length="42" type="WString { }">A Mysterious Figure</TextA>
+    </_6>
+    <_7 kind="Record" offset="362" length="48">
+      <TextKey kind="Leaf" offset="362" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <TextA kind="Leaf" offset="366" length="44" type="WString { }">[Quest] Chief Leomon</TextA>
+    </_7>
+    <_8 kind="Record" offset="410" length="82">
+      <TextKey kind="Leaf" offset="410" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <TextA kind="Leaf" offset="414" length="78" type="WString { }">[Quest] Fourth Dimension SuperStarmon</TextA>
+    </_8>
+    <_9 kind="Record" offset="492" length="58">
+      <TextKey kind="Leaf" offset="492" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <TextA kind="Leaf" offset="496" length="54" type="WString { }">[Quest] Guardian Anubimon</TextA>
+    </_9>
+    <_10 kind="Record" offset="550" length="52">
+      <TextKey kind="Leaf" offset="550" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <TextA kind="Leaf" offset="554" length="48" type="WString { }">A Mysterious Figure 2F</TextA>
+    </_10>
+    <_11 kind="Record" offset="602" length="54">
+      <TextKey kind="Leaf" offset="602" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <TextA kind="Leaf" offset="606" length="50" type="WString { }">[Quest] Chief Leomon 2F</TextA>
+    </_11>
+    <_12 kind="Record" offset="656" length="58">
+      <TextKey kind="Leaf" offset="656" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <TextA kind="Leaf" offset="660" length="54" type="WString { }">[Quest] Mysterious Etemon</TextA>
+    </_12>
+    <_13 kind="Record" offset="714" length="88">
+      <TextKey kind="Leaf" offset="714" length="4" type="Scalar { Kind = U32 }" value="14" />
+      <TextA kind="Leaf" offset="718" length="84" type="WString { }">[Quest] Fourth Dimension SuperStarmon 2F</TextA>
+    </_13>
+    <_14 kind="Record" offset="802" length="64">
+      <TextKey kind="Leaf" offset="802" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <TextA kind="Leaf" offset="806" length="60" type="WString { }">[Quest] Guardian Anubimon 2F</TextA>
+    </_14>
+    <_15 kind="Record" offset="866" length="52">
+      <TextKey kind="Leaf" offset="866" length="4" type="Scalar { Kind = U32 }" value="16" />
+      <TextA kind="Leaf" offset="870" length="48" type="WString { }">A Mysterious Figure 3F</TextA>
+    </_15>
+    <_16 kind="Record" offset="918" length="54">
+      <TextKey kind="Leaf" offset="918" length="4" type="Scalar { Kind = U32 }" value="17" />
+      <TextA kind="Leaf" offset="922" length="50" type="WString { }">[Quest] Chief Leomon 3F</TextA>
+    </_16>
+    <_17 kind="Record" offset="972" length="64">
+      <TextKey kind="Leaf" offset="972" length="4" type="Scalar { Kind = U32 }" value="18" />
+      <TextA kind="Leaf" offset="976" length="60" type="WString { }">[Quest] Mysterious Etemon 3F</TextA>
+    </_17>
+    <_18 kind="Record" offset="1036" length="88">
+      <TextKey kind="Leaf" offset="1036" length="4" type="Scalar { Kind = U32 }" value="19" />
+      <TextA kind="Leaf" offset="1040" length="84" type="WString { }">[Quest] Fourth Dimension SuperStarmon 3F</TextA>
+    </_18>
+    <_19 kind="Record" offset="1124" length="64">
+      <TextKey kind="Leaf" offset="1124" length="4" type="Scalar { Kind = U32 }" value="20" />
+      <TextA kind="Leaf" offset="1128" length="60" type="WString { }">[Quest] Guardian Anubimon 3F</TextA>
+    </_19>
+    <_20 kind="Record" offset="1188" length="54">
+      <TextKey kind="Leaf" offset="1188" length="4" type="Scalar { Kind = U32 }" value="21" />
+      <TextA kind="Leaf" offset="1192" length="50" type="WString { }">Enter Digimon Kaiser 4F</TextA>
+    </_20>
+    <_21 kind="Record" offset="1242" length="54">
+      <TextKey kind="Leaf" offset="1242" length="4" type="Scalar { Kind = U32 }" value="22" />
+      <TextA kind="Leaf" offset="1246" length="50" type="WString { }">[Quest] Scout Leomon 4F</TextA>
+    </_21>
+    <_22 kind="Record" offset="1296" length="64">
+      <TextKey kind="Leaf" offset="1296" length="4" type="Scalar { Kind = U32 }" value="23" />
+      <TextA kind="Leaf" offset="1300" length="60" type="WString { }">[Quest] Mysterious Etemon 4F</TextA>
+    </_22>
+    <_23 kind="Record" offset="1360" length="88">
+      <TextKey kind="Leaf" offset="1360" length="4" type="Scalar { Kind = U32 }" value="24" />
+      <TextA kind="Leaf" offset="1364" length="84" type="WString { }">[Quest] Fourth Dimension SuperStarmon 4F</TextA>
+    </_23>
+    <_24 kind="Record" offset="1448" length="66">
+      <TextKey kind="Leaf" offset="1448" length="4" type="Scalar { Kind = U32 }" value="25" />
+      <TextA kind="Leaf" offset="1452" length="62" type="WString { }">[Quest] Starmon of Passion 4F</TextA>
+    </_24>
+    <_25 kind="Record" offset="1514" length="76">
+      <TextKey kind="Leaf" offset="1514" length="4" type="Scalar { Kind = U32 }" value="26" />
+      <TextA kind="Leaf" offset="1518" length="72" type="WString { }">[Quest] Digimon Kaiser 4F Defeated</TextA>
+    </_25>
+    <_26 kind="Record" offset="1590" length="50">
+      <TextKey kind="Leaf" offset="1590" length="4" type="Scalar { Kind = U32 }" value="27" />
+      <TextA kind="Leaf" offset="1594" length="46" type="WString { }">[Quest] Mercurymon 4F</TextA>
+    </_26>
+    <_27 kind="Record" offset="1640" length="52">
+      <TextKey kind="Leaf" offset="1640" length="4" type="Scalar { Kind = U32 }" value="28" />
+      <TextA kind="Leaf" offset="1644" length="48" type="WString { }">[Quest] SaberLeomon 4F</TextA>
+    </_27>
+    <_28 kind="Record" offset="1692" length="64">
+      <TextKey kind="Leaf" offset="1692" length="4" type="Scalar { Kind = U32 }" value="29" />
+      <TextA kind="Leaf" offset="1696" length="60" type="WString { }">[Quest] Guardian Anubimon 4F</TextA>
+    </_28>
+    <_29 kind="Record" offset="1756" length="56">
+      <TextKey kind="Leaf" offset="1756" length="4" type="Scalar { Kind = U32 }" value="30" />
+      <TextA kind="Leaf" offset="1760" length="52" type="WString { }">Enter Destroyer Bearmon!</TextA>
+    </_29>
+    <_30 kind="Record" offset="1812" length="56">
+      <TextKey kind="Leaf" offset="1812" length="4" type="Scalar { Kind = U32 }" value="31" />
+      <TextA kind="Leaf" offset="1816" length="52" type="WString { }">Royal Knight Gallantmon!</TextA>
+    </_30>
+    <_31 kind="Record" offset="1868" length="66">
+      <TextKey kind="Leaf" offset="1868" length="4" type="Scalar { Kind = U32 }" value="32" />
+      <TextA kind="Leaf" offset="1872" length="62" type="WString { }">Enter Akihiro Kurata Gizumon!</TextA>
+    </_31>
+    <_32 kind="Record" offset="1934" length="74">
+      <TextKey kind="Leaf" offset="1934" length="4" type="Scalar { Kind = U32 }" value="33" />
+      <TextA kind="Leaf" offset="1938" length="70" type="WString { }">Akihiro and the Mysterious Figure</TextA>
+    </_32>
+    <_33 kind="Record" offset="2008" length="54">
+      <TextKey kind="Leaf" offset="2008" length="4" type="Scalar { Kind = U32 }" value="34" />
+      <TextA kind="Leaf" offset="2012" length="50" type="WString { }">Starmon at the Entrance</TextA>
+    </_33>
+    <_34 kind="Record" offset="2062" length="80">
+      <TextKey kind="Leaf" offset="2062" length="4" type="Scalar { Kind = U32 }" value="35" />
+      <TextA kind="Leaf" offset="2066" length="76" type="WString { }">[Quest] SuperStarmon at the Entrance</TextA>
+    </_34>
+    <_35 kind="Record" offset="2142" length="64">
+      <TextKey kind="Leaf" offset="2142" length="4" type="Scalar { Kind = U32 }" value="36" />
+      <TextA kind="Leaf" offset="2146" length="60" type="WString { }">The Stranger at the Entrance</TextA>
+    </_35>
+    <_36 kind="Record" offset="2206" length="52">
+      <TextKey kind="Leaf" offset="2206" length="4" type="Scalar { Kind = U32 }" value="37" />
+      <TextA kind="Leaf" offset="2210" length="48" type="WString { }">Starmon of the Maze B2</TextA>
+    </_36>
+    <_37 kind="Record" offset="2258" length="58">
+      <TextKey kind="Leaf" offset="2258" length="4" type="Scalar { Kind = U32 }" value="38" />
+      <TextA kind="Leaf" offset="2262" length="54" type="WString { }">[Quest] Guardian Anubimon</TextA>
+    </_37>
+    <_38 kind="Record" offset="2316" length="72">
+      <TextKey kind="Leaf" offset="2316" length="4" type="Scalar { Kind = U32 }" value="39" />
+      <TextA kind="Leaf" offset="2320" length="68" type="WString { }">[Quest] The Great Twelve (March)</TextA>
+    </_38>
+    <_39 kind="Record" offset="2388" length="50">
+      <TextKey kind="Leaf" offset="2388" length="4" type="Scalar { Kind = U32 }" value="40" />
+      <TextA kind="Leaf" offset="2392" length="46" type="WString { }">[Special Event] Candy</TextA>
+    </_39>
+    <_40 kind="Record" offset="2438" length="78">
+      <TextKey kind="Leaf" offset="2438" length="4" type="Scalar { Kind = U32 }" value="41" />
+      <TextA kind="Leaf" offset="2442" length="74" type="WString { }">[Special Event] Valentine and White</TextA>
+    </_40>
+    <_41 kind="Record" offset="2516" length="80">
+      <TextKey kind="Leaf" offset="2516" length="4" type="Scalar { Kind = U32 }" value="42" />
+      <TextA kind="Leaf" offset="2520" length="76" type="WString { }">[Quest] The Great Twelve on the Move</TextA>
+    </_41>
+    <_42 kind="Record" offset="2596" length="44">
+      <TextKey kind="Leaf" offset="2596" length="4" type="Scalar { Kind = U32 }" value="43" />
+      <TextA kind="Leaf" offset="2600" length="40" type="WString { }">[Quest] Rookie 2-1</TextA>
+    </_42>
+    <_43 kind="Record" offset="2640" length="44">
+      <TextKey kind="Leaf" offset="2640" length="4" type="Scalar { Kind = U32 }" value="44" />
+      <TextA kind="Leaf" offset="2644" length="40" type="WString { }">[Quest] Rookie 2-2</TextA>
+    </_43>
+    <_44 kind="Record" offset="2684" length="44">
+      <TextKey kind="Leaf" offset="2684" length="4" type="Scalar { Kind = U32 }" value="45" />
+      <TextA kind="Leaf" offset="2688" length="40" type="WString { }">[Quest] Rookie 3-1</TextA>
+    </_44>
+    <_45 kind="Record" offset="2728" length="44">
+      <TextKey kind="Leaf" offset="2728" length="4" type="Scalar { Kind = U32 }" value="46" />
+      <TextA kind="Leaf" offset="2732" length="40" type="WString { }">[Quest] Rookie 3-2</TextA>
+    </_45>
+    <_46 kind="Record" offset="2772" length="40">
+      <TextKey kind="Leaf" offset="2772" length="4" type="Scalar { Kind = U32 }" value="47" />
+      <TextA kind="Leaf" offset="2776" length="36" type="WString { }">[Quest] Rookie 4</TextA>
+    </_46>
+    <_47 kind="Record" offset="2812" length="40">
+      <TextKey kind="Leaf" offset="2812" length="4" type="Scalar { Kind = U32 }" value="48" />
+      <TextA kind="Leaf" offset="2816" length="36" type="WString { }">[Quest] Rookie 5</TextA>
+    </_47>
+    <_48 kind="Record" offset="2852" length="64">
+      <TextKey kind="Leaf" offset="2852" length="4" type="Scalar { Kind = U32 }" value="49" />
+      <TextA kind="Leaf" offset="2856" length="60" type="WString { }">[Quest] Research Assistant 1</TextA>
+    </_48>
+    <_49 kind="Record" offset="2916" length="58">
+      <TextKey kind="Leaf" offset="2916" length="4" type="Scalar { Kind = U32 }" value="50" />
+      <TextA kind="Leaf" offset="2920" length="54" type="WString { }">[Quest] DigiEgg Retrieval</TextA>
+    </_49>
+    <_50 kind="Record" offset="2974" length="60">
+      <TextKey kind="Leaf" offset="2974" length="4" type="Scalar { Kind = U32 }" value="51" />
+      <TextA kind="Leaf" offset="2978" length="56" type="WString { }">[Quest] Drive Out Koromons</TextA>
+    </_50>
+    <_51 kind="Record" offset="3034" length="62">
+      <TextKey kind="Leaf" offset="3034" length="4" type="Scalar { Kind = U32 }" value="52" />
+      <TextA kind="Leaf" offset="3038" length="58" type="WString { }">[Quest] Teach Them a Lesson</TextA>
+    </_51>
+    <_52 kind="Record" offset="3096" length="54">
+      <TextKey kind="Leaf" offset="3096" length="4" type="Scalar { Kind = U32 }" value="53" />
+      <TextA kind="Leaf" offset="3100" length="50" type="WString { }">[Quest] Official Member</TextA>
+    </_52>
+    <_53 kind="Record" offset="3150" length="50">
+      <TextKey kind="Leaf" offset="3150" length="4" type="Scalar { Kind = U32 }" value="54" />
+      <TextA kind="Leaf" offset="3154" length="46" type="WString { }">[Quest] To D-Terminal</TextA>
+    </_53>
+    <_54 kind="Record" offset="3200" length="54">
+      <TextKey kind="Leaf" offset="3200" length="4" type="Scalar { Kind = U32 }" value="55" />
+      <TextA kind="Leaf" offset="3204" length="50" type="WString { }">[Quest] Chrome Digizoid</TextA>
+    </_54>
+    <_55 kind="Record" offset="3254" length="54">
+      <TextKey kind="Leaf" offset="3254" length="4" type="Scalar { Kind = U32 }" value="56" />
+      <TextA kind="Leaf" offset="3258" length="50" type="WString { }">[Quest] Blue Digizoid 1</TextA>
+    </_55>
+    <_56 kind="Record" offset="3308" length="54">
+      <TextKey kind="Leaf" offset="3308" length="4" type="Scalar { Kind = U32 }" value="57" />
+      <TextA kind="Leaf" offset="3312" length="50" type="WString { }">[Quest] Blue Digizoid 2</TextA>
+    </_56>
+    <_57 kind="Record" offset="3362" length="46">
+      <TextKey kind="Leaf" offset="3362" length="4" type="Scalar { Kind = U32 }" value="59" />
+      <TextA kind="Leaf" offset="3366" length="42" type="WString { }">[Quest] Project Ark</TextA>
+    </_57>
+    <_58 kind="Record" offset="3408" length="78">
+      <TextKey kind="Leaf" offset="3408" length="4" type="Scalar { Kind = U32 }" value="60" />
+      <TextA kind="Leaf" offset="3412" length="74" type="WString { }">[Quest] Invasion of DexDorugoramons</TextA>
+    </_58>
+    <_59 kind="Record" offset="3486" length="98">
+      <TextKey kind="Leaf" offset="3486" length="4" type="Scalar { Kind = U32 }" value="61" />
+      <TextA kind="Leaf" offset="3490" length="94" type="WString { }">[Quest] Death X evolution and Blast Evolution</TextA>
+    </_59>
+    <_60 kind="Record" offset="3584" length="62">
+      <TextKey kind="Leaf" offset="3584" length="4" type="Scalar { Kind = U32 }" value="62" />
+      <TextA kind="Leaf" offset="3588" length="58" type="WString { }">[Quest] Two way of Dracomon</TextA>
+    </_60>
+    <_61 kind="Record" offset="3646" length="72">
+      <TextKey kind="Leaf" offset="3646" length="4" type="Scalar { Kind = U32 }" value="63" />
+      <TextA kind="Leaf" offset="3650" length="68" type="WString { }">[Quest] Strange voice - Yggdrsil</TextA>
+    </_61>
+    <_62 kind="Record" offset="3718" length="72">
+      <TextKey kind="Leaf" offset="3718" length="4" type="Scalar { Kind = U32 }" value="64" />
+      <TextA kind="Leaf" offset="3722" length="68" type="WString { }">[Quest] Strange voice - Yggdrsil</TextA>
+    </_62>
+    <_63 kind="Record" offset="3790" length="52">
+      <TextKey kind="Leaf" offset="3790" length="4" type="Scalar { Kind = U32 }" value="65" />
+      <TextA kind="Leaf" offset="3794" length="48" type="WString { }">Weird public telephone</TextA>
+    </_63>
+    <_64 kind="Record" offset="3842" length="56">
+      <TextKey kind="Leaf" offset="3842" length="4" type="Scalar { Kind = U32 }" value="66" />
+      <TextA kind="Leaf" offset="3846" length="52" type="WString { }">Scattered memories place</TextA>
+    </_64>
+    <_65 kind="Record" offset="3898" length="46">
+      <TextKey kind="Leaf" offset="3898" length="4" type="Scalar { Kind = U32 }" value="67" />
+      <TextA kind="Leaf" offset="3902" length="42" type="WString { }">Fight! Monochromon!</TextA>
+    </_65>
+    <_66 kind="Record" offset="3944" length="52">
+      <TextKey kind="Leaf" offset="3944" length="4" type="Scalar { Kind = U32 }" value="68" />
+      <TextA kind="Leaf" offset="3948" length="48" type="WString { }">Devimon's provocation </TextA>
+    </_66>
+    <_67 kind="Record" offset="3996" length="30">
+      <TextKey kind="Leaf" offset="3996" length="4" type="Scalar { Kind = U32 }" value="69" />
+      <TextA kind="Leaf" offset="4000" length="26" type="WString { }">진화할 수 있는거야?</TextA>
+    </_67>
+    <_68 kind="Record" offset="4026" length="34">
+      <TextKey kind="Leaf" offset="4026" length="4" type="Scalar { Kind = U32 }" value="70" />
+      <TextA kind="Leaf" offset="4030" length="30" type="WString { }">아구몬의 에너지를 위해!</TextA>
+    </_68>
+    <_69 kind="Record" offset="4060" length="30">
+      <TextKey kind="Leaf" offset="4060" length="4" type="Scalar { Kind = U32 }" value="71" />
+      <TextA kind="Leaf" offset="4064" length="26" type="WString { }">진화! 메탈그레이몬!</TextA>
+    </_69>
+    <_70 kind="Record" offset="4090" length="22">
+      <TextKey kind="Leaf" offset="4090" length="4" type="Scalar { Kind = U32 }" value="72" />
+      <TextA kind="Leaf" offset="4094" length="18" type="WString { }">동방의 수호자</TextA>
+    </_70>
+    <_71 kind="Record" offset="4112" length="22">
+      <TextKey kind="Leaf" offset="4112" length="4" type="Scalar { Kind = U32 }" value="73" />
+      <TextA kind="Leaf" offset="4116" length="18" type="WString { }">서방의 수호자</TextA>
+    </_71>
+    <_72 kind="Record" offset="4134" length="22">
+      <TextKey kind="Leaf" offset="4134" length="4" type="Scalar { Kind = U32 }" value="74" />
+      <TextA kind="Leaf" offset="4138" length="18" type="WString { }">남방의 수호자</TextA>
+    </_72>
+    <_73 kind="Record" offset="4156" length="22">
+      <TextKey kind="Leaf" offset="4156" length="4" type="Scalar { Kind = U32 }" value="75" />
+      <TextA kind="Leaf" offset="4160" length="18" type="WString { }">북방의 수호자</TextA>
+    </_73>
+    <_74 kind="Record" offset="4178" length="64">
+      <TextKey kind="Leaf" offset="4178" length="4" type="Scalar { Kind = U32 }" value="76" />
+      <TextA kind="Leaf" offset="4182" length="60" type="WString { }">Arrived at the Desert Canyon</TextA>
+    </_74>
+    <_75 kind="Record" offset="4242" length="34">
+      <TextKey kind="Leaf" offset="4242" length="4" type="Scalar { Kind = U32 }" value="77" />
+      <TextA kind="Leaf" offset="4246" length="30" type="WString { }">Light of hope</TextA>
+    </_75>
+    <_76 kind="Record" offset="4276" length="50">
+      <TextKey kind="Leaf" offset="4276" length="4" type="Scalar { Kind = U32 }" value="78" />
+      <TextA kind="Leaf" offset="4280" length="46" type="WString { }">Piximon of the Canyon</TextA>
+    </_76>
+    <_77 kind="Record" offset="4326" length="56">
+      <TextKey kind="Leaf" offset="4326" length="4" type="Scalar { Kind = U32 }" value="79" />
+      <TextA kind="Leaf" offset="4330" length="52" type="WString { }">Tai who became confident</TextA>
+    </_77>
+    <_78 kind="Record" offset="4382" length="46">
+      <TextKey kind="Leaf" offset="4382" length="4" type="Scalar { Kind = U32 }" value="80" />
+      <TextA kind="Leaf" offset="4386" length="42" type="WString { }">Datamon rescue plan</TextA>
+    </_78>
+    <_79 kind="Record" offset="4428" length="60">
+      <TextKey kind="Leaf" offset="4428" length="4" type="Scalar { Kind = U32 }" value="81" />
+      <TextA kind="Leaf" offset="4432" length="56" type="WString { }">Exploring the Datamon Maze</TextA>
+    </_79>
+    <_80 kind="Record" offset="4488" length="36">
+      <TextKey kind="Leaf" offset="4488" length="4" type="Scalar { Kind = U32 }" value="82" />
+      <TextA kind="Leaf" offset="4492" length="32" type="WString { }">Kidnapped Sora</TextA>
+    </_80>
+    <_81 kind="Record" offset="4524" length="40">
+      <TextKey kind="Leaf" offset="4524" length="4" type="Scalar { Kind = U32 }" value="83" />
+      <TextA kind="Leaf" offset="4528" length="36" type="WString { }">Sora rescue plan</TextA>
+    </_81>
+    <_82 kind="Record" offset="4564" length="42">
+      <TextKey kind="Leaf" offset="4564" length="4" type="Scalar { Kind = U32 }" value="84" />
+      <TextA kind="Leaf" offset="4568" length="38" type="WString { }">The end of Etemon</TextA>
+    </_82>
+    <_83 kind="Record" offset="4606" length="50">
+      <TextKey kind="Leaf" offset="4606" length="4" type="Scalar { Kind = U32 }" value="85" />
+      <TextA kind="Leaf" offset="4610" length="46" type="WString { }">Scar of Water Crystal</TextA>
+    </_83>
+    <_84 kind="Record" offset="4656" length="60">
+      <TextKey kind="Leaf" offset="4656" length="4" type="Scalar { Kind = U32 }" value="86" />
+      <TextA kind="Leaf" offset="4660" length="56" type="WString { }">Battle with Marin Devimon!</TextA>
+    </_84>
+    <_85 kind="Record" offset="4716" length="60">
+      <TextKey kind="Leaf" offset="4716" length="4" type="Scalar { Kind = U32 }" value="87" />
+      <TextA kind="Leaf" offset="4720" length="56" type="WString { }">Crystal Waterfall entrance</TextA>
+    </_85>
+    <_86 kind="Record" offset="4776" length="46">
+      <TextKey kind="Leaf" offset="4776" length="4" type="Scalar { Kind = U32 }" value="88" />
+      <TextA kind="Leaf" offset="4780" length="42" type="WString { }">Position difference</TextA>
+    </_86>
+    <_87 kind="Record" offset="4822" length="36">
+      <TextKey kind="Leaf" offset="4822" length="4" type="Scalar { Kind = U32 }" value="89" />
+      <TextA kind="Leaf" offset="4826" length="32" type="WString { }">Uprising Flame</TextA>
+    </_87>
+    <_88 kind="Record" offset="4858" length="42">
+      <TextKey kind="Leaf" offset="4858" length="4" type="Scalar { Kind = U32 }" value="90" />
+      <TextA kind="Leaf" offset="4862" length="38" type="WString { }">Room of Challenge</TextA>
+    </_88>
+    <_89 kind="Record" offset="4900" length="32">
+      <TextKey kind="Leaf" offset="4900" length="4" type="Scalar { Kind = U32 }" value="91" />
+      <TextA kind="Leaf" offset="4904" length="28" type="WString { }">Room of Test</TextA>
+    </_89>
+    <_90 kind="Record" offset="4932" length="44">
+      <TextKey kind="Leaf" offset="4932" length="4" type="Scalar { Kind = U32 }" value="92" />
+      <TextA kind="Leaf" offset="4936" length="40" type="WString { }">Nest of Zhuqiaomon</TextA>
+    </_90>
+    <_91 kind="Record" offset="4976" length="42">
+      <TextKey kind="Leaf" offset="4976" length="4" type="Scalar { Kind = U32 }" value="93" />
+      <TextA kind="Leaf" offset="4980" length="38" type="WString { }">Scout Dats Center</TextA>
+    </_91>
+    <_92 kind="Record" offset="5018" length="72">
+      <TextKey kind="Leaf" offset="5018" length="4" type="Scalar { Kind = U32 }" value="94" />
+      <TextA kind="Leaf" offset="5022" length="68" type="WString { }">the Exterior Zone of Black Steel</TextA>
+    </_92>
+    <_93 kind="Record" offset="5090" length="72">
+      <TextKey kind="Leaf" offset="5090" length="4" type="Scalar { Kind = U32 }" value="95" />
+      <TextA kind="Leaf" offset="5094" length="68" type="WString { }">the Interior Zone of Black Steel</TextA>
+    </_93>
+    <_94 kind="Record" offset="5162" length="70">
+      <TextKey kind="Leaf" offset="5162" length="4" type="Scalar { Kind = U32 }" value="96" />
+      <TextA kind="Leaf" offset="5166" length="66" type="WString { }">the Central Zone of Black Steel</TextA>
+    </_94>
+    <_95 kind="Record" offset="5232" length="52">
+      <TextKey kind="Leaf" offset="5232" length="4" type="Scalar { Kind = U32 }" value="97" />
+      <TextA kind="Leaf" offset="5236" length="48" type="WString { }">Descending Thunder God</TextA>
+    </_95>
+    <_96 kind="Record" offset="5284" length="44">
+      <TextKey kind="Leaf" offset="5284" length="4" type="Scalar { Kind = U32 }" value="98" />
+      <TextA kind="Leaf" offset="5288" length="40" type="WString { }">Thunder God's Land</TextA>
+    </_96>
+    <_97 kind="Record" offset="5328" length="40">
+      <TextKey kind="Leaf" offset="5328" length="4" type="Scalar { Kind = U32 }" value="99" />
+      <TextA kind="Leaf" offset="5332" length="36" type="WString { }">Majiramon's Test</TextA>
+    </_97>
+    <_98 kind="Record" offset="5368" length="52">
+      <TextKey kind="Leaf" offset="5368" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <TextA kind="Leaf" offset="5372" length="48" type="WString { }">Shelter of Thunder God</TextA>
+    </_98>
+    <_99 kind="Record" offset="5420" length="52">
+      <TextKey kind="Leaf" offset="5420" length="4" type="Scalar { Kind = U32 }" value="101" />
+      <TextA kind="Leaf" offset="5424" length="48" type="WString { }">Descending Thunder God</TextA>
+    </_99>
+    <_100 kind="Record" offset="5472" length="44">
+      <TextKey kind="Leaf" offset="5472" length="4" type="Scalar { Kind = U32 }" value="102" />
+      <TextA kind="Leaf" offset="5476" length="40" type="WString { }">Thunder God's Land</TextA>
+    </_100>
+    <_101 kind="Record" offset="5516" length="40">
+      <TextKey kind="Leaf" offset="5516" length="4" type="Scalar { Kind = U32 }" value="103" />
+      <TextA kind="Leaf" offset="5520" length="36" type="WString { }">Majiramon's Test</TextA>
+    </_101>
+    <_102 kind="Record" offset="5556" length="52">
+      <TextKey kind="Leaf" offset="5556" length="4" type="Scalar { Kind = U32 }" value="104" />
+      <TextA kind="Leaf" offset="5560" length="48" type="WString { }">Shelter of Thunder God</TextA>
+    </_102>
+    <_103 kind="Record" offset="5608" length="64">
+      <TextKey kind="Leaf" offset="5608" length="4" type="Scalar { Kind = U32 }" value="105" />
+      <TextA kind="Leaf" offset="5612" length="60" type="WString { }">[Quest] For the Survival (3)</TextA>
+    </_103>
+    <_104 kind="Record" offset="5672" length="74">
+      <TextKey kind="Leaf" offset="5672" length="4" type="Scalar { Kind = U32 }" value="106" />
+      <TextA kind="Leaf" offset="5676" length="70" type="WString { }">[Quest] Struggling to Survive (2)</TextA>
+    </_104>
+    <_105 kind="Record" offset="5746" length="58">
+      <TextKey kind="Leaf" offset="5746" length="4" type="Scalar { Kind = U32 }" value="107" />
+      <TextA kind="Leaf" offset="5750" length="54" type="WString { }">[Quest] Dorumon's Trouble</TextA>
+    </_105>
+    <_106 kind="Record" offset="5804" length="106">
+      <TextKey kind="Leaf" offset="5804" length="4" type="Scalar { Kind = U32 }" value="108" />
+      <TextA kind="Leaf" offset="5808" length="102" type="WString { }">[Quest] The Land of Jungle Law, Verdandi Terminal</TextA>
+    </_106>
+    <_107 kind="Record" offset="5910" length="76">
+      <TextKey kind="Leaf" offset="5910" length="4" type="Scalar { Kind = U32 }" value="109" />
+      <TextA kind="Leaf" offset="5914" length="72" type="WString { }">[Quest] A Messed-up Conference (3)</TextA>
+    </_107>
+    <_108 kind="Record" offset="5986" length="68">
+      <TextKey kind="Leaf" offset="5986" length="4" type="Scalar { Kind = U32 }" value="110" />
+      <TextA kind="Leaf" offset="5990" length="64" type="WString { }">[Quest] Attack of Omegamon (6)</TextA>
+    </_108>
+    <_109 kind="Record" offset="6054" length="104">
+      <TextKey kind="Leaf" offset="6054" length="4" type="Scalar { Kind = U32 }" value="111" />
+      <TextA kind="Leaf" offset="6058" length="100" type="WString { }">[Quest] Project Arc, Real Intention of Yggdrasil</TextA>
+    </_109>
+    <_110 kind="Record" offset="6158" length="66">
+      <TextKey kind="Leaf" offset="6158" length="4" type="Scalar { Kind = U32 }" value="112" />
+      <TextA kind="Leaf" offset="6162" length="62" type="WString { }">[Quest] World Near Apocalypse</TextA>
+    </_110>
+    <_111 kind="Record" offset="6224" length="78">
+      <TextKey kind="Leaf" offset="6224" length="4" type="Scalar { Kind = U32 }" value="113" />
+      <TextA kind="Leaf" offset="6228" length="74" type="WString { }">[Quest] Reinforcements have Arrived</TextA>
+    </_111>
+    <_112 kind="Record" offset="6302" length="72">
+      <TextKey kind="Leaf" offset="6302" length="4" type="Scalar { Kind = U32 }" value="114" />
+      <TextA kind="Leaf" offset="6306" length="68" type="WString { }">[Quest] Ally with the Same Heart</TextA>
+    </_112>
+    <_113 kind="Record" offset="6374" length="52">
+      <TextKey kind="Leaf" offset="6374" length="4" type="Scalar { Kind = U32 }" value="115" />
+      <TextA kind="Leaf" offset="6378" length="48" type="WString { }">[Quest] Hang In There!</TextA>
+    </_113>
+    <_114 kind="Record" offset="6426" length="42">
+      <TextKey kind="Leaf" offset="6426" length="4" type="Scalar { Kind = U32 }" value="116" />
+      <TextA kind="Leaf" offset="6430" length="38" type="WString { }">Northern Boundary</TextA>
+    </_114>
+    <_115 kind="Record" offset="6468" length="42">
+      <TextKey kind="Leaf" offset="6468" length="4" type="Scalar { Kind = U32 }" value="117" />
+      <TextA kind="Leaf" offset="6472" length="38" type="WString { }">Southern Boundary</TextA>
+    </_115>
+    <_116 kind="Record" offset="6510" length="40">
+      <TextKey kind="Leaf" offset="6510" length="4" type="Scalar { Kind = U32 }" value="118" />
+      <TextA kind="Leaf" offset="6514" length="36" type="WString { }">Western Boundary</TextA>
+    </_116>
+    <_117 kind="Record" offset="6550" length="40">
+      <TextKey kind="Leaf" offset="6550" length="4" type="Scalar { Kind = U32 }" value="119" />
+      <TextA kind="Leaf" offset="6554" length="36" type="WString { }">Eastern Boundary</TextA>
+    </_117>
+    <_118 kind="Record" offset="6590" length="70">
+      <TextKey kind="Leaf" offset="6590" length="4" type="Scalar { Kind = U32 }" value="120" />
+      <TextA kind="Leaf" offset="6594" length="66" type="WString { }">Fanglongmon Dungeon Underground</TextA>
+    </_118>
+    <_119 kind="Record" offset="6660" length="48">
+      <TextKey kind="Leaf" offset="6660" length="4" type="Scalar { Kind = U32 }" value="121" />
+      <TextA kind="Leaf" offset="6664" length="44" type="WString { }">Return to Real World</TextA>
+    </_119>
+    <_120 kind="Record" offset="6708" length="38">
+      <TextKey kind="Leaf" offset="6708" length="4" type="Scalar { Kind = U32 }" value="122" />
+      <TextA kind="Leaf" offset="6712" length="34" type="WString { }">Valley of Light</TextA>
+    </_120>
+    <_121 kind="Record" offset="6746" length="60">
+      <TextKey kind="Leaf" offset="6746" length="4" type="Scalar { Kind = U32 }" value="123" />
+      <TextA kind="Leaf" offset="6750" length="56" type="WString { }">Memories of Four Years Ago</TextA>
+    </_121>
+    <_122 kind="Record" offset="6806" length="48">
+      <TextKey kind="Leaf" offset="6806" length="4" type="Scalar { Kind = U32 }" value="124" />
+      <TextA kind="Leaf" offset="6810" length="44" type="WString { }">We Should Eat First!</TextA>
+    </_122>
+    <_123 kind="Record" offset="6854" length="16">
+      <TextKey kind="Leaf" offset="6854" length="4" type="Scalar { Kind = U32 }" value="125" />
+      <TextA kind="Leaf" offset="6858" length="12" type="WString { }">Rest</TextA>
+    </_123>
+    <_124 kind="Record" offset="6870" length="74">
+      <TextKey kind="Leaf" offset="6870" length="4" type="Scalar { Kind = U32 }" value="126" />
+      <TextA kind="Leaf" offset="6874" length="70" type="WString { }">Come Up! Pumpkinmon and Gotsumon!</TextA>
+    </_124>
+    <_125 kind="Record" offset="6944" length="44">
+      <TextKey kind="Leaf" offset="6944" length="4" type="Scalar { Kind = U32 }" value="127" />
+      <TextA kind="Leaf" offset="6948" length="40" type="WString { }">Attack! Myotismon!</TextA>
+    </_125>
+    <_126 kind="Record" offset="6988" length="74">
+      <TextKey kind="Leaf" offset="6988" length="4" type="Scalar { Kind = U32 }" value="128" />
+      <TextA kind="Leaf" offset="6992" length="70" type="WString { }">Death of Friends and Rage of Matt</TextA>
+    </_126>
+    <_127 kind="Record" offset="7062" length="44">
+      <TextKey kind="Leaf" offset="7062" length="4" type="Scalar { Kind = U32 }" value="129" />
+      <TextA kind="Leaf" offset="7066" length="40" type="WString { }">Call from Omegamon</TextA>
+    </_127>
+    <_128 kind="Record" offset="7106" length="50">
+      <TextKey kind="Leaf" offset="7106" length="4" type="Scalar { Kind = U32 }" value="130" />
+      <TextA kind="Leaf" offset="7110" length="46" type="WString { }">Prophecy of Yggdrasil</TextA>
+    </_128>
+    <_129 kind="Record" offset="7156" length="64">
+      <TextKey kind="Leaf" offset="7156" length="4" type="Scalar { Kind = U32 }" value="131" />
+      <TextA kind="Leaf" offset="7160" length="60" type="WString { }">Appearance of Akihiro Kurata</TextA>
+    </_129>
+    <_130 kind="Record" offset="7220" length="54">
+      <TextKey kind="Leaf" offset="7220" length="4" type="Scalar { Kind = U32 }" value="132" />
+      <TextA kind="Leaf" offset="7224" length="50" type="WString { }">Akhiro Kurata's Secrets</TextA>
+    </_130>
+    <_131 kind="Record" offset="7274" length="44">
+      <TextKey kind="Leaf" offset="7274" length="4" type="Scalar { Kind = U32 }" value="133" />
+      <TextA kind="Leaf" offset="7278" length="40" type="WString { }">Acquiring the Cure</TextA>
+    </_131>
+    <_132 kind="Record" offset="7318" length="28">
+      <TextKey kind="Leaf" offset="7318" length="4" type="Scalar { Kind = U32 }" value="134" />
+      <TextA kind="Leaf" offset="7322" length="24" type="WString { }">Medication</TextA>
+    </_132>
+    <_133 kind="Record" offset="7346" length="42">
+      <TextKey kind="Leaf" offset="7346" length="4" type="Scalar { Kind = U32 }" value="135" />
+      <TextA kind="Leaf" offset="7350" length="38" type="WString { }">Fateful Encounter</TextA>
+    </_133>
+    <_134 kind="Record" offset="7388" length="30">
+      <TextKey kind="Leaf" offset="7388" length="4" type="Scalar { Kind = U32 }" value="136" />
+      <TextA kind="Leaf" offset="7392" length="26" type="WString { }">Observation</TextA>
+    </_134>
+    <_135 kind="Record" offset="7418" length="46">
+      <TextKey kind="Leaf" offset="7418" length="4" type="Scalar { Kind = U32 }" value="137" />
+      <TextA kind="Leaf" offset="7422" length="42" type="WString { }">DemiDevimon Emerges</TextA>
+    </_135>
+    <_136 kind="Record" offset="7464" length="22">
+      <TextKey kind="Leaf" offset="7464" length="4" type="Scalar { Kind = U32 }" value="138" />
+      <TextA kind="Leaf" offset="7468" length="18" type="WString { }">Truth 1</TextA>
+    </_136>
+    <_137 kind="Record" offset="7486" length="22">
+      <TextKey kind="Leaf" offset="7486" length="4" type="Scalar { Kind = U32 }" value="139" />
+      <TextA kind="Leaf" offset="7490" length="18" type="WString { }">Truth 4</TextA>
+    </_137>
+    <_138 kind="Record" offset="7508" length="36">
+      <TextKey kind="Leaf" offset="7508" length="4" type="Scalar { Kind = U32 }" value="140" />
+      <TextA kind="Leaf" offset="7512" length="32" type="WString { }">The Gatekeeper</TextA>
+    </_138>
+    <_139 kind="Record" offset="7544" length="28">
+      <TextKey kind="Leaf" offset="7544" length="4" type="Scalar { Kind = U32 }" value="141" />
+      <TextA kind="Leaf" offset="7548" length="24" type="WString { }">Punishment</TextA>
+    </_139>
+    <_140 kind="Record" offset="7572" length="44">
+      <TextKey kind="Leaf" offset="7572" length="4" type="Scalar { Kind = U32 }" value="142" />
+      <TextA kind="Leaf" offset="7576" length="40" type="WString { }">A Dramatic Meeting</TextA>
+    </_140>
+    <_141 kind="Record" offset="7616" length="46">
+      <TextKey kind="Leaf" offset="7616" length="4" type="Scalar { Kind = U32 }" value="143" />
+      <TextA kind="Leaf" offset="7620" length="42" type="WString { }">Big Sight in Crisis</TextA>
+    </_141>
+    <_142 kind="Record" offset="7662" length="20">
+      <TextKey kind="Leaf" offset="7662" length="4" type="Scalar { Kind = U32 }" value="144" />
+      <TextA kind="Leaf" offset="7666" length="16" type="WString { }">Resist</TextA>
+    </_142>
+    <_143 kind="Record" offset="7682" length="34">
+      <TextKey kind="Leaf" offset="7682" length="4" type="Scalar { Kind = U32 }" value="145" />
+      <TextA kind="Leaf" offset="7686" length="30" type="WString { }">Enlightenment</TextA>
+    </_143>
+    <_144 kind="Record" offset="7716" length="66">
+      <TextKey kind="Leaf" offset="7716" length="4" type="Scalar { Kind = U32 }" value="146" />
+      <TextA kind="Leaf" offset="7720" length="62" type="WString { }">Using Hypnosis to Get Through</TextA>
+    </_144>
+    <_145 kind="Record" offset="7782" length="40">
+      <TextKey kind="Leaf" offset="7782" length="4" type="Scalar { Kind = U32 }" value="147" />
+      <TextA kind="Leaf" offset="7786" length="36" type="WString { }">Arrival! Taichi!</TextA>
+    </_145>
+    <_146 kind="Record" offset="7822" length="34">
+      <TextKey kind="Leaf" offset="7822" length="4" type="Scalar { Kind = U32 }" value="148" />
+      <TextA kind="Leaf" offset="7826" length="30" type="WString { }">Untold Secret</TextA>
+    </_146>
+    <_147 kind="Record" offset="7856" length="26">
+      <TextKey kind="Leaf" offset="7856" length="4" type="Scalar { Kind = U32 }" value="149" />
+      <TextA kind="Leaf" offset="7860" length="22" type="WString { }">Wizardmon</TextA>
+    </_147>
+    <_148 kind="Record" offset="7882" length="36">
+      <TextKey kind="Leaf" offset="7882" length="4" type="Scalar { Kind = U32 }" value="150" />
+      <TextA kind="Leaf" offset="7886" length="32" type="WString { }">On the Rooftop</TextA>
+    </_148>
+    <_149 kind="Record" offset="7918" length="50">
+      <TextKey kind="Leaf" offset="7918" length="4" type="Scalar { Kind = U32 }" value="151" />
+      <TextA kind="Leaf" offset="7922" length="46" type="WString { }">The Fog Still Remains</TextA>
+    </_149>
+    <_150 kind="Record" offset="7968" length="48">
+      <TextKey kind="Leaf" offset="7968" length="4" type="Scalar { Kind = U32 }" value="152" />
+      <TextA kind="Leaf" offset="7972" length="44" type="WString { }">Civilians are Asleep</TextA>
+    </_150>
+    <_151 kind="Record" offset="8016" length="48">
+      <TextKey kind="Leaf" offset="8016" length="4" type="Scalar { Kind = U32 }" value="153" />
+      <TextA kind="Leaf" offset="8020" length="44" type="WString { }">The Ancient Prophecy</TextA>
+    </_151>
+    <_152 kind="Record" offset="8064" length="30">
+      <TextKey kind="Leaf" offset="8064" length="4" type="Scalar { Kind = U32 }" value="154" />
+      <TextA kind="Leaf" offset="8068" length="26" type="WString { }">Inferiority</TextA>
+    </_152>
+    <_153 kind="Record" offset="8094" length="56">
+      <TextKey kind="Leaf" offset="8094" length="4" type="Scalar { Kind = U32 }" value="155" />
+      <TextA kind="Leaf" offset="8098" length="52" type="WString { }">Construction of Prophecy</TextA>
+    </_153>
+    <_154 kind="Record" offset="8150" length="64">
+      <TextKey kind="Leaf" offset="8150" length="4" type="Scalar { Kind = U32 }" value="156" />
+      <TextA kind="Leaf" offset="8154" length="60" type="WString { }">Arrow to the Ones to Protect</TextA>
+    </_154>
+    <_155 kind="Record" offset="8214" length="54">
+      <TextKey kind="Leaf" offset="8214" length="4" type="Scalar { Kind = U32 }" value="157" />
+      <TextA kind="Leaf" offset="8218" length="50" type="WString { }">Crisis on Digital World</TextA>
+    </_155>
+    <_156 kind="Record" offset="8268" length="20">
+      <TextKey kind="Leaf" offset="8268" length="4" type="Scalar { Kind = U32 }" value="158" />
+      <TextA kind="Leaf" offset="8272" length="16" type="WString { }">Recall</TextA>
+    </_156>
+    <_157 kind="Record" offset="8288" length="24">
+      <TextKey kind="Leaf" offset="8288" length="4" type="Scalar { Kind = U32 }" value="159" />
+      <TextA kind="Leaf" offset="8292" length="20" type="WString { }">Dispatch</TextA>
+    </_157>
+    <_158 kind="Record" offset="8312" length="30">
+      <TextKey kind="Leaf" offset="8312" length="4" type="Scalar { Kind = U32 }" value="160" />
+      <TextA kind="Leaf" offset="8316" length="26" type="WString { }">Explanation</TextA>
+    </_158>
+    <_159 kind="Record" offset="8342" length="24">
+      <TextKey kind="Leaf" offset="8342" length="4" type="Scalar { Kind = U32 }" value="161" />
+      <TextA kind="Leaf" offset="8346" length="20" type="WString { }">Outbreak</TextA>
+    </_159>
+    <_160 kind="Record" offset="8366" length="34">
+      <TextKey kind="Leaf" offset="8366" length="4" type="Scalar { Kind = U32 }" value="162" />
+      <TextA kind="Leaf" offset="8370" length="30" type="WString { }">Larger Threat</TextA>
+    </_160>
+    <_161 kind="Record" offset="8400" length="20">
+      <TextKey kind="Leaf" offset="8400" length="4" type="Scalar { Kind = U32 }" value="163" />
+      <TextA kind="Leaf" offset="8404" length="16" type="WString { }">Backup</TextA>
+    </_161>
+    <_162 kind="Record" offset="8420" length="36">
+      <TextKey kind="Leaf" offset="8420" length="4" type="Scalar { Kind = U32 }" value="164" />
+      <TextA kind="Leaf" offset="8424" length="32" type="WString { }">Being Prepared</TextA>
+    </_162>
+    <_163 kind="Record" offset="8456" length="48">
+      <TextKey kind="Leaf" offset="8456" length="4" type="Scalar { Kind = U32 }" value="165" />
+      <TextA kind="Leaf" offset="8460" length="44" type="WString { }">Enemy has Approached</TextA>
+    </_163>
+    <_164 kind="Record" offset="8504" length="42">
+      <TextKey kind="Leaf" offset="8504" length="4" type="Scalar { Kind = U32 }" value="166" />
+      <TextA kind="Leaf" offset="8508" length="38" type="WString { }">Northern Boundary</TextA>
+    </_164>
+    <_165 kind="Record" offset="8546" length="42">
+      <TextKey kind="Leaf" offset="8546" length="4" type="Scalar { Kind = U32 }" value="167" />
+      <TextA kind="Leaf" offset="8550" length="38" type="WString { }">Southern Boundary</TextA>
+    </_165>
+    <_166 kind="Record" offset="8588" length="40">
+      <TextKey kind="Leaf" offset="8588" length="4" type="Scalar { Kind = U32 }" value="168" />
+      <TextA kind="Leaf" offset="8592" length="36" type="WString { }">Western Boundary</TextA>
+    </_166>
+    <_167 kind="Record" offset="8628" length="40">
+      <TextKey kind="Leaf" offset="8628" length="4" type="Scalar { Kind = U32 }" value="169" />
+      <TextA kind="Leaf" offset="8632" length="36" type="WString { }">Eastern Boundary</TextA>
+    </_167>
+    <_168 kind="Record" offset="8668" length="70">
+      <TextKey kind="Leaf" offset="8668" length="4" type="Scalar { Kind = U32 }" value="170" />
+      <TextA kind="Leaf" offset="8672" length="66" type="WString { }">Fanglongmon Dungeon Underground</TextA>
+    </_168>
+    <_169 kind="Record" offset="8738" length="30">
+      <TextKey kind="Leaf" offset="8738" length="4" type="Scalar { Kind = U32 }" value="171" />
+      <TextA kind="Leaf" offset="8742" length="26" type="WString { }">Smell a rat</TextA>
+    </_169>
+    <_170 kind="Record" offset="8768" length="24">
+      <TextKey kind="Leaf" offset="8768" length="4" type="Scalar { Kind = U32 }" value="172" />
+      <TextA kind="Leaf" offset="8772" length="20" type="WString { }">Banished</TextA>
+    </_170>
+    <_171 kind="Record" offset="8792" length="28">
+      <TextKey kind="Leaf" offset="8792" length="4" type="Scalar { Kind = U32 }" value="173" />
+      <TextA kind="Leaf" offset="8796" length="24" type="WString { }">Check up 1</TextA>
+    </_171>
+    <_172 kind="Record" offset="8820" length="28">
+      <TextKey kind="Leaf" offset="8820" length="4" type="Scalar { Kind = U32 }" value="174" />
+      <TextA kind="Leaf" offset="8824" length="24" type="WString { }">Check up 2</TextA>
+    </_172>
+    <_173 kind="Record" offset="8848" length="26">
+      <TextKey kind="Leaf" offset="8848" length="4" type="Scalar { Kind = U32 }" value="175" />
+      <TextA kind="Leaf" offset="8852" length="22" type="WString { }">Situation</TextA>
+    </_173>
+    <_174 kind="Record" offset="8874" length="24">
+      <TextKey kind="Leaf" offset="8874" length="4" type="Scalar { Kind = U32 }" value="176" />
+      <TextA kind="Leaf" offset="8878" length="20" type="WString { }">Solution</TextA>
+    </_174>
+    <_175 kind="Record" offset="8898" length="18">
+      <TextKey kind="Leaf" offset="8898" length="4" type="Scalar { Kind = U32 }" value="177" />
+      <TextA kind="Leaf" offset="8902" length="14" type="WString { }">Test1</TextA>
+    </_175>
+    <_176 kind="Record" offset="8916" length="22">
+      <TextKey kind="Leaf" offset="8916" length="4" type="Scalar { Kind = U32 }" value="178" />
+      <TextA kind="Leaf" offset="8920" length="18" type="WString { }">Problem</TextA>
+    </_176>
+    <_177 kind="Record" offset="8938" length="22">
+      <TextKey kind="Leaf" offset="8938" length="4" type="Scalar { Kind = U32 }" value="179" />
+      <TextA kind="Leaf" offset="8942" length="18" type="WString { }">Manager</TextA>
+    </_177>
+    <_178 kind="Record" offset="8960" length="28">
+      <TextKey kind="Leaf" offset="8960" length="4" type="Scalar { Kind = U32 }" value="180" />
+      <TextA kind="Leaf" offset="8964" length="24" type="WString { }">Permission</TextA>
+    </_178>
+    <_179 kind="Record" offset="8988" length="24">
+      <TextKey kind="Leaf" offset="8988" length="4" type="Scalar { Kind = U32 }" value="181" />
+      <TextA kind="Leaf" offset="8992" length="20" type="WString { }">Unlock 4</TextA>
+    </_179>
+    <_180 kind="Record" offset="9012" length="32">
+      <TextKey kind="Leaf" offset="9012" length="4" type="Scalar { Kind = U32 }" value="182" />
+      <TextA kind="Leaf" offset="9016" length="28" type="WString { }">Final Match!</TextA>
+    </_180>
+    <_181 kind="Record" offset="9044" length="28">
+      <TextKey kind="Leaf" offset="9044" length="4" type="Scalar { Kind = U32 }" value="183" />
+      <TextA kind="Leaf" offset="9048" length="24" type="WString { }">Check up 3</TextA>
+    </_181>
+    <_182 kind="Record" offset="9072" length="42">
+      <TextKey kind="Leaf" offset="9072" length="4" type="Scalar { Kind = U32 }" value="184" />
+      <TextA kind="Leaf" offset="9076" length="38" type="WString { }">New Royal Knights</TextA>
+    </_182>
+    <_183 kind="Record" offset="9114" length="28">
+      <TextKey kind="Leaf" offset="9114" length="4" type="Scalar { Kind = U32 }" value="185" />
+      <TextA kind="Leaf" offset="9118" length="24" type="WString { }">Suggestion</TextA>
+    </_183>
+    <_184 kind="Record" offset="9142" length="56">
+      <TextKey kind="Leaf" offset="9142" length="4" type="Scalar { Kind = U32 }" value="186" />
+      <TextA kind="Leaf" offset="9146" length="52" type="WString { }">The third time's a charm</TextA>
+    </_184>
+    <_185 kind="Record" offset="9198" length="22">
+      <TextKey kind="Leaf" offset="9198" length="4" type="Scalar { Kind = U32 }" value="187" />
+      <TextA kind="Leaf" offset="9202" length="18" type="WString { }">Suggest</TextA>
+    </_185>
+    <_186 kind="Record" offset="9220" length="20">
+      <TextKey kind="Leaf" offset="9220" length="4" type="Scalar { Kind = U32 }" value="188" />
+      <TextA kind="Leaf" offset="9224" length="16" type="WString { }">Pass 1</TextA>
+    </_186>
+    <_187 kind="Record" offset="9240" length="68">
+      <TextKey kind="Leaf" offset="9240" length="4" type="Scalar { Kind = U32 }" value="189" />
+      <TextA kind="Leaf" offset="9244" length="64" type="WString { }">Calling from White-beared Guru</TextA>
+    </_187>
+    <_188 kind="Record" offset="9308" length="42">
+      <TextKey kind="Leaf" offset="9308" length="4" type="Scalar { Kind = U32 }" value="190" />
+      <TextA kind="Leaf" offset="9312" length="38" type="WString { }">Righteous Digimon</TextA>
+    </_188>
+    <_189 kind="Record" offset="9350" length="42">
+      <TextKey kind="Leaf" offset="9350" length="4" type="Scalar { Kind = U32 }" value="191" />
+      <TextA kind="Leaf" offset="9354" length="38" type="WString { }">A guardian Knight</TextA>
+    </_189>
+    <_190 kind="Record" offset="9392" length="42">
+      <TextKey kind="Leaf" offset="9392" length="4" type="Scalar { Kind = U32 }" value="192" />
+      <TextA kind="Leaf" offset="9396" length="38" type="WString { }">An Ancient Legend</TextA>
+    </_190>
+    <_191 kind="Record" offset="9434" length="50">
+      <TextKey kind="Leaf" offset="9434" length="4" type="Scalar { Kind = U32 }" value="193" />
+      <TextA kind="Leaf" offset="9438" length="46" type="WString { }">Reason for Difficulty</TextA>
+    </_191>
+    <_192 kind="Record" offset="9484" length="54">
+      <TextKey kind="Leaf" offset="9484" length="4" type="Scalar { Kind = U32 }" value="194" />
+      <TextA kind="Leaf" offset="9488" length="50" type="WString { }">Meeting with Cherubimon</TextA>
+    </_192>
+    <_193 kind="Record" offset="9538" length="54">
+      <TextKey kind="Leaf" offset="9538" length="4" type="Scalar { Kind = U32 }" value="195" />
+      <TextA kind="Leaf" offset="9542" length="50" type="WString { }">Meeting with Seraphimon</TextA>
+    </_193>
+    <_194 kind="Record" offset="9592" length="38">
+      <TextKey kind="Leaf" offset="9592" length="4" type="Scalar { Kind = U32 }" value="196" />
+      <TextA kind="Leaf" offset="9596" length="34" type="WString { }">Immergency Call</TextA>
+    </_194>
+    <_195 kind="Record" offset="9630" length="28">
+      <TextKey kind="Leaf" offset="9630" length="4" type="Scalar { Kind = U32 }" value="197" />
+      <TextA kind="Leaf" offset="9634" length="24" type="WString { }">Research 1</TextA>
+    </_195>
+    <_196 kind="Record" offset="9658" length="28">
+      <TextKey kind="Leaf" offset="9658" length="4" type="Scalar { Kind = U32 }" value="198" />
+      <TextA kind="Leaf" offset="9662" length="24" type="WString { }">Research 2</TextA>
+    </_196>
+    <_197 kind="Record" offset="9686" length="20">
+      <TextKey kind="Leaf" offset="9686" length="4" type="Scalar { Kind = U32 }" value="199" />
+      <TextA kind="Leaf" offset="9690" length="16" type="WString { }">Report</TextA>
+    </_197>
+    <_198 kind="Record" offset="9706" length="28">
+      <TextKey kind="Leaf" offset="9706" length="4" type="Scalar { Kind = U32 }" value="200" />
+      <TextA kind="Leaf" offset="9710" length="24" type="WString { }">Research 3</TextA>
+    </_198>
+    <_199 kind="Record" offset="9734" length="28">
+      <TextKey kind="Leaf" offset="9734" length="4" type="Scalar { Kind = U32 }" value="201" />
+      <TextA kind="Leaf" offset="9738" length="24" type="WString { }">Appeared 2</TextA>
+    </_199>
+    <_200 kind="Record" offset="9762" length="28">
+      <TextKey kind="Leaf" offset="9762" length="4" type="Scalar { Kind = U32 }" value="202" />
+      <TextA kind="Leaf" offset="9766" length="24" type="WString { }">Appeared 3</TextA>
+    </_200>
+    <_201 kind="Record" offset="9790" length="34">
+      <TextKey kind="Leaf" offset="9790" length="4" type="Scalar { Kind = U32 }" value="203" />
+      <TextA kind="Leaf" offset="9794" length="30" type="WString { }">True Criminal</TextA>
+    </_201>
+    <_202 kind="Record" offset="9824" length="26">
+      <TextKey kind="Leaf" offset="9824" length="4" type="Scalar { Kind = U32 }" value="204" />
+      <TextA kind="Leaf" offset="9828" length="22" type="WString { }">Reasoning</TextA>
+    </_202>
+    <_203 kind="Record" offset="9850" length="54">
+      <TextKey kind="Leaf" offset="9850" length="4" type="Scalar { Kind = U32 }" value="205" />
+      <TextA kind="Leaf" offset="9854" length="50" type="WString { }">The stage of the Wicked</TextA>
+    </_203>
+    <_204 kind="Record" offset="9904" length="30">
+      <TextKey kind="Leaf" offset="9904" length="4" type="Scalar { Kind = U32 }" value="206" />
+      <TextA kind="Leaf" offset="9908" length="26" type="WString { }">Case Closed</TextA>
+    </_204>
+    <_205 kind="Record" offset="9934" length="48">
+      <TextKey kind="Leaf" offset="9934" length="4" type="Scalar { Kind = U32 }" value="207" />
+      <TextA kind="Leaf" offset="9938" length="44" type="WString { }">The Rule of Digimons</TextA>
+    </_205>
+    <_206 kind="Record" offset="9982" length="38">
+      <TextKey kind="Leaf" offset="9982" length="4" type="Scalar { Kind = U32 }" value="208" />
+      <TextA kind="Leaf" offset="9986" length="34" type="WString { }">Coincidence - 1</TextA>
+    </_206>
+    <_207 kind="Record" offset="10020" length="38">
+      <TextKey kind="Leaf" offset="10020" length="4" type="Scalar { Kind = U32 }" value="209" />
+      <TextA kind="Leaf" offset="10024" length="34" type="WString { }">Coincidence - 3</TextA>
+    </_207>
+    <_208 kind="Record" offset="10058" length="62">
+      <TextKey kind="Leaf" offset="10058" length="4" type="Scalar { Kind = U32 }" value="210" />
+      <TextA kind="Leaf" offset="10062" length="58" type="WString { }">Disappeared TrobleMaker - 3</TextA>
+    </_208>
+    <_209 kind="Record" offset="10120" length="42">
+      <TextKey kind="Leaf" offset="10120" length="4" type="Scalar { Kind = U32 }" value="211" />
+      <TextA kind="Leaf" offset="10124" length="38" type="WString { }">Unavoidable Fight</TextA>
+    </_209>
+    <_210 kind="Record" offset="10162" length="68">
+      <TextKey kind="Leaf" offset="10162" length="4" type="Scalar { Kind = U32 }" value="212" />
+      <TextA kind="Leaf" offset="10166" length="64" type="WString { }">The reason why we should fight</TextA>
+    </_210>
+    <_211 kind="Record" offset="10230" length="84">
+      <TextKey kind="Leaf" offset="10230" length="4" type="Scalar { Kind = U32 }" value="213" />
+      <TextA kind="Leaf" offset="10234" length="80" type="WString { }">ill-fated relationship in the Past - 2</TextA>
+    </_211>
+    <_212 kind="Record" offset="10314" length="28">
+      <TextKey kind="Leaf" offset="10314" length="4" type="Scalar { Kind = U32 }" value="214" />
+      <TextA kind="Leaf" offset="10318" length="24" type="WString { }">As a Tamer</TextA>
+    </_212>
+    <_213 kind="Record" offset="10342" length="58">
+      <TextKey kind="Leaf" offset="10342" length="4" type="Scalar { Kind = U32 }" value="215" />
+      <TextA kind="Leaf" offset="10346" length="54" type="WString { }">'Desire for Evolution - 1</TextA>
+    </_213>
+    <_214 kind="Record" offset="10400" length="56">
+      <TextKey kind="Leaf" offset="10400" length="4" type="Scalar { Kind = U32 }" value="216" />
+      <TextA kind="Leaf" offset="10404" length="52" type="WString { }">Desire for Evolution - 3</TextA>
+    </_214>
+    <_215 kind="Record" offset="10456" length="56">
+      <TextKey kind="Leaf" offset="10456" length="4" type="Scalar { Kind = U32 }" value="217" />
+      <TextA kind="Leaf" offset="10460" length="52" type="WString { }">Desire for Evolution - 4</TextA>
+    </_215>
+    <_216 kind="Record" offset="10512" length="56">
+      <TextKey kind="Leaf" offset="10512" length="4" type="Scalar { Kind = U32 }" value="218" />
+      <TextA kind="Leaf" offset="10516" length="52" type="WString { }">'Difficult communication</TextA>
+    </_216>
+    <_217 kind="Record" offset="10568" length="48">
+      <TextKey kind="Leaf" offset="10568" length="4" type="Scalar { Kind = U32 }" value="219" />
+      <TextA kind="Leaf" offset="10572" length="44" type="WString { }">Survey investigation</TextA>
+    </_217>
+    <_218 kind="Record" offset="10616" length="36">
+      <TextKey kind="Leaf" offset="10616" length="4" type="Scalar { Kind = U32 }" value="220" />
+      <TextA kind="Leaf" offset="10620" length="32" type="WString { }">Stormy Passage</TextA>
+    </_218>
+    <_219 kind="Record" offset="10652" length="50">
+      <TextKey kind="Leaf" offset="10652" length="4" type="Scalar { Kind = U32 }" value="221" />
+      <TextA kind="Leaf" offset="10656" length="46" type="WString { }">Stop the TroubleMaker</TextA>
+    </_219>
+    <_220 kind="Record" offset="10702" length="46">
+      <TextKey kind="Leaf" offset="10702" length="4" type="Scalar { Kind = U32 }" value="222" />
+      <TextA kind="Leaf" offset="10706" length="42" type="WString { }">Guilmon! Evolution!</TextA>
+    </_220>
+    <_221 kind="Record" offset="10748" length="58">
+      <TextKey kind="Leaf" offset="10748" length="4" type="Scalar { Kind = U32 }" value="223" />
+      <TextA kind="Leaf" offset="10752" length="54" type="WString { }">A bond that overcame fear</TextA>
+    </_221>
+    <_222 kind="Record" offset="10806" length="52">
+      <TextKey kind="Leaf" offset="10806" length="4" type="Scalar { Kind = U32 }" value="224" />
+      <TextA kind="Leaf" offset="10810" length="48" type="WString { }">consciousness as Tamer</TextA>
+    </_222>
+    <_223 kind="Record" offset="10858" length="38">
+      <TextKey kind="Leaf" offset="10858" length="4" type="Scalar { Kind = U32 }" value="225" />
+      <TextA kind="Leaf" offset="10862" length="34" type="WString { }">About Evolution</TextA>
+    </_223>
+    <_224 kind="Record" offset="10896" length="50">
+      <TextKey kind="Leaf" offset="10896" length="4" type="Scalar { Kind = U32 }" value="226" />
+      <TextA kind="Leaf" offset="10900" length="46" type="WString { }">What Icedevimon Wants</TextA>
+    </_224>
+    <_225 kind="Record" offset="10946" length="28">
+      <TextKey kind="Leaf" offset="10946" length="4" type="Scalar { Kind = U32 }" value="227" />
+      <TextA kind="Leaf" offset="10950" length="24" type="WString { }">Save Rika!</TextA>
+    </_225>
+    <_226 kind="Record" offset="10974" length="38">
+      <TextKey kind="Leaf" offset="10974" length="4" type="Scalar { Kind = U32 }" value="228" />
+      <TextA kind="Leaf" offset="10978" length="34" type="WString { }">What Hypnos did</TextA>
+    </_226>
+    <_227 kind="Record" offset="11012" length="76">
+      <TextKey kind="Leaf" offset="11012" length="4" type="Scalar { Kind = U32 }" value="229" />
+      <TextA kind="Leaf" offset="11016" length="72" type="WString { }">Still we need to do what we can do</TextA>
+    </_227>
+    <_228 kind="Record" offset="11088" length="52">
+      <TextKey kind="Leaf" offset="11088" length="4" type="Scalar { Kind = U32 }" value="230" />
+      <TextA kind="Leaf" offset="11092" length="48" type="WString { }">The meaning of Partner</TextA>
+    </_228>
+    <_229 kind="Record" offset="11140" length="50">
+      <TextKey kind="Leaf" offset="11140" length="4" type="Scalar { Kind = U32 }" value="231" />
+      <TextA kind="Leaf" offset="11144" length="46" type="WString { }">Renamon In crisis - 2</TextA>
+    </_229>
+    <_230 kind="Record" offset="11190" length="18">
+      <TextKey kind="Leaf" offset="11190" length="4" type="Scalar { Kind = U32 }" value="232" />
+      <TextA kind="Leaf" offset="11194" length="14" type="WString { }">Crash</TextA>
+    </_230>
+    <_231 kind="Record" offset="11208" length="48">
+      <TextKey kind="Leaf" offset="11208" length="4" type="Scalar { Kind = U32 }" value="233" />
+      <TextA kind="Leaf" offset="11212" length="44" type="WString { }">Abnormal Air Current</TextA>
+    </_231>
+    <_232 kind="Record" offset="11256" length="72">
+      <TextKey kind="Leaf" offset="11256" length="4" type="Scalar { Kind = U32 }" value="234" />
+      <TextA kind="Leaf" offset="11260" length="68" type="WString { }">Connection Between Digital World</TextA>
+    </_232>
+    <_233 kind="Record" offset="11328" length="46">
+      <TextKey kind="Leaf" offset="11328" length="4" type="Scalar { Kind = U32 }" value="235" />
+      <TextA kind="Leaf" offset="11332" length="42" type="WString { }">Awaken and Evoluted</TextA>
+    </_233>
+    <_234 kind="Record" offset="11374" length="56">
+      <TextKey kind="Leaf" offset="11374" length="4" type="Scalar { Kind = U32 }" value="236" />
+      <TextA kind="Leaf" offset="11378" length="52" type="WString { }">Digimon Tamers Formation</TextA>
+    </_234>
+    <_235 kind="Record" offset="11430" length="54">
+      <TextKey kind="Leaf" offset="11430" length="4" type="Scalar { Kind = U32 }" value="237" />
+      <TextA kind="Leaf" offset="11434" length="50" type="WString { }">Let you go home instead</TextA>
+    </_235>
+    <_236 kind="Record" offset="11484" length="52">
+      <TextKey kind="Leaf" offset="11484" length="4" type="Scalar { Kind = U32 }" value="238" />
+      <TextA kind="Leaf" offset="11488" length="48" type="WString { }">Chase up the Sindramon</TextA>
+    </_236>
+    <_237 kind="Record" offset="11536" length="50">
+      <TextKey kind="Leaf" offset="11536" length="4" type="Scalar { Kind = U32 }" value="239" />
+      <TextA kind="Leaf" offset="11540" length="46" type="WString { }">Result of Coincidence</TextA>
+    </_237>
+    <_238 kind="Record" offset="11586" length="48">
+      <TextKey kind="Leaf" offset="11586" length="4" type="Scalar { Kind = U32 }" value="240" />
+      <TextA kind="Leaf" offset="11590" length="44" type="WString { }">Defeat the Pajiramon</TextA>
+    </_238>
+    <_239 kind="Record" offset="11634" length="48">
+      <TextKey kind="Leaf" offset="11634" length="4" type="Scalar { Kind = U32 }" value="241" />
+      <TextA kind="Leaf" offset="11638" length="44" type="WString { }">Defeat the Pajiramon</TextA>
+    </_239>
+    <_240 kind="Record" offset="11682" length="42">
+      <TextKey kind="Leaf" offset="11682" length="4" type="Scalar { Kind = U32 }" value="242" />
+      <TextA kind="Leaf" offset="11686" length="38" type="WString { }">Chase up the Deva</TextA>
+    </_240>
+    <_241 kind="Record" offset="11724" length="42">
+      <TextKey kind="Leaf" offset="11724" length="4" type="Scalar { Kind = U32 }" value="243" />
+      <TextA kind="Leaf" offset="11728" length="38" type="WString { }">Existence of Deva</TextA>
+    </_241>
+    <_242 kind="Record" offset="11766" length="72">
+      <TextKey kind="Leaf" offset="11766" length="4" type="Scalar { Kind = U32 }" value="244" />
+      <TextA kind="Leaf" offset="11770" length="68" type="WString { }">Hypnos's Secret weapon, Shaggai </TextA>
+    </_242>
+    <_243 kind="Record" offset="11838" length="44">
+      <TextKey kind="Leaf" offset="11838" length="4" type="Scalar { Kind = U32 }" value="245" />
+      <TextA kind="Leaf" offset="11842" length="40" type="WString { }">Defeat Vikaralamon</TextA>
+    </_243>
+    <_244 kind="Record" offset="11882" length="22">
+      <TextKey kind="Leaf" offset="11882" length="4" type="Scalar { Kind = U32 }" value="246" />
+      <TextA kind="Leaf" offset="11886" length="18" type="WString { }">Culumon</TextA>
+    </_244>
+    <_245 kind="Record" offset="11904" length="16">
+      <TextKey kind="Leaf" offset="11904" length="4" type="Scalar { Kind = U32 }" value="247" />
+      <TextA kind="Leaf" offset="11908" length="12" type="WString { }">Sign</TextA>
+    </_245>
+    <_246 kind="Record" offset="11920" length="30">
+      <TextKey kind="Leaf" offset="11920" length="4" type="Scalar { Kind = U32 }" value="248" />
+      <TextA kind="Leaf" offset="11924" length="26" type="WString { }">Preparation</TextA>
+    </_246>
+    <_247 kind="Record" offset="11950" length="28">
+      <TextKey kind="Leaf" offset="11950" length="4" type="Scalar { Kind = U32 }" value="249" />
+      <TextA kind="Leaf" offset="11954" length="24" type="WString { }">Barbamon 2</TextA>
+    </_247>
+    <_248 kind="Record" offset="11978" length="28">
+      <TextKey kind="Leaf" offset="11978" length="4" type="Scalar { Kind = U32 }" value="250" />
+      <TextA kind="Leaf" offset="11982" length="24" type="WString { }">Barbamon 3</TextA>
+    </_248>
+    <_249 kind="Record" offset="12006" length="30">
+      <TextKey kind="Leaf" offset="12006" length="4" type="Scalar { Kind = U32 }" value="251" />
+      <TextA kind="Leaf" offset="12010" length="26" type="WString { }">Data Code 1</TextA>
+    </_249>
+    <_250 kind="Record" offset="12036" length="30">
+      <TextKey kind="Leaf" offset="12036" length="4" type="Scalar { Kind = U32 }" value="252" />
+      <TextA kind="Leaf" offset="12040" length="26" type="WString { }">Lilithmon 2</TextA>
+    </_250>
+    <_251 kind="Record" offset="12066" length="44">
+      <TextKey kind="Leaf" offset="12066" length="4" type="Scalar { Kind = U32 }" value="253" />
+      <TextA kind="Leaf" offset="12070" length="40" type="WString { }">A pincer operation</TextA>
+    </_251>
+    <_252 kind="Record" offset="12110" length="22">
+      <TextKey kind="Leaf" offset="12110" length="4" type="Scalar { Kind = U32 }" value="254" />
+      <TextA kind="Leaf" offset="12114" length="18" type="WString { }">Defence</TextA>
+    </_252>
+    <_253 kind="Record" offset="12132" length="30">
+      <TextKey kind="Leaf" offset="12132" length="4" type="Scalar { Kind = U32 }" value="255" />
+      <TextA kind="Leaf" offset="12136" length="26" type="WString { }">Data Code 3</TextA>
+    </_253>
+    <_254 kind="Record" offset="12162" length="28">
+      <TextKey kind="Leaf" offset="12162" length="4" type="Scalar { Kind = U32 }" value="256" />
+      <TextA kind="Leaf" offset="12166" length="24" type="WString { }">True Color</TextA>
+    </_254>
+    <_255 kind="Record" offset="12190" length="30">
+      <TextKey kind="Leaf" offset="12190" length="4" type="Scalar { Kind = U32 }" value="257" />
+      <TextA kind="Leaf" offset="12194" length="26" type="WString { }">Final Match</TextA>
+    </_255>
+    <_256 kind="Record" offset="12220" length="60">
+      <TextKey kind="Leaf" offset="12220" length="4" type="Scalar { Kind = U32 }" value="258" />
+      <TextA kind="Leaf" offset="12224" length="56" type="WString { }">The scattered researchers!</TextA>
+    </_256>
+    <_257 kind="Record" offset="12280" length="56">
+      <TextKey kind="Leaf" offset="12280" length="4" type="Scalar { Kind = U32 }" value="259" />
+      <TextA kind="Leaf" offset="12284" length="52" type="WString { }">Reappear Digimon Kaiser!</TextA>
+    </_257>
+    <_258 kind="Record" offset="12336" length="62">
+      <TextKey kind="Leaf" offset="12336" length="4" type="Scalar { Kind = U32 }" value="260" />
+      <TextA kind="Leaf" offset="12340" length="58" type="WString { }">A Call from Richard Sampson</TextA>
+    </_258>
+    <_259 kind="Record" offset="12398" length="44">
+      <TextKey kind="Leaf" offset="12398" length="4" type="Scalar { Kind = U32 }" value="261" />
+      <TextA kind="Leaf" offset="12402" length="40" type="WString { }">Homework situation</TextA>
+    </_259>
+    <_260 kind="Record" offset="12442" length="36">
+      <TextKey kind="Leaf" offset="12442" length="4" type="Scalar { Kind = U32 }" value="262" />
+      <TextA kind="Leaf" offset="12446" length="32" type="WString { }">'Silly Opinion</TextA>
+    </_260>
+    <_261 kind="Record" offset="12478" length="40">
+      <TextKey kind="Leaf" offset="12478" length="4" type="Scalar { Kind = U32 }" value="263" />
+      <TextA kind="Leaf" offset="12482" length="36" type="WString { }">'Plant protector</TextA>
+    </_261>
+    <_262 kind="Record" offset="12518" length="28">
+      <TextKey kind="Leaf" offset="12518" length="4" type="Scalar { Kind = U32 }" value="264" />
+      <TextA kind="Leaf" offset="12522" length="24" type="WString { }">Be granted</TextA>
+    </_262>
+    <_263 kind="Record" offset="12546" length="48">
+      <TextKey kind="Leaf" offset="12546" length="4" type="Scalar { Kind = U32 }" value="265" />
+      <TextA kind="Leaf" offset="12550" length="44" type="WString { }">Pest extermination 3</TextA>
+    </_263>
+    <_264 kind="Record" offset="12594" length="20">
+      <TextKey kind="Leaf" offset="12594" length="4" type="Scalar { Kind = U32 }" value="266" />
+      <TextA kind="Leaf" offset="12598" length="16" type="WString { }">Report</TextA>
+    </_264>
+    <_265 kind="Record" offset="12614" length="32">
+      <TextKey kind="Leaf" offset="12614" length="4" type="Scalar { Kind = U32 }" value="267" />
+      <TextA kind="Leaf" offset="12618" length="28" type="WString { }">Hit the mark</TextA>
+    </_265>
+    <_266 kind="Record" offset="12646" length="24">
+      <TextKey kind="Leaf" offset="12646" length="4" type="Scalar { Kind = U32 }" value="268" />
+      <TextA kind="Leaf" offset="12650" length="20" type="WString { }">갑작스러운 위험</TextA>
+    </_266>
+    <_267 kind="Record" offset="12670" length="26">
+      <TextKey kind="Leaf" offset="12670" length="4" type="Scalar { Kind = U32 }" value="269" />
+      <TextA kind="Leaf" offset="12674" length="22" type="WString { }">베르단디 터미널로</TextA>
+    </_267>
+    <_268 kind="Record" offset="12696" length="22">
+      <TextKey kind="Leaf" offset="12696" length="4" type="Scalar { Kind = U32 }" value="270" />
+      <TextA kind="Leaf" offset="12700" length="18" type="WString { }">VS 드라큐몬</TextA>
+    </_268>
+    <_269 kind="Record" offset="12718" length="26">
+      <TextKey kind="Leaf" offset="12718" length="4" type="Scalar { Kind = U32 }" value="271" />
+      <TextA kind="Leaf" offset="12722" length="22" type="WString { }">VS 그란드라큐몬</TextA>
+    </_269>
+    <_270 kind="Record" offset="12744" length="16">
+      <TextKey kind="Leaf" offset="12744" length="4" type="Scalar { Kind = U32 }" value="272" />
+      <TextA kind="Leaf" offset="12748" length="12" type="WString { }">약육강식</TextA>
+    </_270>
+    <_271 kind="Record" offset="12760" length="14">
+      <TextKey kind="Leaf" offset="12760" length="4" type="Scalar { Kind = U32 }" value="273" />
+      <TextA kind="Leaf" offset="12764" length="10" type="WString { }">SOS</TextA>
+    </_271>
+    <_272 kind="Record" offset="12774" length="12">
+      <TextKey kind="Leaf" offset="12774" length="4" type="Scalar { Kind = U32 }" value="274" />
+      <TextA kind="Leaf" offset="12778" length="8" type="WString { }">결전</TextA>
+    </_272>
+    <_273 kind="Record" offset="12786" length="24">
+      <TextKey kind="Leaf" offset="12786" length="4" type="Scalar { Kind = U32 }" value="275" />
+      <TextA kind="Leaf" offset="12790" length="20" type="WString { }">VS 오메가몬X</TextA>
+    </_273>
+    <_274 kind="Record" offset="12810" length="76">
+      <TextKey kind="Leaf" offset="12810" length="4" type="Scalar { Kind = U32 }" value="276" />
+      <TextA kind="Leaf" offset="12814" length="72" type="WString { }">Arrived at the Digital World! But…</TextA>
+    </_274>
+    <_275 kind="Record" offset="12886" length="90">
+      <TextKey kind="Leaf" offset="12886" length="4" type="Scalar { Kind = U32 }" value="277" />
+      <TextA kind="Leaf" offset="12890" length="86" type="WString { }">Photos that cannot be taken, missing food</TextA>
+    </_275>
+    <_276 kind="Record" offset="12976" length="64">
+      <TextKey kind="Leaf" offset="12976" length="4" type="Scalar { Kind = U32 }" value="278" />
+      <TextA kind="Leaf" offset="12980" length="60" type="WString { }">Tired Children, Needed Break</TextA>
+    </_276>
+    <_277 kind="Record" offset="13040" length="76">
+      <TextKey kind="Leaf" offset="13040" length="4" type="Scalar { Kind = U32 }" value="279" />
+      <TextA kind="Leaf" offset="13044" length="72" type="WString { }">A sudden change of the environment</TextA>
+    </_277>
+    <_278 kind="Record" offset="13116" length="82">
+      <TextKey kind="Leaf" offset="13116" length="4" type="Scalar { Kind = U32 }" value="280" />
+      <TextA kind="Leaf" offset="13120" length="78" type="WString { }">Wishing each other's wishes come true</TextA>
+    </_278>
+    <_279 kind="Record" offset="13198" length="68">
+      <TextKey kind="Leaf" offset="13198" length="4" type="Scalar { Kind = U32 }" value="281" />
+      <TextA kind="Leaf" offset="13202" length="64" type="WString { }">Great movement of the potatoes</TextA>
+    </_279>
+    <_280 kind="Record" offset="13266" length="46">
+      <TextKey kind="Leaf" offset="13266" length="4" type="Scalar { Kind = U32 }" value="282" />
+      <TextA kind="Leaf" offset="13270" length="42" type="WString { }">Revenge for Meramon</TextA>
+    </_280>
+    <_281 kind="Record" offset="13312" length="48">
+      <TextKey kind="Leaf" offset="13312" length="4" type="Scalar { Kind = U32 }" value="283" />
+      <TextA kind="Leaf" offset="13316" length="44" type="WString { }">Move to find Culumon</TextA>
+    </_281>
+    <_282 kind="Record" offset="13360" length="64">
+      <TextKey kind="Leaf" offset="13360" length="4" type="Scalar { Kind = U32 }" value="284" />
+      <TextA kind="Leaf" offset="13364" length="60" type="WString { }">Escape from the light pillar</TextA>
+    </_282>
+    <_283 kind="Record" offset="13424" length="76">
+      <TextKey kind="Leaf" offset="13424" length="4" type="Scalar { Kind = U32 }" value="285" />
+      <TextA kind="Leaf" offset="13428" length="72" type="WString { }">Wind that's becoming more powerful</TextA>
+    </_283>
+    <_284 kind="Record" offset="13500" length="44">
+      <TextKey kind="Leaf" offset="13500" length="4" type="Scalar { Kind = U32 }" value="286" />
+      <TextA kind="Leaf" offset="13504" length="40" type="WString { }">Stabilized Village</TextA>
+    </_284>
+    <_285 kind="Record" offset="13544" length="60">
+      <TextKey kind="Leaf" offset="13544" length="4" type="Scalar { Kind = U32 }" value="287" />
+      <TextA kind="Leaf" offset="13548" length="56" type="WString { }">Reunited Friends Once More</TextA>
+    </_285>
+    <_286 kind="Record" offset="13604" length="62">
+      <TextKey kind="Leaf" offset="13604" length="4" type="Scalar { Kind = U32 }" value="288" />
+      <TextA kind="Leaf" offset="13608" length="58" type="WString { }">Cog That Has Started Moving</TextA>
+    </_286>
+    <_287 kind="Record" offset="13666" length="46">
+      <TextKey kind="Leaf" offset="13666" length="4" type="Scalar { Kind = U32 }" value="289" />
+      <TextA kind="Leaf" offset="13670" length="42" type="WString { }">The Strongest Tamer</TextA>
+    </_287>
+    <_288 kind="Record" offset="13712" length="50">
+      <TextKey kind="Leaf" offset="13712" length="4" type="Scalar { Kind = U32 }" value="290" />
+      <TextA kind="Leaf" offset="13716" length="46" type="WString { }">Reunited with Culumon</TextA>
+    </_288>
+    <_289 kind="Record" offset="13762" length="64">
+      <TextKey kind="Leaf" offset="13762" length="4" type="Scalar { Kind = U32 }" value="291" />
+      <TextA kind="Leaf" offset="13766" length="60" type="WString { }">Scattered Children Once More</TextA>
+    </_289>
+    <_290 kind="Record" offset="13826" length="48">
+      <TextKey kind="Leaf" offset="13826" length="4" type="Scalar { Kind = U32 }" value="292" />
+      <TextA kind="Leaf" offset="13830" length="44" type="WString { }">Gekomon and Andromon</TextA>
+    </_290>
+    <_291 kind="Record" offset="13874" length="20">
+      <TextKey kind="Leaf" offset="13874" length="4" type="Scalar { Kind = U32 }" value="293" />
+      <TextA kind="Leaf" offset="13878" length="16" type="WString { }">Kidnap</TextA>
+    </_291>
+    <_292 kind="Record" offset="13894" length="62">
+      <TextKey kind="Leaf" offset="13894" length="4" type="Scalar { Kind = U32 }" value="294" />
+      <TextA kind="Leaf" offset="13898" length="58" type="WString { }">Operation Rescue Jeri Katou</TextA>
+    </_292>
+    <_293 kind="Record" offset="13956" length="40">
+      <TextKey kind="Leaf" offset="13956" length="4" type="Scalar { Kind = U32 }" value="295" />
+      <TextA kind="Leaf" offset="13960" length="36" type="WString { }">Inescapable Cave</TextA>
+    </_293>
+    <_294 kind="Record" offset="13996" length="16">
+      <TextKey kind="Leaf" offset="13996" length="4" type="Scalar { Kind = U32 }" value="296" />
+      <TextA kind="Leaf" offset="14000" length="12" type="WString { }">Exit</TextA>
+    </_294>
+    <_295 kind="Record" offset="14012" length="32">
+      <TextKey kind="Leaf" offset="14012" length="4" type="Scalar { Kind = U32 }" value="297" />
+      <TextA kind="Leaf" offset="14016" length="28" type="WString { }">Clogged pipe</TextA>
+    </_295>
+    <_296 kind="Record" offset="14044" length="18">
+      <TextKey kind="Leaf" offset="14044" length="4" type="Scalar { Kind = U32 }" value="298" />
+      <TextA kind="Leaf" offset="14048" length="14" type="WString { }">Truth</TextA>
+    </_296>
+    <_297 kind="Record" offset="14062" length="50">
+      <TextKey kind="Leaf" offset="14062" length="4" type="Scalar { Kind = U32 }" value="299" />
+      <TextA kind="Leaf" offset="14066" length="46" type="WString { }">Deva's Responsibility</TextA>
+    </_297>
+    <_298 kind="Record" offset="14112" length="42">
+      <TextKey kind="Leaf" offset="14112" length="4" type="Scalar { Kind = U32 }" value="300" />
+      <TextA kind="Leaf" offset="14116" length="38" type="WString { }">Current situation</TextA>
+    </_298>
+    <_299 kind="Record" offset="14154" length="16">
+      <TextKey kind="Leaf" offset="14154" length="4" type="Scalar { Kind = U32 }" value="301" />
+      <TextA kind="Leaf" offset="14158" length="12" type="WString { }">Ally</TextA>
+    </_299>
+    <_300 kind="Record" offset="14170" length="28">
+      <TextKey kind="Leaf" offset="14170" length="4" type="Scalar { Kind = U32 }" value="302" />
+      <TextA kind="Leaf" offset="14174" length="24" type="WString { }">Megidramon</TextA>
+    </_300>
+    <_301 kind="Record" offset="14198" length="54">
+      <TextKey kind="Leaf" offset="14198" length="4" type="Scalar { Kind = U32 }" value="303" />
+      <TextA kind="Leaf" offset="14202" length="50" type="WString { }">Worst possible scenario</TextA>
+    </_301>
+    <_302 kind="Record" offset="14252" length="66">
+      <TextKey kind="Leaf" offset="14252" length="4" type="Scalar { Kind = U32 }" value="304" />
+      <TextA kind="Leaf" offset="14256" length="62" type="WString { }">Deva's Tenacious Relationship</TextA>
+    </_302>
+    <_303 kind="Record" offset="14318" length="50">
+      <TextKey kind="Leaf" offset="14318" length="4" type="Scalar { Kind = U32 }" value="305" />
+      <TextA kind="Leaf" offset="14322" length="46" type="WString { }">Create an Opportunity</TextA>
+    </_303>
+    <_304 kind="Record" offset="14368" length="58">
+      <TextKey kind="Leaf" offset="14368" length="4" type="Scalar { Kind = U32 }" value="306" />
+      <TextA kind="Leaf" offset="14372" length="54" type="WString { }">Before Meeting Zhuqiaomon</TextA>
+    </_304>
+    <_305 kind="Record" offset="14426" length="34">
+      <TextKey kind="Leaf" offset="14426" length="4" type="Scalar { Kind = U32 }" value="307" />
+      <TextA kind="Leaf" offset="14430" length="30" type="WString { }">March forward</TextA>
+    </_305>
+    <_306 kind="Record" offset="14460" length="70">
+      <TextKey kind="Leaf" offset="14460" length="4" type="Scalar { Kind = U32 }" value="308" />
+      <TextA kind="Leaf" offset="14464" length="66" type="WString { }">Four Holy Beasts' Genuine Power</TextA>
+    </_306>
+    <_307 kind="Record" offset="14530" length="32">
+      <TextKey kind="Leaf" offset="14530" length="4" type="Scalar { Kind = U32 }" value="309" />
+      <TextA kind="Leaf" offset="14534" length="28" type="WString { }">A true enemy</TextA>
+    </_307>
+    <_308 kind="Record" offset="14562" length="48">
+      <TextKey kind="Leaf" offset="14562" length="4" type="Scalar { Kind = U32 }" value="310" />
+      <TextA kind="Leaf" offset="14566" length="44" type="WString { }">An opponent to fight</TextA>
+    </_308>
+    <_309 kind="Record" offset="14610" length="64">
+      <TextKey kind="Leaf" offset="14610" length="4" type="Scalar { Kind = U32 }" value="311" />
+      <TextA kind="Leaf" offset="14614" length="60" type="WString { }">Becoming a serious situation</TextA>
+    </_309>
+    <_310 kind="Record" offset="14674" length="38">
+      <TextKey kind="Leaf" offset="14674" length="4" type="Scalar { Kind = U32 }" value="312" />
+      <TextA kind="Leaf" offset="14678" length="34" type="WString { }">Rescued Culumon</TextA>
+    </_310>
+    <_311 kind="Record" offset="14712" length="28">
+      <TextKey kind="Leaf" offset="14712" length="4" type="Scalar { Kind = U32 }" value="313" />
+      <TextA kind="Leaf" offset="14716" length="24" type="WString { }">To the Ark</TextA>
+    </_311>
+    <_312 kind="Record" offset="14740" length="46">
+      <TextKey kind="Leaf" offset="14740" length="4" type="Scalar { Kind = U32 }" value="314" />
+      <TextA kind="Leaf" offset="14744" length="42" type="WString { }">Unexpected Behavior</TextA>
+    </_312>
+    <_313 kind="Record" offset="14786" length="22">
+      <TextKey kind="Leaf" offset="14786" length="4" type="Scalar { Kind = U32 }" value="315" />
+      <TextA kind="Leaf" offset="14790" length="18" type="WString { }">To home</TextA>
+    </_313>
+    <_314 kind="Record" offset="14808" length="32">
+      <TextKey kind="Leaf" offset="14808" length="4" type="Scalar { Kind = U32 }" value="316" />
+      <TextA kind="Leaf" offset="14812" length="28" type="WString { }">Recall Order</TextA>
+    </_314>
+    <_315 kind="Record" offset="14840" length="52">
+      <TextKey kind="Leaf" offset="14840" length="4" type="Scalar { Kind = U32 }" value="317" />
+      <TextA kind="Leaf" offset="14844" length="48" type="WString { }">Grasping the Situation</TextA>
+    </_315>
+    <_316 kind="Record" offset="14892" length="38">
+      <TextKey kind="Leaf" offset="14892" length="4" type="Scalar { Kind = U32 }" value="318" />
+      <TextA kind="Leaf" offset="14896" length="34" type="WString { }">Suspicious Data</TextA>
+    </_316>
+    <_317 kind="Record" offset="14930" length="36">
+      <TextKey kind="Leaf" offset="14930" length="4" type="Scalar { Kind = U32 }" value="319" />
+      <TextA kind="Leaf" offset="14934" length="32" type="WString { }">Countermeasure</TextA>
+    </_317>
+    <_318 kind="Record" offset="14966" length="34">
+      <TextKey kind="Leaf" offset="14966" length="4" type="Scalar { Kind = U32 }" value="320" />
+      <TextA kind="Leaf" offset="14970" length="30" type="WString { }">Status Report</TextA>
+    </_318>
+    <_319 kind="Record" offset="15000" length="46">
+      <TextKey kind="Leaf" offset="15000" length="4" type="Scalar { Kind = U32 }" value="321" />
+      <TextA kind="Leaf" offset="15004" length="42" type="WString { }">Dispatch to Odaiba!</TextA>
+    </_319>
+    <_320 kind="Record" offset="15046" length="34">
+      <TextKey kind="Leaf" offset="15046" length="4" type="Scalar { Kind = U32 }" value="322" />
+      <TextA kind="Leaf" offset="15050" length="30" type="WString { }">Bitter Return</TextA>
+    </_320>
+    <_321 kind="Record" offset="15080" length="56">
+      <TextKey kind="Leaf" offset="15080" length="4" type="Scalar { Kind = U32 }" value="323" />
+      <TextA kind="Leaf" offset="15084" length="52" type="WString { }">Dispatch to Minato City!</TextA>
+    </_321>
+    <_322 kind="Record" offset="15136" length="32">
+      <TextKey kind="Leaf" offset="15136" length="4" type="Scalar { Kind = U32 }" value="324" />
+      <TextA kind="Leaf" offset="15140" length="28" type="WString { }">VS Raguelmon</TextA>
+    </_322>
+    <_323 kind="Record" offset="15168" length="20">
+      <TextKey kind="Leaf" offset="15168" length="4" type="Scalar { Kind = U32 }" value="325" />
+      <TextA kind="Leaf" offset="15172" length="16" type="WString { }">Return</TextA>
+    </_323>
+    <_324 kind="Record" offset="15188" length="20">
+      <TextKey kind="Leaf" offset="15188" length="4" type="Scalar { Kind = U32 }" value="326" />
+      <TextA kind="Leaf" offset="15192" length="16" type="WString { }">불길한 기운</TextA>
+    </_324>
+    <_325 kind="Record" offset="15208" length="12">
+      <TextKey kind="Leaf" offset="15208" length="4" type="Scalar { Kind = U32 }" value="327" />
+      <TextA kind="Leaf" offset="15212" length="8" type="WString { }">협조</TextA>
+    </_325>
+    <_326 kind="Record" offset="15220" length="18">
+      <TextKey kind="Leaf" offset="15220" length="4" type="Scalar { Kind = U32 }" value="328" />
+      <TextA kind="Leaf" offset="15224" length="14" type="WString { }">무력 행사</TextA>
+    </_326>
+    <_327 kind="Record" offset="15238" length="22">
+      <TextKey kind="Leaf" offset="15238" length="4" type="Scalar { Kind = U32 }" value="329" />
+      <TextA kind="Leaf" offset="15242" length="18" type="WString { }">탐문 조사 2</TextA>
+    </_327>
+    <_328 kind="Record" offset="15260" length="18">
+      <TextKey kind="Leaf" offset="15260" length="4" type="Scalar { Kind = U32 }" value="330" />
+      <TextA kind="Leaf" offset="15264" length="14" type="WString { }">적대심 2</TextA>
+    </_328>
+    <_329 kind="Record" offset="15278" length="26">
+      <TextKey kind="Leaf" offset="15278" length="4" type="Scalar { Kind = U32 }" value="331" />
+      <TextA kind="Leaf" offset="15282" length="22" type="WString { }">밤이 되었습니다.</TextA>
+    </_329>
+    <_330 kind="Record" offset="15304" length="32">
+      <TextKey kind="Leaf" offset="15304" length="4" type="Scalar { Kind = U32 }" value="332" />
+      <TextA kind="Leaf" offset="15308" length="28" type="WString { }">VS 러스트티라노몬 1</TextA>
+    </_330>
+    <_331 kind="Record" offset="15336" length="36">
+      <TextKey kind="Leaf" offset="15336" length="4" type="Scalar { Kind = U32 }" value="333" />
+      <TextA kind="Leaf" offset="15340" length="32" type="WString { }">Rainbow Bridge</TextA>
+    </_331>
+    <_332 kind="Record" offset="15372" length="48">
+      <TextKey kind="Leaf" offset="15372" length="4" type="Scalar { Kind = U32 }" value="334" />
+      <TextA kind="Leaf" offset="15376" length="44" type="WString { }">Reunion with Chuumon</TextA>
+    </_332>
+    <_333 kind="Record" offset="15420" length="52">
+      <TextKey kind="Leaf" offset="15420" length="4" type="Scalar { Kind = U32 }" value="335" />
+      <TextA kind="Leaf" offset="15424" length="48" type="WString { }">Enter the Dark Masters</TextA>
+    </_333>
+    <_334 kind="Record" offset="15472" length="128">
+      <TextKey kind="Leaf" offset="15472" length="4" type="Scalar { Kind = U32 }" value="336" />
+      <TextA kind="Leaf" offset="15476" length="124" type="WString { }">Near Death Experience at the Colosseum and Rescue by Piximon</TextA>
+    </_334>
+    <_335 kind="Record" offset="15600" length="66">
+      <TextKey kind="Leaf" offset="15600" length="4" type="Scalar { Kind = U32 }" value="337" />
+      <TextA kind="Leaf" offset="15604" length="62" type="WString { }">Discussion on How to Get Away</TextA>
+    </_335>
+    <_336 kind="Record" offset="15666" length="80">
+      <TextKey kind="Leaf" offset="15666" length="4" type="Scalar { Kind = U32 }" value="338" />
+      <TextA kind="Leaf" offset="15670" length="76" type="WString { }">Discovery of Wrecked Payphone Booths</TextA>
+    </_336>
+    <_337 kind="Record" offset="15746" length="78">
+      <TextKey kind="Leaf" offset="15746" length="4" type="Scalar { Kind = U32 }" value="339" />
+      <TextA kind="Leaf" offset="15750" length="74" type="WString { }">Revision of Battle Against Shellmon</TextA>
+    </_337>
+    <_338 kind="Record" offset="15824" length="64">
+      <TextKey kind="Leaf" offset="15824" length="4" type="Scalar { Kind = U32 }" value="340" />
+      <TextA kind="Leaf" offset="15828" length="60" type="WString { }">Discovery of Beachside Store</TextA>
+    </_338>
+    <_339 kind="Record" offset="15888" length="108">
+      <TextKey kind="Leaf" offset="15888" length="4" type="Scalar { Kind = U32 }" value="341" />
+      <TextA kind="Leaf" offset="15892" length="104" type="WString { }">Conversation Between MetalSeadramon and Scorpiomon</TextA>
+    </_339>
+    <_340 kind="Record" offset="15996" length="82">
+      <TextKey kind="Leaf" offset="15996" length="4" type="Scalar { Kind = U32 }" value="342" />
+      <TextA kind="Leaf" offset="16000" length="78" type="WString { }">Revision of Battle Against Scorpiomon</TextA>
+    </_340>
+    <_341 kind="Record" offset="16078" length="82">
+      <TextKey kind="Leaf" offset="16078" length="4" type="Scalar { Kind = U32 }" value="343" />
+      <TextA kind="Leaf" offset="16082" length="78" type="WString { }">After Struggle Against MetalSeadramon</TextA>
+    </_341>
+    <_342 kind="Record" offset="16160" length="76">
+      <TextKey kind="Leaf" offset="16160" length="4" type="Scalar { Kind = U32 }" value="344" />
+      <TextA kind="Leaf" offset="16164" length="72" type="WString { }">Quarrel Between Taichi and Matt #1</TextA>
+    </_342>
+    <_343 kind="Record" offset="16236" length="52">
+      <TextKey kind="Leaf" offset="16236" length="4" type="Scalar { Kind = U32 }" value="345" />
+      <TextA kind="Leaf" offset="16240" length="48" type="WString { }">Clue of Homeostasis #1</TextA>
+    </_343>
+    <_344 kind="Record" offset="16288" length="74">
+      <TextKey kind="Leaf" offset="16288" length="4" type="Scalar { Kind = U32 }" value="346" />
+      <TextA kind="Leaf" offset="16292" length="70" type="WString { }">Moving Forest, seperated children</TextA>
+    </_344>
+    <_345 kind="Record" offset="16362" length="114">
+      <TextKey kind="Leaf" offset="16362" length="4" type="Scalar { Kind = U32 }" value="347" />
+      <TextA kind="Leaf" offset="16366" length="110" type="WString { }">Conflict between brothers and appearance of Puppetmon</TextA>
+    </_345>
+    <_346 kind="Record" offset="16476" length="48">
+      <TextKey kind="Leaf" offset="16476" length="4" type="Scalar { Kind = U32 }" value="348" />
+      <TextA kind="Leaf" offset="16480" length="44" type="WString { }">Puppetmon's war game</TextA>
+    </_346>
+    <_347 kind="Record" offset="16524" length="58">
+      <TextKey kind="Leaf" offset="16524" length="4" type="Scalar { Kind = U32 }" value="349" />
+      <TextA kind="Leaf" offset="16528" length="54" type="WString { }">Kiwimon with the children</TextA>
+    </_347>
+    <_348 kind="Record" offset="16582" length="44">
+      <TextKey kind="Leaf" offset="16582" length="4" type="Scalar { Kind = U32 }" value="350" />
+      <TextA kind="Leaf" offset="16586" length="40" type="WString { }"> Breakaway of Matt</TextA>
+    </_348>
+    <_349 kind="Record" offset="16626" length="54">
+      <TextKey kind="Leaf" offset="16626" length="4" type="Scalar { Kind = U32 }" value="351" />
+      <TextA kind="Leaf" offset="16630" length="50" type="WString { }">About breakaway of Matt</TextA>
+    </_349>
+    <_350 kind="Record" offset="16680" length="40">
+      <TextKey kind="Leaf" offset="16680" length="4" type="Scalar { Kind = U32 }" value="352" />
+      <TextA kind="Leaf" offset="16684" length="36" type="WString { }">Matt's monologue</TextA>
+    </_350>
+    <_351 kind="Record" offset="16720" length="50">
+      <TextKey kind="Leaf" offset="16720" length="4" type="Scalar { Kind = U32 }" value="353" />
+      <TextA kind="Leaf" offset="16724" length="46" type="WString { }">Becoming evil of Matt</TextA>
+    </_351>
+    <_352 kind="Record" offset="16770" length="48">
+      <TextKey kind="Leaf" offset="16770" length="4" type="Scalar { Kind = U32 }" value="354" />
+      <TextA kind="Leaf" offset="16774" length="44" type="WString { }">Battle with Gerbemon</TextA>
+    </_352>
+    <_353 kind="Record" offset="16818" length="36">
+      <TextKey kind="Leaf" offset="16818" length="4" type="Scalar { Kind = U32 }" value="355" />
+      <TextA kind="Leaf" offset="16822" length="32" type="WString { }">Matt's quarrel</TextA>
+    </_353>
+    <_354 kind="Record" offset="16854" length="70">
+      <TextKey kind="Leaf" offset="16854" length="4" type="Scalar { Kind = U32 }" value="356" />
+      <TextA kind="Leaf" offset="16858" length="66" type="WString { }">Quarrel between Taichi and Matt</TextA>
+    </_354>
+    <_355 kind="Record" offset="16924" length="66">
+      <TextKey kind="Leaf" offset="16924" length="4" type="Scalar { Kind = U32 }" value="357" />
+      <TextA kind="Leaf" offset="16928" length="62" type="WString { }">Conversation with Homeostasis</TextA>
+    </_355>
+    <_356 kind="Record" offset="16990" length="34">
+      <TextKey kind="Leaf" offset="16990" length="4" type="Scalar { Kind = U32 }" value="358" />
+      <TextA kind="Leaf" offset="16994" length="30" type="WString { }">Matt's guilty</TextA>
+    </_356>
+    <_357 kind="Record" offset="17024" length="66">
+      <TextKey kind="Leaf" offset="17024" length="4" type="Scalar { Kind = U32 }" value="359" />
+      <TextA kind="Leaf" offset="17028" length="62" type="WString { }">Coversation with Mimi and Joe</TextA>
+    </_357>
+    <_358 kind="Record" offset="17090" length="56">
+      <TextKey kind="Leaf" offset="17090" length="4" type="Scalar { Kind = U32 }" value="360" />
+      <TextA kind="Leaf" offset="17094" length="52" type="WString { }">Coversation with Ogremon</TextA>
+    </_358>
+    <_359 kind="Record" offset="17146" length="58">
+      <TextKey kind="Leaf" offset="17146" length="4" type="Scalar { Kind = U32 }" value="361" />
+      <TextA kind="Leaf" offset="17150" length="54" type="WString { }">Appearance of MetalEtemon</TextA>
+    </_359>
+    <_360 kind="Record" offset="17204" length="74">
+      <TextKey kind="Leaf" offset="17204" length="4" type="Scalar { Kind = U32 }" value="362" />
+      <TextA kind="Leaf" offset="17208" length="70" type="WString { }">Coversation with Floramon/Delumon</TextA>
+    </_360>
+    <_361 kind="Record" offset="17278" length="76">
+      <TextKey kind="Leaf" offset="17278" length="4" type="Scalar { Kind = U32 }" value="363" />
+      <TextA kind="Leaf" offset="17282" length="72" type="WString { }">Check for weapon against Puppetmon</TextA>
+    </_361>
+    <_362 kind="Record" offset="17354" length="54">
+      <TextKey kind="Leaf" offset="17354" length="4" type="Scalar { Kind = U32 }" value="364" />
+      <TextA kind="Leaf" offset="17358" length="50" type="WString { }">Counterattack Puppetmon</TextA>
+    </_362>
+    <_363 kind="Record" offset="17408" length="48">
+      <TextKey kind="Leaf" offset="17408" length="4" type="Scalar { Kind = U32 }" value="365" />
+      <TextA kind="Leaf" offset="17412" length="44" type="WString { }">Thoughts on fighting</TextA>
+    </_363>
+    <_364 kind="Record" offset="17456" length="46">
+      <TextKey kind="Leaf" offset="17456" length="4" type="Scalar { Kind = U32 }" value="366" />
+      <TextA kind="Leaf" offset="17460" length="42" type="WString { }">Reunion with Leomon</TextA>
+    </_364>
+    <_365 kind="Record" offset="17502" length="42">
+      <TextKey kind="Leaf" offset="17502" length="4" type="Scalar { Kind = U32 }" value="367" />
+      <TextA kind="Leaf" offset="17506" length="38" type="WString { }">Mimi's resolution</TextA>
+    </_365>
+    <_366 kind="Record" offset="17544" length="34">
+      <TextKey kind="Leaf" offset="17544" length="4" type="Scalar { Kind = U32 }" value="368" />
+      <TextA kind="Leaf" offset="17548" length="30" type="WString { }">Leomon's jinx</TextA>
+    </_366>
+    <_367 kind="Record" offset="17578" length="54">
+      <TextKey kind="Leaf" offset="17578" length="4" type="Scalar { Kind = U32 }" value="369" />
+      <TextA kind="Leaf" offset="17582" length="50" type="WString { }">Puppetmon's last moment</TextA>
+    </_367>
+    <_368 kind="Record" offset="17632" length="54">
+      <TextKey kind="Leaf" offset="17632" length="4" type="Scalar { Kind = U32 }" value="370" />
+      <TextA kind="Leaf" offset="17636" length="50" type="WString { }">Puppetmon's last moment</TextA>
+    </_368>
+    <_369 kind="Record" offset="17686" length="52">
+      <TextKey kind="Leaf" offset="17686" length="4" type="Scalar { Kind = U32 }" value="382" />
+      <TextA kind="Leaf" offset="17690" length="48" type="WString { }">Enter the Metal Empire</TextA>
+    </_369>
+    <_370 kind="Record" offset="17738" length="38">
+      <TextKey kind="Leaf" offset="17738" length="4" type="Scalar { Kind = U32 }" value="383" />
+      <TextA kind="Leaf" offset="17742" length="34" type="WString { }">For sick Hikari</TextA>
+    </_370>
+    <_371 kind="Record" offset="17776" length="42">
+      <TextKey kind="Leaf" offset="17776" length="4" type="Scalar { Kind = U32 }" value="384" />
+      <TextA kind="Leaf" offset="17780" length="38" type="WString { }">Find the Medicine</TextA>
+    </_371>
+    <_372 kind="Record" offset="17818" length="42">
+      <TextKey kind="Leaf" offset="17818" length="4" type="Scalar { Kind = U32 }" value="385" />
+      <TextA kind="Leaf" offset="17822" length="38" type="WString { }">Detected Location</TextA>
+    </_372>
+    <_373 kind="Record" offset="17860" length="74">
+      <TextKey kind="Leaf" offset="17860" length="4" type="Scalar { Kind = U32 }" value="386" />
+      <TextA kind="Leaf" offset="17864" length="70" type="WString { }">Find the Medicine at the Hospital</TextA>
+    </_373>
+    <_374 kind="Record" offset="17934" length="94">
+      <TextKey kind="Leaf" offset="17934" length="4" type="Scalar { Kind = U32 }" value="387" />
+      <TextA kind="Leaf" offset="17938" length="90" type="WString { }">Children being Chased by MugenDramon's Army</TextA>
+    </_374>
+    <_375 kind="Record" offset="18028" length="106">
+      <TextKey kind="Leaf" offset="18028" length="4" type="Scalar { Kind = U32 }" value="388" />
+      <TextA kind="Leaf" offset="18032" length="102" type="WString { }">MugenDramon's Army is Finding Children's Location</TextA>
+    </_375>
+    <_376 kind="Record" offset="18134" length="48">
+      <TextKey kind="Leaf" offset="18134" length="4" type="Scalar { Kind = U32 }" value="389" />
+      <TextA kind="Leaf" offset="18138" length="44" type="WString { }">Taichi's Hidden Past</TextA>
+    </_376>
+    <_377 kind="Record" offset="18182" length="62">
+      <TextKey kind="Leaf" offset="18182" length="4" type="Scalar { Kind = U32 }" value="390" />
+      <TextA kind="Leaf" offset="18186" length="58" type="WString { }">Confused MugenDramon's Army</TextA>
+    </_377>
+    <_378 kind="Record" offset="18244" length="80">
+      <TextKey kind="Leaf" offset="18244" length="4" type="Scalar { Kind = U32 }" value="391" />
+      <TextA kind="Leaf" offset="18248" length="76" type="WString { }">Destroyed City and Panicked Children</TextA>
+    </_378>
+    <_379 kind="Record" offset="18324" length="56">
+      <TextKey kind="Leaf" offset="18324" length="4" type="Scalar { Kind = U32 }" value="392" />
+      <TextA kind="Leaf" offset="18328" length="52" type="WString { }">Near-devastating Reality</TextA>
+    </_379>
+    <_380 kind="Record" offset="18380" length="98">
+      <TextKey kind="Leaf" offset="18380" length="4" type="Scalar { Kind = U32 }" value="393" />
+      <TextA kind="Leaf" offset="18384" length="94" type="WString { }">Children being Attacked by MugenDramon's Army</TextA>
+    </_380>
+    <_381 kind="Record" offset="18478" length="80">
+      <TextKey kind="Leaf" offset="18478" length="4" type="Scalar { Kind = U32 }" value="394" />
+      <TextA kind="Leaf" offset="18482" length="76" type="WString { }">Children who Fell to the Underground</TextA>
+    </_381>
+    <_382 kind="Record" offset="18558" length="66">
+      <TextKey kind="Leaf" offset="18558" length="4" type="Scalar { Kind = U32 }" value="395" />
+      <TextA kind="Leaf" offset="18562" length="62" type="WString { }">Children Facing WaruMonzaemon</TextA>
+    </_382>
+    <_383 kind="Record" offset="18624" length="80">
+      <TextKey kind="Leaf" offset="18624" length="4" type="Scalar { Kind = U32 }" value="396" />
+      <TextA kind="Leaf" offset="18628" length="76" type="WString { }">WaruMonzaemon Sees Released Numemons</TextA>
+    </_383>
+    <_384 kind="Record" offset="18704" length="50">
+      <TextKey kind="Leaf" offset="18704" length="4" type="Scalar { Kind = U32 }" value="397" />
+      <TextA kind="Leaf" offset="18708" length="46" type="WString { }">Running WaruMonzaemon</TextA>
+    </_384>
+    <_385 kind="Record" offset="18754" length="46">
+      <TextKey kind="Leaf" offset="18754" length="4" type="Scalar { Kind = U32 }" value="398" />
+      <TextA kind="Leaf" offset="18758" length="42" type="WString { }">Pretending to Fight</TextA>
+    </_385>
+    <_386 kind="Record" offset="18800" length="66">
+      <TextKey kind="Leaf" offset="18800" length="4" type="Scalar { Kind = U32 }" value="399" />
+      <TextA kind="Leaf" offset="18804" length="62" type="WString { }">Welcome Reunion with Andromon</TextA>
+    </_386>
+    <_387 kind="Record" offset="18866" length="68">
+      <TextKey kind="Leaf" offset="18866" length="4" type="Scalar { Kind = U32 }" value="400" />
+      <TextA kind="Leaf" offset="18870" length="64" type="WString { }">Last Fight Against MugenDramon</TextA>
+    </_387>
+    <_388 kind="Record" offset="18934" length="46">
+      <TextKey kind="Leaf" offset="18934" length="4" type="Scalar { Kind = U32 }" value="401" />
+      <TextA kind="Leaf" offset="18938" length="42" type="WString { }">Numemons' Sacrifice</TextA>
+    </_388>
+    <_389 kind="Record" offset="18980" length="40">
+      <TextKey kind="Leaf" offset="18980" length="4" type="Scalar { Kind = U32 }" value="402" />
+      <TextA kind="Leaf" offset="18984" length="36" type="WString { }">Emergency Escape</TextA>
+    </_389>
+    <_390 kind="Record" offset="19020" length="56">
+      <TextKey kind="Leaf" offset="19020" length="4" type="Scalar { Kind = U32 }" value="403" />
+      <TextA kind="Leaf" offset="19024" length="52" type="WString { }">Changing Spiral Mountain</TextA>
+    </_390>
+    <_391 kind="Record" offset="19076" length="30">
+      <TextKey kind="Leaf" offset="19076" length="4" type="Scalar { Kind = U32 }" value="404" />
+      <TextA kind="Leaf" offset="19080" length="26" type="WString { }">Short Break</TextA>
+    </_391>
+    <_392 kind="Record" offset="19106" length="76">
+      <TextKey kind="Leaf" offset="19106" length="4" type="Scalar { Kind = U32 }" value="405" />
+      <TextA kind="Leaf" offset="19110" length="72" type="WString { }">Inspection Before The Final Battle</TextA>
+    </_392>
+    <_393 kind="Record" offset="19182" length="50">
+      <TextKey kind="Leaf" offset="19182" length="4" type="Scalar { Kind = U32 }" value="406" />
+      <TextA kind="Leaf" offset="19186" length="46" type="WString { }">LadyDevimon, Vanguard</TextA>
+    </_393>
+    <_394 kind="Record" offset="19232" length="50">
+      <TextKey kind="Leaf" offset="19232" length="4" type="Scalar { Kind = U32 }" value="407" />
+      <TextA kind="Leaf" offset="19236" length="46" type="WString { }">Enemy Is Approaching!</TextA>
+    </_394>
+    <_395 kind="Record" offset="19282" length="60">
+      <TextKey kind="Leaf" offset="19282" length="4" type="Scalar { Kind = U32 }" value="408" />
+      <TextA kind="Leaf" offset="19286" length="56" type="WString { }">Powerful Piedmon's Minions</TextA>
+    </_395>
+    <_396 kind="Record" offset="19342" length="50">
+      <TextKey kind="Leaf" offset="19342" length="4" type="Scalar { Kind = U32 }" value="409" />
+      <TextA kind="Leaf" offset="19346" length="46" type="WString { }">Operation For Victory</TextA>
+    </_396>
+    <_397 kind="Record" offset="19392" length="24">
+      <TextKey kind="Leaf" offset="19392" length="4" type="Scalar { Kind = U32 }" value="410" />
+      <TextA kind="Leaf" offset="19396" length="20" type="WString { }">Catfight</TextA>
+    </_397>
+    <_398 kind="Record" offset="19416" length="50">
+      <TextKey kind="Leaf" offset="19416" length="4" type="Scalar { Kind = U32 }" value="411" />
+      <TextA kind="Leaf" offset="19420" length="46" type="WString { }">Elecmon And Harmonica</TextA>
+    </_398>
+    <_399 kind="Record" offset="19466" length="64">
+      <TextKey kind="Leaf" offset="19466" length="4" type="Scalar { Kind = U32 }" value="412" />
+      <TextA kind="Leaf" offset="19470" length="60" type="WString { }">Elecmon's Decision, And Matt</TextA>
+    </_399>
+    <_400 kind="Record" offset="19530" length="38">
+      <TextKey kind="Leaf" offset="19530" length="4" type="Scalar { Kind = U32 }" value="413" />
+      <TextA kind="Leaf" offset="19534" length="34" type="WString { }">Piedmon Is Here</TextA>
+    </_400>
+    <_401 kind="Record" offset="19568" length="42">
+      <TextKey kind="Leaf" offset="19568" length="4" type="Scalar { Kind = U32 }" value="414" />
+      <TextA kind="Leaf" offset="19572" length="38" type="WString { }">Unfavorable Fight</TextA>
+    </_401>
+    <_402 kind="Record" offset="19610" length="32">
+      <TextKey kind="Leaf" offset="19610" length="4" type="Scalar { Kind = U32 }" value="415" />
+      <TextA kind="Leaf" offset="19614" length="28" type="WString { }">Improved Joe</TextA>
+    </_402>
+    <_403 kind="Record" offset="19642" length="38">
+      <TextKey kind="Leaf" offset="19642" length="4" type="Scalar { Kind = U32 }" value="416" />
+      <TextA kind="Leaf" offset="19646" length="34" type="WString { }">Hidden Thoughts</TextA>
+    </_403>
+    <_404 kind="Record" offset="19680" length="48">
+      <TextKey kind="Leaf" offset="19680" length="4" type="Scalar { Kind = U32 }" value="417" />
+      <TextA kind="Leaf" offset="19684" length="44" type="WString { }">Matt's True Feelings</TextA>
+    </_404>
+    <_405 kind="Record" offset="19728" length="56">
+      <TextKey kind="Leaf" offset="19728" length="4" type="Scalar { Kind = U32 }" value="418" />
+      <TextA kind="Leaf" offset="19732" length="52" type="WString { }">Harmonica And Friendship</TextA>
+    </_405>
+    <_406 kind="Record" offset="19784" length="38">
+      <TextKey kind="Leaf" offset="19784" length="4" type="Scalar { Kind = U32 }" value="419" />
+      <TextA kind="Leaf" offset="19788" length="34" type="WString { }">Sora In Despair</TextA>
+    </_406>
+    <_407 kind="Record" offset="19822" length="42">
+      <TextKey kind="Leaf" offset="19822" length="4" type="Scalar { Kind = U32 }" value="420" />
+      <TextA kind="Leaf" offset="19826" length="38" type="WString { }">Brothers Reunited</TextA>
+    </_407>
+    <_408 kind="Record" offset="19864" length="26">
+      <TextKey kind="Leaf" offset="19864" length="4" type="Scalar { Kind = U32 }" value="421" />
+      <TextA kind="Leaf" offset="19868" length="22" type="WString { }">Save Sora</TextA>
+    </_408>
+    <_409 kind="Record" offset="19890" length="46">
+      <TextKey kind="Leaf" offset="19890" length="4" type="Scalar { Kind = U32 }" value="422" />
+      <TextA kind="Leaf" offset="19894" length="42" type="WString { }">Defeat The Darkness</TextA>
+    </_409>
+    <_410 kind="Record" offset="19936" length="64">
+      <TextKey kind="Leaf" offset="19936" length="4" type="Scalar { Kind = U32 }" value="423" />
+      <TextA kind="Leaf" offset="19940" length="60" type="WString { }">Matt's Return, And New Fight</TextA>
+    </_410>
+    <_411 kind="Record" offset="20000" length="44">
+      <TextKey kind="Leaf" offset="20000" length="4" type="Scalar { Kind = U32 }" value="424" />
+      <TextA kind="Leaf" offset="20004" length="40" type="WString { }">Inverted Situation</TextA>
+    </_411>
+    <_412 kind="Record" offset="20044" length="60">
+      <TextKey kind="Leaf" offset="20044" length="4" type="Scalar { Kind = U32 }" value="425" />
+      <TextA kind="Leaf" offset="20048" length="56" type="WString { }">Children Became A Key Ring</TextA>
+    </_412>
+    <_413 kind="Record" offset="20104" length="26">
+      <TextKey kind="Leaf" offset="20104" length="4" type="Scalar { Kind = U32 }" value="426" />
+      <TextA kind="Leaf" offset="20108" length="22" type="WString { }">Last Hope</TextA>
+    </_413>
+    <_414 kind="Record" offset="20130" length="42">
+      <TextKey kind="Leaf" offset="20130" length="4" type="Scalar { Kind = U32 }" value="427" />
+      <TextA kind="Leaf" offset="20134" length="38" type="WString { }">Last Dark Masters</TextA>
+    </_414>
+    <_415 kind="Record" offset="20172" length="44">
+      <TextKey kind="Leaf" offset="20172" length="4" type="Scalar { Kind = U32 }" value="428" />
+      <TextA kind="Leaf" offset="20176" length="40" type="WString { }">The End Of Piedmon</TextA>
+    </_415>
+    <_416 kind="Record" offset="20216" length="40">
+      <TextKey kind="Leaf" offset="20216" length="4" type="Scalar { Kind = U32 }" value="429" />
+      <TextA kind="Leaf" offset="20220" length="36" type="WString { }">Unfinished Fight</TextA>
+    </_416>
+    <_417 kind="Record" offset="20256" length="52">
+      <TextKey kind="Leaf" offset="20256" length="4" type="Scalar { Kind = U32 }" value="430" />
+      <TextA kind="Leaf" offset="20260" length="48" type="WString { }">Symbol Of Solidarity-1</TextA>
+    </_417>
+    <_418 kind="Record" offset="20308" length="52">
+      <TextKey kind="Leaf" offset="20308" length="4" type="Scalar { Kind = U32 }" value="431" />
+      <TextA kind="Leaf" offset="20312" length="48" type="WString { }">Symbol Of Solidarity-2</TextA>
+    </_418>
+    <_419 kind="Record" offset="20360" length="52">
+      <TextKey kind="Leaf" offset="20360" length="4" type="Scalar { Kind = U32 }" value="432" />
+      <TextA kind="Leaf" offset="20364" length="48" type="WString { }">Symbol Of Solidarity-3</TextA>
+    </_419>
+    <_420 kind="Record" offset="20412" length="52">
+      <TextKey kind="Leaf" offset="20412" length="4" type="Scalar { Kind = U32 }" value="433" />
+      <TextA kind="Leaf" offset="20416" length="48" type="WString { }">Symbol Of Solidarity-4</TextA>
+    </_420>
+    <_421 kind="Record" offset="20464" length="52">
+      <TextKey kind="Leaf" offset="20464" length="4" type="Scalar { Kind = U32 }" value="434" />
+      <TextA kind="Leaf" offset="20468" length="48" type="WString { }">Symbol Of Solidarity-6</TextA>
+    </_421>
+    <_422 kind="Record" offset="20516" length="52">
+      <TextKey kind="Leaf" offset="20516" length="4" type="Scalar { Kind = U32 }" value="435" />
+      <TextA kind="Leaf" offset="20520" length="48" type="WString { }">Symbol Of Solidarity-8</TextA>
+    </_422>
+    <_423 kind="Record" offset="20568" length="54">
+      <TextKey kind="Leaf" offset="20568" length="4" type="Scalar { Kind = U32 }" value="436" />
+      <TextA kind="Leaf" offset="20572" length="50" type="WString { }">Symbol Of Solidarity-10</TextA>
+    </_423>
+    <_424 kind="Record" offset="20622" length="34">
+      <TextKey kind="Leaf" offset="20622" length="4" type="Scalar { Kind = U32 }" value="437" />
+      <TextA kind="Leaf" offset="20626" length="30" type="WString { }">We are Xros-3</TextA>
+    </_424>
+    <_425 kind="Record" offset="20656" length="34">
+      <TextKey kind="Leaf" offset="20656" length="4" type="Scalar { Kind = U32 }" value="438" />
+      <TextA kind="Leaf" offset="20660" length="30" type="WString { }">We are Xros-5</TextA>
+    </_425>
+    <_426 kind="Record" offset="20690" length="50">
+      <TextKey kind="Leaf" offset="20690" length="4" type="Scalar { Kind = U32 }" value="439" />
+      <TextA kind="Leaf" offset="20694" length="46" type="WString { }">The Lask Dark Digimon</TextA>
+    </_426>
+    <_427 kind="Record" offset="20740" length="48">
+      <TextKey kind="Leaf" offset="20740" length="4" type="Scalar { Kind = U32 }" value="440" />
+      <TextA kind="Leaf" offset="20744" length="44" type="WString { }">Apocalymon! Appears!</TextA>
+    </_427>
+    <_428 kind="Record" offset="20788" length="76">
+      <TextKey kind="Leaf" offset="20788" length="4" type="Scalar { Kind = U32 }" value="441" />
+      <TextA kind="Leaf" offset="20792" length="72" type="WString { }">The Tremendous Power of Apocalymon</TextA>
+    </_428>
+    <_429 kind="Record" offset="20864" length="66">
+      <TextKey kind="Leaf" offset="20864" length="4" type="Scalar { Kind = U32 }" value="442" />
+      <TextA kind="Leaf" offset="20868" length="62" type="WString { }">Came Off Evolution, Lost Hope</TextA>
+    </_429>
+    <_430 kind="Record" offset="20930" length="100">
+      <TextKey kind="Leaf" offset="20930" length="4" type="Scalar { Kind = U32 }" value="443" />
+      <TextA kind="Leaf" offset="20934" length="96" type="WString { }">The Meaning of Bond, The Awakening of Children</TextA>
+    </_430>
+    <_431 kind="Record" offset="21030" length="38">
+      <TextKey kind="Leaf" offset="21030" length="4" type="Scalar { Kind = U32 }" value="444" />
+      <TextA kind="Leaf" offset="21034" length="34" type="WString { }">The Last Battle</TextA>
+    </_431>
+    <_432 kind="Record" offset="21068" length="50">
+      <TextKey kind="Leaf" offset="21068" length="4" type="Scalar { Kind = U32 }" value="445" />
+      <TextA kind="Leaf" offset="21072" length="46" type="WString { }">Apocalymon's Struggle</TextA>
+    </_432>
+    <_433 kind="Record" offset="21118" length="30">
+      <TextKey kind="Leaf" offset="21118" length="4" type="Scalar { Kind = U32 }" value="446" />
+      <TextA kind="Leaf" offset="21122" length="26" type="WString { }">True Ending</TextA>
+    </_433>
+    <_434 kind="Record" offset="21148" length="82">
+      <TextKey kind="Leaf" offset="21148" length="4" type="Scalar { Kind = U32 }" value="447" />
+      <TextA kind="Leaf" offset="21152" length="78" type="WString { }">Came Back to Village of The Beginning</TextA>
+    </_434>
+    <_435 kind="Record" offset="21230" length="78">
+      <TextKey kind="Leaf" offset="21230" length="4" type="Scalar { Kind = U32 }" value="448" />
+      <TextA kind="Leaf" offset="21234" length="74" type="WString { }">Leaving Ogremon and About Evolution</TextA>
+    </_435>
+    <_436 kind="Record" offset="21308" length="70">
+      <TextKey kind="Leaf" offset="21308" length="4" type="Scalar { Kind = U32 }" value="449" />
+      <TextA kind="Leaf" offset="21312" length="66" type="WString { }">Turning Back on One's Adventure</TextA>
+    </_436>
+    <_437 kind="Record" offset="21378" length="38">
+      <TextKey kind="Leaf" offset="21378" length="4" type="Scalar { Kind = U32 }" value="450" />
+      <TextA kind="Leaf" offset="21382" length="34" type="WString { }">Sora and Palmon</TextA>
+    </_437>
+    <_438 kind="Record" offset="21416" length="38">
+      <TextKey kind="Leaf" offset="21416" length="4" type="Scalar { Kind = U32 }" value="451" />
+      <TextA kind="Leaf" offset="21420" length="34" type="WString { }">Joe and Gomamon</TextA>
+    </_438>
+    <_439 kind="Record" offset="21454" length="42">
+      <TextKey kind="Leaf" offset="21454" length="4" type="Scalar { Kind = U32 }" value="452" />
+      <TextA kind="Leaf" offset="21458" length="38" type="WString { }">Izzy and Tentomon</TextA>
+    </_439>
+    <_440 kind="Record" offset="21496" length="38">
+      <TextKey kind="Leaf" offset="21496" length="4" type="Scalar { Kind = U32 }" value="453" />
+      <TextA kind="Leaf" offset="21500" length="34" type="WString { }">T.K and Patamon</TextA>
+    </_440>
+    <_441 kind="Record" offset="21534" length="40">
+      <TextKey kind="Leaf" offset="21534" length="4" type="Scalar { Kind = U32 }" value="454" />
+      <TextA kind="Leaf" offset="21538" length="36" type="WString { }">Matt and Gabumon</TextA>
+    </_441>
+    <_442 kind="Record" offset="21574" length="42">
+      <TextKey kind="Leaf" offset="21574" length="4" type="Scalar { Kind = U32 }" value="455" />
+      <TextA kind="Leaf" offset="21578" length="38" type="WString { }">Taichi and Agumon</TextA>
+    </_442>
+    <_443 kind="Record" offset="21616" length="44">
+      <TextKey kind="Leaf" offset="21616" length="4" type="Scalar { Kind = U32 }" value="456" />
+      <TextA kind="Leaf" offset="21620" length="40" type="WString { }">Hikari and Gatomon</TextA>
+    </_443>
+    <_444 kind="Record" offset="21660" length="50">
+      <TextKey kind="Leaf" offset="21660" length="4" type="Scalar { Kind = U32 }" value="457" />
+      <TextA kind="Leaf" offset="21664" length="46" type="WString { }">Palmon is Disappeared</TextA>
+    </_444>
+    <_445 kind="Record" offset="21710" length="48">
+      <TextKey kind="Leaf" offset="21710" length="4" type="Scalar { Kind = U32 }" value="458" />
+      <TextA kind="Leaf" offset="21714" length="44" type="WString { }">Gekomon's Persuasion</TextA>
+    </_445>
+    <_446 kind="Record" offset="21758" length="24">
+      <TextKey kind="Leaf" offset="21758" length="4" type="Scalar { Kind = U32 }" value="459" />
+      <TextA kind="Leaf" offset="21762" length="20" type="WString { }">Farewell</TextA>
+    </_446>
+    <_447 kind="Record" offset="21782" length="64">
+      <TextKey kind="Leaf" offset="21782" length="4" type="Scalar { Kind = U32 }" value="460" />
+      <TextA kind="Leaf" offset="21786" length="60" type="WString { }">Reunion to solve the problem</TextA>
+    </_447>
+    <_448 kind="Record" offset="21846" length="72">
+      <TextKey kind="Leaf" offset="21846" length="4" type="Scalar { Kind = U32 }" value="461" />
+      <TextA kind="Leaf" offset="21850" length="68" type="WString { }">Share information about D-Reaper</TextA>
+    </_448>
+    <_449 kind="Record" offset="21918" length="84">
+      <TextKey kind="Leaf" offset="21918" length="4" type="Scalar { Kind = U32 }" value="462" />
+      <TextA kind="Leaf" offset="21922" length="80" type="WString { }">A fearsome enemy that seems unbeatable</TextA>
+    </_449>
+    <_450 kind="Record" offset="22002" length="60">
+      <TextKey kind="Leaf" offset="22002" length="4" type="Scalar { Kind = U32 }" value="463" />
+      <TextA kind="Leaf" offset="22006" length="56" type="WString { }">The return of Beelzebumon!</TextA>
+    </_450>
+    <_451 kind="Record" offset="22062" length="36">
+      <TextKey kind="Leaf" offset="22062" length="4" type="Scalar { Kind = U32 }" value="464" />
+      <TextA kind="Leaf" offset="22066" length="32" type="WString { }">About D-Reaper</TextA>
+    </_451>
+    <_452 kind="Record" offset="22098" length="26">
+      <TextKey kind="Leaf" offset="22098" length="4" type="Scalar { Kind = U32 }" value="465" />
+      <TextA kind="Leaf" offset="22102" length="22" type="WString { }">Interview</TextA>
+    </_452>
+    <_453 kind="Record" offset="22124" length="40">
+      <TextKey kind="Leaf" offset="22124" length="4" type="Scalar { Kind = U32 }" value="466" />
+      <TextA kind="Leaf" offset="22128" length="36" type="WString { }">More information</TextA>
+    </_453>
+    <_454 kind="Record" offset="22164" length="84">
+      <TextKey kind="Leaf" offset="22164" length="4" type="Scalar { Kind = U32 }" value="467" />
+      <TextA kind="Leaf" offset="22168" length="80" type="WString { }">The power granted by the 4 Holy Beasts</TextA>
+    </_454>
+    <_455 kind="Record" offset="22248" length="78">
+      <TextKey kind="Leaf" offset="22248" length="4" type="Scalar { Kind = U32 }" value="468" />
+      <TextA kind="Leaf" offset="22252" length="74" type="WString { }">Something that has turned into Jeri</TextA>
+    </_455>
+    <_456 kind="Record" offset="22326" length="44">
+      <TextKey kind="Leaf" offset="22326" length="4" type="Scalar { Kind = U32 }" value="469" />
+      <TextA kind="Leaf" offset="22330" length="40" type="WString { }">Concerns of adults</TextA>
+    </_456>
+    <_457 kind="Record" offset="22370" length="26">
+      <TextKey kind="Leaf" offset="22370" length="4" type="Scalar { Kind = U32 }" value="470" />
+      <TextA kind="Leaf" offset="22374" length="22" type="WString { }">Find Jeri</TextA>
+    </_457>
+    <_458 kind="Record" offset="22396" length="126">
+      <TextKey kind="Leaf" offset="22396" length="4" type="Scalar { Kind = U32 }" value="471" />
+      <TextA kind="Leaf" offset="22400" length="122" type="WString { }">A presence above the Tokyo Metropolitan Government Building</TextA>
+    </_458>
+    <_459 kind="Record" offset="22522" length="40">
+      <TextKey kind="Leaf" offset="22522" length="4" type="Scalar { Kind = U32 }" value="472" />
+      <TextA kind="Leaf" offset="22526" length="36" type="WString { }">Zero Arms, Grani</TextA>
+    </_459>
+    <_460 kind="Record" offset="22562" length="30">
+      <TextKey kind="Leaf" offset="22562" length="4" type="Scalar { Kind = U32 }" value="473" />
+      <TextA kind="Leaf" offset="22566" length="26" type="WString { }">Jeri's mind</TextA>
+    </_460>
+    <_461 kind="Record" offset="22592" length="40">
+      <TextKey kind="Leaf" offset="22592" length="4" type="Scalar { Kind = U32 }" value="474" />
+      <TextA kind="Leaf" offset="22596" length="36" type="WString { }">Recurring danger</TextA>
+    </_461>
+    <_462 kind="Record" offset="22632" length="46">
+      <TextKey kind="Leaf" offset="22632" length="4" type="Scalar { Kind = U32 }" value="475" />
+      <TextA kind="Leaf" offset="22636" length="42" type="WString { }">Appearance of Grani</TextA>
+    </_462>
+    <_463 kind="Record" offset="22678" length="68">
+      <TextKey kind="Leaf" offset="22678" length="4" type="Scalar { Kind = U32 }" value="476" />
+      <TextA kind="Leaf" offset="22682" length="64" type="WString { }">Situation in the Digital World</TextA>
+    </_463>
+    <_464 kind="Record" offset="22746" length="50">
+      <TextKey kind="Leaf" offset="22746" length="4" type="Scalar { Kind = U32 }" value="477" />
+      <TextA kind="Leaf" offset="22750" length="46" type="WString { }">The changing D-Reaper</TextA>
+    </_464>
+    <_465 kind="Record" offset="22796" length="54">
+      <TextKey kind="Leaf" offset="22796" length="4" type="Scalar { Kind = U32 }" value="478" />
+      <TextA kind="Leaf" offset="22800" length="50" type="WString { }">Beelzebumon's atonement</TextA>
+    </_465>
+    <_466 kind="Record" offset="22850" length="108">
+      <TextKey kind="Leaf" offset="22850" length="4" type="Scalar { Kind = U32 }" value="479" />
+      <TextA kind="Leaf" offset="22854" length="104" type="WString { }">Rapidly changing circumstances, unexpected results</TextA>
+    </_466>
+    <_467 kind="Record" offset="22958" length="102">
+      <TextKey kind="Leaf" offset="22958" length="4" type="Scalar { Kind = U32 }" value="480" />
+      <TextA kind="Leaf" offset="22962" length="98" type="WString { }">Results of collaboration, analysis and research</TextA>
+    </_467>
+    <_468 kind="Record" offset="23060" length="46">
+      <TextKey kind="Leaf" offset="23060" length="4" type="Scalar { Kind = U32 }" value="481" />
+      <TextA kind="Leaf" offset="23064" length="42" type="WString { }">Gorou Mizuno's help</TextA>
+    </_468>
+    <_469 kind="Record" offset="23106" length="84">
+      <TextKey kind="Leaf" offset="23106" length="4" type="Scalar { Kind = U32 }" value="482" />
+      <TextA kind="Leaf" offset="23110" length="80" type="WString { }">Reconciliation between Impmon and Jeri</TextA>
+    </_469>
+    <_470 kind="Record" offset="23190" length="38">
+      <TextKey kind="Leaf" offset="23190" length="4" type="Scalar { Kind = U32 }" value="483" />
+      <TextA kind="Leaf" offset="23194" length="34" type="WString { }">Sudden farewell</TextA>
+    </_470>
+  </Entries>
+</SceneInfo_Str>

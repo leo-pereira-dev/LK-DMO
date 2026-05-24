@@ -1,0 +1,5 @@
+﻿"Path","Hash","Size","Reason","ChunkOffset","DataOffset"
+"data\bin\english\TamerList.bin","0x9EF9EA50","33344","forced-update","113397108","113397376"
+"data\bin\english\CharCreateTable.bin","0xB34218F5","1462","forced-update","113430720","113430988"
+"data\bin\english\DMBase.bin","0xCAF9E547","128540","forced-update","113432450","113432718"
+"data\bin\english\Skill.bin","0x8B7274DA","4287772","forced-update","113561258","113561526"

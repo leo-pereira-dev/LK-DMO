@@ -62,6 +62,16 @@ namespace ICONITEM
 
 		ITEM_MASK				=	500,
 	};
+
+	inline eTYPE GetSkillIconType( int nIcon )
+	{
+		if( nIcon >= 6000 ) return SKILL6;
+		if( nIcon >= 5000 ) return SKILL5;
+		if( nIcon >= 4000 ) return SKILL4;
+		if( nIcon >= 3000 ) return SKILL3;
+		if( nIcon >= 2000 ) return SKILL2;
+		return SKILL1;
+	}
 }
 
 namespace ICON_Dynamic

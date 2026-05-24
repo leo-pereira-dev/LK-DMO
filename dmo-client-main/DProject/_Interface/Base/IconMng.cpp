@@ -624,15 +624,7 @@ void cIconMng::RenderSkill( cSkill::sINFO* pSkill, CsPoint pos )
 	CsSkill::sINFO* pSkillInfo = pFTSkill->GetInfo();
 	SAFE_POINTER_RET( pSkillInfo );
 
-	cIcon* pIcon;	
-	if( pSkillInfo->s_nIcon >= 4000 )
-		pIcon = m_mapIconItem[ ICONITEM::SKILL4 ];
-	else if( pSkillInfo->s_nIcon >= 3000 )
-		pIcon = m_mapIconItem[ ICONITEM::SKILL3 ];
-	else if( pSkillInfo->s_nIcon >= 2000 )
-		pIcon = m_mapIconItem[ ICONITEM::SKILL2 ];
-	else
-		pIcon = m_mapIconItem[ ICONITEM::SKILL1 ];
+	cIcon* pIcon = m_mapIconItem[ ICONITEM::GetSkillIconType( pSkillInfo->s_nIcon ) ];
 
 	switch( pSkillInfo->s_nIcon )
 	{
@@ -651,15 +643,7 @@ void cIconMng::RenderSkill( CsSkill* pSkill, CsPoint pos, int nLevel/* = 0*/ )
 {
 	CsSkill::sINFO* pSkillInfo = pSkill->GetInfo();
 
-	cIcon* pIcon;	
-	if( pSkillInfo->s_nIcon >= 4000 )
-		pIcon = m_mapIconItem[ ICONITEM::SKILL4 ];
-	else if( pSkillInfo->s_nIcon >= 3000 )
-		pIcon = m_mapIconItem[ ICONITEM::SKILL3 ];
-	else if( pSkillInfo->s_nIcon >= 2000 )
-		pIcon = m_mapIconItem[ ICONITEM::SKILL2 ];
-	else
-		pIcon = m_mapIconItem[ ICONITEM::SKILL1 ];
+	cIcon* pIcon = m_mapIconItem[ ICONITEM::GetSkillIconType( pSkillInfo->s_nIcon ) ];
 
 	switch( pSkillInfo->s_nIcon )
 	{
@@ -683,10 +667,7 @@ void cIconMng::RenderSkill( unsigned short const& nIconIdx, CsPoint pos, int nLe
 {
 	cIcon* pIcon = NULL;
 
-	if( nIconIdx >= 4000 )			pIcon = m_mapIconItem[ ICONITEM::SKILL4 ];
-	else if( nIconIdx >= 3000 )		pIcon = m_mapIconItem[ ICONITEM::SKILL3 ];
-	else if( nIconIdx >= 2000 )		pIcon = m_mapIconItem[ ICONITEM::SKILL2 ];
-	else							pIcon = m_mapIconItem[ ICONITEM::SKILL1 ];
+	pIcon = m_mapIconItem[ ICONITEM::GetSkillIconType( nIconIdx ) ];
 
 	if( NULL == pIcon )
 		return;
@@ -1085,14 +1066,7 @@ void cIconMng::RenderCursorIconSkill( int nIconIndex, CsPoint pos, int nTacticsI
 {
 	cIcon* pIcon = NULL;
 
-	if( nIconIndex >= 4000 )
-		pIcon = m_mapIconItem[ ICONITEM::SKILL4 ];
-	else if( nIconIndex >= 3000 )
-		pIcon = m_mapIconItem[ ICONITEM::SKILL3 ];
-	else if( nIconIndex >= 2000 )
-		pIcon = m_mapIconItem[ ICONITEM::SKILL2 ];
-	else
-		pIcon = m_mapIconItem[ ICONITEM::SKILL1 ];
+	pIcon = m_mapIconItem[ ICONITEM::GetSkillIconType( nIconIndex ) ];
 
 	switch( nIconIndex )
 	{

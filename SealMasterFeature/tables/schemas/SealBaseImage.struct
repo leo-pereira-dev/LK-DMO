@@ -1,0 +1,16 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/SealBaseImage.bin]
+// SealBaseImage.bin — Pack03 v487 client.
+// Route: FUN_01624c60 -> FUN_01625110 -> FUN_01622ef0.
+// Verified: 5 rows, 319/319 bytes.
+
+bin SealBaseImage {
+    section Images {
+        count  u32;
+        record SealBaseImageRecord;
+    }
+}
+
+struct SealBaseImageRecord {
+    u8       AttributeType;
+    lstring  AttributeImagePath;
+}

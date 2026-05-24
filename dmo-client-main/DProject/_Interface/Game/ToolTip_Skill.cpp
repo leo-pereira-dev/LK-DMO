@@ -3,6 +3,59 @@
 #include "stdafx.h"
 #include "ToolTip.h"
 
+namespace
+{
+	bool IsSkillEffectFriendlyTarget( int nTargetCode )
+	{
+		switch( nTargetCode )
+		{
+		case nTarget::MY_ALL:
+		case nTarget::TAMER:
+		case nTarget::DIGIMON:
+		case nTarget::PartyTamer:
+		case nTarget::PartyDigimon:
+		case nTarget::PartyTamers:
+		case nTarget::PartyDigimons:
+		case nTarget::MY_PALL:
+		case nTarget::AroundTamer:
+		case nTarget::AroundDigimon:
+			return true;
+		default:
+			return false;
+		}
+	}
+
+	void AppendSkillEffectDirection( std::wstring& wsText, int nTargetCode )
+	{
+		if( IsSkillEffectFriendlyTarget( nTargetCode ) )
+			wsText.append( UISTRING_TEXT( "COMMON_TXT_RISE" ).c_str() );
+		else
+			wsText.append( UISTRING_TEXT( "COMMON_TXT_DECREASE" ).c_str() );
+	}
+
+	void AppendSkillEffectDuration( std::wstring& wsText, float fDuration )
+	{
+		if( fDuration <= 0.0f )
+			return;
+
+		wsText.append( _T( " (" ) );
+		wsText.append( cTooltip::Time2Str( (u4)fDuration, 0, cTooltip::TT_SIMPLE ) );
+		wsText.append( _T( ")" ) );
+	}
+
+	void AddActivationProbabilityText( cString* pString, cText::sTEXTINFO& ti, int nInvokeRate )
+	{
+		if( nInvokeRate == 0 )
+			return;
+
+		std::wstring wsProb = UISTRING_TEXT( "TOOLTIP_ACTIVATION_PROBABILITY" );
+		DmCS::StringFn::Replace( wsProb, L"#Prob#", (nInvokeRate / 100) );
+		wsProb.append( _T( ", " ) );
+		ti.SetText( wsProb.c_str() );
+		pString->AddText( &ti );
+	}
+}
+
 void cTooltip::_MakeTooltip_Skill()
 {
 	// MainID = 스킬 인덱스
@@ -85,14 +138,7 @@ void cTooltip::_MakeTooltip_Skill()
 		break;
 	default:		
 		{
-			if( pFTInfo->s_nIcon >= 4000 )
-				pString = _AddIcon( ICONITEM::SKILL4, pFTInfo->s_nIcon );
-			else if( pFTInfo->s_nIcon >= 3000 )
-				pString = _AddIcon( ICONITEM::SKILL3, pFTInfo->s_nIcon );
-			else if( pFTInfo->s_nIcon >= 2000 )
-				pString = _AddIcon( ICONITEM::SKILL2, pFTInfo->s_nIcon );
-			else
-				pString = _AddIcon( ICONITEM::SKILL1, pFTInfo->s_nIcon );
+			pString = _AddIcon( ICONITEM::GetSkillIconType( pFTInfo->s_nIcon ), pFTInfo->s_nIcon );
 			ti.SetText( pFTInfo->s_szName );
 			pString->AddText( &ti );
 		}
@@ -427,18 +473,19 @@ void cTooltip::_AddSkillState( CsSkill::sINFO* pFTInfo )
 		// 크리티컬 / 회피 증가 스킬 추가 14.05.28 chu8820
 		case APPLY_CA:		// 크리티컬 증가 버프
 		case APPLY_EV:		// 회피 증가 버프
+		case APPLY_WEAKNESS:
 			ti.SetText( UISTRING_TEXT( "TOOLTIP_SKILL_SKILL_EFFECT" ).c_str() );
 			break;
 		case APPLY_MAXHP:
 			break;
 		case APPLY_CAT:			// 크리티컬 공격력
-			ti.SetText( UISTRING_TEXT("SKILL_APPLY_TYPE_NAME_CAT").c_str() );
+			ti.SetText( UISTRING_TEXT("FMCOMMON_CRITICAL_DAMAGE").c_str() );
 			break;
 		case APPLY_RDD:			// 받는 데미지 감소
 			ti.SetText( UISTRING_TEXT("SKILL_APPLY_TYPE_NAME_RDD").c_str() );
 			break;
 		default:
-			assert_cs( false );
+			assert_csm3( false, _T( "Undefined skill tooltip apply type. SkillID=%d ApplyIndex=%d ApplyA=%d" ), pFTInfo->s_dwID, i, pFTInfo->s_Apply[ i ].s_nA );
 			break;
 		}
 		pString->AddText( &ti )->s_ptSize.x = TOOLTIP_TAB_SIZE * 3;
@@ -446,7 +493,9 @@ void cTooltip::_AddSkillState( CsSkill::sINFO* pFTInfo )
 
 		switch( pFTInfo->s_Apply[ i ].s_nID )
 		{
+		case nSkill::Me_001:
 		case nSkill::Me_002:
+		case nSkill::Me_010:
 			{	
 				CDigimon::sENCHENT_STAT* pEStat = pDUser->GetEnchantStat();
 				if( pEStat->GetEnchantLv( ET_AT ) > 0 )
@@ -603,6 +652,8 @@ void cTooltip::_AddSkillState( CsSkill::sINFO* pFTInfo )
 			}
 			break;
 		case nSkill::Me_101:	// 수치 B만큼 회복
+		case nSkill::Me_104:
+		case nSkill::Me_201:
 			{
 				switch( nSubStr )
 				{
@@ -621,6 +672,10 @@ void cTooltip::_AddSkillState( CsSkill::sINFO* pFTInfo )
 			}
 			break;
 		case nSkill::Me_102:
+		case nSkill::Me_105:
+		case nSkill::Me_106:
+		case nSkill::Me_202:
+		case nSkill::Me_403:
 			{
 				std::wstring wsIncrease;
 				DmCS::StringFn::Format( wsIncrease, L"%d %%%s", nSkillAtt, UISTRING_TEXT( "COMMON_TXT_INCREASE" ).c_str() );
@@ -637,10 +692,19 @@ void cTooltip::_AddSkillState( CsSkill::sINFO* pFTInfo )
 			}
 			break;			
 
-		case nSkill::Me_205:	// % 확률로 발동하는 도트 데미지
+		case nSkill::Me_301:
+			{
+				std::wstring wsDecrease;
+				DmCS::StringFn::Format( wsDecrease, L"%d %s", nSkillAtt, UISTRING_TEXT( "COMMON_TXT_DECREASE" ).c_str() );
+				ti.SetText( wsDecrease.c_str() );
+				pString->AddText( &ti );
+			}
+			break;
+		case nSkill::Me_205:
 		case 206/*nSkill::Me_206*/:	// % 확률로 발동한 버프, 스킬 사용 시 B값 추가
 		case 207/*nSkill::Me_207*/:	// % 확률로 발동한 버프, 스킬 사용 시 + B% 추가
 		case 208/*nSkill::Me_208*/:	// % 스킬 레벨에 따른 지속 시간 증가 연산 - 무적 / 행동불능 연산 방식
+		case 209:
 			{
 				//ACTIVE_SKILL - HP/DS 회복스킬(스킬툴팁 추가)
 
@@ -651,10 +715,7 @@ void cTooltip::_AddSkillState( CsSkill::sINFO* pFTInfo )
 				//확률값 있을 땐 확률 표시
 				if( pFTInfo->s_Apply[i].s_nInvoke_Rate != 0 )
 				{
-					std::wstring wsProb = UISTRING_TEXT( "TOOLTIP_ACTIVATION_PROBABILITY" );
-					DmCS::StringFn::Replace( wsProb, L"#Prob#", (pFTInfo->s_Apply[i].s_nInvoke_Rate / 100) );
-					ti.SetText( sz );
-					pString->AddText( &ti );
+					AddActivationProbabilityText( pString, ti, pFTInfo->s_Apply[i].s_nInvoke_Rate );
 				}
 
 				TCHAR szVal[TOOLTIP_MAX_TEXT_LEN] = {0};
@@ -734,6 +795,26 @@ void cTooltip::_AddSkillState( CsSkill::sINFO* pFTInfo )
 						pString->AddText( &ti );
 					}
 					break;
+				case APPLY_SCD:
+				case APPLY_CAT:
+				case APPLY_RDD:
+				case APPLY_WEAKNESS:
+					{
+						if( FMCommon::GetSkillAttStr( pFTInfo->s_Apply[i].s_nA, TOOLTIP_MAX_TEXT_LEN, szVal, pFTInfo->s_Apply[i].s_nB ) == true )
+						{
+							ti.SetText( szVal );
+							pString->AddText( &ti );
+							pString->TailAddSizeX( 2 );
+						}
+
+						std::wstring wsEffect;
+						DmCS::StringFn::Format( wsEffect, _T( "%d%% " ), nSkillAtt );
+						AppendSkillEffectDirection( wsEffect, pFTInfo->s_Apply[ i ].s_nBuffCode );
+						AppendSkillEffectDuration( wsEffect, pFTInfo->s_fDamageTime );
+						ti.SetText( wsEffect.c_str() );
+						pString->AddText( &ti );
+					}
+					break;
 				default:
 					{
 						CsBuff::MAP* BuffMap = nsCsFileTable::g_pBuffMng->GetBuffMap();
@@ -762,10 +843,15 @@ void cTooltip::_AddSkillState( CsSkill::sINFO* pFTInfo )
 
  			}
 			break;
-		case nSkill::Me_106:
-				break;
+		case nSkill::Me_107:
+		case 108/*nSkill::Me_108*/:
+		case 200/*nSkill::Me_200*/:
+		case nSkill::Me_401:
+		case nSkill::Me_402:
+		case 501:
+			break;
 		default:
-			assert_cs( false );
+			assert_csm4( false, _T( "Undefined skill tooltip method. SkillID=%d ApplyIndex=%d MethodID=%d ApplyA=%d" ), pFTInfo->s_dwID, i, pFTInfo->s_Apply[ i ].s_nID, pFTInfo->s_Apply[ i ].s_nA );
 		}
 		pString->CalMaxSize();
 		m_StringList.AddTail( pString );
@@ -803,10 +889,7 @@ void cTooltip::_MakeTooltip_SimpleSKill()
 			break;
 		default:
 			{
-				if( pFTInfo->s_nIcon >= 4000 )	iConType = ICONITEM::SKILL4;
-				else if( pFTInfo->s_nIcon >= 3000 )	iConType = ICONITEM::SKILL3;
-				else if( pFTInfo->s_nIcon >= 2000 )	iConType = ICONITEM::SKILL2;
-				else	iConType = ICONITEM::SKILL1;
+				iConType = ICONITEM::GetSkillIconType( pFTInfo->s_nIcon );
 			}
 			break;
 		}
@@ -1124,18 +1207,19 @@ void cTooltip::_SimpleAddSkillState( CsSkill::sINFO* pFTInfo, int const& nSkillL
 			// 크리티컬 / 회피 증가 스킬 추가 14.05.28 chu8820
 		case APPLY_CA:		// 크리티컬 증가 버프
 		case APPLY_EV:		// 회피 증가 버프
+		case APPLY_WEAKNESS:
 			ti.SetText( UISTRING_TEXT( "TOOLTIP_SKILL_SKILL_EFFECT" ).c_str() );
 			break;
 		case APPLY_MAXHP:
 			break;
 		case APPLY_CAT:			// 크리티컬 공격력
-			ti.SetText( UISTRING_TEXT("SKILL_APPLY_TYPE_NAME_CAT").c_str() );
+			ti.SetText( UISTRING_TEXT("FMCOMMON_CRITICAL_DAMAGE").c_str() );
 			break;
 		case APPLY_RDD:			// 받는 데미지 감소
 			ti.SetText( UISTRING_TEXT("SKILL_APPLY_TYPE_NAME_RDD").c_str() );
 			break;
 		default:
-			assert_cs( false );
+			assert_csm3( false, _T( "Undefined simple skill tooltip apply type. SkillID=%d ApplyIndex=%d ApplyA=%d" ), pFTInfo->s_dwID, i, pFTInfo->s_Apply[ i ].s_nA );
 			break;
 		}
 		pString->AddText( &ti )->s_ptSize.x = TOOLTIP_TAB_SIZE * 3;
@@ -1143,6 +1227,7 @@ void cTooltip::_SimpleAddSkillState( CsSkill::sINFO* pFTInfo, int const& nSkillL
 
 		switch( pFTInfo->s_Apply[ i ].s_nID )
 		{
+		case nSkill::Me_001:
 		case nSkill::Me_002:
 		case nSkill::Me_010:
 			{	
@@ -1151,6 +1236,8 @@ void cTooltip::_SimpleAddSkillState( CsSkill::sINFO* pFTInfo, int const& nSkillL
 			}
 			break;
 		case nSkill::Me_101:	// 수치 B만큼 회복
+		case nSkill::Me_104:
+		case nSkill::Me_201:
 			{
 				std::wstring msg;
 				switch( nSubStr )
@@ -1173,6 +1260,10 @@ void cTooltip::_SimpleAddSkillState( CsSkill::sINFO* pFTInfo, int const& nSkillL
 			}
 			break;
 		case nSkill::Me_102:
+		case nSkill::Me_105:
+		case nSkill::Me_106:
+		case nSkill::Me_202:
+		case nSkill::Me_403:
 			{
 				std::wstring msg;
 				DmCS::StringFn::Format( msg, L"%d %% %s", nSkillAtt, UISTRING_TEXT( "COMMON_TXT_INCREASE" ).c_str() );
@@ -1189,18 +1280,24 @@ void cTooltip::_SimpleAddSkillState( CsSkill::sINFO* pFTInfo, int const& nSkillL
 			}
 			break;			
 
-		case nSkill::Me_205:	// % 확률로 발동하는 도트 데미지
+		case nSkill::Me_301:
+			{
+				std::wstring wsDecrease;
+				DmCS::StringFn::Format( wsDecrease, L"%d %s", nSkillAtt, UISTRING_TEXT( "COMMON_TXT_DECREASE" ).c_str() );
+				ti.SetText( wsDecrease.c_str() );
+				pString->AddText( &ti );
+			}
+			break;
+		case nSkill::Me_205:
 		case 206/*nSkill::Me_206*/:	// % 확률로 발동한 버프, 스킬 사용 시 B값 추가
 		case 207/*nSkill::Me_207*/:	// % 확률로 발동한 버프, 스킬 사용 시 + B% 추가
 		case 208/*nSkill::Me_208*/:	// % 스킬 레벨에 따른 지속 시간 증가 연산 - 무적 / 행동불능 연산 방식
+		case 209:
 			{
 				//확률값 있을 땐 확률 표시
 				if( pFTInfo->s_Apply[i].s_nInvoke_Rate != 0 )
 				{
-					std::wstring msg = UISTRING_TEXT( "TOOLTIP_ACTIVATION_PROBABILITY" );
-					DmCS::StringFn::Replace( msg, L"#Prob#", (pFTInfo->s_Apply[i].s_nInvoke_Rate / 100) );
-					ti.SetText( msg.c_str() ); 
-					pString->AddText( &ti );
+					AddActivationProbabilityText( pString, ti, pFTInfo->s_Apply[i].s_nInvoke_Rate );
 				}
 
 				switch( pFTInfo->s_Apply[i].s_nA )
@@ -1263,6 +1360,27 @@ void cTooltip::_SimpleAddSkillState( CsSkill::sINFO* pFTInfo, int const& nSkillL
 						pString->AddText( &ti );
 					}
 					break;
+				case APPLY_SCD:
+				case APPLY_CAT:
+				case APPLY_RDD:
+				case APPLY_WEAKNESS:
+					{
+						TCHAR szVal[TOOLTIP_MAX_TEXT_LEN] = {0};
+						if( FMCommon::GetSkillAttStr( pFTInfo->s_Apply[i].s_nA, TOOLTIP_MAX_TEXT_LEN, szVal, pFTInfo->s_Apply[i].s_nB ) == true )
+						{
+							ti.SetText( szVal );
+							pString->AddText( &ti );
+							pString->TailAddSizeX( 2 );
+						}
+
+						std::wstring msg;
+						DmCS::StringFn::Format( msg, _T( "%d%% " ), nSkillAtt );
+						AppendSkillEffectDirection( msg, pFTInfo->s_Apply[ i ].s_nBuffCode );
+						AppendSkillEffectDuration( msg, pFTInfo->s_fDamageTime );
+						ti.SetText( msg.c_str() );
+						pString->AddText( &ti );
+					}
+					break;
 				default:
 					break;
 				}
@@ -1270,11 +1388,15 @@ void cTooltip::_SimpleAddSkillState( CsSkill::sINFO* pFTInfo, int const& nSkillL
 			}
 			break;
 
-		case nSkill::Me_106:
+		case nSkill::Me_107:
+		case 108/*nSkill::Me_108*/:
+		case 200/*nSkill::Me_200*/:
+		case nSkill::Me_401:
+		case nSkill::Me_402:
+		case 501:
 			break;
 		default:
-			//assert_cs( false );
-			break;
+			assert_csm4( false, _T( "Undefined simple skill tooltip method. SkillID=%d ApplyIndex=%d MethodID=%d ApplyA=%d" ), pFTInfo->s_dwID, i, pFTInfo->s_Apply[ i ].s_nID, pFTInfo->s_Apply[ i ].s_nA );
 		}
 		m_StringList.AddTail( pString );
 	}

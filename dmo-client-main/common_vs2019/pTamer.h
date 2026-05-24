@@ -131,7 +131,8 @@ namespace nTamer
 		AkiyamaRyo		= 80017,
 		Hiro			= 80018,
 		Ruli			= 80019,
-		Kiyoshirou		= 80020
+		Kiyoshirou		= 80020,
+		DigimonKaiser	= 80021
 	};
 
 	enum eType // tamer constraint

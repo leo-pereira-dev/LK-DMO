@@ -1,6 +1,6 @@
 # LK-DMO Technical Context
 
-Last updated: 2026-05-23
+Last updated: 2026-05-24
 
 This document is the working memory for the LK-DMO workspace in `C:\0-NewDmo`.
 It summarizes the main fixes, migration work, build notes, and packet/protocol
@@ -129,6 +129,27 @@ Schema: dso
 ```
 
 ## Changelog / work completed
+
+### 2026-05-24 recent Seal, Digimon, skill, and GM Panel work
+
+Detailed notes for the latest chat-driven pass were consolidated in
+`GMPanelAndRecentChanges.md`. Read that file before continuing work around:
+
+- Seal Master card colors, seal inventory tooltip, and `!openseals`.
+- Partial Digimon/evolution import from newer global bins into the older LK-DMO
+  template.
+- New skill names, buff/debuff conversion, tooltip rendering, and OMM skill
+  behavior fixes.
+- GM Panel scrollbar/menu fixes, admin commands, full clone, and the new
+  Summon Monster page with presets, boss ranking, custom stats, client-side
+  clamps, and server-side validation.
+
+Latest GM Panel verification:
+
+- Client built successfully with `Release_English|Win32` through
+  `DProject.sln`.
+- `C:\Release\GSP\DProject_R_ENG.exe` was copied to both local test targets.
+- `dmo-pg-game` was rebuilt and restarted through Docker Compose.
 
 ### 2026-05-23 working tree diff consolidated before main commit
 
@@ -2353,6 +2374,228 @@ docker logs --tail 300 dmo-pg-game | Select-String "DUnit|Loaded Digimon_List|Lo
   - document the processor,
   - include one known-good payload shape.
 - Do not commit local compiled client executables. Rebuild them from source.
+
+## Seal Master, new Digimon bins, and tooltip status from 2026-05-24
+
+This section records the active state after the Seal Master work, the attempted
+large bin update, the rollback decision, and the safer forward plan for adding
+new Digimon/evolutions by converting updated global bins into the older LK-DMO
+client/server template.
+
+Current decision:
+
+- Do not bulk-replace every updated global bin directly into the old client and
+  server. The first attempt proved that this can trigger unrelated startup and
+  runtime crashes because the newer global data carries IDs, model references,
+  tactics entries, skill methods, and apply attributes that the older template
+  does not understand yet.
+- Keep the last stable Seal Master update as the baseline.
+- Add new Digimon and evolutions incrementally by converting the newer bin/XML
+  rows into the old template, then validating the affected asset/model/tactics
+  and packet paths.
+- Use `AddDigimon.md` as the manual workflow for future additions.
+
+Seal Master state:
+
+- The Seal Master UI was updated toward the newer global style:
+  - card color reflects tier/progress;
+  - inventory seal card color should match the Seal Master card tier;
+  - detailed seal tooltip was added to resemble global, including tier
+    thresholds, owned amount, added value, total, source text, opener hint, and
+    active stat section.
+- The initial pink-card issue was caused by wrong/missing asset directory
+  assumptions. Asset paths must be verified against Pack01/Pack03 instead of
+  guessed.
+- New seal assets were moved toward bin-backed lookup instead of DB-only lookup:
+  added/extracted Seal Master bin family around `SealCard`, `SealLeader`,
+  `SealDigimonImage`, `SealPlateImage`, `SealNatureImage`, `SealBaseImage`,
+  `SealFilter`, and `SealMasterName_Str`.
+- `!openseals` was corrected after the rollback: it no longer opens `3000` for
+  every seal. It groups by `SealId` and applies the maximum loaded
+  `RequiredAmount`/`SequentialId`, which matters because some official seals
+  have lower max values.
+- Character `test4` had seals reset during testing.
+
+Rollback and server/bin state:
+
+- A broad update from newer bins was attempted and later rolled back because the
+  user decided it was too risky to keep replacing everything at once.
+- The rollback target was: keep changes up to the Seal Master bin/UI work, but
+  revert the later bulk server/client bin import.
+- After rollback, the client startup crash at `MonsterMng.cpp:693` was resolved.
+- The server was rebuilt/restarted after the rollback pass.
+- If a future crash points to `MonsterMng.cpp`, `TacticsMng.cpp`,
+  `QuickEvol.cpp`, `ToolTip_Skill.cpp`, or `Model.dat`, treat it as a missing
+  converted dependency, not as a reason to blanket-copy all new bins.
+
+New Digimon/evolution import findings:
+
+- New monster/evolution rows can be imported, but they must be adapted to the
+  older template.
+- Directly replacing `Model.dat` from the newer client is unsafe. The old
+  client can open with added models only after missing model assets are copied
+  into Pack01/unpacked data and the model table remains compatible.
+- Pack01 missing model/assets source used during debugging:
+
+  ```text
+  D:\LK-DMO TOOLS\EXTRATOR-Copiar Daqui\Decryptorv2\data11
+  ```
+
+- Example missing model crash:
+
+  ```text
+  Model.dat - 77017 ...
+  ```
+
+  This indicates a Digimon/model row references a model resource not available
+  in the active client assets.
+
+- Example tactics/evolution crashes:
+
+  ```text
+  TacticsMng.cpp line 75
+  Condition: IsTacticsExplain(dwDigiMonID)
+  DigiMon ID = 33005
+
+  TacticsMng.cpp line 75
+  Condition: IsTacticsExplain(dwDigiMonID)
+  DigiMon ID = 45159
+  ```
+
+  These mean new Digimon IDs exist in evolution/monster data but do not have
+  compatible tactics explanation/name data in the client table set.
+
+- Example quick evolution crash:
+
+  ```text
+  QuickEvol.cpp line 360
+  ID 77009
+  index 17
+  ```
+
+  This points to missing/incompatible quick evolution/evolution-slot metadata
+  for the imported route.
+
+Evolution/skill runtime state:
+
+- New evolutions were made visible in the Digimon Information evolution tree.
+- A serious control bug was found: in Digimon-control view, new evolutions could
+  fail to basic attack or use skills, while Tamer-control view worked.
+- Client-side fixes were applied in:
+  - `C:\0-NewDmo\dmo-client-main\DProject\Skill.cpp`
+  - `C:\0-NewDmo\dmo-client-main\DProject\TamerUser.cpp`
+- In Digimon-move mode, normal attack and Digimon skill routing now send the
+  partner directly to the attack/skill action and keep the tamer following the
+  Digimon instead of trying to move the tamer to the target.
+- Server attack/skill processors touched during the same phase:
+  - `PartnerAttackPacketProcessor.cs`
+  - `PartnerSkillPacketProcessor.cs`
+
+Skill tooltip crash and method compatibility:
+
+- Hovering a skill could crash in:
+
+  ```text
+  DProject\_Interface\Game\ToolTip_Skill.cpp
+  line 768
+  Condition: false
+  ```
+
+- Root cause was not a missing texture. It was newer `Skill.bin` method/apply
+  data reaching an old tooltip switch.
+- The specific Omegamon Merciful Mode sample:
+
+  ```text
+  Skill 7112731
+  Apply index 1
+  ApplyA = 48
+  ApplyB = 20
+  BuffCode = 24
+  MethodID = 209
+  ```
+
+- The current `Skill.bin` was scanned and contains these method IDs:
+
+  ```text
+  1, 2, 10, 101, 102, 104, 105, 106, 107, 108, 200,
+  201, 202, 205, 206, 207, 208, 209, 301, 401, 402,
+  403, 501
+  ```
+
+- Client support was added for those methods in:
+  - `C:\0-NewDmo\dmo-client-main\DProject\_Interface\Game\ToolTip_Skill.cpp`
+  - `C:\0-NewDmo\dmo-client-main\DProject\FmCommon.cpp`
+- The fix intentionally does not hide truly unknown data. Unknown methods still
+  assert with:
+
+  ```text
+  SkillID
+  ApplyIndex
+  MethodID
+  ApplyA
+  ```
+
+- A follow-up risk remains: scanning found newer `ApplyA` values that the old
+  client may still not understand. One known sample is `ApplyA=91` on
+  `MethodID=209` for skill `7700521`. If a future crash says
+  `Undefined skill tooltip apply type` with `ApplyA=91`, map the apply attribute
+  properly instead of suppressing the assert.
+
+Digivice identify issue:
+
+- A separate bug was reported where right-click identify on Digivice starts the
+  identify progress bar but does not complete the identification, leaving the
+  item identifiable again.
+- Relevant server files touched or suspected:
+  - `ItemIdentifyPacketProcessor.cs`
+  - `ItemRerollPacketProcessor.cs`
+  - `ItemListBinLoader.cs`
+- Future investigation should compare the current `ItemList`/identify/reroll
+  fields against the updated GDMO data and verify the server persists the new
+  option state and sends the correct inventory refresh packet.
+
+GM panel/admin command notes:
+
+- The GM panel was expanded with additional admin pages, including Make Item,
+  Summon Monster, Debug Char, Tamer EXP, Digimon EXP, AllEvo, Full Clone,
+  Bits, God On/Off, Kick, Ban, Unban, and Membership.
+- There was a request to add a functional scrollbar based on an existing
+  clon-related window and more admin commands.
+- Before extending the GM panel further, check:
+  - `GameMasterCommandsProcessor.cs`
+  - `DProject\_Interface\Game\GMPanel.cpp`
+  - `DProject\_Interface\Game\GMPanel.h`
+- Full clone was added for the active Digimon, and the command/page list is
+  summarized in `GMPanelAndRecentChanges.md`.
+
+Build/deploy verification after the latest tooltip method support:
+
+- Client build passed with:
+
+  ```powershell
+  & "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" `
+    "C:\0-NewDmo\dmo-client-main\DProject.sln" `
+    /m /p:Configuration=Release_English /p:Platform=Win32 /v:minimal
+  ```
+
+- The built executable was copied to:
+
+  ```text
+  C:\0-NewDmo\ClientDist\DProject_R_ENG.exe
+  D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe
+  ```
+
+Important practical notes:
+
+- UAC was disabled during testing, but future automation should not assume the
+  client can always be killed/replaced. If `DProject_R_ENG.exe` is running,
+  close it before copying the new exe.
+- The client may show admin/UAC related prompts when launched. Prefer solving
+  permission/manifest issues directly if repeated automated client launches are
+  needed.
+- When a crash dialog includes exact source, line, condition, and details, use
+  that as the primary compatibility clue. Avoid replacing unrelated bins just
+  because the crash happens after a bin import.
 
 ## GM panel, hatch, and archive status from 2026-05-22
 

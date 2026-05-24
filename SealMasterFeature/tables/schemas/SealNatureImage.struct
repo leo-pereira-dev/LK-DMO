@@ -1,0 +1,16 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/SealNatureImage.bin]
+// SealNatureImage.bin — Pack03 v487 client.
+// Route: FUN_01624c60 -> FUN_016251b0 -> FUN_01623240.
+// Verified: 11 rows, 786/786 bytes.
+
+bin SealNatureImage {
+    section Images {
+        count  u32;
+        record SealNatureImageRecord;
+    }
+}
+
+struct SealNatureImageRecord {
+    u16      NatureType;
+    lstring  ElementalImagePath;
+}

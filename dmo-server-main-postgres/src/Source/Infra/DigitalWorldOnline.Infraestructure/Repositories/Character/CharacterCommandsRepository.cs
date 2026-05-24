@@ -1213,6 +1213,31 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
             }
         }
 
+        public async Task<long> AddEvolutionAsync(long digimonId, DigimonEvolutionModel evolution)
+        {
+            var digimonExists = await _context.Digimon
+                .AsNoTracking()
+                .AnyAsync(x => x.Id == digimonId);
+
+            if (!digimonExists)
+                return 0;
+
+            var dto = _mapper.Map<DigimonEvolutionDTO>(evolution);
+            dto.DigimonId = digimonId;
+
+            _context.DigimonEvolution.Add(dto);
+            await _context.SaveChangesAsync();
+
+            evolution.SetId(dto.Id);
+            if (dto.Skills != null)
+            {
+                for (int i = 0; i < dto.Skills.Count && i < evolution.Skills.Count; i++)
+                    evolution.Skills[i].SetId(dto.Skills[i].Id);
+            }
+
+            return dto.Id;
+        }
+
         public async Task<bool> RemoveMemorySkillAsync(long evolutionId, int skillId)
         {
             var row = await _context.DigimonMemorySkill

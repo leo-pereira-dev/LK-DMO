@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DM_DigiSummon_DigiSummonList_Str schema="DM_DigiSummon-DigiSummonList_Str.struct" bin="DM_DigiSummon-DigiSummonList_Str.bin" byteLength="8096">
+  <Entries kind="Section" offset="0" length="8096">
+    <_0 kind="Record" offset="4" length="302">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <TextA kind="Leaf" offset="8" length="42" type="WString { }">Legend Digital Draw</TextA>
+      <TextB kind="Leaf" offset="50" length="256" type="WString { }">S+ ~ SSS+ items are contained in the Digital Draw.
+You can perform 11 draws by consuming 2 @&lt;tc:090&gt;Data Summon Tickets@&lt;/tc&gt;.</TextB>
+    </_0>
+    <_1 kind="Record" offset="306" length="294">
+      <TextKey kind="Leaf" offset="306" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="310" length="38" type="WString { }">Epic Digital Draw</TextA>
+      <TextB kind="Leaf" offset="348" length="252" type="WString { }">S ~ SSS items are contained in the Digital Draw.
+You can perform 11 draws by consuming 2 @&lt;tc:090&gt;Data Summon Tickets@&lt;/tc&gt;.</TextB>
+    </_1>
+    <_2 kind="Record" offset="600" length="296">
+      <TextKey kind="Leaf" offset="600" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="604" length="42" type="WString { }">Unique Digital Draw</TextA>
+      <TextB kind="Leaf" offset="646" length="250" type="WString { }">A ~ S+ items are contained in the Digital Draw.
+You can perform 11 draws by consuming 2 @&lt;tc:090&gt;Data Summon Tickets@&lt;/tc&gt;.</TextB>
+    </_2>
+    <_3 kind="Record" offset="896" length="292">
+      <TextKey kind="Leaf" offset="896" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="900" length="38" type="WString { }">Rare Digital Draw</TextA>
+      <TextB kind="Leaf" offset="938" length="250" type="WString { }">A ~ A+ items are contained in the Digital Draw.
+You can perform 11 draws by consuming 2 @&lt;tc:090&gt;Data Summon Tickets@&lt;/tc&gt;.</TextB>
+    </_3>
+    <_4 kind="Record" offset="1188" length="282">
+      <TextKey kind="Leaf" offset="1188" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <TextA kind="Leaf" offset="1192" length="28" type="WString { }">Special Draw</TextA>
+      <TextB kind="Leaf" offset="1220" length="250" type="WString { }">A ~ A+ items are contained in the Digital Draw.
+You can perform 11 draws by consuming 1 @&lt;tc:090&gt;Data Summon Tickets@&lt;/tc&gt;.</TextB>
+    </_4>
+    <_5 kind="Record" offset="1470" length="306">
+      <TextKey kind="Leaf" offset="1470" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextA kind="Leaf" offset="1474" length="46" type="WString { }">Year-End Digital Draw</TextA>
+      <TextB kind="Leaf" offset="1520" length="256" type="WString { }">S+ ~ SSS+ items are contained in the Digital Draw.
+You can perform 11 draws by consuming 1 @&lt;tc:090&gt;Data Summon Tickets@&lt;/tc&gt;.</TextB>
+    </_5>
+    <_6 kind="Record" offset="1776" length="304">
+      <TextKey kind="Leaf" offset="1776" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <TextA kind="Leaf" offset="1780" length="44" type="WString { }">Dungeon Masters Draw</TextA>
+      <TextB kind="Leaf" offset="1824" length="256" type="WString { }">S+ ~ SSS+ items are contained in the Digital Draw.
+You can perform 11 draws by consuming 1 @&lt;tc:090&gt;Data Summon Tickets@&lt;/tc&gt;.</TextB>
+    </_6>
+    <_7 kind="Record" offset="2080" length="508">
+      <TextKey kind="Leaf" offset="2080" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <TextA kind="Leaf" offset="2084" length="78" type="WString { }">Sorrow and Determination Digital Draw</TextA>
+      <TextB kind="Leaf" offset="2162" length="426" type="WString { }">This is a Digital Draw containing items from SS+ to U.
+You can obtain Omegamon: Merciful Mode at a higher rate.
+@&lt;tc:090&gt;Pickup Draw Ticket: Sorrow and Determination [Event]@&lt;/tc&gt; 1 will be consumed for 6 draws.</TextB>
+    </_7>
+    <_8 kind="Record" offset="2588" length="458">
+      <TextKey kind="Leaf" offset="2588" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <TextA kind="Leaf" offset="2592" length="52" type="WString { }">Away King Digital Draw  </TextA>
+      <TextB kind="Leaf" offset="2644" length="402" type="WString { }">This is a Digital Draw containing items from SS+ to U.
+You can obtain Shoutmon X7: Superior Mode at a higher rate.
+@&lt;tc:090&gt;Pickup Draw Ticket: Away King [Event]@&lt;/tc&gt; 1 will be consumed for 6 draws.</TextB>
+    </_8>
+    <_9 kind="Record" offset="3046" length="490">
+      <TextKey kind="Leaf" offset="3046" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <TextA kind="Leaf" offset="3050" length="74" type="WString { }">Rite of Purification Digital Draw  </TextA>
+      <TextB kind="Leaf" offset="3124" length="412" type="WString { }">This is a Digital Draw containing items from SS+ to U.
+You can obtain Kuzuhamon: Miko Mode at a higher rate.
+@&lt;tc:090&gt;Pickup Draw Ticket: Rite of Purification [Event]@&lt;/tc&gt; 1 will be consumed for 6 draws.</TextB>
+    </_9>
+    <_10 kind="Record" offset="3536" length="482">
+      <TextKey kind="Leaf" offset="3536" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <TextA kind="Leaf" offset="3540" length="70" type="WString { }">MegaCrimson Knight Digital Draw  </TextA>
+      <TextB kind="Leaf" offset="3610" length="408" type="WString { }">This is a Digital Draw containing items from SS+ to U.
+You can obtain Dukemon Crimson Mode at a higher rate.
+@&lt;tc:090&gt;Pickup Draw Ticket: MegaCrimson Knight [Event]@&lt;/tc&gt; 1 will be consumed for 6 draws.</TextB>
+    </_10>
+    <_11 kind="Record" offset="4018" length="458">
+      <TextKey kind="Leaf" offset="4018" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <TextA kind="Leaf" offset="4022" length="72" type="WString { }">Master of Neverland Digital Draw  </TextA>
+      <TextB kind="Leaf" offset="4094" length="382" type="WString { }">This is a Digital Draw containing items from SS+ to U.
+You can obtain Eosmon at a higher rate.
+@&lt;tc:090&gt;Pickup Draw Ticket: Master of Neverland [Event]@&lt;/tc&gt; 1 will be consumed for 6 draws.</TextB>
+    </_11>
+    <_12 kind="Record" offset="4476" length="466">
+      <TextKey kind="Leaf" offset="4476" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <TextA kind="Leaf" offset="4480" length="70" type="WString { }">Guardian of Nature Digital Draw  </TextA>
+      <TextB kind="Leaf" offset="4550" length="392" type="WString { }">This is a Digital Draw containing items from SS+ to U.
+You can obtain BloomLordmon at a higher rate.
+@&lt;tc:090&gt;Pickup Draw Ticket: Guardian of Nature [Event]@&lt;/tc&gt; 1 will be consumed for 6 draws.</TextB>
+    </_12>
+    <_13 kind="Record" offset="4942" length="452">
+      <TextKey kind="Leaf" offset="4942" length="4" type="Scalar { Kind = U32 }" value="14" />
+      <TextA kind="Leaf" offset="4946" length="58" type="WString { }">Time Paradox Digital Draw  </TextA>
+      <TextB kind="Leaf" offset="5004" length="390" type="WString { }">This is a Digital Draw containing items from SS+ to U.
+You can obtain ZeedMillenniummon at a higher rate.
+@&lt;tc:090&gt;Pickup Draw Ticket: Time Paradox [Event]@&lt;/tc&gt; 1 will be consumed for 6 draws.</TextB>
+    </_13>
+    <_14 kind="Record" offset="5394" length="302">
+      <TextKey kind="Leaf" offset="5394" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <TextA kind="Leaf" offset="5398" length="36" type="WString { }">Exploration Draw</TextA>
+      <TextB kind="Leaf" offset="5434" length="262" type="WString { }">SS ~ SSS+ items are contained in the Digital Draw.
+You can perform 6 draws by consuming 1 @&lt;tc:090&gt;Exploration Draw Ticket@&lt;/tc&gt;.</TextB>
+    </_14>
+    <_15 kind="Record" offset="5696" length="474">
+      <TextKey kind="Leaf" offset="5696" length="4" type="Scalar { Kind = U32 }" value="16" />
+      <TextA kind="Leaf" offset="5700" length="58" type="WString { }">Splendor Blade Digital Draw</TextA>
+      <TextB kind="Leaf" offset="5758" length="412" type="WString { }">This is a Digital Draw containing items from SS+ to U.
+You can obtain Imperialdramon PaladinMode at a higher rate.
+@&lt;tc:090&gt;Pickup Draw Ticket: Splendor Blade [Event]@&lt;/tc&gt; 1 will be consumed for 6 draws.</TextB>
+    </_15>
+    <_16 kind="Record" offset="6170" length="520">
+      <TextKey kind="Leaf" offset="6170" length="4" type="Scalar { Kind = U32 }" value="17" />
+      <TextA kind="Leaf" offset="6174" length="72" type="WString { }">Ultimate-Battle-Blade Digital Draw</TextA>
+      <TextB kind="Leaf" offset="6246" length="444" type="WString { }">This is a Digital Draw containing items from SS+ to U.
+You can obtain Alphamon Ouryuken[Extreme] at a higher rate.
+@&lt;tc:090&gt;Pickup Draw Ticket: Ultimate-Battle-Blade-OURYUKEN [Event]@&lt;/tc&gt; 1 will be consumed for 6 draws.</TextB>
+    </_16>
+    <_17 kind="Record" offset="6690" length="370">
+      <TextKey kind="Leaf" offset="6690" length="4" type="Scalar { Kind = U32 }" value="18" />
+      <TextA kind="Leaf" offset="6694" length="80" type="WString { }">Brilliant Dungeon Masters Digital Draw</TextA>
+      <TextB kind="Leaf" offset="6774" length="286" type="WString { }">S+~ U items are contained in the Digital Draw.
+You can perform 1 draws by consuming 1 @&lt;tc:090&gt;Draw Ticket : Brilliant Dungeon Masters@&lt;/tc&gt;.</TextB>
+    </_17>
+    <_18 kind="Record" offset="7060" length="310">
+      <TextKey kind="Leaf" offset="7060" length="4" type="Scalar { Kind = U32 }" value="19" />
+      <TextA kind="Leaf" offset="7064" length="24" type="WString { }">Royal Draw</TextA>
+      <TextB kind="Leaf" offset="7088" length="282" type="WString { }">SS+ ~ U items are contained in the Digital Draw.
+You can perform 6 draws by consuming 1 @&lt;tc:090&gt;Royal Draw Ticket [SS+ ~ U] [Event]@&lt;/tc&gt;.</TextB>
+    </_18>
+    <_19 kind="Record" offset="7370" length="306">
+      <TextKey kind="Leaf" offset="7370" length="4" type="Scalar { Kind = U32 }" value="20" />
+      <TextA kind="Leaf" offset="7374" length="40" type="WString { }">New Year Wish Draw</TextA>
+      <TextB kind="Leaf" offset="7414" length="262" type="WString { }">SS+ ~ U items are contained in the Digital Draw.
+You can perform 6 draws by consuming 1 @&lt;tc:090&gt;New Year Wish Draw Ticket@&lt;/tc&gt;.</TextB>
+    </_19>
+    <_20 kind="Record" offset="7676" length="420">
+      <TextKey kind="Leaf" offset="7676" length="4" type="Scalar { Kind = U32 }" value="21" />
+      <TextA kind="Leaf" offset="7680" length="56" type="WString { }">Enchanted X-Evolution Draw</TextA>
+      <TextB kind="Leaf" offset="7736" length="360" type="WString { }">This is a digital draw containing N~U items.
+Higher chances to obtain Lilithmon X [Awaken].
+@&lt;tc:090&gt;Consume 1 Enchanted X-Evolution Draw Ticket [Event]@&lt;/tc&gt; to perform 6 times.</TextB>
+    </_20>
+  </Entries>
+</DM_DigiSummon_DigiSummonList_Str>

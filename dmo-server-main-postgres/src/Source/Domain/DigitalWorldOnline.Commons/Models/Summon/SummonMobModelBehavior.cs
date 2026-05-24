@@ -266,6 +266,12 @@ namespace DigitalWorldOnline.Commons.Models.Summon
         /// <param name="config">New reward</param>
         public void SetExpReward(SummonMobExpRewardModel config) => ExpReward = config;
 
+        public void SetClass(int mobClass)
+        {
+            Class = mobClass;
+            BossMonster = mobClass == 8;
+        }
+
         public void SetSkillCooldown(int cooldown) => Cooldown = cooldown;
 
         public void UpdateChaseTime(DateTime chaseEnd) => ChaseEndTime = chaseEnd;

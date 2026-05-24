@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cashshop_Steam_category_Str schema="cashshop_Steam_category_Str.struct" bin="cashshop_Steam_category_Str.bin" byteLength="664">
+  <Groups kind="Section" offset="0" length="664">
+    <_0 kind="Record" offset="4" length="66">
+      <CategoryKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <CategoryName kind="Leaf" offset="8" length="12" type="WString { }">Main</CategoryName>
+      <TextCount kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <Texts kind="Array" offset="24" length="46" count="3">
+        <_0_ kind="Struct" offset="24" length="26">
+          <TextKey kind="Leaf" offset="24" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Text kind="Leaf" offset="28" length="22" type="WString { }">클라이언트 참조용</Text>
+        </_0_>
+        <_1_ kind="Struct" offset="50" length="10">
+          <TextKey kind="Leaf" offset="50" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Text kind="Leaf" offset="54" length="6" type="WString { }">-</Text>
+        </_1_>
+        <_2_ kind="Struct" offset="60" length="10">
+          <TextKey kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <Text kind="Leaf" offset="64" length="6" type="WString { }">-</Text>
+        </_2_>
+      </Texts>
+    </_0>
+    <_1 kind="Record" offset="70" length="140">
+      <CategoryKey kind="Leaf" offset="70" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <CategoryName kind="Leaf" offset="74" length="14" type="WString { }">Tamer</CategoryName>
+      <TextCount kind="Leaf" offset="88" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <Texts kind="Array" offset="92" length="118" count="6">
+        <_0_ kind="Struct" offset="92" length="14">
+          <TextKey kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Text kind="Leaf" offset="96" length="10" type="WString { }">All</Text>
+        </_0_>
+        <_1_ kind="Struct" offset="106" length="26">
+          <TextKey kind="Leaf" offset="106" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Text kind="Leaf" offset="110" length="22" type="WString { }">Expansion</Text>
+        </_1_>
+        <_2_ kind="Struct" offset="132" length="14">
+          <TextKey kind="Leaf" offset="132" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <Text kind="Leaf" offset="136" length="10" type="WString { }">EXP</Text>
+        </_2_>
+        <_3_ kind="Struct" offset="146" length="24">
+          <TextKey kind="Leaf" offset="146" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <Text kind="Leaf" offset="150" length="20" type="WString { }">Movement</Text>
+        </_3_>
+        <_4_ kind="Struct" offset="170" length="26">
+          <TextKey kind="Leaf" offset="170" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Text kind="Leaf" offset="174" length="22" type="WString { }">Chat/Shop</Text>
+        </_4_>
+        <_5_ kind="Struct" offset="196" length="14">
+          <TextKey kind="Leaf" offset="196" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <Text kind="Leaf" offset="200" length="10" type="WString { }">ETC</Text>
+        </_5_>
+      </Texts>
+    </_1>
+    <_2 kind="Record" offset="210" length="178">
+      <CategoryKey kind="Leaf" offset="210" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <CategoryName kind="Leaf" offset="214" length="18" type="WString { }">Digimon</CategoryName>
+      <TextCount kind="Leaf" offset="232" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <Texts kind="Array" offset="236" length="152" count="7">
+        <_0_ kind="Struct" offset="236" length="14">
+          <TextKey kind="Leaf" offset="236" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Text kind="Leaf" offset="240" length="10" type="WString { }">All</Text>
+        </_0_>
+        <_1_ kind="Struct" offset="250" length="22">
+          <TextKey kind="Leaf" offset="250" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Text kind="Leaf" offset="254" length="18" type="WString { }">DigiEgg</Text>
+        </_1_>
+        <_2_ kind="Struct" offset="272" length="26">
+          <TextKey kind="Leaf" offset="272" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <Text kind="Leaf" offset="276" length="22" type="WString { }">Evolution</Text>
+        </_2_>
+        <_3_ kind="Struct" offset="298" length="30">
+          <TextKey kind="Leaf" offset="298" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <Text kind="Leaf" offset="302" length="26" type="WString { }">Hatch/Trans</Text>
+        </_3_>
+        <_4_ kind="Struct" offset="328" length="26">
+          <TextKey kind="Leaf" offset="328" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Text kind="Leaf" offset="332" length="22" type="WString { }">Reinforce</Text>
+        </_4_>
+        <_5_ kind="Struct" offset="354" length="20">
+          <TextKey kind="Leaf" offset="354" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <Text kind="Leaf" offset="358" length="16" type="WString { }">Riding</Text>
+        </_5_>
+        <_6_ kind="Struct" offset="374" length="14">
+          <TextKey kind="Leaf" offset="374" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <Text kind="Leaf" offset="378" length="10" type="WString { }">ETC</Text>
+        </_6_>
+      </Texts>
+    </_2>
+    <_3 kind="Record" offset="388" length="196">
+      <CategoryKey kind="Leaf" offset="388" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <CategoryName kind="Leaf" offset="392" length="16" type="WString { }">Avatar</CategoryName>
+      <TextCount kind="Leaf" offset="408" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <Texts kind="Array" offset="412" length="172" count="9">
+        <_0_ kind="Struct" offset="412" length="14">
+          <TextKey kind="Leaf" offset="412" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Text kind="Leaf" offset="416" length="10" type="WString { }">All</Text>
+        </_0_>
+        <_1_ kind="Struct" offset="426" length="26">
+          <TextKey kind="Leaf" offset="426" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Text kind="Leaf" offset="430" length="22" type="WString { }">Reinforce</Text>
+        </_1_>
+        <_2_ kind="Struct" offset="452" length="16">
+          <TextKey kind="Leaf" offset="452" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <Text kind="Leaf" offset="456" length="12" type="WString { }">Head</Text>
+        </_2_>
+        <_3_ kind="Struct" offset="468" length="14">
+          <TextKey kind="Leaf" offset="468" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <Text kind="Leaf" offset="472" length="10" type="WString { }">Top</Text>
+        </_3_>
+        <_4_ kind="Struct" offset="482" length="20">
+          <TextKey kind="Leaf" offset="482" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <Text kind="Leaf" offset="486" length="16" type="WString { }">Bottom</Text>
+        </_4_>
+        <_5_ kind="Struct" offset="502" length="20">
+          <TextKey kind="Leaf" offset="502" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <Text kind="Leaf" offset="506" length="16" type="WString { }">Gloves</Text>
+        </_5_>
+        <_6_ kind="Struct" offset="522" length="18">
+          <TextKey kind="Leaf" offset="522" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <Text kind="Leaf" offset="526" length="14" type="WString { }">Shoes</Text>
+        </_6_>
+        <_7_ kind="Struct" offset="540" length="22">
+          <TextKey kind="Leaf" offset="540" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <Text kind="Leaf" offset="544" length="18" type="WString { }">Fashion</Text>
+        </_7_>
+        <_8_ kind="Struct" offset="562" length="22">
+          <TextKey kind="Leaf" offset="562" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <Text kind="Leaf" offset="566" length="18" type="WString { }">Costume</Text>
+        </_8_>
+      </Texts>
+    </_3>
+    <_4 kind="Record" offset="584" length="80">
+      <CategoryKey kind="Leaf" offset="584" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <CategoryName kind="Leaf" offset="588" length="20" type="WString { }">Packages</CategoryName>
+      <TextCount kind="Leaf" offset="608" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Texts kind="Array" offset="612" length="52" count="2">
+        <_0_ kind="Struct" offset="612" length="22">
+          <TextKey kind="Leaf" offset="612" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <Text kind="Leaf" offset="616" length="18" type="WString { }">Package</Text>
+        </_0_>
+        <_1_ kind="Struct" offset="634" length="30">
+          <TextKey kind="Leaf" offset="634" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <Text kind="Leaf" offset="638" length="26" type="WString { }">Season Pass</Text>
+        </_1_>
+      </Texts>
+    </_4>
+  </Groups>
+</cashshop_Steam_category_Str>

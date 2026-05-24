@@ -3,6 +3,7 @@
 #include "../Game/SealMasterContents.h"
 
 #define GROUPBUTTONGAP 32
+class cEditBox;
 //
 class cSealMaster : public cBaseWindow, public cSealMasterContents::ObserverType
 {
@@ -39,8 +40,8 @@ public:
 
 	struct sSealGridData : public CUSTOMDATA
 	{
-		sSealGridData ( const DWORD sealID, const DWORD sealModelID, const int sealCount, const int grade, int tableCod, int effectType, bool favorite )
-		:sSealID(sealID), sSealModelID(sealModelID), sSealCount(sealCount), sGrade(grade), sTableCode(tableCod), sEffectType(effectType), sFavorite(favorite)
+		sSealGridData ( const DWORD sealID, const DWORD sealModelID, const int sealCount, const int grade, int tableCod, int effectType, bool favorite, std::wstring const& sealName )
+		:sSealID(sealID), sSealModelID(sealModelID), sSealCount(sealCount), sGrade(grade), sTableCode(tableCod), sEffectType(effectType), sFavorite(favorite), sSealName(sealName)
 		{};
 		virtual ~sSealGridData () {};
 
@@ -51,6 +52,7 @@ public:
 		int				sTableCode;
 		int				sEffectType;
 		bool			sFavorite;
+		std::wstring	sSealName;
 	};
 public:
 	enum RESOLUTIONKEY
@@ -113,6 +115,7 @@ private:
 
 	void					MakePlusState();
 	void					MakeStateFilterComboBox();
+	void					MakeSearchEditBox();
 
 	void					MakeSealGrid();
 
@@ -121,6 +124,7 @@ private:
 	void					ViewButton(void* pSender, void* pData);
 	// 콤보박스 아이템 선택(능력치로 필터링)
 	void					SelectStateFilter(void* pSender, void* pData);
+	void					OnSearchTextChanged(void* pSender, void* pData);
 	// 그리드 우클릭 처리(리더선택, 재밀봉resealing)
 	void					RButton(void* pSender, void* pData);
 	// 닫기 버튼
@@ -146,6 +150,7 @@ private:
 	cTreeBox*				m_pMapgroupTreeBox;		//맵 표시
 	cGridListBox*			m_pGridListBox;
 	cComboBox*				m_pCombo;				//추가 능력치 필터 콤보 박스
+	cEditBox*				m_pSearchEdit;
 	cButton*				m_pButtonClose;
 	cText*					m_pPlusValueText[STATEKINDS];		//추가 능력치 추가량 TEXT
 	cStringList*			m_pActiveSealCountText;				//보여지고 있는 씰중 활성화된 씰의 갯수
@@ -160,6 +165,7 @@ private:
 	bool					m_bFavoriteFilter;		//즐겨찾기 필터 On
 	bool					m_bMapAllFilter;		//모든 맵 보기 필터
 	bool					m_bCountFilter;			//활성화 카드만 보기 필터(상시 작동 필터가 아님)
+	std::wstring			m_wsSearchKeyword;
 
 	int						m_nViewGridCount;			//필터에 걸려져 보여지고 있는 그리드의 숫자
 	int						m_nViewnActiveGridCount;	//보여지고 있는 그리드중 1개 이상 개봉된 seal 숫자

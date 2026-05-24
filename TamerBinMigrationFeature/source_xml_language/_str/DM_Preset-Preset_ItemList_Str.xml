@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DM_Preset_Preset_ItemList_Str schema="DM_Preset-Preset_ItemList_Str.struct" bin="DM_Preset-Preset_ItemList_Str.bin" byteLength="442">
+  <Entries kind="Section" offset="0" length="442">
+    <_0 kind="Record" offset="4" length="16">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="21" />
+      <Text kind="Leaf" offset="8" length="12" type="WString { }">Head</Text>
+    </_0>
+    <_1 kind="Record" offset="20" length="14">
+      <TextKey kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="22" />
+      <Text kind="Leaf" offset="24" length="10" type="WString { }">Top</Text>
+    </_1>
+    <_2 kind="Record" offset="34" length="20">
+      <TextKey kind="Leaf" offset="34" length="4" type="Scalar { Kind = U32 }" value="23" />
+      <Text kind="Leaf" offset="38" length="16" type="WString { }">Gloves</Text>
+    </_2>
+    <_3 kind="Record" offset="54" length="20">
+      <TextKey kind="Leaf" offset="54" length="4" type="Scalar { Kind = U32 }" value="24" />
+      <Text kind="Leaf" offset="58" length="16" type="WString { }">Bottom</Text>
+    </_3>
+    <_4 kind="Record" offset="74" length="18">
+      <TextKey kind="Leaf" offset="74" length="4" type="Scalar { Kind = U32 }" value="25" />
+      <Text kind="Leaf" offset="78" length="14" type="WString { }">Shoes</Text>
+    </_4>
+    <_5 kind="Record" offset="92" length="22">
+      <TextKey kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="26" />
+      <Text kind="Leaf" offset="96" length="18" type="WString { }">Costume</Text>
+    </_5>
+    <_6 kind="Record" offset="114" length="22">
+      <TextKey kind="Leaf" offset="114" length="4" type="Scalar { Kind = U32 }" value="27" />
+      <Text kind="Leaf" offset="118" length="18" type="WString { }">Fashion</Text>
+    </_6>
+    <_7 kind="Record" offset="136" length="24">
+      <TextKey kind="Leaf" offset="136" length="4" type="Scalar { Kind = U32 }" value="28" />
+      <Text kind="Leaf" offset="140" length="20" type="WString { }">Necklace</Text>
+    </_7>
+    <_8 kind="Record" offset="160" length="16">
+      <TextKey kind="Leaf" offset="160" length="4" type="Scalar { Kind = U32 }" value="29" />
+      <Text kind="Leaf" offset="164" length="12" type="WString { }">Ring</Text>
+    </_8>
+    <_9 kind="Record" offset="176" length="22">
+      <TextKey kind="Leaf" offset="176" length="4" type="Scalar { Kind = U32 }" value="30" />
+      <Text kind="Leaf" offset="180" length="18" type="WString { }">Earring</Text>
+    </_9>
+    <_10 kind="Record" offset="198" length="16">
+      <TextKey kind="Leaf" offset="198" length="4" type="Scalar { Kind = U32 }" value="31" />
+      <Text kind="Leaf" offset="202" length="12" type="WString { }">Aura</Text>
+    </_10>
+    <_11 kind="Record" offset="214" length="28">
+      <TextKey kind="Leaf" offset="214" length="4" type="Scalar { Kind = U32 }" value="32" />
+      <Text kind="Leaf" offset="218" length="24" type="WString { }">XAI system</Text>
+    </_11>
+    <_12 kind="Record" offset="242" length="24">
+      <TextKey kind="Leaf" offset="242" length="4" type="Scalar { Kind = U32 }" value="33" />
+      <Text kind="Leaf" offset="246" length="20" type="WString { }">Bracelet</Text>
+    </_12>
+    <_13 kind="Record" offset="266" length="36">
+      <TextKey kind="Leaf" offset="266" length="4" type="Scalar { Kind = U32 }" value="34" />
+      <Text kind="Leaf" offset="270" length="32" type="WString { }">NamePlate Item</Text>
+    </_13>
+    <_14 kind="Record" offset="302" length="24">
+      <TextKey kind="Leaf" offset="302" length="4" type="Scalar { Kind = U32 }" value="35" />
+      <Text kind="Leaf" offset="306" length="20" type="WString { }">Key Ring</Text>
+    </_14>
+    <_15 kind="Record" offset="326" length="34">
+      <TextKey kind="Leaf" offset="326" length="4" type="Scalar { Kind = U32 }" value="36" />
+      <Text kind="Leaf" offset="330" length="30" type="WString { }">Hat accessory</Text>
+    </_15>
+    <_16 kind="Record" offset="360" length="22">
+      <TextKey kind="Leaf" offset="360" length="4" type="Scalar { Kind = U32 }" value="52" />
+      <Text kind="Leaf" offset="364" length="18" type="WString { }">ChipSet</Text>
+    </_16>
+    <_17 kind="Record" offset="382" length="24">
+      <TextKey kind="Leaf" offset="382" length="4" type="Scalar { Kind = U32 }" value="53" />
+      <Text kind="Leaf" offset="386" length="20" type="WString { }">Digivice</Text>
+    </_17>
+    <_18 kind="Record" offset="406" length="36">
+      <TextKey kind="Leaf" offset="406" length="4" type="Scalar { Kind = U32 }" value="616" />
+      <Text kind="Leaf" offset="410" length="32" type="WString { }">Preset Unlock </Text>
+    </_18>
+  </Entries>
+</DM_Preset_Preset_ItemList_Str>

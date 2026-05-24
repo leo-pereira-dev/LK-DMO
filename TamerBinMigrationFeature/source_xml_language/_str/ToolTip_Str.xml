@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ToolTip_Str schema="ToolTip_Str.struct" bin="ToolTip_Str.bin" byteLength="12102">
+  <Entries kind="Section" offset="0" length="12102">
+    <_0 kind="Record" offset="4" length="268">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="2088288423" />
+      <TextA kind="Leaf" offset="8" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="12" length="48" type="WString { }">DiggiEgg Register Slot</TextB>
+      <TextC kind="Leaf" offset="60" length="212" type="WString { }">Register DigiEggs that can be hatched. Right click the DigiEgg or drag and drop to the slot to register.</TextC>
+    </_0>
+    <_1 kind="Record" offset="272" length="260">
+      <TextKey kind="Leaf" offset="272" length="4" type="Scalar { Kind = U32 }" value="2088288424" />
+      <TextA kind="Leaf" offset="276" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="280" length="44" type="WString { }">Auto Register Button</TextB>
+      <TextC kind="Leaf" offset="324" length="208" type="WString { }">DigiEggs in the inventory that can be hatched will be automatically reigster when clicking the button.</TextC>
+    </_1>
+    <_2 kind="Record" offset="532" length="240">
+      <TextKey kind="Leaf" offset="532" length="4" type="Scalar { Kind = U32 }" value="2088288425" />
+      <TextA kind="Leaf" offset="536" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="540" length="36" type="WString { }">Mini Game Button</TextB>
+      <TextC kind="Leaf" offset="576" length="196" type="WString { }">Activates when DigiEgg is registered. Hatch success rate will increase if you win the mini game.</TextC>
+    </_2>
+    <_3 kind="Record" offset="772" length="208">
+      <TextKey kind="Leaf" offset="772" length="4" type="Scalar { Kind = U32 }" value="2088288426" />
+      <TextA kind="Leaf" offset="776" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="780" length="56" type="WString { }">Hatch Backup Register Slot</TextB>
+      <TextC kind="Leaf" offset="836" length="144" type="WString { }">Protects the DigiEgg from breaking when DATA input into DigiEgg fails.</TextC>
+    </_3>
+    <_4 kind="Record" offset="980" length="216">
+      <TextKey kind="Leaf" offset="980" length="4" type="Scalar { Kind = U32 }" value="2088288427" />
+      <TextA kind="Leaf" offset="984" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="988" length="60" type="WString { }">Hatch Backup Register Button</TextB>
+      <TextC kind="Leaf" offset="1048" length="148" type="WString { }">Automatically register Hatch Backup from the inventory to the open slot.</TextC>
+    </_4>
+    <_5 kind="Record" offset="1196" length="486">
+      <TextKey kind="Leaf" offset="1196" length="4" type="Scalar { Kind = U32 }" value="2088288428" />
+      <TextA kind="Leaf" offset="1200" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="1204" length="32" type="WString { }">Receive Button</TextB>
+      <TextC kind="Leaf" offset="1236" length="446" type="WString { }">Activates when DigiEgg is ready to hatch after 3 consecutive DATA input. Can receive the Digimon when you click the button. ※:Caution: DigiEgg will hatch at Lv.3 when you click the Receive Button even if Lv.4 is possible.</TextC>
+    </_5>
+    <_6 kind="Record" offset="1682" length="90">
+      <TextKey kind="Leaf" offset="1682" length="4" type="Scalar { Kind = U32 }" value="2088288429" />
+      <TextA kind="Leaf" offset="1686" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="1690" length="30" type="WString { }">Cancel Button</TextB>
+      <TextC kind="Leaf" offset="1720" length="52" type="WString { }">Cancel hatching DigiEgg.</TextC>
+    </_6>
+    <_7 kind="Record" offset="1772" length="218">
+      <TextKey kind="Leaf" offset="1772" length="4" type="Scalar { Kind = U32 }" value="2088288430" />
+      <TextA kind="Leaf" offset="1776" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="1780" length="38" type="WString { }">Input DATA Button</TextB>
+      <TextC kind="Leaf" offset="1818" length="172" type="WString { }">Input DATA into DigiEgg. Once you succeed with input of DATA, it cannot be canceled.</TextC>
+    </_7>
+    <_8 kind="Record" offset="1990" length="228">
+      <TextKey kind="Leaf" offset="1990" length="4" type="Scalar { Kind = U32 }" value="2088288431" />
+      <TextA kind="Leaf" offset="1994" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="1998" length="30" type="WString { }">Remove Button</TextB>
+      <TextC kind="Leaf" offset="2028" length="190" type="WString { }">Remove DigiEgg with DATA input. Once you click the Rmove Button, the DigiEgg will be deleted.</TextC>
+    </_8>
+    <_9 kind="Record" offset="2218" length="106">
+      <TextKey kind="Leaf" offset="2218" length="4" type="Scalar { Kind = U32 }" value="2088288455" />
+      <TextA kind="Leaf" offset="2222" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="2226" length="30" type="WString { }">Change Button</TextB>
+      <TextC kind="Leaf" offset="2256" length="68" type="WString { }">Change the input DATA item rank.</TextC>
+    </_9>
+    <_10 kind="Record" offset="2324" length="202">
+      <TextKey kind="Leaf" offset="2324" length="4" type="Scalar { Kind = U32 }" value="2088288456" />
+      <TextA kind="Leaf" offset="2328" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="2332" length="54" type="WString { }">Auto Scan Register Button</TextB>
+      <TextC kind="Leaf" offset="2386" length="140" type="WString { }">Automatically register items that can be scanned from the inventory.</TextC>
+    </_10>
+    <_11 kind="Record" offset="2526" length="186">
+      <TextKey kind="Leaf" offset="2526" length="4" type="Scalar { Kind = U32 }" value="2088288457" />
+      <TextA kind="Leaf" offset="2530" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="2534" length="32" type="WString { }">Scan OK Button</TextB>
+      <TextC kind="Leaf" offset="2566" length="146" type="WString { }">Can obtain items by scanning. Scan cost will be deducted for each scan.</TextC>
+    </_11>
+    <_12 kind="Record" offset="2712" length="208">
+      <TextKey kind="Leaf" offset="2712" length="4" type="Scalar { Kind = U32 }" value="2088288458" />
+      <TextA kind="Leaf" offset="2716" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="2720" length="32" type="WString { }">Scan Cost Info</TextB>
+      <TextC kind="Leaf" offset="2752" length="168" type="WString { }">Scan cost will be deducted for each item. Cannot scan if the fund is insufficient.</TextC>
+    </_12>
+    <_13 kind="Record" offset="2920" length="194">
+      <TextKey kind="Leaf" offset="2920" length="4" type="Scalar { Kind = U32 }" value="2088288459" />
+      <TextA kind="Leaf" offset="2924" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="2928" length="44" type="WString { }">Auto Register Button</TextB>
+      <TextC kind="Leaf" offset="2972" length="142" type="WString { }">Automatically register items that can be returned from the inventory.</TextC>
+    </_13>
+    <_14 kind="Record" offset="3114" length="104">
+      <TextKey kind="Leaf" offset="3114" length="4" type="Scalar { Kind = U32 }" value="2088288460" />
+      <TextA kind="Leaf" offset="3118" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="3122" length="36" type="WString { }">Return OK Button</TextB>
+      <TextC kind="Leaf" offset="3158" length="60" type="WString { }">Can obtain BIT by returning.</TextC>
+    </_14>
+    <_15 kind="Record" offset="3218" length="152">
+      <TextKey kind="Leaf" offset="3218" length="4" type="Scalar { Kind = U32 }" value="2088288461" />
+      <TextA kind="Leaf" offset="3222" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="3226" length="40" type="WString { }">Return Amount Info</TextB>
+      <TextC kind="Leaf" offset="3266" length="104" type="WString { }">Amount of BIT that can be obtained from returning.</TextC>
+    </_15>
+    <_16 kind="Record" offset="3370" length="84">
+      <TextKey kind="Leaf" offset="3370" length="4" type="Scalar { Kind = U32 }" value="2088288462" />
+      <TextA kind="Leaf" offset="3374" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="3378" length="22" type="WString { }">Item Scan</TextB>
+      <TextC kind="Leaf" offset="3400" length="54" type="WString { }">Scan item to obtain item.</TextC>
+    </_16>
+    <_17 kind="Record" offset="3454" length="90">
+      <TextKey kind="Leaf" offset="3454" length="4" type="Scalar { Kind = U32 }" value="2088288463" />
+      <TextA kind="Leaf" offset="3458" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="3462" length="26" type="WString { }">Item Return</TextB>
+      <TextC kind="Leaf" offset="3488" length="56" type="WString { }">Return item to obtain BIT.</TextC>
+    </_17>
+    <_18 kind="Record" offset="3544" length="278">
+      <TextKey kind="Leaf" offset="3544" length="4" type="Scalar { Kind = U32 }" value="2088288464" />
+      <TextA kind="Leaf" offset="3548" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="3552" length="40" type="WString { }">Scan Complete Item</TextB>
+      <TextC kind="Leaf" offset="3592" length="230" type="WString { }">Place where items obtained from scanning are placed. Obtained items will be moved automatically to the inventory.</TextC>
+    </_18>
+    <_19 kind="Record" offset="3822" length="382">
+      <TextKey kind="Leaf" offset="3822" length="4" type="Scalar { Kind = U32 }" value="2088288489" />
+      <TextA kind="Leaf" offset="3826" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="3830" length="50" type="WString { }">Digiclone Register Slot</TextB>
+      <TextC kind="Leaf" offset="3880" length="324" type="WString { }">Digiclone is required for reinforcement. D is required for Lv.1-3, C is required for Lv.4-6, B is required for Lv.7-9, A is required for Lv.10-12 reinforcement.</TextC>
+    </_19>
+    <_20 kind="Record" offset="4204" length="226">
+      <TextKey kind="Leaf" offset="4204" length="4" type="Scalar { Kind = U32 }" value="2088288490" />
+      <TextA kind="Leaf" offset="4208" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="4212" length="54" type="WString { }">Backup Disk Register Slot</TextB>
+      <TextC kind="Leaf" offset="4266" length="164" type="WString { }">Can equip backup disk. Backup disk prevents penalties from failed reinforcement.</TextC>
+    </_20>
+    <_21 kind="Record" offset="4430" length="98">
+      <TextKey kind="Leaf" offset="4430" length="4" type="Scalar { Kind = U32 }" value="2088288491" />
+      <TextA kind="Leaf" offset="4434" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="4438" length="40" type="WString { }">Reinforcement Cost</TextB>
+      <TextC kind="Leaf" offset="4478" length="50" type="WString { }">Cost for reinforcement.</TextC>
+    </_21>
+    <_22 kind="Record" offset="4528" length="276">
+      <TextKey kind="Leaf" offset="4528" length="4" type="Scalar { Kind = U32 }" value="2088288492" />
+      <TextA kind="Leaf" offset="4532" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="4536" length="48" type="WString { }">Equip Digiclone Button</TextB>
+      <TextC kind="Leaf" offset="4584" length="220" type="WString { }">Automatically equip Digiclone from the inventory into the slot. Activates after choosing stats to reinforce.</TextC>
+    </_22>
+    <_23 kind="Record" offset="4804" length="246">
+      <TextKey kind="Leaf" offset="4804" length="4" type="Scalar { Kind = U32 }" value="2088288493" />
+      <TextA kind="Leaf" offset="4808" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="4812" length="36" type="WString { }">Reinforce Button</TextB>
+      <TextC kind="Leaf" offset="4848" length="202" type="WString { }">Can attempt reinforcement after choosing the stat to reinforce and equip the appropriate Digiclone.</TextC>
+    </_23>
+    <_24 kind="Record" offset="5050" length="158">
+      <TextKey kind="Leaf" offset="5050" length="4" type="Scalar { Kind = U32 }" value="2088288494" />
+      <TextA kind="Leaf" offset="5054" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="5058" length="52" type="WString { }">Reset Capsule Equip Slot</TextB>
+      <TextC kind="Leaf" offset="5110" length="98" type="WString { }">Equip reset capsule and undo the reinforcement.</TextC>
+    </_24>
+    <_25 kind="Record" offset="5208" length="202">
+      <TextKey kind="Leaf" offset="5208" length="4" type="Scalar { Kind = U32 }" value="2088288495" />
+      <TextA kind="Leaf" offset="5212" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="5216" length="56" type="WString { }">Reset Capsule Equip Button</TextB>
+      <TextC kind="Leaf" offset="5272" length="138" type="WString { }">Automatically equip reset capsule from the inventory into the slot.</TextC>
+    </_25>
+    <_26 kind="Record" offset="5410" length="224">
+      <TextKey kind="Leaf" offset="5410" length="4" type="Scalar { Kind = U32 }" value="2088288496" />
+      <TextA kind="Leaf" offset="5414" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="5418" length="28" type="WString { }">Reset Button</TextB>
+      <TextC kind="Leaf" offset="5446" length="188" type="WString { }">Can undo the reinforcement after equipping the reset capsule and choosing the stat to reset.</TextC>
+    </_26>
+    <_27 kind="Record" offset="5634" length="182">
+      <TextKey kind="Leaf" offset="5634" length="4" type="Scalar { Kind = U32 }" value="2088288497" />
+      <TextA kind="Leaf" offset="5638" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="5642" length="40" type="WString { }">Backup Disk Button</TextB>
+      <TextC kind="Leaf" offset="5682" length="134" type="WString { }">Automatically equip backup disk from the inventory into the slot.</TextC>
+    </_27>
+    <_28 kind="Record" offset="5816" length="132">
+      <TextKey kind="Leaf" offset="5816" length="4" type="Scalar { Kind = U32 }" value="2088288522" />
+      <TextA kind="Leaf" offset="5820" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="5824" length="42" type="WString { }">Attribute Item Slot</TextB>
+      <TextC kind="Leaf" offset="5866" length="82" type="WString { }">Can equip unidentified attribute items.</TextC>
+    </_28>
+    <_29 kind="Record" offset="5948" length="160">
+      <TextKey kind="Leaf" offset="5948" length="4" type="Scalar { Kind = U32 }" value="2088288523" />
+      <TextA kind="Leaf" offset="5952" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="5956" length="60" type="WString { }">Attribute Item Identify Cost</TextB>
+      <TextC kind="Leaf" offset="6016" length="92" type="WString { }">Need to pay a fee to identify the attribute.</TextC>
+    </_29>
+    <_30 kind="Record" offset="6108" length="216">
+      <TextKey kind="Leaf" offset="6108" length="4" type="Scalar { Kind = U32 }" value="2088288524" />
+      <TextA kind="Leaf" offset="6112" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="6116" length="34" type="WString { }">Identify Button</TextB>
+      <TextC kind="Leaf" offset="6150" length="174" type="WString { }">Can identify the attribute if an unidentified attribute item is in the identify slot.</TextC>
+    </_30>
+    <_31 kind="Record" offset="6324" length="162">
+      <TextKey kind="Leaf" offset="6324" length="4" type="Scalar { Kind = U32 }" value="2088288525" />
+      <TextA kind="Leaf" offset="6328" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="6332" length="52" type="WString { }">Merge Item Register Slot</TextB>
+      <TextC kind="Leaf" offset="6384" length="102" type="WString { }">Register equipment item with attribute socket(s).</TextC>
+    </_31>
+    <_32 kind="Record" offset="6486" length="296">
+      <TextKey kind="Leaf" offset="6486" length="4" type="Scalar { Kind = U32 }" value="2088288526" />
+      <TextA kind="Leaf" offset="6490" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="6494" length="60" type="WString { }">Attribute Item Register Slot</TextB>
+      <TextC kind="Leaf" offset="6554" length="228" type="WString { }">Regitster applicable attribute item to equipment item. (Attribute item must be identified in order to register.)</TextC>
+    </_32>
+    <_33 kind="Record" offset="6782" length="112">
+      <TextKey kind="Leaf" offset="6782" length="4" type="Scalar { Kind = U32 }" value="2088288527" />
+      <TextA kind="Leaf" offset="6786" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="6790" length="24" type="WString { }">Merge Cost</TextB>
+      <TextC kind="Leaf" offset="6814" length="80" type="WString { }">Need to pay a fee to merge equipments.</TextC>
+    </_33>
+    <_34 kind="Record" offset="6894" length="156">
+      <TextKey kind="Leaf" offset="6894" length="4" type="Scalar { Kind = U32 }" value="2088288528" />
+      <TextA kind="Leaf" offset="6898" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="6902" length="28" type="WString { }">Merge Button</TextB>
+      <TextC kind="Leaf" offset="6930" length="120" type="WString { }">Can merger if equipment and aatribute item are registered.</TextC>
+    </_34>
+    <_35 kind="Record" offset="7050" length="116">
+      <TextKey kind="Leaf" offset="7050" length="4" type="Scalar { Kind = U32 }" value="2088288529" />
+      <TextA kind="Leaf" offset="7054" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="7058" length="26" type="WString { }">Remove Cost</TextB>
+      <TextC kind="Leaf" offset="7084" length="82" type="WString { }">Need to pay a fee to remove equipments.</TextC>
+    </_35>
+    <_36 kind="Record" offset="7166" length="252">
+      <TextKey kind="Leaf" offset="7166" length="4" type="Scalar { Kind = U32 }" value="2088288530" />
+      <TextA kind="Leaf" offset="7170" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="7174" length="30" type="WString { }">Remove Button</TextB>
+      <TextC kind="Leaf" offset="7204" length="214" type="WString { }">Remove merged attribute item from the equipment. Can remove after selecting the attribute item to remove.</TextC>
+    </_36>
+    <_37 kind="Record" offset="7418" length="230">
+      <TextKey kind="Leaf" offset="7418" length="4" type="Scalar { Kind = U32 }" value="2088288555" />
+      <TextA kind="Leaf" offset="7422" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="7426" length="52" type="WString { }">Digivice Register Window</TextB>
+      <TextC kind="Leaf" offset="7478" length="170" type="WString { }">Can equip Digivice. Digivice can be obtained from quests or purchased from Yushima.</TextC>
+    </_37>
+    <_38 kind="Record" offset="7648" length="194">
+      <TextKey kind="Leaf" offset="7648" length="4" type="Scalar { Kind = U32 }" value="2088288556" />
+      <TextA kind="Leaf" offset="7652" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="7656" length="48" type="WString { }">Mercenary Digimon Slot</TextB>
+      <TextC kind="Leaf" offset="7704" length="138" type="WString { }">Digimon in the mercenary slot. Can change or delete by right click.</TextC>
+    </_38>
+    <_39 kind="Record" offset="7842" length="184">
+      <TextKey kind="Leaf" offset="7842" length="4" type="Scalar { Kind = U32 }" value="2088288557" />
+      <TextA kind="Leaf" offset="7846" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="7850" length="28" type="WString { }">Chipset Slot</TextB>
+      <TextC kind="Leaf" offset="7878" length="148" type="WString { }">Can obtain vairous abilities by inserting Chipset into the Chipset slot.</TextC>
+    </_39>
+    <_40 kind="Record" offset="8026" length="146">
+      <TextKey kind="Leaf" offset="8026" length="4" type="Scalar { Kind = U32 }" value="2088288588" />
+      <TextA kind="Leaf" offset="8030" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="8034" length="42" type="WString { }">Minimap Open Button</TextB>
+      <TextC kind="Leaf" offset="8076" length="96" type="WString { }">Can open the minimap when clicked. Shortcut: M</TextC>
+    </_40>
+    <_41 kind="Record" offset="8172" length="194">
+      <TextKey kind="Leaf" offset="8172" length="4" type="Scalar { Kind = U32 }" value="2088288589" />
+      <TextA kind="Leaf" offset="8176" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="8180" length="20" type="WString { }">Find NPC</TextB>
+      <TextC kind="Leaf" offset="8200" length="166" type="WString { }">List of all NPCs in the current map. Can find the NPC by clicking the NPC button.</TextC>
+    </_41>
+    <_42 kind="Record" offset="8366" length="94">
+      <TextKey kind="Leaf" offset="8366" length="4" type="Scalar { Kind = U32 }" value="2088288590" />
+      <TextA kind="Leaf" offset="8370" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="8374" length="36" type="WString { }">Increase Minimap</TextB>
+      <TextC kind="Leaf" offset="8410" length="50" type="WString { }">Can expand the minimap.</TextC>
+    </_42>
+    <_43 kind="Record" offset="8460" length="106">
+      <TextKey kind="Leaf" offset="8460" length="4" type="Scalar { Kind = U32 }" value="2088288591" />
+      <TextA kind="Leaf" offset="8464" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="8468" length="36" type="WString { }">Decrease Minimap</TextB>
+      <TextC kind="Leaf" offset="8504" length="62" type="WString { }">Can make the minimap smaller.</TextC>
+    </_43>
+    <_44 kind="Record" offset="8566" length="124">
+      <TextKey kind="Leaf" offset="8566" length="4" type="Scalar { Kind = U32 }" value="2088288592" />
+      <TextA kind="Leaf" offset="8570" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="8574" length="48" type="WString { }">Tamer Info Open Button</TextB>
+      <TextC kind="Leaf" offset="8622" length="68" type="WString { }">Can open Tamer info. Shortcut: C</TextC>
+    </_44>
+    <_45 kind="Record" offset="8690" length="132">
+      <TextKey kind="Leaf" offset="8690" length="4" type="Scalar { Kind = U32 }" value="2088288593" />
+      <TextA kind="Leaf" offset="8694" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="8698" length="52" type="WString { }">Digimon Info Open Button</TextB>
+      <TextC kind="Leaf" offset="8750" length="72" type="WString { }">Can open Digimon info. Shortcut: X</TextC>
+    </_45>
+    <_46 kind="Record" offset="8822" length="172">
+      <TextKey kind="Leaf" offset="8822" length="4" type="Scalar { Kind = U32 }" value="2088288594" />
+      <TextA kind="Leaf" offset="8826" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="8830" length="36" type="WString { }">Boss Appear Time</TextB>
+      <TextC kind="Leaf" offset="8866" length="128" type="WString { }">List of the time when Boss monsters in the current map appear.</TextC>
+    </_46>
+    <_47 kind="Record" offset="8994" length="128">
+      <TextKey kind="Leaf" offset="8994" length="4" type="Scalar { Kind = U32 }" value="2088288622" />
+      <TextA kind="Leaf" offset="8998" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="9002" length="30" type="WString { }">Required Cost</TextB>
+      <TextC kind="Leaf" offset="9032" length="90" type="WString { }">Cost required to receive the selected item.</TextC>
+    </_47>
+    <_48 kind="Record" offset="9122" length="142">
+      <TextKey kind="Leaf" offset="9122" length="4" type="Scalar { Kind = U32 }" value="2088288654" />
+      <TextA kind="Leaf" offset="9126" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="9130" length="50" type="WString { }">Equipment Register Slot</TextB>
+      <TextC kind="Leaf" offset="9180" length="84" type="WString { }">Can register chargeable equipment items.</TextC>
+    </_48>
+    <_49 kind="Record" offset="9264" length="98">
+      <TextKey kind="Leaf" offset="9264" length="4" type="Scalar { Kind = U32 }" value="2088288655" />
+      <TextA kind="Leaf" offset="9268" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="9272" length="26" type="WString { }">Charge Cost</TextB>
+      <TextC kind="Leaf" offset="9298" length="64" type="WString { }">Need to pay a fee to recharge.</TextC>
+    </_49>
+    <_50 kind="Record" offset="9362" length="170">
+      <TextKey kind="Leaf" offset="9362" length="4" type="Scalar { Kind = U32 }" value="2088288656" />
+      <TextA kind="Leaf" offset="9366" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="9370" length="30" type="WString { }">Charge Button</TextB>
+      <TextC kind="Leaf" offset="9400" length="132" type="WString { }">Recharge will start once the fee is paid by clikcing the button.</TextC>
+    </_50>
+    <_51 kind="Record" offset="9532" length="144">
+      <TextKey kind="Leaf" offset="9532" length="4" type="Scalar { Kind = U32 }" value="2088288657" />
+      <TextA kind="Leaf" offset="9536" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="9540" length="44" type="WString { }">Chargeable Item Slot</TextB>
+      <TextC kind="Leaf" offset="9584" length="92" type="WString { }">Can register consumable items to charge now.</TextC>
+    </_51>
+    <_52 kind="Record" offset="9676" length="164">
+      <TextKey kind="Leaf" offset="9676" length="4" type="Scalar { Kind = U32 }" value="2088288658" />
+      <TextA kind="Leaf" offset="9680" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="9684" length="38" type="WString { }">Charge Now Button</TextB>
+      <TextC kind="Leaf" offset="9722" length="118" type="WString { }">Consume the item for the selected duration to charge now.</TextC>
+    </_52>
+    <_53 kind="Record" offset="9840" length="196">
+      <TextKey kind="Leaf" offset="9840" length="4" type="Scalar { Kind = U32 }" value="2088288659" />
+      <TextA kind="Leaf" offset="9844" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="9848" length="48" type="WString { }">Evolution Chipset Slot</TextB>
+      <TextC kind="Leaf" offset="9896" length="140" type="WString { }">Equip a Jogress Chip or DigiXros Chip to enable Jogress or DigiXros.</TextC>
+    </_53>
+    <_54 kind="Record" offset="10036" length="174">
+      <TextKey kind="Leaf" offset="10036" length="4" type="Scalar { Kind = U32 }" value="2088288687" />
+      <TextA kind="Leaf" offset="10040" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="10044" length="38" type="WString { }">Change Appearance</TextB>
+      <TextC kind="Leaf" offset="10082" length="128" type="WString { }">Digimon appearance is changed by using appearance change item.</TextC>
+    </_54>
+    <_55 kind="Record" offset="10210" length="668">
+      <TextKey kind="Leaf" offset="10210" length="4" type="Scalar { Kind = U32 }" value="2088288688" />
+      <TextA kind="Leaf" offset="10214" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="10218" length="30" type="WString { }">Hunter's Aura</TextB>
+      <TextC kind="Leaf" offset="10248" length="630" type="WString { }">Hunter's Aura starts to charge when Tamers defeat evil Digimon in each region and is shared among Tamers. When it is fully charged, an evil Digimon defeated by a Tamer will drop a reward item. When the reward item is dropped, the Aura resets, and the Aura interface can be hidden by accessing Settings &gt; Interface</TextC>
+    </_55>
+    <_56 kind="Record" offset="10878" length="148">
+      <TextKey kind="Leaf" offset="10878" length="4" type="Scalar { Kind = U32 }" value="2088288689" />
+      <TextA kind="Leaf" offset="10882" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="10886" length="60" type="WString { }">Level and Size Data Exchange</TextB>
+      <TextC kind="Leaf" offset="10946" length="80" type="WString { }">Exchange Digimon's size and level data</TextC>
+    </_56>
+    <_57 kind="Record" offset="11026" length="144">
+      <TextKey kind="Leaf" offset="11026" length="4" type="Scalar { Kind = U32 }" value="2088288690" />
+      <TextA kind="Leaf" offset="11030" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="11034" length="58" type="WString { }">Reinforcement Data Exchange</TextB>
+      <TextC kind="Leaf" offset="11092" length="78" type="WString { }">Exchange Digimon's reinforcement data</TextC>
+    </_57>
+    <_58 kind="Record" offset="11170" length="188">
+      <TextKey kind="Leaf" offset="11170" length="4" type="Scalar { Kind = U32 }" value="2088288691" />
+      <TextA kind="Leaf" offset="11174" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="11178" length="80" type="WString { }">Evolution Slot and Skill Data Exchange</TextB>
+      <TextC kind="Leaf" offset="11258" length="100" type="WString { }">Exchange Digimon's evolution slot and skill data</TextC>
+    </_58>
+    <_59 kind="Record" offset="11358" length="178">
+      <TextKey kind="Leaf" offset="11358" length="4" type="Scalar { Kind = U32 }" value="2088288692" />
+      <TextA kind="Leaf" offset="11362" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="11366" length="58" type="WString { }">Equipment Registration Slot</TextB>
+      <TextC kind="Leaf" offset="11424" length="112" type="WString { }">You can register equipment items that can be enhanced.</TextC>
+    </_59>
+    <_60 kind="Record" offset="11536" length="286">
+      <TextKey kind="Leaf" offset="11536" length="4" type="Scalar { Kind = U32 }" value="2088288693" />
+      <TextA kind="Leaf" offset="11540" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="11544" length="38" type="WString { }">Sorting Lock Help</TextB>
+      <TextC kind="Leaf" offset="11582" length="240" type="WString { }">You can lock or unlock item sorting by pressing Ctrl + Left Mouse Click.\nItems in sorting lock state cannot be split.</TextC>
+    </_60>
+    <_61 kind="Record" offset="11822" length="132">
+      <TextKey kind="Leaf" offset="11822" length="4" type="Scalar { Kind = U32 }" value="2088324360" />
+      <TextA kind="Leaf" offset="11826" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="11830" length="28" type="WString { }">Charge Crown</TextB>
+      <TextC kind="Leaf" offset="11858" length="96" type="WString { }">Crown charge webpage will appear when clicked.</TextC>
+    </_61>
+    <_62 kind="Record" offset="11954" length="148">
+      <TextKey kind="Leaf" offset="11954" length="4" type="Scalar { Kind = U32 }" value="2088324361" />
+      <TextA kind="Leaf" offset="11958" length="4" type="WString { }"></TextA>
+      <TextB kind="Leaf" offset="11962" length="36" type="WString { }">Charge DigiCrwon</TextB>
+      <TextC kind="Leaf" offset="11998" length="104" type="WString { }">DigiCrwon charge webpage will appear when clicked.</TextC>
+    </_62>
+  </Entries>
+</ToolTip_Str>

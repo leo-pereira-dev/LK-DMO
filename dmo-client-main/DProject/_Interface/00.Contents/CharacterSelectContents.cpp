@@ -277,6 +277,7 @@ int CharacterSelectContents::sCharacterInfo::GetCharacterImageIdx( uint const& m
 	case CODE_HIRO:			return 17;	// Hiro Amanokawa
 	case CODE_RULI:			return 18;	// Ruli Tsukiyono
 	case CODE_KIYOSHIROU:	return 19;	// Kiyoshirou Higashimitarai
+	case CODE_DIGIMON_KAISER:return 20;	// Digimon Kaiser
 	default:				return 0;	// If not configured show Marcus Damon image
 	}
 }
@@ -1009,4 +1010,3 @@ void CharacterSelectContents::Get_Date( int nYear, int nMonth, int nDay, char* p
 
 	sprintf_s( szDate, 32, "%d/%d/%d %s", nRealYear, nRealMonth, nRealDay, pTime );
 }
-

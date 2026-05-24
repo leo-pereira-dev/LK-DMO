@@ -44,6 +44,11 @@ namespace DigitalWorldOnline.Commons.Models.Asset
         /// Total casting time
         /// </summary>
         public float CastingTime { get; private set; }
+
+        /// <summary>
+        /// Duration, in seconds, for timed secondary skill effects.
+        /// </summary>
+        public int EffectDuration { get; private set; }
         
         /// <summary>
         /// Cooldown in seconds

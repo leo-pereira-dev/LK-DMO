@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DBookOpt_Str schema="DBookOpt_Str.struct" bin="DBookOpt_Str.bin" byteLength="1306">
+  <Entries kind="Section" offset="0" length="1306">
+    <_0 kind="Record" offset="4" length="158">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <TextA kind="Leaf" offset="8" length="58" type="WString { }">Additional damage to attack</TextA>
+      <TextB kind="Leaf" offset="66" length="96" type="WString { }">Additional damage to normal attack is applied.</TextB>
+    </_0>
+    <_1 kind="Record" offset="162" length="154">
+      <TextKey kind="Leaf" offset="162" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="166" length="56" type="WString { }">Additional damage to skill</TextA>
+      <TextB kind="Leaf" offset="222" length="94" type="WString { }">Additional damage to skill attack is applied.</TextB>
+    </_1>
+    <_2 kind="Record" offset="316" length="126">
+      <TextKey kind="Leaf" offset="316" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="320" length="60" type="WString { }">Increase critical hit damage</TextA>
+      <TextB kind="Leaf" offset="380" length="62" type="WString { }">Increase critical hit damage.</TextB>
+    </_2>
+    <_3 kind="Record" offset="442" length="148">
+      <TextKey kind="Leaf" offset="442" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="446" length="54" type="WString { }">Reset skill cooldown time</TextA>
+      <TextB kind="Leaf" offset="500" length="90" type="WString { }">Reset skills' cooldown time when activated.</TextB>
+    </_3>
+    <_4 kind="Record" offset="590" length="94">
+      <TextKey kind="Leaf" offset="590" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <TextA kind="Leaf" offset="594" length="34" type="WString { }">Increase Max HP</TextA>
+      <TextB kind="Leaf" offset="628" length="56" type="WString { }">Increase digimon's Max HP.</TextB>
+    </_4>
+    <_5 kind="Record" offset="684" length="118">
+      <TextKey kind="Leaf" offset="684" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextA kind="Leaf" offset="688" length="46" type="WString { }">Increase attack speed</TextA>
+      <TextB kind="Leaf" offset="734" length="68" type="WString { }">Increase normal attacking speed.</TextB>
+    </_5>
+    <_6 kind="Record" offset="802" length="100">
+      <TextKey kind="Leaf" offset="802" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <TextA kind="Leaf" offset="806" length="38" type="WString { }">Increase Hit Rate</TextA>
+      <TextB kind="Leaf" offset="844" length="58" type="WString { }">Increase digimon's Hit Rate</TextB>
+    </_6>
+    <_7 kind="Record" offset="902" length="102">
+      <TextKey kind="Leaf" offset="902" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <TextA kind="Leaf" offset="906" length="44" type="WString { }">Attack Amplification</TextA>
+      <TextB kind="Leaf" offset="950" length="54" type="WString { }">Current attack amplified.</TextB>
+    </_7>
+    <_8 kind="Record" offset="1004" length="116">
+      <TextKey kind="Leaf" offset="1004" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <TextA kind="Leaf" offset="1008" length="54" type="WString { }">Attribute Damage Increase</TextA>
+      <TextB kind="Leaf" offset="1062" length="58" type="WString { }">Attribute damage increased.</TextB>
+    </_8>
+    <_9 kind="Record" offset="1120" length="86">
+      <TextKey kind="Leaf" offset="1120" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <TextA kind="Leaf" offset="1124" length="34" type="WString { }">Attack Increase</TextA>
+      <TextB kind="Leaf" offset="1158" length="48" type="WString { }">Base attack increased.</TextB>
+    </_9>
+    <_10 kind="Record" offset="1206" length="100">
+      <TextKey kind="Leaf" offset="1206" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <TextA kind="Leaf" offset="1210" length="46" type="WString { }">Final Damage Increase</TextA>
+      <TextB kind="Leaf" offset="1256" length="50" type="WString { }">Final damage increased.</TextB>
+    </_10>
+  </Entries>
+</DBookOpt_Str>

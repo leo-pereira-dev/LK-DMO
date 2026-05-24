@@ -59,6 +59,7 @@ namespace DigitalWorldOnline.Application.GameAssets.Queries
                     HPUsage = rec.UseHP,
                     Value = 0,
                     CastingTime = rec.CastingTime,
+                    EffectDuration = (int)rec.DamageTime,
                     Cooldown = (int)rec.CooldownTimeMs,
                     MaxLevel = (byte)rec.MaxLevel,
                     RequiredPoints = (byte)rec.LevelupPoint,

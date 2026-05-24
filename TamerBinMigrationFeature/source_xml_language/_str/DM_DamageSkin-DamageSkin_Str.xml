@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DM_DamageSkin_DamageSkin_Str schema="DM_DamageSkin-DamageSkin_Str.struct" bin="DM_DamageSkin-DamageSkin_Str.bin" byteLength="624">
+  <Entries kind="Section" offset="0" length="624">
+    <_0 kind="Record" offset="4" length="24">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <TextA kind="Leaf" offset="8" length="20" type="WString { }">Red Tint</TextA>
+    </_0>
+    <_1 kind="Record" offset="28" length="32">
+      <TextKey kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="32" length="28" type="WString { }">SUMMER BEACH</TextA>
+    </_1>
+    <_2 kind="Record" offset="60" length="32">
+      <TextKey kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="64" length="28" type="WString { }">Golden Metal</TextA>
+    </_2>
+    <_3 kind="Record" offset="92" length="26">
+      <TextKey kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="96" length="22" type="WString { }">Jellybean</TextA>
+    </_3>
+    <_4 kind="Record" offset="118" length="32">
+      <TextKey kind="Leaf" offset="118" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <TextA kind="Leaf" offset="122" length="28" type="WString { }">Starry Night</TextA>
+    </_4>
+    <_5 kind="Record" offset="150" length="20">
+      <TextKey kind="Leaf" offset="150" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextA kind="Leaf" offset="154" length="16" type="WString { }">Digita</TextA>
+    </_5>
+    <_6 kind="Record" offset="170" length="20">
+      <TextKey kind="Leaf" offset="170" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <TextA kind="Leaf" offset="174" length="16" type="WString { }">Hangul</TextA>
+    </_6>
+    <_7 kind="Record" offset="190" length="42">
+      <TextKey kind="Leaf" offset="190" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <TextA kind="Leaf" offset="194" length="38" type="WString { }">Refreshing Forest</TextA>
+    </_7>
+    <_8 kind="Record" offset="232" length="26">
+      <TextKey kind="Leaf" offset="232" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <TextA kind="Leaf" offset="236" length="22" type="WString { }">Neon Sign</TextA>
+    </_8>
+    <_9 kind="Record" offset="258" length="24">
+      <TextKey kind="Leaf" offset="258" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <TextA kind="Leaf" offset="262" length="20" type="WString { }">Monotone</TextA>
+    </_9>
+    <_10 kind="Record" offset="282" length="28">
+      <TextKey kind="Leaf" offset="282" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <TextA kind="Leaf" offset="286" length="24" type="WString { }">Dark Blood</TextA>
+    </_10>
+    <_11 kind="Record" offset="310" length="26">
+      <TextKey kind="Leaf" offset="310" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <TextA kind="Leaf" offset="314" length="22" type="WString { }">Halloween</TextA>
+    </_11>
+    <_12 kind="Record" offset="336" length="22">
+      <TextKey kind="Leaf" offset="336" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <TextA kind="Leaf" offset="340" length="18" type="WString { }">Courage</TextA>
+    </_12>
+    <_13 kind="Record" offset="358" length="28">
+      <TextKey kind="Leaf" offset="358" length="4" type="Scalar { Kind = U32 }" value="14" />
+      <TextA kind="Leaf" offset="362" length="24" type="WString { }">Friendship</TextA>
+    </_13>
+    <_14 kind="Record" offset="386" length="26">
+      <TextKey kind="Leaf" offset="386" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <TextA kind="Leaf" offset="390" length="22" type="WString { }">Christmas</TextA>
+    </_14>
+    <_15 kind="Record" offset="412" length="38">
+      <TextKey kind="Leaf" offset="412" length="4" type="Scalar { Kind = U32 }" value="16" />
+      <TextA kind="Leaf" offset="416" length="34" type="WString { }">Cherry blossoms</TextA>
+    </_15>
+    <_16 kind="Record" offset="450" length="18">
+      <TextKey kind="Leaf" offset="450" length="4" type="Scalar { Kind = U32 }" value="17" />
+      <TextA kind="Leaf" offset="454" length="14" type="WString { }">Hanja</TextA>
+    </_16>
+    <_17 kind="Record" offset="468" length="20">
+      <TextKey kind="Leaf" offset="468" length="4" type="Scalar { Kind = U32 }" value="18" />
+      <TextA kind="Leaf" offset="472" length="16" type="WString { }">Mosaic</TextA>
+    </_17>
+    <_18 kind="Record" offset="488" length="22">
+      <TextKey kind="Leaf" offset="488" length="4" type="Scalar { Kind = U32 }" value="19" />
+      <TextA kind="Leaf" offset="492" length="18" type="WString { }">Vampire</TextA>
+    </_18>
+    <_19 kind="Record" offset="510" length="26">
+      <TextKey kind="Leaf" offset="510" length="4" type="Scalar { Kind = U32 }" value="20" />
+      <TextA kind="Leaf" offset="514" length="22" type="WString { }">Milky Way</TextA>
+    </_19>
+    <_20 kind="Record" offset="536" length="28">
+      <TextKey kind="Leaf" offset="536" length="4" type="Scalar { Kind = U32 }" value="21" />
+      <TextA kind="Leaf" offset="540" length="24" type="WString { }">Balck Rose</TextA>
+    </_20>
+    <_21 kind="Record" offset="564" length="36">
+      <TextKey kind="Leaf" offset="564" length="4" type="Scalar { Kind = U32 }" value="22" />
+      <TextA kind="Leaf" offset="568" length="32" type="WString { }">Blooming Party</TextA>
+    </_21>
+    <_22 kind="Record" offset="600" length="24">
+      <TextKey kind="Leaf" offset="600" length="4" type="Scalar { Kind = U32 }" value="23" />
+      <TextA kind="Leaf" offset="604" length="20" type="WString { }">Icecream</TextA>
+    </_22>
+  </Entries>
+</DM_DamageSkin_DamageSkin_Str>

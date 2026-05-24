@@ -4,11 +4,13 @@ using DigitalWorldOnline.Application.Admin.Queries;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
 using DigitalWorldOnline.Application.GameAssets.Queries;
+using DigitalWorldOnline.Commons.DTOs.Account;
 using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums.Account;
 using DigitalWorldOnline.Commons.Enums.Character;
 using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Models.Base;
+using DigitalWorldOnline.Commons.Models.Summon;
 using DigitalWorldOnline.Commons.Packets.Chat;
 using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.GameServer.Combat;
@@ -77,7 +79,7 @@ namespace DigitalWorldOnline.Game
         {
             var command = Regex.Replace(message.Trim().ToLower(), @"\s+", " ").Split(' ');
 
-            if (message.Contains("summon"))
+            if (command[0] == "summon" && command.Length > 2)
             {
                
                 // Mantém o segundo elemento em sua forma original
@@ -926,6 +928,61 @@ namespace DigitalWorldOnline.Game
                                 }
                                 break;
 
+                            case "clone":
+                                {
+                                    var regex = @"(digimon\sclone\sfull$){1}";
+                                    var match = Regex.Match(message, regex, RegexOptions.IgnoreCase);
+
+                                    if (!match.Success)
+                                    {
+                                        client.Send(new SystemMessagePacket("Correct usage is \"!digimon clone full\"."));
+                                        break;
+                                    }
+
+                                    var cloneTypes = new[]
+                                    {
+                                        DigicloneTypeEnum.AT,
+                                        DigicloneTypeEnum.BL,
+                                        DigicloneTypeEnum.CT,
+                                        DigicloneTypeEnum.EV,
+                                        DigicloneTypeEnum.HP
+                                    };
+
+                                    foreach (var cloneType in cloneTypes)
+                                    {
+                                        client.Partner.Digiclone.ResetAll(cloneType);
+
+                                        for (byte level = 1; level <= 15; level++)
+                                        {
+                                            var cloneValue = _assets.CloneValues.FirstOrDefault(x =>
+                                                x.Type == cloneType &&
+                                                level >= x.MinLevel &&
+                                                level <= x.MaxLevel);
+
+                                            if (cloneValue == null)
+                                            {
+                                                client.Send(new SystemMessagePacket($"Missing clone value asset for {cloneType} level {level}."));
+                                                break;
+                                            }
+
+                                            client.Partner.Digiclone.IncreaseCloneLevel(cloneType, (short)cloneValue.MaxValue);
+                                        }
+                                    }
+
+                                    client.Partner.SetBaseStatus(
+                                        _statusManager.GetDigimonBaseStatus(
+                                            client.Partner.CurrentType,
+                                            client.Partner.Level,
+                                            client.Partner.Size
+                                        )
+                                    );
+
+                                    client.Send(new UpdateStatusPacket(client.Tamer));
+                                    await _sender.Send(new UpdateDigicloneCommand(client.Partner.Digiclone));
+                                    client.Send(new SystemMessagePacket("Active Digimon full clone applied."));
+                                }
+                                break;
+
                             default:
                                 {
                                     client.Send(new SystemMessagePacket("Unknown command. Check the available commands at the admin portal."));
@@ -1179,6 +1236,68 @@ namespace DigitalWorldOnline.Game
                             targetClient.Send(new PickItemFailPacket(PickItemFailReasonEnum.InventoryFull));
                             _logger.Information($"GM giveitem failed. Inventory full. gm={client.TamerId} target={targetClient.TamerId} item={itemId} amount={amount}");
                         }
+                    }
+                    break;
+
+                case "summonmonster":
+                    {
+                        if (command.Length < 2)
+                        {
+                            client.Send(new SystemMessagePacket("Correct usage is \"!summonmonster {monsterid} [amount] [easy|normal|medium|hard]\" or \"!summonmonster {monsterid} [amount] custom Level HP DS AT DE HT EV CT AS\"."));
+                            break;
+                        }
+
+                        var monsterId = int.Parse(command[1]);
+                        var amount = command.Length == 2 ? 1 : int.Parse(command[2]);
+                        var preset = command.Length >= 4 ? command[3].ToLowerInvariant() : "normal";
+                        int[]? customStats = null;
+                        var bossMonster = false;
+
+                        if (amount <= 0)
+                            amount = 1;
+                        if (amount > 50)
+                            amount = 50;
+
+                        if (preset == "custom")
+                        {
+                            if (command.Length < 13)
+                            {
+                                client.Send(new SystemMessagePacket("Custom usage: !summonmonster {monsterid} {amount} custom Level HP DS AT DE HT EV CT AS"));
+                                break;
+                            }
+
+                            customStats = new int[9];
+                            var validCustom = true;
+                            for (var i = 0; i < customStats.Length; i++)
+                            {
+                                if (!long.TryParse(command[4 + i], out var rawValue) || rawValue <= 0)
+                                {
+                                    validCustom = false;
+                                    break;
+                                }
+
+                                customStats[i] = ClampSummonCustomStat(rawValue, i);
+                            }
+
+                            if (!validCustom)
+                            {
+                                client.Send(new SystemMessagePacket("Custom stats must be positive numbers: Level HP DS AT DE HT EV CT AS."));
+                                break;
+                            }
+
+                            bossMonster = command.Length >= 14 && command[13].Equals("boss", StringComparison.OrdinalIgnoreCase);
+                        }
+                        else if (preset is not ("easy" or "normal" or "medium" or "hard"))
+                        {
+                            client.Send(new SystemMessagePacket("Invalid preset. Use easy, normal, medium, hard, or custom."));
+                            break;
+                        }
+                        else
+                        {
+                            bossMonster = command.Length >= 5 && command[4].Equals("boss", StringComparison.OrdinalIgnoreCase);
+                        }
+
+                        SummonMonsterByGm(client, monsterId, amount, preset, customStats, bossMonster);
                     }
                     break;
 
@@ -1461,9 +1580,17 @@ namespace DigitalWorldOnline.Game
                 case "openseals":
                     {
                         var sealInfoList = _assets.SealInfo;
-                        foreach (var seal in sealInfoList)
+                        var maxSealInfoList = sealInfoList
+                            .GroupBy(x => x.SealId)
+                            .Select(x => x
+                                .OrderByDescending(seal => seal.RequiredAmount)
+                                .ThenByDescending(seal => seal.SequentialId)
+                                .First())
+                            .ToList();
+
+                        foreach (var seal in maxSealInfoList)
                         {
-                            client.Tamer.SealList.AddOrUpdateSeal(seal.SealId, 3000, seal.SequentialId);
+                            client.Tamer.SealList.AddOrSetSeal(seal.SealId, seal.RequiredAmount, seal.SequentialId);
                         }
 
                         client.Partner?.SetSealStatus(sealInfoList);
@@ -1486,6 +1613,116 @@ namespace DigitalWorldOnline.Game
                             client.Tamer.Location.MapId,
                             client.Tamer.Location.X,
                             client.Tamer.Location.Y));
+                    }
+                    break;
+
+                case "admin":
+                    {
+                        var regex = @"(admin\skick\s\S+$){1}|(admin\sban\s\S+$){1}|(admin\sunban\s\S+$){1}";
+                        var match = Regex.Match(message, regex, RegexOptions.IgnoreCase);
+
+                        if (!match.Success)
+                        {
+                            client.Send(new SystemMessagePacket("Correct usage is \"!admin kick {tamer}\", \"!admin ban {tamer}\" or \"!admin unban {account|tamer}\"."));
+                            break;
+                        }
+
+                        var action = command[1];
+                        var targetName = command[2];
+
+                        switch (action)
+                        {
+                            case "kick":
+                                {
+                                    var targetClient = FindOnlineClient(targetName);
+                                    if (targetClient == null)
+                                    {
+                                        client.Send(new SystemMessagePacket($"Player {targetName} is not online."));
+                                        break;
+                                    }
+
+                                    if (targetClient.AccessLevel >= client.AccessLevel)
+                                    {
+                                        client.Send(new SystemMessagePacket("Cannot kick a player with equal or higher access level."));
+                                        break;
+                                    }
+
+                                    targetClient.Send(new DisconnectUserPacket("Disconnected by administrator."));
+                                    targetClient.Disconnect(true);
+                                    client.Send(new SystemMessagePacket($"Player {targetClient.Tamer.Name} disconnected."));
+                                    _logger.Information("GM admin kick gm={GmTamerId}:{GmName} target={TargetTamerId}:{TargetName}", client.TamerId, client.Tamer.Name, targetClient.TamerId, targetClient.Tamer.Name);
+                                }
+                                break;
+
+                            case "ban":
+                                {
+                                    var targetClient = FindOnlineClient(targetName);
+                                    AccountDTO? account = null;
+
+                                    if (targetClient != null)
+                                        account = await _sender.Send(new AccountByIdQuery(targetClient.AccountId));
+                                    else
+                                        account = await FindAccountForAdminTarget(targetName);
+
+                                    if (account == null)
+                                    {
+                                        client.Send(new SystemMessagePacket($"Account/tamer {targetName} not found."));
+                                        break;
+                                    }
+
+                                    if (targetClient != null && targetClient.AccessLevel >= client.AccessLevel)
+                                    {
+                                        client.Send(new SystemMessagePacket("Cannot ban a player with equal or higher access level."));
+                                        break;
+                                    }
+
+                                    if (account.AccessLevel >= client.AccessLevel)
+                                    {
+                                        client.Send(new SystemMessagePacket("Cannot ban an account with equal or higher access level."));
+                                        break;
+                                    }
+
+                                    await _sender.Send(new DigitalWorldOnline.Application.Admin.Commands.UpdateAccountCommand(
+                                        account.Id,
+                                        account.Username,
+                                        account.Email,
+                                        AccountAccessLevelEnum.Blocked,
+                                        account.Premium,
+                                        account.Silk));
+
+                                    if (targetClient != null)
+                                    {
+                                        targetClient.Send(new DisconnectUserPacket("Account blocked by administrator."));
+                                        targetClient.Disconnect(true);
+                                    }
+
+                                    client.Send(new SystemMessagePacket($"Account {account.Username} blocked."));
+                                    _logger.Information("GM admin ban gm={GmTamerId}:{GmName} account={AccountId}:{Username} target={Target}", client.TamerId, client.Tamer.Name, account.Id, account.Username, targetName);
+                                }
+                                break;
+
+                            case "unban":
+                                {
+                                    var account = await FindAccountForAdminTarget(targetName);
+                                    if (account == null)
+                                    {
+                                        client.Send(new SystemMessagePacket($"Account/tamer {targetName} not found."));
+                                        break;
+                                    }
+
+                                    await _sender.Send(new DigitalWorldOnline.Application.Admin.Commands.UpdateAccountCommand(
+                                        account.Id,
+                                        account.Username,
+                                        account.Email,
+                                        AccountAccessLevelEnum.Default,
+                                        account.Premium,
+                                        account.Silk));
+
+                                    client.Send(new SystemMessagePacket($"Account {account.Username} unblocked."));
+                                    _logger.Information("GM admin unban gm={GmTamerId}:{GmName} account={AccountId}:{Username} target={Target}", client.TamerId, client.Tamer.Name, account.Id, account.Username, targetName);
+                                }
+                                break;
+                        }
                     }
                     break;
 
@@ -1533,6 +1770,135 @@ namespace DigitalWorldOnline.Game
                     client.Send(new SystemMessagePacket($"Unknown command. Check the available commands on the Admin Portal."));
                     break;
             }
+        }
+
+        private GameClient? FindOnlineClient(string tamerName)
+        {
+            return
+                _mapServer.FindClientByTamerName(tamerName) ??
+                _dungeonServer.FindClientByTamerName(tamerName) ??
+                _pvpServer.FindClientByTamerName(tamerName);
+        }
+
+        private static int ClampSummonStat(long value)
+        {
+            if (value < 1)
+                return 1;
+            if (value > 999999999)
+                return 999999999;
+            return (int)value;
+        }
+
+        private static int ClampSummonCustomStat(long value, int index)
+        {
+            var max = index == 0 ? byte.MaxValue : 999999999;
+            if (value < 1)
+                return 1;
+            if (value > max)
+                return max;
+            return (int)value;
+        }
+
+        private static int ScaleSummonStat(int value, int percent)
+        {
+            return ClampSummonStat((long)value * percent / 100);
+        }
+
+        private static (byte Level, int Percent) ResolveSummonPreset(int baseLevel, string preset)
+        {
+            baseLevel = Math.Clamp(baseLevel, 1, byte.MaxValue);
+
+            return preset switch
+            {
+                "easy" => ((byte)Math.Clamp(baseLevel * 60 / 100, 1, byte.MaxValue), 60),
+                "medium" => ((byte)Math.Clamp(baseLevel * 150 / 100, 1, byte.MaxValue), 150),
+                "hard" => ((byte)Math.Clamp(baseLevel * 250 / 100, 1, byte.MaxValue), 250),
+                _ => ((byte)baseLevel, 100)
+            };
+        }
+
+        private void SummonMonsterByGm(GameClient client, int monsterId, int amount, string preset = "normal", int[]? customStats = null, bool bossMonster = false)
+        {
+            if (_assets.Monster?.IsLoaded != true || !_assets.Monster.Data.ByType.TryGetValue(monsterId, out var rec))
+            {
+                client.Send(new SystemMessagePacket($"No monster info found with ID {monsterId}."));
+                _logger.Warning("GM summonmonster failed. Monster {MonsterId} not found. gm={GmTamerId}", monsterId, client.TamerId);
+                return;
+            }
+
+            var map = client.DungeonMap
+                ? _dungeonServer.FindMapByTamer(client.TamerId)
+                : _mapServer.FindMapByTamer(client.TamerId);
+
+            if (map == null)
+            {
+                client.Send(new SystemMessagePacket("Unable to find your current map instance."));
+                _logger.Warning("GM summonmonster failed. Map not found. gm={GmTamerId} monster={MonsterId}", client.TamerId, monsterId);
+                return;
+            }
+
+            var rng = Random.Shared;
+            var maxMobId = map.Mobs.Any() ? map.Mobs.Max(x => x.Id) : 0;
+            var maxSummonId = map.SummonMobs.Any() ? map.SummonMobs.Max(x => x.Id) : 0;
+            var firstId = Math.Max(maxMobId, maxSummonId) + 1;
+            var presetValues = ResolveSummonPreset(rec.Level, preset);
+            var level = customStats == null
+                ? presetValues.Level
+                : (byte)Math.Clamp(customStats[0], 1, byte.MaxValue);
+            var percent = presetValues.Percent;
+
+            for (var i = 0; i < amount; i++)
+            {
+                var x = client.Tamer.Location.X + (i == 0 ? 0 : rng.Next(-350, 351));
+                var y = client.Tamer.Location.Y + (i == 0 ? 0 : rng.Next(-350, 351));
+
+                var summon = new SummonMobModel
+                {
+                    Id = firstId + i,
+                    Type = rec.Type,
+                    Model = rec.ModelId,
+                    Name = string.Empty,
+                    Level = level,
+                    ViewRange = rec.Sight,
+                    HuntRange = rec.HuntRange,
+                    ATValue = customStats == null ? ScaleSummonStat(rec.AttPower, percent) : customStats[3],
+                    ASValue = customStats == null ? ScaleSummonStat(rec.AttSpeed, percent) : customStats[8],
+                    ARValue = rec.AttRange,
+                    DEValue = customStats == null ? ScaleSummonStat(rec.DefPower, percent) : customStats[4],
+                    EVValue = customStats == null ? ScaleSummonStat(rec.Evasion, percent) : customStats[6],
+                    HPValue = customStats == null ? ScaleSummonStat(rec.Hp, percent) : customStats[1],
+                    HTValue = customStats == null ? ScaleSummonStat(rec.HitRate, percent) : customStats[5],
+                    MSValue = rec.MoveSpeed,
+                    WSValue = rec.WalkSpeed,
+                    CTValue = customStats == null ? ScaleSummonStat(rec.CriticalRate, percent) : customStats[7],
+                    DSValue = customStats == null ? ScaleSummonStat(rec.Ds, percent) : customStats[2],
+                    Duration = 3600
+                };
+
+                summon.SetLocation(client.Tamer.Location.MapId, x, y);
+                summon.SetDuration();
+                summon.SetTargetSummonHandle(client.Tamer.GeneralHandler);
+                summon.SetClass(bossMonster ? 8 : rec.Class);
+                if (bossMonster)
+                    summon.SetDropReward(new SummonMobDropRewardModel());
+                map.AddMob(summon);
+            }
+
+            client.Send(new SystemMessagePacket($"Summoned monster {monsterId} x{amount} preset={preset} level={level} boss={bossMonster}."));
+            _logger.Information("GM summonmonster success. gm={GmTamerId} monster={MonsterId} amount={Amount} preset={Preset} level={Level} boss={Boss} map={MapId}", client.TamerId, monsterId, amount, preset, level, bossMonster, map.MapId);
+        }
+
+        private async Task<AccountDTO?> FindAccountForAdminTarget(string accountOrTamerName)
+        {
+            var account = await _sender.Send(new AccountByUsernameQuery(accountOrTamerName));
+            if (account != null)
+                return account;
+
+            var character = await _sender.Send(new CharacterByNameQuery(accountOrTamerName));
+            if (character == null)
+                return null;
+
+            return await _sender.Send(new AccountByIdQuery(character.AccountId));
         }
 
         public void Dispose()

@@ -75,6 +75,8 @@ namespace DigitalWorldOnline.Commons.Interfaces
 
         Task UpdateEvolutionAsync(DigimonEvolutionModel evolution);
 
+        Task<long> AddEvolutionAsync(long digimonId, DigimonEvolutionModel evolution);
+
         /// <summary>
         /// Detach (and remove from the DB) a single memory skill from a digimon evolution.
         /// No-op if the (evolutionId, skillId) pair doesn't exist.  Returns true if a row

@@ -58,14 +58,7 @@ void cTooltip::_MakeTooltip_BuffInfo()
 		assert_cs( false );
 	}
 
-	if( pBuffInfo->s_nBuffIcon >= 4000 )
-		pString = _AddIcon( ICONITEM::SKILL4, pBuffInfo->s_nBuffIcon );
-	else if( pBuffInfo->s_nBuffIcon >= 3000 )
-		pString = _AddIcon( ICONITEM::SKILL3, pBuffInfo->s_nBuffIcon );
-	else if( pBuffInfo->s_nBuffIcon >= 2000 )
-		pString = _AddIcon( ICONITEM::SKILL2, pBuffInfo->s_nBuffIcon );
-	else
-		pString = _AddIcon( ICONITEM::SKILL1, pBuffInfo->s_nBuffIcon );
+	pString = _AddIcon( ICONITEM::GetSkillIconType( pBuffInfo->s_nBuffIcon ), pBuffInfo->s_nBuffIcon );
 
 	if( m_nMainID == IF_BUFF_ACHIEVE )	// 업적창에서 띄운 툴팁일 경우
 	{

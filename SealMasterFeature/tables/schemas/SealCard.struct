@@ -1,0 +1,31 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/SealCard.bin]
+// SealCard.bin — Pack03 v487 client.
+// Route: FUN_01624c60 -> FUN_01625130 -> FUN_01623780.
+// Verified: 504 rows, 48388/48388 bytes.
+
+bin SealCard {
+    section Cards {
+        count  u32;
+        record SealCardRecord;
+    }
+}
+
+struct SealCardRecord {
+    u32  SealItemId;
+    u16  LeaderId;
+    u32  DigimonId;
+    u16  IconId;
+    u16  Scale;
+    u32  StageCount;
+    SealStage[StageCount] Stages;
+}
+
+struct SealStage size=13 {
+    u8   Grade;
+    u16  IconId;
+    u16  MaxCount;
+    u16  Effect1;
+    u16  Effect1Value;
+    u16  Effect2;
+    u16  Effect2Value;
+}

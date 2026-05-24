@@ -964,7 +964,12 @@ void cSkill::_Target_One_Enemy( int nSkilIndex )	// Target 51
 					pAttackProp->SetFollowTarget( pTarget, fRange, (CsC_AttackProp::eFOLLOW_ITERATOR)( CsC_AttackProp::FI_SKILL1 + nSkilIndex ), bRange );
 					( (CDigimonUser*)m_pParent )->SetDigimonUserState( CDigimonUser::DU_SKILL );
 					pTamer->ReleaseArriveTarget();
-					pTamer->SetTargetPos( pTarget->GetPos(), CsMax( TAMERUSER_ATTACK_DIST, fRange ), false, false );
+#ifdef KEYBOARD_MOVE
+					if( g_pResist->m_Global.s_bMoveDigimon )
+						pTamer->SetTamerUserState( CTamerUser::TU_FOLLOW_DIGIMON );
+					else
+#endif
+						pTamer->SetTargetPos( pTarget->GetPos(), CsMax( TAMERUSER_ATTACK_DIST, fRange ), false, false );
 				}
 				else
 				{
@@ -1656,7 +1661,12 @@ void cSkill::_Target_My_Partner_Around( int nSkilIndex )
 					pAttackProp->SetFollowTarget( pTarget, fRange, (CsC_AttackProp::eFOLLOW_ITERATOR)( CsC_AttackProp::FI_SKILL1 + nSkilIndex ), bRange );
 					( (CDigimonUser*)m_pParent )->SetDigimonUserState( CDigimonUser::DU_SKILL );
 					pTamer->ReleaseArriveTarget();
-					pTamer->SetTargetPos( pTarget->GetPos(), CsMax( TAMERUSER_ATTACK_DIST, fRange ), false, false );
+#ifdef KEYBOARD_MOVE
+					if( g_pResist->m_Global.s_bMoveDigimon )
+						pTamer->SetTamerUserState( CTamerUser::TU_FOLLOW_DIGIMON );
+					else
+#endif
+						pTamer->SetTargetPos( pTarget->GetPos(), CsMax( TAMERUSER_ATTACK_DIST, fRange ), false, false );
 				}
 				else
 				{
@@ -1998,7 +2008,21 @@ void cSkill::__Attack_Digimon( sINFO* pSkillInfo )
 	{
 	case nLIB::SVR_DUNGEON:
 	case nLIB::SVR_GAME:
-		g_pCharMng->GetTamerUser()->SetAttackPos( pTarget );
+#ifdef KEYBOARD_MOVE
+		if( g_pResist->m_Global.s_bMoveDigimon )
+		{
+			CDigimonUser* pDigimonUser = g_pCharMng->GetDigimonUser( 0 );
+			CTamerUser* pTamerUser = g_pCharMng->GetTamerUser();
+			SAFE_POINTER_RET( pDigimonUser );
+			SAFE_POINTER_RET( pTamerUser );
+
+			pTamerUser->ReleaseArriveTarget();
+			pTamerUser->SetTamerUserState( CTamerUser::TU_FOLLOW_DIGIMON );
+			pDigimonUser->SetDigimonUserState( CDigimonUser::DU_ATTACK, pTarget );
+		}
+		else
+#endif
+			g_pCharMng->GetTamerUser()->SetAttackPos( pTarget );
 		break;
 	case nLIB::SVR_BATTLE:
 		g_pCharMng->GetDigimonUser( 0 )->SetDigimonUserState( CDigimonUser::DU_ATTACK, pTarget );

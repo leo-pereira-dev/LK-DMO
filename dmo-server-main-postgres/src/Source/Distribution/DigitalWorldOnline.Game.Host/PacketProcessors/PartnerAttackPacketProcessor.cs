@@ -50,8 +50,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var lookupAttacker = attackerHandler & CTypeClassIdxMask;
             var lookupTarget = targetHandler & CTypeClassIdxMask;
 
-            _logger.Verbose("Attack packet: handler={0}(0x{0:X}) mask={1}(0x{1:X}) target={2}(0x{2:X}) mask={3}(0x{3:X}) tamer={4} map={5}",
-                attackerHandler, lookupAttacker, targetHandler, lookupTarget, client.TamerId, client.Tamer.Location.MapId);
+            _logger.Information("Attack packet: handler={Handler}(0x{Handler:X}) mask={MaskedHandler}(0x{MaskedHandler:X}) target={Target}(0x{Target:X}) mask={MaskedTarget}(0x{MaskedTarget:X}) tamer={TamerId} map={MapId} currentType={CurrentType}",
+                attackerHandler, lookupAttacker, targetHandler, lookupTarget, client.TamerId, client.Tamer.Location.MapId, client.Partner?.CurrentType);
 
             // Reply packets must use the same class+index handler announced in InitialInfoPacket.
             // Newer client builds may send CType.m_nTypeAll here (for example 0x84001 for
@@ -659,7 +659,11 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 var targetMob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, lookupTarget);
 
                 if (targetMob == null || client.Partner == null)
+                {
+                    _logger.Information("Attack ignored: targetMob={HasTargetMob} partner={HasPartner} targetHandler={TargetHandler} maskedTarget={MaskedTarget} tamer={TamerId} map={MapId}",
+                        targetMob != null, client.Partner != null, targetHandler, lookupTarget, client.TamerId, client.Tamer.Location.MapId);
                     return Task.CompletedTask;
+                }
 
                 if (DateTime.Now < client.Partner.LastHitTime.AddMilliseconds(client.Partner.AS))
                     client.Partner.StartAutoAttack();

@@ -1,0 +1,817 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DigitamaExplain_Str schema="DigitamaExplain_Str.struct" bin="DigitamaExplain_Str.bin" byteLength="70058">
+  <Entries kind="Section" offset="0" length="70058">
+    <_0 kind="Record" offset="4" length="280">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="21134" />
+      <TextA kind="Leaf" offset="8" length="26" type="WString { }">DemiMeramon</TextA>
+      <TextB kind="Leaf" offset="34" length="250" type="WString { }">A Flame Digimon with small body size. Since the Digicore is burning furiously inside its body, it has appearance of flame. </TextB>
+    </_0>
+    <_1 kind="Record" offset="284" length="360">
+      <TextKey kind="Leaf" offset="284" length="4" type="Scalar { Kind = U32 }" value="21137" />
+      <TextA kind="Leaf" offset="288" length="18" type="WString { }">Tanemon</TextA>
+      <TextB kind="Leaf" offset="306" length="338" type="WString { }">It is cowardly and digs a hole with its four feet and buries itself under the ground when it detects enemies. The sprout on its head is for the camouflage of a plant. </TextB>
+    </_1>
+    <_2 kind="Record" offset="644" length="514">
+      <TextKey kind="Leaf" offset="644" length="4" type="Scalar { Kind = U32 }" value="31001" />
+      <TextA kind="Leaf" offset="648" length="16" type="WString { }">Agumon</TextA>
+      <TextB kind="Leaf" offset="664" length="494" type="WString { }">Agumon is a Reptile type Digimon with a Flame attribute in its Rookie stage. This Digimon has two attack skills - the Baby Flame, which continuously shoots small flame balls; and the Baby Burner, which shoots a charged flame ball from its mouth.</TextB>
+    </_2>
+    <_3 kind="Record" offset="1158" length="570">
+      <TextKey kind="Leaf" offset="1158" length="4" type="Scalar { Kind = U32 }" value="31002" />
+      <TextA kind="Leaf" offset="1162" length="18" type="WString { }">Raramon</TextA>
+      <TextB kind="Leaf" offset="1180" length="548" type="WString { }">Lalamon is a Plant type Digimon with an Earth attribute in its Rookie stage. This Digimon has three attack skills - the Nut Shooter, which fires hard grains from its mouth; the Lala Screw, which spins its head and leaves; and the Sing-a-Song, which makes the enemy sleepy.</TextB>
+    </_3>
+    <_4 kind="Record" offset="1728" length="530">
+      <TextKey kind="Leaf" offset="1728" length="4" type="Scalar { Kind = U32 }" value="31003" />
+      <TextA kind="Leaf" offset="1732" length="16" type="WString { }">Gaomon</TextA>
+      <TextB kind="Leaf" offset="1748" length="510" type="WString { }">Gaomon is a Beast type Digimon with a Wind attribute in its Rookie stage. This Digimon has three attack skills - the Spinning Double Backhand; the Rolling Upper, which uses fast spinning and a jump; and the Gao Rush, a continuous, rapid-punching attack.</TextB>
+    </_4>
+    <_5 kind="Record" offset="2258" length="396">
+      <TextKey kind="Leaf" offset="2258" length="4" type="Scalar { Kind = U32 }" value="31004" />
+      <TextA kind="Leaf" offset="2262" length="20" type="WString { }">Palcomon</TextA>
+      <TextB kind="Leaf" offset="2282" length="372" type="WString { }">Keenan Krier's Partner Digimon in its Rookie stage. It flies with large, well-developed wings. This Digimon usually accompanies Ninjas and uses its Scratch Smash Skill and Shuririnken.</TextB>
+    </_5>
+    <_6 kind="Record" offset="2654" length="488">
+      <TextKey kind="Leaf" offset="2654" length="4" type="Scalar { Kind = U32 }" value="31005" />
+      <TextA kind="Leaf" offset="2658" length="18" type="WString { }">Guilmon</TextA>
+      <TextB kind="Leaf" offset="2676" length="466" type="WString { }">A Reptile Digimon who has the ferocious personality of a carnivorous beast. The mark drawn on its abdomen is called the "Digital Hazard", which is inscribed on those that have the potential to cause massive damage to computer data.</TextB>
+    </_6>
+    <_7 kind="Record" offset="3142" length="298">
+      <TextKey kind="Leaf" offset="3142" length="4" type="Scalar { Kind = U32 }" value="31006" />
+      <TextA kind="Leaf" offset="3146" length="18" type="WString { }">Renamon</TextA>
+      <TextB kind="Leaf" offset="3164" length="276" type="WString { }">An Animal Digimon whose appearance looks like a golden fox. It is practiced enough that it doesn't lose that composure in any situation.</TextB>
+    </_7>
+    <_8 kind="Record" offset="3440" length="316">
+      <TextKey kind="Leaf" offset="3440" length="4" type="Scalar { Kind = U32 }" value="31007" />
+      <TextA kind="Leaf" offset="3444" length="16" type="WString { }">Agumon</TextA>
+      <TextB kind="Leaf" offset="3460" length="296" type="WString { }">A Reptile Digimon who has grown up and become able to walk on two legs. It is a being that foretells Digivolution to a great and powerful Digimon.</TextB>
+    </_8>
+    <_9 kind="Record" offset="3756" length="320">
+      <TextKey kind="Leaf" offset="3756" length="4" type="Scalar { Kind = U32 }" value="31008" />
+      <TextA kind="Leaf" offset="3760" length="32" type="WString { }">V-mon[ExV-mon]</TextA>
+      <TextB kind="Leaf" offset="3792" length="284" type="WString { }">One of the Ancient Animal types of Digimon. This Digimon has the highest battle ability of any Rookie among the Ancient Animal type Digimon.</TextB>
+    </_9>
+    <_10 kind="Record" offset="4076" length="524">
+      <TextKey kind="Leaf" offset="4076" length="4" type="Scalar { Kind = U32 }" value="31009" />
+      <TextA kind="Leaf" offset="4080" length="38" type="WString { }">PawnChessmonBlack</TextA>
+      <TextB kind="Leaf" offset="4118" length="482" type="WString { }">A Puppet Digimon, born from data leaking out of a chess game. This generic yet mysterious pawn suddenly evolves with increasing experience and is capable of attaining the powers of a Mega Class Digimon. A competitor to PawnChessmon (White)</TextB>
+    </_10>
+    <_11 kind="Record" offset="4600" length="268">
+      <TextKey kind="Leaf" offset="4600" length="4" type="Scalar { Kind = U32 }" value="31010" />
+      <TextA kind="Leaf" offset="4604" length="24" type="WString { }">Terriermon</TextA>
+      <TextB kind="Leaf" offset="4628" length="240" type="WString { }">A healthy Digimon with an easy-going nature. This Digimon uses its ear, which is split into three branches, as a hand.</TextB>
+    </_11>
+    <_12 kind="Record" offset="4868" length="348">
+      <TextKey kind="Leaf" offset="4868" length="4" type="Scalar { Kind = U32 }" value="31011" />
+      <TextA kind="Leaf" offset="4872" length="24" type="WString { }">Monodramon</TextA>
+      <TextB kind="Leaf" offset="4896" length="320" type="WString { }">A Digimon with a vicious personality that likes to fight. The horn growing behind it is said to be its weak point, but this definitely has no degree of truth.</TextB>
+    </_12>
+    <_13 kind="Record" offset="5216" length="242">
+      <TextKey kind="Leaf" offset="5216" length="4" type="Scalar { Kind = U32 }" value="31012" />
+      <TextA kind="Leaf" offset="5220" length="18" type="WString { }">Patamon</TextA>
+      <TextB kind="Leaf" offset="5238" length="220" type="WString { }">A mammal Digimon with large ears. It can fly but walks much faster. It stays true to its word and is honest.</TextB>
+    </_13>
+    <_14 kind="Record" offset="5458" length="524">
+      <TextKey kind="Leaf" offset="5458" length="4" type="Scalar { Kind = U32 }" value="31013" />
+      <TextA kind="Leaf" offset="5462" length="38" type="WString { }">PawnChessmonWhite</TextA>
+      <TextB kind="Leaf" offset="5500" length="482" type="WString { }">A Puppet Digimon, born from data leaking out of a chess game. This generic yet mysterious pawn suddenly evolves with increasing experience and is capable of attaining the powers of a Mega Class Digimon. A competitor to PawnChessmon (Black)</TextB>
+    </_14>
+    <_15 kind="Record" offset="5982" length="222">
+      <TextKey kind="Leaf" offset="5982" length="4" type="Scalar { Kind = U32 }" value="31014" />
+      <TextA kind="Leaf" offset="5986" length="32" type="WString { }">Dracomon[Blue]</TextA>
+      <TextB kind="Leaf" offset="6018" length="186" type="WString { }">A pure-blooded Dragon Digimon. It is considered as the ancestor of all Dramon type Digimons</TextB>
+    </_15>
+    <_16 kind="Record" offset="6204" length="246">
+      <TextKey kind="Leaf" offset="6204" length="4" type="Scalar { Kind = U32 }" value="31015" />
+      <TextA kind="Leaf" offset="6208" length="16" type="WString { }">Lopmon</TextA>
+      <TextB kind="Leaf" offset="6224" length="226" type="WString { }">A Digimon whose personality is a lonely crybaby. While it is similar to Terriermon, it has 3 horns on the head.</TextB>
+    </_16>
+    <_17 kind="Record" offset="6450" length="304">
+      <TextKey kind="Leaf" offset="6450" length="4" type="Scalar { Kind = U32 }" value="31016" />
+      <TextA kind="Leaf" offset="6454" length="22" type="WString { }">FanBeemon</TextA>
+      <TextB kind="Leaf" offset="6476" length="278" type="WString { }">An insect-type Digimon with a bright personality who is a strong worker. It always gets along with Plant Digimon like Palmon or Lillymon.</TextB>
+    </_17>
+    <_18 kind="Record" offset="6754" length="366">
+      <TextKey kind="Leaf" offset="6754" length="4" type="Scalar { Kind = U32 }" value="31017" />
+      <TextA kind="Leaf" offset="6758" length="18" type="WString { }">Keramon</TextA>
+      <TextB kind="Leaf" offset="6776" length="344" type="WString { }">A Digimon whose personality is extremely cheerful. This Digimon thinks of its destructive actions as just part of its play. It eats away 100 megabytes of data per second.</TextB>
+    </_18>
+    <_19 kind="Record" offset="7120" length="336">
+      <TextKey kind="Leaf" offset="7120" length="4" type="Scalar { Kind = U32 }" value="31018" />
+      <TextA kind="Leaf" offset="7124" length="20" type="WString { }">Gotsumon</TextA>
+      <TextB kind="Leaf" offset="7144" length="312" type="WString { }">A Rock type Digimon with strong Defense reinforced by Rock DATA within itself. A cheerful Digimon. It is normally mischievous with a cheerful personality.</TextB>
+    </_19>
+    <_20 kind="Record" offset="7456" length="542">
+      <TextKey kind="Leaf" offset="7456" length="4" type="Scalar { Kind = U32 }" value="31019" />
+      <TextA kind="Leaf" offset="7460" length="18" type="WString { }">Salamon</TextA>
+      <TextB kind="Leaf" offset="7478" length="520" type="WString { }">A pet-based holy type Digimon who was created by Digimon scientist. As it is still very young, it is unable to manifest its holy powers, and isn't even aware of its own mission. For that reason it is naturally insecure, so it can become either good or evil. </TextB>
+    </_20>
+    <_21 kind="Record" offset="7998" length="442">
+      <TextKey kind="Leaf" offset="7998" length="4" type="Scalar { Kind = U32 }" value="31020" />
+      <TextA kind="Leaf" offset="8002" length="18" type="WString { }">Hawkmon</TextA>
+      <TextB kind="Leaf" offset="8020" length="420" type="WString { }">A Digimon whose nature is polite, calm and cool. It is a descendant of a special species that flourished in ancient times, able to perform special Armor Digivolutions. Its head decoration came from Garudamon.</TextB>
+    </_21>
+    <_22 kind="Record" offset="8440" length="506">
+      <TextKey kind="Leaf" offset="8440" length="4" type="Scalar { Kind = U32 }" value="31021" />
+      <TextA kind="Leaf" offset="8444" length="20" type="WString { }">Gladimon</TextA>
+      <TextB kind="Leaf" offset="8464" length="482" type="WString { }">A Digimon that aims to become the greatest swordsman in the Digimon world. It is quiet but works hard to train itself in secret places. Its real appearance is hidden as it never takes off its protective gear. Has a strong sense of justice.</TextB>
+    </_22>
+    <_23 kind="Record" offset="8946" length="394">
+      <TextKey kind="Leaf" offset="8946" length="4" type="Scalar { Kind = U32 }" value="31022" />
+      <TextA kind="Leaf" offset="8950" length="22" type="WString { }">Candlemon</TextA>
+      <TextB kind="Leaf" offset="8972" length="368" type="WString { }">A Flame Digimon who has a flame on its head. When the flame goes out, it dies. It throws a fireball to the enemy. It looks scary but the Digimon is actually gentle and not offensive.</TextB>
+    </_23>
+    <_24 kind="Record" offset="9340" length="376">
+      <TextKey kind="Leaf" offset="9340" length="4" type="Scalar { Kind = U32 }" value="31023" />
+      <TextA kind="Leaf" offset="9344" length="18" type="WString { }">Kudamon</TextA>
+      <TextB kind="Leaf" offset="9362" length="354" type="WString { }">A Holy Beast type Digimon in its growth stage with a transparent body. It has a stable and calm personality, and analyzes the situation even during battle and turns the tides.</TextB>
+    </_24>
+    <_25 kind="Record" offset="9716" length="426">
+      <TextKey kind="Leaf" offset="9716" length="4" type="Scalar { Kind = U32 }" value="31026" />
+      <TextA kind="Leaf" offset="9720" length="18" type="WString { }">Betamon</TextA>
+      <TextB kind="Leaf" offset="9738" length="404" type="WString { }">An Amphibian Digimon who walks on four legs. Its personality is gentle, but although it is a docile Digimon, once Betamon is angered, it attacks the enemy by generating electric current from its body.</TextB>
+    </_25>
+    <_26 kind="Record" offset="10142" length="278">
+      <TextKey kind="Leaf" offset="10142" length="4" type="Scalar { Kind = U32 }" value="31027" />
+      <TextA kind="Leaf" offset="10146" length="20" type="WString { }">Ryudamon</TextA>
+      <TextB kind="Leaf" offset="10166" length="254" type="WString { }">A Beast type Digimon presumed to be a Prototype before Digimon was discovered, since it has an old interface on its forehead.</TextB>
+    </_26>
+    <_27 kind="Record" offset="10420" length="276">
+      <TextKey kind="Leaf" offset="10420" length="4" type="Scalar { Kind = U32 }" value="31028" />
+      <TextA kind="Leaf" offset="10424" length="24" type="WString { }">Drimogemon</TextA>
+      <TextB kind="Leaf" offset="10448" length="248" type="WString { }">A mole-shaped Beast type Digimon with a well-developed nose drill. It moves underground by drilling rapidly through soil. </TextB>
+    </_27>
+    <_28 kind="Record" offset="10696" length="214">
+      <TextKey kind="Leaf" offset="10696" length="4" type="Scalar { Kind = U32 }" value="31029" />
+      <TextA kind="Leaf" offset="10700" length="18" type="WString { }">Kunemon</TextA>
+      <TextB kind="Leaf" offset="10718" length="192" type="WString { }">A larva-shaped, Larva type Digimon. A very rare Digimon. It is an invaluable type of Digimon. </TextB>
+    </_28>
+    <_29 kind="Record" offset="10910" length="324">
+      <TextKey kind="Leaf" offset="10910" length="4" type="Scalar { Kind = U32 }" value="31030" />
+      <TextA kind="Leaf" offset="10914" length="22" type="WString { }">Armadimon</TextA>
+      <TextB kind="Leaf" offset="10936" length="298" type="WString { }">A Mammal Digimon whose body is covered in a hard shell. It has a carefree, charming personality. It is able to perform special Armor Digivolutions.</TextB>
+    </_29>
+    <_30 kind="Record" offset="11234" length="168">
+      <TextKey kind="Leaf" offset="11234" length="4" type="Scalar { Kind = U32 }" value="31031" />
+      <TextA kind="Leaf" offset="11238" length="20" type="WString { }">Tentomon</TextA>
+      <TextB kind="Leaf" offset="11258" length="144" type="WString { }">An Insectoid Digimon. Like a ladybug, it is covered with a hard shell.</TextB>
+    </_30>
+    <_31 kind="Record" offset="11402" length="334">
+      <TextKey kind="Leaf" offset="11402" length="4" type="Scalar { Kind = U32 }" value="31032" />
+      <TextA kind="Leaf" offset="11406" length="22" type="WString { }">Sharmamon</TextA>
+      <TextB kind="Leaf" offset="11428" length="308" type="WString { }">A Digimon that delivers the word of God to its kind. It begins its rite with a strange dance. When it enters a trance, the Goblimon could hear from God.</TextB>
+    </_31>
+    <_32 kind="Record" offset="11736" length="402">
+      <TextKey kind="Leaf" offset="11736" length="4" type="Scalar { Kind = U32 }" value="31033" />
+      <TextA kind="Leaf" offset="11740" length="20" type="WString { }">Goblimon</TextA>
+      <TextB kind="Leaf" offset="11760" length="378" type="WString { }">The Digimon carries a wooden club, with its hair groomed daily in the mo-hawk style. It favors ambush, but, when the fight seems to be going downhill, it runs away in the blink of an eye.</TextB>
+    </_32>
+    <_33 kind="Record" offset="12138" length="338">
+      <TextKey kind="Leaf" offset="12138" length="4" type="Scalar { Kind = U32 }" value="31034" />
+      <TextA kind="Leaf" offset="12142" length="44" type="WString { }">Hagurumon[Gardromon]</TextA>
+      <TextB kind="Leaf" offset="12186" length="290" type="WString { }">A mutant Digimon shaped like a gear. As this Digimon is impervious to good and evil,, it doesn't even know it is being misused by bad Digimons.</TextB>
+    </_33>
+    <_34 kind="Record" offset="12476" length="426">
+      <TextKey kind="Leaf" offset="12476" length="4" type="Scalar { Kind = U32 }" value="31035" />
+      <TextA kind="Leaf" offset="12480" length="28" type="WString { }">CommanDramon</TextA>
+      <TextB kind="Leaf" offset="12508" length="394" type="WString { }">A Cyborg Digimon covered in a special texture, this Digimon can discern the colors around it in real-time. This foot soldier also belongs to a special task force assigned to top secret missions. </TextB>
+    </_34>
+    <_35 kind="Record" offset="12902" length="298">
+      <TextKey kind="Leaf" offset="12902" length="4" type="Scalar { Kind = U32 }" value="31036" />
+      <TextA kind="Leaf" offset="12906" length="22" type="WString { }">Dorugamon</TextA>
+      <TextB kind="Leaf" offset="12928" length="272" type="WString { }">An experimental prototype Digimon created before the discovery of Digimons. It has a strong fighting instinct and a wild personality. </TextB>
+    </_35>
+    <_36 kind="Record" offset="13200" length="560">
+      <TextKey kind="Leaf" offset="13200" length="4" type="Scalar { Kind = U32 }" value="31037" />
+      <TextA kind="Leaf" offset="13204" length="22" type="WString { }">Arkadimon</TextA>
+      <TextB kind="Leaf" offset="13226" length="534" type="WString { }">A super Demon beast that starts a tragedy to rule the entire world. It is in the Rookie period of Burst Mode Arkadimon that was resurrected through the hands of the Demon. It has hands like sickle and can absorb the enemy’s energy. It has power most cannot imagine.</TextB>
+    </_36>
+    <_37 kind="Record" offset="13760" length="460">
+      <TextKey kind="Leaf" offset="13760" length="4" type="Scalar { Kind = U32 }" value="31038" />
+      <TextA kind="Leaf" offset="13764" length="22" type="WString { }">Dokunemon</TextA>
+      <TextB kind="Leaf" offset="13786" length="434" type="WString { }">A larva type digimon like the kunemon, with deadly poison in its body. It can easily evolve into the mature period with strong poisonous qualities. Research is being conducted to solve the riddle of the insect type.</TextB>
+    </_37>
+    <_38 kind="Record" offset="14220" length="404">
+      <TextKey kind="Leaf" offset="14220" length="4" type="Scalar { Kind = U32 }" value="31039" />
+      <TextA kind="Leaf" offset="14224" length="18" type="WString { }">Dracmon</TextA>
+      <TextB kind="Leaf" offset="14242" length="382" type="WString { }">A mischievous Digimon from the Dark Area. It takes risks just to fool around and get some fun. It seems so busy trying some pranks on Royal Knights that it hardly sucks on blood these days.</TextB>
+    </_38>
+    <_39 kind="Record" offset="14624" length="390">
+      <TextKey kind="Leaf" offset="14624" length="4" type="Scalar { Kind = U32 }" value="31040" />
+      <TextA kind="Leaf" offset="14628" length="18" type="WString { }">Swimmon</TextA>
+      <TextB kind="Leaf" offset="14646" length="368" type="WString { }">A tropical fish type of Digimon with a colorful body. The colors of the scales match the colors of the upper part and can camouflage to avoid danger when attacked by marine Digimons.</TextB>
+    </_39>
+    <_40 kind="Record" offset="15014" length="290">
+      <TextKey kind="Leaf" offset="15014" length="4" type="Scalar { Kind = U32 }" value="31041" />
+      <TextA kind="Leaf" offset="15018" length="18" type="WString { }">Woodmon</TextA>
+      <TextB kind="Leaf" offset="15036" length="268" type="WString { }">A Plant type Digimon with a flower on top of its head. It will waft about a sweet fragrance or a foul stench, depending on its mood.</TextB>
+    </_40>
+    <_41 kind="Record" offset="15304" length="486">
+      <TextKey kind="Leaf" offset="15304" length="4" type="Scalar { Kind = U32 }" value="31042" />
+      <TextA kind="Leaf" offset="15308" length="24" type="WString { }">Mushroomon</TextA>
+      <TextB kind="Leaf" offset="15332" length="458" type="WString { }">A small vegetation Digimon in the form of a poisonous mushroom. There are small mushroom bombs on the body of the Mushmon, and getting hit by a mushroom bomb leads to various addictive symptoms such as paralysis or memory loss.</TextB>
+    </_41>
+    <_42 kind="Record" offset="15790" length="486">
+      <TextKey kind="Leaf" offset="15790" length="4" type="Scalar { Kind = U32 }" value="31043" />
+      <TextA kind="Leaf" offset="15794" length="30" type="WString { }">Agumon[Black]</TextA>
+      <TextB kind="Leaf" offset="15824" length="452" type="WString { }">Agumon whose wild instincts have been awakened. The Digimon has evolved into a virus. While the aggressive nature is still intact, its heart of justice is close. It makes surprise attacks on its enemies with the sharp claws.</TextB>
+    </_42>
+    <_43 kind="Record" offset="16276" length="558">
+      <TextKey kind="Leaf" offset="16276" length="4" type="Scalar { Kind = U32 }" value="31044" />
+      <TextA kind="Leaf" offset="16280" length="58" type="WString { }">Agumon(Black)[Millenniumon]</TextA>
+      <TextB kind="Leaf" offset="16338" length="496" type="WString { }">Agumon that has evolved into a virus-type form after its inner instincts' awakening to wildness. Its aggressive characteristics are still there, but it no longer possesses any sense of justice. It ambushes its enemy fiercely with its sharp claws.</TextB>
+    </_43>
+    <_44 kind="Record" offset="16834" length="566">
+      <TextKey kind="Leaf" offset="16834" length="4" type="Scalar { Kind = U32 }" value="31045" />
+      <TextA kind="Leaf" offset="16838" length="66" type="WString { }">Agumon(Black)[MoonMillenniumon]</TextA>
+      <TextB kind="Leaf" offset="16904" length="496" type="WString { }">Agumon that has evolved into a virus-type form after its inner instincts' awakening to wildness. Its aggressive characteristics are still there, but it no longer possesses any sense of justice. It ambushes its enemy fiercely with its sharp claws.</TextB>
+    </_44>
+    <_45 kind="Record" offset="17400" length="276">
+      <TextKey kind="Leaf" offset="17400" length="4" type="Scalar { Kind = U32 }" value="31048" />
+      <TextA kind="Leaf" offset="17404" length="18" type="WString { }">Piyomon</TextA>
+      <TextB kind="Leaf" offset="17422" length="254" type="WString { }">A Bird type Digimon with wings, but it can hardly fly. This Digimon is full of curiosity. It likes to peck at Tanemon's head.</TextB>
+    </_45>
+    <_46 kind="Record" offset="17676" length="264">
+      <TextKey kind="Leaf" offset="17676" length="4" type="Scalar { Kind = U32 }" value="31049" />
+      <TextA kind="Leaf" offset="17680" length="18" type="WString { }">Elecmon</TextA>
+      <TextB kind="Leaf" offset="17698" length="242" type="WString { }">A Mammal type Digimon that still preserves traces of the Mammal Digimon, Tsunomon. A naughty Digimon full of curiosity.</TextB>
+    </_46>
+    <_47 kind="Record" offset="17940" length="180">
+      <TextKey kind="Leaf" offset="17940" length="4" type="Scalar { Kind = U32 }" value="31050" />
+      <TextA kind="Leaf" offset="17944" length="36" type="WString { }">Gomamon[Vikemon]</TextA>
+      <TextB kind="Leaf" offset="17980" length="140" type="WString { }">A Sea Animal Digimon that can live on land, as it has a coat of fur.</TextB>
+    </_47>
+    <_48 kind="Record" offset="18120" length="276">
+      <TextKey kind="Leaf" offset="18120" length="4" type="Scalar { Kind = U32 }" value="31051" />
+      <TextA kind="Leaf" offset="18124" length="18" type="WString { }">Kamemon</TextA>
+      <TextB kind="Leaf" offset="18142" length="254" type="WString { }">A Cyborg type Digimon wearing a helmet. The PC mouse ball on its stomach can be used to move very fast as if sliding across. </TextB>
+    </_48>
+    <_49 kind="Record" offset="18396" length="180">
+      <TextKey kind="Leaf" offset="18396" length="4" type="Scalar { Kind = U32 }" value="31052" />
+      <TextA kind="Leaf" offset="18400" length="36" type="WString { }">Gomamon[Jijimon]</TextA>
+      <TextB kind="Leaf" offset="18436" length="140" type="WString { }">A Sea Animal Digimon that can live on land, as it has a coat of fur.</TextB>
+    </_49>
+    <_50 kind="Record" offset="18576" length="254">
+      <TextKey kind="Leaf" offset="18576" length="4" type="Scalar { Kind = U32 }" value="31066" />
+      <TextA kind="Leaf" offset="18580" length="16" type="WString { }">Impmon</TextA>
+      <TextB kind="Leaf" offset="18596" length="234" type="WString { }">A Digimon whose appearance is like a demon's child. It loves pranks, so it enjoys seeing its opponents embarrassed.</TextB>
+    </_50>
+    <_51 kind="Record" offset="18830" length="370">
+      <TextKey kind="Leaf" offset="18830" length="4" type="Scalar { Kind = U32 }" value="31067" />
+      <TextA kind="Leaf" offset="18834" length="18" type="WString { }">Bakemon</TextA>
+      <TextB kind="Leaf" offset="18852" length="348" type="WString { }">A small Digimon which has an appearance like a bat. It exists to serve as a familiar for Devimon. The Digimon likes to stay in dark places. It usually ambushes in the dark.</TextB>
+    </_51>
+    <_52 kind="Record" offset="19200" length="474">
+      <TextKey kind="Leaf" offset="19200" length="4" type="Scalar { Kind = U32 }" value="31068" />
+      <TextA kind="Leaf" offset="19204" length="32" type="WString { }">Gabumon[Black]</TextA>
+      <TextB kind="Leaf" offset="19236" length="438" type="WString { }">A Gabumon which evolved to become Virus attributed. Although its Garurumon-admiring personality has not changed, it has an evil heart due to the influence of the virus. It is covered with skin that Garurumon provided.</TextB>
+    </_52>
+    <_53 kind="Record" offset="19674" length="424">
+      <TextKey kind="Leaf" offset="19674" length="4" type="Scalar { Kind = U32 }" value="31069" />
+      <TextA kind="Leaf" offset="19678" length="22" type="WString { }">Kokuwamon</TextA>
+      <TextB kind="Leaf" offset="19700" length="398" type="WString { }">Insect type mechanic digimon which has recently been found. His head and both arms are designed to unleash 10 million voltage of electricity when he sences threat, but he is normally a gentle type.</TextB>
+    </_53>
+    <_54 kind="Record" offset="20098" length="458">
+      <TextKey kind="Leaf" offset="20098" length="4" type="Scalar { Kind = U32 }" value="31121" />
+      <TextA kind="Leaf" offset="20102" length="18" type="WString { }">Bearmon</TextA>
+      <TextB kind="Leaf" offset="20120" length="436" type="WString { }">A Beast type Digimon that looks like a small bear.  Its trademark is its backward cap. It is slightly cowardly but becomes friendly with other Digimons quickly. It has strong stamina and guts, and is very reliable.  </TextB>
+    </_54>
+    <_55 kind="Record" offset="20556" length="252">
+      <TextKey kind="Leaf" offset="20556" length="4" type="Scalar { Kind = U32 }" value="31138" />
+      <TextA kind="Leaf" offset="20560" length="18" type="WString { }">Gabumon</TextA>
+      <TextB kind="Leaf" offset="20578" length="230" type="WString { }">A Reptile type Digimon with furry skin. A shy and timid Digimon. It is covered with skin that Garurumon provided.</TextB>
+    </_55>
+    <_56 kind="Record" offset="20808" length="390">
+      <TextKey kind="Leaf" offset="20808" length="4" type="Scalar { Kind = U32 }" value="31142" />
+      <TextA kind="Leaf" offset="20812" length="18" type="WString { }">Wormmon</TextA>
+      <TextB kind="Leaf" offset="20830" length="368" type="WString { }">A shy and timid Larva type Digimon. Its an descendant of an ancient clan, like Veemon. As it is a descendant of an ancient species, it is able to perform special Armor Digivolutions,</TextB>
+    </_56>
+    <_57 kind="Record" offset="21198" length="242">
+      <TextKey kind="Leaf" offset="21198" length="4" type="Scalar { Kind = U32 }" value="31143" />
+      <TextA kind="Leaf" offset="21202" length="18" type="WString { }">Patamon</TextA>
+      <TextB kind="Leaf" offset="21220" length="220" type="WString { }">A mammal Digimon with large ears. It can fly but walks much faster. It stays true to its word and is honest.</TextB>
+    </_57>
+    <_58 kind="Record" offset="21440" length="324">
+      <TextKey kind="Leaf" offset="21440" length="4" type="Scalar { Kind = U32 }" value="31144" />
+      <TextA kind="Leaf" offset="21444" length="22" type="WString { }">Armadimon</TextA>
+      <TextB kind="Leaf" offset="21466" length="298" type="WString { }">A Mammal Digimon whose body is covered in a hard shell. It has a carefree, charming personality. It is able to perform special Armor Digivolutions.</TextB>
+    </_58>
+    <_59 kind="Record" offset="21764" length="464">
+      <TextKey kind="Leaf" offset="21764" length="4" type="Scalar { Kind = U32 }" value="31145" />
+      <TextA kind="Leaf" offset="21768" length="40" type="WString { }">Hawkmon[Silphymon]</TextA>
+      <TextB kind="Leaf" offset="21808" length="420" type="WString { }">A Digimon whose nature is polite, calm and cool. It is a descendant of a special species that flourished in ancient times, able to perform special Armor Digivolutions. Its head decoration came from Garudamon.</TextB>
+    </_59>
+    <_60 kind="Record" offset="22228" length="564">
+      <TextKey kind="Leaf" offset="22228" length="4" type="Scalar { Kind = U32 }" value="31146" />
+      <TextA kind="Leaf" offset="22232" length="40" type="WString { }">Salamon[Silphymon]</TextA>
+      <TextB kind="Leaf" offset="22272" length="520" type="WString { }">A pet-based holy type Digimon who was created by Digimon scientist. As it is still very young, it is unable to manifest its holy powers, and isn't even aware of its own mission. For that reason it is naturally insecure, so it can become either good or evil. </TextB>
+    </_60>
+    <_61 kind="Record" offset="22792" length="554">
+      <TextKey kind="Leaf" offset="22792" length="4" type="Scalar { Kind = U32 }" value="31147" />
+      <TextA kind="Leaf" offset="22796" length="20" type="WString { }">Syakomon</TextA>
+      <TextB kind="Leaf" offset="22816" length="530" type="WString { }">A Digimon covered with a hard shell like a seashell. Because it has developed the encrusted shell-like scales drastically, its internal structure and body is slime-shaped as it was an In-Training Digimon. It entices the opponent with its cute face, then attacks. </TextB>
+    </_61>
+    <_62 kind="Record" offset="23346" length="324">
+      <TextKey kind="Leaf" offset="23346" length="4" type="Scalar { Kind = U32 }" value="32008" />
+      <TextA kind="Leaf" offset="23350" length="36" type="WString { }">V-mon[Veedramon]</TextA>
+      <TextB kind="Leaf" offset="23386" length="284" type="WString { }">One of the Ancient Animal types of Digimon. This Digimon has the highest battle ability of any Rookie among the Ancient Animal type Digimon.</TextB>
+    </_62>
+    <_63 kind="Record" offset="23670" length="554">
+      <TextKey kind="Leaf" offset="23670" length="4" type="Scalar { Kind = U32 }" value="32014" />
+      <TextA kind="Leaf" offset="23674" length="34" type="WString { }">Dracomon[Green]</TextA>
+      <TextB kind="Leaf" offset="23708" length="516" type="WString { }">A pure-blooded Dragon Digimon. It is considered as the ancestor of all Dramon type Digimons It possesses physical ability to a degree that could not be imagined from its small build, and both its power and its quick wits are top class among Rookie Digimon.</TextB>
+    </_63>
+    <_64 kind="Record" offset="24224" length="570">
+      <TextKey kind="Leaf" offset="24224" length="4" type="Scalar { Kind = U32 }" value="32019" />
+      <TextA kind="Leaf" offset="24228" length="46" type="WString { }">Salamon[BlackGatomon]</TextA>
+      <TextB kind="Leaf" offset="24274" length="520" type="WString { }">A pet-based holy type Digimon who was created by Digimon scientist. As it is still very young, it is unable to manifest its holy powers, and isn't even aware of its own mission. For that reason it is naturally insecure, so it can become either good or evil. </TextB>
+    </_64>
+    <_65 kind="Record" offset="24794" length="506">
+      <TextKey kind="Leaf" offset="24794" length="4" type="Scalar { Kind = U32 }" value="32021" />
+      <TextA kind="Leaf" offset="24798" length="20" type="WString { }">Musyamon</TextA>
+      <TextB kind="Leaf" offset="24818" length="482" type="WString { }">A Digimon that aims to become the greatest swordsman in the Digimon world. It is quiet but works hard to train itself in secret places. Its real appearance is hidden as it never takes off its protective gear. Has a strong sense of justice.</TextB>
+    </_65>
+    <_66 kind="Record" offset="25300" length="344">
+      <TextKey kind="Leaf" offset="25300" length="4" type="Scalar { Kind = U32 }" value="32034" />
+      <TextA kind="Leaf" offset="25304" length="50" type="WString { }">Hagurumon[MechaNorimon]</TextA>
+      <TextB kind="Leaf" offset="25354" length="290" type="WString { }">A mutant Digimon shaped like a gear. As this Digimon is impervious to good and evil,, it doesn't even know it is being misused by bad Digimons.</TextB>
+    </_66>
+    <_67 kind="Record" offset="25644" length="304">
+      <TextKey kind="Leaf" offset="25644" length="4" type="Scalar { Kind = U32 }" value="32036" />
+      <TextA kind="Leaf" offset="25648" length="28" type="WString { }">DexDorugamon</TextA>
+      <TextB kind="Leaf" offset="25676" length="272" type="WString { }">An experimental prototype Digimon created before the discovery of Digimons. It has a strong fighting instinct and a wild personality. </TextB>
+    </_67>
+    <_68 kind="Record" offset="25948" length="290">
+      <TextKey kind="Leaf" offset="25948" length="4" type="Scalar { Kind = U32 }" value="32041" />
+      <TextA kind="Leaf" offset="25952" length="18" type="WString { }">Togemon</TextA>
+      <TextB kind="Leaf" offset="25970" length="268" type="WString { }">A Plant type Digimon with a flower on top of its head. It will waft about a sweet fragrance or a foul stench, depending on its mood.</TextB>
+    </_68>
+    <_69 kind="Record" offset="26238" length="396">
+      <TextKey kind="Leaf" offset="26238" length="4" type="Scalar { Kind = U32 }" value="32067" />
+      <TextA kind="Leaf" offset="26242" length="44" type="WString { }">PicoDevimon[Soulmon]</TextA>
+      <TextB kind="Leaf" offset="26286" length="348" type="WString { }">A small Digimon which has an appearance like a bat. It exists to serve as a familiar for Devimon. The Digimon likes to stay in dark places. It usually ambushes in the dark.</TextB>
+    </_69>
+    <_70 kind="Record" offset="26634" length="546">
+      <TextKey kind="Leaf" offset="26634" length="4" type="Scalar { Kind = U32 }" value="33001" />
+      <TextA kind="Leaf" offset="26638" length="20" type="WString { }">Shoutmon</TextA>
+      <TextB kind="Leaf" offset="26658" length="522" type="WString { }">A ferocious Digimon with extremely high aggressiveness due to its hot-blooded enthusiasm. However, it is friendly towards its comrades, and its friendship with other Digimon, surpassing species, can be deepened even further if they are recognized by Shoutmon.</TextB>
+    </_70>
+    <_71 kind="Record" offset="27180" length="466">
+      <TextKey kind="Leaf" offset="27180" length="4" type="Scalar { Kind = U32 }" value="33002" />
+      <TextA kind="Leaf" offset="27184" length="26" type="WString { }">Ballistamon</TextA>
+      <TextB kind="Leaf" offset="27210" length="436" type="WString { }">A heavyweight Digimon that possesses bulky metallic armor and overwhelming power. It appears warlike at first glance, but because of its gentle personality, preferring harmony to conflict, it will never attack first.</TextB>
+    </_71>
+    <_72 kind="Record" offset="27646" length="326">
+      <TextKey kind="Leaf" offset="27646" length="4" type="Scalar { Kind = U32 }" value="33003" />
+      <TextA kind="Leaf" offset="27650" length="22" type="WString { }">Dorulumon</TextA>
+      <TextB kind="Leaf" offset="27672" length="300" type="WString { }">A faithful Beast Digimon with a chivalrous spirit. It usually sticks to rocky, mountainous areas, and often acts alone without flocking with others.</TextB>
+    </_72>
+    <_73 kind="Record" offset="27972" length="350">
+      <TextKey kind="Leaf" offset="27972" length="4" type="Scalar { Kind = U32 }" value="33005" />
+      <TextA kind="Leaf" offset="27976" length="24" type="WString { }">Sparrowmon</TextA>
+      <TextB kind="Leaf" offset="28000" length="322" type="WString { }">Digimon specializing in air combat that can fly silently at high speed. It does not just fly fast, it can also respond quickly and can make tight turns easily.</TextB>
+    </_73>
+    <_74 kind="Record" offset="28322" length="322">
+      <TextKey kind="Leaf" offset="28322" length="4" type="Scalar { Kind = U32 }" value="33036" />
+      <TextA kind="Leaf" offset="28326" length="46" type="WString { }">Dorumon[RaptorDramon]</TextA>
+      <TextB kind="Leaf" offset="28372" length="272" type="WString { }">An experimental prototype Digimon created before the discovery of Digimons. It has a strong fighting instinct and a wild personality. </TextB>
+    </_74>
+    <_75 kind="Record" offset="28644" length="400">
+      <TextKey kind="Leaf" offset="28644" length="4" type="Scalar { Kind = U32 }" value="33067" />
+      <TextA kind="Leaf" offset="28648" length="48" type="WString { }">PicoDevimon[Myotismon]</TextA>
+      <TextB kind="Leaf" offset="28696" length="348" type="WString { }">A small Digimon which has an appearance like a bat. It exists to serve as a familiar for Devimon. The Digimon likes to stay in dark places. It usually ambushes in the dark.</TextB>
+    </_75>
+    <_76 kind="Record" offset="29044" length="520">
+      <TextKey kind="Leaf" offset="29044" length="4" type="Scalar { Kind = U32 }" value="33068" />
+      <TextA kind="Leaf" offset="29048" length="18" type="WString { }">Gazimon</TextA>
+      <TextB kind="Leaf" offset="29066" length="498" type="WString { }">A Mammal type Digimon that has sharp and large nails. It is a small Digimon, but very violent in nature, and does not ever try to follow humans. Nails on paw are very effective during attack, but also good for digging the ground and making traps. </TextB>
+    </_76>
+    <_77 kind="Record" offset="29564" length="476">
+      <TextKey kind="Leaf" offset="29564" length="4" type="Scalar { Kind = U32 }" value="33069" />
+      <TextA kind="Leaf" offset="29568" length="22" type="WString { }">Tsukaimon</TextA>
+      <TextB kind="Leaf" offset="29590" length="450" type="WString { }">A Mammal Digimon characterized by its big ears. Although it is considered a subspecies of Patamon, it has quite the opposite personality as Patamon: it loves brawling. Usually, it acts as a familiar for Devimon and others. </TextB>
+    </_77>
+    <_78 kind="Record" offset="30040" length="502">
+      <TextKey kind="Leaf" offset="30040" length="4" type="Scalar { Kind = U32 }" value="33070" />
+      <TextA kind="Leaf" offset="30044" length="48" type="WString { }">Tsukaimon[Murmukusmon]</TextA>
+      <TextB kind="Leaf" offset="30092" length="450" type="WString { }">A Mammal Digimon characterized by its big ears. Although it is considered a subspecies of Patamon, it has quite the opposite personality as Patamon: it loves brawling. Usually, it acts as a familiar for Devimon and others. </TextB>
+    </_78>
+    <_79 kind="Record" offset="30542" length="440">
+      <TextKey kind="Leaf" offset="30542" length="4" type="Scalar { Kind = U32 }" value="33071" />
+      <TextA kind="Leaf" offset="30546" length="42" type="WString { }">Tsukaimon[Barbamon]</TextA>
+      <TextB kind="Leaf" offset="30588" length="394" type="WString { }">A mammal type Digimon that has large ears. While it can be seen as a subspecies of Patamon, it has a completely different personality and enjoys battle. Generally, it's a familiar of Devimon etc.</TextB>
+    </_79>
+    <_80 kind="Record" offset="30982" length="590">
+      <TextKey kind="Leaf" offset="30982" length="4" type="Scalar { Kind = U32 }" value="33072" />
+      <TextA kind="Leaf" offset="30986" length="46" type="WString { }">Gazimon[Millenniumon]</TextA>
+      <TextB kind="Leaf" offset="31032" length="540" type="WString { }">A mammal-type Digimon that possesses large and sharp claws. It may be relatively small in size, but its highly wild and aggressive nature makes it impossible to follow humans. Its claws are not only useful when attacking, but also when digging a hole to create a trap.</TextB>
+    </_80>
+    <_81 kind="Record" offset="31572" length="598">
+      <TextKey kind="Leaf" offset="31572" length="4" type="Scalar { Kind = U32 }" value="33073" />
+      <TextA kind="Leaf" offset="31576" length="54" type="WString { }">Gazimon[MoonMillenniumon]</TextA>
+      <TextB kind="Leaf" offset="31630" length="540" type="WString { }">A mammal-type Digimon that possesses large and sharp claws. It may be relatively small in size, but its highly wild and aggressive nature makes it impossible to follow humans. Its claws are not only useful when attacking, but also when digging a hole to create a trap.</TextB>
+    </_81>
+    <_82 kind="Record" offset="32170" length="334">
+      <TextKey kind="Leaf" offset="32170" length="4" type="Scalar { Kind = U32 }" value="33074" />
+      <TextA kind="Leaf" offset="32174" length="46" type="WString { }">V-mon[ImperialDramon]</TextA>
+      <TextB kind="Leaf" offset="32220" length="284" type="WString { }">One of the Ancient Animal types of Digimon. This Digimon has the highest battle ability of any Rookie among the Ancient Animal type Digimon.</TextB>
+    </_82>
+    <_83 kind="Record" offset="32504" length="422">
+      <TextKey kind="Leaf" offset="32504" length="4" type="Scalar { Kind = U32 }" value="33075" />
+      <TextA kind="Leaf" offset="32508" length="50" type="WString { }">Wormmon[ImperialDramon]</TextA>
+      <TextB kind="Leaf" offset="32558" length="368" type="WString { }">A shy and timid Larva type Digimon. Its an descendant of an ancient clan, like Veemon. As it is a descendant of an ancient species, it is able to perform special Armor Digivolutions,</TextB>
+    </_83>
+    <_84 kind="Record" offset="32926" length="450">
+      <TextKey kind="Leaf" offset="32926" length="4" type="Scalar { Kind = U32 }" value="33076" />
+      <TextA kind="Leaf" offset="32930" length="42" type="WString { }">Betamon[Apocalymon]</TextA>
+      <TextB kind="Leaf" offset="32972" length="404" type="WString { }">An Amphibian Digimon who walks on four legs. Its personality is gentle, but although it is a docile Digimon, once Betamon is angered, it attacks the enemy by generating electric current from its body.</TextB>
+    </_84>
+    <_85 kind="Record" offset="33376" length="312">
+      <TextKey kind="Leaf" offset="33376" length="4" type="Scalar { Kind = U32 }" value="33077" />
+      <TextA kind="Leaf" offset="33380" length="40" type="WString { }">Palmon[Apocalymon]</TextA>
+      <TextB kind="Leaf" offset="33420" length="268" type="WString { }">A Plant type Digimon with a flower on top of its head. It will waft about a sweet fragrance or a foul stench, depending on its mood.</TextB>
+    </_85>
+    <_86 kind="Record" offset="33688" length="340">
+      <TextKey kind="Leaf" offset="33688" length="4" type="Scalar { Kind = U32 }" value="33078" />
+      <TextA kind="Leaf" offset="33692" length="46" type="WString { }">Hagurumon[Apocalymon]</TextA>
+      <TextB kind="Leaf" offset="33738" length="290" type="WString { }">A mutant Digimon shaped like a gear. As this Digimon is impervious to good and evil,, it doesn't even know it is being misused by bad Digimons.</TextB>
+    </_86>
+    <_87 kind="Record" offset="34028" length="402">
+      <TextKey kind="Leaf" offset="34028" length="4" type="Scalar { Kind = U32 }" value="33079" />
+      <TextA kind="Leaf" offset="34032" length="50" type="WString { }">PicoDevimon[Apocalymon]</TextA>
+      <TextB kind="Leaf" offset="34082" length="348" type="WString { }">A small Digimon which has an appearance like a bat. It exists to serve as a familiar for Devimon. The Digimon likes to stay in dark places. It usually ambushes in the dark.</TextB>
+    </_87>
+    <_88 kind="Record" offset="34430" length="558">
+      <TextKey kind="Leaf" offset="34430" length="4" type="Scalar { Kind = U32 }" value="33080" />
+      <TextA kind="Leaf" offset="34434" length="58" type="WString { }">Agumon(Black)[BlitzGreymon]</TextA>
+      <TextB kind="Leaf" offset="34492" length="496" type="WString { }">Agumon that has evolved into a virus-type form after its inner instincts' awakening to wildness. Its aggressive characteristics are still there, but it no longer possesses any sense of justice. It ambushes its enemy fiercely with its sharp claws.</TextB>
+    </_88>
+    <_89 kind="Record" offset="34988" length="522">
+      <TextKey kind="Leaf" offset="34988" length="4" type="Scalar { Kind = U32 }" value="33081" />
+      <TextA kind="Leaf" offset="34992" length="52" type="WString { }">Guilmon[ChaosGallantmon]</TextA>
+      <TextB kind="Leaf" offset="35044" length="466" type="WString { }">A Reptile Digimon who has the ferocious personality of a carnivorous beast. The mark drawn on its abdomen is called the "Digital Hazard", which is inscribed on those that have the potential to cause massive damage to computer data.</TextB>
+    </_89>
+    <_90 kind="Record" offset="35510" length="282">
+      <TextKey kind="Leaf" offset="35510" length="4" type="Scalar { Kind = U32 }" value="33082" />
+      <TextA kind="Leaf" offset="35514" length="48" type="WString { }">Gabumon[CresGarurumon]</TextA>
+      <TextB kind="Leaf" offset="35562" length="230" type="WString { }">A Reptile type Digimon with furry skin. A shy and timid Digimon. It is covered with skin that Garurumon provided.</TextB>
+    </_90>
+    <_91 kind="Record" offset="35792" length="282">
+      <TextKey kind="Leaf" offset="35792" length="4" type="Scalar { Kind = U32 }" value="33083" />
+      <TextA kind="Leaf" offset="35796" length="36" type="WString { }">Elecmon[Duftmon]</TextA>
+      <TextB kind="Leaf" offset="35832" length="242" type="WString { }">A Mammal type Digimon that still preserves traces of the Mammal Digimon, Tsunomon. A naughty Digimon full of curiosity.</TextB>
+    </_91>
+    <_92 kind="Record" offset="36074" length="308">
+      <TextKey kind="Leaf" offset="36074" length="4" type="Scalar { Kind = U32 }" value="33084" />
+      <TextA kind="Leaf" offset="36078" length="36" type="WString { }">Palmon[Original]</TextA>
+      <TextB kind="Leaf" offset="36114" length="268" type="WString { }">A Plant type Digimon with a flower on top of its head. It will waft about a sweet fragrance or a foul stench, depending on its mood.</TextB>
+    </_92>
+    <_93 kind="Record" offset="36382" length="484">
+      <TextKey kind="Leaf" offset="36382" length="4" type="Scalar { Kind = U32 }" value="33085" />
+      <TextA kind="Leaf" offset="36386" length="20" type="WString { }">Floramon</TextA>
+      <TextB kind="Leaf" offset="36406" length="460" type="WString { }">Its whole face has the appearance of a flower, and the petal-styled shell usually protects its head like a helmet. When humans are not around or when it's in a good mood, the petals on its head and both of its arms open up wide.</TextB>
+    </_93>
+    <_94 kind="Record" offset="36866" length="400">
+      <TextKey kind="Leaf" offset="36866" length="4" type="Scalar { Kind = U32 }" value="33086" />
+      <TextA kind="Leaf" offset="36870" length="18" type="WString { }">Gizamon</TextA>
+      <TextB kind="Leaf" offset="36888" length="378" type="WString { }">An aquatic mammal Digimon with webbed hands and feet, which help it to swim in the water. On the land, it is cowardly and timid, but once in the water, it shows its true, ferocious color.</TextB>
+    </_94>
+    <_95 kind="Record" offset="37266" length="276">
+      <TextKey kind="Leaf" offset="37266" length="4" type="Scalar { Kind = U32 }" value="35028" />
+      <TextA kind="Leaf" offset="37270" length="24" type="WString { }">Drimogemon</TextA>
+      <TextB kind="Leaf" offset="37294" length="248" type="WString { }">A mole-shaped Beast type Digimon with a well-developed nose drill. It moves underground by drilling rapidly through soil. </TextB>
+    </_95>
+    <_96 kind="Record" offset="37542" length="162">
+      <TextKey kind="Leaf" offset="37542" length="4" type="Scalar { Kind = U32 }" value="35050" />
+      <TextA kind="Leaf" offset="37546" length="18" type="WString { }">Gomamon</TextA>
+      <TextB kind="Leaf" offset="37564" length="140" type="WString { }">A Sea Animal Digimon that can live on land, as it has a coat of fur.</TextB>
+    </_96>
+    <_97 kind="Record" offset="37704" length="252">
+      <TextKey kind="Leaf" offset="37704" length="4" type="Scalar { Kind = U32 }" value="35138" />
+      <TextA kind="Leaf" offset="37708" length="18" type="WString { }">Gabumon</TextA>
+      <TextB kind="Leaf" offset="37726" length="230" type="WString { }">A Reptile type Digimon with furry skin. A shy and timid Digimon. It is covered with skin that Garurumon provided.</TextB>
+    </_97>
+    <_98 kind="Record" offset="37956" length="564">
+      <TextKey kind="Leaf" offset="37956" length="4" type="Scalar { Kind = U32 }" value="35139" />
+      <TextA kind="Leaf" offset="37960" length="40" type="WString { }">Salamon[Lilithmon]</TextA>
+      <TextB kind="Leaf" offset="38000" length="520" type="WString { }">A pet-based holy type Digimon who was created by Digimon scientist. As it is still very young, it is unable to manifest its holy powers, and isn't even aware of its own mission. For that reason it is naturally insecure, so it can become either good or evil. </TextB>
+    </_98>
+    <_99 kind="Record" offset="38520" length="348">
+      <TextKey kind="Leaf" offset="38520" length="4" type="Scalar { Kind = U32 }" value="35143" />
+      <TextA kind="Leaf" offset="38524" length="20" type="WString { }">Otamamon</TextA>
+      <TextB kind="Leaf" offset="38544" length="324" type="WString { }">A larva Digimon whose skin is not firm because it chose life underwater. Care is required when nurturing the Digimon because it can go through mutant evolution.</TextB>
+    </_99>
+    <_100 kind="Record" offset="38868" length="614">
+      <TextKey kind="Leaf" offset="38868" length="4" type="Scalar { Kind = U32 }" value="35144" />
+      <TextA kind="Leaf" offset="38872" length="22" type="WString { }">ToyAgumon</TextA>
+      <TextB kind="Leaf" offset="38894" length="588" type="WString { }">A special digimon that has a body made of special plastic blocks. They say a child using the internet created it based on the shape of the Agumon, and it is very lovable. Unlike the strong Agumon, it has a cowardly side, and when surprised its blocks get undone and spread out here and there.</TextB>
+    </_100>
+    <_101 kind="Record" offset="39482" length="452">
+      <TextKey kind="Leaf" offset="39482" length="4" type="Scalar { Kind = U32 }" value="35145" />
+      <TextA kind="Leaf" offset="39486" length="22" type="WString { }">Psychemon</TextA>
+      <TextB kind="Leaf" offset="39508" length="426" type="WString { }">A Reptile Digimon that looks similar to Gabumon. It has sharp molars and claws, and a horn on its head. It likes bright and fancy things, but is timid just like Gabumon. They even resemble each other in skills. </TextB>
+    </_101>
+    <_102 kind="Record" offset="39934" length="578">
+      <TextKey kind="Leaf" offset="39934" length="4" type="Scalar { Kind = U32 }" value="35147" />
+      <TextA kind="Leaf" offset="39938" length="18" type="WString { }">Hackmon</TextA>
+      <TextB kind="Leaf" offset="39956" length="556" type="WString { }">Live in a way that is free, at will, and refuses to be bound. He is also flexible in dealing with the harsh trials of Gankoomon. Even if the enemy is perfect form, they can fight in a same state, and he is the Digimon, who wants to be a Royal Nights like his master, Gankumon.</TextB>
+    </_102>
+    <_103 kind="Record" offset="40512" length="378">
+      <TextKey kind="Leaf" offset="40512" length="4" type="Scalar { Kind = U32 }" value="35148" />
+      <TextA kind="Leaf" offset="40516" length="20" type="WString { }">gammamon</TextA>
+      <TextB kind="Leaf" offset="40536" length="354" type="WString { }">A very rare, young, white Ceratopsian Digimon that was recently discovered. Gammamon's evolution is said to be linked to a "digital signal that came from extragalactic space".</TextB>
+    </_103>
+    <_104 kind="Record" offset="40890" length="614">
+      <TextKey kind="Leaf" offset="40890" length="4" type="Scalar { Kind = U32 }" value="35151" />
+      <TextA kind="Leaf" offset="40894" length="22" type="WString { }">ToyAgumon</TextA>
+      <TextB kind="Leaf" offset="40916" length="588" type="WString { }">A special digimon that has a body made of special plastic blocks. They say a child using the internet created it based on the shape of the Agumon, and it is very lovable. Unlike the strong Agumon, it has a cowardly side, and when surprised its blocks get undone and spread out here and there.</TextB>
+    </_104>
+    <_105 kind="Record" offset="41504" length="420">
+      <TextKey kind="Leaf" offset="41504" length="4" type="Scalar { Kind = U32 }" value="35153" />
+      <TextA kind="Leaf" offset="41508" length="16" type="WString { }">Eosmon</TextA>
+      <TextB kind="Leaf" offset="41524" length="400" type="WString { }">An artificial Digimon modeled after another Digimon. Eosmon lacks emotions and acts solely according to the researcher’s instructions, so even actions based on good or evil depend on the researcher.</TextB>
+    </_105>
+    <_106 kind="Record" offset="41924" length="620">
+      <TextKey kind="Leaf" offset="41924" length="4" type="Scalar { Kind = U32 }" value="35155" />
+      <TextA kind="Leaf" offset="41928" length="20" type="WString { }">JELLYMON</TextA>
+      <TextB kind="Leaf" offset="41948" length="596" type="WString { }">A soft-bodied Digimon with a soft head like a jellyfish. Their entire body is flexible, so they can put their body inside their head, but they usually live with just their head. They like clean environments and activities, and when they see dirty behavior, they get angry and go into battle mode.</TextB>
+    </_106>
+    <_107 kind="Record" offset="42544" length="476">
+      <TextKey kind="Leaf" offset="42544" length="4" type="Scalar { Kind = U32 }" value="35156" />
+      <TextA kind="Leaf" offset="42548" length="22" type="WString { }">ANGORAMON</TextA>
+      <TextB kind="Leaf" offset="42570" length="450" type="WString { }">A beast-type Digimon characterized by long ears and body hair that covers its entire body. It has a gentle personality that does not like fighting, and its long ears detect the approach of distant enemies and avoids battle.</TextB>
+    </_107>
+    <_108 kind="Record" offset="43020" length="270">
+      <TextKey kind="Leaf" offset="43020" length="4" type="Scalar { Kind = U32 }" value="35157" />
+      <TextA kind="Leaf" offset="43024" length="34" type="WString { }">Impmon[Baalmon]</TextA>
+      <TextB kind="Leaf" offset="43058" length="232" type="WString { }">Mischievous Digimon who loves playing pranks. It can evolve into Impmon, IceDevimon, Baalmon, and Beelzebumon (C).</TextB>
+    </_108>
+    <_109 kind="Record" offset="43290" length="368">
+      <TextKey kind="Leaf" offset="43290" length="4" type="Scalar { Kind = U32 }" value="35159" />
+      <TextA kind="Leaf" offset="43294" length="18" type="WString { }">Negamon</TextA>
+      <TextB kind="Leaf" offset="43312" length="346" type="WString { }">An In-Training Digimon that grew up submerged in the network, overflowing with negative data. It quietly lives in pitch-black darkness, always yearning for its own demise.</TextB>
+    </_109>
+    <_110 kind="Record" offset="43658" length="304">
+      <TextKey kind="Leaf" offset="43658" length="4" type="Scalar { Kind = U32 }" value="41033" />
+      <TextA kind="Leaf" offset="43662" length="20" type="WString { }">Dobermon</TextA>
+      <TextB kind="Leaf" offset="43682" length="280" type="WString { }">A famous Digimon known as the vicious Digicore Hunter. This Digimon hunts the same Virus type Digimon, and generally does not obey humans.</TextB>
+    </_110>
+    <_111 kind="Record" offset="43962" length="202">
+      <TextKey kind="Leaf" offset="43962" length="4" type="Scalar { Kind = U32 }" value="41075" />
+      <TextA kind="Leaf" offset="43966" length="18" type="WString { }">Gizumon</TextA>
+      <TextB kind="Leaf" offset="43984" length="180" type="WString { }">A Machine type Digimon built from the modification of various Digimon by Akihiro Kurata.</TextB>
+    </_111>
+    <_112 kind="Record" offset="44164" length="250">
+      <TextKey kind="Leaf" offset="44164" length="4" type="Scalar { Kind = U32 }" value="41088" />
+      <TextA kind="Leaf" offset="44168" length="18" type="WString { }">Starmon</TextA>
+      <TextB kind="Leaf" offset="44186" length="228" type="WString { }">A Mutant type Digimon that was created from the Space Center software, designed to solve mystery of the planets.</TextB>
+    </_112>
+    <_113 kind="Record" offset="44414" length="190">
+      <TextKey kind="Leaf" offset="44414" length="4" type="Scalar { Kind = U32 }" value="41132" />
+      <TextA kind="Leaf" offset="44418" length="18" type="WString { }">Kiwimon</TextA>
+      <TextB kind="Leaf" offset="44436" length="168" type="WString { }">An ancient bird-type Digimon on the verge of extinction. A simple-natured Digimon.</TextB>
+    </_113>
+    <_114 kind="Record" offset="44604" length="262">
+      <TextKey kind="Leaf" offset="44604" length="4" type="Scalar { Kind = U32 }" value="41146" />
+      <TextA kind="Leaf" offset="44608" length="20" type="WString { }">Doggymon</TextA>
+      <TextB kind="Leaf" offset="44628" length="238" type="WString { }">A Puppet Digimon produced from an American cartoon TV database. It is a harmless Digimon with no malice or aggression</TextB>
+    </_114>
+    <_115 kind="Record" offset="44866" length="260">
+      <TextKey kind="Leaf" offset="44866" length="4" type="Scalar { Kind = U32 }" value="41159" />
+      <TextA kind="Leaf" offset="44870" length="22" type="WString { }">Deputymon</TextA>
+      <TextB kind="Leaf" offset="44892" length="234" type="WString { }">A Mutant Digimon whose body has become a gun barrel. It has a deep sense of justice and fights against evil powers.</TextB>
+    </_115>
+    <_116 kind="Record" offset="45126" length="536">
+      <TextKey kind="Leaf" offset="45126" length="4" type="Scalar { Kind = U32 }" value="41178" />
+      <TextA kind="Leaf" offset="45130" length="22" type="WString { }">Meicoomon</TextA>
+      <TextB kind="Leaf" offset="45152" length="510" type="WString { }">Despite its fluffy coat of fur and adorable appearance, it actually possesses extremely sharp claws underneath its paws.
+Other than hiding its shy face, the two feelers growing from Meicoomon's neck are also excellent to use as a scarf during cold days.</TextB>
+    </_116>
+    <_117 kind="Record" offset="45662" length="320">
+      <TextKey kind="Leaf" offset="45662" length="4" type="Scalar { Kind = U32 }" value="43004" />
+      <TextA kind="Leaf" offset="45666" length="30" type="WString { }">Mailbirdramon</TextA>
+      <TextB kind="Leaf" offset="45696" length="286" type="WString { }">Raptor-type Fyling Digimon. It surveys the battle status from the sky and specializes in hit-and-run tactics with precies attacks on enemies.</TextB>
+    </_117>
+    <_118 kind="Record" offset="45982" length="350">
+      <TextKey kind="Leaf" offset="45982" length="4" type="Scalar { Kind = U32 }" value="43005" />
+      <TextA kind="Leaf" offset="45986" length="24" type="WString { }">Greymon(C)</TextA>
+      <TextB kind="Leaf" offset="46010" length="322" type="WString { }">Tyrannosaurus-type Digimon. Because of its offensive nature, its combat instinct is very high, and it will not stop fighting until all enemies are annihilated.</TextB>
+    </_118>
+    <_119 kind="Record" offset="46332" length="452">
+      <TextKey kind="Leaf" offset="46332" length="4" type="Scalar { Kind = U32 }" value="45159" />
+      <TextA kind="Leaf" offset="46336" length="20" type="WString { }">Starmons</TextA>
+      <TextB kind="Leaf" offset="46356" length="428" type="WString { }">Starmons is a digimon composed of several Pickmon with Starmon at the center. Starmon's will is the will of Starmons and because the decision by Starmon is absolute, Pickmon perfectly follow the order of Starmon.</TextB>
+    </_119>
+    <_120 kind="Record" offset="46784" length="342">
+      <TextKey kind="Leaf" offset="46784" length="4" type="Scalar { Kind = U32 }" value="45160" />
+      <TextA kind="Leaf" offset="46788" length="18" type="WString { }">Lucemon</TextA>
+      <TextB kind="Leaf" offset="46806" length="320" type="WString { }">A Digimon who looks like a baby angel. It was said that the Digimon appeared to bring order and peace to the World, while the Digimon World was still chaotic.</TextB>
+    </_120>
+    <_121 kind="Record" offset="47126" length="494">
+      <TextKey kind="Leaf" offset="47126" length="4" type="Scalar { Kind = U32 }" value="45163" />
+      <TextA kind="Leaf" offset="47130" length="24" type="WString { }">Zhuqiaomon</TextA>
+      <TextB kind="Leaf" offset="47154" length="466" type="WString { }">One of the four holy beasts which protect the digital world. It guards the south. It controls fire. Zhuqiaomon is especially wild among the four holy beasts so that it exterminates everything approaching it without a proper cause. </TextB>
+    </_121>
+    <_122 kind="Record" offset="47620" length="652">
+      <TextKey kind="Leaf" offset="47620" length="4" type="Scalar { Kind = U32 }" value="45164" />
+      <TextA kind="Leaf" offset="47624" length="26" type="WString { }">QingLongmon</TextA>
+      <TextB kind="Leaf" offset="47650" length="622" type="WString { }">One of the Four Holy Beasts who protects the Digital World. It guards the East with fierce lightning. It is a legendary being like the other Four Holy Beasts. It is said its power can match that of a god. Also, it is regarded as one of the Four Great Dragons alongside Holydramon, Magnadramon, and Megidramon.</TextB>
+    </_122>
+    <_123 kind="Record" offset="48272" length="588">
+      <TextKey kind="Leaf" offset="48272" length="4" type="Scalar { Kind = U32 }" value="45165" />
+      <TextA kind="Leaf" offset="48276" length="22" type="WString { }">Xuanwumon</TextA>
+      <TextB kind="Leaf" offset="48298" length="562" type="WString { }">One of the four holy beasts which protect the digital world. It guards the north. It uses water skill. Xuanwumon is the oldest of the four holy beast digimons, and has gentle mind. All the four holy beast digimons have four eyes and twelve Digicores floating around their bodies.</TextB>
+    </_123>
+    <_124 kind="Record" offset="48860" length="728">
+      <TextKey kind="Leaf" offset="48860" length="4" type="Scalar { Kind = U32 }" value="45166" />
+      <TextA kind="Leaf" offset="48864" length="20" type="WString { }">Baihumon</TextA>
+      <TextB kind="Leaf" offset="48884" length="704" type="WString { }">One of the four holy beasts which protect the digital world. It has steel characteristics that protect the West. It has reigned since the mythical age and is legendary just like the other four holy beasts digimons, and its power is known to be almost as strong as god. It is the youngest of the four holy beasts digimons, but has the strongest power.</TextB>
+    </_124>
+    <_125 kind="Record" offset="49588" length="402">
+      <TextKey kind="Leaf" offset="49588" length="4" type="Scalar { Kind = U32 }" value="45172" />
+      <TextA kind="Leaf" offset="49592" length="18" type="WString { }">Raremon</TextA>
+      <TextB kind="Leaf" offset="49610" length="380" type="WString { }">An Undead Digimon whose muscles have all rotted away. It tried to extend its life by mechanizing its body, but it destabilized its body, and its configuration data has begun to break down.</TextB>
+    </_125>
+    <_126 kind="Record" offset="49990" length="610">
+      <TextKey kind="Leaf" offset="49990" length="4" type="Scalar { Kind = U32 }" value="45188" />
+      <TextA kind="Leaf" offset="49994" length="30" type="WString { }">Deadly Axemon</TextA>
+      <TextB kind="Leaf" offset="50024" length="576" type="WString { }">A younger brother who exchanged cups of brotherhood with Skull Knightmon, it is a brawny fighter replete with nimble movements and limitless physical strength. It faithfully obeys its sworn brother Skull Knightmon, and battles with faith in its sworn brother in order to obtain victory.</TextB>
+    </_126>
+    <_127 kind="Record" offset="50600" length="658">
+      <TextKey kind="Leaf" offset="50600" length="4" type="Scalar { Kind = U32 }" value="45189" />
+      <TextA kind="Leaf" offset="50604" length="32" type="WString { }">SkullKnightmon</TextA>
+      <TextB kind="Leaf" offset="50636" length="622" type="WString { }">An elder brother who exchanged cups of brotherhood with Deadly Axemon. As a knight that excels in cunning, its behavior is based on its policy, "Those who are knights must fight. Even more importantly than fighting, they must win," and it places great importance on attaining a victorious outcome at any rate.</TextB>
+    </_127>
+    <_128 kind="Record" offset="51258" length="698">
+      <TextKey kind="Leaf" offset="51258" length="4" type="Scalar { Kind = U32 }" value="45190" />
+      <TextA kind="Leaf" offset="51262" length="20" type="WString { }">Bagramon</TextA>
+      <TextB kind="Leaf" offset="51282" length="674" type="WString { }">Although it was originally a high-ranking Angel Digimon that ruled over death, it despaired against the unreasonable justice of the world and rebelled against God. It then received the scourge of God and eternally lost one of its eyes and half of its body, and has since replaced that half with an artificial body cut from King Drasil.</TextB>
+    </_128>
+    <_129 kind="Record" offset="51956" length="450">
+      <TextKey kind="Leaf" offset="51956" length="4" type="Scalar { Kind = U32 }" value="63012" />
+      <TextA kind="Leaf" offset="51960" length="20" type="WString { }">Ogudomon</TextA>
+      <TextB kind="Leaf" offset="51980" length="426" type="WString { }">Incarnate Type of Digimon who has 7 eyes and legs, and the mysterious 8th eye. 
+Because it contains all the sins of the digital world, Digimon, who is even a little bit malicious, has no way to defeat the power.</TextB>
+    </_129>
+    <_130 kind="Record" offset="52406" length="392">
+      <TextKey kind="Leaf" offset="52406" length="4" type="Scalar { Kind = U32 }" value="71102" />
+      <TextA kind="Leaf" offset="52410" length="42" type="WString { }">Apocalymon[Psychic]</TextA>
+      <TextB kind="Leaf" offset="52452" length="346" type="WString { }">A mysterious Digimon that appeared when negative thoughts gathered through dark power. None know its true identity, and whether this thing is a Digimon cannot be analyzed.</TextB>
+    </_130>
+    <_131 kind="Record" offset="52798" length="344">
+      <TextKey kind="Leaf" offset="52798" length="4" type="Scalar { Kind = U32 }" value="71103" />
+      <TextA kind="Leaf" offset="52802" length="46" type="WString { }">Armagemon[Conflation]</TextA>
+      <TextB kind="Leaf" offset="52848" length="294" type="WString { }">Massive number of Kuramon have conflated and mutated into Armagemon. By unity of massive Kuramons, it gained the power that transcends Diablomon.</TextB>
+    </_131>
+    <_132 kind="Record" offset="53142" length="428">
+      <TextKey kind="Leaf" offset="53142" length="4" type="Scalar { Kind = U32 }" value="75020" />
+      <TextA kind="Leaf" offset="53146" length="18" type="WString { }">Agnimon</TextA>
+      <TextB kind="Leaf" offset="53164" length="406" type="WString { }">A Digimon that possesses power of Fire, which bears the might of legendary Ten Warriors. The Digimon can freely control fire because spiritual fire, also known as sacred flame, surrounds the DigiCore. </TextB>
+    </_132>
+    <_133 kind="Record" offset="53570" length="496">
+      <TextKey kind="Leaf" offset="53570" length="4" type="Scalar { Kind = U32 }" value="75021" />
+      <TextA kind="Leaf" offset="53574" length="22" type="WString { }">Vritramon</TextA>
+      <TextB kind="Leaf" offset="53596" length="470" type="WString { }">A Digimon that possesses power of Fire, which bears the might of legendary Ten Warriors. It has skin that can withstand high temperatures, can move in lava, and is a fire fighter that can quench fire with sudden and explosive flames.</TextB>
+    </_133>
+    <_134 kind="Record" offset="54066" length="784">
+      <TextKey kind="Leaf" offset="54066" length="4" type="Scalar { Kind = U32 }" value="75022" />
+      <TextA kind="Leaf" offset="54070" length="20" type="WString { }">Fairimon</TextA>
+      <TextB kind="Leaf" offset="54090" length="760" type="WString { }">A Digimon that possesses power of Wind, which bears the might of legendary Ten Warriors. The Digimon effortlessly controls the atmosphere to create mirages for its enemies and creates vacuums to attack with "Piercing Winds." It is more skilled in gaining intelligence than fighting and as a complete optimist, its strong will allows the Digimon to laugh away small difficulties.</TextB>
+    </_134>
+    <_135 kind="Record" offset="54850" length="626">
+      <TextKey kind="Leaf" offset="54850" length="4" type="Scalar { Kind = U32 }" value="75023" />
+      <TextA kind="Leaf" offset="54854" length="20" type="WString { }">Shutsmon</TextA>
+      <TextB kind="Leaf" offset="54874" length="602" type="WString { }">A Digimon that possesses power of Wind, which bears the might of legendary Ten Warriors. Since the Digimon looks like a calm female adult, it lures enemies with its languid behaviors but actually, it is has a devilish personality and is very fickle and enjoys putting people in difficult situations.</TextB>
+    </_135>
+    <_136 kind="Record" offset="55476" length="730">
+      <TextKey kind="Leaf" offset="55476" length="4" type="Scalar { Kind = U32 }" value="75024" />
+      <TextA kind="Leaf" offset="55480" length="22" type="WString { }">Chakkumon</TextA>
+      <TextB kind="Leaf" offset="55502" length="704" type="WString { }">A Digimon that possesses power of Ice, which bears the might of legendary Ten Warriors. It claims to be a member of the Polar Region Defense Force of the Polar Army but the truth is unknown. it is survivalist knowledge is strong and reliable. The Digimon rarely acts on its own will and primarily operates in response to someone's requests or orders.</TextB>
+    </_136>
+    <_137 kind="Record" offset="56206" length="438">
+      <TextKey kind="Leaf" offset="56206" length="4" type="Scalar { Kind = U32 }" value="75025" />
+      <TextA kind="Leaf" offset="56210" length="24" type="WString { }">Blizzarmon</TextA>
+      <TextB kind="Leaf" offset="56234" length="410" type="WString { }">A Digimon that possesses power of Ice, which bears the might of legendary Ten Warriors. It is reckless and impulsive rather than brave and resolute. It is a wild Digimon that is determined and ambitious.</TextB>
+    </_137>
+    <_138 kind="Record" offset="56644" length="656">
+      <TextKey kind="Leaf" offset="56644" length="4" type="Scalar { Kind = U32 }" value="75026" />
+      <TextA kind="Leaf" offset="56648" length="20" type="WString { }">Arbormon</TextA>
+      <TextB kind="Leaf" offset="56668" length="632" type="WString { }">A Digimon that possesses power of Wood, which bears the might of legendary Ten Warriors. It is quiet and emotionless and therefore, it is impossible to guess its thoughts. Normally, it is treated literally as a wooden doll but once a battle begins, its tricky movements makes its enemies feel pain and humiliation.</TextB>
+    </_138>
+    <_139 kind="Record" offset="57300" length="624">
+      <TextKey kind="Leaf" offset="57300" length="4" type="Scalar { Kind = U32 }" value="75027" />
+      <TextA kind="Leaf" offset="57304" length="26" type="WString { }">Petaldramon</TextA>
+      <TextB kind="Leaf" offset="57330" length="594" type="WString { }">A Digimon that possesses power of Wood, which bears the might of legendary Ten Warriors. Its emotionless face makes it difficult to guess its thoughts but the Digimon has a huge appetite. It swallows everything with its tongue that looks like an ivy vine and makes the branches on its back grow.</TextB>
+    </_139>
+    <_140 kind="Record" offset="57924" length="630">
+      <TextKey kind="Leaf" offset="57924" length="4" type="Scalar { Kind = U32 }" value="75028" />
+      <TextA kind="Leaf" offset="57928" length="18" type="WString { }">Grotmon</TextA>
+      <TextB kind="Leaf" offset="57946" length="608" type="WString { }">A Digimon that possesses power of Earth, which bears the might of legendary Ten Warriors. There are various weapons and defense mechanisms on its large hands and thick fingers. It hates receiving orders and frequently acts independently but follows orders from those whose intelligence it acknowledges.</TextB>
+    </_140>
+    <_141 kind="Record" offset="58554" length="694">
+      <TextKey kind="Leaf" offset="58554" length="4" type="Scalar { Kind = U32 }" value="75029" />
+      <TextA kind="Leaf" offset="58558" length="20" type="WString { }">Gigasmon</TextA>
+      <TextB kind="Leaf" offset="58578" length="670" type="WString { }">A Digimon that possesses power of Earth, which bears the might of legendary Ten Warriors. It is a dirt giant created with earth or materials from the atmosphere. Compared to Grotmon, it is more arrogant and violent. It has Grotmon's personality of looking down on others and often considers battles to be boring and yawns frequently.</TextB>
+    </_141>
+    <_142 kind="Record" offset="59248" length="748">
+      <TextKey kind="Leaf" offset="59248" length="4" type="Scalar { Kind = U32 }" value="75030" />
+      <TextA kind="Leaf" offset="59252" length="30" type="WString { }">KaiserGreymon</TextA>
+      <TextB kind="Leaf" offset="59282" length="714" type="WString { }">A Transcend Form Digimon with the power of fire exceeding that of Ten Legendary Warriors. It is said to contain the power of nine dragon veins flowing through the ground and can control the strength of nine dragons to rule Gaia with unfathomable power. It is said to wield 'Ryugonken', a sword which seals the spirits of the dragons, to control the power.</TextB>
+    </_142>
+    <_143 kind="Record" offset="59996" length="676">
+      <TextKey kind="Leaf" offset="59996" length="4" type="Scalar { Kind = U32 }" value="75031" />
+      <TextA kind="Leaf" offset="60000" length="18" type="WString { }">Wolfmon</TextA>
+      <TextB kind="Leaf" offset="60018" length="654" type="WString { }">A Digimon that possesses power of Light, which bears the might of legendary Ten Warriors. As a chivalrous Digimon who will lay down its life for its beliefs, it despises injustice. Lobomon might seem cold because it does not often speak and does not want to be associated with anyone, but it is a very warm and sweet warrior.</TextB>
+    </_143>
+    <_144 kind="Record" offset="60672" length="700">
+      <TextKey kind="Leaf" offset="60672" length="4" type="Scalar { Kind = U32 }" value="75032" />
+      <TextA kind="Leaf" offset="60676" length="18" type="WString { }">Garmmon</TextA>
+      <TextB kind="Leaf" offset="60694" length="678" type="WString { }">A Digimon that possesses power of Light, which bears the might of legendary Ten Warriors. It has super speed because it was discovered in an optical communications network and hates evil due to its just mind. It never follows anyone with even the slightest malice but once it pledges loyalty to someone, it will never betray that person.</TextB>
+    </_144>
+    <_145 kind="Record" offset="61372" length="508">
+      <TextKey kind="Leaf" offset="61372" length="4" type="Scalar { Kind = U32 }" value="75033" />
+      <TextA kind="Leaf" offset="61376" length="20" type="WString { }">Blitzmon</TextA>
+      <TextB kind="Leaf" offset="61396" length="484" type="WString { }">A Digimon that possesses power of Thunder, which bears the might of legendary Ten Warriors. It has mechanical appearance contrariwise it has warm heart. Its battle type is close wrestler style, and it is not good at underwater circumstance.</TextB>
+    </_145>
+    <_146 kind="Record" offset="61880" length="592">
+      <TextKey kind="Leaf" offset="61880" length="4" type="Scalar { Kind = U32 }" value="75034" />
+      <TextA kind="Leaf" offset="61884" length="18" type="WString { }">Bolgmon</TextA>
+      <TextB kind="Leaf" offset="61902" length="570" type="WString { }">A Digimon that possesses power of Thunder, which bears the might of legendary Ten Warriors. It has strong armor and receives enemy’s attack as a shield instead another colleague, however merciless attack through entire weapon is started when the damage reaches to its critical point.</TextB>
+    </_146>
+    <_147 kind="Record" offset="62472" length="592">
+      <TextKey kind="Leaf" offset="62472" length="4" type="Scalar { Kind = U32 }" value="75035" />
+      <TextA kind="Leaf" offset="62476" length="18" type="WString { }">Lanamon</TextA>
+      <TextB kind="Leaf" offset="62494" length="570" type="WString { }">A Digimon that possesses power of Water, which bears the might of legendary Ten Warriors. It has severe mood swings. When it is in good mood, it becomes like elegant lady, however when it is in bad mood, it becomes like newborn baby. Main battle style is indirect attack with water. </TextB>
+    </_147>
+    <_148 kind="Record" offset="63064" length="808">
+      <TextKey kind="Leaf" offset="63064" length="4" type="Scalar { Kind = U32 }" value="75036" />
+      <TextA kind="Leaf" offset="63068" length="26" type="WString { }">Calamaramon</TextA>
+      <TextB kind="Leaf" offset="63094" length="778" type="WString { }">A Digimon that possesses power of Water, which bears the might of legendary Ten Warriors. It is half man and half beast. The character is impatient &amp; crafty like witch. It attacks enemy with high-speed spinning of own tentacle and also defense oneself with it. When tentacle attack not gives any damage for the enemy, it changes one’s body into jumbo squid and increase the attack power.</TextB>
+    </_148>
+    <_149 kind="Record" offset="63872" length="732">
+      <TextKey kind="Leaf" offset="63872" length="4" type="Scalar { Kind = U32 }" value="75037" />
+      <TextA kind="Leaf" offset="63876" length="18" type="WString { }">Lowemon</TextA>
+      <TextB kind="Leaf" offset="63894" length="710" type="WString { }">A Digimon that possesses power of Darkness, which bears the might of legendary Ten Warriors. It became Duskmon by Cherubimon’s curse before. However Lowemon is actual form which is released from the curse, shadow of Ten warriors and pitch darkness warrior. Lowemon is executor to purify evils also with using Spear of conviction and Shield of atonement.</TextB>
+    </_149>
+    <_150 kind="Record" offset="64604" length="702">
+      <TextKey kind="Leaf" offset="64604" length="4" type="Scalar { Kind = U32 }" value="75038" />
+      <TextA kind="Leaf" offset="64608" length="28" type="WString { }">KaiserLeomon</TextA>
+      <TextB kind="Leaf" offset="64636" length="670" type="WString { }">A Digimon that possesses power of Darkness, which bears the might of legendary Ten Warriors. ‘Spirit of darkness’ appearance was changed into another by Cherubimon’s curse. However KaiserLeomon is actual form which is released from the curse. Its body covered by Obsidian Digizoid, so defensive power is quite high &amp; sharp itself.   </TextB>
+    </_150>
+    <_151 kind="Record" offset="65306" length="684">
+      <TextKey kind="Leaf" offset="65306" length="4" type="Scalar { Kind = U32 }" value="75039" />
+      <TextA kind="Leaf" offset="65310" length="24" type="WString { }">Mercuremon</TextA>
+      <TextB kind="Leaf" offset="65334" length="656" type="WString { }">A Digimon that possesses power of Steel, which bears the might of legendary Ten Warriors. It plans various strategies at the same time. Always it talks to oneself to discuss everything and anytime. The strong both arms are called with “Shield of irony” which reflects enemy’s attack. Sometimes it hides own body in the shield.</TextB>
+    </_151>
+    <_152 kind="Record" offset="65990" length="862">
+      <TextKey kind="Leaf" offset="65990" length="4" type="Scalar { Kind = U32 }" value="75040" />
+      <TextA kind="Leaf" offset="65994" length="24" type="WString { }">Sefirotmon</TextA>
+      <TextB kind="Leaf" offset="66018" length="834" type="WString { }">A Digimon that possesses power of metal, which bears the might of legendary Ten Warriors. The appearance is a machine which any other emotion vanished. It is able to analysis enemy’s weakness point in a twinkle. However, the character becomes own weakness point when it is in uncalculated situation. 10 spheres have same attribute with 10 warriors, so it use same attribute with enemy and can absorb enemy’s attack.</TextB>
+    </_152>
+    <_153 kind="Record" offset="66852" length="922">
+      <TextKey kind="Leaf" offset="66852" length="4" type="Scalar { Kind = U32 }" value="75041" />
+      <TextA kind="Leaf" offset="66856" length="32" type="WString { }">MagnaGarurumon</TextA>
+      <TextB kind="Leaf" offset="66888" length="886" type="WString { }">A Digimon that possesses power of light, and even its power transcends  the might of legendary Ten Warriors. When combine with a flight unit, it fly with light speed. Chest armor, 「Sniper phantom」 on right hand and 「Strike phantom」 on left hand can be split up however it makes power decreasing. Every target can be traced with 「Laser sight」 on the chest, and while it circles in the air, general attack is always ready to fire against them.</TextB>
+    </_153>
+    <_154 kind="Record" offset="67774" length="488">
+      <TextKey kind="Leaf" offset="67774" length="4" type="Scalar { Kind = U32 }" value="76001" />
+      <TextA kind="Leaf" offset="67778" length="18" type="WString { }">Guilmon</TextA>
+      <TextB kind="Leaf" offset="67796" length="466" type="WString { }">A Reptile Digimon who has the ferocious personality of a carnivorous beast. The mark drawn on its abdomen is called the "Digital Hazard", which is inscribed on those that have the potential to cause massive damage to computer data.</TextB>
+    </_154>
+    <_155 kind="Record" offset="68262" length="254">
+      <TextKey kind="Leaf" offset="68262" length="4" type="Scalar { Kind = U32 }" value="76002" />
+      <TextA kind="Leaf" offset="68266" length="16" type="WString { }">Impmon</TextA>
+      <TextB kind="Leaf" offset="68282" length="234" type="WString { }">A Digimon whose appearance is like a demon's child. It loves pranks, so it enjoys seeing its opponents embarrassed.</TextB>
+    </_155>
+    <_156 kind="Record" offset="68516" length="302">
+      <TextKey kind="Leaf" offset="68516" length="4" type="Scalar { Kind = U32 }" value="76003" />
+      <TextA kind="Leaf" offset="68520" length="14" type="WString { }">V-mon</TextA>
+      <TextB kind="Leaf" offset="68534" length="284" type="WString { }">One of the Ancient Animal types of Digimon. This Digimon has the highest battle ability of any Rookie among the Ancient Animal type Digimon.</TextB>
+    </_156>
+    <_157 kind="Record" offset="68818" length="276">
+      <TextKey kind="Leaf" offset="68818" length="4" type="Scalar { Kind = U32 }" value="76004" />
+      <TextA kind="Leaf" offset="68822" length="18" type="WString { }">Piyomon</TextA>
+      <TextB kind="Leaf" offset="68840" length="254" type="WString { }">A Bird type Digimon with wings, but it can hardly fly. This Digimon is full of curiosity. It likes to peck at Tanemon's head.</TextB>
+    </_157>
+    <_158 kind="Record" offset="69094" length="264">
+      <TextKey kind="Leaf" offset="69094" length="4" type="Scalar { Kind = U32 }" value="76005" />
+      <TextA kind="Leaf" offset="69098" length="18" type="WString { }">Elecmon</TextA>
+      <TextB kind="Leaf" offset="69116" length="242" type="WString { }">A Mammal type Digimon that still preserves traces of the Mammal Digimon, Tsunomon. A naughty Digimon full of curiosity.</TextB>
+    </_158>
+    <_159 kind="Record" offset="69358" length="542">
+      <TextKey kind="Leaf" offset="69358" length="4" type="Scalar { Kind = U32 }" value="76006" />
+      <TextA kind="Leaf" offset="69362" length="18" type="WString { }">Salamon</TextA>
+      <TextB kind="Leaf" offset="69380" length="520" type="WString { }">A pet-based holy type Digimon who was created by Digimon scientist. As it is still very young, it is unable to manifest its holy powers, and isn't even aware of its own mission. For that reason it is naturally insecure, so it can become either good or evil. </TextB>
+    </_159>
+    <_160 kind="Record" offset="69900" length="132">
+      <TextKey kind="Leaf" offset="69900" length="4" type="Scalar { Kind = U32 }" value="76007" />
+      <TextA kind="Leaf" offset="69904" length="16" type="WString { }">Leomon</TextA>
+      <TextB kind="Leaf" offset="69920" length="112" type="WString { }">Leomon of destiny, His destiny has always been a pity.</TextB>
+    </_160>
+    <_161 kind="Record" offset="70032" length="26">
+      <TextKey kind="Leaf" offset="70032" length="4" type="Scalar { Kind = U32 }" value="80003" />
+      <TextA kind="Leaf" offset="70036" length="18" type="WString { }">Raremon</TextA>
+      <TextB kind="Leaf" offset="70054" length="4" type="WString { }"></TextB>
+    </_161>
+  </Entries>
+</DigitamaExplain_Str>

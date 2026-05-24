@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DM_Pass_PassInfo_Str schema="DM_Pass-PassInfo_Str.struct" bin="DM_Pass-PassInfo_Str.bin" byteLength="4486">
+  <Entries kind="Section" offset="0" length="4486">
+    <_0 kind="Record" offset="4" length="404">
+      <TextKey kind="Leaf" offset="4" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Text kind="Leaf" offset="6" length="402" type="WString { }">This is the first season of the Season Pass that started with the new semester of Digimon Adventure.\n
+Perform various prepared missions to gain EXP, increase Pass level, and receive various rewards.</Text>
+    </_0>
+    <_1 kind="Record" offset="408" length="412">
+      <TextKey kind="Leaf" offset="408" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Text kind="Leaf" offset="410" length="410" type="WString { }">This is the second season of the SEASONPASS that began in celebration of Family Month.\n
+Earn experience points by performing various prepared missions, raise your pass level, so receive various rewards.</Text>
+    </_1>
+    <_2 kind="Record" offset="820" length="380">
+      <TextKey kind="Leaf" offset="820" length="2" type="Scalar { Kind = U16 }" value="3" />
+      <Text kind="Leaf" offset="822" length="378" type="WString { }">The third season of the Season Pass has begun to celebrate the summer vacation. 
+Complete the prepared missions to earn experience points, level up your pass, and receive various rewards.</Text>
+    </_2>
+    <_3 kind="Record" offset="1200" length="372">
+      <TextKey kind="Leaf" offset="1200" length="2" type="Scalar { Kind = U16 }" value="4" />
+      <Text kind="Leaf" offset="1202" length="370" type="WString { }">This is the fourth season of the season pass, starting with the new area.\n
+Complete the various prepared missions to earn experience, level up your pass, and receive various rewards.</Text>
+    </_3>
+    <_4 kind="Record" offset="1572" length="416">
+      <TextKey kind="Leaf" offset="1572" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Text kind="Leaf" offset="1574" length="414" type="WString { }">This is the five season of the Season Pass celebrating the 13th anniversary of Digimon Masters.\n
+Complete the various prepared missions to earn experience, level up your pass, and receive various rewards.</Text>
+    </_4>
+    <_5 kind="Record" offset="1988" length="354">
+      <TextKey kind="Leaf" offset="1988" length="2" type="Scalar { Kind = U16 }" value="7" />
+      <Text kind="Leaf" offset="1990" length="352" type="WString { }">This is the seventh season of the Season Pass with Digimon Kaiser.\nPerform various prepared missions to gain experience and raise your pass level to receive various rewards.</Text>
+    </_5>
+    <_6 kind="Record" offset="2342" length="338">
+      <TextKey kind="Leaf" offset="2342" length="2" type="Scalar { Kind = U16 }" value="8" />
+      <Text kind="Leaf" offset="2344" length="336" type="WString { }">This is the eighth season of the Season Pass with Jumping.\nPerform various prepared missions to gain experience and raise your pass level to receive various rewards.</Text>
+    </_6>
+    <_7 kind="Record" offset="2680" length="364">
+      <TextKey kind="Leaf" offset="2680" length="2" type="Scalar { Kind = U16 }" value="9" />
+      <Text kind="Leaf" offset="2682" length="362" type="WString { }">The ninth season of the Season Pass has begun to celebrate the summer.\nComplete various missions to earn experience points, raise your pass level, and claim a variety of rewards.</Text>
+    </_7>
+    <_8 kind="Record" offset="3044" length="384">
+      <TextKey kind="Leaf" offset="3044" length="2" type="Scalar { Kind = U16 }" value="10" />
+      <Text kind="Leaf" offset="3046" length="382" type="WString { }">The 10th season of the Season Pass has begun to celebrate Digimon Masters' 16th Anniversary.
+Complete various prepared missions to earn EXP, level up your pass, and receive various rewards.</Text>
+    </_8>
+    <_9 kind="Record" offset="3428" length="362">
+      <TextKey kind="Leaf" offset="3428" length="2" type="Scalar { Kind = U16 }" value="11" />
+      <Text kind="Leaf" offset="3430" length="360" type="WString { }">The 11th season of the Season Pass has begun to celebrate the Winter.\nComplete various missions to earn experience points, raise your pass level, and claim a variety of rewards.</Text>
+    </_9>
+    <_10 kind="Record" offset="3790" length="380">
+      <TextKey kind="Leaf" offset="3790" length="2" type="Scalar { Kind = U16 }" value="12" />
+      <Text kind="Leaf" offset="3792" length="378" type="WString { }">This is the 12th season of the Season Pass launched to celebrate the New Year.\nComplete various missions to earn experience points, raise your pass level, and claim a variety of rewards.</Text>
+    </_10>
+    <_11 kind="Record" offset="4170" length="316">
+      <TextKey kind="Leaf" offset="4170" length="2" type="Scalar { Kind = U16 }" value="13" />
+      <Text kind="Leaf" offset="4172" length="314" type="WString { }">This is the 13th season of the Season Pass.\n
+Complete various prepared missions to earn experience and level up your pass to receive a variety of rewards.</Text>
+    </_11>
+  </Entries>
+</DM_Pass_PassInfo_Str>

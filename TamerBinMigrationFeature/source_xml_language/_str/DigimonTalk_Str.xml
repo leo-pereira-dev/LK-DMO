@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DigimonTalk_Str schema="DigimonTalk_Str.struct" bin="DigimonTalk_Str.bin" byteLength="5022">
+  <Entries kind="Section" offset="0" length="5022">
+    <_0 kind="Record" offset="4" length="128">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="11011" />
+      <TextA kind="Leaf" offset="8" length="70" type="WString { }">Are you sure you want to dump it?</TextA>
+      <TextB kind="Leaf" offset="78" length="54" type="WString { }">Tried dumping a Rare Item</TextB>
+    </_0>
+    <_1 kind="Record" offset="132" length="138">
+      <TextKey kind="Leaf" offset="132" length="4" type="Scalar { Kind = U32 }" value="11012" />
+      <TextA kind="Leaf" offset="136" length="66" type="WString { }">You cannot throw away that item</TextA>
+      <TextB kind="Leaf" offset="202" length="68" type="WString { }">Tried dumping undestroyable item</TextB>
+    </_1>
+    <_2 kind="Record" offset="270" length="90">
+      <TextKey kind="Leaf" offset="270" length="4" type="Scalar { Kind = U32 }" value="12001" />
+      <TextA kind="Leaf" offset="274" length="50" type="WString { }">I can't… fight any more</TextA>
+      <TextB kind="Leaf" offset="324" length="36" type="WString { }">Lost in a Battle</TextB>
+    </_2>
+    <_3 kind="Record" offset="360" length="96">
+      <TextKey kind="Leaf" offset="360" length="4" type="Scalar { Kind = U32 }" value="13000" />
+      <TextA kind="Leaf" offset="364" length="34" type="WString { }">Watch your HP!!</TextA>
+      <TextB kind="Leaf" offset="398" length="58" type="WString { }">Remaining HP is 10% or less</TextB>
+    </_3>
+    <_4 kind="Record" offset="456" length="126">
+      <TextKey kind="Leaf" offset="456" length="4" type="Scalar { Kind = U32 }" value="13002" />
+      <TextA kind="Leaf" offset="460" length="50" type="WString { }">You cannot use this yet</TextA>
+      <TextB kind="Leaf" offset="510" length="72" type="WString { }">Tried using skills during cooldown</TextB>
+    </_4>
+    <_5 kind="Record" offset="582" length="92">
+      <TextKey kind="Leaf" offset="582" length="4" type="Scalar { Kind = U32 }" value="13003" />
+      <TextA kind="Leaf" offset="586" length="40" type="WString { }">Check Digi-Soul…!!</TextA>
+      <TextB kind="Leaf" offset="626" length="48" type="WString { }">Insufficient Digi-Soul</TextB>
+    </_5>
+    <_6 kind="Record" offset="674" length="136">
+      <TextKey kind="Leaf" offset="674" length="4" type="Scalar { Kind = U32 }" value="13004" />
+      <TextA kind="Leaf" offset="678" length="60" type="WString { }">You have unused skill points</TextA>
+      <TextB kind="Leaf" offset="738" length="72" type="WString { }">More than 3 skill points remaining</TextB>
+    </_6>
+    <_7 kind="Record" offset="810" length="62">
+      <TextKey kind="Leaf" offset="810" length="4" type="Scalar { Kind = U32 }" value="13005" />
+      <TextA kind="Leaf" offset="814" length="26" type="WString { }">Digi-Soul!!</TextA>
+      <TextB kind="Leaf" offset="840" length="32" type="WString { }">DS 10% or less</TextB>
+    </_7>
+    <_8 kind="Record" offset="872" length="162">
+      <TextKey kind="Leaf" offset="872" length="4" type="Scalar { Kind = U32 }" value="14005" />
+      <TextA kind="Leaf" offset="876" length="76" type="WString { }">Mission [Quest] has been completed!!</TextA>
+      <TextB kind="Leaf" offset="952" length="82" type="WString { }">Satisfied the requirements to the quest</TextB>
+    </_8>
+    <_9 kind="Record" offset="1034" length="186">
+      <TextKey kind="Leaf" offset="1034" length="4" type="Scalar { Kind = U32 }" value="18001" />
+      <TextA kind="Leaf" offset="1038" length="96" type="WString { }">We don't own it. In other words, it's not ours</TextA>
+      <TextB kind="Leaf" offset="1134" length="86" type="WString { }">Tried obtaining an item belongs to others</TextB>
+    </_9>
+    <_10 kind="Record" offset="1220" length="76">
+      <TextKey kind="Leaf" offset="1220" length="4" type="Scalar { Kind = U32 }" value="19001" />
+      <TextA kind="Leaf" offset="1224" length="38" type="WString { }">You have grown up</TextA>
+      <TextB kind="Leaf" offset="1262" length="34" type="WString { }">Tamer Levels Up</TextB>
+    </_10>
+    <_11 kind="Record" offset="1296" length="98">
+      <TextKey kind="Leaf" offset="1296" length="4" type="Scalar { Kind = U32 }" value="30003" />
+      <TextA kind="Leaf" offset="1300" length="64" type="WString { }">You have newly learned [SKILL]</TextA>
+      <TextB kind="Leaf" offset="1364" length="30" type="WString { }">Skill Learned</TextB>
+    </_11>
+    <_12 kind="Record" offset="1394" length="50">
+      <TextKey kind="Leaf" offset="1394" length="4" type="Scalar { Kind = U32 }" value="30004" />
+      <TextA kind="Leaf" offset="1398" length="22" type="WString { }">[SKILL]!!</TextA>
+      <TextB kind="Leaf" offset="1420" length="24" type="WString { }">Skill Used</TextB>
+    </_12>
+    <_13 kind="Record" offset="1444" length="86">
+      <TextKey kind="Leaf" offset="1444" length="4" type="Scalar { Kind = U32 }" value="30005" />
+      <TextA kind="Leaf" offset="1448" length="40" type="WString { }">Attack [DIGIMON]!!</TextA>
+      <TextB kind="Leaf" offset="1488" length="42" type="WString { }">Used General Attack</TextB>
+    </_13>
+    <_14 kind="Record" offset="1530" length="88">
+      <TextKey kind="Leaf" offset="1530" length="4" type="Scalar { Kind = U32 }" value="30010" />
+      <TextA kind="Leaf" offset="1534" length="50" type="WString { }">Digivolve!! [DIGIMON]!!</TextA>
+      <TextB kind="Leaf" offset="1584" length="34" type="WString { }">Digimon Evolved</TextB>
+    </_14>
+    <_15 kind="Record" offset="1618" length="148">
+      <TextKey kind="Leaf" offset="1618" length="4" type="Scalar { Kind = U32 }" value="30011" />
+      <TextA kind="Leaf" offset="1622" length="64" type="WString { }">That item cannot be used now!!</TextA>
+      <TextB kind="Leaf" offset="1686" length="80" type="WString { }">This item cannot be used during battle</TextB>
+    </_15>
+    <_16 kind="Record" offset="1766" length="174">
+      <TextKey kind="Leaf" offset="1766" length="4" type="Scalar { Kind = U32 }" value="30013" />
+      <TextA kind="Leaf" offset="1770" length="78" type="WString { }">You'd better get closer to pick it up</TextA>
+      <TextB kind="Leaf" offset="1848" length="92" type="WString { }">Tried picking up an item placed too far away</TextB>
+    </_16>
+    <_17 kind="Record" offset="1940" length="114">
+      <TextKey kind="Leaf" offset="1940" length="4" type="Scalar { Kind = U32 }" value="30016" />
+      <TextA kind="Leaf" offset="1944" length="44" type="WString { }">It's too far to move</TextA>
+      <TextB kind="Leaf" offset="1988" length="66" type="WString { }">Clicked on the unavailable spot</TextB>
+    </_17>
+    <_18 kind="Record" offset="2054" length="188">
+      <TextKey kind="Leaf" offset="2054" length="4" type="Scalar { Kind = U32 }" value="40000" />
+      <TextA kind="Leaf" offset="2058" length="108" type="WString { }">We finally have the right to go to the Digital World</TextA>
+      <TextB kind="Leaf" offset="2166" length="76" type="WString { }">Portal to Digital World is available</TextB>
+    </_18>
+    <_19 kind="Record" offset="2242" length="168">
+      <TextKey kind="Leaf" offset="2242" length="4" type="Scalar { Kind = U32 }" value="50000" />
+      <TextA kind="Leaf" offset="2246" length="76" type="WString { }">Even though we're at a disadvantage…</TextA>
+      <TextB kind="Leaf" offset="2322" length="88" type="WString { }">Either Attribute or Element is unfavorable</TextB>
+    </_19>
+    <_20 kind="Record" offset="2410" length="174">
+      <TextKey kind="Leaf" offset="2410" length="4" type="Scalar { Kind = U32 }" value="50001" />
+      <TextA kind="Leaf" offset="2414" length="82" type="WString { }">I don't feel like following that order…</TextA>
+      <TextB kind="Leaf" offset="2496" length="88" type="WString { }">Both Attribute and Element are unfavorable</TextB>
+    </_20>
+    <_21 kind="Record" offset="2584" length="144">
+      <TextKey kind="Leaf" offset="2584" length="4" type="Scalar { Kind = U32 }" value="50002" />
+      <TextA kind="Leaf" offset="2588" length="56" type="WString { }">We're at an advantage here</TextA>
+      <TextB kind="Leaf" offset="2644" length="84" type="WString { }">Either Attribute or Element is favorable</TextB>
+    </_21>
+    <_22 kind="Record" offset="2728" length="240">
+      <TextKey kind="Leaf" offset="2728" length="4" type="Scalar { Kind = U32 }" value="50003" />
+      <TextA kind="Leaf" offset="2732" length="152" type="WString { }">We can take advantage of the both the properties of nature and the Digimon</TextA>
+      <TextB kind="Leaf" offset="2884" length="84" type="WString { }">Both Attribute and Element are favorable</TextB>
+    </_22>
+    <_23 kind="Record" offset="2968" length="178">
+      <TextKey kind="Leaf" offset="2968" length="4" type="Scalar { Kind = U32 }" value="50004" />
+      <TextA kind="Leaf" offset="2972" length="92" type="WString { }">Not an easy fight, but if that's your order…</TextA>
+      <TextB kind="Leaf" offset="3064" length="82" type="WString { }">About to battle with a stronger Digimon</TextB>
+    </_23>
+    <_24 kind="Record" offset="3146" length="156">
+      <TextKey kind="Leaf" offset="3146" length="4" type="Scalar { Kind = U32 }" value="50005" />
+      <TextA kind="Leaf" offset="3150" length="74" type="WString { }">Why don't we face stronger Digimon…</TextA>
+      <TextB kind="Leaf" offset="3224" length="78" type="WString { }">About to battle with a weaker Digimon</TextB>
+    </_24>
+    <_25 kind="Record" offset="3302" length="138">
+      <TextKey kind="Leaf" offset="3302" length="4" type="Scalar { Kind = U32 }" value="50006" />
+      <TextA kind="Leaf" offset="3306" length="54" type="WString { }">Why don't we go to [NPC]?</TextA>
+      <TextB kind="Leaf" offset="3360" length="80" type="WString { }">There's a quest available in this map.</TextB>
+    </_25>
+    <_26 kind="Record" offset="3440" length="110">
+      <TextKey kind="Leaf" offset="3440" length="4" type="Scalar { Kind = U32 }" value="50007" />
+      <TextA kind="Leaf" offset="3444" length="50" type="WString { }">[NPC] has other quests.</TextA>
+      <TextB kind="Leaf" offset="3494" length="56" type="WString { }">More quests are available </TextB>
+    </_26>
+    <_27 kind="Record" offset="3550" length="116">
+      <TextKey kind="Leaf" offset="3550" length="4" type="Scalar { Kind = U32 }" value="50008" />
+      <TextA kind="Leaf" offset="3554" length="68" type="WString { }">You have obtained a quality item</TextA>
+      <TextB kind="Leaf" offset="3622" length="44" type="WString { }">Obtained a Rare Item</TextB>
+    </_27>
+    <_28 kind="Record" offset="3666" length="126">
+      <TextKey kind="Leaf" offset="3666" length="4" type="Scalar { Kind = U32 }" value="50009" />
+      <TextA kind="Leaf" offset="3670" length="52" type="WString { }">Hmmm… I'm feeling bored…</TextA>
+      <TextB kind="Leaf" offset="3722" length="70" type="WString { }">Done nothing for more than a min.</TextB>
+    </_28>
+    <_29 kind="Record" offset="3792" length="102">
+      <TextKey kind="Leaf" offset="3792" length="4" type="Scalar { Kind = U32 }" value="50010" />
+      <TextA kind="Leaf" offset="3796" length="28" type="WString { }">Where is he?</TextA>
+      <TextB kind="Leaf" offset="3824" length="70" type="WString { }">Done nothing for more than a min.</TextB>
+    </_29>
+    <_30 kind="Record" offset="3894" length="82">
+      <TextKey kind="Leaf" offset="3894" length="4" type="Scalar { Kind = U32 }" value="50011" />
+      <TextA kind="Leaf" offset="3898" length="8" type="WString { }">??</TextA>
+      <TextB kind="Leaf" offset="3906" length="70" type="WString { }">Done nothing for more than a min.</TextB>
+    </_30>
+    <_31 kind="Record" offset="3976" length="106">
+      <TextKey kind="Leaf" offset="3976" length="4" type="Scalar { Kind = U32 }" value="50012" />
+      <TextA kind="Leaf" offset="3980" length="62" type="WString { }">[NPC] is this way! Follow me~</TextA>
+      <TextB kind="Leaf" offset="4042" length="40" type="WString { }">NPC search started</TextB>
+    </_31>
+    <_32 kind="Record" offset="4082" length="112">
+      <TextKey kind="Leaf" offset="4082" length="4" type="Scalar { Kind = U32 }" value="50013" />
+      <TextA kind="Leaf" offset="4086" length="42" type="WString { }">This way~ this way~</TextA>
+      <TextB kind="Leaf" offset="4128" length="66" type="WString { }">Must catch up with your Digimon</TextB>
+    </_32>
+    <_33 kind="Record" offset="4194" length="130">
+      <TextKey kind="Leaf" offset="4194" length="4" type="Scalar { Kind = U32 }" value="50014" />
+      <TextA kind="Leaf" offset="4198" length="44" type="WString { }">[NPC] is right here~</TextA>
+      <TextB kind="Leaf" offset="4242" length="82" type="WString { }">Arrived to the NPC you were looking for</TextB>
+    </_33>
+    <_34 kind="Record" offset="4324" length="154">
+      <TextKey kind="Leaf" offset="4324" length="4" type="Scalar { Kind = U32 }" value="50015" />
+      <TextA kind="Leaf" offset="4328" length="80" type="WString { }">This area will fatigue you. Be careful</TextA>
+      <TextB kind="Leaf" offset="4408" length="70" type="WString { }">Fatigue level started to increase</TextB>
+    </_34>
+    <_35 kind="Record" offset="4478" length="128">
+      <TextKey kind="Leaf" offset="4478" length="4" type="Scalar { Kind = U32 }" value="50016" />
+      <TextA kind="Leaf" offset="4482" length="70" type="WString { }">Watch your Fatigue Level, please.</TextA>
+      <TextB kind="Leaf" offset="4552" length="54" type="WString { }">Fatigue level reached 40%</TextB>
+    </_35>
+    <_36 kind="Record" offset="4606" length="174">
+      <TextKey kind="Leaf" offset="4606" length="4" type="Scalar { Kind = U32 }" value="50017" />
+      <TextA kind="Leaf" offset="4610" length="116" type="WString { }">I guess further work is too much for you, due to fatigue</TextA>
+      <TextB kind="Leaf" offset="4726" length="54" type="WString { }">Fatigue level reached 80%</TextB>
+    </_36>
+    <_37 kind="Record" offset="4780" length="144">
+      <TextKey kind="Leaf" offset="4780" length="4" type="Scalar { Kind = U32 }" value="50018" />
+      <TextA kind="Leaf" offset="4784" length="100" type="WString { }">You're fatigued now. Think of your health first…</TextA>
+      <TextB kind="Leaf" offset="4884" length="40" type="WString { }">Feeling too tired.</TextB>
+    </_37>
+    <_38 kind="Record" offset="4924" length="98">
+      <TextKey kind="Leaf" offset="4924" length="4" type="Scalar { Kind = U32 }" value="50019" />
+      <TextA kind="Leaf" offset="4928" length="46" type="WString { }">I'm getting refreshed</TextA>
+      <TextB kind="Leaf" offset="4974" length="48" type="WString { }">Recovered from fatigue</TextB>
+    </_38>
+  </Entries>
+</DigimonTalk_Str>

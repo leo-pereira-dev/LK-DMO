@@ -49,6 +49,22 @@
                 AddSeal(sealId, amount, sequential);
         }
 
+        /// <summary>
+        /// Adds a new seal to the list or sets its amount if already exists.
+        /// </summary>
+        /// <param name="sealId">Target seal id.</param>
+        /// <param name="amount">Seal amount.</param>
+        /// <param name="sequential">Target seal sequential id.</param>
+        public void AddOrSetSeal(int sealId, short amount, short sequential)
+        {
+            var targetSeal = FindSealById(sealId);
+
+            if (targetSeal != null)
+                targetSeal.SetAmount(amount);
+            else
+                AddSeal(sealId, amount, sequential);
+        }
+
         private void AddSeal(int sealId, short amount, short sequential) => Seals.Add(CharacterSealModel.Create(sealId, amount, sequential));
         private void AddSeal(int sealId, short sequential, bool favorited) => Seals.Add(CharacterSealModel.Create(sealId, sequential, favorited));
         private CharacterSealModel? FindSealById(int id) => Seals.FirstOrDefault(x => x.SealId == id);

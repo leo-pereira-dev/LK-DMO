@@ -255,10 +255,9 @@ bool FMCommon::GetStrApply_ID( TCHAR* sz, int nStrLen, int nID, bool bMinus )
 {
 	switch( nID )
 	{
-#ifdef CROSSWARS_SYSTEM
 	case nSkill::Me_104:
-#endif
-	case nSkill::Me_101:	// 수치 B만큼 회복
+	case nSkill::Me_101:
+	case nSkill::Me_201:	// 수치 B만큼 회복
 		{
 			if( bMinus == false )
 				_tcscat_s( sz, nStrLen, UISTRING_TEXT( "COMMON_TXT_RISE" ).c_str() );
@@ -269,6 +268,7 @@ bool FMCommon::GetStrApply_ID( TCHAR* sz, int nStrLen, int nID, bool bMinus )
 	case nSkill::Me_102:
 	case nSkill::Me_105:	
 	case nSkill::Me_106:
+	case nSkill::Me_202:
 	case nSkill::Me_403:
 		{
 			if( bMinus == false )
@@ -285,7 +285,6 @@ bool FMCommon::GetStrApply_ID( TCHAR* sz, int nStrLen, int nID, bool bMinus )
 			}
 		}
 		return true;
-#ifdef DEBUFF_ITEM
 	case nSkill::Me_301:
 		{
 			if( bMinus == false )
@@ -295,6 +294,7 @@ bool FMCommon::GetStrApply_ID( TCHAR* sz, int nStrLen, int nID, bool bMinus )
 		}
 		return true;
 
+#ifdef DEBUFF_ITEM
 
 	case nSkill::Me_302:
 	case nSkill::Me_404:
@@ -322,6 +322,7 @@ bool FMCommon::GetStrApply_ID( TCHAR* sz, int nStrLen, int nID, bool bMinus )
 		}
 		return true;
 	case 206/*nSkill::Me_206*/:
+	case 209:
 		{
 			std::wstring wsIncrease;
 			DmCS::StringFn::Format( wsIncrease, L"%% %s", UISTRING_TEXT( "COMMON_TXT_INCREASE" ).c_str() );
@@ -341,9 +342,12 @@ bool FMCommon::GetStrApply_ID( TCHAR* sz, int nStrLen, int nID, bool bMinus )
 	case nSkill::Me_401:	// 이벤트 동기화 // 폭죽등
 	case nSkill::Me_402:	// 디지몬 스케일 임시 변경 // 수수께끼 성장열매 같은거
 	case nSkill::Me_002:
+	case nSkill::Me_010:
 	case nSkill::Me_107:
+	case 108/*nSkill::Me_108*/:
 	case 200/*nSkill::Me_200*/:
 	case nSkill::Me_205:
+	case 501:
 		return false;	
 	default:		assert_cs( false );
 	}

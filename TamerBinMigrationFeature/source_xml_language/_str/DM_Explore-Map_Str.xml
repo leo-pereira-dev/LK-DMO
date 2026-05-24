@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DM_Explore_Map_Str schema="DM_Explore-Map_Str.struct" bin="DM_Explore-Map_Str.bin" byteLength="254">
+  <Entries kind="Section" offset="0" length="254">
+    <_0 kind="Record" offset="4" length="26">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="8" length="22" type="WString { }">Item Lv.2</TextA>
+    </_0>
+    <_1 kind="Record" offset="30" length="24">
+      <TextKey kind="Leaf" offset="30" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="34" length="20" type="WString { }">EXP Lv.2</TextA>
+    </_1>
+    <_2 kind="Record" offset="54" length="24">
+      <TextKey kind="Leaf" offset="54" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextA kind="Leaf" offset="58" length="20" type="WString { }">EXP Lv.1</TextA>
+    </_2>
+    <_3 kind="Record" offset="78" length="26">
+      <TextKey kind="Leaf" offset="78" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <TextA kind="Leaf" offset="82" length="22" type="WString { }">Item Lv.3</TextA>
+    </_3>
+    <_4 kind="Record" offset="104" length="26">
+      <TextKey kind="Leaf" offset="104" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <TextA kind="Leaf" offset="108" length="22" type="WString { }">Item Lv.5</TextA>
+    </_4>
+    <_5 kind="Record" offset="130" length="26">
+      <TextKey kind="Leaf" offset="130" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <TextA kind="Leaf" offset="134" length="22" type="WString { }">Item Lv.1</TextA>
+    </_5>
+    <_6 kind="Record" offset="156" length="24">
+      <TextKey kind="Leaf" offset="156" length="4" type="Scalar { Kind = U32 }" value="17" />
+      <TextA kind="Leaf" offset="160" length="20" type="WString { }">EXP Lv.5</TextA>
+    </_6>
+    <_7 kind="Record" offset="180" length="24">
+      <TextKey kind="Leaf" offset="180" length="4" type="Scalar { Kind = U32 }" value="18" />
+      <TextA kind="Leaf" offset="184" length="20" type="WString { }">EXP Lv.3</TextA>
+    </_7>
+    <_8 kind="Record" offset="204" length="24">
+      <TextKey kind="Leaf" offset="204" length="4" type="Scalar { Kind = U32 }" value="20" />
+      <TextA kind="Leaf" offset="208" length="20" type="WString { }">EXP Lv.4</TextA>
+    </_8>
+    <_9 kind="Record" offset="228" length="26">
+      <TextKey kind="Leaf" offset="228" length="4" type="Scalar { Kind = U32 }" value="22" />
+      <TextA kind="Leaf" offset="232" length="22" type="WString { }">Item Lv.4</TextA>
+    </_9>
+  </Entries>
+</DM_Explore_Map_Str>

@@ -1,0 +1,985 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MapName_Str schema="MapName_Str.struct" bin="MapName_Str.bin" byteLength="10702">
+  <Entries kind="Section" offset="0" length="10702">
+    <_0 kind="Record" offset="4" length="30">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <TextA kind="Leaf" offset="8" length="26" type="WString { }">Dats Center</TextA>
+    </_0>
+    <_1 kind="Record" offset="34" length="28">
+      <TextKey kind="Leaf" offset="34" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="38" length="24" type="WString { }">D-terminal</TextA>
+    </_1>
+    <_2 kind="Record" offset="62" length="30">
+      <TextKey kind="Leaf" offset="62" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="66" length="26" type="WString { }">Dats Center</TextA>
+    </_2>
+    <_3 kind="Record" offset="92" length="42">
+      <TextKey kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="96" length="38" type="WString { }">Yggdrasill's Room</TextA>
+    </_3>
+    <_4 kind="Record" offset="134" length="22">
+      <TextKey kind="Leaf" offset="134" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <TextA kind="Leaf" offset="138" length="18" type="WString { }">GM ROOM</TextA>
+    </_4>
+    <_5 kind="Record" offset="156" length="50">
+      <TextKey kind="Leaf" offset="156" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <TextA kind="Leaf" offset="160" length="46" type="WString { }">D-terminal-Dungeon-B1</TextA>
+    </_5>
+    <_6 kind="Record" offset="206" length="50">
+      <TextKey kind="Leaf" offset="206" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <TextA kind="Leaf" offset="210" length="46" type="WString { }">D-terminal-Dungeon-B2</TextA>
+    </_6>
+    <_7 kind="Record" offset="256" length="80">
+      <TextKey kind="Leaf" offset="256" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <TextA kind="Leaf" offset="260" length="76" type="WString { }">D-Terminal Underground Summon Square</TextA>
+    </_7>
+    <_8 kind="Record" offset="336" length="40">
+      <TextKey kind="Leaf" offset="336" length="4" type="Scalar { Kind = U32 }" value="14" />
+      <TextA kind="Leaf" offset="340" length="36" type="WString { }">Mystic GM's Room</TextA>
+    </_8>
+    <_9 kind="Record" offset="376" length="24">
+      <TextKey kind="Leaf" offset="376" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <TextA kind="Leaf" offset="380" length="20" type="WString { }">The Void</TextA>
+    </_9>
+    <_10 kind="Record" offset="400" length="70">
+      <TextKey kind="Leaf" offset="400" length="4" type="Scalar { Kind = U32 }" value="16" />
+      <TextA kind="Leaf" offset="404" length="66" type="WString { }">Village of the Beginning (Lost)</TextA>
+    </_10>
+    <_11 kind="Record" offset="470" length="42">
+      <TextKey kind="Leaf" offset="470" length="4" type="Scalar { Kind = U32 }" value="17" />
+      <TextA kind="Leaf" offset="474" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_11>
+    <_12 kind="Record" offset="512" length="70">
+      <TextKey kind="Leaf" offset="512" length="4" type="Scalar { Kind = U32 }" value="18" />
+      <TextA kind="Leaf" offset="516" length="66" type="WString { }">Master's Match Dungeon 4th Room</TextA>
+    </_12>
+    <_13 kind="Record" offset="582" length="44">
+      <TextKey kind="Leaf" offset="582" length="4" type="Scalar { Kind = U32 }" value="19" />
+      <TextA kind="Leaf" offset="586" length="40" type="WString { }">Former DATS Center</TextA>
+    </_13>
+    <_14 kind="Record" offset="626" length="30">
+      <TextKey kind="Leaf" offset="626" length="4" type="Scalar { Kind = U32 }" value="20" />
+      <TextA kind="Leaf" offset="630" length="26" type="WString { }">Duel Sphere</TextA>
+    </_14>
+    <_15 kind="Record" offset="656" length="38">
+      <TextKey kind="Leaf" offset="656" length="4" type="Scalar { Kind = U32 }" value="21" />
+      <TextA kind="Leaf" offset="660" length="34" type="WString { }">Base of Lucemon</TextA>
+    </_15>
+    <_16 kind="Record" offset="694" length="46">
+      <TextKey kind="Leaf" offset="694" length="4" type="Scalar { Kind = U32 }" value="22" />
+      <TextA kind="Leaf" offset="698" length="42" type="WString { }">Base of Beelzebumon</TextA>
+    </_16>
+    <_17 kind="Record" offset="740" length="40">
+      <TextKey kind="Leaf" offset="740" length="4" type="Scalar { Kind = U32 }" value="23" />
+      <TextA kind="Leaf" offset="744" length="36" type="WString { }">Base of Barbamon</TextA>
+    </_17>
+    <_18 kind="Record" offset="780" length="42">
+      <TextKey kind="Leaf" offset="780" length="4" type="Scalar { Kind = U32 }" value="24" />
+      <TextA kind="Leaf" offset="784" length="38" type="WString { }">Base of Lilithmon</TextA>
+    </_18>
+    <_19 kind="Record" offset="822" length="42">
+      <TextKey kind="Leaf" offset="822" length="4" type="Scalar { Kind = U32 }" value="25" />
+      <TextA kind="Leaf" offset="826" length="38" type="WString { }">Battle with Demon</TextA>
+    </_19>
+    <_20 kind="Record" offset="864" length="50">
+      <TextKey kind="Leaf" offset="864" length="4" type="Scalar { Kind = U32 }" value="26" />
+      <TextA kind="Leaf" offset="868" length="46" type="WString { }">Battle with Belphemon</TextA>
+    </_20>
+    <_21 kind="Record" offset="914" length="40">
+      <TextKey kind="Leaf" offset="914" length="4" type="Scalar { Kind = U32 }" value="27" />
+      <TextA kind="Leaf" offset="918" length="36" type="WString { }">Base of Leviamon</TextA>
+    </_21>
+    <_22 kind="Record" offset="954" length="62">
+      <TextKey kind="Leaf" offset="954" length="4" type="Scalar { Kind = U32 }" value="50" />
+      <TextA kind="Leaf" offset="958" length="58" type="WString { }">Gankoomon's Training Ground</TextA>
+    </_22>
+    <_23 kind="Record" offset="1016" length="40">
+      <TextKey kind="Leaf" offset="1016" length="4" type="Scalar { Kind = U32 }" value="51" />
+      <TextA kind="Leaf" offset="1020" length="36" type="WString { }">Guild Tournament</TextA>
+    </_23>
+    <_24 kind="Record" offset="1056" length="30">
+      <TextKey kind="Leaf" offset="1056" length="4" type="Scalar { Kind = U32 }" value="52" />
+      <TextA kind="Leaf" offset="1060" length="26" type="WString { }">Upper floor</TextA>
+    </_24>
+    <_25 kind="Record" offset="1086" length="30">
+      <TextKey kind="Leaf" offset="1086" length="4" type="Scalar { Kind = U32 }" value="53" />
+      <TextA kind="Leaf" offset="1090" length="26" type="WString { }">Lower floor</TextA>
+    </_25>
+    <_26 kind="Record" offset="1116" length="18">
+      <TextKey kind="Leaf" offset="1116" length="4" type="Scalar { Kind = U32 }" value="54" />
+      <TextA kind="Leaf" offset="1120" length="14" type="WString { }">Abyss</TextA>
+    </_26>
+    <_27 kind="Record" offset="1134" length="30">
+      <TextKey kind="Leaf" offset="1134" length="4" type="Scalar { Kind = U32 }" value="70" />
+      <TextA kind="Leaf" offset="1138" length="26" type="WString { }">Marketplace</TextA>
+    </_27>
+    <_28 kind="Record" offset="1164" length="30">
+      <TextKey kind="Leaf" offset="1164" length="4" type="Scalar { Kind = U32 }" value="71" />
+      <TextA kind="Leaf" offset="1168" length="26" type="WString { }">Marketplace</TextA>
+    </_28>
+    <_29 kind="Record" offset="1194" length="26">
+      <TextKey kind="Leaf" offset="1194" length="4" type="Scalar { Kind = U32 }" value="72" />
+      <TextA kind="Leaf" offset="1198" length="22" type="WString { }">Neverland</TextA>
+    </_29>
+    <_30 kind="Record" offset="1220" length="34">
+      <TextKey kind="Leaf" offset="1220" length="4" type="Scalar { Kind = U32 }" value="87" />
+      <TextA kind="Leaf" offset="1224" length="30" type="WString { }">Road to Glory</TextA>
+    </_30>
+    <_31 kind="Record" offset="1254" length="34">
+      <TextKey kind="Leaf" offset="1254" length="4" type="Scalar { Kind = U32 }" value="88" />
+      <TextA kind="Leaf" offset="1258" length="30" type="WString { }">Road to Glory</TextA>
+    </_31>
+    <_32 kind="Record" offset="1288" length="58">
+      <TextKey kind="Leaf" offset="1288" length="4" type="Scalar { Kind = U32 }" value="89" />
+      <TextA kind="Leaf" offset="1292" length="54" type="WString { }">Infinite Mountain Dungeon</TextA>
+    </_32>
+    <_33 kind="Record" offset="1346" length="32">
+      <TextKey kind="Leaf" offset="1346" length="4" type="Scalar { Kind = U32 }" value="90" />
+      <TextA kind="Leaf" offset="1350" length="28" type="WString { }">Santa's room</TextA>
+    </_33>
+    <_34 kind="Record" offset="1378" length="46">
+      <TextKey kind="Leaf" offset="1378" length="4" type="Scalar { Kind = U32 }" value="91" />
+      <TextA kind="Leaf" offset="1382" length="42" type="WString { }">Black Rabbit's Hole</TextA>
+    </_34>
+    <_35 kind="Record" offset="1424" length="16">
+      <TextKey kind="Leaf" offset="1424" length="4" type="Scalar { Kind = U32 }" value="92" />
+      <TextA kind="Leaf" offset="1428" length="12" type="WString { }">Maze</TextA>
+    </_35>
+    <_36 kind="Record" offset="1440" length="38">
+      <TextKey kind="Leaf" offset="1440" length="4" type="Scalar { Kind = U32 }" value="93" />
+      <TextA kind="Leaf" offset="1444" length="34" type="WString { }">Ferocious Ocean</TextA>
+    </_36>
+    <_37 kind="Record" offset="1478" length="42">
+      <TextKey kind="Leaf" offset="1478" length="4" type="Scalar { Kind = U32 }" value="94" />
+      <TextA kind="Leaf" offset="1482" length="38" type="WString { }">Infinite Mountain</TextA>
+    </_37>
+    <_38 kind="Record" offset="1520" length="72">
+      <TextKey kind="Leaf" offset="1520" length="4" type="Scalar { Kind = U32 }" value="95" />
+      <TextA kind="Leaf" offset="1524" length="68" type="WString { }">D-terminal-Dungeon-B3 - Weekends</TextA>
+    </_38>
+    <_39 kind="Record" offset="1592" length="54">
+      <TextKey kind="Leaf" offset="1592" length="4" type="Scalar { Kind = U32 }" value="96" />
+      <TextA kind="Leaf" offset="1596" length="50" type="WString { }">Burning Time - Weekdays</TextA>
+    </_39>
+    <_40 kind="Record" offset="1646" length="54">
+      <TextKey kind="Leaf" offset="1646" length="4" type="Scalar { Kind = U32 }" value="97" />
+      <TextA kind="Leaf" offset="1650" length="50" type="WString { }">Burning Time - Weekdays</TextA>
+    </_40>
+    <_41 kind="Record" offset="1700" length="54">
+      <TextKey kind="Leaf" offset="1700" length="4" type="Scalar { Kind = U32 }" value="98" />
+      <TextA kind="Leaf" offset="1704" length="50" type="WString { }">Burning Time - Weekdays</TextA>
+    </_41>
+    <_42 kind="Record" offset="1754" length="54">
+      <TextKey kind="Leaf" offset="1754" length="4" type="Scalar { Kind = U32 }" value="99" />
+      <TextA kind="Leaf" offset="1758" length="50" type="WString { }">Burning Time - Weekdays</TextA>
+    </_42>
+    <_43 kind="Record" offset="1808" length="40">
+      <TextKey kind="Leaf" offset="1808" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <TextA kind="Leaf" offset="1812" length="36" type="WString { }">Yokohama Village</TextA>
+    </_43>
+    <_44 kind="Record" offset="1848" length="54">
+      <TextKey kind="Leaf" offset="1848" length="4" type="Scalar { Kind = U32 }" value="101" />
+      <TextA kind="Leaf" offset="1852" length="50" type="WString { }">Burning Time - Weekends</TextA>
+    </_44>
+    <_45 kind="Record" offset="1902" length="54">
+      <TextKey kind="Leaf" offset="1902" length="4" type="Scalar { Kind = U32 }" value="102" />
+      <TextA kind="Leaf" offset="1906" length="50" type="WString { }">Burning Time - Weekends</TextA>
+    </_45>
+    <_46 kind="Record" offset="1956" length="54">
+      <TextKey kind="Leaf" offset="1956" length="4" type="Scalar { Kind = U32 }" value="103" />
+      <TextA kind="Leaf" offset="1960" length="50" type="WString { }">Burning Time - Weekends</TextA>
+    </_46>
+    <_47 kind="Record" offset="2010" length="54">
+      <TextKey kind="Leaf" offset="2010" length="4" type="Scalar { Kind = U32 }" value="104" />
+      <TextA kind="Leaf" offset="2014" length="50" type="WString { }">Burning Time - Weekends</TextA>
+    </_47>
+    <_48 kind="Record" offset="2064" length="40">
+      <TextKey kind="Leaf" offset="2064" length="4" type="Scalar { Kind = U32 }" value="105" />
+      <TextA kind="Leaf" offset="2068" length="36" type="WString { }">Yokohama Village</TextA>
+    </_48>
+    <_49 kind="Record" offset="2104" length="50">
+      <TextKey kind="Leaf" offset="2104" length="4" type="Scalar { Kind = U32 }" value="110" />
+      <TextA kind="Leaf" offset="2108" length="46" type="WString { }">Yokohama East Village</TextA>
+    </_49>
+    <_50 kind="Record" offset="2154" length="36">
+      <TextKey kind="Leaf" offset="2154" length="4" type="Scalar { Kind = U32 }" value="111" />
+      <TextA kind="Leaf" offset="2158" length="32" type="WString { }">Oil refinery-1</TextA>
+    </_50>
+    <_51 kind="Record" offset="2190" length="36">
+      <TextKey kind="Leaf" offset="2190" length="4" type="Scalar { Kind = U32 }" value="112" />
+      <TextA kind="Leaf" offset="2194" length="32" type="WString { }">Oil refinery-2</TextA>
+    </_51>
+    <_52 kind="Record" offset="2226" length="36">
+      <TextKey kind="Leaf" offset="2226" length="4" type="Scalar { Kind = U32 }" value="113" />
+      <TextA kind="Leaf" offset="2230" length="32" type="WString { }">Oil refinery-3</TextA>
+    </_52>
+    <_53 kind="Record" offset="2262" length="42">
+      <TextKey kind="Leaf" offset="2262" length="4" type="Scalar { Kind = U32 }" value="114" />
+      <TextA kind="Leaf" offset="2266" length="38" type="WString { }">Small Forest Park</TextA>
+    </_53>
+    <_54 kind="Record" offset="2304" length="44">
+      <TextKey kind="Leaf" offset="2304" length="4" type="Scalar { Kind = U32 }" value="115" />
+      <TextA kind="Leaf" offset="2308" length="40" type="WString { }">Small Forest trail</TextA>
+    </_54>
+    <_55 kind="Record" offset="2348" length="42">
+      <TextKey kind="Leaf" offset="2348" length="4" type="Scalar { Kind = U32 }" value="116" />
+      <TextA kind="Leaf" offset="2352" length="38" type="WString { }">Small Forest Park</TextA>
+    </_55>
+    <_56 kind="Record" offset="2390" length="24">
+      <TextKey kind="Leaf" offset="2390" length="4" type="Scalar { Kind = U32 }" value="200" />
+      <TextA kind="Leaf" offset="2394" length="20" type="WString { }">CampSite</TextA>
+    </_56>
+    <_57 kind="Record" offset="2414" length="38">
+      <TextKey kind="Leaf" offset="2414" length="4" type="Scalar { Kind = U32 }" value="201" />
+      <TextA kind="Leaf" offset="2418" length="34" type="WString { }">Valley of Light</TextA>
+    </_57>
+    <_58 kind="Record" offset="2452" length="22">
+      <TextKey kind="Leaf" offset="2452" length="4" type="Scalar { Kind = U32 }" value="202" />
+      <TextA kind="Leaf" offset="2456" length="18" type="WString { }">Shibuya</TextA>
+    </_58>
+    <_59 kind="Record" offset="2474" length="30">
+      <TextKey kind="Leaf" offset="2474" length="4" type="Scalar { Kind = U32 }" value="203" />
+      <TextA kind="Leaf" offset="2478" length="26" type="WString { }">Tokyo Tower</TextA>
+    </_59>
+    <_60 kind="Record" offset="2504" length="54">
+      <TextKey kind="Leaf" offset="2504" length="4" type="Scalar { Kind = U32 }" value="204" />
+      <TextA kind="Leaf" offset="2508" length="50" type="WString { }">Tokyo Tower Observatory</TextA>
+    </_60>
+    <_61 kind="Record" offset="2558" length="72">
+      <TextKey kind="Leaf" offset="2558" length="4" type="Scalar { Kind = U32 }" value="205" />
+      <TextA kind="Leaf" offset="2562" length="68" type="WString { }">Tokyo Tower Observation Platform</TextA>
+    </_61>
+    <_62 kind="Record" offset="2630" length="30">
+      <TextKey kind="Leaf" offset="2630" length="4" type="Scalar { Kind = U32 }" value="206" />
+      <TextA kind="Leaf" offset="2634" length="26" type="WString { }">Minato City</TextA>
+    </_62>
+    <_63 kind="Record" offset="2660" length="26">
+      <TextKey kind="Leaf" offset="2660" length="4" type="Scalar { Kind = U32 }" value="207" />
+      <TextA kind="Leaf" offset="2664" length="22" type="WString { }">Big Sight</TextA>
+    </_63>
+    <_64 kind="Record" offset="2686" length="20">
+      <TextKey kind="Leaf" offset="2686" length="4" type="Scalar { Kind = U32 }" value="208" />
+      <TextA kind="Leaf" offset="2690" length="16" type="WString { }">Odaiba</TextA>
+    </_64>
+    <_65 kind="Record" offset="2706" length="38">
+      <TextKey kind="Leaf" offset="2706" length="4" type="Scalar { Kind = U32 }" value="209" />
+      <TextA kind="Leaf" offset="2710" length="34" type="WString { }">Fuji TV Rooftop</TextA>
+    </_65>
+    <_66 kind="Record" offset="2744" length="22">
+      <TextKey kind="Leaf" offset="2744" length="4" type="Scalar { Kind = U32 }" value="210" />
+      <TextA kind="Leaf" offset="2748" length="18" type="WString { }">Fuji TV</TextA>
+    </_66>
+    <_67 kind="Record" offset="2766" length="40">
+      <TextKey kind="Leaf" offset="2766" length="4" type="Scalar { Kind = U32 }" value="211" />
+      <TextA kind="Leaf" offset="2770" length="36" type="WString { }">Vortex of Poison</TextA>
+    </_67>
+    <_68 kind="Record" offset="2806" length="36">
+      <TextKey kind="Leaf" offset="2806" length="4" type="Scalar { Kind = U32 }" value="212" />
+      <TextA kind="Leaf" offset="2810" length="32" type="WString { }">Rainbow Bridge</TextA>
+    </_68>
+    <_69 kind="Record" offset="2842" length="84">
+      <TextKey kind="Leaf" offset="2842" length="4" type="Scalar { Kind = U32 }" value="213" />
+      <TextA kind="Leaf" offset="2846" length="80" type="WString { }">Tokyo Tower Observation Platform(Easy)</TextA>
+    </_69>
+    <_70 kind="Record" offset="2926" length="34">
+      <TextKey kind="Leaf" offset="2926" length="4" type="Scalar { Kind = U32 }" value="214" />
+      <TextA kind="Leaf" offset="2930" length="30" type="WString { }">Fuji TV(Easy)</TextA>
+    </_70>
+    <_71 kind="Record" offset="2960" length="40">
+      <TextKey kind="Leaf" offset="2960" length="4" type="Scalar { Kind = U32 }" value="215" />
+      <TextA kind="Leaf" offset="2964" length="36" type="WString { }">Vortex of Poison</TextA>
+    </_71>
+    <_72 kind="Record" offset="3000" length="60">
+      <TextKey kind="Leaf" offset="3000" length="4" type="Scalar { Kind = U32 }" value="250" />
+      <TextA kind="Leaf" offset="3004" length="56" type="WString { }">Shinjuku Western area(Day)</TextA>
+    </_72>
+    <_73 kind="Record" offset="3060" length="54">
+      <TextKey kind="Leaf" offset="3060" length="4" type="Scalar { Kind = U32 }" value="251" />
+      <TextA kind="Leaf" offset="3064" length="50" type="WString { }">Shinjuku East area(Day)</TextA>
+    </_73>
+    <_74 kind="Record" offset="3114" length="22">
+      <TextKey kind="Leaf" offset="3114" length="4" type="Scalar { Kind = U32 }" value="252" />
+      <TextA kind="Leaf" offset="3118" length="18" type="WString { }">Stadium</TextA>
+    </_74>
+    <_75 kind="Record" offset="3136" length="16">
+      <TextKey kind="Leaf" offset="3136" length="4" type="Scalar { Kind = U32 }" value="253" />
+      <TextA kind="Leaf" offset="3140" length="12" type="WString { }">Road</TextA>
+    </_75>
+    <_76 kind="Record" offset="3152" length="64">
+      <TextKey kind="Leaf" offset="3152" length="4" type="Scalar { Kind = U32 }" value="254" />
+      <TextA kind="Leaf" offset="3156" length="60" type="WString { }">Shinjuku Western area(Night)</TextA>
+    </_76>
+    <_77 kind="Record" offset="3216" length="58">
+      <TextKey kind="Leaf" offset="3216" length="4" type="Scalar { Kind = U32 }" value="255" />
+      <TextA kind="Leaf" offset="3220" length="54" type="WString { }">Shinjuku East area(Night)</TextA>
+    </_77>
+    <_78 kind="Record" offset="3274" length="40">
+      <TextKey kind="Leaf" offset="3274" length="4" type="Scalar { Kind = U32 }" value="256" />
+      <TextA kind="Leaf" offset="3278" length="36" type="WString { }">Stadium [NORMAL]</TextA>
+    </_78>
+    <_79 kind="Record" offset="3314" length="28">
+      <TextKey kind="Leaf" offset="3314" length="4" type="Scalar { Kind = U32 }" value="257" />
+      <TextA kind="Leaf" offset="3318" length="24" type="WString { }">Road[Easy]</TextA>
+    </_79>
+    <_80 kind="Record" offset="3342" length="54">
+      <TextKey kind="Leaf" offset="3342" length="4" type="Scalar { Kind = U32 }" value="260" />
+      <TextA kind="Leaf" offset="3346" length="50" type="WString { }">West Shinjuku(D-Reaper)</TextA>
+    </_80>
+    <_81 kind="Record" offset="3396" length="54">
+      <TextKey kind="Leaf" offset="3396" length="4" type="Scalar { Kind = U32 }" value="261" />
+      <TextA kind="Leaf" offset="3400" length="50" type="WString { }">East Shinjuku(D-Reaper)</TextA>
+    </_81>
+    <_82 kind="Record" offset="3450" length="20">
+      <TextKey kind="Leaf" offset="3450" length="4" type="Scalar { Kind = U32 }" value="262" />
+      <TextA kind="Leaf" offset="3454" length="16" type="WString { }">Office</TextA>
+    </_82>
+    <_83 kind="Record" offset="3470" length="40">
+      <TextKey kind="Leaf" offset="3470" length="4" type="Scalar { Kind = U32 }" value="263" />
+      <TextA kind="Leaf" offset="3474" length="36" type="WString { }">Shinjuku Station</TextA>
+    </_83>
+    <_84 kind="Record" offset="3510" length="54">
+      <TextKey kind="Leaf" offset="3510" length="4" type="Scalar { Kind = U32 }" value="264" />
+      <TextA kind="Leaf" offset="3514" length="50" type="WString { }">Shinjuku Park(D-Reaper)</TextA>
+    </_84>
+    <_85 kind="Record" offset="3564" length="26">
+      <TextKey kind="Leaf" offset="3564" length="4" type="Scalar { Kind = U32 }" value="265" />
+      <TextA kind="Leaf" offset="3568" length="22" type="WString { }">Safe Area</TextA>
+    </_85>
+    <_86 kind="Record" offset="3590" length="34">
+      <TextKey kind="Leaf" offset="3590" length="4" type="Scalar { Kind = U32 }" value="266" />
+      <TextA kind="Leaf" offset="3594" length="30" type="WString { }">D-Reaper Area</TextA>
+    </_86>
+    <_87 kind="Record" offset="3624" length="34">
+      <TextKey kind="Leaf" offset="3624" length="4" type="Scalar { Kind = U32 }" value="267" />
+      <TextA kind="Leaf" offset="3628" length="30" type="WString { }">Shinjuku Park</TextA>
+    </_87>
+    <_88 kind="Record" offset="3658" length="42">
+      <TextKey kind="Leaf" offset="3658" length="4" type="Scalar { Kind = U32 }" value="300" />
+      <TextA kind="Leaf" offset="3662" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_88>
+    <_89 kind="Record" offset="3700" length="42">
+      <TextKey kind="Leaf" offset="3700" length="4" type="Scalar { Kind = U32 }" value="301" />
+      <TextA kind="Leaf" offset="3704" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_89>
+    <_90 kind="Record" offset="3742" length="42">
+      <TextKey kind="Leaf" offset="3742" length="4" type="Scalar { Kind = U32 }" value="302" />
+      <TextA kind="Leaf" offset="3746" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_90>
+    <_91 kind="Record" offset="3784" length="42">
+      <TextKey kind="Leaf" offset="3784" length="4" type="Scalar { Kind = U32 }" value="303" />
+      <TextA kind="Leaf" offset="3788" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_91>
+    <_92 kind="Record" offset="3826" length="42">
+      <TextKey kind="Leaf" offset="3826" length="4" type="Scalar { Kind = U32 }" value="304" />
+      <TextA kind="Leaf" offset="3830" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_92>
+    <_93 kind="Record" offset="3868" length="42">
+      <TextKey kind="Leaf" offset="3868" length="4" type="Scalar { Kind = U32 }" value="305" />
+      <TextA kind="Leaf" offset="3872" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_93>
+    <_94 kind="Record" offset="3910" length="42">
+      <TextKey kind="Leaf" offset="3910" length="4" type="Scalar { Kind = U32 }" value="306" />
+      <TextA kind="Leaf" offset="3914" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_94>
+    <_95 kind="Record" offset="3952" length="42">
+      <TextKey kind="Leaf" offset="3952" length="4" type="Scalar { Kind = U32 }" value="307" />
+      <TextA kind="Leaf" offset="3956" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_95>
+    <_96 kind="Record" offset="3994" length="42">
+      <TextKey kind="Leaf" offset="3994" length="4" type="Scalar { Kind = U32 }" value="308" />
+      <TextA kind="Leaf" offset="3998" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_96>
+    <_97 kind="Record" offset="4036" length="42">
+      <TextKey kind="Leaf" offset="4036" length="4" type="Scalar { Kind = U32 }" value="309" />
+      <TextA kind="Leaf" offset="4040" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_97>
+    <_98 kind="Record" offset="4078" length="42">
+      <TextKey kind="Leaf" offset="4078" length="4" type="Scalar { Kind = U32 }" value="310" />
+      <TextA kind="Leaf" offset="4082" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_98>
+    <_99 kind="Record" offset="4120" length="42">
+      <TextKey kind="Leaf" offset="4120" length="4" type="Scalar { Kind = U32 }" value="311" />
+      <TextA kind="Leaf" offset="4124" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_99>
+    <_100 kind="Record" offset="4162" length="42">
+      <TextKey kind="Leaf" offset="4162" length="4" type="Scalar { Kind = U32 }" value="312" />
+      <TextA kind="Leaf" offset="4166" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_100>
+    <_101 kind="Record" offset="4204" length="42">
+      <TextKey kind="Leaf" offset="4204" length="4" type="Scalar { Kind = U32 }" value="313" />
+      <TextA kind="Leaf" offset="4208" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_101>
+    <_102 kind="Record" offset="4246" length="42">
+      <TextKey kind="Leaf" offset="4246" length="4" type="Scalar { Kind = U32 }" value="314" />
+      <TextA kind="Leaf" offset="4250" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_102>
+    <_103 kind="Record" offset="4288" length="42">
+      <TextKey kind="Leaf" offset="4288" length="4" type="Scalar { Kind = U32 }" value="315" />
+      <TextA kind="Leaf" offset="4292" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_103>
+    <_104 kind="Record" offset="4330" length="42">
+      <TextKey kind="Leaf" offset="4330" length="4" type="Scalar { Kind = U32 }" value="316" />
+      <TextA kind="Leaf" offset="4334" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_104>
+    <_105 kind="Record" offset="4372" length="42">
+      <TextKey kind="Leaf" offset="4372" length="4" type="Scalar { Kind = U32 }" value="317" />
+      <TextA kind="Leaf" offset="4376" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_105>
+    <_106 kind="Record" offset="4414" length="42">
+      <TextKey kind="Leaf" offset="4414" length="4" type="Scalar { Kind = U32 }" value="318" />
+      <TextA kind="Leaf" offset="4418" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_106>
+    <_107 kind="Record" offset="4456" length="42">
+      <TextKey kind="Leaf" offset="4456" length="4" type="Scalar { Kind = U32 }" value="319" />
+      <TextA kind="Leaf" offset="4460" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_107>
+    <_108 kind="Record" offset="4498" length="42">
+      <TextKey kind="Leaf" offset="4498" length="4" type="Scalar { Kind = U32 }" value="320" />
+      <TextA kind="Leaf" offset="4502" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_108>
+    <_109 kind="Record" offset="4540" length="42">
+      <TextKey kind="Leaf" offset="4540" length="4" type="Scalar { Kind = U32 }" value="321" />
+      <TextA kind="Leaf" offset="4544" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_109>
+    <_110 kind="Record" offset="4582" length="42">
+      <TextKey kind="Leaf" offset="4582" length="4" type="Scalar { Kind = U32 }" value="322" />
+      <TextA kind="Leaf" offset="4586" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_110>
+    <_111 kind="Record" offset="4624" length="42">
+      <TextKey kind="Leaf" offset="4624" length="4" type="Scalar { Kind = U32 }" value="323" />
+      <TextA kind="Leaf" offset="4628" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_111>
+    <_112 kind="Record" offset="4666" length="42">
+      <TextKey kind="Leaf" offset="4666" length="4" type="Scalar { Kind = U32 }" value="324" />
+      <TextA kind="Leaf" offset="4670" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_112>
+    <_113 kind="Record" offset="4708" length="42">
+      <TextKey kind="Leaf" offset="4708" length="4" type="Scalar { Kind = U32 }" value="325" />
+      <TextA kind="Leaf" offset="4712" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_113>
+    <_114 kind="Record" offset="4750" length="42">
+      <TextKey kind="Leaf" offset="4750" length="4" type="Scalar { Kind = U32 }" value="326" />
+      <TextA kind="Leaf" offset="4754" length="38" type="WString { }">Colosseum Stadium</TextA>
+    </_114>
+    <_115 kind="Record" offset="4792" length="56">
+      <TextKey kind="Leaf" offset="4792" length="4" type="Scalar { Kind = U32 }" value="328" />
+      <TextA kind="Leaf" offset="4796" length="52" type="WString { }">DATS HQ basement storage</TextA>
+    </_115>
+    <_116 kind="Record" offset="4848" length="38">
+      <TextKey kind="Leaf" offset="4848" length="4" type="Scalar { Kind = U32 }" value="400" />
+      <TextA kind="Leaf" offset="4852" length="34" type="WString { }">Kaiser's Domain</TextA>
+    </_116>
+    <_117 kind="Record" offset="4886" length="34">
+      <TextKey kind="Leaf" offset="4886" length="4" type="Scalar { Kind = U32 }" value="401" />
+      <TextA kind="Leaf" offset="4890" length="30" type="WString { }">Kaiser's Base</TextA>
+    </_117>
+    <_118 kind="Record" offset="4920" length="34">
+      <TextKey kind="Leaf" offset="4920" length="4" type="Scalar { Kind = U32 }" value="402" />
+      <TextA kind="Leaf" offset="4924" length="30" type="WString { }">Kaiser's Base</TextA>
+    </_118>
+    <_119 kind="Record" offset="4954" length="34">
+      <TextKey kind="Leaf" offset="4954" length="4" type="Scalar { Kind = U32 }" value="403" />
+      <TextA kind="Leaf" offset="4958" length="30" type="WString { }">Kaiser's Base</TextA>
+    </_119>
+    <_120 kind="Record" offset="4988" length="34">
+      <TextKey kind="Leaf" offset="4988" length="4" type="Scalar { Kind = U32 }" value="404" />
+      <TextA kind="Leaf" offset="4992" length="30" type="WString { }">Kaiser's Base</TextA>
+    </_120>
+    <_121 kind="Record" offset="5022" length="40">
+      <TextKey kind="Leaf" offset="5022" length="4" type="Scalar { Kind = U32 }" value="405" />
+      <TextA kind="Leaf" offset="5026" length="36" type="WString { }">Odaiba (Night)  </TextA>
+    </_121>
+    <_122 kind="Record" offset="5062" length="24">
+      <TextKey kind="Leaf" offset="5062" length="4" type="Scalar { Kind = U32 }" value="406" />
+      <TextA kind="Leaf" offset="5066" length="20" type="WString { }">Dark Web</TextA>
+    </_122>
+    <_123 kind="Record" offset="5086" length="26">
+      <TextKey kind="Leaf" offset="5086" length="4" type="Scalar { Kind = U32 }" value="407" />
+      <TextA kind="Leaf" offset="5090" length="22" type="WString { }">Nightmare</TextA>
+    </_123>
+    <_124 kind="Record" offset="5112" length="56">
+      <TextKey kind="Leaf" offset="5112" length="4" type="Scalar { Kind = U32 }" value="410" />
+      <TextA kind="Leaf" offset="5116" length="52" type="WString { }">Digital World Wilderness</TextA>
+    </_124>
+    <_125 kind="Record" offset="5168" length="38">
+      <TextKey kind="Leaf" offset="5168" length="4" type="Scalar { Kind = U32 }" value="411" />
+      <TextA kind="Leaf" offset="5172" length="34" type="WString { }">Kaiser's Domain</TextA>
+    </_125>
+    <_126 kind="Record" offset="5206" length="38">
+      <TextKey kind="Leaf" offset="5206" length="4" type="Scalar { Kind = U32 }" value="412" />
+      <TextA kind="Leaf" offset="5210" length="34" type="WString { }">Kaiser's Domain</TextA>
+    </_126>
+    <_127 kind="Record" offset="5244" length="42">
+      <TextKey kind="Leaf" offset="5244" length="4" type="Scalar { Kind = U32 }" value="500" />
+      <TextA kind="Leaf" offset="5248" length="38" type="WString { }">Terminal of Flame</TextA>
+    </_127>
+    <_128 kind="Record" offset="5286" length="34">
+      <TextKey kind="Leaf" offset="5286" length="4" type="Scalar { Kind = U32 }" value="501" />
+      <TextA kind="Leaf" offset="5290" length="30" type="WString { }">Digital World</TextA>
+    </_128>
+    <_129 kind="Record" offset="5320" length="32">
+      <TextKey kind="Leaf" offset="5320" length="4" type="Scalar { Kind = U32 }" value="502" />
+      <TextA kind="Leaf" offset="5324" length="28" type="WString { }">Wind Factory</TextA>
+    </_129>
+    <_130 kind="Record" offset="5352" length="36">
+      <TextKey kind="Leaf" offset="5352" length="4" type="Scalar { Kind = U32 }" value="503" />
+      <TextA kind="Leaf" offset="5356" length="32" type="WString { }">Breeze Village</TextA>
+    </_130>
+    <_131 kind="Record" offset="5388" length="42">
+      <TextKey kind="Leaf" offset="5388" length="4" type="Scalar { Kind = U32 }" value="510" />
+      <TextA kind="Leaf" offset="5392" length="38" type="WString { }">Terminal of Flame</TextA>
+    </_131>
+    <_132 kind="Record" offset="5430" length="48">
+      <TextKey kind="Leaf" offset="5430" length="4" type="Scalar { Kind = U32 }" value="511" />
+      <TextA kind="Leaf" offset="5434" length="44" type="WString { }">Terminal Underground</TextA>
+    </_132>
+    <_133 kind="Record" offset="5478" length="48">
+      <TextKey kind="Leaf" offset="5478" length="4" type="Scalar { Kind = U32 }" value="512" />
+      <TextA kind="Leaf" offset="5482" length="44" type="WString { }">Terminal Underground</TextA>
+    </_133>
+    <_134 kind="Record" offset="5526" length="38">
+      <TextKey kind="Leaf" offset="5526" length="4" type="Scalar { Kind = U32 }" value="1100" />
+      <TextA kind="Leaf" offset="5530" length="34" type="WString { }">Western Village</TextA>
+    </_134>
+    <_135 kind="Record" offset="5564" length="38">
+      <TextKey kind="Leaf" offset="5564" length="4" type="Scalar { Kind = U32 }" value="1101" />
+      <TextA kind="Leaf" offset="5568" length="34" type="WString { }">Wilderness Area</TextA>
+    </_135>
+    <_136 kind="Record" offset="5602" length="32">
+      <TextKey kind="Leaf" offset="5602" length="4" type="Scalar { Kind = U32 }" value="1102" />
+      <TextA kind="Leaf" offset="5606" length="28" type="WString { }">Digimon Farm</TextA>
+    </_136>
+    <_137 kind="Record" offset="5634" length="30">
+      <TextKey kind="Leaf" offset="5634" length="4" type="Scalar { Kind = U32 }" value="1103" />
+      <TextA kind="Leaf" offset="5638" length="26" type="WString { }">Wind Valley</TextA>
+    </_137>
+    <_138 kind="Record" offset="5664" length="38">
+      <TextKey kind="Leaf" offset="5664" length="4" type="Scalar { Kind = U32 }" value="1104" />
+      <TextA kind="Leaf" offset="5668" length="34" type="WString { }">Ruined Historic</TextA>
+    </_138>
+    <_139 kind="Record" offset="5702" length="56">
+      <TextKey kind="Leaf" offset="5702" length="4" type="Scalar { Kind = U32 }" value="1105" />
+      <TextA kind="Leaf" offset="5706" length="52" type="WString { }">Western Area : Outskirts</TextA>
+    </_139>
+    <_140 kind="Record" offset="5758" length="46">
+      <TextKey kind="Leaf" offset="5758" length="4" type="Scalar { Kind = U32 }" value="1106" />
+      <TextA kind="Leaf" offset="5762" length="42" type="WString { }">Western Area : East</TextA>
+    </_140>
+    <_141 kind="Record" offset="5804" length="46">
+      <TextKey kind="Leaf" offset="5804" length="4" type="Scalar { Kind = U32 }" value="1107" />
+      <TextA kind="Leaf" offset="5808" length="42" type="WString { }">Western Area : West</TextA>
+    </_141>
+    <_142 kind="Record" offset="5850" length="50">
+      <TextKey kind="Leaf" offset="5850" length="4" type="Scalar { Kind = U32 }" value="1108" />
+      <TextA kind="Leaf" offset="5854" length="46" type="WString { }">Digimon Maze Entrance</TextA>
+    </_142>
+    <_143 kind="Record" offset="5900" length="48">
+      <TextKey kind="Leaf" offset="5900" length="4" type="Scalar { Kind = U32 }" value="1109" />
+      <TextA kind="Leaf" offset="5904" length="44" type="WString { }">Dark tower Wasteland</TextA>
+    </_143>
+    <_144 kind="Record" offset="5948" length="58">
+      <TextKey kind="Leaf" offset="5948" length="4" type="Scalar { Kind = U32 }" value="1110" />
+      <TextA kind="Leaf" offset="5952" length="54" type="WString { }">Kaiser's Laboratory(Easy)</TextA>
+    </_144>
+    <_145 kind="Record" offset="6006" length="62">
+      <TextKey kind="Leaf" offset="6006" length="4" type="Scalar { Kind = U32 }" value="1111" />
+      <TextA kind="Leaf" offset="6010" length="58" type="WString { }">Kaiser's Laboratory(Normal)</TextA>
+    </_145>
+    <_146 kind="Record" offset="6068" length="58">
+      <TextKey kind="Leaf" offset="6068" length="4" type="Scalar { Kind = U32 }" value="1112" />
+      <TextA kind="Leaf" offset="6072" length="54" type="WString { }">Kaiser's Laboratory(Hard)</TextA>
+    </_146>
+    <_147 kind="Record" offset="6126" length="38">
+      <TextKey kind="Leaf" offset="6126" length="4" type="Scalar { Kind = U32 }" value="1201" />
+      <TextA kind="Leaf" offset="6130" length="34" type="WString { }">Digimon Maze B1</TextA>
+    </_147>
+    <_148 kind="Record" offset="6164" length="38">
+      <TextKey kind="Leaf" offset="6164" length="4" type="Scalar { Kind = U32 }" value="1202" />
+      <TextA kind="Leaf" offset="6168" length="34" type="WString { }">Digimon Maze B2</TextA>
+    </_148>
+    <_149 kind="Record" offset="6202" length="38">
+      <TextKey kind="Leaf" offset="6202" length="4" type="Scalar { Kind = U32 }" value="1203" />
+      <TextA kind="Leaf" offset="6206" length="34" type="WString { }">Digimon Maze F1</TextA>
+    </_149>
+    <_150 kind="Record" offset="6240" length="38">
+      <TextKey kind="Leaf" offset="6240" length="4" type="Scalar { Kind = U32 }" value="1204" />
+      <TextA kind="Leaf" offset="6244" length="34" type="WString { }">Digimon Maze F2</TextA>
+    </_150>
+    <_151 kind="Record" offset="6278" length="38">
+      <TextKey kind="Leaf" offset="6278" length="4" type="Scalar { Kind = U32 }" value="1205" />
+      <TextA kind="Leaf" offset="6282" length="34" type="WString { }">Digimon Maze F3</TextA>
+    </_151>
+    <_152 kind="Record" offset="6316" length="38">
+      <TextKey kind="Leaf" offset="6316" length="4" type="Scalar { Kind = U32 }" value="1206" />
+      <TextA kind="Leaf" offset="6320" length="34" type="WString { }">Digimon Maze F4</TextA>
+    </_152>
+    <_153 kind="Record" offset="6354" length="56">
+      <TextKey kind="Leaf" offset="6354" length="4" type="Scalar { Kind = U32 }" value="1300" />
+      <TextA kind="Leaf" offset="6358" length="52" type="WString { }">Village of the Beginning</TextA>
+    </_153>
+    <_154 kind="Record" offset="6410" length="30">
+      <TextKey kind="Leaf" offset="6410" length="4" type="Scalar { Kind = U32 }" value="1301" />
+      <TextA kind="Leaf" offset="6414" length="26" type="WString { }">Silver Lake</TextA>
+    </_154>
+    <_155 kind="Record" offset="6440" length="38">
+      <TextKey kind="Leaf" offset="6440" length="4" type="Scalar { Kind = U32 }" value="1302" />
+      <TextA kind="Leaf" offset="6444" length="34" type="WString { }">A Silent Forest</TextA>
+    </_155>
+    <_156 kind="Record" offset="6478" length="44">
+      <TextKey kind="Leaf" offset="6478" length="4" type="Scalar { Kind = U32 }" value="1303" />
+      <TextA kind="Leaf" offset="6482" length="40" type="WString { }">Lost Historic Site</TextA>
+    </_156>
+    <_157 kind="Record" offset="6522" length="54">
+      <TextKey kind="Leaf" offset="6522" length="4" type="Scalar { Kind = U32 }" value="1304" />
+      <TextA kind="Leaf" offset="6526" length="50" type="WString { }">Ancient Ruins of Secret</TextA>
+    </_157>
+    <_158 kind="Record" offset="6576" length="52">
+      <TextKey kind="Leaf" offset="6576" length="4" type="Scalar { Kind = U32 }" value="1305" />
+      <TextA kind="Leaf" offset="6580" length="48" type="WString { }">File Island Waterfront</TextA>
+    </_158>
+    <_159 kind="Record" offset="6628" length="42">
+      <TextKey kind="Leaf" offset="6628" length="4" type="Scalar { Kind = U32 }" value="1306" />
+      <TextA kind="Leaf" offset="6632" length="38" type="WString { }">Infinite Mountain</TextA>
+    </_159>
+    <_160 kind="Record" offset="6670" length="58">
+      <TextKey kind="Leaf" offset="6670" length="4" type="Scalar { Kind = U32 }" value="1307" />
+      <TextA kind="Leaf" offset="6674" length="54" type="WString { }">Infinite Mountain Dungeon</TextA>
+    </_160>
+    <_161 kind="Record" offset="6728" length="40">
+      <TextKey kind="Leaf" offset="6728" length="4" type="Scalar { Kind = U32 }" value="1308" />
+      <TextA kind="Leaf" offset="6732" length="36" type="WString { }">Crack of Devimon</TextA>
+    </_161>
+    <_162 kind="Record" offset="6768" length="60">
+      <TextKey kind="Leaf" offset="6768" length="4" type="Scalar { Kind = U32 }" value="1309" />
+      <TextA kind="Leaf" offset="6772" length="56" type="WString { }">Hidden nest of Waterdragon</TextA>
+    </_162>
+    <_163 kind="Record" offset="6828" length="54">
+      <TextKey kind="Leaf" offset="6828" length="4" type="Scalar { Kind = U32 }" value="1310" />
+      <TextA kind="Leaf" offset="6832" length="50" type="WString { }">Ancient Ruins of Secret</TextA>
+    </_163>
+    <_164 kind="Record" offset="6882" length="40">
+      <TextKey kind="Leaf" offset="6882" length="4" type="Scalar { Kind = U32 }" value="1311" />
+      <TextA kind="Leaf" offset="6886" length="36" type="WString { }">Crack of Devimon</TextA>
+    </_164>
+    <_165 kind="Record" offset="6922" length="58">
+      <TextKey kind="Leaf" offset="6922" length="4" type="Scalar { Kind = U32 }" value="1312" />
+      <TextA kind="Leaf" offset="6926" length="54" type="WString { }">Infinite Mountain Dungeon</TextA>
+    </_165>
+    <_166 kind="Record" offset="6980" length="54">
+      <TextKey kind="Leaf" offset="6980" length="4" type="Scalar { Kind = U32 }" value="1400" />
+      <TextA kind="Leaf" offset="6984" length="50" type="WString { }">Server Continent Desert</TextA>
+    </_166>
+    <_167 kind="Record" offset="7034" length="54">
+      <TextKey kind="Leaf" offset="7034" length="4" type="Scalar { Kind = U32 }" value="1401" />
+      <TextA kind="Leaf" offset="7038" length="50" type="WString { }">Server Continent Canyon</TextA>
+    </_167>
+    <_168 kind="Record" offset="7088" length="56">
+      <TextKey kind="Leaf" offset="7088" length="4" type="Scalar { Kind = U32 }" value="1402" />
+      <TextA kind="Leaf" offset="7092" length="52" type="WString { }">Server Continent Pyramid</TextA>
+    </_168>
+    <_169 kind="Record" offset="7144" length="46">
+      <TextKey kind="Leaf" offset="7144" length="4" type="Scalar { Kind = U32 }" value="1403" />
+      <TextA kind="Leaf" offset="7148" length="42" type="WString { }">Nanomon Maze (Easy)</TextA>
+    </_169>
+    <_170 kind="Record" offset="7190" length="50">
+      <TextKey kind="Leaf" offset="7190" length="4" type="Scalar { Kind = U32 }" value="1404" />
+      <TextA kind="Leaf" offset="7194" length="46" type="WString { }">Nanomon Maze (Normal)</TextA>
+    </_170>
+    <_171 kind="Record" offset="7240" length="46">
+      <TextKey kind="Leaf" offset="7240" length="4" type="Scalar { Kind = U32 }" value="1406" />
+      <TextA kind="Leaf" offset="7244" length="42" type="WString { }">Nanomon Maze (Hard)</TextA>
+    </_171>
+    <_172 kind="Record" offset="7286" length="28">
+      <TextKey kind="Leaf" offset="7286" length="4" type="Scalar { Kind = U32 }" value="1500" />
+      <TextA kind="Leaf" offset="7290" length="24" type="WString { }">Green Zone</TextA>
+    </_172>
+    <_173 kind="Record" offset="7314" length="30">
+      <TextKey kind="Leaf" offset="7314" length="4" type="Scalar { Kind = U32 }" value="1501" />
+      <TextA kind="Leaf" offset="7318" length="26" type="WString { }">Miso Vilage</TextA>
+    </_173>
+    <_174 kind="Record" offset="7344" length="50">
+      <TextKey kind="Leaf" offset="7344" length="4" type="Scalar { Kind = U32 }" value="1502" />
+      <TextA kind="Leaf" offset="7348" length="46" type="WString { }">Green Zone (Advanced)</TextA>
+    </_174>
+    <_175 kind="Record" offset="7394" length="34">
+      <TextKey kind="Leaf" offset="7394" length="4" type="Scalar { Kind = U32 }" value="1503" />
+      <TextA kind="Leaf" offset="7398" length="30" type="WString { }">Event Dungeon</TextA>
+    </_175>
+    <_176 kind="Record" offset="7428" length="50">
+      <TextKey kind="Leaf" offset="7428" length="4" type="Scalar { Kind = U32 }" value="1600" />
+      <TextA kind="Leaf" offset="7432" length="46" type="WString { }">Scar of Water Crystal</TextA>
+    </_176>
+    <_177 kind="Record" offset="7478" length="36">
+      <TextKey kind="Leaf" offset="7478" length="4" type="Scalar { Kind = U32 }" value="1601" />
+      <TextA kind="Leaf" offset="7482" length="32" type="WString { }">Uprising Flame</TextA>
+    </_177>
+    <_178 kind="Record" offset="7514" length="48">
+      <TextKey kind="Leaf" offset="7514" length="4" type="Scalar { Kind = U32 }" value="1602" />
+      <TextA kind="Leaf" offset="7518" length="44" type="WString { }">Trace of Black Steel</TextA>
+    </_178>
+    <_179 kind="Record" offset="7562" length="52">
+      <TextKey kind="Leaf" offset="7562" length="4" type="Scalar { Kind = U32 }" value="1603" />
+      <TextA kind="Leaf" offset="7566" length="48" type="WString { }">Descending Thunder God</TextA>
+    </_179>
+    <_180 kind="Record" offset="7614" length="48">
+      <TextKey kind="Leaf" offset="7614" length="4" type="Scalar { Kind = U32 }" value="1604" />
+      <TextA kind="Leaf" offset="7618" length="44" type="WString { }">Uprising Flame(Easy)</TextA>
+    </_180>
+    <_181 kind="Record" offset="7662" length="62">
+      <TextKey kind="Leaf" offset="7662" length="4" type="Scalar { Kind = U32 }" value="1605" />
+      <TextA kind="Leaf" offset="7666" length="58" type="WString { }">Scar of Water Crystal(Easy)</TextA>
+    </_181>
+    <_182 kind="Record" offset="7724" length="60">
+      <TextKey kind="Leaf" offset="7724" length="4" type="Scalar { Kind = U32 }" value="1606" />
+      <TextA kind="Leaf" offset="7728" length="56" type="WString { }">Trace of Black Steel(Easy)</TextA>
+    </_182>
+    <_183 kind="Record" offset="7784" length="64">
+      <TextKey kind="Leaf" offset="7784" length="4" type="Scalar { Kind = U32 }" value="1607" />
+      <TextA kind="Leaf" offset="7788" length="60" type="WString { }">Descending Thunder God(Easy)</TextA>
+    </_183>
+    <_184 kind="Record" offset="7848" length="72">
+      <TextKey kind="Leaf" offset="7848" length="4" type="Scalar { Kind = U32 }" value="1608" />
+      <TextA kind="Leaf" offset="7852" length="68" type="WString { }">Huanglongmon Underground Dungeon</TextA>
+    </_184>
+    <_185 kind="Record" offset="7920" length="48">
+      <TextKey kind="Leaf" offset="7920" length="4" type="Scalar { Kind = U32 }" value="1609" />
+      <TextA kind="Leaf" offset="7924" length="44" type="WString { }">Huanglongmon Dungeon</TextA>
+    </_185>
+    <_186 kind="Record" offset="7968" length="62">
+      <TextKey kind="Leaf" offset="7968" length="4" type="Scalar { Kind = U32 }" value="1610" />
+      <TextA kind="Leaf" offset="7972" length="58" type="WString { }">Scar of Water Crystal(Hard)</TextA>
+    </_186>
+    <_187 kind="Record" offset="8030" length="48">
+      <TextKey kind="Leaf" offset="8030" length="4" type="Scalar { Kind = U32 }" value="1611" />
+      <TextA kind="Leaf" offset="8034" length="44" type="WString { }">Uprising Flame(Hard)</TextA>
+    </_187>
+    <_188 kind="Record" offset="8078" length="60">
+      <TextKey kind="Leaf" offset="8078" length="4" type="Scalar { Kind = U32 }" value="1612" />
+      <TextA kind="Leaf" offset="8082" length="56" type="WString { }">Trace of Black Steel(Hard)</TextA>
+    </_188>
+    <_189 kind="Record" offset="8138" length="64">
+      <TextKey kind="Leaf" offset="8138" length="4" type="Scalar { Kind = U32 }" value="1613" />
+      <TextA kind="Leaf" offset="8142" length="60" type="WString { }">Descending Thunder God(Hard)</TextA>
+    </_189>
+    <_190 kind="Record" offset="8202" length="84">
+      <TextKey kind="Leaf" offset="8202" length="4" type="Scalar { Kind = U32 }" value="1614" />
+      <TextA kind="Leaf" offset="8206" length="80" type="WString { }">Huanglongmon Underground Dungeon(Easy)</TextA>
+    </_190>
+    <_191 kind="Record" offset="8286" length="60">
+      <TextKey kind="Leaf" offset="8286" length="4" type="Scalar { Kind = U32 }" value="1615" />
+      <TextA kind="Leaf" offset="8290" length="56" type="WString { }">Huanglongmon Dungeon(Easy)</TextA>
+    </_191>
+    <_192 kind="Record" offset="8346" length="84">
+      <TextKey kind="Leaf" offset="8346" length="4" type="Scalar { Kind = U32 }" value="1616" />
+      <TextA kind="Leaf" offset="8350" length="80" type="WString { }">Huanglongmon Underground Dungeon(Hard)</TextA>
+    </_192>
+    <_193 kind="Record" offset="8430" length="60">
+      <TextKey kind="Leaf" offset="8430" length="4" type="Scalar { Kind = U32 }" value="1617" />
+      <TextA kind="Leaf" offset="8434" length="56" type="WString { }">Huanglongmon Dungeon(Hard)</TextA>
+    </_193>
+    <_194 kind="Record" offset="8490" length="42">
+      <TextKey kind="Leaf" offset="8490" length="4" type="Scalar { Kind = U32 }" value="1700" />
+      <TextA kind="Leaf" offset="8494" length="38" type="WString { }">Verdandi Terminal</TextA>
+    </_194>
+    <_195 kind="Record" offset="8532" length="28">
+      <TextKey kind="Leaf" offset="8532" length="4" type="Scalar { Kind = U32 }" value="1701" />
+      <TextA kind="Leaf" offset="8536" length="24" type="WString { }">Royal Base</TextA>
+    </_195>
+    <_196 kind="Record" offset="8560" length="42">
+      <TextKey kind="Leaf" offset="8560" length="4" type="Scalar { Kind = U32 }" value="1702" />
+      <TextA kind="Leaf" offset="8564" length="38" type="WString { }">Center Royal Base</TextA>
+    </_196>
+    <_197 kind="Record" offset="8602" length="42">
+      <TextKey kind="Leaf" offset="8602" length="4" type="Scalar { Kind = U32 }" value="1703" />
+      <TextA kind="Leaf" offset="8606" length="38" type="WString { }">Yggdrasill's Room</TextA>
+    </_197>
+    <_198 kind="Record" offset="8644" length="42">
+      <TextKey kind="Leaf" offset="8644" length="4" type="Scalar { Kind = U32 }" value="1704" />
+      <TextA kind="Leaf" offset="8648" length="38" type="WString { }">Royal Base (Easy)</TextA>
+    </_198>
+    <_199 kind="Record" offset="8686" length="56">
+      <TextKey kind="Leaf" offset="8686" length="4" type="Scalar { Kind = U32 }" value="1705" />
+      <TextA kind="Leaf" offset="8690" length="52" type="WString { }">Center Royal Base (Easy)</TextA>
+    </_199>
+    <_200 kind="Record" offset="8742" length="56">
+      <TextKey kind="Leaf" offset="8742" length="4" type="Scalar { Kind = U32 }" value="1706" />
+      <TextA kind="Leaf" offset="8746" length="52" type="WString { }">Yggdrasill's Room (Easy)</TextA>
+    </_200>
+    <_201 kind="Record" offset="8798" length="42">
+      <TextKey kind="Leaf" offset="8798" length="4" type="Scalar { Kind = U32 }" value="1707" />
+      <TextA kind="Leaf" offset="8802" length="38" type="WString { }">Royal Base (Hard)</TextA>
+    </_201>
+    <_202 kind="Record" offset="8840" length="56">
+      <TextKey kind="Leaf" offset="8840" length="4" type="Scalar { Kind = U32 }" value="1708" />
+      <TextA kind="Leaf" offset="8844" length="52" type="WString { }">Center Royal Base (Hard)</TextA>
+    </_202>
+    <_203 kind="Record" offset="8896" length="56">
+      <TextKey kind="Leaf" offset="8896" length="4" type="Scalar { Kind = U32 }" value="1709" />
+      <TextA kind="Leaf" offset="8900" length="52" type="WString { }">Yggdrasill's Room (Hard)</TextA>
+    </_203>
+    <_204 kind="Record" offset="8952" length="36">
+      <TextKey kind="Leaf" offset="8952" length="4" type="Scalar { Kind = U32 }" value="1800" />
+      <TextA kind="Leaf" offset="8956" length="32" type="WString { }">Wasteland Area</TextA>
+    </_204>
+    <_205 kind="Record" offset="8988" length="52">
+      <TextKey kind="Leaf" offset="8988" length="4" type="Scalar { Kind = U32 }" value="1801" />
+      <TextA kind="Leaf" offset="8992" length="48" type="WString { }">Wasteland Area (Night)</TextA>
+    </_205>
+    <_206 kind="Record" offset="9040" length="30">
+      <TextKey kind="Leaf" offset="9040" length="4" type="Scalar { Kind = U32 }" value="1802" />
+      <TextA kind="Leaf" offset="9044" length="26" type="WString { }">Forest Area</TextA>
+    </_206>
+    <_207 kind="Record" offset="9070" length="28">
+      <TextKey kind="Leaf" offset="9070" length="4" type="Scalar { Kind = U32 }" value="1803" />
+      <TextA kind="Leaf" offset="9074" length="24" type="WString { }">Ocean Area</TextA>
+    </_207>
+    <_208 kind="Record" offset="9098" length="48">
+      <TextKey kind="Leaf" offset="9098" length="4" type="Scalar { Kind = U32 }" value="1804" />
+      <TextA kind="Leaf" offset="9102" length="44" type="WString { }">Four Holy Beast Area</TextA>
+    </_208>
+    <_209 kind="Record" offset="9146" length="28">
+      <TextKey kind="Leaf" offset="9146" length="4" type="Scalar { Kind = U32 }" value="1805" />
+      <TextA kind="Leaf" offset="9150" length="24" type="WString { }">Cloud Area</TextA>
+    </_209>
+    <_210 kind="Record" offset="9174" length="68">
+      <TextKey kind="Leaf" offset="9174" length="4" type="Scalar { Kind = U32 }" value="1806" />
+      <TextA kind="Leaf" offset="9178" length="64" type="WString { }">Collapsed Four Holy Beast Area</TextA>
+    </_210>
+    <_211 kind="Record" offset="9242" length="58">
+      <TextKey kind="Leaf" offset="9242" length="4" type="Scalar { Kind = U32 }" value="1807" />
+      <TextA kind="Leaf" offset="9246" length="54" type="WString { }">Zhuqiaomon's Resting Area</TextA>
+    </_211>
+    <_212 kind="Record" offset="9300" length="70">
+      <TextKey kind="Leaf" offset="9300" length="4" type="Scalar { Kind = U32 }" value="1808" />
+      <TextA kind="Leaf" offset="9304" length="66" type="WString { }">Four Holy Beast Area (D-Reaper)</TextA>
+    </_212>
+    <_213 kind="Record" offset="9370" length="46">
+      <TextKey kind="Leaf" offset="9370" length="4" type="Scalar { Kind = U32 }" value="1809" />
+      <TextA kind="Leaf" offset="9374" length="42" type="WString { }">Chaotic Battlefield</TextA>
+    </_213>
+    <_214 kind="Record" offset="9416" length="32">
+      <TextKey kind="Leaf" offset="9416" length="4" type="Scalar { Kind = U32 }" value="1810" />
+      <TextA kind="Leaf" offset="9420" length="28" type="WString { }">Final Battle</TextA>
+    </_214>
+    <_215 kind="Record" offset="9448" length="54">
+      <TextKey kind="Leaf" offset="9448" length="4" type="Scalar { Kind = U32 }" value="1901" />
+      <TextA kind="Leaf" offset="9452" length="50" type="WString { }">Forest of the Beginning</TextA>
+    </_215>
+    <_216 kind="Record" offset="9502" length="48">
+      <TextKey kind="Leaf" offset="9502" length="4" type="Scalar { Kind = U32 }" value="1902" />
+      <TextA kind="Leaf" offset="9506" length="44" type="WString { }">Forest of Marionette</TextA>
+    </_216>
+    <_217 kind="Record" offset="9550" length="32">
+      <TextKey kind="Leaf" offset="9550" length="4" type="Scalar { Kind = U32 }" value="1903" />
+      <TextA kind="Leaf" offset="9554" length="28" type="WString { }">Metal Empire</TextA>
+    </_217>
+    <_218 kind="Record" offset="9582" length="40">
+      <TextKey kind="Leaf" offset="9582" length="4" type="Scalar { Kind = U32 }" value="1904" />
+      <TextA kind="Leaf" offset="9586" length="36" type="WString { }">Underground City</TextA>
+    </_218>
+    <_219 kind="Record" offset="9622" length="52">
+      <TextKey kind="Leaf" offset="9622" length="4" type="Scalar { Kind = U32 }" value="1905" />
+      <TextA kind="Leaf" offset="9626" length="48" type="WString { }">The Top Of A Nightmare</TextA>
+    </_219>
+    <_220 kind="Record" offset="9674" length="28">
+      <TextKey kind="Leaf" offset="9674" length="4" type="Scalar { Kind = U32 }" value="1906" />
+      <TextA kind="Leaf" offset="9678" length="24" type="WString { }">Void Space</TextA>
+    </_220>
+    <_221 kind="Record" offset="9702" length="50">
+      <TextKey kind="Leaf" offset="9702" length="4" type="Scalar { Kind = U32 }" value="1907" />
+      <TextA kind="Leaf" offset="9706" length="46" type="WString { }">Lake of the Beginning</TextA>
+    </_221>
+    <_222 kind="Record" offset="9752" length="48">
+      <TextKey kind="Leaf" offset="9752" length="4" type="Scalar { Kind = U32 }" value="1911" />
+      <TextA kind="Leaf" offset="9756" length="44" type="WString { }">Marine Dragon Domain</TextA>
+    </_222>
+    <_223 kind="Record" offset="9800" length="72">
+      <TextKey kind="Leaf" offset="9800" length="4" type="Scalar { Kind = U32 }" value="1912" />
+      <TextA kind="Leaf" offset="9804" length="68" type="WString { }">Front Yard of Marionette Mansion</TextA>
+    </_223>
+    <_224 kind="Record" offset="9872" length="44">
+      <TextKey kind="Leaf" offset="9872" length="4" type="Scalar { Kind = U32 }" value="1913" />
+      <TextA kind="Leaf" offset="9876" length="40" type="WString { }">Back of the Empire</TextA>
+    </_224>
+    <_225 kind="Record" offset="9916" length="36">
+      <TextKey kind="Leaf" offset="9916" length="4" type="Scalar { Kind = U32 }" value="1914" />
+      <TextA kind="Leaf" offset="9920" length="32" type="WString { }">Stage Of Clown</TextA>
+    </_225>
+    <_226 kind="Record" offset="9952" length="28">
+      <TextKey kind="Leaf" offset="9952" length="4" type="Scalar { Kind = U32 }" value="1915" />
+      <TextA kind="Leaf" offset="9956" length="24" type="WString { }">Void Space</TextA>
+    </_226>
+    <_227 kind="Record" offset="9980" length="58">
+      <TextKey kind="Leaf" offset="9980" length="4" type="Scalar { Kind = U32 }" value="2001" />
+      <TextA kind="Leaf" offset="9984" length="54" type="WString { }">Shadow Digimon Labyrinth </TextA>
+    </_227>
+    <_228 kind="Record" offset="10038" length="68">
+      <TextKey kind="Leaf" offset="10038" length="4" type="Scalar { Kind = U32 }" value="2002" />
+      <TextA kind="Leaf" offset="10042" length="64" type="WString { }">Shadow Digimon Labyrinth(Hard)</TextA>
+    </_228>
+    <_229 kind="Record" offset="10106" length="42">
+      <TextKey kind="Leaf" offset="10106" length="4" type="Scalar { Kind = U32 }" value="2100" />
+      <TextA kind="Leaf" offset="10110" length="38" type="WString { }">Snowstorm Village</TextA>
+    </_229>
+    <_230 kind="Record" offset="10148" length="34">
+      <TextKey kind="Leaf" offset="10148" length="4" type="Scalar { Kind = U32 }" value="2101" />
+      <TextA kind="Leaf" offset="10152" length="30" type="WString { }">Frozen Ground</TextA>
+    </_230>
+    <_231 kind="Record" offset="10182" length="38">
+      <TextKey kind="Leaf" offset="10182" length="4" type="Scalar { Kind = U32 }" value="2102" />
+      <TextA kind="Leaf" offset="10186" length="34" type="WString { }">Snowman Village</TextA>
+    </_231>
+    <_232 kind="Record" offset="10220" length="52">
+      <TextKey kind="Leaf" offset="10220" length="4" type="Scalar { Kind = U32 }" value="2103" />
+      <TextA kind="Leaf" offset="10224" length="48" type="WString { }">Distorted Data Village</TextA>
+    </_232>
+    <_233 kind="Record" offset="10272" length="42">
+      <TextKey kind="Leaf" offset="10272" length="4" type="Scalar { Kind = U32 }" value="2104" />
+      <TextA kind="Leaf" offset="10276" length="38" type="WString { }">Infinite Ice Wall</TextA>
+    </_233>
+    <_234 kind="Record" offset="10314" length="38">
+      <TextKey kind="Leaf" offset="10314" length="4" type="Scalar { Kind = U32 }" value="3000" />
+      <TextA kind="Leaf" offset="10318" length="34" type="WString { }">Dungeon Masters</TextA>
+    </_234>
+    <_235 kind="Record" offset="10352" length="38">
+      <TextKey kind="Leaf" offset="10352" length="4" type="Scalar { Kind = U32 }" value="3001" />
+      <TextA kind="Leaf" offset="10356" length="34" type="WString { }">Dungeon Masters</TextA>
+    </_235>
+    <_236 kind="Record" offset="10390" length="38">
+      <TextKey kind="Leaf" offset="10390" length="4" type="Scalar { Kind = U32 }" value="3002" />
+      <TextA kind="Leaf" offset="10394" length="34" type="WString { }">Dungeon Masters</TextA>
+    </_236>
+    <_237 kind="Record" offset="10428" length="38">
+      <TextKey kind="Leaf" offset="10428" length="4" type="Scalar { Kind = U32 }" value="3003" />
+      <TextA kind="Leaf" offset="10432" length="34" type="WString { }">Dungeon Masters</TextA>
+    </_237>
+    <_238 kind="Record" offset="10466" length="38">
+      <TextKey kind="Leaf" offset="10466" length="4" type="Scalar { Kind = U32 }" value="3004" />
+      <TextA kind="Leaf" offset="10470" length="34" type="WString { }">Dungeon Masters</TextA>
+    </_238>
+    <_239 kind="Record" offset="10504" length="38">
+      <TextKey kind="Leaf" offset="10504" length="4" type="Scalar { Kind = U32 }" value="3005" />
+      <TextA kind="Leaf" offset="10508" length="34" type="WString { }">Dungeon Masters</TextA>
+    </_239>
+    <_240 kind="Record" offset="10542" length="38">
+      <TextKey kind="Leaf" offset="10542" length="4" type="Scalar { Kind = U32 }" value="3007" />
+      <TextA kind="Leaf" offset="10546" length="34" type="WString { }">Dungeon Masters</TextA>
+    </_240>
+    <_241 kind="Record" offset="10580" length="38">
+      <TextKey kind="Leaf" offset="10580" length="4" type="Scalar { Kind = U32 }" value="3008" />
+      <TextA kind="Leaf" offset="10584" length="34" type="WString { }">Dungeon Masters</TextA>
+    </_241>
+    <_242 kind="Record" offset="10618" length="38">
+      <TextKey kind="Leaf" offset="10618" length="4" type="Scalar { Kind = U32 }" value="3009" />
+      <TextA kind="Leaf" offset="10622" length="34" type="WString { }">Dungeon Masters</TextA>
+    </_242>
+    <_243 kind="Record" offset="10656" length="8">
+      <TextKey kind="Leaf" offset="10656" length="4" type="Scalar { Kind = U32 }" value="9101" />
+      <TextA kind="Leaf" offset="10660" length="4" type="WString { }"></TextA>
+    </_243>
+    <_244 kind="Record" offset="10664" length="38">
+      <TextKey kind="Leaf" offset="10664" length="4" type="Scalar { Kind = U32 }" value="9203" />
+      <TextA kind="Leaf" offset="10668" length="34" type="WString { }">Attribute Arena</TextA>
+    </_244>
+  </Entries>
+</MapName_Str>

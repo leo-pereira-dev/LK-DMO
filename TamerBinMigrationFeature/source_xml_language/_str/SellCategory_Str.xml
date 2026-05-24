@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SellCategory_Str schema="SellCategory_Str.struct" bin="SellCategory_Str.bin" byteLength="414">
+  <Entries kind="Section" offset="0" length="414">
+    <_0 kind="Record" offset="4" length="14">
+      <TextKey kind="Leaf" offset="4" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Text kind="Leaf" offset="6" length="12" type="WString { }">Rare</Text>
+    </_0>
+    <_1 kind="Record" offset="18" length="14">
+      <TextKey kind="Leaf" offset="18" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Text kind="Leaf" offset="20" length="12" type="WString { }">Cash</Text>
+    </_1>
+    <_2 kind="Record" offset="32" length="16">
+      <TextKey kind="Leaf" offset="32" length="2" type="Scalar { Kind = U16 }" value="3" />
+      <Text kind="Leaf" offset="34" length="14" type="WString { }">Event</Text>
+    </_2>
+    <_3 kind="Record" offset="48" length="14">
+      <TextKey kind="Leaf" offset="48" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Text kind="Leaf" offset="50" length="12" type="WString { }">Move</Text>
+    </_3>
+    <_4 kind="Record" offset="62" length="14">
+      <TextKey kind="Leaf" offset="62" length="2" type="Scalar { Kind = U16 }" value="8" />
+      <Text kind="Leaf" offset="64" length="12" type="WString { }">Data</Text>
+    </_4>
+    <_5 kind="Record" offset="76" length="20">
+      <TextKey kind="Leaf" offset="76" length="2" type="Scalar { Kind = U16 }" value="9" />
+      <Text kind="Leaf" offset="78" length="18" type="WString { }">Digiegg</Text>
+    </_5>
+    <_6 kind="Record" offset="96" length="14">
+      <TextKey kind="Leaf" offset="96" length="2" type="Scalar { Kind = U16 }" value="10" />
+      <Text kind="Leaf" offset="98" length="12" type="WString { }">Shop</Text>
+    </_6>
+    <_7 kind="Record" offset="110" length="16">
+      <TextKey kind="Leaf" offset="110" length="2" type="Scalar { Kind = U16 }" value="11" />
+      <Text kind="Leaf" offset="112" length="14" type="WString { }">Guild</Text>
+    </_7>
+    <_8 kind="Record" offset="126" length="22">
+      <TextKey kind="Leaf" offset="126" length="2" type="Scalar { Kind = U16 }" value="12" />
+      <Text kind="Leaf" offset="128" length="20" type="WString { }">Material</Text>
+    </_8>
+    <_9 kind="Record" offset="148" length="20">
+      <TextKey kind="Leaf" offset="148" length="2" type="Scalar { Kind = U16 }" value="200" />
+      <Text kind="Leaf" offset="150" length="18" type="WString { }">Costume</Text>
+    </_9>
+    <_10 kind="Record" offset="168" length="30">
+      <TextKey kind="Leaf" offset="168" length="2" type="Scalar { Kind = U16 }" value="201" />
+      <Text kind="Leaf" offset="170" length="28" type="WString { }">Rare Costume</Text>
+    </_10>
+    <_11 kind="Record" offset="198" length="34">
+      <TextKey kind="Leaf" offset="198" length="2" type="Scalar { Kind = U16 }" value="203" />
+      <Text kind="Leaf" offset="200" length="32" type="WString { }">Attribute Item</Text>
+    </_11>
+    <_12 kind="Record" offset="232" length="22">
+      <TextKey kind="Leaf" offset="232" length="2" type="Scalar { Kind = U16 }" value="205" />
+      <Text kind="Leaf" offset="234" length="20" type="WString { }">Digivice</Text>
+    </_12>
+    <_13 kind="Record" offset="254" length="18">
+      <TextKey kind="Leaf" offset="254" length="2" type="Scalar { Kind = U16 }" value="260" />
+      <Text kind="Leaf" offset="256" length="16" type="WString { }">Avatar</Text>
+    </_13>
+    <_14 kind="Record" offset="272" length="20">
+      <TextKey kind="Leaf" offset="272" length="2" type="Scalar { Kind = U16 }" value="520" />
+      <Text kind="Leaf" offset="274" length="18" type="WString { }">ChipSet</Text>
+    </_14>
+    <_15 kind="Record" offset="292" length="14">
+      <TextKey kind="Leaf" offset="292" length="2" type="Scalar { Kind = U16 }" value="711" />
+      <Text kind="Leaf" offset="294" length="12" type="WString { }">Food</Text>
+    </_15>
+    <_16 kind="Record" offset="306" length="14">
+      <TextKey kind="Leaf" offset="306" length="2" type="Scalar { Kind = U16 }" value="712" />
+      <Text kind="Leaf" offset="308" length="12" type="WString { }">DISC</Text>
+    </_16>
+    <_17 kind="Record" offset="320" length="16">
+      <TextKey kind="Leaf" offset="320" length="2" type="Scalar { Kind = U16 }" value="800" />
+      <Text kind="Leaf" offset="322" length="14" type="WString { }">Quest</Text>
+    </_17>
+    <_18 kind="Record" offset="336" length="20">
+      <TextKey kind="Leaf" offset="336" length="2" type="Scalar { Kind = U16 }" value="801" />
+      <Text kind="Leaf" offset="338" length="18" type="WString { }">S.medal</Text>
+    </_18>
+    <_19 kind="Record" offset="356" length="20">
+      <TextKey kind="Leaf" offset="356" length="2" type="Scalar { Kind = U16 }" value="802" />
+      <Text kind="Leaf" offset="358" length="18" type="WString { }">B.medal</Text>
+    </_19>
+    <_20 kind="Record" offset="376" length="12">
+      <TextKey kind="Leaf" offset="376" length="2" type="Scalar { Kind = U16 }" value="900" />
+      <Text kind="Leaf" offset="378" length="10" type="WString { }">ETC</Text>
+    </_20>
+    <_21 kind="Record" offset="388" length="26">
+      <TextKey kind="Leaf" offset="388" length="2" type="Scalar { Kind = U16 }" value="999" />
+      <Text kind="Leaf" offset="390" length="24" type="WString { }">Repurchase</Text>
+    </_21>
+  </Entries>
+</SellCategory_Str>

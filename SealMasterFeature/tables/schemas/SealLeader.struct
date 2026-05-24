@@ -1,0 +1,16 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/SealLeader.bin]
+// SealLeader.bin — Pack03 v487 client.
+// Route: FUN_01624c60 -> FUN_01625190 -> FUN_015e4440.
+// Verified: 504 rows, 3028/3028 bytes.
+
+bin SealLeader {
+    section Leaders {
+        count  u32;
+        record SealLeaderRecord;
+    }
+}
+
+struct SealLeaderRecord size=6 {
+    u16  LeaderId;
+    u32  DigimonId;
+}

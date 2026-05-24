@@ -1,0 +1,23 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/SealFilter.bin]
+// SealFilter.bin — Pack03 v487 client.
+// Route: FUN_01624c60 -> FUN_01625170 -> FUN_01623590.
+// Verified: 13 rows, 3178/3178 bytes.
+
+bin SealFilter {
+    section Filters {
+        count  u32;
+        record SealFilterRecord;
+    }
+}
+
+struct SealFilterRecord {
+    u16  MapGroupId;
+    u32  GroupCount;
+    SealFilterGroup[GroupCount] Groups;
+}
+
+struct SealFilterGroup {
+    u32  MapId;
+    u32  SealCount;
+    u32[SealCount] SealItemIds;
+}

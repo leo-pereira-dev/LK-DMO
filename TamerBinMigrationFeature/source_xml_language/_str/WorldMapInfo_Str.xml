@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorldMapInfo_Str schema="WorldMapInfo_Str.struct" bin="WorldMapInfo_Str.bin" byteLength="3560">
+  <Entries kind="Section" offset="0" length="3560">
+    <_0 kind="Record" offset="4" length="244">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <TextA kind="Leaf" offset="8" length="38" type="WString { }">Yokohama\nVillage</TextA>
+      <TextB kind="Leaf" offset="46" length="36" type="WString { }">Yokohama Village</TextB>
+      <TextC kind="Leaf" offset="82" length="166" type="WString { }">The emergence of Digimon was frequently reported in the Yokohama region of Japan.</TextC>
+    </_0>
+    <_1 kind="Record" offset="248" length="180">
+      <TextKey kind="Leaf" offset="248" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="252" length="30" type="WString { }">Western\nArea</TextA>
+      <TextB kind="Leaf" offset="282" length="28" type="WString { }">Western Area</TextB>
+      <TextC kind="Leaf" offset="310" length="118" type="WString { }">A Digimon rampage is the biggest threat to public safety.</TextC>
+    </_1>
+    <_2 kind="Record" offset="428" length="280">
+      <TextKey kind="Leaf" offset="428" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="432" length="28" type="WString { }">Dats\nCenter</TextA>
+      <TextB kind="Leaf" offset="460" length="26" type="WString { }">Dats Center</TextB>
+      <TextC kind="Leaf" offset="486" length="222" type="WString { }">An institution that specializes in dealing with trouble caused by the interaction between humans and Digimon.</TextC>
+    </_2>
+    <_3 kind="Record" offset="708" length="206">
+      <TextKey kind="Leaf" offset="708" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="712" length="26" type="WString { }">D\nterminal</TextA>
+      <TextB kind="Leaf" offset="738" length="22" type="WString { }">D-termina</TextB>
+      <TextC kind="Leaf" offset="760" length="154" type="WString { }">A Restricted Area where you need to have permission of Dats Center to enter</TextC>
+    </_3>
+    <_4 kind="Record" offset="914" length="146">
+      <TextKey kind="Leaf" offset="914" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <TextA kind="Leaf" offset="918" length="30" type="WString { }">Glacier\nArea</TextA>
+      <TextB kind="Leaf" offset="948" length="28" type="WString { }">Glacier Area</TextB>
+      <TextC kind="Leaf" offset="976" length="84" type="WString { }">Unknown Land where everything is frozen.</TextC>
+    </_4>
+    <_5 kind="Record" offset="1060" length="128">
+      <TextKey kind="Leaf" offset="1060" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextA kind="Leaf" offset="1064" length="28" type="WString { }">File\nIsland</TextA>
+      <TextB kind="Leaf" offset="1092" length="26" type="WString { }">File Island</TextB>
+      <TextC kind="Leaf" offset="1118" length="70" type="WString { }">Mystery Island consists of data. </TextC>
+    </_5>
+    <_6 kind="Record" offset="1188" length="176">
+      <TextKey kind="Leaf" offset="1188" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <TextA kind="Leaf" offset="1192" length="38" type="WString { }">Server\nContinent</TextA>
+      <TextB kind="Leaf" offset="1230" length="36" type="WString { }">Server Continent</TextB>
+      <TextC kind="Leaf" offset="1266" length="98" type="WString { }">Gigantic continent composed of vast server data</TextC>
+    </_6>
+    <_7 kind="Record" offset="1364" length="170">
+      <TextKey kind="Leaf" offset="1364" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <TextA kind="Leaf" offset="1368" length="42" type="WString { }">New\nDigital\nWorld</TextA>
+      <TextB kind="Leaf" offset="1410" length="38" type="WString { }">New Digital World</TextB>
+      <TextC kind="Leaf" offset="1448" length="86" type="WString { }">A new digital world created by Yggdrasil.</TextC>
+    </_7>
+    <_8 kind="Record" offset="1534" length="144">
+      <TextKey kind="Leaf" offset="1534" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <TextA kind="Leaf" offset="1538" length="20" type="WString { }">XrosWars</TextA>
+      <TextB kind="Leaf" offset="1558" length="20" type="WString { }">XrosWars</TextB>
+      <TextC kind="Leaf" offset="1578" length="100" type="WString { }">A Digital worlds strewn with data of code crowns</TextC>
+    </_8>
+    <_9 kind="Record" offset="1678" length="82">
+      <TextKey kind="Leaf" offset="1678" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <TextA kind="Leaf" offset="1682" length="20" type="WString { }">GM\nROOM</TextA>
+      <TextB kind="Leaf" offset="1702" length="18" type="WString { }">GM ROOM</TextB>
+      <TextC kind="Leaf" offset="1720" length="40" type="WString { }">GM's private space</TextC>
+    </_9>
+    <_10 kind="Record" offset="1760" length="200">
+      <TextKey kind="Leaf" offset="1760" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <TextA kind="Leaf" offset="1764" length="38" type="WString { }">Four holy\nbeasts</TextA>
+      <TextB kind="Leaf" offset="1802" length="52" type="WString { }">Four holy beasts dungeon</TextB>
+      <TextC kind="Leaf" offset="1854" length="106" type="WString { }">The site of rageful Four holy beasts for real world</TextC>
+    </_10>
+    <_11 kind="Record" offset="1960" length="222">
+      <TextKey kind="Leaf" offset="1960" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <TextA kind="Leaf" offset="1964" length="38" type="WString { }">Shadow\nLabyrinth</TextA>
+      <TextB kind="Leaf" offset="2002" length="36" type="WString { }">Shadow Labyrinth</TextB>
+      <TextC kind="Leaf" offset="2038" length="144" type="WString { }">A place where the data is distorted by the effect of Ocean of Darkness</TextC>
+    </_11>
+    <_12 kind="Record" offset="2182" length="196">
+      <TextKey kind="Leaf" offset="2182" length="4" type="Scalar { Kind = U32 }" value="14" />
+      <TextA kind="Leaf" offset="2186" length="30" type="WString { }">Tokyo\nOdaiba</TextA>
+      <TextB kind="Leaf" offset="2216" length="28" type="WString { }">Tokyo-Odaiba</TextB>
+      <TextC kind="Leaf" offset="2244" length="134" type="WString { }">Place where the chosen children used to live, and still live now.</TextC>
+    </_12>
+    <_13 kind="Record" offset="2378" length="180">
+      <TextKey kind="Leaf" offset="2378" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <TextA kind="Leaf" offset="2382" length="28" type="WString { }">Duel\nSphere</TextA>
+      <TextB kind="Leaf" offset="2410" length="26" type="WString { }">Duel Sphere</TextB>
+      <TextC kind="Leaf" offset="2436" length="122" type="WString { }">A place of fierce battle with the Monsters for world peace.</TextC>
+    </_13>
+    <_14 kind="Record" offset="2558" length="142">
+      <TextKey kind="Leaf" offset="2558" length="4" type="Scalar { Kind = U32 }" value="16" />
+      <TextA kind="Leaf" offset="2562" length="20" type="WString { }">Shinjuku</TextA>
+      <TextB kind="Leaf" offset="2582" length="20" type="WString { }">Shinjuku</TextB>
+      <TextC kind="Leaf" offset="2602" length="98" type="WString { }">A bustling city with strange realize phenomenon</TextC>
+    </_14>
+    <_15 kind="Record" offset="2700" length="162">
+      <TextKey kind="Leaf" offset="2700" length="4" type="Scalar { Kind = U32 }" value="17" />
+      <TextA kind="Leaf" offset="2704" length="28" type="WString { }">Digital Area</TextA>
+      <TextB kind="Leaf" offset="2732" length="28" type="WString { }">Digital Area</TextB>
+      <TextC kind="Leaf" offset="2760" length="102" type="WString { }">Another Digital World connected through Shinjuku.</TextC>
+    </_15>
+    <_16 kind="Record" offset="2862" length="166">
+      <TextKey kind="Leaf" offset="2862" length="4" type="Scalar { Kind = U32 }" value="18" />
+      <TextA kind="Leaf" offset="2866" length="34" type="WString { }">Spiral Mountain</TextA>
+      <TextB kind="Leaf" offset="2900" length="34" type="WString { }">Spiral Mountain</TextB>
+      <TextC kind="Leaf" offset="2934" length="94" type="WString { }">The Digital World ruined by the Dark Masters.</TextC>
+    </_16>
+    <_17 kind="Record" offset="3028" length="176">
+      <TextKey kind="Leaf" offset="3028" length="4" type="Scalar { Kind = U32 }" value="19" />
+      <TextA kind="Leaf" offset="3032" length="44" type="WString { }">Shinjuku\n(D-Reaper)</TextA>
+      <TextB kind="Leaf" offset="3076" length="42" type="WString { }">Shinjuku (D-Reaper)</TextB>
+      <TextC kind="Leaf" offset="3118" length="86" type="WString { }">A bustling city with a strange phenomenon</TextC>
+    </_17>
+    <_18 kind="Record" offset="3204" length="172">
+      <TextKey kind="Leaf" offset="3204" length="4" type="Scalar { Kind = U32 }" value="20" />
+      <TextA kind="Leaf" offset="3208" length="30" type="WString { }">Digital World</TextA>
+      <TextB kind="Leaf" offset="3238" length="30" type="WString { }">Digital World</TextB>
+      <TextC kind="Leaf" offset="3268" length="108" type="WString { }">It is the Digital World connected to the Real World.</TextC>
+    </_18>
+    <_19 kind="Record" offset="3376" length="184">
+      <TextKey kind="Leaf" offset="3376" length="4" type="Scalar { Kind = U32 }" value="21" />
+      <TextA kind="Leaf" offset="3380" length="36" type="WString { }">Digimon Frontier</TextA>
+      <TextB kind="Leaf" offset="3416" length="36" type="WString { }">Digimon Frontier</TextB>
+      <TextC kind="Leaf" offset="3452" length="108" type="WString { }">It is the Digital World connected to the Real World.</TextC>
+    </_19>
+  </Entries>
+</WorldMapInfo_Str>

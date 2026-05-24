@@ -1,0 +1,1433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AreaMapInfo_Str schema="AreaMapInfo_Str.struct" bin="AreaMapInfo_Str.bin" byteLength="48318">
+  <Entries kind="Section" offset="0" length="48318">
+    <_0 kind="Record" offset="4" length="258">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="8" length="24" type="WString { }">D-terminal</TextA>
+      <TextB kind="Leaf" offset="32" length="24" type="WString { }">D-terminal</TextB>
+      <TextC kind="Leaf" offset="56" length="206" type="WString { }">A large-scale dimensional terminal connected to the Digital World Only official Dats Agents can enter</TextC>
+    </_0>
+    <_1 kind="Record" offset="262" length="210">
+      <TextKey kind="Leaf" offset="262" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="266" length="28" type="WString { }">Dats\nCenter</TextA>
+      <TextB kind="Leaf" offset="294" length="26" type="WString { }">Dats Center</TextB>
+      <TextC kind="Leaf" offset="320" length="152" type="WString { }">An agency founded to deal with strange activities from the Digital World. </TextC>
+    </_1>
+    <_2 kind="Record" offset="472" length="156">
+      <TextKey kind="Leaf" offset="472" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="476" length="38" type="WString { }">Yggdrasill's Room</TextA>
+      <TextB kind="Leaf" offset="514" length="38" type="WString { }">Yggdrasill's Room</TextB>
+      <TextC kind="Leaf" offset="552" length="76" type="WString { }">The room where Yggdrasil is staying.</TextC>
+    </_2>
+    <_3 kind="Record" offset="628" length="80">
+      <TextKey kind="Leaf" offset="628" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <TextA kind="Leaf" offset="632" length="18" type="WString { }">GM ROOM</TextA>
+      <TextB kind="Leaf" offset="650" length="18" type="WString { }">GM ROOM</TextB>
+      <TextC kind="Leaf" offset="668" length="40" type="WString { }">GM's private space</TextC>
+    </_3>
+    <_4 kind="Record" offset="708" length="300">
+      <TextKey kind="Leaf" offset="708" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <TextA kind="Leaf" offset="712" length="34" type="WString { }">D\nterminal\nB1</TextA>
+      <TextB kind="Leaf" offset="746" length="46" type="WString { }">D-terminal-Dungeon-B1</TextB>
+      <TextC kind="Leaf" offset="792" length="216" type="WString { }">D-Terminal Dungeon area sealed by dimensional collapse. Dimensional collapse made this area very dangerous</TextC>
+    </_4>
+    <_5 kind="Record" offset="1008" length="312">
+      <TextKey kind="Leaf" offset="1008" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <TextA kind="Leaf" offset="1012" length="46" type="WString { }">D-terminal-Dungeon-B2</TextA>
+      <TextB kind="Leaf" offset="1058" length="46" type="WString { }">D-terminal-Dungeon-B2</TextB>
+      <TextC kind="Leaf" offset="1104" length="216" type="WString { }">D-Terminal Dungeon area sealed by dimensional collapse. Dimensional collapse made this area very dangerous</TextC>
+    </_5>
+    <_6 kind="Record" offset="1320" length="250">
+      <TextKey kind="Leaf" offset="1320" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <TextA kind="Leaf" offset="1324" length="76" type="WString { }">D-Terminal Underground Summon Square</TextA>
+      <TextB kind="Leaf" offset="1400" length="76" type="WString { }">D-Terminal Underground Summon Square</TextB>
+      <TextC kind="Leaf" offset="1476" length="94" type="WString { }">D-Terminal's space for summoning the monsters</TextC>
+    </_6>
+    <_7 kind="Record" offset="1570" length="120">
+      <TextKey kind="Leaf" offset="1570" length="4" type="Scalar { Kind = U32 }" value="14" />
+      <TextA kind="Leaf" offset="1574" length="36" type="WString { }">Mystic GM's Room</TextA>
+      <TextB kind="Leaf" offset="1610" length="36" type="WString { }">Mystic GM's Room</TextB>
+      <TextC kind="Leaf" offset="1646" length="44" type="WString { }">Mysterious GM's Room</TextC>
+    </_7>
+    <_8 kind="Record" offset="1690" length="494">
+      <TextKey kind="Leaf" offset="1690" length="4" type="Scalar { Kind = U32 }" value="16" />
+      <TextA kind="Leaf" offset="1694" length="66" type="WString { }">Village of the Beginning (Lost)</TextA>
+      <TextB kind="Leaf" offset="1760" length="66" type="WString { }">Village of the Beginning (Lost)</TextB>
+      <TextC kind="Leaf" offset="1826" length="358" type="WString { }">A hideout of evil beings created at the outer Digital World, which resembles village of the beginning. Apocalymon is planning to reach the real world using this place as a link.</TextC>
+    </_8>
+    <_9 kind="Record" offset="2184" length="200">
+      <TextKey kind="Leaf" offset="2184" length="4" type="Scalar { Kind = U32 }" value="17" />
+      <TextA kind="Leaf" offset="2188" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="2226" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="2264" length="120" type="WString { }">The Colosseum Stadium is a perfect stage for Digimon Arena</TextC>
+    </_9>
+    <_10 kind="Record" offset="2384" length="184">
+      <TextKey kind="Leaf" offset="2384" length="4" type="Scalar { Kind = U32 }" value="18" />
+      <TextA kind="Leaf" offset="2388" length="66" type="WString { }">Master's Match Dungeon 4th Room</TextA>
+      <TextB kind="Leaf" offset="2454" length="66" type="WString { }">Master's Match Dungeon 4th Room</TextB>
+      <TextC kind="Leaf" offset="2520" length="48" type="WString { }">Master's Match Dungeon</TextC>
+    </_10>
+    <_11 kind="Record" offset="2568" length="178">
+      <TextKey kind="Leaf" offset="2568" length="4" type="Scalar { Kind = U32 }" value="20" />
+      <TextA kind="Leaf" offset="2572" length="26" type="WString { }">Duel Sphere</TextA>
+      <TextB kind="Leaf" offset="2598" length="26" type="WString { }">Duel Sphere</TextB>
+      <TextC kind="Leaf" offset="2624" length="122" type="WString { }">a place of fierce battle with the Monsters for world peace.</TextC>
+    </_11>
+    <_12 kind="Record" offset="2746" length="140">
+      <TextKey kind="Leaf" offset="2746" length="4" type="Scalar { Kind = U32 }" value="21" />
+      <TextA kind="Leaf" offset="2750" length="34" type="WString { }">Base of Lucemon</TextA>
+      <TextB kind="Leaf" offset="2784" length="34" type="WString { }">Base of Lucemon</TextB>
+      <TextC kind="Leaf" offset="2818" length="68" type="WString { }">The Base where the Lucemon Stays</TextC>
+    </_12>
+    <_13 kind="Record" offset="2886" length="164">
+      <TextKey kind="Leaf" offset="2886" length="4" type="Scalar { Kind = U32 }" value="22" />
+      <TextA kind="Leaf" offset="2890" length="42" type="WString { }">Base of Beelzebumon</TextA>
+      <TextB kind="Leaf" offset="2932" length="42" type="WString { }">Base of Beelzebumon</TextB>
+      <TextC kind="Leaf" offset="2974" length="76" type="WString { }">The Base where the Beelzebumon Stays</TextC>
+    </_13>
+    <_14 kind="Record" offset="3050" length="146">
+      <TextKey kind="Leaf" offset="3050" length="4" type="Scalar { Kind = U32 }" value="23" />
+      <TextA kind="Leaf" offset="3054" length="36" type="WString { }">Base of Barbamon</TextA>
+      <TextB kind="Leaf" offset="3090" length="36" type="WString { }">Base of Barbamon</TextB>
+      <TextC kind="Leaf" offset="3126" length="70" type="WString { }">The Base where the Barbamon Stays</TextC>
+    </_14>
+    <_15 kind="Record" offset="3196" length="152">
+      <TextKey kind="Leaf" offset="3196" length="4" type="Scalar { Kind = U32 }" value="24" />
+      <TextA kind="Leaf" offset="3200" length="38" type="WString { }">Base of Lilithmon</TextA>
+      <TextB kind="Leaf" offset="3238" length="38" type="WString { }">Base of Lilithmon</TextB>
+      <TextC kind="Leaf" offset="3276" length="72" type="WString { }">The Base where the Lilithmon Stays</TextC>
+    </_15>
+    <_16 kind="Record" offset="3348" length="144">
+      <TextKey kind="Leaf" offset="3348" length="4" type="Scalar { Kind = U32 }" value="25" />
+      <TextA kind="Leaf" offset="3352" length="38" type="WString { }">Battle with Demon</TextA>
+      <TextB kind="Leaf" offset="3390" length="38" type="WString { }">Battle with Demon</TextB>
+      <TextC kind="Leaf" offset="3428" length="64" type="WString { }">The Base where the Demon Stays</TextC>
+    </_16>
+    <_17 kind="Record" offset="3492" length="168">
+      <TextKey kind="Leaf" offset="3492" length="4" type="Scalar { Kind = U32 }" value="26" />
+      <TextA kind="Leaf" offset="3496" length="46" type="WString { }">Battle with Belphemon</TextA>
+      <TextB kind="Leaf" offset="3542" length="46" type="WString { }">Battle with Belphemon</TextB>
+      <TextC kind="Leaf" offset="3588" length="72" type="WString { }">The Base where the Belphemon Stays</TextC>
+    </_17>
+    <_18 kind="Record" offset="3660" length="146">
+      <TextKey kind="Leaf" offset="3660" length="4" type="Scalar { Kind = U32 }" value="27" />
+      <TextA kind="Leaf" offset="3664" length="36" type="WString { }">Base of Leviamon</TextA>
+      <TextB kind="Leaf" offset="3700" length="36" type="WString { }">Base of Leviamon</TextB>
+      <TextC kind="Leaf" offset="3736" length="70" type="WString { }">The Base where the Leviamon Stays</TextC>
+    </_18>
+    <_19 kind="Record" offset="3806" length="178">
+      <TextKey kind="Leaf" offset="3806" length="4" type="Scalar { Kind = U32 }" value="50" />
+      <TextA kind="Leaf" offset="3810" length="58" type="WString { }">Gankoomon's Training Ground</TextA>
+      <TextB kind="Leaf" offset="3868" length="58" type="WString { }">Gankoomon's Training Ground</TextB>
+      <TextC kind="Leaf" offset="3926" length="58" type="WString { }">Gankoomon's Training Ground</TextC>
+    </_19>
+    <_20 kind="Record" offset="3984" length="112">
+      <TextKey kind="Leaf" offset="3984" length="4" type="Scalar { Kind = U32 }" value="51" />
+      <TextA kind="Leaf" offset="3988" length="36" type="WString { }">Guild Tournament</TextA>
+      <TextB kind="Leaf" offset="4024" length="36" type="WString { }">Guild Tournament</TextB>
+      <TextC kind="Leaf" offset="4060" length="36" type="WString { }">Guild Tournament</TextC>
+    </_20>
+    <_21 kind="Record" offset="4096" length="272">
+      <TextKey kind="Leaf" offset="4096" length="4" type="Scalar { Kind = U32 }" value="52" />
+      <TextA kind="Leaf" offset="4100" length="46" type="WString { }">Center of Upper floor</TextA>
+      <TextB kind="Leaf" offset="4146" length="46" type="WString { }">Center of Upper floor</TextB>
+      <TextC kind="Leaf" offset="4192" length="176" type="WString { }">It is the center of the Upper floor. If we go down more and more, what's at the end...</TextC>
+    </_21>
+    <_22 kind="Record" offset="4368" length="272">
+      <TextKey kind="Leaf" offset="4368" length="4" type="Scalar { Kind = U32 }" value="53" />
+      <TextA kind="Leaf" offset="4372" length="46" type="WString { }">Center of Lower floor</TextA>
+      <TextB kind="Leaf" offset="4418" length="46" type="WString { }">Center of Lower floor</TextB>
+      <TextC kind="Leaf" offset="4464" length="176" type="WString { }">It is the center of the Lower floor. If we go down more and more, what's at the end...</TextC>
+    </_22>
+    <_23 kind="Record" offset="4640" length="228">
+      <TextKey kind="Leaf" offset="4640" length="4" type="Scalar { Kind = U32 }" value="54" />
+      <TextA kind="Leaf" offset="4644" length="34" type="WString { }">Center of Abyss</TextA>
+      <TextB kind="Leaf" offset="4678" length="34" type="WString { }">Center of Abyss</TextB>
+      <TextC kind="Leaf" offset="4712" length="156" type="WString { }">It is the center of the abyss. We can feel the energy of strong magic power.</TextC>
+    </_23>
+    <_24 kind="Record" offset="4868" length="82">
+      <TextKey kind="Leaf" offset="4868" length="4" type="Scalar { Kind = U32 }" value="70" />
+      <TextA kind="Leaf" offset="4872" length="26" type="WString { }">Marketplace</TextA>
+      <TextB kind="Leaf" offset="4898" length="26" type="WString { }">Marketplace</TextB>
+      <TextC kind="Leaf" offset="4924" length="26" type="WString { }">Marketplace</TextC>
+    </_24>
+    <_25 kind="Record" offset="4950" length="82">
+      <TextKey kind="Leaf" offset="4950" length="4" type="Scalar { Kind = U32 }" value="71" />
+      <TextA kind="Leaf" offset="4954" length="26" type="WString { }">Marketplace</TextA>
+      <TextB kind="Leaf" offset="4980" length="26" type="WString { }">Marketplace</TextB>
+      <TextC kind="Leaf" offset="5006" length="26" type="WString { }">Marketplace</TextC>
+    </_25>
+    <_26 kind="Record" offset="5032" length="70">
+      <TextKey kind="Leaf" offset="5032" length="4" type="Scalar { Kind = U32 }" value="72" />
+      <TextA kind="Leaf" offset="5036" length="22" type="WString { }">Neverland</TextA>
+      <TextB kind="Leaf" offset="5058" length="22" type="WString { }">Neverland</TextB>
+      <TextC kind="Leaf" offset="5080" length="22" type="WString { }">Neverland</TextC>
+    </_26>
+    <_27 kind="Record" offset="5102" length="300">
+      <TextKey kind="Leaf" offset="5102" length="4" type="Scalar { Kind = U32 }" value="87" />
+      <TextA kind="Leaf" offset="5106" length="42" type="WString { }">Datamon Maze (Hard)</TextA>
+      <TextB kind="Leaf" offset="5148" length="42" type="WString { }">Datamon Maze (Hard)</TextB>
+      <TextC kind="Leaf" offset="5190" length="212" type="WString { }">It is a base designed by Datamon who was defeated in a battle with Etemon and became Etemon's underling.</TextC>
+    </_27>
+    <_28 kind="Record" offset="5402" length="162">
+      <TextKey kind="Leaf" offset="5402" length="4" type="Scalar { Kind = U32 }" value="88" />
+      <TextA kind="Leaf" offset="5406" length="32" type="WString { }">Rainbow Bridge</TextA>
+      <TextB kind="Leaf" offset="5438" length="32" type="WString { }">Rainbow Bridge</TextB>
+      <TextC kind="Leaf" offset="5470" length="94" type="WString { }">A bridge that connects Minato City and Odaiba</TextC>
+    </_28>
+    <_29 kind="Record" offset="5564" length="188">
+      <TextKey kind="Leaf" offset="5564" length="4" type="Scalar { Kind = U32 }" value="89" />
+      <TextA kind="Leaf" offset="5568" length="34" type="WString { }">Ballroom of Sin</TextA>
+      <TextB kind="Leaf" offset="5602" length="34" type="WString { }">Ballroom of Sin</TextB>
+      <TextC kind="Leaf" offset="5636" length="116" type="WString { }">The area where Digimons gathered to break the excitement</TextC>
+    </_29>
+    <_30 kind="Record" offset="5752" length="110">
+      <TextKey kind="Leaf" offset="5752" length="4" type="Scalar { Kind = U32 }" value="90" />
+      <TextA kind="Leaf" offset="5756" length="28" type="WString { }">Santa's Room</TextA>
+      <TextB kind="Leaf" offset="5784" length="28" type="WString { }">Santa's Room</TextB>
+      <TextC kind="Leaf" offset="5812" length="50" type="WString { }">mysterious Santa's room</TextC>
+    </_30>
+    <_31 kind="Record" offset="5862" length="86">
+      <TextKey kind="Leaf" offset="5862" length="4" type="Scalar { Kind = U32 }" value="91" />
+      <TextA kind="Leaf" offset="5866" length="20" type="WString { }">검은 토끼의 굴</TextA>
+      <TextB kind="Leaf" offset="5886" length="20" type="WString { }">검은 토끼의 굴</TextB>
+      <TextC kind="Leaf" offset="5906" length="42" type="WString { }">Black Rabbit's Hole</TextC>
+    </_31>
+    <_32 kind="Record" offset="5948" length="104">
+      <TextKey kind="Leaf" offset="5948" length="4" type="Scalar { Kind = U32 }" value="92" />
+      <TextA kind="Leaf" offset="5952" length="12" type="WString { }">Maze</TextA>
+      <TextB kind="Leaf" offset="5964" length="12" type="WString { }">Maze</TextB>
+      <TextC kind="Leaf" offset="5976" length="76" type="WString { }">Maze where Energy of Moon has fallen</TextC>
+    </_32>
+    <_33 kind="Record" offset="6052" length="52">
+      <TextKey kind="Leaf" offset="6052" length="4" type="Scalar { Kind = U32 }" value="93" />
+      <TextA kind="Leaf" offset="6056" length="16" type="WString { }">흉포한 바다</TextA>
+      <TextB kind="Leaf" offset="6072" length="16" type="WString { }">흉포한 바다</TextB>
+      <TextC kind="Leaf" offset="6088" length="16" type="WString { }">흉포한 바다</TextC>
+    </_33>
+    <_34 kind="Record" offset="6104" length="82">
+      <TextKey kind="Leaf" offset="6104" length="4" type="Scalar { Kind = U32 }" value="94" />
+      <TextA kind="Leaf" offset="6108" length="26" type="WString { }">모험을 떠나자!_진화</TextA>
+      <TextB kind="Leaf" offset="6134" length="26" type="WString { }">모험을 떠나자!_진화</TextB>
+      <TextC kind="Leaf" offset="6160" length="26" type="WString { }">모험을 떠나자!_진화</TextC>
+    </_34>
+    <_35 kind="Record" offset="6186" length="312">
+      <TextKey kind="Leaf" offset="6186" length="4" type="Scalar { Kind = U32 }" value="95" />
+      <TextA kind="Leaf" offset="6190" length="46" type="WString { }">D-terminal-Dungeon-B3</TextA>
+      <TextB kind="Leaf" offset="6236" length="46" type="WString { }">D-terminal-Dungeon-B3</TextB>
+      <TextC kind="Leaf" offset="6282" length="216" type="WString { }">D-Terminal Dungeon area sealed by dimensional collapse. Dimensional collapse made this area very dangerous</TextC>
+    </_35>
+    <_36 kind="Record" offset="6498" length="292">
+      <TextKey kind="Leaf" offset="6498" length="4" type="Scalar { Kind = U32 }" value="96" />
+      <TextA kind="Leaf" offset="6502" length="38" type="WString { }">Small Forest Park</TextA>
+      <TextB kind="Leaf" offset="6540" length="38" type="WString { }">Small Forest Park</TextB>
+      <TextC kind="Leaf" offset="6578" length="212" type="WString { }">This was once a peaceful park. Now, the Digimon that have come into the Real World threaten its security</TextC>
+    </_36>
+    <_37 kind="Record" offset="6790" length="188">
+      <TextKey kind="Leaf" offset="6790" length="4" type="Scalar { Kind = U32 }" value="97" />
+      <TextA kind="Leaf" offset="6794" length="40" type="WString { }">Small Forest trail</TextA>
+      <TextB kind="Leaf" offset="6834" length="40" type="WString { }">Small Forest trail</TextB>
+      <TextC kind="Leaf" offset="6874" length="104" type="WString { }">A troubled area due to frequently emerging Digimon</TextC>
+    </_37>
+    <_38 kind="Record" offset="6978" length="284">
+      <TextKey kind="Leaf" offset="6978" length="4" type="Scalar { Kind = U32 }" value="98" />
+      <TextA kind="Leaf" offset="6982" length="34" type="WString { }">Wood bench Park</TextA>
+      <TextB kind="Leaf" offset="7016" length="34" type="WString { }">Wood bench Park</TextB>
+      <TextC kind="Leaf" offset="7050" length="212" type="WString { }">This was once a peaceful park. Now, the Digimon that have come into the Real World threaten its security</TextC>
+    </_38>
+    <_39 kind="Record" offset="7262" length="180">
+      <TextKey kind="Leaf" offset="7262" length="4" type="Scalar { Kind = U32 }" value="99" />
+      <TextA kind="Leaf" offset="7266" length="36" type="WString { }">Wood bench trail</TextA>
+      <TextB kind="Leaf" offset="7302" length="36" type="WString { }">Wood bench trail</TextB>
+      <TextC kind="Leaf" offset="7338" length="104" type="WString { }">A troubled area due to frequently emerging Digimon</TextC>
+    </_39>
+    <_40 kind="Record" offset="7442" length="300">
+      <TextKey kind="Leaf" offset="7442" length="4" type="Scalar { Kind = U32 }" value="100" />
+      <TextA kind="Leaf" offset="7446" length="36" type="WString { }">Yokohama Village</TextA>
+      <TextB kind="Leaf" offset="7482" length="36" type="WString { }">Yokohama Village</TextB>
+      <TextC kind="Leaf" offset="7518" length="224" type="WString { }">Due to the frequent invasion of Digimon, the Dats Center classified this area as a specially monitored region.</TextC>
+    </_40>
+    <_41 kind="Record" offset="7742" length="292">
+      <TextKey kind="Leaf" offset="7742" length="4" type="Scalar { Kind = U32 }" value="101" />
+      <TextA kind="Leaf" offset="7746" length="38" type="WString { }">Small Forest Park</TextA>
+      <TextB kind="Leaf" offset="7784" length="38" type="WString { }">Small Forest Park</TextB>
+      <TextC kind="Leaf" offset="7822" length="212" type="WString { }">This was once a peaceful park. Now, the Digimon that have come into the Real World threaten its security</TextC>
+    </_41>
+    <_42 kind="Record" offset="8034" length="188">
+      <TextKey kind="Leaf" offset="8034" length="4" type="Scalar { Kind = U32 }" value="102" />
+      <TextA kind="Leaf" offset="8038" length="40" type="WString { }">Small Forest trail</TextA>
+      <TextB kind="Leaf" offset="8078" length="40" type="WString { }">Small Forest trail</TextB>
+      <TextC kind="Leaf" offset="8118" length="104" type="WString { }">A troubled area due to frequently emerging Digimon</TextC>
+    </_42>
+    <_43 kind="Record" offset="8222" length="284">
+      <TextKey kind="Leaf" offset="8222" length="4" type="Scalar { Kind = U32 }" value="103" />
+      <TextA kind="Leaf" offset="8226" length="34" type="WString { }">Wood bench Park</TextA>
+      <TextB kind="Leaf" offset="8260" length="34" type="WString { }">Wood bench Park</TextB>
+      <TextC kind="Leaf" offset="8294" length="212" type="WString { }">This was once a peaceful park. Now, the Digimon that have come into the Real World threaten its security</TextC>
+    </_43>
+    <_44 kind="Record" offset="8506" length="180">
+      <TextKey kind="Leaf" offset="8506" length="4" type="Scalar { Kind = U32 }" value="104" />
+      <TextA kind="Leaf" offset="8510" length="36" type="WString { }">Wood bench trail</TextA>
+      <TextB kind="Leaf" offset="8546" length="36" type="WString { }">Wood bench trail</TextB>
+      <TextC kind="Leaf" offset="8582" length="104" type="WString { }">A troubled area due to frequently emerging Digimon</TextC>
+    </_44>
+    <_45 kind="Record" offset="8686" length="302">
+      <TextKey kind="Leaf" offset="8686" length="4" type="Scalar { Kind = U32 }" value="105" />
+      <TextA kind="Leaf" offset="8690" length="38" type="WString { }">Yokohama\nVillage</TextA>
+      <TextB kind="Leaf" offset="8728" length="36" type="WString { }">Yokohama Village</TextB>
+      <TextC kind="Leaf" offset="8764" length="224" type="WString { }">Due to the frequent invasion of Digimon, the Dats Center classified this area as a specially monitored region.</TextC>
+    </_45>
+    <_46 kind="Record" offset="8988" length="314">
+      <TextKey kind="Leaf" offset="8988" length="4" type="Scalar { Kind = U32 }" value="110" />
+      <TextA kind="Leaf" offset="8992" length="30" type="WString { }">East\nVillage</TextA>
+      <TextB kind="Leaf" offset="9022" length="46" type="WString { }">Yokohama East Village</TextB>
+      <TextC kind="Leaf" offset="9068" length="234" type="WString { }">A village close to the Oil Refinery area. Not an appropriate place to live because of the regional characteristics.</TextC>
+    </_46>
+    <_47 kind="Record" offset="9302" length="318">
+      <TextKey kind="Leaf" offset="9302" length="4" type="Scalar { Kind = U32 }" value="111" />
+      <TextA kind="Leaf" offset="9306" length="36" type="WString { }">Oil\nrefinery\n1</TextA>
+      <TextB kind="Leaf" offset="9342" length="32" type="WString { }">Oil refinery-1</TextB>
+      <TextC kind="Leaf" offset="9374" length="246" type="WString { }">This place is the target of digimons that want to take revenge on people because there are a lot of dangerous substances.</TextC>
+    </_47>
+    <_48 kind="Record" offset="9620" length="318">
+      <TextKey kind="Leaf" offset="9620" length="4" type="Scalar { Kind = U32 }" value="112" />
+      <TextA kind="Leaf" offset="9624" length="36" type="WString { }">Oil\nrefinery\n2</TextA>
+      <TextB kind="Leaf" offset="9660" length="32" type="WString { }">Oil refinery-2</TextB>
+      <TextC kind="Leaf" offset="9692" length="246" type="WString { }">This place is the target of digimons that want to take revenge on people because there are a lot of dangerous substances.</TextC>
+    </_48>
+    <_49 kind="Record" offset="9938" length="318">
+      <TextKey kind="Leaf" offset="9938" length="4" type="Scalar { Kind = U32 }" value="113" />
+      <TextA kind="Leaf" offset="9942" length="36" type="WString { }">Oil\nrefinery\n3</TextA>
+      <TextB kind="Leaf" offset="9978" length="32" type="WString { }">Oil refinery-3</TextB>
+      <TextC kind="Leaf" offset="10010" length="246" type="WString { }">This place is the target of digimons that want to take revenge on people because there are a lot of dangerous substances.</TextC>
+    </_49>
+    <_50 kind="Record" offset="10256" length="266">
+      <TextKey kind="Leaf" offset="10256" length="4" type="Scalar { Kind = U32 }" value="114" />
+      <TextA kind="Leaf" offset="10260" length="38" type="WString { }">Small Forest Park</TextA>
+      <TextB kind="Leaf" offset="10298" length="38" type="WString { }">Small Forest Park</TextB>
+      <TextC kind="Leaf" offset="10336" length="186" type="WString { }">The forgotten Small Forest Park area was discovered by Yukidarumon, who is now guiding you.</TextC>
+    </_50>
+    <_51 kind="Record" offset="10522" length="272">
+      <TextKey kind="Leaf" offset="10522" length="4" type="Scalar { Kind = U32 }" value="115" />
+      <TextA kind="Leaf" offset="10526" length="40" type="WString { }">Small Forest trail</TextA>
+      <TextB kind="Leaf" offset="10566" length="40" type="WString { }">Small Forest trail</TextB>
+      <TextC kind="Leaf" offset="10606" length="188" type="WString { }">The forgotten Small Forest Trail area was discovered by Yukidarumon, who is now guiding you.</TextC>
+    </_51>
+    <_52 kind="Record" offset="10794" length="266">
+      <TextKey kind="Leaf" offset="10794" length="4" type="Scalar { Kind = U32 }" value="116" />
+      <TextA kind="Leaf" offset="10798" length="38" type="WString { }">Small Forest Park</TextA>
+      <TextB kind="Leaf" offset="10836" length="38" type="WString { }">Small Forest Park</TextB>
+      <TextC kind="Leaf" offset="10874" length="186" type="WString { }">The forgotten Small Forest Park area was discovered by Yukidarumon, who is now guiding you.</TextC>
+    </_52>
+    <_53 kind="Record" offset="11060" length="168">
+      <TextKey kind="Leaf" offset="11060" length="4" type="Scalar { Kind = U32 }" value="200" />
+      <TextA kind="Leaf" offset="11064" length="26" type="WString { }">CampingSite</TextA>
+      <TextB kind="Leaf" offset="11090" length="28" type="WString { }">Camping Site</TextB>
+      <TextC kind="Leaf" offset="11118" length="110" type="WString { }">Place where the chosen children went to Digital World</TextC>
+    </_53>
+    <_54 kind="Record" offset="11228" length="184">
+      <TextKey kind="Leaf" offset="11228" length="4" type="Scalar { Kind = U32 }" value="201" />
+      <TextA kind="Leaf" offset="11232" length="38" type="WString { }">Valley\nof\nLight</TextA>
+      <TextB kind="Leaf" offset="11270" length="34" type="WString { }">Valley of Light</TextB>
+      <TextC kind="Leaf" offset="11304" length="108" type="WString { }">Place where the chosen children lived four years ago</TextC>
+    </_54>
+    <_55 kind="Record" offset="11412" length="120">
+      <TextKey kind="Leaf" offset="11412" length="4" type="Scalar { Kind = U32 }" value="202" />
+      <TextA kind="Leaf" offset="11416" length="18" type="WString { }">Shibuya</TextA>
+      <TextB kind="Leaf" offset="11434" length="18" type="WString { }">Shibuya</TextB>
+      <TextC kind="Leaf" offset="11452" length="80" type="WString { }">Commercial district representing Tokyo</TextC>
+    </_55>
+    <_56 kind="Record" offset="11532" length="132">
+      <TextKey kind="Leaf" offset="11532" length="4" type="Scalar { Kind = U32 }" value="203" />
+      <TextA kind="Leaf" offset="11536" length="28" type="WString { }">Tokyo\nTower</TextA>
+      <TextB kind="Leaf" offset="11564" length="26" type="WString { }">Tokyo-Tower</TextB>
+      <TextC kind="Leaf" offset="11590" length="74" type="WString { }">Tourist attraction sybolizing Tokyo</TextC>
+    </_56>
+    <_57 kind="Record" offset="11664" length="214">
+      <TextKey kind="Leaf" offset="11664" length="4" type="Scalar { Kind = U32 }" value="204" />
+      <TextA kind="Leaf" offset="11668" length="54" type="WString { }">Tokyo\nTower\nObservatory</TextA>
+      <TextB kind="Leaf" offset="11722" length="50" type="WString { }">Tokyo-Tower Observatory</TextB>
+      <TextC kind="Leaf" offset="11772" length="106" type="WString { }">Tourist attraction where you can see downtown Tokyo</TextC>
+    </_57>
+    <_58 kind="Record" offset="11878" length="250">
+      <TextKey kind="Leaf" offset="11878" length="4" type="Scalar { Kind = U32 }" value="205" />
+      <TextA kind="Leaf" offset="11882" length="70" type="WString { }">Tokyo-Tower Observatory (Dungeon)</TextA>
+      <TextB kind="Leaf" offset="11952" length="70" type="WString { }">Tokyo-Tower Observatory (Dungeon)</TextB>
+      <TextC kind="Leaf" offset="12022" length="106" type="WString { }">Tourist attraction where you can see downtown Tokyo</TextC>
+    </_58>
+    <_59 kind="Record" offset="12128" length="148">
+      <TextKey kind="Leaf" offset="12128" length="4" type="Scalar { Kind = U32 }" value="206" />
+      <TextA kind="Leaf" offset="12132" length="28" type="WString { }">Minato\nCity</TextA>
+      <TextB kind="Leaf" offset="12160" length="26" type="WString { }">Minato City</TextB>
+      <TextC kind="Leaf" offset="12186" length="90" type="WString { }">The current address of the Chosen Children.</TextC>
+    </_59>
+    <_60 kind="Record" offset="12276" length="374">
+      <TextKey kind="Leaf" offset="12276" length="4" type="Scalar { Kind = U32 }" value="207" />
+      <TextA kind="Leaf" offset="12280" length="22" type="WString { }">Big Sight</TextA>
+      <TextB kind="Leaf" offset="12302" length="22" type="WString { }">Big Sight</TextB>
+      <TextC kind="Leaf" offset="12324" length="326" type="WString { }">The place is a convention and exhibition center officially known as Tokyo International Exhibition Center, but it became more popular by the name of 'Big Sight'.</TextC>
+    </_60>
+    <_61 kind="Record" offset="12650" length="248">
+      <TextKey kind="Leaf" offset="12650" length="4" type="Scalar { Kind = U32 }" value="208" />
+      <TextA kind="Leaf" offset="12654" length="16" type="WString { }">Odaiba</TextA>
+      <TextB kind="Leaf" offset="12670" length="16" type="WString { }">Odaiba</TextB>
+      <TextC kind="Leaf" offset="12686" length="212" type="WString { }">A futuristic architecture on a man made island. Fuji TV Station is placed there as one of the landmarks.</TextC>
+    </_61>
+    <_62 kind="Record" offset="12898" length="150">
+      <TextKey kind="Leaf" offset="12898" length="4" type="Scalar { Kind = U32 }" value="209" />
+      <TextA kind="Leaf" offset="12902" length="36" type="WString { }">Fuji TV\nRooftop</TextA>
+      <TextB kind="Leaf" offset="12938" length="34" type="WString { }">Fuji TV Rooftop</TextB>
+      <TextC kind="Leaf" offset="12972" length="76" type="WString { }">Top of the Fuji TV Station building.</TextC>
+    </_62>
+    <_63 kind="Record" offset="13048" length="236">
+      <TextKey kind="Leaf" offset="13048" length="4" type="Scalar { Kind = U32 }" value="210" />
+      <TextA kind="Leaf" offset="13052" length="52" type="WString { }">Fuji TV Rooftop(Dungeon)</TextA>
+      <TextB kind="Leaf" offset="13104" length="52" type="WString { }">Fuji TV Rooftop(Dungeon)</TextB>
+      <TextC kind="Leaf" offset="13156" length="128" type="WString { }">Fuji Television Network based in Odaiba, Minato, Tokyo, Japan.</TextC>
+    </_63>
+    <_64 kind="Record" offset="13284" length="210">
+      <TextKey kind="Leaf" offset="13284" length="4" type="Scalar { Kind = U32 }" value="211" />
+      <TextA kind="Leaf" offset="13288" length="34" type="WString { }">Venomous Vortex</TextA>
+      <TextB kind="Leaf" offset="13322" length="52" type="WString { }">Venomous Vortex(Dungeon)</TextB>
+      <TextC kind="Leaf" offset="13374" length="120" type="WString { }">Myotismon has resurrected as VenomMyotismon in this place.</TextC>
+    </_64>
+    <_65 kind="Record" offset="13494" length="162">
+      <TextKey kind="Leaf" offset="13494" length="4" type="Scalar { Kind = U32 }" value="212" />
+      <TextA kind="Leaf" offset="13498" length="32" type="WString { }">Rainbow Bridge</TextA>
+      <TextB kind="Leaf" offset="13530" length="32" type="WString { }">Rainbow Bridge</TextB>
+      <TextC kind="Leaf" offset="13562" length="94" type="WString { }">A bridge that connects Minato City and Odaiba</TextC>
+    </_65>
+    <_66 kind="Record" offset="13656" length="258">
+      <TextKey kind="Leaf" offset="13656" length="4" type="Scalar { Kind = U32 }" value="213" />
+      <TextA kind="Leaf" offset="13660" length="74" type="WString { }">Tokyo-Tower Observatory (Dungeon-E)</TextA>
+      <TextB kind="Leaf" offset="13734" length="74" type="WString { }">Tokyo-Tower Observatory (Dungeon-E)</TextB>
+      <TextC kind="Leaf" offset="13808" length="106" type="WString { }">Tourist attraction where you can see downtown Tokyo</TextC>
+    </_66>
+    <_67 kind="Record" offset="13914" length="192">
+      <TextKey kind="Leaf" offset="13914" length="4" type="Scalar { Kind = U32 }" value="214" />
+      <TextA kind="Leaf" offset="13918" length="30" type="WString { }">Fuji TV(Easy)</TextA>
+      <TextB kind="Leaf" offset="13948" length="30" type="WString { }">Fuji TV(Easy)</TextB>
+      <TextC kind="Leaf" offset="13978" length="128" type="WString { }">Fuji Television Network based in Odaiba, Minato, Tokyo, Japan.</TextC>
+    </_67>
+    <_68 kind="Record" offset="14106" length="216">
+      <TextKey kind="Leaf" offset="14106" length="4" type="Scalar { Kind = U32 }" value="215" />
+      <TextA kind="Leaf" offset="14110" length="46" type="WString { }">Venomous Vortex(Easy)</TextA>
+      <TextB kind="Leaf" offset="14156" length="46" type="WString { }">Venomous Vortex(Easy)</TextB>
+      <TextC kind="Leaf" offset="14202" length="120" type="WString { }">Myotismon has resurrected as VenomMyotismon in this place.</TextC>
+    </_68>
+    <_69 kind="Record" offset="14322" length="238">
+      <TextKey kind="Leaf" offset="14322" length="4" type="Scalar { Kind = U32 }" value="250" />
+      <TextA kind="Leaf" offset="14326" length="58" type="WString { }">Shinjuku\nWestern area(Day)</TextA>
+      <TextB kind="Leaf" offset="14384" length="56" type="WString { }">Shinjuku Western area(Day)</TextB>
+      <TextC kind="Leaf" offset="14440" length="120" type="WString { }">The area where Shinjuku park and Resident Area is located.</TextC>
+    </_69>
+    <_70 kind="Record" offset="14560" length="248">
+      <TextKey kind="Leaf" offset="14560" length="4" type="Scalar { Kind = U32 }" value="251" />
+      <TextA kind="Leaf" offset="14564" length="52" type="WString { }">Shinjuku\nEast area(Day)</TextA>
+      <TextB kind="Leaf" offset="14616" length="50" type="WString { }">Shinjuku East area(Day)</TextB>
+      <TextC kind="Leaf" offset="14666" length="142" type="WString { }">The area where Tokyo Metropolitan Government and Downtown is located.</TextC>
+    </_70>
+    <_71 kind="Record" offset="14808" length="178">
+      <TextKey kind="Leaf" offset="14808" length="4" type="Scalar { Kind = U32 }" value="252" />
+      <TextA kind="Leaf" offset="14812" length="32" type="WString { }">Stadium [EASY]</TextA>
+      <TextB kind="Leaf" offset="14844" length="32" type="WString { }">Stadium [EASY]</TextB>
+      <TextC kind="Leaf" offset="14876" length="110" type="WString { }">The foggy stadium, Vajramon, is used as a final duel.</TextC>
+    </_71>
+    <_72 kind="Record" offset="14986" length="92">
+      <TextKey kind="Leaf" offset="14986" length="4" type="Scalar { Kind = U32 }" value="253" />
+      <TextA kind="Leaf" offset="14990" length="12" type="WString { }">Road</TextA>
+      <TextB kind="Leaf" offset="15002" length="12" type="WString { }">Road</TextB>
+      <TextC kind="Leaf" offset="15014" length="64" type="WString { }">Destroyed Road by Vikaralamon.</TextC>
+    </_72>
+    <_73 kind="Record" offset="15078" length="246">
+      <TextKey kind="Leaf" offset="15078" length="4" type="Scalar { Kind = U32 }" value="254" />
+      <TextA kind="Leaf" offset="15082" length="62" type="WString { }">Shinjuku\nWestern area(Night)</TextA>
+      <TextB kind="Leaf" offset="15144" length="60" type="WString { }">Shinjuku Western area(Night)</TextB>
+      <TextC kind="Leaf" offset="15204" length="120" type="WString { }">The area where Shinjuku park and Resident Area is located.</TextC>
+    </_73>
+    <_74 kind="Record" offset="15324" length="256">
+      <TextKey kind="Leaf" offset="15324" length="4" type="Scalar { Kind = U32 }" value="255" />
+      <TextA kind="Leaf" offset="15328" length="56" type="WString { }">Shinjuku\nEast area(Night)</TextA>
+      <TextB kind="Leaf" offset="15384" length="54" type="WString { }">Shinjuku East area(Night)</TextB>
+      <TextC kind="Leaf" offset="15438" length="142" type="WString { }">The area where Tokyo Metropolitan Government and Downtown is located.</TextC>
+    </_74>
+    <_75 kind="Record" offset="15580" length="186">
+      <TextKey kind="Leaf" offset="15580" length="4" type="Scalar { Kind = U32 }" value="256" />
+      <TextA kind="Leaf" offset="15584" length="36" type="WString { }">Stadium [NORMAL]</TextA>
+      <TextB kind="Leaf" offset="15620" length="36" type="WString { }">Stadium [NORMAL]</TextB>
+      <TextC kind="Leaf" offset="15656" length="110" type="WString { }">The foggy stadium, Vajramon, is used as a final duel.</TextC>
+    </_75>
+    <_76 kind="Record" offset="15766" length="132">
+      <TextKey kind="Leaf" offset="15766" length="4" type="Scalar { Kind = U32 }" value="257" />
+      <TextA kind="Leaf" offset="15770" length="26" type="WString { }">Road [EASY]</TextA>
+      <TextB kind="Leaf" offset="15796" length="26" type="WString { }">Road [EASY]</TextB>
+      <TextC kind="Leaf" offset="15822" length="76" type="WString { }">The road that Vikaralamon destroyed.</TextC>
+    </_76>
+    <_77 kind="Record" offset="15898" length="212">
+      <TextKey kind="Leaf" offset="15898" length="4" type="Scalar { Kind = U32 }" value="260" />
+      <TextA kind="Leaf" offset="15902" length="50" type="WString { }">West Shinjuku(D-Reaper)</TextA>
+      <TextB kind="Leaf" offset="15952" length="50" type="WString { }">West Shinjuku(D-Reaper)</TextB>
+      <TextC kind="Leaf" offset="16002" length="108" type="WString { }">Western Shinjuku(D-Reaper) area invaded by D-Reaper.</TextC>
+    </_77>
+    <_78 kind="Record" offset="16110" length="212">
+      <TextKey kind="Leaf" offset="16110" length="4" type="Scalar { Kind = U32 }" value="261" />
+      <TextA kind="Leaf" offset="16114" length="50" type="WString { }">East Shinjuku(D-Reaper)</TextA>
+      <TextB kind="Leaf" offset="16164" length="50" type="WString { }">East Shinjuku(D-Reaper)</TextB>
+      <TextC kind="Leaf" offset="16214" length="108" type="WString { }">Eastern Shinjuku(D-Reaper) area invaded by D-Reaper.</TextC>
+    </_78>
+    <_79 kind="Record" offset="16322" length="152">
+      <TextKey kind="Leaf" offset="16322" length="4" type="Scalar { Kind = U32 }" value="262" />
+      <TextA kind="Leaf" offset="16326" length="16" type="WString { }">Office</TextA>
+      <TextB kind="Leaf" offset="16342" length="16" type="WString { }">Office</TextB>
+      <TextC kind="Leaf" offset="16358" length="116" type="WString { }">Office used by Wild Bunch and Tamers as their home base.</TextC>
+    </_79>
+    <_80 kind="Record" offset="16474" length="222">
+      <TextKey kind="Leaf" offset="16474" length="4" type="Scalar { Kind = U32 }" value="263" />
+      <TextA kind="Leaf" offset="16478" length="36" type="WString { }">Shinjuku Station</TextA>
+      <TextB kind="Leaf" offset="16514" length="36" type="WString { }">Shinjuku Station</TextB>
+      <TextC kind="Leaf" offset="16550" length="146" type="WString { }">Shinjuku Station where powerful D-Reaper has appeared and messed it up.</TextC>
+    </_80>
+    <_81 kind="Record" offset="16696" length="186">
+      <TextKey kind="Leaf" offset="16696" length="4" type="Scalar { Kind = U32 }" value="264" />
+      <TextA kind="Leaf" offset="16700" length="50" type="WString { }">Shinjuku Park(D-Reaper)</TextA>
+      <TextB kind="Leaf" offset="16750" length="50" type="WString { }">Shinjuku Park(D-Reaper)</TextB>
+      <TextC kind="Leaf" offset="16800" length="82" type="WString { }">Shinjuku Park contaminated by D-Reaper.</TextC>
+    </_81>
+    <_82 kind="Record" offset="16882" length="184">
+      <TextKey kind="Leaf" offset="16882" length="4" type="Scalar { Kind = U32 }" value="265" />
+      <TextA kind="Leaf" offset="16886" length="22" type="WString { }">Safe Area</TextA>
+      <TextB kind="Leaf" offset="16908" length="22" type="WString { }">Safe Area</TextB>
+      <TextC kind="Leaf" offset="16930" length="136" type="WString { }">Safe Area prepared by Wild Bunch before entering the D-Reaper Area</TextC>
+    </_82>
+    <_83 kind="Record" offset="17066" length="138">
+      <TextKey kind="Leaf" offset="17066" length="4" type="Scalar { Kind = U32 }" value="266" />
+      <TextA kind="Leaf" offset="17070" length="30" type="WString { }">D-Reaper Area</TextA>
+      <TextB kind="Leaf" offset="17100" length="30" type="WString { }">D-Reaper Area</TextB>
+      <TextC kind="Leaf" offset="17130" length="74" type="WString { }">Area that is dominated by D-Reaper.</TextC>
+    </_83>
+    <_84 kind="Record" offset="17204" length="214">
+      <TextKey kind="Leaf" offset="17204" length="4" type="Scalar { Kind = U32 }" value="267" />
+      <TextA kind="Leaf" offset="17208" length="30" type="WString { }">Shinjuku Park</TextA>
+      <TextB kind="Leaf" offset="17238" length="30" type="WString { }">Shinjuku Park</TextB>
+      <TextC kind="Leaf" offset="17268" length="150" type="WString { }">Shinjuku Park, which regained its true form after defeating the D-Reaper.</TextC>
+    </_84>
+    <_85 kind="Record" offset="17418" length="118">
+      <TextKey kind="Leaf" offset="17418" length="4" type="Scalar { Kind = U32 }" value="300" />
+      <TextA kind="Leaf" offset="17422" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="17460" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="17498" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_85>
+    <_86 kind="Record" offset="17536" length="118">
+      <TextKey kind="Leaf" offset="17536" length="4" type="Scalar { Kind = U32 }" value="301" />
+      <TextA kind="Leaf" offset="17540" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="17578" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="17616" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_86>
+    <_87 kind="Record" offset="17654" length="118">
+      <TextKey kind="Leaf" offset="17654" length="4" type="Scalar { Kind = U32 }" value="302" />
+      <TextA kind="Leaf" offset="17658" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="17696" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="17734" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_87>
+    <_88 kind="Record" offset="17772" length="118">
+      <TextKey kind="Leaf" offset="17772" length="4" type="Scalar { Kind = U32 }" value="303" />
+      <TextA kind="Leaf" offset="17776" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="17814" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="17852" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_88>
+    <_89 kind="Record" offset="17890" length="118">
+      <TextKey kind="Leaf" offset="17890" length="4" type="Scalar { Kind = U32 }" value="304" />
+      <TextA kind="Leaf" offset="17894" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="17932" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="17970" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_89>
+    <_90 kind="Record" offset="18008" length="118">
+      <TextKey kind="Leaf" offset="18008" length="4" type="Scalar { Kind = U32 }" value="305" />
+      <TextA kind="Leaf" offset="18012" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="18050" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="18088" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_90>
+    <_91 kind="Record" offset="18126" length="118">
+      <TextKey kind="Leaf" offset="18126" length="4" type="Scalar { Kind = U32 }" value="306" />
+      <TextA kind="Leaf" offset="18130" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="18168" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="18206" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_91>
+    <_92 kind="Record" offset="18244" length="118">
+      <TextKey kind="Leaf" offset="18244" length="4" type="Scalar { Kind = U32 }" value="307" />
+      <TextA kind="Leaf" offset="18248" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="18286" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="18324" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_92>
+    <_93 kind="Record" offset="18362" length="118">
+      <TextKey kind="Leaf" offset="18362" length="4" type="Scalar { Kind = U32 }" value="308" />
+      <TextA kind="Leaf" offset="18366" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="18404" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="18442" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_93>
+    <_94 kind="Record" offset="18480" length="118">
+      <TextKey kind="Leaf" offset="18480" length="4" type="Scalar { Kind = U32 }" value="309" />
+      <TextA kind="Leaf" offset="18484" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="18522" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="18560" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_94>
+    <_95 kind="Record" offset="18598" length="118">
+      <TextKey kind="Leaf" offset="18598" length="4" type="Scalar { Kind = U32 }" value="310" />
+      <TextA kind="Leaf" offset="18602" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="18640" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="18678" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_95>
+    <_96 kind="Record" offset="18716" length="118">
+      <TextKey kind="Leaf" offset="18716" length="4" type="Scalar { Kind = U32 }" value="311" />
+      <TextA kind="Leaf" offset="18720" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="18758" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="18796" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_96>
+    <_97 kind="Record" offset="18834" length="118">
+      <TextKey kind="Leaf" offset="18834" length="4" type="Scalar { Kind = U32 }" value="312" />
+      <TextA kind="Leaf" offset="18838" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="18876" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="18914" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_97>
+    <_98 kind="Record" offset="18952" length="118">
+      <TextKey kind="Leaf" offset="18952" length="4" type="Scalar { Kind = U32 }" value="313" />
+      <TextA kind="Leaf" offset="18956" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="18994" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="19032" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_98>
+    <_99 kind="Record" offset="19070" length="118">
+      <TextKey kind="Leaf" offset="19070" length="4" type="Scalar { Kind = U32 }" value="314" />
+      <TextA kind="Leaf" offset="19074" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="19112" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="19150" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_99>
+    <_100 kind="Record" offset="19188" length="118">
+      <TextKey kind="Leaf" offset="19188" length="4" type="Scalar { Kind = U32 }" value="315" />
+      <TextA kind="Leaf" offset="19192" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="19230" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="19268" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_100>
+    <_101 kind="Record" offset="19306" length="118">
+      <TextKey kind="Leaf" offset="19306" length="4" type="Scalar { Kind = U32 }" value="316" />
+      <TextA kind="Leaf" offset="19310" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="19348" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="19386" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_101>
+    <_102 kind="Record" offset="19424" length="118">
+      <TextKey kind="Leaf" offset="19424" length="4" type="Scalar { Kind = U32 }" value="317" />
+      <TextA kind="Leaf" offset="19428" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="19466" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="19504" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_102>
+    <_103 kind="Record" offset="19542" length="118">
+      <TextKey kind="Leaf" offset="19542" length="4" type="Scalar { Kind = U32 }" value="318" />
+      <TextA kind="Leaf" offset="19546" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="19584" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="19622" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_103>
+    <_104 kind="Record" offset="19660" length="118">
+      <TextKey kind="Leaf" offset="19660" length="4" type="Scalar { Kind = U32 }" value="319" />
+      <TextA kind="Leaf" offset="19664" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="19702" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="19740" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_104>
+    <_105 kind="Record" offset="19778" length="118">
+      <TextKey kind="Leaf" offset="19778" length="4" type="Scalar { Kind = U32 }" value="320" />
+      <TextA kind="Leaf" offset="19782" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="19820" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="19858" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_105>
+    <_106 kind="Record" offset="19896" length="118">
+      <TextKey kind="Leaf" offset="19896" length="4" type="Scalar { Kind = U32 }" value="321" />
+      <TextA kind="Leaf" offset="19900" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="19938" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="19976" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_106>
+    <_107 kind="Record" offset="20014" length="118">
+      <TextKey kind="Leaf" offset="20014" length="4" type="Scalar { Kind = U32 }" value="322" />
+      <TextA kind="Leaf" offset="20018" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="20056" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="20094" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_107>
+    <_108 kind="Record" offset="20132" length="118">
+      <TextKey kind="Leaf" offset="20132" length="4" type="Scalar { Kind = U32 }" value="323" />
+      <TextA kind="Leaf" offset="20136" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="20174" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="20212" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_108>
+    <_109 kind="Record" offset="20250" length="118">
+      <TextKey kind="Leaf" offset="20250" length="4" type="Scalar { Kind = U32 }" value="324" />
+      <TextA kind="Leaf" offset="20254" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="20292" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="20330" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_109>
+    <_110 kind="Record" offset="20368" length="118">
+      <TextKey kind="Leaf" offset="20368" length="4" type="Scalar { Kind = U32 }" value="325" />
+      <TextA kind="Leaf" offset="20372" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="20410" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="20448" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_110>
+    <_111 kind="Record" offset="20486" length="118">
+      <TextKey kind="Leaf" offset="20486" length="4" type="Scalar { Kind = U32 }" value="326" />
+      <TextA kind="Leaf" offset="20490" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="20528" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="20566" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_111>
+    <_112 kind="Record" offset="20604" length="118">
+      <TextKey kind="Leaf" offset="20604" length="4" type="Scalar { Kind = U32 }" value="328" />
+      <TextA kind="Leaf" offset="20608" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="20646" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="20684" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_112>
+    <_113 kind="Record" offset="20722" length="180">
+      <TextKey kind="Leaf" offset="20722" length="4" type="Scalar { Kind = U32 }" value="400" />
+      <TextA kind="Leaf" offset="20726" length="34" type="WString { }">Kaiser's Domain</TextA>
+      <TextB kind="Leaf" offset="20760" length="34" type="WString { }">Kaiser's Domain</TextB>
+      <TextC kind="Leaf" offset="20794" length="108" type="WString { }">It is the Digital World connected to the Real World.</TextC>
+    </_113>
+    <_114 kind="Record" offset="20902" length="188">
+      <TextKey kind="Leaf" offset="20902" length="4" type="Scalar { Kind = U32 }" value="401" />
+      <TextA kind="Leaf" offset="20906" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="20944" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="20982" length="108" type="WString { }">It is the Digital World connected to the Real World.</TextC>
+    </_114>
+    <_115 kind="Record" offset="21090" length="188">
+      <TextKey kind="Leaf" offset="21090" length="4" type="Scalar { Kind = U32 }" value="402" />
+      <TextA kind="Leaf" offset="21094" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="21132" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="21170" length="108" type="WString { }">It is the Digital World connected to the Real World.</TextC>
+    </_115>
+    <_116 kind="Record" offset="21278" length="188">
+      <TextKey kind="Leaf" offset="21278" length="4" type="Scalar { Kind = U32 }" value="403" />
+      <TextA kind="Leaf" offset="21282" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="21320" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="21358" length="108" type="WString { }">It is the Digital World connected to the Real World.</TextC>
+    </_116>
+    <_117 kind="Record" offset="21466" length="188">
+      <TextKey kind="Leaf" offset="21466" length="4" type="Scalar { Kind = U32 }" value="404" />
+      <TextA kind="Leaf" offset="21470" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="21508" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="21546" length="108" type="WString { }">It is the Digital World connected to the Real World.</TextC>
+    </_117>
+    <_118 kind="Record" offset="21654" length="132">
+      <TextKey kind="Leaf" offset="21654" length="4" type="Scalar { Kind = U32 }" value="405" />
+      <TextA kind="Leaf" offset="21658" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="21696" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="21734" length="52" type="WString { }">리얼 월드와 연결되어 있는 디지털 월드이다.</TextC>
+    </_118>
+    <_119 kind="Record" offset="21786" length="132">
+      <TextKey kind="Leaf" offset="21786" length="4" type="Scalar { Kind = U32 }" value="406" />
+      <TextA kind="Leaf" offset="21790" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="21828" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="21866" length="52" type="WString { }">리얼 월드와 연결되어 있는 디지털 월드이다.</TextC>
+    </_119>
+    <_120 kind="Record" offset="21918" length="132">
+      <TextKey kind="Leaf" offset="21918" length="4" type="Scalar { Kind = U32 }" value="407" />
+      <TextA kind="Leaf" offset="21922" length="38" type="WString { }">Colosseum Stadium</TextA>
+      <TextB kind="Leaf" offset="21960" length="38" type="WString { }">Colosseum Stadium</TextB>
+      <TextC kind="Leaf" offset="21998" length="52" type="WString { }">리얼 월드와 연결되어 있는 디지털 월드이다.</TextC>
+    </_120>
+    <_121 kind="Record" offset="22050" length="230">
+      <TextKey kind="Leaf" offset="22050" length="4" type="Scalar { Kind = U32 }" value="410" />
+      <TextA kind="Leaf" offset="22054" length="52" type="WString { }">Digital World Wilderness</TextA>
+      <TextB kind="Leaf" offset="22106" length="52" type="WString { }">Digital World Wilderness</TextB>
+      <TextC kind="Leaf" offset="22158" length="122" type="WString { }">It is the wilderness area controlled by the Digimon Kaiser.</TextC>
+    </_121>
+    <_122 kind="Record" offset="22280" length="186">
+      <TextKey kind="Leaf" offset="22280" length="4" type="Scalar { Kind = U32 }" value="500" />
+      <TextA kind="Leaf" offset="22284" length="32" type="WString { }">Flame Terminal</TextA>
+      <TextB kind="Leaf" offset="22316" length="32" type="WString { }">Flame Terminal</TextB>
+      <TextC kind="Leaf" offset="22348" length="118" type="WString { }">This is the Flame Terminal connected to the Real World.  </TextC>
+    </_122>
+    <_123 kind="Record" offset="22466" length="174">
+      <TextKey kind="Leaf" offset="22466" length="4" type="Scalar { Kind = U32 }" value="501" />
+      <TextA kind="Leaf" offset="22470" length="30" type="WString { }">Digital World</TextA>
+      <TextB kind="Leaf" offset="22500" length="30" type="WString { }">Digital World</TextB>
+      <TextC kind="Leaf" offset="22530" length="110" type="WString { }">This is the Digital World, full of various Digimon.  </TextC>
+    </_123>
+    <_124 kind="Record" offset="22640" length="168">
+      <TextKey kind="Leaf" offset="22640" length="4" type="Scalar { Kind = U32 }" value="502" />
+      <TextA kind="Leaf" offset="22644" length="28" type="WString { }">Wind Factory</TextA>
+      <TextB kind="Leaf" offset="22672" length="28" type="WString { }">Wind Factory</TextB>
+      <TextC kind="Leaf" offset="22700" length="108" type="WString { }">This is the Wind Factory located in the Wasteland.  </TextC>
+    </_124>
+    <_125 kind="Record" offset="22808" length="216">
+      <TextKey kind="Leaf" offset="22808" length="4" type="Scalar { Kind = U32 }" value="503" />
+      <TextA kind="Leaf" offset="22812" length="46" type="WString { }">Gentle Breeze Village</TextA>
+      <TextB kind="Leaf" offset="22858" length="46" type="WString { }">Gentle Breeze Village</TextB>
+      <TextC kind="Leaf" offset="22904" length="120" type="WString { }">This is a village with a giant tree where Floramon live.  </TextC>
+    </_125>
+    <_126 kind="Record" offset="23024" length="186">
+      <TextKey kind="Leaf" offset="23024" length="4" type="Scalar { Kind = U32 }" value="510" />
+      <TextA kind="Leaf" offset="23028" length="32" type="WString { }">Flame Terminal</TextA>
+      <TextB kind="Leaf" offset="23060" length="32" type="WString { }">Flame Terminal</TextB>
+      <TextC kind="Leaf" offset="23092" length="118" type="WString { }">This is the Flame Terminal connected to the Real World.  </TextC>
+    </_126>
+    <_127 kind="Record" offset="23210" length="230">
+      <TextKey kind="Leaf" offset="23210" length="4" type="Scalar { Kind = U32 }" value="511" />
+      <TextA kind="Leaf" offset="23214" length="56" type="WString { }">Flame Terminal Underground</TextA>
+      <TextB kind="Leaf" offset="23270" length="56" type="WString { }">Flame Terminal Underground</TextB>
+      <TextC kind="Leaf" offset="23326" length="114" type="WString { }">This is the Flame Terminal connected to the Real World.</TextC>
+    </_127>
+    <_128 kind="Record" offset="23440" length="230">
+      <TextKey kind="Leaf" offset="23440" length="4" type="Scalar { Kind = U32 }" value="512" />
+      <TextA kind="Leaf" offset="23444" length="56" type="WString { }">Flame Terminal Underground</TextA>
+      <TextB kind="Leaf" offset="23500" length="56" type="WString { }">Flame Terminal Underground</TextB>
+      <TextC kind="Leaf" offset="23556" length="114" type="WString { }">This is the Flame Terminal connected to the Real World.</TextC>
+    </_128>
+    <_129 kind="Record" offset="23670" length="334">
+      <TextKey kind="Leaf" offset="23670" length="4" type="Scalar { Kind = U32 }" value="1100" />
+      <TextA kind="Leaf" offset="23674" length="36" type="WString { }">Western\nVillage</TextA>
+      <TextB kind="Leaf" offset="23710" length="34" type="WString { }">Western Village</TextB>
+      <TextC kind="Leaf" offset="23744" length="260" type="WString { }">A strategically important point where the Real World and the Digital World meet. Its security is threatened by rampaging Digimon</TextC>
+    </_129>
+    <_130 kind="Record" offset="24004" length="336">
+      <TextKey kind="Leaf" offset="24004" length="4" type="Scalar { Kind = U32 }" value="1101" />
+      <TextA kind="Leaf" offset="24008" length="36" type="WString { }">Wilderness\nArea</TextA>
+      <TextB kind="Leaf" offset="24044" length="34" type="WString { }">Wilderness Area</TextB>
+      <TextC kind="Leaf" offset="24078" length="262" type="WString { }">An area where rampaging Digimon that have been evicted from the monitored area now fight each other to take control of territory.</TextC>
+    </_130>
+    <_131 kind="Record" offset="24340" length="210">
+      <TextKey kind="Leaf" offset="24340" length="4" type="Scalar { Kind = U32 }" value="1102" />
+      <TextA kind="Leaf" offset="24344" length="30" type="WString { }">Digimon\nFarm</TextA>
+      <TextB kind="Leaf" offset="24374" length="28" type="WString { }">Digimon Farm</TextB>
+      <TextC kind="Leaf" offset="24402" length="148" type="WString { }">It used to be a peaceful area. It became chaos due to rampaging Digimon.</TextC>
+    </_131>
+    <_132 kind="Record" offset="24550" length="120">
+      <TextKey kind="Leaf" offset="24550" length="4" type="Scalar { Kind = U32 }" value="1103" />
+      <TextA kind="Leaf" offset="24554" length="28" type="WString { }">Wind\nValley</TextA>
+      <TextB kind="Leaf" offset="24582" length="26" type="WString { }">Wind Valley</TextB>
+      <TextC kind="Leaf" offset="24608" length="62" type="WString { }">A wasteland with strong winds</TextC>
+    </_132>
+    <_133 kind="Record" offset="24670" length="270">
+      <TextKey kind="Leaf" offset="24670" length="4" type="Scalar { Kind = U32 }" value="1104" />
+      <TextA kind="Leaf" offset="24674" length="36" type="WString { }">Ruined\nHistoric</TextA>
+      <TextB kind="Leaf" offset="24710" length="34" type="WString { }">Ruined Historic</TextB>
+      <TextC kind="Leaf" offset="24744" length="196" type="WString { }">Traces of experiments were found in the Historic Ruins. The Dats Center sent investigation team.</TextC>
+    </_133>
+    <_134 kind="Record" offset="24940" length="216">
+      <TextKey kind="Leaf" offset="24940" length="4" type="Scalar { Kind = U32 }" value="1105" />
+      <TextA kind="Leaf" offset="24944" length="56" type="WString { }">Western\nArea\n&lt;Outskirts&gt;</TextA>
+      <TextB kind="Leaf" offset="25000" length="52" type="WString { }">Western Area : Outskirts</TextB>
+      <TextC kind="Leaf" offset="25052" length="104" type="WString { }">A region next to the Western Village : Outskirts  </TextC>
+    </_134>
+    <_135 kind="Record" offset="25156" length="334">
+      <TextKey kind="Leaf" offset="25156" length="4" type="Scalar { Kind = U32 }" value="1106" />
+      <TextA kind="Leaf" offset="25160" length="46" type="WString { }">Western\nArea\n&lt;East&gt;</TextA>
+      <TextB kind="Leaf" offset="25206" length="42" type="WString { }">Western Area : East</TextB>
+      <TextC kind="Leaf" offset="25248" length="242" type="WString { }">The passage between the Western Village and the Digimon Farm. Its security is severely threatened by rampaging Digimon.</TextC>
+    </_135>
+    <_136 kind="Record" offset="25490" length="244">
+      <TextKey kind="Leaf" offset="25490" length="4" type="Scalar { Kind = U32 }" value="1107" />
+      <TextA kind="Leaf" offset="25494" length="46" type="WString { }">Western\nArea\n&lt;West&gt;</TextA>
+      <TextB kind="Leaf" offset="25540" length="42" type="WString { }">Western Area : West</TextB>
+      <TextC kind="Leaf" offset="25582" length="152" type="WString { }">A very dangerous area because of rampaging digimons due to the Dark Tower.</TextC>
+    </_136>
+    <_137 kind="Record" offset="25734" length="202">
+      <TextKey kind="Leaf" offset="25734" length="4" type="Scalar { Kind = U32 }" value="1108" />
+      <TextA kind="Leaf" offset="25738" length="50" type="WString { }">Digimon\nMaze\nEntrance</TextA>
+      <TextB kind="Leaf" offset="25788" length="46" type="WString { }">Digimon Maze Entrance</TextB>
+      <TextC kind="Leaf" offset="25834" length="102" type="WString { }">An area with a huge pyramid due to strange data. </TextC>
+    </_137>
+    <_138 kind="Record" offset="25936" length="304">
+      <TextKey kind="Leaf" offset="25936" length="4" type="Scalar { Kind = U32 }" value="1109" />
+      <TextA kind="Leaf" offset="25940" length="44" type="WString { }">DarkTower\nWasteland</TextA>
+      <TextB kind="Leaf" offset="25984" length="44" type="WString { }">Dark tower Wasteland</TextB>
+      <TextC kind="Leaf" offset="26028" length="212" type="WString { }">An area where evolution of digimons is restricted because of the Dark Tower built by the Digimon Kaiser.</TextC>
+    </_138>
+    <_139 kind="Record" offset="26240" length="392">
+      <TextKey kind="Leaf" offset="26240" length="4" type="Scalar { Kind = U32 }" value="1110" />
+      <TextA kind="Leaf" offset="26244" length="44" type="WString { }">Kaiser's\nLaboratory</TextA>
+      <TextB kind="Leaf" offset="26288" length="42" type="WString { }">Kaiser's Laboratory</TextB>
+      <TextC kind="Leaf" offset="26330" length="302" type="WString { }">A place to create a Chimairamon experiments. An area where evolution of digimons is restricted because of the Dark Tower built by the Digimon Kaiser.</TextC>
+    </_139>
+    <_140 kind="Record" offset="26632" length="434">
+      <TextKey kind="Leaf" offset="26632" length="4" type="Scalar { Kind = U32 }" value="1111" />
+      <TextA kind="Leaf" offset="26636" length="64" type="WString { }">Kaiser's Laboratory[Normal-4P]</TextA>
+      <TextB kind="Leaf" offset="26700" length="64" type="WString { }">Kaiser's Laboratory[Normal-4P]</TextB>
+      <TextC kind="Leaf" offset="26764" length="302" type="WString { }">A place to create a Chimairamon experiments. An area where evolution of digimons is restricted because of the Dark Tower built by the Digimon Kaiser.</TextC>
+    </_140>
+    <_141 kind="Record" offset="27066" length="426">
+      <TextKey kind="Leaf" offset="27066" length="4" type="Scalar { Kind = U32 }" value="1112" />
+      <TextA kind="Leaf" offset="27070" length="60" type="WString { }">Kaiser's Laboratory[Hard-4P]</TextA>
+      <TextB kind="Leaf" offset="27130" length="60" type="WString { }">Kaiser's Laboratory[Hard-4P]</TextB>
+      <TextC kind="Leaf" offset="27190" length="302" type="WString { }">A place to create a Chimairamon experiments. An area where evolution of digimons is restricted because of the Dark Tower built by the Digimon Kaiser.</TextC>
+    </_141>
+    <_142 kind="Record" offset="27492" length="342">
+      <TextKey kind="Leaf" offset="27492" length="4" type="Scalar { Kind = U32 }" value="1201" />
+      <TextA kind="Leaf" offset="27496" length="36" type="WString { }">Digimon\nMaze B1</TextA>
+      <TextB kind="Leaf" offset="27532" length="34" type="WString { }">Digimon Maze B1</TextB>
+      <TextC kind="Leaf" offset="27566" length="268" type="WString { }">A place that is judged to have been created intentionally by someone through data manipulation. The identity is shrouded in secrecy.</TextC>
+    </_142>
+    <_143 kind="Record" offset="27834" length="340">
+      <TextKey kind="Leaf" offset="27834" length="4" type="Scalar { Kind = U32 }" value="1202" />
+      <TextA kind="Leaf" offset="27838" length="34" type="WString { }">Digimon Maze B2</TextA>
+      <TextB kind="Leaf" offset="27872" length="34" type="WString { }">Digimon Maze B2</TextB>
+      <TextC kind="Leaf" offset="27906" length="268" type="WString { }">A place that is judged to have been created intentionally by someone through data manipulation. The identity is shrouded in secrecy.</TextC>
+    </_143>
+    <_144 kind="Record" offset="28174" length="340">
+      <TextKey kind="Leaf" offset="28174" length="4" type="Scalar { Kind = U32 }" value="1203" />
+      <TextA kind="Leaf" offset="28178" length="34" type="WString { }">Digimon Maze F1</TextA>
+      <TextB kind="Leaf" offset="28212" length="34" type="WString { }">Digimon Maze F1</TextB>
+      <TextC kind="Leaf" offset="28246" length="268" type="WString { }">A place that is judged to have been created intentionally by someone through data manipulation. The identity is shrouded in secrecy.</TextC>
+    </_144>
+    <_145 kind="Record" offset="28514" length="340">
+      <TextKey kind="Leaf" offset="28514" length="4" type="Scalar { Kind = U32 }" value="1204" />
+      <TextA kind="Leaf" offset="28518" length="34" type="WString { }">Digimon Maze F2</TextA>
+      <TextB kind="Leaf" offset="28552" length="34" type="WString { }">Digimon Maze F2</TextB>
+      <TextC kind="Leaf" offset="28586" length="268" type="WString { }">A place that is judged to have been created intentionally by someone through data manipulation. The identity is shrouded in secrecy.</TextC>
+    </_145>
+    <_146 kind="Record" offset="28854" length="340">
+      <TextKey kind="Leaf" offset="28854" length="4" type="Scalar { Kind = U32 }" value="1205" />
+      <TextA kind="Leaf" offset="28858" length="34" type="WString { }">Digimon Maze F3</TextA>
+      <TextB kind="Leaf" offset="28892" length="34" type="WString { }">Digimon Maze F3</TextB>
+      <TextC kind="Leaf" offset="28926" length="268" type="WString { }">A place that is judged to have been created intentionally by someone through data manipulation. The identity is shrouded in secrecy.</TextC>
+    </_146>
+    <_147 kind="Record" offset="29194" length="340">
+      <TextKey kind="Leaf" offset="29194" length="4" type="Scalar { Kind = U32 }" value="1206" />
+      <TextA kind="Leaf" offset="29198" length="34" type="WString { }">Digimon Maze F4</TextA>
+      <TextB kind="Leaf" offset="29232" length="34" type="WString { }">Digimon Maze F4</TextB>
+      <TextC kind="Leaf" offset="29266" length="268" type="WString { }">A place that is judged to have been created intentionally by someone through data manipulation. The identity is shrouded in secrecy.</TextC>
+    </_147>
+    <_148 kind="Record" offset="29534" length="204">
+      <TextKey kind="Leaf" offset="29534" length="4" type="Scalar { Kind = U32 }" value="1300" />
+      <TextA kind="Leaf" offset="29538" length="56" type="WString { }">Village\nof the\nBeginning</TextA>
+      <TextB kind="Leaf" offset="29594" length="52" type="WString { }">Village of the Beginning</TextB>
+      <TextC kind="Leaf" offset="29646" length="92" type="WString { }">Beautiful and cute village with baby digimon</TextC>
+    </_148>
+    <_149 kind="Record" offset="29738" length="136">
+      <TextKey kind="Leaf" offset="29738" length="4" type="Scalar { Kind = U32 }" value="1301" />
+      <TextA kind="Leaf" offset="29742" length="28" type="WString { }">Silver\nLake</TextA>
+      <TextB kind="Leaf" offset="29770" length="26" type="WString { }">Silver Lake</TextB>
+      <TextC kind="Leaf" offset="29796" length="78" type="WString { }"> Sunshine forest. It feels like warm.</TextC>
+    </_149>
+    <_150 kind="Record" offset="29874" length="158">
+      <TextKey kind="Leaf" offset="29874" length="4" type="Scalar { Kind = U32 }" value="1302" />
+      <TextA kind="Leaf" offset="29878" length="32" type="WString { }">Silent\nForest</TextA>
+      <TextB kind="Leaf" offset="29910" length="30" type="WString { }">Silent Forest</TextB>
+      <TextC kind="Leaf" offset="29940" length="92" type="WString { }">Eerie Jungle with graveyard and dark forest.</TextC>
+    </_150>
+    <_151 kind="Record" offset="30032" length="186">
+      <TextKey kind="Leaf" offset="30032" length="4" type="Scalar { Kind = U32 }" value="1303" />
+      <TextA kind="Leaf" offset="30036" length="44" type="WString { }">Lost\nHistoric\nSite</TextA>
+      <TextB kind="Leaf" offset="30080" length="40" type="WString { }">Lost Historic Site</TextB>
+      <TextC kind="Leaf" offset="30120" length="98" type="WString { }">This Wood has legend and secret of File Island.</TextC>
+    </_151>
+    <_152 kind="Record" offset="30218" length="202">
+      <TextKey kind="Leaf" offset="30218" length="4" type="Scalar { Kind = U32 }" value="1304" />
+      <TextA kind="Leaf" offset="30222" length="54" type="WString { }">Ancient\nRuins of\nSecret</TextA>
+      <TextB kind="Leaf" offset="30276" length="48" type="WString { }">AncientRuins of Secret</TextB>
+      <TextC kind="Leaf" offset="30324" length="96" type="WString { }">Ancient site where hidden secret of FileIsland</TextC>
+    </_152>
+    <_153 kind="Record" offset="30420" length="230">
+      <TextKey kind="Leaf" offset="30420" length="4" type="Scalar { Kind = U32 }" value="1305" />
+      <TextA kind="Leaf" offset="30424" length="52" type="WString { }">File\nIsland\nWaterfront</TextA>
+      <TextB kind="Leaf" offset="30476" length="48" type="WString { }">File Island Waterfront</TextB>
+      <TextC kind="Leaf" offset="30524" length="126" type="WString { }">A place that coexist grand mountain,expanse sea and warm wood</TextC>
+    </_153>
+    <_154 kind="Record" offset="30650" length="176">
+      <TextKey kind="Leaf" offset="30650" length="4" type="Scalar { Kind = U32 }" value="1306" />
+      <TextA kind="Leaf" offset="30654" length="40" type="WString { }">Infinite\nMountain</TextA>
+      <TextB kind="Leaf" offset="30694" length="38" type="WString { }">Infinite Mountain</TextB>
+      <TextC kind="Leaf" offset="30732" length="94" type="WString { }">A place that is made up rocks with wild wind.</TextC>
+    </_154>
+    <_155 kind="Record" offset="30826" length="238">
+      <TextKey kind="Leaf" offset="30826" length="4" type="Scalar { Kind = U32 }" value="1307" />
+      <TextA kind="Leaf" offset="30830" length="58" type="WString { }">Infinite\nMountain\nDungeon</TextA>
+      <TextB kind="Leaf" offset="30888" length="54" type="WString { }">Infinite Mountain Dungeon</TextB>
+      <TextC kind="Leaf" offset="30942" length="122" type="WString { }">Devimon's base. It is located top of the Infinite Mountain.</TextC>
+    </_155>
+    <_156 kind="Record" offset="31064" length="220">
+      <TextKey kind="Leaf" offset="31064" length="4" type="Scalar { Kind = U32 }" value="1308" />
+      <TextA kind="Leaf" offset="31068" length="36" type="WString { }">Crack of Devimon</TextA>
+      <TextB kind="Leaf" offset="31104" length="36" type="WString { }">Crack of Devimon</TextB>
+      <TextC kind="Leaf" offset="31140" length="144" type="WString { }">A place to Devimon's rest. It is located top of the Infinite Mountain.</TextC>
+    </_156>
+    <_157 kind="Record" offset="31284" length="246">
+      <TextKey kind="Leaf" offset="31284" length="4" type="Scalar { Kind = U32 }" value="1309" />
+      <TextA kind="Leaf" offset="31288" length="56" type="WString { }">Hidden nest of Waterdragon</TextA>
+      <TextB kind="Leaf" offset="31344" length="56" type="WString { }">Hidden nest of Waterdragon</TextB>
+      <TextC kind="Leaf" offset="31400" length="130" type="WString { }">A veiled water dragon's nest which is unexposed to outer areas.</TextC>
+    </_157>
+    <_158 kind="Record" offset="31530" length="246">
+      <TextKey kind="Leaf" offset="31530" length="4" type="Scalar { Kind = U32 }" value="1310" />
+      <TextA kind="Leaf" offset="31534" length="76" type="WString { }">Ancient\nRuins of\nSecret[Normal-4P]</TextA>
+      <TextB kind="Leaf" offset="31610" length="70" type="WString { }">AncientRuins of Secret[Normal-4P]</TextB>
+      <TextC kind="Leaf" offset="31680" length="96" type="WString { }">Ancient site where hidden secret of FileIsland</TextC>
+    </_158>
+    <_159 kind="Record" offset="31776" length="256">
+      <TextKey kind="Leaf" offset="31776" length="4" type="Scalar { Kind = U32 }" value="1311" />
+      <TextA kind="Leaf" offset="31780" length="54" type="WString { }">Crack of Devimon[Hard-4P]</TextA>
+      <TextB kind="Leaf" offset="31834" length="54" type="WString { }">Crack of Devimon[Hard-4P]</TextB>
+      <TextC kind="Leaf" offset="31888" length="144" type="WString { }">A place to Devimon's rest. It is located top of the Infinite Mountain.</TextC>
+    </_159>
+    <_160 kind="Record" offset="32032" length="248">
+      <TextKey kind="Leaf" offset="32032" length="4" type="Scalar { Kind = U32 }" value="1312" />
+      <TextA kind="Leaf" offset="32036" length="54" type="WString { }">Crack of Devimon[Hard-4P]</TextA>
+      <TextB kind="Leaf" offset="32090" length="54" type="WString { }">Crack of Devimon[Hard-4P]</TextB>
+      <TextC kind="Leaf" offset="32144" length="136" type="WString { }">A habitat for Susanoomon who manages Destruction and Regeneration.</TextC>
+    </_160>
+    <_161 kind="Record" offset="32280" length="168">
+      <TextKey kind="Leaf" offset="32280" length="4" type="Scalar { Kind = U32 }" value="1400" />
+      <TextA kind="Leaf" offset="32284" length="16" type="WString { }">Desert</TextA>
+      <TextB kind="Leaf" offset="32300" length="50" type="WString { }">Server Continent Desert</TextB>
+      <TextC kind="Leaf" offset="32350" length="98" type="WString { }">Gigantic continent composed of vast server data</TextC>
+    </_161>
+    <_162 kind="Record" offset="32448" length="158">
+      <TextKey kind="Leaf" offset="32448" length="4" type="Scalar { Kind = U32 }" value="1401" />
+      <TextA kind="Leaf" offset="32452" length="16" type="WString { }">Canyon</TextA>
+      <TextB kind="Leaf" offset="32468" length="50" type="WString { }">Server Continent Canyon</TextB>
+      <TextC kind="Leaf" offset="32518" length="88" type="WString { }">A maze canyon composed of vast server data</TextC>
+    </_162>
+    <_163 kind="Record" offset="32606" length="234">
+      <TextKey kind="Leaf" offset="32606" length="4" type="Scalar { Kind = U32 }" value="1402" />
+      <TextA kind="Leaf" offset="32610" length="18" type="WString { }">Pyramid</TextA>
+      <TextB kind="Leaf" offset="32628" length="52" type="WString { }">Server Continent Pyramid</TextB>
+      <TextC kind="Leaf" offset="32680" length="160" type="WString { }">It has a wide desert of Sever Continent and Sphinx, and Etemon's headquarters.</TextC>
+    </_163>
+    <_164 kind="Record" offset="32840" length="276">
+      <TextKey kind="Leaf" offset="32840" length="4" type="Scalar { Kind = U32 }" value="1403" />
+      <TextA kind="Leaf" offset="32844" length="30" type="WString { }">Datamon\nMaze</TextA>
+      <TextB kind="Leaf" offset="32874" length="30" type="WString { }">Datamon\nMaze</TextB>
+      <TextC kind="Leaf" offset="32904" length="212" type="WString { }">It is a base designed by Datamon who was defeated in a battle with Etemon and became Etemon's underling.</TextC>
+    </_164>
+    <_165 kind="Record" offset="33116" length="308">
+      <TextKey kind="Leaf" offset="33116" length="4" type="Scalar { Kind = U32 }" value="1404" />
+      <TextA kind="Leaf" offset="33120" length="46" type="WString { }">Datamon Maze (Normal)</TextA>
+      <TextB kind="Leaf" offset="33166" length="46" type="WString { }">Datamon Maze (Normal)</TextB>
+      <TextC kind="Leaf" offset="33212" length="212" type="WString { }">It is a base designed by Datamon who was defeated in a battle with Etemon and became Etemon's underling.</TextC>
+    </_165>
+    <_166 kind="Record" offset="33424" length="300">
+      <TextKey kind="Leaf" offset="33424" length="4" type="Scalar { Kind = U32 }" value="1406" />
+      <TextA kind="Leaf" offset="33428" length="42" type="WString { }">Datamon Maze (Hard)</TextA>
+      <TextB kind="Leaf" offset="33470" length="42" type="WString { }">Datamon Maze (Hard)</TextB>
+      <TextC kind="Leaf" offset="33512" length="212" type="WString { }">It is a base designed by Datamon who was defeated in a battle with Etemon and became Etemon's underling.</TextC>
+    </_166>
+    <_167 kind="Record" offset="33724" length="202">
+      <TextKey kind="Leaf" offset="33724" length="4" type="Scalar { Kind = U32 }" value="1500" />
+      <TextA kind="Leaf" offset="33728" length="26" type="WString { }">Green\nZone</TextA>
+      <TextB kind="Leaf" offset="33754" length="24" type="WString { }">Green Zone</TextB>
+      <TextC kind="Leaf" offset="33778" length="148" type="WString { }">It is the first area of the Xros Wars, which is dominated by Mad Leomon.</TextC>
+    </_167>
+    <_168 kind="Record" offset="33926" length="208">
+      <TextKey kind="Leaf" offset="33926" length="4" type="Scalar { Kind = U32 }" value="1501" />
+      <TextA kind="Leaf" offset="33930" length="30" type="WString { }">Miso\nVillage</TextA>
+      <TextB kind="Leaf" offset="33960" length="50" type="WString { }">Green Zone Miso Village</TextB>
+      <TextC kind="Leaf" offset="34010" length="124" type="WString { }">Hometown of Shoutmon. Bagra Army takes down the village now.</TextC>
+    </_168>
+    <_169 kind="Record" offset="34134" length="246">
+      <TextKey kind="Leaf" offset="34134" length="4" type="Scalar { Kind = U32 }" value="1502" />
+      <TextA kind="Leaf" offset="34138" length="48" type="WString { }">Green\nZone (Advanced)</TextA>
+      <TextB kind="Leaf" offset="34186" length="46" type="WString { }">Green Zone (Advanced)</TextB>
+      <TextC kind="Leaf" offset="34232" length="148" type="WString { }">It is the first area of the Xros Wars, which is dominated by Mad Leomon.</TextC>
+    </_169>
+    <_170 kind="Record" offset="34380" length="212">
+      <TextKey kind="Leaf" offset="34380" length="4" type="Scalar { Kind = U32 }" value="1503" />
+      <TextA kind="Leaf" offset="34384" length="30" type="WString { }">Event Dungeon</TextA>
+      <TextB kind="Leaf" offset="34414" length="30" type="WString { }">Event Dungeon</TextB>
+      <TextC kind="Leaf" offset="34444" length="148" type="WString { }">It is the first area of the Xros Wars, which is dominated by Mad Leomon.</TextC>
+    </_170>
+    <_171 kind="Record" offset="34592" length="178">
+      <TextKey kind="Leaf" offset="34592" length="4" type="Scalar { Kind = U32 }" value="1600" />
+      <TextA kind="Leaf" offset="34596" length="26" type="WString { }">Xuanwu\nmon</TextA>
+      <TextB kind="Leaf" offset="34622" length="46" type="WString { }">Scar of Water Crystal</TextB>
+      <TextC kind="Leaf" offset="34668" length="102" type="WString { }">Xuanwumon among Four holy beasts is in this site.</TextC>
+    </_171>
+    <_172 kind="Record" offset="34770" length="168">
+      <TextKey kind="Leaf" offset="34770" length="4" type="Scalar { Kind = U32 }" value="1601" />
+      <TextA kind="Leaf" offset="34774" length="28" type="WString { }">Zhuqiao\nmon</TextA>
+      <TextB kind="Leaf" offset="34802" length="32" type="WString { }">Uprising Flame</TextB>
+      <TextC kind="Leaf" offset="34834" length="104" type="WString { }">Zhuqiaomon among Four holy beasts is in this site.</TextC>
+    </_172>
+    <_173 kind="Record" offset="34938" length="168">
+      <TextKey kind="Leaf" offset="34938" length="4" type="Scalar { Kind = U32 }" value="1602" />
+      <TextA kind="Leaf" offset="34942" length="20" type="WString { }">Baihumon</TextA>
+      <TextB kind="Leaf" offset="34962" length="44" type="WString { }">Trace of Black Steel</TextB>
+      <TextC kind="Leaf" offset="35006" length="100" type="WString { }">Baihumon among Four holy beasts is in this site.</TextC>
+    </_173>
+    <_174 kind="Record" offset="35106" length="208">
+      <TextKey kind="Leaf" offset="35106" length="4" type="Scalar { Kind = U32 }" value="1603" />
+      <TextA kind="Leaf" offset="35110" length="30" type="WString { }">Qinglong\nmon</TextA>
+      <TextB kind="Leaf" offset="35140" length="48" type="WString { }">Descending Thunder God</TextB>
+      <TextC kind="Leaf" offset="35188" length="126" type="WString { }">The area where Qinglongmon among the Four Holy Beasts exists.</TextC>
+    </_174>
+    <_175 kind="Record" offset="35314" length="200">
+      <TextKey kind="Leaf" offset="35314" length="4" type="Scalar { Kind = U32 }" value="1604" />
+      <TextA kind="Leaf" offset="35318" length="46" type="WString { }">Uprising Flame (Easy)</TextA>
+      <TextB kind="Leaf" offset="35364" length="46" type="WString { }">Uprising Flame (Easy)</TextB>
+      <TextC kind="Leaf" offset="35410" length="104" type="WString { }">Zhuqiaomon among Four holy beasts is in this site.</TextC>
+    </_175>
+    <_176 kind="Record" offset="35514" length="214">
+      <TextKey kind="Leaf" offset="35514" length="4" type="Scalar { Kind = U32 }" value="1605" />
+      <TextA kind="Leaf" offset="35518" length="54" type="WString { }">Light blue Crystal (Easy)</TextA>
+      <TextB kind="Leaf" offset="35572" length="54" type="WString { }">Light blue Crystal (Easy)</TextB>
+      <TextC kind="Leaf" offset="35626" length="102" type="WString { }">Xuanwumon among Four holy beasts is in this site.</TextC>
+    </_176>
+    <_177 kind="Record" offset="35728" length="220">
+      <TextKey kind="Leaf" offset="35728" length="4" type="Scalar { Kind = U32 }" value="1606" />
+      <TextA kind="Leaf" offset="35732" length="58" type="WString { }">Trace of Black Steel (Easy)</TextA>
+      <TextB kind="Leaf" offset="35790" length="58" type="WString { }">Trace of Black Steel (Easy)</TextB>
+      <TextC kind="Leaf" offset="35848" length="100" type="WString { }">Baihumon among Four holy beasts is in this site.</TextC>
+    </_177>
+    <_178 kind="Record" offset="35948" length="254">
+      <TextKey kind="Leaf" offset="35948" length="4" type="Scalar { Kind = U32 }" value="1607" />
+      <TextA kind="Leaf" offset="35952" length="62" type="WString { }">Descending Thunder God (Easy)</TextA>
+      <TextB kind="Leaf" offset="36014" length="62" type="WString { }">Descending Thunder God (Easy)</TextB>
+      <TextC kind="Leaf" offset="36076" length="126" type="WString { }">The area where Qinglongmon among the Four Holy Beasts exists.</TextC>
+    </_178>
+    <_179 kind="Record" offset="36202" length="276">
+      <TextKey kind="Leaf" offset="36202" length="4" type="Scalar { Kind = U32 }" value="1608" />
+      <TextA kind="Leaf" offset="36206" length="66" type="WString { }">Fanglongmon Dungeon Underground</TextA>
+      <TextB kind="Leaf" offset="36272" length="66" type="WString { }">Fanglongmon Dungeon Underground</TextB>
+      <TextC kind="Leaf" offset="36338" length="140" type="WString { }">Fanglongmon's dwelling located underground of Ascending Thunder God.</TextC>
+    </_179>
+    <_180 kind="Record" offset="36478" length="288">
+      <TextKey kind="Leaf" offset="36478" length="4" type="Scalar { Kind = U32 }" value="1609" />
+      <TextA kind="Leaf" offset="36482" length="30" type="WString { }">Fanglong\nmon</TextA>
+      <TextB kind="Leaf" offset="36512" length="42" type="WString { }">Fanglongmon Dungeon</TextB>
+      <TextC kind="Leaf" offset="36554" length="212" type="WString { }">Ascending Thunder God area is a place where the Four Holy Beasts were guarding Fanglongmon by his order.</TextC>
+    </_180>
+    <_181 kind="Record" offset="36766" length="214">
+      <TextKey kind="Leaf" offset="36766" length="4" type="Scalar { Kind = U32 }" value="1610" />
+      <TextA kind="Leaf" offset="36770" length="54" type="WString { }">Light blue Crystal (Hard)</TextA>
+      <TextB kind="Leaf" offset="36824" length="54" type="WString { }">Light blue Crystal (Hard)</TextB>
+      <TextC kind="Leaf" offset="36878" length="102" type="WString { }">Xuanwumon among Four holy beasts is in this site.</TextC>
+    </_181>
+    <_182 kind="Record" offset="36980" length="200">
+      <TextKey kind="Leaf" offset="36980" length="4" type="Scalar { Kind = U32 }" value="1611" />
+      <TextA kind="Leaf" offset="36984" length="46" type="WString { }">Uprising Flame (Hard)</TextA>
+      <TextB kind="Leaf" offset="37030" length="46" type="WString { }">Uprising Flame (Hard)</TextB>
+      <TextC kind="Leaf" offset="37076" length="104" type="WString { }">Zhuqiaomon among Four holy beasts is in this site.</TextC>
+    </_182>
+    <_183 kind="Record" offset="37180" length="224">
+      <TextKey kind="Leaf" offset="37180" length="4" type="Scalar { Kind = U32 }" value="1612" />
+      <TextA kind="Leaf" offset="37184" length="60" type="WString { }">Traces Of Black Steel (Hard)</TextA>
+      <TextB kind="Leaf" offset="37244" length="60" type="WString { }">Traces Of Black Steel (Hard)</TextB>
+      <TextC kind="Leaf" offset="37304" length="100" type="WString { }">Baihumon among Four holy beasts is in this site.</TextC>
+    </_183>
+    <_184 kind="Record" offset="37404" length="254">
+      <TextKey kind="Leaf" offset="37404" length="4" type="Scalar { Kind = U32 }" value="1613" />
+      <TextA kind="Leaf" offset="37408" length="62" type="WString { }">Descending Thunder God (Hard)</TextA>
+      <TextB kind="Leaf" offset="37470" length="62" type="WString { }">Descending Thunder God (Hard)</TextB>
+      <TextC kind="Leaf" offset="37532" length="126" type="WString { }">The area where Qinglongmon among the Four Holy Beasts exists.</TextC>
+    </_184>
+    <_185 kind="Record" offset="37658" length="304">
+      <TextKey kind="Leaf" offset="37658" length="4" type="Scalar { Kind = U32 }" value="1614" />
+      <TextA kind="Leaf" offset="37662" length="80" type="WString { }">Fanglongmon Dungeon Underground (Easy)</TextA>
+      <TextB kind="Leaf" offset="37742" length="80" type="WString { }">Fanglongmon Dungeon Underground (Easy)</TextB>
+      <TextC kind="Leaf" offset="37822" length="140" type="WString { }">Fanglongmon's dwelling located underground of Ascending Thunder God.</TextC>
+    </_185>
+    <_186 kind="Record" offset="37962" length="328">
+      <TextKey kind="Leaf" offset="37962" length="4" type="Scalar { Kind = U32 }" value="1615" />
+      <TextA kind="Leaf" offset="37966" length="56" type="WString { }">Fanglongmon Dungeon (Easy)</TextA>
+      <TextB kind="Leaf" offset="38022" length="56" type="WString { }">Fanglongmon Dungeon (Easy)</TextB>
+      <TextC kind="Leaf" offset="38078" length="212" type="WString { }">Ascending Thunder God area is a place where the Four Holy Beasts were guarding Fanglongmon by his order.</TextC>
+    </_186>
+    <_187 kind="Record" offset="38290" length="258">
+      <TextKey kind="Leaf" offset="38290" length="4" type="Scalar { Kind = U32 }" value="1616" />
+      <TextA kind="Leaf" offset="38294" length="34" type="WString { }">판롱몬 던전 지하 (어려움)</TextA>
+      <TextB kind="Leaf" offset="38328" length="80" type="WString { }">Fanglongmon Dungeon Underground (Hard)</TextB>
+      <TextC kind="Leaf" offset="38408" length="140" type="WString { }">Fanglongmon's dwelling located underground of Ascending Thunder God.</TextC>
+    </_187>
+    <_188 kind="Record" offset="38548" length="300">
+      <TextKey kind="Leaf" offset="38548" length="4" type="Scalar { Kind = U32 }" value="1617" />
+      <TextA kind="Leaf" offset="38552" length="28" type="WString { }">판롱몬 던전 (어려움)</TextA>
+      <TextB kind="Leaf" offset="38580" length="56" type="WString { }">Fanglongmon Dungeon (Hard)</TextB>
+      <TextC kind="Leaf" offset="38636" length="212" type="WString { }">Ascending Thunder God area is a place where the Four Holy Beasts were guarding Fanglongmon by his order.</TextC>
+    </_188>
+    <_189 kind="Record" offset="38848" length="206">
+      <TextKey kind="Leaf" offset="38848" length="4" type="Scalar { Kind = U32 }" value="1700" />
+      <TextA kind="Leaf" offset="38852" length="40" type="WString { }">Verdandi\nTerminal</TextA>
+      <TextB kind="Leaf" offset="38892" length="38" type="WString { }">Verdandi Terminal</TextB>
+      <TextC kind="Leaf" offset="38930" length="124" type="WString { }">A region of jungle law where X-Program is spread throughout.</TextC>
+    </_189>
+    <_190 kind="Record" offset="39054" length="140">
+      <TextKey kind="Leaf" offset="39054" length="4" type="Scalar { Kind = U32 }" value="1701" />
+      <TextA kind="Leaf" offset="39058" length="26" type="WString { }">Royal\nBase</TextA>
+      <TextB kind="Leaf" offset="39084" length="24" type="WString { }">Royal Base</TextB>
+      <TextC kind="Leaf" offset="39108" length="86" type="WString { }">The secret headquarters of Royal Knights.</TextC>
+    </_190>
+    <_191 kind="Record" offset="39194" length="238">
+      <TextKey kind="Leaf" offset="39194" length="4" type="Scalar { Kind = U32 }" value="1702" />
+      <TextA kind="Leaf" offset="39198" length="38" type="WString { }">Center Royal Base</TextA>
+      <TextB kind="Leaf" offset="39236" length="38" type="WString { }">Center Royal Base</TextB>
+      <TextC kind="Leaf" offset="39274" length="158" type="WString { }">Yggdrasil is known to execute experiments from the very center of Royal Base.</TextC>
+    </_191>
+    <_192 kind="Record" offset="39432" length="156">
+      <TextKey kind="Leaf" offset="39432" length="4" type="Scalar { Kind = U32 }" value="1703" />
+      <TextA kind="Leaf" offset="39436" length="38" type="WString { }">Yggdrasill's Room</TextA>
+      <TextB kind="Leaf" offset="39474" length="38" type="WString { }">Yggdrasill's Room</TextB>
+      <TextC kind="Leaf" offset="39512" length="76" type="WString { }">The room where Yggdrasil is staying.</TextC>
+    </_192>
+    <_193 kind="Record" offset="39588" length="166">
+      <TextKey kind="Leaf" offset="39588" length="4" type="Scalar { Kind = U32 }" value="1704" />
+      <TextA kind="Leaf" offset="39592" length="38" type="WString { }">Royal Base (Easy)</TextA>
+      <TextB kind="Leaf" offset="39630" length="38" type="WString { }">Royal Base (Easy)</TextB>
+      <TextC kind="Leaf" offset="39668" length="86" type="WString { }">The secret headquarters of Royal Knights.</TextC>
+    </_193>
+    <_194 kind="Record" offset="39754" length="266">
+      <TextKey kind="Leaf" offset="39754" length="4" type="Scalar { Kind = U32 }" value="1705" />
+      <TextA kind="Leaf" offset="39758" length="52" type="WString { }">Center Royal Base (Easy)</TextA>
+      <TextB kind="Leaf" offset="39810" length="52" type="WString { }">Center Royal Base (Easy)</TextB>
+      <TextC kind="Leaf" offset="39862" length="158" type="WString { }">Yggdrasil is known to execute experiments from the very center of Royal Base.</TextC>
+    </_194>
+    <_195 kind="Record" offset="40020" length="184">
+      <TextKey kind="Leaf" offset="40020" length="4" type="Scalar { Kind = U32 }" value="1706" />
+      <TextA kind="Leaf" offset="40024" length="52" type="WString { }">Yggdrasill's Room (Easy)</TextA>
+      <TextB kind="Leaf" offset="40076" length="52" type="WString { }">Yggdrasill's Room (Easy)</TextB>
+      <TextC kind="Leaf" offset="40128" length="76" type="WString { }">The room where Yggdrasil is staying.</TextC>
+    </_195>
+    <_196 kind="Record" offset="40204" length="166">
+      <TextKey kind="Leaf" offset="40204" length="4" type="Scalar { Kind = U32 }" value="1707" />
+      <TextA kind="Leaf" offset="40208" length="38" type="WString { }">Royal Base (Hard)</TextA>
+      <TextB kind="Leaf" offset="40246" length="38" type="WString { }">Royal Base (Hard)</TextB>
+      <TextC kind="Leaf" offset="40284" length="86" type="WString { }">The secret headquarters of Royal Knights.</TextC>
+    </_196>
+    <_197 kind="Record" offset="40370" length="266">
+      <TextKey kind="Leaf" offset="40370" length="4" type="Scalar { Kind = U32 }" value="1708" />
+      <TextA kind="Leaf" offset="40374" length="52" type="WString { }">Center Royal Base (Hard)</TextA>
+      <TextB kind="Leaf" offset="40426" length="52" type="WString { }">Center Royal Base (Hard)</TextB>
+      <TextC kind="Leaf" offset="40478" length="158" type="WString { }">Yggdrasil is known to execute experiments from the very center of Royal Base.</TextC>
+    </_197>
+    <_198 kind="Record" offset="40636" length="184">
+      <TextKey kind="Leaf" offset="40636" length="4" type="Scalar { Kind = U32 }" value="1709" />
+      <TextA kind="Leaf" offset="40640" length="52" type="WString { }">Yggdrasill's Room (Hard)</TextA>
+      <TextB kind="Leaf" offset="40692" length="52" type="WString { }">Yggdrasill's Room (Hard)</TextB>
+      <TextC kind="Leaf" offset="40744" length="76" type="WString { }">The room where Yggdrasil is staying.</TextC>
+    </_198>
+    <_199 kind="Record" offset="40820" length="160">
+      <TextKey kind="Leaf" offset="40820" length="4" type="Scalar { Kind = U32 }" value="1800" />
+      <TextA kind="Leaf" offset="40824" length="32" type="WString { }">Wasteland Area</TextA>
+      <TextB kind="Leaf" offset="40856" length="32" type="WString { }">Wasteland Area</TextB>
+      <TextC kind="Leaf" offset="40888" length="92" type="WString { }">An area where only dried sandstorms rage on.</TextC>
+    </_199>
+    <_200 kind="Record" offset="40980" length="232">
+      <TextKey kind="Leaf" offset="40980" length="4" type="Scalar { Kind = U32 }" value="1801" />
+      <TextA kind="Leaf" offset="40984" length="48" type="WString { }">Wasteland Area (Night)</TextA>
+      <TextB kind="Leaf" offset="41032" length="48" type="WString { }">Wasteland Area (Night)</TextB>
+      <TextC kind="Leaf" offset="41080" length="132" type="WString { }">Nighttime Wasteland Area where darkness envelops the entire map.</TextC>
+    </_200>
+    <_201 kind="Record" offset="41212" length="168">
+      <TextKey kind="Leaf" offset="41212" length="4" type="Scalar { Kind = U32 }" value="1802" />
+      <TextA kind="Leaf" offset="41216" length="26" type="WString { }">Forest Area</TextA>
+      <TextB kind="Leaf" offset="41242" length="26" type="WString { }">Forest Area</TextB>
+      <TextC kind="Leaf" offset="41268" length="112" type="WString { }">An area filled with mystical lake and beautiful trees.</TextC>
+    </_201>
+    <_202 kind="Record" offset="41380" length="132">
+      <TextKey kind="Leaf" offset="41380" length="4" type="Scalar { Kind = U32 }" value="1803" />
+      <TextA kind="Leaf" offset="41384" length="24" type="WString { }">Ocean Area</TextA>
+      <TextB kind="Leaf" offset="41408" length="24" type="WString { }">Ocean Area</TextB>
+      <TextC kind="Leaf" offset="41432" length="80" type="WString { }">An area with beautiful ocean seascape.</TextC>
+    </_202>
+    <_203 kind="Record" offset="41512" length="216">
+      <TextKey kind="Leaf" offset="41512" length="4" type="Scalar { Kind = U32 }" value="1804" />
+      <TextA kind="Leaf" offset="41516" length="44" type="WString { }">Four Holy Beast Area</TextA>
+      <TextB kind="Leaf" offset="41560" length="44" type="WString { }">Four Holy Beast Area</TextB>
+      <TextC kind="Leaf" offset="41604" length="124" type="WString { }">A desolate and silent place nearby the Four Holy Beast area.</TextC>
+    </_203>
+    <_204 kind="Record" offset="41728" length="122">
+      <TextKey kind="Leaf" offset="41728" length="4" type="Scalar { Kind = U32 }" value="1805" />
+      <TextA kind="Leaf" offset="41732" length="24" type="WString { }">Cloud Area</TextA>
+      <TextB kind="Leaf" offset="41756" length="24" type="WString { }">Cloud Area</TextB>
+      <TextC kind="Leaf" offset="41780" length="70" type="WString { }">An area with heavy cloud and fog.</TextC>
+    </_204>
+    <_205 kind="Record" offset="41850" length="224">
+      <TextKey kind="Leaf" offset="41850" length="4" type="Scalar { Kind = U32 }" value="1806" />
+      <TextA kind="Leaf" offset="41854" length="64" type="WString { }">Collapsed Four Holy Beast Area</TextA>
+      <TextB kind="Leaf" offset="41918" length="64" type="WString { }">Collapsed Four Holy Beast Area</TextB>
+      <TextC kind="Leaf" offset="41982" length="92" type="WString { }">Completely collapsed Four Holy Beasts' area.</TextC>
+    </_205>
+    <_206 kind="Record" offset="42074" length="194">
+      <TextKey kind="Leaf" offset="42074" length="4" type="Scalar { Kind = U32 }" value="1807" />
+      <TextA kind="Leaf" offset="42078" length="54" type="WString { }">Zhuqiaomon's Resting Area</TextA>
+      <TextB kind="Leaf" offset="42132" length="54" type="WString { }">Zhuqiaomon's Resting Area</TextB>
+      <TextC kind="Leaf" offset="42186" length="82" type="WString { }">Resting Area where Zhuqiaomon presides.</TextC>
+    </_206>
+    <_207 kind="Record" offset="42268" length="240">
+      <TextKey kind="Leaf" offset="42268" length="4" type="Scalar { Kind = U32 }" value="1808" />
+      <TextA kind="Leaf" offset="42272" length="66" type="WString { }">Four Holy Beast Area (D-Reaper)</TextA>
+      <TextB kind="Leaf" offset="42338" length="66" type="WString { }">Four Holy Beast Area (D-Reaper)</TextB>
+      <TextC kind="Leaf" offset="42404" length="104" type="WString { }">Four Holy Beasts' area where D-Reaper was spotted.</TextC>
+    </_207>
+    <_208 kind="Record" offset="42508" length="292">
+      <TextKey kind="Leaf" offset="42508" length="4" type="Scalar { Kind = U32 }" value="1809" />
+      <TextA kind="Leaf" offset="42512" length="42" type="WString { }">Chaotic Battlefield</TextA>
+      <TextB kind="Leaf" offset="42554" length="42" type="WString { }">Chaotic Battlefield</TextB>
+      <TextC kind="Leaf" offset="42596" length="204" type="WString { }">An illusional area created by Zhuqiaomon, replicating the battle between Beelzebumon and Megidramon.</TextC>
+    </_208>
+    <_209 kind="Record" offset="42800" length="264">
+      <TextKey kind="Leaf" offset="42800" length="4" type="Scalar { Kind = U32 }" value="1810" />
+      <TextA kind="Leaf" offset="42804" length="28" type="WString { }">Final Battle</TextA>
+      <TextB kind="Leaf" offset="42832" length="28" type="WString { }">Final Battle</TextB>
+      <TextC kind="Leaf" offset="42860" length="204" type="WString { }">An illusional area created by Zhuqiaomon, replicating the battle between Zhuqiaomon and Qinglongmon.</TextC>
+    </_209>
+    <_210 kind="Record" offset="43064" length="250">
+      <TextKey kind="Leaf" offset="43064" length="4" type="Scalar { Kind = U32 }" value="1901" />
+      <TextA kind="Leaf" offset="43068" length="50" type="WString { }">Forest of the Beginning</TextA>
+      <TextB kind="Leaf" offset="43118" length="50" type="WString { }">Forest of the Beginning</TextB>
+      <TextC kind="Leaf" offset="43168" length="146" type="WString { }">The region under MetalSeadramon's rule, who is one of the Dark Masters.</TextC>
+    </_210>
+    <_211 kind="Record" offset="43314" length="218">
+      <TextKey kind="Leaf" offset="43314" length="4" type="Scalar { Kind = U32 }" value="1902" />
+      <TextA kind="Leaf" offset="43318" length="44" type="WString { }">Forest of Marionette</TextA>
+      <TextB kind="Leaf" offset="43362" length="44" type="WString { }">Forest of Marionette</TextB>
+      <TextC kind="Leaf" offset="43406" length="126" type="WString { }">Here is dominion of Puppetmon who is one of the dark masters.</TextC>
+    </_211>
+    <_212 kind="Record" offset="43532" length="200">
+      <TextKey kind="Leaf" offset="43532" length="4" type="Scalar { Kind = U32 }" value="1903" />
+      <TextA kind="Leaf" offset="43536" length="28" type="WString { }">Metal Empire</TextA>
+      <TextB kind="Leaf" offset="43564" length="28" type="WString { }">Metal Empire</TextB>
+      <TextC kind="Leaf" offset="43592" length="140" type="WString { }">This is a region controlled by one of the Dark Masters, MugenDramon.</TextC>
+    </_212>
+    <_213 kind="Record" offset="43732" length="216">
+      <TextKey kind="Leaf" offset="43732" length="4" type="Scalar { Kind = U32 }" value="1904" />
+      <TextA kind="Leaf" offset="43736" length="36" type="WString { }">Underground City</TextA>
+      <TextB kind="Leaf" offset="43772" length="36" type="WString { }">Underground City</TextB>
+      <TextC kind="Leaf" offset="43808" length="140" type="WString { }">This is a region controlled by one of the Dark Masters, MugenDramon.</TextC>
+    </_213>
+    <_214 kind="Record" offset="43948" length="232">
+      <TextKey kind="Leaf" offset="43948" length="4" type="Scalar { Kind = U32 }" value="1905" />
+      <TextA kind="Leaf" offset="43952" length="48" type="WString { }">The Top Of A Nightmare</TextA>
+      <TextB kind="Leaf" offset="44000" length="48" type="WString { }">The Top Of A Nightmare</TextB>
+      <TextC kind="Leaf" offset="44048" length="132" type="WString { }">This is a region controlled by one of the Dark Masters, Piedmon.</TextC>
+    </_214>
+    <_215 kind="Record" offset="44180" length="120">
+      <TextKey kind="Leaf" offset="44180" length="4" type="Scalar { Kind = U32 }" value="1906" />
+      <TextA kind="Leaf" offset="44184" length="24" type="WString { }">Void Space</TextA>
+      <TextB kind="Leaf" offset="44208" length="24" type="WString { }">Void Space</TextB>
+      <TextC kind="Leaf" offset="44232" length="68" type="WString { }">Void space filled with darkness.</TextC>
+    </_215>
+    <_216 kind="Record" offset="44300" length="252">
+      <TextKey kind="Leaf" offset="44300" length="4" type="Scalar { Kind = U32 }" value="1907" />
+      <TextA kind="Leaf" offset="44304" length="46" type="WString { }">Lake of the Beginning</TextA>
+      <TextB kind="Leaf" offset="44350" length="46" type="WString { }">Lake of the Beginning</TextB>
+      <TextC kind="Leaf" offset="44396" length="156" type="WString { }">Lake where the chosen children first stayed when they came to Digital World.</TextC>
+    </_216>
+    <_217 kind="Record" offset="44552" length="238">
+      <TextKey kind="Leaf" offset="44552" length="4" type="Scalar { Kind = U32 }" value="1911" />
+      <TextA kind="Leaf" offset="44556" length="44" type="WString { }">Marine Dragon Domain</TextA>
+      <TextB kind="Leaf" offset="44600" length="44" type="WString { }">Marine Dragon Domain</TextB>
+      <TextC kind="Leaf" offset="44644" length="146" type="WString { }">The region under MetalSeadramon's rule, who is one of the Dark Masters.</TextC>
+    </_217>
+    <_218 kind="Record" offset="44790" length="266">
+      <TextKey kind="Leaf" offset="44790" length="4" type="Scalar { Kind = U32 }" value="1912" />
+      <TextA kind="Leaf" offset="44794" length="68" type="WString { }">Front Yard of Marionette Mansion</TextA>
+      <TextB kind="Leaf" offset="44862" length="68" type="WString { }">Front Yard of Marionette Mansion</TextB>
+      <TextC kind="Leaf" offset="44930" length="126" type="WString { }">Here is dominion of Puppetmon who is one of the dark masters.</TextC>
+    </_218>
+    <_219 kind="Record" offset="45056" length="224">
+      <TextKey kind="Leaf" offset="45056" length="4" type="Scalar { Kind = U32 }" value="1913" />
+      <TextA kind="Leaf" offset="45060" length="40" type="WString { }">Back of the Empire</TextA>
+      <TextB kind="Leaf" offset="45100" length="40" type="WString { }">Back of the Empire</TextB>
+      <TextC kind="Leaf" offset="45140" length="140" type="WString { }">This is a region controlled by one of the Dark Masters, MugenDramon.</TextC>
+    </_219>
+    <_220 kind="Record" offset="45280" length="200">
+      <TextKey kind="Leaf" offset="45280" length="4" type="Scalar { Kind = U32 }" value="1914" />
+      <TextA kind="Leaf" offset="45284" length="32" type="WString { }">Stage Of Clown</TextA>
+      <TextB kind="Leaf" offset="45316" length="32" type="WString { }">Stage Of Clown</TextB>
+      <TextC kind="Leaf" offset="45348" length="132" type="WString { }">This is a region controlled by one of the Dark Masters, Piedmon.</TextC>
+    </_220>
+    <_221 kind="Record" offset="45480" length="120">
+      <TextKey kind="Leaf" offset="45480" length="4" type="Scalar { Kind = U32 }" value="1915" />
+      <TextA kind="Leaf" offset="45484" length="24" type="WString { }">Void Space</TextA>
+      <TextB kind="Leaf" offset="45508" length="24" type="WString { }">Void Space</TextB>
+      <TextC kind="Leaf" offset="45532" length="68" type="WString { }">Void space filled with darkness.</TextC>
+    </_221>
+    <_222 kind="Record" offset="45600" length="222">
+      <TextKey kind="Leaf" offset="45600" length="4" type="Scalar { Kind = U32 }" value="2001" />
+      <TextA kind="Leaf" offset="45604" length="38" type="WString { }">Shadow\nLabyrinth</TextA>
+      <TextB kind="Leaf" offset="45642" length="36" type="WString { }">Shadow Labyrinth</TextB>
+      <TextC kind="Leaf" offset="45678" length="144" type="WString { }">A place where the data is distorted by the effect of Ocean of Darkness</TextC>
+    </_222>
+    <_223 kind="Record" offset="45822" length="248">
+      <TextKey kind="Leaf" offset="45822" length="4" type="Scalar { Kind = U32 }" value="2002" />
+      <TextA kind="Leaf" offset="45826" length="50" type="WString { }">Shadow Labyrinth (Hard)</TextA>
+      <TextB kind="Leaf" offset="45876" length="50" type="WString { }">Shadow Labyrinth (Hard)</TextB>
+      <TextC kind="Leaf" offset="45926" length="144" type="WString { }">A place where the data is distorted by the effect of Ocean of Darkness</TextC>
+    </_223>
+    <_224 kind="Record" offset="46070" length="294">
+      <TextKey kind="Leaf" offset="46070" length="4" type="Scalar { Kind = U32 }" value="2100" />
+      <TextA kind="Leaf" offset="46074" length="40" type="WString { }">Snowstorm\nVillage</TextA>
+      <TextB kind="Leaf" offset="46114" length="38" type="WString { }">Snowstorm Village</TextB>
+      <TextC kind="Leaf" offset="46152" length="212" type="WString { }">A village the early stage digital expedition went through. Doctor Akihiro Kurata went back for research.</TextC>
+    </_224>
+    <_225 kind="Record" offset="46364" length="236">
+      <TextKey kind="Leaf" offset="46364" length="4" type="Scalar { Kind = U32 }" value="2101" />
+      <TextA kind="Leaf" offset="46368" length="32" type="WString { }">Frozen\nGround</TextA>
+      <TextB kind="Leaf" offset="46400" length="30" type="WString { }">Frozen Ground</TextB>
+      <TextC kind="Leaf" offset="46430" length="170" type="WString { }">A frozen land nobody has stepped on, with only traces of a black saw-toothed wheel.</TextC>
+    </_225>
+    <_226 kind="Record" offset="46600" length="228">
+      <TextKey kind="Leaf" offset="46600" length="4" type="Scalar { Kind = U32 }" value="2102" />
+      <TextA kind="Leaf" offset="46604" length="36" type="WString { }">Snowman\nVillage</TextA>
+      <TextB kind="Leaf" offset="46640" length="34" type="WString { }">Snowman Village</TextB>
+      <TextC kind="Leaf" offset="46674" length="154" type="WString { }">The place where frigimon and keenan krier stayed from a very long time ago.</TextC>
+    </_226>
+    <_227 kind="Record" offset="46828" length="238">
+      <TextKey kind="Leaf" offset="46828" length="4" type="Scalar { Kind = U32 }" value="2103" />
+      <TextA kind="Leaf" offset="46832" length="52" type="WString { }">Distorted\nData\nVillage</TextA>
+      <TextB kind="Leaf" offset="46884" length="48" type="WString { }">Distorted Data Village</TextB>
+      <TextC kind="Leaf" offset="46932" length="134" type="WString { }">A village where data has been intentionally disturbed by someone.</TextC>
+    </_227>
+    <_228 kind="Record" offset="47066" length="394">
+      <TextKey kind="Leaf" offset="47066" length="4" type="Scalar { Kind = U32 }" value="2104" />
+      <TextA kind="Leaf" offset="47070" length="40" type="WString { }">Infinite\nIce Wall</TextA>
+      <TextB kind="Leaf" offset="47110" length="38" type="WString { }">Infinite Ice Wall</TextB>
+      <TextC kind="Leaf" offset="47148" length="312" type="WString { }">The place where the castle Merukimon, which rules the glacier region, is located. The location of Merukimon is currently unknown, causing great confusion.</TextC>
+    </_228>
+    <_229 kind="Record" offset="47460" length="110">
+      <TextKey kind="Leaf" offset="47460" length="4" type="Scalar { Kind = U32 }" value="3000" />
+      <TextA kind="Leaf" offset="47464" length="34" type="WString { }">Dungeon Masters</TextA>
+      <TextB kind="Leaf" offset="47498" length="34" type="WString { }">Dungeon Masters</TextB>
+      <TextC kind="Leaf" offset="47532" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_229>
+    <_230 kind="Record" offset="47570" length="110">
+      <TextKey kind="Leaf" offset="47570" length="4" type="Scalar { Kind = U32 }" value="3001" />
+      <TextA kind="Leaf" offset="47574" length="34" type="WString { }">Dungeon Masters</TextA>
+      <TextB kind="Leaf" offset="47608" length="34" type="WString { }">Dungeon Masters</TextB>
+      <TextC kind="Leaf" offset="47642" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_230>
+    <_231 kind="Record" offset="47680" length="110">
+      <TextKey kind="Leaf" offset="47680" length="4" type="Scalar { Kind = U32 }" value="3002" />
+      <TextA kind="Leaf" offset="47684" length="34" type="WString { }">Dungeon Masters</TextA>
+      <TextB kind="Leaf" offset="47718" length="34" type="WString { }">Dungeon Masters</TextB>
+      <TextC kind="Leaf" offset="47752" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_231>
+    <_232 kind="Record" offset="47790" length="110">
+      <TextKey kind="Leaf" offset="47790" length="4" type="Scalar { Kind = U32 }" value="3003" />
+      <TextA kind="Leaf" offset="47794" length="34" type="WString { }">Dungeon Masters</TextA>
+      <TextB kind="Leaf" offset="47828" length="34" type="WString { }">Dungeon Masters</TextB>
+      <TextC kind="Leaf" offset="47862" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_232>
+    <_233 kind="Record" offset="47900" length="110">
+      <TextKey kind="Leaf" offset="47900" length="4" type="Scalar { Kind = U32 }" value="3004" />
+      <TextA kind="Leaf" offset="47904" length="34" type="WString { }">Dungeon Masters</TextA>
+      <TextB kind="Leaf" offset="47938" length="34" type="WString { }">Dungeon Masters</TextB>
+      <TextC kind="Leaf" offset="47972" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_233>
+    <_234 kind="Record" offset="48010" length="110">
+      <TextKey kind="Leaf" offset="48010" length="4" type="Scalar { Kind = U32 }" value="3005" />
+      <TextA kind="Leaf" offset="48014" length="34" type="WString { }">Dungeon Masters</TextA>
+      <TextB kind="Leaf" offset="48048" length="34" type="WString { }">Dungeon Masters</TextB>
+      <TextC kind="Leaf" offset="48082" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_234>
+    <_235 kind="Record" offset="48120" length="62">
+      <TextKey kind="Leaf" offset="48120" length="4" type="Scalar { Kind = U32 }" value="3007" />
+      <TextA kind="Leaf" offset="48124" length="10" type="WString { }">상점가</TextA>
+      <TextB kind="Leaf" offset="48134" length="10" type="WString { }">상점가</TextB>
+      <TextC kind="Leaf" offset="48144" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_235>
+    <_236 kind="Record" offset="48182" length="58">
+      <TextKey kind="Leaf" offset="48182" length="4" type="Scalar { Kind = U32 }" value="3008" />
+      <TextA kind="Leaf" offset="48186" length="8" type="WString { }">악몽</TextA>
+      <TextB kind="Leaf" offset="48194" length="8" type="WString { }">악몽</TextB>
+      <TextC kind="Leaf" offset="48202" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_236>
+    <_237 kind="Record" offset="48240" length="78">
+      <TextKey kind="Leaf" offset="48240" length="4" type="Scalar { Kind = U32 }" value="3009" />
+      <TextA kind="Leaf" offset="48244" length="18" type="WString { }">던전 마스터즈</TextA>
+      <TextB kind="Leaf" offset="48262" length="18" type="WString { }">던전 마스터즈</TextB>
+      <TextC kind="Leaf" offset="48280" length="38" type="WString { }">Colosseum Stadium</TextC>
+    </_237>
+  </Entries>
+</AreaMapInfo_Str>

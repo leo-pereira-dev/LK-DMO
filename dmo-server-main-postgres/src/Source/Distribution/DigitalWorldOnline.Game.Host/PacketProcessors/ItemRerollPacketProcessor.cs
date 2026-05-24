@@ -8,6 +8,7 @@ using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Models;
+using DigitalWorldOnline.Commons.Models.Asset;
 using DigitalWorldOnline.Commons.Packets.Chat;
 using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.Items;
@@ -378,7 +379,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         return;
                     }
 
-                    var optionInfo = ResolveAccessoryOptionInfo(itemInfo.Type);
+                    var optionInfo = ResolveAccessoryOptionInfo(itemInfo);
                     if (optionInfo != null)
                     {
                         targetAccessory.AccessoryStatus = targetAccessory.AccessoryStatus.OrderBy(x => x.Slot).ToList();
@@ -467,7 +468,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         return;
                     }
 
-                    var optionInfo = ResolveAccessoryOptionInfo(itemInfo.Type);
+                    var optionInfo = ResolveAccessoryOptionInfo(itemInfo);
                     if (optionInfo != null)
                     {
                         targetAccessory.AccessoryStatus = targetAccessory.AccessoryStatus.OrderBy(x => x.Slot).ToList();
@@ -560,9 +561,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             await _sender.Send(new UpdateItemCommand(consumedStone));
         }
 
-        private AccessoryOptionInfo? ResolveAccessoryOptionInfo(int accessoryType)
+        private AccessoryOptionInfo? ResolveAccessoryOptionInfo(ItemAssetModel itemInfo)
         {
-            var record = _itemListBinLoader.Data.AccessoryOptions.FirstOrDefault(x => x.ItemType == (uint)accessoryType);
+            var optionKey = ResolveAccessoryOptionKey(itemInfo);
+            var record = _itemListBinLoader.Data.AccessoryOptions.FirstOrDefault(x => x.ItemType == optionKey);
             if (record == null)
                 return null;
 
@@ -580,8 +582,16 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (!grouped.Any())
                 return null;
 
-            int maxStatusCount = Math.Max(0, Math.Min(record.MaxValue, grouped.Sum(x => x.MaxAmount)));
+            int maxStatusCount = Math.Max(0, Math.Min((int)record.MinValue, grouped.Sum(x => x.MaxAmount)));
             return new AccessoryOptionInfo(maxStatusCount, grouped);
+        }
+
+        private uint ResolveAccessoryOptionKey(ItemAssetModel itemInfo)
+        {
+            if (itemInfo.SkillCode > 0 && _itemListBinLoader.Data.AccessoryOptions.Any(x => x.ItemType == (uint)itemInfo.SkillCode))
+                return (uint)itemInfo.SkillCode;
+
+            return (uint)itemInfo.Type;
         }
 
         private sealed record AccessoryOptionInfo(int MaxStatusCount, List<AccessoryOptionRange> Options);

@@ -314,6 +314,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
                             case SkillCodeApplyTypeEnum.AlsoPercent:
                             case SkillCodeApplyTypeEnum.Percent:
                             case SkillCodeApplyTypeEnum.Unknown105:
+                            case SkillCodeApplyTypeEnum.CriticalDamagePercent:
                                 {
                                     SomaValue += apply.Value + (buff.TypeN) * apply.IncreaseValue;
 

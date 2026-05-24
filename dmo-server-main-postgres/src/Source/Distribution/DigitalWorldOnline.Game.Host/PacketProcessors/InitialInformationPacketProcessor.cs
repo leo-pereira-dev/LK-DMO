@@ -16,6 +16,7 @@ using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Models.Account;
 using DigitalWorldOnline.Commons.Models.Base;
 using DigitalWorldOnline.Commons.Models.Character;
+using DigitalWorldOnline.Commons.Models.Digimon;
 using DigitalWorldOnline.Commons.Packets.Chat;
 using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.Items;
@@ -32,6 +33,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 {
     public class InitialInformationPacketProcessor : IGamePacketProcessor
     {
+        private const int MaxClientEvolutionUnits = 16;
+
         public GameServerPacketEnum Type => GameServerPacketEnum.InitialInformation;
 
         private readonly PartyManager _partyManager;
@@ -227,6 +230,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 character.Inventory.Count);
 
             await RecoverInvalidEvolutionState(character);
+            await EnsureMissingEvolutionRows(character);
             await RecoverAutoUnlockedEvolutions(character);
 
             foreach (var digimon in character.Digimons)
@@ -624,6 +628,60 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         digimon.BaseType,
                         evolution.Type,
                         line.EvoSlot);
+                }
+            }
+        }
+
+        private async Task EnsureMissingEvolutionRows(CharacterModel character)
+        {
+            foreach (var digimon in character.Digimons)
+            {
+                var tree = _digimonEvo.Data.FindByType(digimon.BaseType);
+                if (tree == null)
+                    continue;
+
+                var assetTree = _assets.EvolutionInfo.FirstOrDefault(x => x.Type == digimon.BaseType);
+                var existingTypes = digimon.Evolutions.Select(x => x.Type).ToHashSet();
+
+                foreach (var line in tree.Lines.OrderBy(x => x.EvoSlot))
+                {
+                    if (line.EvoSlot <= 0 || line.EvoSlot > MaxClientEvolutionUnits)
+                        continue;
+
+                    if (!existingTypes.Add(line.Type))
+                        continue;
+
+                    var evolution = new DigimonEvolutionModel(line.Type);
+                    var assetLine = assetTree?.Lines.FirstOrDefault(x => x.Type == line.Type);
+                    if (assetLine?.SkillMaxLevels != null)
+                        evolution.SetSkillMaxLevels(assetLine.SkillMaxLevels);
+
+                    if (ShouldAutoUnlockEvolution(line))
+                        evolution.Unlock();
+
+                    var evolutionId = await _sender.Send(new CreateEvolutionCommand(digimon.Id, evolution));
+                    if (evolutionId <= 0)
+                    {
+                        _logger.Warning(
+                            "[EVO-REPAIR] could not create missing evolution row: character={CharacterId} digimon={DigimonId} base={BaseType} evolution={EvolutionType}",
+                            character.Id,
+                            digimon.Id,
+                            digimon.BaseType,
+                            line.Type);
+                        continue;
+                    }
+
+                    evolution.SetId(evolutionId);
+                    digimon.Evolutions.Add(evolution);
+
+                    _logger.Information(
+                        "[EVO-REPAIR] character={CharacterId} digimon={DigimonId} base={BaseType} added={EvolutionType} slot={SlotLevel} unlocked={Unlocked}",
+                        character.Id,
+                        digimon.Id,
+                        digimon.BaseType,
+                        evolution.Type,
+                        line.EvoSlot,
+                        evolution.Unlocked);
                 }
             }
         }

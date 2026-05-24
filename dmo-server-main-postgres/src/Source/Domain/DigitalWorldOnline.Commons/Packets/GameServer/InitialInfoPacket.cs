@@ -11,6 +11,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
     {
         private const int PacketNumber = 1003;
         private const int GmPanelClientOption = unchecked((int)0x80000000);
+        private const int MaxClientEvolutionUnits = 16;
 
         /// <summary>
         /// Initial information for character spawn.
@@ -101,12 +102,13 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteInt(character.Partner.BL);
             WriteInt(character.Partner.BaseType);
 
-            WriteByte((byte)character.Partner.Evolutions.Count);
+            var partnerEvolutions = GetClientSafeEvolutions(character.Partner.Evolutions);
 
-            //TODO: teste com foreach
-            for (int i = 0; i < character.Partner.Evolutions.Count; i++)
+            WriteByte((byte)partnerEvolutions.Count);
+
+            for (int i = 0; i < partnerEvolutions.Count; i++)
             {
-                var form = character.Partner.Evolutions[i];
+                var form = partnerEvolutions[i];
                 WriteBytes(form.ToArray());
             }
 
@@ -164,7 +166,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteShort(character.Partner.AttributeExperience.Steel);
 
             WriteInt(0);//nUID (não é mais utilizado?)
-            WriteMemorySkillBlock(character.Partner.Evolutions, evoStageLookup);
+            WriteMemorySkillBlock(partnerEvolutions, evoStageLookup);
 
             byte slot = 1;
             foreach (var digimon in character.ActiveDigimons)
@@ -198,11 +200,12 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
                 WriteInt(digimon.BL);
                 WriteInt(digimon.BaseType);
 
-                WriteByte((byte)digimon.Evolutions.Count);
-                //TODO: teste com foreach
-                for (int i = 0; i < digimon.Evolutions.Count; i++)
+                var activeDigimonEvolutions = GetClientSafeEvolutions(digimon.Evolutions);
+
+                WriteByte((byte)activeDigimonEvolutions.Count);
+                for (int i = 0; i < activeDigimonEvolutions.Count; i++)
                 {
-                    var form = digimon.Evolutions[i];
+                    var form = activeDigimonEvolutions[i];
                     WriteBytes(form.ToArray());
                 }
 
@@ -238,7 +241,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
                 WriteShort(digimon.AttributeExperience.Steel);
 
                 WriteInt(16404); //16404
-                WriteMemorySkillBlock(digimon.Evolutions, evoStageLookup);
+                WriteMemorySkillBlock(activeDigimonEvolutions, evoStageLookup);
 
                 slot++;
             }
@@ -396,6 +399,13 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteInt(0);
 
             WriteBytes(new byte[29]);
+        }
+
+        private static List<DigimonEvolutionModel> GetClientSafeEvolutions(IList<DigimonEvolutionModel> evolutions)
+        {
+            return evolutions
+                .Take(MaxClientEvolutionUnits)
+                .ToList();
         }
 
         /// <summary>

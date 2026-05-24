@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Event_Str schema="Event_Str.struct" bin="Event_Str.bin" byteLength="8661">
+  <Groups kind="Section" offset="0" length="8661">
+    <_0 kind="Record" offset="4" length="4831">
+      <GroupKey kind="Leaf" offset="4" length="1" type="Scalar { Kind = U8 }" value="3" />
+      <TextCount kind="Leaf" offset="5" length="4" type="Scalar { Kind = U32 }" value="32" />
+      <EventTexts kind="Array" offset="9" length="4826" count="32">
+        <_0_ kind="Struct" offset="9" length="80">
+          <TextKey kind="Leaf" offset="9" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <TextA kind="Leaf" offset="13" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_0_>
+        <_1_ kind="Struct" offset="89" length="80">
+          <TextKey kind="Leaf" offset="89" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <TextA kind="Leaf" offset="93" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_1_>
+        <_2_ kind="Struct" offset="169" length="80">
+          <TextKey kind="Leaf" offset="169" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <TextA kind="Leaf" offset="173" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_2_>
+        <_3_ kind="Struct" offset="249" length="80">
+          <TextKey kind="Leaf" offset="249" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <TextA kind="Leaf" offset="253" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_3_>
+        <_4_ kind="Struct" offset="329" length="80">
+          <TextKey kind="Leaf" offset="329" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <TextA kind="Leaf" offset="333" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_4_>
+        <_5_ kind="Struct" offset="409" length="80">
+          <TextKey kind="Leaf" offset="409" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <TextA kind="Leaf" offset="413" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_5_>
+        <_6_ kind="Struct" offset="489" length="80">
+          <TextKey kind="Leaf" offset="489" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <TextA kind="Leaf" offset="493" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_6_>
+        <_7_ kind="Struct" offset="569" length="80">
+          <TextKey kind="Leaf" offset="569" length="4" type="Scalar { Kind = U32 }" value="7" />
+          <TextA kind="Leaf" offset="573" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_7_>
+        <_8_ kind="Struct" offset="649" length="80">
+          <TextKey kind="Leaf" offset="649" length="4" type="Scalar { Kind = U32 }" value="8" />
+          <TextA kind="Leaf" offset="653" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_8_>
+        <_9_ kind="Struct" offset="729" length="80">
+          <TextKey kind="Leaf" offset="729" length="4" type="Scalar { Kind = U32 }" value="9" />
+          <TextA kind="Leaf" offset="733" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_9_>
+        <_10_ kind="Struct" offset="809" length="80">
+          <TextKey kind="Leaf" offset="809" length="4" type="Scalar { Kind = U32 }" value="10" />
+          <TextA kind="Leaf" offset="813" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_10_>
+        <_11_ kind="Struct" offset="889" length="80">
+          <TextKey kind="Leaf" offset="889" length="4" type="Scalar { Kind = U32 }" value="11" />
+          <TextA kind="Leaf" offset="893" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_11_>
+        <_12_ kind="Struct" offset="969" length="80">
+          <TextKey kind="Leaf" offset="969" length="4" type="Scalar { Kind = U32 }" value="12" />
+          <TextA kind="Leaf" offset="973" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_12_>
+        <_13_ kind="Struct" offset="1049" length="80">
+          <TextKey kind="Leaf" offset="1049" length="4" type="Scalar { Kind = U32 }" value="13" />
+          <TextA kind="Leaf" offset="1053" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_13_>
+        <_14_ kind="Struct" offset="1129" length="80">
+          <TextKey kind="Leaf" offset="1129" length="4" type="Scalar { Kind = U32 }" value="14" />
+          <TextA kind="Leaf" offset="1133" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_14_>
+        <_15_ kind="Struct" offset="1209" length="80">
+          <TextKey kind="Leaf" offset="1209" length="4" type="Scalar { Kind = U32 }" value="15" />
+          <TextA kind="Leaf" offset="1213" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_15_>
+        <_16_ kind="Struct" offset="1289" length="80">
+          <TextKey kind="Leaf" offset="1289" length="4" type="Scalar { Kind = U32 }" value="16" />
+          <TextA kind="Leaf" offset="1293" length="76" type="WString { }">Welcome back to the Digital world!!!</TextA>
+        </_16_>
+        <_17_ kind="Struct" offset="1369" length="330">
+          <TextKey kind="Leaf" offset="1369" length="4" type="Scalar { Kind = U32 }" value="17" />
+          <TextA kind="Leaf" offset="1373" length="326" type="WString { }">Come Back Tamer! Event Reward
+
+The event reward for the returners of Digimon Masters Online has arrived.
+Reward items can be obtained through the Cash Warehouse.</TextA>
+        </_17_>
+        <_18_ kind="Struct" offset="1699" length="330">
+          <TextKey kind="Leaf" offset="1699" length="4" type="Scalar { Kind = U32 }" value="18" />
+          <TextA kind="Leaf" offset="1703" length="326" type="WString { }">Come Back Tamer! Event Reward
+
+The event reward for the returners of Digimon Masters Online has arrived.
+Reward items can be obtained through the Cash Warehouse.</TextA>
+        </_18_>
+        <_19_ kind="Struct" offset="2029" length="200">
+          <TextKey kind="Leaf" offset="2029" length="4" type="Scalar { Kind = U32 }" value="19" />
+          <TextA kind="Leaf" offset="2033" length="196" type="WString { }">2021년 봄맞이 복귀 테이머 이벤트 보상
+
+디지몬 마스터즈 복귀 유저에게 지급하는 이벤트 보상이 도착하였습니다.
+지급된 보상 아이템은 캐시 창고에서 확인하실 수 있습니다.</TextA>
+        </_19_>
+        <_20_ kind="Struct" offset="2229" length="340">
+          <TextKey kind="Leaf" offset="2229" length="4" type="Scalar { Kind = U32 }" value="20" />
+          <TextA kind="Leaf" offset="2233" length="336" type="WString { }">2021 Come Back Tamer! Event Reward
+
+The event reward for the returners of Digimon Masters Online has arrived.
+Reward items can be obtained through the Cash Warehouse.</TextA>
+        </_20_>
+        <_21_ kind="Struct" offset="2569" length="340">
+          <TextKey kind="Leaf" offset="2569" length="4" type="Scalar { Kind = U32 }" value="21" />
+          <TextA kind="Leaf" offset="2573" length="336" type="WString { }">2021 Come Back Tamer! Event Reward
+
+The event reward for the returners of Digimon Masters Online has arrived.
+Reward items can be obtained through the Cash Warehouse.</TextA>
+        </_21_>
+        <_22_ kind="Struct" offset="2909" length="340">
+          <TextKey kind="Leaf" offset="2909" length="4" type="Scalar { Kind = U32 }" value="22" />
+          <TextA kind="Leaf" offset="2913" length="336" type="WString { }">2022 Come Back Tamer! Event Reward
+
+The event reward for the returners of Digimon Masters Online has arrived.
+Reward items can be obtained through the Cash Warehouse.</TextA>
+        </_22_>
+        <_23_ kind="Struct" offset="3249" length="340">
+          <TextKey kind="Leaf" offset="3249" length="4" type="Scalar { Kind = U32 }" value="23" />
+          <TextA kind="Leaf" offset="3253" length="336" type="WString { }">2023 Come Back Tamer! Event Reward
+
+The event reward for the returners of Digimon Masters Online has arrived.
+Reward items can be obtained through the Cash Warehouse.</TextA>
+        </_23_>
+        <_24_ kind="Struct" offset="3589" length="314">
+          <TextKey kind="Leaf" offset="3589" length="4" type="Scalar { Kind = U32 }" value="24" />
+          <TextA kind="Leaf" offset="3593" length="310" type="WString { }">Summer Return User Support Event Reward
+
+Event rewards for returning Digimon Masters users have arrived.
+Rewarded items can be checked at Cash Inventory.</TextA>
+        </_24_>
+        <_25_ kind="Struct" offset="3903" length="300">
+          <TextKey kind="Leaf" offset="3903" length="4" type="Scalar { Kind = U32 }" value="25" />
+          <TextA kind="Leaf" offset="3907" length="296" type="WString { }">Return User Support Event Reward
+
+Event rewards for returning Digimon Masters users have arrived.
+Rewarded items can be checked at Cash Inventory.</TextA>
+        </_25_>
+        <_26_ kind="Struct" offset="4203" length="300">
+          <TextKey kind="Leaf" offset="4203" length="4" type="Scalar { Kind = U32 }" value="26" />
+          <TextA kind="Leaf" offset="4207" length="296" type="WString { }">Return User Support Event Reward
+
+Event rewards for returning Digimon Masters users have arrived.
+Rewarded items can be checked at Cash Inventory.</TextA>
+        </_26_>
+        <_27_ kind="Struct" offset="4503" length="300">
+          <TextKey kind="Leaf" offset="4503" length="4" type="Scalar { Kind = U32 }" value="27" />
+          <TextA kind="Leaf" offset="4507" length="296" type="WString { }">Return User Support Event Reward
+
+Event rewards for returning Digimon Masters users have arrived.
+Rewarded items can be checked at Cash Inventory.</TextA>
+        </_27_>
+        <_28_ kind="Struct" offset="4803" length="8">
+          <TextKey kind="Leaf" offset="4803" length="4" type="Scalar { Kind = U32 }" value="28" />
+          <TextA kind="Leaf" offset="4807" length="4" type="WString { }"></TextA>
+        </_28_>
+        <_29_ kind="Struct" offset="4811" length="8">
+          <TextKey kind="Leaf" offset="4811" length="4" type="Scalar { Kind = U32 }" value="29" />
+          <TextA kind="Leaf" offset="4815" length="4" type="WString { }"></TextA>
+        </_29_>
+        <_30_ kind="Struct" offset="4819" length="8">
+          <TextKey kind="Leaf" offset="4819" length="4" type="Scalar { Kind = U32 }" value="30" />
+          <TextA kind="Leaf" offset="4823" length="4" type="WString { }"></TextA>
+        </_30_>
+        <_31_ kind="Struct" offset="4827" length="8">
+          <TextKey kind="Leaf" offset="4827" length="4" type="Scalar { Kind = U32 }" value="31" />
+          <TextA kind="Leaf" offset="4831" length="4" type="WString { }"></TextA>
+        </_31_>
+      </EventTexts>
+    </_0>
+    <_1 kind="Record" offset="4835" length="1259">
+      <GroupKey kind="Leaf" offset="4835" length="1" type="Scalar { Kind = U8 }" value="5" />
+      <TextCount kind="Leaf" offset="4836" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <EventTexts kind="Array" offset="4840" length="1254" count="8">
+        <_0_ kind="Struct" offset="4840" length="8">
+          <TextKey kind="Leaf" offset="4840" length="4" type="Scalar { Kind = U32 }" value="4294967295" />
+          <TextA kind="Leaf" offset="4844" length="4" type="WString { }"></TextA>
+        </_0_>
+        <_1_ kind="Struct" offset="4848" length="178">
+          <TextKey kind="Leaf" offset="4848" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <TextA kind="Leaf" offset="4852" length="174" type="WString { }">Congratulations. Tamer level reached 10.
+Items above are given only once per account.</TextA>
+        </_1_>
+        <_2_ kind="Struct" offset="5026" length="178">
+          <TextKey kind="Leaf" offset="5026" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <TextA kind="Leaf" offset="5030" length="174" type="WString { }">Congratulations. Tamer level reached 20.
+Items above are given only once per account.</TextA>
+        </_2_>
+        <_3_ kind="Struct" offset="5204" length="178">
+          <TextKey kind="Leaf" offset="5204" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <TextA kind="Leaf" offset="5208" length="174" type="WString { }">Congratulations. Tamer level reached 30.
+Items above are given only once per account.</TextA>
+        </_3_>
+        <_4_ kind="Struct" offset="5382" length="178">
+          <TextKey kind="Leaf" offset="5382" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <TextA kind="Leaf" offset="5386" length="174" type="WString { }">Congratulations. Tamer level reached 40.
+Items above are given only once per account.</TextA>
+        </_4_>
+        <_5_ kind="Struct" offset="5560" length="178">
+          <TextKey kind="Leaf" offset="5560" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <TextA kind="Leaf" offset="5564" length="174" type="WString { }">Congratulations. Tamer level reached 50.
+Items above are given only once per account.</TextA>
+        </_5_>
+        <_6_ kind="Struct" offset="5738" length="178">
+          <TextKey kind="Leaf" offset="5738" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <TextA kind="Leaf" offset="5742" length="174" type="WString { }">Congratulations. Tamer level reached 60.
+Items above are given only once per account.</TextA>
+        </_6_>
+        <_7_ kind="Struct" offset="5916" length="178">
+          <TextKey kind="Leaf" offset="5916" length="4" type="Scalar { Kind = U32 }" value="6" />
+          <TextA kind="Leaf" offset="5920" length="174" type="WString { }">Congratulations. Tamer level reached 99.
+Items above are given only once per account.</TextA>
+        </_7_>
+      </EventTexts>
+    </_1>
+    <_2 kind="Record" offset="6094" length="2567">
+      <GroupKey kind="Leaf" offset="6094" length="1" type="Scalar { Kind = U8 }" value="7" />
+      <TextCount kind="Leaf" offset="6095" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <EventTexts kind="Array" offset="6099" length="2562" count="7">
+        <_0_ kind="Struct" offset="6099" length="8">
+          <TextKey kind="Leaf" offset="6099" length="4" type="Scalar { Kind = U32 }" value="4294967295" />
+          <TextA kind="Leaf" offset="6103" length="4" type="WString { }"></TextA>
+        </_0_>
+        <_1_ kind="Struct" offset="6107" length="464">
+          <TextKey kind="Leaf" offset="6107" length="4" type="Scalar { Kind = U32 }" value="0" />
+          <TextA kind="Leaf" offset="6111" length="460" type="WString { }">[Jumping Digimon reaches Level 50] - Receive the reward of Jumping Digimon's level achievement from the Gift &amp; Reward Item Storage!
+The next rewards for reaching level 60 are Jumping Fruit and Mysterious Jogress DigiEgg (Alpha)!</TextA>
+        </_1_>
+        <_2_ kind="Struct" offset="6571" length="450">
+          <TextKey kind="Leaf" offset="6571" length="4" type="Scalar { Kind = U32 }" value="1" />
+          <TextA kind="Leaf" offset="6575" length="446" type="WString { }">[Jumping Digimon reaches Level 60] - Receive the reward of Jumping Digimon's level achievement from the Gift &amp; Reward Item Storage!
+The next rewards for reaching level 70 are Jumping Fruit and Growth Accessory (Necklace)!</TextA>
+        </_2_>
+        <_3_ kind="Struct" offset="7021" length="462">
+          <TextKey kind="Leaf" offset="7021" length="4" type="Scalar { Kind = U32 }" value="2" />
+          <TextA kind="Leaf" offset="7025" length="458" type="WString { }">[Jumping Digimon reaches Level 70] - Receive the reward of Jumping Digimon's level achievement from the Gift &amp; Reward Item Storage!
+The next rewards for reaching level 80 are Jumping Fruit and Mysterious Jogress DigiEgg (Beta)!</TextA>
+        </_3_>
+        <_4_ kind="Struct" offset="7483" length="450">
+          <TextKey kind="Leaf" offset="7483" length="4" type="Scalar { Kind = U32 }" value="3" />
+          <TextA kind="Leaf" offset="7487" length="446" type="WString { }">[Jumping Digimon reaches Level 80] - Receive the reward of Jumping Digimon's level achievement from the Gift &amp; Reward Item Storage!
+The next rewards for reaching level 90 are Jumping Fruit and Growth Accessory (Earrings)!</TextA>
+        </_4_>
+        <_5_ kind="Struct" offset="7933" length="458">
+          <TextKey kind="Leaf" offset="7933" length="4" type="Scalar { Kind = U32 }" value="4" />
+          <TextA kind="Leaf" offset="7937" length="454" type="WString { }">[Jumping Digimon reaches Level 90] - Receive the reward of Jumping Digimon's level achievement from the Gift &amp; Reward Item Storage!
+The next rewards for reaching level 99 are Jumping Fruit and Mysterious Jogress DigiEgg Lv.5!</TextA>
+        </_5_>
+        <_6_ kind="Struct" offset="8391" length="270">
+          <TextKey kind="Leaf" offset="8391" length="4" type="Scalar { Kind = U32 }" value="5" />
+          <TextA kind="Leaf" offset="8395" length="266" type="WString { }">[Jumping Digimon reaches Level 99] - Receive the reward of Jumping Digimon's level achievement from the Gift &amp; Reward Item Storage!</TextA>
+        </_6_>
+      </EventTexts>
+    </_2>
+  </Groups>
+</Event_Str>

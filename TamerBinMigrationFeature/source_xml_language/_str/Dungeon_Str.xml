@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon_Str schema="Dungeon_Str.struct" bin="Dungeon_Str.bin" byteLength="17482">
+  <Entries kind="Section" offset="0" length="17482">
+    <_0 kind="Record" offset="4" length="148">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="5001" />
+      <TextA kind="Leaf" offset="8" length="58" type="WString { }">Gankoomon's Training Ground</TextA>
+      <TextB kind="Leaf" offset="66" length="86" type="WString { }">Entry Max: 1\nGankoomon's Training Ground</TextB>
+    </_0>
+    <_1 kind="Record" offset="152" length="122">
+      <TextKey kind="Leaf" offset="152" length="4" type="Scalar { Kind = U32 }" value="5201" />
+      <TextA kind="Leaf" offset="156" length="26" type="WString { }">Upper floor</TextA>
+      <TextB kind="Leaf" offset="182" length="92" type="WString { }">Max Capacity : 4\nRequired Digimon level: 90</TextB>
+    </_1>
+    <_2 kind="Record" offset="274" length="180">
+      <TextKey kind="Leaf" offset="274" length="4" type="Scalar { Kind = U32 }" value="5301" />
+      <TextA kind="Leaf" offset="278" length="26" type="WString { }">Lower floor</TextA>
+      <TextB kind="Leaf" offset="304" length="150" type="WString { }">Max Capacity : 4\nParty play is recommended.\nRequired Digimon level: 130</TextB>
+    </_2>
+    <_3 kind="Record" offset="454" length="260">
+      <TextKey kind="Leaf" offset="454" length="4" type="Scalar { Kind = U32 }" value="5401" />
+      <TextA kind="Leaf" offset="458" length="14" type="WString { }">Abyss</TextA>
+      <TextB kind="Leaf" offset="472" length="242" type="WString { }">Max Capacity : 4\nWarning!\nVery powerful enemies will appear.\nParty play is recommended.\nRequired Digimon level: 130</TextB>
+    </_3>
+    <_4 kind="Record" offset="714" length="150">
+      <TextKey kind="Leaf" offset="714" length="4" type="Scalar { Kind = U32 }" value="7001" />
+      <TextA kind="Leaf" offset="718" length="26" type="WString { }">Marketplace</TextA>
+      <TextB kind="Leaf" offset="744" length="120" type="WString { }">Maximum Entry: 1 Player\nStop the rampaging GulusGammamon!</TextB>
+    </_4>
+    <_5 kind="Record" offset="864" length="150">
+      <TextKey kind="Leaf" offset="864" length="4" type="Scalar { Kind = U32 }" value="7002" />
+      <TextA kind="Leaf" offset="868" length="26" type="WString { }">Marketplace</TextA>
+      <TextB kind="Leaf" offset="894" length="120" type="WString { }">Maximum Entry: 1 Player\nStop the rampaging GulusGammamon!</TextB>
+    </_5>
+    <_6 kind="Record" offset="1014" length="246">
+      <TextKey kind="Leaf" offset="1014" length="4" type="Scalar { Kind = U32 }" value="7201" />
+      <TextA kind="Leaf" offset="1018" length="22" type="WString { }">Neverland</TextA>
+      <TextB kind="Leaf" offset="1040" length="220" type="WString { }">Max Entry: 4 players\nThe DigiDestined are losing consciousness.\nStop Eosmon who has appeared in Neverland!</TextB>
+    </_6>
+    <_7 kind="Record" offset="1260" length="320">
+      <TextKey kind="Leaf" offset="1260" length="4" type="Scalar { Kind = U32 }" value="8701" />
+      <TextA kind="Leaf" offset="1264" length="26" type="WString { }">Maze Runner</TextA>
+      <TextB kind="Leaf" offset="1290" length="290" type="WString { }">Max Capacity : 4\nIt is a Maze dungeon that looks incredibly complicated. If you escape as quickly as possible, something good might happen...?</TextB>
+    </_7>
+    <_8 kind="Record" offset="1580" length="340">
+      <TextKey kind="Leaf" offset="1580" length="4" type="Scalar { Kind = U32 }" value="8801" />
+      <TextA kind="Leaf" offset="1584" length="28" type="WString { }">RTG - Bridge</TextA>
+      <TextB kind="Leaf" offset="1612" length="308" type="WString { }">Max Capacity : 4\nCompetitive dungeon where the skills(strength) of guilds in Digimon Masters are compared to select the strongest guild in each country</TextB>
+    </_8>
+    <_9 kind="Record" offset="1920" length="174">
+      <TextKey kind="Leaf" offset="1920" length="4" type="Scalar { Kind = U32 }" value="8901" />
+      <TextA kind="Leaf" offset="1924" length="50" type="WString { }">Lonely Mountain[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="1974" length="120" type="WString { }">Max entrance: 1\nMountain where lonely people are gathered</TextB>
+    </_9>
+    <_10 kind="Record" offset="2094" length="184">
+      <TextKey kind="Leaf" offset="2094" length="4" type="Scalar { Kind = U32 }" value="9001" />
+      <TextA kind="Leaf" offset="2098" length="44" type="WString { }">Santa's Room[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="2142" length="136" type="WString { }">Maximum Capacity : 1\nSanta's Room\nRecommended Digimon level : 80</TextB>
+    </_10>
+    <_11 kind="Record" offset="2278" length="182">
+      <TextKey kind="Leaf" offset="2278" length="4" type="Scalar { Kind = U32 }" value="9101" />
+      <TextA kind="Leaf" offset="2282" length="42" type="WString { }">Black Rabbit's Hole</TextA>
+      <TextB kind="Leaf" offset="2324" length="136" type="WString { }">Max Capacity : 1\nBlack Rabbit's Hole\nRequired Digimon level : 80</TextB>
+    </_11>
+    <_12 kind="Record" offset="2460" length="182">
+      <TextKey kind="Leaf" offset="2460" length="4" type="Scalar { Kind = U32 }" value="9201" />
+      <TextA kind="Leaf" offset="2464" length="12" type="WString { }">Maze</TextA>
+      <TextB kind="Leaf" offset="2476" length="166" type="WString { }">Max Capacity: 1\nMaze where Energy of Moon has fallen\nRequired Digimon level: 80</TextB>
+    </_12>
+    <_13 kind="Record" offset="2642" length="208">
+      <TextKey kind="Leaf" offset="2642" length="4" type="Scalar { Kind = U32 }" value="9301" />
+      <TextA kind="Leaf" offset="2646" length="50" type="WString { }">Ferocious Ocean[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="2696" length="154" type="WString { }">Maximum: 1 P\nOcean of Mysterious Dimension\nRecommended Digimon level : 90</TextB>
+    </_13>
+    <_14 kind="Record" offset="2850" length="272">
+      <TextKey kind="Leaf" offset="2850" length="4" type="Scalar { Kind = U32 }" value="9401" />
+      <TextA kind="Leaf" offset="2854" length="94" type="WString { }">Let's Go on an Adventure! : Evolution[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="2948" length="174" type="WString { }">Maximum Capacity : 1\nAn adventure for Evolution takes place here\nDigimon Level : 60</TextB>
+    </_14>
+    <_15 kind="Record" offset="3122" length="164">
+      <TextKey kind="Leaf" offset="3122" length="4" type="Scalar { Kind = U32 }" value="11401" />
+      <TextA kind="Leaf" offset="3126" length="44" type="WString { }">Yokohama Secret Park</TextA>
+      <TextB kind="Leaf" offset="3170" length="116" type="WString { }">Maximum Entry Capacity: 1 Person\nA secret park for cats</TextB>
+    </_15>
+    <_16 kind="Record" offset="3286" length="206">
+      <TextKey kind="Leaf" offset="3286" length="4" type="Scalar { Kind = U32 }" value="20501" />
+      <TextA kind="Leaf" offset="3290" length="82" type="WString { }">Tokyo Tower Observatory (Dungeon)[EASY]</TextA>
+      <TextB kind="Leaf" offset="3372" length="120" type="WString { }">Entry Max: 4\nStop DeadMeramon at Tokyo Tower Observatory!</TextB>
+    </_16>
+    <_17 kind="Record" offset="3492" length="194">
+      <TextKey kind="Leaf" offset="3492" length="4" type="Scalar { Kind = U32 }" value="20502" />
+      <TextA kind="Leaf" offset="3496" length="70" type="WString { }">Tokyo Tower Observatory (Dungeon)</TextA>
+      <TextB kind="Leaf" offset="3566" length="120" type="WString { }">Entry Max: 4\nStop DeadMeramon at Tokyo Tower Observatory!</TextB>
+    </_17>
+    <_18 kind="Record" offset="3686" length="182">
+      <TextKey kind="Leaf" offset="3686" length="4" type="Scalar { Kind = U32 }" value="21001" />
+      <TextA kind="Leaf" offset="3690" length="66" type="WString { }">Fuji TV Rooftop (Dungeon)[EASY]</TextA>
+      <TextB kind="Leaf" offset="3756" length="112" type="WString { }">Entry Max: 4\nDefeat Myotismon on the Fuji TV Rooftop!</TextB>
+    </_18>
+    <_19 kind="Record" offset="3868" length="170">
+      <TextKey kind="Leaf" offset="3868" length="4" type="Scalar { Kind = U32 }" value="21002" />
+      <TextA kind="Leaf" offset="3872" length="54" type="WString { }">Fuji TV Rooftop (Dungeon)</TextA>
+      <TextB kind="Leaf" offset="3926" length="112" type="WString { }">Entry Max: 4\nDefeat Myotismon on the Fuji TV Rooftop!</TextB>
+    </_19>
+    <_20 kind="Record" offset="4038" length="262">
+      <TextKey kind="Leaf" offset="4038" length="4" type="Scalar { Kind = U32 }" value="21101" />
+      <TextA kind="Leaf" offset="4042" length="46" type="WString { }">Venomous Vortex[EASY]</TextA>
+      <TextB kind="Leaf" offset="4088" length="212" type="WString { }">Entry Max: 4\nMyotismon has awakened into VenomMyotismon! Defeat VenomMyotismon and save the real world!</TextB>
+    </_20>
+    <_21 kind="Record" offset="4300" length="250">
+      <TextKey kind="Leaf" offset="4300" length="4" type="Scalar { Kind = U32 }" value="21102" />
+      <TextA kind="Leaf" offset="4304" length="34" type="WString { }">Venomous Vortex</TextA>
+      <TextB kind="Leaf" offset="4338" length="212" type="WString { }">Entry Max: 4\nMyotismon has awakened into VenomMyotismon! Defeat VenomMyotismon and save the real world!</TextB>
+    </_21>
+    <_22 kind="Record" offset="4550" length="420">
+      <TextKey kind="Leaf" offset="4550" length="4" type="Scalar { Kind = U32 }" value="21201" />
+      <TextA kind="Leaf" offset="4554" length="48" type="WString { }">Rainbow Bridge[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="4602" length="368" type="WString { }">Maximum Capacity : 4\nJoe and T.K. head to Odaiba on Ikkakumon's back.\nHowever, they unexpectedly encounter a fearsome opponent on Rainbow Bridge...\nWill they survive this ordeal!?</TextB>
+    </_22>
+    <_23 kind="Record" offset="4970" length="164">
+      <TextKey kind="Leaf" offset="4970" length="4" type="Scalar { Kind = U32 }" value="25201" />
+      <TextA kind="Leaf" offset="4974" length="30" type="WString { }">Stadium[EASY]</TextA>
+      <TextB kind="Leaf" offset="5004" length="130" type="WString { }">Maximum: 1 P\nStop the Vajramon meeting Renamon at the stadium!</TextB>
+    </_23>
+    <_24 kind="Record" offset="5134" length="230">
+      <TextKey kind="Leaf" offset="5134" length="4" type="Scalar { Kind = U32 }" value="25301" />
+      <TextA kind="Leaf" offset="5138" length="30" type="WString { }">Road [NORMAL]</TextA>
+      <TextB kind="Leaf" offset="5168" length="196" type="WString { }">Maximum: 4 P\nStop the Vikaralamon on the road and Digimon coming from beyond the digital world!</TextB>
+    </_24>
+    <_25 kind="Record" offset="5364" length="170">
+      <TextKey kind="Leaf" offset="5364" length="4" type="Scalar { Kind = U32 }" value="25601" />
+      <TextA kind="Leaf" offset="5368" length="36" type="WString { }">Stadium [NORMAL]</TextA>
+      <TextB kind="Leaf" offset="5404" length="130" type="WString { }">Maximum: 1 P\nStop the Vajramon meeting Renamon at the stadium!</TextB>
+    </_25>
+    <_26 kind="Record" offset="5534" length="212">
+      <TextKey kind="Leaf" offset="5534" length="4" type="Scalar { Kind = U32 }" value="25701" />
+      <TextA kind="Leaf" offset="5538" length="26" type="WString { }">Road [EASY]</TextA>
+      <TextB kind="Leaf" offset="5564" length="182" type="WString { }">Maximum: 1 P\nStop Vikaralamon on the road and Digimons coming from beyong Digital World!</TextB>
+    </_26>
+    <_27 kind="Record" offset="5746" length="178">
+      <TextKey kind="Leaf" offset="5746" length="4" type="Scalar { Kind = U32 }" value="26302" />
+      <TextA kind="Leaf" offset="5750" length="54" type="WString { }">Shinjuku Station [NORMAL]</TextA>
+      <TextB kind="Leaf" offset="5804" length="120" type="WString { }">Max Capacity: 4\nStop the D-Reapers from Shinjuku Station!</TextB>
+    </_27>
+    <_28 kind="Record" offset="5924" length="216">
+      <TextKey kind="Leaf" offset="5924" length="4" type="Scalar { Kind = U32 }" value="26402" />
+      <TextA kind="Leaf" offset="5928" length="66" type="WString { }">Shinjuku Park(D-Reaper)[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="5994" length="146" type="WString { }">Max Capacity: 1\nStop the D-Reaper ADR-01 from Shinjuku Park(D-Reaper)!</TextB>
+    </_28>
+    <_29 kind="Record" offset="6140" length="198">
+      <TextKey kind="Leaf" offset="6140" length="4" type="Scalar { Kind = U32 }" value="26602" />
+      <TextA kind="Leaf" offset="6144" length="46" type="WString { }">D-Reaper Area[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="6190" length="148" type="WString { }">Max Capacity: 4\nDefeat the D-Reapers that appears in the D-Reaper Area!</TextB>
+    </_29>
+    <_30 kind="Record" offset="6338" length="186">
+      <TextKey kind="Leaf" offset="6338" length="4" type="Scalar { Kind = U32 }" value="30001" />
+      <TextA kind="Leaf" offset="6342" length="48" type="WString { }">Digimon Arena [Normal]</TextA>
+      <TextB kind="Leaf" offset="6390" length="134" type="WString { }">Maximum Entry Capacity: 1 Person\nOvercome the limits of Digimon!</TextB>
+    </_30>
+    <_31 kind="Record" offset="6524" length="184">
+      <TextKey kind="Leaf" offset="6524" length="4" type="Scalar { Kind = U32 }" value="30101" />
+      <TextA kind="Leaf" offset="6528" length="44" type="WString { }">Digimon Arena [Hard]</TextA>
+      <TextB kind="Leaf" offset="6572" length="136" type="WString { }">Maximum Entry Capacity: 1 Person\nChallenge the impossible limits!</TextB>
+    </_31>
+    <_32 kind="Record" offset="6708" length="184">
+      <TextKey kind="Leaf" offset="6708" length="4" type="Scalar { Kind = U32 }" value="32801" />
+      <TextA kind="Leaf" offset="6712" length="52" type="WString { }">DATS HQ basement storage</TextA>
+      <TextB kind="Leaf" offset="6764" length="128" type="WString { }">Maximum Entry Capacity: 1 Person\nClean up the messy basement!</TextB>
+    </_32>
+    <_33 kind="Record" offset="6892" length="148">
+      <TextKey kind="Leaf" offset="6892" length="4" type="Scalar { Kind = U32 }" value="40101" />
+      <TextA kind="Leaf" offset="6896" length="30" type="WString { }">Kaiser's Base</TextA>
+      <TextB kind="Leaf" offset="6926" length="114" type="WString { }">Maximum Entry: 4 Players\nStop Digimon Kaiser's Plan!  </TextB>
+    </_33>
+    <_34 kind="Record" offset="7040" length="144">
+      <TextKey kind="Leaf" offset="7040" length="4" type="Scalar { Kind = U32 }" value="40201" />
+      <TextA kind="Leaf" offset="7044" length="30" type="WString { }">Kaiser's Base</TextA>
+      <TextB kind="Leaf" offset="7074" length="110" type="WString { }">Maximum Entry: 4 Players\nStop Digimon Kaiser's Plan!</TextB>
+    </_34>
+    <_35 kind="Record" offset="7184" length="166">
+      <TextKey kind="Leaf" offset="7184" length="4" type="Scalar { Kind = U32 }" value="40501" />
+      <TextA kind="Leaf" offset="7188" length="20" type="WString { }">Dark Web</TextA>
+      <TextB kind="Leaf" offset="7208" length="142" type="WString { }">Maximum Entry: 2 Players\nStop Diablomon from destroying the network!</TextB>
+    </_35>
+    <_36 kind="Record" offset="7350" length="180">
+      <TextKey kind="Leaf" offset="7350" length="4" type="Scalar { Kind = U32 }" value="40701" />
+      <TextA kind="Leaf" offset="7354" length="22" type="WString { }">Nightmare</TextA>
+      <TextB kind="Leaf" offset="7376" length="154" type="WString { }">Maximum Entry: 1 Player\nLet’s save the children from the Seed of Darkness!</TextB>
+    </_36>
+    <_37 kind="Record" offset="7530" length="264">
+      <TextKey kind="Leaf" offset="7530" length="4" type="Scalar { Kind = U32 }" value="41001" />
+      <TextA kind="Leaf" offset="7534" length="32" type="WString { }">Digimon Kaiser</TextA>
+      <TextB kind="Leaf" offset="7566" length="228" type="WString { }">Maximum Entry: 4 Player\nThe Digimon Kaiser has kidnapped Agumon.\nLet’s rescue Agumon from the Digimon Kaiser.
+</TextB>
+    </_37>
+    <_38 kind="Record" offset="7794" length="208">
+      <TextKey kind="Leaf" offset="7794" length="4" type="Scalar { Kind = U32 }" value="41101" />
+      <TextA kind="Leaf" offset="7798" length="44" type="WString { }">Kaiser's Domain [1P]</TextA>
+      <TextB kind="Leaf" offset="7842" length="160" type="WString { }">Maximum Entry: 1 Player\nRescue the Digimons controlled by the Digimon Kaiser.</TextB>
+    </_38>
+    <_39 kind="Record" offset="8002" length="210">
+      <TextKey kind="Leaf" offset="8002" length="4" type="Scalar { Kind = U32 }" value="41201" />
+      <TextA kind="Leaf" offset="8006" length="44" type="WString { }">Kaiser's Domain [4P]</TextA>
+      <TextB kind="Leaf" offset="8050" length="162" type="WString { }">Maximum Entry: 4 Players\nRescue the Digimons controlled by the Digimon Kaiser.</TextB>
+    </_39>
+    <_40 kind="Record" offset="8212" length="174">
+      <TextKey kind="Leaf" offset="8212" length="4" type="Scalar { Kind = U32 }" value="51001" />
+      <TextA kind="Leaf" offset="8216" length="32" type="WString { }">Flame Terminal</TextA>
+      <TextB kind="Leaf" offset="8248" length="138" type="WString { }">Maximum entry: 1 person\nLet's save the Flame Terminal in danger!  </TextB>
+    </_40>
+    <_41 kind="Record" offset="8386" length="182">
+      <TextKey kind="Leaf" offset="8386" length="4" type="Scalar { Kind = U32 }" value="51101" />
+      <TextA kind="Leaf" offset="8390" length="44" type="WString { }">Terminal Underground</TextA>
+      <TextB kind="Leaf" offset="8434" length="134" type="WString { }">Maximum entry: 1 person\nLet's investigate the suspicious area!  </TextB>
+    </_41>
+    <_42 kind="Record" offset="8568" length="178">
+      <TextKey kind="Leaf" offset="8568" length="4" type="Scalar { Kind = U32 }" value="51201" />
+      <TextA kind="Leaf" offset="8572" length="44" type="WString { }">Terminal Underground</TextA>
+      <TextB kind="Leaf" offset="8616" length="130" type="WString { }">Maximum entry: 1 person\nLet's investigate the suspicious area!</TextB>
+    </_42>
+    <_43 kind="Record" offset="8746" length="256">
+      <TextKey kind="Leaf" offset="8746" length="4" type="Scalar { Kind = U32 }" value="110901" />
+      <TextA kind="Leaf" offset="8750" length="64" type="WString { }">Kaiser's Laboratory [4P][EASY]</TextA>
+      <TextB kind="Leaf" offset="8814" length="188" type="WString { }">Maximum: 4 P\nKaiser's Laboratory! Deal with the Kaiser's Horrible result of the experiment!</TextB>
+    </_43>
+    <_44 kind="Record" offset="9002" length="260">
+      <TextKey kind="Leaf" offset="9002" length="4" type="Scalar { Kind = U32 }" value="110902" />
+      <TextA kind="Leaf" offset="9006" length="68" type="WString { }">Kaiser's Laboratory [4P][NORMAL]</TextA>
+      <TextB kind="Leaf" offset="9074" length="188" type="WString { }">Maximum: 4 P\nKaiser's Laboratory! Deal with the Kaiser's Horrible result of the experiment!</TextB>
+    </_44>
+    <_45 kind="Record" offset="9262" length="256">
+      <TextKey kind="Leaf" offset="9262" length="4" type="Scalar { Kind = U32 }" value="110903" />
+      <TextA kind="Leaf" offset="9266" length="64" type="WString { }">Kaiser's Laboratory [4P][HARD]</TextA>
+      <TextB kind="Leaf" offset="9330" length="188" type="WString { }">Maximum: 4 P\nKaiser's Laboratory! Deal with the Kaiser's Horrible result of the experiment!</TextB>
+    </_45>
+    <_46 kind="Record" offset="9518" length="436">
+      <TextKey kind="Leaf" offset="9518" length="4" type="Scalar { Kind = U32 }" value="130402" />
+      <TextA kind="Leaf" offset="9522" length="72" type="WString { }">Ancient Ruins of Secret [1P][EASY]</TextA>
+      <TextB kind="Leaf" offset="9594" length="360" type="WString { }">Maximum: 1 P\nPalmon and Izzy find the whereabouts of Tentomon and Mimi, who entered the Ancient Ruins.\nReceive Palmon's request, let's follow the track of Digimon in the ruins.</TextB>
+    </_46>
+    <_47 kind="Record" offset="9954" length="440">
+      <TextKey kind="Leaf" offset="9954" length="4" type="Scalar { Kind = U32 }" value="130403" />
+      <TextA kind="Leaf" offset="9958" length="76" type="WString { }">Ancient Ruins of Secret [4P][NORMAL]</TextA>
+      <TextB kind="Leaf" offset="10034" length="360" type="WString { }">Maximum: 4 P\nPalmon and Izzy find the whereabouts of Tentomon and Mimi, who entered the Ancient Ruins.\nReceive Palmon's request, let's follow the track of Digimon in the ruins.</TextB>
+    </_47>
+    <_48 kind="Record" offset="10394" length="334">
+      <TextKey kind="Leaf" offset="10394" length="4" type="Scalar { Kind = U32 }" value="130803" />
+      <TextA kind="Leaf" offset="10398" length="62" type="WString { }">Crack of Devimon [4P][NORMAL]</TextA>
+      <TextB kind="Leaf" offset="10460" length="268" type="WString { }">Maximum: 4 P\nAnother Crack to the other demention has occured.\nDevidramon is growing the Power to dominate File Island again here.</TextB>
+    </_48>
+    <_49 kind="Record" offset="10728" length="330">
+      <TextKey kind="Leaf" offset="10728" length="4" type="Scalar { Kind = U32 }" value="130804" />
+      <TextA kind="Leaf" offset="10732" length="58" type="WString { }">Crack of Devimon [4P][HARD]</TextA>
+      <TextB kind="Leaf" offset="10790" length="268" type="WString { }">Maximum: 4 P\nAnother Crack to the other demention has occured.\nDevidramon is growing the Power to dominate File Island again here.</TextB>
+    </_49>
+    <_50 kind="Record" offset="11058" length="234">
+      <TextKey kind="Leaf" offset="11058" length="4" type="Scalar { Kind = U32 }" value="131201" />
+      <TextA kind="Leaf" offset="11062" length="60" type="WString { }">Destruction and Regeneration</TextA>
+      <TextB kind="Leaf" offset="11122" length="170" type="WString { }">Maximum number of participants: 4\nStop Susanoomon, who wants to destroy the world!</TextB>
+    </_50>
+    <_51 kind="Record" offset="11292" length="238">
+      <TextKey kind="Leaf" offset="11292" length="4" type="Scalar { Kind = U32 }" value="140301" />
+      <TextA kind="Leaf" offset="11296" length="50" type="WString { }">Nanomon Maze [4P][EASY]</TextA>
+      <TextB kind="Leaf" offset="11346" length="184" type="WString { }">Maximum: 4 P\nNanomon kidnapped colleagues. Find Nanomon in the Maze and rescue colleagues</TextB>
+    </_51>
+    <_52 kind="Record" offset="11530" length="242">
+      <TextKey kind="Leaf" offset="11530" length="4" type="Scalar { Kind = U32 }" value="140302" />
+      <TextA kind="Leaf" offset="11534" length="54" type="WString { }">Nanomon Maze [4P][NORMAL]</TextA>
+      <TextB kind="Leaf" offset="11588" length="184" type="WString { }">Maximum: 4 P\nNanomon kidnapped colleagues. Find Nanomon in the Maze and rescue colleagues</TextB>
+    </_52>
+    <_53 kind="Record" offset="11772" length="238">
+      <TextKey kind="Leaf" offset="11772" length="4" type="Scalar { Kind = U32 }" value="140303" />
+      <TextA kind="Leaf" offset="11776" length="50" type="WString { }">Nanomon Maze [4P][HARD]</TextA>
+      <TextB kind="Leaf" offset="11826" length="184" type="WString { }">Maximum: 4 P\nNanomon kidnapped colleagues. Find Nanomon in the Maze and rescue colleagues</TextB>
+    </_53>
+    <_54 kind="Record" offset="12010" length="220">
+      <TextKey kind="Leaf" offset="12010" length="4" type="Scalar { Kind = U32 }" value="150001" />
+      <TextA kind="Leaf" offset="12014" length="48" type="WString { }">GreenZone [4P][NORMAL]</TextA>
+      <TextB kind="Leaf" offset="12062" length="168" type="WString { }">Maximum: 4 P\nThe digital world threatened by Bagra Army.\nGreenZone is in Danger!</TextB>
+    </_54>
+    <_55 kind="Record" offset="12230" length="238">
+      <TextKey kind="Leaf" offset="12230" length="4" type="Scalar { Kind = U32 }" value="150002" />
+      <TextA kind="Leaf" offset="12234" length="66" type="WString { }">GreenZone [4P]-Advanced[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="12300" length="168" type="WString { }">Maximum: 4 P\nThe digital world threatened by Bagra Army.\nGreenZone is in Danger!</TextB>
+    </_55>
+    <_56 kind="Record" offset="12468" length="250">
+      <TextKey kind="Leaf" offset="12468" length="4" type="Scalar { Kind = U32 }" value="150101" />
+      <TextA kind="Leaf" offset="12472" length="52" type="WString { }">Miso Vilage [4P][NORMAL]</TextA>
+      <TextB kind="Leaf" offset="12524" length="194" type="WString { }">Maximum: 4 P\nBagra Army took over the Miso Village.\nLet's defeat the MadLeomon with Shoutmon.</TextB>
+    </_56>
+    <_57 kind="Record" offset="12718" length="132">
+      <TextKey kind="Leaf" offset="12718" length="4" type="Scalar { Kind = U32 }" value="150301" />
+      <TextA kind="Leaf" offset="12722" length="30" type="WString { }">Event Dungeon</TextA>
+      <TextB kind="Leaf" offset="12752" length="98" type="WString { }">Maximum: 1 P\nEnjoy the Life Reversal Festival!</TextB>
+    </_57>
+    <_58 kind="Record" offset="12850" length="124">
+      <TextKey kind="Leaf" offset="12850" length="4" type="Scalar { Kind = U32 }" value="160001" />
+      <TextA kind="Leaf" offset="12854" length="46" type="WString { }">Scar of Water Crystal</TextA>
+      <TextB kind="Leaf" offset="12900" length="74" type="WString { }">Entry Max: 4\nXuanwumon's Sanctuary</TextB>
+    </_58>
+    <_59 kind="Record" offset="12974" length="124">
+      <TextKey kind="Leaf" offset="12974" length="4" type="Scalar { Kind = U32 }" value="160002" />
+      <TextA kind="Leaf" offset="12978" length="46" type="WString { }">Scar of Water Crystal</TextA>
+      <TextB kind="Leaf" offset="13024" length="74" type="WString { }">Entry Max: 4\nXuanwumon's Sanctuary</TextB>
+    </_59>
+    <_60 kind="Record" offset="13098" length="124">
+      <TextKey kind="Leaf" offset="13098" length="4" type="Scalar { Kind = U32 }" value="160003" />
+      <TextA kind="Leaf" offset="13102" length="46" type="WString { }">Scar of Water Crystal</TextA>
+      <TextB kind="Leaf" offset="13148" length="74" type="WString { }">Entry Max: 4\nXuanwumon's Sanctuary</TextB>
+    </_60>
+    <_61 kind="Record" offset="13222" length="112">
+      <TextKey kind="Leaf" offset="13222" length="4" type="Scalar { Kind = U32 }" value="160101" />
+      <TextA kind="Leaf" offset="13226" length="32" type="WString { }">Uprising Flame</TextA>
+      <TextB kind="Leaf" offset="13258" length="76" type="WString { }">Entry Max: 4\nZhuqiaomon's Sanctuary</TextB>
+    </_61>
+    <_62 kind="Record" offset="13334" length="112">
+      <TextKey kind="Leaf" offset="13334" length="4" type="Scalar { Kind = U32 }" value="160102" />
+      <TextA kind="Leaf" offset="13338" length="32" type="WString { }">Uprising Flame</TextA>
+      <TextB kind="Leaf" offset="13370" length="76" type="WString { }">Entry Max: 4\nZhuqiaomon's Sanctuary</TextB>
+    </_62>
+    <_63 kind="Record" offset="13446" length="112">
+      <TextKey kind="Leaf" offset="13446" length="4" type="Scalar { Kind = U32 }" value="160103" />
+      <TextA kind="Leaf" offset="13450" length="32" type="WString { }">Uprising Flame</TextA>
+      <TextB kind="Leaf" offset="13482" length="76" type="WString { }">Entry Max: 4\nZhuqiaomon's Sanctuary</TextB>
+    </_63>
+    <_64 kind="Record" offset="13558" length="120">
+      <TextKey kind="Leaf" offset="13558" length="4" type="Scalar { Kind = U32 }" value="160201" />
+      <TextA kind="Leaf" offset="13562" length="44" type="WString { }">Trace of Black Steel</TextA>
+      <TextB kind="Leaf" offset="13606" length="72" type="WString { }">Entry Max: 4\nBaihumon's Sanctuary</TextB>
+    </_64>
+    <_65 kind="Record" offset="13678" length="120">
+      <TextKey kind="Leaf" offset="13678" length="4" type="Scalar { Kind = U32 }" value="160202" />
+      <TextA kind="Leaf" offset="13682" length="44" type="WString { }">Trace of Black Steel</TextA>
+      <TextB kind="Leaf" offset="13726" length="72" type="WString { }">Entry Max: 4\nBaihumon's Sanctuary</TextB>
+    </_65>
+    <_66 kind="Record" offset="13798" length="120">
+      <TextKey kind="Leaf" offset="13798" length="4" type="Scalar { Kind = U32 }" value="160203" />
+      <TextA kind="Leaf" offset="13802" length="44" type="WString { }">Trace of Black Steel</TextA>
+      <TextB kind="Leaf" offset="13846" length="72" type="WString { }">Entry Max: 4\nBaihumon's Sanctuary</TextB>
+    </_66>
+    <_67 kind="Record" offset="13918" length="130">
+      <TextKey kind="Leaf" offset="13918" length="4" type="Scalar { Kind = U32 }" value="160301" />
+      <TextA kind="Leaf" offset="13922" length="48" type="WString { }">Descending Thunder God</TextA>
+      <TextB kind="Leaf" offset="13970" length="78" type="WString { }">Entry Max: 4\nQinglongmon's Sanctuary</TextB>
+    </_67>
+    <_68 kind="Record" offset="14048" length="130">
+      <TextKey kind="Leaf" offset="14048" length="4" type="Scalar { Kind = U32 }" value="160302" />
+      <TextA kind="Leaf" offset="14052" length="48" type="WString { }">Descending Thunder God</TextA>
+      <TextB kind="Leaf" offset="14100" length="78" type="WString { }">Entry Max: 4\nQinglongmon's Sanctuary</TextB>
+    </_68>
+    <_69 kind="Record" offset="14178" length="130">
+      <TextKey kind="Leaf" offset="14178" length="4" type="Scalar { Kind = U32 }" value="160303" />
+      <TextA kind="Leaf" offset="14182" length="48" type="WString { }">Descending Thunder God</TextA>
+      <TextB kind="Leaf" offset="14230" length="78" type="WString { }">Entry Max: 4\nQinglongmon's Sanctuary</TextB>
+    </_69>
+    <_70 kind="Record" offset="14308" length="128">
+      <TextKey kind="Leaf" offset="14308" length="4" type="Scalar { Kind = U32 }" value="160801" />
+      <TextA kind="Leaf" offset="14312" length="44" type="WString { }">Huanglongmon Dungeon</TextA>
+      <TextB kind="Leaf" offset="14356" length="80" type="WString { }">Entry Max: 4\nHuanglongmon's Sanctuary</TextB>
+    </_70>
+    <_71 kind="Record" offset="14436" length="128">
+      <TextKey kind="Leaf" offset="14436" length="4" type="Scalar { Kind = U32 }" value="161401" />
+      <TextA kind="Leaf" offset="14440" length="44" type="WString { }">Huanglongmon Dungeon</TextA>
+      <TextB kind="Leaf" offset="14484" length="80" type="WString { }">Entry Max: 4\nHuanglongmon's Sanctuary</TextB>
+    </_71>
+    <_72 kind="Record" offset="14564" length="128">
+      <TextKey kind="Leaf" offset="14564" length="4" type="Scalar { Kind = U32 }" value="161601" />
+      <TextA kind="Leaf" offset="14568" length="44" type="WString { }">Huanglongmon Dungeon</TextA>
+      <TextB kind="Leaf" offset="14612" length="80" type="WString { }">Entry Max: 4\nHuanglongmon's Sanctuary</TextB>
+    </_72>
+    <_73 kind="Record" offset="14692" length="100">
+      <TextKey kind="Leaf" offset="14692" length="4" type="Scalar { Kind = U32 }" value="170101" />
+      <TextA kind="Leaf" offset="14696" length="40" type="WString { }">Royal Base[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="14736" length="56" type="WString { }">Entry Max: 4\nStop Dexmon!</TextB>
+    </_73>
+    <_74 kind="Record" offset="14792" length="96">
+      <TextKey kind="Leaf" offset="14792" length="4" type="Scalar { Kind = U32 }" value="170401" />
+      <TextA kind="Leaf" offset="14796" length="36" type="WString { }">Royal Base[EASY]</TextA>
+      <TextB kind="Leaf" offset="14832" length="56" type="WString { }">Entry Max: 4\nStop Dexmon!</TextB>
+    </_74>
+    <_75 kind="Record" offset="14888" length="96">
+      <TextKey kind="Leaf" offset="14888" length="4" type="Scalar { Kind = U32 }" value="170701" />
+      <TextA kind="Leaf" offset="14892" length="36" type="WString { }">Royal Base[HARD]</TextA>
+      <TextB kind="Leaf" offset="14928" length="56" type="WString { }">Entry Max: 4\nStop Dexmon!</TextB>
+    </_75>
+    <_76 kind="Record" offset="14984" length="288">
+      <TextKey kind="Leaf" offset="14984" length="4" type="Scalar { Kind = U32 }" value="180901" />
+      <TextA kind="Leaf" offset="14988" length="58" type="WString { }">Chaotic Battlefield[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="15046" length="226" type="WString { }">Maximum: 4 P\nZhuqiaomon recreated the battle between Beelzebumon and Megidramon to test Tamers. Pass the test!</TextB>
+    </_76>
+    <_77 kind="Record" offset="15272" length="274">
+      <TextKey kind="Leaf" offset="15272" length="4" type="Scalar { Kind = U32 }" value="181001" />
+      <TextA kind="Leaf" offset="15276" length="44" type="WString { }">Final Battle[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="15320" length="226" type="WString { }">Maximum: 4 P\nZhuqiaomon recreated the battle between Zhuqiaomon and Qinglongmon to test Tamers. Pass the test!</TextB>
+    </_77>
+    <_78 kind="Record" offset="15546" length="154">
+      <TextKey kind="Leaf" offset="15546" length="4" type="Scalar { Kind = U32 }" value="191102" />
+      <TextA kind="Leaf" offset="15550" length="60" type="WString { }">Marine Dragon Domain[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="15610" length="90" type="WString { }">Maximum Capacity: 4\nMetalSeadramon Dungeon</TextB>
+    </_78>
+    <_79 kind="Record" offset="15700" length="168">
+      <TextKey kind="Leaf" offset="15700" length="4" type="Scalar { Kind = U32 }" value="191202" />
+      <TextA kind="Leaf" offset="15704" length="84" type="WString { }">Front Yard of Marionette Mansion[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="15788" length="80" type="WString { }">Maximum Capacity: 4\nPuppetmon Dungeon</TextB>
+    </_79>
+    <_80 kind="Record" offset="15868" length="136">
+      <TextKey kind="Leaf" offset="15868" length="4" type="Scalar { Kind = U32 }" value="191302" />
+      <TextA kind="Leaf" offset="15872" length="48" type="WString { }">Back of the Empire [N]</TextA>
+      <TextB kind="Leaf" offset="15920" length="84" type="WString { }">Maximum Capacity: 4\nMugenDramon Dungeon</TextB>
+    </_80>
+    <_81 kind="Record" offset="16004" length="128">
+      <TextKey kind="Leaf" offset="16004" length="4" type="Scalar { Kind = U32 }" value="191402" />
+      <TextA kind="Leaf" offset="16008" length="48" type="WString { }">Stage Of Clown[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="16056" length="76" type="WString { }">Maximum Capacity: 4\nPiedmon Dungeon</TextB>
+    </_81>
+    <_82 kind="Record" offset="16132" length="128">
+      <TextKey kind="Leaf" offset="16132" length="4" type="Scalar { Kind = U32 }" value="191502" />
+      <TextA kind="Leaf" offset="16136" length="42" type="WString { }">Void Space [NORMAL]</TextA>
+      <TextB kind="Leaf" offset="16178" length="82" type="WString { }">Maximum Capacity: 4\nApocalymon Dungeon</TextB>
+    </_82>
+    <_83 kind="Record" offset="16260" length="176">
+      <TextKey kind="Leaf" offset="16260" length="4" type="Scalar { Kind = U32 }" value="200101" />
+      <TextA kind="Leaf" offset="16264" length="68" type="WString { }">Shadow Digimon Labyrinth[NORMAL]</TextA>
+      <TextB kind="Leaf" offset="16332" length="104" type="WString { }">Entry Max: 4\nHurry up before the world collapses!</TextB>
+    </_83>
+    <_84 kind="Record" offset="16436" length="172">
+      <TextKey kind="Leaf" offset="16436" length="4" type="Scalar { Kind = U32 }" value="200201" />
+      <TextA kind="Leaf" offset="16440" length="64" type="WString { }">Shadow Digimon Labyrinth[HARD]</TextA>
+      <TextB kind="Leaf" offset="16504" length="104" type="WString { }">Entry Max: 4\nHurry up before the world collapses!</TextB>
+    </_84>
+    <_85 kind="Record" offset="16608" length="158">
+      <TextKey kind="Leaf" offset="16608" length="4" type="Scalar { Kind = U32 }" value="300001" />
+      <TextA kind="Leaf" offset="16612" length="54" type="WString { }">Dungeon Masters Challenge</TextA>
+      <TextB kind="Leaf" offset="16666" length="100" type="WString { }">Maximum Entry: 4 Players\nBecome the strongest!!</TextB>
+    </_85>
+    <_86 kind="Record" offset="16766" length="160">
+      <TextKey kind="Leaf" offset="16766" length="4" type="Scalar { Kind = U32 }" value="300301" />
+      <TextA kind="Leaf" offset="16770" length="56" type="WString { }">Dungeon Masters2 Challenge</TextA>
+      <TextB kind="Leaf" offset="16826" length="100" type="WString { }">Maximum Entry: 4 Players\nBecome the strongest!!</TextB>
+    </_86>
+    <_87 kind="Record" offset="16926" length="184">
+      <TextKey kind="Leaf" offset="16926" length="4" type="Scalar { Kind = U32 }" value="300701" />
+      <TextA kind="Leaf" offset="16930" length="60" type="WString { }">Dungeon Masters(Marketplace)</TextA>
+      <TextB kind="Leaf" offset="16990" length="120" type="WString { }">Maximum Entry: 1 Player\nStop the rampaging GulusGammamon!</TextB>
+    </_87>
+    <_88 kind="Record" offset="17110" length="214">
+      <TextKey kind="Leaf" offset="17110" length="4" type="Scalar { Kind = U32 }" value="300801" />
+      <TextA kind="Leaf" offset="17114" length="56" type="WString { }">Dungeon Masters(Nightmare)</TextA>
+      <TextB kind="Leaf" offset="17170" length="154" type="WString { }">Maximum Entry: 1 Player\nLet’s save the children from the Seed of Darkness!</TextB>
+    </_88>
+    <_89 kind="Record" offset="17324" length="158">
+      <TextKey kind="Leaf" offset="17324" length="4" type="Scalar { Kind = U32 }" value="300901" />
+      <TextA kind="Leaf" offset="17328" length="54" type="WString { }">Dungeon Masters Challenge</TextA>
+      <TextB kind="Leaf" offset="17382" length="100" type="WString { }">Maximum Entry: 1 Players\nBecome the strongest!!</TextB>
+    </_89>
+  </Entries>
+</Dungeon_Str>

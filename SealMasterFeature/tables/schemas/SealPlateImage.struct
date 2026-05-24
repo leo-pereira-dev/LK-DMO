@@ -1,0 +1,18 @@
+[filemask=/home/freedomgamez/Desktop/DMO/tools/NewTools/BinTool/out_pack03_pack3only_v6_exact/Data/Bin/Table/SealPlateImage.bin]
+// SealPlateImage.bin — Pack03 v487 client.
+// Route: FUN_01624c60 -> FUN_016251d0 -> FUN_01622c20.
+// Verified: 6 rows, 1060/1060 bytes.
+
+bin SealPlateImage {
+    section Images {
+        count  u32;
+        record SealPlateImageRecord;
+    }
+}
+
+struct SealPlateImageRecord {
+    u8       Grade;
+    lstring  NifPath;
+    lstring  GradeBackImagePath;
+    lstring  BlindBackImagePath;
+}

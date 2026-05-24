@@ -7,7 +7,12 @@ namespace DigitalWorldOnline.Application.GameAssets.Bins;
 public sealed class ItemListBinLoader
 {
     private const string FileName = "ItemList.bin";
+    private const string SplitItemDataFileName = "ItemData.bin";
+    private const string SplitItemStringFileName = "Item_Str.bin";
+    private const string SplitAccessoryOptionFileName = "AccOption.bin";
+    private const string SplitAccessoryEnchantFileName = "AccEnchant.bin";
     private const int Utf16Bytes = 2;
+    private const int SplitAccessoryOptionSlots = 5;
 
     private static readonly int ItemInfoRecordSize = ComputeItemInfoRecordSize();
     private static readonly int ItemTapRecordSize = sizeof(ushort) + (32 * Utf16Bytes);
@@ -31,11 +36,241 @@ public sealed class ItemListBinLoader
     {
         if (_data != null) return _data;
 
-        var path = Path.Combine(BinPath.ResolveDirectory(), FileName);
+        var binDirectory = BinPath.ResolveDirectory();
+        if (TryLoadSplit(binDirectory, out var splitData))
+        {
+            _data = splitData;
+            return _data;
+        }
+
+        var path = Path.Combine(binDirectory, FileName);
         using var fs = File.OpenRead(path);
         using var r = new BinaryReader(fs);
         _data = Parse(r);
         return _data;
+    }
+
+    private static bool TryLoadSplit(string binDirectory, out ItemList data)
+    {
+        var itemDataPath = Path.Combine(binDirectory, SplitItemDataFileName);
+        var itemStringPath = Path.Combine(binDirectory, SplitItemStringFileName);
+        var accessoryOptionPath = Path.Combine(binDirectory, SplitAccessoryOptionFileName);
+        var accessoryEnchantPath = Path.Combine(binDirectory, SplitAccessoryEnchantFileName);
+
+        if (!File.Exists(itemDataPath) ||
+            !File.Exists(itemStringPath) ||
+            !File.Exists(accessoryOptionPath) ||
+            !File.Exists(accessoryEnchantPath))
+        {
+            data = null!;
+            return false;
+        }
+
+        var itemNames = ReadSplitItemStrings(itemStringPath);
+        var items = ReadSplitItems(itemDataPath, itemNames);
+        var accessoryOptions = ReadSplitAccessoryOptions(accessoryOptionPath);
+        var accessoryEnchants = ReadSplitAccessoryEnchants(accessoryEnchantPath);
+
+        data = new ItemList(
+            items,
+            Array.Empty<ItemTapRecord>(),
+            Array.Empty<ItemCoolTimeRecord>(),
+            Array.Empty<ItemMapDisplayRecord>(),
+            Array.Empty<ItemMapTypeNameRecord>(),
+            Array.Empty<ItemRankRecord>(),
+            Array.Empty<uint>(),
+            Array.Empty<uint>(),
+            Array.Empty<ItemExchangeRecord>(),
+            accessoryOptions,
+            accessoryEnchants,
+            new ItemListSectionCounts(
+                items.Count,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                accessoryOptions.Count,
+                accessoryEnchants.Count));
+
+        return true;
+    }
+
+    private static IReadOnlyDictionary<int, string> ReadSplitItemStrings(string path)
+    {
+        using var fs = File.OpenRead(path);
+        using var r = new BinaryReader(fs);
+
+        var count = r.ReadUInt32();
+        var names = new Dictionary<int, string>(checked((int)count));
+        for (var i = 0; i < count; i++)
+        {
+            var textKey = checked((int)r.ReadUInt32());
+            var localName = ReadCountedUtf16(r);
+            var englishName = ReadCountedUtf16(r);
+            _ = ReadCountedUtf16(r);
+
+            names[textKey] = string.IsNullOrWhiteSpace(englishName) ? localName : englishName;
+        }
+
+        return names;
+    }
+
+    private static IReadOnlyList<ItemAssetDTO> ReadSplitItems(
+        string path,
+        IReadOnlyDictionary<int, string> itemNames)
+    {
+        using var fs = File.OpenRead(path);
+        using var r = new BinaryReader(fs);
+
+        var count = r.ReadUInt32();
+        var items = new List<ItemAssetDTO>(checked((int)count));
+        for (var i = 0; i < count; i++)
+        {
+            _ = r.ReadUInt32();
+            var itemId = checked((int)r.ReadUInt32());
+            _ = r.ReadUInt32();
+            _ = r.ReadByte();
+            var skillCode = r.ReadUInt32();
+            _ = r.ReadByte();
+            var @class = r.ReadUInt16();
+            var typeL = r.ReadUInt16();
+            var typeS = r.ReadUInt16();
+            var typeValue = r.ReadUInt32();
+            var section = r.ReadUInt32();
+            var sellType = r.ReadUInt16();
+            _ = r.ReadByte();
+            _ = r.ReadUInt16();
+            var overlap = r.ReadUInt16();
+            var tamerMinLevel = ToByte(r.ReadUInt16());
+            var tamerMaxLevel = ToByte(r.ReadUInt16());
+            var digimonMinLevel = ToByte(r.ReadUInt16());
+            var digimonMaxLevel = ToByte(r.ReadUInt16());
+            _ = r.ReadUInt16();
+            _ = r.ReadUInt16();
+            _ = r.ReadUInt16();
+            _ = r.ReadUInt16();
+            var eventPriceId = r.ReadUInt32();
+            var digicorePrice = r.ReadUInt16();
+            var eventPriceAmount = r.ReadUInt16();
+            var scanPrice = r.ReadUInt32();
+            var sellPrice = r.ReadUInt32();
+            _ = r.ReadByte();
+            _ = r.ReadByte();
+            _ = r.ReadUInt16();
+            var applyValueMax = r.ReadByte();
+            var applyValueMin = r.ReadByte();
+            var applyElement = r.ReadByte();
+            var boundType = r.ReadUInt16();
+            _ = r.ReadByte();
+            var questRefCount = r.ReadUInt32();
+            for (var questRef = 0; questRef < questRefCount; questRef++)
+                _ = r.ReadUInt32();
+            _ = r.ReadByte();
+            _ = r.ReadByte();
+            _ = r.ReadUInt32();
+            var useTimeType = r.ReadByte();
+            var usageTimeMinutes = r.ReadUInt32();
+            _ = r.ReadByte();
+            _ = r.ReadUInt16();
+            _ = r.ReadByte();
+            _ = ReadCountedAscii(r);
+            _ = ReadCountedAscii(r);
+            _ = ReadCountedAscii(r);
+
+            if (overlap <= 0)
+                overlap = 1;
+
+            items.Add(new ItemAssetDTO
+            {
+                ItemId = itemId,
+                Name = itemNames.TryGetValue(itemId, out var name) ? name : itemId.ToString(),
+                Class = @class,
+                Type = typeL,
+                TypeN = checked((int)typeValue),
+                ApplyValueMin = applyValueMin,
+                ApplyValueMax = applyValueMax,
+                ApplyElement = applyElement,
+                Section = checked((int)section),
+                SellType = sellType,
+                BoundType = boundType,
+                UseTimeType = useTimeType,
+                SkillCode = skillCode,
+                TamerMinLevel = tamerMinLevel,
+                TamerMaxLevel = tamerMaxLevel,
+                DigimonMinLevel = digimonMinLevel,
+                DigimonMaxLevel = digimonMaxLevel,
+                SellPrice = sellPrice,
+                ScanPrice = checked((int)scanPrice),
+                DigicorePrice = digicorePrice,
+                EventPriceId = checked((int)eventPriceId),
+                EventPriceAmount = eventPriceAmount,
+                UsageTimeMinutes = checked((int)usageTimeMinutes),
+                Overlap = checked((short)overlap),
+                Target = ResolveConsumeTarget(typeS),
+            });
+        }
+
+        return items;
+    }
+
+    private static IReadOnlyList<ItemAccessoryOptionRecord> ReadSplitAccessoryOptions(string path)
+    {
+        using var fs = File.OpenRead(path);
+        using var r = new BinaryReader(fs);
+
+        var count = r.ReadUInt32();
+        var records = new List<ItemAccessoryOptionRecord>(checked((int)count));
+        for (var i = 0; i < count; i++)
+        {
+            var optionSetId = r.ReadUInt32();
+            var gainOptionCount = r.ReadUInt16();
+            var enchantLimit = r.ReadUInt16();
+            var optionCount = r.ReadUInt32();
+
+            var slots = new List<ItemAccessoryOptionSlot>(SplitAccessoryOptionSlots);
+            for (var slot = 0; slot < optionCount; slot++)
+            {
+                slots.Add(new ItemAccessoryOptionSlot(
+                    checked((short)r.ReadUInt16()),
+                    r.ReadUInt32(),
+                    r.ReadUInt32()));
+            }
+
+            records.Add(new ItemAccessoryOptionRecord(
+                checked((int)optionSetId),
+                optionSetId,
+                checked((short)gainOptionCount),
+                checked((short)enchantLimit),
+                slots));
+        }
+
+        return records;
+    }
+
+    private static IReadOnlyList<ItemAccessoryEnchantRecord> ReadSplitAccessoryEnchants(string path)
+    {
+        using var fs = File.OpenRead(path);
+        using var r = new BinaryReader(fs);
+
+        var count = r.ReadUInt32();
+        var records = new List<ItemAccessoryEnchantRecord>(checked((int)count));
+        for (var i = 0; i < count; i++)
+        {
+            var enchantId = r.ReadUInt32();
+            var optionType = r.ReadUInt16();
+            var value = r.ReadUInt16();
+            records.Add(new ItemAccessoryEnchantRecord(
+                checked((int)enchantId),
+                enchantId,
+                checked((short)optionType),
+                checked((short)value)));
+        }
+
+        return records;
     }
 
     public static ItemList Parse(BinaryReader r)
@@ -548,6 +783,19 @@ public sealed class ItemListBinLoader
         }
 
         return Encoding.Unicode.GetString(span[..end]);
+    }
+
+    private static string ReadCountedUtf16(BinaryReader r)
+    {
+        var chars = r.ReadUInt32();
+        var bytes = checked((int)chars * Utf16Bytes);
+        return Encoding.Unicode.GetString(r.ReadBytes(bytes));
+    }
+
+    private static string ReadCountedAscii(BinaryReader r)
+    {
+        var bytes = checked((int)r.ReadUInt32());
+        return Encoding.ASCII.GetString(r.ReadBytes(bytes));
     }
 
     private static string ReadAscii(byte[] data, ref int cursor, int bytes)

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TamerEmotion_Str schema="TamerEmotion_Str.struct" bin="TamerEmotion_Str.bin" byteLength="290">
+  <Groups kind="Section" offset="0" length="290">
+    <_0 kind="Record" offset="4" length="26">
+      <GroupKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <TextCount kind="Leaf" offset="8" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Texts kind="Array" offset="12" length="18" count="2">
+        <_0_ kind="Leaf" offset="12" length="8" type="WString { }">인사</_0_>
+        <_1_ kind="Leaf" offset="20" length="10" type="WString { }">/hi</_1_>
+      </Texts>
+    </_0>
+    <_1 kind="Record" offset="30" length="28">
+      <GroupKey kind="Leaf" offset="30" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextCount kind="Leaf" offset="34" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Texts kind="Array" offset="38" length="20" count="2">
+        <_0_ kind="Leaf" offset="38" length="8" type="WString { }">긍정</_0_>
+        <_1_ kind="Leaf" offset="46" length="12" type="WString { }">/yes</_1_>
+      </Texts>
+    </_1>
+    <_2 kind="Record" offset="58" length="26">
+      <GroupKey kind="Leaf" offset="58" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextCount kind="Leaf" offset="62" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Texts kind="Array" offset="66" length="18" count="2">
+        <_0_ kind="Leaf" offset="66" length="8" type="WString { }">부정</_0_>
+        <_1_ kind="Leaf" offset="74" length="10" type="WString { }">/no</_1_>
+      </Texts>
+    </_2>
+    <_3 kind="Record" offset="84" length="32">
+      <GroupKey kind="Leaf" offset="84" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextCount kind="Leaf" offset="88" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Texts kind="Array" offset="92" length="24" count="2">
+        <_0_ kind="Leaf" offset="92" length="8" type="WString { }">응원</_0_>
+        <_1_ kind="Leaf" offset="100" length="16" type="WString { }">/cheer</_1_>
+      </Texts>
+    </_3>
+    <_4 kind="Record" offset="116" length="36">
+      <GroupKey kind="Leaf" offset="116" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <TextCount kind="Leaf" offset="120" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Texts kind="Array" offset="124" length="28" count="2">
+        <_0_ kind="Leaf" offset="124" length="8" type="WString { }">좌절</_0_>
+        <_1_ kind="Leaf" offset="132" length="20" type="WString { }">/despair</_1_>
+      </Texts>
+    </_4>
+    <_5 kind="Record" offset="152" length="44">
+      <GroupKey kind="Leaf" offset="152" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextCount kind="Leaf" offset="156" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <Texts kind="Array" offset="160" length="36" count="3">
+        <_0_ kind="Leaf" offset="160" length="8" type="WString { }">기쁨</_0_>
+        <_1_ kind="Leaf" offset="168" length="12" type="WString { }">/joy</_1_>
+        <_2_ kind="Leaf" offset="180" length="16" type="WString { }">/laugh</_2_>
+      </Texts>
+    </_5>
+    <_6 kind="Record" offset="196" length="32">
+      <GroupKey kind="Leaf" offset="196" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <TextCount kind="Leaf" offset="200" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Texts kind="Array" offset="204" length="24" count="2">
+        <_0_ kind="Leaf" offset="204" length="8" type="WString { }">도발</_0_>
+        <_1_ kind="Leaf" offset="212" length="16" type="WString { }">/taunt</_1_>
+      </Texts>
+    </_6>
+    <_7 kind="Record" offset="228" length="30">
+      <GroupKey kind="Leaf" offset="228" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <TextCount kind="Leaf" offset="232" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Texts kind="Array" offset="236" length="22" count="2">
+        <_0_ kind="Leaf" offset="236" length="8" type="WString { }">운동</_0_>
+        <_1_ kind="Leaf" offset="244" length="14" type="WString { }">/flex</_1_>
+      </Texts>
+    </_7>
+    <_8 kind="Record" offset="258" length="32">
+      <GroupKey kind="Leaf" offset="258" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <TextCount kind="Leaf" offset="262" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <Texts kind="Array" offset="266" length="24" count="2">
+        <_0_ kind="Leaf" offset="266" length="8" type="WString { }">댄스</_0_>
+        <_1_ kind="Leaf" offset="274" length="16" type="WString { }">/dance</_1_>
+      </Texts>
+    </_8>
+  </Groups>
+</TamerEmotion_Str>

@@ -6,7 +6,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer.Combat
 {
     public class AreaSkillPacket : PacketWriter
     {
-        private const int PacketNumber = 1112;
+        private const int PacketNumber = 1116;
 
         /// <summary>
         /// Casts the partner area skill.
@@ -33,6 +33,8 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer.Combat
                 WriteInt(finalDamage * -1);
                 WriteByte(byte.MaxValue); //Previous HP Rate. Verificar necessidade
             }
+
+            WriteShort(0); // death target count
         }
         public AreaSkillPacket(int attackerHandler, byte attackerHpRate, List<SummonMobModel> targets, byte skillSlot, int finalDamage)
         {
@@ -51,6 +53,8 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer.Combat
                 WriteInt(finalDamage * -1);
                 WriteByte(byte.MaxValue); //Previous HP Rate. Verificar necessidade
             }
+
+            WriteShort(0); // death target count
         }
     }
 }

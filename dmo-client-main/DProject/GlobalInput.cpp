@@ -15,6 +15,25 @@ namespace
 			nRawWParam == VK_RCONTROL ||
 			nRawWParam == VK_PROCESSKEY;
 	}
+
+	bool IsExtraInventoryShortcutKey( UINT nConfiguredKey, UINT nPressedKey )
+	{
+		if( nConfiguredKey == VK_CONTROL ||
+			nConfiguredKey == VK_LCONTROL ||
+			nConfiguredKey == VK_RCONTROL )
+		{
+			return nPressedKey == DMKEYBOARD::KEY_I;
+		}
+
+		return nPressedKey == nConfiguredKey;
+	}
+
+	bool IsControlDown()
+	{
+		return ( GetAsyncKeyState( VK_CONTROL ) & 0x8000 ) != 0 ||
+			( GetAsyncKeyState( VK_LCONTROL ) & 0x8000 ) != 0 ||
+			( GetAsyncKeyState( VK_RCONTROL ) & 0x8000 ) != 0;
+	}
 }
 
 cGlobalInput::cGlobalInput()
@@ -781,10 +800,8 @@ bool cGlobalInput::KeyBoardMenu(const MSG& p_kMsg)
 				mHotKey->m_MKey[DMKEY::MENU_TAMER_SKILL].s_nKeyDown = true;
 			}
 
-			if( wParam == mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKey &&
-				( ( GetAsyncKeyState( VK_CONTROL ) & 0x8000 ) != 0 ||
-				  ( GetAsyncKeyState( VK_LCONTROL ) & 0x8000 ) != 0 ||
-				  ( GetAsyncKeyState( VK_RCONTROL ) & 0x8000 ) != 0 ) )
+			if( IsExtraInventoryShortcutKey( mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKey, wParam ) &&
+				IsControlDown() )
 			{
 				mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKeyDown = true;
 				ExtraInventoryDebugLog( "[ExtraInventory][KeyBoardMenu] keydown accepted; keyDown set true" );
@@ -932,7 +949,7 @@ bool cGlobalInput::KeyBoardMenu(const MSG& p_kMsg)
 				return true;
 			}
 
-			if( wParam == mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKey &&
+			if( IsExtraInventoryShortcutKey( mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKey, wParam ) &&
 				mHotKey->m_MKey[DMKEY::MENU_EXTRA_INVENTORY].s_nKeyDown )
 			{
 				bool bWasActive = g_pGameIF->IsActiveWindow( cBaseWindow::WT_EXTRAINVENTORY );

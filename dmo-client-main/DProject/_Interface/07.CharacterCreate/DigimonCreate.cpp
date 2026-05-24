@@ -586,12 +586,7 @@ void CDigimonCreate::_ResetDigimonSkill( CharacterCreateContents::LIST_SKILL_INF
 		case CsSkill::IT_CHANGE2:	type = ICONITEM::SKILL_MASK;	break;			
 		default:
 			{
-				if( (*it).m_dwIconIndex >= 4000 )
-					type = ICONITEM::SKILL4;
-				else if( (*it).m_dwIconIndex >= 3000 )
-					type = ICONITEM::SKILL3;
-				else if( (*it).m_dwIconIndex >= 2000 )
-					type = ICONITEM::SKILL2;
+				type = ICONITEM::GetSkillIconType( (*it).m_dwIconIndex );
 			}
 			break;
 		}	

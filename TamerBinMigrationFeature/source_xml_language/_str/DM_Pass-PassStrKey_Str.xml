@@ -1,0 +1,1213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DM_Pass_PassStrKey_Str schema="DM_Pass-PassStrKey_Str.struct" bin="DM_Pass-PassStrKey_Str.bin" byteLength="24632">
+  <Entries kind="Section" offset="0" length="24632">
+    <_0 kind="Record" offset="4" length="98">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="2217340659" />
+      <TextA kind="Leaf" offset="8" length="94" type="WString { }">Defeat enemy Digimon with specific attriubute</TextA>
+    </_0>
+    <_1 kind="Record" offset="102" length="96">
+      <TextKey kind="Leaf" offset="102" length="4" type="Scalar { Kind = U32 }" value="2236057107" />
+      <TextA kind="Leaf" offset="106" length="92" type="WString { }">Performing Specific Data Summoning - Step 10</TextA>
+    </_1>
+    <_2 kind="Record" offset="198" length="64">
+      <TextKey kind="Leaf" offset="198" length="4" type="Scalar { Kind = U32 }" value="2262312323" />
+      <TextA kind="Leaf" offset="202" length="60" type="WString { }">Use a certain amount of Bit.</TextA>
+    </_2>
+    <_3 kind="Record" offset="262" length="72">
+      <TextKey kind="Leaf" offset="262" length="4" type="Scalar { Kind = U32 }" value="2324486695" />
+      <TextA kind="Leaf" offset="266" length="68" type="WString { }">Perform events and obtain items.</TextA>
+    </_3>
+    <_4 kind="Record" offset="334" length="100">
+      <TextKey kind="Leaf" offset="334" length="4" type="Scalar { Kind = U32 }" value="2360316559" />
+      <TextA kind="Leaf" offset="338" length="96" type="WString { }">Clear the Qinglongmon Dungeon(Normal) - Step 1</TextA>
+    </_4>
+    <_5 kind="Record" offset="434" length="100">
+      <TextKey kind="Leaf" offset="434" length="4" type="Scalar { Kind = U32 }" value="2360316560" />
+      <TextA kind="Leaf" offset="438" length="96" type="WString { }">Clear the Qinglongmon Dungeon(Normal) - Step 2</TextA>
+    </_5>
+    <_6 kind="Record" offset="534" length="100">
+      <TextKey kind="Leaf" offset="534" length="4" type="Scalar { Kind = U32 }" value="2360316561" />
+      <TextA kind="Leaf" offset="538" length="96" type="WString { }">Clear the Qinglongmon Dungeon(Normal) - Step 3</TextA>
+    </_6>
+    <_7 kind="Record" offset="634" length="100">
+      <TextKey kind="Leaf" offset="634" length="4" type="Scalar { Kind = U32 }" value="2360316562" />
+      <TextA kind="Leaf" offset="638" length="96" type="WString { }">Clear the Qinglongmon Dungeon(Normal) - Step 4</TextA>
+    </_7>
+    <_8 kind="Record" offset="734" length="100">
+      <TextKey kind="Leaf" offset="734" length="4" type="Scalar { Kind = U32 }" value="2360316563" />
+      <TextA kind="Leaf" offset="738" length="96" type="WString { }">Clear the Qinglongmon Dungeon(Normal) - Step 5</TextA>
+    </_8>
+    <_9 kind="Record" offset="834" length="90">
+      <TextKey kind="Leaf" offset="834" length="4" type="Scalar { Kind = U32 }" value="2367406730" />
+      <TextA kind="Leaf" offset="838" length="86" type="WString { }">Successfully transcend a specific Digimon</TextA>
+    </_9>
+    <_10 kind="Record" offset="924" length="72">
+      <TextKey kind="Leaf" offset="924" length="4" type="Scalar { Kind = U32 }" value="2385004236" />
+      <TextA kind="Leaf" offset="928" length="68" type="WString { }">Clear the Shinjuku Park (Dungen)</TextA>
+    </_10>
+    <_11 kind="Record" offset="996" length="94">
+      <TextKey kind="Leaf" offset="996" length="4" type="Scalar { Kind = U32 }" value="2410468739" />
+      <TextA kind="Leaf" offset="1000" length="90" type="WString { }">Performing Specific Data Summoning - Step 1</TextA>
+    </_11>
+    <_12 kind="Record" offset="1090" length="94">
+      <TextKey kind="Leaf" offset="1090" length="4" type="Scalar { Kind = U32 }" value="2410468740" />
+      <TextA kind="Leaf" offset="1094" length="90" type="WString { }">Performing Specific Data Summoning - Step 2</TextA>
+    </_12>
+    <_13 kind="Record" offset="1184" length="94">
+      <TextKey kind="Leaf" offset="1184" length="4" type="Scalar { Kind = U32 }" value="2410468741" />
+      <TextA kind="Leaf" offset="1188" length="90" type="WString { }">Performing Specific Data Summoning - Step 3</TextA>
+    </_13>
+    <_14 kind="Record" offset="1278" length="94">
+      <TextKey kind="Leaf" offset="1278" length="4" type="Scalar { Kind = U32 }" value="2410468742" />
+      <TextA kind="Leaf" offset="1282" length="90" type="WString { }">Performing Specific Data Summoning - Step 4</TextA>
+    </_14>
+    <_15 kind="Record" offset="1372" length="94">
+      <TextKey kind="Leaf" offset="1372" length="4" type="Scalar { Kind = U32 }" value="2410468743" />
+      <TextA kind="Leaf" offset="1376" length="90" type="WString { }">Performing Specific Data Summoning - Step 5</TextA>
+    </_15>
+    <_16 kind="Record" offset="1466" length="94">
+      <TextKey kind="Leaf" offset="1466" length="4" type="Scalar { Kind = U32 }" value="2410468744" />
+      <TextA kind="Leaf" offset="1470" length="90" type="WString { }">Performing Specific Data Summoning - Step 6</TextA>
+    </_16>
+    <_17 kind="Record" offset="1560" length="94">
+      <TextKey kind="Leaf" offset="1560" length="4" type="Scalar { Kind = U32 }" value="2410468745" />
+      <TextA kind="Leaf" offset="1564" length="90" type="WString { }">Performing Specific Data Summoning - Step 7</TextA>
+    </_17>
+    <_18 kind="Record" offset="1654" length="94">
+      <TextKey kind="Leaf" offset="1654" length="4" type="Scalar { Kind = U32 }" value="2410468746" />
+      <TextA kind="Leaf" offset="1658" length="90" type="WString { }">Performing Specific Data Summoning - Step 8</TextA>
+    </_18>
+    <_19 kind="Record" offset="1748" length="94">
+      <TextKey kind="Leaf" offset="1748" length="4" type="Scalar { Kind = U32 }" value="2410468747" />
+      <TextA kind="Leaf" offset="1752" length="90" type="WString { }">Performing Specific Data Summoning - Step 9</TextA>
+    </_19>
+    <_20 kind="Record" offset="1842" length="54">
+      <TextKey kind="Leaf" offset="1842" length="4" type="Scalar { Kind = U32 }" value="2435536942" />
+      <TextA kind="Leaf" offset="1846" length="50" type="WString { }">Hatch Psychemon to Lv.5</TextA>
+    </_20>
+    <_21 kind="Record" offset="1896" length="44">
+      <TextKey kind="Leaf" offset="1896" length="4" type="Scalar { Kind = U32 }" value="2447437528" />
+      <TextA kind="Leaf" offset="1900" length="40" type="WString { }">Clear any Dungeon.</TextA>
+    </_21>
+    <_22 kind="Record" offset="1940" length="60">
+      <TextKey kind="Leaf" offset="1940" length="4" type="Scalar { Kind = U32 }" value="2540028379" />
+      <TextA kind="Leaf" offset="1944" length="56" type="WString { }">Clear the Royal Base(Hard)</TextA>
+    </_22>
+    <_23 kind="Record" offset="2000" length="90">
+      <TextKey kind="Leaf" offset="2000" length="4" type="Scalar { Kind = U32 }" value="2548788651" />
+      <TextA kind="Leaf" offset="2004" length="86" type="WString { }">Complete missions to increase Pass level.</TextA>
+    </_23>
+    <_24 kind="Record" offset="2090" length="70">
+      <TextKey kind="Leaf" offset="2090" length="4" type="Scalar { Kind = U32 }" value="2564443459" />
+      <TextA kind="Leaf" offset="2094" length="66" type="WString { }">Digimon Masters Access - Step 1</TextA>
+    </_24>
+    <_25 kind="Record" offset="2160" length="70">
+      <TextKey kind="Leaf" offset="2160" length="4" type="Scalar { Kind = U32 }" value="2564443460" />
+      <TextA kind="Leaf" offset="2164" length="66" type="WString { }">Digimon Masters Access - Step 2</TextA>
+    </_25>
+    <_26 kind="Record" offset="2230" length="70">
+      <TextKey kind="Leaf" offset="2230" length="4" type="Scalar { Kind = U32 }" value="2564443461" />
+      <TextA kind="Leaf" offset="2234" length="66" type="WString { }">Digimon Masters Access - Step 3</TextA>
+    </_26>
+    <_27 kind="Record" offset="2300" length="70">
+      <TextKey kind="Leaf" offset="2300" length="4" type="Scalar { Kind = U32 }" value="2564443462" />
+      <TextA kind="Leaf" offset="2304" length="66" type="WString { }">Digimon Masters Access - Step 4</TextA>
+    </_27>
+    <_28 kind="Record" offset="2370" length="70">
+      <TextKey kind="Leaf" offset="2370" length="4" type="Scalar { Kind = U32 }" value="2564443463" />
+      <TextA kind="Leaf" offset="2374" length="66" type="WString { }">Digimon Masters Access - Step 5</TextA>
+    </_28>
+    <_29 kind="Record" offset="2440" length="70">
+      <TextKey kind="Leaf" offset="2440" length="4" type="Scalar { Kind = U32 }" value="2564443464" />
+      <TextA kind="Leaf" offset="2444" length="66" type="WString { }">Digimon Masters Access - Step 6</TextA>
+    </_29>
+    <_30 kind="Record" offset="2510" length="70">
+      <TextKey kind="Leaf" offset="2510" length="4" type="Scalar { Kind = U32 }" value="2564443465" />
+      <TextA kind="Leaf" offset="2514" length="66" type="WString { }">Digimon Masters Access - Step 7</TextA>
+    </_30>
+    <_31 kind="Record" offset="2580" length="70">
+      <TextKey kind="Leaf" offset="2580" length="4" type="Scalar { Kind = U32 }" value="2564443466" />
+      <TextA kind="Leaf" offset="2584" length="66" type="WString { }">Digimon Masters Access - Step 8</TextA>
+    </_31>
+    <_32 kind="Record" offset="2650" length="70">
+      <TextKey kind="Leaf" offset="2650" length="4" type="Scalar { Kind = U32 }" value="2564443467" />
+      <TextA kind="Leaf" offset="2654" length="66" type="WString { }">Digimon Masters Access - Step 9</TextA>
+    </_32>
+    <_33 kind="Record" offset="2720" length="54">
+      <TextKey kind="Leaf" offset="2720" length="4" type="Scalar { Kind = U32 }" value="2575611870" />
+      <TextA kind="Leaf" offset="2724" length="50" type="WString { }">Defeat specific Digimon</TextA>
+    </_33>
+    <_34 kind="Record" offset="2774" length="40">
+      <TextKey kind="Leaf" offset="2774" length="4" type="Scalar { Kind = U32 }" value="2615018324" />
+      <TextA kind="Leaf" offset="2778" length="36" type="WString { }">Use any emotion.</TextA>
+    </_34>
+    <_35 kind="Record" offset="2814" length="84">
+      <TextKey kind="Leaf" offset="2814" length="4" type="Scalar { Kind = U32 }" value="2649523349" />
+      <TextA kind="Leaf" offset="2818" length="80" type="WString { }">Enter the Destruction and Regeneration</TextA>
+    </_35>
+    <_36 kind="Record" offset="2898" length="62">
+      <TextKey kind="Leaf" offset="2898" length="4" type="Scalar { Kind = U32 }" value="2690466466" />
+      <TextA kind="Leaf" offset="2902" length="58" type="WString { }">Visit a specific Landmark 1</TextA>
+    </_36>
+    <_37 kind="Record" offset="2960" length="62">
+      <TextKey kind="Leaf" offset="2960" length="4" type="Scalar { Kind = U32 }" value="2690466467" />
+      <TextA kind="Leaf" offset="2964" length="58" type="WString { }">Visit a specific Landmark 2</TextA>
+    </_37>
+    <_38 kind="Record" offset="3022" length="62">
+      <TextKey kind="Leaf" offset="3022" length="4" type="Scalar { Kind = U32 }" value="2690466468" />
+      <TextA kind="Leaf" offset="3026" length="58" type="WString { }">Visit a specific Landmark 3</TextA>
+    </_38>
+    <_39 kind="Record" offset="3084" length="62">
+      <TextKey kind="Leaf" offset="3084" length="4" type="Scalar { Kind = U32 }" value="2690466469" />
+      <TextA kind="Leaf" offset="3088" length="58" type="WString { }">Visit a specific Landmark 4</TextA>
+    </_39>
+    <_40 kind="Record" offset="3146" length="62">
+      <TextKey kind="Leaf" offset="3146" length="4" type="Scalar { Kind = U32 }" value="2690466470" />
+      <TextA kind="Leaf" offset="3150" length="58" type="WString { }">Visit a specific Landmark 5</TextA>
+    </_40>
+    <_41 kind="Record" offset="3208" length="88">
+      <TextKey kind="Leaf" offset="3208" length="4" type="Scalar { Kind = U32 }" value="2762638721" />
+      <TextA kind="Leaf" offset="3212" length="84" type="WString { }">Clear the Marine Dragon Domain (Dungeon)</TextA>
+    </_41>
+    <_42 kind="Record" offset="3296" length="76">
+      <TextKey kind="Leaf" offset="3296" length="4" type="Scalar { Kind = U32 }" value="2798276867" />
+      <TextA kind="Leaf" offset="3300" length="72" type="WString { }">Clear Destruction and Regeneration</TextA>
+    </_42>
+    <_43 kind="Record" offset="3372" length="46">
+      <TextKey kind="Leaf" offset="3372" length="4" type="Scalar { Kind = U32 }" value="2960314252" />
+      <TextA kind="Leaf" offset="3376" length="42" type="WString { }">Use recovery items.</TextA>
+    </_43>
+    <_44 kind="Record" offset="3418" length="72">
+      <TextKey kind="Leaf" offset="3418" length="4" type="Scalar { Kind = U32 }" value="3022255571" />
+      <TextA kind="Leaf" offset="3422" length="68" type="WString { }">Digimon Masters Access - Step 10</TextA>
+    </_44>
+    <_45 kind="Record" offset="3490" length="78">
+      <TextKey kind="Leaf" offset="3490" length="4" type="Scalar { Kind = U32 }" value="3062822324" />
+      <TextA kind="Leaf" offset="3494" length="74" type="WString { }">Clear Marketplace[Normal] - Stage 1</TextA>
+    </_45>
+    <_46 kind="Record" offset="3568" length="78">
+      <TextKey kind="Leaf" offset="3568" length="4" type="Scalar { Kind = U32 }" value="3062822325" />
+      <TextA kind="Leaf" offset="3572" length="74" type="WString { }">Clear Marketplace[Normal] - Stage 2</TextA>
+    </_46>
+    <_47 kind="Record" offset="3646" length="78">
+      <TextKey kind="Leaf" offset="3646" length="4" type="Scalar { Kind = U32 }" value="3062822326" />
+      <TextA kind="Leaf" offset="3650" length="74" type="WString { }">Clear Marketplace[Normal] - Stage 3</TextA>
+    </_47>
+    <_48 kind="Record" offset="3724" length="78">
+      <TextKey kind="Leaf" offset="3724" length="4" type="Scalar { Kind = U32 }" value="3062822327" />
+      <TextA kind="Leaf" offset="3728" length="74" type="WString { }">Clear Marketplace[Normal] - Stage 4</TextA>
+    </_48>
+    <_49 kind="Record" offset="3802" length="78">
+      <TextKey kind="Leaf" offset="3802" length="4" type="Scalar { Kind = U32 }" value="3062822328" />
+      <TextA kind="Leaf" offset="3806" length="74" type="WString { }">Clear Marketplace[Normal] - Stage 5</TextA>
+    </_49>
+    <_50 kind="Record" offset="3880" length="78">
+      <TextKey kind="Leaf" offset="3880" length="4" type="Scalar { Kind = U32 }" value="3062822329" />
+      <TextA kind="Leaf" offset="3884" length="74" type="WString { }">Clear Marketplace[Normal] - Stage 6</TextA>
+    </_50>
+    <_51 kind="Record" offset="3958" length="78">
+      <TextKey kind="Leaf" offset="3958" length="4" type="Scalar { Kind = U32 }" value="3062822330" />
+      <TextA kind="Leaf" offset="3962" length="74" type="WString { }">Clear Marketplace[Normal] - Stage 7</TextA>
+    </_51>
+    <_52 kind="Record" offset="4036" length="78">
+      <TextKey kind="Leaf" offset="4036" length="4" type="Scalar { Kind = U32 }" value="3062822331" />
+      <TextA kind="Leaf" offset="4040" length="74" type="WString { }">Clear Marketplace[Normal] - Stage 8</TextA>
+    </_52>
+    <_53 kind="Record" offset="4114" length="72">
+      <TextKey kind="Leaf" offset="4114" length="4" type="Scalar { Kind = U32 }" value="3092774953" />
+      <TextA kind="Leaf" offset="4118" length="68" type="WString { }">Clear the Event Dungeon - Step 1</TextA>
+    </_53>
+    <_54 kind="Record" offset="4186" length="72">
+      <TextKey kind="Leaf" offset="4186" length="4" type="Scalar { Kind = U32 }" value="3092774954" />
+      <TextA kind="Leaf" offset="4190" length="68" type="WString { }">Clear the Event Dungeon - Step 2</TextA>
+    </_54>
+    <_55 kind="Record" offset="4258" length="72">
+      <TextKey kind="Leaf" offset="4258" length="4" type="Scalar { Kind = U32 }" value="3092774955" />
+      <TextA kind="Leaf" offset="4262" length="68" type="WString { }">Clear the Event Dungeon - Step 3</TextA>
+    </_55>
+    <_56 kind="Record" offset="4330" length="72">
+      <TextKey kind="Leaf" offset="4330" length="4" type="Scalar { Kind = U32 }" value="3092774956" />
+      <TextA kind="Leaf" offset="4334" length="68" type="WString { }">Clear the Event Dungeon - Step 4</TextA>
+    </_56>
+    <_57 kind="Record" offset="4402" length="72">
+      <TextKey kind="Leaf" offset="4402" length="4" type="Scalar { Kind = U32 }" value="3092774957" />
+      <TextA kind="Leaf" offset="4406" length="68" type="WString { }">Clear the Event Dungeon - Step 5</TextA>
+    </_57>
+    <_58 kind="Record" offset="4474" length="72">
+      <TextKey kind="Leaf" offset="4474" length="4" type="Scalar { Kind = U32 }" value="3092774958" />
+      <TextA kind="Leaf" offset="4478" length="68" type="WString { }">Clear the Event Dungeon - Step 6</TextA>
+    </_58>
+    <_59 kind="Record" offset="4546" length="72">
+      <TextKey kind="Leaf" offset="4546" length="4" type="Scalar { Kind = U32 }" value="3092774959" />
+      <TextA kind="Leaf" offset="4550" length="68" type="WString { }">Clear the Event Dungeon - Step 7</TextA>
+    </_59>
+    <_60 kind="Record" offset="4618" length="72">
+      <TextKey kind="Leaf" offset="4618" length="4" type="Scalar { Kind = U32 }" value="3092774960" />
+      <TextA kind="Leaf" offset="4622" length="68" type="WString { }">Clear the Event Dungeon - Step 8</TextA>
+    </_60>
+    <_61 kind="Record" offset="4690" length="62">
+      <TextKey kind="Leaf" offset="4690" length="4" type="Scalar { Kind = U32 }" value="3097172742" />
+      <TextA kind="Leaf" offset="4694" length="58" type="WString { }">Clear a sea-related dungeon</TextA>
+    </_61>
+    <_62 kind="Record" offset="4752" length="74">
+      <TextKey kind="Leaf" offset="4752" length="4" type="Scalar { Kind = U32 }" value="3109116555" />
+      <TextA kind="Leaf" offset="4756" length="70" type="WString { }">Complete the Event Quest - Step 1</TextA>
+    </_62>
+    <_63 kind="Record" offset="4826" length="74">
+      <TextKey kind="Leaf" offset="4826" length="4" type="Scalar { Kind = U32 }" value="3109116556" />
+      <TextA kind="Leaf" offset="4830" length="70" type="WString { }">Complete the Event Quest - Step 2</TextA>
+    </_63>
+    <_64 kind="Record" offset="4900" length="74">
+      <TextKey kind="Leaf" offset="4900" length="4" type="Scalar { Kind = U32 }" value="3109116557" />
+      <TextA kind="Leaf" offset="4904" length="70" type="WString { }">Complete the Event Quest - Step 3</TextA>
+    </_64>
+    <_65 kind="Record" offset="4974" length="74">
+      <TextKey kind="Leaf" offset="4974" length="4" type="Scalar { Kind = U32 }" value="3109116558" />
+      <TextA kind="Leaf" offset="4978" length="70" type="WString { }">Complete the Event Quest - Step 4</TextA>
+    </_65>
+    <_66 kind="Record" offset="5048" length="74">
+      <TextKey kind="Leaf" offset="5048" length="4" type="Scalar { Kind = U32 }" value="3109116559" />
+      <TextA kind="Leaf" offset="5052" length="70" type="WString { }">Complete the Event Quest - Step 5</TextA>
+    </_66>
+    <_67 kind="Record" offset="5122" length="74">
+      <TextKey kind="Leaf" offset="5122" length="4" type="Scalar { Kind = U32 }" value="3109116560" />
+      <TextA kind="Leaf" offset="5126" length="70" type="WString { }">Complete the Event Quest - Step 6</TextA>
+    </_67>
+    <_68 kind="Record" offset="5196" length="74">
+      <TextKey kind="Leaf" offset="5196" length="4" type="Scalar { Kind = U32 }" value="3109116561" />
+      <TextA kind="Leaf" offset="5200" length="70" type="WString { }">Complete the Event Quest - Step 7</TextA>
+    </_68>
+    <_69 kind="Record" offset="5270" length="74">
+      <TextKey kind="Leaf" offset="5270" length="4" type="Scalar { Kind = U32 }" value="3109116562" />
+      <TextA kind="Leaf" offset="5274" length="70" type="WString { }">Complete the Event Quest - Step 8</TextA>
+    </_69>
+    <_70 kind="Record" offset="5344" length="74">
+      <TextKey kind="Leaf" offset="5344" length="4" type="Scalar { Kind = U32 }" value="3109116563" />
+      <TextA kind="Leaf" offset="5348" length="70" type="WString { }">Complete the Event Quest - Step 9</TextA>
+    </_70>
+    <_71 kind="Record" offset="5418" length="56">
+      <TextKey kind="Leaf" offset="5418" length="4" type="Scalar { Kind = U32 }" value="3112232845" />
+      <TextA kind="Leaf" offset="5422" length="52" type="WString { }">Complete Season Missions</TextA>
+    </_71>
+    <_72 kind="Record" offset="5474" length="48">
+      <TextKey kind="Leaf" offset="5474" length="4" type="Scalar { Kind = U32 }" value="3270386736" />
+      <TextA kind="Leaf" offset="5478" length="44" type="WString { }">Earning Bit - Step 1</TextA>
+    </_72>
+    <_73 kind="Record" offset="5522" length="48">
+      <TextKey kind="Leaf" offset="5522" length="4" type="Scalar { Kind = U32 }" value="3270386737" />
+      <TextA kind="Leaf" offset="5526" length="44" type="WString { }">Earning Bit - Step 2</TextA>
+    </_73>
+    <_74 kind="Record" offset="5570" length="48">
+      <TextKey kind="Leaf" offset="5570" length="4" type="Scalar { Kind = U32 }" value="3270386738" />
+      <TextA kind="Leaf" offset="5574" length="44" type="WString { }">Earning Bit - Step 3</TextA>
+    </_74>
+    <_75 kind="Record" offset="5618" length="48">
+      <TextKey kind="Leaf" offset="5618" length="4" type="Scalar { Kind = U32 }" value="3270386739" />
+      <TextA kind="Leaf" offset="5622" length="44" type="WString { }">Earning Bit - Step 4</TextA>
+    </_75>
+    <_76 kind="Record" offset="5666" length="48">
+      <TextKey kind="Leaf" offset="5666" length="4" type="Scalar { Kind = U32 }" value="3270386740" />
+      <TextA kind="Leaf" offset="5670" length="44" type="WString { }">Earning Bit - Step 5</TextA>
+    </_76>
+    <_77 kind="Record" offset="5714" length="54">
+      <TextKey kind="Leaf" offset="5714" length="4" type="Scalar { Kind = U32 }" value="3289857447" />
+      <TextA kind="Leaf" offset="5718" length="50" type="WString { }">Change accessory option</TextA>
+    </_77>
+    <_78 kind="Record" offset="5768" length="68">
+      <TextKey kind="Leaf" offset="5768" length="4" type="Scalar { Kind = U32 }" value="3314520179" />
+      <TextA kind="Leaf" offset="5772" length="64" type="WString { }">Clear the Yokohama Secret Park</TextA>
+    </_78>
+    <_79 kind="Record" offset="5836" length="90">
+      <TextKey kind="Leaf" offset="5836" length="4" type="Scalar { Kind = U32 }" value="3327780792" />
+      <TextA kind="Leaf" offset="5840" length="86" type="WString { }">Clear one of the Spiral Mountain dungeons</TextA>
+    </_79>
+    <_80 kind="Record" offset="5926" length="116">
+      <TextKey kind="Leaf" offset="5926" length="4" type="Scalar { Kind = U32 }" value="3344941911" />
+      <TextA kind="Leaf" offset="5930" length="112" type="WString { }">You can transcend Digimon through the Digimon Archive.</TextA>
+    </_80>
+    <_81 kind="Record" offset="6042" length="90">
+      <TextKey kind="Leaf" offset="6042" length="4" type="Scalar { Kind = U32 }" value="3349257529" />
+      <TextA kind="Leaf" offset="6046" length="86" type="WString { }">Clear dungeons related to Digimon Tamer's</TextA>
+    </_81>
+    <_82 kind="Record" offset="6132" length="86">
+      <TextKey kind="Leaf" offset="6132" length="4" type="Scalar { Kind = U32 }" value="3380147468" />
+      <TextA kind="Leaf" offset="6136" length="82" type="WString { }">Defeat Thunder attribute enemy Digimon.</TextA>
+    </_82>
+    <_83 kind="Record" offset="6218" length="280">
+      <TextKey kind="Leaf" offset="6218" length="4" type="Scalar { Kind = U32 }" value="3385816735" />
+      <TextA kind="Leaf" offset="6222" length="276" type="WString { }">Try using an emotional expression by typing\ntexts such as "/hi", "/yes", "/no", "/cheer", "/despair", "/joy", and "/taunt" in the chat.</TextA>
+    </_83>
+    <_84 kind="Record" offset="6498" length="40">
+      <TextKey kind="Leaf" offset="6498" length="4" type="Scalar { Kind = U32 }" value="3398968654" />
+      <TextA kind="Leaf" offset="6502" length="36" type="WString { }">Return any item.</TextA>
+    </_84>
+    <_85 kind="Record" offset="6538" length="150">
+      <TextKey kind="Leaf" offset="6538" length="4" type="Scalar { Kind = U32 }" value="3420191387" />
+      <TextA kind="Leaf" offset="6542" length="146" type="WString { }">You can enter the Four Holy Beasts Dungeon from D-Terminal twice a day.</TextA>
+    </_85>
+    <_86 kind="Record" offset="6688" length="72">
+      <TextKey kind="Leaf" offset="6688" length="4" type="Scalar { Kind = U32 }" value="3421909991" />
+      <TextA kind="Leaf" offset="6692" length="68" type="WString { }">Clear the Nanomon Maze (Dungeon)</TextA>
+    </_86>
+    <_87 kind="Record" offset="6760" length="56">
+      <TextKey kind="Leaf" offset="6760" length="4" type="Scalar { Kind = U32 }" value="3421925185" />
+      <TextA kind="Leaf" offset="6764" length="52" type="WString { }">Clear the Road (Dungeon)</TextA>
+    </_87>
+    <_88 kind="Record" offset="6816" length="78">
+      <TextKey kind="Leaf" offset="6816" length="4" type="Scalar { Kind = U32 }" value="3422003323" />
+      <TextA kind="Leaf" offset="6820" length="74" type="WString { }">Clear the Fuji TV Rooftop (Dungeon)</TextA>
+    </_88>
+    <_89 kind="Record" offset="6894" length="56">
+      <TextKey kind="Leaf" offset="6894" length="4" type="Scalar { Kind = U32 }" value="3581256096" />
+      <TextA kind="Leaf" offset="6898" length="52" type="WString { }">Defeat any enemy Digimon</TextA>
+    </_89>
+    <_90 kind="Record" offset="6950" length="92">
+      <TextKey kind="Leaf" offset="6950" length="4" type="Scalar { Kind = U32 }" value="3584643138" />
+      <TextA kind="Leaf" offset="6954" length="88" type="WString { }">Complete a certain number of Daily Quests.</TextA>
+    </_90>
+    <_91 kind="Record" offset="7042" length="58">
+      <TextKey kind="Leaf" offset="7042" length="4" type="Scalar { Kind = U32 }" value="3586579441" />
+      <TextA kind="Leaf" offset="7046" length="54" type="WString { }">Complete the Event Quest.</TextA>
+    </_91>
+    <_92 kind="Record" offset="7100" length="116">
+      <TextKey kind="Leaf" offset="7100" length="4" type="Scalar { Kind = U32 }" value="3672672031" />
+      <TextA kind="Leaf" offset="7104" length="112" type="WString { }">Defeat enemy Digimon with specific attriubute - Step 1</TextA>
+    </_92>
+    <_93 kind="Record" offset="7216" length="116">
+      <TextKey kind="Leaf" offset="7216" length="4" type="Scalar { Kind = U32 }" value="3672672032" />
+      <TextA kind="Leaf" offset="7220" length="112" type="WString { }">Defeat enemy Digimon with specific attriubute - Step 2</TextA>
+    </_93>
+    <_94 kind="Record" offset="7332" length="116">
+      <TextKey kind="Leaf" offset="7332" length="4" type="Scalar { Kind = U32 }" value="3672672033" />
+      <TextA kind="Leaf" offset="7336" length="112" type="WString { }">Defeat enemy Digimon with specific attriubute - Step 3</TextA>
+    </_94>
+    <_95 kind="Record" offset="7448" length="116">
+      <TextKey kind="Leaf" offset="7448" length="4" type="Scalar { Kind = U32 }" value="3672672034" />
+      <TextA kind="Leaf" offset="7452" length="112" type="WString { }">Defeat enemy Digimon with specific attriubute - Step 4</TextA>
+    </_95>
+    <_96 kind="Record" offset="7564" length="116">
+      <TextKey kind="Leaf" offset="7564" length="4" type="Scalar { Kind = U32 }" value="3672672035" />
+      <TextA kind="Leaf" offset="7568" length="112" type="WString { }">Defeat enemy Digimon with specific attriubute - Step 5</TextA>
+    </_96>
+    <_97 kind="Record" offset="7680" length="116">
+      <TextKey kind="Leaf" offset="7680" length="4" type="Scalar { Kind = U32 }" value="3672672036" />
+      <TextA kind="Leaf" offset="7684" length="112" type="WString { }">Defeat enemy Digimon with specific attriubute - Step 6</TextA>
+    </_97>
+    <_98 kind="Record" offset="7796" length="116">
+      <TextKey kind="Leaf" offset="7796" length="4" type="Scalar { Kind = U32 }" value="3672672037" />
+      <TextA kind="Leaf" offset="7800" length="112" type="WString { }">Defeat enemy Digimon with specific attriubute - Step 7</TextA>
+    </_98>
+    <_99 kind="Record" offset="7912" length="116">
+      <TextKey kind="Leaf" offset="7912" length="4" type="Scalar { Kind = U32 }" value="3672672038" />
+      <TextA kind="Leaf" offset="7916" length="112" type="WString { }">Defeat enemy Digimon with specific attriubute - Step 8</TextA>
+    </_99>
+    <_100 kind="Record" offset="8028" length="116">
+      <TextKey kind="Leaf" offset="8028" length="4" type="Scalar { Kind = U32 }" value="3672672039" />
+      <TextA kind="Leaf" offset="8032" length="112" type="WString { }">Defeat enemy Digimon with specific attriubute - Step 9</TextA>
+    </_100>
+    <_101 kind="Record" offset="8144" length="62">
+      <TextKey kind="Leaf" offset="8144" length="4" type="Scalar { Kind = U32 }" value="3682943065" />
+      <TextA kind="Leaf" offset="8148" length="58" type="WString { }">Enhance a specific Digimon.</TextA>
+    </_101>
+    <_102 kind="Record" offset="8206" length="66">
+      <TextKey kind="Leaf" offset="8206" length="4" type="Scalar { Kind = U32 }" value="3693634638" />
+      <TextA kind="Leaf" offset="8210" length="62" type="WString { }">Clear Digimon Arena - Stage 1</TextA>
+    </_102>
+    <_103 kind="Record" offset="8272" length="66">
+      <TextKey kind="Leaf" offset="8272" length="4" type="Scalar { Kind = U32 }" value="3693634639" />
+      <TextA kind="Leaf" offset="8276" length="62" type="WString { }">Clear Digimon Arena - Stage 2</TextA>
+    </_103>
+    <_104 kind="Record" offset="8338" length="66">
+      <TextKey kind="Leaf" offset="8338" length="4" type="Scalar { Kind = U32 }" value="3693634640" />
+      <TextA kind="Leaf" offset="8342" length="62" type="WString { }">Clear Digimon Arena - Stage 3</TextA>
+    </_104>
+    <_105 kind="Record" offset="8404" length="66">
+      <TextKey kind="Leaf" offset="8404" length="4" type="Scalar { Kind = U32 }" value="3693634641" />
+      <TextA kind="Leaf" offset="8408" length="62" type="WString { }">Clear Digimon Arena - Stage 4</TextA>
+    </_105>
+    <_106 kind="Record" offset="8470" length="66">
+      <TextKey kind="Leaf" offset="8470" length="4" type="Scalar { Kind = U32 }" value="3693634642" />
+      <TextA kind="Leaf" offset="8474" length="62" type="WString { }">Clear Digimon Arena - Stage 5</TextA>
+    </_106>
+    <_107 kind="Record" offset="8536" length="66">
+      <TextKey kind="Leaf" offset="8536" length="4" type="Scalar { Kind = U32 }" value="3693634643" />
+      <TextA kind="Leaf" offset="8540" length="62" type="WString { }">Clear Digimon Arena - Stage 6</TextA>
+    </_107>
+    <_108 kind="Record" offset="8602" length="66">
+      <TextKey kind="Leaf" offset="8602" length="4" type="Scalar { Kind = U32 }" value="3693634644" />
+      <TextA kind="Leaf" offset="8606" length="62" type="WString { }">Clear Digimon Arena - Stage 7</TextA>
+    </_108>
+    <_109 kind="Record" offset="8668" length="66">
+      <TextKey kind="Leaf" offset="8668" length="4" type="Scalar { Kind = U32 }" value="3693634645" />
+      <TextA kind="Leaf" offset="8672" length="62" type="WString { }">Clear Digimon Arena - Stage 8</TextA>
+    </_109>
+    <_110 kind="Record" offset="8734" length="60">
+      <TextKey kind="Leaf" offset="8734" length="4" type="Scalar { Kind = U32 }" value="3735704897" />
+      <TextA kind="Leaf" offset="8738" length="56" type="WString { }">Clear the specific Dungeon</TextA>
+    </_110>
+    <_111 kind="Record" offset="8794" length="78">
+      <TextKey kind="Leaf" offset="8794" length="4" type="Scalar { Kind = U32 }" value="3741142497" />
+      <TextA kind="Leaf" offset="8798" length="74" type="WString { }">Performing Data Summoning - Step 10</TextA>
+    </_111>
+    <_112 kind="Record" offset="8872" length="54">
+      <TextKey kind="Leaf" offset="8872" length="4" type="Scalar { Kind = U32 }" value="3773727068" />
+      <TextA kind="Leaf" offset="8876" length="50" type="WString { }">Change accessory Values</TextA>
+    </_112>
+    <_113 kind="Record" offset="8926" length="50">
+      <TextKey kind="Leaf" offset="8926" length="4" type="Scalar { Kind = U32 }" value="3800955525" />
+      <TextA kind="Leaf" offset="8930" length="46" type="WString { }">Visit a specific Area</TextA>
+    </_113>
+    <_114 kind="Record" offset="8976" length="40">
+      <TextKey kind="Leaf" offset="8976" length="4" type="Scalar { Kind = U32 }" value="3803635496" />
+      <TextA kind="Leaf" offset="8980" length="36" type="WString { }">Hatch Psychemon.</TextA>
+    </_114>
+    <_115 kind="Record" offset="9016" length="76">
+      <TextKey kind="Leaf" offset="9016" length="4" type="Scalar { Kind = U32 }" value="3816598555" />
+      <TextA kind="Leaf" offset="9020" length="72" type="WString { }">Complete the Event Quest - Step 10</TextA>
+    </_115>
+    <_116 kind="Record" offset="9092" length="60">
+      <TextKey kind="Leaf" offset="9092" length="4" type="Scalar { Kind = U32 }" value="3831693313" />
+      <TextA kind="Leaf" offset="9096" length="56" type="WString { }">Obtain Event Item - Step 1</TextA>
+    </_116>
+    <_117 kind="Record" offset="9152" length="60">
+      <TextKey kind="Leaf" offset="9152" length="4" type="Scalar { Kind = U32 }" value="3831693314" />
+      <TextA kind="Leaf" offset="9156" length="56" type="WString { }">Obtain Event Item - Step 2</TextA>
+    </_117>
+    <_118 kind="Record" offset="9212" length="60">
+      <TextKey kind="Leaf" offset="9212" length="4" type="Scalar { Kind = U32 }" value="3831693315" />
+      <TextA kind="Leaf" offset="9216" length="56" type="WString { }">Obtain Event Item - Step 3</TextA>
+    </_118>
+    <_119 kind="Record" offset="9272" length="60">
+      <TextKey kind="Leaf" offset="9272" length="4" type="Scalar { Kind = U32 }" value="3831693316" />
+      <TextA kind="Leaf" offset="9276" length="56" type="WString { }">Obtain Event Item - Step 4</TextA>
+    </_119>
+    <_120 kind="Record" offset="9332" length="60">
+      <TextKey kind="Leaf" offset="9332" length="4" type="Scalar { Kind = U32 }" value="3831693317" />
+      <TextA kind="Leaf" offset="9336" length="56" type="WString { }">Obtain Event Item - Step 5</TextA>
+    </_120>
+    <_121 kind="Record" offset="9392" length="60">
+      <TextKey kind="Leaf" offset="9392" length="4" type="Scalar { Kind = U32 }" value="3831693318" />
+      <TextA kind="Leaf" offset="9396" length="56" type="WString { }">Obtain Event Item - Step 6</TextA>
+    </_121>
+    <_122 kind="Record" offset="9452" length="60">
+      <TextKey kind="Leaf" offset="9452" length="4" type="Scalar { Kind = U32 }" value="3831693319" />
+      <TextA kind="Leaf" offset="9456" length="56" type="WString { }">Obtain Event Item - Step 7</TextA>
+    </_122>
+    <_123 kind="Record" offset="9512" length="60">
+      <TextKey kind="Leaf" offset="9512" length="4" type="Scalar { Kind = U32 }" value="3831693320" />
+      <TextA kind="Leaf" offset="9516" length="56" type="WString { }">Obtain Event Item - Step 8</TextA>
+    </_123>
+    <_124 kind="Record" offset="9572" length="60">
+      <TextKey kind="Leaf" offset="9572" length="4" type="Scalar { Kind = U32 }" value="3831693321" />
+      <TextA kind="Leaf" offset="9576" length="56" type="WString { }">Obtain Event Item - Step 9</TextA>
+    </_124>
+    <_125 kind="Record" offset="9632" length="94">
+      <TextKey kind="Leaf" offset="9632" length="4" type="Scalar { Kind = U32 }" value="3847279099" />
+      <TextA kind="Leaf" offset="9636" length="90" type="WString { }">Clear dungeons related to Digimon Adventure</TextA>
+    </_125>
+    <_126 kind="Record" offset="9726" length="76">
+      <TextKey kind="Leaf" offset="9726" length="4" type="Scalar { Kind = U32 }" value="3920719305" />
+      <TextA kind="Leaf" offset="9730" length="72" type="WString { }">Clear the Four Holy Beasts Dungeon</TextA>
+    </_126>
+    <_127 kind="Record" offset="9802" length="128">
+      <TextKey kind="Leaf" offset="9802" length="4" type="Scalar { Kind = U32 }" value="3957036300" />
+      <TextA kind="Leaf" offset="9806" length="124" type="WString { }">Defeat enemy Digimons that appears randomly on various maps.</TextA>
+    </_127>
+    <_128 kind="Record" offset="9930" length="36">
+      <TextKey kind="Leaf" offset="9930" length="4" type="Scalar { Kind = U32 }" value="3973361003" />
+      <TextA kind="Leaf" offset="9934" length="32" type="WString { }">Scan the item.</TextA>
+    </_128>
+    <_129 kind="Record" offset="9966" length="70">
+      <TextKey kind="Leaf" offset="9966" length="4" type="Scalar { Kind = U32 }" value="3982250341" />
+      <TextA kind="Leaf" offset="9970" length="66" type="WString { }">Maintain connection time(hours)</TextA>
+    </_129>
+    <_130 kind="Record" offset="10036" length="58">
+      <TextKey kind="Leaf" offset="10036" length="4" type="Scalar { Kind = U32 }" value="4049267223" />
+      <TextA kind="Leaf" offset="10040" length="54" type="WString { }">Log-in to Digimon Masters</TextA>
+    </_130>
+    <_131 kind="Record" offset="10094" length="32">
+      <TextKey kind="Leaf" offset="10094" length="4" type="Scalar { Kind = U32 }" value="4058751500" />
+      <TextA kind="Leaf" offset="10098" length="28" type="WString { }">Move to map.</TextA>
+    </_131>
+    <_132 kind="Record" offset="10126" length="96">
+      <TextKey kind="Leaf" offset="10126" length="4" type="Scalar { Kind = U32 }" value="4119304901" />
+      <TextA kind="Leaf" offset="10130" length="92" type="WString { }">Clear the Qinglongmon Dungeon(Hard) - Step 1</TextA>
+    </_132>
+    <_133 kind="Record" offset="10222" length="96">
+      <TextKey kind="Leaf" offset="10222" length="4" type="Scalar { Kind = U32 }" value="4119304902" />
+      <TextA kind="Leaf" offset="10226" length="92" type="WString { }">Clear the Qinglongmon Dungeon(Hard) - Step 2</TextA>
+    </_133>
+    <_134 kind="Record" offset="10318" length="96">
+      <TextKey kind="Leaf" offset="10318" length="4" type="Scalar { Kind = U32 }" value="4119304903" />
+      <TextA kind="Leaf" offset="10322" length="92" type="WString { }">Clear the Qinglongmon Dungeon(Hard) - Step 3</TextA>
+    </_134>
+    <_135 kind="Record" offset="10414" length="96">
+      <TextKey kind="Leaf" offset="10414" length="4" type="Scalar { Kind = U32 }" value="4119304904" />
+      <TextA kind="Leaf" offset="10418" length="92" type="WString { }">Clear the Qinglongmon Dungeon(Hard) - Step 4</TextA>
+    </_135>
+    <_136 kind="Record" offset="10510" length="96">
+      <TextKey kind="Leaf" offset="10510" length="4" type="Scalar { Kind = U32 }" value="4119304905" />
+      <TextA kind="Leaf" offset="10514" length="92" type="WString { }">Clear the Qinglongmon Dungeon(Hard) - Step 5</TextA>
+    </_136>
+    <_137 kind="Record" offset="10606" length="42">
+      <TextKey kind="Leaf" offset="10606" length="4" type="Scalar { Kind = U32 }" value="4123280231" />
+      <TextA kind="Leaf" offset="10610" length="38" type="WString { }">Hatch any Digimon</TextA>
+    </_137>
+    <_138 kind="Record" offset="10648" length="78">
+      <TextKey kind="Leaf" offset="10648" length="4" type="Scalar { Kind = U32 }" value="4128127424" />
+      <TextA kind="Leaf" offset="10652" length="74" type="WString { }">Clear the Shinjuku Station (Dungen)</TextA>
+    </_138>
+    <_139 kind="Record" offset="10726" length="56">
+      <TextKey kind="Leaf" offset="10726" length="4" type="Scalar { Kind = U32 }" value="4181098796" />
+      <TextA kind="Leaf" offset="10730" length="52" type="WString { }">Enter the Arena - Step 1</TextA>
+    </_139>
+    <_140 kind="Record" offset="10782" length="56">
+      <TextKey kind="Leaf" offset="10782" length="4" type="Scalar { Kind = U32 }" value="4181098797" />
+      <TextA kind="Leaf" offset="10786" length="52" type="WString { }">Enter the Arena - Step 2</TextA>
+    </_140>
+    <_141 kind="Record" offset="10838" length="56">
+      <TextKey kind="Leaf" offset="10838" length="4" type="Scalar { Kind = U32 }" value="4181098798" />
+      <TextA kind="Leaf" offset="10842" length="52" type="WString { }">Enter the Arena - Step 3</TextA>
+    </_141>
+    <_142 kind="Record" offset="10894" length="56">
+      <TextKey kind="Leaf" offset="10894" length="4" type="Scalar { Kind = U32 }" value="4181098799" />
+      <TextA kind="Leaf" offset="10898" length="52" type="WString { }">Enter the Arena - Step 4</TextA>
+    </_142>
+    <_143 kind="Record" offset="10950" length="56">
+      <TextKey kind="Leaf" offset="10950" length="4" type="Scalar { Kind = U32 }" value="4181098800" />
+      <TextA kind="Leaf" offset="10954" length="52" type="WString { }">Enter the Arena - Step 5</TextA>
+    </_143>
+    <_144 kind="Record" offset="11006" length="56">
+      <TextKey kind="Leaf" offset="11006" length="4" type="Scalar { Kind = U32 }" value="4181098801" />
+      <TextA kind="Leaf" offset="11010" length="52" type="WString { }">Enter the Arena - Step 6</TextA>
+    </_144>
+    <_145 kind="Record" offset="11062" length="56">
+      <TextKey kind="Leaf" offset="11062" length="4" type="Scalar { Kind = U32 }" value="4181098802" />
+      <TextA kind="Leaf" offset="11066" length="52" type="WString { }">Enter the Arena - Step 7</TextA>
+    </_145>
+    <_146 kind="Record" offset="11118" length="56">
+      <TextKey kind="Leaf" offset="11118" length="4" type="Scalar { Kind = U32 }" value="4181098803" />
+      <TextA kind="Leaf" offset="11122" length="52" type="WString { }">Enter the Arena - Step 8</TextA>
+    </_146>
+    <_147 kind="Record" offset="11174" length="82">
+      <TextKey kind="Leaf" offset="11174" length="4" type="Scalar { Kind = U32 }" value="41639811" />
+      <TextA kind="Leaf" offset="11178" length="78" type="WString { }">Obtain Attribute Arena Coins - Step 1</TextA>
+    </_147>
+    <_148 kind="Record" offset="11256" length="82">
+      <TextKey kind="Leaf" offset="11256" length="4" type="Scalar { Kind = U32 }" value="41639812" />
+      <TextA kind="Leaf" offset="11260" length="78" type="WString { }">Obtain Attribute Arena Coins - Step 2</TextA>
+    </_148>
+    <_149 kind="Record" offset="11338" length="82">
+      <TextKey kind="Leaf" offset="11338" length="4" type="Scalar { Kind = U32 }" value="41639813" />
+      <TextA kind="Leaf" offset="11342" length="78" type="WString { }">Obtain Attribute Arena Coins - Step 3</TextA>
+    </_149>
+    <_150 kind="Record" offset="11420" length="82">
+      <TextKey kind="Leaf" offset="11420" length="4" type="Scalar { Kind = U32 }" value="41639814" />
+      <TextA kind="Leaf" offset="11424" length="78" type="WString { }">Obtain Attribute Arena Coins - Step 4</TextA>
+    </_150>
+    <_151 kind="Record" offset="11502" length="82">
+      <TextKey kind="Leaf" offset="11502" length="4" type="Scalar { Kind = U32 }" value="41639815" />
+      <TextA kind="Leaf" offset="11506" length="78" type="WString { }">Obtain Attribute Arena Coins - Step 5</TextA>
+    </_151>
+    <_152 kind="Record" offset="11584" length="82">
+      <TextKey kind="Leaf" offset="11584" length="4" type="Scalar { Kind = U32 }" value="41639816" />
+      <TextA kind="Leaf" offset="11588" length="78" type="WString { }">Obtain Attribute Arena Coins - Step 6</TextA>
+    </_152>
+    <_153 kind="Record" offset="11666" length="82">
+      <TextKey kind="Leaf" offset="11666" length="4" type="Scalar { Kind = U32 }" value="41639817" />
+      <TextA kind="Leaf" offset="11670" length="78" type="WString { }">Obtain Attribute Arena Coins - Step 7</TextA>
+    </_153>
+    <_154 kind="Record" offset="11748" length="82">
+      <TextKey kind="Leaf" offset="11748" length="4" type="Scalar { Kind = U32 }" value="41639818" />
+      <TextA kind="Leaf" offset="11752" length="78" type="WString { }">Obtain Attribute Arena Coins - Step 8</TextA>
+    </_154>
+    <_155 kind="Record" offset="11830" length="106">
+      <TextKey kind="Leaf" offset="11830" length="4" type="Scalar { Kind = U32 }" value="112601264" />
+      <TextA kind="Leaf" offset="11834" length="102" type="WString { }">You can summon Data through Babel at DATS Center.</TextA>
+    </_155>
+    <_156 kind="Record" offset="11936" length="76">
+      <TextKey kind="Leaf" offset="11936" length="4" type="Scalar { Kind = U32 }" value="113367953" />
+      <TextA kind="Leaf" offset="11940" length="72" type="WString { }">Performing Data Summoning - Step 1</TextA>
+    </_156>
+    <_157 kind="Record" offset="12012" length="76">
+      <TextKey kind="Leaf" offset="12012" length="4" type="Scalar { Kind = U32 }" value="113367954" />
+      <TextA kind="Leaf" offset="12016" length="72" type="WString { }">Performing Data Summoning - Step 2</TextA>
+    </_157>
+    <_158 kind="Record" offset="12088" length="76">
+      <TextKey kind="Leaf" offset="12088" length="4" type="Scalar { Kind = U32 }" value="113367955" />
+      <TextA kind="Leaf" offset="12092" length="72" type="WString { }">Performing Data Summoning - Step 3</TextA>
+    </_158>
+    <_159 kind="Record" offset="12164" length="76">
+      <TextKey kind="Leaf" offset="12164" length="4" type="Scalar { Kind = U32 }" value="113367956" />
+      <TextA kind="Leaf" offset="12168" length="72" type="WString { }">Performing Data Summoning - Step 4</TextA>
+    </_159>
+    <_160 kind="Record" offset="12240" length="76">
+      <TextKey kind="Leaf" offset="12240" length="4" type="Scalar { Kind = U32 }" value="113367957" />
+      <TextA kind="Leaf" offset="12244" length="72" type="WString { }">Performing Data Summoning - Step 5</TextA>
+    </_160>
+    <_161 kind="Record" offset="12316" length="76">
+      <TextKey kind="Leaf" offset="12316" length="4" type="Scalar { Kind = U32 }" value="113367958" />
+      <TextA kind="Leaf" offset="12320" length="72" type="WString { }">Performing Data Summoning - Step 6</TextA>
+    </_161>
+    <_162 kind="Record" offset="12392" length="76">
+      <TextKey kind="Leaf" offset="12392" length="4" type="Scalar { Kind = U32 }" value="113367959" />
+      <TextA kind="Leaf" offset="12396" length="72" type="WString { }">Performing Data Summoning - Step 7</TextA>
+    </_162>
+    <_163 kind="Record" offset="12468" length="76">
+      <TextKey kind="Leaf" offset="12468" length="4" type="Scalar { Kind = U32 }" value="113367960" />
+      <TextA kind="Leaf" offset="12472" length="72" type="WString { }">Performing Data Summoning - Step 8</TextA>
+    </_163>
+    <_164 kind="Record" offset="12544" length="76">
+      <TextKey kind="Leaf" offset="12544" length="4" type="Scalar { Kind = U32 }" value="113367961" />
+      <TextA kind="Leaf" offset="12548" length="72" type="WString { }">Performing Data Summoning - Step 9</TextA>
+    </_164>
+    <_165 kind="Record" offset="12620" length="112">
+      <TextKey kind="Leaf" offset="12620" length="4" type="Scalar { Kind = U32 }" value="172532065" />
+      <TextA kind="Leaf" offset="12624" length="108" type="WString { }">Defeat enemy Digimon with specific natural attribute</TextA>
+    </_165>
+    <_166 kind="Record" offset="12732" length="62">
+      <TextKey kind="Leaf" offset="12732" length="4" type="Scalar { Kind = U32 }" value="196182311" />
+      <TextA kind="Leaf" offset="12736" length="58" type="WString { }">Clear the Stadium (Dungeon)</TextA>
+    </_166>
+    <_167 kind="Record" offset="12794" length="52">
+      <TextKey kind="Leaf" offset="12794" length="4" type="Scalar { Kind = U32 }" value="206536535" />
+      <TextA kind="Leaf" offset="12798" length="48" type="WString { }">Complete Daily Mission</TextA>
+    </_167>
+    <_168 kind="Record" offset="12846" length="38">
+      <TextKey kind="Leaf" offset="12846" length="4" type="Scalar { Kind = U32 }" value="213758977" />
+      <TextA kind="Leaf" offset="12850" length="34" type="WString { }">Move to any map</TextA>
+    </_168>
+    <_169 kind="Record" offset="12884" length="36">
+      <TextKey kind="Leaf" offset="12884" length="4" type="Scalar { Kind = U32 }" value="229555645" />
+      <TextA kind="Leaf" offset="12888" length="32" type="WString { }">Use Megaphone.</TextA>
+    </_169>
+    <_170 kind="Record" offset="12920" length="110">
+      <TextKey kind="Leaf" offset="12920" length="4" type="Scalar { Kind = U32 }" value="248003101" />
+      <TextA kind="Leaf" offset="12924" length="106" type="WString { }">Participate in Gankoomon's Training Ground - Step 1</TextA>
+    </_170>
+    <_171 kind="Record" offset="13030" length="110">
+      <TextKey kind="Leaf" offset="13030" length="4" type="Scalar { Kind = U32 }" value="248003102" />
+      <TextA kind="Leaf" offset="13034" length="106" type="WString { }">Participate in Gankoomon's Training Ground - Step 2</TextA>
+    </_171>
+    <_172 kind="Record" offset="13140" length="110">
+      <TextKey kind="Leaf" offset="13140" length="4" type="Scalar { Kind = U32 }" value="248003103" />
+      <TextA kind="Leaf" offset="13144" length="106" type="WString { }">Participate in Gankoomon's Training Ground - Step 3</TextA>
+    </_172>
+    <_173 kind="Record" offset="13250" length="110">
+      <TextKey kind="Leaf" offset="13250" length="4" type="Scalar { Kind = U32 }" value="248003104" />
+      <TextA kind="Leaf" offset="13254" length="106" type="WString { }">Participate in Gankoomon's Training Ground - Step 4</TextA>
+    </_173>
+    <_174 kind="Record" offset="13360" length="110">
+      <TextKey kind="Leaf" offset="13360" length="4" type="Scalar { Kind = U32 }" value="248003105" />
+      <TextA kind="Leaf" offset="13364" length="106" type="WString { }">Participate in Gankoomon's Training Ground - Step 5</TextA>
+    </_174>
+    <_175 kind="Record" offset="13470" length="110">
+      <TextKey kind="Leaf" offset="13470" length="4" type="Scalar { Kind = U32 }" value="248003106" />
+      <TextA kind="Leaf" offset="13474" length="106" type="WString { }">Participate in Gankoomon's Training Ground - Step 6</TextA>
+    </_175>
+    <_176 kind="Record" offset="13580" length="110">
+      <TextKey kind="Leaf" offset="13580" length="4" type="Scalar { Kind = U32 }" value="248003107" />
+      <TextA kind="Leaf" offset="13584" length="106" type="WString { }">Participate in Gankoomon's Training Ground - Step 7</TextA>
+    </_176>
+    <_177 kind="Record" offset="13690" length="110">
+      <TextKey kind="Leaf" offset="13690" length="4" type="Scalar { Kind = U32 }" value="248003108" />
+      <TextA kind="Leaf" offset="13694" length="106" type="WString { }">Participate in Gankoomon's Training Ground - Step 8</TextA>
+    </_177>
+    <_178 kind="Record" offset="13800" length="68">
+      <TextKey kind="Leaf" offset="13800" length="4" type="Scalar { Kind = U32 }" value="253770436" />
+      <TextA kind="Leaf" offset="13804" length="64" type="WString { }">Clear the Void Space (Dungeon)</TextA>
+    </_178>
+    <_179 kind="Record" offset="13868" length="96">
+      <TextKey kind="Leaf" offset="13868" length="4" type="Scalar { Kind = U32 }" value="275658031" />
+      <TextA kind="Leaf" offset="13872" length="92" type="WString { }">Clear Destruction and Regeneration - Stage 1</TextA>
+    </_179>
+    <_180 kind="Record" offset="13964" length="96">
+      <TextKey kind="Leaf" offset="13964" length="4" type="Scalar { Kind = U32 }" value="275658032" />
+      <TextA kind="Leaf" offset="13968" length="92" type="WString { }">Clear Destruction and Regeneration - Stage 2</TextA>
+    </_180>
+    <_181 kind="Record" offset="14060" length="96">
+      <TextKey kind="Leaf" offset="14060" length="4" type="Scalar { Kind = U32 }" value="275658033" />
+      <TextA kind="Leaf" offset="14064" length="92" type="WString { }">Clear Destruction and Regeneration - Stage 3</TextA>
+    </_181>
+    <_182 kind="Record" offset="14156" length="96">
+      <TextKey kind="Leaf" offset="14156" length="4" type="Scalar { Kind = U32 }" value="275658034" />
+      <TextA kind="Leaf" offset="14160" length="92" type="WString { }">Clear Destruction and Regeneration - Stage 4</TextA>
+    </_182>
+    <_183 kind="Record" offset="14252" length="96">
+      <TextKey kind="Leaf" offset="14252" length="4" type="Scalar { Kind = U32 }" value="275658035" />
+      <TextA kind="Leaf" offset="14256" length="92" type="WString { }">Clear Destruction and Regeneration - Stage 5</TextA>
+    </_183>
+    <_184 kind="Record" offset="14348" length="96">
+      <TextKey kind="Leaf" offset="14348" length="4" type="Scalar { Kind = U32 }" value="275658036" />
+      <TextA kind="Leaf" offset="14352" length="92" type="WString { }">Clear Destruction and Regeneration - Stage 6</TextA>
+    </_184>
+    <_185 kind="Record" offset="14444" length="96">
+      <TextKey kind="Leaf" offset="14444" length="4" type="Scalar { Kind = U32 }" value="275658037" />
+      <TextA kind="Leaf" offset="14448" length="92" type="WString { }">Clear Destruction and Regeneration - Stage 7</TextA>
+    </_185>
+    <_186 kind="Record" offset="14540" length="96">
+      <TextKey kind="Leaf" offset="14540" length="4" type="Scalar { Kind = U32 }" value="275658038" />
+      <TextA kind="Leaf" offset="14544" length="92" type="WString { }">Clear Destruction and Regeneration - Stage 8</TextA>
+    </_186>
+    <_187 kind="Record" offset="14636" length="130">
+      <TextKey kind="Leaf" offset="14636" length="4" type="Scalar { Kind = U32 }" value="290116621" />
+      <TextA kind="Leaf" offset="14640" length="126" type="WString { }">Defeat enemy Digimon with specific natural attribute - Step 1</TextA>
+    </_187>
+    <_188 kind="Record" offset="14766" length="130">
+      <TextKey kind="Leaf" offset="14766" length="4" type="Scalar { Kind = U32 }" value="290116622" />
+      <TextA kind="Leaf" offset="14770" length="126" type="WString { }">Defeat enemy Digimon with specific natural attribute - Step 2</TextA>
+    </_188>
+    <_189 kind="Record" offset="14896" length="130">
+      <TextKey kind="Leaf" offset="14896" length="4" type="Scalar { Kind = U32 }" value="290116623" />
+      <TextA kind="Leaf" offset="14900" length="126" type="WString { }">Defeat enemy Digimon with specific natural attribute - Step 3</TextA>
+    </_189>
+    <_190 kind="Record" offset="15026" length="130">
+      <TextKey kind="Leaf" offset="15026" length="4" type="Scalar { Kind = U32 }" value="290116624" />
+      <TextA kind="Leaf" offset="15030" length="126" type="WString { }">Defeat enemy Digimon with specific natural attribute - Step 4</TextA>
+    </_190>
+    <_191 kind="Record" offset="15156" length="130">
+      <TextKey kind="Leaf" offset="15156" length="4" type="Scalar { Kind = U32 }" value="290116625" />
+      <TextA kind="Leaf" offset="15160" length="126" type="WString { }">Defeat enemy Digimon with specific natural attribute - Step 5</TextA>
+    </_191>
+    <_192 kind="Record" offset="15286" length="130">
+      <TextKey kind="Leaf" offset="15286" length="4" type="Scalar { Kind = U32 }" value="290116626" />
+      <TextA kind="Leaf" offset="15290" length="126" type="WString { }">Defeat enemy Digimon with specific natural attribute - Step 6</TextA>
+    </_192>
+    <_193 kind="Record" offset="15416" length="130">
+      <TextKey kind="Leaf" offset="15416" length="4" type="Scalar { Kind = U32 }" value="290116627" />
+      <TextA kind="Leaf" offset="15420" length="126" type="WString { }">Defeat enemy Digimon with specific natural attribute - Step 7</TextA>
+    </_193>
+    <_194 kind="Record" offset="15546" length="130">
+      <TextKey kind="Leaf" offset="15546" length="4" type="Scalar { Kind = U32 }" value="290116628" />
+      <TextA kind="Leaf" offset="15550" length="126" type="WString { }">Defeat enemy Digimon with specific natural attribute - Step 8</TextA>
+    </_194>
+    <_195 kind="Record" offset="15676" length="130">
+      <TextKey kind="Leaf" offset="15676" length="4" type="Scalar { Kind = U32 }" value="290116629" />
+      <TextA kind="Leaf" offset="15680" length="126" type="WString { }">Defeat enemy Digimon with specific natural attribute - Step 9</TextA>
+    </_195>
+    <_196 kind="Record" offset="15806" length="102">
+      <TextKey kind="Leaf" offset="15806" length="4" type="Scalar { Kind = U32 }" value="296372703" />
+      <TextA kind="Leaf" offset="15810" length="98" type="WString { }">Complete a certain number of Seasonal Missions.</TextA>
+    </_196>
+    <_197 kind="Record" offset="15908" length="88">
+      <TextKey kind="Leaf" offset="15908" length="4" type="Scalar { Kind = U32 }" value="309483565" />
+      <TextA kind="Leaf" offset="15912" length="84" type="WString { }">Defeat Darkness attribute enemy Digimon.</TextA>
+    </_197>
+    <_198 kind="Record" offset="15996" length="76">
+      <TextKey kind="Leaf" offset="15996" length="4" type="Scalar { Kind = U32 }" value="384061644" />
+      <TextA kind="Leaf" offset="16000" length="72" type="WString { }">Successfully transcend any Digimon</TextA>
+    </_198>
+    <_199 kind="Record" offset="16072" length="80">
+      <TextKey kind="Leaf" offset="16072" length="4" type="Scalar { Kind = U32 }" value="429070537" />
+      <TextA kind="Leaf" offset="16076" length="76" type="WString { }">Defeat Data attribute enemy Digimon.</TextA>
+    </_199>
+    <_200 kind="Record" offset="16152" length="80">
+      <TextKey kind="Leaf" offset="16152" length="4" type="Scalar { Kind = U32 }" value="429070881" />
+      <TextA kind="Leaf" offset="16156" length="76" type="WString { }">Defeat None attribute enemy Digimon.</TextA>
+    </_200>
+    <_201 kind="Record" offset="16232" length="96">
+      <TextKey kind="Leaf" offset="16232" length="4" type="Scalar { Kind = U32 }" value="429071111" />
+      <TextA kind="Leaf" offset="16236" length="92" type="WString { }">Defeat Unidentified attribute enemy Digimon.</TextA>
+    </_201>
+    <_202 kind="Record" offset="16328" length="86">
+      <TextKey kind="Leaf" offset="16328" length="4" type="Scalar { Kind = U32 }" value="429071131" />
+      <TextA kind="Leaf" offset="16332" length="82" type="WString { }">Defeat Vaccine attribute enemy Digimon.</TextA>
+    </_202>
+    <_203 kind="Record" offset="16414" length="82">
+      <TextKey kind="Leaf" offset="16414" length="4" type="Scalar { Kind = U32 }" value="429071139" />
+      <TextA kind="Leaf" offset="16418" length="78" type="WString { }">Defeat Virus attribute enemy Digimon.</TextA>
+    </_203>
+    <_204 kind="Record" offset="16496" length="50">
+      <TextKey kind="Leaf" offset="16496" length="4" type="Scalar { Kind = U32 }" value="434525830" />
+      <TextA kind="Leaf" offset="16500" length="46" type="WString { }">Use a specific items.</TextA>
+    </_204>
+    <_205 kind="Record" offset="16546" length="32">
+      <TextKey kind="Leaf" offset="16546" length="4" type="Scalar { Kind = U32 }" value="459039100" />
+      <TextA kind="Leaf" offset="16550" length="28" type="WString { }">Visit Map 1.</TextA>
+    </_205>
+    <_206 kind="Record" offset="16578" length="32">
+      <TextKey kind="Leaf" offset="16578" length="4" type="Scalar { Kind = U32 }" value="459039101" />
+      <TextA kind="Leaf" offset="16582" length="28" type="WString { }">Visit Map 2.</TextA>
+    </_206>
+    <_207 kind="Record" offset="16610" length="32">
+      <TextKey kind="Leaf" offset="16610" length="4" type="Scalar { Kind = U32 }" value="459039102" />
+      <TextA kind="Leaf" offset="16614" length="28" type="WString { }">Visit Map 3.</TextA>
+    </_207>
+    <_208 kind="Record" offset="16642" length="32">
+      <TextKey kind="Leaf" offset="16642" length="4" type="Scalar { Kind = U32 }" value="459039103" />
+      <TextA kind="Leaf" offset="16646" length="28" type="WString { }">Visit Map 4.</TextA>
+    </_208>
+    <_209 kind="Record" offset="16674" length="32">
+      <TextKey kind="Leaf" offset="16674" length="4" type="Scalar { Kind = U32 }" value="459039104" />
+      <TextA kind="Leaf" offset="16678" length="28" type="WString { }">Visit Map 5.</TextA>
+    </_209>
+    <_210 kind="Record" offset="16706" length="140">
+      <TextKey kind="Leaf" offset="16706" length="4" type="Scalar { Kind = U32 }" value="478020102" />
+      <TextA kind="Leaf" offset="16710" length="136" type="WString { }">You can enhance your Digimon from Richard Sampson at DATS Center .</TextA>
+    </_210>
+    <_211 kind="Record" offset="16846" length="96">
+      <TextKey kind="Leaf" offset="16846" length="4" type="Scalar { Kind = U32 }" value="487065906" />
+      <TextA kind="Leaf" offset="16850" length="92" type="WString { }">Designate a specific Digimon as your Partner</TextA>
+    </_211>
+    <_212 kind="Record" offset="16942" length="76">
+      <TextKey kind="Leaf" offset="16942" length="4" type="Scalar { Kind = U32 }" value="563942431" />
+      <TextA kind="Leaf" offset="16946" length="72" type="WString { }">Clear the Rainbow Bridge (Dungeon)</TextA>
+    </_212>
+    <_213 kind="Record" offset="17018" length="72">
+      <TextKey kind="Leaf" offset="17018" length="4" type="Scalar { Kind = U32 }" value="571886902" />
+      <TextA kind="Leaf" offset="17022" length="68" type="WString { }">Clear the D-Reaper Area (Dungen)</TextA>
+    </_213>
+    <_214 kind="Record" offset="17090" length="94">
+      <TextKey kind="Leaf" offset="17090" length="4" type="Scalar { Kind = U32 }" value="585291567" />
+      <TextA kind="Leaf" offset="17094" length="90" type="WString { }">Clear the Ancient Ruins of Secret (Dungeon)</TextA>
+    </_214>
+    <_215 kind="Record" offset="17184" length="46">
+      <TextKey kind="Leaf" offset="17184" length="4" type="Scalar { Kind = U32 }" value="588469474" />
+      <TextA kind="Leaf" offset="17188" length="42" type="WString { }">Clear Digimon Arena</TextA>
+    </_215>
+    <_216 kind="Record" offset="17230" length="54">
+      <TextKey kind="Leaf" offset="17230" length="4" type="Scalar { Kind = U32 }" value="593356925" />
+      <TextA kind="Leaf" offset="17234" length="50" type="WString { }">Clear the Event Dungeon</TextA>
+    </_216>
+    <_217 kind="Record" offset="17284" length="92">
+      <TextKey kind="Leaf" offset="17284" length="4" type="Scalar { Kind = U32 }" value="594983793" />
+      <TextA kind="Leaf" offset="17288" length="88" type="WString { }">Participate in Gankoomon's Training Ground</TextA>
+    </_217>
+    <_218 kind="Record" offset="17376" length="58">
+      <TextKey kind="Leaf" offset="17376" length="4" type="Scalar { Kind = U32 }" value="601702078" />
+      <TextA kind="Leaf" offset="17380" length="54" type="WString { }">Hatch any Digimon to Lv.5</TextA>
+    </_218>
+    <_219 kind="Record" offset="17434" length="58">
+      <TextKey kind="Leaf" offset="17434" length="4" type="Scalar { Kind = U32 }" value="609898952" />
+      <TextA kind="Leaf" offset="17438" length="54" type="WString { }">Clear Marketplace[Normal]</TextA>
+    </_219>
+    <_220 kind="Record" offset="17492" length="90">
+      <TextKey kind="Leaf" offset="17492" length="4" type="Scalar { Kind = U32 }" value="636877962" />
+      <TextA kind="Leaf" offset="17496" length="86" type="WString { }">Leveling up your Partner Digimon - Step 1</TextA>
+    </_220>
+    <_221 kind="Record" offset="17582" length="90">
+      <TextKey kind="Leaf" offset="17582" length="4" type="Scalar { Kind = U32 }" value="636877963" />
+      <TextA kind="Leaf" offset="17586" length="86" type="WString { }">Leveling up your Partner Digimon - Step 2</TextA>
+    </_221>
+    <_222 kind="Record" offset="17672" length="90">
+      <TextKey kind="Leaf" offset="17672" length="4" type="Scalar { Kind = U32 }" value="636877964" />
+      <TextA kind="Leaf" offset="17676" length="86" type="WString { }">Leveling up your Partner Digimon - Step 3</TextA>
+    </_222>
+    <_223 kind="Record" offset="17762" length="90">
+      <TextKey kind="Leaf" offset="17762" length="4" type="Scalar { Kind = U32 }" value="636877965" />
+      <TextA kind="Leaf" offset="17766" length="86" type="WString { }">Leveling up your Partner Digimon - Step 4</TextA>
+    </_223>
+    <_224 kind="Record" offset="17852" length="90">
+      <TextKey kind="Leaf" offset="17852" length="4" type="Scalar { Kind = U32 }" value="636877966" />
+      <TextA kind="Leaf" offset="17856" length="86" type="WString { }">Leveling up your Partner Digimon - Step 5</TextA>
+    </_224>
+    <_225 kind="Record" offset="17942" length="96">
+      <TextKey kind="Leaf" offset="17942" length="4" type="Scalar { Kind = U32 }" value="640727064" />
+      <TextA kind="Leaf" offset="17946" length="92" type="WString { }">Clear the Qinglongmon Dungeon(Easy) - Step 1</TextA>
+    </_225>
+    <_226 kind="Record" offset="18038" length="96">
+      <TextKey kind="Leaf" offset="18038" length="4" type="Scalar { Kind = U32 }" value="640727065" />
+      <TextA kind="Leaf" offset="18042" length="92" type="WString { }">Clear the Qinglongmon Dungeon(Easy) - Step 2</TextA>
+    </_226>
+    <_227 kind="Record" offset="18134" length="96">
+      <TextKey kind="Leaf" offset="18134" length="4" type="Scalar { Kind = U32 }" value="640727066" />
+      <TextA kind="Leaf" offset="18138" length="92" type="WString { }">Clear the Qinglongmon Dungeon(Easy) - Step 3</TextA>
+    </_227>
+    <_228 kind="Record" offset="18230" length="96">
+      <TextKey kind="Leaf" offset="18230" length="4" type="Scalar { Kind = U32 }" value="640727067" />
+      <TextA kind="Leaf" offset="18234" length="92" type="WString { }">Clear the Qinglongmon Dungeon(Easy) - Step 4</TextA>
+    </_228>
+    <_229 kind="Record" offset="18326" length="96">
+      <TextKey kind="Leaf" offset="18326" length="4" type="Scalar { Kind = U32 }" value="640727068" />
+      <TextA kind="Leaf" offset="18330" length="92" type="WString { }">Clear the Qinglongmon Dungeon(Easy) - Step 5</TextA>
+    </_229>
+    <_230 kind="Record" offset="18422" length="48">
+      <TextKey kind="Leaf" offset="18422" length="4" type="Scalar { Kind = U32 }" value="685060411" />
+      <TextA kind="Leaf" offset="18426" length="44" type="WString { }">Enhance any Digimon.</TextA>
+    </_230>
+    <_231 kind="Record" offset="18470" length="50">
+      <TextKey kind="Leaf" offset="18470" length="4" type="Scalar { Kind = U32 }" value="736499120" />
+      <TextA kind="Leaf" offset="18474" length="46" type="WString { }">Complete Daily Quests</TextA>
+    </_231>
+    <_232 kind="Record" offset="18520" length="78">
+      <TextKey kind="Leaf" offset="18520" length="4" type="Scalar { Kind = U32 }" value="841675651" />
+      <TextA kind="Leaf" offset="18524" length="74" type="WString { }">Defeat Ice attribute enemy Digimon.</TextA>
+    </_232>
+    <_233 kind="Record" offset="18598" length="38">
+      <TextKey kind="Leaf" offset="18598" length="4" type="Scalar { Kind = U32 }" value="855417664" />
+      <TextA kind="Leaf" offset="18602" length="34" type="WString { }">Enter the Arena</TextA>
+    </_233>
+    <_234 kind="Record" offset="18636" length="74">
+      <TextKey kind="Leaf" offset="18636" length="4" type="Scalar { Kind = U32 }" value="869641116" />
+      <TextA kind="Leaf" offset="18640" length="70" type="WString { }">Hatching specific Digimon to Lv.5</TextA>
+    </_234>
+    <_235 kind="Record" offset="18710" length="94">
+      <TextKey kind="Leaf" offset="18710" length="4" type="Scalar { Kind = U32 }" value="888083530" />
+      <TextA kind="Leaf" offset="18714" length="90" type="WString { }">Defeat a specific villain Digimon - Stage 1</TextA>
+    </_235>
+    <_236 kind="Record" offset="18804" length="94">
+      <TextKey kind="Leaf" offset="18804" length="4" type="Scalar { Kind = U32 }" value="888083531" />
+      <TextA kind="Leaf" offset="18808" length="90" type="WString { }">Defeat a specific villain Digimon - Stage 2</TextA>
+    </_236>
+    <_237 kind="Record" offset="18898" length="94">
+      <TextKey kind="Leaf" offset="18898" length="4" type="Scalar { Kind = U32 }" value="888083532" />
+      <TextA kind="Leaf" offset="18902" length="90" type="WString { }">Defeat a specific villain Digimon - Stage 3</TextA>
+    </_237>
+    <_238 kind="Record" offset="18992" length="94">
+      <TextKey kind="Leaf" offset="18992" length="4" type="Scalar { Kind = U32 }" value="888083533" />
+      <TextA kind="Leaf" offset="18996" length="90" type="WString { }">Defeat a specific villain Digimon - Stage 4</TextA>
+    </_238>
+    <_239 kind="Record" offset="19086" length="94">
+      <TextKey kind="Leaf" offset="19086" length="4" type="Scalar { Kind = U32 }" value="888083534" />
+      <TextA kind="Leaf" offset="19090" length="90" type="WString { }">Defeat a specific villain Digimon - Stage 5</TextA>
+    </_239>
+    <_240 kind="Record" offset="19180" length="94">
+      <TextKey kind="Leaf" offset="19180" length="4" type="Scalar { Kind = U32 }" value="888083535" />
+      <TextA kind="Leaf" offset="19184" length="90" type="WString { }">Defeat a specific villain Digimon - Stage 6</TextA>
+    </_240>
+    <_241 kind="Record" offset="19274" length="94">
+      <TextKey kind="Leaf" offset="19274" length="4" type="Scalar { Kind = U32 }" value="888083536" />
+      <TextA kind="Leaf" offset="19278" length="90" type="WString { }">Defeat a specific villain Digimon - Stage 7</TextA>
+    </_241>
+    <_242 kind="Record" offset="19368" length="94">
+      <TextKey kind="Leaf" offset="19368" length="4" type="Scalar { Kind = U32 }" value="888083537" />
+      <TextA kind="Leaf" offset="19372" length="90" type="WString { }">Defeat a specific villain Digimon - Stage 8</TextA>
+    </_242>
+    <_243 kind="Record" offset="19462" length="94">
+      <TextKey kind="Leaf" offset="19462" length="4" type="Scalar { Kind = U32 }" value="888083538" />
+      <TextA kind="Leaf" offset="19466" length="90" type="WString { }">Defeat a specific villain Digimon - Stage 9</TextA>
+    </_243>
+    <_244 kind="Record" offset="19556" length="78">
+      <TextKey kind="Leaf" offset="19556" length="4" type="Scalar { Kind = U32 }" value="922806279" />
+      <TextA kind="Leaf" offset="19560" length="74" type="WString { }">Clear the Royal Base(Hard) - Step 1</TextA>
+    </_244>
+    <_245 kind="Record" offset="19634" length="78">
+      <TextKey kind="Leaf" offset="19634" length="4" type="Scalar { Kind = U32 }" value="922806280" />
+      <TextA kind="Leaf" offset="19638" length="74" type="WString { }">Clear the Royal Base(Hard) - Step 2</TextA>
+    </_245>
+    <_246 kind="Record" offset="19712" length="78">
+      <TextKey kind="Leaf" offset="19712" length="4" type="Scalar { Kind = U32 }" value="922806281" />
+      <TextA kind="Leaf" offset="19716" length="74" type="WString { }">Clear the Royal Base(Hard) - Step 3</TextA>
+    </_246>
+    <_247 kind="Record" offset="19790" length="78">
+      <TextKey kind="Leaf" offset="19790" length="4" type="Scalar { Kind = U32 }" value="922806282" />
+      <TextA kind="Leaf" offset="19794" length="74" type="WString { }">Clear the Royal Base(Hard) - Step 4</TextA>
+    </_247>
+    <_248 kind="Record" offset="19868" length="78">
+      <TextKey kind="Leaf" offset="19868" length="4" type="Scalar { Kind = U32 }" value="922806283" />
+      <TextA kind="Leaf" offset="19872" length="74" type="WString { }">Clear the Royal Base(Hard) - Step 5</TextA>
+    </_248>
+    <_249 kind="Record" offset="19946" length="78">
+      <TextKey kind="Leaf" offset="19946" length="4" type="Scalar { Kind = U32 }" value="922806284" />
+      <TextA kind="Leaf" offset="19950" length="74" type="WString { }">Clear the Royal Base(Hard) - Step 6</TextA>
+    </_249>
+    <_250 kind="Record" offset="20024" length="78">
+      <TextKey kind="Leaf" offset="20024" length="4" type="Scalar { Kind = U32 }" value="922806285" />
+      <TextA kind="Leaf" offset="20028" length="74" type="WString { }">Clear the Royal Base(Hard) - Step 7</TextA>
+    </_250>
+    <_251 kind="Record" offset="20102" length="78">
+      <TextKey kind="Leaf" offset="20102" length="4" type="Scalar { Kind = U32 }" value="922806286" />
+      <TextA kind="Leaf" offset="20106" length="74" type="WString { }">Clear the Royal Base(Hard) - Step 8</TextA>
+    </_251>
+    <_252 kind="Record" offset="20180" length="118">
+      <TextKey kind="Leaf" offset="20180" length="4" type="Scalar { Kind = U32 }" value="939092783" />
+      <TextA kind="Leaf" offset="20184" length="114" type="WString { }">Defeat enemy Digimon with specific attriubute - Step 10</TextA>
+    </_252>
+    <_253 kind="Record" offset="20298" length="36">
+      <TextKey kind="Leaf" offset="20298" length="4" type="Scalar { Kind = U32 }" value="976252064" />
+      <TextA kind="Leaf" offset="20302" length="32" type="WString { }">Scan any items</TextA>
+    </_253>
+    <_254 kind="Record" offset="20334" length="132">
+      <TextKey kind="Leaf" offset="20334" length="4" type="Scalar { Kind = U32 }" value="983913949" />
+      <TextA kind="Leaf" offset="20338" length="128" type="WString { }">Defeat enemy Digimon with specific natural attribute - Step 10</TextA>
+    </_254>
+    <_255 kind="Record" offset="20466" length="78">
+      <TextKey kind="Leaf" offset="20466" length="4" type="Scalar { Kind = U32 }" value="1037823981" />
+      <TextA kind="Leaf" offset="20470" length="74" type="WString { }">Clear the specific Dungeon - Step 1</TextA>
+    </_255>
+    <_256 kind="Record" offset="20544" length="78">
+      <TextKey kind="Leaf" offset="20544" length="4" type="Scalar { Kind = U32 }" value="1037823982" />
+      <TextA kind="Leaf" offset="20548" length="74" type="WString { }">Clear the specific Dungeon - Step 2</TextA>
+    </_256>
+    <_257 kind="Record" offset="20622" length="78">
+      <TextKey kind="Leaf" offset="20622" length="4" type="Scalar { Kind = U32 }" value="1037823983" />
+      <TextA kind="Leaf" offset="20626" length="74" type="WString { }">Clear the specific Dungeon - Step 3</TextA>
+    </_257>
+    <_258 kind="Record" offset="20700" length="78">
+      <TextKey kind="Leaf" offset="20700" length="4" type="Scalar { Kind = U32 }" value="1037823984" />
+      <TextA kind="Leaf" offset="20704" length="74" type="WString { }">Clear the specific Dungeon - Step 4</TextA>
+    </_258>
+    <_259 kind="Record" offset="20778" length="78">
+      <TextKey kind="Leaf" offset="20778" length="4" type="Scalar { Kind = U32 }" value="1037823985" />
+      <TextA kind="Leaf" offset="20782" length="74" type="WString { }">Clear the specific Dungeon - Step 5</TextA>
+    </_259>
+    <_260 kind="Record" offset="20856" length="78">
+      <TextKey kind="Leaf" offset="20856" length="4" type="Scalar { Kind = U32 }" value="1037823986" />
+      <TextA kind="Leaf" offset="20860" length="74" type="WString { }">Clear the specific Dungeon - Step 6</TextA>
+    </_260>
+    <_261 kind="Record" offset="20934" length="78">
+      <TextKey kind="Leaf" offset="20934" length="4" type="Scalar { Kind = U32 }" value="1037823987" />
+      <TextA kind="Leaf" offset="20938" length="74" type="WString { }">Clear the specific Dungeon - Step 7</TextA>
+    </_261>
+    <_262 kind="Record" offset="21012" length="78">
+      <TextKey kind="Leaf" offset="21012" length="4" type="Scalar { Kind = U32 }" value="1037823988" />
+      <TextA kind="Leaf" offset="21016" length="74" type="WString { }">Clear the specific Dungeon - Step 8</TextA>
+    </_262>
+    <_263 kind="Record" offset="21090" length="56">
+      <TextKey kind="Leaf" offset="21090" length="4" type="Scalar { Kind = U32 }" value="1085118041" />
+      <TextA kind="Leaf" offset="21094" length="52" type="WString { }">Reach the Pass Level 30.</TextA>
+    </_263>
+    <_264 kind="Record" offset="21146" length="136">
+      <TextKey kind="Leaf" offset="21146" length="4" type="Scalar { Kind = U32 }" value="1150953655" />
+      <TextA kind="Leaf" offset="21150" length="132" type="WString { }">Log-in to Digimon Masters and stay for a certain amount of time.</TextA>
+    </_264>
+    <_265 kind="Record" offset="21282" length="48">
+      <TextKey kind="Leaf" offset="21282" length="4" type="Scalar { Kind = U32 }" value="1250062635" />
+      <TextA kind="Leaf" offset="21286" length="44" type="WString { }">Defeat Enemy Digimon</TextA>
+    </_265>
+    <_266 kind="Record" offset="21330" length="128">
+      <TextKey kind="Leaf" offset="21330" length="4" type="Scalar { Kind = U32 }" value="1250917364" />
+      <TextA kind="Leaf" offset="21334" length="124" type="WString { }">Clear the Digimon Arena. You can enter from the Dats Center.</TextA>
+    </_266>
+    <_267 kind="Record" offset="21458" length="80">
+      <TextKey kind="Leaf" offset="21458" length="4" type="Scalar { Kind = U32 }" value="1254026173" />
+      <TextA kind="Leaf" offset="21462" length="76" type="WString { }">Clear the Crack of Devimon (Dungeon)</TextA>
+    </_267>
+    <_268 kind="Record" offset="21538" length="78">
+      <TextKey kind="Leaf" offset="21538" length="4" type="Scalar { Kind = U32 }" value="1254373627" />
+      <TextA kind="Leaf" offset="21542" length="74" type="WString { }">Clear the Venomous Vortex (Dungeon)</TextA>
+    </_268>
+    <_269 kind="Record" offset="21616" length="102">
+      <TextKey kind="Leaf" offset="21616" length="4" type="Scalar { Kind = U32 }" value="1255804815" />
+      <TextA kind="Leaf" offset="21620" length="98" type="WString { }">You can enter the Event Dungeon at DATS Center.</TextA>
+    </_269>
+    <_270 kind="Record" offset="21718" length="124">
+      <TextKey kind="Leaf" offset="21718" length="4" type="Scalar { Kind = U32 }" value="1257431683" />
+      <TextA kind="Leaf" offset="21722" length="120" type="WString { }">Participate in Gankoomon's Training Ground at DATS Center.</TextA>
+    </_270>
+    <_271 kind="Record" offset="21842" length="128">
+      <TextKey kind="Leaf" offset="21842" length="4" type="Scalar { Kind = U32 }" value="1263876046" />
+      <TextA kind="Leaf" offset="21846" length="124" type="WString { }">You can enter the Royal Base Dungeon from Verdandi Terminal.</TextA>
+    </_271>
+    <_272 kind="Record" offset="21970" length="144">
+      <TextKey kind="Leaf" offset="21970" length="4" type="Scalar { Kind = U32 }" value="1268617690" />
+      <TextA kind="Leaf" offset="21974" length="140" type="WString { }">Clear the Digimon Kaiser Dungeon. You can enter from the D-Terminal.</TextA>
+    </_272>
+    <_273 kind="Record" offset="22114" length="122">
+      <TextKey kind="Leaf" offset="22114" length="4" type="Scalar { Kind = U32 }" value="1272346842" />
+      <TextA kind="Leaf" offset="22118" length="118" type="WString { }">Clear the Marketplace. You can enter from the D-Terminal.</TextA>
+    </_273>
+    <_274 kind="Record" offset="22236" length="94">
+      <TextKey kind="Leaf" offset="22236" length="4" type="Scalar { Kind = U32 }" value="1273348963" />
+      <TextA kind="Leaf" offset="22240" length="90" type="WString { }">Clear the Tokyo Tower Observatory (Dungeon)</TextA>
+    </_274>
+    <_275 kind="Record" offset="22330" length="44">
+      <TextKey kind="Leaf" offset="22330" length="4" type="Scalar { Kind = U32 }" value="1294030029" />
+      <TextA kind="Leaf" offset="22334" length="40" type="WString { }">Clear any Dungeon.</TextA>
+    </_275>
+    <_276 kind="Record" offset="22374" length="116">
+      <TextKey kind="Leaf" offset="22374" length="4" type="Scalar { Kind = U32 }" value="1338057138" />
+      <TextA kind="Leaf" offset="22378" length="112" type="WString { }">Change accessory options by using Option Change Stone.</TextA>
+    </_276>
+    <_277 kind="Record" offset="22490" length="40">
+      <TextKey kind="Leaf" offset="22490" length="4" type="Scalar { Kind = U32 }" value="1340320665" />
+      <TextA kind="Leaf" offset="22494" length="36" type="WString { }">Return the item.</TextA>
+    </_277>
+    <_278 kind="Record" offset="22530" length="254">
+      <TextKey kind="Leaf" offset="22530" length="4" type="Scalar { Kind = U32 }" value="1359845138" />
+      <TextA kind="Leaf" offset="22534" length="250" type="WString { }">You can participate in the Arena at DATS Center. You can earn Battle Points according to the stages you clear in the Arena.</TextA>
+    </_278>
+    <_279 kind="Record" offset="22784" length="96">
+      <TextKey kind="Leaf" offset="22784" length="4" type="Scalar { Kind = U32 }" value="1422712681" />
+      <TextA kind="Leaf" offset="22788" length="92" type="WString { }">Complete a certain number of Daily Missions.</TextA>
+    </_279>
+    <_280 kind="Record" offset="22880" length="58">
+      <TextKey kind="Leaf" offset="22880" length="4" type="Scalar { Kind = U32 }" value="1460561449" />
+      <TextA kind="Leaf" offset="22884" length="54" type="WString { }">Log-in to Digimon Masters</TextA>
+    </_280>
+    <_281 kind="Record" offset="22938" length="88">
+      <TextKey kind="Leaf" offset="22938" length="4" type="Scalar { Kind = U32 }" value="1469462706" />
+      <TextA kind="Leaf" offset="22942" length="84" type="WString { }">Hatch Digimon using incubators or items.</TextA>
+    </_281>
+    <_282 kind="Record" offset="23026" length="316">
+      <TextKey kind="Leaf" offset="23026" length="4" type="Scalar { Kind = U32 }" value="1592690409" />
+      <TextA kind="Leaf" offset="23030" length="312" type="WString { }">You can participate in the Attribute Arena at DATS Center. You can receive Attribute Arena Coins by mail according to your weekly Attribute Arena ranking.</TextA>
+    </_282>
+    <_283 kind="Record" offset="23342" length="114">
+      <TextKey kind="Leaf" offset="23342" length="4" type="Scalar { Kind = U32 }" value="1602367655" />
+      <TextA kind="Leaf" offset="23346" length="110" type="WString { }">Change accessory values by using Number Change Stone.</TextA>
+    </_283>
+    <_284 kind="Record" offset="23456" length="70">
+      <TextKey kind="Leaf" offset="23456" length="4" type="Scalar { Kind = U32 }" value="1698352982" />
+      <TextA kind="Leaf" offset="23460" length="66" type="WString { }">Obtain a certain amount of Bit.</TextA>
+    </_284>
+    <_285 kind="Record" offset="23526" length="82">
+      <TextKey kind="Leaf" offset="23526" length="4" type="Scalar { Kind = U32 }" value="1751952422" />
+      <TextA kind="Leaf" offset="23530" length="78" type="WString { }">Defeat Earth attribute enemy Digimon.</TextA>
+    </_285>
+    <_286 kind="Record" offset="23608" length="82">
+      <TextKey kind="Leaf" offset="23608" length="4" type="Scalar { Kind = U32 }" value="1760529002" />
+      <TextA kind="Leaf" offset="23612" length="78" type="WString { }">Defeat Light attribute enemy Digimon.</TextA>
+    </_286>
+    <_287 kind="Record" offset="23690" length="82">
+      <TextKey kind="Leaf" offset="23690" length="4" type="Scalar { Kind = U32 }" value="1769223471" />
+      <TextA kind="Leaf" offset="23694" length="78" type="WString { }">Defeat Steel attribute enemy Digimon.</TextA>
+    </_287>
+    <_288 kind="Record" offset="23772" length="82">
+      <TextKey kind="Leaf" offset="23772" length="4" type="Scalar { Kind = U32 }" value="1773300693" />
+      <TextA kind="Leaf" offset="23776" length="78" type="WString { }">Defeat Water attribute enemy Digimon.</TextA>
+    </_288>
+    <_289 kind="Record" offset="23854" length="80">
+      <TextKey kind="Leaf" offset="23854" length="4" type="Scalar { Kind = U32 }" value="1841344959" />
+      <TextA kind="Leaf" offset="23858" length="76" type="WString { }">Designate a Digimon as your Partner.</TextA>
+    </_289>
+    <_290 kind="Record" offset="23934" length="62">
+      <TextKey kind="Leaf" offset="23934" length="4" type="Scalar { Kind = U32 }" value="1891827793" />
+      <TextA kind="Leaf" offset="23938" length="58" type="WString { }">Obtain Event Item - Step 10</TextA>
+    </_290>
+    <_291 kind="Record" offset="23996" length="80">
+      <TextKey kind="Leaf" offset="23996" length="4" type="Scalar { Kind = U32 }" value="2005391960" />
+      <TextA kind="Leaf" offset="24000" length="76" type="WString { }">Defeat Fire attribute enemy Digimon.</TextA>
+    </_291>
+    <_292 kind="Record" offset="24076" length="80">
+      <TextKey kind="Leaf" offset="24076" length="4" type="Scalar { Kind = U32 }" value="2006002756" />
+      <TextA kind="Leaf" offset="24080" length="76" type="WString { }">Defeat Wind attribute enemy Digimon.</TextA>
+    </_292>
+    <_293 kind="Record" offset="24156" length="80">
+      <TextKey kind="Leaf" offset="24156" length="4" type="Scalar { Kind = U32 }" value="2006009323" />
+      <TextA kind="Leaf" offset="24160" length="76" type="WString { }">Defeat Wood attribute enemy Digimon.</TextA>
+    </_293>
+    <_294 kind="Record" offset="24236" length="58">
+      <TextKey kind="Leaf" offset="24236" length="4" type="Scalar { Kind = U32 }" value="2035453445" />
+      <TextA kind="Leaf" offset="24240" length="54" type="WString { }">Hatching specific Digimon</TextA>
+    </_294>
+    <_295 kind="Record" offset="24294" length="68">
+      <TextKey kind="Leaf" offset="24294" length="4" type="Scalar { Kind = U32 }" value="2059525680" />
+      <TextA kind="Leaf" offset="24298" length="64" type="WString { }">Level up your Partner Digimon.</TextA>
+    </_295>
+    <_296 kind="Record" offset="24362" length="50">
+      <TextKey kind="Leaf" offset="24362" length="4" type="Scalar { Kind = U32 }" value="2095869663" />
+      <TextA kind="Leaf" offset="24366" length="46" type="WString { }">Visit a specific map.</TextA>
+    </_296>
+    <_297 kind="Record" offset="24412" length="44">
+      <TextKey kind="Leaf" offset="24412" length="4" type="Scalar { Kind = U32 }" value="2125506589" />
+      <TextA kind="Leaf" offset="24416" length="40" type="WString { }">Using Bit - Step 1</TextA>
+    </_297>
+    <_298 kind="Record" offset="24456" length="44">
+      <TextKey kind="Leaf" offset="24456" length="4" type="Scalar { Kind = U32 }" value="2125506590" />
+      <TextA kind="Leaf" offset="24460" length="40" type="WString { }">Using Bit - Step 2</TextA>
+    </_298>
+    <_299 kind="Record" offset="24500" length="44">
+      <TextKey kind="Leaf" offset="24500" length="4" type="Scalar { Kind = U32 }" value="2125506591" />
+      <TextA kind="Leaf" offset="24504" length="40" type="WString { }">Using Bit - Step 3</TextA>
+    </_299>
+    <_300 kind="Record" offset="24544" length="44">
+      <TextKey kind="Leaf" offset="24544" length="4" type="Scalar { Kind = U32 }" value="2125506592" />
+      <TextA kind="Leaf" offset="24548" length="40" type="WString { }">Using Bit - Step 4</TextA>
+    </_300>
+    <_301 kind="Record" offset="24588" length="44">
+      <TextKey kind="Leaf" offset="24588" length="4" type="Scalar { Kind = U32 }" value="2125506593" />
+      <TextA kind="Leaf" offset="24592" length="40" type="WString { }">Using Bit - Step 5</TextA>
+    </_301>
+  </Entries>
+</DM_Pass_PassStrKey_Str>

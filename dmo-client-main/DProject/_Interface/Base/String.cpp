@@ -581,14 +581,7 @@ void cString::sICON::ChangeSkillIcon(int nIconType, int nIndex1, int nIndex2 /*=
 	case CsSkill::IT_CHANGE2:	s_nIconType = ICONITEM::SKILL_MASK;	break;			
 	default:
 		{
-			if( nIconType >= 4000 )
-				s_nIconType = ICONITEM::SKILL4;
-			else if( nIconType >= 3000 )
-				s_nIconType = ICONITEM::SKILL3;
-			else if( nIconType >= 2000 )
-				s_nIconType = ICONITEM::SKILL2;
-			else
-				s_nIconType = ICONITEM::SKILL1;
+			s_nIconType = ICONITEM::GetSkillIconType( nIconType );
 		}
 		break;
 	}
@@ -1805,14 +1798,7 @@ cString::sICON* cString::AddSkillIcon(CsPoint size, int nIconType, int nIndex1, 
 	case CsSkill::IT_CHANGE2:	pIcon->s_nIconType = ICONITEM::SKILL_MASK;	break;			
 	default:
 		{
-			if( nIconType >= 4000 )
-				pIcon->s_nIconType = ICONITEM::SKILL4;
-			else if( nIconType >= 3000 )
-				pIcon->s_nIconType = ICONITEM::SKILL3;
-			else if( nIconType >= 2000 )
-				pIcon->s_nIconType = ICONITEM::SKILL2;
-			else
-				pIcon->s_nIconType = ICONITEM::SKILL1;
+			pIcon->s_nIconType = ICONITEM::GetSkillIconType( nIconType );
 		}
 		break;
 	}

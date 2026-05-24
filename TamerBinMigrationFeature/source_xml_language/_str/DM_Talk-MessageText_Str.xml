@@ -1,0 +1,905 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DM_Talk_MessageText_Str schema="DM_Talk-MessageText_Str.struct" bin="DM_Talk-MessageText_Str.bin" byteLength="25716">
+  <Entries kind="Section" offset="0" length="25716">
+    <_0 kind="Record" offset="4" length="156">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="31853961" />
+      <TextA kind="Leaf" offset="8" length="152" type="WString { }">There is not all the evolution information of the Digimon to be extracted.</TextA>
+    </_0>
+    <_1 kind="Record" offset="160" length="80">
+      <TextKey kind="Leaf" offset="160" length="4" type="Scalar { Kind = U32 }" value="41202360" />
+      <TextA kind="Leaf" offset="164" length="76" type="WString { }">The preset slot is already unlocked.</TextA>
+    </_1>
+    <_2 kind="Record" offset="240" length="144">
+      <TextKey kind="Leaf" offset="240" length="4" type="Scalar { Kind = U32 }" value="63407586" />
+      <TextA kind="Leaf" offset="244" length="140" type="WString { }">A problem occurred while using Digimon Exploration.\nError code : %d</TextA>
+    </_2>
+    <_3 kind="Record" offset="384" length="86">
+      <TextKey kind="Leaf" offset="384" length="4" type="Scalar { Kind = U32 }" value="68100101" />
+      <TextA kind="Leaf" offset="388" length="82" type="WString { }">@&lt;tc:900&gt;Failed to retrieve item.@&lt;/tc&gt;</TextA>
+    </_3>
+    <_4 kind="Record" offset="470" length="128">
+      <TextKey kind="Leaf" offset="470" length="4" type="Scalar { Kind = U32 }" value="99180820" />
+      <TextA kind="Leaf" offset="474" length="124" type="WString { }">An error occurred while deleting the item used for purchase.</TextA>
+    </_4>
+    <_5 kind="Record" offset="598" length="104">
+      <TextKey kind="Leaf" offset="598" length="4" type="Scalar { Kind = U32 }" value="101493981" />
+      <TextA kind="Leaf" offset="602" length="100" type="WString { }">@&lt;tc:990&gt;Enhancement Data Recovery Failed.@&lt;/tc&gt;</TextA>
+    </_5>
+    <_6 kind="Record" offset="702" length="58">
+      <TextKey kind="Leaf" offset="702" length="4" type="Scalar { Kind = U32 }" value="126354349" />
+      <TextA kind="Leaf" offset="706" length="54" type="WString { }">You have already settled.</TextA>
+    </_6>
+    <_7 kind="Record" offset="760" length="108">
+      <TextKey kind="Leaf" offset="760" length="4" type="Scalar { Kind = U32 }" value="172372139" />
+      <TextA kind="Leaf" offset="764" length="104" type="WString { }">The recruitment has been cancelled due to absence.</TextA>
+    </_7>
+    <_8 kind="Record" offset="868" length="134">
+      <TextKey kind="Leaf" offset="868" length="4" type="Scalar { Kind = U32 }" value="180839748" />
+      <TextA kind="Leaf" offset="872" length="130" type="WString { }">It is impossible to proceed because someone has settled points.</TextA>
+    </_8>
+    <_9 kind="Record" offset="1002" length="126">
+      <TextKey kind="Leaf" offset="1002" length="4" type="Scalar { Kind = U32 }" value="245374332" />
+      <TextA kind="Leaf" offset="1006" length="122" type="WString { }">@&lt;tc:900&gt;This function is not available while riding.@&lt;/tc&gt;</TextA>
+    </_9>
+    <_10 kind="Record" offset="1128" length="172">
+      <TextKey kind="Leaf" offset="1128" length="4" type="Scalar { Kind = U32 }" value="245416055" />
+      <TextA kind="Leaf" offset="1132" length="168" type="WString { }">@&lt;tc:900&gt;Insufficient interruption fee@&lt;/tc&gt;\nUnable to stop consignment exchange.</TextA>
+    </_10>
+    <_11 kind="Record" offset="1300" length="104">
+      <TextKey kind="Leaf" offset="1300" length="4" type="Scalar { Kind = U32 }" value="246830861" />
+      <TextA kind="Leaf" offset="1304" length="100" type="WString { }">An error occurred while sending the reward item.</TextA>
+    </_11>
+    <_12 kind="Record" offset="1404" length="58">
+      <TextKey kind="Leaf" offset="1404" length="4" type="Scalar { Kind = U32 }" value="260125112" />
+      <TextA kind="Leaf" offset="1408" length="54" type="WString { }">Please enter the content.</TextA>
+    </_12>
+    <_13 kind="Record" offset="1462" length="132">
+      <TextKey kind="Leaf" offset="1462" length="4" type="Scalar { Kind = U32 }" value="268040062" />
+      <TextA kind="Leaf" offset="1466" length="128" type="WString { }">Importing currently equipped information into the preset slot.</TextA>
+    </_13>
+    <_14 kind="Record" offset="1594" length="84">
+      <TextKey kind="Leaf" offset="1594" length="4" type="Scalar { Kind = U32 }" value="275187474" />
+      <TextA kind="Leaf" offset="1598" length="80" type="WString { }">Successfully saved to the preset slot.</TextA>
+    </_14>
+    <_15 kind="Record" offset="1678" length="148">
+      <TextKey kind="Leaf" offset="1678" length="4" type="Scalar { Kind = U32 }" value="286796203" />
+      <TextA kind="Leaf" offset="1682" length="144" type="WString { }">@&lt;tc:900&gt;Cannot summon guild members while using trading system.@&lt;/tc&gt;</TextA>
+    </_15>
+    <_16 kind="Record" offset="1826" length="102">
+      <TextKey kind="Leaf" offset="1826" length="4" type="Scalar { Kind = U32 }" value="331704958" />
+      <TextA kind="Leaf" offset="1830" length="98" type="WString { }">The party leader has declined your application.</TextA>
+    </_16>
+    <_17 kind="Record" offset="1928" length="54">
+      <TextKey kind="Leaf" offset="1928" length="4" type="Scalar { Kind = U32 }" value="359922941" />
+      <TextA kind="Leaf" offset="1932" length="50" type="WString { }">Waiting for processing.</TextA>
+    </_17>
+    <_18 kind="Record" offset="1982" length="74">
+      <TextKey kind="Leaf" offset="1982" length="4" type="Scalar { Kind = U32 }" value="395297396" />
+      <TextA kind="Leaf" offset="1986" length="70" type="WString { }">This item has not been appraised.</TextA>
+    </_18>
+    <_19 kind="Record" offset="2056" length="166">
+      <TextKey kind="Leaf" offset="2056" length="4" type="Scalar { Kind = U32 }" value="476797738" />
+      <TextA kind="Leaf" offset="2060" length="162" type="WString { }">Resetting the registered preset information.\nUnsaved information will be lost.</TextA>
+    </_19>
+    <_20 kind="Record" offset="2222" length="78">
+      <TextKey kind="Leaf" offset="2222" length="4" type="Scalar { Kind = U32 }" value="485412592" />
+      <TextA kind="Leaf" offset="2226" length="74" type="WString { }">Do you want to use the Damage Skin?</TextA>
+    </_20>
+    <_21 kind="Record" offset="2300" length="88">
+      <TextKey kind="Leaf" offset="2300" length="4" type="Scalar { Kind = U32 }" value="512374701" />
+      <TextA kind="Leaf" offset="2304" length="84" type="WString { }">Contains characters that cannot be used.</TextA>
+    </_21>
+    <_22 kind="Record" offset="2388" length="148">
+      <TextKey kind="Leaf" offset="2388" length="4" type="Scalar { Kind = U32 }" value="554510304" />
+      <TextA kind="Leaf" offset="2392" length="144" type="WString { }">An issue occurred while accessing Equipment Potential.\nError code: %d</TextA>
+    </_22>
+    <_23 kind="Record" offset="2536" length="84">
+      <TextKey kind="Leaf" offset="2536" length="4" type="Scalar { Kind = U32 }" value="556002570" />
+      <TextA kind="Leaf" offset="2540" length="80" type="WString { }">Potion registration has been canceled.</TextA>
+    </_23>
+    <_24 kind="Record" offset="2620" length="116">
+      <TextKey kind="Leaf" offset="2620" length="4" type="Scalar { Kind = U32 }" value="610003264" />
+      <TextA kind="Leaf" offset="2624" length="112" type="WString { }">You have been forcibly removed from party recruitment.</TextA>
+    </_24>
+    <_25 kind="Record" offset="2736" length="62">
+      <TextKey kind="Leaf" offset="2736" length="4" type="Scalar { Kind = U32 }" value="617380941" />
+      <TextA kind="Leaf" offset="2740" length="58" type="WString { }">You are already in a party.</TextA>
+    </_25>
+    <_26 kind="Record" offset="2798" length="160">
+      <TextKey kind="Leaf" offset="2798" length="4" type="Scalar { Kind = U32 }" value="635966488" />
+      <TextA kind="Leaf" offset="2802" length="156" type="WString { }">The problem is occured while using equipment Reinforcement.\nError code : %d</TextA>
+    </_26>
+    <_27 kind="Record" offset="2958" length="130">
+      <TextKey kind="Leaf" offset="2958" length="4" type="Scalar { Kind = U32 }" value="636652968" />
+      <TextA kind="Leaf" offset="2962" length="126" type="WString { }">An error occurred while using D-Unit Fusion.\nError code : %d</TextA>
+    </_27>
+    <_28 kind="Record" offset="3088" length="108">
+      <TextKey kind="Leaf" offset="3088" length="4" type="Scalar { Kind = U32 }" value="645470362" />
+      <TextA kind="Leaf" offset="3092" length="104" type="WString { }">This Digimon cannot be hacked with D-Unit Hacking.</TextA>
+    </_28>
+    <_29 kind="Record" offset="3196" length="100">
+      <TextKey kind="Leaf" offset="3196" length="4" type="Scalar { Kind = U32 }" value="652904589" />
+      <TextA kind="Leaf" offset="3200" length="96" type="WString { }">Insufficient inventory space to retrieve item.</TextA>
+    </_29>
+    <_30 kind="Record" offset="3296" length="174">
+      <TextKey kind="Leaf" offset="3296" length="4" type="Scalar { Kind = U32 }" value="664623036" />
+      <TextA kind="Leaf" offset="3300" length="170" type="WString { }">The evolution slot of the Digimon to be extracted is locked and cannot be extracted</TextA>
+    </_30>
+    <_31 kind="Record" offset="3470" length="76">
+      <TextKey kind="Leaf" offset="3470" length="4" type="Scalar { Kind = U32 }" value="803046556" />
+      <TextA kind="Leaf" offset="3474" length="72" type="WString { }">Maximum enhancement level reached.</TextA>
+    </_31>
+    <_32 kind="Record" offset="3546" length="152">
+      <TextKey kind="Leaf" offset="3546" length="4" type="Scalar { Kind = U32 }" value="851353862" />
+      <TextA kind="Leaf" offset="3550" length="148" type="WString { }">An issue occurred while using Enhancement Data Transfer.\nError code: %d</TextA>
+    </_32>
+    <_33 kind="Record" offset="3698" length="86">
+      <TextKey kind="Leaf" offset="3698" length="4" type="Scalar { Kind = U32 }" value="874777387" />
+      <TextA kind="Leaf" offset="3702" length="82" type="WString { }">@&lt;tc:900&gt;Failed to purchase item.@&lt;/tc&gt;</TextA>
+    </_33>
+    <_34 kind="Record" offset="3784" length="96">
+      <TextKey kind="Leaf" offset="3784" length="4" type="Scalar { Kind = U32 }" value="881544025" />
+      <TextA kind="Leaf" offset="3788" length="92" type="WString { }">@&lt;tc:900&gt;Timed items cannot be traded.@&lt;/tc&gt;</TextA>
+    </_34>
+    <_35 kind="Record" offset="3880" length="96">
+      <TextKey kind="Leaf" offset="3880" length="4" type="Scalar { Kind = U32 }" value="882632205" />
+      <TextA kind="Leaf" offset="3884" length="92" type="WString { }">It cannot be used before clearing the Arena.</TextA>
+    </_35>
+    <_36 kind="Record" offset="3976" length="108">
+      <TextKey kind="Leaf" offset="3976" length="4" type="Scalar { Kind = U32 }" value="921219635" />
+      <TextA kind="Leaf" offset="3980" length="104" type="WString { }">Not available yet. Please try again in %d seconds.</TextA>
+    </_36>
+    <_37 kind="Record" offset="4084" length="154">
+      <TextKey kind="Leaf" offset="4084" length="4" type="Scalar { Kind = U32 }" value="928422874" />
+      <TextA kind="Leaf" offset="4088" length="150" type="WString { }">Failed to hack due to abnormal access to the inventory. Please try again.</TextA>
+    </_37>
+    <_38 kind="Record" offset="4238" length="106">
+      <TextKey kind="Leaf" offset="4238" length="4" type="Scalar { Kind = U32 }" value="932669391" />
+      <TextA kind="Leaf" offset="4242" length="102" type="WString { }">There is not enough space in Exclusive Inventory.</TextA>
+    </_38>
+    <_39 kind="Record" offset="4344" length="658">
+      <TextKey kind="Leaf" offset="4344" length="4" type="Scalar { Kind = U32 }" value="949087305" />
+      <TextA kind="Leaf" offset="4348" length="654" type="WString { }">@&lt;tc:990&gt;[str1]@&lt;/tc&gt;Do you want to extract\n@&lt;tc:990&gt;[str2]@&lt;/tc&gt;using the item?\n\n※ Evolution items are sent via mail @&lt;tc:090&gt;when extracted @&lt;/tc&gt;\n\n@&lt;tc:900&gt;※ The following items are not restored when extracted.@&lt;/tc&gt;\n@&lt;tc:950&gt;Riding, Skill Memory@&lt;/tc&gt;\n@&lt;tc:950&gt;Skill Mastery, Skill Points, and Skill DigiCode@&lt;/tc&gt;</TextA>
+    </_39>
+    <_40 kind="Record" offset="5002" length="78">
+      <TextKey kind="Leaf" offset="5002" length="4" type="Scalar { Kind = U32 }" value="970741881" />
+      <TextA kind="Leaf" offset="5006" length="74" type="WString { }">Preset information reset completed.</TextA>
+    </_40>
+    <_41 kind="Record" offset="5080" length="148">
+      <TextKey kind="Leaf" offset="5080" length="4" type="Scalar { Kind = U32 }" value="1024014888" />
+      <TextA kind="Leaf" offset="5084" length="144" type="WString { }">You need to register 4 Evolution Items to proceed with Digital Fusion.</TextA>
+    </_41>
+    <_42 kind="Record" offset="5228" length="136">
+      <TextKey kind="Leaf" offset="5228" length="4" type="Scalar { Kind = U32 }" value="1025826901" />
+      <TextA kind="Leaf" offset="5232" length="132" type="WString { }">The item expiration date has expired, and the pop-up will close.</TextA>
+    </_42>
+    <_43 kind="Record" offset="5364" length="88">
+      <TextKey kind="Leaf" offset="5364" length="4" type="Scalar { Kind = U32 }" value="1026298592" />
+      <TextA kind="Leaf" offset="5368" length="84" type="WString { }">This product has already been purchased.</TextA>
+    </_43>
+    <_44 kind="Record" offset="5452" length="64">
+      <TextKey kind="Leaf" offset="5452" length="4" type="Scalar { Kind = U32 }" value="1030157843" />
+      <TextA kind="Leaf" offset="5456" length="60" type="WString { }">There is no Link information</TextA>
+    </_44>
+    <_45 kind="Record" offset="5516" length="92">
+      <TextKey kind="Leaf" offset="5516" length="4" type="Scalar { Kind = U32 }" value="1046825153" />
+      <TextA kind="Leaf" offset="5520" length="88" type="WString { }">This Digimon has already been transcended.</TextA>
+    </_45>
+    <_46 kind="Record" offset="5608" length="76">
+      <TextKey kind="Leaf" offset="5608" length="4" type="Scalar { Kind = U32 }" value="1054159005" />
+      <TextA kind="Leaf" offset="5612" length="72" type="WString { }">Cannot be changed during cooldown.</TextA>
+    </_46>
+    <_47 kind="Record" offset="5684" length="124">
+      <TextKey kind="Leaf" offset="5684" length="4" type="Scalar { Kind = U32 }" value="1071835452" />
+      <TextA kind="Leaf" offset="5688" length="120" type="WString { }">There was a problem during Digital Fusion.\nError code: %d</TextA>
+    </_47>
+    <_48 kind="Record" offset="5808" length="122">
+      <TextKey kind="Leaf" offset="5808" length="4" type="Scalar { Kind = U32 }" value="1135207036" />
+      <TextA kind="Leaf" offset="5812" length="118" type="WString { }">This feature cannot be used while recruiting for a party.</TextA>
+    </_48>
+    <_49 kind="Record" offset="5930" length="60">
+      <TextKey kind="Leaf" offset="5930" length="4" type="Scalar { Kind = U32 }" value="1135542274" />
+      <TextA kind="Leaf" offset="5934" length="56" type="WString { }">No specific rating exists.</TextA>
+    </_49>
+    <_50 kind="Record" offset="5990" length="138">
+      <TextKey kind="Leaf" offset="5990" length="4" type="Scalar { Kind = U32 }" value="1150269655" />
+      <TextA kind="Leaf" offset="5994" length="134" type="WString { }">It cannot be extracted if the Digimon to be extracted is summoned</TextA>
+    </_50>
+    <_51 kind="Record" offset="6128" length="100">
+      <TextKey kind="Leaf" offset="6128" length="4" type="Scalar { Kind = U32 }" value="1172186296" />
+      <TextA kind="Leaf" offset="6132" length="96" type="WString { }">You cannot hack a Digimon you already possess.</TextA>
+    </_51>
+    <_52 kind="Record" offset="6228" length="124">
+      <TextKey kind="Leaf" offset="6228" length="4" type="Scalar { Kind = U32 }" value="1174446896" />
+      <TextA kind="Leaf" offset="6232" length="120" type="WString { }">This feature is not available while the filter is applied.</TextA>
+    </_52>
+    <_53 kind="Record" offset="6352" length="52">
+      <TextKey kind="Leaf" offset="6352" length="4" type="Scalar { Kind = U32 }" value="1179805494" />
+      <TextA kind="Leaf" offset="6356" length="48" type="WString { }">Insufficient currency.</TextA>
+    </_53>
+    <_54 kind="Record" offset="6404" length="92">
+      <TextKey kind="Leaf" offset="6404" length="4" type="Scalar { Kind = U32 }" value="1223359310" />
+      <TextA kind="Leaf" offset="6408" length="88" type="WString { }">@&lt;tc:900&gt;Failed to stop transaction.@&lt;/tc&gt;</TextA>
+    </_54>
+    <_55 kind="Record" offset="6496" length="136">
+      <TextKey kind="Leaf" offset="6496" length="4" type="Scalar { Kind = U32 }" value="1249057672" />
+      <TextA kind="Leaf" offset="6500" length="132" type="WString { }">@&lt;tc:090&gt;Purchase success@&lt;/tc&gt;\nPlease check your DATS mailbox.</TextA>
+    </_55>
+    <_56 kind="Record" offset="6632" length="102">
+      <TextKey kind="Leaf" offset="6632" length="4" type="Scalar { Kind = U32 }" value="1282164301" />
+      <TextA kind="Leaf" offset="6636" length="98" type="WString { }">@&lt;tc:090&gt;Equipment enhancement succeeded.@&lt;/tc&gt;</TextA>
+    </_56>
+    <_57 kind="Record" offset="6734" length="132">
+      <TextKey kind="Leaf" offset="6734" length="4" type="Scalar { Kind = U32 }" value="1300116674" />
+      <TextA kind="Leaf" offset="6738" length="128" type="WString { }">There is no information on the evolution slot to be extracted.</TextA>
+    </_57>
+    <_58 kind="Record" offset="6866" length="164">
+      <TextKey kind="Leaf" offset="6866" length="4" type="Scalar { Kind = U32 }" value="1311622290" />
+      <TextA kind="Leaf" offset="6870" length="160" type="WString { }">The upper evolution slot of the Digimon to be extracted has not been extracted</TextA>
+    </_58>
+    <_59 kind="Record" offset="7030" length="46">
+      <TextKey kind="Leaf" offset="7030" length="4" type="Scalar { Kind = U32 }" value="1318111534" />
+      <TextA kind="Leaf" offset="7034" length="42" type="WString { }">NPC does not exist.</TextA>
+    </_59>
+    <_60 kind="Record" offset="7076" length="136">
+      <TextKey kind="Leaf" offset="7076" length="4" type="Scalar { Kind = U32 }" value="1324968724" />
+      <TextA kind="Leaf" offset="7080" length="132" type="WString { }">You must register 4 hacking items to proceed with D-Unit Fusion.</TextA>
+    </_60>
+    <_61 kind="Record" offset="7212" length="112">
+      <TextKey kind="Leaf" offset="7212" length="4" type="Scalar { Kind = U32 }" value="1346558106" />
+      <TextA kind="Leaf" offset="7216" length="108" type="WString { }">@&lt;tc:090&gt;Enhancement Data Recovery Successful.@&lt;/tc&gt;</TextA>
+    </_61>
+    <_62 kind="Record" offset="7324" length="158">
+      <TextKey kind="Leaf" offset="7324" length="4" type="Scalar { Kind = U32 }" value="1377776073" />
+      <TextA kind="Leaf" offset="7328" length="154" type="WString { }">Please register an item of the same grade as the currently registered item.</TextA>
+    </_62>
+    <_63 kind="Record" offset="7482" length="102">
+      <TextKey kind="Leaf" offset="7482" length="4" type="Scalar { Kind = U32 }" value="1381332058" />
+      <TextA kind="Leaf" offset="7486" length="98" type="WString { }">Not enough inventory space to apply the preset.</TextA>
+    </_63>
+    <_64 kind="Record" offset="7584" length="118">
+      <TextKey kind="Leaf" offset="7584" length="4" type="Scalar { Kind = U32 }" value="1383133620" />
+      <TextA kind="Leaf" offset="7588" length="114" type="WString { }">This is not the number of sales that can be registered.</TextA>
+    </_64>
+    <_65 kind="Record" offset="7702" length="156">
+      <TextKey kind="Leaf" offset="7702" length="4" type="Scalar { Kind = U32 }" value="1398644958" />
+      <TextA kind="Leaf" offset="7706" length="152" type="WString { }">This is not a registrable sales amount.\nMinimum price @&lt;tc:090&gt;100B@&lt;/tc&gt;</TextA>
+    </_65>
+    <_66 kind="Record" offset="7858" length="96">
+      <TextKey kind="Leaf" offset="7858" length="4" type="Scalar { Kind = U32 }" value="1404307338" />
+      <TextA kind="Leaf" offset="7862" length="92" type="WString { }">This exploration has already been completed.</TextA>
+    </_66>
+    <_67 kind="Record" offset="7954" length="74">
+      <TextKey kind="Leaf" offset="7954" length="4" type="Scalar { Kind = U32 }" value="1417859892" />
+      <TextA kind="Leaf" offset="7958" length="70" type="WString { }">You cannot re-enter this dungeon.</TextA>
+    </_67>
+    <_68 kind="Record" offset="8028" length="162">
+      <TextKey kind="Leaf" offset="8028" length="4" type="Scalar { Kind = U32 }" value="1462408562" />
+      <TextA kind="Leaf" offset="8032" length="158" type="WString { }">This item cannot be registered in the preset slot.\nReason: Item is not bound</TextA>
+    </_68>
+    <_69 kind="Record" offset="8190" length="178">
+      <TextKey kind="Leaf" offset="8190" length="4" type="Scalar { Kind = U32 }" value="1468753275" />
+      <TextA kind="Leaf" offset="8194" length="174" type="WString { }">Preset application failed due to a digivice that did not meet the equip requirements.</TextA>
+    </_69>
+    <_70 kind="Record" offset="8368" length="198">
+      <TextKey kind="Leaf" offset="8368" length="4" type="Scalar { Kind = U32 }" value="1509163701" />
+      <TextA kind="Leaf" offset="8372" length="194" type="WString { }">@&lt;tc:900&gt;Equipment enhancement failed. The backup disk activated, so it wasn't destroyed.@&lt;/tc&gt;</TextA>
+    </_70>
+    <_71 kind="Record" offset="8566" length="138">
+      <TextKey kind="Leaf" offset="8566" length="4" type="Scalar { Kind = U32 }" value="1533558545" />
+      <TextA kind="Leaf" offset="8570" length="134" type="WString { }">There is no evolution information of the Digimon to be extracted.</TextA>
+    </_71>
+    <_72 kind="Record" offset="8704" length="90">
+      <TextKey kind="Leaf" offset="8704" length="4" type="Scalar { Kind = U32 }" value="1569632769" />
+      <TextA kind="Leaf" offset="8708" length="86" type="WString { }">The extracted item has been paid by mail.</TextA>
+    </_72>
+    <_73 kind="Record" offset="8794" length="126">
+      <TextKey kind="Leaf" offset="8794" length="4" type="Scalar { Kind = U32 }" value="1590985795" />
+      <TextA kind="Leaf" offset="8798" length="122" type="WString { }">There was a problem using the Season Pass.\nError code : %d</TextA>
+    </_73>
+    <_74 kind="Record" offset="8920" length="134">
+      <TextKey kind="Leaf" offset="8920" length="4" type="Scalar { Kind = U32 }" value="1633733165" />
+      <TextA kind="Leaf" offset="8924" length="130" type="WString { }">Ther is not enough [str1].\nDo you want to go to the Cash Shop?</TextA>
+    </_74>
+    <_75 kind="Record" offset="9054" length="120">
+      <TextKey kind="Leaf" offset="9054" length="4" type="Scalar { Kind = U32 }" value="1638202544" />
+      <TextA kind="Leaf" offset="9058" length="116" type="WString { }">@&lt;tc:900&gt;Some party members have left the dungeon.@&lt;/tc&gt;</TextA>
+    </_75>
+    <_76 kind="Record" offset="9174" length="80">
+      <TextKey kind="Leaf" offset="9174" length="4" type="Scalar { Kind = U32 }" value="1655635471" />
+      <TextA kind="Leaf" offset="9178" length="76" type="WString { }">This equipment cannot be registered.</TextA>
+    </_76>
+    <_77 kind="Record" offset="9254" length="74">
+      <TextKey kind="Leaf" offset="9254" length="4" type="Scalar { Kind = U32 }" value="1692626985" />
+      <TextA kind="Leaf" offset="9258" length="70" type="WString { }">The Damage Skin has been changed.</TextA>
+    </_77>
+    <_78 kind="Record" offset="9328" length="98">
+      <TextKey kind="Leaf" offset="9328" length="4" type="Scalar { Kind = U32 }" value="1701970752" />
+      <TextA kind="Leaf" offset="9332" length="94" type="WString { }">Close all popup windows except the inventory.</TextA>
+    </_78>
+    <_79 kind="Record" offset="9426" length="70">
+      <TextKey kind="Leaf" offset="9426" length="4" type="Scalar { Kind = U32 }" value="1741000475" />
+      <TextA kind="Leaf" offset="9430" length="66" type="WString { }">Invalid party recruitment post.</TextA>
+    </_79>
+    <_80 kind="Record" offset="9496" length="186">
+      <TextKey kind="Leaf" offset="9496" length="4" type="Scalar { Kind = U32 }" value="1750250996" />
+      <TextA kind="Leaf" offset="9500" length="182" type="WString { }">Only Digimon with reset breakthrough info can undergo Enhancement Reset or Data Exchange.</TextA>
+    </_80>
+    <_81 kind="Record" offset="9682" length="76">
+      <TextKey kind="Leaf" offset="9682" length="4" type="Scalar { Kind = U32 }" value="1788748698" />
+      <TextA kind="Leaf" offset="9686" length="72" type="WString { }">No preset item available to apply.</TextA>
+    </_81>
+    <_82 kind="Record" offset="9758" length="122">
+      <TextKey kind="Leaf" offset="9758" length="4" type="Scalar { Kind = U32 }" value="1791897076" />
+      <TextA kind="Leaf" offset="9762" length="118" type="WString { }">@&lt;tc:090&gt;You can move them after unlocking sorting.@&lt;/tc&gt;</TextA>
+    </_82>
+    <_83 kind="Record" offset="9880" length="118">
+      <TextKey kind="Leaf" offset="9880" length="4" type="Scalar { Kind = U32 }" value="1806192480" />
+      <TextA kind="Leaf" offset="9884" length="114" type="WString { }">If the points earned are 0, settlement is not possible.</TextA>
+    </_83>
+    <_84 kind="Record" offset="9998" length="130">
+      <TextKey kind="Leaf" offset="9998" length="4" type="Scalar { Kind = U32 }" value="1832226705" />
+      <TextA kind="Leaf" offset="10002" length="126" type="WString { }">An error occurred while deleting the item used for extraction</TextA>
+    </_84>
+    <_85 kind="Record" offset="10128" length="74">
+      <TextKey kind="Leaf" offset="10128" length="4" type="Scalar { Kind = U32 }" value="1907572758" />
+      <TextA kind="Leaf" offset="10132" length="70" type="WString { }">Evolution Data Extraction failed.</TextA>
+    </_85>
+    <_86 kind="Record" offset="10202" length="104">
+      <TextKey kind="Leaf" offset="10202" length="4" type="Scalar { Kind = U32 }" value="1916511113" />
+      <TextA kind="Leaf" offset="10206" length="100" type="WString { }">It cannot be used unless you are a party leader.</TextA>
+    </_86>
+    <_87 kind="Record" offset="10306" length="134">
+      <TextKey kind="Leaf" offset="10306" length="4" type="Scalar { Kind = U32 }" value="1993144138" />
+      <TextA kind="Leaf" offset="10310" length="130" type="WString { }">You have already received all the rewards you are eligible for.</TextA>
+    </_87>
+    <_88 kind="Record" offset="10440" length="64">
+      <TextKey kind="Leaf" offset="10440" length="4" type="Scalar { Kind = U32 }" value="1994491238" />
+      <TextA kind="Leaf" offset="10444" length="60" type="WString { }">Preset applied successfully.</TextA>
+    </_88>
+    <_89 kind="Record" offset="10504" length="60">
+      <TextKey kind="Leaf" offset="10504" length="4" type="Scalar { Kind = U32 }" value="1995790348" />
+      <TextA kind="Leaf" offset="10508" length="56" type="WString { }">Password must be 4 digits.</TextA>
+    </_89>
+    <_90 kind="Record" offset="10564" length="66">
+      <TextKey kind="Leaf" offset="10564" length="4" type="Scalar { Kind = U32 }" value="2023901332" />
+      <TextA kind="Leaf" offset="10568" length="62" type="WString { }">The item cannot be registred.</TextA>
+    </_90>
+    <_91 kind="Record" offset="10630" length="238">
+      <TextKey kind="Leaf" offset="10630" length="4" type="Scalar { Kind = U32 }" value="2056118570" />
+      <TextA kind="Leaf" offset="10634" length="234" type="WString { }">@&lt;tc:950&gt;Exchange system cannot be used in duplicate. Please try after closing exchange system you are using.@&lt;/tc&gt;</TextA>
+    </_91>
+    <_92 kind="Record" offset="10868" length="86">
+      <TextKey kind="Leaf" offset="10868" length="4" type="Scalar { Kind = U32 }" value="2057461548" />
+      <TextA kind="Leaf" offset="10872" length="82" type="WString { }">All craft attempts have been exhausted.</TextA>
+    </_92>
+    <_93 kind="Record" offset="10954" length="136">
+      <TextKey kind="Leaf" offset="10954" length="4" type="Scalar { Kind = U32 }" value="2068555740" />
+      <TextA kind="Leaf" offset="10958" length="132" type="WString { }">Disconnected from the server.\nError state : %d\nError code : %d</TextA>
+    </_93>
+    <_94 kind="Record" offset="11090" length="80">
+      <TextKey kind="Leaf" offset="11090" length="4" type="Scalar { Kind = U32 }" value="2091365653" />
+      <TextA kind="Leaf" offset="11094" length="76" type="WString { }">The excahnge information is invalid.</TextA>
+    </_94>
+    <_95 kind="Record" offset="11170" length="102">
+      <TextKey kind="Leaf" offset="11170" length="4" type="Scalar { Kind = U32 }" value="2104731807" />
+      <TextA kind="Leaf" offset="11174" length="98" type="WString { }">Not enough warehouse space to apply the preset.</TextA>
+    </_95>
+    <_96 kind="Record" offset="11272" length="66">
+      <TextKey kind="Leaf" offset="11272" length="4" type="Scalar { Kind = U32 }" value="2131457926" />
+      <TextA kind="Leaf" offset="11276" length="62" type="WString { }">There are no items to import.</TextA>
+    </_96>
+    <_97 kind="Record" offset="11338" length="144">
+      <TextKey kind="Leaf" offset="11338" length="4" type="Scalar { Kind = U32 }" value="2138842530" />
+      <TextA kind="Leaf" offset="11342" length="140" type="WString { }">This action cannot be performed while the Macro Protector is active.</TextA>
+    </_97>
+    <_98 kind="Record" offset="11482" length="74">
+      <TextKey kind="Leaf" offset="11482" length="4" type="Scalar { Kind = U32 }" value="2148116810" />
+      <TextA kind="Leaf" offset="11486" length="70" type="WString { }">Failed to load party information.</TextA>
+    </_98>
+    <_99 kind="Record" offset="11556" length="132">
+      <TextKey kind="Leaf" offset="11556" length="4" type="Scalar { Kind = U32 }" value="2149458783" />
+      <TextA kind="Leaf" offset="11560" length="128" type="WString { }">It cannot be extracted while evolving or waiting for evolution</TextA>
+    </_99>
+    <_100 kind="Record" offset="11688" length="96">
+      <TextKey kind="Leaf" offset="11688" length="4" type="Scalar { Kind = U32 }" value="2200991355" />
+      <TextA kind="Leaf" offset="11692" length="92" type="WString { }">The party or recruitment could not be found.</TextA>
+    </_100>
+    <_101 kind="Record" offset="11784" length="136">
+      <TextKey kind="Leaf" offset="11784" length="4" type="Scalar { Kind = U32 }" value="2231193165" />
+      <TextA kind="Leaf" offset="11788" length="132" type="WString { }">Successfully imported equipped information into the preset slot.</TextA>
+    </_101>
+    <_102 kind="Record" offset="11920" length="382">
+      <TextKey kind="Leaf" offset="11920" length="4" type="Scalar { Kind = U32 }" value="2269352460" />
+      <TextA kind="Leaf" offset="11924" length="378" type="WString { }">The amount of EXP remaining \nuntil the Max Level is less than the amount of EXP gained by purchasing EXP, \n@&lt;tc:900&gt;so [str1] EXP will be discarded.@&lt;/tc&gt;\nDo you really want to buy it?</TextA>
+    </_102>
+    <_103 kind="Record" offset="12302" length="68">
+      <TextKey kind="Leaf" offset="12302" length="4" type="Scalar { Kind = U32 }" value="2286884563" />
+      <TextA kind="Leaf" offset="12306" length="64" type="WString { }">This item type cannot be used.</TextA>
+    </_103>
+    <_104 kind="Record" offset="12370" length="104">
+      <TextKey kind="Leaf" offset="12370" length="4" type="Scalar { Kind = U32 }" value="2358343024" />
+      <TextA kind="Leaf" offset="12374" length="100" type="WString { }">The information in the reward item is incorrect.</TextA>
+    </_104>
+    <_105 kind="Record" offset="12474" length="160">
+      <TextKey kind="Leaf" offset="12474" length="4" type="Scalar { Kind = U32 }" value="2378070690" />
+      <TextA kind="Leaf" offset="12478" length="156" type="WString { }">@&lt;tc:900&gt;Need to update trading system information.@&lt;/tc&gt;\nPlease try later.</TextA>
+    </_105>
+    <_106 kind="Record" offset="12634" length="110">
+      <TextKey kind="Leaf" offset="12634" length="4" type="Scalar { Kind = U32 }" value="2419032500" />
+      <TextA kind="Leaf" offset="12638" length="106" type="WString { }">@&lt;tc:990&gt;Enhancement Data Transfer Collision.@&lt;/tc&gt;</TextA>
+    </_106>
+    <_107 kind="Record" offset="12744" length="194">
+      <TextKey kind="Leaf" offset="12744" length="4" type="Scalar { Kind = U32 }" value="2422333664" />
+      <TextA kind="Leaf" offset="12748" length="190" type="WString { }">The remaining time is less than the time that would be reduced.\nDo you still want to use it?</TextA>
+    </_107>
+    <_108 kind="Record" offset="12938" length="80">
+      <TextKey kind="Leaf" offset="12938" length="4" type="Scalar { Kind = U32 }" value="2425632569" />
+      <TextA kind="Leaf" offset="12942" length="76" type="WString { }">Insufficient resources for the draw.</TextA>
+    </_108>
+    <_109 kind="Record" offset="13018" length="94">
+      <TextKey kind="Leaf" offset="13018" length="4" type="Scalar { Kind = U32 }" value="2431502333" />
+      <TextA kind="Leaf" offset="13022" length="90" type="WString { }">@&lt;tc:900&gt;Cannot be used at this time.@&lt;/tc&gt;</TextA>
+    </_109>
+    <_110 kind="Record" offset="13112" length="180">
+      <TextKey kind="Leaf" offset="13112" length="4" type="Scalar { Kind = U32 }" value="2456466390" />
+      <TextA kind="Leaf" offset="13116" length="176" type="WString { }">@&lt;tc:900&gt;You can't install any more because the installed exchange is maxed out.@&lt;/tc&gt;</TextA>
+    </_110>
+    <_111 kind="Record" offset="13292" length="60">
+      <TextKey kind="Leaf" offset="13292" length="4" type="Scalar { Kind = U32 }" value="2458863964" />
+      <TextA kind="Leaf" offset="13296" length="56" type="WString { }">There are unsaved changes.</TextA>
+    </_111>
+    <_112 kind="Record" offset="13352" length="124">
+      <TextKey kind="Leaf" offset="13352" length="4" type="Scalar { Kind = U32 }" value="2580132487" />
+      <TextA kind="Leaf" offset="13356" length="120" type="WString { }">There is no information about the Digimon to be extracted.</TextA>
+    </_112>
+    <_113 kind="Record" offset="13476" length="124">
+      <TextKey kind="Leaf" offset="13476" length="4" type="Scalar { Kind = U32 }" value="2589101921" />
+      <TextA kind="Leaf" offset="13480" length="120" type="WString { }">Successfully saved current information to the preset slot.</TextA>
+    </_113>
+    <_114 kind="Record" offset="13600" length="62">
+      <TextKey kind="Leaf" offset="13600" length="4" type="Scalar { Kind = U32 }" value="2613972386" />
+      <TextA kind="Leaf" offset="13604" length="58" type="WString { }">It's not the season period.</TextA>
+    </_114>
+    <_115 kind="Record" offset="13662" length="76">
+      <TextKey kind="Leaf" offset="13662" length="4" type="Scalar { Kind = U32 }" value="2619263752" />
+      <TextA kind="Leaf" offset="13666" length="72" type="WString { }">This is not an available position.</TextA>
+    </_115>
+    <_116 kind="Record" offset="13738" length="100">
+      <TextKey kind="Leaf" offset="13738" length="4" type="Scalar { Kind = U32 }" value="2634447861" />
+      <TextA kind="Leaf" offset="13742" length="96" type="WString { }">Insufficient additional enhancement materials.</TextA>
+    </_116>
+    <_117 kind="Record" offset="13838" length="212">
+      <TextKey kind="Leaf" offset="13838" length="4" type="Scalar { Kind = U32 }" value="2635613656" />
+      <TextA kind="Leaf" offset="13842" length="208" type="WString { }">The item is already registered in the current slot.\nAn item cannot be registered in multiple presets.</TextA>
+    </_117>
+    <_118 kind="Record" offset="14050" length="94">
+      <TextKey kind="Leaf" offset="14050" length="4" type="Scalar { Kind = U32 }" value="2655328936" />
+      <TextA kind="Leaf" offset="14054" length="90" type="WString { }">This item cannot be used by trial accounts.</TextA>
+    </_118>
+    <_119 kind="Record" offset="14144" length="84">
+      <TextKey kind="Leaf" offset="14144" length="4" type="Scalar { Kind = U32 }" value="2659798739" />
+      <TextA kind="Leaf" offset="14148" length="80" type="WString { }">Summoning Guild member is unavailable.</TextA>
+    </_119>
+    <_120 kind="Record" offset="14228" length="58">
+      <TextKey kind="Leaf" offset="14228" length="4" type="Scalar { Kind = U32 }" value="2694588224" />
+      <TextA kind="Leaf" offset="14232" length="54" type="WString { }">It cannot be started now.</TextA>
+    </_120>
+    <_121 kind="Record" offset="14286" length="158">
+      <TextKey kind="Leaf" offset="14286" length="4" type="Scalar { Kind = U32 }" value="2719318069" />
+      <TextA kind="Leaf" offset="14290" length="154" type="WString { }">Please register an item of the same grade as the currently registered item.</TextA>
+    </_121>
+    <_122 kind="Record" offset="14444" length="56">
+      <TextKey kind="Leaf" offset="14444" length="4" type="Scalar { Kind = U32 }" value="2720152522" />
+      <TextA kind="Leaf" offset="14448" length="52" type="WString { }">Currently not available.</TextA>
+    </_122>
+    <_123 kind="Record" offset="14500" length="76">
+      <TextKey kind="Leaf" offset="14500" length="4" type="Scalar { Kind = U32 }" value="2738654187" />
+      <TextA kind="Leaf" offset="14504" length="72" type="WString { }">This item cannot be sent via mail.</TextA>
+    </_123>
+    <_124 kind="Record" offset="14576" length="86">
+      <TextKey kind="Leaf" offset="14576" length="4" type="Scalar { Kind = U32 }" value="2740792601" />
+      <TextA kind="Leaf" offset="14580" length="82" type="WString { }">@&lt;tc:900&gt;No more space to expand.@&lt;/tc&gt;</TextA>
+    </_124>
+    <_125 kind="Record" offset="14662" length="100">
+      <TextKey kind="Leaf" offset="14662" length="4" type="Scalar { Kind = U32 }" value="2752651964" />
+      <TextA kind="Leaf" offset="14666" length="96" type="WString { }">There is no information about the reward item.</TextA>
+    </_125>
+    <_126 kind="Record" offset="14762" length="80">
+      <TextKey kind="Leaf" offset="14762" length="4" type="Scalar { Kind = U32 }" value="2765932440" />
+      <TextA kind="Leaf" offset="14766" length="76" type="WString { }">Would you like to save the settings?</TextA>
+    </_126>
+    <_127 kind="Record" offset="14842" length="82">
+      <TextKey kind="Leaf" offset="14842" length="4" type="Scalar { Kind = U32 }" value="2770626284" />
+      <TextA kind="Leaf" offset="14846" length="78" type="WString { }">You do not have enough hacking tools.</TextA>
+    </_127>
+    <_128 kind="Record" offset="14924" length="102">
+      <TextKey kind="Leaf" offset="14924" length="4" type="Scalar { Kind = U32 }" value="2778414654" />
+      <TextA kind="Leaf" offset="14928" length="98" type="WString { }">@&lt;tc:900&gt;Equipment enhancement destroyed.@&lt;/tc&gt;</TextA>
+    </_128>
+    <_129 kind="Record" offset="15026" length="120">
+      <TextKey kind="Leaf" offset="15026" length="4" type="Scalar { Kind = U32 }" value="2802724857" />
+      <TextA kind="Leaf" offset="15030" length="116" type="WString { }">Failed to save preset information (Reason: Preset name).</TextA>
+    </_129>
+    <_130 kind="Record" offset="15146" length="112">
+      <TextKey kind="Leaf" offset="15146" length="4" type="Scalar { Kind = U32 }" value="2810051984" />
+      <TextA kind="Leaf" offset="15150" length="108" type="WString { }">Due to limited inventory space, it was sent by mail.</TextA>
+    </_130>
+    <_131 kind="Record" offset="15258" length="120">
+      <TextKey kind="Leaf" offset="15258" length="4" type="Scalar { Kind = U32 }" value="2818902622" />
+      <TextA kind="Leaf" offset="15262" length="116" type="WString { }">There was a problem during Digital Draw.\nError code: %d</TextA>
+    </_131>
+    <_132 kind="Record" offset="15378" length="148">
+      <TextKey kind="Leaf" offset="15378" length="4" type="Scalar { Kind = U32 }" value="2831458145" />
+      <TextA kind="Leaf" offset="15382" length="144" type="WString { }">This product can only be purchased only if you purchase premium first.</TextA>
+    </_132>
+    <_133 kind="Record" offset="15526" length="152">
+      <TextKey kind="Leaf" offset="15526" length="4" type="Scalar { Kind = U32 }" value="2833147717" />
+      <TextA kind="Leaf" offset="15530" length="148" type="WString { }">@&lt;tc:900&gt;The previous request failed. Update the item information.@&lt;/tc&gt;</TextA>
+    </_133>
+    <_134 kind="Record" offset="15678" length="126">
+      <TextKey kind="Leaf" offset="15678" length="4" type="Scalar { Kind = U32 }" value="2843774241" />
+      <TextA kind="Leaf" offset="15682" length="122" type="WString { }">Seals that have already been mastered cannot be registered.</TextA>
+    </_134>
+    <_135 kind="Record" offset="15804" length="96">
+      <TextKey kind="Leaf" offset="15804" length="4" type="Scalar { Kind = U32 }" value="2856763248" />
+      <TextA kind="Leaf" offset="15808" length="92" type="WString { }">@&lt;tc:990&gt;Equipment enhancement failed.@&lt;/tc&gt;</TextA>
+    </_135>
+    <_136 kind="Record" offset="15900" length="108">
+      <TextKey kind="Leaf" offset="15900" length="4" type="Scalar { Kind = U32 }" value="2868514874" />
+      <TextA kind="Leaf" offset="15904" length="104" type="WString { }">Please select a Digimon to send on an exploration.</TextA>
+    </_136>
+    <_137 kind="Record" offset="16008" length="40">
+      <TextKey kind="Leaf" offset="16008" length="4" type="Scalar { Kind = U32 }" value="2881137076" />
+      <TextA kind="Leaf" offset="16012" length="36" type="WString { }">Not on sale yet.</TextA>
+    </_137>
+    <_138 kind="Record" offset="16048" length="72">
+      <TextKey kind="Leaf" offset="16048" length="4" type="Scalar { Kind = U32 }" value="2930374520" />
+      <TextA kind="Leaf" offset="16052" length="68" type="WString { }">@&lt;tc:900&gt;Please try later.@&lt;/tc&gt;</TextA>
+    </_138>
+    <_139 kind="Record" offset="16120" length="128">
+      <TextKey kind="Leaf" offset="16120" length="4" type="Scalar { Kind = U32 }" value="2931137759" />
+      <TextA kind="Leaf" offset="16124" length="124" type="WString { }">@&lt;tc:900&gt;Failed to load exchange purchase information.@&lt;/tc&gt;</TextA>
+    </_139>
+    <_140 kind="Record" offset="16248" length="82">
+      <TextKey kind="Leaf" offset="16248" length="4" type="Scalar { Kind = U32 }" value="2939985439" />
+      <TextA kind="Leaf" offset="16252" length="78" type="WString { }">Failed to use the preset unlock item.</TextA>
+    </_140>
+    <_141 kind="Record" offset="16330" length="118">
+      <TextKey kind="Leaf" offset="16330" length="4" type="Scalar { Kind = U32 }" value="2946234842" />
+      <TextA kind="Leaf" offset="16334" length="114" type="WString { }">The party recruitment was canceled by the party leader.</TextA>
+    </_141>
+    <_142 kind="Record" offset="16448" length="174">
+      <TextKey kind="Leaf" offset="16448" length="4" type="Scalar { Kind = U32 }" value="3021777413" />
+      <TextA kind="Leaf" offset="16452" length="170" type="WString { }">@&lt;tc:950&gt;Need to update previous or next page information.@&lt;/tc&gt;\nPlease try later.</TextA>
+    </_142>
+    <_143 kind="Record" offset="16622" length="348">
+      <TextKey kind="Leaf" offset="16622" length="4" type="Scalar { Kind = U32 }" value="3034901820" />
+      <TextA kind="Leaf" offset="16626" length="344" type="WString { }">@&lt;tc:990&gt;There is a possibility that the equipment item may be destroyed.@&lt;/tc&gt;\nDo you want to proceed with the enhancement?\n\n@&lt;tc:900&gt;Destruction chance [str1]%@&lt;/tc&gt;</TextA>
+    </_143>
+    <_144 kind="Record" offset="16970" length="158">
+      <TextKey kind="Leaf" offset="16970" length="4" type="Scalar { Kind = U32 }" value="3035739985" />
+      <TextA kind="Leaf" offset="16974" length="154" type="WString { }">After retrieving all closed transaction, you must re-install the exchange..</TextA>
+    </_144>
+    <_145 kind="Record" offset="17128" length="148">
+      <TextKey kind="Leaf" offset="17128" length="4" type="Scalar { Kind = U32 }" value="3064401507" />
+      <TextA kind="Leaf" offset="17132" length="144" type="WString { }">You can change the stats after resetting the breakthrough information.</TextA>
+    </_145>
+    <_146 kind="Record" offset="17276" length="170">
+      <TextKey kind="Leaf" offset="17276" length="4" type="Scalar { Kind = U32 }" value="3085953739" />
+      <TextA kind="Leaf" offset="17280" length="166" type="WString { }">Some items did not meet the equip requirements and were excluded from the preset.</TextA>
+    </_146>
+    <_147 kind="Record" offset="17446" length="104">
+      <TextKey kind="Leaf" offset="17446" length="4" type="Scalar { Kind = U32 }" value="3086040438" />
+      <TextA kind="Leaf" offset="17450" length="100" type="WString { }">Breakthrough information has already been reset.</TextA>
+    </_147>
+    <_148 kind="Record" offset="17550" length="104">
+      <TextKey kind="Leaf" offset="17550" length="4" type="Scalar { Kind = U32 }" value="3133622834" />
+      <TextA kind="Leaf" offset="17554" length="100" type="WString { }">The #Item_name# Damage Skin has been registered.</TextA>
+    </_148>
+    <_149 kind="Record" offset="17654" length="86">
+      <TextKey kind="Leaf" offset="17654" length="4" type="Scalar { Kind = U32 }" value="3140080698" />
+      <TextA kind="Leaf" offset="17658" length="82" type="WString { }">@&lt;tc:990&gt;[str1]@&lt;/tc&gt; Not enough items.</TextA>
+    </_149>
+    <_150 kind="Record" offset="17740" length="92">
+      <TextKey kind="Leaf" offset="17740" length="4" type="Scalar { Kind = U32 }" value="3191864480" />
+      <TextA kind="Leaf" offset="17744" length="88" type="WString { }">A party description is required to create.</TextA>
+    </_150>
+    <_151 kind="Record" offset="17832" length="52">
+      <TextKey kind="Leaf" offset="17832" length="4" type="Scalar { Kind = U32 }" value="3240279102" />
+      <TextA kind="Leaf" offset="17836" length="48" type="WString { }">Map ID does not exist.</TextA>
+    </_151>
+    <_152 kind="Record" offset="17884" length="84">
+      <TextKey kind="Leaf" offset="17884" length="4" type="Scalar { Kind = U32 }" value="3243984244" />
+      <TextA kind="Leaf" offset="17888" length="80" type="WString { }">The button cooldown has not yet ended.</TextA>
+    </_152>
+    <_153 kind="Record" offset="17968" length="88">
+      <TextKey kind="Leaf" offset="17968" length="4" type="Scalar { Kind = U32 }" value="3284624614" />
+      <TextA kind="Leaf" offset="17972" length="84" type="WString { }">Today's score has already been recorded.</TextA>
+    </_153>
+    <_154 kind="Record" offset="18056" length="106">
+      <TextKey kind="Leaf" offset="18056" length="4" type="Scalar { Kind = U32 }" value="3315605032" />
+      <TextA kind="Leaf" offset="18060" length="102" type="WString { }">There are requests being processed by the server.</TextA>
+    </_154>
+    <_155 kind="Record" offset="18162" length="86">
+      <TextKey kind="Leaf" offset="18162" length="4" type="Scalar { Kind = U32 }" value="3318302848" />
+      <TextA kind="Leaf" offset="18166" length="82" type="WString { }">@&lt;tc:900&gt;Failed to register item.@&lt;/tc&gt;</TextA>
+    </_155>
+    <_156 kind="Record" offset="18248" length="166">
+      <TextKey kind="Leaf" offset="18248" length="4" type="Scalar { Kind = U32 }" value="3319897068" />
+      <TextA kind="Leaf" offset="18252" length="162" type="WString { }">You cannot be a guild member summon target while the Macro Protector is active.</TextA>
+    </_156>
+    <_157 kind="Record" offset="18414" length="100">
+      <TextKey kind="Leaf" offset="18414" length="4" type="Scalar { Kind = U32 }" value="3328096515" />
+      <TextA kind="Leaf" offset="18418" length="96" type="WString { }">@&lt;tc:900&gt;Failed to change exchange sign.@&lt;/tc&gt;</TextA>
+    </_157>
+    <_158 kind="Record" offset="18514" length="140">
+      <TextKey kind="Leaf" offset="18514" length="4" type="Scalar { Kind = U32 }" value="3372220763" />
+      <TextA kind="Leaf" offset="18518" length="136" type="WString { }">There is no extraction information of the Digimon to be extracted.</TextA>
+    </_158>
+    <_159 kind="Record" offset="18654" length="122">
+      <TextKey kind="Leaf" offset="18654" length="4" type="Scalar { Kind = U32 }" value="3383067438" />
+      <TextA kind="Leaf" offset="18658" length="118" type="WString { }">Please register equipment with a lower enhancement level.</TextA>
+    </_159>
+    <_160 kind="Record" offset="18776" length="62">
+      <TextKey kind="Leaf" offset="18776" length="4" type="Scalar { Kind = U32 }" value="3444150197" />
+      <TextA kind="Leaf" offset="18780" length="58" type="WString { }">Invalid preset information.</TextA>
+    </_160>
+    <_161 kind="Record" offset="18838" length="170">
+      <TextKey kind="Leaf" offset="18838" length="4" type="Scalar { Kind = U32 }" value="3464381683" />
+      <TextA kind="Leaf" offset="18842" length="166" type="WString { }">This item cannot be registered in the preset slot.\nReason: Item is not appraised</TextA>
+    </_161>
+    <_162 kind="Record" offset="19008" length="126">
+      <TextKey kind="Leaf" offset="19008" length="4" type="Scalar { Kind = U32 }" value="3464795484" />
+      <TextA kind="Leaf" offset="19012" length="122" type="WString { }">@&lt;tc:900&gt;You cannot purchase the item you registered.@&lt;/tc&gt;</TextA>
+    </_162>
+    <_163 kind="Record" offset="19134" length="114">
+      <TextKey kind="Leaf" offset="19134" length="4" type="Scalar { Kind = U32 }" value="3468421728" />
+      <TextA kind="Leaf" offset="19138" length="110" type="WString { }">@&lt;tc:900&gt;Character bound item cannot be traded.@&lt;/tc&gt;</TextA>
+    </_163>
+    <_164 kind="Record" offset="19248" length="160">
+      <TextKey kind="Leaf" offset="19248" length="4" type="Scalar { Kind = U32 }" value="3469154622" />
+      <TextA kind="Leaf" offset="19252" length="156" type="WString { }">@&lt;tc:990&gt;This item cannot be treaded during the trade restricted time.@&lt;/tc&gt;</TextA>
+    </_164>
+    <_165 kind="Record" offset="19408" length="110">
+      <TextKey kind="Leaf" offset="19408" length="4" type="Scalar { Kind = U32 }" value="3478909240" />
+      <TextA kind="Leaf" offset="19412" length="106" type="WString { }">Item in that slot cannot be registered as products.</TextA>
+    </_165>
+    <_166 kind="Record" offset="19518" length="62">
+      <TextKey kind="Leaf" offset="19518" length="4" type="Scalar { Kind = U32 }" value="3499174868" />
+      <TextA kind="Leaf" offset="19522" length="58" type="WString { }">There are no results found.</TextA>
+    </_166>
+    <_167 kind="Record" offset="19580" length="120">
+      <TextKey kind="Leaf" offset="19580" length="4" type="Scalar { Kind = U32 }" value="3499742672" />
+      <TextA kind="Leaf" offset="19584" length="116" type="WString { }">An error occurred while sending the reward item by mail.</TextA>
+    </_167>
+    <_168 kind="Record" offset="19700" length="80">
+      <TextKey kind="Leaf" offset="19700" length="4" type="Scalar { Kind = U32 }" value="3518272042" />
+      <TextA kind="Leaf" offset="19704" length="76" type="WString { }">Arena is not available at this time.</TextA>
+    </_168>
+    <_169 kind="Record" offset="19780" length="108">
+      <TextKey kind="Leaf" offset="19780" length="4" type="Scalar { Kind = U32 }" value="3519773304" />
+      <TextA kind="Leaf" offset="19784" length="104" type="WString { }">This item cannot be stored in Exclusive Inventory.</TextA>
+    </_169>
+    <_170 kind="Record" offset="19888" length="60">
+      <TextKey kind="Leaf" offset="19888" length="4" type="Scalar { Kind = U32 }" value="3547680584" />
+      <TextA kind="Leaf" offset="19892" length="56" type="WString { }">Same as the previous sign.</TextA>
+    </_170>
+    <_171 kind="Record" offset="19948" length="64">
+      <TextKey kind="Leaf" offset="19948" length="4" type="Scalar { Kind = U32 }" value="3557816795" />
+      <TextA kind="Leaf" offset="19952" length="60" type="WString { }">This Cash ID does not exist.</TextA>
+    </_171>
+    <_172 kind="Record" offset="20012" length="136">
+      <TextKey kind="Leaf" offset="20012" length="4" type="Scalar { Kind = U32 }" value="3563946899" />
+      <TextA kind="Leaf" offset="20016" length="132" type="WString { }">Failed to apply preset information (Reason: Preset slot locked).</TextA>
+    </_172>
+    <_173 kind="Record" offset="20148" length="46">
+      <TextKey kind="Leaf" offset="20148" length="4" type="Scalar { Kind = U32 }" value="3570555645" />
+      <TextA kind="Leaf" offset="20152" length="42" type="WString { }">No changes to save.</TextA>
+    </_173>
+    <_174 kind="Record" offset="20194" length="96">
+      <TextKey kind="Leaf" offset="20194" length="4" type="Scalar { Kind = U32 }" value="3604363389" />
+      <TextA kind="Leaf" offset="20198" length="92" type="WString { }">This user has disabled detailed information.</TextA>
+    </_174>
+    <_175 kind="Record" offset="20290" length="142">
+      <TextKey kind="Leaf" offset="20290" length="4" type="Scalar { Kind = U32 }" value="3613309964" />
+      <TextA kind="Leaf" offset="20294" length="138" type="WString { }">@&lt;tc:950&gt;Exchange information is not valid. Please try again.@&lt;/tc&gt;</TextA>
+    </_175>
+    <_176 kind="Record" offset="20432" length="120">
+      <TextKey kind="Leaf" offset="20432" length="4" type="Scalar { Kind = U32 }" value="3657161874" />
+      <TextA kind="Leaf" offset="20436" length="116" type="WString { }">There are items that do not meet the equip requirements.</TextA>
+    </_176>
+    <_177 kind="Record" offset="20552" length="92">
+      <TextKey kind="Leaf" offset="20552" length="4" type="Scalar { Kind = U32 }" value="3701578090" />
+      <TextA kind="Leaf" offset="20556" length="88" type="WString { }">@&lt;tc:900&gt;Failed to load search page.@&lt;/tc&gt;</TextA>
+    </_177>
+    <_178 kind="Record" offset="20644" length="46">
+      <TextKey kind="Leaf" offset="20644" length="4" type="Scalar { Kind = U32 }" value="3705797040" />
+      <TextA kind="Leaf" offset="20648" length="42" type="WString { }">Incorrect password.</TextA>
+    </_178>
+    <_179 kind="Record" offset="20690" length="72">
+      <TextKey kind="Leaf" offset="20690" length="4" type="Scalar { Kind = U32 }" value="3712013695" />
+      <TextA kind="Leaf" offset="20694" length="68" type="WString { }">This item is already registered.</TextA>
+    </_179>
+    <_180 kind="Record" offset="20762" length="214">
+      <TextKey kind="Leaf" offset="20762" length="4" type="Scalar { Kind = U32 }" value="3714780303" />
+      <TextA kind="Leaf" offset="20766" length="210" type="WString { }">When changing slot, unsaved information will be reset.\nDo you want to change the selected preset slot?</TextA>
+    </_180>
+    <_181 kind="Record" offset="20976" length="116">
+      <TextKey kind="Leaf" offset="20976" length="4" type="Scalar { Kind = U32 }" value="3719011875" />
+      <TextA kind="Leaf" offset="20980" length="112" type="WString { }">@&lt;tc:900&gt;This cannot be used on the current map.@&lt;/tc&gt;</TextA>
+    </_181>
+    <_182 kind="Record" offset="21092" length="112">
+      <TextKey kind="Leaf" offset="21092" length="4" type="Scalar { Kind = U32 }" value="3721539612" />
+      <TextA kind="Leaf" offset="21096" length="108" type="WString { }">There are no empty slots available for registration.</TextA>
+    </_182>
+    <_183 kind="Record" offset="21204" length="328">
+      <TextKey kind="Leaf" offset="21204" length="4" type="Scalar { Kind = U32 }" value="3721876800" />
+      <TextA kind="Leaf" offset="21208" length="324" type="WString { }">Are you sure you want to stop the exploration?\nUsed items will be consumed, you won’t receive any rewards,\nand the Digimon will return to the Digimon Archive.</TextA>
+    </_183>
+    <_184 kind="Record" offset="21532" length="84">
+      <TextKey kind="Leaf" offset="21532" length="4" type="Scalar { Kind = U32 }" value="3752544427" />
+      <TextA kind="Leaf" offset="21536" length="80" type="WString { }">The season periods are set to overlap.</TextA>
+    </_184>
+    <_185 kind="Record" offset="21616" length="74">
+      <TextKey kind="Leaf" offset="21616" length="4" type="Scalar { Kind = U32 }" value="3756354691" />
+      <TextA kind="Leaf" offset="21620" length="70" type="WString { }">Failed to unlock the preset slot.</TextA>
+    </_185>
+    <_186 kind="Record" offset="21690" length="120">
+      <TextKey kind="Leaf" offset="21690" length="4" type="Scalar { Kind = U32 }" value="3756626841" />
+      <TextA kind="Leaf" offset="21694" length="116" type="WString { }">You cannot register more items than the maximum allowed.</TextA>
+    </_186>
+    <_187 kind="Record" offset="21810" length="140">
+      <TextKey kind="Leaf" offset="21810" length="4" type="Scalar { Kind = U32 }" value="3769814189" />
+      <TextA kind="Leaf" offset="21814" length="136" type="WString { }">You cannot register more than the maximum allowed number of items.</TextA>
+    </_187>
+    <_188 kind="Record" offset="21950" length="100">
+      <TextKey kind="Leaf" offset="21950" length="4" type="Scalar { Kind = U32 }" value="3781302016" />
+      <TextA kind="Leaf" offset="21954" length="96" type="WString { }">Presets can only be applied outside of combat.</TextA>
+    </_188>
+    <_189 kind="Record" offset="22050" length="176">
+      <TextKey kind="Leaf" offset="22050" length="4" type="Scalar { Kind = U32 }" value="3808967181" />
+      <TextA kind="Leaf" offset="22054" length="172" type="WString { }">@&lt;tc:900&gt;This area is not available.@&lt;/tc&gt;\n@&lt;tc:090&gt;Please@&lt;/tc&gt;try at DATS Center.</TextA>
+    </_189>
+    <_190 kind="Record" offset="22226" length="48">
+      <TextKey kind="Leaf" offset="22226" length="4" type="Scalar { Kind = U32 }" value="3813665775" />
+      <TextA kind="Leaf" offset="22230" length="44" type="WString { }">Invalid preset slot.</TextA>
+    </_190>
+    <_191 kind="Record" offset="22274" length="68">
+      <TextKey kind="Leaf" offset="22274" length="4" type="Scalar { Kind = U32 }" value="3816882458" />
+      <TextA kind="Leaf" offset="22278" length="64" type="WString { }">Registration period is invalid</TextA>
+    </_191>
+    <_192 kind="Record" offset="22342" length="52">
+      <TextKey kind="Leaf" offset="22342" length="4" type="Scalar { Kind = U32 }" value="3847865440" />
+      <TextA kind="Leaf" offset="22346" length="48" type="WString { }">No preset unlock item.</TextA>
+    </_192>
+    <_193 kind="Record" offset="22394" length="128">
+      <TextKey kind="Leaf" offset="22394" length="4" type="Scalar { Kind = U32 }" value="3872751331" />
+      <TextA kind="Leaf" offset="22398" length="124" type="WString { }">@&lt;tc:900&gt;You must end the preceding action to proceed.@&lt;/tc&gt;</TextA>
+    </_193>
+    <_194 kind="Record" offset="22522" length="134">
+      <TextKey kind="Leaf" offset="22522" length="4" type="Scalar { Kind = U32 }" value="3874319795" />
+      <TextA kind="Leaf" offset="22526" length="130" type="WString { }">There is no information about the item to be used for purchase.</TextA>
+    </_194>
+    <_195 kind="Record" offset="22656" length="82">
+      <TextKey kind="Leaf" offset="22656" length="4" type="Scalar { Kind = U32 }" value="3877783033" />
+      <TextA kind="Leaf" offset="22660" length="78" type="WString { }">All held potions have been exhausted.</TextA>
+    </_195>
+    <_196 kind="Record" offset="22738" length="120">
+      <TextKey kind="Leaf" offset="22738" length="4" type="Scalar { Kind = U32 }" value="3881518567" />
+      <TextA kind="Leaf" offset="22742" length="116" type="WString { }">This is a recruitment post from a user you have blocked.</TextA>
+    </_196>
+    <_197 kind="Record" offset="22858" length="144">
+      <TextKey kind="Leaf" offset="22858" length="4" type="Scalar { Kind = U32 }" value="3907626479" />
+      <TextA kind="Leaf" offset="22862" length="140" type="WString { }">The information of the item to be used for extraction is not correct</TextA>
+    </_197>
+    <_198 kind="Record" offset="23002" length="144">
+      <TextKey kind="Leaf" offset="23002" length="4" type="Scalar { Kind = U32 }" value="3922432337" />
+      <TextA kind="Leaf" offset="23006" length="140" type="WString { }">In order to extract, the currently applied deck must be deactivated.</TextA>
+    </_198>
+    <_199 kind="Record" offset="23146" length="88">
+      <TextKey kind="Leaf" offset="23146" length="4" type="Scalar { Kind = U32 }" value="3936039093" />
+      <TextA kind="Leaf" offset="23150" length="84" type="WString { }">@&lt;tc:900&gt;The map is not available.@&lt;/tc&gt;</TextA>
+    </_199>
+    <_200 kind="Record" offset="23234" length="62">
+      <TextKey kind="Leaf" offset="23234" length="4" type="Scalar { Kind = U32 }" value="3971828133" />
+      <TextA kind="Leaf" offset="23238" length="58" type="WString { }">Potion has been registered.</TextA>
+    </_200>
+    <_201 kind="Record" offset="23296" length="136">
+      <TextKey kind="Leaf" offset="23296" length="4" type="Scalar { Kind = U32 }" value="3997737375" />
+      <TextA kind="Leaf" offset="23300" length="132" type="WString { }">@&lt;tc:900&gt;Failed to load exchange registration information.@&lt;/tc&gt;</TextA>
+    </_201>
+    <_202 kind="Record" offset="23432" length="86">
+      <TextKey kind="Leaf" offset="23432" length="4" type="Scalar { Kind = U32 }" value="3997955141" />
+      <TextA kind="Leaf" offset="23436" length="82" type="WString { }">@&lt;tc:900&gt;Failed to open exchange.@&lt;/tc&gt;</TextA>
+    </_202>
+    <_203 kind="Record" offset="23518" length="166">
+      <TextKey kind="Leaf" offset="23518" length="4" type="Scalar { Kind = U32 }" value="4014697498" />
+      <TextA kind="Leaf" offset="23522" length="162" type="WString { }">Please check the Enhancement Stage or whether Transcendence has been completed.</TextA>
+    </_203>
+    <_204 kind="Record" offset="23684" length="64">
+      <TextKey kind="Leaf" offset="23684" length="4" type="Scalar { Kind = U32 }" value="4021743499" />
+      <TextA kind="Leaf" offset="23688" length="60" type="WString { }">The sell-by date is invalid.</TextA>
+    </_204>
+    <_205 kind="Record" offset="23748" length="60">
+      <TextKey kind="Leaf" offset="23748" length="4" type="Scalar { Kind = U32 }" value="4040674345" />
+      <TextA kind="Leaf" offset="23752" length="56" type="WString { }">The preset slot is locked.</TextA>
+    </_205>
+    <_206 kind="Record" offset="23808" length="92">
+      <TextKey kind="Leaf" offset="23808" length="4" type="Scalar { Kind = U32 }" value="4052588412" />
+      <TextA kind="Leaf" offset="23812" length="88" type="WString { }">Already applied for this recruitment post.</TextA>
+    </_206>
+    <_207 kind="Record" offset="23900" length="152">
+      <TextKey kind="Leaf" offset="23900" length="4" type="Scalar { Kind = U32 }" value="4063731525" />
+      <TextA kind="Leaf" offset="23904" length="148" type="WString { }">An issue occurred while using Enhancement Data Recovery.\nError code: %d</TextA>
+    </_207>
+    <_208 kind="Record" offset="24052" length="68">
+      <TextKey kind="Leaf" offset="24052" length="4" type="Scalar { Kind = U32 }" value="4065936946" />
+      <TextA kind="Leaf" offset="24056" length="64" type="WString { }">No season length has been set.</TextA>
+    </_208>
+    <_209 kind="Record" offset="24120" length="54">
+      <TextKey kind="Leaf" offset="24120" length="4" type="Scalar { Kind = U32 }" value="4084403049" />
+      <TextA kind="Leaf" offset="24124" length="50" type="WString { }">Insufficient materials.</TextA>
+    </_209>
+    <_210 kind="Record" offset="24174" length="144">
+      <TextKey kind="Leaf" offset="24174" length="4" type="Scalar { Kind = U32 }" value="4091780992" />
+      <TextA kind="Leaf" offset="24178" length="140" type="WString { }">@&lt;tc:900&gt;You cannot purchase item due to insufficient mailbox.@&lt;/tc&gt;</TextA>
+    </_210>
+    <_211 kind="Record" offset="24318" length="74">
+      <TextKey kind="Leaf" offset="24318" length="4" type="Scalar { Kind = U32 }" value="4102066130" />
+      <TextA kind="Leaf" offset="24322" length="70" type="WString { }">Failed to unlock the preset slot.</TextA>
+    </_211>
+    <_212 kind="Record" offset="24392" length="70">
+      <TextKey kind="Leaf" offset="24392" length="4" type="Scalar { Kind = U32 }" value="4125073817" />
+      <TextA kind="Leaf" offset="24396" length="66" type="WString { }">@&lt;tc:900&gt;Already aligned.@&lt;/tc&gt;</TextA>
+    </_212>
+    <_213 kind="Record" offset="24462" length="92">
+      <TextKey kind="Leaf" offset="24462" length="4" type="Scalar { Kind = U32 }" value="4148545845" />
+      <TextA kind="Leaf" offset="24466" length="88" type="WString { }">It cannot be used during Arena challenges.</TextA>
+    </_213>
+    <_214 kind="Record" offset="24554" length="48">
+      <TextKey kind="Leaf" offset="24554" length="4" type="Scalar { Kind = U32 }" value="4156127929" />
+      <TextA kind="Leaf" offset="24558" length="44" type="WString { }">Insufficient amount.</TextA>
+    </_214>
+    <_215 kind="Record" offset="24602" length="112">
+      <TextKey kind="Leaf" offset="24602" length="4" type="Scalar { Kind = U32 }" value="4169026043" />
+      <TextA kind="Leaf" offset="24606" length="108" type="WString { }">@&lt;tc:090&gt;Enhancement Data Transfer Successful.@&lt;/tc&gt;</TextA>
+    </_215>
+    <_216 kind="Record" offset="24714" length="104">
+      <TextKey kind="Leaf" offset="24714" length="4" type="Scalar { Kind = U32 }" value="4177966950" />
+      <TextA kind="Leaf" offset="24718" length="100" type="WString { }">[str1] Would you like to@&lt;/tc&gt;\nmove to dungeon?</TextA>
+    </_216>
+    <_217 kind="Record" offset="24818" length="138">
+      <TextKey kind="Leaf" offset="24818" length="4" type="Scalar { Kind = U32 }" value="4197635716" />
+      <TextA kind="Leaf" offset="24822" length="134" type="WString { }">You have canceled your application to join the party recruitment.</TextA>
+    </_217>
+    <_218 kind="Record" offset="24956" length="162">
+      <TextKey kind="Leaf" offset="24956" length="4" type="Scalar { Kind = U32 }" value="4249259751" />
+      <TextA kind="Leaf" offset="24960" length="158" type="WString { }">You have exhausted all daily draw attempts, and cannot proceed with the draw.</TextA>
+    </_218>
+    <_219 kind="Record" offset="25118" length="140">
+      <TextKey kind="Leaf" offset="25118" length="4" type="Scalar { Kind = U32 }" value="4255748903" />
+      <TextA kind="Leaf" offset="25122" length="136" type="WString { }">The information for the item to be used for purchase is incorrect.</TextA>
+    </_219>
+    <_220 kind="Record" offset="25258" length="132">
+      <TextKey kind="Leaf" offset="25258" length="4" type="Scalar { Kind = U32 }" value="4260525691" />
+      <TextA kind="Leaf" offset="25262" length="128" type="WString { }">There is no information on the item to be used for extraction.</TextA>
+    </_220>
+    <_221 kind="Record" offset="25390" length="78">
+      <TextKey kind="Leaf" offset="25390" length="4" type="Scalar { Kind = U32 }" value="4266981437" />
+      <TextA kind="Leaf" offset="25394" length="74" type="WString { }">Insufficient enhancement materials.</TextA>
+    </_221>
+    <_222 kind="Record" offset="25468" length="114">
+      <TextKey kind="Leaf" offset="25468" length="4" type="Scalar { Kind = U32 }" value="4277000305" />
+      <TextA kind="Leaf" offset="25472" length="110" type="WString { }">The Digimon’s level is lower than the required level.</TextA>
+    </_222>
+    <_223 kind="Record" offset="25582" length="76">
+      <TextKey kind="Leaf" offset="25582" length="4" type="Scalar { Kind = U32 }" value="4286633681" />
+      <TextA kind="Leaf" offset="25586" length="72" type="WString { }">Not enough space in the inventory.</TextA>
+    </_223>
+    <_224 kind="Record" offset="25658" length="58">
+      <TextKey kind="Leaf" offset="25658" length="4" type="Scalar { Kind = U32 }" value="4288442598" />
+      <TextA kind="Leaf" offset="25662" length="54" type="WString { }">Invalid user information.</TextA>
+    </_224>
+  </Entries>
+</DM_Talk_MessageText_Str>

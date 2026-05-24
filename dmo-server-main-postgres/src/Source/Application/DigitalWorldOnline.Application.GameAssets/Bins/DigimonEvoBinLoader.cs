@@ -88,8 +88,8 @@ public sealed class DigimonEvoBinLoader
         for (int i = 0; i < 9; i++)
         {
             int o = 8 + i * 8;
-            int slot = BitConverter.ToInt32(rec[o..(o + 4)]);
-            int target = BitConverter.ToInt32(rec[(o + 4)..(o + 8)]);
+            int slot = BitConverter.ToUInt16(rec[o..(o + 2)]);
+            int target = (int)BitConverter.ToUInt32(rec[(o + 4)..(o + 8)]);
             stages[i] = new DigimonEvoStage(slot, target);
         }
         ushort enableSlot = BitConverter.ToUInt16(rec[88..90]);

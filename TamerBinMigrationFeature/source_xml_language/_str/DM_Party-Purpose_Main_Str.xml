@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DM_Party_Purpose_Main_Str schema="DM_Party-Purpose_Main_Str.struct" bin="DM_Party-Purpose_Main_Str.bin" byteLength="298">
+  <Entries kind="Section" offset="0" length="298">
+    <_0 kind="Record" offset="4" length="48">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <TextA kind="Leaf" offset="8" length="44" type="WString { }">D-terminal(Beginner)</TextA>
+    </_0>
+    <_1 kind="Record" offset="52" length="44">
+      <TextKey kind="Leaf" offset="52" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="56" length="40" type="WString { }">D-terminal(Expert)</TextA>
+    </_1>
+    <_2 kind="Record" offset="96" length="28">
+      <TextKey kind="Leaf" offset="96" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="100" length="24" type="WString { }">Real World</TextA>
+    </_2>
+    <_3 kind="Record" offset="124" length="54">
+      <TextKey kind="Leaf" offset="124" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="128" length="50" type="WString { }">Digital World(Beginner)</TextA>
+    </_3>
+    <_4 kind="Record" offset="178" length="50">
+      <TextKey kind="Leaf" offset="178" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <TextA kind="Leaf" offset="182" length="46" type="WString { }">Digital World(Expert)</TextA>
+    </_4>
+    <_5 kind="Record" offset="228" length="34">
+      <TextKey kind="Leaf" offset="228" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextA kind="Leaf" offset="232" length="30" type="WString { }">Field Hunting</TextA>
+    </_5>
+    <_6 kind="Record" offset="262" length="36">
+      <TextKey kind="Leaf" offset="262" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <TextA kind="Leaf" offset="266" length="32" type="WString { }">Newbie Support</TextA>
+    </_6>
+  </Entries>
+</DM_Party_Purpose_Main_Str>

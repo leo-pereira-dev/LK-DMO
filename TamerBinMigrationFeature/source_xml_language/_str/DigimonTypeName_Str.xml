@@ -1,0 +1,469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DigimonTypeName_Str schema="DigimonTypeName_Str.struct" bin="DigimonTypeName_Str.bin" byteLength="4806">
+  <Entries kind="Section" offset="0" length="4806">
+    <_0 kind="Record" offset="4" length="8">
+      <TextKey kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="0" />
+      <TextA kind="Leaf" offset="8" length="4" type="WString { }"></TextA>
+    </_0>
+    <_1 kind="Record" offset="12" length="20">
+      <TextKey kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="1" />
+      <TextA kind="Leaf" offset="16" length="16" type="WString { }">Divine</TextA>
+    </_1>
+    <_2 kind="Record" offset="32" length="22">
+      <TextKey kind="Leaf" offset="32" length="4" type="Scalar { Kind = U32 }" value="2" />
+      <TextA kind="Leaf" offset="36" length="18" type="WString { }">Ancient</TextA>
+    </_2>
+    <_3 kind="Record" offset="54" length="24">
+      <TextKey kind="Leaf" offset="54" length="4" type="Scalar { Kind = U32 }" value="3" />
+      <TextA kind="Leaf" offset="58" length="20" type="WString { }">Humanoid</TextA>
+    </_3>
+    <_4 kind="Record" offset="78" length="20">
+      <TextKey kind="Leaf" offset="78" length="4" type="Scalar { Kind = U32 }" value="4" />
+      <TextA kind="Leaf" offset="82" length="16" type="WString { }">Dragon</TextA>
+    </_4>
+    <_5 kind="Record" offset="98" length="22">
+      <TextKey kind="Leaf" offset="98" length="4" type="Scalar { Kind = U32 }" value="5" />
+      <TextA kind="Leaf" offset="102" length="18" type="WString { }">Aquatic</TextA>
+    </_5>
+    <_6 kind="Record" offset="120" length="18">
+      <TextKey kind="Leaf" offset="120" length="4" type="Scalar { Kind = U32 }" value="6" />
+      <TextA kind="Leaf" offset="124" length="14" type="WString { }">Plant</TextA>
+    </_6>
+    <_7 kind="Record" offset="138" length="20">
+      <TextKey kind="Leaf" offset="138" length="4" type="Scalar { Kind = U32 }" value="7" />
+      <TextA kind="Leaf" offset="142" length="16" type="WString { }">Insect</TextA>
+    </_7>
+    <_8 kind="Record" offset="158" length="20">
+      <TextKey kind="Leaf" offset="158" length="4" type="Scalar { Kind = U32 }" value="8" />
+      <TextA kind="Leaf" offset="162" length="16" type="WString { }">Flight</TextA>
+    </_8>
+    <_9 kind="Record" offset="178" length="18">
+      <TextKey kind="Leaf" offset="178" length="4" type="Scalar { Kind = U32 }" value="9" />
+      <TextA kind="Leaf" offset="182" length="14" type="WString { }">Beast</TextA>
+    </_9>
+    <_10 kind="Record" offset="196" length="22">
+      <TextKey kind="Leaf" offset="196" length="4" type="Scalar { Kind = U32 }" value="10" />
+      <TextA kind="Leaf" offset="200" length="18" type="WString { }">Mineral</TextA>
+    </_10>
+    <_11 kind="Record" offset="218" length="22">
+      <TextKey kind="Leaf" offset="218" length="4" type="Scalar { Kind = U32 }" value="11" />
+      <TextA kind="Leaf" offset="222" length="18" type="WString { }">Machine</TextA>
+    </_11>
+    <_12 kind="Record" offset="240" length="18">
+      <TextKey kind="Leaf" offset="240" length="4" type="Scalar { Kind = U32 }" value="12" />
+      <TextA kind="Leaf" offset="244" length="14" type="WString { }">Demon</TextA>
+    </_12>
+    <_13 kind="Record" offset="258" length="18">
+      <TextKey kind="Leaf" offset="258" length="4" type="Scalar { Kind = U32 }" value="13" />
+      <TextA kind="Leaf" offset="262" length="14" type="WString { }">Magic</TextA>
+    </_13>
+    <_14 kind="Record" offset="276" length="22">
+      <TextKey kind="Leaf" offset="276" length="4" type="Scalar { Kind = U32 }" value="14" />
+      <TextA kind="Leaf" offset="280" length="18" type="WString { }">Unknown</TextA>
+    </_14>
+    <_15 kind="Record" offset="298" length="20">
+      <TextKey kind="Leaf" offset="298" length="4" type="Scalar { Kind = U32 }" value="15" />
+      <TextA kind="Leaf" offset="302" length="16" type="WString { }">Unique</TextA>
+    </_15>
+    <_16 kind="Record" offset="318" length="44">
+      <TextKey kind="Leaf" offset="318" length="4" type="Scalar { Kind = U32 }" value="101" />
+      <TextA kind="Leaf" offset="322" length="40" type="WString { }">Divine / Archangel</TextA>
+    </_16>
+    <_17 kind="Record" offset="362" length="36">
+      <TextKey kind="Leaf" offset="362" length="4" type="Scalar { Kind = U32 }" value="102" />
+      <TextA kind="Leaf" offset="366" length="32" type="WString { }">Divine / Angel</TextA>
+    </_17>
+    <_18 kind="Record" offset="398" length="38">
+      <TextKey kind="Leaf" offset="398" length="4" type="Scalar { Kind = U32 }" value="103" />
+      <TextA kind="Leaf" offset="402" length="34" type="WString { }">Divine / Seraph</TextA>
+    </_18>
+    <_19 kind="Record" offset="436" length="36">
+      <TextKey kind="Leaf" offset="436" length="4" type="Scalar { Kind = U32 }" value="104" />
+      <TextA kind="Leaf" offset="440" length="32" type="WString { }">Divine / Deity</TextA>
+    </_19>
+    <_20 kind="Record" offset="472" length="38">
+      <TextKey kind="Leaf" offset="472" length="4" type="Scalar { Kind = U32 }" value="105" />
+      <TextA kind="Leaf" offset="476" length="34" type="WString { }">Divine / Throne</TextA>
+    </_20>
+    <_21 kind="Record" offset="510" length="38">
+      <TextKey kind="Leaf" offset="510" length="4" type="Scalar { Kind = U32 }" value="106" />
+      <TextA kind="Leaf" offset="514" length="34" type="WString { }">Divine / Cherub</TextA>
+    </_21>
+    <_22 kind="Record" offset="548" length="46">
+      <TextKey kind="Leaf" offset="548" length="4" type="Scalar { Kind = U32 }" value="107" />
+      <TextA kind="Leaf" offset="552" length="42" type="WString { }">Divine / Wicked God</TextA>
+    </_22>
+    <_23 kind="Record" offset="594" length="44">
+      <TextKey kind="Leaf" offset="594" length="4" type="Scalar { Kind = U32 }" value="108" />
+      <TextA kind="Leaf" offset="598" length="40" type="WString { }">Divine / God Beast</TextA>
+    </_23>
+    <_24 kind="Record" offset="638" length="44">
+      <TextKey kind="Leaf" offset="638" length="4" type="Scalar { Kind = U32 }" value="109" />
+      <TextA kind="Leaf" offset="642" length="40" type="WString { }">Divine / Demon God</TextA>
+    </_24>
+    <_25 kind="Record" offset="682" length="36">
+      <TextKey kind="Leaf" offset="682" length="4" type="Scalar { Kind = U32 }" value="110" />
+      <TextA kind="Leaf" offset="686" length="32" type="WString { }">Divine / Power</TextA>
+    </_25>
+    <_26 kind="Record" offset="718" length="54">
+      <TextKey kind="Leaf" offset="718" length="4" type="Scalar { Kind = U32 }" value="201" />
+      <TextA kind="Leaf" offset="722" length="50" type="WString { }">Ancient / Ancient Plant</TextA>
+    </_26>
+    <_27 kind="Record" offset="772" length="64">
+      <TextKey kind="Leaf" offset="772" length="4" type="Scalar { Kind = U32 }" value="202" />
+      <TextA kind="Leaf" offset="776" length="60" type="WString { }">Ancient / Ancient Dragon Man</TextA>
+    </_27>
+    <_28 kind="Record" offset="836" length="54">
+      <TextKey kind="Leaf" offset="836" length="4" type="Scalar { Kind = U32 }" value="203" />
+      <TextA kind="Leaf" offset="840" length="50" type="WString { }">Ancient / Ancient Beast</TextA>
+    </_28>
+    <_29 kind="Record" offset="890" length="64">
+      <TextKey kind="Leaf" offset="890" length="4" type="Scalar { Kind = U32 }" value="204" />
+      <TextA kind="Leaf" offset="894" length="60" type="WString { }">Ancient / Ancient Crustacean</TextA>
+    </_29>
+    <_30 kind="Record" offset="954" length="52">
+      <TextKey kind="Leaf" offset="954" length="4" type="Scalar { Kind = U32 }" value="205" />
+      <TextA kind="Leaf" offset="958" length="48" type="WString { }">Ancient / Ancient Bird</TextA>
+    </_30>
+    <_31 kind="Record" offset="1006" length="66">
+      <TextKey kind="Leaf" offset="1006" length="4" type="Scalar { Kind = U32 }" value="206" />
+      <TextA kind="Leaf" offset="1010" length="62" type="WString { }">Ancient / Ancient Holy Knight</TextA>
+    </_31>
+    <_32 kind="Record" offset="1072" length="56">
+      <TextKey kind="Leaf" offset="1072" length="4" type="Scalar { Kind = U32 }" value="207" />
+      <TextA kind="Leaf" offset="1076" length="52" type="WString { }">Ancient / Ancient Dragon</TextA>
+    </_32>
+    <_33 kind="Record" offset="1128" length="42">
+      <TextKey kind="Leaf" offset="1128" length="4" type="Scalar { Kind = U32 }" value="208" />
+      <TextA kind="Leaf" offset="1132" length="38" type="WString { }">Ancient / Ancient</TextA>
+    </_33>
+    <_34 kind="Record" offset="1170" length="48">
+      <TextKey kind="Leaf" offset="1170" length="4" type="Scalar { Kind = U32 }" value="209" />
+      <TextA kind="Leaf" offset="1174" length="44" type="WString { }">Ancient / Holy Beast</TextA>
+    </_34>
+    <_35 kind="Record" offset="1218" length="52">
+      <TextKey kind="Leaf" offset="1218" length="4" type="Scalar { Kind = U32 }" value="301" />
+      <TextA kind="Leaf" offset="1222" length="48" type="WString { }">Humanoid / Holy Knight</TextA>
+    </_35>
+    <_36 kind="Record" offset="1270" length="52">
+      <TextKey kind="Leaf" offset="1270" length="4" type="Scalar { Kind = U32 }" value="302" />
+      <TextA kind="Leaf" offset="1274" length="48" type="WString { }">Humanoid / Dark Knight</TextA>
+    </_36>
+    <_37 kind="Record" offset="1322" length="44">
+      <TextKey kind="Leaf" offset="1322" length="4" type="Scalar { Kind = U32 }" value="303" />
+      <TextA kind="Leaf" offset="1326" length="40" type="WString { }">Humanoid / Warrior</TextA>
+    </_37>
+    <_38 kind="Record" offset="1366" length="46">
+      <TextKey kind="Leaf" offset="1366" length="4" type="Scalar { Kind = U32 }" value="304" />
+      <TextA kind="Leaf" offset="1370" length="42" type="WString { }">Humanoid / Bird Man</TextA>
+    </_38>
+    <_39 kind="Record" offset="1412" length="50">
+      <TextKey kind="Leaf" offset="1412" length="4" type="Scalar { Kind = U32 }" value="305" />
+      <TextA kind="Leaf" offset="1416" length="46" type="WString { }">Humanoid / Dragon Man</TextA>
+    </_39>
+    <_40 kind="Record" offset="1462" length="56">
+      <TextKey kind="Leaf" offset="1462" length="4" type="Scalar { Kind = U32 }" value="306" />
+      <TextA kind="Leaf" offset="1466" length="52" type="WString { }">Humanoid / Dragon Knight</TextA>
+    </_40>
+    <_41 kind="Record" offset="1518" length="38">
+      <TextKey kind="Leaf" offset="1518" length="4" type="Scalar { Kind = U32 }" value="401" />
+      <TextA kind="Leaf" offset="1522" length="34" type="WString { }">Dragon / Dragon</TextA>
+    </_41>
+    <_42 kind="Record" offset="1556" length="56">
+      <TextKey kind="Leaf" offset="1556" length="4" type="Scalar { Kind = U32 }" value="402" />
+      <TextA kind="Leaf" offset="1560" length="52" type="WString { }">Dragon / Mythical Dragon</TextA>
+    </_42>
+    <_43 kind="Record" offset="1612" length="46">
+      <TextKey kind="Leaf" offset="1612" length="4" type="Scalar { Kind = U32 }" value="403" />
+      <TextA kind="Leaf" offset="1616" length="42" type="WString { }">Dragon / Ankylosaur</TextA>
+    </_43>
+    <_44 kind="Record" offset="1658" length="50">
+      <TextKey kind="Leaf" offset="1658" length="4" type="Scalar { Kind = U32 }" value="404" />
+      <TextA kind="Leaf" offset="1662" length="46" type="WString { }">Dragon / Demon Dragon</TextA>
+    </_44>
+    <_45 kind="Record" offset="1708" length="48">
+      <TextKey kind="Leaf" offset="1708" length="4" type="Scalar { Kind = U32 }" value="405" />
+      <TextA kind="Leaf" offset="1712" length="44" type="WString { }">Dragon / Evil Dragon</TextA>
+    </_45>
+    <_46 kind="Record" offset="1756" length="48">
+      <TextKey kind="Leaf" offset="1756" length="4" type="Scalar { Kind = U32 }" value="406" />
+      <TextA kind="Leaf" offset="1760" length="44" type="WString { }">Dragon / Holy Dragon</TextA>
+    </_46>
+    <_47 kind="Record" offset="1804" length="50">
+      <TextKey kind="Leaf" offset="1804" length="4" type="Scalar { Kind = U32 }" value="407" />
+      <TextA kind="Leaf" offset="1808" length="46" type="WString { }">Dragon / Small Dragon</TextA>
+    </_47>
+    <_48 kind="Record" offset="1854" length="50">
+      <TextKey kind="Leaf" offset="1854" length="4" type="Scalar { Kind = U32 }" value="408" />
+      <TextA kind="Leaf" offset="1858" length="46" type="WString { }">Dragon / Beast Dragon</TextA>
+    </_48>
+    <_49 kind="Record" offset="1904" length="46">
+      <TextKey kind="Leaf" offset="1904" length="4" type="Scalar { Kind = U32 }" value="409" />
+      <TextA kind="Leaf" offset="1908" length="42" type="WString { }">Dragon / Plesiosaur</TextA>
+    </_49>
+    <_50 kind="Record" offset="1950" length="50">
+      <TextKey kind="Leaf" offset="1950" length="4" type="Scalar { Kind = U32 }" value="410" />
+      <TextA kind="Leaf" offset="1954" length="46" type="WString { }">Dragon / Earth Dragon</TextA>
+    </_50>
+    <_51 kind="Record" offset="2000" length="50">
+      <TextKey kind="Leaf" offset="2000" length="4" type="Scalar { Kind = U32 }" value="411" />
+      <TextA kind="Leaf" offset="2004" length="46" type="WString { }">Dragon / Beast Dragon</TextA>
+    </_51>
+    <_52 kind="Record" offset="2050" length="46">
+      <TextKey kind="Leaf" offset="2050" length="4" type="Scalar { Kind = U32 }" value="412" />
+      <TextA kind="Leaf" offset="2054" length="42" type="WString { }">Dragon / Sky Dragon</TextA>
+    </_52>
+    <_53 kind="Record" offset="2096" length="50">
+      <TextKey kind="Leaf" offset="2096" length="4" type="Scalar { Kind = U32 }" value="413" />
+      <TextA kind="Leaf" offset="2100" length="46" type="WString { }">Dragon / Ocean Dragon</TextA>
+    </_53>
+    <_54 kind="Record" offset="2146" length="50">
+      <TextKey kind="Leaf" offset="2146" length="4" type="Scalar { Kind = U32 }" value="414" />
+      <TextA kind="Leaf" offset="2150" length="46" type="WString { }">Dragon / Light Dragon</TextA>
+    </_54>
+    <_55 kind="Record" offset="2196" length="46">
+      <TextKey kind="Leaf" offset="2196" length="4" type="Scalar { Kind = U32 }" value="501" />
+      <TextA kind="Leaf" offset="2200" length="42" type="WString { }">Aquatic / Amphibian</TextA>
+    </_55>
+    <_56 kind="Record" offset="2242" length="54">
+      <TextKey kind="Leaf" offset="2242" length="4" type="Scalar { Kind = U32 }" value="502" />
+      <TextA kind="Leaf" offset="2246" length="50" type="WString { }">Aquatic / Tropical Fish</TextA>
+    </_56>
+    <_57 kind="Record" offset="2296" length="42">
+      <TextKey kind="Leaf" offset="2296" length="4" type="Scalar { Kind = U32 }" value="503" />
+      <TextA kind="Leaf" offset="2300" length="38" type="WString { }">Aquatic / Mollusk</TextA>
+    </_57>
+    <_58 kind="Record" offset="2338" length="52">
+      <TextKey kind="Leaf" offset="2338" length="4" type="Scalar { Kind = U32 }" value="504" />
+      <TextA kind="Leaf" offset="2342" length="48" type="WString { }">Aquatic / Marine Beast</TextA>
+    </_58>
+    <_59 kind="Record" offset="2390" length="56">
+      <TextKey kind="Leaf" offset="2390" length="4" type="Scalar { Kind = U32 }" value="505" />
+      <TextA kind="Leaf" offset="2394" length="52" type="WString { }">Aquatic / Aquatic Mammal</TextA>
+    </_59>
+    <_60 kind="Record" offset="2446" length="42">
+      <TextKey kind="Leaf" offset="2446" length="4" type="Scalar { Kind = U32 }" value="506" />
+      <TextA kind="Leaf" offset="2450" length="38" type="WString { }">Aquatic / Aquatic</TextA>
+    </_60>
+    <_61 kind="Record" offset="2488" length="42">
+      <TextKey kind="Leaf" offset="2488" length="4" type="Scalar { Kind = U32 }" value="507" />
+      <TextA kind="Leaf" offset="2492" length="38" type="WString { }">Aquatic / Aquatic</TextA>
+    </_61>
+    <_62 kind="Record" offset="2530" length="62">
+      <TextKey kind="Leaf" offset="2530" length="4" type="Scalar { Kind = U32 }" value="508" />
+      <TextA kind="Leaf" offset="2534" length="58" type="WString { }">Aquatic / Aquatic Beast Man</TextA>
+    </_62>
+    <_63 kind="Record" offset="2592" length="48">
+      <TextKey kind="Leaf" offset="2592" length="4" type="Scalar { Kind = U32 }" value="509" />
+      <TextA kind="Leaf" offset="2596" length="44" type="WString { }">Aquatic / Crustacean</TextA>
+    </_63>
+    <_64 kind="Record" offset="2640" length="34">
+      <TextKey kind="Leaf" offset="2640" length="4" type="Scalar { Kind = U32 }" value="601" />
+      <TextA kind="Leaf" offset="2644" length="30" type="WString { }">Plant / Plant</TextA>
+    </_64>
+    <_65 kind="Record" offset="2674" length="62">
+      <TextKey kind="Leaf" offset="2674" length="4" type="Scalar { Kind = U32 }" value="602" />
+      <TextA kind="Leaf" offset="2678" length="58" type="WString { }">Plant / Insectivorous Plant</TextA>
+    </_65>
+    <_66 kind="Record" offset="2736" length="32">
+      <TextKey kind="Leaf" offset="2736" length="4" type="Scalar { Kind = U32 }" value="603" />
+      <TextA kind="Leaf" offset="2740" length="28" type="WString { }">Plant / Bulb</TextA>
+    </_66>
+    <_67 kind="Record" offset="2768" length="38">
+      <TextKey kind="Leaf" offset="2768" length="4" type="Scalar { Kind = U32 }" value="701" />
+      <TextA kind="Leaf" offset="2772" length="34" type="WString { }">Insect / Insect</TextA>
+    </_67>
+    <_68 kind="Record" offset="2806" length="36">
+      <TextKey kind="Leaf" offset="2806" length="4" type="Scalar { Kind = U32 }" value="702" />
+      <TextA kind="Leaf" offset="2810" length="32" type="WString { }">Insect / Larva</TextA>
+    </_68>
+    <_69 kind="Record" offset="2842" length="46">
+      <TextKey kind="Leaf" offset="2842" length="4" type="Scalar { Kind = U32 }" value="801" />
+      <TextA kind="Leaf" offset="2846" length="42" type="WString { }">Flight / Giant Bird</TextA>
+    </_69>
+    <_70 kind="Record" offset="2888" length="34">
+      <TextKey kind="Leaf" offset="2888" length="4" type="Scalar { Kind = U32 }" value="802" />
+      <TextA kind="Leaf" offset="2892" length="30" type="WString { }">Flight / Bird</TextA>
+    </_70>
+    <_71 kind="Record" offset="2922" length="44">
+      <TextKey kind="Leaf" offset="2922" length="4" type="Scalar { Kind = U32 }" value="803" />
+      <TextA kind="Leaf" offset="2926" length="40" type="WString { }">Flight / Holy Bird</TextA>
+    </_71>
+    <_72 kind="Record" offset="2966" length="56">
+      <TextKey kind="Leaf" offset="2966" length="4" type="Scalar { Kind = U32 }" value="804" />
+      <TextA kind="Leaf" offset="2970" length="52" type="WString { }">Flight / Bewitching Bird</TextA>
+    </_72>
+    <_73 kind="Record" offset="3022" length="36">
+      <TextKey kind="Leaf" offset="3022" length="4" type="Scalar { Kind = U32 }" value="805" />
+      <TextA kind="Leaf" offset="3026" length="32" type="WString { }">Flight / Chick</TextA>
+    </_73>
+    <_74 kind="Record" offset="3058" length="44">
+      <TextKey kind="Leaf" offset="3058" length="4" type="Scalar { Kind = U32 }" value="901" />
+      <TextA kind="Leaf" offset="3062" length="40" type="WString { }">Beast / Rare Beast</TextA>
+    </_74>
+    <_75 kind="Record" offset="3102" length="36">
+      <TextKey kind="Leaf" offset="3102" length="4" type="Scalar { Kind = U32 }" value="902" />
+      <TextA kind="Leaf" offset="3106" length="32" type="WString { }">Beast / Mammal</TextA>
+    </_75>
+    <_76 kind="Record" offset="3138" length="34">
+      <TextKey kind="Leaf" offset="3138" length="4" type="Scalar { Kind = U32 }" value="903" />
+      <TextA kind="Leaf" offset="3142" length="30" type="WString { }">Beast / Beast</TextA>
+    </_76>
+    <_77 kind="Record" offset="3172" length="36">
+      <TextKey kind="Leaf" offset="3172" length="4" type="Scalar { Kind = U32 }" value="904" />
+      <TextA kind="Leaf" offset="3176" length="32" type="WString { }">Beast / Lesser</TextA>
+    </_77>
+    <_78 kind="Record" offset="3208" length="40">
+      <TextKey kind="Leaf" offset="3208" length="4" type="Scalar { Kind = U32 }" value="905" />
+      <TextA kind="Leaf" offset="3212" length="36" type="WString { }">Beast / Dinosaur</TextA>
+    </_78>
+    <_79 kind="Record" offset="3248" length="38">
+      <TextKey kind="Leaf" offset="3248" length="4" type="Scalar { Kind = U32 }" value="906" />
+      <TextA kind="Leaf" offset="3252" length="34" type="WString { }">Beast / Reptile</TextA>
+    </_79>
+    <_80 kind="Record" offset="3286" length="42">
+      <TextKey kind="Leaf" offset="3286" length="4" type="Scalar { Kind = U32 }" value="907" />
+      <TextA kind="Leaf" offset="3290" length="38" type="WString { }">Beast / Beast Man</TextA>
+    </_80>
+    <_81 kind="Record" offset="3328" length="48">
+      <TextKey kind="Leaf" offset="3328" length="4" type="Scalar { Kind = U32 }" value="908" />
+      <TextA kind="Leaf" offset="3332" length="44" type="WString { }">Beast / Beast Knight</TextA>
+    </_81>
+    <_82 kind="Record" offset="3376" length="32">
+      <TextKey kind="Leaf" offset="3376" length="4" type="Scalar { Kind = U32 }" value="909" />
+      <TextA kind="Leaf" offset="3380" length="28" type="WString { }">Beast / Ogre</TextA>
+    </_82>
+    <_83 kind="Record" offset="3408" length="46">
+      <TextKey kind="Leaf" offset="3408" length="4" type="Scalar { Kind = U32 }" value="910" />
+      <TextA kind="Leaf" offset="3412" length="42" type="WString { }">Beast / Ceratopsian</TextA>
+    </_83>
+    <_84 kind="Record" offset="3454" length="42">
+      <TextKey kind="Leaf" offset="3454" length="4" type="Scalar { Kind = U32 }" value="1001" />
+      <TextA kind="Leaf" offset="3458" length="38" type="WString { }">Mineral / Mineral</TextA>
+    </_84>
+    <_85 kind="Record" offset="3496" length="34">
+      <TextKey kind="Leaf" offset="3496" length="4" type="Scalar { Kind = U32 }" value="1002" />
+      <TextA kind="Leaf" offset="3500" length="30" type="WString { }">Mineral / Ore</TextA>
+    </_85>
+    <_86 kind="Record" offset="3530" length="36">
+      <TextKey kind="Leaf" offset="3530" length="4" type="Scalar { Kind = U32 }" value="1003" />
+      <TextA kind="Leaf" offset="3534" length="32" type="WString { }">Mineral / Rock</TextA>
+    </_86>
+    <_87 kind="Record" offset="3566" length="56">
+      <TextKey kind="Leaf" offset="3566" length="4" type="Scalar { Kind = U32 }" value="1101" />
+      <TextA kind="Leaf" offset="3570" length="52" type="WString { }">Machine / Machine Dragon</TextA>
+    </_87>
+    <_88 kind="Record" offset="3622" length="40">
+      <TextKey kind="Leaf" offset="3622" length="4" type="Scalar { Kind = U32 }" value="1102" />
+      <TextA kind="Leaf" offset="3626" length="36" type="WString { }">Machine / Cyborg</TextA>
+    </_88>
+    <_89 kind="Record" offset="3662" length="42">
+      <TextKey kind="Leaf" offset="3662" length="4" type="Scalar { Kind = U32 }" value="1103" />
+      <TextA kind="Leaf" offset="3666" length="38" type="WString { }">Machine / Machine</TextA>
+    </_89>
+    <_90 kind="Record" offset="3704" length="34">
+      <TextKey kind="Leaf" offset="3704" length="4" type="Scalar { Kind = U32 }" value="1201" />
+      <TextA kind="Leaf" offset="3708" length="30" type="WString { }">Demon / Ghost</TextA>
+    </_90>
+    <_91 kind="Record" offset="3738" length="46">
+      <TextKey kind="Leaf" offset="3738" length="4" type="Scalar { Kind = U32 }" value="1202" />
+      <TextA kind="Leaf" offset="3742" length="42" type="WString { }">Demon / Small Devil</TextA>
+    </_91>
+    <_92 kind="Record" offset="3784" length="44">
+      <TextKey kind="Leaf" offset="3784" length="4" type="Scalar { Kind = U32 }" value="1203" />
+      <TextA kind="Leaf" offset="3788" length="40" type="WString { }">Demon / Demon Lord</TextA>
+    </_92>
+    <_93 kind="Record" offset="3828" length="36">
+      <TextKey kind="Leaf" offset="3828" length="4" type="Scalar { Kind = U32 }" value="1204" />
+      <TextA kind="Leaf" offset="3832" length="32" type="WString { }">Demon / Undead</TextA>
+    </_93>
+    <_94 kind="Record" offset="3864" length="36">
+      <TextKey kind="Leaf" offset="3864" length="4" type="Scalar { Kind = U32 }" value="1205" />
+      <TextA kind="Leaf" offset="3868" length="32" type="WString { }">Demon / Avatar</TextA>
+    </_94>
+    <_95 kind="Record" offset="3900" length="46">
+      <TextKey kind="Leaf" offset="3900" length="4" type="Scalar { Kind = U32 }" value="1206" />
+      <TextA kind="Leaf" offset="3904" length="42" type="WString { }">Demon / Demon Beast</TextA>
+    </_95>
+    <_96 kind="Record" offset="3946" length="56">
+      <TextKey kind="Leaf" offset="3946" length="4" type="Scalar { Kind = U32 }" value="1207" />
+      <TextA kind="Leaf" offset="3950" length="52" type="WString { }">Demon / Bewitching Beast</TextA>
+    </_96>
+    <_97 kind="Record" offset="4002" length="48">
+      <TextKey kind="Leaf" offset="4002" length="4" type="Scalar { Kind = U32 }" value="1208" />
+      <TextA kind="Leaf" offset="4006" length="44" type="WString { }">Demon / Fallen angel</TextA>
+    </_97>
+    <_98 kind="Record" offset="4050" length="48">
+      <TextKey kind="Leaf" offset="4050" length="4" type="Scalar { Kind = U32 }" value="1301" />
+      <TextA kind="Leaf" offset="4054" length="44" type="WString { }">Magic / Magic Knight</TextA>
+    </_98>
+    <_99 kind="Record" offset="4098" length="42">
+      <TextKey kind="Leaf" offset="4098" length="4" type="Scalar { Kind = U32 }" value="1302" />
+      <TextA kind="Leaf" offset="4102" length="38" type="WString { }">Magic / Demon Man</TextA>
+    </_99>
+    <_100 kind="Record" offset="4140" length="34">
+      <TextKey kind="Leaf" offset="4140" length="4" type="Scalar { Kind = U32 }" value="1303" />
+      <TextA kind="Leaf" offset="4144" length="30" type="WString { }">Magic / Fairy</TextA>
+    </_100>
+    <_101 kind="Record" offset="4174" length="36">
+      <TextKey kind="Leaf" offset="4174" length="4" type="Scalar { Kind = U32 }" value="1304" />
+      <TextA kind="Leaf" offset="4178" length="32" type="WString { }">Magic / Puppet</TextA>
+    </_101>
+    <_102 kind="Record" offset="4210" length="34">
+      <TextKey kind="Leaf" offset="4210" length="4" type="Scalar { Kind = U32 }" value="1305" />
+      <TextA kind="Leaf" offset="4214" length="30" type="WString { }">Magic / Flame</TextA>
+    </_102>
+    <_103 kind="Record" offset="4244" length="40">
+      <TextKey kind="Leaf" offset="4244" length="4" type="Scalar { Kind = U32 }" value="1306" />
+      <TextA kind="Leaf" offset="4248" length="36" type="WString { }">Magic / Ice-Snow</TextA>
+    </_103>
+    <_104 kind="Record" offset="4284" length="52">
+      <TextKey kind="Leaf" offset="4284" length="4" type="Scalar { Kind = U32 }" value="1401" />
+      <TextA kind="Leaf" offset="4288" length="48" type="WString { }">Unknown / Unidentified</TextA>
+    </_104>
+    <_105 kind="Record" offset="4336" length="52">
+      <TextKey kind="Leaf" offset="4336" length="4" type="Scalar { Kind = U32 }" value="1402" />
+      <TextA kind="Leaf" offset="4340" length="48" type="WString { }">Unknown / Unanalyzable</TextA>
+    </_105>
+    <_106 kind="Record" offset="4388" length="42">
+      <TextKey kind="Leaf" offset="4388" length="4" type="Scalar { Kind = U32 }" value="1403" />
+      <TextA kind="Leaf" offset="4392" length="38" type="WString { }">Unknown / Unknown</TextA>
+    </_106>
+    <_107 kind="Record" offset="4430" length="38">
+      <TextKey kind="Leaf" offset="4430" length="4" type="Scalar { Kind = U32 }" value="1501" />
+      <TextA kind="Leaf" offset="4434" length="34" type="WString { }">Unique / Mutant</TextA>
+    </_107>
+    <_108 kind="Record" offset="4468" length="38">
+      <TextKey kind="Leaf" offset="4468" length="4" type="Scalar { Kind = U32 }" value="1502" />
+      <TextA kind="Leaf" offset="4472" length="34" type="WString { }">Unique / Unique</TextA>
+    </_108>
+    <_109 kind="Record" offset="4506" length="54">
+      <TextKey kind="Leaf" offset="4506" length="4" type="Scalar { Kind = U32 }" value="1503" />
+      <TextA kind="Leaf" offset="4510" length="50" type="WString { }">Unique / Mythical Beast</TextA>
+    </_109>
+    <_110 kind="Record" offset="4560" length="40">
+      <TextKey kind="Leaf" offset="4560" length="4" type="Scalar { Kind = U32 }" value="1504" />
+      <TextA kind="Leaf" offset="4564" length="36" type="WString { }">Unique / Perfect</TextA>
+    </_110>
+    <_111 kind="Record" offset="4600" length="44">
+      <TextKey kind="Leaf" offset="4600" length="4" type="Scalar { Kind = U32 }" value="1505" />
+      <TextA kind="Leaf" offset="4604" length="40" type="WString { }">Unique / Composite</TextA>
+    </_111>
+    <_112 kind="Record" offset="4644" length="48">
+      <TextKey kind="Leaf" offset="4644" length="4" type="Scalar { Kind = U32 }" value="1506" />
+      <TextA kind="Leaf" offset="4648" length="44" type="WString { }">Unique / Enhancement</TextA>
+    </_112>
+    <_113 kind="Record" offset="4692" length="42">
+      <TextKey kind="Leaf" offset="4692" length="4" type="Scalar { Kind = U32 }" value="1507" />
+      <TextA kind="Leaf" offset="4696" length="38" type="WString { }">Unique / Parasite</TextA>
+    </_113>
+    <_114 kind="Record" offset="4734" length="36">
+      <TextKey kind="Leaf" offset="4734" length="4" type="Scalar { Kind = U32 }" value="1508" />
+      <TextA kind="Leaf" offset="4738" length="32" type="WString { }">Unique / Minor</TextA>
+    </_114>
+    <_115 kind="Record" offset="4770" length="36">
+      <TextKey kind="Leaf" offset="4770" length="4" type="Scalar { Kind = U32 }" value="1509" />
+      <TextA kind="Leaf" offset="4774" length="32" type="WString { }">Unique / Major</TextA>
+    </_115>
+  </Entries>
+</DigimonTypeName_Str>

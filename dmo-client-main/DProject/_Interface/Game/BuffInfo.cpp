@@ -669,12 +669,8 @@ void cBuffInfo::Render()
 #ifdef MONSTER_SKILL_GROWTH
 				nStack = it->m_nStack;
 #endif
-				ICONITEM::eTYPE type = ICONITEM::SKILL4;
 				USHORT	usBuffIcon = it->s_pBuffTable->GetInfo()->s_nBuffIcon;
-				if( usBuffIcon >= 4000 )		type = ICONITEM::SKILL4;
-				else if( usBuffIcon >= 3000 )	type = ICONITEM::SKILL3;
-				else if( usBuffIcon >= 2000 )	type = ICONITEM::SKILL2;
-				else							type = ICONITEM::SKILL1;
+				ICONITEM::eTYPE type = ICONITEM::GetSkillIconType( usBuffIcon );
 
 				g_pIconMng->RenderIcon( type, GetRootClient() + CsPoint( 2 + (nIdx * m_nDeltaX), 2 ), ptSize, it->s_pBuffTable->GetInfo()->s_nBuffIcon % 1000, nStack  );
 
@@ -782,13 +778,8 @@ void cBuffInfo::Render()
 							nStack = it->m_nStack;	//	중첩 표현
 #endif
 
-							ICONITEM::eTYPE type = ICONITEM::SKILL2;
 							USHORT	usBuffIcon = it->s_pBuffTable->GetInfo()->s_nBuffIcon;
-
-							if( usBuffIcon >= 4000 )		type = ICONITEM::SKILL4;
-							else if( usBuffIcon >= 3000 )	type = ICONITEM::SKILL3;
-							else if( usBuffIcon >= 2000 )	type = ICONITEM::SKILL2;
-							else							type = ICONITEM::SKILL1;
+							ICONITEM::eTYPE type = ICONITEM::GetSkillIconType( usBuffIcon );
 
 							g_pIconMng->RenderIcon( type, GetRootClient() + CsPoint( /*169*/nEndPosX + 7 + (nIdx * m_nDeltaX), 2 ), ptSize, it->s_pBuffTable->GetInfo()->s_nBuffIcon % 1000, nStack );
 

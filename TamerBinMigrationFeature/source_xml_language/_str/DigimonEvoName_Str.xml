@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DigimonEvoName_Str schema="DigimonEvoName_Str.struct" bin="DigimonEvoName_Str.bin" byteLength="424">
+  <Entries kind="Section" offset="0" length="424">
+    <_0 kind="Record" offset="4" length="24">
+      <TextKey kind="Leaf" offset="4" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Text kind="Leaf" offset="6" length="22" type="WString { }">Digi-Tama</Text>
+    </_0>
+    <_1 kind="Record" offset="28" length="28">
+      <TextKey kind="Leaf" offset="28" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Text kind="Leaf" offset="30" length="26" type="WString { }">In-Training</Text>
+    </_1>
+    <_2 kind="Record" offset="56" length="18">
+      <TextKey kind="Leaf" offset="56" length="2" type="Scalar { Kind = U16 }" value="3" />
+      <Text kind="Leaf" offset="58" length="16" type="WString { }">Rookie</Text>
+    </_2>
+    <_3 kind="Record" offset="74" length="22">
+      <TextKey kind="Leaf" offset="74" length="2" type="Scalar { Kind = U16 }" value="4" />
+      <Text kind="Leaf" offset="76" length="20" type="WString { }">Champion</Text>
+    </_3>
+    <_4 kind="Record" offset="96" length="22">
+      <TextKey kind="Leaf" offset="96" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Text kind="Leaf" offset="98" length="20" type="WString { }">Ultimate</Text>
+    </_4>
+    <_5 kind="Record" offset="118" length="14">
+      <TextKey kind="Leaf" offset="118" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <Text kind="Leaf" offset="120" length="12" type="WString { }">Mega</Text>
+    </_5>
+    <_6 kind="Record" offset="132" length="26">
+      <TextKey kind="Leaf" offset="132" length="2" type="Scalar { Kind = U16 }" value="7" />
+      <Text kind="Leaf" offset="134" length="24" type="WString { }">Burst Mode</Text>
+    </_6>
+    <_7 kind="Record" offset="158" length="20">
+      <TextKey kind="Leaf" offset="158" length="2" type="Scalar { Kind = U16 }" value="8" />
+      <Text kind="Leaf" offset="160" length="18" type="WString { }">Jogress</Text>
+    </_7>
+    <_8 kind="Record" offset="178" length="20">
+      <TextKey kind="Leaf" offset="178" length="2" type="Scalar { Kind = U16 }" value="9" />
+      <Text kind="Leaf" offset="180" length="18" type="WString { }">Capsule</Text>
+    </_8>
+    <_9 kind="Record" offset="198" length="18">
+      <TextKey kind="Leaf" offset="198" length="2" type="Scalar { Kind = U16 }" value="10" />
+      <Text kind="Leaf" offset="200" length="16" type="WString { }">Hybrid</Text>
+    </_9>
+    <_10 kind="Record" offset="216" length="22">
+      <TextKey kind="Leaf" offset="216" length="2" type="Scalar { Kind = U16 }" value="11" />
+      <Text kind="Leaf" offset="218" length="20" type="WString { }">Rookie X</Text>
+    </_10>
+    <_11 kind="Record" offset="238" length="26">
+      <TextKey kind="Leaf" offset="238" length="2" type="Scalar { Kind = U16 }" value="12" />
+      <Text kind="Leaf" offset="240" length="24" type="WString { }">Champion X</Text>
+    </_11>
+    <_12 kind="Record" offset="264" length="26">
+      <TextKey kind="Leaf" offset="264" length="2" type="Scalar { Kind = U16 }" value="13" />
+      <Text kind="Leaf" offset="266" length="24" type="WString { }">Ultimate X</Text>
+    </_12>
+    <_13 kind="Record" offset="290" length="18">
+      <TextKey kind="Leaf" offset="290" length="2" type="Scalar { Kind = U16 }" value="14" />
+      <Text kind="Leaf" offset="292" length="16" type="WString { }">Mega X</Text>
+    </_13>
+    <_14 kind="Record" offset="308" length="30">
+      <TextKey kind="Leaf" offset="308" length="2" type="Scalar { Kind = U16 }" value="15" />
+      <Text kind="Leaf" offset="310" length="28" type="WString { }">Burst Mode X</Text>
+    </_14>
+    <_15 kind="Record" offset="338" length="24">
+      <TextKey kind="Leaf" offset="338" length="2" type="Scalar { Kind = U16 }" value="16" />
+      <Text kind="Leaf" offset="340" length="22" type="WString { }">Jogress X</Text>
+    </_15>
+    <_16 kind="Record" offset="362" length="20">
+      <TextKey kind="Leaf" offset="362" length="2" type="Scalar { Kind = U16 }" value="17" />
+      <Text kind="Leaf" offset="364" length="18" type="WString { }">Variant</Text>
+    </_16>
+    <_17 kind="Record" offset="382" length="14">
+      <TextKey kind="Leaf" offset="382" length="2" type="Scalar { Kind = U16 }" value="18" />
+      <Text kind="Leaf" offset="384" length="12" type="WString { }">Mega</Text>
+    </_17>
+    <_18 kind="Record" offset="396" length="28">
+      <TextKey kind="Leaf" offset="396" length="2" type="Scalar { Kind = U16 }" value="19" />
+      <Text kind="Leaf" offset="398" length="26" type="WString { }">Buster Mode</Text>
+    </_18>
+  </Entries>
+</DigimonEvoName_Str>

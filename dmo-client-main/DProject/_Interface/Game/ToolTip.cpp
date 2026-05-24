@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "ToolTip.h"
+#include "SealMasterContents.h"
 
 #define TOOLTIP_COMMENT_FONT_SIZE		CFont::FS_14
 #define TOOLTIP_COMMENT_FONT			&g_pEngine->m_FontText
@@ -14,6 +15,125 @@ namespace
 	inline TCHAR const* SafeTooltipText( TCHAR const* pText )
 	{
 		return ( pText != NULL ) ? pText : _T( "" );
+	}
+
+	int GetTooltipActiveSealCount( int nSealItemID )
+	{
+		if( CONTENTSSYSTEM_PTR == NULL )
+			return 0;
+
+		cSealMasterContents* pSealContents = CONTENTSSYSTEM_PTR->GetContents< cSealMasterContents >( cSealMasterContents::IsContentsIdentity() );
+		if( pSealContents == NULL )
+			return 0;
+
+		cSealMasterContents::SealInfoMap const& sealInfoMap = pSealContents->GetSealInfoMap();
+		cSealMasterContents::SealInfoMap::const_iterator it = sealInfoMap.find( nSealItemID );
+		if( it == sealInfoMap.end() )
+			return 0;
+
+		return it->second.sSealCount;
+	}
+
+	std::wstring GetTooltipSealGradeName( int nGrade )
+	{
+		switch( nGrade )
+		{
+		case nCardGrade::Normal:		return UISTRING_TEXT( "COMMON_TXT_NORMAL" );
+		case nCardGrade::Bronze:		return UISTRING_TEXT( "TOOLTIP_SEALMASTER_BRONZE" );
+		case nCardGrade::Silver:		return UISTRING_TEXT( "TOOLTIP_SEALMASTER_SILVER" );
+		case nCardGrade::Gold:		return UISTRING_TEXT( "TOOLTIP_SEALMASTER_GOLD" );
+		case nCardGrade::Platinum:	return UISTRING_TEXT( "TOOLTIP_SEALMASTER_PLATINUM" );
+		case nCardGrade::Master:		return UISTRING_TEXT( "TOOLTIP_SEALMASTER_MASTER" );
+		default:					break;
+		}
+
+		return UISTRING_TEXT( "COMMON_TXT_NORMAL" );
+	}
+
+	std::wstring GetTooltipItemClassName( int nClass )
+	{
+		switch( nClass )
+		{
+		case 1:		return UISTRING_TEXT( "TOOLTIP_ITEM_MISC_ITEM" );
+		case 2:		return UISTRING_TEXT( "TOOLTIP_ITEM_NORMAL_ITEM" );
+		case 3:		return UISTRING_TEXT( "TOOLTIP_ITEM_MAGIC_ITEM" );
+		case 4:		return UISTRING_TEXT( "TOOLTIP_ITEM_RARE_ITEM" );
+		case 5:		return UISTRING_TEXT( "TOOLTIP_ITEM_EPIC_ITEM" );
+		case 6:		return UISTRING_TEXT( "TOOLTIP_ITEM_UNIQUE_ITEM" );
+		case 7:		return UISTRING_TEXT( "TOOLTIP_ITEM_LEGEND_ITEM" );
+		case 9:		return UISTRING_TEXT( "COMMON_TXT_EVENT_ITEM" );
+		case 10:	return UISTRING_TEXT( "TOOLTIP_ITEM_CASH_ITEM" );
+		case 13:	return UISTRING_TEXT( "TOOLTIP_ITEM_CASH_ITEM_SECOND" );
+		default:	break;
+		}
+
+		return _T( "" );
+	}
+
+	std::wstring GetTooltipSealEffectName( USHORT nEffType )
+	{
+		switch( nEffType )
+		{
+		case nCardGrade::HP:	return UISTRING_TEXT( "SEALMASTER_STATE_HP" );
+		case nCardGrade::DS:	return UISTRING_TEXT( "SEALMASTER_STATE_DS" );
+		case nCardGrade::AT:	return UISTRING_TEXT( "SEALMASTER_STATE_AT" );
+		case nCardGrade::AS:	return UISTRING_TEXT( "SEALMASTER_STATE_AS" );
+		case nCardGrade::CT:	return UISTRING_TEXT( "SEALMASTER_STATE_CT" );
+		case nCardGrade::HT:	return UISTRING_TEXT( "SEALMASTER_STATE_HT" );
+		case nCardGrade::DE:	return UISTRING_TEXT( "SEALMASTER_STATE_DE" );
+		case nCardGrade::BL:	return UISTRING_TEXT( "SEALMASTER_STATE_BL" );
+		case nCardGrade::EV:	return UISTRING_TEXT( "SEALMASTER_STATE_EV" );
+		default:				break;
+		}
+
+		return _T( "" );
+	}
+
+	std::wstring GetTooltipSealEffectValue( USHORT nEffType, int nEffValue )
+	{
+		std::wstring wsEffValue;
+		if( nEffType == nCardGrade::EV || nEffType == nCardGrade::BL || nEffType == nCardGrade::CT )
+		{
+			float fValue = nEffValue * 0.01f;
+			DmCS::StringFn::From( wsEffValue, fValue );
+			size_t nDotPos = wsEffValue.find( L'.' );
+			if( nDotPos != std::wstring::npos && nDotPos + 3 < wsEffValue.length() )
+				wsEffValue = wsEffValue.substr( 0, nDotPos + 3 );
+			wsEffValue += L"%";
+		}
+		else
+			DmCS::StringFn::From( wsEffValue, nEffValue );
+
+		return wsEffValue;
+	}
+
+	void AddTooltipRow( cStringList& stringList, TCHAR const* pTitle, TCHAR const* pValue, NiColor valueColor = FONT_WHITE )
+	{
+		cText::sTEXTINFO ti;
+		ti.Init( &g_pEngine->m_FontSystem, TOOLTIP_FONT_1_SIZE );
+
+		cString* pString = NiNew cString;
+		ti.s_Color = FONT_GOLD;
+		ti.SetText( pTitle );
+		pString->AddText( &ti )->s_ptSize.x = 115;
+
+		ti.s_Color = valueColor;
+		ti.SetText( pValue );
+		pString->AddText( &ti );
+
+		stringList.AddTail( pString );
+	}
+
+	void AddTooltipText( cStringList& stringList, TCHAR const* pText, NiColor color = FONT_WHITE )
+	{
+		cText::sTEXTINFO ti;
+		ti.Init( &g_pEngine->m_FontSystem, TOOLTIP_FONT_1_SIZE );
+		ti.s_Color = color;
+		ti.SetText( pText );
+
+		cString* pString = NiNew cString;
+		pString->AddText( &ti );
+		stringList.AddTail( pString );
 	}
 }
 
@@ -325,7 +445,7 @@ void cTooltip::SetTooltip( CsPoint pos, CsPoint patch, int nMaxSizeX, eTYPE type
 	m_bRenderTooltip = true;
 
 
-	cItemInfo* pInfo = (cItemInfo*)pData;
+	cItemInfo* pInfo = ( type == ITEM ) ? (cItemInfo*)pData : NULL;
 	int nCount = pInfo ? pInfo->GetCount() : 0;
 
 	// 전부 이전과 동일 하다면 생성하지말고 리턴. 이전갯수와 현재 갯수 검사하는 루틴 추가.
@@ -1712,12 +1832,14 @@ void cTooltip::SetSealMasterTootipTile( CsItem::sINFO const* pFTInfo, CsMaster_C
 	std::wstring wsText;
 	if (iCardGrade == -1 )
 		DmCS::StringFn::Format( wsText, L"%s", sInfo.s_szName );
-	else
+	else if( wsGrade.empty() == false )
 		DmCS::StringFn::Format( wsText, L"%s(%s)", sInfo.s_szName, wsGrade.c_str() );
+	else
+		DmCS::StringFn::Format( wsText, L"%s", sInfo.s_szName );
 
 	cText::sTEXTINFO ti;
 	ti.Init( &g_pEngine->m_FontSystem, CFont::FS_12 );
-	ti.s_Color = g_pDataMng->GetItemColor( pFTInfo->s_nClass );
+	ti.s_Color = pFTInfo ? g_pDataMng->GetItemColor( pFTInfo->s_nClass ) : NiColor( 0.0f, 0.9f, 1.0f );
 
 	cString* pString = NiNew cString;
 	ti.SetText( wsText.c_str() );
@@ -2024,25 +2146,109 @@ void cTooltip::SetSealMasterEffectString( cStringList& stringList, CsMaster_Card
 void cTooltip::_MakeTooltip_SealMaster()
 {
 	SAFE_POINTER_RET(m_pData);
-	CsItem::sINFO* pFTInfo = nsCsFileTable::g_pItemMng->GetItem( static_cast<int>(m_nMainID) )->GetInfo();
+	SAFE_POINTER_RET( nsCsFileTable::g_pItemMng );
+	CsItem* pMainItem = nsCsFileTable::g_pItemMng->GetItem( static_cast<int>(m_nMainID) );
+	CsItem::sINFO* pFTInfo = pMainItem ? pMainItem->GetInfo() : NULL;
 	CsMaster_Card::sINFO	sInfo = *(CsMaster_Card::sINFO*)m_pData;
-	SetSealMasterTootipTile( pFTInfo, sInfo, m_StringList, m_nSubID_2 );
-	if (m_nSubID_2 == -1)
+
+	if( m_nSubID_1 == cBaseWindow::WT_EXTRAINVENTORY )
+	{
+		SAFE_POINTER_RET( pFTInfo );
+
+		int const nTotalSealCount = static_cast<int>( m_nSubID_3 );
+		int const nActiveSealCount = GetTooltipActiveSealCount( static_cast<int>( m_nMainID ) );
+		int nSealItemCount = nTotalSealCount - nActiveSealCount;
+		if( nSealItemCount < 0 )
+			nSealItemCount = 0;
+
+		cText::sTEXTINFO ti;
+		ti.Init( &g_pEngine->m_FontSystem, CFont::FS_12 );
+		ti.s_Color = NiColor( 0.0f, 0.9f, 1.0f );
+		ti.SetText( pFTInfo->s_szName );
+
+		cString* pString = NiNew cString;
+		pString->AddText( &ti );
+		m_StringList.AddTail( pString );
+
+		_AddLine( true );
+
+		AddTooltipRow( m_StringList, _T( "Tipo" ), pFTInfo->s_szTypeComment );
+		AddTooltipRow( m_StringList, _T( "Classe" ), GetTooltipItemClassName( pFTInfo->s_nClass ).c_str() );
+		AddTooltipRow( m_StringList, _T( "Quantidade" ), DmCS::StringFn::getNumberFormatW( nSealItemCount ).c_str() );
+
+		_AddLine( true );
+
+		for( int nGrade = CsMaster_Card::FT_CARD_NORMAL; nGrade < CsMaster_Card::FT_CARD_MAX; ++nGrade )
+		{
+			int const nNeedCount = sInfo.s_stGradeInfo[ nGrade ].s_nMax;
+			int const nCurrentCount = ( nTotalSealCount > nNeedCount ) ? nNeedCount : nTotalSealCount;
+			std::wstring wsCount;
+			DmCS::StringFn::Format( wsCount, L"%s/%s",
+				DmCS::StringFn::getNumberFormatW( nCurrentCount ).c_str(),
+				DmCS::StringFn::getNumberFormatW( nNeedCount ).c_str() );
+
+			NiColor valueColor = ( nTotalSealCount >= nNeedCount ) ? FONT_WHITE : TOOLTIP_COLOR1;
+			if( nGrade == m_nSubID_2 )
+				valueColor = FONT_GREEN;
+
+			AddTooltipRow( m_StringList, GetTooltipSealGradeName( nGrade ).c_str(), wsCount.c_str(), valueColor );
+		}
+
+		_AddLine( true );
+
+		AddTooltipRow( m_StringList, _T( "Selo :" ), DmCS::StringFn::getNumberFormatW( nSealItemCount ).c_str() );
+		AddTooltipRow( m_StringList, _T( "Selo Adicionado :" ), DmCS::StringFn::getNumberFormatW( nActiveSealCount ).c_str() );
+		AddTooltipRow( m_StringList, _T( "Selo Total :" ), DmCS::StringFn::getNumberFormatW( nTotalSealCount ).c_str() );
+
+		if( SafeTooltipText( pFTInfo->s_szComment )[ 0 ] != _T( '\0' ) )
+		{
+			_AddLine( true );
+			ti.Init( &g_pEngine->m_FontSystem, TOOLTIP_FONT_1_SIZE );
+			ti.s_Color = FONT_WHITE;
+			g_pStringAnalysis->Cut_Parcing( &m_StringList, 320, const_cast<TCHAR*>( SafeTooltipText( pFTInfo->s_szComment ) ), &ti );
+		}
+
+		int const nGrade = static_cast<int>( m_nSubID_2 );
+		if( nGrade >= CsMaster_Card::FT_CARD_NORMAL && nGrade < CsMaster_Card::FT_CARD_MAX )
+		{
+			_AddLine( true );
+
+			std::wstring wsLevel;
+			DmCS::StringFn::Format( wsLevel, L"[No nivel %s]", GetTooltipSealGradeName( nGrade ).c_str() );
+			AddTooltipText( m_StringList, wsLevel.c_str(), FONT_GREEN );
+
+			USHORT const nEffType = sInfo.s_stGradeInfo[ nGrade ].s_nEff1;
+			int const nEffValue = sInfo.s_stGradeInfo[ nGrade ].s_nEff1val;
+			std::wstring wsEffect;
+			DmCS::StringFn::Format( wsEffect, L"%s +%s",
+				GetTooltipSealEffectName( nEffType ).c_str(),
+				GetTooltipSealEffectValue( nEffType, nEffValue ).c_str() );
+			AddTooltipText( m_StringList, wsEffect.c_str(), FONT_GREEN );
+		}
+
+		return;
+	}
+
+	int const nSealTooltipGrade = static_cast<int>( m_nSubID_2 );
+	int const nSealTooltipCount = static_cast<int>( m_nSubID_3 );
+
+	SetSealMasterTootipTile( pFTInfo, sInfo, m_StringList, nSealTooltipGrade );
+	if (nSealTooltipGrade == -1)
 	{
 		SetSealMasterNoneLevel( m_StringList, sInfo );
 
 	}
-	else if(m_nSubID_2 >= nCardGrade::Normal && m_nSubID_2 <= nCardGrade::Master )
+	else if(nSealTooltipGrade >= nCardGrade::Normal && nSealTooltipGrade <= nCardGrade::Master )
 	{
 		// sInfoGrade는none~master 등급까지 총 7등급 sInfo내의 등급은 none을 제외한 6등급이다 이를 맞춰주기 위해서 -1을 해야 함
-		int sInfoGrade = m_nSubID_2;
+		int sInfoGrade = nSealTooltipGrade;
 		SetSealMasterEffectString(m_StringList, sInfo, sInfo.s_stGradeInfo[sInfoGrade].s_nEff1, sInfo.s_stGradeInfo[sInfoGrade].s_nEff1val);
 		
-		if (m_nSubID_2 != nCardGrade::Master)
+		if (nSealTooltipGrade != nCardGrade::Master)
 		{
 			_AddLine( true );
-			SetSealMasterNextCountString( m_StringList, sInfo, m_nSubID_2 + 1, m_nSubID_3 );
-			SetSealMasterNextEffectString( m_StringList, sInfo, sInfo.s_stGradeInfo[m_nSubID_2 + 1].s_nEff1, sInfo.s_stGradeInfo[m_nSubID_2 + 1].s_nEff1val );
+			SetSealMasterNextCountString( m_StringList, sInfo, nSealTooltipGrade + 1, nSealTooltipCount );
+			SetSealMasterNextEffectString( m_StringList, sInfo, sInfo.s_stGradeInfo[nSealTooltipGrade + 1].s_nEff1, sInfo.s_stGradeInfo[nSealTooltipGrade + 1].s_nEff1val );
 		}
 	}
 }
@@ -2494,7 +2700,7 @@ void cTooltip::_MakeTooltip_DeckList()		// 덱 UI 툴팁
 				std::wstring wsText = UISTRING_TEXT( "TOOLTIP_ACTIVATION_PROBABILITY" );
 				DmCS::StringFn::Replace( wsText, L"#Prob#", wsProb.c_str() );
 
-				ti.SetText( wsProb.c_str() );
+				ti.SetText( wsText.c_str() );
 				pString->AddText( &ti );
 				m_StringList.AddTail( pString );
 			}
@@ -2744,14 +2950,7 @@ void cTooltip::_MakeTooltip_GuildSkill()
 	CsSkill* pSkill = nsCsFileTable::g_pSkillMng->GetSkill( (*it_Act)->s_nSkillCode );
 	int nIconID = pSkill->GetInfo()->s_nIcon;
 
-	if( nIconID >= 4000 )
-		pString->AddIcon( CsPoint( 32,32 ), ICONITEM::SKILL4, nIconID%1000, 2, CsPoint::ZERO );
-	else if( nIconID >= 3000 )
-		pString->AddIcon( CsPoint( 32,32 ), ICONITEM::SKILL3, nIconID%1000, 3, CsPoint::ZERO );
-	else if( nIconID >= 2000 )
-		pString->AddIcon( CsPoint( 32,32 ), ICONITEM::SKILL2, nIconID%1000, 4, CsPoint::ZERO );
-	else
-		pString->AddIcon( CsPoint( 32,32 ), ICONITEM::SKILL1, nIconID%1000, 5, CsPoint::ZERO );
+	pString->AddIcon( CsPoint( 32,32 ), ICONITEM::GetSkillIconType( nIconID ), nIconID%1000, 2, CsPoint::ZERO );
 
 	//=================================================================================================================
 	//		스킬 이름
@@ -3082,14 +3281,7 @@ void cTooltip::_MakeTooltip_GuildSkillBuff()
 		pString = NiNew cString;
 		int nIconID = pSkill->GetInfo()->s_nIcon;
 		 
-	 	if( nIconID >= 4000 )
-	 		pString->AddIcon( CsPoint( 32,32 ), ICONITEM::SKILL4, nIconID%1000, 2, CsPoint::ZERO );
-	 	else if( nIconID >= 3000 )
-	 		pString->AddIcon( CsPoint( 32,32 ), ICONITEM::SKILL3, nIconID%1000, 3, CsPoint::ZERO );
-	 	else if( nIconID >= 2000 )
-	 		pString->AddIcon( CsPoint( 32,32 ), ICONITEM::SKILL2, nIconID%1000, 4, CsPoint::ZERO );
-	 	else
-	 		pString->AddIcon( CsPoint( 32,32 ), ICONITEM::SKILL1, nIconID%1000, 5, CsPoint::ZERO );
+	 	pString->AddIcon( CsPoint( 32,32 ), ICONITEM::GetSkillIconType( nIconID ), nIconID%1000, 2, CsPoint::ZERO );
 		//=================================================================================================================
 		//	스킬 효과
 		//=================================================================================================================	

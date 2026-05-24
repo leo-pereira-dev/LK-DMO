@@ -72,8 +72,6 @@ CsTactics* CsTacticsMng::GetTactics( DWORD dwDigitamaID )
 
 CsTacticsExplain* CsTacticsMng::GetTacticsExplain( DWORD dwDigiMonID )
 {
-	assert_csm1( IsTacticsExplain( dwDigiMonID ), _T( "DigiMon ID = %d" ), dwDigiMonID );
-
 	CsTacticsExplain::MAP_IT it = m_mapTacticsExplain.find( dwDigiMonID );
 	if( it == m_mapTacticsExplain.end() )
 		return NULL;

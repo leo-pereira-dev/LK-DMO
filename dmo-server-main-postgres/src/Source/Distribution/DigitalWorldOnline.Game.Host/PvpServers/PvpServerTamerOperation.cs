@@ -314,7 +314,7 @@ namespace DigitalWorldOnline.GameHost
             critBonusMultiplier = 0.00;
             double critChance = tamer.Partner.CC / 100;
             if (critChance >= UtilitiesFunctions.RandomDouble())
-                critBonusMultiplier = tamer.Partner.CD;
+                critBonusMultiplier = tamer.Partner.CriticalDamagePercent / 100.0;
 
             blocked = tamer.TargetPartner.BL >= UtilitiesFunctions.RandomDouble();
             var levelBonusMultiplier = tamer.Partner.Level > tamer.TargetPartner.Level ?

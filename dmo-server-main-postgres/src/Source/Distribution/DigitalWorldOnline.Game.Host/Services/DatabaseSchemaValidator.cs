@@ -18,7 +18,8 @@ namespace DigitalWorldOnline.Game.Services
             new("Character_XmlUnionProgress", "Level"),
             new("Character_XmlUnionProgress", "CurrentExperience"),
             new("Character_XmlUnionProgress", "RequiredExperience"),
-            new("Character_XmlUnionProgress", "ClaimedRewardMask")
+            new("Character_XmlUnionProgress", "ClaimedRewardMask"),
+            new("Character_Tamer", "EncyclopediaDeckId")
         };
 
         private readonly IServiceProvider _serviceProvider;

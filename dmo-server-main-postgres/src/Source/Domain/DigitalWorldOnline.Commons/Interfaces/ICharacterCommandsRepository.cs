@@ -39,6 +39,8 @@ namespace DigitalWorldOnline.Commons.Interfaces
 
         Task UpdateCharacterTitleByIdAsync(long characterId, short titleId);
 
+        Task UpdateCharacterEncyclopediaDeckAsync(long characterId, int deckId);
+
         Task UpdatePartnerCurrentTypeAsync(DigimonModel digimon);
 
         Task AddChatMessageAsync(ChatMessageModel chatMessage);

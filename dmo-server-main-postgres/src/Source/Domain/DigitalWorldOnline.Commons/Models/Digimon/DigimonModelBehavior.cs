@@ -98,6 +98,9 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
 
         public bool PossibleTranscendence => TranscendenceExperience >= 140000;
 
+        private const int EncyclopediaDeckOptionHp = 5;
+        private const int EncyclopediaDeckOptionAttackSpeed = 6;
+
         //TODO: deck, encyclopedia, accessory
         /// <summary>
         /// Final friendship value.
@@ -116,13 +119,14 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             }
         }
 
-        public int AS =>
+        public int AS => NonNegative(
             _baseAs -
             GetSealStatus(StatusTypeEnum.AS) -
             (Character?.EquipmentAttributeForPartner(_baseAs, SkillCodeApplyAttributeEnum.AS) ?? 0) -
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.AS, _baseAs) ?? 0) -
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.AS, _baseAs) ?? 0) -
-            BuffAttribute(_baseAs, SkillCodeApplyAttributeEnum.AS);
+            BuffAttribute(_baseAs, SkillCodeApplyAttributeEnum.AS) -
+            (Character?.EncyclopediaDeckPassiveBonus(EncyclopediaDeckOptionAttackSpeed, _baseAs) ?? 0));
 
         public short AR => (short)_baseAr;
 
@@ -181,23 +185,68 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.CD) ?? 0) +
              BuffAttribute(_baseCd, SkillCodeApplyAttributeEnum.CAT);
 
+        public double CriticalDamagePercent => CD / 100.0;
+
         public int ATT =>
            _baseAtt +
            (Character?.EquipmentAttributeForPartner(_baseAtt, SkillCodeApplyAttributeEnum.ATTRIBUTE) ?? 0) +
            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.ATT) ?? 0);
 
         /// <summary>
-        /// Accessory-driven skill damage bonus (percentage points).
-        /// CT/EV are basis-point tracks; ATT follows client percent semantics.
+        /// General skill damage bonus (percentage points).
+        /// Attribute/element skill damage is situational and is added only for a target
+        /// with matching advantage via SkillDamagePercentValueForAdvantage.
         /// </summary>
-        public int SkillDamagePercent =>
-            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.ATT) ?? 0) +
-            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.ATT) ?? 0) +
-            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.SCDRate, 100) ?? 0) +
-            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.SCDRate, 100) ?? 0) +
-            (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.SCDRate, 100) ?? 0) +
-            (Character?.DUnitCollectionBonus.AttributeSkillDamage(BaseInfo.Attribute, BaseInfo.Element) ?? 0) +
-            BuffAttribute(0, SkillCodeApplyAttributeEnum.SkillDamageByAttribute);
+        public int SkillDamagePercent => (int)SkillDamagePercentValue;
+
+        public double SkillDamagePercentValue =>
+            SkillDamageBasisPoints / 100.0;
+
+        public int SkillDamageBasisPoints =>
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.SCDRate, 10000) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.SCDRate, 10000) ?? 0) +
+            (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.SCDRate, 10000) ?? 0) +
+            ((Character?.DUnitCollectionBonus.SCD ?? 0) * 100) +
+            BuffAttribute(0, SkillCodeApplyAttributeEnum.SCD);
+
+        public int SituationalSkillDamageBasisPoints(
+            bool hasAttributeAdvantage,
+            bool hasElementAdvantage)
+        {
+            var dUnitValue = 0;
+
+            if (hasAttributeAdvantage)
+            {
+                dUnitValue += Character?.DUnitCollectionBonus.Basic ?? 0;
+                dUnitValue += Character?.DUnitCollectionBonus.AttributeSpecificSkillDamage(BaseInfo.Attribute) ?? 0;
+            }
+
+            if (hasElementAdvantage)
+                dUnitValue += Character?.DUnitCollectionBonus.ElementSpecificSkillDamage(BaseInfo.Element) ?? 0;
+
+            var buffValue = hasAttributeAdvantage || hasElementAdvantage
+                ? BuffAttribute(0, SkillCodeApplyAttributeEnum.SkillDamageByAttribute) * 100
+                : 0;
+
+            return (dUnitValue * 100) + buffValue;
+        }
+
+        public double SkillDamagePercentValueForAdvantage(
+            bool hasAttributeAdvantage,
+            bool hasElementAdvantage)
+        {
+            return (SkillDamageBasisPoints +
+                    SituationalSkillDamageBasisPoints(hasAttributeAdvantage, hasElementAdvantage)) / 100.0;
+        }
+
+        public double SkillDamagePercentValueAgainst(
+            DigimonAttributeEnum targetAttribute,
+            DigimonElementEnum targetElement)
+        {
+            return SkillDamagePercentValueForAdvantage(
+                BaseInfo.Attribute.HasAttributeAdvantage(targetAttribute),
+                BaseInfo.Element.HasElementAdvantage(targetElement));
+        }
 
         public int FinalDamageBasisPoints =>
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.FinalDamageRate, 10000) ?? 0) +
@@ -280,6 +329,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HP) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
+            (Character?.EncyclopediaDeckPassiveBonus(EncyclopediaDeckOptionHp, _baseHp) ?? 0) +
             BuffAttribute(_baseHp, SkillCodeApplyAttributeEnum.MaxHP));
 
         public int TamerDetailDS => NonNegative(
@@ -308,7 +358,8 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (Character?.EquipmentAttributeForPartner(_baseAs, SkillCodeApplyAttributeEnum.AS) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.AS, _baseAs) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.AS, _baseAs) ?? 0) +
-            BuffAttribute(_baseAs, SkillCodeApplyAttributeEnum.AS));
+            BuffAttribute(_baseAs, SkillCodeApplyAttributeEnum.AS) +
+            (Character?.EncyclopediaDeckPassiveBonus(EncyclopediaDeckOptionAttackSpeed, _baseAs) ?? 0));
 
         public int TamerDetailCT => NonNegative(
             GetSealDetailStatus(StatusTypeEnum.CT) +
@@ -327,13 +378,13 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HT) ?? 0) +
             BuffAttribute(_baseHt, SkillCodeApplyAttributeEnum.HT));
 
-        public int TamerDetailSCD => NonNegative(SCD / 100);
+        public int TamerDetailSCD => NonNegative(SkillDamageBasisPoints);
 
         public int TamerDetailCD => NonNegative(CD - _baseCd);
 
         public int TamerDetailSD => NonNegative(SKD - _baseAt);
 
-        public int TamerDetailBaseDamage => NonNegative(FinalDamageBasisPoints / 100);
+        public int TamerDetailBaseDamage => NonNegative(FinalDamageBasisPoints);
 
         public int TamerDetailDE => NonNegative(
             GetSealDetailStatus(StatusTypeEnum.DE) +
@@ -374,6 +425,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HP) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
+            (Character?.EncyclopediaDeckPassiveBonus(EncyclopediaDeckOptionHp, _baseHp) ?? 0) +
             BuffAttribute(_baseHp, SkillCodeApplyAttributeEnum.MaxHP);
 
         public int MS => _fsMs;

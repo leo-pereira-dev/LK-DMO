@@ -2389,9 +2389,9 @@ TCHAR* cTooltip::Time2Str( u4 nDestTS, u4 nSrcTS, eTIMETYPE type )
 }
 
 #ifdef VERSION_USA
-	#define DECK_TOOLTIP_TAB_SIZE	TOOLTIP_TAB_SIZE * 3
+	#define DECK_TOOLTIP_TAB_SIZE	TOOLTIP_TAB_SIZE * 4
 #else
-	#define DECK_TOOLTIP_TAB_SIZE	TOOLTIP_TAB_SIZE * 2
+	#define DECK_TOOLTIP_TAB_SIZE	TOOLTIP_TAB_SIZE * 3
 #endif
 
 void cTooltip::_MakeTooltip_DeckBuff()	// 덱 선택으로 인해 적용 중인 버프아이콘 툴팁
@@ -2479,18 +2479,20 @@ void cTooltip::_MakeTooltip_DeckBuff()	// 덱 선택으로 인해 적용 중인 
 				case EncyclopediaContents::ATK_NORMAL:	_tcscpy_s( sz, UISTRING_TEXT( "TOOLTIP_NORMAL_ATTACK" ).c_str() );	break;
 				case EncyclopediaContents::ATK_SKILL:		_tcscpy_s( sz, UISTRING_TEXT( "TOOLTIP_SKILL_ATTACK" ).c_str() );	break;
 				}
-				if( sz[ 0 ] != 0 )
-				{
-					ti.SetText( sz );
-					pString->AddText( &ti );
-				}
-
 			std::wstring wsProb;
 			DmCS::StringFn::Format( wsProb, L"%.1f", ((float)nProb/100) );
 			std::wstring wsText = UISTRING_TEXT( "TOOLTIP_ACTIVATION_PROBABILITY" );
 			DmCS::StringFn::Replace( wsText, L"#Prob#", wsProb.c_str() );
 
-			ti.SetText( wsText.c_str() );
+			std::wstring wsActivation;
+			if( sz[ 0 ] != 0 )
+			{
+				wsActivation = sz;
+				wsActivation += L" ";
+			}
+			wsActivation += wsText;
+
+			ti.SetText( wsActivation.c_str() );
 			pString->AddText( &ti );
 			m_StringList.AddTail( pString );
 		}
@@ -2690,18 +2692,20 @@ void cTooltip::_MakeTooltip_DeckList()		// 덱 UI 툴팁
 					case EncyclopediaContents::ATK_NORMAL:	_tcscpy_s( sz, UISTRING_TEXT( "TOOLTIP_NORMAL_ATTACK" ).c_str() );	break;
 					case EncyclopediaContents::ATK_SKILL:		_tcscpy_s( sz, UISTRING_TEXT( "TOOLTIP_SKILL_ATTACK" ).c_str() );	break;
 					}
-					if( sz[ 0 ] != 0 )
-					{
-						ti.SetText( sz );
-						pString->AddText( &ti );
-					}
-
 				std::wstring wsProb;
 				DmCS::StringFn::Format( wsProb, L"%.1f", ((float)nProb/100) );
 				std::wstring wsText = UISTRING_TEXT( "TOOLTIP_ACTIVATION_PROBABILITY" );
 				DmCS::StringFn::Replace( wsText, L"#Prob#", wsProb.c_str() );
 
-				ti.SetText( wsText.c_str() );
+				std::wstring wsActivation;
+				if( sz[ 0 ] != 0 )
+				{
+					wsActivation = sz;
+					wsActivation += L" ";
+				}
+				wsActivation += wsText;
+
+				ti.SetText( wsActivation.c_str() );
 				pString->AddText( &ti );
 				m_StringList.AddTail( pString );
 			}

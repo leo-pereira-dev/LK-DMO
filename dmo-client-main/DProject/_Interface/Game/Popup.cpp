@@ -1,6 +1,9 @@
 
 #include "stdafx.h"
 #include "Popup.h"
+#include "EncyclopediaContents.h"
+#include "../../ContentsSystem/ContentsSystemDef.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 cPopUpWindow::cPopUpWindow()
 {
@@ -2095,14 +2098,36 @@ bool cPopUpWindow::_Update_ForMouse_Mainbar_Data()
 			{
 				bool nServerRecv = false;
 				GAME_EVENT_STPTR->OnEvent(EVENT_CODE::GET_ENCYCLOPEDIA_BISRECV, &nServerRecv);
+				EncyclopediaContents* pEncyclopediaContents = (EncyclopediaContents*)CONTENTSSYSTEM_PTR->GetContents( E_CT_ENCYCLOPEDIA_CONTENTS );
 
-				if (nServerRecv == false)
+				g_pGameIF->GetDynamicIF(cBaseWindow::WT_ENCYCLOPEDIA);
+				pEncyclopediaContents = (EncyclopediaContents*)CONTENTSSYSTEM_PTR->GetContents( E_CT_ENCYCLOPEDIA_CONTENTS );
+				if( pEncyclopediaContents )
 				{
-					cPrintMsg::PrintMsg(10019);
-					net::game->SendEncyclopediaOpen();
+					pEncyclopediaContents->EnsureStaticDataLoaded();
+					if( pEncyclopediaContents->ShouldRequestServerData( 1000 ) )
+					{
+						if( net::game )
+						{
+							pEncyclopediaContents->MarkServerDataRequesting();
+							nsCSDEBUG::CrashLogger::LogMessage( "[ENCYREQ] popup send DigimonBookInfo eventRecv=%d",
+								nServerRecv ? 1 : 0 );
+							net::game->SendEncyclopediaOpen();
+						}
+						else
+							nsCSDEBUG::CrashLogger::LogMessage( "[ENCYREQ] popup send failed: net::game is null" );
+					}
+					else
+					{
+						nsCSDEBUG::CrashLogger::LogMessage( "[ENCYREQ] popup skip send eventRecv=%d recv=%d requesting=%d",
+							nServerRecv ? 1 : 0,
+							pEncyclopediaContents->IsServerDataReceived() ? 1 : 0,
+							pEncyclopediaContents->IsServerDataRequesting() ? 1 : 0 );
+					}
 				}
 				else
-					g_pGameIF->GetDynamicIF(cBaseWindow::WT_ENCYCLOPEDIA);
+					nsCSDEBUG::CrashLogger::LogMessage( "[ENCYREQ] popup skip send: EncyclopediaContents is null eventRecv=%d",
+						nServerRecv ? 1 : 0 );
 			}
 		}
 		break;

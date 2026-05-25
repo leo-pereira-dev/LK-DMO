@@ -673,7 +673,7 @@ bool cListBox::AddItem( cListBoxItem* pAddItem )
 	return true;
 }
 
-bool cListBox::AddItemMultiHeight( cListBoxItem* pAddItem, int minusHeight )
+bool cListBox::AddItemMultiHeight( cListBoxItem* pAddItem, int minusHeight, bool bConfigureScroll )
 {
 	SAFE_POINTER_RETVAL( pAddItem, false );
 	int nIdx = GetItemIndex( pAddItem );
@@ -683,7 +683,8 @@ bool cListBox::AddItemMultiHeight( cListBoxItem* pAddItem, int minusHeight )
 	pAddItem->SetItemHeight( pAddItem->getItemHeight() - minusHeight );
 
 	m_listItems.push_back( pAddItem );
-	configureScrollbars();
+	if( bConfigureScroll )
+		configureScrollbars();
 	return true;
 }
 
@@ -1007,7 +1008,34 @@ void cListBox::configureScrollbars()
 		return;
 	}
 
-	UINT nShowItemSize = m_listItems.size();	
+	int nVisibleItemCount = 0;
+	float fVisibleHeight = 0.0f;
+	std::list<cListBoxItem*>::const_iterator it = m_listItems.begin();
+	for( ; it != m_listItems.end(); ++it )
+	{
+		SAFE_POINTER_CON( (*it) );
+
+		if( !m_bItemHideRender && !(*it)->GetVisible() )
+			continue;
+
+		float fNextHeight = static_cast<float>( (*it)->getItemHeight() );
+		if( nVisibleItemCount > 0 )
+			fNextHeight += static_cast<float>( m_CsItemGab.y );
+
+		if( nVisibleItemCount > 0 && fVisibleHeight + fNextHeight > m_ptSize.y )
+			break;
+
+		fVisibleHeight += fNextHeight;
+		++nVisibleItemCount;
+	}
+
+	UINT nShowItemSize = m_listItems.size();
+	if( nVisibleItemCount < 1 )
+		nVisibleItemCount = 1;
+	if( nVisibleItemCount >= (int)nShowItemSize && nShowItemSize > 1 )
+		nVisibleItemCount = (int)nShowItemSize - 1;
+
+	m_pScrollBar->SetRenderCount( nVisibleItemCount );
 	m_pScrollBar->SetRange( CsPoint(0, nShowItemSize) );		
 }
 
@@ -1270,7 +1298,14 @@ cListBoxItem* cListBox::getItemFromListAtPoint(CsPoint & localpt, int const& nSt
 void cListBox::SetScrollBarRenderCount(int cnt)
 {
 	SAFE_POINTER_RET( m_pScrollBar );
+	if( cnt < 1 )
+		cnt = 1;
 	m_pScrollBar->SetRenderCount(cnt);
+}
+
+void cListBox::ReconfigureScrollbars()
+{
+	configureScrollbars();
 }
 
 void cListBox::SetAutoItemSelectStateChange(bool bValue)

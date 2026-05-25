@@ -2473,6 +2473,11 @@ namespace DigitalWorldOnline.Infraestructure.Migrations
                         .HasColumnType("tinyint unsigned")
                         .HasDefaultValue((byte)3);
 
+                    b.Property<int>("EncyclopediaDeckId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
                     b.Property<int>("EventState")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")

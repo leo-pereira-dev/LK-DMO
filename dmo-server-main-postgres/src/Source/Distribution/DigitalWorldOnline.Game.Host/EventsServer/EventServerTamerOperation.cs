@@ -435,7 +435,7 @@ namespace DigitalWorldOnline.GameHost.EventsServer
             critBonusMultiplier = 0.00;
             double critChance = tamer.Partner.CC / 100;
             if (critChance >= UtilitiesFunctions.RandomDouble())
-                critBonusMultiplier = tamer.Partner.CD;
+                critBonusMultiplier = tamer.Partner.CriticalDamagePercent / 100.0;
 
             blocked = tamer.TargetMob.BLValue >= UtilitiesFunctions.RandomDouble();
             var levelBonusMultiplier = tamer.Partner.Level > tamer.TargetMob.Level ?
@@ -450,9 +450,24 @@ namespace DigitalWorldOnline.GameHost.EventsServer
 
             baseDamage /= blocked ? 2 : 1;
 
-            return (int)Math.Floor(baseDamage +
+            var finalDamage = (int)Math.Floor(baseDamage +
                 (baseDamage * critBonusMultiplier) +
                 (baseDamage * levelBonusMultiplier));
+
+            return ApplyFinalDamageBonus(finalDamage, tamer.Partner.FinalDamageBasisPoints);
+        }
+
+        private static int ApplyFinalDamageBonus(int baseDamage, int basisPoints)
+        {
+            if (baseDamage <= 0 || basisPoints == 0)
+                return baseDamage;
+
+            long scaled = (long)baseDamage * (10000L + basisPoints);
+            long adjusted = scaled / 10000L;
+
+            if (adjusted > int.MaxValue) return int.MaxValue;
+            if (adjusted < int.MinValue) return int.MinValue;
+            return (int)adjusted;
         }
 
         

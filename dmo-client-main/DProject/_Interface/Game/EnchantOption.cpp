@@ -5,6 +5,9 @@
 #define IF_ACCESSORY_ENCHANT_WND_WIDTH 709
 #define IF_ACCESSORY_ENCHANT_WND_HEIGHT 439
 #define IF_ACCESSORY_ENCHANT_LEFT_WIDTH 397
+#define IF_ACCESSORY_ENCHANT_TITLE_DRAG_HEIGHT 36
+#define IF_ACCESSORY_ENCHANT_TITLE_DRAG_RIGHT_MARGIN 34
+#define IF_ACCESSORY_ENCHANT_EFFECT_TEX_SIZE 660
 
 cEnchantOption::cEnchantOption() :
 m_nUIState( 0 ),
@@ -174,7 +177,7 @@ cBaseWindow::eMU_TYPE cEnchantOption::Update_ForMouse()
 	if( m_pCancelBtn && m_pCancelBtn->Update_ForMouse() == cButton::ACTION_CLICK )
 		return muReturn;
 
-	if( CURSOR_ST.CheckClickBox( CsRect( GetRootClient(), CsSIZE( 300, 36 ) ) ) != CURSOR::BUTTON_OUTWINDOW )
+	if( CURSOR_ST.CheckClickBox( CsRect( GetRootClient(), CsSIZE( IF_ACCESSORY_ENCHANT_WND_WIDTH - IF_ACCESSORY_ENCHANT_TITLE_DRAG_RIGHT_MARGIN, IF_ACCESSORY_ENCHANT_TITLE_DRAG_HEIGHT ) ) ) != CURSOR::BUTTON_OUTWINDOW )
 		_UpdateMoveWindow_ForMouse();
 
 	return muReturn;
@@ -272,7 +275,9 @@ void cEnchantOption::_CreateEnchantUI()
 
 	InitScript( NULL, ptPos, ptSize, true );
 	AddSprite( CsPoint::ZERO, ptSize, "Accessory\\Enchant\\Enchant_BG1.tga", true );
-	AddTitle( UISTRING_TEXT( "ACCESSORY_ENCHANT_TITLE_ACC_ENCHANT" ).c_str(), CsPoint( 0, 5 ) );
+	cText* pTitle = AddTitle( UISTRING_TEXT( "ACCESSORY_ENCHANT_TITLE_ACC_ENCHANT" ).c_str(), CsPoint( 0, 14 ), CFont::FS_16 );
+	if( pTitle )
+		pTitle->GetTextInfo()->SetBoldLevel( cText::sTEXTINFO::BL_2 );
 
 	{	// 스톤
 		cText::sTEXTINFO ti;
@@ -449,9 +454,11 @@ void cEnchantOption::_StartEnchant()
 		m_pEnchantBtn->SetEnable( false );
 
 	if( !m_pEffectRender )
+	{
 		m_pEffectRender = NiNew cRenderTex;
-	if( !m_pEffectRender->Init( CsPoint( 660, 660 ) ) )
-		SAFE_NIDELETE( m_pEffectRender );
+		if( m_pEffectRender && !m_pEffectRender->Init( CsPoint( IF_ACCESSORY_ENCHANT_EFFECT_TEX_SIZE, IF_ACCESSORY_ENCHANT_EFFECT_TEX_SIZE ) ) )
+			SAFE_NIDELETE( m_pEffectRender );
+	}
 
 	m_pEffectObj = GetSystem()->GetEnchantItemEffect();
 
@@ -652,12 +659,12 @@ void cEnchantOption::_MakeOptionPanels()
 		ti.SetText( L"" );
 		for( int i = 0; i < nLimit::MAX_ACCESSORY_OPTION; ++i )
 		{
-			m_pCurrentOptionText[ i ] = AddText( &ti, CsPoint( 22, 185 + ( i * 24 ) ) );
-			m_pCurrentOptionMaxText[ i ] = AddText( &ti, CsPoint( 186, 185 + ( i * 24 ) ) );
+			m_pCurrentOptionText[ i ] = AddText( &ti, CsPoint( 22, 185 + ( i * 29 ) ) );
+			m_pCurrentOptionMaxText[ i ] = AddText( &ti, CsPoint( 186, 185 + ( i * 29 ) ) );
 			m_pCurrentOptionLockBtn[ i ] = NiNew cSprite;
 			if( m_pCurrentOptionLockBtn[ i ] )
 			{
-				m_pCurrentOptionLockBtn[ i ]->Init( m_pRoot, CsPoint( 372, 176 + ( i * 24 ) ), CsPoint( 32, 32 ), CsRect( 0, 0, 32, 32 ), "Accessory\\Enchant\\UnLock.tga", false );
+				m_pCurrentOptionLockBtn[ i ]->Init( m_pRoot, CsPoint( 362, 176 + ( i * 29 ) ), CsPoint( 32, 32 ), CsRect( 0, 0, 32, 32 ), "Accessory\\Enchant\\UnLock.tga", false );
 				m_pCurrentOptionLockBtn[ i ]->SetVisible( false );
 				AddChildControl( m_pCurrentOptionLockBtn[ i ] );
 			}

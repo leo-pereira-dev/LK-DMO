@@ -313,6 +313,134 @@ Important limitation:
   Do not import it blindly; use `AddItems.md` and the generated audit report
   before changing box rewards.
 
+### 2026-05-25 deck bin migration pass
+
+The GDMO deck/encyclopedia data migration is tracked in:
+
+```text
+C:\0-NewDmo\DeckBinMigrationFeature
+```
+
+New converter:
+
+```text
+C:\0-NewDmo\DeckBinMigrationFeature\tools\Convert-ModernDBookToLegacyDigimonBook.ps1
+```
+
+What it does:
+
+- Reads modern DBook XML from `C:\0-NewDmo\Dcommerce\xml\AllBins\Data`.
+- Reads language XML from
+  `C:\0-NewDmo\TamerBinMigrationFeature\source_xml_language\_str`.
+- Converts the modern split DBook data into the legacy client template
+  `Digimon_Book.bin`, used by
+  `C:\0-NewDmo\dmo-client-main\LibProj\CsFileTable\DigimonMng.cpp`.
+- Preserves the current legacy structural limit `ENCY_MAX_OPTION = 3`; any
+  fourth modern deck effect is reported instead of silently overflowing the old
+  binary layout.
+- Writes generated output to:
+
+```text
+C:\0-NewDmo\DeckBinMigrationFeature\generated\converted\Digimon_Book.bin
+```
+
+Latest conversion result:
+
+```text
+OutputBytes=189344
+OptionCount=11
+ExceptionCount=14
+DeckCount=57
+CompositionGroupCount=58
+CompositionEntryCount=395
+TruncatedDeckOptions=9
+UnsupportedLegacyDeckOptions=23
+MissingDigimonNames=0
+StringTruncations=1
+ValidationExactRead=True
+```
+
+Generated reports:
+
+```text
+C:\0-NewDmo\DeckBinMigrationFeature\generated\reports\digimon-book-summary.csv
+C:\0-NewDmo\DeckBinMigrationFeature\generated\reports\deck-conversion.csv
+C:\0-NewDmo\DeckBinMigrationFeature\generated\reports\deck-truncated-options.csv
+C:\0-NewDmo\DeckBinMigrationFeature\generated\reports\deck-unsupported-options.csv
+C:\0-NewDmo\DeckBinMigrationFeature\generated\reports\missing-digimon-names.csv
+C:\0-NewDmo\DeckBinMigrationFeature\generated\reports\string-truncations.csv
+```
+
+Applied files:
+
+```text
+C:\0-NewDmo\dmo-server-main-postgres\Bins\data\bin\english\Digimon_Book.bin
+C:\0-NewDmo\DigiCombineFeature\assets\extracted_pack03\data\bin\english\Digimon_Book.bin
+```
+
+The server split DBook bins already matched the `Dcommerce` source by hash for
+`DBookDeckData.bin` and `DBookCompositionData.bin`.
+
+Pack03 active patch status:
+
+- `ClientDist\Data\Pack03.pf/.hf` was patched on 2026-05-25 after the client
+  process released the pack.
+- Patch command:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass `
+  -File "C:\0-NewDmo\SealMasterFeature\tools\Patch-Pack03Files.ps1" `
+  -RelativeFiles @("data\bin\english\Digimon_Book.bin")
+```
+
+- Patched entry:
+
+```text
+data\bin\english\Digimon_Book.bin
+Hash=0x6DB4D9AC
+Size=189344
+```
+
+Functional limitation:
+
+- Modern deck option IDs 7 to 11 are present in the converted data:
+  Hit Rate, Attack Amplification, Attribute Damage Increase, Attack Increase,
+  and Final Damage Increase.
+- The old client effect enum/application code only has built-in handling for
+  deck options 1 to 6. Treat `deck-unsupported-options.csv` as the implementation
+  checklist before expecting those new effects to apply in combat/stat flows.
+
+Runtime follow-up on 2026-05-25:
+
+- Full runtime notes were added to `EncyclopediaDeckSystem.md`.
+- The deck converter now writes the required 2-byte C++ alignment pad between
+  `USHORT s_nVal[3]` and `UINT s_nProb[3]`. Missing this pad was the cause of
+  tooltip values such as `1310720.0% chance` and `458752 seconds`.
+- The C++ client loader in `LibProj/CsFileTable/DigimonMng.cpp` normalizes both
+  padded and older no-pad converted deck records so existing packs do not show
+  shifted `Probability/Time` values.
+- Deck tooltips in `ToolTip.cpp` were widened and now join the attack trigger
+  and chance text with explicit spacing, avoiding label/value collisions.
+- Server `DigimonBookBinLoader` now loads `Digimon_Book.bin` at Game.Host boot
+  and registers deck effects through `UtilitiesFunctions`.
+- `Character_Tamer.EncyclopediaDeckId` remains the persisted active deck id.
+  `EncyclopediaDeckUsePacketProcessor` now persists the id, sends
+  `UpdateStatusPacket`, and logs all loaded effects for the selected deck.
+- Current server-side functional deck passives:
+  - option `6` attack speed: subtracts `floor(baseAS * percent / 100)` from the
+    partner's real AS;
+  - option `5` max HP: adds `floor(baseHP * percent / 100)` to the partner's
+    real HP.
+- Verified reference deck: group `1030`
+  `White Wings : Gurei Tou of Courage` loads as
+  `Condition=1,3,3`, `AttackType=0,1,1`, `Option=6,3,1`,
+  `Value=22,125,30`, `Probability=0,1000,2000`, `Time=0,10,7`.
+- Validation on 2026-05-25:
+  - client `Release_English|Win32` build passed;
+  - server `DigitalWorldOnline.Game.csproj` release build passed;
+  - Docker `game` image rebuilt and `dmo-pg-game` recreated;
+  - boot log confirmed `Loaded Digimon_Book.bin: 11 options, 57 decks, 58 composition groups`.
+
 Follow-up container-bin change:
 
 - Added server `ContainerBinLoader` for `RandomBoxList.bin`,
@@ -1748,6 +1876,93 @@ Completed on 2026-05-21:
     `GameServerPacketEnum.EncyclopediaDeckUse = 3236`.
   - The current processor reads the requested deck id and logs it. The passive
     deck state is still applied client-side by the current client flow.
+
+Follow-up performance change on 2026-05-25:
+
+- Encyclopedia data preload was moved into the loading flow.
+  - `LoadingContents` now builds the encyclopedia static maps during loading and
+    sends `SendEncyclopediaOpen()` once if the 3234 data has not been received
+    yet.
+  - The preload is also requested from `RecvPlayerDataLoaded()`, after the game
+    connection is available. This fixes the case where the earlier loading pass
+    tried before `net::game` existed, leaving the first manual open to do the
+    heavy cache work.
+  - `EncyclopediaContents` now tracks an in-flight server request through
+    `mbIsRequesting`. Main option and popup encyclopedia opens reuse that
+    pending request instead of sending another 3234 packet while preload is
+    still waiting for the response.
+  - `RecvEncyclopediaOpen()` now only applies/caches the server data and marks
+    the encyclopedia as ready; it no longer calls
+    `GetDynamicIF(WT_ENCYCLOPEDIA)` by itself. This lets the loading screen
+    warm the cache without opening the encyclopedia window automatically.
+  - A crash on 2026-05-25 showed `SetGroupInfoMap()` being called from the
+    loading screen while walking mismatched deck/group data. The preload can
+    build the full static data again after `SetGroupInfoMap()` was hardened.
+  - `Recv_OpenData()` builds the encyclopedia open-state map and applies server
+    state. The full static data map can be warmed by loading or built on demand
+    by the encyclopedia UI/deck flow.
+  - `SetGroupInfoMap()` no longer assumes `GetGroupMap()` and `GetDeckMap()`
+    have the same count/order. It resolves deck data by `GroupIdx`, skips groups
+    without matching deck data, and guards missing Digimon table entries before
+    reading model/icon data.
+  - `cEncyclopedia::Update()` has a deferred list build guard. If the window is
+    created before the 3234 response is fully applied, the first frame after the
+    data becomes ready rebuilds the active list automatically instead of waiting
+    for the player to switch between Deck and Encyclopedia tabs.
+  - Follow-up fix: `cEncyclopedia::Open()` also calls the same initial-list
+    guard when the window is shown/re-shown. This fixes the case where the UI
+    opened empty and only populated after switching Deck/Encyclopedia tabs.
+  - Stronger follow-up: opening the window and receiving
+    `ENCYCLOPEDIA_REFRESHLIST` now invalidate both Encyclopedia and Deck visual
+    caches before the first lazy build. Fresh first-page builds also force the
+    active scrollbar back to position 0 after `ReconfigureScrollbars()`, so an
+    old scroll/cursor state cannot make the first opened view look blank.
+  - Reopen-state fix: this window's `Close()` only hides it, so opening an
+    already-live instance can reuse `m_nMainTab`, submenu, search, and scroll
+    state from the previous session. `Open()`/`Create()` now reset the initial
+    tab state to `Encyclopedia > Series`, clear search, resync the tab buttons,
+    and then run the first lazy build. This preserves the old "open and show
+    cards immediately" behavior while keeping lazy append for later rows.
+  - Critical correction: the old full-load flow did not wait for the 3234 server
+    packet before drawing the Encyclopedia list. The lazy implementation now
+    also calls `EnsureStaticDataLoaded()` and runs the same main-tab selection
+    path immediately, even when `IsServerDataReceived()` is still false. The
+    server packet only updates open/closed state afterward.
+  - The Encyclopedia visual list now appends rows lazily instead of drawing the
+    whole active page in one frame. The first build adds 8 visible rows and the
+    follow-up builder adds 2 rows per frame while the scrollbar is near the
+    pending range. Prefetch starts when the remaining scroll rows are less than
+    or equal to twice the current render count, so new cards are prepared before
+    the player reaches the bottom.
+  - Lazy append covers the heavy `Series`, `All`, `Class`, and `Deck` views.
+    `Class` is flattened into rank header/card rows internally, so changing the
+    class filter no longer forces a full card render in one frame.
+  - Encyclopedia/deck list caches are invalidated on main-tab change, submenu
+    change, search, reset, and live search-keyword changes. This prevents stale
+    lazy cursors when switching between Deck and Encyclopedia or changing
+    filters while a partial build is still active.
+  - Follow-up filter fix: lazy append now bypasses the expensive full
+    `_SetTabList()` rebuild path and calls only the append renderer for the
+    active list. The search editbox also compares the typed text after its mouse
+    update, so live text search rebuilds the first filtered lazy block instead
+    of waiting for a button click or silently doing nothing.
+  - Deck follow-up: favorite stars now sort matching deck groups to the top of
+    the lazy source list and immediately rebuild the first deck block after a
+    favorite toggle. Bookmark hit-testing now runs after the deck list updates
+    its current mouse-over item, so clicks land on the correct panel. Deck
+    header overlays are rendered for collecting, completed, and active states.
+  - Deck completion follow-up: completed/access checks now reconcile the legacy
+    base-slot walk with modern converted deck data by treating a deck card as
+    collected when its destination Digimon is open anywhere in the Encyclopedia
+    cache. This restores completed deck access/activation when the converted
+    DBook data points to a different legacy base line.
+  - Existing delta/update packets still update the cached encyclopedia state
+    through `Recv_SetEvolInfo`, `Recv_InchantResult`, `Recv_EvolutionUpdate`,
+    `Recv_BisReward`, and `Recv_Scale`.
+  - Perf logging for encyclopedia UI/content/packet paths is now disabled by
+    default in release code (`ENCY_PERF_LOG=0`, `ENCY_PACKET_PERF_LOG=0`).
+    `EnsureStaticDataLoaded()` also returns immediately when both static maps
+    are already built, avoiding repeated log/file I/O during UI interaction.
 
 ### Inventory renewal
 

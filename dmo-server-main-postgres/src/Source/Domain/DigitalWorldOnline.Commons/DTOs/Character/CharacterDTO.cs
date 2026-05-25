@@ -29,6 +29,7 @@ namespace DigitalWorldOnline.Commons.DTOs.Character
         public int XGauge { get; set; }
         public short XCrystals { get; set; }
         public short CurrentTitle { get; set; }
+        public int EncyclopediaDeckId { get; set; }
         public DateTime CreateDate { get; set; }
 
         //Refs

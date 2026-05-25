@@ -1182,7 +1182,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             critBonusMultiplier = 0.00;
             double critChance = client.Tamer.Partner.CC / 100;
             if (critChance >= UtilitiesFunctions.RandomDouble())
-                critBonusMultiplier = client.Tamer.Partner.CD;
+                critBonusMultiplier = client.Tamer.Partner.CriticalDamagePercent / 100.0;
 
             blocked = targetPartner.BL >= UtilitiesFunctions.RandomDouble();
             var levelBonusMultiplier = client.Tamer.Partner.Level > targetPartner.Level ?
@@ -1235,6 +1235,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var attackerAttribute = partner.BaseInfo.Attribute;
             var attackerElement = partner.BaseInfo.Element;
             var elementPercent = Math.Max(0, attackerElement.GetElementDelta(targetElement));
+            var hasAttributeAdvantage = attackerAttribute.HasAttributeAdvantage(targetAttribute);
+            var hasElementAdvantage = elementPercent > 0;
 
             return new DamageFormulaInput
             {
@@ -1244,12 +1246,14 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 SkillDamageFlat = skillDamageFlat,
                 AttributePercent = partner.ATT,
                 ElementPercent = elementPercent,
-                SkillDamagePercent = partner.SkillDamagePercent,
-                CriticalDamageExtraPercent = partner.CD,
+                SkillDamagePercent = isSkill
+                    ? partner.SkillDamagePercentValueForAdvantage(hasAttributeAdvantage, hasElementAdvantage)
+                    : partner.SkillDamagePercentValue,
+                CriticalDamageExtraPercent = partner.CriticalDamagePercent,
                 FinalDamagePercent = partner.FinalDamageBasisPoints / 100.0,
                 TargetReductionPercent = targetReductionPercent,
-                HasAttributeAdvantage = attackerAttribute.HasAttributeAdvantage(targetAttribute),
-                HasElementAdvantage = elementPercent > 0,
+                HasAttributeAdvantage = hasAttributeAdvantage,
+                HasElementAdvantage = hasElementAdvantage,
                 IsCritical = isCritical,
                 IsSkill = isSkill,
                 AttackerIndex = partner.GeneralHandler,
@@ -1284,7 +1288,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var ResultDamage = 0;
             var ResultCriticalDamage = 0;
             var ResultCriticalDamageDoubleAdvantage = 0;
-            double criticalDamageValue = client.Tamer.Partner.CD;
+            double criticalDamageValue = client.Tamer.Partner.CriticalDamagePercent;
             var ResultDamageDoubleAdvantage = 0;
             double MultiplierAttribute = 0;
 
@@ -1316,7 +1320,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var ResultDamage = 0;
             var ResultCriticalDamage = 0;
             var ResultCriticalDamageDoubleAdvantage = 0;
-            double criticalDamageValue = client.Tamer.Partner.CD;
+            double criticalDamageValue = client.Tamer.Partner.CriticalDamagePercent;
             var ResultDamageDoubleAdvantage = 0;
             double MultiplierAttribute = 0;
 

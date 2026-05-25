@@ -91,11 +91,9 @@ namespace DigitalWorldOnline.Commons.Models.Character
             Steel = steel;
         }
 
-        public int AttributeSkillDamage(DigimonAttributeEnum attribute, DigimonElementEnum element)
+        public int AttributeSpecificSkillDamage(DigimonAttributeEnum attribute)
         {
-            var value = Basic;
-
-            value += attribute switch
+            return attribute switch
             {
                 DigimonAttributeEnum.Vaccine => Vaccine,
                 DigimonAttributeEnum.Data => Data,
@@ -103,8 +101,11 @@ namespace DigitalWorldOnline.Commons.Models.Character
                 DigimonAttributeEnum.Unknown => Unknown,
                 _ => 0
             };
+        }
 
-            value += element switch
+        public int ElementSpecificSkillDamage(DigimonElementEnum element)
+        {
+            return element switch
             {
                 DigimonElementEnum.Fire => Fire,
                 DigimonElementEnum.Water => Water,
@@ -118,8 +119,13 @@ namespace DigitalWorldOnline.Commons.Models.Character
                 DigimonElementEnum.Steel => Steel,
                 _ => 0
             };
+        }
 
-            return value;
+        public int AttributeSkillDamage(DigimonAttributeEnum attribute, DigimonElementEnum element)
+        {
+            return Basic +
+                   AttributeSpecificSkillDamage(attribute) +
+                   ElementSpecificSkillDamage(element);
         }
     }
 }

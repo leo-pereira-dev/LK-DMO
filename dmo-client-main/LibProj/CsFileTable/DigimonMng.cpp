@@ -1,6 +1,56 @@
 
 #include "stdafx.h"
 #include "DigimonMng.h"
+#include <stddef.h>
+
+namespace
+{
+	UINT ReadDeckUInt( const unsigned char* pData, size_t nOffset )
+	{
+		UINT nValue = 0;
+		memcpy( &nValue, pData + nOffset, sizeof( UINT ) );
+		return nValue;
+	}
+
+	void ReadDeckUIntArray( UINT pOut[ ENCY_MAX_OPTION ], const unsigned char* pData, size_t nOffset )
+	{
+		for( int i = 0 ; i < ENCY_MAX_OPTION ; ++i )
+			pOut[ i ] = ReadDeckUInt( pData, nOffset + ( sizeof( UINT ) * i ) );
+	}
+
+	bool IsDeckUIntLayoutSane( const UINT pProb[ ENCY_MAX_OPTION ], const UINT pTime[ ENCY_MAX_OPTION ] )
+	{
+		for( int i = 0 ; i < ENCY_MAX_OPTION ; ++i )
+		{
+			if( pProb[ i ] > 10000 )
+				return false;
+			if( pTime[ i ] > 86400 )
+				return false;
+		}
+		return true;
+	}
+
+	void NormalizeEncyDeckInfo( CsEncy_Deck::sINFO& Info, const unsigned char* pRaw )
+	{
+		UINT pNoPadProb[ ENCY_MAX_OPTION ] = { 0, };
+		UINT pNoPadTime[ ENCY_MAX_OPTION ] = { 0, };
+
+		const size_t nNoPadProbOffset = offsetof( CsEncy_Deck::sINFO, s_nVal ) + sizeof( Info.s_nVal );
+		const size_t nNoPadTimeOffset = nNoPadProbOffset + sizeof( UINT ) * ENCY_MAX_OPTION;
+
+		ReadDeckUIntArray( pNoPadProb, pRaw, nNoPadProbOffset );
+		ReadDeckUIntArray( pNoPadTime, pRaw, nNoPadTimeOffset );
+
+		if( IsDeckUIntLayoutSane( pNoPadProb, pNoPadTime ) )
+		{
+			for( int i = 0 ; i < ENCY_MAX_OPTION ; ++i )
+			{
+				Info.s_nProb[ i ] = pNoPadProb[ i ];
+				Info.s_nTime[ i ] = pNoPadTime[ i ];
+			}
+		}
+	}
+}
 
 CsDigimonMng::CsDigimonMng()
 {
@@ -2092,7 +2142,10 @@ bool CsDigimonMng::_LoadBin( char* cPath )
 		CsEncy_Deck::sINFO info_Deck;
 		for( int i=0; i<nCount; ++i )
 		{
-			fread( &info_Deck, sizeof( CsEncy_Deck::sINFO ), 1, fp );
+			unsigned char pRawDeck[ sizeof( CsEncy_Deck::sINFO ) ];
+			fread( pRawDeck, sizeof( CsEncy_Deck::sINFO ), 1, fp );
+			memcpy( &info_Deck, pRawDeck, sizeof( CsEncy_Deck::sINFO ) );
+			NormalizeEncyDeckInfo( info_Deck, pRawDeck );
 
 			CsEncy_Deck* pObject = csnew CsEncy_Deck;
 			pObject->Init( &info_Deck );
@@ -2384,7 +2437,10 @@ void CsDigimonMng::_LoadFilePack( char* cPath )
 			CsEncy_Deck::sINFO info_Deck;
 			for( int i=0; i<nCount; ++i )
 			{
-				_read( nHandle, &info_Deck, sizeof( CsEncy_Deck::sINFO ) );
+				unsigned char pRawDeck[ sizeof( CsEncy_Deck::sINFO ) ];
+				_read( nHandle, pRawDeck, sizeof( CsEncy_Deck::sINFO ) );
+				memcpy( &info_Deck, pRawDeck, sizeof( CsEncy_Deck::sINFO ) );
+				NormalizeEncyDeckInfo( info_Deck, pRawDeck );
 
 				CsEncy_Deck* pObject = csnew CsEncy_Deck;
 				pObject->Init( &info_Deck );

@@ -461,7 +461,7 @@ cBuffInfo::Update_ForMouse()
 					if( rc.PtInRect( ptLocalMouse ) == TRUE )
 					{
 						//TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( ptCurPos + GetRootClient(), CsPoint( 24, 24 ), 240, cTooltip::DECKBUFF, nOpt, nVal, nIcon, nRemainTime, pGroupInfo );
-						TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( ptCurPos + GetRootClient(), CsPoint( 24, 24 ), 240, cTooltip::DECKBUFF, i, 0, 0, 0, NULL );
+						TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( ptCurPos + GetRootClient(), CsPoint( 24, 24 ), 340, cTooltip::DECKBUFF, i, 0, 0, 0, NULL );
 
 						return muReturn;
 					}
@@ -1136,7 +1136,7 @@ bool cBuffInfo::SetEncyTooltip( u2 nPosIdx, u2 nApplyIdx, CsPoint ptDeltaPos /*=
 
 		if( rc.PtInRect( ptMousPos ) == TRUE )
 		{
-			TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( ptPos, CsPoint( 24, 24 ), 240, cTooltip::DECKBUFF, nApplyIdx, 0, 0, 0, NULL );
+			TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( ptPos, CsPoint( 24, 24 ), 340, cTooltip::DECKBUFF, nApplyIdx, 0, 0, 0, NULL );
 
 			return true;
 		}

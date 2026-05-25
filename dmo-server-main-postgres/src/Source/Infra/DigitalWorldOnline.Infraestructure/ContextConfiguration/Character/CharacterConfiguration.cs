@@ -135,6 +135,12 @@ namespace DigitalWorldOnline.Infraestructure.ContextConfiguration.Character
                 .IsRequired();
 
             builder
+                .Property(x => x.EncyclopediaDeckId)
+                .HasColumnType("int")
+                .HasDefaultValue(0)
+                .IsRequired();
+
+            builder
                 .HasOne(x => x.BuffList)
                 .WithOne(x => x.Character)
                 .HasForeignKey<CharacterBuffListDTO>(x => x.CharacterId);

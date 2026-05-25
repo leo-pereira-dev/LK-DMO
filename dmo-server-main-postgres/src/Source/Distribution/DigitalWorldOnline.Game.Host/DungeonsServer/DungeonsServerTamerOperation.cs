@@ -977,16 +977,29 @@ namespace DigitalWorldOnline.GameHost
             {
                 blocked = false;
                 critBonusMultiplier = 1;
-                return GetCurrentDamage(tamer);
+                return ApplyFinalDamageBonus(GetCurrentDamage(tamer), tamer.Partner.FinalDamageBasisPoints);
             }
 
-            return baseDamage;
+            return ApplyFinalDamageBonus(baseDamage, tamer.Partner.FinalDamageBasisPoints);
 
             //return (int)Math.Floor(baseDamage +
             //    (baseDamage * critBonusMultiplier) +
             //    (baseDamage * levelBonusMultiplier) +
             //    (baseDamage * attributeMultiplier) +
             //    (baseDamage * elementMultiplier));
+        }
+
+        private static int ApplyFinalDamageBonus(int baseDamage, int basisPoints)
+        {
+            if (baseDamage <= 0 || basisPoints == 0)
+                return baseDamage;
+
+            long scaled = (long)baseDamage * (10000L + basisPoints);
+            long adjusted = scaled / 10000L;
+
+            if (adjusted > int.MaxValue) return int.MaxValue;
+            if (adjusted < int.MinValue) return int.MinValue;
+            return (int)adjusted;
         }
 
         public static int GetCurrentDamage(CharacterModel tamer)
@@ -996,7 +1009,7 @@ namespace DigitalWorldOnline.GameHost
             var ResultDamage = 0;
             var ResultCriticalDamage = 0;
             var ResultCriticalDamageDoubleAdvantage = 0;
-            double criticalDamageValue = tamer.Partner.CD;
+            double criticalDamageValue = tamer.Partner.CriticalDamagePercent;
             var ResultDamageDoubleAdvantage = 0;
             double MultiplierAttribute = 0;
 

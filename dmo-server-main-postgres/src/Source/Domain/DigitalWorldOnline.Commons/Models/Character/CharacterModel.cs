@@ -103,6 +103,11 @@ namespace DigitalWorldOnline.Commons.Models.Character
         public short CurrentTitle { get; private set; }
 
         /// <summary>
+        /// Currently enabled Digimon Encyclopedia deck effect.
+        /// </summary>
+        public int EncyclopediaDeckId { get; private set; }
+
+        /// <summary>
         /// Character inventories.
         /// </summary>
         public List<ItemListModel> ItemList { get; private set; }

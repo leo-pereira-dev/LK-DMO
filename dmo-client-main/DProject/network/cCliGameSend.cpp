@@ -28,6 +28,7 @@
 #include "../Flow/Flow.h"
 #include "../Flow/FlowMgr.h"
 #include "../ExtraInventoryDebugLog.h"
+#include "../../LibProj/CsFunc/CrashLogger.h"
 
 //extern uint g_nNetVersion;
 
@@ -2328,6 +2329,7 @@ void cCliGame::SendTacticsOpen( u4 nUID, n2 nInvenPos )
 
 void cCliGame::SendEncyclopediaOpen()
 {
+	nsCSDEBUG::CrashLogger::LogMessage( "[ENCYREQ] SendEncyclopediaOpen packet=DigimonBookInfo" );
  	newp( pDigimon::DigimonBookInfo );
  	endp( pDigimon::DigimonBookInfo );
  	send();

@@ -393,7 +393,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             //WriteInt(60);//Duração block chat em segundos 
             //Obs.: Passar 0 posteriormente não remove o valor da duração passado anteriormente.
             WriteByte(0); //master match (1 = equipe A, 2 = equipe B)
-            WriteInt(0); //encyclopedia id (apenas 1 ativo por vez - 1021 = op)
+            WriteInt(character.EncyclopediaDeckId); // encyclopedia id (apenas 1 ativo por vez)
             WriteByte(0); //Megaphone ban (1 = block)
 
             WriteInt(0);

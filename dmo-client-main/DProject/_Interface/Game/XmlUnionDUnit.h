@@ -18,7 +18,8 @@ class CDigimonEvolveInfo;
 #define IF_XML_UNION_TAB_SLANT_COUNT	18
 #define IF_XML_UNION_FILTER_COUNT	15
 #define IF_XML_UNION_EFFECT_COUNT	8
-#define IF_XML_UNION_STAT_COUNT		11
+#define IF_XML_UNION_STAT_COUNT		25
+#define IF_XML_UNION_STAT_VISIBLE_COUNT	9
 #define IF_XML_UNION_REWARD_COUNT	7
 
 class cXmlUnionDUnit : public cBaseWindow
@@ -47,6 +48,7 @@ public:
 	void					RecvServerProgress( u1 nLevel, n4 nCurrentExperience, n4 nRequiredExperience, u2 nProgressPercentBasisPoints, u2 nClaimedRewardMask );
 	void					RecvRewardClaimResult( u1 nResult, u1 nRewardIndex, u2 nClaimedRewardMask, u1 nLevel, u2 nProgressPercentBasisPoints );
 	void					RecvCollectionInfo();
+	int						GetCollectionBonusValue( int nIndex ) const;
 
 private:
 	struct sSERVER_MEMBER_STATE
@@ -180,6 +182,9 @@ private:
 	void				_UpdateEffectControls();
 	void				_UpdateCardControls();
 	void				_UpdateCardScrollControls();
+	void				_CreateTotalStatScrollBar();
+	void				_UpdateTotalStatControls();
+	void				_UpdateTotalStatScrollControls();
 	void				_UpdateHoverTooltipControls();
 	void				_UpdateCardHoverEffects();
 	void				_UpdateVisibleFilters();
@@ -246,7 +251,14 @@ private:
 	cSprite*			m_pEffectStateLeft[ IF_XML_UNION_EFFECT_COUNT ];
 	cSprite*			m_pEffectStateRight[ IF_XML_UNION_EFFECT_COUNT ];
 	cText*				m_pEffectStateText[ IF_XML_UNION_EFFECT_COUNT ];
-	cText*				m_pStatValueText[ IF_XML_UNION_STAT_COUNT ];
+	cText*				m_pStatNameText[ IF_XML_UNION_STAT_VISIBLE_COUNT ];
+	cText*				m_pStatValueText[ IF_XML_UNION_STAT_VISIBLE_COUNT ];
+	cSprite*			m_pTotalStatScrollBorder;
+	cSprite*			m_pTotalStatScrollBg;
+	cSprite*			m_pTotalStatScrollTrack;
+	cSprite*			m_pTotalStatScrollThumb;
+	cSprite*			m_pTotalStatScrollUp;
+	cSprite*			m_pTotalStatScrollDown;
 	cSprite*			m_pHoverTooltipBg;
 	cSprite*			m_pHoverTooltipTop;
 	cSprite*			m_pHoverTooltipBottom;
@@ -316,6 +328,7 @@ private:
 	u2								m_nServerProgressPercentBasisPoints;
 	u2								m_nServerClaimedRewardMask;
 	int								m_nServerBonusValue[ IF_XML_UNION_STAT_COUNT ];
+	int								m_nTotalStatScroll;
 
 	cUnionXmlTools		m_XmlData;
 	std::vector< cUnionXmlTools::sGROUP > m_vAllGroups;

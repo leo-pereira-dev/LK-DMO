@@ -1226,7 +1226,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     targetMob.Element,
                     targetMob.GeneralHandler,
                     (int)skill.SkillCode,
-                    (int)Math.Floor(f1BaseDamage + addedf1Damage));
+                    (int)Math.Floor(f1BaseDamage));
 
                 var result = DamageFormula.CalculateDamage(input, _damageFormulaConfig);
                 LogDamageFormula(input, result);
@@ -1234,7 +1234,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
 
             var Damage = (int)Math.Floor(f1BaseDamage + addedf1Damage + client.Tamer.Partner.AT + client.Tamer.Partner.SKD);
-            Damage = ApplySkillDamagePercentBonus(Damage, client.Tamer.Partner.SkillDamagePercent);
+            Damage = ApplySkillDamagePercentBonus(
+                Damage,
+                client.Tamer.Partner.SkillDamagePercentValueAgainst(targetMob.Attribute, targetMob.Element));
 
             if (client.Tamer.Partner.BaseInfo == null)
             {
@@ -1296,7 +1298,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     targetMob.Element,
                     targetMob.GeneralHandler,
                     (int)skill.SkillCode,
-                    (int)Math.Floor(f1BaseDamage + addedf1Damage));
+                    (int)Math.Floor(f1BaseDamage));
 
                 var result = DamageFormula.CalculateDamage(input, _damageFormulaConfig);
                 LogDamageFormula(input, result);
@@ -1304,7 +1306,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
 
             var Damage = (int)Math.Floor(f1BaseDamage + addedf1Damage + client.Tamer.Partner.AT + client.Tamer.Partner.SKD);
-            Damage = ApplySkillDamagePercentBonus(Damage, client.Tamer.Partner.SkillDamagePercent);
+            Damage = ApplySkillDamagePercentBonus(
+                Damage,
+                client.Tamer.Partner.SkillDamagePercentValueAgainst(targetMob.Attribute, targetMob.Element));
 
             if (client.Tamer.Partner.BaseInfo == null)
             {
@@ -1364,6 +1368,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var attackerAttribute = partner.BaseInfo.Attribute;
             var attackerElement = partner.BaseInfo.Element;
             var elementPercent = Math.Max(0, attackerElement.GetElementDelta(targetElement));
+            var hasAttributeAdvantage = attackerAttribute.HasAttributeAdvantage(targetAttribute);
+            var hasElementAdvantage = elementPercent > 0;
 
             return new DamageFormulaInput
             {
@@ -1373,12 +1379,14 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 SkillDamageFlat = partner.SKD,
                 AttributePercent = partner.ATT,
                 ElementPercent = elementPercent,
-                SkillDamagePercent = partner.SkillDamagePercent,
+                SkillDamagePercent = partner.SkillDamagePercentValueForAdvantage(
+                    hasAttributeAdvantage,
+                    hasElementAdvantage),
                 CriticalDamageExtraPercent = 0,
                 FinalDamagePercent = partner.FinalDamageBasisPoints / 100.0,
                 TargetReductionPercent = 0,
-                HasAttributeAdvantage = attackerAttribute.HasAttributeAdvantage(targetAttribute),
-                HasElementAdvantage = elementPercent > 0,
+                HasAttributeAdvantage = hasAttributeAdvantage,
+                HasElementAdvantage = hasElementAdvantage,
                 IsCritical = false,
                 IsSkill = true,
                 AttackerIndex = partner.GeneralHandler,
@@ -1393,13 +1401,12 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 _logger.Information(DamageFormula.CreateLogMessage(input, result));
         }
 
-        private static int ApplySkillDamagePercentBonus(int baseDamage, int percentPoints)
+        private static int ApplySkillDamagePercentBonus(int baseDamage, double percentPoints)
         {
             if (baseDamage <= 0 || percentPoints == 0)
                 return baseDamage;
 
-            long scaled = (long)baseDamage * (100L + percentPoints);
-            long adjusted = scaled / 100L;
+            var adjusted = Math.Floor(baseDamage * (100.0 + percentPoints) / 100.0);
 
             if (adjusted > int.MaxValue) return int.MaxValue;
             if (adjusted < int.MinValue) return int.MinValue;

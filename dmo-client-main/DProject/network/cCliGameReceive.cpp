@@ -39,6 +39,11 @@
 
 #include "../nProtect/Client_nProtect.h"
 
+#ifndef ENCY_PACKET_PERF_LOG
+#define ENCY_PACKET_PERF_LOG 1
+#endif
+#define ENCY_PACKET_PERF( ... ) do { if( ENCY_PACKET_PERF_LOG ) nsCSDEBUG::CrashLogger::LogMessage( "[ENCYPACKET] " __VA_ARGS__ ); } while( 0 )
+
 //bool g_bTempRevPortal = false; // 안쓰는 변수이다.
 
 #ifdef SDM_DEF_XIGNCODE3_20181107
@@ -7752,12 +7757,14 @@ void cCliGame::RecvTacticsOpen()
 
 void cCliGame::RecvEncyclopediaOpen()
 {
+	DWORD const dwBegin = GetTickCount();
 	// 도감 정보( 데이터가 있는 놈들만)
 	// 보유 계열체 수
 	GS2C_RECV_ENCYCLOPEDIA_OPEN recv;
 
 	n4 nCnt = 0;
 	pop( nCnt );	// 데이터가 존재하는 ( 한번이라도 오픈 한 ) 디지몬 계열체 갯수
+	nsCSDEBUG::CrashLogger::LogMessage( "[ENCYPACKET] RecvEncyclopediaOpen begin count=%d", (int)nCnt );
 	for( int i = 0 ; i < nCnt ; i++ )
 	{
 		sEncyclopediaOpendedData sData;		
@@ -7779,13 +7786,49 @@ void cCliGame::RecvEncyclopediaOpen()
 		pop( sData.nSize );			// 8. 계열체 사이즈
 		pop( sData.bIsReward );		// 9. 보상여부, 0: 아직 수령 안함, 1: 아이템 획득했음
 
+		if( i < 12 )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "[ENCYPACKET] RecvEncyclopediaOpen record idx=%d base=%u level=%u mask=0x%08lX%08lX size=%d reward=%d enchAT=%u enchBL=%u enchCT=%u enchEV=%u enchHP=%u",
+				i,
+				(unsigned)sData.nDigimonID,
+				(unsigned)sData.nLevel,
+				(unsigned long)( ( sData.nSlotOpened >> 32 ) & 0xFFFFFFFFULL ),
+				(unsigned long)( sData.nSlotOpened & 0xFFFFFFFFULL ),
+				(int)sData.nSize,
+				(int)sData.bIsReward,
+				(unsigned)sData.nEnchant_AT,
+				(unsigned)sData.nEnchant_BL,
+				(unsigned)sData.nEnchant_CT,
+				(unsigned)sData.nEnchant_EV,
+				(unsigned)sData.nEnchant_HP );
+		}
+
 		recv.m_listOpendedData.push_back( sData );
 	}
 
+	DWORD const dwParsedMs = GetTickCount() - dwBegin;
+	nsCSDEBUG::CrashLogger::LogMessage( "[ENCYPACKET] RecvEncyclopediaOpen dispatch count=%d parseMs=%u",
+		(int)nCnt,
+		(unsigned)dwParsedMs );
+	DWORD const dwOpenDataBegin = GetTickCount();
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::ENCYCLOPEDIA_OPEN_DATA, &recv );
+	DWORD const dwOpenDataMs = GetTickCount() - dwOpenDataBegin;
 
-	g_pGameIF->GetDynamicIF( cBaseWindow::WT_ENCYCLOPEDIA );
+	DWORD const dwReadyBegin = GetTickCount();
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::ENCYCLOPEDIA_RECV_SERVER, NULL );
+	DWORD const dwReadyMs = GetTickCount() - dwReadyBegin;
+	nsCSDEBUG::CrashLogger::LogMessage( "[ENCYPACKET] RecvEncyclopediaOpen end count=%d parseMs=%u openDataEventMs=%u readyEventMs=%u totalMs=%u",
+		(int)nCnt,
+		(unsigned)dwParsedMs,
+		(unsigned)dwOpenDataMs,
+		(unsigned)dwReadyMs,
+		(unsigned)( GetTickCount() - dwBegin ) );
+	ENCY_PACKET_PERF( "RecvEncyclopediaOpen end count=%d parseMs=%u openDataEventMs=%u readyEventMs=%u totalMs=%u",
+		(int)nCnt,
+		(unsigned)dwParsedMs,
+		(unsigned)dwOpenDataMs,
+		(unsigned)dwReadyMs,
+		(unsigned)( GetTickCount() - dwBegin ) );
 	//데이터 수신중 메세지
 	cMessageBox::DelMsg( 10019, false );
 }

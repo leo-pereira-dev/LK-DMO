@@ -108,7 +108,7 @@ public:
 	void			SetSelectedImg(cImage* pImage, bool bSizeFix= false);
 
 	bool			AddItem( cListBoxItem* pAddItem );
-	bool			AddItemMultiHeight( cListBoxItem* pAddItem, int minusHeight );	//2017-06-05-nova
+	bool			AddItemMultiHeight( cListBoxItem* pAddItem, int minusHeight, bool bConfigureScroll = true );	//2017-06-05-nova
 	bool			InsertItem( int nPos, cListBoxItem* pAddItem );
 	void			RemoveItem( cListBoxItem* pAddItem );
 	void			RemoveItem( int nPos );
@@ -158,6 +158,7 @@ public:
 	CsPoint			GetItemtoMousePos( CsPoint localPos, cListBoxItem * pFindItem );
 
 	void			SetScrollBarRenderCount(int cnt);	//2017-06-05-nova
+	void			ReconfigureScrollbars();
 	void			changeAllItemHeight(int const& nNewHeight);
 	void			configureScrollbars();
 

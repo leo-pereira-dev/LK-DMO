@@ -7,6 +7,8 @@
 #include "../../ContentsSystem/ContentsSystemDef.h"
 #include "../Adapt/AdaptBattleSystem.h"
 #include "../Adapt/AdaptTutorialQuest.h"
+#include "../Game/EncyclopediaContents.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 bool LoadingContents::sBattleLoadingInfo::IsBattleLoading() const
 {
@@ -42,7 +44,7 @@ int const LoadingContents::IsContentsIdentity(void)
 	return E_CT_LOADING;
 }
 
-LoadingContents::LoadingContents(void):m_AdaptBattleSystem(NULL),m_nLoadingProgress(0),m_bLoadStart(false),m_AdaptTutorialSystem(NULL)
+LoadingContents::LoadingContents(void):m_AdaptBattleSystem(NULL),m_nLoadingProgress(0),m_bLoadStart(false),m_bRequestedEncyclopediaPreload(false),m_AdaptTutorialSystem(NULL)
 {
 	GAME_EVENT_ST.AddEvent( EVENT_CODE::SEND_PORTAL_MOVE, this, &LoadingContents::Send_Portal_Move );
 	GAME_EVENT_ST.AddEvent( EVENT_CODE::LOADING_START, this, &LoadingContents::LoadingStart );
@@ -185,6 +187,8 @@ std::wstring LoadingContents::GetLoadingTipString()
 
 void LoadingContents::_DataLoadComplete()
 {
+	_RequestEncyclopediaPreload();
+
 	// 데이터 로드가 완료 되면 서버에 패킷을 보낸다
 	// 서버에 동기화
 	if( net::game && ( g_bFirstLoding == false ) )
@@ -206,7 +210,51 @@ void LoadingContents::_ResetData()
 {
 	m_nLoadingProgress = 0;
 	m_bLoadStart = false;
+	m_bRequestedEncyclopediaPreload = false;
 	m_BattleLoadingInfo.ResetData();
+}
+
+void LoadingContents::_RequestEncyclopediaPreload()
+{
+	if( m_bRequestedEncyclopediaPreload )
+		return;
+
+	EncyclopediaContents* pEncyclopediaContents = (EncyclopediaContents*)CONTENTSSYSTEM_PTR->GetContents( E_CT_ENCYCLOPEDIA_CONTENTS );
+	if( pEncyclopediaContents == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "[ENCYREQ] preload skip: EncyclopediaContents is null" );
+		return;
+	}
+
+	pEncyclopediaContents->EnsureStaticDataLoaded();
+	if( pEncyclopediaContents->ShouldRequestServerData() == false )
+	{
+		m_bRequestedEncyclopediaPreload = pEncyclopediaContents->IsServerDataReceived() || pEncyclopediaContents->IsServerDataRequesting();
+		nsCSDEBUG::CrashLogger::LogMessage( "[ENCYREQ] preload skip: recv=%d requesting=%d",
+			pEncyclopediaContents->IsServerDataReceived() ? 1 : 0,
+			pEncyclopediaContents->IsServerDataRequesting() ? 1 : 0 );
+		return;
+	}
+
+	if( net::game == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "[ENCYREQ] preload skip: net::game is null" );
+		return;
+	}
+
+	bool bServerRecv = false;
+	GAME_EVENT_STPTR->OnEvent( EVENT_CODE::GET_ENCYCLOPEDIA_BISRECV, &bServerRecv );
+	if( bServerRecv )
+	{
+		m_bRequestedEncyclopediaPreload = true;
+		nsCSDEBUG::CrashLogger::LogMessage( "[ENCYREQ] preload skip: event says already received" );
+		return;
+	}
+
+	m_bRequestedEncyclopediaPreload = true;
+	pEncyclopediaContents->MarkServerDataRequesting();
+	nsCSDEBUG::CrashLogger::LogMessage( "[ENCYREQ] preload send DigimonBookInfo" );
+	net::game->SendEncyclopediaOpen();
 }
 
 bool LoadingContents::_DataProcess_Update()
@@ -258,6 +306,7 @@ bool LoadingContents::_DataProcess_Update()
 	}else if( m_nLoadingProgress < 90 )// NPC 배치
 	{
 		g_pMngCollector->LoadChar( net::next_map_no );
+		_RequestEncyclopediaPreload();
 		_SetLoadingProgressValue( 90 );
 	}
 	else if( m_nLoadingProgress < 100 )
@@ -330,6 +379,7 @@ void LoadingContents::RecvPlayerDataLoaded(void* pData)
 		g_pResist->SetEnablePortal( true );
 
 	g_pResist->SetMovePortal(false); //2017-04-12-nova
+	_RequestEncyclopediaPreload();
 
 	if( FLOWMGR_ST.GetCurFlowSize() > 1 )
 	{

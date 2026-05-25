@@ -66,6 +66,7 @@ private:
 	void			LoadingStart(void* pData);
 
 private:
+	void			_RequestEncyclopediaPreload();
 	void			_SetLoadingProgressValue( int const& nValue );
 	bool			_DataProcess_Update();
 	void			_SetCameraSet();
@@ -81,6 +82,7 @@ private:
 
 	int										m_nLoadingProgress;
 	bool									m_bLoadStart;
+	bool									m_bRequestedEncyclopediaPreload;
 
 	sBattleLoadingInfo						m_BattleLoadingInfo;
 

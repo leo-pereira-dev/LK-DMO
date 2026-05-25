@@ -4,6 +4,12 @@
 
 #include "EncyclopediaContents.h"
 #include "../../ContentsSystem/ContentsSystemDef.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
+
+#ifndef ENCY_PERF_LOG
+#define ENCY_PERF_LOG 1
+#endif
+#define ENCY_CONTENTS_PERF( ... ) do { if( ENCY_PERF_LOG ) nsCSDEBUG::CrashLogger::LogMessage( "[ENCYPERF] " __VA_ARGS__ ); } while( 0 )
 
 EncyclopediaContents::sINFO::sINFO()
 { 
@@ -46,6 +52,8 @@ EncyclopediaContents::EncyclopediaContents(void)
 	mUseDeck = INT_MIN;
 	iDeckIdx = 0;
 	mbIsRecv = false;
+	mbIsRequesting = false;
+	m_dwLastServerRequestTick = 0;
 
 	GAME_EVENT_STPTR->AddEvent( EVENT_CODE::ENCYCLOPEDIA_OPEN_DATA,		this, &EncyclopediaContents::Recv_OpenData );
 	GAME_EVENT_STPTR->AddEvent( EVENT_CODE::ENCYCLOPEDIA_USE_DECK,		this, &EncyclopediaContents::Recv_UseDeck );
@@ -82,16 +90,86 @@ int const EncyclopediaContents::GetContentsIdentity(void) const
 	return IsContentsIdentity();
 }
 
+void EncyclopediaContents::EnsureStaticDataLoaded()
+{
+	DWORD const dwBegin = GetTickCount();
+	bool const bHadEncyMap = ( mEncyInfoMap.size() != 0 );
+	bool const bHadGroupMap = ( mGroupInfoMap.size() != 0 );
+	if( bHadEncyMap && bHadGroupMap )
+		return;
+
+	SetEncyInfoMap();
+	SetGroupInfoMap();
+
+	ENCY_CONTENTS_PERF( "EnsureStaticDataLoaded hadEncy=%d hadGroup=%d encyCount=%d groupCount=%d elapsedMs=%u",
+		bHadEncyMap ? 1 : 0,
+		bHadGroupMap ? 1 : 0,
+		(int)mEncyInfoMap.size(),
+		(int)mGroupInfoMap.size(),
+		(unsigned)( GetTickCount() - dwBegin ) );
+}
+
+bool EncyclopediaContents::IsServerDataReceived() const
+{
+	return mbIsRecv;
+}
+
+bool EncyclopediaContents::IsServerDataRequesting() const
+{
+	return mbIsRequesting;
+}
+
+bool EncyclopediaContents::ShouldRequestServerData( DWORD dwRetryMs ) const
+{
+	if( mbIsRecv )
+		return false;
+
+	if( mbIsRequesting == false )
+		return true;
+
+	if( m_dwLastServerRequestTick == 0 )
+		return true;
+
+	DWORD const dwNow = GetTickCount();
+	return ( dwNow - m_dwLastServerRequestTick ) >= dwRetryMs;
+}
+
+void EncyclopediaContents::MarkServerDataRequesting()
+{
+	mbIsRequesting = true;
+	m_dwLastServerRequestTick = GetTickCount();
+	nsCSDEBUG::CrashLogger::LogMessage( "[ENCYSTATE] MarkServerDataRequesting recv=%d requesting=%d tick=%u encyCount=%d groupCount=%d",
+		mbIsRecv ? 1 : 0,
+		mbIsRequesting ? 1 : 0,
+		(unsigned)m_dwLastServerRequestTick,
+		(int)mEncyInfoMap.size(),
+		(int)mGroupInfoMap.size() );
+}
+
 void EncyclopediaContents::Recv_OpenData(void* pData)
 {
 	SAFE_POINTER_RET(pData);
+	DWORD const dwBegin = GetTickCount();
 	GS2C_RECV_ENCYCLOPEDIA_OPEN* pRecv = static_cast<GS2C_RECV_ENCYCLOPEDIA_OPEN*>(pData);	
 
+	EnsureStaticDataLoaded();
+
+	int nAppliedCount = 0;
+	int nMissingCount = 0;
 	std::list<sEncyclopediaOpendedData>::const_iterator it = pRecv->m_listOpendedData.begin();
 	for( ; it != pRecv->m_listOpendedData.end(); ++it )
 	{		
 		EncyclopediaContents::sEVOL_INFO* pEvolInfo = GetEncyclopediaEvolInfo( (*it).nDigimonID );
-		SAFE_POINTER_CON( pEvolInfo );
+		if( pEvolInfo == NULL )
+		{
+			nMissingCount++;
+			nsCSDEBUG::CrashLogger::LogMessage( "[ENCYSTATE] Recv_OpenData missing base=%u level=%u mask=0x%08lX%08lX",
+				(unsigned)(*it).nDigimonID,
+				(unsigned)(*it).nLevel,
+				(unsigned long)( ( (*it).nSlotOpened >> 32 ) & 0xFFFFFFFFULL ),
+				(unsigned long)( (*it).nSlotOpened & 0xFFFFFFFFULL ) );
+			continue;
+		}
 
 		int nOpenCnt = 0;				// 계열체 내 진화 슬롯 오픈 갯수
 
@@ -105,7 +183,7 @@ void EncyclopediaContents::Recv_OpenData(void* pData)
 				continue;
 			}
 
-			if( (*it).nSlotOpened & (1 << (n - 1)) )
+			if( (*it).nSlotOpened & ( 1ULL << ( n - 1 ) ) )
 			{
 				pEvolInfo->s_sInfo[ n ].s_eImgState = EncyclopediaContents::sINFO::S_OPEN;
 				nOpenCnt++;
@@ -148,13 +226,47 @@ void EncyclopediaContents::Recv_OpenData(void* pData)
 
 		// 아이템 획득 전/후 셋팅
 		pEvolInfo->s_bIsReward = (0 == (*it).bIsReward)?false:true;		
+		if( nAppliedCount < 12 )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "[ENCYSTATE] Recv_OpenData record idx=%d base=%u level=%u mask=0x%08lX%08lX openCnt=%d lineCount=%d allOpen=%d reward=%d size=%d enchAT=%u enchBL=%u enchCT=%u enchEV=%u enchHP=%u",
+				nAppliedCount,
+				(unsigned)(*it).nDigimonID,
+				(unsigned)(*it).nLevel,
+				(unsigned long)( ( (*it).nSlotOpened >> 32 ) & 0xFFFFFFFFULL ),
+				(unsigned long)( (*it).nSlotOpened & 0xFFFFFFFFULL ),
+				nOpenCnt,
+				(int)pEvolInfo->s_nCount,
+				pEvolInfo->s_bIsAllOpen ? 1 : 0,
+				(int)pEvolInfo->s_bIsReward,
+				(int)pEvolInfo->s_nSize,
+				(unsigned)pEvolInfo->s_nEnchant_AT,
+				(unsigned)pEvolInfo->s_nEnchant_BL,
+				(unsigned)pEvolInfo->s_nEnchant_CT,
+				(unsigned)pEvolInfo->s_nEnchant_EV,
+				(unsigned)pEvolInfo->s_nEnchant_HP );
+		}
+		nAppliedCount++;
 	}
+
+	nsCSDEBUG::CrashLogger::LogMessage( "[ENCYSTATE] Recv_OpenData summary packetCount=%d applied=%d missing=%d encyCount=%d groupCount=%d elapsedMs=%u",
+		(int)pRecv->m_listOpendedData.size(),
+		nAppliedCount,
+		nMissingCount,
+		(int)mEncyInfoMap.size(),
+		(int)mGroupInfoMap.size(),
+		(unsigned)( GetTickCount() - dwBegin ) );
+	ENCY_CONTENTS_PERF( "Recv_OpenData packetCount=%d applied=%d missing=%d encyCount=%d groupCount=%d elapsedMs=%u",
+		(int)pRecv->m_listOpendedData.size(),
+		nAppliedCount,
+		nMissingCount,
+		(int)mEncyInfoMap.size(),
+		(int)mGroupInfoMap.size(),
+		(unsigned)( GetTickCount() - dwBegin ) );
 }
 
 void EncyclopediaContents::Recv_UseDeck(void* pData)
 {
-	SetEncyInfoMap();		
-	SetGroupInfoMap();
+	EnsureStaticDataLoaded();
 
 	SAFE_POINTER_RET(pData);
 	GS2C_RECV_ENCYCLOPEDIA_USEDECK* pRecv = static_cast<GS2C_RECV_ENCYCLOPEDIA_USEDECK*>(pData);
@@ -164,8 +276,7 @@ void EncyclopediaContents::Recv_UseDeck(void* pData)
 
 void EncyclopediaContents::Recv_GetDeck(void* pData)
 {
-	SetEncyInfoMap();		
-	SetGroupInfoMap();
+	EnsureStaticDataLoaded();
 
 	SAFE_POINTER_RET(pData);
 	GS2C_RECV_ENCYCLOPEDIA_USEDECK* pRecv = static_cast<GS2C_RECV_ENCYCLOPEDIA_USEDECK*>(pData);
@@ -205,7 +316,17 @@ void EncyclopediaContents::Recv_SetEvolInfo(void* pData)
 
 void EncyclopediaContents::Recv_Server_Encyclopedia(void* pData)
 {
+	EnsureStaticDataLoaded();
 	mbIsRecv = true;
+	mbIsRequesting = false;
+	m_dwLastServerRequestTick = 0;
+	nsCSDEBUG::CrashLogger::LogMessage( "[ENCYSTATE] Recv_Server_Encyclopedia ready encyCount=%d groupCount=%d",
+		(int)mEncyInfoMap.size(),
+		(int)mGroupInfoMap.size() );
+	ENCY_CONTENTS_PERF( "Recv_Server_Encyclopedia ready encyCount=%d groupCount=%d",
+		(int)mEncyInfoMap.size(),
+		(int)mGroupInfoMap.size() );
+	Notify( ENCYCLOPEDIA_REFRESHLIST );
 }
 
 void EncyclopediaContents::Recv_InchantResult(void* pData)
@@ -357,6 +478,8 @@ void EncyclopediaContents::Recv_Scale(void* pData)
 void EncyclopediaContents::Recv_LogOut(void* pData)
 {
 	mbIsRecv = false;
+	mbIsRequesting = false;
+	m_dwLastServerRequestTick = 0;
 
 	//도감 정보 리셋
 	MAP_IT it = mEncyInfoMap.begin();
@@ -573,6 +696,7 @@ void EncyclopediaContents::SetEncyInfoMap()
 	if(mEncyInfoMap.size() != 0)
 		return;	
 
+	DWORD const dwBegin = GetTickCount();
 	MakeGroupString( mGroupStr );
 
 	//초기화는 모든 디지몬 잠겨있는 상태로 합시다. 일단 테이블 가져옴
@@ -688,6 +812,10 @@ void EncyclopediaContents::SetEncyInfoMap()
 	}
 
 	mUseDeck = INT_MIN;	// 선택한 덱 번호, 미사용 중일 땐 -int
+	ENCY_CONTENTS_PERF( "SetEncyInfoMap built encyCount=%d groupStringCount=%d elapsedMs=%u",
+		(int)mEncyInfoMap.size(),
+		(int)mGroupStr.size(),
+		(unsigned)( GetTickCount() - dwBegin ) );
 }
 
 void EncyclopediaContents::SetGroupInfoMap()
@@ -696,14 +824,26 @@ void EncyclopediaContents::SetGroupInfoMap()
 		return;	
 
 	//덱 정보
-	CsEncy_Deck_Composition::MAP_IT itGroup = nsCsFileTable::g_pDigimonMng->GetGroupMap()->begin();
-	CsEncy_Deck_Composition::MAP_IT itGroupEnd = nsCsFileTable::g_pDigimonMng->GetGroupMap()->end();
+	DWORD const dwBegin = GetTickCount();
+	if( nsCsFileTable::g_pDigimonMng == NULL ||
+		nsCsFileTable::g_pDigimonMng->GetGroupMap() == NULL ||
+		nsCsFileTable::g_pDigimonMng->GetDeckMap() == NULL )
+		return;
 
-	CsEncy_Deck::MAP_IT itDeck = nsCsFileTable::g_pDigimonMng->GetDeckMap()->begin();
+	CsEncy_Deck_Composition::MAP* pGroupMap = nsCsFileTable::g_pDigimonMng->GetGroupMap();
+	CsEncy_Deck::MAP* pDeckMap = nsCsFileTable::g_pDigimonMng->GetDeckMap();
+	CsEncy_Deck_Composition::MAP_IT itGroup = pGroupMap->begin();
+	CsEncy_Deck_Composition::MAP_IT itGroupEnd = pGroupMap->end();
 
 	for( ; itGroup != itGroupEnd ; itGroup++ )
 	{
+		SAFE_POINTER_CON( itGroup->second );
+		SAFE_POINTER_CON( itGroup->second->GetInfo() );
+
 		int nidx = itGroup->second->GetInfo()->s_nGroupIdx;
+		CsEncy_Deck::MAP_IT itDeck = pDeckMap->find( (USHORT)nidx );
+		if( itDeck == pDeckMap->end() || itDeck->second == NULL || itDeck->second->GetInfo() == NULL )
+			continue;
 
 		sGROUP_INFO* pInfo = csnew sGROUP_INFO;
 		pInfo->s_nGroupIdx = nidx;
@@ -738,7 +878,8 @@ void EncyclopediaContents::SetGroupInfoMap()
 
 			// 진화 이미지 이름 찾기
 			pData->s_ImgFileName.clear();
-			CsDigimon::sINFO* pFTInfo = nsCsFileTable::g_pDigimonMng->GetDigimon( pData->s_dwDestDigimonID )->GetInfo();
+			CsDigimon* pDigimon = nsCsFileTable::g_pDigimonMng->GetDigimon( pData->s_dwDestDigimonID );
+			CsDigimon::sINFO* pFTInfo = ( pDigimon != NULL ) ? pDigimon->GetInfo() : NULL;
 			if( pFTInfo == NULL ) // 디지몬 테이블에 디지몬 정보 없음
 			{
 #ifndef _GIVE
@@ -781,6 +922,20 @@ void EncyclopediaContents::SetGroupInfoMap()
 			pInfo->s_nVal[ i ] = itDeck->second->GetInfo()->s_nVal[ i ];
 			pInfo->s_nProb[ i ] = itDeck->second->GetInfo()->s_nProb[ i ];
 			pInfo->s_nTime[ i ] = itDeck->second->GetInfo()->s_nTime[ i ];
+
+			if( pInfo->s_nGroupIdx == 1030 || pInfo->s_nProb[ i ] > 10000 || pInfo->s_nTime[ i ] > 86400 )
+			{
+				nsCSDEBUG::CrashLogger::LogMessage( "[ENCYDECKDATA] group=%u optIdx=%d condition=%u atkType=%u option=%u val=%u probRaw=%u chanceShown=%.1f timeRaw=%u",
+					(unsigned)pInfo->s_nGroupIdx,
+					i,
+					(unsigned)pInfo->s_nCondition[ i ],
+					(unsigned)pInfo->s_nAT_Type[ i ],
+					(unsigned)pInfo->s_nOption[ i ],
+					(unsigned)pInfo->s_nVal[ i ],
+					(unsigned)pInfo->s_nProb[ i ],
+					(float)pInfo->s_nProb[ i ] / 100.0f,
+					(unsigned)pInfo->s_nTime[ i ] );
+			}
 		}
 
 		//덱 선택 버튼
@@ -790,9 +945,10 @@ void EncyclopediaContents::SetGroupInfoMap()
 		pInfo->s_bUse = false; 		
 
 		mGroupInfoMap[ nidx ] = pInfo;
-
-		itDeck++;
 	}
+	ENCY_CONTENTS_PERF( "SetGroupInfoMap built groupCount=%d elapsedMs=%u",
+		(int)mGroupInfoMap.size(),
+		(unsigned)( GetTickCount() - dwBegin ) );
 }
 
 void EncyclopediaContents::SetUseDeck( int nDeckIdx, bool bUse )

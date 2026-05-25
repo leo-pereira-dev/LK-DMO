@@ -90,12 +90,26 @@ protected:
 	cText*				m_pSubMenuText[4];	// submenu labels that must follow tab visibility
 	cScrollBar*			m_pScrollBar;
 	cListBox*			m_pEncyListBox;
+	cScrollBar*			m_pDeckScrollBar;
+	cListBox*			m_pDeckListBox;
 	cSprite*			m_pSearchBarBg;
 	cEditBox*			m_pSearchEdit;
 	cButton*			m_pSearchBtn;
 	cButton*			m_pSearchResetBtn;
 	std::wstring		m_wsSearchKeyword;
+	std::wstring		m_wsEncyListCacheSearch;
+	std::wstring		m_wsDeckListCacheSearch;
 	bool				m_bSearchFocusVisualOn;
+	bool				m_bEncyListBuilt;
+	bool				m_bDeckListBuilt;
+	int					m_nEncyListCacheSubMenu;
+	bool				m_bEncyLazyAppendActive;
+	bool				m_bDeckLazyAppendActive;
+	int					m_nEncyLazySourceIndex;
+	int					m_nEncyLazyFlatRowIndex;
+	int					m_nDeckLazyGroupCursor;
+	std::vector< EncyclopediaContents::sGROUP_INFO* >	m_vDeckLazyGroups;
+	CRITICAL_SECTION	m_csListRender;
 
 	enum eMAIN_TAB
 	{
@@ -181,9 +195,23 @@ protected:
 	};
 	std::vector<sDECK_BOOKMARK_INFO>					m_vDeckBookmarkInfo;
 	std::set<int>										m_setDeckFavoriteGroup;
+	bool				_IsDeckFavoriteGroup( int nGroupIdx ) const;
+	void				_LoadDeckFavoriteCache();
+	void				_SaveDeckFavoriteCache() const;
+	std::string			_GetDeckFavoriteCachePath() const;
 
 	void				_SetTabList( int nCurRadioIdx );								// 현재 탭 디지몬 리스트 셋
 	void				_RefreshList();
+	cListBox*			_GetActiveListBox() const;
+	cScrollBar*			_GetActiveScrollBar() const;
+	void				_UpdateActiveListVisibility();
+	void				_ResetInitialTabState();
+	void				_SelectMainTab( int nMainTab, bool bForceRefresh );
+	void				_InvalidateEncyListCache();
+	void				_InvalidateDeckListCache();
+	bool				_EnsureInitialListBuilt();
+	bool				_ShouldAppendLazyRows() const;
+	void				_UpdateLazyListBuild();
 	void				_UpdateCardHover();
 	void				_SetCardHoverVisible( bool bVisible );
 	void				_RenderCardNameTooltip();
@@ -191,6 +219,7 @@ protected:
 	void				_OnClickEncyclopediaItem( void* pSender, void* pData );
 	void				_OpenOverview( int nDigimonId, int nTooltipDigimonId );
 	void				_CloseOverview();
+	void				_EnsureOverviewRenderResources();
 	void				_ReleaseOverviewRenderDigimon();
 	void				_RenderOverview();
 	void				_UpdateOverviewRenderDigimon();
@@ -235,7 +264,7 @@ protected:
 	void				_RenderTooltip( CsPoint ptMousePos );
 	void				_Updata_ForMouse_Group( int count );		// 덱 마우스 업데이트
 	void				_SetGroupTooltip( int nGroupIdx );			// 덱 툴팁	
-	void				_UpdateDeckBookmarkVisuals();
+	bool				_UpdateDeckBookmarkVisuals();
 
 	/************************************************************************/
 	/*						도감 UI - 보상아이템 획득						*/

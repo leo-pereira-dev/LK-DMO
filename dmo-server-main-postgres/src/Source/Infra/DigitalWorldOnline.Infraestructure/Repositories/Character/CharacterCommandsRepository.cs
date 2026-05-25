@@ -467,6 +467,21 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
             }
         }
 
+        public async Task UpdateCharacterEncyclopediaDeckAsync(long characterId, int deckId)
+        {
+            var dto = await _context.Character
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == characterId);
+
+            if (dto != null)
+            {
+                dto.EncyclopediaDeckId = Math.Max(0, deckId);
+
+                _context.Update(dto);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task UpdateCharacterProgressCompleteAsync(CharacterProgressModel progress)
         {
             var dto = await _context.CharacterProgress

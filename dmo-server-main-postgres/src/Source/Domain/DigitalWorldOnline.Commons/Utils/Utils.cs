@@ -439,6 +439,67 @@ namespace DigitalWorldOnline.Commons.Utils
             return _monsterHitFloor.TryGetValue(targetLevel, out var f) ? f : 0;
         }
 
+        // ─── Digimon_Book.bin-driven Encyclopedia deck passives ────────────
+        // Game.Host registers this once at boot after parsing Digimon_Book.bin.
+        // Deck option ids mirror the legacy client enum:
+        // 1 AT, 2 Skill, 3 Critical, 4 CoolReset, 5 HP, 6 AS.
+
+        public readonly struct EncyclopediaDeckEffect
+        {
+            public EncyclopediaDeckEffect(int condition, int attackType, int option, int value, int probability, int time)
+            {
+                Condition = condition;
+                AttackType = attackType;
+                Option = option;
+                Value = value;
+                Probability = probability;
+                Time = time;
+            }
+
+            public int Condition { get; }
+            public int AttackType { get; }
+            public int Option { get; }
+            public int Value { get; }
+            public int Probability { get; }
+            public int Time { get; }
+        }
+
+        private static IReadOnlyDictionary<int, IReadOnlyList<EncyclopediaDeckEffect>>? _encyclopediaDeckEffects;
+
+        public static void RegisterEncyclopediaDeckEffects(
+            IReadOnlyDictionary<int, IReadOnlyList<EncyclopediaDeckEffect>> source)
+        {
+            _encyclopediaDeckEffects = source;
+        }
+
+        public static int GetEncyclopediaDeckPassivePercent(int deckId, int option)
+        {
+            const int PassiveCondition = 1;
+
+            if (deckId <= 0 || _encyclopediaDeckEffects is null)
+                return 0;
+
+            if (!_encyclopediaDeckEffects.TryGetValue(deckId, out var effects))
+                return 0;
+
+            var total = 0;
+            foreach (var effect in effects)
+            {
+                if (effect.Condition == PassiveCondition && effect.Option == option)
+                    total += effect.Value;
+            }
+
+            return total;
+        }
+
+        public static int GetEncyclopediaDeckPassiveBonus(int deckId, int option, int baseValue)
+        {
+            if (baseValue <= 0)
+                return 0;
+
+            return baseValue * GetEncyclopediaDeckPassivePercent(deckId, option) / 100;
+        }
+
         // ─── Nature.bin-driven combat multipliers ───────────────────────────
         // Populated at Game.Host boot via RegisterNatureSource(...).  Until then the
         // helpers fall back to a hardcoded binary advantage table (the pre-bin behaviour)

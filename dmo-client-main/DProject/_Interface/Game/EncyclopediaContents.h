@@ -132,6 +132,9 @@ private:
 	int		iDeckIdx;	// 2017-05-29-nova 툴팁에 사용하는 idx
 	bool	mbIsRecv;	// 도감 목록 최초 서버 수신 셋팅
 
+	bool	mbIsRequesting;
+	DWORD	m_dwLastServerRequestTick;
+
 	std::map<std::wstring,std::wstring>		mGroupStr;
 	std::map< int, sEVOL_INFO* >			mEncyInfoMap;		// 디지몬 계열체 맵
 	std::map< int, sGROUP_INFO* >			mGroupInfoMap;		// 그룹 완성 정보
@@ -178,6 +181,11 @@ private:
 public:
 	int	GetUseDeck();
 	int	GetScaleVal( int nScale );	
+	void EnsureStaticDataLoaded();
+	bool IsServerDataReceived() const;
+	bool IsServerDataRequesting() const;
+	bool ShouldRequestServerData( DWORD dwRetryMs = 3000 ) const;
+	void MarkServerDataRequesting();
 	int	GetEnchant_Order( int nOrder, int& nEnchant_AT, int& nEnchant_CT, int& nEnchant_EV, int& nEnchant_BL, int& nEnchant_HP );	// 해당번째 높은 강화 수치 종류 return ( 0 : AT, 1 : CT, 2 : EV, 3 : BL )
 
 	sEVOL_INFO* GetEncyData(int num) const;

@@ -156,6 +156,7 @@ namespace DigitalWorldOnline.Game
                     services.AddSingleton<DMBaseBinLoader>();
                     services.AddSingleton<DigimonListBinLoader>();
                     services.AddSingleton<DigimonEvoBinLoader>();
+                    services.AddSingleton<DigimonBookBinLoader>();
                     services.AddSingleton<BuffBinLoader>();
                     services.AddSingleton<AchieveBinLoader>();
                     services.AddSingleton<EventTableBinLoader>();
@@ -206,6 +207,7 @@ namespace DigitalWorldOnline.Game
             var dmBase = host.Services.GetRequiredService<DMBaseBinLoader>().Load();
             var digimonList = host.Services.GetRequiredService<DigimonListBinLoader>().Load();
             var digimonEvo = host.Services.GetRequiredService<DigimonEvoBinLoader>().Load();
+            var digimonBook = host.Services.GetRequiredService<DigimonBookBinLoader>().Load();
             var buff = host.Services.GetRequiredService<BuffBinLoader>().Load();
             var achieve = host.Services.GetRequiredService<AchieveBinLoader>().Load();
             var eventTable = host.Services.GetRequiredService<EventTableBinLoader>().Load();
@@ -227,6 +229,19 @@ namespace DigitalWorldOnline.Game
             // loaded by client DigimonMng, not NatureMng.  No server consumer.
             DigitalWorldOnline.Commons.Utils.UtilitiesFunctions.RegisterNatureSource(nature);
             DigitalWorldOnline.Commons.Utils.UtilitiesFunctions.RegisterMonsterHitFloor(monster.HitByLevel);
+            DigitalWorldOnline.Commons.Utils.UtilitiesFunctions.RegisterEncyclopediaDeckEffects(
+                digimonBook.DecksByGroupId.ToDictionary(
+                    pair => pair.Key,
+                    pair => (IReadOnlyList<DigitalWorldOnline.Commons.Utils.UtilitiesFunctions.EncyclopediaDeckEffect>)
+                        pair.Value.Effects
+                            .Select(effect => new DigitalWorldOnline.Commons.Utils.UtilitiesFunctions.EncyclopediaDeckEffect(
+                                effect.Condition,
+                                effect.AttackType,
+                                effect.Option,
+                                effect.Value,
+                                effect.Probability,
+                                effect.Time))
+                            .ToList()));
 
             // DMBase.bin section 7 MaxShareStash drives the AccountWarehouse default size
             // so the server matches what v487 client expects (Warehouse.cpp:81 reads s_nMaxShareStash).
@@ -247,6 +262,9 @@ namespace DigitalWorldOnline.Game
             serilog.Information(
                 "Loaded DigimonEvo.bin: {Count} evolution trees, {Lines} total evolution lines",
                 digimonEvo.ByType.Count, digimonEvo.ByType.Values.Sum(e => e.Lines.Count));
+            serilog.Information(
+                "Loaded Digimon_Book.bin: {Options} options, {Decks} decks, {Compositions} composition groups",
+                digimonBook.OptionCount, digimonBook.DecksByGroupId.Count, digimonBook.CompositionGroupCount);
             serilog.Information(
                 "Loaded Buff.bin: {Count} buffs", buff.ById.Count);
             serilog.Information(

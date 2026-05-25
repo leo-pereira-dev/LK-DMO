@@ -15,6 +15,7 @@ namespace
 	const char* const XML_UNION_FRAME_N = "Union\\collection_frame_rank1_new.png";
 	const char* const XML_UNION_FRAME_S = "Union\\collection_frame_rank2_new.png";
 	const char* const XML_UNION_FRAME_U = "Union\\collection_frame_rank3_new.png";
+	const char* const XML_UNION_FRAME_COMPLETED = "Encyclopedia\\newencyclopedia\\rate_frame\\collection_frame_rank3.png";
 	const char* const XML_UNION_RANK_ICON = "Encyclopedia\\newencyclopedia\\icon\\encyclopedia_512.png";
 	const char* const XML_UNION_BG_LEFT = "Union\\side_bg_a.png";
 	const char* const XML_UNION_BG_CENTER = "Union\\center_bg.png";
@@ -54,6 +55,17 @@ namespace
 	int const XML_UNION_CARD_SCROLL_TRACK_H = XML_UNION_CARD_SCROLL_H - ( XML_UNION_CARD_SCROLL_ARROW_H * 2 );
 	int const XML_UNION_CARD_SCROLL_PAGE = IF_XML_UNION_CARD_COUNT;
 	int const XML_UNION_RIGHT_PANEL_SHIFT = 10;
+	int const XML_UNION_TOTAL_STAT_ROW_X = 724 + XML_UNION_RIGHT_PANEL_SHIFT;
+	int const XML_UNION_TOTAL_STAT_VALUE_X = 853 + XML_UNION_RIGHT_PANEL_SHIFT;
+	int const XML_UNION_TOTAL_STAT_ROW_Y = 397;
+	int const XML_UNION_TOTAL_STAT_ROW_STEP = 24;
+	int const XML_UNION_TOTAL_STAT_SCROLL_X = 866 + XML_UNION_RIGHT_PANEL_SHIFT;
+	int const XML_UNION_TOTAL_STAT_SCROLL_Y = 389;
+	int const XML_UNION_TOTAL_STAT_SCROLL_W = 14;
+	int const XML_UNION_TOTAL_STAT_SCROLL_H = 210;
+	int const XML_UNION_TOTAL_STAT_SCROLL_ARROW_H = 14;
+	int const XML_UNION_TOTAL_STAT_SCROLL_TRACK_Y = XML_UNION_TOTAL_STAT_SCROLL_Y + XML_UNION_TOTAL_STAT_SCROLL_ARROW_H;
+	int const XML_UNION_TOTAL_STAT_SCROLL_TRACK_H = XML_UNION_TOTAL_STAT_SCROLL_H - ( XML_UNION_TOTAL_STAT_SCROLL_ARROW_H * 2 );
 	int const XML_UNION_TREASURE_X = 828;
 	int const XML_UNION_TREASURE_Y = 282;
 	int const XML_UNION_TREASURE_W = 35;
@@ -96,11 +108,14 @@ namespace
 	{
 		L"MaxHP", L"MaxDS", L"AT", L"DE", L"EV", L"HT",
 		L"CT", L"EXP", L"BL", L"SCD", L"Basic Attribute",
+		L"Vaccine", L"Data", L"Virus", L"Unknown",
+		L"Fire", L"Water", L"Ice", L"Wind", L"Thunder",
+		L"Light", L"Dark", L"Land", L"Wood", L"Steel",
 	};
 
 	bool _IsPercentStatIndex( int nIndex )
 	{
-		return nIndex == 7 || nIndex == 9 || nIndex == 10;
+		return nIndex == 7 || nIndex >= 9;
 	}
 
 	void _CopyWideToTChar( std::wstring const& wsText, TCHAR* pOut, size_t nOutCount )
@@ -337,6 +352,12 @@ cXmlUnionDUnit::cXmlUnionDUnit()
 	, m_pCardScrollThumb( NULL )
 	, m_pCardScrollUp( NULL )
 	, m_pCardScrollDown( NULL )
+	, m_pTotalStatScrollBorder( NULL )
+	, m_pTotalStatScrollBg( NULL )
+	, m_pTotalStatScrollTrack( NULL )
+	, m_pTotalStatScrollThumb( NULL )
+	, m_pTotalStatScrollUp( NULL )
+	, m_pTotalStatScrollDown( NULL )
 	, m_pRewardTreasureIcon( NULL )
 	, m_pRewardModalBg( NULL )
 	, m_pRewardModalTitleBg( NULL )
@@ -366,6 +387,7 @@ cXmlUnionDUnit::cXmlUnionDUnit()
 	, m_nServerRequiredExperience( 0 )
 	, m_nServerProgressPercentBasisPoints( 0 )
 	, m_nServerClaimedRewardMask( 0 )
+	, m_nTotalStatScroll( 0 )
 	, m_pSearchEdit( NULL )
 	, m_nFilterScroll( 0 )
 	, m_nCardScroll( 0 )
@@ -421,11 +443,14 @@ cXmlUnionDUnit::cXmlUnionDUnit()
 		m_pEffectStateText[ i ] = NULL;
 	}
 
-	for( int i = 0; i < IF_XML_UNION_STAT_COUNT; ++i )
+	for( int i = 0; i < IF_XML_UNION_STAT_VISIBLE_COUNT; ++i )
 	{
+		m_pStatNameText[ i ] = NULL;
 		m_pStatValueText[ i ] = NULL;
-		m_nServerBonusValue[ i ] = 0;
 	}
+
+	for( int i = 0; i < IF_XML_UNION_STAT_COUNT; ++i )
+		m_nServerBonusValue[ i ] = 0;
 
 	for( int i = 0; i < IF_XML_UNION_REWARD_COUNT; ++i )
 	{
@@ -491,6 +516,12 @@ void cXmlUnionDUnit::DeleteResource()
 	m_pCardScrollThumb = NULL;
 	m_pCardScrollUp = NULL;
 	m_pCardScrollDown = NULL;
+	m_pTotalStatScrollBorder = NULL;
+	m_pTotalStatScrollBg = NULL;
+	m_pTotalStatScrollTrack = NULL;
+	m_pTotalStatScrollThumb = NULL;
+	m_pTotalStatScrollUp = NULL;
+	m_pTotalStatScrollDown = NULL;
 	m_pRewardTreasureIcon = NULL;
 	m_pRewardModalBg = NULL;
 	m_pRewardModalTitleBg = NULL;
@@ -520,6 +551,7 @@ void cXmlUnionDUnit::DeleteResource()
 	m_nServerRequiredExperience = 0;
 	m_nServerProgressPercentBasisPoints = 0;
 	m_nServerClaimedRewardMask = 0;
+	m_nTotalStatScroll = 0;
 	m_mapServerGroups.clear();
 	m_vRewardModalSprites.clear();
 	m_vRewardModalTexts.clear();
@@ -566,11 +598,13 @@ void cXmlUnionDUnit::DeleteResource()
 		m_pEffectStateRight[ i ] = NULL;
 		m_pEffectStateText[ i ] = NULL;
 	}
-	for( int i = 0; i < IF_XML_UNION_STAT_COUNT; ++i )
+	for( int i = 0; i < IF_XML_UNION_STAT_VISIBLE_COUNT; ++i )
 	{
+		m_pStatNameText[ i ] = NULL;
 		m_pStatValueText[ i ] = NULL;
-		m_nServerBonusValue[ i ] = 0;
 	}
+	for( int i = 0; i < IF_XML_UNION_STAT_COUNT; ++i )
+		m_nServerBonusValue[ i ] = 0;
 	for( int i = 0; i < IF_XML_UNION_REWARD_COUNT; ++i )
 	{
 		m_pRewardOptionGlow[ i ] = NULL;
@@ -797,6 +831,58 @@ cBaseWindow::eMU_TYPE cXmlUnionDUnit::Update_ForMouse()
 	{
 		_SetRewardModalVisible( true );
 		return muReturn;
+	}
+
+	int const nTotalStatMaxScroll = max( 0, IF_XML_UNION_STAT_COUNT - IF_XML_UNION_STAT_VISIBLE_COUNT );
+	CsRect const rcTotalStatScroll( CsPoint( ptRoot.x + XML_UNION_TOTAL_STAT_SCROLL_X - 3, ptRoot.y + XML_UNION_TOTAL_STAT_SCROLL_Y ),
+		CsSIZE( XML_UNION_TOTAL_STAT_SCROLL_W + 6, XML_UNION_TOTAL_STAT_SCROLL_H ) );
+	CsRect const rcTotalStatArea( CsPoint( ptRoot.x + 710 + XML_UNION_RIGHT_PANEL_SHIFT, ptRoot.y + 382 ), CsSIZE( 168, 220 ) );
+	if( nTotalStatMaxScroll > 0 )
+	{
+		CsRect const rcTotalStatScrollUp( CsPoint( ptRoot.x + XML_UNION_TOTAL_STAT_SCROLL_X, ptRoot.y + XML_UNION_TOTAL_STAT_SCROLL_Y ), CsSIZE( XML_UNION_TOTAL_STAT_SCROLL_W, XML_UNION_TOTAL_STAT_SCROLL_ARROW_H ) );
+		CsRect const rcTotalStatScrollDown( CsPoint( ptRoot.x + XML_UNION_TOTAL_STAT_SCROLL_X, ptRoot.y + XML_UNION_TOTAL_STAT_SCROLL_Y + XML_UNION_TOTAL_STAT_SCROLL_H - XML_UNION_TOTAL_STAT_SCROLL_ARROW_H ), CsSIZE( XML_UNION_TOTAL_STAT_SCROLL_W, XML_UNION_TOTAL_STAT_SCROLL_ARROW_H ) );
+		if( CURSOR_ST.CheckClickBox( rcTotalStatScrollUp ) == CURSOR::LBUTTON_UP )
+		{
+			if( m_nTotalStatScroll > 0 )
+			{
+				--m_nTotalStatScroll;
+				_UpdateTotalStatControls();
+			}
+			return muReturn;
+		}
+		if( CURSOR_ST.CheckClickBox( rcTotalStatScrollDown ) == CURSOR::LBUTTON_UP )
+		{
+			if( m_nTotalStatScroll < nTotalStatMaxScroll )
+			{
+				++m_nTotalStatScroll;
+				_UpdateTotalStatControls();
+			}
+			return muReturn;
+		}
+		if( CURSOR_ST.CheckClickBox( rcTotalStatScroll ) == CURSOR::LBUTTON_UP )
+		{
+			int const nRelativeY = max( 0, min( XML_UNION_TOTAL_STAT_SCROLL_TRACK_H, ptCursor.y - ( ptRoot.y + XML_UNION_TOTAL_STAT_SCROLL_TRACK_Y ) ) );
+			int const nNewScroll = ( nRelativeY * nTotalStatMaxScroll ) / XML_UNION_TOTAL_STAT_SCROLL_TRACK_H;
+			if( nNewScroll != m_nTotalStatScroll )
+			{
+				m_nTotalStatScroll = nNewScroll;
+				_UpdateTotalStatControls();
+			}
+			return muReturn;
+		}
+		if( CURSOR_ST.GetWheel() != INVALIDE_WHEEL && CURSOR_ST.CheckClickBox( rcTotalStatArea ) != CURSOR::BUTTON_OUTWINDOW )
+		{
+			int const nOldScroll = m_nTotalStatScroll;
+			if( CURSOR_ST.GetWheel() < 0 && m_nTotalStatScroll < nTotalStatMaxScroll )
+				++m_nTotalStatScroll;
+			else if( CURSOR_ST.GetWheel() > 0 && m_nTotalStatScroll > 0 )
+				--m_nTotalStatScroll;
+
+			if( nOldScroll != m_nTotalStatScroll )
+				_UpdateTotalStatControls();
+			CURSOR_ST.ResetWheel();
+			return muReturn;
+		}
 	}
 
 	for( int i = 0; i < IF_XML_UNION_FILTER_COUNT; ++i )
@@ -1121,15 +1207,17 @@ void cXmlUnionDUnit::RecvCollectionInfo()
 		m_nServerBonusValue[ i ] = nValue;
 	}
 
-	for( int i = 0; i < 14; ++i )
-	{
-		n4 nIgnored = 0;
-		net::game->pop( nIgnored );
-	}
-
 	m_mapCardCache.clear();
 	_RefreshView();
 	_UpdateServerProgressControls();
+}
+
+int cXmlUnionDUnit::GetCollectionBonusValue( int nIndex ) const
+{
+	if( nIndex < 0 || nIndex >= IF_XML_UNION_STAT_COUNT )
+		return 0;
+
+	return m_nServerBonusValue[ nIndex ];
 }
 
 bool cXmlUnionDUnit::_FileExists( char const* pPath ) const
@@ -1416,6 +1504,7 @@ void cXmlUnionDUnit::_RefreshView()
 	_UpdateTabControls();
 	_UpdateEffectControls();
 	_UpdateCardControls();
+	_UpdateTotalStatControls();
 	_UpdateHoverTooltipControls();
 }
 
@@ -2458,18 +2547,14 @@ void cXmlUnionDUnit::_CreateLayout()
 	_UpdateEffectControls();
 
 	_AddLabel( _T( "Efeito Total de Coleta" ), CsPoint( 784 + XML_UNION_RIGHT_PANEL_SHIFT, 357 ), CFont::FS_9, NiColor( 0.0f, 1.0f, 0.25f ), DT_CENTER );
-	for( int i = 0; i < IF_XML_UNION_STAT_COUNT; ++i )
+	for( int i = 0; i < IF_XML_UNION_STAT_VISIBLE_COUNT; ++i )
 	{
-		TCHAR szName[ 48 ] = { 0, };
-		TCHAR szValue[ 48 ] = { 0, };
-		std::wstring wsName = STAT_LABEL[ i ];
-		wsName = _GetDisplayStatName( wsName );
-		_CopyWideToTChar( wsName, szName, _countof( szName ) );
-		_stprintf_s( szValue, _countof( szValue ), _IsPercentStatIndex( i ) ? _T( "+ %d%%" ) : _T( "+ %d" ), m_nServerBonusValue[ i ] );
-
-		_AddLabel( szName, CsPoint( 724 + XML_UNION_RIGHT_PANEL_SHIFT, 397 + ( i * 24 ) ), CFont::FS_9, NiColor( 0.88f, 0.92f, 1.0f ), DT_LEFT );
-		m_pStatValueText[ i ] = _AddLabel( szValue, CsPoint( 861 + XML_UNION_RIGHT_PANEL_SHIFT, 397 + ( i * 24 ) ), CFont::FS_9, NiColor( 0.88f, 0.92f, 1.0f ), DT_RIGHT );
+		int const nRowY = XML_UNION_TOTAL_STAT_ROW_Y + ( i * XML_UNION_TOTAL_STAT_ROW_STEP );
+		m_pStatNameText[ i ] = _AddLabel( _T( "" ), CsPoint( XML_UNION_TOTAL_STAT_ROW_X, nRowY ), CFont::FS_9, NiColor( 0.88f, 0.92f, 1.0f ), DT_LEFT );
+		m_pStatValueText[ i ] = _AddLabel( _T( "" ), CsPoint( XML_UNION_TOTAL_STAT_VALUE_X, nRowY ), CFont::FS_9, NiColor( 0.88f, 0.92f, 1.0f ), DT_RIGHT );
 	}
+	_CreateTotalStatScrollBar();
+	_UpdateTotalStatControls();
 }
 
 void cXmlUnionDUnit::_CreateCardSprites()
@@ -2660,32 +2745,45 @@ void cXmlUnionDUnit::_UpdateCardControls()
 		int const nCardIndex = m_nCardScroll + i;
 		bool const bHasCard = nCardIndex >= 0 && nCardIndex < (int)m_vCards.size();
 		bool const bOwnedCard = bHasCard && m_vCards[ nCardIndex ].s_bOwned;
+		bool bCompletedGroup = false;
+		if( bHasCard )
+		{
+			std::map< DWORD, sSERVER_GROUP_STATE >::const_iterator itGroup = m_mapServerGroups.find( m_vCards[ nCardIndex ].s_dwGroupID );
+			bCompletedGroup = itGroup != m_mapServerGroups.end() && itGroup->second.s_bCompleted;
+		}
+		bool const bFullCard = bOwnedCard || bCompletedGroup;
 
 		if( m_pCardBg[ i ] )
 		{
 			m_pCardBg[ i ]->SetVisible( true );
-			m_pCardBg[ i ]->SetAlpha( bOwnedCard ? 1.0f : 0.42f );
+			m_pCardBg[ i ]->SetAlpha( bFullCard ? 1.0f : 0.42f );
 		}
 		if( m_pCardFrame[ i ] )
 		{
 			char const* pFrame = XML_UNION_FRAME_N;
+			CsRect rcFrame( 0, 0, 126, 150 );
 			if( bHasCard )
 			{
-				if( m_vCards[ nCardIndex ].s_nRank >= 9 )
+				if( bCompletedGroup )
+				{
+					pFrame = XML_UNION_FRAME_COMPLETED;
+					rcFrame = CsRect( 0, 0, 138, 174 );
+				}
+				else if( m_vCards[ nCardIndex ].s_nRank >= 9 )
 					pFrame = XML_UNION_FRAME_U;
 				else if( m_vCards[ nCardIndex ].s_nRank >= 3 )
 					pFrame = XML_UNION_FRAME_S;
 			}
 			if( _FileExists( pFrame ) && m_strCardFramePath[ i ] != pFrame )
 			{
-				m_pCardFrame[ i ]->ChangeTexture( pFrame, CsRect( 0, 0, 126, 150 ) );
+				m_pCardFrame[ i ]->ChangeTexture( pFrame, rcFrame );
 				m_strCardFramePath[ i ] = pFrame;
 			}
 			m_pCardFrame[ i ]->SetVisible( true );
-			m_pCardFrame[ i ]->SetAlpha( bHasCard ? ( bOwnedCard ? 1.0f : 0.58f ) : 0.35f );
+			m_pCardFrame[ i ]->SetAlpha( bHasCard ? ( bFullCard ? 1.0f : 0.58f ) : 0.35f );
 		}
 
-		bool const bShowIcon = bOwnedCard && m_vCards[ nCardIndex ].s_strIconPath.empty() == false && _FileExists( m_vCards[ nCardIndex ].s_strIconPath.c_str() );
+		bool const bShowIcon = bFullCard && m_vCards[ nCardIndex ].s_strIconPath.empty() == false && _FileExists( m_vCards[ nCardIndex ].s_strIconPath.c_str() );
 		std::string const strIconPath = bShowIcon ? m_vCards[ nCardIndex ].s_strIconPath : std::string();
 		bool const bIconChanged = m_strCardIconPath[ i ] != strIconPath;
 		int const nIconSize = IF_XML_UNION_ICON_SLICE_COUNT;
@@ -3144,15 +3242,7 @@ void cXmlUnionDUnit::_UpdateServerProgressControls()
 		m_pProgressLevelValueText->SetText( szLevel );
 	}
 
-	for( int i = 0; i < IF_XML_UNION_STAT_COUNT; ++i )
-	{
-		if( m_pStatValueText[ i ] == NULL )
-			continue;
-
-		TCHAR szValue[ 48 ] = { 0, };
-		_stprintf_s( szValue, _countof( szValue ), _IsPercentStatIndex( i ) ? _T( "+ %d%%" ) : _T( "+ %d" ), m_nServerBonusValue[ i ] );
-		m_pStatValueText[ i ]->SetText( szValue );
-	}
+	_UpdateTotalStatControls();
 }
 
 bool cXmlUnionDUnit::_IsRewardClaimed( int nRewardIndex ) const
@@ -3532,6 +3622,76 @@ void cXmlUnionDUnit::_CreateFilterScrollBar()
 	m_pFilterScrollTrack = _AddSolidSprite( CsPoint( XML_UNION_FILTER_SCROLL_X + 1, XML_UNION_FILTER_SCROLL_TRACK_Y ), CsPoint( XML_UNION_FILTER_SCROLL_W - 2, XML_UNION_FILTER_SCROLL_TRACK_H ), NiColorA( 0.0f, 0.40f, 0.75f, 0.35f ) );
 	m_pFilterScrollThumb = _AddSolidSprite( CsPoint( XML_UNION_FILTER_SCROLL_X + 1, XML_UNION_FILTER_SCROLL_TRACK_Y ), CsPoint( XML_UNION_FILTER_SCROLL_W - 2, 28 ), NiColorA( 0.0f, 0.78f, 1.0f, 0.95f ) );
 	_UpdateFilterRowControls();
+}
+
+void cXmlUnionDUnit::_CreateTotalStatScrollBar()
+{
+	int const nBottomArrowY = XML_UNION_TOTAL_STAT_SCROLL_Y + XML_UNION_TOTAL_STAT_SCROLL_H - XML_UNION_TOTAL_STAT_SCROLL_ARROW_H;
+
+	m_pTotalStatScrollBorder = _AddSolidSprite( CsPoint( XML_UNION_TOTAL_STAT_SCROLL_X - 1, XML_UNION_TOTAL_STAT_SCROLL_Y - 1 ), CsPoint( XML_UNION_TOTAL_STAT_SCROLL_W + 2, XML_UNION_TOTAL_STAT_SCROLL_H + 2 ), NiColorA( 0.0f, 0.35f, 0.75f, 0.85f ) );
+	m_pTotalStatScrollBg = _AddSolidSprite( CsPoint( XML_UNION_TOTAL_STAT_SCROLL_X, XML_UNION_TOTAL_STAT_SCROLL_Y ), CsPoint( XML_UNION_TOTAL_STAT_SCROLL_W, XML_UNION_TOTAL_STAT_SCROLL_H ), NiColorA( 0.0f, 0.10f, 0.22f, 0.9f ) );
+	m_pTotalStatScrollUp = _AddAssetSpriteRect( CsPoint( XML_UNION_TOTAL_STAT_SCROLL_X, XML_UNION_TOTAL_STAT_SCROLL_Y ), CsPoint( XML_UNION_TOTAL_STAT_SCROLL_W, XML_UNION_TOTAL_STAT_SCROLL_ARROW_H ), CsRect( 0, 0, 14, 14 ), XML_UNION_SCROLL_UP, NiColorA( 0.0f, 0.75f, 1.0f, 0.95f ) );
+	m_pTotalStatScrollDown = _AddAssetSpriteRect( CsPoint( XML_UNION_TOTAL_STAT_SCROLL_X, nBottomArrowY ), CsPoint( XML_UNION_TOTAL_STAT_SCROLL_W, XML_UNION_TOTAL_STAT_SCROLL_ARROW_H ), CsRect( 0, 0, 14, 14 ), XML_UNION_SCROLL_DOWN, NiColorA( 0.0f, 0.75f, 1.0f, 0.95f ) );
+	m_pTotalStatScrollTrack = _AddSolidSprite( CsPoint( XML_UNION_TOTAL_STAT_SCROLL_X + 1, XML_UNION_TOTAL_STAT_SCROLL_TRACK_Y ), CsPoint( XML_UNION_TOTAL_STAT_SCROLL_W - 2, XML_UNION_TOTAL_STAT_SCROLL_TRACK_H ), NiColorA( 0.0f, 0.40f, 0.75f, 0.35f ) );
+	m_pTotalStatScrollThumb = _AddSolidSprite( CsPoint( XML_UNION_TOTAL_STAT_SCROLL_X + 1, XML_UNION_TOTAL_STAT_SCROLL_TRACK_Y ), CsPoint( XML_UNION_TOTAL_STAT_SCROLL_W - 2, 28 ), NiColorA( 0.0f, 0.78f, 1.0f, 0.95f ) );
+	_UpdateTotalStatScrollControls();
+}
+
+void cXmlUnionDUnit::_UpdateTotalStatControls()
+{
+	int const nMaxScroll = max( 0, IF_XML_UNION_STAT_COUNT - IF_XML_UNION_STAT_VISIBLE_COUNT );
+	if( m_nTotalStatScroll > nMaxScroll )
+		m_nTotalStatScroll = nMaxScroll;
+	if( m_nTotalStatScroll < 0 )
+		m_nTotalStatScroll = 0;
+
+	for( int i = 0; i < IF_XML_UNION_STAT_VISIBLE_COUNT; ++i )
+	{
+		int const nStatIndex = m_nTotalStatScroll + i;
+		bool const bVisible = nStatIndex >= 0 && nStatIndex < IF_XML_UNION_STAT_COUNT;
+
+		TCHAR szName[ 48 ] = { 0, };
+		TCHAR szValue[ 48 ] = { 0, };
+		if( bVisible )
+		{
+			std::wstring wsName = _GetDisplayStatName( STAT_LABEL[ nStatIndex ] );
+			_CopyWideToTChar( wsName, szName, _countof( szName ) );
+			_stprintf_s( szValue, _countof( szValue ), _IsPercentStatIndex( nStatIndex ) ? _T( "+ %d%%" ) : _T( "+ %d" ), m_nServerBonusValue[ nStatIndex ] );
+		}
+
+		if( m_pStatNameText[ i ] )
+		{
+			m_pStatNameText[ i ]->SetVisible( bVisible );
+			m_pStatNameText[ i ]->SetText( szName );
+		}
+		if( m_pStatValueText[ i ] )
+		{
+			m_pStatValueText[ i ]->SetVisible( bVisible );
+			m_pStatValueText[ i ]->SetText( szValue );
+		}
+	}
+
+	_UpdateTotalStatScrollControls();
+}
+
+void cXmlUnionDUnit::_UpdateTotalStatScrollControls()
+{
+	bool const bShowScroll = IF_XML_UNION_STAT_COUNT > IF_XML_UNION_STAT_VISIBLE_COUNT;
+	if( m_pTotalStatScrollBorder ) m_pTotalStatScrollBorder->SetVisible( bShowScroll );
+	if( m_pTotalStatScrollBg ) m_pTotalStatScrollBg->SetVisible( bShowScroll );
+	if( m_pTotalStatScrollTrack ) m_pTotalStatScrollTrack->SetVisible( bShowScroll );
+	if( m_pTotalStatScrollThumb ) m_pTotalStatScrollThumb->SetVisible( bShowScroll );
+	if( m_pTotalStatScrollUp ) m_pTotalStatScrollUp->SetVisible( bShowScroll );
+	if( m_pTotalStatScrollDown ) m_pTotalStatScrollDown->SetVisible( bShowScroll );
+	if( bShowScroll == false || m_pTotalStatScrollThumb == NULL )
+		return;
+
+	int const nMaxScroll = max( 1, IF_XML_UNION_STAT_COUNT - IF_XML_UNION_STAT_VISIBLE_COUNT );
+	int const nThumbH = max( 28, ( XML_UNION_TOTAL_STAT_SCROLL_TRACK_H * IF_XML_UNION_STAT_VISIBLE_COUNT ) / IF_XML_UNION_STAT_COUNT );
+	int const nTravel = max( 1, XML_UNION_TOTAL_STAT_SCROLL_TRACK_H - nThumbH );
+	int const nThumbY = XML_UNION_TOTAL_STAT_SCROLL_TRACK_Y + ( nTravel * m_nTotalStatScroll ) / nMaxScroll;
+	m_pTotalStatScrollThumb->SetPos( CsPoint( XML_UNION_TOTAL_STAT_SCROLL_X + 1, nThumbY ) );
+	m_pTotalStatScrollThumb->SetSize( CsPoint( XML_UNION_TOTAL_STAT_SCROLL_W - 2, nThumbH ) );
 }
 
 void cXmlUnionDUnit::_CreateCardScrollBar()

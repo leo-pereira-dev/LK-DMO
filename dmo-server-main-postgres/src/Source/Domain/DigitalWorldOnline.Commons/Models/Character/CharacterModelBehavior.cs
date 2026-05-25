@@ -64,6 +64,19 @@ namespace DigitalWorldOnline.Commons.Models.Character
         public byte HpRate => (byte)(CurrentHp * 255 / HP);
 
         /// <summary>
+        /// Updates the currently enabled Digimon Encyclopedia deck effect.
+        /// </summary>
+        public void SetEncyclopediaDeck(int deckId)
+        {
+            EncyclopediaDeckId = Math.Max(0, deckId);
+        }
+
+        public int EncyclopediaDeckPassiveBonus(int option, int baseValue)
+        {
+            return UtilitiesFunctions.GetEncyclopediaDeckPassiveBonus(EncyclopediaDeckId, option, baseValue);
+        }
+
+        /// <summary>
         /// Returns the condition result for partner miss hit.
         /// </summary>
         public bool CanMissHit()

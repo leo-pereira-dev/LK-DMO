@@ -3,6 +3,8 @@
 
 namespace
 {
+	static const bool kEnableTextRenderTrace = false;
+
 	bool IsShortRenderedMojibake( std::wstring const& text )
 	{
 		if( text.length() < 4 || text.length() > 96 )
@@ -102,6 +104,9 @@ namespace
 
 	void TraceRenderedText( std::wstring const& text, bool blocked, CsPoint pos )
 	{
+		if( !kEnableTextRenderTrace )
+			return;
+
 		static DWORD s_dwLastSampleTick = 0;
 		DWORD dwNow = GetTickCount();
 		if( !blocked )

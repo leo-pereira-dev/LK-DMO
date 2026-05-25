@@ -278,8 +278,8 @@ void cEnchantOption::_CreateEnchantUI()
 		cText::sTEXTINFO ti;
 		ti.Init( CFont::FS_12, NiColor::WHITE );
 		ti.s_eTextAlign = DT_CENTER;
-		ti.SetText( L"Pedra" );
-		m_pStoneTypeName = AddText( &ti, CsPoint( 263, 58 ) );
+		ti.SetText( L"Stone" );
+		m_pStoneTypeName = AddText( &ti, CsPoint( 264, 58 ) );
 	}
 
 	{	// 악세서리
@@ -295,7 +295,7 @@ void cEnchantOption::_CreateEnchantUI()
 		ti.Init( CFont::FS_10, NiColor( 0.45f, 0.75f, 1.0f ) );
 		ti.s_eTextAlign = DT_LEFT;
 		ti.SetText( L"" );
-		m_pStoneCountText = AddText( &ti, CsPoint( 290, 92 ) );
+		m_pStoneCountText = AddText( &ti, CsPoint( 291, 92 ) );
 	}
 
 	m_pTimeProgress = NiNew cUI_TimerProgressBar;
@@ -339,7 +339,7 @@ void cEnchantOption::_MakeEnchantItem()
 	m_pRegistStone = NiNew cListBox;
 	SAFE_POINTER_RET( m_pRegistStone );
 
-	m_pRegistStone->Init( m_pRoot, CsPoint( 242, 72 ), CsPoint( 42, 42 ), NULL, false );
+	m_pRegistStone->Init( m_pRoot, CsPoint( 243, 72 ), CsPoint( 42, 42 ), NULL, false );
 	m_pRegistStone->SetBackOverAndSelectedImgRender( false );
 	m_pRegistStone->AddEvent( cListBox::LIST_ITEM_RIGHT_UP, this, &cEnchantOption::_OnRClickEnchantStone );
 	AddChildControl( m_pRegistStone );

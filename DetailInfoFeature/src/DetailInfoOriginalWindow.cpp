@@ -2,13 +2,22 @@
 
 namespace detail_info_feature {
 
-const std::array<OriginalFunctionRef, 31>& GetOriginalFunctionMap()
+const std::array<OriginalFunctionRef, 70>& GetOriginalFunctionMap()
 {
-    static constexpr std::array<OriginalFunctionRef, 31> functions = {{
+    static constexpr std::array<OriginalFunctionRef, 70> functions = {{
         {"0128bab0", "FUN_0128bab0", "CreateTamerStatusUI", "decompiled/StatusUI/CreateTamerStatusUI.original.c", "Creates and registers TamerStatusUI."},
         {"0128bcc0", "FUN_0128bcc0", "CreateDigimonStatusUI", "decompiled/StatusUI/CreateDigimonStatusUI.original.c", "Creates and registers DigimonStatusUI."},
         {"0128bd60", "FUN_0128bd60", "CreateDigimonStatusHelpUI", "decompiled/StatusUI/CreateDigimonStatusHelpUI.original.c", "Creates DigimonStatusUI_Help."},
+        {"011d0110", "FUN_011d0110", "RefreshAdditionalStatList", "decompiled/DetailInfoAdditionalStat/RefreshAdditionalStatList.original.c", "Refreshes the additional stat popup list."},
+        {"011d0390", "FUN_011d0390", "BuildAdditionalStatListRow", "decompiled/DetailInfoAdditionalStat/BuildAdditionalStatListRow.original.c", "Builds an additional stat popup row."},
         {"011d12b0", "FUN_011d12b0", "BuildAdditionalStatPanel", "decompiled/DetailInfoUI/BuildAdditionalStatPanel.original.c", "Builds the additional/attribute stat popup panel."},
+        {"011d14a0", "FUN_011d14a0", "BindAdditionalStatPopupEvents", "decompiled/DetailInfoAdditionalStat/BindAdditionalStatPopupEvents.original.c", "Binds events for the additional stat popup."},
+        {"011d14f0", "FUN_011d14f0", "BuildAdditionalStatTabButtons", "decompiled/DetailInfoAdditionalStat/BuildAdditionalStatTabButtons.original.c", "Builds additional stat popup tab buttons."},
+        {"011d1690", "FUN_011d1690", "HandleAdditionalStatTabChange", "decompiled/DetailInfoAdditionalStat/HandleAdditionalStatTabChange.original.c", "Handles tab changes inside the additional stat popup."},
+        {"011d17c0", "FUN_011d17c0", "RefreshAdditionalStatPopup", "decompiled/DetailInfoAdditionalStat/RefreshAdditionalStatPopup.original.c", "Refreshes additional stat popup content."},
+        {"011d1890", "FUN_011d1890", "BuildAdditionalStatAttributeRows", "decompiled/DetailInfoAdditionalStat/BuildAdditionalStatAttributeRows.original.c", "Builds attribute rows for the additional stat popup."},
+        {"011d2710", "FUN_011d2710", "ConstructDetailInfoDigimonSubUI", "decompiled/DetailInfoUI/ConstructDetailInfoDigimonSubUI.original.c", "Constructs the Digimon tab sub UI object."},
+        {"011d28b0", "FUN_011d28b0", "RenderDetailInfoDigimonSubUI", "decompiled/DetailInfoUI/RenderDetailInfoDigimonSubUI.original.c", "Renders and updates the Digimon tab sub UI."},
         {"011d2a20", "FUN_011d2a20", "BuildDigimonDetailRoot", "decompiled/DetailInfoUI/BuildDigimonDetailRoot.original.c", "Builds Digimon tab root background and subpanels."},
         {"011d2b30", "FUN_011d2b30", "BuildDigimonInfoPanel", "decompiled/DetailInfoUI/BuildDigimonInfoPanel.original.c", "Builds Digimon portrait/name/level area."},
         {"011d30b0", "FUN_011d30b0", "BuildDigimonInfoBox", "decompiled/DetailInfoUI/BuildDigimonInfoBox.original.c", "Builds the Digimon information text box."},
@@ -17,9 +26,29 @@ const std::array<OriginalFunctionRef, 31>& GetOriginalFunctionMap()
         {"011d4320", "FUN_011d4320", "BuildDigimonEnchantPanel", "decompiled/DetailInfoUI/BuildDigimonEnchantPanel.original.c", "Builds enchant stat rows and icons."},
         {"011d4bd0", "FUN_011d4bd0", "BuildDigimonAdvancePanel", "decompiled/DetailInfoUI/BuildDigimonAdvancePanel.original.c", "Builds Digimon breakthrough/advance area."},
         {"011d50f0", "FUN_011d50f0", "FinalizeDigimonDetailPanel", "decompiled/DetailInfoUI/FinalizeDigimonDetailPanel.original.c", "Finishes Digimon tab button/event wiring."},
+        {"011d5350", "FUN_011d5350", "RenderDigimonEnchantOrAdvanceValue", "decompiled/DetailInfoUI/RenderDigimonEnchantOrAdvanceValue.original.c", "Renders enchant or advance values for the Digimon tab."},
+        {"011d5590", "FUN_011d5590", "RenderDigimonPercentValue", "decompiled/DetailInfoUI/RenderDigimonPercentValue.original.c", "Renders percent-style Digimon values."},
+        {"011d5940", "FUN_011d5940", "ResolveDigimonDataStatText", "decompiled/DetailInfoUI/ResolveDigimonDataStatText.original.c", "Maps Digimon data stat indexes to official text keys."},
+        {"011d5d40", "FUN_011d5d40", "HandleDigimonZoomButton", "decompiled/DetailInfoUI/HandleDigimonZoomButton.original.c", "Handles the Digimon zoom/help button."},
+        {"011d5e00", "FUN_011d5e00", "BindDigimonZoomButton", "decompiled/DetailInfoUI/BindDigimonZoomButton.original.c", "Binds Digimon zoom/help button events."},
         {"011d61d0", "FUN_011d61d0", "BuildEquipmentPanel", "decompiled/DetailInfoUI/BuildEquipmentPanel.original.c", "Builds equipment detail popup shell."},
+        {"011d62e0", "FUN_011d62e0", "PrepareEquipmentPopupData", "decompiled/DetailInfoUI/PrepareEquipmentPopupData.original.c", "Prepares equipment popup data."},
+        {"011d6580", "FUN_011d6580", "BindEquipmentPopupCloseButton", "decompiled/DetailInfoUI/BindEquipmentPopupCloseButton.original.c", "Builds or binds the equipment popup close button."},
         {"011d65d0", "FUN_011d65d0", "BuildEquipmentDetailList", "decompiled/DetailInfoUI/BuildEquipmentDetailList.original.c", "Builds equipment stat/detail list."},
+        {"011d7cf0", "FUN_011d7cf0", "RenderEquipmentDetailValue", "decompiled/DetailInfoUI/RenderEquipmentDetailValue.original.c", "Formats an equipment detail value."},
+        {"011d7de0", "FUN_011d7de0", "BindEquipmentPopupCloseButtonEvent", "decompiled/DetailInfoUI/BindEquipmentPopupCloseButtonEvent.original.c", "Binds the equipment popup close-button event."},
         {"011d82a0", "FUN_011d82a0", "BuildVisibilityToggleButton", "decompiled/DetailInfoUI/BuildVisibilityToggleButton.original.c", "Selects Autocrop ON/OFF button sprite."},
+        {"011d8250", "FUN_011d8250", "SetVisibilityToggleState", "decompiled/DetailInfoMainUI/SetVisibilityToggleState.original.c", "Sets local DetailInfo visibility toggle state."},
+        {"011d8320", "FUN_011d8320", "BuildLocalDetailInfoTabButtons", "decompiled/DetailInfoMainUI/BuildLocalDetailInfoTabButtons.original.c", "Builds local DetailInfo Tamer and Digimon tab buttons."},
+        {"011d86e0", "FUN_011d86e0", "CreateLocalDetailInfoTabContents", "decompiled/DetailInfoMainUI/CreateLocalDetailInfoTabContents.original.c", "Creates local Tamer and Digimon tab contents."},
+        {"011d8c20", "FUN_011d8c20", "RefreshLocalDetailInfoMainUI", "decompiled/DetailInfoMainUI/RefreshLocalDetailInfoMainUI.original.c", "Refreshes local DetailInfo main UI state."},
+        {"011d8e30", "FUN_011d8e30", "HandleLocalDetailInfoTabChange", "decompiled/DetailInfoMainUI/HandleLocalDetailInfoTabChange.original.c", "Handles local Tamer and Digimon tab switching."},
+        {"011d8ff0", "FUN_011d8ff0", "BindLocalDetailInfoButtonEvent", "decompiled/DetailInfoMainUI/BindLocalDetailInfoButtonEvent.original.c", "Binds local DetailInfo button event handlers."},
+        {"011d93f0", "FUN_011d93f0", "SetOtherDetailInfoVisibilityToggleState", "decompiled/DetailInfoMainUI/SetOtherDetailInfoVisibilityToggleState.original.c", "Sets other-player DetailInfo visibility toggle state."},
+        {"011d9440", "FUN_011d9440", "BuildOtherDetailInfoTabButtons", "decompiled/DetailInfoMainUI/BuildOtherDetailInfoTabButtons.original.c", "Builds other-player DetailInfo Tamer and Digimon tab buttons."},
+        {"011d9800", "FUN_011d9800", "CreateOtherDetailInfoTabContents", "decompiled/DetailInfoMainUI/CreateOtherDetailInfoTabContents.original.c", "Creates other-player Tamer and Digimon tab contents."},
+        {"011d9b80", "FUN_011d9b80", "HandleOtherDetailInfoTabChange", "decompiled/DetailInfoMainUI/HandleOtherDetailInfoTabChange.original.c", "Handles other-player Tamer and Digimon tab switching."},
+        {"011d9ce0", "FUN_011d9ce0", "BindOtherDetailInfoButtonEvent", "decompiled/DetailInfoMainUI/BindOtherDetailInfoButtonEvent.original.c", "Binds other-player DetailInfo button event handlers."},
         {"011da000", "FUN_011da000", "BuildSealMasterPanel", "decompiled/DetailInfoUI/BuildSealMasterPanel.original.c", "Builds Seal Master panel shell."},
         {"011da100", "FUN_011da100", "BuildSealMasterCloseButton", "decompiled/DetailInfoUI/BuildSealMasterCloseButton.original.c", "Builds Seal Master close button."},
         {"011da150", "FUN_011da150", "BuildSealMasterStatRows", "decompiled/DetailInfoUI/BuildSealMasterStatRows.original.c", "Builds Seal Master stat rows."},
@@ -27,6 +56,9 @@ const std::array<OriginalFunctionRef, 31>& GetOriginalFunctionMap()
         {"011da506", "switchD_011da4c0::caseD_1", "ResolveSealMasterDsTextCase", "decompiled/DetailInfoUI/ResolveSealMasterDsTextCase.original.c", "Decompiler split case for Seal Master DS text."},
         {"011da5e0", "FUN_011da5e0", "ResolveSealMasterStatValue", "decompiled/DetailInfoUI/ResolveSealMasterStatValue.original.c", "Formats Seal Master stat values."},
         {"011da8e0", "FUN_011da8e0", "BindSealMasterCloseButton", "decompiled/DetailInfoUI/BindSealMasterCloseButton.original.c", "Binds Seal Master close button event."},
+        {"011dab40", "FUN_011dab40", "ConstructDetailInfoTamerSubUI", "decompiled/DetailInfoUI/ConstructDetailInfoTamerSubUI.original.c", "Constructs the Tamer tab sub UI object."},
+        {"011dac40", "FUN_011dac40", "DestroyDetailInfoTamerSubUI", "decompiled/DetailInfoUI/DestroyDetailInfoTamerSubUI.original.c", "Destroys or cleans up the Tamer tab sub UI object."},
+        {"011dad40", "FUN_011dad40", "RenderDetailInfoTamerSubUI", "decompiled/DetailInfoUI/RenderDetailInfoTamerSubUI.original.c", "Renders and updates the Tamer tab sub UI."},
         {"011daec0", "FUN_011daec0", "BuildTamerDetailRoot", "decompiled/DetailInfoUI/BuildTamerDetailRoot.original.c", "Builds Tamer tab root background and subpanels."},
         {"011daf90", "FUN_011daf90", "PrepareTamerDetailControls", "decompiled/DetailInfoUI/PrepareTamerDetailControls.original.c", "Prepares Tamer tab controls/events."},
         {"011db440", "FUN_011db440", "BuildTamerEquipmentSection", "decompiled/DetailInfoUI/BuildTamerEquipmentSection.original.c", "Builds equipped item slots and equipment button."},
@@ -34,15 +66,22 @@ const std::array<OriginalFunctionRef, 31>& GetOriginalFunctionMap()
         {"011dbca0", "FUN_011dbca0", "BuildTamerObtainedAttributes", "decompiled/DetailInfoUI/BuildTamerObtainedAttributes.original.c", "Builds obtained attribute stat table."},
         {"011dc210", "FUN_011dc210", "BuildTamerDigimonPreviewSection", "decompiled/DetailInfoUI/BuildTamerDigimonPreviewSection.original.c", "Builds Tamer/Digimon preview field."},
         {"011dc7f0", "FUN_011dc7f0", "BuildEquippedAchievementSection", "decompiled/DetailInfoUI/BuildEquippedAchievementSection.original.c", "Builds equipped achievement panel."},
+        {"011dcbe0", "FUN_011dcbe0", "RenderTamerAttributeValue", "decompiled/DetailInfoUI/RenderTamerAttributeValue.original.c", "Renders Tamer obtained attribute values."},
+        {"011dcf20", "FUN_011dcf20", "ResolveTamerObtainedAttributeValue", "decompiled/DetailInfoUI/ResolveTamerObtainedAttributeValue.original.c", "Resolves Tamer obtained attribute values."},
         {"011dd050", "FUN_011dd050", "ResolveDetailInfoStatText", "decompiled/DetailInfoUI/ResolveDetailInfoStatText.original.c", "Maps stat indexes to official text keys."},
+        {"011dd0a6", "switchD_011dd060::caseD_1", "ResolveDetailInfoDsTextCase", "decompiled/DetailInfoUI/ResolveDetailInfoDsTextCase.original.c", "Decompiler split case for DetailInfo DS text."},
+        {"011dd1d0", "FUN_011dd1d0", "ResolveDetailInfoStatValue", "decompiled/DetailInfoUI/ResolveDetailInfoStatValue.original.c", "Formats obtained attribute stat values."},
+        {"011dd560", "FUN_011dd560", "HandleTamerEquipmentButton", "decompiled/DetailInfoUI/HandleTamerEquipmentButton.original.c", "Handles the Tamer equipment button."},
+        {"011dd5b0", "FUN_011dd5b0", "BindTamerEquipmentButton", "decompiled/DetailInfoUI/BindTamerEquipmentButton.original.c", "Binds the Tamer equipment button event."},
+        {"011dd770", "FUN_011dd770", "HandleSealMasterButton", "decompiled/DetailInfoUI/HandleSealMasterButton.original.c", "Handles the Seal Master button from the Tamer tab."},
         {"011ed0a0", "FUN_011ed0a0", "BuildSharedDetailRewardPanel", "decompiled/Shared/BuildSharedDetailRewardPanel.original.c", "Shared reward panel using DetailInfo_bg_b."},
     }};
     return functions;
 }
 
-const std::array<OriginalAssetRef, 36>& GetOriginalAssetMap()
+const std::array<OriginalAssetRef, 42>& GetOriginalAssetMap()
 {
-    static constexpr std::array<OriginalAssetRef, 36> assets = {{
+    static constexpr std::array<OriginalAssetRef, 42> assets = {{
         {"CommonUI/NinePatch/center_gradient2.tga", "BuildEquipmentDetailList", "Gradient row background used in equipment details."},
         {"CommonUI/CommonUI_close.tga", "BuildSealMasterCloseButton", "Close button used by Seal Master detail panel."},
         {"DetailInfo/Autocrop_OFF_Btn.bmp", "BuildVisibilityToggleButton", "Top-left visibility toggle OFF sprite."},
@@ -71,10 +110,16 @@ const std::array<OriginalAssetRef, 36>& GetOriginalAssetMap()
         {"DetailInfo/TamerStatus_Win_04_bg.tga", "BuildTamerDetailRoot", "Tamer tab frame."},
         {"DetailInfo/zoom_in_aa.tga", "BuildDigimonDetailRoot", "Zoom/help button beside Digimon data."},
         {"DigimonStatus_New/Digimon_Status_Enchant_01.tga", "BuildDigimonEnchantPanel", "Enchant section background."},
+        {"DMG_SKINS/Mini_Out_btn_b.tga", "BuildAdditionalStatListRow", "Mini button alternate state used by additional stat rows."},
         {"DMG_SKINS/Mini_Out_btn_a.tga", "BuildTamerEquipmentSection", "Mini exit/button asset reused by Tamer equipment panel."},
+        {"DMG_SKINS/skin_btn_a.tga", "BuildAdditionalStatListRow", "Additional stat row button normal skin."},
+        {"DMG_SKINS/skin_btn_b.tga", "BuildAdditionalStatListRow", "Additional stat row button selected/hover skin."},
         {"EquipSystem/Upgrade_Slot.tga", "BuildDigimonSkillSection", "Skill slot background."},
         {"Icon/Mask_Over.dds", "BuildTamerAttributePanel", "Icon mask overlay."},
         {"Mail/Mail_List_Box.tga", "BuildEquipmentDetailList", "List box background reused by equipment details."},
+        {"Number.dds", "BuildAdditionalStatListRow", "Number atlas used in additional stat rows."},
+        {"System/Btn_Radio1.tga", "BuildLocalDetailInfoTabButtons", "Radio/tab button skin for local Tamer/Digimon tabs."},
+        {"System/Btn_Radio1.tga", "BuildOtherDetailInfoTabButtons", "Radio/tab button skin for other-player Tamer/Digimon tabs."},
         {"TacticsHouse/CheckOnline.tga", "BuildDigimonAdvancePanel", "Check marker reused by advance area."},
         {"TacticsHouse/CheckOnline.tga", "BuildDigimonEnchantPanel", "Check marker reused by enchant area."},
         {"TacticsHouse/Storage_M_field.tga", "BuildDigimonInfoPanel", "Field background reused by Digimon info section."},

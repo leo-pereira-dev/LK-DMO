@@ -526,6 +526,8 @@ namespace DigitalWorldOnline.Commons.Utils
 
         public static bool HasAcessoryAttribute(this DigimonAttributeEnum hitter, AccessoryStatusTypeEnum accessory)
         {
+            accessory = accessory.NormalizeAccessoryStatus();
+
             return accessory == AccessoryStatusTypeEnum.Data && hitter == DigimonAttributeEnum.Data ||
                    accessory == AccessoryStatusTypeEnum.Vacina && hitter == DigimonAttributeEnum.Vaccine ||
                    accessory == AccessoryStatusTypeEnum.Virus && hitter == DigimonAttributeEnum.Virus ||
@@ -534,6 +536,8 @@ namespace DigitalWorldOnline.Commons.Utils
 
         public static bool HasAcessoryElement(this DigimonElementEnum hitter, AccessoryStatusTypeEnum accessory)
         {
+            accessory = accessory.NormalizeAccessoryStatus();
+
             return accessory == AccessoryStatusTypeEnum.Ice && hitter == DigimonElementEnum.Ice ||
                    accessory == AccessoryStatusTypeEnum.Water && hitter == DigimonElementEnum.Water ||
                    accessory == AccessoryStatusTypeEnum.Fire && hitter == DigimonElementEnum.Fire ||

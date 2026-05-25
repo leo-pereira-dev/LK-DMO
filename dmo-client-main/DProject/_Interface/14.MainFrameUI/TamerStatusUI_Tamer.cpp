@@ -10,6 +10,7 @@ m_pApplyAbilList(NULL),
 #ifdef WEB_INFOMATION
 	m_pWebInfoButton(NULL),
 #endif
+m_pDetailInfoButton(NULL),
 m_pLevelText(NULL),
 m_pNameText(NULL),
 m_pGuildText(NULL),
@@ -92,6 +93,10 @@ void cTamerStatusUI_Tamer::Create(cWindow* pkRoot, int nValue /*= 0 */)
 	m_pWebInfoButton = AddButton( CsPoint( 342, 84 ), CsPoint( 27, 27 ), CsPoint( 0, 27 ), "TamerStatus_New\\TamerStatus_Info.tga" );
 	m_pWebInfoButton->AddEvent( cButton::BUTTON_LBUP_EVENT, this, &cTamerStatusUI_Tamer::_OnClickWebInfo );
 #endif
+
+	m_pDetailInfoButton = AddButton( CsPoint( 156, 458 ), CsPoint( 110, 33 ), cButton::IMAGE_NOR_9, _T("Detalhes") );
+	if( m_pDetailInfoButton )
+		m_pDetailInfoButton->AddEvent( cButton::BUTTON_LBUP_EVENT, this, &cTamerStatusUI_Tamer::_OnClickDetailInfo );
 
 	m_pTamerRenderTex = NiNew cRenderTex;
 	if( m_pTamerRenderTex )
@@ -221,6 +226,9 @@ BOOL cTamerStatusUI_Tamer::Update_ForMouse()
 #endif
 
 	// 툴팁 필요
+	if( m_pDetailInfoButton && m_pDetailInfoButton->Update_ForMouse() )
+		return TRUE;
+
 	if( m_pTamerAbilList && m_pTamerAbilList->Update_ForMouse( CURSOR_ST.GetPos() ) )
 		return _SetStatTooltip( m_pTamerAbilList->GetMouseOverItem() );
 
@@ -597,6 +605,23 @@ void cTamerStatusUI_Tamer::_OnClickWebInfo(void* pSender, void* pData)
 }
 #endif
 
+void cTamerStatusUI_Tamer::_OnClickDetailInfo(void* pSender, void* pData)
+{
+	SAFE_POINTER_RET( g_pGameIF );
+
+	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_DETAIL_INFO ) )
+	{
+		g_pGameIF->CloseDynamicIF( cBaseWindow::WT_DETAIL_INFO );
+		CURSOR_ST.ReleaseIcon();
+		return;
+	}
+	else
+		g_pGameIF->GetDynamicIF( cBaseWindow::WT_DETAIL_INFO );
+
+	CURSOR_ST.ReleaseIcon();
+	g_pGameIF->CloseDynamicIF( cBaseWindow::WT_NEW_TAMERSTATUS );
+}
+
 void cTamerStatusUI_Tamer::_OnLClickDownEquipItem(void* pSender, void* pData)
 {
 	SAFE_POINTER_RET( pData );
@@ -680,4 +705,3 @@ void cTamerStatusUI_Tamer::sAbility::SetText(int nAbilPoint)
 		pAbilText->SetText( wsPoint.c_str() );
 	}
 }
-

@@ -125,6 +125,7 @@ public:
 	int				GetFriendShip() const;
 
 	int				GetTamerStat( eAbilType eType ) const;
+	int				GetTamerDetailInfoStat( int nIndex ) const;
 	void			GetBaseStat( int& nType, int& nBaseStat, eAbilType eType );
 
 	std::wstring	GetTamerName() const;

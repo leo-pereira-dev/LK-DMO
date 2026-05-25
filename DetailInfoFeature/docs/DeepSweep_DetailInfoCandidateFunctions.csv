@@ -1,0 +1,126 @@
+Address,SourceFile,Bytes,Status,Local011dCallees,InterestingEvidence
+011d0110,011d0110_FUN_011d0110.c,3902,local-chain-callee,011d0390,
+011d0390,011d0390_FUN_011d0390.c,11354,local-chain-callee,011d0e20 011d0fb0,
+011d0c70,011d0c70_FUN_011d0c70.c,494,adjacent-or-generic,,
+011d0de0,011d0de0_FUN_011d0de0.c,797,adjacent-or-generic,,
+011d0e20,011d0e20_FUN_011d0e20.c,2587,adjacent-or-generic,,
+011d0fb0,011d0fb0_FUN_011d0fb0.c,1728,adjacent-or-generic,,
+011d1130,011d1130_FUN_011d1130.c,1110,adjacent-or-generic,,
+011d1200,011d1200_FUN_011d1200.c,871,adjacent-or-generic,,
+011d1280,011d1280_FUN_011d1280.c,595,adjacent-or-generic,,
+011d12b0,011d12b0_FUN_011d12b0.c,2486,copied-or-new-seed,011d14a0 011d14f0 011d1890 011d17c0,"FUN_012459a0(param_2,s_DetailInfo_skin_bg_a_tga_01ae2a3c,1,0,0,1,0x1cf,0,300,0x1e9); | FUN_00f19cc0(s_DETAIL_INFO_ADDITION_01ae2a24,0x14); | FUN_00f19cc0(s_COMMON_ATTRIBUTE_STAT_01ae2a58,0x15);"
+011d14a0,011d14a0_FUN_011d14a0.c,557,local-chain-callee,011d1890,
+011d14f0,011d14f0_FUN_011d14f0.c,2615,local-chain-callee,011d1200 011d1a10,
+011d1690,011d1690_FUN_011d1690.c,2089,adjacent-or-generic,,
+011d17c0,011d17c0_FUN_011d17c0.c,1265,adjacent-or-generic,,
+011d1890,011d1890_FUN_011d1890.c,2554,adjacent-or-generic,,
+011d1a10,011d1a10_FUN_011d1a10.c,1856,adjacent-or-generic,,
+011d1b30,011d1b30_FUN_011d1b30.c,1112,local-chain-callee,011d1c00,
+011d1c00,011d1c00_FUN_011d1c00.c,430,adjacent-or-generic,,
+011d1c30,011d1c30_FUN_011d1c30.c,446,adjacent-or-generic,,
+011d2710,011d2710_FUN_011d2710.c,1169,local-chain-callee,011d1200,
+011d27f0,011d27f0_FUN_011d27f0.c,1130,local-chain-callee,011d1c00,
+011d28b0,011d28b0_FUN_011d28b0.c,2515,local-chain-callee,011d5350 011d5590,
+011d2a20,011d2a20_FUN_011d2a20.c,1944,copied-or-new-seed,011d2b30 011d3690 011d3b00 011d30b0 011d4320 011d4bd0 011d50f0 011d5d40 011d5e00,"FUN_01246800(s_DetailInfo_TamerStatus_Win_03_bg_01ae2b68,&local_30); | FUN_01246800(s_DetailInfo_Digimon_Status_Win_tg_01ae2b44,&local_30); | iVar1 = FUN_012462c0(s_DetailInfo_zoom_in_aa_tga_01ae2cc8);"
+011d2b30,011d2b30_FUN_011d2b30.c,8810,copied-or-new-seed,,"local_14c = s_DetailInfo_Storage_M_field_a_tga_01ae2bbc; | local_14c = s_DetailInfo_TamerStatus_Digimon_T_01ae2b90; | FUN_01246800(s_TacticsHouse_Storage_M_field_tga_01ad8e18,&local_154);"
+011d30b0,011d30b0_FUN_011d30b0.c,7437,copied-or-new-seed,,"FUN_01246720(s_DetailInfo_RemainTimerBG_tga_01ae2bf8,1,10,0xaa,0xf1,0x5c); | FUN_00f19cc0(s_DIGIMONSTATUS_BASEINFO_HATCHLV_01ace938,0x1e);"
+011d3690,011d3690_FUN_011d3690.c,6800,copied-or-new-seed,011d5940,"FUN_00f19cc0(s_DETAIL_INFO_DIGIDATA_01ae2be0,0x14);"
+011d3b00,011d3b00_FUN_011d3b00.c,9852,copied-or-new-seed,,"FUN_015010a0(&local_90,&DAT_01ae7290,&DAT_01bfbd40,s_EquipSystem_Upgrade_Slot_tga_01ae2c40);"
+011d4320,011d4320_FUN_011d4320.c,9119,copied-or-new-seed,,"FUN_00f19cc0(s_ENCHANTTACTICS_TITLE_DIGIMON_ENC_01ae2c18,0x24); | FUN_015010a0(&local_3c,&DAT_01ae7290,&DAT_01bfbd40,s_DigimonStatus_New_Digimon_Status_01ae2c80);"
+011d4bd0,011d4bd0_FUN_011d4bd0.c,7555,copied-or-new-seed,,"FUN_00f19cc0(s_Breakthrough_Title_01ad2a7c,0x12);"
+011d50f0,011d50f0_FUN_011d50f0.c,3842,copied-or-new-seed,011d12b0,
+011d5350,011d5350_FUN_011d5350.c,3146,copied-or-new-seed,,
+011d5590,011d5590_FUN_011d5590.c,7261,copied-or-new-seed,011d5f90,
+011d5940,011d5940_FUN_011d5940.c,6370,copied-or-new-seed,,
+011d5cf0,011d5cf0_FUN_011d5cf0.c,590,adjacent-or-generic,,
+011d5d40,011d5d40_FUN_011d5d40.c,638,copied-or-new-seed,,
+011d5e00,011d5e00_FUN_011d5e00.c,2587,copied-or-new-seed,,
+011d5f90,011d5f90_FUN_011d5f90.c,1873,adjacent-or-generic,,
+011d60f0,011d60f0_FUN_011d60f0.c,1166,adjacent-or-generic,,
+011d61d0,011d61d0_FUN_011d61d0.c,1420,copied-or-new-seed,011d6580 011d65d0,"FUN_012459a0(param_1,s_DetailInfo_DetailInfo_bg_b_tga_01ae2e20,1,0,0,1,0x1cf,0,0x157,0x223); | FUN_00f19cc0(s_DETAIL_INFO_EQUIP_TOP_01ae2e08,0x15);"
+011d62e0,011d62e0_FUN_011d62e0.c,1684,copied-or-new-seed,,
+011d6580,011d6580_FUN_011d6580.c,595,local-chain-callee,011d7de0,
+011d65d0,011d65d0_FUN_011d65d0.c,29525,copied-or-new-seed,011d7cf0,pcStack_194 = s_INVENTORY_FILTER_TEXT_EQUIP_01ae2e58; | pcStack_194 = s_DETAIL_INFO_EQUIP_LV_01ae2e74; | pcStack_194 = s_DETAIL_INFO_EQUIP_NAME_01ae2eb8;
+011d7860,011d7860_FUN_011d7860.c,6958,adjacent-or-generic,,
+011d7cf0,011d7cf0_FUN_011d7cf0.c,1613,adjacent-or-generic,,
+011d7de0,011d7de0_FUN_011d7de0.c,2587,adjacent-or-generic,,
+011d7f70,011d7f70_FUN_011d7f70.c,678,adjacent-or-generic,,
+011d7ff0,011d7ff0_FUN_011d7ff0.c,871,adjacent-or-generic,,
+011d8080,011d8080_FUN_011d8080.c,508,adjacent-or-generic,,
+011d80b0,011d80b0_FUN_011d80b0.c,448,adjacent-or-generic,,
+011d8250,011d8250_FUN_011d8250.c,506,local-chain-callee,011d8ff0,
+011d82a0,011d82a0_FUN_011d82a0.c,796,copied-or-new-seed,011d8ff0,pcVar1 = s_DetailInfo_Autocrop_ON_Btn_bmp_01ae2fe4; | pcVar1 = s_DetailInfo_Autocrop_OFF_Btn_bmp_01ae2fc4;
+011d8320,011d8320_FUN_011d8320.c,5633,copied-or-new-seed,011d8ff0 011d8e30,pcVar11 = s_COMMON_TXT_TAMER_01ae3064; | pcVar11 = s_COMMON_TXT_DIGIMON_01ad9b10;
+011d86e0,011d86e0_FUN_011d86e0.c,2737,local-chain-callee,011dab40 011d2710,
+011d8c20,011d8c20_FUN_011d8c20.c,2352,local-chain-callee,011d82a0,
+011d8e30,011d8e30_FUN_011d8e30.c,2318,adjacent-or-generic,,
+011d8f90,011d8f90_FUN_011d8f90.c,861,adjacent-or-generic,,
+011d8ff0,011d8ff0_FUN_011d8ff0.c,2554,copied-or-new-seed,,
+011d91c0,011d91c0_FUN_011d91c0.c,677,adjacent-or-generic,,
+011d9250,011d9250_FUN_011d9250.c,448,adjacent-or-generic,,
+011d93f0,011d93f0_FUN_011d93f0.c,506,local-chain-callee,011d9ce0,
+011d9440,011d9440_FUN_011d9440.c,5633,copied-or-new-seed,011d9ce0 011d9b80,pcVar11 = s_COMMON_TXT_TAMER_01ae3064; | pcVar11 = s_COMMON_TXT_DIGIMON_01ad9b10;
+011d9800,011d9800_FUN_011d9800.c,2737,local-chain-callee,011dab40 011d2710,
+011d9a00,011d9a00_FUN_011d9a00.c,2826,adjacent-or-generic,,
+011d9b80,011d9b80_FUN_011d9b80.c,2318,adjacent-or-generic,,
+011d9ce0,011d9ce0_FUN_011d9ce0.c,2554,copied-or-new-seed,,
+011d9e70,011d9e70_FUN_011d9e70.c,680,adjacent-or-generic,,
+011d9ed0,011d9ed0_FUN_011d9ed0.c,507,adjacent-or-generic,,
+011d9f40,011d9f40_FUN_011d9f40.c,1092,adjacent-or-generic,,
+011da000,011da000_FUN_011da000.c,1388,copied-or-new-seed,011da100 011da150,"FUN_012459a0(param_1,s_DetailInfo_Detailinfo_bg_a_tga_01ae32c4,1,0,0,1,0x1cf,0x223,0x157,0x79);"
+011da100,011da100_FUN_011da100.c,595,copied-or-new-seed,011da8e0,
+011da150,011da150_FUN_011da150.c,4820,copied-or-new-seed,011da4b0 011da5e0,
+011da4b0,011da4b0_FUN_011da4b0.c,1430,copied-or-new-seed,,pcVar1 = s_SEALMASTER_STATE_HP_01ad7500; | pcVar1 = s_SEALMASTER_STATE_DS_01ae32e4; | pcVar1 = s_SEALMASTER_STATE_AT_01ad7490; | pcVar1 = s_SEALMASTER_STATE_AS_01ae3328; | pcVar1 = s_SEALMASTER_STATE_CT_01ad74d8; | pcVar1 = s_SEALMASTER_STATE_HT_01ae3314;
+011da506,011da506_caseD_1.c,655,copied-or-new-seed,011da4c0,"FUN_00f19cc0(s_SEALMASTER_STATE_DS_01ae32e4,0x13);"
+011da5e0,011da5e0_FUN_011da5e0.c,4596,copied-or-new-seed,,
+011da8a0,011da8a0_FUN_011da8a0.c,623,adjacent-or-generic,,
+011da8e0,011da8e0_FUN_011da8e0.c,2587,copied-or-new-seed,,
+011daa70,011daa70_FUN_011daa70.c,680,adjacent-or-generic,,
+011daad0,011daad0_FUN_011daad0.c,507,adjacent-or-generic,,
+011dab40,011dab40_FUN_011dab40.c,1423,local-chain-callee,011d1200,
+011dac40,011dac40_FUN_011dac40.c,1162,local-chain-callee,011dad10,
+011dad10,011dad10_FUN_011dad10.c,448,adjacent-or-generic,,
+011dad40,011dad40_FUN_011dad40.c,2267,local-chain-callee,011dcf20,
+011daec0,011daec0_FUN_011daec0.c,1447,copied-or-new-seed,011daf90 011db440 011db840 011dbca0 011dc210 011dc7f0,"FUN_01246800(s_DetailInfo_TamerStatus_Win_03_bg_01ae2b68,&local_30); | FUN_01246800(s_DetailInfo_TamerStatus_Win_04_bg_01ae33fc,&local_30);"
+011daf90,011daf90_FUN_011daf90.c,6835,copied-or-new-seed,011d62e0 011d61d0 011da000,
+011db440,011db440_FUN_011db440.c,6077,copied-or-new-seed,011dd5b0,pcVar11 = s_DETAIL_INFO_EQUIP_01ae3460;
+011db840,011db840_FUN_011db840.c,4344,copied-or-new-seed,011dcbe0,"FUN_015010a0(&local_3c,&DAT_01ae7290,&DAT_01bfbd40,s_DetailInfo_TamerStatus_win_02_bg_01ae3438);"
+011dbca0,011dbca0_FUN_011dbca0.c,8245,copied-or-new-seed,011dd050 011dd1d0,"FUN_00f19cc0(s_DETAIL_INFO_DATA_01ae3424,0x10);"
+011dc210,011dc210_FUN_011dc210.c,6739,copied-or-new-seed,,"FUN_015010a0(&local_50,&DAT_01ae7290,&DAT_01bfbd40,s_DetailInfo_Storage_M_field_a_tga_01ae2bbc); | FUN_015010a0(&local_50,&DAT_01ae7290,&DAT_01bfbd40,s_DetailInfo_TamerStatus_Digimon_T_01ae2b90"
+011dc7f0,011dc7f0_FUN_011dc7f0.c,4815,copied-or-new-seed,,"FUN_015010a0(&local_80,&DAT_01ae7290,&DAT_01bfbd40,s_TacticsHouse_Storage_M_field_tga_01ad8e18); | FUN_00f19cc0(s_DETAIL_INFO_NONE_01ace904,0x10); | FUN_00f19cc0(s_DETAIL_INFO_ACHIEVE_01ae3474,0x13);"
+011dcbe0,011dcbe0_FUN_011dcbe0.c,5156,adjacent-or-generic,,
+011dcf20,011dcf20_FUN_011dcf20.c,2524,adjacent-or-generic,,
+011dd050,011dd050_FUN_011dd050.c,2061,copied-or-new-seed,,pcVar1 = s_TOOLTIP_ENCHANT_EXPLAIN_TITLE_HP_01ae34ac; | pcVar1 = s_TOOLTIP_ENCHANT_EXPLAIN_TITLE_AT_01ade08c; | pcVar1 = s_TOOLTIP_ENCHANT_EXPLAIN_TITLE_CR_01ae3488; | pcVar1 = s_DETAIL_INFO_SCD_01ae34e8; | pcVar1 = s_DETAIL_INFO_CRIDAMAGE_01ae34d0; | pcVar1 = s_DETAIL_INFO_SD_01ae351c;
+011dd0a6,011dd0a6_caseD_1.c,648,copied-or-new-seed,011dd060,
+011dd1d0,011dd1d0_FUN_011dd1d0.c,6114,copied-or-new-seed,,
+011dd560,011dd560_FUN_011dd560.c,587,adjacent-or-generic,,
+011dd5b0,011dd5b0_FUN_011dd5b0.c,2593,adjacent-or-generic,,
+011dd770,011dd770_FUN_011dd770.c,1408,adjacent-or-generic,,
+011dd910,011dd910_FUN_011dd910.c,3015,local-chain-callee,011de7d0,
+011ddac0,011ddac0_FUN_011ddac0.c,1568,local-chain-callee,011ddc00 011ddc50 011de020 011de4a0,
+011ddc00,011ddc00_FUN_011ddc00.c,557,local-chain-callee,011ded80,
+011ddc50,011ddc50_FUN_011ddc50.c,5989,local-chain-callee,011ded80,
+011de020,011de020_FUN_011de020.c,6130,local-chain-callee,011df020 011ded80 011deb20,
+011de4a0,011de4a0_FUN_011de4a0.c,3006,local-chain-callee,011ded80 011dec60,
+011de700,011de700_FUN_011de700.c,1533,adjacent-or-generic,,
+011de7d0,011de7d0_FUN_011de7d0.c,4153,adjacent-or-generic,,
+011deb20,011deb20_FUN_011deb20.c,2111,adjacent-or-generic,,
+011dec60,011dec60_FUN_011dec60.c,1870,adjacent-or-generic,,
+011ded80,011ded80_FUN_011ded80.c,2554,adjacent-or-generic,,
+011def10,011def10_FUN_011def10.c,486,local-chain-callee,011def50,
+011def50,011def50_FUN_011def50.c,1253,adjacent-or-generic,,
+011df020,011df020_FUN_011df020.c,872,adjacent-or-generic,,
+011df0d0,011df0d0_FUN_011df0d0.c,1112,local-chain-callee,011df280,
+011df220,011df220_FUN_011df220.c,626,local-chain-callee,011dfa80,
+011df280,011df280_FUN_011df280.c,430,adjacent-or-generic,,
+011df2b0,011df2b0_FUN_011df2b0.c,2610,adjacent-or-generic,,
+011df490,011df490_FUN_011df490.c,834,local-chain-callee,011df5d0,
+011df500,011df500_FUN_011df500.c,605,local-chain-callee,011df860 011dfa80,
+011df550,011df550_FUN_011df550.c,803,adjacent-or-generic,,
+011df5d0,011df5d0_FUN_011df5d0.c,2907,adjacent-or-generic,,
+011df860,011df860_FUN_011df860.c,2561,adjacent-or-generic,,
+011dfa80,011dfa80_FUN_011dfa80.c,23042,local-chain-callee,011df550,
+011ed0a0,011ed0a0_FUN_011ed0a0.c,1595,copied-or-new-seed,,"FUN_012459a0(0,s_DetailInfo_DetailInfo_bg_b_tga_01ae2e20,1,0,0,1,param_3 + -0x136,param_4 + -0x118"
+0128bab0,0128bab0_FUN_0128bab0.c,1239,copied-or-new-seed,,"FUN_00f19f10(s_TamerStatusUI_01ae9d30,0xd);"
+0128bcc0,0128bcc0_FUN_0128bcc0.c,910,copied-or-new-seed,,"FUN_00f19f10(s_DigimonStatusUI_01ae9d58,0xf);"
+0128bd60,0128bd60_FUN_0128bd60.c,2507,copied-or-new-seed,,"FUN_00f19f10(s_DigimonStatusUI_Help_01ae9d40,0x14);"

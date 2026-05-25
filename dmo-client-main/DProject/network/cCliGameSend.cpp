@@ -2266,7 +2266,7 @@ void cCliGame::SendAccessoryCheck( u4 nUID, u2 nInvenPos )
 	endp( pItem::AccessoryCheck );
 	send();
 }
-void cCliGame::SendAccessoryEnchant( u4 nUID, u2 nItemPos, u2 nAccPos, int nCombIdx )
+void cCliGame::SendAccessoryEnchant( u4 nUID, u2 nItemPos, u2 nAccPos, int nCombIdx, u1 nLockMask )
 {
 	newp( pItem::AccStoneUse );
 	push( nUID );
@@ -2274,6 +2274,10 @@ void cCliGame::SendAccessoryEnchant( u4 nUID, u2 nItemPos, u2 nAccPos, int nComb
 	push( nAccPos );
 	if( nCombIdx != -1 )
 		push( (u1)nCombIdx );
+	else if( nLockMask != 0 )
+		push( (u1)0 );
+	if( nLockMask != 0 )
+		push( nLockMask );
 	endp( pItem::AccStoneUse );
 	send();
 }

@@ -1,6 +1,6 @@
 # LK-DMO Technical Context
 
-Last updated: 2026-05-24
+Last updated: 2026-05-25
 
 This document is the working memory for the LK-DMO workspace in `C:\0-NewDmo`.
 It summarizes the main fixes, migration work, build notes, and packet/protocol
@@ -130,6 +130,102 @@ Schema: dso
 
 ## Changelog / work completed
 
+### 2026-05-24 configurable GameServer damage formula
+
+Detailed notes for the new damage formula module were added to
+`DamageFormulaSystem.md`. Read that file before continuing combat, attribute,
+element, Skill Damage, Critical Damage, or Final Damage work.
+
+Implemented server-side formula isolation:
+
+- New central module:
+  - `dmo-server-main-postgres/src/Source/Domain/DigitalWorldOnline.Commons/Models/Combat/DamageFormula.cs`
+- New tests:
+  - `dmo-server-main-postgres/src/Tests/DigitalWorldOnline.Game.Tests/Combat/DamageFormulaTests.cs`
+- GameServer config:
+  - `dmo-server-main-postgres/src/Source/Distribution/DigitalWorldOnline.Game.Host/appsettings.json`
+  - `dmo-server-main-postgres/src/Source/Distribution/DigitalWorldOnline.Game.Host/appsettings.Development.Example.json`
+
+The formula is intentionally configurable because public GAMEKING/DMO
+references confirm battle attribute/element interactions and separate options
+such as Skill Damage, Critical Damage, and Final Damage, but do not publish a
+complete final damage formula. External reference links and the exact formulas
+are recorded in `DamageFormulaSystem.md`.
+
+Current config block:
+
+```json
+"DamageFormula": {
+  "Enable": true,
+  "EnableLog": false,
+  "CritBaseRate": 1.0,
+  "ApplyAttributeToCriticalExtra": false,
+  "ApplyAttackToSkill": true,
+  "ApplyAttributeToSkillFlat": false,
+  "ApplyFinalDamageToSkill": true,
+  "ApplyElementDamage": true
+}
+```
+
+Integrated paths:
+
+- `PartnerAttackPacketProcessor.cs`
+  - normal attack vs configured mob;
+  - normal attack vs summon mob;
+  - PvP partner target;
+  - critical route through `DamageFormula.CalculateDamage(...)`.
+- `PartnerSkillPacketProcessor.cs`
+  - F1/F2/F3 damage vs configured mob;
+  - F1/F2/F3 damage vs summon mob.
+
+Current formula behavior:
+
+- Normal damage:
+  `floor((Attack + ExtraAttack) * M_attr * M_element * M_fd * M_target)`.
+- Critical damage:
+  `CritBaseExtra = Attack * CritBaseRate`;
+  `CritExtraFromBonus = CritBaseExtra * CriticalDamageExtraPercent / 100`;
+  by default, critical extra is added after the attribute/element-multiplied
+  base critical portion.
+- Skill damage:
+  `SkillBaseDamage * (1 + SkillDamagePercent / 100)`, optional AT, attribute
+  and element multiplier, flat Skill Damage, optional Final Damage.
+- Block is currently represented as `TargetReductionPercent=50` when the new
+  formula path is active.
+- Existing miss, aggro, cooldown, DS/HP consumption, debuff reduction, damage
+  packets, kill handling, EXP/drop flow, and combat state remain outside the
+  formula and in the existing battle flow.
+
+Validation:
+
+```powershell
+dotnet test src\Tests\DigitalWorldOnline.Game.Tests\DigitalWorldOnline.Game.Tests.csproj -c Debug --no-build
+dotnet build src\Source\Distribution\DigitalWorldOnline.Game.Host\DigitalWorldOnline.Game.csproj -c Debug --no-restore
+```
+
+Result:
+
+- Damage formula tests passed with the existing test suite: `14/14`.
+- `Game.Host` build passed with `0` errors.
+- Existing warnings remain: `net7.0` support warning, package vulnerability
+  warnings, and pre-existing nullable warnings.
+
+Known remaining calibration/work:
+
+- Calibrate `CritBaseRate` (`1.0` default, `0.8` candidate).
+- Validate whether Critical Damage extra should receive attribute/element
+  scaling (`ApplyAttributeToCriticalExtra`).
+- Validate whether current `Partner.ATT`, `Partner.SCD`, `Partner.SKD`,
+  `Partner.SkillDamagePercent`, and `Partner.FinalDamageBasisPoints` map exactly
+  to the desired official-like buckets.
+- Confirm element option behavior separately from `Nature.bin` element delta if
+  item-provided element damage is later exposed.
+- Remaining parallel damage paths still calculate separately and should be
+  reviewed in a later pass before declaring all server damage unified:
+  `MemorySkillUsePacketProcessor`, `MapServerTamerOperation`,
+  `DungeonsServerTamerOperation`, `EventServerTamerOperation`,
+  `PvpServerTamerOperation`, and `MapInstanceMobBehavior`.
+
 ### 2026-05-24 recent Seal, Digimon, skill, and GM Panel work
 
 Detailed notes for the latest chat-driven pass were consolidated in
@@ -150,6 +246,93 @@ Latest GM Panel verification:
   `DProject.sln`.
 - `C:\Release\GSP\DProject_R_ENG.exe` was copied to both local test targets.
 - `dmo-pg-game` was rebuilt and restarted through Docker Compose.
+
+### 2026-05-24 item bin migration pass
+
+Detailed item workflow notes were added to `AddItems.md`. Read that file before
+continuing item, box, consumable, or `ItemList.bin` work.
+
+Safe changes applied:
+
+- `SkillCodeItem.bin` was merged into legacy `Skill.bin` so item effects exist
+  in the same table format used by the client/server template.
+- Resulting `Skill.bin`: 10161 `CsSkill` rows, with all
+  `SkillCodeDigimon.bin`, `SkillCodeTamer.bin`, and `SkillCodeItem.bin` IDs
+  present.
+- `ItemList.bin` is generated append-only from modern split
+  `ItemData.bin + Item_Str.bin`: existing legacy `ItemId`s are preserved
+  byte-a-byte, only missing modern `ItemId`s are converted into the old
+  fixed `CsItem::sINFO` layout, and legacy-only IDs remain appended.
+- Converted `ItemList.bin`: 28507 item rows. Counts: 14907 legacy input,
+  27320 modern input, 13720 preserved legacy rows, 13600 converted new rows,
+  and 1187 legacy-only rows.
+- `Item_Str.bin` detail: the first UTF-16 string is the real item name and
+  the second is a category/type label. Using the second field caused new items
+  to appear as generic names like `Container item`, `Ring`, or `Earring`.
+- `Zero Unit` items are confirmed in the generated add report and pack, for
+  example `45054 Zero Unit Earring`, `45057 Zero Unit Bracelet`,
+  `1310630 Zero Unit Necklace`, and `1310632 Zero Unit Ring`.
+- The client-side accessory option pool was updated from `MAX_OPT_COUNT=16`
+  to `MAX_OPT_COUNT=44` in
+  `C:\0-NewDmo\dmo-client-main\LibProj\CsFileTable\Item.h`, matching the
+  largest current `AccOption.bin` pool. This is separate from the runtime
+  item add slots, which already support 8.
+- The generated `ItemList.bin` now replaces the old accessory tail with
+  modern `AccOption.bin`/`AccEnchant.bin` converted into the legacy monolithic
+  layout: `AccessoryOption=284`, `AccessoryEnchant=36`, pool slots `44`.
+- GM Panel item/monster search now stores a normalized alphanumeric search key,
+  so names with spaces or punctuation can be found with compact input such as
+  `zerounity`.
+- Updated files were copied to:
+
+```text
+C:\0-NewDmo\dmo-server-main-postgres\Bins\data\bin\english\Skill.bin
+C:\0-NewDmo\DigiCombineFeature\assets\extracted_pack03\data\bin\english\Skill.bin
+C:\0-NewDmo\DigiCombineFeature\assets\extracted_pack03\data\bin\english\ItemList.bin
+```
+
+- `ClientDist\Data\Pack03.pf/.hf` was patched with:
+
+```text
+data\bin\english\ItemList.bin
+data\bin\english\Skill.bin
+```
+
+- `dmo-pg-game` was rebuilt/restarted and logged:
+
+```text
+Loaded Skill.bin: 10161 CsSkill + 116 CsTamerSkill + 93 CsAreaCheck rows
+Loaded ItemList.bin static sections: Items=27320, AccessoryOption=284, AccessoryEnchant=36
+```
+
+Important limitation:
+
+- `RandomBox*.bin` is not the same direct contract as the current
+  `Asset_Container` database tables. Current audit found no direct match from
+  `RandomBoxList.BoxId` or `ConsumeItems.ItemId` to `Asset_Container.ItemId`.
+  Do not import it blindly; use `AddItems.md` and the generated audit report
+  before changing box rewards.
+
+Follow-up container-bin change:
+
+- Added server `ContainerBinLoader` for `RandomBoxList.bin`,
+  `RandomBoxItem.bin`, and `RandomBoxReward.bin`.
+- `AssetsLoader` now merges database containers with bin containers; bin data
+  wins on duplicate `ItemId`, database remains fallback.
+- `ItemConsumePacketProcessor` routes any item with `_assets.Container` config
+  through `ContainerItem(...)`, even if `TypeL` is not `170`.
+- Boot verification:
+
+```text
+Loaded RandomBox container bins: Boxes=335, ItemGroups=173, RewardGroups=101,
+Containers=335, MissingItemGroups=0, MissingRewardGroups=0
+```
+
+- Usable low-ID RandomBox test candidates are recorded in:
+
+```text
+C:\0-NewDmo\ItemBinMigrationFeature\generated\reports\random-box-usable-test-ids.csv
+```
 
 ### 2026-05-23 working tree diff consolidated before main commit
 
@@ -2851,6 +3034,43 @@ Copied table/XML dependencies for later porting:
   `DM_Breakthrough-Rate`, `DM_Breakthrough-Cost`,
   `DM_Breakthrough-EtcValue`
 
+## DetailInfo implementation pass from 2026-05-25
+
+Detailed implementation notes were added to `DetailInfo.md`. Read that file
+before continuing the `Detalhes` window.
+
+Current state:
+
+- `DetailInfoFeature/` remains the reverse-map/reference folder for the official
+  GDMO DetailInfo UI, function chain, assets, and packet names.
+- The main client now has an independent movable `WT_DETAIL_INFO` window in
+  `MainFrame_DetailInfoUI.cpp/.h`.
+- The Tamer/equipment window now exposes a `Detalhes` button that opens this
+  independent window instead of mixing DetailInfo content into the existing
+  `C`/Tamer Status screen.
+- The Tamer tab has the official-style background, equipment slots, 3D tamer
+  render, `Equipamento` and `Selo Mestre` buttons, and a right-side
+  `Atributos Obtidos` table.
+- The Tamer portrait bug was fixed by matching the HUD/target-window behavior:
+  render `CTamerUser::GetCharImage()->Render_L(...)`. The large tamer portrait
+  asset is already circular and framed. Do not use `Render_S` here and do not
+  overlay `DetailInfo\TamerStatus_Digimon_Tamer.tga` on the Tamer face because
+  that asset has a dark filled center and will hide/dim the portrait.
+- The latest client build passed with `Release_English|Win32` through
+  `DProject.sln`, and the exe was copied to both local test clients.
+
+Pending for later:
+
+- Finish the user/other-player DetailInfo flow. Official packet references are
+  already mapped as `C2GS_REQ_OTHER_TAMER_DETAIL_INFO`,
+  `GS2C_RES_OTHER_TAMER_DETAIL_INFO`,
+  `nsOtherTamerDetailInfo::stTamer`, and
+  `nsOtherTamerDetailInfo::stDigimon`, but the full backend/client flow is not
+  complete yet.
+- Continue visual parity for the Digimon tab after the Tamer tab settles.
+- Recheck the final Tamer attribute table formatting after the remaining
+  user-detail packet work is implemented.
+
 ## ExtraInventory isolated reverse map from 2026-05-23
 
 The official "Inventario Exclusivo" window shown in the latest screenshot was
@@ -3032,3 +3252,213 @@ Packet/result strings recorded separately:
 - `GS2C_RES_ITEM_UPGRADE_DATA_TRANSFER`
 - `GS2C_RES_ITEM_UPGRADE_DATA_RESTORE`
 - `stProcessItemUpgradeResult`
+
+## EnchantOption / OCS / NCS isolated reverse map from 2026-05-24
+
+The official `Encantamento` window shown for accessory/equipment option
+improvement was mapped into:
+
+```text
+C:\0-NewDmo\EnchantOptionFeature
+```
+
+This subproject covers the client cluster for:
+
+- accessory identify;
+- OCS-like random option reroll (`nItem::AccOption`);
+- NCS-like selected option value reroll (`nItem::OptionValue`);
+- `DigiPower`;
+- `Renewal`;
+- optional Digivice support via `LJW_ENCHANT_OPTION_DIGIVICE_190904`.
+
+Internal active-client anchors:
+
+- `cEnchantOption`
+- `cEnchantOptionContents`
+- `AdaptEnchantOption`
+- `WT_ENCHANT_OPTION`
+- `E_CT_ENCHANT_OPTION_CONTENTS`
+- `EVENT_CODE::RECV_ENCHANT_OPTION_IDENTIFY_RESULT`
+- `EVENT_CODE::RECV_ENCHANT_OPTION_ENCHANT_RESULT`
+- `EVENT_CODE::START_ENCHANT_OPTION_ENCHANT`
+- `pItem::AccessoryCheck`
+- `pItem::AccStoneUse`
+
+Copied decompiled coverage:
+
+- `decompiled\EnchantOptionUI`: 13 official `.original.c` functions,
+  including factory `0128c5d0` and init `01371e40`.
+- `decompiled\EnchantOptionResultUI`: 16 official `.original.c` functions,
+  including factory `0128c7f0` and init `01267760`.
+- `decompiled\DigiPowerEnchantUI`: 22 official `.original.c` functions,
+  including factory `0128c990` and init `0125dde0`.
+- `decompiled\AdditionalXrefs`: 4 direct `unpacked_exe_all` functions:
+  `013729d0`, `01372d20`, `01373ea0`, and `015e9390`. These cover extra
+  `ACCESSORY_*` text xrefs and the official `AccOption.bin` string.
+
+Key active source references:
+
+- `dmo-client-main\DProject\_Interface\Game\EnchantOption.cpp`
+- `dmo-client-main\DProject\_Interface\Game\EnchantOption.h`
+- `dmo-client-main\DProject\_Interface\00.Contents\EnchantOptionContents.cpp`
+- `dmo-client-main\DProject\_Interface\00.Contents\EnchantOptionContents.h`
+- `dmo-client-main\DProject\_Interface\Adapt\AdaptEnchantOption.cpp`
+- `dmo-client-main\DProject\network\cCliGameSend.cpp`
+- `dmo-client-main\DProject\network\cCliGameReceive.cpp`
+- `dmo-client-main\common_vs2019\pItem.h`
+- `dmo-client-main\LibProj\CsFileTable\ItemMng.cpp`
+
+Key official UI paths:
+
+- `Accessory\Enchant\Enchant_BG1.tga` (official wide `709x439` window loaded
+  through `Data\Interface` from Pack01)
+- `Accessory\Enchant\Enchant_BG.tga`
+- `Accessory\Enchant\Enchant_EnchantBtn.tga`
+- `Accessory\Identify\Identify_BarBG.tga`
+- `Accessory\Identify\Identify_Bar.tga`
+- `Accessory\Identify\Identify_BarMask.tga`
+- `System\Ch_Close.tga`
+- `SealMaster\dropdown_list_0`
+- `Control_G\ComboBox\Combo2.tga`
+- `system\Accessory\Ring.nif`
+- `system\Accessory\Necklace.nif`
+- `system\Accessory\Earring.nif`
+- `system\Accessory\Digivice.nif`
+
+Important packet layout:
+
+- Identify request: `pItem::AccessoryCheck` with `u4 nUID`, `u2 nInvenPos`.
+- Enchant request: `pItem::AccStoneUse` with `u4 nUID`, `u2 nItemPos`
+  (stone), `u2 nAccPos` (accessory), and optional `u1 nCombIdx` for
+  `OptionValue` / NCS.
+- Identify response: `nInvenPos`, `nRate`, `nLevel`, `nAccOption[8]`,
+  `nAccValues[8]`.
+- Enchant response: `nResult`, `nInvenPos`, `nRate`, `nLevel`,
+  `nAccOption[8]`, `nAccValues[8]`.
+
+Server-side state discovered:
+
+- The PostgreSQL server already loads `ItemList.bin` static sections
+  `AccessoryOption` and `AccessoryEnchant`.
+- `AccessoryRollAssetsQueryHandler` projects `AccessoryOption` into
+  `AccessoryRollAssetDTO` / `AccessoryRollStatusAssetDTO` and uses
+  `AccessoryEnchant` for `RerollAmount`.
+- The direct decompiled sweep confirms `AccOption.bin` as an official split
+  table string, but the loose split file was not present in this workspace; the
+  current server can still consume the `AccessoryOption` section from
+  `ItemList.bin`.
+- Active GameServer packet processors now exist for `AccessoryCheck` and
+  `AccStoneUse`; see the implementation section below.
+
+Subproject docs:
+
+- `EnchantOptionFeature\README.md`
+- `EnchantOptionFeature\docs\FunctionMap.md`
+- `EnchantOptionFeature\docs\PacketAndEventFlow.md`
+- `EnchantOptionFeature\docs\OcsNcsBehavior.md`
+- `EnchantOptionFeature\docs\TableAndServerMap.md`
+- `EnchantOptionFeature\docs\LastSweepNotes.md`
+
+## EnchantOption / OCS / NCS GameServer implementation from 2026-05-24
+
+The mapped accessory enchant system was made functional server-side without
+changing the client packets.
+
+New central module:
+
+```text
+C:\0-NewDmo\dmo-server-main-postgres\src\Source\Distribution\DigitalWorldOnline.Game.Host\Services\AccessoryEnchantService.cs
+```
+
+Changed processors:
+
+- `ItemIdentifyPacketProcessor` now acts as the compatible
+  `pItem::AccessoryCheck` endpoint (`GameServerPacketEnum.ItemIdentify = 3968`).
+- `ItemRerollPacketProcessor` now acts as the compatible `pItem::AccStoneUse`
+  endpoint (`GameServerPacketEnum.ItemReroll = 3969`).
+
+The old hardcoded processor behavior was replaced by the service while keeping
+fallback support for the old stone item IDs. Official resolution path:
+
+1. Resolve stone by `stone.ItemInfo.SkillCode`.
+2. Find `ItemListBinLoader.Data.AccessoryEnchants[Index == SkillCode]`.
+3. Use `ItemAccessoryEnchantRecord.ItemType` as the official stone type:
+   `1 = DigiPower`, `2 = Renewal`, `3 = AccOption`, `4 = OptionValue`.
+4. Use `AccessoryOption` records to roll option types/values.
+5. Preserve packet payloads `3968` and `3969`.
+
+Vital Breath / large option pool note:
+
+- `Vital Breath Digivice -V-` (`47420`) currently resolves through
+  `SkillCode = 10000523`, whose `AccOption.bin` pool has 23 rows. The expected
+  modern stats are present in that pool, including `CD`, `HPRate`, `DSRate`,
+  `SCDRate`, and `FinalDamageRate`.
+- The server roll logic now keeps the official row-level pool instead of
+  grouping by status type before the random selection. This makes the roll
+  chance match the client list (`100 / OptionCount`, e.g. `4.35 %` for 23 rows)
+  while still using the repeated rows as the max duplicate count for a stat.
+- Re-value/NCS lookup still uses a grouped range by normalized option type, so
+  selecting an existing stat rerolls within the full min/max range for that
+  stat without changing packet behavior.
+
+Loader fix:
+
+- `ItemListBinLoader` now reads split `AccEnchant.bin` / ItemList
+  `AccessoryEnchant` records as the official 8-byte layout:
+  `u4 EnchantId`, `u2 OptionType`, `u2 Value`.
+- This matches the copied XML/decompiled evidence in
+  `EnchantOptionFeature\tables\xml\AccEnchant.xml`.
+
+Validation run:
+
+```text
+dotnet build src\Source\Distribution\DigitalWorldOnline.Game.Host\DigitalWorldOnline.Game.csproj -c Debug --no-restore
+dotnet test src\Tests\DigitalWorldOnline.Game.Tests\DigitalWorldOnline.Game.Tests.csproj -c Debug --no-build
+```
+
+Result: GameServer build succeeded with 0 errors; Game tests passed 14/14.
+
+## EnchantOption / OCS / NCS client implementation from 2026-05-24
+
+The mapping subproject remains documentation/reference only. The functional
+client changes were applied in the main C++ client:
+
+- `C:\0-NewDmo\dmo-client-main\DProject\_Interface\Game\EnchantOption.cpp`
+- `C:\0-NewDmo\dmo-client-main\DProject\_Interface\Game\EnchantOption.h`
+- `C:\0-NewDmo\dmo-client-main\DProject\_Interface\00.Contents\EnchantOptionContents.cpp`
+- `C:\0-NewDmo\dmo-client-main\DProject\_Interface\00.Contents\EnchantOptionContents.h`
+
+Client behavior now follows the mapped official window more closely:
+
+- `_CreateEnchantUI()` uses the official wide background
+  `Accessory\Enchant\Enchant_BG1.tga` at `709x439`, which resolves under
+  `Data\Interface` and is served from Pack01 when FilePack mode is enabled.
+- The right panel renders available accessory options from the active
+  `Accessory_Option` table in Pack03/ItemList data through
+  `CsAccessory_Option`.
+- Each available row shows option name, min/max range, and equal probability
+  based on the number of non-empty option entries, matching the mapped UI
+  behavior such as `6.25 %` for 16 possible entries.
+- The available-options panel uses `cListBox` with `cScrollBar`, so accessory
+  option pools larger than the visible area scroll instead of overlapping the
+  footer text.
+- The left option panel shows the current item option values and the max value
+  found in the same `Accessory_Option` table.
+- Accessory and stone item icons are aligned to the wide background slots from
+  `Enchant_BG1.tga` instead of the old compact-window coordinates.
+- NCS (`OptionValue`) still uses the official combo box assets:
+  `SealMaster\dropdown_list_0` and `Control_G\ComboBox\Combo2.tga`.
+- Enchant response handling now respects `nResult`: only success consumes the
+  local stone; non-success responses synchronize item data and clear the
+  registered stone without doing a false local decrement.
+
+Client validation run:
+
+```text
+& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" "C:\0-NewDmo\dmo-client-main\DProject.sln" /m /p:Configuration=Release_English /p:Platform=Win32 /v:minimal
+```
+
+Result: client build succeeded and produced
+`C:\Release\GSP\DProject_R_ENG.exe`. The executable was copied to
+`C:\0-NewDmo\ClientDist\DProject_R_ENG.exe` and
+`D:\OpenDmo\src\Source\Cliente-OficialV2\Release\DProject_R_ENG.exe`.

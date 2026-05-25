@@ -12,8 +12,6 @@ public sealed class ItemListBinLoader
     private const string SplitAccessoryOptionFileName = "AccOption.bin";
     private const string SplitAccessoryEnchantFileName = "AccEnchant.bin";
     private const int Utf16Bytes = 2;
-    private const int SplitAccessoryOptionSlots = 5;
-
     private static readonly int ItemInfoRecordSize = ComputeItemInfoRecordSize();
     private static readonly int ItemTapRecordSize = sizeof(ushort) + (32 * Utf16Bytes);
     private static readonly int ItemCoolTimeRecordSize = Align(sizeof(uint) + sizeof(byte), 8) + sizeof(double);
@@ -23,7 +21,7 @@ public sealed class ItemListBinLoader
     private static readonly int ElementItemRecordSize = sizeof(uint);
     private static readonly int ExchangeRecordSize = sizeof(int) + ComputeExchangeInfoSize();
     private static readonly int AccessoryOptionRecordSize = sizeof(int) + ComputeAccessoryOptionInfoSize();
-    private static readonly int AccessoryEnchantRecordSize = sizeof(int) + sizeof(uint) + sizeof(short) + sizeof(short);
+    private static readonly int AccessoryEnchantRecordSize = sizeof(int) + sizeof(ushort) + sizeof(ushort);
 
     private ItemList? _data;
 
@@ -113,7 +111,7 @@ public sealed class ItemListBinLoader
             var englishName = ReadCountedUtf16(r);
             _ = ReadCountedUtf16(r);
 
-            names[textKey] = string.IsNullOrWhiteSpace(englishName) ? localName : englishName;
+            names[textKey] = string.IsNullOrWhiteSpace(localName) ? englishName : localName;
         }
 
         return names;
@@ -231,7 +229,7 @@ public sealed class ItemListBinLoader
             var enchantLimit = r.ReadUInt16();
             var optionCount = r.ReadUInt32();
 
-            var slots = new List<ItemAccessoryOptionSlot>(SplitAccessoryOptionSlots);
+            var slots = new List<ItemAccessoryOptionSlot>(checked((int)optionCount));
             for (var slot = 0; slot < optionCount; slot++)
             {
                 slots.Add(new ItemAccessoryOptionSlot(
@@ -265,8 +263,8 @@ public sealed class ItemListBinLoader
             var value = r.ReadUInt16();
             records.Add(new ItemAccessoryEnchantRecord(
                 checked((int)enchantId),
-                enchantId,
-                checked((short)optionType),
+                optionType,
+                checked((short)value),
                 checked((short)value)));
         }
 
@@ -620,10 +618,9 @@ public sealed class ItemListBinLoader
 
             int cursor = 0;
             int index = ReadInt32(rec, ref cursor);
-            uint itemType = ReadUInt32(rec, ref cursor);
-            short minValue = ReadInt16(rec, ref cursor);
-            short maxValue = ReadInt16(rec, ref cursor);
-            records.Add(new ItemAccessoryEnchantRecord(index, itemType, minValue, maxValue));
+            ushort optionType = ReadUInt16(rec, ref cursor);
+            short value = ReadInt16(rec, ref cursor);
+            records.Add(new ItemAccessoryEnchantRecord(index, optionType, value, value));
         }
 
         return records;

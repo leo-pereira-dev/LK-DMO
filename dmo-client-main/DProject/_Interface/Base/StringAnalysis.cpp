@@ -1654,6 +1654,8 @@ void cStringAnalysis::ItemComment_Parcing( cStringList* pList, cItemInfo* pEquip
 			if( nOpt == 0 )//옵션값 없으면 나가자
 				break;
 
+			int nOptBase = nItem::NormalizeAccessoryOption( nOpt );
+			nOpt = nOptBase;
 			int nVal = pEquipItem->m_nAccValues[ i ];
 			int nStrSize = 0;
 
@@ -1821,7 +1823,24 @@ void cStringAnalysis::ItemComment_Parcing( cStringList* pList, cItemInfo* pEquip
 				}
 				break;
 				// ============================ 여기에 속성 데미지 관련 툴팁 파싱 추가 ============================
-#if COMMON_LIB_FIXED
+			case nItem::AP_RATIO:
+			case nItem::DP_RATIO:
+			case nItem::MAXHP_RATIO:
+			case nItem::MAXDS_RATIO:
+			case nItem::SkillAP_RATIO:
+			case nItem::FINAL_AP_RATIO:
+				{
+					const wchar_t* pOptionName = nItem::GetAccessoryRatioOptionText( nOpt );
+					float nRealVal = ( (float)nVal * 0.01f ) * ( ( (float)(pEquipItem->m_nRate) ) * 0.01f );
+					DmCS::StringFn::Format( wsOption, L" %s + %05.2f%% ", pOptionName, nRealVal );
+					ti.SetText( wsOption.c_str() );
+					pString->AddText( &ti );
+
+					DmCS::StringFn::Format( wsOption, L"( %s + %05.2f%% )", pOptionName, ((float)nVal * 0.01f) );
+					ti.SetText( wsOption.c_str() );
+				}
+				break;
+#if 1
 			case nItem::AP_ATTRIBUTE_DA:
 				{
 					float nRealVal = ( (float)nVal * 0.01f ) * ( ( (float)(pEquipItem->m_nRate) ) * 0.01f );
@@ -2005,19 +2024,6 @@ void cStringAnalysis::ItemComment_Parcing( cStringList* pList, cItemInfo* pEquip
 			pList->AddTail( pString );
 		}
 
-		int nLevel = 0;
-		if( pEquipItem->m_nLevel > 0 )
-			nLevel = pEquipItem->m_nLevel;
-
-		std::wstring wsText;
-		DmCS::StringFn::Format( wsText, L"%s : %d %s", 
-			UISTRING_TEXT( "STRING_ANALYSIS_DIGIABLE_POWER_RENEWAL" ).c_str(), 
-			nLevel, UISTRING_TEXT( "STRING_ANALYSIS_COUNT" ).c_str() );
-		ti.SetText( wsText.c_str() );
-
-		pString = NiNew cString;
-		pString->AddText( &ti );
-		pList->AddTail( pString );
 		return;
 	}
 	else if( pFTItemInfo->s_nType_L == nItem::AccStone )//강화아이템일 때

@@ -17,6 +17,7 @@ s_nMaxHP(CsC_AvObject::INVALIDE_STAT),s_nMaxDS(CsC_AvObject::INVALIDE_STAT),s_dw
 ,s_usMaxCrystal(0),s_usCurrentCrystal(0),s_uiMaxGuage(0),s_uiCurrentGuage(0)
 #endif
 {
+	memset( s_nDetailInfoStat, 0, sizeof( s_nDetailInfoStat ) );
 }
 
 CTamerUser::sUSER_STAT::~sUSER_STAT()
@@ -144,6 +145,15 @@ int CTamerUser::sUSER_STAT::GetDef() const
 { 
 	return s_nDef; 
 }
+
+int CTamerUser::sUSER_STAT::GetDetailInfoStat( int nIndex ) const
+{
+	if( nIndex < 0 || nIndex >= DETAILINFO_STAT_COUNT )
+		return 0;
+
+	return s_nDetailInfoStat[ nIndex ];
+}
+
 #ifdef CROSSWARS_SYSTEM
 int CTamerUser::sUSER_STAT::GetCR() const
 { 
@@ -169,6 +179,14 @@ void CTamerUser::sUSER_STAT::SetAtt( int nValue )
 void CTamerUser::sUSER_STAT::SetDef( int nValue )
 { 
 	s_nDef = nValue; 
+}
+
+void CTamerUser::sUSER_STAT::SetDetailInfoStat( int nIndex, int nValue )
+{
+	if( nIndex < 0 || nIndex >= DETAILINFO_STAT_COUNT )
+		return;
+
+	s_nDetailInfoStat[ nIndex ] = nValue;
 }
 
 #ifdef CROSSWARS_SYSTEM

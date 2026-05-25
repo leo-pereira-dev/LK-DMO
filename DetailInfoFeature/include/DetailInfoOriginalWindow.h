@@ -30,8 +30,8 @@ struct OriginalStatTextRef {
     std::string_view screen_label_hint;
 };
 
-const std::array<OriginalFunctionRef, 31>& GetOriginalFunctionMap();
-const std::array<OriginalAssetRef, 36>& GetOriginalAssetMap();
+const std::array<OriginalFunctionRef, 70>& GetOriginalFunctionMap();
+const std::array<OriginalAssetRef, 42>& GetOriginalAssetMap();
 const std::array<OriginalStatTextRef, 13>& GetObtainedAttributeStatTextMap();
 
 } // namespace detail_info_feature

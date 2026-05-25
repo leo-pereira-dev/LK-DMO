@@ -81,6 +81,7 @@ namespace DigitalWorldOnline.Api
             services.AddSingleton<NatureBinLoader>();
             services.AddSingleton<MonsterBinLoader>();
             services.AddSingleton<MapBinLoader>();
+            services.AddSingleton<ContainerBinLoader>();
             services.AddSingleton<QuestBinLoader>();
             services.AddSingleton<AssetsLoader>();
             services.AddScoped<StoragePersistenceDualWriteCoordinator>();

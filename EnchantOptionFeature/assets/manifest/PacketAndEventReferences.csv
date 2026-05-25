@@ -1,0 +1,18 @@
+Name,Kind,File,Notes
+WT_ENCHANT_OPTION,Window,dmo-client-main/DProject/_Interface/Game/_BaseWindow.h,Window id dinamico
+cEnchantOption,Class,dmo-client-main/DProject/_Interface/Game/EnchantOption.h,UI principal
+cEnchantOptionContents,Class,dmo-client-main/DProject/_Interface/00.Contents/EnchantOptionContents.h,Logica de conteudo
+AdaptEnchantOption,Class,dmo-client-main/DProject/_Interface/Adapt/AdaptEnchantOption.h,Adaptador UI/conteudo
+E_CT_ENCHANT_OPTION_CONTENTS,ContentsId,dmo-client-main/DProject/ContentsSystem/ContentsSystemDef.h,Id do contents system
+EVENT_CODE::RECV_ENCHANT_OPTION_IDENTIFY_RESULT,Event,dmo-client-main/DProject/EventHandler/GameEventCode.h,Resposta de identify
+EVENT_CODE::RECV_ENCHANT_OPTION_ENCHANT_RESULT,Event,dmo-client-main/DProject/EventHandler/GameEventCode.h,Resposta de enchant
+EVENT_CODE::START_ENCHANT_OPTION_ENCHANT,Event,dmo-client-main/DProject/EventHandler/GameEventCode.h,Confirmacao do usuario
+pItem::AccessoryCheck,Packet,dmo-client-main/common_vs2019/pItem.h,Request/response de identify
+pItem::AccStoneUse,Packet,dmo-client-main/common_vs2019/pItem.h,Request de OCS/NCS/enchant
+GS2C_RECV_ENCHANT_ITEM_IDENTIFY,Struct,dmo-client-main/DProject/network/cCliGameReceive.cpp,Payload de identify
+GS2C_RECV_ENCHANT_ITEM_ENCHANT,Struct,dmo-client-main/DProject/network/cCliGameReceive.cpp,Payload de enchant
+nItem::DigiPower,StoneType,dmo-client-main/common_vs2019/pItem.h,Tipo 1
+nItem::Renewal,StoneType,dmo-client-main/common_vs2019/pItem.h,Tipo 2
+nItem::AccOption,StoneType,dmo-client-main/common_vs2019/pItem.h,Tipo 3 / OCS
+nItem::OptionValue,StoneType,dmo-client-main/common_vs2019/pItem.h,Tipo 4 / NCS
+

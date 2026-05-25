@@ -1092,7 +1092,7 @@ public:
 	void SendAccessoryCheck( u4 nUID, u2 nInvenPos );
 	void RecvEnchantItemIdentify();
 	//악세서리 강화
-	void SendAccessoryEnchant( u4 nUID, u2 nItemPos, u2 nAccPos, int nComboIdx = -1 );
+	void SendAccessoryEnchant( u4 nUID, u2 nItemPos, u2 nAccPos, int nComboIdx = -1, u1 nLockMask = 0 );
 	void RecvEnchantItemEnchant();
 
 #ifdef CHEAT_ITEMRANK

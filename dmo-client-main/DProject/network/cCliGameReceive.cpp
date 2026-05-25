@@ -4021,6 +4021,47 @@ void cCliGame::RecvAllStat(void)
 	pop( nExtentionParameterLV[ nExtendState::ET_HT ] );	
 	pop( nExtentionParameterLV[ nExtendState::ET_HP ] );
 
+	n4 nT_DetailInfoStat[ CTamerUser::sUSER_STAT::DETAILINFO_STAT_COUNT ] = {0,};
+	size_t const nDetailInfoExpectedBytes = CTamerUser::sUSER_STAT::DETAILINFO_STAT_COUNT * sizeof( n4 );
+	size_t const nDetailInfoAvailableBytes = GetReadAvailable();
+	bool const bHasDetailInfoTail = nDetailInfoAvailableBytes >= nDetailInfoExpectedBytes;
+
+	if( bHasDetailInfoTail )
+	{
+		for( int i = 0; i < CTamerUser::sUSER_STAT::DETAILINFO_STAT_COUNT; ++i )
+			pop( nT_DetailInfoStat[ i ] );
+
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"ALLSTAT DetailInfo recv bytes=%u HP=%d DS=%d AT=%d AS=%d CT=%d HT=%d SCD=%d CD=%d SD=%d BASE=%d DE=%d BL=%d EV=%d",
+			static_cast<unsigned>( nDetailInfoAvailableBytes ),
+			nT_DetailInfoStat[ 0 ],
+			nT_DetailInfoStat[ 1 ],
+			nT_DetailInfoStat[ 2 ],
+			nT_DetailInfoStat[ 3 ],
+			nT_DetailInfoStat[ 4 ],
+			nT_DetailInfoStat[ 5 ],
+			nT_DetailInfoStat[ 6 ],
+			nT_DetailInfoStat[ 7 ],
+			nT_DetailInfoStat[ 8 ],
+			nT_DetailInfoStat[ 9 ],
+			nT_DetailInfoStat[ 10 ],
+			nT_DetailInfoStat[ 11 ],
+			nT_DetailInfoStat[ 12 ] );
+	}
+	else
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"ALLSTAT DetailInfo missing tail bytes=%u expected=%u; client will keep DetailInfo as zero until server sends the extended packet",
+			static_cast<unsigned>( nDetailInfoAvailableBytes ),
+			static_cast<unsigned>( nDetailInfoExpectedBytes ) );
+	}
+
+	if( pTBase && pTUser->GetLeafRTTI() == RTTI_TAMER_USER )
+	{
+		for( int i = 0; i < CTamerUser::sUSER_STAT::DETAILINFO_STAT_COUNT; ++i )
+			pTBase->SetDetailInfoStat( i, nT_DetailInfoStat[ i ] );
+	}
+
 	CDigimonUser::sUSER_STAT* pDBase = dynamic_cast<CDigimonUser::sUSER_STAT*>(pDUser->GetBaseStat());
 	if( pDBase && pDUser->GetLeafRTTI() == RTTI_DIGIMON_USER )
 	{

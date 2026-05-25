@@ -14,9 +14,28 @@ vieram de `unpacked_exe_all/functions` e continuam com o corpo decompilado
 original em arquivos `*.original.c`; os nomes dos arquivos foram saneados para
 descrever a funcao aparente de cada bloco.
 
+## Implementacao no cliente
+
+O estado funcional portado para `dmo-client-main` esta documentado em
+`../DetailInfo.md`.
+
+Resumo do estado atual:
+
+- a janela `Detalhes` ja existe como janela independente/movivel no client;
+- a aba `Tamer` tem background, slots, render 3D, botoes e tabela de atributos;
+- o retrato circular do Tamer foi corrigido para usar o mesmo `Render_L` da HUD
+  do personagem, sem a moldura escura `DetailInfo\\TamerStatus_Digimon_Tamer`
+  por cima;
+- a parte de user/outro jogador ainda nao esta finalizada e deve ser retomada
+  usando os pacotes oficiais mapeados neste subprojeto.
+
 ## Conteudo
 
 - `decompiled/DetailInfoUI`: funcoes oficiais da janela `DetailInfo`.
+- `decompiled/DetailInfoMainUI`: shell oficial da janela, abas
+  `Tamer`/`Digimon`, estado local/outro jogador e eventos dos botoes.
+- `decompiled/DetailInfoAdditionalStat`: popup auxiliar de atributos
+  adicionais.
 - `decompiled/StatusUI`: construtores oficiais das UIs de status relacionadas.
 - `decompiled/Shared`: funcao compartilhada que usa asset de `DetailInfo`.
 - `assets/manifest`: CSVs gerados a partir dos `.c` e `xrefs.csv`.
@@ -29,7 +48,7 @@ descrever a funcao aparente de cada bloco.
 ## Manifestos principais
 
 - `assets/manifest/Pack01RequiredAssets.csv`: sprites/texturas referenciadas
-  pelas funcoes decompiladas. A ultima varredura mapeou 36 referencias de
+  pelas funcoes decompiladas. A ultima varredura mapeou 42 referencias de
   asset. As imagens de interface ficam no Pack01 / `Data\\Interface`.
 - `assets/manifest/DecompiledXrefStringReferences.csv`: referencias por xref,
   com funcao original e endereco.
@@ -47,8 +66,9 @@ Pack01 preservando a arvore `Data\\Interface`.
 ## Ultima varredura
 
 `docs/LastSweep_DetailInfoXrefs.csv` registra todas as referencias amplas
-encontradas por xref. A varredura encontrou seis dependencias adicionais do
-painel de Selo Mestre, que foram copiadas para `decompiled/DetailInfoUI`:
+encontradas por xref. A primeira varredura encontrou seis dependencias
+adicionais do painel de Selo Mestre, que foram copiadas para
+`decompiled/DetailInfoUI`:
 
 - `BuildSealMasterCloseButton.original.c`
 - `BuildSealMasterStatRows.original.c`
@@ -56,6 +76,22 @@ painel de Selo Mestre, que foram copiadas para `decompiled/DetailInfoUI`:
 - `ResolveSealMasterDsTextCase.original.c`
 - `ResolveSealMasterStatValue.original.c`
 - `BindSealMasterCloseButton.original.c`
+
+A varredura profunda seguinte percorreu as chamadas proximas ao bloco
+`011d****` e gerou:
+
+- `docs/DeepSweep_DetailInfoCandidateFunctions.csv`: 125 funcoes candidatas,
+  classificadas por confianca.
+- `docs/DeepSweep_DetailInfoCallEdges.csv`: 85 arestas de chamada entre
+  funcoes da familia `DetailInfo`.
+- `docs/DeepSweepCopiedFunctionFiles.csv`: 39 arquivos oficiais adicionais
+  copiados para este subprojeto.
+- `docs/FunctionChainMap.md`: cadeia organizada por janela principal, aba
+  `Tamer`, aba `Digimon`, popup de equipamento, popup de atributo adicional e
+  Selo Mestre.
+
+Depois dessa varredura, o subprojeto possui 70 funcoes mapeadas entre codigo
+de status, janela principal, abas, popups e compartilhados.
 
 ## Protocolos de comunicacao
 

@@ -130,6 +130,7 @@ namespace DigitalWorldOnline.Routine
                     services.AddSingleton<MonsterBinLoader>();
                     services.AddSingleton<MapBinLoader>();
                     services.AddSingleton<ItemListBinLoader>();
+                    services.AddSingleton<ContainerBinLoader>();
                     services.AddSingleton<QuestBinLoader>();
                     services.AddSingleton<UnionXmlAssetLoader>();
                     services.AddSingleton<DUnitCollectionService>();

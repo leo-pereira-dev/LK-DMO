@@ -504,7 +504,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             {
                 await IncreaseArchiveSlots(client, itemSlot, targetItem);
             }
-            else if (targetItem.ItemInfo.Type == 170)
+            else if (targetItem.ItemInfo.Type == 170 || IsConfiguredContainer(targetItem.ItemId))
             {
                 await ContainerItem(client, itemSlot, targetItem);
             }
@@ -544,6 +544,11 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                 client.Send(new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type));
             }
+        }
+
+        private bool IsConfiguredContainer(int itemId)
+        {
+            return itemId > 0 && _assets.Container?.Any(x => x.ItemId == itemId) == true;
         }
 
         /// <summary>

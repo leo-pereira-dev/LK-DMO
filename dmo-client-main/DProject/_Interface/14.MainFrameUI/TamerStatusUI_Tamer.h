@@ -78,6 +78,7 @@ private:
 #ifdef WEB_INFOMATION
 	cButton*				m_pWebInfoButton;
 #endif
+	cButton*				m_pDetailInfoButton;
 
 	cText*					m_pLevelText;
 	cText*					m_pNameText;
@@ -110,9 +111,9 @@ private:
 #ifdef WEB_INFOMATION
 	void					_OnClickWebInfo( void* pSender, void* pData );
 #endif
+	void					_OnClickDetailInfo( void* pSender, void* pData );
 	void					_OnLClickDownEquipItem( void* pSender, void* pData );
 	void					_OnRClickEquipItem( void* pSender, void* pData );
 
 	bool					_OnClickEquipItem( cGridListBoxItem const* pOverItem );
 };
-

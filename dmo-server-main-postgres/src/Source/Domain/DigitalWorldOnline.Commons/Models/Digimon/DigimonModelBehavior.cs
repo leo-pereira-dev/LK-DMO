@@ -138,7 +138,9 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
                     GetTitleStatus(StatusTypeEnum.AT) +
                     (Character?.DUnitCollectionBonus.AT ?? 0) +
                     (Character?.AccessoryStatus(AccessoryStatusTypeEnum.AT) ?? 0) +
+                    (Character?.AccessoryStatus(AccessoryStatusTypeEnum.ATRate, _baseAt) ?? 0) +
                     (Character?.ChipsetStatus(AccessoryStatusTypeEnum.AT) ?? 0) +
+                    (Character?.ChipsetStatus(AccessoryStatusTypeEnum.ATRate, _baseAt) ?? 0) +
                     BuffAttribute(_baseAt, SkillCodeApplyAttributeEnum.AT, SkillCodeApplyAttributeEnum.DA));
 
                 if (intValue > short.MaxValue)
@@ -191,8 +193,16 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         public int SkillDamagePercent =>
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.ATT) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.ATT) ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.SCDRate, 100) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.SCDRate, 100) ?? 0) +
+            (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.SCDRate, 100) ?? 0) +
             (Character?.DUnitCollectionBonus.AttributeSkillDamage(BaseInfo.Attribute, BaseInfo.Element) ?? 0) +
             BuffAttribute(0, SkillCodeApplyAttributeEnum.SkillDamageByAttribute);
+
+        public int FinalDamageBasisPoints =>
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.FinalDamageRate, 10000) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.FinalDamageRate, 10000) ?? 0) +
+            (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.FinalDamageRate, 10000) ?? 0);
 
         public short DE => (short)
             (_baseDe +
@@ -201,7 +211,9 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             GetTitleStatus(StatusTypeEnum.DE) +
             (Character?.DUnitCollectionBonus.DE ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DE) ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DERate, _baseDe) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DE) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DERate, _baseDe) ?? 0) +
             BuffAttribute(_baseDe, SkillCodeApplyAttributeEnum.DP));
 
         public int DS =>
@@ -211,7 +223,10 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             GetTitleStatus(StatusTypeEnum.DS) +
             (Character?.DUnitCollectionBonus.DS ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DS) ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DSRate, _baseDs) ?? 0) +
+            (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.DSRate, _baseDs) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DS) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DSRate, _baseDs) ?? 0) +
             BuffAttribute(_baseDs, SkillCodeApplyAttributeEnum.MaxDS, SkillCodeApplyAttributeEnum.DS);
 
         public short EV => ClampToShort(
@@ -256,6 +271,95 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.Thunder) ?? 0) +
         (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.Steel) ?? 0));
  
+        public int TamerDetailHP => NonNegative(
+            GetSealDetailStatus(StatusTypeEnum.HP) +
+            GetTitleStatus(StatusTypeEnum.HP) +
+            (Character?.DUnitCollectionBonus.HP ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HP) ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
+            (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HP) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
+            BuffAttribute(_baseHp, SkillCodeApplyAttributeEnum.MaxHP));
+
+        public int TamerDetailDS => NonNegative(
+            GetSealDetailStatus(StatusTypeEnum.DS) +
+            GetTitleStatus(StatusTypeEnum.DS) +
+            (Character?.DUnitCollectionBonus.DS ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DS) ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DSRate, _baseDs) ?? 0) +
+            (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.DSRate, _baseDs) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DS) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DSRate, _baseDs) ?? 0) +
+            BuffAttribute(_baseDs, SkillCodeApplyAttributeEnum.MaxDS, SkillCodeApplyAttributeEnum.DS));
+
+        public int TamerDetailAT => NonNegative(
+            GetSealDetailStatus(StatusTypeEnum.AT) +
+            GetTitleStatus(StatusTypeEnum.AT) +
+            (Character?.DUnitCollectionBonus.AT ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.AT) ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.ATRate, _baseAt) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.AT) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.ATRate, _baseAt) ?? 0) +
+            BuffAttribute(_baseAt, SkillCodeApplyAttributeEnum.AT, SkillCodeApplyAttributeEnum.DA));
+
+        public int TamerDetailAS => NonNegative(
+            GetSealDetailStatus(StatusTypeEnum.AS) +
+            (Character?.EquipmentAttributeForPartner(_baseAs, SkillCodeApplyAttributeEnum.AS) ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.AS, _baseAs) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.AS, _baseAs) ?? 0) +
+            BuffAttribute(_baseAs, SkillCodeApplyAttributeEnum.AS));
+
+        public int TamerDetailCT => NonNegative(
+            GetSealDetailStatus(StatusTypeEnum.CT) +
+            GetTitleStatus(StatusTypeEnum.CT) +
+            (Character?.DUnitCollectionBonus.CT ?? 0) +
+            (Character?.EquipmentAttributeForPartner(_baseCc, SkillCodeApplyAttributeEnum.CA) ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.CT, _baseCc) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.CT) ?? 0) +
+            BuffAttribute(_baseCc, SkillCodeApplyAttributeEnum.CA));
+
+        public int TamerDetailHT => NonNegative(
+            GetSealDetailStatus(StatusTypeEnum.HT) +
+            GetTitleStatus(StatusTypeEnum.HT) +
+            (Character?.DUnitCollectionBonus.HT ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HT) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HT) ?? 0) +
+            BuffAttribute(_baseHt, SkillCodeApplyAttributeEnum.HT));
+
+        public int TamerDetailSCD => NonNegative(SCD / 100);
+
+        public int TamerDetailCD => NonNegative(CD - _baseCd);
+
+        public int TamerDetailSD => NonNegative(SKD - _baseAt);
+
+        public int TamerDetailBaseDamage => NonNegative(FinalDamageBasisPoints / 100);
+
+        public int TamerDetailDE => NonNegative(
+            GetSealDetailStatus(StatusTypeEnum.DE) +
+            GetTitleStatus(StatusTypeEnum.DE) +
+            (Character?.DUnitCollectionBonus.DE ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DE) ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DERate, _baseDe) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DE) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DERate, _baseDe) ?? 0) +
+            BuffAttribute(_baseDe, SkillCodeApplyAttributeEnum.DP));
+
+        public int TamerDetailBL => NonNegative(
+            GetSealDetailStatus(StatusTypeEnum.BL) +
+            ((Character?.DUnitCollectionBonus.BL ?? 0) * 100) +
+            ((Character?.AccessoryStatus(AccessoryStatusTypeEnum.BL) ?? 0) * 100) +
+            ((Character?.ChipsetStatus(AccessoryStatusTypeEnum.BL) ?? 0) * 100) +
+            (BuffAttribute(_baseBl, SkillCodeApplyAttributeEnum.BL) * 100));
+
+        public int TamerDetailEV => NonNegative(
+            GetSealDetailStatus(StatusTypeEnum.EV) +
+            GetTitleStatus(StatusTypeEnum.EV) +
+            (Character?.DUnitCollectionBonus.EV ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.EV) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.EV) ?? 0) +
+            BuffAttribute(_baseEv, SkillCodeApplyAttributeEnum.EV, SkillCodeApplyAttributeEnum.ER));
+
 
 
         public int HP =>
@@ -266,10 +370,15 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             GetTitleStatus(StatusTypeEnum.HP) +
             (Character?.DUnitCollectionBonus.HP ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HP) ?? 0) +
+            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
+            (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HP) ?? 0) +
+            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
             BuffAttribute(_baseHp, SkillCodeApplyAttributeEnum.MaxHP);
 
         public int MS => _fsMs;
+
+        private static int NonNegative(int value) => value < 0 ? 0 : value;
 
         private static short ClampToShort(int value)
         {
@@ -519,6 +628,32 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
                 StatusTypeEnum.HT => SealStatusList.Sum(x => x.HTValue),
                 StatusTypeEnum.MS => SealStatusList.Sum(x => x.MSValue),
                 _ => 0,
+            };
+        }
+
+        private int GetSealDetailStatus(StatusTypeEnum status)
+        {
+            var rawValue = status switch
+            {
+                StatusTypeEnum.AS => SealStatusList.Sum(x => x.ASValue),
+                StatusTypeEnum.AT => SealStatusList.Sum(x => x.ATValue),
+                StatusTypeEnum.BL => SealStatusList.Sum(x => x.BLValue),
+                StatusTypeEnum.CT => SealStatusList.Sum(x => x.CTValue),
+                StatusTypeEnum.DE => SealStatusList.Sum(x => x.DEValue),
+                StatusTypeEnum.DS => SealStatusList.Sum(x => x.DSValue),
+                StatusTypeEnum.EV => SealStatusList.Sum(x => x.EVValue),
+                StatusTypeEnum.HP => SealStatusList.Sum(x => x.HPValue),
+                StatusTypeEnum.HT => SealStatusList.Sum(x => x.HTValue),
+                StatusTypeEnum.MS => SealStatusList.Sum(x => x.MSValue),
+                _ => 0,
+            };
+
+            return status switch
+            {
+                StatusTypeEnum.BL => rawValue / 100,
+                StatusTypeEnum.CT => rawValue / 100,
+                StatusTypeEnum.EV => rawValue / 100,
+                _ => rawValue,
             };
         }
 

@@ -373,6 +373,7 @@ void cTooltip::_MakeTooltip_Item(bool compare)
 	case 5:		ti.SetText( UISTRING_TEXT( "TOOLTIP_ITEM_EPIC_ITEM" ).c_str() );			break;
 	case 6:		ti.SetText( UISTRING_TEXT( "TOOLTIP_ITEM_UNIQUE_ITEM" ).c_str() );			break;
 	case 7:		ti.SetText( UISTRING_TEXT( "TOOLTIP_ITEM_LEGEND_ITEM" ).c_str() );			break;
+	case 8:		ti.SetText( UISTRING_TEXT( "COMMON_TXT_EVENT_ITEM" ).c_str() );			break;
 
 	case 9:		ti.SetText( UISTRING_TEXT( "COMMON_TXT_EVENT_ITEM" ).c_str() );			break;
 	case 10:

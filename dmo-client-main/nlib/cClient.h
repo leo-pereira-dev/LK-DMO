@@ -148,6 +148,7 @@ public:
 
 	void pop(void* data, size_t len, bool wlen = false);
 
+	size_t GetReadAvailable() const { return m_read.GetReadableSize(); }
 
 	void newp(uint16_t id);
 	void endp(uint16_t id);

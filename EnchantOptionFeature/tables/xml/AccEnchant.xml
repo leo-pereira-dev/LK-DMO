@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AccEnchant schema="AccEnchant.struct" bin="AccEnchant.bin" byteLength="292">
+  <Enchants kind="Section" offset="0" length="292">
+    <_0 kind="Record" offset="4" length="8">
+      <EnchantId kind="Leaf" offset="4" length="4" type="Scalar { Kind = U32 }" value="20000001" />
+      <OptionType kind="Leaf" offset="8" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="10" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_0>
+    <_1 kind="Record" offset="12" length="8">
+      <EnchantId kind="Leaf" offset="12" length="4" type="Scalar { Kind = U32 }" value="20000002" />
+      <OptionType kind="Leaf" offset="16" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Value kind="Leaf" offset="18" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_1>
+    <_2 kind="Record" offset="20" length="8">
+      <EnchantId kind="Leaf" offset="20" length="4" type="Scalar { Kind = U32 }" value="20000003" />
+      <OptionType kind="Leaf" offset="24" length="2" type="Scalar { Kind = U16 }" value="3" />
+      <Value kind="Leaf" offset="26" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_2>
+    <_3 kind="Record" offset="28" length="8">
+      <EnchantId kind="Leaf" offset="28" length="4" type="Scalar { Kind = U32 }" value="20000004" />
+      <OptionType kind="Leaf" offset="32" length="2" type="Scalar { Kind = U16 }" value="4" />
+      <Value kind="Leaf" offset="34" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_3>
+    <_4 kind="Record" offset="36" length="8">
+      <EnchantId kind="Leaf" offset="36" length="4" type="Scalar { Kind = U32 }" value="20000005" />
+      <OptionType kind="Leaf" offset="40" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="42" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_4>
+    <_5 kind="Record" offset="44" length="8">
+      <EnchantId kind="Leaf" offset="44" length="4" type="Scalar { Kind = U32 }" value="20000006" />
+      <OptionType kind="Leaf" offset="48" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="50" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_5>
+    <_6 kind="Record" offset="52" length="8">
+      <EnchantId kind="Leaf" offset="52" length="4" type="Scalar { Kind = U32 }" value="20000007" />
+      <OptionType kind="Leaf" offset="56" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="58" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_6>
+    <_7 kind="Record" offset="60" length="8">
+      <EnchantId kind="Leaf" offset="60" length="4" type="Scalar { Kind = U32 }" value="20000008" />
+      <OptionType kind="Leaf" offset="64" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="66" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_7>
+    <_8 kind="Record" offset="68" length="8">
+      <EnchantId kind="Leaf" offset="68" length="4" type="Scalar { Kind = U32 }" value="20000009" />
+      <OptionType kind="Leaf" offset="72" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="74" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_8>
+    <_9 kind="Record" offset="76" length="8">
+      <EnchantId kind="Leaf" offset="76" length="4" type="Scalar { Kind = U32 }" value="20000010" />
+      <OptionType kind="Leaf" offset="80" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="82" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_9>
+    <_10 kind="Record" offset="84" length="8">
+      <EnchantId kind="Leaf" offset="84" length="4" type="Scalar { Kind = U32 }" value="20000011" />
+      <OptionType kind="Leaf" offset="88" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="90" length="2" type="Scalar { Kind = U16 }" value="3" />
+    </_10>
+    <_11 kind="Record" offset="92" length="8">
+      <EnchantId kind="Leaf" offset="92" length="4" type="Scalar { Kind = U32 }" value="20000012" />
+      <OptionType kind="Leaf" offset="96" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="98" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_11>
+    <_12 kind="Record" offset="100" length="8">
+      <EnchantId kind="Leaf" offset="100" length="4" type="Scalar { Kind = U32 }" value="20000013" />
+      <OptionType kind="Leaf" offset="104" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Value kind="Leaf" offset="106" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_12>
+    <_13 kind="Record" offset="108" length="8">
+      <EnchantId kind="Leaf" offset="108" length="4" type="Scalar { Kind = U32 }" value="20000014" />
+      <OptionType kind="Leaf" offset="112" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Value kind="Leaf" offset="114" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_13>
+    <_14 kind="Record" offset="116" length="8">
+      <EnchantId kind="Leaf" offset="116" length="4" type="Scalar { Kind = U32 }" value="20000015" />
+      <OptionType kind="Leaf" offset="120" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Value kind="Leaf" offset="122" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_14>
+    <_15 kind="Record" offset="124" length="8">
+      <EnchantId kind="Leaf" offset="124" length="4" type="Scalar { Kind = U32 }" value="20000016" />
+      <OptionType kind="Leaf" offset="128" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Value kind="Leaf" offset="130" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_15>
+    <_16 kind="Record" offset="132" length="8">
+      <EnchantId kind="Leaf" offset="132" length="4" type="Scalar { Kind = U32 }" value="20000017" />
+      <OptionType kind="Leaf" offset="136" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Value kind="Leaf" offset="138" length="2" type="Scalar { Kind = U16 }" value="3" />
+    </_16>
+    <_17 kind="Record" offset="140" length="8">
+      <EnchantId kind="Leaf" offset="140" length="4" type="Scalar { Kind = U32 }" value="20000018" />
+      <OptionType kind="Leaf" offset="144" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Value kind="Leaf" offset="146" length="2" type="Scalar { Kind = U16 }" value="5" />
+    </_17>
+    <_18 kind="Record" offset="148" length="8">
+      <EnchantId kind="Leaf" offset="148" length="4" type="Scalar { Kind = U32 }" value="20000019" />
+      <OptionType kind="Leaf" offset="152" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="154" length="2" type="Scalar { Kind = U16 }" value="30" />
+    </_18>
+    <_19 kind="Record" offset="156" length="8">
+      <EnchantId kind="Leaf" offset="156" length="4" type="Scalar { Kind = U32 }" value="20000020" />
+      <OptionType kind="Leaf" offset="160" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="162" length="2" type="Scalar { Kind = U16 }" value="3" />
+    </_19>
+    <_20 kind="Record" offset="164" length="8">
+      <EnchantId kind="Leaf" offset="164" length="4" type="Scalar { Kind = U32 }" value="20000021" />
+      <OptionType kind="Leaf" offset="168" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="170" length="2" type="Scalar { Kind = U16 }" value="2" />
+    </_20>
+    <_21 kind="Record" offset="172" length="8">
+      <EnchantId kind="Leaf" offset="172" length="4" type="Scalar { Kind = U32 }" value="20000022" />
+      <OptionType kind="Leaf" offset="176" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Value kind="Leaf" offset="178" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_21>
+    <_22 kind="Record" offset="180" length="8">
+      <EnchantId kind="Leaf" offset="180" length="4" type="Scalar { Kind = U32 }" value="20000023" />
+      <OptionType kind="Leaf" offset="184" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="186" length="2" type="Scalar { Kind = U16 }" value="10" />
+    </_22>
+    <_23 kind="Record" offset="188" length="8">
+      <EnchantId kind="Leaf" offset="188" length="4" type="Scalar { Kind = U32 }" value="20000024" />
+      <OptionType kind="Leaf" offset="192" length="2" type="Scalar { Kind = U16 }" value="2" />
+      <Value kind="Leaf" offset="194" length="2" type="Scalar { Kind = U16 }" value="5" />
+    </_23>
+    <_24 kind="Record" offset="196" length="8">
+      <EnchantId kind="Leaf" offset="196" length="4" type="Scalar { Kind = U32 }" value="20000025" />
+      <OptionType kind="Leaf" offset="200" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="202" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_24>
+    <_25 kind="Record" offset="204" length="8">
+      <EnchantId kind="Leaf" offset="204" length="4" type="Scalar { Kind = U32 }" value="20000026" />
+      <OptionType kind="Leaf" offset="208" length="2" type="Scalar { Kind = U16 }" value="1" />
+      <Value kind="Leaf" offset="210" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_25>
+    <_26 kind="Record" offset="212" length="8">
+      <EnchantId kind="Leaf" offset="212" length="4" type="Scalar { Kind = U32 }" value="20000031" />
+      <OptionType kind="Leaf" offset="216" length="2" type="Scalar { Kind = U16 }" value="6" />
+      <Value kind="Leaf" offset="218" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_26>
+    <_27 kind="Record" offset="220" length="8">
+      <EnchantId kind="Leaf" offset="220" length="4" type="Scalar { Kind = U32 }" value="20000032" />
+      <OptionType kind="Leaf" offset="224" length="2" type="Scalar { Kind = U16 }" value="7" />
+      <Value kind="Leaf" offset="226" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_27>
+    <_28 kind="Record" offset="228" length="8">
+      <EnchantId kind="Leaf" offset="228" length="4" type="Scalar { Kind = U32 }" value="20000033" />
+      <OptionType kind="Leaf" offset="232" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Value kind="Leaf" offset="234" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_28>
+    <_29 kind="Record" offset="236" length="8">
+      <EnchantId kind="Leaf" offset="236" length="4" type="Scalar { Kind = U32 }" value="20000034" />
+      <OptionType kind="Leaf" offset="240" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Value kind="Leaf" offset="242" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_29>
+    <_30 kind="Record" offset="244" length="8">
+      <EnchantId kind="Leaf" offset="244" length="4" type="Scalar { Kind = U32 }" value="20000035" />
+      <OptionType kind="Leaf" offset="248" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Value kind="Leaf" offset="250" length="2" type="Scalar { Kind = U16 }" value="10" />
+    </_30>
+    <_31 kind="Record" offset="252" length="8">
+      <EnchantId kind="Leaf" offset="252" length="4" type="Scalar { Kind = U32 }" value="20000036" />
+      <OptionType kind="Leaf" offset="256" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Value kind="Leaf" offset="258" length="2" type="Scalar { Kind = U16 }" value="1" />
+    </_31>
+    <_32 kind="Record" offset="260" length="8">
+      <EnchantId kind="Leaf" offset="260" length="4" type="Scalar { Kind = U32 }" value="20000037" />
+      <OptionType kind="Leaf" offset="264" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Value kind="Leaf" offset="266" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_32>
+    <_33 kind="Record" offset="268" length="8">
+      <EnchantId kind="Leaf" offset="268" length="4" type="Scalar { Kind = U32 }" value="20000038" />
+      <OptionType kind="Leaf" offset="272" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Value kind="Leaf" offset="274" length="2" type="Scalar { Kind = U16 }" value="0" />
+    </_33>
+    <_34 kind="Record" offset="276" length="8">
+      <EnchantId kind="Leaf" offset="276" length="4" type="Scalar { Kind = U32 }" value="20000039" />
+      <OptionType kind="Leaf" offset="280" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Value kind="Leaf" offset="282" length="2" type="Scalar { Kind = U16 }" value="10" />
+    </_34>
+    <_35 kind="Record" offset="284" length="8">
+      <EnchantId kind="Leaf" offset="284" length="4" type="Scalar { Kind = U32 }" value="20000040" />
+      <OptionType kind="Leaf" offset="288" length="2" type="Scalar { Kind = U16 }" value="5" />
+      <Value kind="Leaf" offset="290" length="2" type="Scalar { Kind = U16 }" value="90" />
+    </_35>
+  </Enchants>
+</AccEnchant>

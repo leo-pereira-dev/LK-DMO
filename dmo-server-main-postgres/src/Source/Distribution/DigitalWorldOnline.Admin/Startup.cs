@@ -130,6 +130,7 @@ namespace DigitalWorldOnline.Admin
             services.AddSingleton<MonsterBinLoader>();
             services.AddSingleton<MapBinLoader>();
             services.AddSingleton<ItemListBinLoader>();
+            services.AddSingleton<ContainerBinLoader>();
             services.AddSingleton<QuestBinLoader>();
             services.AddScoped<StoragePersistenceDualWriteCoordinator>();
             services.AddSingleton<AssetsLoader>();

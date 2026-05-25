@@ -210,6 +210,7 @@
 #include "../14.MainFrameUI/MainFrame_TamerStatusUI.h"
 #include "../14.MainFrameUI/MainFrame_DeleteDigimonUI.h"
 #include "../14.MainFrameUI/MainFrame_DigimonStatusUI.h"
+#include "../14.MainFrameUI/MainFrame_DetailInfoUI.h"
 #include "../14.MainFrameUI/MainFrame_DigimonStatusHelpUI.h"
 #include "../14.MainFrameUI/MainFrame_TargetUI.h"
 
@@ -343,6 +344,7 @@ public:
 	cAchieve*				GetAchieve() { return (cAchieve*)_GetPointer( cBaseWindow::WT_ACHIEVE, 0 ); }
 	cUnionStore*			GetUnionStore(){ return (cUnionStore*)_GetPointer( cBaseWindow::WT_UNIONSTORE, 0 ); }
 	cXmlUnionDUnit*			GetXmlUnionDUnit(){ return (cXmlUnionDUnit*)_GetPointer( cBaseWindow::WT_XML_UNION, 0 ); }
+	cDetailInfoUI*			GetDetailInfoUI(){ return (cDetailInfoUI*)_GetPointer( cBaseWindow::WT_DETAIL_INFO, 0 ); }
 	
 	cCenterbar*				GetCenterBar( int nIndex ) { return (cCenterbar*)_GetPointer( cBaseWindow::WT_CENTERBAR, nIndex ); }	
 

@@ -186,6 +186,8 @@ public:
 	struct sUSER_STAT : public CsC_AvObject::sBASE_STAT
 	{
 	public:
+		enum { DETAILINFO_STAT_COUNT = 13 };
+
 		sUSER_STAT( CsC_AvObject* pParent );
 		~sUSER_STAT();
 
@@ -202,6 +204,7 @@ public:
 		__int64			s_dwExp;
 		int				s_nAtt;
 		int				s_nDef;
+		int				s_nDetailInfoStat[ DETAILINFO_STAT_COUNT ];
 #ifdef CROSSWARS_SYSTEM
 		int				s_nCR;
 		int				s_nMaxCR;
@@ -237,6 +240,7 @@ public:
 		void	SetExp( __int64 dwExp );
 		int				GetAtt() const;
 		int				GetDef() const;
+		int				GetDetailInfoStat( int nIndex ) const;
 #ifdef CROSSWARS_SYSTEM
 		int				GetCR() const;
 		int				GetMaxCR() const;
@@ -245,6 +249,7 @@ public:
 
 		void			SetAtt( int nValue );
 		void			SetDef( int nValue );
+		void			SetDetailInfoStat( int nIndex, int nValue );
 #ifdef CROSSWARS_SYSTEM
 		void			SetMaxCR( int nValue );
 		void			SetCR( int nValue );

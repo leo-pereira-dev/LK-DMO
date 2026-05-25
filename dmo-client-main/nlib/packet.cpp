@@ -22,6 +22,11 @@
 cPacket::cPacket() : real_len(0) {}
 cPacket::~cPacket() = default;
 
+size_t cPacket::GetReadableSize() const
+{
+	return m_buf.size();
+}
+
 void cPacket::newp(uint16_t id)
 {
 	real_len = 0;

@@ -38,14 +38,21 @@ copiados. As imagens de interface devem sair do Pack01 em `Data/Interface`.
 - `CommonUI/CommonUI_close.tga`
 - `DigimonStatus_New/Digimon_Status_Enchant_01.tga`
 - `DMG_SKINS/Mini_Out_btn_a.tga`
+- `DMG_SKINS/Mini_Out_btn_b.tga`
+- `DMG_SKINS/skin_btn_a.tga`
+- `DMG_SKINS/skin_btn_b.tga`
 - `EquipSystem/Upgrade_Slot.tga`
 - `Icon/Mask_Over.dds`
 - `Mail/Mail_List_Box.tga`
+- `Number.dds`
+- `System/Btn_Radio1.tga`
 - `TacticsHouse/CheckOnline.tga`
 - `TacticsHouse/Storage_M_field.tga`
 
 `TacticsHouse/Storage_M_field.tga` aparece em mais de uma funcao copiada
 (`BuildDigimonInfoPanel` e `BuildEquippedAchievementSection`).
+`System/Btn_Radio1.tga` e usado pelos botoes de aba `Tamer`/`Digimon` nas
+variantes local e outro jogador da janela principal.
 
 ## Status
 

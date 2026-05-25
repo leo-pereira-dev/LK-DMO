@@ -1,0 +1,27 @@
+Path,Role
+dmo-client-main/DProject/_Interface/Game/EnchantOption.cpp,Implementacao visual da janela
+dmo-client-main/DProject/_Interface/Game/EnchantOption.h,Classe e membros da UI
+dmo-client-main/DProject/_Interface/00.Contents/EnchantOptionContents.cpp,Fluxo de item/pedra/validacao/envio de packets
+dmo-client-main/DProject/_Interface/00.Contents/EnchantOptionContents.h,Structs e enums de estado do conteudo
+dmo-client-main/DProject/_Interface/Adapt/AdaptEnchantOption.cpp,Adaptador para o contents system
+dmo-client-main/DProject/_Interface/Adapt/AdaptEnchantOption.h,Declaracao do adaptador
+dmo-client-main/DProject/_Interface/Game/_BaseWindow.cpp,Factory WT_ENCHANT_OPTION
+dmo-client-main/DProject/_Interface/Game/_BaseWindow.h,Enum WT_ENCHANT_OPTION
+dmo-client-main/DProject/_Interface/Game/_GameIF.cpp,Bloqueios/estado de janela ativa
+dmo-client-main/DProject/_Interface/Game/MessageBox.cpp,Dispara START_ENCHANT_OPTION_ENCHANT
+dmo-client-main/DProject/network/cCliGameSend.cpp,SendAccessoryCheck e SendAccessoryEnchant
+dmo-client-main/DProject/network/cCliGameReceive.cpp,RecvEnchantItemIdentify e RecvEnchantItemEnchant
+dmo-client-main/DProject/network/cCliGame.cpp,Dispatch de pItem::AccessoryCheck para RecvEnchantItemIdentify
+dmo-client-main/common_vs2019/pItem.h,Enums de packets e stone types
+dmo-client-main/common_vs2019/cItemData.h,Campos m_nAccOption e m_nAccValues
+dmo-client-main/LibProj/CsFileTable/ItemMng.cpp,Loader de AccessoryEnchant
+dmo-client-main/LibProj/CsFileTable/ItemMng.h,Mapa GetAccessoryEnchant
+dmo-client-main/DProject/ItemInfo.cpp,Tooltip/detalhes de pedra AccessoryEnchant
+dmo-client-main/DProject/_Interface/Base/StringAnalysis.cpp,Descricao textual de stones DigiPower/Renewal/AccOption/OptionValue
+dmo-client-main/DProject/_Interface/Game/ToolTip.cpp,Leitura de opcoes de acessorio
+dmo-client-main/DProject/_Interface/Game/ToolTip_Skill.cpp,SkillAP vindo de m_nAccOption
+dmo-client-main/DProject/FmDigimon.cpp,Leitura de opcoes de equipamento
+dmo-client-main/DProject/Data_Inven.cpp,Copia de m_nAccOption/m_nAccValues
+dmo-client-main/DProject/Data_TEquip.cpp,Copia de m_nAccOption/m_nAccValues
+dmo-client-main/DProject/Data_Digivice.cpp,Copia de m_nAccOption/m_nAccValues
+

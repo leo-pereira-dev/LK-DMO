@@ -999,6 +999,7 @@ namespace DigitalWorldOnline.Commons.Models.Character
         public short ChipsetStatus(AccessoryStatusTypeEnum type, int baseValue = 0)
         {
             var totalValue = 0;
+            var baseType = type.NormalizeAccessoryStatus();
 
             foreach (var item in ChipSets.EquippedItems)
             {
@@ -1008,20 +1009,20 @@ namespace DigitalWorldOnline.Commons.Models.Character
                 if (!IsSameFamily(item))
                     continue;
 
-                foreach (var statusValue in item.AccessoryStatus.Where(x => x.Type == type).Select(x => x.Value))
+                foreach (var statusValue in item.AccessoryStatus.Where(x => x.Type.NormalizeAccessoryStatus() == baseType).Select(x => x.Value))
                 {
 
-                    if (type >= AccessoryStatusTypeEnum.Data)
+                    if (baseType.IsAttributeOrElementDamage() || baseType.IsRatioStatus())
                     {
                         var percentValue = (decimal)statusValue / 100;
 
                         totalValue += (int)((percentValue * baseValue) / 100);
                     }
-                    else if (type == AccessoryStatusTypeEnum.CT || type == AccessoryStatusTypeEnum.EV)
+                    else if (baseType == AccessoryStatusTypeEnum.CT || baseType == AccessoryStatusTypeEnum.EV)
                     {
                         totalValue += statusValue * 100;
                     }
-                    else if (type == AccessoryStatusTypeEnum.CD)
+                    else if (baseType == AccessoryStatusTypeEnum.CD)
                     {
                         totalValue += statusValue;
                     }
@@ -1081,34 +1082,38 @@ namespace DigitalWorldOnline.Commons.Models.Character
         public short DigiviceAccessoryStatus(AccessoryStatusTypeEnum type, int baseValue = 0)
         {
             var totalValue = 0;
+            var baseType = type.NormalizeAccessoryStatus();
 
             foreach (var item in Digivice.EquippedItems)
             {
                 if (!item.HasAccessoryStatus || Level < item.ItemInfo.TamerMinLevel || Partner.Level < item.ItemInfo.DigimonMinLevel)
                     continue;
 
-                foreach (var statusValue in item.AccessoryStatus.Where(x => x.Type == type).Select(x => x.Value))
+                foreach (var statusValue in item.AccessoryStatus.Where(x => x.Type.NormalizeAccessoryStatus() == baseType).Select(x => x.Value))
                 {
                     var percent = (decimal)item.Power / 100;
                     var scaledValue = (int)Math.Round((double)(statusValue * percent), MidpointRounding.AwayFromZero);
 
-                    if (type >= AccessoryStatusTypeEnum.Data)
+                    if (baseType.IsAttributeOrElementDamage())
                     {
-                        if (type >= AccessoryStatusTypeEnum.Data)
-                        {
-                            bool IsPossible = HasAcessoryAttribute(Partner.BaseInfo.Attribute, type) || HasAcessoryElement(Partner.BaseInfo.Element, type);
-                            if (!IsPossible)
-                                break;
-                        }
+                        bool IsPossible = HasAcessoryAttribute(Partner.BaseInfo.Attribute, baseType) || HasAcessoryElement(Partner.BaseInfo.Element, baseType);
+                        if (!IsPossible)
+                            break;
 
 
                         totalValue += statusValue;
                     }
-                    else if (type == AccessoryStatusTypeEnum.CT || type == AccessoryStatusTypeEnum.EV)
+                    else if (baseType.IsRatioStatus())
+                    {
+                        var percentValue = (decimal)statusValue / 100;
+
+                        totalValue += (int)((percent * percentValue * baseValue) / 100);
+                    }
+                    else if (baseType == AccessoryStatusTypeEnum.CT || baseType == AccessoryStatusTypeEnum.EV)
                     {
                         totalValue += scaledValue * 100;
                     }
-                    else if (type == AccessoryStatusTypeEnum.CD)
+                    else if (baseType == AccessoryStatusTypeEnum.CD)
                     {
                         totalValue += scaledValue;
                     }
@@ -1131,37 +1136,41 @@ namespace DigitalWorldOnline.Commons.Models.Character
         public short AccessoryStatus(AccessoryStatusTypeEnum type, int baseValue = 0)
         {
             var totalValue = 0;
+            var baseType = type.NormalizeAccessoryStatus();
 
             foreach (var item in Equipment.EquippedItems)
             {
                 if (!item.HasAccessoryStatus || Level < item.ItemInfo.TamerMinLevel || Partner.Level < item.ItemInfo.DigimonMinLevel)
                     continue;
 
-                foreach (var statusValue in item.AccessoryStatus.Where(x => x.Type == type).Select(x => x.Value))
+                foreach (var statusValue in item.AccessoryStatus.Where(x => x.Type.NormalizeAccessoryStatus() == baseType).Select(x => x.Value))
                 {
                     var percent = (decimal)item.Power / 100;
                     var scaledValue = (int)Math.Round((double)(statusValue * percent), MidpointRounding.AwayFromZero);
 
-                    if (type >= AccessoryStatusTypeEnum.Data)
+                    if (baseType.IsAttributeOrElementDamage())
                     {
-                        if (type >= AccessoryStatusTypeEnum.Data)
-                        {
-                            var isPossible =
-                                HasAcessoryAttribute(Partner.BaseInfo.Attribute, type) ||
-                                HasAcessoryElement(Partner.BaseInfo.Element, type);
-                            if (!isPossible)
-                                break;
-                        }
+                        var isPossible =
+                            HasAcessoryAttribute(Partner.BaseInfo.Attribute, baseType) ||
+                            HasAcessoryElement(Partner.BaseInfo.Element, baseType);
+                        if (!isPossible)
+                            break;
 
                         var percentValue = (decimal)statusValue / 100;
 
                         totalValue += (int)((percent * percentValue * baseValue) / 100);
                     }
-                    else if (type == AccessoryStatusTypeEnum.CT || type == AccessoryStatusTypeEnum.EV)
+                    else if (baseType.IsRatioStatus())
+                    {
+                        var percentValue = (decimal)statusValue / 100;
+
+                        totalValue += (int)((percent * percentValue * baseValue) / 100);
+                    }
+                    else if (baseType == AccessoryStatusTypeEnum.CT || baseType == AccessoryStatusTypeEnum.EV)
                     {
                         totalValue += scaledValue * 100;
                     }
-                    else if (type == AccessoryStatusTypeEnum.CD)
+                    else if (baseType == AccessoryStatusTypeEnum.CD)
                     {
                         totalValue += scaledValue;
                     }

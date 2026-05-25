@@ -127,6 +127,7 @@ namespace DigitalWorldOnline.Game
                     services.AddSingleton<AttendanceService>();
                     services.AddSingleton<OwnerStorageFlushService>();
                     services.AddSingleton<PortalDestinationResolver>();
+                    services.AddSingleton<AccessoryEnchantService>();
                     services.AddSingleton<DatabaseSchemaValidator>();
 
                     services.AddSingleton<EventQueueManager>();
@@ -164,6 +165,7 @@ namespace DigitalWorldOnline.Game
                     services.AddSingleton<MonsterBinLoader>();
                     services.AddSingleton<MapBinLoader>();
                     services.AddSingleton<ItemListBinLoader>();
+                    services.AddSingleton<ContainerBinLoader>();
                     services.AddSingleton<QuestBinLoader>();
                     services.AddSingleton<UnionXmlAssetLoader>();
                     services.AddSingleton<DUnitCollectionService>();
@@ -213,6 +215,7 @@ namespace DigitalWorldOnline.Game
             var monster = host.Services.GetRequiredService<MonsterBinLoader>().Load();
             var mapBin = host.Services.GetRequiredService<MapBinLoader>().Load();
             var itemList = host.Services.GetRequiredService<ItemListBinLoader>().Load();
+            var containerBin = host.Services.GetRequiredService<ContainerBinLoader>().Load();
             var quest = host.Services.GetRequiredService<QuestBinLoader>().Load();
             // Element-vs-element + attribute-vs-attribute combat multipliers come from
             // Nature.bin — accessed via Utils.GetElementDelta / GetAttributePoint, which
@@ -280,6 +283,14 @@ namespace DigitalWorldOnline.Game
                 itemList.Sections.Exchange,
                 itemList.Sections.AccessoryOption,
                 itemList.Sections.AccessoryEnchant);
+            serilog.Information(
+                "Loaded container bins: SourceRows={Boxes}, RewardRows={ItemGroups}, RewardGroups={RewardGroups}, Containers={Containers}, MissingItemGroups={MissingItemGroups}, MissingRewardGroups={MissingRewardGroups}",
+                containerBin.RandomBoxRows,
+                containerBin.ItemGroupRows,
+                containerBin.RewardGroupRows,
+                containerBin.Containers.Count,
+                containerBin.MissingItemGroups,
+                containerBin.MissingRewardGroups);
 
             return host;
         }

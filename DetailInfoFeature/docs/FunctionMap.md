@@ -34,4 +34,57 @@
 | `011dd050` | `FUN_011dd050` | `ResolveDetailInfoStatText` | `decompiled/DetailInfoUI/ResolveDetailInfoStatText.original.c` |
 | `011ed0a0` | `FUN_011ed0a0` | `BuildSharedDetailRewardPanel` | `decompiled/Shared/BuildSharedDetailRewardPanel.original.c` |
 
-`docs/CopiedFunctionFiles.csv` contem o mesmo mapa em formato CSV gerado.
+`docs/CopiedFunctionFiles.csv` contem o mapa inicial em formato CSV gerado.
+`docs/DeepSweepCopiedFunctionFiles.csv` contem as funcoes adicionadas pela
+varredura profunda.
+
+## Deep Sweep Additions
+
+Uma segunda varredura focada na cadeia de chamadas `011d****` adicionou 39
+funcoes oficiais que nao estavam no mapa inicial, mas sao chamadas direta ou
+indiretamente pela janela das prints.
+
+| Address | Clean name | Copied file |
+| --- | --- | --- |
+| `011d0110` | `RefreshAdditionalStatList` | `decompiled/DetailInfoAdditionalStat/RefreshAdditionalStatList.original.c` |
+| `011d0390` | `BuildAdditionalStatListRow` | `decompiled/DetailInfoAdditionalStat/BuildAdditionalStatListRow.original.c` |
+| `011d14a0` | `BindAdditionalStatPopupEvents` | `decompiled/DetailInfoAdditionalStat/BindAdditionalStatPopupEvents.original.c` |
+| `011d14f0` | `BuildAdditionalStatTabButtons` | `decompiled/DetailInfoAdditionalStat/BuildAdditionalStatTabButtons.original.c` |
+| `011d1690` | `HandleAdditionalStatTabChange` | `decompiled/DetailInfoAdditionalStat/HandleAdditionalStatTabChange.original.c` |
+| `011d17c0` | `RefreshAdditionalStatPopup` | `decompiled/DetailInfoAdditionalStat/RefreshAdditionalStatPopup.original.c` |
+| `011d1890` | `BuildAdditionalStatAttributeRows` | `decompiled/DetailInfoAdditionalStat/BuildAdditionalStatAttributeRows.original.c` |
+| `011d2710` | `ConstructDetailInfoDigimonSubUI` | `decompiled/DetailInfoUI/ConstructDetailInfoDigimonSubUI.original.c` |
+| `011d28b0` | `RenderDetailInfoDigimonSubUI` | `decompiled/DetailInfoUI/RenderDetailInfoDigimonSubUI.original.c` |
+| `011d5350` | `RenderDigimonEnchantOrAdvanceValue` | `decompiled/DetailInfoUI/RenderDigimonEnchantOrAdvanceValue.original.c` |
+| `011d5590` | `RenderDigimonPercentValue` | `decompiled/DetailInfoUI/RenderDigimonPercentValue.original.c` |
+| `011d5940` | `ResolveDigimonDataStatText` | `decompiled/DetailInfoUI/ResolveDigimonDataStatText.original.c` |
+| `011d5d40` | `HandleDigimonZoomButton` | `decompiled/DetailInfoUI/HandleDigimonZoomButton.original.c` |
+| `011d5e00` | `BindDigimonZoomButton` | `decompiled/DetailInfoUI/BindDigimonZoomButton.original.c` |
+| `011d62e0` | `PrepareEquipmentPopupData` | `decompiled/DetailInfoUI/PrepareEquipmentPopupData.original.c` |
+| `011d6580` | `BindEquipmentPopupCloseButton` | `decompiled/DetailInfoUI/BindEquipmentPopupCloseButton.original.c` |
+| `011d7cf0` | `RenderEquipmentDetailValue` | `decompiled/DetailInfoUI/RenderEquipmentDetailValue.original.c` |
+| `011d7de0` | `BindEquipmentPopupCloseButtonEvent` | `decompiled/DetailInfoUI/BindEquipmentPopupCloseButtonEvent.original.c` |
+| `011d8250` | `SetVisibilityToggleState` | `decompiled/DetailInfoMainUI/SetVisibilityToggleState.original.c` |
+| `011d8320` | `BuildLocalDetailInfoTabButtons` | `decompiled/DetailInfoMainUI/BuildLocalDetailInfoTabButtons.original.c` |
+| `011d86e0` | `CreateLocalDetailInfoTabContents` | `decompiled/DetailInfoMainUI/CreateLocalDetailInfoTabContents.original.c` |
+| `011d8c20` | `RefreshLocalDetailInfoMainUI` | `decompiled/DetailInfoMainUI/RefreshLocalDetailInfoMainUI.original.c` |
+| `011d8e30` | `HandleLocalDetailInfoTabChange` | `decompiled/DetailInfoMainUI/HandleLocalDetailInfoTabChange.original.c` |
+| `011d8ff0` | `BindLocalDetailInfoButtonEvent` | `decompiled/DetailInfoMainUI/BindLocalDetailInfoButtonEvent.original.c` |
+| `011d93f0` | `SetOtherDetailInfoVisibilityToggleState` | `decompiled/DetailInfoMainUI/SetOtherDetailInfoVisibilityToggleState.original.c` |
+| `011d9440` | `BuildOtherDetailInfoTabButtons` | `decompiled/DetailInfoMainUI/BuildOtherDetailInfoTabButtons.original.c` |
+| `011d9800` | `CreateOtherDetailInfoTabContents` | `decompiled/DetailInfoMainUI/CreateOtherDetailInfoTabContents.original.c` |
+| `011d9b80` | `HandleOtherDetailInfoTabChange` | `decompiled/DetailInfoMainUI/HandleOtherDetailInfoTabChange.original.c` |
+| `011d9ce0` | `BindOtherDetailInfoButtonEvent` | `decompiled/DetailInfoMainUI/BindOtherDetailInfoButtonEvent.original.c` |
+| `011dab40` | `ConstructDetailInfoTamerSubUI` | `decompiled/DetailInfoUI/ConstructDetailInfoTamerSubUI.original.c` |
+| `011dac40` | `DestroyDetailInfoTamerSubUI` | `decompiled/DetailInfoUI/DestroyDetailInfoTamerSubUI.original.c` |
+| `011dad40` | `RenderDetailInfoTamerSubUI` | `decompiled/DetailInfoUI/RenderDetailInfoTamerSubUI.original.c` |
+| `011dcbe0` | `RenderTamerAttributeValue` | `decompiled/DetailInfoUI/RenderTamerAttributeValue.original.c` |
+| `011dcf20` | `ResolveTamerObtainedAttributeValue` | `decompiled/DetailInfoUI/ResolveTamerObtainedAttributeValue.original.c` |
+| `011dd0a6` | `ResolveDetailInfoDsTextCase` | `decompiled/DetailInfoUI/ResolveDetailInfoDsTextCase.original.c` |
+| `011dd1d0` | `ResolveDetailInfoStatValue` | `decompiled/DetailInfoUI/ResolveDetailInfoStatValue.original.c` |
+| `011dd560` | `HandleTamerEquipmentButton` | `decompiled/DetailInfoUI/HandleTamerEquipmentButton.original.c` |
+| `011dd5b0` | `BindTamerEquipmentButton` | `decompiled/DetailInfoUI/BindTamerEquipmentButton.original.c` |
+| `011dd770` | `HandleSealMasterButton` | `decompiled/DetailInfoUI/HandleSealMasterButton.original.c` |
+
+Veja `docs/FunctionChainMap.md` para a cadeia de execucao organizada por janela,
+aba e popup.

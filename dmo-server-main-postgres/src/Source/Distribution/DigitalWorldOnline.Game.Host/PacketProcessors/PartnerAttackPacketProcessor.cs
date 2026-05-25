@@ -1,7 +1,9 @@
 ﻿using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums;
+using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
+using DigitalWorldOnline.Commons.Models.Combat;
 using DigitalWorldOnline.Commons.Models;
 using DigitalWorldOnline.Commons.Models.Config;
 using DigitalWorldOnline.Commons.Models.Digimon;
@@ -9,6 +11,7 @@ using DigitalWorldOnline.Commons.Models.Summon;
 using DigitalWorldOnline.Commons.Packets.GameServer.Combat;
 using DigitalWorldOnline.Commons.Utils;
 using DigitalWorldOnline.GameHost;
+using Microsoft.Extensions.Configuration;
 using Serilog;
 using System;
 
@@ -22,16 +25,20 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private readonly PvpServer _pvpServer;
         private readonly DungeonsServer _dungeonServer;
         private readonly ILogger _logger;
+        private readonly DamageFormulaConfig _damageFormulaConfig;
 
         public PartnerAttackPacketProcessor(
             MapServer mapServer,
             PvpServer pvpServer,
-            ILogger logger,DungeonsServer dungeonsServer)
+            ILogger logger,
+            DungeonsServer dungeonsServer,
+            IConfiguration configuration)
         {
             _mapServer = mapServer;
             _pvpServer = pvpServer;
             _dungeonServer = dungeonsServer;
             _logger = logger;
+            _damageFormulaConfig = LoadDamageFormulaConfig(configuration);
         }
 
         public Task Process(GameClient client, byte[] packetData)
@@ -937,13 +944,36 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         //    return ElementVantage;
         //}
 
-        private static int CalculateFinalDamage(GameClient client, MobConfigModel? targetMob, out double critBonusMultiplier, out bool blocked)
+        private int CalculateFinalDamage(GameClient client, MobConfigModel? targetMob, out double critBonusMultiplier, out bool blocked)
         {
             critBonusMultiplier = 0.00;
             blocked = false;
 
             if (targetMob == null || client?.Tamer?.Partner?.BaseInfo == null)
                 return 0;
+
+            if (_damageFormulaConfig.Enable)
+            {
+                blocked = targetMob.BLValue >= UtilitiesFunctions.RandomDouble();
+                var isCritical = client.Tamer.Partner.CC / 100.0 >= UtilitiesFunctions.RandomDouble() && client.Partner.CD > 0;
+                critBonusMultiplier = isCritical ? 1.0 : 0.0;
+
+                var input = CreateDamageFormulaInput(
+                    client,
+                    targetMob.Attribute,
+                    targetMob.Element,
+                    targetMob.GeneralHandler,
+                    isCritical,
+                    false,
+                    0,
+                    0,
+                    0,
+                    blocked ? 50 : 0);
+
+                var result = DamageFormula.CalculateDamage(input, _damageFormulaConfig);
+                LogDamageFormula(input, result);
+                return result.FinalDamage;
+            }
 
             var baseDamage = UtilitiesFunctions.ApplyNatureMatrixDamage(
                 client.Tamer.Partner.AT,
@@ -1003,10 +1033,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (critChance >= UtilitiesFunctions.RandomDouble() && client.Partner.CD > 0)
             {
                 blocked = false;
-                return GetCurrentDamage(client, targetMob);
+                return ApplyFinalDamageBonus(GetCurrentDamage(client, targetMob), client.Tamer.Partner.FinalDamageBasisPoints);
             }
 
-            return baseDamage;
+            return ApplyFinalDamageBonus(baseDamage, client.Tamer.Partner.FinalDamageBasisPoints);
 
             //return (int)Math.Floor(baseDamage +
             //    (baseDamage * critBonusMultiplier) +
@@ -1014,13 +1044,36 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             //    (baseDamage * attributeMultiplier) +
             //    (baseDamage * elementMultiplier));
         }
-        private static int CalculateFinalDamage(GameClient client, SummonMobModel targetMob, out double critBonusMultiplier, out bool blocked)
+        private int CalculateFinalDamage(GameClient client, SummonMobModel targetMob, out double critBonusMultiplier, out bool blocked)
         {
             critBonusMultiplier = 0.00;
             blocked = false;
 
             if (targetMob == null || client?.Tamer?.Partner?.BaseInfo == null)
                 return 0;
+
+            if (_damageFormulaConfig.Enable)
+            {
+                blocked = targetMob.BLValue >= UtilitiesFunctions.RandomDouble();
+                var isCritical = client.Tamer.Partner.CC / 100.0 >= UtilitiesFunctions.RandomDouble() && client.Partner.CD > 0;
+                critBonusMultiplier = isCritical ? 1.0 : 0.0;
+
+                var input = CreateDamageFormulaInput(
+                    client,
+                    targetMob.Attribute,
+                    targetMob.Element,
+                    targetMob.GeneralHandler,
+                    isCritical,
+                    false,
+                    0,
+                    0,
+                    0,
+                    blocked ? 50 : 0);
+
+                var result = DamageFormula.CalculateDamage(input, _damageFormulaConfig);
+                LogDamageFormula(input, result);
+                return result.FinalDamage;
+            }
 
             var baseDamage = UtilitiesFunctions.ApplyNatureMatrixDamage(
                 client.Tamer.Partner.AT,
@@ -1080,10 +1133,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (critChance >= UtilitiesFunctions.RandomDouble() && client.Partner.CD > 0)
             {
                 blocked = false;
-                return GetCurrentDamage(client, targetMob);
+                return ApplyFinalDamageBonus(GetCurrentDamage(client, targetMob), client.Tamer.Partner.FinalDamageBasisPoints);
             }
 
-            return baseDamage;
+            return ApplyFinalDamageBonus(baseDamage, client.Tamer.Partner.FinalDamageBasisPoints);
 
             //return (int)Math.Floor(baseDamage +
             //    (baseDamage * critBonusMultiplier) +
@@ -1092,8 +1145,37 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             //    (baseDamage * elementMultiplier));
         }
 
-        private static int CalculateFinalDamage(GameClient client, DigimonModel? targetPartner, out double critBonusMultiplier, out bool blocked)
+        private int CalculateFinalDamage(GameClient client, DigimonModel? targetPartner, out double critBonusMultiplier, out bool blocked)
         {
+            critBonusMultiplier = 0.00;
+            blocked = false;
+
+            if (targetPartner == null || client?.Tamer?.Partner?.BaseInfo == null)
+                return 0;
+
+            if (_damageFormulaConfig.Enable)
+            {
+                blocked = targetPartner.BL >= UtilitiesFunctions.RandomDouble();
+                var isCritical = client.Tamer.Partner.CC / 100.0 >= UtilitiesFunctions.RandomDouble() && client.Tamer.Partner.CD > 0;
+                critBonusMultiplier = isCritical ? 1.0 : 0.0;
+
+                var input = CreateDamageFormulaInput(
+                    client,
+                    targetPartner.BaseInfo.Attribute,
+                    targetPartner.BaseInfo.Element,
+                    targetPartner.GeneralHandler,
+                    isCritical,
+                    false,
+                    Math.Max(0, client.Tamer.Partner.AT - targetPartner.DE + UtilitiesFunctions.RandomInt(1, 15)),
+                    0,
+                    0,
+                    blocked ? 50 : 0);
+
+                var result = DamageFormula.CalculateDamage(input, _damageFormulaConfig);
+                LogDamageFormula(input, result);
+                return result.FinalDamage;
+            }
+
             var baseDamage = client.Tamer.Partner.AT - targetPartner.DE + UtilitiesFunctions.RandomInt(1, 15);
             if (baseDamage < 0) baseDamage = 0;
 
@@ -1115,9 +1197,84 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             baseDamage /= blocked ? 2 : 1;
 
-            return (int)Math.Floor(baseDamage +
+            var finalDamage = (int)Math.Floor(baseDamage +
                 (baseDamage * critBonusMultiplier) +
                 (baseDamage * levelBonusMultiplier));
+
+            return ApplyFinalDamageBonus(finalDamage, client.Tamer.Partner.FinalDamageBasisPoints);
+        }
+
+        private static DamageFormulaConfig LoadDamageFormulaConfig(IConfiguration configuration)
+        {
+            return new DamageFormulaConfig
+            {
+                Enable = configuration.GetValue("DamageFormula:Enable", true),
+                EnableDamageFormulaLog = configuration.GetValue("DamageFormula:EnableLog", false),
+                CritBaseRate = configuration.GetValue("DamageFormula:CritBaseRate", 1.0),
+                ApplyAttributeToCriticalExtra = configuration.GetValue("DamageFormula:ApplyAttributeToCriticalExtra", false),
+                ApplyAttackToSkill = configuration.GetValue("DamageFormula:ApplyAttackToSkill", true),
+                ApplyAttributeToSkillFlat = configuration.GetValue("DamageFormula:ApplyAttributeToSkillFlat", false),
+                ApplyFinalDamageToSkill = configuration.GetValue("DamageFormula:ApplyFinalDamageToSkill", true),
+                ApplyElementDamage = configuration.GetValue("DamageFormula:ApplyElementDamage", true)
+            };
+        }
+
+        private DamageFormulaInput CreateDamageFormulaInput(
+            GameClient client,
+            DigimonAttributeEnum targetAttribute,
+            DigimonElementEnum targetElement,
+            int targetHandler,
+            bool isCritical,
+            bool isSkill,
+            int attackOverride,
+            int skillBaseDamage,
+            int skillDamageFlat,
+            double targetReductionPercent)
+        {
+            var partner = client.Tamer.Partner;
+            var attackerAttribute = partner.BaseInfo.Attribute;
+            var attackerElement = partner.BaseInfo.Element;
+            var elementPercent = Math.Max(0, attackerElement.GetElementDelta(targetElement));
+
+            return new DamageFormulaInput
+            {
+                Attack = attackOverride > 0 ? attackOverride : partner.AT,
+                ExtraAttack = 0,
+                SkillBaseDamage = skillBaseDamage,
+                SkillDamageFlat = skillDamageFlat,
+                AttributePercent = partner.ATT,
+                ElementPercent = elementPercent,
+                SkillDamagePercent = partner.SkillDamagePercent,
+                CriticalDamageExtraPercent = partner.CD,
+                FinalDamagePercent = partner.FinalDamageBasisPoints / 100.0,
+                TargetReductionPercent = targetReductionPercent,
+                HasAttributeAdvantage = attackerAttribute.HasAttributeAdvantage(targetAttribute),
+                HasElementAdvantage = elementPercent > 0,
+                IsCritical = isCritical,
+                IsSkill = isSkill,
+                AttackerIndex = partner.GeneralHandler,
+                TargetIndex = targetHandler,
+                SkillId = 0
+            };
+        }
+
+        private void LogDamageFormula(DamageFormulaInput input, DamageFormulaResult result)
+        {
+            if (_damageFormulaConfig.EnableDamageFormulaLog)
+                _logger.Information(DamageFormula.CreateLogMessage(input, result));
+        }
+
+        private static int ApplyFinalDamageBonus(int baseDamage, int basisPoints)
+        {
+            if (baseDamage <= 0 || basisPoints == 0)
+                return baseDamage;
+
+            long scaled = (long)baseDamage * (10000L + basisPoints);
+            long adjusted = scaled / 10000L;
+
+            if (adjusted > int.MaxValue) return int.MaxValue;
+            if (adjusted < int.MinValue) return int.MinValue;
+            return (int)adjusted;
         }
 
         public static int GetCurrentDamage(GameClient client, MobConfigModel? targetMob)

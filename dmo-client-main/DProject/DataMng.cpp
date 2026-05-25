@@ -235,7 +235,7 @@ NiColor cDataMng::GetItemColor( int nItemClass )
 	case 5:		return NiColor( 255/255.0f, 41/255.0f, 178/255.0f );
 	case 6:		return NiColor( 225/255.0f, 118/255.0f, 72/255.0f );
 	case 7:		return NiColor( 255/255.0f, 212/255.0f, 72/255.0f );
-	//case 8:	return NiColor( 255/255.0f, 102/255.0f, 255/255.0f );
+	case 8:		return NiColor( 255/255.0f, 102/255.0f, 255/255.0f );
 	case 9:		return NiColor( 255/255.0f, 0, 87.0f/255.0f );
 	case 10:	return NiColor( 255/255.0f, 240/255.0f, 0 );
 	case 11:	return FONT_WHITE;

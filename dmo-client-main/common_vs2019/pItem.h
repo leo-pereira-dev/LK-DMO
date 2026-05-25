@@ -186,6 +186,7 @@ namespace nItem
 		eEpicItem		  = 5,	// 에픽 아이템 / 보라색
 		eUniqueItem		  = 6,	// 유니크 아이템 / 주황색
 		eLegendItem		  = 7,	// 레전드 아이템 / 황금색
+		eGlobalEventItem  = 8,
 		eEventItem		  = 9,	// 이벤트 아이템
 		eCashItem		  = 10,	// 캐시 아이템
 		eAdministratorItem = 11, // 관리자 아이템
@@ -695,6 +696,27 @@ namespace nItem
 		EV		= 10,
 		BL		= 11,
 		HT		= 12,
+		AP_RATIO		= 13,
+		DP_RATIO		= 14,
+		MAXHP_RATIO		= 15,
+		MAXDS_RATIO		= 16,
+		SkillAP_RATIO	= 17,
+		FINAL_AP_RATIO	= 18,
+
+		AP_ATTRIBUTE_DA	= 101,
+		AP_ATTRIBUTE_VA	= 102,
+		AP_ATTRIBUTE_VI	= 103,
+		AP_ATTRIBUTE_UN	= 104,
+		AP_ATTRIBUTE_IC	= 105,
+		AP_ATTRIBUTE_WA	= 106,
+		AP_ATTRIBUTE_FI	= 107,
+		AP_ATTRIBUTE_EA	= 108,
+		AP_ATTRIBUTE_WI	= 109,
+		AP_ATTRIBUTE_WO	= 110,
+		AP_ATTRIBUTE_LI	= 111,
+		AP_ATTRIBUTE_DK	= 112,
+		AP_ATTRIBUTE_TH	= 113,
+		AP_ATTRIBUTE_ST	= 114,
 		MaxSize = HT,		//배열사이즈, 항상 위에 옵션값 갯수와 같아야한다
 
 		DigiPower	= 1,	//디지터리파워
@@ -702,6 +724,41 @@ namespace nItem
 		AccOption	= 3,	//악세사리 옵션 
 		OptionValue = 4,	//해당 옵션 값
 	};
+
+	inline int NormalizeAccessoryOption(int nOption)
+	{
+		if( nOption >= 1000 && nOption < 4000 )
+		{
+			const int nBaseOption = nOption % 1000;
+			if( ( nBaseOption >= AP && nBaseOption <= FINAL_AP_RATIO ) ||
+				( nBaseOption >= AP_ATTRIBUTE_DA && nBaseOption <= AP_ATTRIBUTE_ST ) )
+				return nBaseOption;
+		}
+
+		return nOption;
+	}
+
+	inline bool IsAccessoryHundredthPercentOption(int nOption)
+	{
+		const int nBaseOption = NormalizeAccessoryOption( nOption );
+		return nBaseOption == CD || nBaseOption == AS ||
+			( nBaseOption >= AP_RATIO && nBaseOption <= FINAL_AP_RATIO ) ||
+			( nBaseOption >= AP_ATTRIBUTE_DA && nBaseOption <= AP_ATTRIBUTE_ST );
+	}
+
+	inline const wchar_t* GetAccessoryRatioOptionText(int nOption)
+	{
+		switch( NormalizeAccessoryOption( nOption ) )
+		{
+		case AP_RATIO:			return L"AT %";
+		case DP_RATIO:			return L"DE %";
+		case MAXHP_RATIO:		return L"HP %";
+		case MAXDS_RATIO:		return L"DS %";
+		case SkillAP_RATIO:		return L"Skill Damage %";
+		case FINAL_AP_RATIO:	return L"Final Damage %";
+		default:				return L"";
+		}
+	}
 		
 //#endif
 };

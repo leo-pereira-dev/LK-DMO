@@ -78,6 +78,19 @@ namespace
 		return value;
 	}
 
+	static std::wstring GMPanelNormalizeSearch( std::wstring value )
+	{
+		std::wstring result;
+		result.reserve( value.length() );
+		for( size_t i = 0; i < value.length(); ++i )
+		{
+			TCHAR const ch = (TCHAR)towlower( value[i] );
+			if( _istalnum( ch ) != 0 )
+				result.push_back( ch );
+		}
+		return result;
+	}
+
 	static bool GMPanelIsNumber( TCHAR const* szText )
 	{
 		if( szText == NULL || szText[0] == 0 )
@@ -872,6 +885,7 @@ void cGMPanel::_LoadItemsFromTable()
 		entry.s_dwItemId = pInfo->s_dwItemID;
 		entry.s_wsName = pInfo->s_szName;
 		entry.s_wsLowerName = GMPanelToLower( entry.s_wsName );
+		entry.s_wsSearchName = GMPanelNormalizeSearch( entry.s_wsName );
 
 		TCHAR szDisplay[256] = { 0, };
 		_stprintf_s( szDisplay, 256, _T( "%lu - %s" ), (unsigned long)entry.s_dwItemId, entry.s_wsName.c_str() );
@@ -888,6 +902,7 @@ void cGMPanel::_RefreshItemFilter()
 	TCHAR const* szSearch = m_pItemSearchEdit ? m_pItemSearchEdit->GetTextAll() : _T( "" );
 	std::wstring wsSearch = szSearch ? szSearch : _T( "" );
 	std::wstring wsLowerSearch = GMPanelToLower( wsSearch );
+	std::wstring wsNormalizedSearch = GMPanelNormalizeSearch( wsSearch );
 	m_nItemResultScroll = 0;
 
 	if( wsLowerSearch.empty() )
@@ -907,6 +922,7 @@ void cGMPanel::_RefreshItemFilter()
 		_stprintf_s( szId, 32, _T( "%lu" ), (unsigned long)m_vItems[i].s_dwItemId );
 
 		if( m_vItems[i].s_wsLowerName.find( wsLowerSearch ) != std::wstring::npos ||
+			( !wsNormalizedSearch.empty() && m_vItems[i].s_wsSearchName.find( wsNormalizedSearch ) != std::wstring::npos ) ||
 			std::wstring( szId ).find( wsLowerSearch ) != std::wstring::npos )
 		{
 			m_vFilteredItems.push_back( (int)i );
@@ -1064,6 +1080,7 @@ void cGMPanel::_LoadMonstersFromTable()
 		entry.s_dwMonsterId = pInfo->s_dwMonsterID;
 		entry.s_wsName = pInfo->s_szName;
 		entry.s_wsLowerName = GMPanelToLower( entry.s_wsName );
+		entry.s_wsSearchName = GMPanelNormalizeSearch( entry.s_wsName );
 		entry.s_nLevel = pInfo->s_nLevel;
 		entry.s_nHP = pInfo->s_nHP;
 		entry.s_nDS = pInfo->s_nDS;
@@ -1089,6 +1106,7 @@ void cGMPanel::_RefreshMonsterFilter()
 	TCHAR const* szSearch = m_pItemSearchEdit ? m_pItemSearchEdit->GetTextAll() : _T( "" );
 	std::wstring wsSearch = szSearch ? szSearch : _T( "" );
 	std::wstring wsLowerSearch = GMPanelToLower( wsSearch );
+	std::wstring wsNormalizedSearch = GMPanelNormalizeSearch( wsSearch );
 	m_nMonsterResultScroll = 0;
 
 	if( wsLowerSearch.empty() )
@@ -1109,6 +1127,7 @@ void cGMPanel::_RefreshMonsterFilter()
 		_stprintf_s( szId, 32, _T( "%lu" ), (unsigned long)m_vMonsters[i].s_dwMonsterId );
 
 		if( m_vMonsters[i].s_wsLowerName.find( wsLowerSearch ) != std::wstring::npos ||
+			( !wsNormalizedSearch.empty() && m_vMonsters[i].s_wsSearchName.find( wsNormalizedSearch ) != std::wstring::npos ) ||
 			std::wstring( szId ).find( wsLowerSearch ) != std::wstring::npos )
 		{
 			m_vFilteredMonsters.push_back( (int)i );

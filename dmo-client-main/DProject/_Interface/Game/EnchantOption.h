@@ -68,6 +68,13 @@ private:
 	CsC_AvObject*			m_pEffectObj;
 
 	cText*					m_pItemTypeName;
+	cText*					m_pStoneTypeName;
+	cText*					m_pStoneCountText;
+	cText*					m_pCurrentOptionText[ nLimit::MAX_ACCESSORY_OPTION ];
+	cText*					m_pCurrentOptionMaxText[ nLimit::MAX_ACCESSORY_OPTION ];
+	cSprite*				m_pCurrentOptionLockBtn[ nLimit::MAX_ACCESSORY_OPTION ];
+	cText*					m_pSameOptionText;
+	cListBox*				m_pAvailableOptionList;
 
 private:
 	void					_CreateEnchantUI();
@@ -83,6 +90,11 @@ private:
 	void					_SetOptionValueBox();
 	void					_AddOptionValueItem( ushort nOption, ushort nValue, uint nIndex );
 	std::wstring			_GetAccOptionValue( ushort nOption, float fValue ) const;
+	void					_MakeOptionPanels();
+	void					_RefreshOptionPanels();
+	void					_RefreshStoneCountText();
+	std::wstring			_GetAvailableOptionValueText( ushort nOption, uint nMinValue, uint nMaxValue ) const;
+	void					_ToggleOptionLock( uint nOptionIndex );
 
 	void					_SetEnchantButton();
 	void					_SetTooltipEnchantStone( cListBoxItem const* pOverItem );
@@ -93,6 +105,7 @@ private:
 	void					_OnClickClose( void* pSender, void* pData );
 	void					_OnClickEnchant( void* pSender, void* pData );
 	void					_OnClickComboBox( void* pSender, void* pData );
+	void					_OnClickOptionLock( void* pSender, void* pData );
 	void					_OnRClickEnchantStone( void* pSender, void* pData );
 	void					_OnRClickEnchantItem( void* pSender, void* pData );
 };

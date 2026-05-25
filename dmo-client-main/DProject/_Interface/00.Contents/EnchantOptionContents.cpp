@@ -175,6 +175,30 @@ void cEnchantOptionContents::RecvEnchantItem(void* pData)
 		return;
 	}
 
+	if( pRecv->nResult != 1 )
+	{
+		uint nAutoStoneType = m_sEnchant.nStoneType;
+		uint nOptionLockMask = m_sEnchant.nOptionLockMask;
+		pInvenItem->m_nRate = pRecv->nRate;
+		pInvenItem->m_nLevel = pRecv->nLevel;
+		m_sEnchant.cEnchantItem.m_nRate = pRecv->nRate;
+		m_sEnchant.cEnchantItem.m_nLevel = pRecv->nLevel;
+		for( int i = 0; i < nLimit::MAX_ACCESSORY_OPTION; ++i )
+		{
+			pInvenItem->m_nAccOption[ i ] = pRecv->nAccOption[ i ];
+			pInvenItem->m_nAccValues[ i ] = pRecv->nAccValues[ i ];
+			m_sEnchant.cEnchantItem.m_nAccOption[ i ] = pRecv->nAccOption[ i ];
+			m_sEnchant.cEnchantItem.m_nAccValues[ i ] = pRecv->nAccValues[ i ];
+		}
+
+		m_sEnchant.ResetEnchantStone();
+		if( nAutoStoneType == nItem::AccOption )
+			m_sEnchant.nOptionLockMask = nOptionLockMask;
+		_TryAutoRegistEnchantStone( nAutoStoneType );
+		Notify( eSuccessEnchant );
+		return;
+	}
+
 	switch( m_sEnchant.nStoneType )
 	{
 	case nItem::DigiPower://디지터리 파워 증가/감소
@@ -235,15 +259,10 @@ void cEnchantOptionContents::RecvEnchantItem(void* pData)
 	case nItem::OptionValue://해당 악세서리 옵션 값 증가/감소
 		{
 			std::wstring wsOption = GetOptionName( pRecv->nAccOption[ m_sEnchant.nSelectOption ] );
+			ushort nOption = static_cast<ushort>( nItem::NormalizeAccessoryOption( pRecv->nAccOption[ m_sEnchant.nSelectOption ] ) );
 
 			// 목걸이 추가 시 CD, AS 스텟 추가됨.
-			if( pRecv->nAccOption[ m_sEnchant.nSelectOption ] == nItem::CD ||
-				pRecv->nAccOption[ m_sEnchant.nSelectOption ] == nItem::AS
-#if COMMON_LIB_FIXED
-				|| ( pRecv->nAccOption[ m_sEnchant.nSelectOption ] >= nItem::AP_ATTRIBUTE_DA &&
-				pRecv->nAccOption[ m_sEnchant.nSelectOption ] <= nItem::AP_ATTRIBUTE_ST )
-#endif
-				)
+			if( nItem::IsAccessoryHundredthPercentOption( nOption ) )
 			{
 				float fOldVal = m_sEnchant.cEnchantItem.m_nAccValues[ m_sEnchant.nSelectOption ] / 100.0f;
 				float fCurVal = pRecv->nAccValues[ m_sEnchant.nSelectOption ] / 100.0f;
@@ -283,11 +302,17 @@ void cEnchantOptionContents::RecvEnchantItem(void* pData)
 	}
 
 	// 강화 아이템 1 감소
+	uint nAutoStoneType = m_sEnchant.nStoneType;
+	uint nOptionLockMask = m_sEnchant.nOptionLockMask;
+	int nConsumedStoneCount = GetRequiredStoneCount();
 	cItemInfo* pInvenStone = GetInvenItem( m_sEnchant.nStoneIndex );
 	if( pInvenStone )
-		pInvenStone->DecreaseCount( 1 );
+		pInvenStone->DecreaseCount( nConsumedStoneCount );
 	// 강화 아이템 지우고
 	m_sEnchant.ResetEnchantStone();
+	if( nAutoStoneType == nItem::AccOption )
+		m_sEnchant.nOptionLockMask = nOptionLockMask;
+	_TryAutoRegistEnchantStone( nAutoStoneType );
 
 	Notify( eSuccessEnchant );
 }
@@ -298,7 +323,7 @@ void cEnchantOptionContents::StartEnchantItem(void* pData)
 	Notify( eStartEnchant );
 }
 
-cEnchantOptionContents::eEnchantType cEnchantOptionContents::_CheckEnchantItemType(uint nItemType)
+cEnchantOptionContents::eEnchantType cEnchantOptionContents::_CheckEnchantItemType(uint nItemType) const
 {
 	CsItem::sINFO* pFTInfo = GetFTItemInfo( nItemType );
 	SAFE_POINTER_RETVAL( pFTInfo, eAT_None );
@@ -454,6 +479,9 @@ void cEnchantOptionContents::_RegistEnchantItem(cItemInfo* pInvenItem, uint nInv
 	ContentsStream kSend;
 	kSend << m_sEnchant.cEnchantItem.m_nType;
 	Notify( eRegistEnchantItem, kSend );
+
+	if( !m_sEnchant.IsRegistEnchantStone() )
+		_TryAutoRegistEnchantStone( nItem::AccOption );
 }
 
 void cEnchantOptionContents::_RegistEnchantStone(cItemInfo* pInvenItem, uint nInvenIndex)
@@ -467,15 +495,90 @@ void cEnchantOptionContents::_RegistEnchantStone(cItemInfo* pInvenItem, uint nIn
 	CsAccessory_Enchant::sINFO* pEInfo = pEnchant->GetInfo();
 	SAFE_POINTER_RET( pEInfo );
 
+	uint nOptionLockMask = m_sEnchant.nOptionLockMask;
+
 	// 이미 등록되어 있는 인첸 스톤이 존재하면
 	if( m_sEnchant.IsRegistEnchantStone() )
 		m_sEnchant.ResetEnchantStone();
 
 	m_sEnchant.SetEnchantStone( pInvenItem, nInvenIndex, pEInfo->s_nOpt );
+	if( pEInfo->s_nOpt == nItem::AccOption )
+		m_sEnchant.nOptionLockMask = nOptionLockMask;
+	else
+		m_sEnchant.nOptionLockMask = 0;
 
 	ContentsStream kSend;
 	kSend << m_sEnchant.cEnchantStone.m_nType << m_sEnchant.nStoneType;
 	Notify( eRegistEnchantStone, kSend );
+}
+
+bool cEnchantOptionContents::_TryAutoRegistEnchantStone(uint nPreferredStoneType)
+{
+	int nStoneSlot = _FindAutoEnchantStoneSlot( nPreferredStoneType );
+	if( cData_Inven::INVALIDE_INVEN_INDEX == nStoneSlot && 0 == GetLockedOptionCount() )
+		nStoneSlot = _FindAutoEnchantStoneSlot( 0 );
+
+	if( cData_Inven::INVALIDE_INVEN_INDEX == nStoneSlot )
+		return false;
+
+	cItemInfo* pInvenItem = GetInvenItem( nStoneSlot );
+	SAFE_POINTER_RETVAL( pInvenItem, false );
+
+	_RegistEnchantStone( pInvenItem, nStoneSlot );
+	return m_sEnchant.IsRegistEnchantStone();
+}
+
+int cEnchantOptionContents::_FindAutoEnchantStoneSlot(uint nPreferredStoneType) const
+{
+	SAFE_POINTER_RETVAL( g_pDataMng, cData_Inven::INVALIDE_INVEN_INDEX );
+	cData_Inven* pInven = g_pDataMng->GetInven();
+	SAFE_POINTER_RETVAL( pInven, cData_Inven::INVALIDE_INVEN_INDEX );
+
+	int nSlotCount = static_cast<int>( pInven->GetInvenSlotCount() );
+	for( int i = 0; i < nSlotCount; ++i )
+	{
+		cItemInfo* pInvenItem = pInven->GetData( i );
+		if( !_IsUsableAutoEnchantStone( pInvenItem, i, nPreferredStoneType ) )
+			continue;
+
+		return i;
+	}
+
+	return cData_Inven::INVALIDE_INVEN_INDEX;
+}
+
+bool cEnchantOptionContents::_IsUsableAutoEnchantStone(cItemInfo* pInvenItem, uint nInvenIndex, uint nPreferredStoneType) const
+{
+	if( !pInvenItem || !pInvenItem->IsEnable() )
+		return false;
+
+	if( nInvenIndex == m_sEnchant.nItemIndex )
+		return false;
+
+	if( g_pDataMng && g_pDataMng->IsItemLock( nInvenIndex ) )
+		return false;
+
+	if( eAT_Enchant != _CheckEnchantItemType( pInvenItem->GetType() ) )
+		return false;
+
+	CsItem::sINFO* pFTInfo = GetFTItemInfo( pInvenItem->GetType() );
+	SAFE_POINTER_RETVAL( pFTInfo, false );
+	CsAccessory_Enchant* pEnchant = nsCsFileTable::g_pItemMng->GetAccessoryEnchant( pFTInfo->s_dwSkill );
+	SAFE_POINTER_RETVAL( pEnchant, false );
+	CsAccessory_Enchant::sINFO* pEInfo = pEnchant->GetInfo();
+	SAFE_POINTER_RETVAL( pEInfo, false );
+
+	if( nPreferredStoneType != 0 && pEInfo->s_nOpt != nPreferredStoneType )
+		return false;
+
+	int nRequiredCount = 1;
+	if( pEInfo->s_nOpt == nItem::AccOption )
+	{
+		int nLockedCount = GetLockedOptionCount();
+		nRequiredCount = ( nLockedCount <= 0 ) ? 1 : nLockedCount * 2;
+	}
+
+	return pInvenItem->GetCount() >= nRequiredCount;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -546,7 +649,7 @@ void cEnchantOptionContents::SuccessEnchantItem()
 	case nItem::Renewal:
 		{
 			//Send - UIDX, 강화아이템 인벤슬롯, 악세서리 인벤슬롯
-			net::game->SendAccessoryEnchant( nUID, m_sEnchant.nStoneIndex, m_sEnchant.nItemIndex );
+			net::game->SendAccessoryEnchant( nUID, m_sEnchant.nStoneIndex, m_sEnchant.nItemIndex, -1, GetLockedOptionMask() );
 		}
 		break;
 	case nItem::OptionValue:
@@ -571,6 +674,34 @@ void cEnchantOptionContents::SelectOptionValue(uint nSelectIndex)
 		return;
 
 	m_sEnchant.nSelectOption = nSelectIndex;
+}
+
+bool cEnchantOptionContents::ToggleOptionLock(uint nOptionIndex)
+{
+	if( nOptionIndex >= nLimit::MAX_ACCESSORY_OPTION )
+		return false;
+
+	if( m_sEnchant.nStoneType != nItem::AccOption )
+		return false;
+
+	if( !m_sEnchant.IsRegistEnchantItem() )
+		return false;
+
+	if( m_sEnchant.cEnchantItem.m_nAccOption[ nOptionIndex ] == 0 )
+		return false;
+
+	uint nMask = ( 1 << nOptionIndex );
+	if( m_sEnchant.nOptionLockMask & nMask )
+	{
+		m_sEnchant.nOptionLockMask &= ~nMask;
+		return true;
+	}
+
+	if( GetLockedOptionCount() >= 2 )
+		return false;
+
+	m_sEnchant.nOptionLockMask |= nMask;
+	return true;
 }
 
 bool cEnchantOptionContents::ResetEnchantStone()
@@ -604,6 +735,20 @@ bool cEnchantOptionContents::IsEnableRegist(uint nInvenIndex, uint nItemCount) c
 	}
 
 	return true;
+}
+
+bool cEnchantOptionContents::CanAutoRegistEnchantStone() const
+{
+	if( !m_sEnchant.IsRegistEnchantItem() )
+		return false;
+
+	if( cData_Inven::INVALIDE_INVEN_INDEX != _FindAutoEnchantStoneSlot( nItem::AccOption ) )
+		return true;
+
+	if( 0 != GetLockedOptionCount() )
+		return false;
+
+	return cData_Inven::INVALIDE_INVEN_INDEX != _FindAutoEnchantStoneSlot( 0 );
 }
 
 bool cEnchantOptionContents::IsProcessingEnchant() const
@@ -674,6 +819,46 @@ uint cEnchantOptionContents::GetEnchantItemType() const
 		return 0;
 
 	return m_sEnchant.cEnchantItem.m_nType;
+}
+
+bool cEnchantOptionContents::IsOptionLocked(uint nOptionIndex) const
+{
+	if( nOptionIndex >= nLimit::MAX_ACCESSORY_OPTION )
+		return false;
+
+	return ( m_sEnchant.nOptionLockMask & ( 1 << nOptionIndex ) ) != 0;
+}
+
+int cEnchantOptionContents::GetLockedOptionCount() const
+{
+	int nCount = 0;
+	for( uint i = 0; i < nLimit::MAX_ACCESSORY_OPTION; ++i )
+	{
+		if( IsOptionLocked( i ) )
+			++nCount;
+	}
+
+	return nCount;
+}
+
+uint cEnchantOptionContents::GetLockedOptionMask() const
+{
+	if( m_sEnchant.nStoneType != nItem::AccOption )
+		return 0;
+
+	return m_sEnchant.nOptionLockMask;
+}
+
+int cEnchantOptionContents::GetRequiredStoneCount() const
+{
+	if( m_sEnchant.nStoneType != nItem::AccOption )
+		return 1;
+
+	int nLockedCount = GetLockedOptionCount();
+	if( nLockedCount <= 0 )
+		return 1;
+
+	return nLockedCount * 2;
 }
 
 uint cEnchantOptionContents::GetItemUserUID(uint nItemType) const
@@ -783,6 +968,7 @@ CsC_AvObject* cEnchantOptionContents::GetEnchantItemEffect() const
 
 std::wstring cEnchantOptionContents::GetOptionName(ushort nOption) const
 {
+	nOption = static_cast<ushort>( nItem::NormalizeAccessoryOption( nOption ) );
 	switch( nOption )
 	{
 	case nItem::AP:			return UISTRING_TEXT( "COMMON_TXT_STAT_ATTACK" );
@@ -797,8 +983,15 @@ std::wstring cEnchantOptionContents::GetOptionName(ushort nOption) const
 	case nItem::EV:			return UISTRING_TEXT( "COMMON_TXT_AVOID" );
 	case nItem::BL:			return UISTRING_TEXT( "COMMON_TXT_BLOCK" );
 	case nItem::HT:			return UISTRING_TEXT( "COMMON_TXT_STAT_HIT_RATE" );
+	case nItem::AP_RATIO:
+	case nItem::DP_RATIO:
+	case nItem::MAXHP_RATIO:
+	case nItem::MAXDS_RATIO:
+	case nItem::SkillAP_RATIO:
+	case nItem::FINAL_AP_RATIO:
+		return nItem::GetAccessoryRatioOptionText( nOption );
 
-#if COMMON_LIB_FIXED
+#if 1
 		// 속성 데미지 추가
 	case nItem::AP_ATTRIBUTE_DA:	return UISTRING_TEXT( "COMMON_TXT_DATA_ATTRIBUTE_DAMAGE" );
 	case nItem::AP_ATTRIBUTE_VA:	return UISTRING_TEXT( "COMMON_TXT_VACCINE_ATTRIBUTE_DAMAGE" );
@@ -820,10 +1013,113 @@ std::wstring cEnchantOptionContents::GetOptionName(ushort nOption) const
 	return UISTRING_TEXT( "COMMON_TXT_UNKNOWN_ATTRIBUTION" );
 }
 
+int cEnchantOptionContents::GetAvailableAccessoryOptionCount() const
+{
+	if( !m_sEnchant.IsRegistEnchantItem() )
+		return 0;
+
+	CsItem::sINFO* pFTAcc = GetFTItemInfo( m_sEnchant.cEnchantItem.m_nType );
+	SAFE_POINTER_RETVAL( pFTAcc, 0 );
+	CsAccessory_Option* pOption = nsCsFileTable::g_pItemMng->GetAccessoryOption( pFTAcc->s_dwSkill );
+	SAFE_POINTER_RETVAL( pOption, 0 );
+	CsAccessory_Option::sINFO* pOptionInfo = pOption->GetInfo();
+	SAFE_POINTER_RETVAL( pOptionInfo, 0 );
+
+	int nCount = 0;
+	for( int i = 0; i < MAX_OPT_COUNT; ++i )
+	{
+		if( pOptionInfo->m_OptInfo[ i ].s_nOptIdx != 0 )
+			++nCount;
+	}
+
+	return nCount;
+}
+
+bool cEnchantOptionContents::GetAvailableAccessoryOption(int nDisplayIndex, ushort& nOption, uint& nMinValue, uint& nMaxValue) const
+{
+	nOption = 0;
+	nMinValue = 0;
+	nMaxValue = 0;
+
+	if( nDisplayIndex < 0 || !m_sEnchant.IsRegistEnchantItem() )
+		return false;
+
+	CsItem::sINFO* pFTAcc = GetFTItemInfo( m_sEnchant.cEnchantItem.m_nType );
+	SAFE_POINTER_RETVAL( pFTAcc, false );
+	CsAccessory_Option* pOption = nsCsFileTable::g_pItemMng->GetAccessoryOption( pFTAcc->s_dwSkill );
+	SAFE_POINTER_RETVAL( pOption, false );
+	CsAccessory_Option::sINFO* pOptionInfo = pOption->GetInfo();
+	SAFE_POINTER_RETVAL( pOptionInfo, false );
+
+	int nCurrentIndex = 0;
+	for( int i = 0; i < MAX_OPT_COUNT; ++i )
+	{
+		if( pOptionInfo->m_OptInfo[ i ].s_nOptIdx == 0 )
+			continue;
+
+		if( nCurrentIndex == nDisplayIndex )
+		{
+			nOption = static_cast<ushort>( pOptionInfo->m_OptInfo[ i ].s_nOptIdx );
+			nMinValue = pOptionInfo->m_OptInfo[ i ].s_nMin;
+			nMaxValue = pOptionInfo->m_OptInfo[ i ].s_nMax;
+			return true;
+		}
+
+		++nCurrentIndex;
+	}
+
+	return false;
+}
+
+bool cEnchantOptionContents::GetAccessoryOptionMaxValue(ushort nOption, uint& nMaxValue) const
+{
+	nMaxValue = 0;
+	nOption = static_cast<ushort>( nItem::NormalizeAccessoryOption( nOption ) );
+
+	if( !m_sEnchant.IsRegistEnchantItem() )
+		return false;
+
+	CsItem::sINFO* pFTAcc = GetFTItemInfo( m_sEnchant.cEnchantItem.m_nType );
+	SAFE_POINTER_RETVAL( pFTAcc, false );
+	CsAccessory_Option* pOption = nsCsFileTable::g_pItemMng->GetAccessoryOption( pFTAcc->s_dwSkill );
+	SAFE_POINTER_RETVAL( pOption, false );
+	CsAccessory_Option::sINFO* pOptionInfo = pOption->GetInfo();
+	SAFE_POINTER_RETVAL( pOptionInfo, false );
+
+	for( int i = 0; i < MAX_OPT_COUNT; ++i )
+	{
+		ushort nTableOption = static_cast<ushort>( nItem::NormalizeAccessoryOption( pOptionInfo->m_OptInfo[ i ].s_nOptIdx ) );
+		if( nTableOption == nOption )
+		{
+			nMaxValue = pOptionInfo->m_OptInfo[ i ].s_nMax;
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void cEnchantOptionContents::EnchantItem() 
 {
 	if( !m_sEnchant.IsRegistEnchantItem() )
 		return;
+
+	if( !m_sEnchant.IsRegistEnchantStone() )
+		_TryAutoRegistEnchantStone( nItem::AccOption );
+
+	if( m_sEnchant.IsRegistEnchantStone() )
+	{
+		cItemInfo* pInvenStone = GetInvenItem( m_sEnchant.nStoneIndex );
+		if( !pInvenStone || pInvenStone->GetCount() < GetRequiredStoneCount() )
+		{
+			uint nPreferredStoneType = m_sEnchant.nStoneType;
+			uint nOptionLockMask = m_sEnchant.nOptionLockMask;
+			m_sEnchant.ResetEnchantStone();
+			if( nPreferredStoneType == nItem::AccOption )
+				m_sEnchant.nOptionLockMask = nOptionLockMask;
+			_TryAutoRegistEnchantStone( nPreferredStoneType );
+		}
+	}
 
 	if( !m_sEnchant.IsRegistEnchantStone() )
 		return;
@@ -879,32 +1175,14 @@ void cEnchantOptionContents::EnchantItem()
 		break;
 	case nItem::AccOption://악세서리 옵션 랜덤 변경
 		{
-			if( m_sEnchant.cEnchantItem.m_nLevel <= 0 )
-			{
-				//강화횟수 다써서 더이상 강화 불가능
-				cPrintMsg::PrintMsg( 30607 ); // 리뉴얼 변경 횟수가 부족하여 디지어블 능력치를 변경할 수 없습니다.
-				return;
-			}
-			else
-			{
-				cPrintMsg::PrintMsg( 30605 ); // 디지털 스톤의 힘을 적용하여 디지어블 능력치를 변경하시겠습니까?
-				return;
-			}
+			cPrintMsg::PrintMsg( 30605 ); // 디지털 스톤의 힘을 적용하여 디지어블 능력치를 변경하시겠습니까?
+			return;
 		}
 		break;
 	case nItem::OptionValue://해당 악세서리 옵션 값 증가/감소
 		{
-			if( m_sEnchant.cEnchantItem.m_nLevel <= 0 )
-			{
-				//강화횟수 다써서 더이상 강화 불가능
-				cPrintMsg::PrintMsg( 30610 ); // 리뉴얼 변경 횟수가 부족하여 디지어블 능력 수치를 변경할 수 없습니다.
-				return;
-			}
-			else
-			{
-				cPrintMsg::PrintMsg( 30608 ); // 디지털 스톤의 힘을 적용하여 디지어블 능력 수치를 변경하시겠습니까?
-				return;
-			}
+			cPrintMsg::PrintMsg( 30608 ); // 디지털 스톤의 힘을 적용하여 디지어블 능력 수치를 변경하시겠습니까?
+			return;
 		}
 		break;
 	}
@@ -992,6 +1270,7 @@ void cEnchantOptionContents::sEnchantItem::ResetEnchantItem()
 	nItemIndex = INT_MAX;
 	cEnchantItem.Clear();
 	nSelectOption = 0;
+	nOptionLockMask = 0;
 }
 
 void cEnchantOptionContents::sEnchantItem::ResetEnchantStone()
@@ -1001,4 +1280,5 @@ void cEnchantOptionContents::sEnchantItem::ResetEnchantStone()
 	nStoneIndex = INT_MAX;
 	cEnchantStone.Clear();
 	nSelectOption = 0;
+	nOptionLockMask = 0;
 }

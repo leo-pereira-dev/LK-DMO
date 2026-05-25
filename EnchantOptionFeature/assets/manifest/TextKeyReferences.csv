@@ -1,0 +1,26 @@
+TextKey,WhereFound,Notes
+ACCESSORY_ENCHANT_TITLE_ACC_ENCHANT,cEnchantOption::_CreateEnchantUI,Titulo da janela
+ACCESSORY_ENCHANT_REGIST_STONE,cEnchantOption::_CreateEnchantUI,Label da pedra
+ACCESSORY_ENCHANT_ENCHANTMENT,cEnchantOption::_CreateEnchantUI,Texto do botao
+ACCESSORY_ENCHANT_RESULT,EnchantOptionResultUI,Texto/titulo do popup de resultado
+ACCESSORY_ENCHANT_OPTION,AdditionalXrefs 01373ea0,Texto de opcao disponivel/resultado
+ACCESSORY_ENCHANT_SAME_OPTION,AdditionalXrefs 01373ea0,Texto "podem aparecer as mesmas opcoes"
+ACCESSORY_IDENTIFY_IDENTIFYING,cEnchantOption::_CreateIdentifyUI,Texto da identificacao
+COMMON_TXT_ACCESSORY,cEnchantOption::_CreateEnchantUI,Tipo generico acessorio
+COMMON_TXT_ATTACK,cEnchantOption::_GetAccOptionValue / GetOptionName,Opcao AP
+COMMON_TXT_DEFENSE,cEnchantOption::_GetAccOptionValue / GetOptionName,Opcao DP
+COMMON_TXT_MAX_HP,cEnchantOption::_GetAccOptionValue / GetOptionName,Opcao MAXHP
+COMMON_TXT_MAX_DS,cEnchantOption::_GetAccOptionValue / GetOptionName,Opcao MAXDS
+COMMON_TXT_SKILLAP,cEnchantOption::_GetAccOptionValue / GetOptionName,Skill damage
+COMMON_TXT_ATTRIBUTEAP,cEnchantOption::_GetAccOptionValue / GetOptionName,Atributo basico
+COMMON_TXT_CRITICAL,cEnchantOption::_GetAccOptionValue / GetOptionName,Critico
+COMMON_TXT_CRITICAL_DAMAGE,cEnchantOption::_GetAccOptionValue / GetOptionName,Critical damage
+COMMON_TXT_ATTACK_SPEED,cEnchantOption::_GetAccOptionValue / GetOptionName,Attack speed
+COMMON_TXT_AVOID,cEnchantOption::_GetAccOptionValue / GetOptionName,Evade
+COMMON_TXT_BLOCK,cEnchantOption::_GetAccOptionValue / GetOptionName,Block
+COMMON_TXT_HIT_RATE,cEnchantOption::_GetAccOptionValue / GetOptionName,Hit
+COMMON_TXT_DATA_ATTRIBUTE_DAMAGE,cEnchantOption::_GetAccOptionValue / GetOptionName,Data attribute damage
+COMMON_TXT_VACCINE_ATTRIBUTE_DAMAGE,cEnchantOption::_GetAccOptionValue / GetOptionName,Vaccine attribute damage
+COMMON_TXT_VIRUS_ATTRIBUTE_DAMAGE,cEnchantOption::_GetAccOptionValue / GetOptionName,Virus attribute damage
+COMMON_TXT_UNKNOWN_ATTRIBUTE_DAMAGE,cEnchantOption::_GetAccOptionValue / GetOptionName,Unknown attribute damage
+COMMON_TXT_ICE_ATTRIBUTE_DAMAGE,cEnchantOption::_GetAccOptionValue / GetOptionName,Ice element damage

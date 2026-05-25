@@ -2629,6 +2629,7 @@
     <ClCompile Include="_Interface\14.MainFrameUI\TamerStatusUI_Skill.cpp" />
     <ClCompile Include="_Interface\14.MainFrameUI\TamerStatusUI_SubViewer.cpp" />
     <ClCompile Include="_Interface\14.MainFrameUI\TamerStatusUI_Tamer.cpp" />
+    <ClCompile Include="_Interface\14.MainFrameUI\MainFrame_DetailInfoUI.cpp" />
     <ClCompile Include="_Interface\14.MainFrameUI\MainFrame_DigimonStatusHelpUI.cpp" />
     <ClCompile Include="_Interface\14.MainFrameUI\MainFrame_DigimonStatusUI.cpp" />
     <ClCompile Include="_Interface\14.MainFrameUI\MainFrame_TargetUI.cpp" />
@@ -3473,6 +3474,7 @@
     <ClInclude Include="_Interface\14.MainFrameUI\TamerStatusUI_Skill.h" />
     <CustomBuildStep Include="_Interface\14.MainFrameUI\TamerStatusUI_SubViewer.h" />
     <ClInclude Include="_Interface\14.MainFrameUI\TamerStatusUI_Tamer.h" />
+    <ClInclude Include="_Interface\14.MainFrameUI\MainFrame_DetailInfoUI.h" />
     <ClInclude Include="_Interface\14.MainFrameUI\MainFrame_DigimonStatusHelpUI.h" />
     <ClInclude Include="_Interface\14.MainFrameUI\MainFrame_DigimonStatusUI.h" />
     <ClInclude Include="_Interface\14.MainFrameUI\MainFrame_TargetUI.h" />

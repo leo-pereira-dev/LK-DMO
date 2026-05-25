@@ -3,9 +3,11 @@ using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums;
+using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Models.Asset;
+using DigitalWorldOnline.Commons.Models.Combat;
 using DigitalWorldOnline.Commons.Models.Config;
 using DigitalWorldOnline.Commons.Models.Digimon;
 using DigitalWorldOnline.Commons.Models.Summon;
@@ -14,6 +16,7 @@ using DigitalWorldOnline.Commons.Packets.GameServer.Combat;
 using DigitalWorldOnline.Commons.Utils;
 using DigitalWorldOnline.GameHost;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Serilog;
 using static DigitalWorldOnline.Commons.Packets.GameServer.AddBuffPacket;
 
@@ -28,18 +31,23 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private readonly DungeonsServer _dungeonServer;
         private readonly ILogger _logger;
         private readonly ISender _sender;
+        private readonly DamageFormulaConfig _damageFormulaConfig;
 
         public PartnerSkillPacketProcessor(
 
             AssetsLoader assets,
             MapServer mapServer,
-            ILogger logger, ISender sender, DungeonsServer dungeonServer)
+            ILogger logger,
+            ISender sender,
+            DungeonsServer dungeonServer,
+            IConfiguration configuration)
         {
             _assets = assets;
             _mapServer = mapServer;
             _logger = logger;
             _sender = sender;
             _dungeonServer = dungeonServer;
+            _damageFormulaConfig = LoadDamageFormulaConfig(configuration);
         }
 
         public Task Process(GameClient client, byte[] packetData)
@@ -1210,11 +1218,29 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             double addedf1Damage = Math.Floor(f1BaseDamage * SkillFactor / 100.0);
 
+            if (_damageFormulaConfig.Enable && client.Tamer.Partner.BaseInfo != null && skill != null)
+            {
+                var input = CreateDamageFormulaInput(
+                    client,
+                    targetMob.Attribute,
+                    targetMob.Element,
+                    targetMob.GeneralHandler,
+                    (int)skill.SkillCode,
+                    (int)Math.Floor(f1BaseDamage + addedf1Damage));
+
+                var result = DamageFormula.CalculateDamage(input, _damageFormulaConfig);
+                LogDamageFormula(input, result);
+                return result.FinalDamage;
+            }
+
             var Damage = (int)Math.Floor(f1BaseDamage + addedf1Damage + client.Tamer.Partner.AT + client.Tamer.Partner.SKD);
             Damage = ApplySkillDamagePercentBonus(Damage, client.Tamer.Partner.SkillDamagePercent);
 
             if (client.Tamer.Partner.BaseInfo == null)
-                return (int)(Damage * (1.0 + new Random().NextDouble() * 0.05));
+            {
+                var finalDamage = (int)(Damage * (1.0 + new Random().NextDouble() * 0.05));
+                return ApplyFinalDamageBonus(finalDamage, client.Tamer.Partner.FinalDamageBasisPoints);
+            }
 
             var matrixAdjustedDamage = UtilitiesFunctions.ApplyNatureMatrixDamage(
                 Damage,
@@ -1225,7 +1251,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             Random random = new Random();
             double percentagemBonus = random.NextDouble() * 0.05;
-            return (int)(matrixAdjustedDamage * (1.0 + percentagemBonus));
+            return ApplyFinalDamageBonus((int)(matrixAdjustedDamage * (1.0 + percentagemBonus)), client.Tamer.Partner.FinalDamageBasisPoints);
         }
         private int CalculateDamageOrHeal(GameClient client, SummonMobModel? targetMob, DigimonSkillAssetModel? targetSkill, SkillCodeAssetModel? skill, byte skillSlot)
         {
@@ -1262,11 +1288,29 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             double addedf1Damage = Math.Floor(f1BaseDamage * SkillFactor / 100.0);
 
+            if (_damageFormulaConfig.Enable && client.Tamer.Partner.BaseInfo != null && skill != null)
+            {
+                var input = CreateDamageFormulaInput(
+                    client,
+                    targetMob.Attribute,
+                    targetMob.Element,
+                    targetMob.GeneralHandler,
+                    (int)skill.SkillCode,
+                    (int)Math.Floor(f1BaseDamage + addedf1Damage));
+
+                var result = DamageFormula.CalculateDamage(input, _damageFormulaConfig);
+                LogDamageFormula(input, result);
+                return result.FinalDamage;
+            }
+
             var Damage = (int)Math.Floor(f1BaseDamage + addedf1Damage + client.Tamer.Partner.AT + client.Tamer.Partner.SKD);
             Damage = ApplySkillDamagePercentBonus(Damage, client.Tamer.Partner.SkillDamagePercent);
 
             if (client.Tamer.Partner.BaseInfo == null)
-                return (int)(Damage * (1.0 + new Random().NextDouble() * 0.05));
+            {
+                var finalDamage = (int)(Damage * (1.0 + new Random().NextDouble() * 0.05));
+                return ApplyFinalDamageBonus(finalDamage, client.Tamer.Partner.FinalDamageBasisPoints);
+            }
 
             var matrixAdjustedDamage = UtilitiesFunctions.ApplyNatureMatrixDamage(
                 Damage,
@@ -1277,7 +1321,76 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             Random random = new Random();
             double percentagemBonus = random.NextDouble() * 0.05;
-            return (int)(matrixAdjustedDamage * (1.0 + percentagemBonus));
+            return ApplyFinalDamageBonus((int)(matrixAdjustedDamage * (1.0 + percentagemBonus)), client.Tamer.Partner.FinalDamageBasisPoints);
+        }
+
+        private static int ApplyFinalDamageBonus(int baseDamage, int basisPoints)
+        {
+            if (baseDamage <= 0 || basisPoints == 0)
+                return baseDamage;
+
+            long scaled = (long)baseDamage * (10000L + basisPoints);
+            long adjusted = scaled / 10000L;
+
+            if (adjusted > int.MaxValue) return int.MaxValue;
+            if (adjusted < int.MinValue) return int.MinValue;
+            return (int)adjusted;
+        }
+
+        private static DamageFormulaConfig LoadDamageFormulaConfig(IConfiguration configuration)
+        {
+            return new DamageFormulaConfig
+            {
+                Enable = configuration.GetValue("DamageFormula:Enable", true),
+                EnableDamageFormulaLog = configuration.GetValue("DamageFormula:EnableLog", false),
+                CritBaseRate = configuration.GetValue("DamageFormula:CritBaseRate", 1.0),
+                ApplyAttributeToCriticalExtra = configuration.GetValue("DamageFormula:ApplyAttributeToCriticalExtra", false),
+                ApplyAttackToSkill = configuration.GetValue("DamageFormula:ApplyAttackToSkill", true),
+                ApplyAttributeToSkillFlat = configuration.GetValue("DamageFormula:ApplyAttributeToSkillFlat", false),
+                ApplyFinalDamageToSkill = configuration.GetValue("DamageFormula:ApplyFinalDamageToSkill", true),
+                ApplyElementDamage = configuration.GetValue("DamageFormula:ApplyElementDamage", true)
+            };
+        }
+
+        private DamageFormulaInput CreateDamageFormulaInput(
+            GameClient client,
+            DigimonAttributeEnum targetAttribute,
+            DigimonElementEnum targetElement,
+            int targetHandler,
+            int skillId,
+            int skillBaseDamage)
+        {
+            var partner = client.Tamer.Partner;
+            var attackerAttribute = partner.BaseInfo.Attribute;
+            var attackerElement = partner.BaseInfo.Element;
+            var elementPercent = Math.Max(0, attackerElement.GetElementDelta(targetElement));
+
+            return new DamageFormulaInput
+            {
+                Attack = partner.AT,
+                ExtraAttack = 0,
+                SkillBaseDamage = skillBaseDamage,
+                SkillDamageFlat = partner.SKD,
+                AttributePercent = partner.ATT,
+                ElementPercent = elementPercent,
+                SkillDamagePercent = partner.SkillDamagePercent,
+                CriticalDamageExtraPercent = 0,
+                FinalDamagePercent = partner.FinalDamageBasisPoints / 100.0,
+                TargetReductionPercent = 0,
+                HasAttributeAdvantage = attackerAttribute.HasAttributeAdvantage(targetAttribute),
+                HasElementAdvantage = elementPercent > 0,
+                IsCritical = false,
+                IsSkill = true,
+                AttackerIndex = partner.GeneralHandler,
+                TargetIndex = targetHandler,
+                SkillId = skillId
+            };
+        }
+
+        private void LogDamageFormula(DamageFormulaInput input, DamageFormulaResult result)
+        {
+            if (_damageFormulaConfig.EnableDamageFormulaLog)
+                _logger.Information(DamageFormula.CreateLogMessage(input, result));
         }
 
         private static int ApplySkillDamagePercentBonus(int baseDamage, int percentPoints)

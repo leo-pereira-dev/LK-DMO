@@ -58,6 +58,7 @@ private:
 		DWORD			s_dwItemId;
 		std::wstring	s_wsName;
 		std::wstring	s_wsLowerName;
+		std::wstring	s_wsSearchName;
 		std::wstring	s_wsDisplay;
 	};
 
@@ -66,6 +67,7 @@ private:
 		DWORD			s_dwMonsterId;
 		std::wstring	s_wsName;
 		std::wstring	s_wsLowerName;
+		std::wstring	s_wsSearchName;
 		std::wstring	s_wsDisplay;
 		int				s_nLevel;
 		int				s_nHP;

@@ -19,6 +19,7 @@ namespace DigitalWorldOnline.Application.GameAssets
         private readonly IMapper _mapper;
         private readonly MonsterBinLoader _monster;
         private readonly QuestBinLoader _questBin;
+        private readonly ContainerBinLoader _containerBin;
         private readonly UnionXmlAssetLoader _xmlUnion;
         private bool? _loading;
 
@@ -72,12 +73,14 @@ namespace DigitalWorldOnline.Application.GameAssets
             IMapper mapper,
             MonsterBinLoader monster,
             QuestBinLoader questBin,
+            ContainerBinLoader containerBin,
             UnionXmlAssetLoader xmlUnion)
         {
             _sender = sender;
             _mapper = mapper;
             _monster = monster;
             _questBin = questBin;
+            _containerBin = containerBin;
             _xmlUnion = xmlUnion;
         }
 
@@ -111,7 +114,7 @@ namespace DigitalWorldOnline.Application.GameAssets
             EvolutionInfo = _mapper.Map<List<EvolutionAssetModel>>(await _sender.Send(new DigimonEvolutionAssetsQuery()));
             BuffInfo = _mapper.Map<List<BuffInfoAssetModel>>(await _sender.Send(new BuffInfoAssetsQuery()));
             ScanDetail = _mapper.Map<List<ScanDetailAssetModel>>(await _sender.Send(new ScanDetailAssetQuery()));
-            Container = _mapper.Map<List<ContainerAssetModel>>(await _sender.Send(new ContainerAssetQuery()));
+            Container = _mapper.Map<List<ContainerAssetModel>>(_containerBin.Load().Containers);
             StatusApply = _mapper.Map<List<StatusApplyAssetModel>>(await _sender.Send(new StatusApplyAssetQuery()));
             TitleStatus = _mapper.Map<List<TitleStatusAssetModel>>(await _sender.Send(new AllTitleStatusAssetsQuery()));
             AccessoryRoll = _mapper.Map<List<AccessoryRollAssetModel>>(await _sender.Send(new AccessoryRollAssetsQuery()));

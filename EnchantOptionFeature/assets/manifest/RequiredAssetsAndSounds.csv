@@ -1,0 +1,20 @@
+Path,Kind,WhereFound,Notes
+Accessory\Enchant\Enchant_BG1.tga,Texture,cEnchantOption::_CreateEnchantUI,Background oficial largo da janela de encantamento em Pack01/Data/Interface
+Accessory\Enchant\Enchant_BG.tga,Texture,cEnchantOption::_CreateEnchantUI,Background legado/compacto da janela de encantamento
+Accessory\Enchant\Enchant_EnchantBtn.tga,Texture,cEnchantOption::_CreateEnchantUI,Botao Encantamento
+Accessory\Identify\Identify_BarBG.tga,Texture,cEnchantOption::_CreateIdentifyUI,Barra de fundo da identificacao
+Accessory\Identify\Identify_Bar.tga,Texture,cEnchantOption::_CreateIdentifyUI,Barra de progresso
+Accessory\Identify\Identify_BarMask.tga,Texture,cEnchantOption::_CreateIdentifyUI,Mascara da barra
+System\Ch_Close.tga,Texture,cEnchantOption::_CreateEnchantUI,Botao fechar
+SealMaster\dropdown_list_0,Texture,cEnchantOption::_MakeOptionValueBox,Lista/combobox para NCS
+Control_G\ComboBox\Combo2.tga,Texture,cEnchantOption::_MakeOptionValueBox,Combo box visual
+Control_G\Popup\ON2Dlg,Texture,Cluster de popup/resultado,Popup de confirmacao/resultado
+Talk\Common_Seletbar.tga,Texture,Cluster de popup/resultado,Selecao/lista
+Random_box\bar_arrow.png,Texture,Cluster adjacente,Seta/barra em popups
+SeasonPass\Pass_ExpPopup_bg.png,Texture,Cluster adjacente,Popup reutilizado em funcoes copiadas
+system\Accessory\Digivice.nif,Model,cEnchantOptionContents::GetEnchantItemEffect,Efeito/preview de Digivice
+system\Accessory\Ring.nif,Model,cEnchantOptionContents::GetEnchantItemEffect,Efeito/preview de Ring
+system\Accessory\Necklace.nif,Model,cEnchantOptionContents::GetEnchantItemEffect,Efeito/preview de Necklace
+system\Accessory\Earring.nif,Model,cEnchantOptionContents::GetEnchantItemEffect,Efeito/preview de Earring
+System\System_return_01.wav,Sound,cEnchantOption::_CreateIdentifyUI,Som de retorno/identificacao
+Enchant_Room.mp3,Sound,DigimonAdvanceFeature assets,Musica adjacente do cluster de enchant room

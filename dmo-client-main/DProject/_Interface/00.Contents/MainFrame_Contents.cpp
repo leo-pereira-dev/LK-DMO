@@ -745,6 +745,17 @@ int CMainFrameContents::GetTamerStat(eAbilType eType) const
 	return 0;
 }
 
+int CMainFrameContents::GetTamerDetailInfoStat( int nIndex ) const
+{
+	SAFE_POINTER_RETVAL( g_pCharMng, 0 );
+	CTamerUser* pUser = g_pCharMng->GetTamerUser();
+	SAFE_POINTER_RETVAL( pUser, 0 );
+	CTamerUser::sUSER_STAT* pStat = dynamic_cast<CTamerUser::sUSER_STAT*>( pUser->GetBaseStat() );
+	SAFE_POINTER_RETVAL( pStat, 0 );
+
+	return pStat->GetDetailInfoStat( nIndex );
+}
+
 void CMainFrameContents::GetBaseStat(int& nType, int& nBaseStat, eAbilType eType)
 {
 	SAFE_POINTER_RET( g_pCharMng );

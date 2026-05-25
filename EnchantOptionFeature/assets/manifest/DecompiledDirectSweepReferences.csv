@@ -1,0 +1,17 @@
+SourceFile,Line,Reference,Notes
+unpacked_exe_all/unpacked_GDMO.exe_strings.csv,2308,AccOption.bin,String oficial da tabela split
+unpacked_exe_all/unpacked_GDMO.exe_strings.csv,17295,ACCESSORY_IDENTIFY_IDENTIFYING,Texto da tela de identify
+unpacked_exe_all/unpacked_GDMO.exe_strings.csv,17300,ACCESSORY_ENCHANT_ENCHANTMENT,Texto do botao/acao
+unpacked_exe_all/unpacked_GDMO.exe_strings.csv,17330,ACCESSORY_ENCHANT_RESULT,Texto de resultado
+unpacked_exe_all/unpacked_GDMO.exe_strings.csv,17483,EnchantOption,Nome da janela
+unpacked_exe_all/unpacked_GDMO.exe_strings.csv,17485,DigiPowerEnchant,Nome da janela adjacente
+unpacked_exe_all/unpacked_GDMO.exe_strings.csv,17486,EnchantOptionResultUI,Nome da janela de resultado
+unpacked_exe_all/unpacked_GDMO.exe_strings.csv,18241,ACCESSORY_ENCHANT_REGIST_STONE,Label de registro de pedra
+unpacked_exe_all/unpacked_GDMO.exe_strings.csv,18243,ACCESSORY_ENCHANT_OPTION,Texto de opcao
+unpacked_exe_all/unpacked_GDMO.exe_strings.csv,18244,ACCESSORY_ENCHANT_SAME_OPTION,Texto verde da print
+unpacked_exe_all/unpacked_GDMO.exe_xrefs.csv,432986,FUN_013729d0 -> ACCESSORY_IDENTIFY_IDENTIFYING,Copiado para AdditionalXrefs
+unpacked_exe_all/unpacked_GDMO.exe_xrefs.csv,433067,FUN_01372d20 -> ACCESSORY_ENCHANT_ENCHANTMENT,Copiado para AdditionalXrefs
+unpacked_exe_all/unpacked_GDMO.exe_xrefs.csv,433105,FUN_01372d20 -> ACCESSORY_ENCHANT_REGIST_STONE,Copiado para AdditionalXrefs
+unpacked_exe_all/unpacked_GDMO.exe_xrefs.csv,433590,FUN_01373ea0 -> ACCESSORY_ENCHANT_OPTION,Copiado para AdditionalXrefs
+unpacked_exe_all/unpacked_GDMO.exe_xrefs.csv,433629,FUN_01373ea0 -> ACCESSORY_ENCHANT_SAME_OPTION,Copiado para AdditionalXrefs
+unpacked_exe_all/unpacked_GDMO.exe_xrefs.csv,715388,FUN_015e9390 -> AccOption.bin,Copiado para AdditionalXrefs

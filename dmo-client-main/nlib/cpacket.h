@@ -59,6 +59,8 @@ public:
 
 	void pop(void* data, size_t len, bool wlen = false);
 
+	size_t GetReadableSize() const;
+
 	void newp(uint16_t id);
 	void endp(uint16_t id);
 

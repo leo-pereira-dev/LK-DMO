@@ -68,7 +68,7 @@ private:
 
 	struct sEnchantItem
 	{
-		sEnchantItem() : nStoneType( 0 ), nStoneIndex( INT_MAX ), nItemIndex( INT_MAX ), nSelectOption( 0 ) {}
+		sEnchantItem() : nStoneType( 0 ), nStoneIndex( INT_MAX ), nItemIndex( INT_MAX ), nSelectOption( 0 ), nOptionLockMask( 0 ) {}
 		~sEnchantItem() {}
 
 		bool			IsRegistEnchantItem() const;
@@ -86,6 +86,7 @@ private:
 		uint			nStoneIndex;		// 옵변 아이템 인벤 위치
 		uint			nItemIndex;			// 강화할 아이템 인벤 위치
 		uint			nSelectOption;		// 선택된 옵션 번호
+		uint			nOptionLockMask;
 	};
 
 	eEnchantUI		m_eUIState;
@@ -99,12 +100,15 @@ private:
 	void				StartEnchantItem( void* pData );
 
 private:
-	eEnchantType		_CheckEnchantItemType( uint nItemType );
+	eEnchantType		_CheckEnchantItemType( uint nItemType ) const;
 	void				_SetEnchantItem( cItemInfo* pInvenItem, uint nInvenIndex );
 	void				_SetEnchantStone( cItemInfo* pInvenItem, uint nInvenIndex );
 
 	void				_RegistEnchantItem( cItemInfo* pInvenItem, uint nInvenIndex );
 	void				_RegistEnchantStone( cItemInfo* pInvenItem, uint nInvenIndex );
+	bool				_TryAutoRegistEnchantStone( uint nPreferredStoneType );
+	int					_FindAutoEnchantStoneSlot( uint nPreferredStoneType ) const;
+	bool				_IsUsableAutoEnchantStone( cItemInfo* pInvenItem, uint nInvenIndex, uint nPreferredStoneType ) const;
 
 public:
 	void				RegistEnchantItem( int const& nInvenIndex );
@@ -116,12 +120,14 @@ public:
 
 	void				EnchantItem();
 	void				SelectOptionValue( uint nSelectIndex );
+	bool				ToggleOptionLock( uint nOptionIndex );
 
 	bool				ResetEnchantStone();
 	bool				ResetEnchantItem();
 
 public:
 	bool				IsEnableRegist( uint nInvenIndex, uint nItemCount ) const;
+	bool				CanAutoRegistEnchantStone() const;
 	bool				IsProcessingEnchant() const;
 	eEnchantUI			GetUIState() const;
 	uint				GetEnchantStoneEnchantType() const;
@@ -135,4 +141,11 @@ public:
 	CsItem::sINFO*		GetFTItemInfo( uint nItemType ) const;
 	CsC_AvObject*		GetEnchantItemEffect() const;
 	std::wstring		GetOptionName( ushort nOption ) const;
+	int					GetAvailableAccessoryOptionCount() const;
+	bool				GetAvailableAccessoryOption( int nDisplayIndex, ushort& nOption, uint& nMinValue, uint& nMaxValue ) const;
+	bool				GetAccessoryOptionMaxValue( ushort nOption, uint& nMaxValue ) const;
+	bool				IsOptionLocked( uint nOptionIndex ) const;
+	int					GetLockedOptionCount() const;
+	uint				GetLockedOptionMask() const;
+	int					GetRequiredStoneCount() const;
 };

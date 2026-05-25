@@ -255,7 +255,7 @@ public:
 	sINFO*			GetInfo(){ return &m_Info; }	
 };
 
-#define MAX_OPT_COUNT	16
+#define MAX_OPT_COUNT	44
 class CsAccessory_Option
 {
 public:

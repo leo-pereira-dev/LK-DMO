@@ -379,6 +379,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                     finalDmg = (int)Math.Floor(baseDmg + addedDmg + client.Tamer.Partner.AT + client.Tamer.Partner.SKD);
                     finalDmg = ApplySkillDamagePercentBonus(finalDmg, client.Tamer.Partner.SkillDamagePercent);
+                    finalDmg = ApplyFinalDamageBonus(finalDmg, client.Tamer.Partner.FinalDamageBasisPoints);
                     if (finalDmg <= 0) finalDmg = 1;
                 }
 
@@ -482,6 +483,19 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                 long scaled = (long)baseDamage * (100L + percentPoints);
                 long adjusted = scaled / 100L;
+
+                if (adjusted > int.MaxValue) return int.MaxValue;
+                if (adjusted < int.MinValue) return int.MinValue;
+                return (int)adjusted;
+            }
+
+            static int ApplyFinalDamageBonus(int baseDamage, int basisPoints)
+            {
+                if (baseDamage <= 0 || basisPoints == 0)
+                    return baseDamage;
+
+                long scaled = (long)baseDamage * (10000L + basisPoints);
+                long adjusted = scaled / 10000L;
 
                 if (adjusted > int.MaxValue) return int.MaxValue;
                 if (adjusted < int.MinValue) return int.MinValue;

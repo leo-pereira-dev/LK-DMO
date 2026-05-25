@@ -51,6 +51,37 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteShort(character.Partner.Digiclone.EVLevel);
             WriteShort(0); //HT
             WriteShort(character.Partner.Digiclone.HPLevel);
+
+            var detailHP = character.Partner.TamerDetailHP;
+            var detailDS = character.Partner.TamerDetailDS;
+            var detailAT = character.Partner.TamerDetailAT;
+            var detailAS = character.Partner.TamerDetailAS;
+            var detailCT = character.Partner.TamerDetailCT;
+            var detailHT = character.Partner.TamerDetailHT;
+            var detailSCD = character.Partner.TamerDetailSCD;
+            var detailCD = character.Partner.TamerDetailCD;
+            var detailSD = character.Partner.TamerDetailSD;
+            var detailBaseDamage = character.Partner.TamerDetailBaseDamage;
+            var detailDE = character.Partner.TamerDetailDE;
+            var detailBL = character.Partner.TamerDetailBL;
+            var detailEV = character.Partner.TamerDetailEV;
+
+            WriteInt(detailHP);
+            WriteInt(detailDS);
+            WriteInt(detailAT);
+            WriteInt(detailAS);
+            WriteInt(detailCT);
+            WriteInt(detailHT);
+            WriteInt(detailSCD);
+            WriteInt(detailCD);
+            WriteInt(detailSD);
+            WriteInt(detailBaseDamage);
+            WriteInt(detailDE);
+            WriteInt(detailBL);
+            WriteInt(detailEV);
+
+            Console.WriteLine(
+                $"[UpdateStatusPacket:DetailInfo] tamer={character.Id} partner={character.Partner.Id} HP={detailHP} DS={detailDS} AT={detailAT} AS={detailAS} CT={detailCT} HT={detailHT} SCD={detailSCD} CD={detailCD} SD={detailSD} BASE={detailBaseDamage} DE={detailDE} BL={detailBL} EV={detailEV}");
         }
     }
 }

@@ -6,6 +6,8 @@ using DigitalWorldOnline.Commons.Models.Character;
 using DigitalWorldOnline.Commons.Utils;
 using System.Diagnostics;
 
+using DigitalWorldOnline.Commons.Constants;
+
 namespace DigitalWorldOnline.Commons.Models.Digimon
 {
     public sealed partial class DigimonModel
@@ -26,14 +28,14 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         private int _baseAr => BaseStatus.ARValue;
         private int _baseHp => BaseStatus.HPValue;
         private int _baseDs => BaseStatus.DSValue;
-        private short _baseAt => (short)BaseStatus.ATValue;
+        private int _baseAt => BaseStatus.ATValue;
         private short _baseBl => Digiclone.BLValue;
         private short _baseCc => (short)BaseStatus.CTValue;
         private short _baseCd => 0;
         private short _baseAtt => 0;
-        private short _baseDe => (short)BaseStatus.DEValue;
+        private int _baseDe => BaseStatus.DEValue;
         private short _baseEv => (short)BaseStatus.EVValue;
-        private short _baseHt => (short)BaseStatus.HTValue;
+        private int _baseHt => BaseStatus.HTValue;
 
         /// <summary>
         /// Current health points.
@@ -98,8 +100,17 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
 
         public bool PossibleTranscendence => TranscendenceExperience >= 140000;
 
+        private const int EncyclopediaDeckOptionAttackDamage = 1;
+        private const int EncyclopediaDeckOptionSkillDamage = 2;
+        private const int EncyclopediaDeckOptionCriticalDamage = 3;
         private const int EncyclopediaDeckOptionHp = 5;
         private const int EncyclopediaDeckOptionAttackSpeed = 6;
+        private const int EncyclopediaDeckOptionHitRate = 7;
+        private const int EncyclopediaDeckOptionAttackAmplification = 8;
+        private const int EncyclopediaDeckOptionAttributeDamage = 9;
+        private const int EncyclopediaDeckOptionAttack = 10;
+        private const int EncyclopediaDeckOptionFinalDamage = 11;
+        private const int MaxPartnerAttack = 200000;
 
         //TODO: deck, encyclopedia, accessory
         /// <summary>
@@ -130,34 +141,17 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
 
         public short AR => (short)_baseAr;
 
-        public short AT
+        public int AT => ClampPartnerAttack(BuildAttackStatusParts().Total);
+
+        public long RawAT => NonNegativeLong(BuildAttackStatusParts().Total);
+
+        public string AttackStatusDebugBreakdown()
         {
-            get
-            {
-                int intValue =
-                    (_baseAt +
-                    (_baseAt * Digiclone.ATValue / 100) +
-                    _fsAt +
-                    GetSealStatus(StatusTypeEnum.AT) +
-                    GetTitleStatus(StatusTypeEnum.AT) +
-                    (Character?.DUnitCollectionBonus.AT ?? 0) +
-                    (Character?.AccessoryStatus(AccessoryStatusTypeEnum.AT) ?? 0) +
-                    (Character?.AccessoryStatus(AccessoryStatusTypeEnum.ATRate, _baseAt) ?? 0) +
-                    (Character?.ChipsetStatus(AccessoryStatusTypeEnum.AT) ?? 0) +
-                    (Character?.ChipsetStatus(AccessoryStatusTypeEnum.ATRate, _baseAt) ?? 0) +
-                    BuffAttribute(_baseAt, SkillCodeApplyAttributeEnum.AT, SkillCodeApplyAttributeEnum.DA));
+            var parts = BuildAttackStatusParts();
+            var raw = NonNegativeLong(parts.Total);
+            var safe = ClampPartnerAttack(parts.Total);
 
-                if (intValue > short.MaxValue)
-                {
-                    return (short)short.MaxValue; // Retorna o valor máximo de short
-                }
-                else if (intValue < short.MinValue)
-                {
-                    return (short)short.MinValue; // Retorna o valor mínimo de short
-                }
-
-                return (short)intValue; // Retorna o valor como short
-            }
+            return parts.ToLogString(raw, safe, MaxPartnerAttack);
         }
 
         public short BL => ClampToShort(
@@ -165,6 +159,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (Digiclone.BLValue) +
             GetSealStatus(StatusTypeEnum.BL) +
             (Character?.DUnitCollectionBonus.BL ?? 0) +
+            (Character?.EquipmentAttributeForPartner(_baseBl, SkillCodeApplyAttributeEnum.BL) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.BL) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.BL) ?? 0) +
             BuffAttribute(_baseBl, SkillCodeApplyAttributeEnum.BL));
@@ -183,13 +178,15 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         public int CD =>
             _baseCd +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.CD) ?? 0) +
-             BuffAttribute(_baseCd, SkillCodeApplyAttributeEnum.CAT);
+            ((Character?.EncyclopediaDeckOptionPercent(EncyclopediaDeckOptionCriticalDamage) ?? 0) * 100) +
+            BuffAttribute(_baseCd, SkillCodeApplyAttributeEnum.CAT);
 
         public double CriticalDamagePercent => CD / 100.0;
 
         public int ATT =>
            _baseAtt +
            (Character?.EquipmentAttributeForPartner(_baseAtt, SkillCodeApplyAttributeEnum.ATTRIBUTE) ?? 0) +
+           (Character?.EncyclopediaDeckOptionPercent(EncyclopediaDeckOptionAttributeDamage) ?? 0) +
            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.ATT) ?? 0);
 
         /// <summary>
@@ -206,8 +203,14 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.SCDRate, 10000) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.SCDRate, 10000) ?? 0) +
             (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.SCDRate, 10000) ?? 0) +
+            ((Character?.EncyclopediaDeckOptionPercent(EncyclopediaDeckOptionSkillDamage) ?? 0) * 100) +
             ((Character?.DUnitCollectionBonus.SCD ?? 0) * 100) +
+            (Character?.EquipmentAttributeForPartner(0, SkillCodeApplyAttributeEnum.SCD) ?? 0) +
             BuffAttribute(0, SkillCodeApplyAttributeEnum.SCD);
+
+        public int NormalAttackDamageBasisPoints =>
+            ((Character?.EncyclopediaDeckOptionPercent(EncyclopediaDeckOptionAttackDamage) ?? 0) * 100) +
+            ((Character?.EncyclopediaDeckOptionPercent(EncyclopediaDeckOptionAttackAmplification) ?? 0) * 100);
 
         public int SituationalSkillDamageBasisPoints(
             bool hasAttributeAdvantage,
@@ -251,14 +254,16 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         public int FinalDamageBasisPoints =>
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.FinalDamageRate, 10000) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.FinalDamageRate, 10000) ?? 0) +
-            (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.FinalDamageRate, 10000) ?? 0);
+            (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.FinalDamageRate, 10000) ?? 0) +
+            ((Character?.EncyclopediaDeckOptionPercent(EncyclopediaDeckOptionFinalDamage) ?? 0) * 100);
 
-        public short DE => (short)
-            (_baseDe +
+        public int DE => ClampPartnerStatus(
+            _baseDe +
             _fsDe +
             GetSealStatus(StatusTypeEnum.DE) +
             GetTitleStatus(StatusTypeEnum.DE) +
             (Character?.DUnitCollectionBonus.DE ?? 0) +
+            (Character?.EquipmentAttributeForPartner(_baseDe, SkillCodeApplyAttributeEnum.DP) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DE) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DERate, _baseDe) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DE) ?? 0) +
@@ -271,6 +276,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             GetSealStatus(StatusTypeEnum.DS) +
             GetTitleStatus(StatusTypeEnum.DS) +
             (Character?.DUnitCollectionBonus.DS ?? 0) +
+            (Character?.EquipmentAttributeForPartner(_baseDs, SkillCodeApplyAttributeEnum.MaxDS, SkillCodeApplyAttributeEnum.DS) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DS) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DSRate, _baseDs) ?? 0) +
             (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.DSRate, _baseDs) ?? 0) +
@@ -284,26 +290,30 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             GetSealStatus(StatusTypeEnum.EV) +
             GetTitleStatus(StatusTypeEnum.EV) +
             (Character?.DUnitCollectionBonus.EV ?? 0) +
+            (Character?.EquipmentAttributeForPartner(_baseEv, SkillCodeApplyAttributeEnum.EV, SkillCodeApplyAttributeEnum.ER) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.EV) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.EV) ?? 0) +
             BuffAttribute(_baseEv, SkillCodeApplyAttributeEnum.EV, SkillCodeApplyAttributeEnum.ER)); //100 = 1%
 
-        public short HT => ClampToShort(
+        public int HT => ClampPartnerStatus(
             _baseHt +
             GetSealStatus(StatusTypeEnum.HT) +
             GetTitleStatus(StatusTypeEnum.HT) +
             (Character?.DUnitCollectionBonus.HT ?? 0) +
+            (Character?.EncyclopediaDeckOptionBonus(EncyclopediaDeckOptionHitRate, _baseHt) ?? 0) +
+            (Character?.EquipmentAttributeForPartner(_baseHt, SkillCodeApplyAttributeEnum.HT) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HT) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HT) ?? 0) +
             BuffAttribute(_baseHt, SkillCodeApplyAttributeEnum.HT));
         
-        public short SKD => (short)
-         (_baseAt +   
+        public int SKD =>
+         (_baseAt +
          (Character?.AccessoryStatus(AccessoryStatusTypeEnum.SCD) ?? 0) +
          (Character?.ChipsetStatus(AccessoryStatusTypeEnum.SCD) ?? 0));
 
         public short SCD => (short)
         (BuffAttribute(0, SkillCodeApplyAttributeEnum.SCD)+
+        (Character?.EquipmentAttributeForPartner(0, SkillCodeApplyAttributeEnum.SCD) ?? 0)+
         ((Character?.DUnitCollectionBonus.SCD ?? 0) * 100) +
         (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.Data) ?? 0)+
         (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.Vacina) ?? 0)+
@@ -324,6 +334,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             GetSealDetailStatus(StatusTypeEnum.HP) +
             GetTitleStatus(StatusTypeEnum.HP) +
             (Character?.DUnitCollectionBonus.HP ?? 0) +
+            (Character?.EquipmentAttributeForPartner(_baseHp, SkillCodeApplyAttributeEnum.MaxHP, SkillCodeApplyAttributeEnum.HP) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HP) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
             (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
@@ -336,6 +347,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             GetSealDetailStatus(StatusTypeEnum.DS) +
             GetTitleStatus(StatusTypeEnum.DS) +
             (Character?.DUnitCollectionBonus.DS ?? 0) +
+            (Character?.EquipmentAttributeForPartner(_baseDs, SkillCodeApplyAttributeEnum.MaxDS, SkillCodeApplyAttributeEnum.DS) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DS) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DSRate, _baseDs) ?? 0) +
             (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.DSRate, _baseDs) ?? 0) +
@@ -343,15 +355,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DSRate, _baseDs) ?? 0) +
             BuffAttribute(_baseDs, SkillCodeApplyAttributeEnum.MaxDS, SkillCodeApplyAttributeEnum.DS));
 
-        public int TamerDetailAT => NonNegative(
-            GetSealDetailStatus(StatusTypeEnum.AT) +
-            GetTitleStatus(StatusTypeEnum.AT) +
-            (Character?.DUnitCollectionBonus.AT ?? 0) +
-            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.AT) ?? 0) +
-            (Character?.AccessoryStatus(AccessoryStatusTypeEnum.ATRate, _baseAt) ?? 0) +
-            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.AT) ?? 0) +
-            (Character?.ChipsetStatus(AccessoryStatusTypeEnum.ATRate, _baseAt) ?? 0) +
-            BuffAttribute(_baseAt, SkillCodeApplyAttributeEnum.AT, SkillCodeApplyAttributeEnum.DA));
+        public int TamerDetailAT => ClampPartnerAttack(BuildAttackStatusParts(detailSeal: true).BonusTotal);
 
         public int TamerDetailAS => NonNegative(
             GetSealDetailStatus(StatusTypeEnum.AS) +
@@ -374,6 +378,8 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             GetSealDetailStatus(StatusTypeEnum.HT) +
             GetTitleStatus(StatusTypeEnum.HT) +
             (Character?.DUnitCollectionBonus.HT ?? 0) +
+            (Character?.EncyclopediaDeckOptionBonus(EncyclopediaDeckOptionHitRate, _baseHt) ?? 0) +
+            (Character?.EquipmentAttributeForPartner(_baseHt, SkillCodeApplyAttributeEnum.HT) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HT) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.HT) ?? 0) +
             BuffAttribute(_baseHt, SkillCodeApplyAttributeEnum.HT));
@@ -382,7 +388,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
 
         public int TamerDetailCD => NonNegative(CD - _baseCd);
 
-        public int TamerDetailSD => NonNegative(SKD - _baseAt);
+        public int TamerDetailSD => NonNegative(SKD - _baseAt + (NormalAttackDamageBasisPoints / 100));
 
         public int TamerDetailBaseDamage => NonNegative(FinalDamageBasisPoints);
 
@@ -390,6 +396,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             GetSealDetailStatus(StatusTypeEnum.DE) +
             GetTitleStatus(StatusTypeEnum.DE) +
             (Character?.DUnitCollectionBonus.DE ?? 0) +
+            (Character?.EquipmentAttributeForPartner(_baseDe, SkillCodeApplyAttributeEnum.DP) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DE) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.DERate, _baseDe) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DE) ?? 0) +
@@ -399,6 +406,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         public int TamerDetailBL => NonNegative(
             GetSealDetailStatus(StatusTypeEnum.BL) +
             ((Character?.DUnitCollectionBonus.BL ?? 0) * 100) +
+            ((Character?.EquipmentAttributeForPartner(_baseBl, SkillCodeApplyAttributeEnum.BL) ?? 0) * 100) +
             ((Character?.AccessoryStatus(AccessoryStatusTypeEnum.BL) ?? 0) * 100) +
             ((Character?.ChipsetStatus(AccessoryStatusTypeEnum.BL) ?? 0) * 100) +
             (BuffAttribute(_baseBl, SkillCodeApplyAttributeEnum.BL) * 100));
@@ -407,6 +415,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             GetSealDetailStatus(StatusTypeEnum.EV) +
             GetTitleStatus(StatusTypeEnum.EV) +
             (Character?.DUnitCollectionBonus.EV ?? 0) +
+            (Character?.EquipmentAttributeForPartner(_baseEv, SkillCodeApplyAttributeEnum.EV, SkillCodeApplyAttributeEnum.ER) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.EV) ?? 0) +
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.EV) ?? 0) +
             BuffAttribute(_baseEv, SkillCodeApplyAttributeEnum.EV, SkillCodeApplyAttributeEnum.ER));
@@ -420,6 +429,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             GetSealStatus(StatusTypeEnum.HP) +
             GetTitleStatus(StatusTypeEnum.HP) +
             (Character?.DUnitCollectionBonus.HP ?? 0) +
+            (Character?.EquipmentAttributeForPartner(_baseHp, SkillCodeApplyAttributeEnum.MaxHP, SkillCodeApplyAttributeEnum.HP) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HP) ?? 0) +
             (Character?.AccessoryStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
             (Character?.DigiviceAccessoryStatus(AccessoryStatusTypeEnum.HPRate, _baseHp) ?? 0) +
@@ -430,7 +440,60 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
 
         public int MS => _fsMs;
 
+        private AttackStatusParts BuildAttackStatusParts(bool detailSeal = false)
+        {
+            var seal = detailSeal ? GetSealDetailStatus(StatusTypeEnum.AT) : GetSealStatus(StatusTypeEnum.AT);
+            var title = GetTitleStatus(StatusTypeEnum.AT);
+            var dUnit = Character?.DUnitCollectionBonus.AT ?? 0;
+            var deck = Character?.EncyclopediaDeckOptionBonus(EncyclopediaDeckOptionAttack, _baseAt) ?? 0;
+            var equipment = Character?.EquipmentAttributeForPartner(_baseAt, SkillCodeApplyAttributeEnum.AT, SkillCodeApplyAttributeEnum.DA) ?? 0;
+            var accessoryFlat = Character?.AccessoryStatus(AccessoryStatusTypeEnum.AT) ?? 0;
+            var accessoryRate = Character?.AccessoryStatus(AccessoryStatusTypeEnum.ATRate, _baseAt) ?? 0;
+            var chipsetFlat = Character?.ChipsetStatus(AccessoryStatusTypeEnum.AT) ?? 0;
+            var chipsetRate = Character?.ChipsetStatus(AccessoryStatusTypeEnum.ATRate, _baseAt) ?? 0;
+            var buff = BuffAttribute(_baseAt, SkillCodeApplyAttributeEnum.AT, SkillCodeApplyAttributeEnum.DA);
+
+            return new AttackStatusParts(
+                _baseAt,
+                (long)_baseAt * Digiclone.ATValue / 100,
+                _fsAt,
+                seal,
+                title,
+                dUnit,
+                deck,
+                equipment,
+                accessoryFlat,
+                accessoryRate,
+                chipsetFlat,
+                chipsetRate,
+                buff);
+        }
+
         private static int NonNegative(int value) => value < 0 ? 0 : value;
+
+        private static long NonNegativeLong(long value) => value < 0 ? 0 : value;
+
+        private static int ClampPartnerAttack(long value)
+        {
+            if (value <= 0)
+                return 0;
+
+            if (value > MaxPartnerAttack)
+                return MaxPartnerAttack;
+
+            return (int)value;
+        }
+
+        private static int ClampPartnerStatus(int value)
+        {
+            if (value <= 0)
+                return 0;
+
+            if (value > MaxPartnerAttack)
+                return MaxPartnerAttack;
+
+            return value;
+        }
 
         private static short ClampToShort(int value)
         {
@@ -441,6 +504,63 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
                 return short.MinValue;
 
             return (short)value;
+        }
+
+        private readonly struct AttackStatusParts
+        {
+            public AttackStatusParts(
+                long baseAt,
+                long clone,
+                long friendship,
+                long seal,
+                long title,
+                long dUnit,
+                long deck,
+                long equipment,
+                long accessoryFlat,
+                long accessoryRate,
+                long chipsetFlat,
+                long chipsetRate,
+                long buff)
+            {
+                BaseAt = baseAt;
+                Clone = clone;
+                Friendship = friendship;
+                Seal = seal;
+                Title = title;
+                DUnit = dUnit;
+                Deck = deck;
+                Equipment = equipment;
+                AccessoryFlat = accessoryFlat;
+                AccessoryRate = accessoryRate;
+                ChipsetFlat = chipsetFlat;
+                ChipsetRate = chipsetRate;
+                Buff = buff;
+            }
+
+            public long BaseAt { get; }
+            public long Clone { get; }
+            public long Friendship { get; }
+            public long Seal { get; }
+            public long Title { get; }
+            public long DUnit { get; }
+            public long Deck { get; }
+            public long Equipment { get; }
+            public long AccessoryFlat { get; }
+            public long AccessoryRate { get; }
+            public long ChipsetFlat { get; }
+            public long ChipsetRate { get; }
+            public long Buff { get; }
+
+            public long BonusTotal =>
+                Seal + Title + DUnit + Deck + Equipment + AccessoryFlat + AccessoryRate + ChipsetFlat + ChipsetRate + Buff;
+
+            public long Total => BaseAt + Clone + Friendship + BonusTotal;
+
+            public string ToLogString(long raw, int safe, int max)
+            {
+                return $"base={BaseAt} clone={Clone} fs={Friendship} seal={Seal} title={Title} dunit={DUnit} deck={Deck} equipment={Equipment} accessoryFlat={AccessoryFlat} accessoryRate={AccessoryRate} chipsetFlat={ChipsetFlat} chipsetRate={ChipsetRate} buff={Buff} raw={raw} safe={safe} max={max}";
+            }
         }
 
         /// <summary>
@@ -877,8 +997,11 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             foreach (var tamerSeal in Character.SealList.Seals)
             {
                 var status = statusList
-                    .FirstOrDefault(x => x.SealId == tamerSeal.SealId &&
-                                         x.RequiredAmount <= tamerSeal.Amount);
+                    .Where(x => x.SealId == tamerSeal.SealId &&
+                                x.RequiredAmount <= tamerSeal.Amount)
+                    .OrderByDescending(x => x.RequiredAmount)
+                    .ThenByDescending(x => x.SequentialId)
+                    .FirstOrDefault();
 
                 if (status != null) SealStatusList.Add(status);
             }
@@ -997,7 +1120,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         /// <param name="levels">Levels to increase.</param>
         public void LevelUp(byte levels = 1)
         {
-            if (Level + levels <= 120)
+            if (Level + levels <= LevelConstants.MaxLevel)
             {
                 Level += levels;
                 CurrentExperience = 0;

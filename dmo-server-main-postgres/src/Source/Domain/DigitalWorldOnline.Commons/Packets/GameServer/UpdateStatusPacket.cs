@@ -13,25 +13,28 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         /// <param name="character">The tamer to be updated</param>
         public UpdateStatusPacket(CharacterModel character)
         {
+            var partnerAttack = character.Partner.AT;
+            var partnerRawAttack = character.Partner.RawAT;
+
             Type(PacketNumber);
             WriteInt(character.HP);
             WriteInt(character.DS);
             WriteInt(character.CurrentHp);
             WriteInt(character.CurrentDs);
-            WriteShort(character.AT);
-            WriteShort(character.DE);
+            WriteInt(character.AT);
+            WriteInt(character.DE);
             WriteShort((short)character.MS);
             WriteInt(character.Partner.HP);
             WriteInt(character.Partner.DS);
             WriteInt(character.Partner.CurrentHp);
             WriteInt(character.Partner.CurrentDs);
             WriteShort(character.Partner.FS);
-            WriteShort(character.Partner.AT);
-            WriteShort(character.Partner.DE);
+            WriteInt(partnerAttack);
+            WriteInt(character.Partner.DE);
             WriteShort(character.Partner.CC);
-            WriteShort((short)character.Partner.AS);
+            WriteFloat(character.Partner.AS / 1000f);
             WriteShort(character.Partner.EV);
-            WriteShort(character.Partner.HT);
+            WriteInt(character.Partner.HT);
             WriteShort(character.Partner.AR);
             WriteShort(character.Partner.BL);
 
@@ -81,7 +84,16 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteInt(detailEV);
 
             Console.WriteLine(
-                $"[UpdateStatusPacket:DetailInfo] tamer={character.Id} partner={character.Partner.Id} HP={detailHP} DS={detailDS} AT={detailAT} AS={detailAS} CT={detailCT} HT={detailHT} SCD={detailSCD} CD={detailCD} SD={detailSD} BASE={detailBaseDamage} DE={detailDE} BL={detailBL} EV={detailEV}");
+                $"[UpdateStatusPacket:Main] tamer={character.Id} tamerHP={character.HP} tamerDS={character.DS} tamerCurrHP={character.CurrentHp} tamerCurrDS={character.CurrentDs} tamerAT={character.AT} tamerDE={character.DE} tamerMS={character.MS} partner={character.Partner.Id} partnerName={character.Partner.Name} partnerHP={character.Partner.HP} partnerDS={character.Partner.DS} partnerCurrHP={character.Partner.CurrentHp} partnerCurrDS={character.Partner.CurrentDs} partnerAT={partnerAttack} partnerRawAT={partnerRawAttack} partnerDE={character.Partner.DE} partnerAS={character.Partner.AS} partnerCT={character.Partner.CC} partnerHT={character.Partner.HT} partnerAR={character.Partner.AR} partnerBL={character.Partner.BL} partnerEV={character.Partner.EV} fs={character.Partner.FS} fsLayout=int32");
+
+            Console.WriteLine(
+                $"[UpdateStatusPacket:DetailInfo] tamer={character.Id} partner={character.Partner.Id} detailHP={detailHP} detailDS={detailDS} detailAT={detailAT} detailAS={detailAS} detailCT={detailCT} detailHT={detailHT} detailSCD={detailSCD} detailCD={detailCD} detailSD={detailSD} detailBaseDamage={detailBaseDamage} detailDE={detailDE} detailBL={detailBL} detailEV={detailEV}");
+
+            if (partnerRawAttack != partnerAttack || partnerAttack >= 100000 || detailAT >= 100000)
+            {
+                Console.WriteLine(
+                    $"[UpdateStatusPacket:PartnerATBreakdown] tamer={character.Id} tamerName={character.Name} partner={character.Partner.Id} partnerName={character.Partner.Name} baseType={character.Partner.BaseType} currentType={character.Partner.CurrentType} level={character.Partner.Level} size={character.Partner.Size} atDiff={(partnerRawAttack - partnerAttack)} {character.Partner.AttackStatusDebugBreakdown()}");
+            }
         }
     }
 }

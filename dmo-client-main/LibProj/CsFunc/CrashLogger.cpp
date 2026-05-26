@@ -21,10 +21,12 @@ namespace CrashLogger
 // ---------- module state ----------
 static CRITICAL_SECTION   g_cs;
 static FILE*              g_fp           = NULL;
+static FILE*              g_fpStats      = NULL;
 static bool               g_inited       = false;
 static bool               g_symInited    = false;
 static bool               g_isWine       = false;  // skip Sym* on Wine — its dbghelp asserts internally
 static char               g_logPath[ MAX_PATH ] = { 0 };
+static char               g_statsPath[ MAX_PATH ] = { 0 };
 static char               g_lastContext[ 1024 ] = { 0 };
 static char               g_lastPacket[ 512 ] = { 0 };
 
@@ -161,6 +163,15 @@ static void WriteLine( const char* line )
 	fputs( line, g_fp );
 	fputc( '\n', g_fp );
 	fflush( g_fp );
+}
+
+static void WriteStatsLine( const char* line )
+{
+	if( g_fpStats == NULL )
+		return;
+	fputs( line, g_fpStats );
+	fputc( '\n', g_fpStats );
+	fflush( g_fpStats );
 }
 
 static void WriteCrashContext()
@@ -542,6 +553,10 @@ void Init( const char* logPath )
 	EnsureDir( g_logPath );
 	fopen_s( &g_fp, g_logPath, "a" );
 
+	_snprintf_s( g_statsPath, _TRUNCATE, "logs\\stats.log" );
+	EnsureDir( g_statsPath );
+	fopen_s( &g_fpStats, g_statsPath, "a" );
+
 	g_prevSEHFilter   = SetUnhandledExceptionFilter( OnUnhandledSEH );
 	g_prevTerminate   = set_terminate( OnTerminate );
 	g_prevPurecall    = _set_purecall_handler( OnPurecall );
@@ -560,6 +575,14 @@ void Init( const char* logPath )
 		_snprintf_s( buf, _TRUNCATE, "[%s] CrashLogger VEH=%p local_dump_dir=Log\\CrashDumps",
 			ts, g_vectoredHandler );
 		WriteLine( buf );
+	}
+
+	if( g_fpStats )
+	{
+		char ts[ 64 ]; Timestamp( ts, sizeof( ts ) );
+		char buf[ 256 ];
+		_snprintf_s( buf, _TRUNCATE, "[%s] Stats log initialized (%s)", ts, g_statsPath );
+		WriteStatsLine( buf );
 	}
 }
 
@@ -609,6 +632,27 @@ void LogMessage( const char* fmt, ... )
 	char line[ 1280 ];
 	_snprintf_s( line, _TRUNCATE, "[%s] %s", ts, body );
 	WriteLine( line );
+
+	LeaveCriticalSection( &g_cs );
+}
+
+void LogStatsMessage( const char* fmt, ... )
+{
+	if( !g_inited || !g_fpStats || !fmt )
+		return;
+
+	EnterCriticalSection( &g_cs );
+
+	char ts[ 64 ]; Timestamp( ts, sizeof( ts ) );
+	char body[ 1024 ];
+	va_list args;
+	va_start( args, fmt );
+	_vsnprintf_s( body, _TRUNCATE, fmt, args );
+	va_end( args );
+
+	char line[ 1280 ];
+	_snprintf_s( line, _TRUNCATE, "[%s] %s", ts, body );
+	WriteStatsLine( line );
 
 	LeaveCriticalSection( &g_cs );
 }

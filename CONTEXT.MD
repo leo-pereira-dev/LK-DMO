@@ -1,6 +1,6 @@
 # LK-DMO Technical Context
 
-Last updated: 2026-05-25
+Last updated: 2026-05-26
 
 This document is the working memory for the LK-DMO workspace in `C:\0-NewDmo`.
 It summarizes the main fixes, migration work, build notes, and packet/protocol
@@ -126,6 +126,523 @@ Database: dso
 User: dso
 Password: dso_password
 Schema: dso
+```
+
+## Production VPS is the priority for live bugs
+
+For current player-facing issues, inspect and fix the production VPS first
+unless the user explicitly says the problem is local-only.
+
+Production target:
+
+```text
+VPS: ubuntu@104.234.41.94
+Remote root: /home/ubuntu/dmo-server-main-postgres
+Compose env: .env.production
+Local source: C:\0-NewDmo\dmo-server-main-postgres
+```
+
+Start with:
+
+```bash
+cd /home/ubuntu/dmo-server-main-postgres
+sudo docker compose --env-file .env.production ps
+sudo docker compose --env-file .env.production logs --tail=200 account character game
+```
+
+Use these deploy/restart patterns:
+
+```bash
+sudo docker compose --env-file .env.production up -d --build game
+sudo docker compose --env-file .env.production up -d --build character game
+sudo docker compose --env-file .env.production restart account character game
+```
+
+Secrets are stored only in ignored local helpers such as
+`C:\0-NewDmo\vps-game-logs.local.ps1`; never reveal or commit them. Before
+overwriting production files, create a timestamped backup under:
+
+```text
+/home/ubuntu/dmo-server-main-postgres/deploy-backups/
+```
+
+## 2026-05-25/26 live incident: sync, crashes, stats, and login
+
+Detailed standalone handoff for the player visibility, trade, and party work:
+
+```text
+C:\0-NewDmo\LiveSyncTradePartyContext.md
+```
+
+### Status packet / equipment / tooltip resolved on 2026-05-26
+
+The main Digimon status discrepancy is currently resolved.
+
+- Production `game` was rebuilt on the VPS after correcting the status packet
+  and equipment total paths.
+- `UpdateStatusPacket` now sends large partner/tamer values using `int32` where
+  needed, and sends partner AS as `float`.
+- The client `RecvAllStat` parser supports the extended layout with `AT int32`,
+  `DE int32`, `AS float`, `HT int32`, and the 13-value `DetailInfo` tail.
+- Server equipment/accessory/chipset/digivice helpers now return `int` totals
+  instead of clamping totals to `short`.
+- The Digimon status tooltip now reconciles its local breakdown with the
+  authoritative value from the server, so `ALL` should match the visible status
+  even when the client cannot split a newer server-side source into a specific
+  local line.
+- Handoffs updated:
+  - `C:\0-NewDmo\HANDOFF_DIGIMON_STATUS_AS_PARSE.md`
+  - `C:\0-NewDmo\HANDOFF_AT_NEGATIVO_STATUS_TOOLTIP.md`
+  - `C:\0-NewDmo\DetailInfo.md`
+
+Current state from the latest pass:
+
+- player visibility/sync was fixed enough for the user to confirm both clients
+  rendered each other in the same place;
+- sensitive movement/facing sync was added on 2026-05-26: client sends
+  facing-only updates with a 0.03 rad threshold, server echoes
+  `pSync::Rotation = 0x7F` in packet `1006`, and `game` was rebuilt on the VPS;
+- precise movement target sync was tried on 2026-05-26 04:11 BRT and rolled
+  back on 2026-05-26 04:22 BRT after the client froze when another player
+  entered the same channel/field. The rollback keeps rotation sync but removes
+  float `X/Y` from `1004` and removes `pSync::PrecisePosition = 0x7E` from
+  `1006`;
+- trade open and item display were fixed;
+- trade final completion crash on packet `1504` was patched in the client and
+  the client was rebuilt/copied at `2026-05-26 02:29`, but still needs the next
+  live retest;
+- party is still bugged and must be treated as active development.
+
+This is the current high-priority production context for the next agent. The
+user was testing with friends on the live VPS. When players approached each
+other in the same channel/location, they could not see each other, mobs became
+unattackable, channel changes failed, and the server appeared to lag. Multiple
+clients also crashed while network packets were being executed.
+
+### Crash/log symptoms reported by users
+
+Observed client crash contexts:
+
+```text
+packet=3969 body_bytes=41 total_len=43
+packet=1006 body_bytes=23 total_len=25
+packet=1308 body_bytes=27 total_len=29
+EXCEPTION_ACCESS_VIOLATION 0xc0000005
+```
+
+Important examples:
+
+- `2026-05-25 22:08:26`: crash while executing packet `3969`, right after
+  repeated accessory/item use attempts and sync packets.
+- `2026-05-25 22:20:51` and `2026-05-25 23:02:12`: crashes around packet
+  `1006` execute-end.
+- `2026-05-25 23:11:42`: crash around packet `1308` execute-end while testing
+  character selection/login flow.
+
+The user also reported a player leveling/upgrading an item very quickly before
+one crash. Do not assume that item speed alone is the root cause; keep checking
+packet layout, object sync, race conditions, null checks, game logic, pipelines,
+and overflow.
+
+### Client object type / sync root cause found
+
+The C++ client `cType` contract was inconsistent:
+
+- `pop<cType>` reads/writes an 8-byte object type.
+- `cType::SetTypeAll` and `GetTypeAll` were using `u4`.
+
+This dropped the high 32 bits of object type/model information and could break
+object creation/sync when tamers, digimons, mobs, or other objects entered view.
+
+Files changed:
+
+```text
+C:\0-NewDmo\dmo-client-main\common_vs2019\pType.h
+C:\0-NewDmo\dmo-client-main\common_vs2019\pType.cpp
+```
+
+Required behavior:
+
+- `SetTypeAll(u8)`
+- `GetTypeAll()` returns `u8`
+
+Keep this aligned with every packet/object reader that uses `cType`.
+
+### Client crash/sync logs added
+
+Logging was added so the next live test can show exactly where object sync
+breaks:
+
+```text
+C:\0-NewDmo\dmo-client-main\DProject\network\cCliGameSync.cpp
+C:\0-NewDmo\dmo-client-main\DProject\network\cCliGateReceive.cpp
+```
+
+Instrumented areas:
+
+- `RecvSyncData`
+- `SyncNewObject`
+- `SyncInObject`
+- `SyncInTamer`
+- `SyncInDigimon`
+- `SyncInMonster`
+- most `SyncInBuff` debug chat spam was moved to `CrashLogger::LogMessage`
+- `RecvTamerSelectSuccess` / packet `1308` parse logging
+
+When testing, collect the latest client `message.txt` and crash dump path under
+`Log\CrashDumps\`.
+
+### Server visibility / map sync guard
+
+Server-side map visibility was hardened:
+
+```text
+C:\0-NewDmo\dmo-server-main-postgres\src\Source\Domain\DigitalWorldOnline.Commons\Models\Maps\MapInstanceTamerBehavior.cs
+C:\0-NewDmo\dmo-server-main-postgres\src\Source\Distribution\DigitalWorldOnline.Game.Host\MapServers\MapServerTamerOperation.cs
+```
+
+Behavior to preserve:
+
+- `ShowTamer` creates `TamersView[tamerKey]` if missing.
+- Duplicate view entries are avoided.
+- `LoadTamerPacket` and `LoadBuffsPacket` are serialized before send.
+- `PKT-TRACE ShowTamer...` logs include packet size/prefix data before sending.
+
+This was deployed to the VPS with:
+
+```bash
+docker compose --env-file .env.production up -d --build game
+```
+
+Remote backup from that pass:
+
+```text
+/home/ubuntu/dmo-server-main-postgres/deploy-backups/20260525-232841-sync-pkt-trace/files.tgz
+```
+
+### Sensitive movement / facing sync
+
+After the visibility fix, tiny turns and small movements could still drift
+because the client deduped movement only by integer `uid/X/Y`, and the server
+discarded the `fDirect` value it received in `pGame::MoveTo` (`1004`) when
+broadcasting `pGame::Sync` (`1006`).
+
+Files changed:
+
+```text
+C:\0-NewDmo\dmo-client-main\DProject\UserServerMove.cpp
+C:\0-NewDmo\dmo-client-main\DProject\UserServerMove.h
+C:\0-NewDmo\dmo-client-main\DProject\network\cCliGameSend.cpp
+C:\0-NewDmo\dmo-client-main\DProject\network\cCliGameSync.cpp
+C:\0-NewDmo\dmo-client-main\DProject\network\cCliGame.h
+C:\0-NewDmo\dmo-client-main\common_vs2019\pSync.h
+C:\0-NewDmo\dmo-server-main-postgres\src\Source\Domain\DigitalWorldOnline.Commons\Packets\GameServer\TamerWalkPacket.cs
+C:\0-NewDmo\dmo-server-main-postgres\src\Source\Domain\DigitalWorldOnline.Commons\Packets\GameServer\DigimonWalkPacket.cs
+```
+
+Behavior to preserve:
+
+- game/dungeon movement throttle is 150 ms; battle throttle is 120 ms;
+- client dedupe allows rotation-only sends when facing changes by at least
+  `0.03` radians;
+- coordinate sends round to nearest integer instead of truncating;
+- server sends `pSync::Walk`/`Move`, then `pSync::Rotation (0x7F)`, then `0`;
+- server and client must be updated together because older clients do not know
+  the new `pSync::Rotation` sub-block.
+
+2026-05-26 04:11/04:22 BRT precision experiment and rollback:
+
+- User confirmed turn/rotation felt correct, but walking positions were still
+  slightly offset between two clients standing together.
+- Root cause: movement endpoints were still integer `nSync::Pos` on the wire.
+- A test build appended float target `X/Y` after `fDirect` in `1004`, had the
+  server echo `pSync::PrecisePosition (0x7E): uid + float X/Y` before
+  `pSync::Rotation`, and had the client apply those floats with
+  `SetPath(float X, float Y)`.
+- The test was rolled back after live logs showed heavy `1004 bytes=34`
+  movement spam and the user clarified they manually closed the client only
+  because it froze after entering the same channel as another player.
+- Both local test clients also had `network_pgsql.log` around 90 MB from
+  verbose `SYNC1006` tracing. `cCliGameSync.cpp::SyncTrace` is now disabled
+  unless `LKDMO_VERBOSE_SYNC_TRACE` is explicitly defined.
+- Current active behavior: no `PrecisePosition` / `0x7E`; keep rounded integer
+  position plus `pSync::Rotation (0x7F)`.
+- VPS backups:
+  `/home/ubuntu/dmo-server-main-postgres/deploy-backups/20260526-041101-precise-position-sync`.
+  `/home/ubuntu/dmo-server-main-postgres/deploy-backups/20260526-042216-rollback-precise-position`.
+- Validation after rollback: server `DigitalWorldOnline.Game.csproj -c Release`
+  and client `Release_English|Win32` builds succeeded; `dmo-pg-game` was
+  recreated and logs reached `GameServer started`.
+
+Client-only rotate control added after the sync fix:
+
+- `Shift + WASD` rotates the controlled tamer/digimon toward the keyboard
+  direction instead of walking.
+- `Shift + left click` rotates toward the clicked terrain/object instead of
+  starting click movement.
+- The path is canceled, `ANI::MOVE_RUN` is forced back to `ANI::IDLE_NORMAL`,
+  and smooth turn-in-place uses existing `SetRotation_AniDir` /
+  `_UpdateRotation`; no separate turn animation was found.
+- The facing change continues to sync via the `1004`/`1006 pSync::Rotation`
+  path above.
+
+Production deploy:
+
+```text
+/home/ubuntu/dmo-server-main-postgres/deploy-backups/20260526-025903-sensitive-move-rotation
+docker compose --env-file .env.production up -d --build game
+dmo-pg-game Up on 17608; logs reached "GameServer started."
+```
+
+### Server/client BIN and Pack03 sync
+
+The user asked to verify whether server BINs and client `Pack03` BINs were in
+sync, then to synchronize the client pack data with the server version.
+
+Server BIN root:
+
+```text
+C:\0-NewDmo\dmo-server-main-postgres\Bins\data\bin\english
+```
+
+Extracted client Pack03 BIN root:
+
+```text
+C:\0-NewDmo\DigiCombineFeature\assets\extracted_pack03\data\bin\english
+```
+
+Core gameplay bins that already matched by SHA256:
+
+```text
+Buff.bin
+CashShop.bin
+CharCreateTable.bin
+Digimon_Book.bin
+Digimon_List.bin
+DigimonEvo.bin
+DMBase.bin
+Event.bin
+ItemList.bin
+MapList.bin
+MapMonsterList.bin
+MapPortal.bin
+MapRegion.bin
+Monster.bin
+Nature.bin
+Quest.bin
+Skill.bin
+```
+
+Files copied from server BINs into extracted Pack03:
+
+```text
+Achieve.bin
+DM_UnionCombine-CeilGroup.bin
+DM_UnionCombine-ItemGroup.bin
+DM_UnionCombine-ItemList.bin
+DM_UnionCombine-RankList.bin
+DM_Union-Effect.bin
+DM_Union-Filter.bin
+DM_Union-Filter_Str.bin
+DM_Union-Group.bin
+DM_Union-Group_Str.bin
+DM_Union-HackingInfo.bin
+DM_Union-Reward.bin
+DM_Union-Reward_Str.bin
+MapCharLight.bin
+MapNpc.bin
+MapObject.bin
+skillcodeunion.bin
+Weather.bin
+WorldMap.bin
+```
+
+Backup of replaced Pack03 files:
+
+```text
+C:\0-NewDmo\DigiCombineFeature\generated\backups\sync_pack03_from_server_20260525_234021
+```
+
+Post-sync validation result: all 19 copied files matched server SHA256,
+`mismatches=0`.
+
+If the active client still uses packed data, patch `ClientDist\Data\Pack03.pf`
+and `.hf` with the same files after changing the extracted Pack03 tree.
+
+### Level cap 150 context
+
+The user requested raising both server and client level cap to `150`.
+Production logs showed level 150 tamers/digimons active during the incident
+(`Leleo`, `Noah`, `tatu`). Treat level 150 as part of the current live test
+surface when checking stat math, packet widths, EXP/leveling assets, and
+overflow.
+
+Do not assume a stat anomaly is caused by the level cap alone. The Noah AT bug
+below was a packet layout mismatch.
+
+### Abnormal AT value on Noah
+
+User screenshot showed:
+
+```text
+Lv. 150 Noah
+AT 761680497
+HP 19667
+DS 20754
+```
+
+Server logs showed normal partner AT values for Noah/Leleo, around `20766`,
+`30766`, or item snapshot `37201`, so the database/stat calculation was not
+producing `761680497`.
+
+Root cause:
+
+- The current client reads partner AT in `RecvAllStat` as `n4` / 4 bytes.
+- Production server `UpdateStatusPacket.cs` was still writing partner AT as
+  `short` / 2 bytes.
+- The client combined partner AT low bytes with the next stat bytes, producing
+  huge values such as `0x2d665271 = 761680497`.
+
+Fixed file:
+
+```text
+C:\0-NewDmo\dmo-server-main-postgres\src\Source\Domain\DigitalWorldOnline.Commons\Packets\GameServer\UpdateStatusPacket.cs
+```
+
+Required behavior:
+
+- write partner AT with `WriteInt(character.Partner.AT)`
+- keep the log marker:
+  `[UpdateStatusPacket:Main] ... partnerATLayout=int32 ... bytesBeforeSerialize=...`
+
+Local validation passed for `DigitalWorldOnline.Game.csproj` with `0` errors
+(pre-existing warnings remained). Production backup:
+
+```text
+/home/ubuntu/dmo-server-main-postgres/deploy-backups/20260525-234740-update-status-at-int32
+```
+
+Production was rebuilt/restarted with:
+
+```bash
+docker compose --env-file .env.production up -d --build game
+```
+
+### Tatubas account disconnect on login
+
+User reported that account `Tatubas` was taking DC when trying to log in.
+
+Account service accepted the login:
+
+```text
+username=Tatubas
+accountId=12
+```
+
+Then the character service logged:
+
+```text
+Process packet error
+System.InvalidOperationException: Sequence contains no elements
+CharacterModel.get_Partner()
+CharacterListPacket..ctor
+CharacterPacketProcessor.ProcessPacketAsync
+```
+
+Database investigation on production:
+
+```text
+Account: Tatubas / accountId=12
+Tamer: tatu / characterId=10 / position=0 / level=150 / DigimonCount=0
+Tamer: testee / characterId=13 / position=1 / level=150 / DigimonCount=2
+```
+
+Existing backup table:
+
+```text
+dso_backup.reset_tatu_20260525_234346_digimons
+```
+
+Restored 5 digimons for character `10` / tamer `tatu`:
+
+```text
+id 44 pretaao BaseType=31044 CurrentType=31044 level=150 slot=0
+id 36 gaogao  BaseType=31003 CurrentType=31003 level=120 slot=1
+id 38 sakuyaa BaseType=31006 CurrentType=31006 level=120 slot=2
+id 43 mile    BaseType=33072 CurrentType=33072 level=150 slot=3
+id 37 aaa     BaseType=31029 CurrentType=31029 level=1   slot=4
+```
+
+Minimal missing child rows were created for:
+
+```text
+Digimon_Digiclone
+Digimon_DigicloneHistory
+Digimon_AttributeExperience
+Digimon_Location
+Digimon_BuffList
+```
+
+Pre-restore backup tables were created with names like:
+
+```text
+dso_backup.restore_tatubas_tatu_YYYYMMDD_HHMMSS_pre_digimons
+dso_backup.restore_tatubas_tatu_YYYYMMDD_HHMMSS_pre_digiclone
+dso_backup.restore_tatubas_tatu_YYYYMMDD_HHMMSS_pre_attr
+dso_backup.restore_tatubas_tatu_YYYYMMDD_HHMMSS_pre_location
+dso_backup.restore_tatubas_tatu_YYYYMMDD_HHMMSS_pre_bufflist
+```
+
+After restore, `tatu` had `DigimonCount=5`; all five had clone, attribute,
+location, and buff-list rows. Game has `EnsureMissingEvolutionRows` and should
+recreate missing evolution rows on first login, logging `[EVO-REPAIR]`.
+
+Code guards applied:
+
+```text
+C:\0-NewDmo\dmo-server-main-postgres\src\Source\Domain\DigitalWorldOnline.Commons\Packets\CharacterServer\CharacterListPacket.cs
+C:\0-NewDmo\dmo-server-main-postgres\src\Source\Distribution\DigitalWorldOnline.Game.Host\PacketProcessors\InitialInformationPacketProcessor.cs
+```
+
+Required behavior:
+
+- filter character list with `character.Digimons.Any()` before accessing
+  `character.Partner`
+- cache `var partner = character.Partner`
+- do not call `character.Partner` for partnerless tamers
+- initial information guard checks `character == null || !character.Digimons.Any()`
+
+Local builds passed for both `DigitalWorldOnline.Character.csproj` and
+`DigitalWorldOnline.Game.csproj` with `0` errors. Production backup:
+
+```text
+/home/ubuntu/dmo-server-main-postgres/deploy-backups/20260525-235743-partnerless-login-guard
+```
+
+Production deploy command:
+
+```bash
+docker compose --env-file .env.production up -d --build character game
+```
+
+Post-deploy logs showed `CharacterServer started.` and `GameServer started.`;
+there was no fresh `Sequence contains no elements` after restart in the checked
+log window.
+
+### Production restart context
+
+The user asked to restart the full main VPS instance set. This was done with:
+
+```bash
+docker compose --env-file .env.production restart account character game
+```
+
+Confirmed markers after restart:
+
+```text
+AuthenticationServer started.
+CharacterServer started.
+GameServer started.
 ```
 
 ## Changelog / work completed

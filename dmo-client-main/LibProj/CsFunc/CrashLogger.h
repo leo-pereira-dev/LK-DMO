@@ -19,6 +19,9 @@ namespace nsCSDEBUG
 		// Free-form entry; useful for ad-hoc trace points without an assert.
 		void LogMessage( const char* fmt, ... );
 
+		// Dedicated stats trace for status packets (writes to logs/stats.log).
+		void LogStatsMessage( const char* fmt, ... );
+
 		// Lightweight breadcrumbs written into the next fatal crash report.
 		// These do not spam the log; they only keep the latest known client state.
 		void SetContext( const char* fmt, ... );

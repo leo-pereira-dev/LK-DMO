@@ -1,6 +1,6 @@
 # DetailInfo / Detalhes
 
-Last updated: 2026-05-25
+Last updated: 2026-05-26
 
 This file tracks the active implementation of the GDMO-style `Detalhes`
 window in the LK-DMO client. The reverse-mapping source of truth remains under
@@ -82,6 +82,24 @@ The right-side Tamer table is meant to show attributes obtained by the Tamer,
 not Digimon stats. It should aggregate values from equipment, accessories,
 seals, buffs/added status, and server-calculated status packet fields. Digimon
 stats belong to the Digimon tab and must stay separate.
+
+2026-05-26 status resolution:
+
+- The live status packet path was corrected for large values: partner HP/DS,
+  AT, DE and HT use `int32`; partner AS is parsed as `float`; DetailInfo remains
+  13 `int32` values.
+- Equipment/accessory/chipset/digivice total helpers on the server now return
+  `int` totals instead of clamping to `short`, so high equipment totals can be
+  applied correctly.
+- The Digimon stat tooltip now reconciles its local breakdown with the
+  authoritative status value received from the server. If a newer server-side
+  source is not locally decomposed, the tooltip shows the residual before `ALL`
+  so the total no longer looks incoherent.
+- Relevant files:
+  - `dmo-server-main-postgres/src/Source/Domain/DigitalWorldOnline.Commons/Packets/GameServer/UpdateStatusPacket.cs`
+  - `dmo-server-main-postgres/src/Source/Domain/DigitalWorldOnline.Commons/Models/Character/CharacterModelBehavior.cs`
+  - `dmo-client-main/DProject/network/cCliGameReceive.cpp`
+  - `dmo-client-main/DProject/_Interface/Game/ToolTip_Stat.cpp`
 
 The status packet route was expanded during this work, but the user/other-player
 DetailInfo route is not finished yet. Official references found in the

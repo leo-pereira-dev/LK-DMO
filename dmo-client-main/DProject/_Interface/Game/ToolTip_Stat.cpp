@@ -2,6 +2,83 @@
 #include "stdafx.h"
 #include "ToolTip.h"
 
+namespace
+{
+int GetServerDetailStatIndex(nTable_Parameter eParam)
+{
+	switch (eParam)
+	{
+	case APPLY_MAXHP:
+		return 0;
+	case APPLY_MAXDS:
+		return 1;
+	case APPLY_AP:
+		return 2;
+	case APPLY_AS:
+		return 3;
+	case APPLY_CA:
+		return 4;
+	case APPLY_HT:
+		return 5;
+	case APPLY_DP:
+		return 10;
+	case APPLY_BL:
+		return 11;
+	case APPLY_EV:
+		return 12;
+	default:
+		return -1;
+	}
+}
+
+__int64 GetServerDetailBonusForTooltip(nTable_Parameter eParam)
+{
+	const int nIndex = GetServerDetailStatIndex(eParam);
+	if (nIndex < 0 || !g_pCharMng)
+		return 0;
+
+	CTamerUser* pTamerUser = g_pCharMng->GetTamerUser();
+	if (!pTamerUser)
+		return 0;
+
+	CTamerUser::sUSER_STAT* pTamerStat = dynamic_cast<CTamerUser::sUSER_STAT*>(pTamerUser->GetBaseStat());
+	if (!pTamerStat)
+		return 0;
+
+	return pTamerStat->GetDetailInfoStat(nIndex);
+}
+
+__int64 GetAuthoritativeDigimonStatForTooltip(nTable_Parameter eParam, CDigimonUser::sUSER_STAT const* pUserStat)
+{
+	if (!pUserStat)
+		return 0;
+
+	switch (eParam)
+	{
+	case APPLY_MAXHP:
+		return pUserStat->GetMaxHP();
+	case APPLY_MAXDS:
+		return pUserStat->GetMaxDS();
+	case APPLY_AP:
+		return pUserStat->GetAtt();
+	case APPLY_AS:
+		return static_cast<__int64>(pUserStat->GetAttackSpeed() * 1000.0f);
+	case APPLY_CA:
+		return pUserStat->GetCritical();
+	case APPLY_HT:
+		return pUserStat->GetHitRate();
+	case APPLY_DP:
+		return pUserStat->GetDef();
+	case APPLY_BL:
+		return pUserStat->GetBL();
+	case APPLY_EV:
+		return pUserStat->GetEvade();
+	default:
+		return 0;
+	}
+}
+}
+
 #define IF_TOOLTIP_STAT_STRLEN			64
 #define IF_TOOLTIP_STAT_ICON_SIZE CsPoint( 32, 32 )
 
@@ -195,7 +272,9 @@ void cTooltip::_MakeTooltip_Stat_Digimon()
 		info.s_nLevel = pDigiUser->GetBaseStat()->GetLevel();
 		info.s_fGameOrgScale = pDigiUser->GetOrgGameScale();
 		
-		__int64 equipValue = FMDigimon::GetTamerEquipValue( &info, (nTable_Parameter)m_nMainID, nsPART::Costume );
+		__int64 equipValue = 0;
+		for( int part = nsPART::Head; part <= nsPART::Glass; ++part )
+			equipValue += FMDigimon::GetTamerEquipValue( &info, (nTable_Parameter)m_nMainID, part );
 		equipValue += FMDigimon::GetTamerEquipValue( &info, (nTable_Parameter)m_nMainID, nTamer::MaxParts );		// 디지바이스
 		if( equipValue )
 		{
@@ -298,6 +377,22 @@ void cTooltip::_MakeTooltip_Stat_Digimon()
 		m_StringList.AddTail(pString);
 		nTotalResult = nTotalResult + PlusPair.second;
 	}
+
+	// The server is authoritative. When the old client-side breakdown misses a
+	// newer source, show the residual so the tooltip total matches the real stat.
+	__int64 const nAuthoritativeTotal = GetAuthoritativeDigimonStatForTooltip( (nTable_Parameter)m_nMainID, pUserStat );
+	__int64 const nMissingTooltipValue = nAuthoritativeTotal - nTotalResult;
+	if( nAuthoritativeTotal > 0 && nMissingTooltipValue != 0 )
+	{
+		NiColor color = nMissingTooltipValue > 0 ? FONT_GREEN : FONT_RED;
+		cString* pServerStat = _MakeAddStat( true, ICONITEM::Stat, 13, CFont::FS_11, color, nMissingTooltipValue, bFloat, bFloat2 );
+		SAFE_POINTER_RET( pServerStat );
+		m_StringList.AddTail( pServerStat );
+		nTotalResult += nMissingTooltipValue;
+	}
+
+	if( nTotalResult < 0 )
+		nTotalResult = 0;
 
 	_AddLine( true );
 

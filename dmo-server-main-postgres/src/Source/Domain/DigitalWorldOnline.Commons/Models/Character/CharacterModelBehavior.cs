@@ -13,6 +13,8 @@ using System;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
 
+using DigitalWorldOnline.Commons.Constants;
+
 namespace DigitalWorldOnline.Commons.Models.Character
 {
     public sealed partial class CharacterModel
@@ -37,6 +39,21 @@ namespace DigitalWorldOnline.Commons.Models.Character
         private int _targetHandler;
         private int _currentHP = 0;
         private int _currentDS = 0;
+
+        private static readonly (int FirstItemId, int LastItemId, (int RequiredCount, SkillCodeApplyTypeEnum Type, SkillCodeApplyAttributeEnum Attribute, int Value)[] Applies)[] PartnerPassiveEquipmentSetBonuses =
+        {
+            (47371, 47382, new[]
+            {
+                (4, SkillCodeApplyTypeEnum.Unknown105, SkillCodeApplyAttributeEnum.EXP, 1000),
+                (4, SkillCodeApplyTypeEnum.Default, SkillCodeApplyAttributeEnum.MaxHP, 3000),
+                (4, SkillCodeApplyTypeEnum.Default, SkillCodeApplyAttributeEnum.HT, 1500),
+            }),
+            (47383, 47394, new[]
+            {
+                (4, SkillCodeApplyTypeEnum.Unknown105, SkillCodeApplyAttributeEnum.SCD, 40),
+                (4, SkillCodeApplyTypeEnum.Default, SkillCodeApplyAttributeEnum.MaxHP, 4500),
+            }),
+        };
 
         /// <summary>
         /// Current character health points.
@@ -69,11 +86,53 @@ namespace DigitalWorldOnline.Commons.Models.Character
         public void SetEncyclopediaDeck(int deckId)
         {
             EncyclopediaDeckId = Math.Max(0, deckId);
+            ActiveEncyclopediaDeckEffects.Clear();
         }
 
         public int EncyclopediaDeckPassiveBonus(int option, int baseValue)
         {
             return UtilitiesFunctions.GetEncyclopediaDeckPassiveBonus(EncyclopediaDeckId, option, baseValue);
+        }
+
+        public int EncyclopediaDeckOptionPercent(int option)
+        {
+            ClearExpiredEncyclopediaDeckEffects();
+
+            return UtilitiesFunctions.GetEncyclopediaDeckPassivePercent(EncyclopediaDeckId, option) +
+                   UtilitiesFunctions.GetEncyclopediaDeckActivePercent(
+                       EncyclopediaDeckId,
+                       ActiveEncyclopediaDeckEffects.Keys,
+                       option);
+        }
+
+        public int EncyclopediaDeckOptionBonus(int option, int baseValue)
+        {
+            if (baseValue <= 0)
+                return 0;
+
+            return baseValue * EncyclopediaDeckOptionPercent(option) / 100;
+        }
+
+        public DateTime ActivateEncyclopediaDeckEffect(int effectIndex, int seconds)
+        {
+            var endDate = DateTime.UtcNow.AddSeconds(Math.Max(0, seconds));
+            ActiveEncyclopediaDeckEffects[effectIndex] = endDate;
+            return endDate;
+        }
+
+        private void ClearExpiredEncyclopediaDeckEffects()
+        {
+            if (ActiveEncyclopediaDeckEffects.Count == 0)
+                return;
+
+            var now = DateTime.UtcNow;
+            foreach (var expired in ActiveEncyclopediaDeckEffects
+                         .Where(pair => pair.Value <= now)
+                         .Select(pair => pair.Key)
+                         .ToList())
+            {
+                ActiveEncyclopediaDeckEffects.Remove(expired);
+            }
         }
 
         /// <summary>
@@ -513,7 +572,7 @@ namespace DigitalWorldOnline.Commons.Models.Character
                 SkillCodeApplyAttributeEnum.MovementSpeedComparisonCorrectionBuff,
                 SkillCodeApplyAttributeEnum.MovementSpeedIncrease);
 
-        public short AT => (short)
+        public int AT => ClampCharacterStatus(
             (_baseAt +
             EquipmentAttribute(_baseAt,
                 SkillCodeApplyAttributeEnum.AT,
@@ -521,19 +580,32 @@ namespace DigitalWorldOnline.Commons.Models.Character
             SocketAttribute(_baseAt, AccessoryStatusTypeEnum.AT) +
             BuffAttribute(_baseAt,
                 SkillCodeApplyAttributeEnum.AT,
-                SkillCodeApplyAttributeEnum.DA));
+                SkillCodeApplyAttributeEnum.DA)));
 
-        public short DE => (short)
+        public int DE => ClampCharacterStatus(
             (_baseDe +
             EquipmentAttribute(_baseDe, SkillCodeApplyAttributeEnum.DP) +
             SocketAttribute(_baseDe, AccessoryStatusTypeEnum.DE) +
-            BuffAttribute(_baseDe, SkillCodeApplyAttributeEnum.DP));
+            BuffAttribute(_baseDe, SkillCodeApplyAttributeEnum.DP)));
 
         public short BonusEXP => (short)
             (0 +
             EquipmentAttribute(0, SkillCodeApplyAttributeEnum.EXP) +
             BuffAttribute(0, SkillCodeApplyAttributeEnum.EXP) +
             DUnitCollectionBonus.EXP);
+
+        private const int MaxCharacterStatus = 200000;
+
+        private static int ClampCharacterStatus(int value)
+        {
+            if (value < 0)
+                return 0;
+
+            if (value > MaxCharacterStatus)
+                return MaxCharacterStatus;
+
+            return value;
+        }
         /// <summary>
         /// Sets the default basic character information.
         /// </summary>
@@ -882,7 +954,7 @@ namespace DigitalWorldOnline.Commons.Models.Character
         /// <param name="levels">Levels to increase.</param>
         public void LevelUp(byte levels = 1)
         {
-            if (Level + levels <= 120)
+            if (Level + levels <= LevelConstants.MaxLevel)
             {
                 Level += levels;
                 CurrentExperience = 0;
@@ -932,7 +1004,8 @@ namespace DigitalWorldOnline.Commons.Models.Character
 
         public int EquipmentAttributeForPartner(int baseValue, params SkillCodeApplyAttributeEnum[] attributes)
         {
-            return EquipmentAttributeInternal(baseValue, true, attributes);
+            return EquipmentAttributeInternal(baseValue, true, attributes) +
+                EquipmentSetAttributeForPartner(baseValue, attributes);
         }
 
         private int EquipmentAttributeInternal(
@@ -966,7 +1039,7 @@ namespace DigitalWorldOnline.Commons.Models.Character
 
                             case SkillCodeApplyTypeEnum.Unknown105:
                             case SkillCodeApplyTypeEnum.Percent:
-                                totalValue += (int)(baseValue * (decimal)apply.Value / 100);
+                                totalValue += ResolveEquipmentAttributeValue(baseValue, apply.Type, apply.Attribute, apply.Value);
                                 break;
 
                             case SkillCodeApplyTypeEnum.AlsoPercent:
@@ -983,6 +1056,66 @@ namespace DigitalWorldOnline.Commons.Models.Character
             }
 
             return totalValue;
+        }
+
+        private int EquipmentSetAttributeForPartner(
+            int baseValue,
+            params SkillCodeApplyAttributeEnum[] attributes)
+        {
+            if (Partner == null)
+                return 0;
+
+            var totalValue = 0;
+
+            foreach (var setBonus in PartnerPassiveEquipmentSetBonuses)
+            {
+                var equippedPieces = Equipment.EquippedItems.Count(item =>
+                    item.ItemInfo != null &&
+                    item.RemainingMinutes() != 0xFFFFFFFF &&
+                    Level >= item.ItemInfo.TamerMinLevel &&
+                    Partner.Level >= item.ItemInfo.DigimonMinLevel &&
+                    item.ItemId >= setBonus.FirstItemId &&
+                    item.ItemId <= setBonus.LastItemId);
+
+                if (equippedPieces == 0)
+                    continue;
+
+                foreach (var apply in setBonus.Applies)
+                {
+                    if (equippedPieces < apply.RequiredCount || !attributes.Any(x => x == apply.Attribute))
+                        continue;
+
+                    totalValue += ResolveEquipmentAttributeValue(baseValue, apply.Type, apply.Attribute, apply.Value);
+                }
+            }
+
+            return totalValue;
+        }
+
+        private static int ResolveEquipmentAttributeValue(
+            int baseValue,
+            SkillCodeApplyTypeEnum type,
+            SkillCodeApplyAttributeEnum attribute,
+            int value)
+        {
+            switch (type)
+            {
+                case SkillCodeApplyTypeEnum.Default:
+                    return value;
+
+                case SkillCodeApplyTypeEnum.Unknown105:
+                case SkillCodeApplyTypeEnum.Percent:
+                    if (attribute == SkillCodeApplyAttributeEnum.SCD)
+                        return value * 100;
+
+                    if (attribute == SkillCodeApplyAttributeEnum.CAT)
+                        return value;
+
+                    return (int)(baseValue * (decimal)value / 100);
+
+                default:
+                    return 0;
+            }
         }
         public int SocketAttribute(int baseValue, AccessoryStatusTypeEnum attribute)
         {
@@ -1009,14 +1142,14 @@ namespace DigitalWorldOnline.Commons.Models.Character
         /// Returns the target  chipset status value.
         /// </summary>
         /// <param name="type">Target status type.</param>
-        public short ChipsetStatus(AccessoryStatusTypeEnum type, int baseValue = 0)
+        public int ChipsetStatus(AccessoryStatusTypeEnum type, int baseValue = 0)
         {
             var totalValue = 0;
             var baseType = type.NormalizeAccessoryStatus();
 
             foreach (var item in ChipSets.EquippedItems)
             {
-                if (!item.HasAccessoryStatus || Level < item.ItemInfo.TamerMinLevel || Partner.Level < item.ItemInfo.DigimonMinLevel)
+                if (!CanApplyEquippedItemStatus(item))
                     continue;
 
                 if (!IsSameFamily(item))
@@ -1046,9 +1179,7 @@ namespace DigitalWorldOnline.Commons.Models.Character
                 }
             }
 
-            return totalValue > short.MaxValue ? short.MaxValue :
-                totalValue < short.MinValue ? short.MinValue :
-                (short)totalValue;
+            return totalValue;
         }
         public bool IsSameFamily(ItemModel item)
         {
@@ -1092,14 +1223,14 @@ namespace DigitalWorldOnline.Commons.Models.Character
 
         public void ClearDUnitCollectionBonus() => DUnitCollectionBonus.Reset();
 
-        public short DigiviceAccessoryStatus(AccessoryStatusTypeEnum type, int baseValue = 0)
+        public int DigiviceAccessoryStatus(AccessoryStatusTypeEnum type, int baseValue = 0)
         {
             var totalValue = 0;
             var baseType = type.NormalizeAccessoryStatus();
 
             foreach (var item in Digivice.EquippedItems)
             {
-                if (!item.HasAccessoryStatus || Level < item.ItemInfo.TamerMinLevel || Partner.Level < item.ItemInfo.DigimonMinLevel)
+                if (!CanApplyEquippedItemStatus(item))
                     continue;
 
                 foreach (var statusValue in item.AccessoryStatus.Where(x => x.Type.NormalizeAccessoryStatus() == baseType).Select(x => x.Value))
@@ -1137,23 +1268,21 @@ namespace DigitalWorldOnline.Commons.Models.Character
                 }
             }
 
-            return totalValue > short.MaxValue ? short.MaxValue :
-                totalValue < short.MinValue ? short.MinValue :
-                (short)totalValue;
+            return totalValue;
         }
 
         /// <summary>
         /// Returns the target accessory status value.
         /// </summary>
         /// <param name="type">Target status type.</param>
-        public short AccessoryStatus(AccessoryStatusTypeEnum type, int baseValue = 0)
+        public int AccessoryStatus(AccessoryStatusTypeEnum type, int baseValue = 0)
         {
             var totalValue = 0;
             var baseType = type.NormalizeAccessoryStatus();
 
             foreach (var item in Equipment.EquippedItems)
             {
-                if (!item.HasAccessoryStatus || Level < item.ItemInfo.TamerMinLevel || Partner.Level < item.ItemInfo.DigimonMinLevel)
+                if (!CanApplyEquippedItemStatus(item))
                     continue;
 
                 foreach (var statusValue in item.AccessoryStatus.Where(x => x.Type.NormalizeAccessoryStatus() == baseType).Select(x => x.Value))
@@ -1194,9 +1323,17 @@ namespace DigitalWorldOnline.Commons.Models.Character
                 }
             }
 
-            return totalValue > short.MaxValue ? short.MaxValue :
-                totalValue < short.MinValue ? short.MinValue :
-                (short)totalValue;
+            return totalValue;
+        }
+
+        private bool CanApplyEquippedItemStatus(ItemModel item)
+        {
+            return item.HasAccessoryStatus &&
+                   item.ItemInfo != null &&
+                   Partner != null &&
+                   Partner.BaseInfo != null &&
+                   Level >= item.ItemInfo.TamerMinLevel &&
+                   Partner.Level >= item.ItemInfo.DigimonMinLevel;
         }
 
         public static bool HasAcessoryAttribute(DigimonAttributeEnum hitter, AccessoryStatusTypeEnum accessory)

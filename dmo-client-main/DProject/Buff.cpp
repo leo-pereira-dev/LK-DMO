@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "Buff.h"
+#include "../LibProj/CsFunc/CrashLogger.h"
 
 cBuffData::cBuffData()
 {
@@ -24,10 +25,25 @@ void cBuffData::Delete()
 
 void cBuffData::SetBuff( USHORT nBuffID, UINT nID, UINT nLifeTime, int nLV, u4 dwSkillCode )
 {		
+	if( nsCsFileTable::g_pBuffMng == NULL || nsCsFileTable::g_pBuffMng->IsBuff( nBuffID ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "BUFF_DATA ignored missing buffId=%u targetUid=%u lifeTime=%u level=%d skillCode=%u object=%p",
+			nBuffID,
+			nID,
+			nLifeTime,
+			nLV,
+			dwSkillCode,
+			m_pObject );
+		return;
+	}
+
 	CsBuff* pBuff = nsCsFileTable::g_pBuffMng->GetBuff( nBuffID );	
 
 	if( !pBuff )
 		return;
+
+	while( IsBuffData( nBuffID ) )
+		ReleaseBuff( nBuffID );
 	
 	sBUFF_DATA pInfo;
 	pInfo.s_pBuffTable = pBuff;
@@ -133,43 +149,60 @@ void cBuffData::ReleaseBuff( USHORT nBuffID )
 
 	it = m_ListBuff.begin();	
 	itEnd = m_ListBuff.end();	
-	for( ; it != itEnd; it++ )
+	for( ; it != itEnd; )
 	{
 		if( it->s_pBuffTable->GetInfo()->s_dwID == nBuffID )	
 		{
 			dwTargetUID = it->s_nTargetUID;
-			m_ListBuff.erase( it );
-			break;
+			it = m_ListBuff.erase( it );
+			continue;
 		}
+
+		++it;
 	}
 
 	it = m_ListDeBuff.begin();	
 	itEnd = m_ListDeBuff.end();
-	for( ; it != itEnd; it++ )
+	for( ; it != itEnd; )
 	{		
 		if( it->s_pBuffTable->GetInfo()->s_dwID == nBuffID )	
 		{
 			dwTargetUID = it->s_nTargetUID;
-			m_ListDeBuff.erase( it );
-			break;
+			it = m_ListDeBuff.erase( it );
+			continue;
 		}
+
+		++it;
 	}	
 
 	it = m_ListSystemBuff.begin();	
 	itEnd = m_ListSystemBuff.end();
-	for( ; it != itEnd; it++ )
+	for( ; it != itEnd; )
 	{		
 		if( it->s_pBuffTable->GetInfo()->s_dwID == nBuffID )	
 		{
-			m_ListSystemBuff.erase( it );
-			break;
+			it = m_ListSystemBuff.erase( it );
+			continue;
 		}
+
+		++it;
 	}
 
 	// 상태 이상류 버프 확인	
-	CTamer* tempTamer = (CTamer*)m_pObject;
-	if( !tempTamer->IsRide() )
-		_ReleaseUnusalCond( _GetUnusalCondLv() );
+	if( m_pObject )
+	{
+		const int nRTTI = m_pObject->GetLeafRTTI();
+		if( nRTTI == RTTI_TAMER || nRTTI == RTTI_TAMER_USER )
+		{
+			CTamer* tempTamer = (CTamer*)m_pObject;
+			if( !tempTamer->IsRide() )
+				_ReleaseUnusalCond( _GetUnusalCondLv() );
+		}
+		else
+		{
+			_ReleaseUnusalCond( _GetUnusalCondLv() );
+		}
+	}
 
 	// 루프 이펙트 삭제 추가
 

@@ -265,6 +265,10 @@ void CsItemMng::_LoadExcel( char* cExcel )
 		case 30:/*Earring*/
 		case 31:/*EquipAura*/
 		case 32:/*XAI*/
+		case 33:/*Bracelet*/
+		case 34:/*NamePlate*/
+		case 35:/*Keyring*/
+		case 36:/*Goggles*/
 			{
 				assert_csm2( info.s_nOverlap == 1, _T( "장비 아이템의 오버랩 갯수가 1이 아닙니다. ItemID = %d, Item Name = %s" ), info.s_dwItemID, info.s_szName );
 			}
@@ -1082,7 +1086,7 @@ bool CsItemMng::_LoadBin( char* cPath )
 		CsItem* pObject = csnew CsItem;
 		pObject->Init( &info );
 		assert_cs( m_Map.find( info.s_dwItemID ) == m_Map.end() );
-		m_Map[ info.s_dwItemID ] = pObject;		
+		m_Map[ info.s_dwItemID ] = pObject;
 	}
 	
 	fread( &nCount, sizeof( int ), 1, fp );
@@ -1245,27 +1249,36 @@ void CsItemMng::_LoadFilePack( char* cPath )
 {
 	char cName[ MAX_PATH ];
 	sprintf_s( cName, MAX_PATH, "%s\\%s", cPath, BASE_ITEM_LIST_BIN );
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST FilePack begin path=%s", cName );
 
 	if( !CsFPS::CsFPSystem::SeekLock( FT_PACKHANDLE ) )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST FilePack SeekLock failed" );
 		return;
+	}
 
 	int nHandle = CsFPS::CsFPSystem::GetFileHandle( FT_PACKHANDLE, cName );
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST FilePack handle=%d", nHandle );
 
 	int nCount;
 
 	long offBeforeItems = _tell( nHandle );
 	_read( nHandle, &nCount, sizeof( int ) );
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST ItemInfo count=%d recordSize=%u offset=%ld", nCount, (unsigned int)sizeof( CsItem::sINFO ), offBeforeItems );
 
 	CsItem::sINFO info;
 	for( int i=0; i<nCount; ++i )
 	{
 		_read( nHandle, &info, sizeof( CsItem::sINFO ) );
+		if( i < 5 || i + 5 >= nCount || ( i % 1000 ) == 0 )
+			nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST ItemInfo progress index=%d id=%u offset=%ld", i, (unsigned int)info.s_dwItemID, _tell( nHandle ) );
 
 		CsItem* pObject = csnew CsItem;
 		pObject->Init( &info );
 		assert_cs( m_Map.find( info.s_dwItemID ) == m_Map.end() );
 		m_Map[ info.s_dwItemID ] = pObject;
 	}
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST ItemInfo end mapSize=%u offset=%ld", (unsigned int)m_Map.size(), _tell( nHandle ) );
 
 	long offBeforeCats = _tell( nHandle );
 	_read( nHandle, &nCount, sizeof( int ) );
@@ -1424,14 +1437,25 @@ void CsItemMng::_LoadFilePack( char* cPath )
 		m_mapAccessoryEnchant[ AccessoryItem_Idx ] = pObject;
 	}
 
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST ProductionTable begin offset=%ld", _tell( nHandle ) );
 	_LoadFilePack_ItemProductionTable( nHandle );
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST ProductionTable end offset=%ld", _tell( nHandle ) );
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST AssistItemGroup begin offset=%ld", _tell( nHandle ) );
 	_LoadFilePack_AssistItemGroupTable( nHandle );
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST AssistItemGroup end offset=%ld", _tell( nHandle ) );
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST XAISystem begin offset=%ld", _tell( nHandle ) );
 	_LoadFilePack_ItemXAISystemTable(nHandle);
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST XAISystem end offset=%ld", _tell( nHandle ) );
 
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST RankEffect begin offset=%ld", _tell( nHandle ) );
 	_LoadFilePack_RankEffect( nHandle );
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST RankEffect end offset=%ld", _tell( nHandle ) );
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST Dparts begin offset=%ld", _tell( nHandle ) );
 	_LoadFilePack_DpartsItem(nHandle);
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST Dparts end offset=%ld", _tell( nHandle ) );
 
 	CsFPS::CsFPSystem::SeekUnLock( FT_PACKHANDLE );
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST FilePack end" );
 }
 
 

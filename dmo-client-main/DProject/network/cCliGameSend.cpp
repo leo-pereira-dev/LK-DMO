@@ -31,30 +31,27 @@
 #include "../../LibProj/CsFunc/CrashLogger.h"
 
 //extern uint g_nNetVersion;
-
 namespace
 {
-	uint ProtocolPortForAccessCode(uint port)
+	const DWORD JOGRESS_XROSS_CHIPSET_SKILL_CODE = 2500245;
+
+	bool IsJogressXrossChipsetItem( const CsItem::sINFO* pFTInfo )
 	{
-		if (port == 17050)
-			return 7050;
-		if (port == 17608)
-			return 7608;
-		return port;
+		return pFTInfo != NULL &&
+			pFTInfo->s_nType_L == nItem::Chipset &&
+			pFTInfo->s_dwSkill == JOGRESS_XROSS_CHIPSET_SKILL_CODE;
 	}
 }
-	
+
 void cCliGame::SendAccessCode(void)
 {
 	xassert(net::access_code, "access_code is null");
 	xassert(net::account_idx, "account_idx is null");
 
-	uint protocolPort = ProtocolPortForAccessCode(net::game->port);
-
 	//LOG("(%s) acnt_idx:%d code:%d", m_szMapName, net::account_idx, net::access_code);
 
 	newp(pSvr::AccessCode);
-		push(protocolPort^net::access_code|net::account_idx);
+		push(net::game->port^net::access_code|net::account_idx);
 		push(net::account_idx);
 		push(net::access_code);
 		push(g_nNetVersion);
@@ -129,6 +126,12 @@ void cCliGame::SendChangeServer(void)
 {
 	bool bSendBlock = cClient::IsSendBlock();
 	cClient::SetSendBlock(false);
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"MAPLOAD SendChangeServer packet=1703 sendBlockWas=%d requesting=%d processing=%d nextMap=%u",
+		bSendBlock ? 1 : 0,
+		m_bPortalRequesting ? 1 : 0,
+		m_bPortalProcessing ? 1 : 0,
+		(unsigned)net::next_map_no );
 
 	// game server -> game server
 	newp(pSvr::Change);
@@ -225,7 +228,7 @@ void cCliGame::SendCardScan(wchar* szCode, nSync::Pos &pos)
 {
 	if(nBase::strlen(szCode) != nScanner::CardLength)
 	{
-		__asm int 3;
+		__debugbreak();
 		return;
 	}
 
@@ -291,7 +294,7 @@ void cCliGame::SendScannerRegister(wchar *szCode)
 	// RecvInitGameData 이후 아무때나 호출 가능
 	if(nBase::strlen(szCode) != nScanner::CodeLength)
 	{
-		__asm int 3;
+		__debugbreak();
 		return;
 	}
 
@@ -307,7 +310,7 @@ void cCliGame::SendScannerRelease(wchar *szCode)
 
 	if(nBase::strlen(szCode) != nScanner::CodeLength)
 	{
-		__asm int 3;
+		__debugbreak();
 		return;
 	}
 
@@ -423,6 +426,38 @@ void cCliGame::SendMsgWhisper( TCHAR const* name, TCHAR const* msg )
 static int s_nCnt = 0;
 static u4 s_nUID = 0;
 static int s_nPX = 0, s_nPY = 0;
+static float s_fMoveDirect = 999999.0f;
+
+namespace
+{
+	const float kSensitiveMovePacketRotDelta = 0.03f;
+
+	float SensitiveMovePacketRotDelta(float lhs, float rhs)
+	{
+		float delta = fabsf(lhs - rhs);
+		while (delta > NI_PI * 2.0f)
+			delta -= NI_PI * 2.0f;
+		if (delta > NI_PI)
+			delta = NI_PI * 2.0f - delta;
+		return fabsf(delta);
+	}
+
+	bool IsSameSensitiveMovePacket(u4 uid, nSync::Pos const& tp, float fDirect)
+	{
+		return s_nUID == uid &&
+			s_nPX == tp.m_nX &&
+			s_nPY == tp.m_nY &&
+			SensitiveMovePacketRotDelta(s_fMoveDirect, fDirect) < kSensitiveMovePacketRotDelta;
+	}
+
+	void StoreSensitiveMovePacket(u4 uid, nSync::Pos const& tp, float fDirect)
+	{
+		s_nUID = uid;
+		s_nPX = tp.m_nX;
+		s_nPY = tp.m_nY;
+		s_fMoveDirect = fDirect;
+	}
+}
 
 void cCliGame::SendMoveTo(u4 uid, nSync::Pos sp, nSync::Pos tp, float fDirect)
 {
@@ -434,13 +469,11 @@ void cCliGame::SendMoveTo(u4 uid, nSync::Pos sp, nSync::Pos tp, float fDirect)
 		return;
 	}
 
-	if(s_nUID==uid && s_nPX==tp.m_nX && s_nPY==tp.m_nY)
+	if(IsSameSensitiveMovePacket(uid, tp, fDirect))
 	{
 		return;
 	}
-	s_nUID = uid;
-	s_nPX = tp.m_nX;
-	s_nPY = tp.m_nY;
+	StoreSensitiveMovePacket(uid, tp, fDirect);
 
 	
 // 암호화 처리 필요
@@ -467,13 +500,11 @@ void cCliGame::SendMoveTo(u4 uid, nSync::Pos tp, float fDirect)
 		return;
 	}
 
-	if(s_nUID==uid && s_nPX==tp.m_nX && s_nPY==tp.m_nY)
+	if(IsSameSensitiveMovePacket(uid, tp, fDirect))
 	{
 		return;
 	}
-	s_nUID = uid;
-	s_nPX = tp.m_nX;
-	s_nPY = tp.m_nY;
+	StoreSensitiveMovePacket(uid, tp, fDirect);
 
 // 암호화 처리 필요
 	newp(pGame::MoveTo);
@@ -497,6 +528,7 @@ void cCliGame::SendMoveToKnockBack( u4 uid, nSync::Pos tp )
 	s_nUID = uid;
 	s_nPX = tp.m_nX;
 	s_nPY = tp.m_nY;
+	s_fMoveDirect = 999999.0f;
 
 	newp(pGame::KnockBack);
 	push((u4)GetTickCount()-m_nConnectedTickCount);
@@ -874,8 +906,10 @@ void cCliGame::SendItemMove(short nSrcItemPos, short nDstItemPos, bool bCheckBel
 			cItemInfo* pSrc = g_pDataMng->SrvID2ItemInfo( nSrcItemPos );
 			CsItem::sINFO* pSrcFT1 = nsCsFileTable::g_pItemMng->GetItem( pSrc->GetType() )->GetInfo();
 			// pSrcFT1->s_nType_L 값이 
-			if( 0 != pSrcFT1->s_nType_S )
+			if( pSrcFT1->s_nType_L != nItem::Chipset || IsJogressXrossChipsetItem( pSrcFT1 ) )
 			{
+				g_pDataMng->ServerItemMoveFailed( nSrcItemPos, nDstItemPos );
+				return;
 				if(g_pDataMng->GetDigivice()->DoYouHaveJointProgressChipset()) // 디지바이스에 조그레스 아이템이 있으면 리턴.
 				{
 					g_pDataMng->ServerItemMoveFailed( nSrcItemPos, nDstItemPos );
@@ -907,6 +941,17 @@ void cCliGame::SendItemMove(short nSrcItemPos, short nDstItemPos, bool bCheckBel
 					cMessageBox::GetFirstMessageBox()->SetValue2( nDstItemPos );
 					return;
 				}
+			}
+		}
+		else if( ( TO_CONSTANT( nSrcItemPos ) == SERVER_DATA_INVEN_CONSTANT )&&
+			( TO_CONSTANT( nDstItemPos ) == SERVER_DATA_EVOCHIP_CONSTANT ) )
+		{
+			cItemInfo* pSrc = g_pDataMng->SrvID2ItemInfo( nSrcItemPos );
+			CsItem::sINFO* pSrcFT1 = nsCsFileTable::g_pItemMng->GetItem( pSrc->GetType() )->GetInfo();
+			if( !IsJogressXrossChipsetItem( pSrcFT1 ) )
+			{
+				g_pDataMng->ServerItemMoveFailed( nSrcItemPos, nDstItemPos );
+				return;
 			}
 		}
 		else if( ( TO_CONSTANT( nSrcItemPos ) == SERVER_DATA_CHIPSET_CONSTANT )&&
@@ -1199,6 +1244,13 @@ void cCliGame::SendItemUseCross(u4 nUID, n2 nInvenPos)
 #endif
 void cCliGame::SendItemUse(u4 nUID, n2 nInvenPos)
 {
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEM_USE_SEND begin uid=%u invenPos=%d portal=%d trade=%d store=%d",
+		nUID,
+		nInvenPos,
+		m_bPortalRequesting ? 1 : 0,
+		g_pGameIF->IsActiveWindow( cBaseWindow::WT_TRADE ) ? 1 : 0,
+		g_pGameIF->IsActiveWindow( cBaseWindow::WT_PERSONSTORE ) ? 1 : 0 );
+
 	// 파트너몬 변경시에 실패
 	/*if( g_pDataMng->GetServerSync()->IsChageDigimon() )
 	{
@@ -1209,17 +1261,20 @@ void cCliGame::SendItemUse(u4 nUID, n2 nInvenPos)
 
 	if(m_bPortalRequesting)
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "ITEM_USE_SEND blocked: portal requesting uid=%u invenPos=%d", nUID, nInvenPos );
 		g_pDataMng->ServerItemUseFailed( nInvenPos );
 		return;
 	}
 	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_TRADE ) )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "ITEM_USE_SEND blocked: trade window uid=%u invenPos=%d", nUID, nInvenPos );
 		cPrintMsg::PrintMsg( 30028 );
 		g_pDataMng->ServerItemUseFailed( nInvenPos );
 		return;
 	}
 	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_PERSONSTORE ) )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "ITEM_USE_SEND blocked: personal store uid=%u invenPos=%d", nUID, nInvenPos );
 		cPrintMsg::PrintMsg( 30357 );
 		g_pDataMng->ServerItemUseFailed( nInvenPos );
 		return;
@@ -1230,6 +1285,7 @@ void cCliGame::SendItemUse(u4 nUID, n2 nInvenPos)
 		push(nUID);		// target unique id
 		push(nInvenPos);
 	endp(pItem::Use);
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEM_USE_SEND packet sent uid=%u invenPos=%d", nUID, nInvenPos );
 	send();
 }
 
@@ -2329,6 +2385,16 @@ void cCliGame::SendTacticsOpen( u4 nUID, n2 nInvenPos )
 
 void cCliGame::SendEncyclopediaOpen()
 {
+	if( m_bPortalRequesting || m_bPortalProcessing || ( g_pResist && g_pResist->IsMovePortal() ) )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"[ENCYREQ] SendEncyclopediaOpen blocked during portal requesting=%d processing=%d movePortal=%d",
+			m_bPortalRequesting ? 1 : 0,
+			m_bPortalProcessing ? 1 : 0,
+			( g_pResist && g_pResist->IsMovePortal() ) ? 1 : 0 );
+		return;
+	}
+
 	nsCSDEBUG::CrashLogger::LogMessage( "[ENCYREQ] SendEncyclopediaOpen packet=DigimonBookInfo" );
  	newp( pDigimon::DigimonBookInfo );
  	endp( pDigimon::DigimonBookInfo );

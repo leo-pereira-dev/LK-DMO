@@ -2,6 +2,8 @@
 
 #pragma once 
 
+class cSpriteAni;
+
 class cQuestComp : public cBaseWindow
 {
 public:
@@ -33,6 +35,7 @@ protected:
 protected:
 	cPopUp*			m_pBGWindow;
 	cSprite*		m_pExpSprite;
+	cSpriteAni*		 m_pTutorialQuestArrow;
 
 	// 포인터만 있는 컨트롤
 protected:

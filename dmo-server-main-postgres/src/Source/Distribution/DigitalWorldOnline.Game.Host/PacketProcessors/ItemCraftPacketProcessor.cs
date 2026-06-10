@@ -11,6 +11,7 @@ using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Models.Asset;
 using DigitalWorldOnline.Commons.Models.Base;
 using DigitalWorldOnline.Commons.Packets.Chat;
+using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.Items;
 using DigitalWorldOnline.Commons.Utils;
 using MediatR;
@@ -26,6 +27,19 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private const int ResultNotEnoughMoney = 11071;
         private const int ResultNotEnoughResource = 11040;
         private const int ResultInvalidMakeCount = 11079;
+        private static readonly IReadOnlySet<int> TutorialCraftNpcIds = new HashSet<int> { 91199, 91203 };
+        private const short TutorialCraftQuestId = 4054;
+        private const int TutorialCraftMaterialItemId = 70261;
+
+        private static readonly IReadOnlyDictionary<int, int> TutorialCraftOutputByRecipe = new Dictionary<int, int>
+        {
+            [4699] = 70262,
+            [4700] = 70263,
+            [4701] = 70264,
+            [4702] = 70265,
+            [4703] = 70266,
+            [4704] = 70267
+        };
 
         public GameServerPacketEnum Type => GameServerPacketEnum.ItemCraft;
 
@@ -57,6 +71,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var protectItem = packet.ReadInt();
 
             var craftRecipe = _mapper.Map<ItemCraftAssetModel>(await _sender.Send(new ItemCraftAssetsByFilterQuery(npcId, sequencialId)));
+            craftRecipe ??= TryBuildTutorialCraftRecipe(npcId, sequencialId);
 
             if (craftRecipe == null)
             {
@@ -266,6 +281,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             await _sender.Send(new UpdateItemListBitsCommand(client.Tamer.Inventory));
             await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
+            await TryCompleteTutorialCraftQuest(client, sequencialId, totalCrafted);
 
             client.Send(
                 UtilitiesFunctions.GroupPackets(
@@ -282,6 +298,62 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
                 )
             );
+        }
+
+        private static ItemCraftAssetModel? TryBuildTutorialCraftRecipe(int npcId, int sequencialId)
+        {
+            if (!TutorialCraftNpcIds.Contains(npcId) ||
+                !TutorialCraftOutputByRecipe.TryGetValue(sequencialId, out var itemId))
+            {
+                return null;
+            }
+
+            return new ItemCraftAssetModel
+            {
+                Id = sequencialId,
+                SequencialId = sequencialId,
+                ItemId = itemId,
+                NpcId = npcId,
+                SuccessRate = 100,
+                Price = 0,
+                Amount = 1,
+                Materials = new List<ItemCraftMaterialAssetModel>
+                {
+                    new()
+                    {
+                        Id = sequencialId * 1000L + 1,
+                        ItemId = TutorialCraftMaterialItemId,
+                        Amount = 1
+                    }
+                }
+            };
+        }
+
+        private async Task TryCompleteTutorialCraftQuest(GameClient client, int sequencialId, int totalCrafted)
+        {
+            if (totalCrafted <= 0 ||
+                !TutorialCraftOutputByRecipe.ContainsKey(sequencialId))
+            {
+                return;
+            }
+
+            var questToUpdate = client.Tamer.Progress.InProgressQuestData.FirstOrDefault(x => x.QuestId == TutorialCraftQuestId);
+            if (questToUpdate == null)
+                return;
+
+            var currentGoalValue = client.Tamer.Progress.GetQuestGoalProgress(TutorialCraftQuestId, 0);
+            if (currentGoalValue >= 1)
+                return;
+
+            client.Tamer.Progress.UpdateQuestInProgress(TutorialCraftQuestId, 0, 1);
+            client.Send(new QuestGoalUpdatePacket(TutorialCraftQuestId, 0, 1));
+            await _sender.Send(new UpdateCharacterInProgressCommand(questToUpdate));
+
+            _logger.Information(
+                "Completed tutorial craft quest {QuestId} goal 0 for tamer {TamerId} with recipe {RecipeId}.",
+                TutorialCraftQuestId,
+                client.TamerId,
+                sequencialId);
         }
     }
 }

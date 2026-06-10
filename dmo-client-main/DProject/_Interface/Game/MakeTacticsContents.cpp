@@ -6,12 +6,22 @@
 #include "../../ContentsSystem/ContentsSystemDef.h"
 #include "../Adapt/AdaptTutorialQuest.h"
 
+namespace
+{
+	bool IsHatchableDigimonEggItem( int nItemID )
+	{
+		return nItemID != 0 &&
+			nsCsFileTable::g_pTacticsMng != NULL &&
+			nsCsFileTable::g_pTacticsMng->IsTactics( nItemID );
+	}
+}
+
 int const MakeTacticsContents::IsContentsIdentity(void)
 {
 	return E_CT_MAKETACTICS_CONTENTS;
 }
 
-MakeTacticsContents::MakeTacticsContents(void):m_AdaptTutorialQuest(0),iSuccessLevel(0),iDigimonEggIdx(0),iBackupDiskIdx(0)
+MakeTacticsContents::MakeTacticsContents(void):m_AdaptTutorialQuest(0),iSuccessLevel(0),m_nLastDigimonEggType(0),iDigimonEggIdx(0),iBackupDiskIdx(0)
 ,iRequireDataCnt(0),iDataFlag(CsTactics::DATA_LV1),iDataFlagMax(CsTactics::DATA_MAX),iEnableGradeMax(0)
 ,bWaitRecvServer(false)
 #ifdef MINIGAME
@@ -74,6 +84,8 @@ void MakeTacticsContents::Recv_DigimonEgg( void* pData )
 	m_pDigimonEgg.m_nType					= pRecv->m_nEggType;
 	m_pDigimonEgg.m_nRemainTradeLimitTime	= pRecv->m_nEggTradeLimitTime;
 	m_pDigimonEgg.m_nCount					= pRecv->m_nEggLevel;
+	if( pRecv->m_nEggType != 0 )
+		m_nLastDigimonEggType = pRecv->m_nEggType;
 	assert( pRecv->m_nEggLevel <= 5 );
 	m_pBackupDisk.m_nType					= pRecv->m_nBackupDisk; 
 	m_pBackupDisk.m_nRemainTradeLimitTime	= pRecv->m_nBackupdiskTradeLimitTime;
@@ -131,10 +143,14 @@ void MakeTacticsContents::DataInputFailed()
 	m_pDigimonEgg.m_nType				  = 0;
 	m_pDigimonEgg.m_nRemainTradeLimitTime = 0;
 	m_pDigimonEgg.m_nCount				  = 0;
+	m_nLastDigimonEggType				  = 0;
 }
 
 void MakeTacticsContents::SetSuccessLevel()
 {
+	if( m_pDigimonEgg.m_nType == 0 && m_nLastDigimonEggType != 0 )
+		m_pDigimonEgg.m_nType = m_nLastDigimonEggType;
+
 	m_pDigimonEgg.m_nCount = iSuccessLevel; 
 }
 
@@ -142,6 +158,22 @@ void MakeTacticsContents::ResetDigimonEgg()
 {
 
 	m_pDigimonEgg.Reset();
+	m_nLastDigimonEggType = 0;
+}
+
+bool MakeTacticsContents::RestoreDigimonEggType()
+{
+	if( m_pDigimonEgg.m_nType != 0 )
+		return true;
+
+	if( m_nLastDigimonEggType == 0 )
+		return false;
+
+	if( m_pDigimonEgg.GetCount() < IF_MAKE_TACTICS_REQUITE_LEVEL )
+		return false;
+
+	m_pDigimonEgg.m_nType = m_nLastDigimonEggType;
+	return true;
 }
 
 bool MakeTacticsContents::AutoResistDigiMonEgg()
@@ -161,6 +193,9 @@ bool MakeTacticsContents::AutoResistDigiMonEgg()
 		pFTItemInfo = pInven->GetFTData( i );	
 		if( pFTItemInfo->s_nType_L == IF_DIGITAMA_MAKE_TACTICS_ITEM_TYPE )	
 		{			
+			if( IsHatchableDigimonEggItem( pInven->GetData( i )->GetType() ) == false )
+				continue;
+
 			if( IsDigimonEggResist( i ) == IF_DIGITAMA_MAKE_TACTICS_ITEM_TYPE )
 			{
 				iDigimonEggIdx = i+1;
@@ -182,6 +217,8 @@ bool MakeTacticsContents::AutoResistDigiMonEgg()
 		pFTItemInfo = pInven->GetFTData( i );
 		if( pFTItemInfo->s_nType_L == IF_DIGITAMA_MAKE_TACTICS_ITEM_TYPE )
 		{
+			if( IsHatchableDigimonEggItem( pInven->GetData( i )->GetType() ) == false )
+				continue;
 
 			if( IsDigimonEggResist( i ) == IF_DIGITAMA_MAKE_TACTICS_ITEM_TYPE )
 			{
@@ -235,7 +272,14 @@ bool MakeTacticsContents::InputDataDigimonEgg(int invenIDX, n4 NpcID, bool bVipM
 	if(!pInfo)
 		return true;
 
+	if( IsHatchableDigimonEggItem( pInfo->GetType() ) == false )
+	{
+		CsMessageBox( MB_OK, UISTRING_TEXT( "MAKETACTICS_EGG_NOT_HATCH" ).c_str() );
+		return true;
+	}
+
 	m_pDigimonEgg = *pInfo;	
+	m_nLastDigimonEggType = m_pDigimonEgg.m_nType;
 	m_pDigimonEgg.m_nCount = 0;		// 레벨로 사용	
 
 	pInfo->DecreaseCount( 1 );						// 인벤에서 빼준다.
@@ -497,6 +541,12 @@ int MakeTacticsContents::IsDigimonEggResist(int nInvenIndex)
 
 	if( pItemInfo->s_nType_L == IF_DIGITAMA_MAKE_TACTICS_ITEM_TYPE ) // 알이라면
 	{		
+		if( IsHatchableDigimonEggItem( pInfo->GetType() ) == false )
+		{
+			CsMessageBox( MB_OK, UISTRING_TEXT( "MAKETACTICS_EGG_NOT_HATCH" ).c_str() );
+			return -1;
+		}
+
 		return pItemInfo->s_nType_L;
 	}
 

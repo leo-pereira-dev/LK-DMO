@@ -30,6 +30,7 @@ namespace nsCsNpcTable
 		NT_INFINITEWAR_MANAGER_NPC = 22,		// 무한대전 진행 NPC
 		NT_INFINITEWAR_NOTICEBOARD_NPC = 23,	// 무한대전 게시판 NPC
 		NT_EXTRA_EVOLUTION_NPC = 24,
+		NT_GDMO_PORTAL_TEST_NPC = 25,
 	};
 
 	enum eNPC_MOVE

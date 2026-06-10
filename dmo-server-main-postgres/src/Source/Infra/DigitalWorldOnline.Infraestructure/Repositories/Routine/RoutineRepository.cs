@@ -1,5 +1,6 @@
-﻿using DigitalWorldOnline.Commons.DTOs.Routine;
+using DigitalWorldOnline.Commons.DTOs.Routine;
 using DigitalWorldOnline.Commons.Interfaces;
+using DigitalWorldOnline.Commons.Models.Character;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigitalWorldOnline.Infraestructure.Repositories.Routine
@@ -70,6 +71,8 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Routine
         }
         public int[] MarkQuestIncomplete(int qIDX, int[] CompleteDataInt)
         {
+            CompleteDataInt = CharacterProgressModel.EnsureCompletedDataValueCapacity(CompleteDataInt);
+
             int bitValue = BitwiseOperations.GetBitValue(CompleteDataInt, qIDX - 1);
 
             if (bitValue == 1)

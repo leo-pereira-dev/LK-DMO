@@ -7,6 +7,7 @@ using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Packets.Chat;
 using DigitalWorldOnline.Commons.Packets.MapServer;
+using DigitalWorldOnline.Game.Configuration;
 using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
 using MediatR;
@@ -100,7 +101,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             client.Send(new MapSwapPacket(
                 _configuration[GamerServerPublic],
-                _configuration[GameServerPort],
+                _configuration.GetPublicGameServerPort(),
                 client.Tamer.Location.MapId,
                 client.Tamer.Location.X,
                 client.Tamer.Location.Y)

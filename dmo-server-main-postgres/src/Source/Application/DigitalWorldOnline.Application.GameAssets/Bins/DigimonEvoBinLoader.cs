@@ -23,6 +23,8 @@ namespace DigitalWorldOnline.Application.GameAssets.Bins;
 ///   90   USHORT m_nOpenQualification
 ///   92   USHORT m_nOpenLevel
 ///   94   USHORT m_nOpenQuest
+///   96   USHORT m_nOpenItemTypeS
+///   98   USHORT m_nOpenItemNum
 ///   100  USHORT m_nUseItem
 ///   102  USHORT m_nUseItemNum
 ///   ...rest of fields not used by server DTO and is skipped.
@@ -96,8 +98,10 @@ public sealed class DigimonEvoBinLoader
         ushort openQualification = BitConverter.ToUInt16(rec[90..92]);
         ushort openLevel = BitConverter.ToUInt16(rec[92..94]);
         ushort openQuest = BitConverter.ToUInt16(rec[94..96]);
+        ushort openItem = BitConverter.ToUInt16(rec[96..98]);
+        ushort openItemNum = BitConverter.ToUInt16(rec[98..100]);
         ushort useItem = BitConverter.ToUInt16(rec[100..102]);
         ushort useItemNum = BitConverter.ToUInt16(rec[102..104]);
-        return new DigimonEvoLine((int)type, evoSlot, enableSlot, openQualification, openLevel, openQuest, useItem, useItemNum, stages);
+        return new DigimonEvoLine((int)type, evoSlot, enableSlot, openQualification, openLevel, openQuest, openItem, openItemNum, useItem, useItemNum, stages);
     }
 }

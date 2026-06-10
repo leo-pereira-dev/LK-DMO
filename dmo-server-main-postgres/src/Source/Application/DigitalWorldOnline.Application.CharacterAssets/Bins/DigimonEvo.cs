@@ -47,5 +47,7 @@ public sealed record DigimonEvoLine(
     ushort OpenQualification,
     ushort OpenLevel,
     ushort OpenQuest,
+    ushort OpenItem,
+    ushort OpenItemNum,
     ushort UseItem,
     ushort UseItemNum);

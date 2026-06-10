@@ -1,4 +1,4 @@
-
+﻿
 
 #include "stdafx.h"
 
@@ -9,7 +9,7 @@
 #include "common_vs2019/pPass2.h"
 
 //////////////////////////////////////////////////////////////////////////
-// Recebeu um pedido de transação (apenas da outra parte)
+// Recebeu um pedido de transaÃ§Ã£o (apenas da outra parte)
 // Received transaction request (only from the other party)
 //////////////////////////////////////////////////////////////////////////
 void cCliGame::RecvTradeRequest(void)	
@@ -21,9 +21,9 @@ void cCliGame::RecvTradeRequest(void)
 }
 
 //////////////////////////////////////////////////////////////////////////
-// 거래 불가한 상태(상대방한테만 감)
+// ê±°ëž˜ ë¶ˆê°€í•œ ìƒíƒœ(ìƒëŒ€ë°©í•œí…Œë§Œ ê°)
 //////////////////////////////////////////////////////////////////////////
-void cCliGame::RecvTradeImpossible(void)// 거래 불가한 상태
+void cCliGame::RecvTradeImpossible(void)// ê±°ëž˜ ë¶ˆê°€í•œ ìƒíƒœ
 {
 	u4 nFlag;
 	pop(nFlag);
@@ -31,9 +31,9 @@ void cCliGame::RecvTradeImpossible(void)// 거래 불가한 상태
 	GS2C_RECV_TRADE_REQUEST_RESULT recv;
 	switch( nFlag )
 	{
-	case 0:		recv.m_dwResult = 30023;	break;		//다른 용무 중입니다. 거래를 신청할 수 없습니다
-	case 1:		recv.m_dwResult = 11015;	break;		// 내 가방에 빈공간 없음
-	case 2:		recv.m_dwResult = 30031;	break;		// 상대방 가방에 빈공간 없음
+	case 0:		recv.m_dwResult = 30023;	break;		//ë‹¤ë¥¸ ìš©ë¬´ ì¤‘ìž…ë‹ˆë‹¤. ê±°ëž˜ë¥¼ ì‹ ì²­í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤
+	case 1:		recv.m_dwResult = 11015;	break;		// ë‚´ ê°€ë°©ì— ë¹ˆê³µê°„ ì—†ìŒ
+	case 2:		recv.m_dwResult = 30031;	break;		// ìƒëŒ€ë°© ê°€ë°©ì— ë¹ˆê³µê°„ ì—†ìŒ
 	default:	recv.m_dwResult	= nFlag;	break;
 	}
 
@@ -42,7 +42,7 @@ void cCliGame::RecvTradeImpossible(void)// 거래 불가한 상태
 
 
 //////////////////////////////////////////////////////////////////////////
-// 거래 거부 당함(둘다 한테 감)
+// ê±°ëž˜ ê±°ë¶€ ë‹¹í•¨(ë‘˜ë‹¤ í•œí…Œ ê°)
 //////////////////////////////////////////////////////////////////////////
 void cCliGame::RecvTradeReject(void)
 {
@@ -52,7 +52,7 @@ void cCliGame::RecvTradeReject(void)
 }
 
 //////////////////////////////////////////////////////////////////////////
-// 거래 요청에 대한 승락/거부 (둘다 한테 감)
+// ê±°ëž˜ ìš”ì²­ì— ëŒ€í•œ ìŠ¹ë½/ê±°ë¶€ (ë‘˜ë‹¤ í•œí…Œ ê°)
 //////////////////////////////////////////////////////////////////////////
 void cCliGame::RecvTradeApproval(void)
 {
@@ -63,33 +63,34 @@ void cCliGame::RecvTradeApproval(void)
 }
 
 //////////////////////////////////////////////////////////////////////////
-// 거래 아이템 등록 (둘다 한테 감)
+// ê±°ëž˜ ì•„ì´í…œ ë“±ë¡ (ë‘˜ë‹¤ í•œí…Œ ê°)
 //////////////////////////////////////////////////////////////////////////
 void cCliGame::RecvTradeAddItem(void)
 {
 	GS2C_RECV_TRADE_ITEM_REGIST recv;
-	pop(recv.m_TargetTamerUID);//아이템을 추가한 유저 아이디
+	pop(recv.m_TargetTamerUID);//ì•„ì´í…œì„ ì¶”ê°€í•œ ìœ ì € ì•„ì´ë””
 	pop(recv.m_ItemData);
-	pop(recv.m_TradeInvenSlotNum);// 거래창 슬롯 번호
-	pop(recv.m_InventorySlotNum);// 인벤토리 슬롯 번호
+	pop(recv.m_TradeInvenSlotNum);// ê±°ëž˜ì°½ ìŠ¬ë¡¯ ë²ˆí˜¸
+	pop(recv.m_InventorySlotNum);// ì¸ë²¤í† ë¦¬ ìŠ¬ë¡¯ ë²ˆí˜¸
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_TRADE_ITEM_REGIST, &recv );	
 }
 
 //////////////////////////////////////////////////////////////////////////
-// 거래 아이템 취소 (둘다 한테 감)
+// ê±°ëž˜ ì•„ì´í…œ ì·¨ì†Œ (ë‘˜ë‹¤ í•œí…Œ ê°)
 //////////////////////////////////////////////////////////////////////////
 void cCliGame::RecvTradeCancelItem(void)
 {
 	GS2C_RECV_TRADE_ITEM_UNREGIST recv;
-	pop(recv.m_TargetTamerUID);//아이템을 제거한 유저 아이디
+	pop(recv.m_TargetTamerUID);//ì•„ì´í…œì„ ì œê±°í•œ ìœ ì € ì•„ì´ë””
 	pop(recv.m_nItemPosition);
+	LOG("RecvTradeCancelItem protocol=%d target=%u slot=%u", pTrade::CancelItem, recv.m_TargetTamerUID, (int)recv.m_nItemPosition);
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_TRADE_ITEM_UNREGIST, &recv );	
 }
 
 //////////////////////////////////////////////////////////////////////////
-// 거래 돈 변경 (둘다 한테 감)
+// ê±°ëž˜ ëˆ ë³€ê²½ (ë‘˜ë‹¤ í•œí…Œ ê°)
 //////////////////////////////////////////////////////////////////////////
-void cCliGame::RecvTradeAddMoney(void)	// 겜머니 추가
+void cCliGame::RecvTradeAddMoney(void)	// ê²œë¨¸ë‹ˆ ì¶”ê°€
 {
 	GS2C_RECV_TRADE_MONEY_CHANGE recv;
 	pop(recv.m_TargetTamerUID);
@@ -98,29 +99,29 @@ void cCliGame::RecvTradeAddMoney(void)	// 겜머니 추가
 }
 
 //////////////////////////////////////////////////////////////////////////
-// 거래 인벤토리 잠금.
+// ê±°ëž˜ ì¸ë²¤í† ë¦¬ ìž ê¸ˆ.
 //////////////////////////////////////////////////////////////////////////
 void cCliGame::RecvTradeInvenLock(void)
 {
 	GS2C_RECV_TRADE_INVEN_LOCK recv;
-	pop(recv.m_TargetTamerUID);// 거래 Ready 취소한 테이머 UID
+	pop(recv.m_TargetTamerUID);// ê±°ëž˜ Ready ì·¨ì†Œí•œ í…Œì´ë¨¸ UID
 	recv.m_bLock = true;
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_TRADE_INVEN_LOCK_UNLOCK, &recv );	
 }
 
 //////////////////////////////////////////////////////////////////////////
-// 거래 인벤토리 해제
+// ê±°ëž˜ ì¸ë²¤í† ë¦¬ í•´ì œ
 //////////////////////////////////////////////////////////////////////////
 void cCliGame::RecvTradeUnInvenLock(void)
 {
 	GS2C_RECV_TRADE_INVEN_LOCK recv;
-	pop(recv.m_TargetTamerUID);// 거래 Ready 취소한 테이머 UID
+	pop(recv.m_TargetTamerUID);// ê±°ëž˜ Ready ì·¨ì†Œí•œ í…Œì´ë¨¸ UID
 	recv.m_bLock = false;
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_TRADE_INVEN_LOCK_UNLOCK, &recv );	
 }
 
 //////////////////////////////////////////////////////////////////////////
-// 최종 거래 확인 패킷
+// ìµœì¢… ê±°ëž˜ í™•ì¸ íŒ¨í‚·
 //////////////////////////////////////////////////////////////////////////
 void cCliGame::RecvTradeComplete(void)
 {
@@ -130,7 +131,7 @@ void cCliGame::RecvTradeComplete(void)
 }
 
 //////////////////////////////////////////////////////////////////////////
-// 거래 완료 - 최종
+// ê±°ëž˜ ì™„ë£Œ - ìµœì¢…
 //////////////////////////////////////////////////////////////////////////
 void cCliGame::RecvTradeCompleteFinal(void)
 {
@@ -142,7 +143,7 @@ void cCliGame::RecvTradeCompleteFinal(void)
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-// 거래 요청
+// ê±°ëž˜ ìš”ì²­
 void cCliGame::SendTradeRequest(u4 nTargetTamerUID)
 {
 	cCreateName::DeleteInstance();
@@ -153,11 +154,11 @@ void cCliGame::SendTradeRequest(u4 nTargetTamerUID)
 	send();
 }
 
-// 승인
+// ìŠ¹ì¸
 void cCliGame::SendTradeApproval(u4 nTargetTamerUID)
 {
 	newp(pTrade::Approval);
-		push(nTargetTamerUID); // 나에게 거래 요청한 사용자에게, 거래 승인
+		push(nTargetTamerUID); // ë‚˜ì—ê²Œ ê±°ëž˜ ìš”ì²­í•œ ì‚¬ìš©ìžì—ê²Œ, ê±°ëž˜ ìŠ¹ì¸
 	endp(pTrade::Approval);
 	send();
 }
@@ -181,7 +182,7 @@ void cCliGame::SendTradeReject(u4 nTargetTamerUID)
 void cCliGame::SendTradeImpossible(u4 nTargetTamerUID)
 {
 	newp(pTrade::Impossible);
-		push(nTargetTamerUID); // 나에게 거래 요청한 사용자에게, 거래 불가 알림
+		push(nTargetTamerUID); // ë‚˜ì—ê²Œ ê±°ëž˜ ìš”ì²­í•œ ì‚¬ìš©ìžì—ê²Œ, ê±°ëž˜ ë¶ˆê°€ ì•Œë¦¼
 	endp(pTrade::Impossible);
 	send();
 }
@@ -199,6 +200,7 @@ void cCliGame::SendTradeAddItem(u2 nInvenPos, u2 nCnt)
 void cCliGame::SendTradeCancelItem(n1 nPos)
 {
 	newp(pTrade::CancelItem);		
+	LOG("SendTradeCancelItem protocol=%d slot=%d", pTrade::CancelItem, (int)nPos);
 		push(nPos);
 		endp(pTrade::CancelItem);
 	send();
@@ -213,7 +215,7 @@ void cCliGame::SendTradeAddMoney(u4 nMoney)
 	send();
 }
 //////////////////////////////////////////////////////////////////////////
-// 거래 창 인벤트로 잠금/해제 
+// ê±°ëž˜ ì°½ ì¸ë²¤íŠ¸ë¡œ ìž ê¸ˆ/í•´ì œ 
 //////////////////////////////////////////////////////////////////////////
 void cCliGame::SendTradeInvenLock( bool bLock )
 {
@@ -232,7 +234,7 @@ void cCliGame::SendTradeInvenLock( bool bLock )
 }
 
 //////////////////////////////////////////////////////////////////////////
-// 최종 거래 확인 패킷
+// ìµœì¢… ê±°ëž˜ í™•ì¸ íŒ¨í‚·
 //////////////////////////////////////////////////////////////////////////
 void cCliGame::SendTradeCompleteFinal()
 {
@@ -243,16 +245,16 @@ void cCliGame::SendTradeCompleteFinal()
 
 
 //////////////////////////////////////////////////////////////////
-// 테이머 개인 상점 관련 처리
+// í…Œì´ë¨¸ ê°œì¸ ìƒì  ê´€ë ¨ ì²˜ë¦¬
 
-// 개인 상점 오픈 준비 요청 & 개인 상점 편집 가능상태로 변경 요청
+// ê°œì¸ ìƒì  ì˜¤í”ˆ ì¤€ë¹„ ìš”ì²­ & ê°œì¸ ìƒì  íŽ¸ì§‘ ê°€ëŠ¥ìƒíƒœë¡œ ë³€ê²½ ìš”ì²­
 void cCliGame::SendTamerShopReady(n4 nRequestType, u4 nSlot)
 {
 	newp( pTrade::TamerShopReady );
 		push( nRequestType );
 
 #ifdef ITEM_USE_TIME_PASS
-		if( nRequestType == 1 || nRequestType == 4 )	//2017-04-04-nova 1일경우에도 슬롯번호 전송
+		if( nRequestType == 1 || nRequestType == 4 )	//2017-04-04-nova 1ì¼ê²½ìš°ì—ë„ ìŠ¬ë¡¯ë²ˆí˜¸ ì „ì†¡
 		{
 			push( nSlot );
 		}
@@ -277,20 +279,20 @@ void cCliGame::RecvTamerShopReadyResult(void)
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_STORE_READY_RESULT, &recv );
 }
 
-void cCliGame::SendTamerShopOpen(wchar const* szTitle, n4 nItemNumber, nTrade::Item *pSellItemList)	// 개인 상점 개설
+void cCliGame::SendTamerShopOpen(wchar const* szTitle, n4 nItemNumber, nTrade::Item *pSellItemList)	// ê°œì¸ ìƒì  ê°œì„¤
 {
 	std::wstring wtitle(szTitle);
 
 	newp(pTrade::TamerShopOpen);
-		push( wtitle );		// 상점 타이틀 
-		push(nItemNumber);	// 판매할 아이템 개수
-		push(pSellItemList, sizeof(nTrade::Item)*nItemNumber);	// 판매할 아이템 정보
+		push( wtitle );		// ìƒì  íƒ€ì´í‹€ 
+		push(nItemNumber);	// íŒë§¤í•  ì•„ì´í…œ ê°œìˆ˜
+		push(pSellItemList, sizeof(nTrade::Item)*nItemNumber);	// íŒë§¤í•  ì•„ì´í…œ ì •ë³´
 	endp(pTrade::TamerShopOpen);
 
 	send();
 }
 
-// 개인 상점 오픈 결과
+// ê°œì¸ ìƒì  ì˜¤í”ˆ ê²°ê³¼
 void cCliGame::RecvTamerShopOpenResult(void)
 {
 	GS2C_RECV_STORE_OPEN_CLOSE_RESULT recv;
@@ -299,7 +301,7 @@ void cCliGame::RecvTamerShopOpenResult(void)
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_OPEN_PERSONSTORE, &recv );
 }
 
-void cCliGame::SendTamerShopClose(void)	// 개인 상점 폐쇄
+void cCliGame::SendTamerShopClose(void)	// ê°œì¸ ìƒì  íì‡„
 {
 	newp(pTrade::TamerShopClose);
 	endp(pTrade::TamerShopClose);
@@ -314,8 +316,8 @@ void cCliGame::RecvTamerShopCloseResult(void)
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_CLOSE_PERSONSTORE, &recv );
 }
 
-// nType 기본 값은 0 입니다. 0: 개인 상점 1: 위탁 상점
-void cCliGame::SendTamerShopItemList(u4 nTargetTamerUID, uint nType) // 상점에서 판매하는 아이템 목록 요청
+// nType ê¸°ë³¸ ê°’ì€ 0 ìž…ë‹ˆë‹¤. 0: ê°œì¸ ìƒì  1: ìœ„íƒ ìƒì 
+void cCliGame::SendTamerShopItemList(u4 nTargetTamerUID, uint nType) // ìƒì ì—ì„œ íŒë§¤í•˜ëŠ” ì•„ì´í…œ ëª©ë¡ ìš”ì²­
 {
 	newp(pTrade::TamerShopList);
 		push( nType );
@@ -324,7 +326,7 @@ void cCliGame::SendTamerShopItemList(u4 nTargetTamerUID, uint nType) // 상점�
 	send();
 }
 
-void cCliGame::RecvTamerShopItemList(void)	// 테이머 개인 상점 아이템 목록
+void cCliGame::RecvTamerShopItemList(void)	// í…Œì´ë¨¸ ê°œì¸ ìƒì  ì•„ì´í…œ ëª©ë¡
 {
 	GS2C_RECV_PERSONSTORE_ITEMLIST recv;
 	pop( recv.nResult );
@@ -332,7 +334,7 @@ void cCliGame::RecvTamerShopItemList(void)	// 테이머 개인 상점 아이템 
 	if( 100 == recv.nResult )
 	{
 		pop( recv.szTitle );
-		pop( recv.nItemCount );		// 판매 아이템 개수
+		pop( recv.nItemCount );		// íŒë§¤ ì•„ì´í…œ ê°œìˆ˜
 		for ( int i = 0; i < recv.nItemCount; ++i )
 		{
 			nsPersonStore::sSellItemInfo SellItem;
@@ -346,22 +348,22 @@ void cCliGame::RecvTamerShopItemList(void)	// 테이머 개인 상점 아이템 
 }
 
 
-void cCliGame::SendTamerShopBuy(u4 nTargetTamerUID, uint nIndex, cItemData *item, n8 Price)	// 상점으로 부터 아이템 구매
+void cCliGame::SendTamerShopBuy(u4 nTargetTamerUID, uint nIndex, cItemData *item, n8 Price)	// ìƒì ìœ¼ë¡œ ë¶€í„° ì•„ì´í…œ êµ¬ë§¤
 {
-	// 동기화 - 기반은 1부터
+	// ë™ê¸°í™” - ê¸°ë°˜ì€ 1ë¶€í„°
 	nIndex += 1;
 
 	newp(pTrade::TamerShopBuy);
-		push(nTargetTamerUID);	// 대상 UID
-		push(nIndex);			// 상점의 아이템 인덱스 0값은 사용하지 않습니다. 1부터~
-		push(*item);			// 구매 아이템 정보
-		push(Price);			// 개별 구매 금액
+		push(nTargetTamerUID);	// ëŒ€ìƒ UID
+		push(nIndex);			// ìƒì ì˜ ì•„ì´í…œ ì¸ë±ìŠ¤ 0ê°’ì€ ì‚¬ìš©í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. 1ë¶€í„°~
+		push(*item);			// êµ¬ë§¤ ì•„ì´í…œ ì •ë³´
+		push(Price);			// ê°œë³„ êµ¬ë§¤ ê¸ˆì•¡
 	endp(pTrade::TamerShopBuy);
 
 	send();
 }
 
-// 상점으로 부터 아이템을 구매 결과
+// ìƒì ìœ¼ë¡œ ë¶€í„° ì•„ì´í…œì„ êµ¬ë§¤ ê²°ê³¼
 void cCliGame::RecvTamerShopBuy(void)
 {
 	GS2C_RECV_BUY_RESULT_PERSONITEM recv;
@@ -377,12 +379,12 @@ void cCliGame::RecvTamerShopBuy(void)
 	net::game->SendQueryMoneyInven();
 }
 
-// 개인 상점 - 자기 상점 아이템 판매 결과
+// ê°œì¸ ìƒì  - ìžê¸° ìƒì  ì•„ì´í…œ íŒë§¤ ê²°ê³¼
 void cCliGame::RecvTamerShopSellResult(void)
 {	
-	// 자신이 올린 아이템 팔렸을 경우
+	// ìžì‹ ì´ ì˜¬ë¦° ì•„ì´í…œ íŒ”ë ¸ì„ ê²½ìš°
 	GS2C_RECV_BUY_RESULT_PERSONITEM recv;
-	recv.nResult = 100;		// 판매 성공으로 가야한다
+	recv.nResult = 100;		// íŒë§¤ ì„±ê³µìœ¼ë¡œ ê°€ì•¼í•œë‹¤
 	pop( recv.nSlotIndex );
 	pop( recv.nCount );
 
@@ -392,13 +394,13 @@ void cCliGame::RecvTamerShopSellResult(void)
 }
 
 //////////////////////////////////////////////////////////////////
-// 위탁 상점 관련 처리
+// ìœ„íƒ ìƒì  ê´€ë ¨ ì²˜ë¦¬
 
-// nRequestType 1: 상점 오픈 준비 요청 2: 상점 편집상태로 변경 요청 3: 상점 오픈 준비 취소
-// pos 위치, nFloat 회전 값
-// nSlot 라이센스 아이템이 있는 위치
+// nRequestType 1: ìƒì  ì˜¤í”ˆ ì¤€ë¹„ ìš”ì²­ 2: ìƒì  íŽ¸ì§‘ìƒíƒœë¡œ ë³€ê²½ ìš”ì²­ 3: ìƒì  ì˜¤í”ˆ ì¤€ë¹„ ì·¨ì†Œ
+// pos ìœ„ì¹˜, nFloat íšŒì „ ê°’
+// nSlot ë¼ì´ì„¼ìŠ¤ ì•„ì´í…œì´ ìžˆëŠ” ìœ„ì¹˜
 	
-// 위탁 상점 오픈 요청 ( 상점 이름 )
+// ìœ„íƒ ìƒì  ì˜¤í”ˆ ìš”ì²­ ( ìƒì  ì´ë¦„ )
 
 void cCliGame::SendCommissionShopOpen(nSync::Pos pos, float nFloat, wchar const * szTitle, n8 nMoney, uint nItemCount, nTrade::Item *item )
 {
@@ -407,8 +409,8 @@ void cCliGame::SendCommissionShopOpen(nSync::Pos pos, float nFloat, wchar const 
 	newp( pTrade::ShopOpen );
 		push( pos );
 		push( nFloat );
-		push( wtitle );				// 상점 이름
-		push( nMoney );					// 상점 구매 금액 등록
+		push( wtitle );				// ìƒì  ì´ë¦„
+		push( nMoney );					// ìƒì  êµ¬ë§¤ ê¸ˆì•¡ ë“±ë¡
 		push( nItemCount );
 		push( item, sizeof( nTrade::Item) * nItemCount );
 	endp( pTrade::ShopOpen );			
@@ -448,10 +450,10 @@ void cCliGame::RecvCommissionShopCloseResult()
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_CLOSE_COMMISSIONSTORE, &recv );
 }
 
-// 위탁 상점 아이템 구매 요청 ( UID, 상품 인덱스, 구매 개수 )
+// ìœ„íƒ ìƒì  ì•„ì´í…œ êµ¬ë§¤ ìš”ì²­ ( UID, ìƒí’ˆ ì¸ë±ìŠ¤, êµ¬ë§¤ ê°œìˆ˜ )
 void cCliGame::SendCommissionShopBuy(u4 nShopUID, uint nIndex, cItemData *pItem, n8 nUnitPrice)
 {
-	// 동기화 - 기반은 1부터
+	// ë™ê¸°í™” - ê¸°ë°˜ì€ 1ë¶€í„°
 	nIndex += 1;
 
 	newp( pTrade::ShopBuy );
@@ -475,10 +477,10 @@ void cCliGame::RecvCommissionShopBuyResult(void)
 	net::game->SendQueryMoneyInven();
 }
 
-// 위탁 상점 아이템 판매 요청 ( UID, 상품 인덱스, 판매 아이템, 판매 개수, 아이템 타입, 개별 가격 )	
+// ìœ„íƒ ìƒì  ì•„ì´í…œ íŒë§¤ ìš”ì²­ ( UID, ìƒí’ˆ ì¸ë±ìŠ¤, íŒë§¤ ì•„ì´í…œ, íŒë§¤ ê°œìˆ˜, ì•„ì´í…œ íƒ€ìž…, ê°œë³„ ê°€ê²© )	
 void cCliGame::SendCommissionShopSell(u4 nShopUID, uint nIndex, cItemData *pItem, n8 nUnitPrice)
 {
-	// 동기화 - 기반은 1부터
+	// ë™ê¸°í™” - ê¸°ë°˜ì€ 1ë¶€í„°
 	nIndex += 1;
 
 	newp( pTrade::ShopSell );
@@ -492,9 +494,9 @@ void cCliGame::SendCommissionShopSell(u4 nShopUID, uint nIndex, cItemData *pItem
 
 void cCliGame::RecvCommissionShopSellResult(void)
 {
-	// 위탁 상점 판매 결과시 호출되지만 아무것도 안 함
-	// 판매 결과 갱신도 안 함
-	// 현재는 UI 다시 켤 때 갱신됨
+	// ìœ„íƒ ìƒì  íŒë§¤ ê²°ê³¼ì‹œ í˜¸ì¶œë˜ì§€ë§Œ ì•„ë¬´ê²ƒë„ ì•ˆ í•¨
+	// íŒë§¤ ê²°ê³¼ ê°±ì‹ ë„ ì•ˆ í•¨
+	// í˜„ìž¬ëŠ” UI ë‹¤ì‹œ ì¼¤ ë•Œ ê°±ì‹ ë¨
 }
 
 
@@ -515,16 +517,16 @@ void cCliGame::RecvCommissionShopItemListResult(void)
 		pop( recv.szTamerName );
 #endif
 
-		{	// 안 쓴다. 날린다.
+		{	// ì•ˆ ì“´ë‹¤. ë‚ ë¦°ë‹¤.
 			u4 nBuyCount = 0;
-			pop( nBuyCount );						// 구매 개수
+			pop( nBuyCount );						// êµ¬ë§¤ ê°œìˆ˜
 
 			cItemData ItemData;
 			n8 nUnitPrice = 0;
 			for( uint i = 0; i < nBuyCount; i++ )
 			{		
-				pop( ItemData );	// 아이템 정보
-				pop( nUnitPrice );	// 아이템 개별 구매가
+				pop( ItemData );	// ì•„ì´í…œ ì •ë³´
+				pop( nUnitPrice );	// ì•„ì´í…œ ê°œë³„ êµ¬ë§¤ê°€
 			}
 		}
 
@@ -570,12 +572,12 @@ void cCliGame::RecvCommissionShopNpcItemList(void)
 		uint		nCount = 0;
 		cItemData	ItemData;
 
-		pop( nMoney );	// 보관중인 금액
+		pop( nMoney );	// ë³´ê´€ì¤‘ì¸ ê¸ˆì•¡
 		GS2C_RECV_SET_UNIONMONEY recv1;
 		recv1.money = nMoney;
 		GAME_EVENT_ST.OnEvent( EVENT_CODE::UNION_MONEY_SET_DATA, &recv1 );	
 
-		pop( nCount );	// 보관중인 아이템 개수
+		pop( nCount );	// ë³´ê´€ì¤‘ì¸ ì•„ì´í…œ ê°œìˆ˜
 		GS2C_RECV_ADD_UNIONITEM recv2;
 
 		for( uint i = 0; i < nCount; i++ )
@@ -584,7 +586,7 @@ void cCliGame::RecvCommissionShopNpcItemList(void)
 
 			recv2.ItemData = ItemData;
 
-			if( ItemData.m_nType == 0 )
+			if( ItemData.GetType() == 0 )
 				continue;
 
 			GAME_EVENT_ST.OnEvent( EVENT_CODE::UNION_ITEM_ADD_DATA, &recv2 );
@@ -600,8 +602,8 @@ void cCliGame::RecvCommissionShopNpcItemList(void)
 	}	
 }
 
-// 위탁 상점 아이템 보관함에서 아이템 회수 Type 1: 아이템 회수 2: 돈 회수
-// 돈 회수의 경우 nIndex 값을 
+// ìœ„íƒ ìƒì  ì•„ì´í…œ ë³´ê´€í•¨ì—ì„œ ì•„ì´í…œ íšŒìˆ˜ Type 1: ì•„ì´í…œ íšŒìˆ˜ 2: ëˆ íšŒìˆ˜
+// ëˆ íšŒìˆ˜ì˜ ê²½ìš° nIndex ê°’ì„ 
 void cCliGame::SendCommissionShopItemWithDraw()
 {
 	newp( pTrade::ShopWithdraw );
@@ -616,3 +618,5 @@ void cCliGame::RecvCommissionShopItemWithDrawResult(void)
 
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_UNION_SHOP_WITHDRAW, &nResult );	
 }
+
+

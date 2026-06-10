@@ -42,7 +42,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return;
 
             var snapshotItems = equippedItems
-                .Where(item => item != null && item.HasAccessoryStatus)
+                .Where(item => item != null &&
+                    (item.HasAccessoryStatus || item.AccessoryStatus.Any(status => status.HasInvalidNegativeValue)))
                 .ToList();
 
             if (!snapshotItems.Any())
@@ -73,12 +74,24 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         {
             var summary = new StringBuilder();
             var powerMultiplier = (decimal)item.Power / 100m;
+            var invalidNegativeValues = item.AccessoryStatus
+                .Where(status => status.HasInvalidNegativeValue)
+                .OrderBy(status => status.Slot)
+                .Select(status => $"{status.Slot}:{status.Type}:{status.Value}")
+                .ToList();
+
+            if (invalidNegativeValues.Any())
+            {
+                summary.Append("invalidNegative=[")
+                    .Append(string.Join(",", invalidNegativeValues))
+                    .Append(']');
+            }
 
             foreach (var type in TrackedTypes)
             {
                 var rawTotal = item.AccessoryStatus
                     .Where(status => status.Type == type)
-                    .Sum(status => (int)status.Value);
+                    .Sum(status => status.EffectiveValue);
 
                 if (rawTotal <= 0)
                     continue;

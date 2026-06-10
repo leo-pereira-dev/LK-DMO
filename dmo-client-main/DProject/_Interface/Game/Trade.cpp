@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "Trade.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 #define IF_TRADE_MY_POS		CsPoint( 225, 0 )
 
@@ -156,6 +157,7 @@ void cTrade::Create(int nValue /* = 0  */)
 
 void cTrade::CloseWindowEvent(void* pSender, void* pData)
 {
+	nsCSDEBUG::CrashLogger::LogMessage( "TRADE_UI cancel reason=close-button target=%u", GetSystem()->GetTradeTamerUID() );
 	GetSystem()->SendTradeCancel();
 }
 
@@ -181,6 +183,7 @@ void cTrade::PreResetMap()
 
 bool cTrade::OnEscapeKey()
 { 
+	nsCSDEBUG::CrashLogger::LogMessage( "TRADE_UI cancel reason=escape target=%u", GetSystem()->GetTradeTamerUID() );
 	CloseWindowEvent(m_pCancelButton,NULL);
 	return true;
 }
@@ -204,17 +207,47 @@ void cTrade::Update(float const& fDeltaTime)
 	if( g_pNpcMng )
 		g_pNpcMng->SetZoomNpcType( cBaseWindow::WT_TRADE );
 
-	CTamer* pTamer = g_pCharMng->GetTamerFromUIDX( GetSystem()->GetTradeTamerUID() );
-	if( NULL == pTamer )
+	if( !GetSystem() )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "TRADE_UI update skipped reason=system-null" );
+		return;
+	}
+
+	uint const nTradeTargetUID = GetSystem()->GetTradeTamerUID();
+	if( 0 == nTradeTargetUID )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "TRADE_UI update skipped reason=target-zero" );
+		return;
+	}
+
+	if( NULL == g_pCharMng || NULL == g_pCharMng->GetTamerUser() )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "TRADE_UI update skipped reason=char-null target=%u charMng=%p", nTradeTargetUID, g_pCharMng );
+		return;
+	}
+
+	CTamerUser* pTamerUser = g_pCharMng->GetTamerUser();
+	CTamer* pTamer = g_pCharMng->GetTamerFromUIDX( nTradeTargetUID );
+	CsC_AvObject* pTargetObject = pTamer;
+	if( NULL == pTargetObject && g_pMngCollector )
+		pTargetObject = g_pMngCollector->GetObject( nTradeTargetUID );
+
+	if( NULL == pTargetObject )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "TRADE_UI cancel reason=target-missing target=%u charMng=%p collector=%p",
+			nTradeTargetUID, pTamer, g_pMngCollector ? g_pMngCollector->GetObject( nTradeTargetUID ) : NULL );
 		GetSystem()->SendTradeCancel();
 		return;
 	}
 	else
 	{
-		float fLen = ( g_pCharMng->GetTamerUser()->GetPos2D() - pTamer->GetPos2D() ).Length();
+		float fLen = ( pTamerUser->GetPos2D() - pTargetObject->GetPos2D() ).Length();
 		if( fLen > TRADE_DISTANCE )
 		{
+			NiPoint2 const myPos = pTamerUser->GetPos2D();
+			NiPoint2 const targetPos = pTargetObject->GetPos2D();
+			nsCSDEBUG::CrashLogger::LogMessage( "TRADE_UI cancel reason=distance target=%u dist=%.2f limit=%.2f my=%.1f,%.1f targetPos=%.1f,%.1f viaCharMng=%d",
+				nTradeTargetUID, fLen, TRADE_DISTANCE, myPos.x, myPos.y, targetPos.x, targetPos.y, pTamer ? 1 : 0 );
 			cPrintMsg::PrintMsg( 30022 );	//	거리가 너무 멉니다.
 			GetSystem()->SendTradeCancel();
 			return;
@@ -222,8 +255,9 @@ void cTrade::Update(float const& fDeltaTime)
 	}
 
 	// 전투중이라면 종료
-	if( g_pCharMng->GetTamerUser()->IsBattle() == true )
+	if( pTamerUser->IsBattle() == true )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "TRADE_UI cancel reason=battle target=%u", nTradeTargetUID );
 		GetSystem()->SendTradeCancel();
 		return;
 	}
@@ -311,17 +345,17 @@ bool cTrade::_UpdateIcon_ForMouse()
 				{
 					CsPoint pos = m_MyInfo[ i ].s_IFIcon.GetPos() + GetRootClient();
 					TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( pos, IF_TRADE_ICON_SIZE, TOOLTIP_MAX_SIZE, cTooltip::ITEM,
-						m_MyInfo[ i ].s_Item.m_nType, cBaseWindow::WT_TRADE, cTooltip::OPEN_SLOT, 0, &m_MyInfo[ i ].s_Item );
+						m_MyInfo[ i ].s_Item.GetType(), cBaseWindow::WT_TRADE, cTooltip::OPEN_SLOT, 0, &m_MyInfo[ i ].s_Item );
 
 					//////////////////////////////////////////////////////////
 					//2017-01-19-nova 장착중인 아이템을 비교창에 출력
-					int nItemType = nsCsFileTable::g_pItemMng->GetItem( m_MyInfo[ i ].s_Item.m_nType )->GetInfo()->s_nType_L;
+					int nItemType = nsCsFileTable::g_pItemMng->GetItem( m_MyInfo[ i ].s_Item.GetType() )->GetInfo()->s_nType_L;
 
 					for( int i=0; i<nLimit::Equip; ++i )
 					{
 						cItemInfo* PlayerpData = g_pDataMng->GetTEquip()->GetData( i );
 
-						if(PlayerpData->m_nType != 0)
+						if(PlayerpData->GetType() != 0)
 						{
 							CsItem::sINFO* pFTSrc = nsCsFileTable::g_pItemMng->GetItem( PlayerpData->GetType() )->GetInfo();
 
@@ -341,17 +375,17 @@ bool cTrade::_UpdateIcon_ForMouse()
 				{					
 					CsPoint pos = m_TargetInfo[ i ].s_IFIcon.GetPos() + GetRootClient();
 					TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( pos, IF_TRADE_ICON_SIZE, TOOLTIP_MAX_SIZE, cTooltip::ITEM,
-						m_TargetInfo[ i ].s_Item.m_nType, cBaseWindow::WT_TRADE, cTooltip::OPEN_SLOT, 0, &m_TargetInfo[ i ].s_Item );
+						m_TargetInfo[ i ].s_Item.GetType(), cBaseWindow::WT_TRADE, cTooltip::OPEN_SLOT, 0, &m_TargetInfo[ i ].s_Item );
 
 					//////////////////////////////////////////////////////////
 					//2017-01-19-nova 장착중인 아이템을 비교창에 출력
-					int nItemType = nsCsFileTable::g_pItemMng->GetItem( m_TargetInfo[ i ].s_Item.m_nType )->GetInfo()->s_nType_L;
+					int nItemType = nsCsFileTable::g_pItemMng->GetItem( m_TargetInfo[ i ].s_Item.GetType() )->GetInfo()->s_nType_L;
 
 					for( int i=0; i<nLimit::Equip; ++i )
 					{
 						cItemInfo* PlayerpData = g_pDataMng->GetTEquip()->GetData( i );
 
-						if(PlayerpData->m_nType != 0)
+						if(PlayerpData->GetType() != 0)
 						{
 							CsItem::sINFO* pFTSrc = nsCsFileTable::g_pItemMng->GetItem( PlayerpData->GetType() )->GetInfo();
 
@@ -505,7 +539,7 @@ void cTrade::RegistItem( bool bMy, int const& nSlotNum )
 	{
 		m_MyInfo[ nSlotNum ].s_Item = *pData;
 
-		CsItem::sINFO* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_MyInfo[ nSlotNum ].s_Item.m_nType )->GetInfo();
+		CsItem::sINFO* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_MyInfo[ nSlotNum ].s_Item.GetType() )->GetInfo();
 		cText::sTEXTINFO ti;
 
 #ifdef VERSION_USA
@@ -520,7 +554,7 @@ void cTrade::RegistItem( bool bMy, int const& nSlotNum )
 	{
 		m_TargetInfo[ nSlotNum ].s_Item = *pData;
 
-		CsItem::sINFO* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_TargetInfo[ nSlotNum ].s_Item.m_nType )->GetInfo();
+		CsItem::sINFO* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_TargetInfo[ nSlotNum ].s_Item.GetType() )->GetInfo();
 		cText::sTEXTINFO ti;
 
 #ifdef VERSION_USA

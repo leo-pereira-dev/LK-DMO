@@ -1,7 +1,7 @@
 #pragma once 
 
-#define ACCOUNT_IP					"127.0.0.1"
-#define	ACCOUNT_PORT				7029
+#define ACCOUNT_IP					"104.234.41.94"
+#define	ACCOUNT_PORT				17029
 
 #define	NAME_MIN_LEN				3
 #define NAME_MAX_LEN				12

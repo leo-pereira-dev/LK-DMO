@@ -127,7 +127,10 @@ namespace DigitalWorldOnline.Game
                     services.AddSingleton<AttendanceService>();
                     services.AddSingleton<OwnerStorageFlushService>();
                     services.AddSingleton<PortalDestinationResolver>();
+                    services.AddSingleton<DungeonExitDestinationResolver>();
                     services.AddSingleton<AccessoryEnchantService>();
+                    services.AddSingleton<VerdandiXProgramService>();
+                    services.AddSingleton<EquipmentSetBonusService>();
                     services.AddSingleton<DatabaseSchemaValidator>();
 
                     services.AddSingleton<EventQueueManager>();
@@ -167,7 +170,10 @@ namespace DigitalWorldOnline.Game
                     services.AddSingleton<MapBinLoader>();
                     services.AddSingleton<ItemListBinLoader>();
                     services.AddSingleton<ContainerBinLoader>();
+                    services.AddSingleton<ExtraExchangeBinLoader>();
                     services.AddSingleton<QuestBinLoader>();
+                    services.AddSingleton<NpcBinLoader>();
+                    services.AddSingleton<DungeonBinLoader>();
                     services.AddSingleton<UnionXmlAssetLoader>();
                     services.AddSingleton<DUnitCollectionService>();
 
@@ -218,7 +224,10 @@ namespace DigitalWorldOnline.Game
             var mapBin = host.Services.GetRequiredService<MapBinLoader>().Load();
             var itemList = host.Services.GetRequiredService<ItemListBinLoader>().Load();
             var containerBin = host.Services.GetRequiredService<ContainerBinLoader>().Load();
+            var extraExchange = host.Services.GetRequiredService<ExtraExchangeBinLoader>().Load();
             var quest = host.Services.GetRequiredService<QuestBinLoader>().Load();
+            var npcAssets = host.Services.GetRequiredService<NpcBinLoader>().Load();
+            var dungeon = host.Services.GetRequiredService<DungeonBinLoader>().Load();
             // Element-vs-element + attribute-vs-attribute combat multipliers come from
             // Nature.bin — accessed via Utils.GetElementDelta / GetAttributePoint, which
             // drive the boolean HasElementAdvantage / HasAttributeAdvantage extension
@@ -234,7 +243,8 @@ namespace DigitalWorldOnline.Game
                     pair => pair.Key,
                     pair => (IReadOnlyList<DigitalWorldOnline.Commons.Utils.UtilitiesFunctions.EncyclopediaDeckEffect>)
                         pair.Value.Effects
-                            .Select(effect => new DigitalWorldOnline.Commons.Utils.UtilitiesFunctions.EncyclopediaDeckEffect(
+                            .Select((effect, index) => new DigitalWorldOnline.Commons.Utils.UtilitiesFunctions.EncyclopediaDeckEffect(
+                                index,
                                 effect.Condition,
                                 effect.AttackType,
                                 effect.Option,
@@ -309,6 +319,17 @@ namespace DigitalWorldOnline.Game
                 containerBin.Containers.Count,
                 containerBin.MissingItemGroups,
                 containerBin.MissingRewardGroups);
+            serilog.Information(
+                "Loaded ExtraExchange.bin: {Npcs} NPC groups, {Recipes} exchange recipes",
+                extraExchange.Count,
+                extraExchange.Sum(npc => npc.ExtraEvolutionInformation.Sum(info => info.ExtraEvolution.Count)));
+            serilog.Information(
+                "Loaded dungeon bins: List={Dungeons}, ClearInfo={ClearInfo}, Rewards={Rewards}, Steps={Steps}, Qualification={Qualification}",
+                dungeon.List.Count,
+                dungeon.ClearInfo.Count,
+                dungeon.Rewards.Count,
+                dungeon.Steps.Count,
+                dungeon.Qualification.Count);
 
             return host;
         }
@@ -362,3 +383,5 @@ namespace DigitalWorldOnline.Game
         }
     }
 }
+
+

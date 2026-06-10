@@ -253,7 +253,7 @@ void DataTradeBase::Render()
 
 	// 표시될 아이콘 정보
 	cItemInfo	_Trade_Use_Item;
-	_Trade_Use_Item.m_nType = Item_code;
+	_Trade_Use_Item.SetType( Item_code );
 	_Trade_Use_Item.m_nCount = ItemCount;
 
 	CsPoint	Root = GetRootClient();

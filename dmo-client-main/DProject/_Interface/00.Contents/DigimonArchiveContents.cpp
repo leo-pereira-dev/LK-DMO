@@ -1817,7 +1817,7 @@ void CDigimonArchiveContents::OnRClick_LockedArchiveSlot(int ArchiveSlotIdx)
 			if(pItem == NULL)
 				return;
 
-			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 			if(pFTItem == NULL)
 				return;
 

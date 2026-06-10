@@ -537,6 +537,7 @@ public:
 
 	void SyncWalkObject(void);		// 다른 obj가 이동(걷기)시
 	void SyncMoveObject(void);		// 다른 obj가 이동(뛰기)시
+	void SyncRotationObject(void);	// LK-DMO: nearby obj facing update
 
 	void SyncInObject(void);		// 다른 obj가 시야에 들어오는 경우
 	void SyncOutObject(void);		// 다른 obj가 시야에서 사라지는 경우
@@ -915,6 +916,9 @@ public:
 
 	void	SendInsMap_DungeonIN(uint nPortalNo);
 	void	RecvInsMap_DungeonFail();
+	void	SendDungeonClearExit();
+	void	SendDungeonReEnter();
+	void	RecvDungeonClearResult();
 	void	RecvBattleEvoPoint();
 
 

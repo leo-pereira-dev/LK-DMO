@@ -15,9 +15,11 @@ using DigitalWorldOnline.Commons.Models.Base;
 using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.Items;
 using DigitalWorldOnline.Commons.Utils;
+using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
 using MediatR;
 using Serilog;
+using System.Collections.Concurrent;
 
 namespace DigitalWorldOnline.Game.PacketProcessors
 {
@@ -31,12 +33,54 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private readonly IMapper _mapper;
         private readonly DungeonsServer _dungeonServer;
         private readonly ItemListBinLoader _itemListBinLoader;
+        private readonly EquipmentSetBonusService _equipmentSetBonusService;
+        private readonly AccessoryEnchantService _accessoryEnchantService;
 
         private const int CategorySeal = 0;
         private const int CategoryTicket = 1;
         private const int CategoryEvolution = 2;
         private const int CategoryDigitama = 3;
         private const int CategoryMaterial = 4;
+        private const int TamerHeadSlot = 0;
+        private const int TamerCoatSlot = 1;
+        private const int TamerGloveSlot = 2;
+        private const int TamerPantsSlot = 3;
+        private const int TamerShoesSlot = 4;
+        private const int TamerCostumeSlot = 5;
+        private const int TamerGlassSlot = 6;
+        private const int TamerNecklaceSlot = 7;
+        private const int TamerRingSlot = 8;
+        private const int TamerEarringSlot = 9;
+        private const int TamerEquipAuraSlot = 10;
+        private const int TamerXaiSlot = 11;
+        private const int TamerBraceletSlot = 12;
+        private const int TamerNamePlateSlot = 13;
+        private const int TamerGogglesSlot = 14;
+        private const int TamerKeyringSlot = 15;
+        // Client nsPART::Digivice visual part. It is not part of the Equipment item list.
+        private const int TamerDigiviceVisualSlot = 16;
+        private const int HeadItemType = 21;
+        private const int CoatItemType = 22;
+        private const int GloveItemType = 23;
+        private const int PantsItemType = 24;
+        private const int ShoesItemType = 25;
+        private const int CostumeItemType = 26;
+        private const int GlassItemType = 27;
+        private const int NecklaceItemType = 28;
+        private const int RingItemType = 29;
+        private const int EarringItemType = 30;
+        private const int EquipAuraItemType = 31;
+        private const int XaiItemType = 32;
+        private const int BraceletItemType = 33;
+        private const int NamePlateItemType = 34;
+        private const int KeyringItemType = 35;
+        private const int GogglesItemType = 36;
+        private const int DigiviceItemType = 53;
+        private const int ChipsetItemType = 52;
+        private const long JogressXrossChipsetSkillCode = 2500245;
+        private const int ItemMoveLockWaitMilliseconds = 10000;
+
+        private static readonly ConcurrentDictionary<long, SemaphoreSlim> ItemMoveLocks = new();
 
         private static readonly IReadOnlySet<int> SealTypes = new HashSet<int> { 190, 191, 192 };
         private static readonly IReadOnlySet<int> TicketTypes = new HashSet<int> { 100, 178, 185 };
@@ -50,7 +94,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             ILogger logger,
             DungeonsServer dungeonsServer,
             IMapper mapper,
-            ItemListBinLoader itemListBinLoader)
+            ItemListBinLoader itemListBinLoader,
+            EquipmentSetBonusService equipmentSetBonusService,
+            AccessoryEnchantService accessoryEnchantService)
         {
             _mapServer = mapServer;
             _sender = sender;
@@ -58,6 +104,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _dungeonServer = dungeonsServer;
             _mapper = mapper;
             _itemListBinLoader = itemListBinLoader;
+            _equipmentSetBonusService = equipmentSetBonusService;
+            _accessoryEnchantService = accessoryEnchantService;
         }
 
         public async Task Process(GameClient client, byte[] packetData)
@@ -68,6 +116,71 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var destinationSlot = packet.ReadShort();
 
             var itemListMovimentation = UtilitiesFunctions.SwitchItemList(originSlot, destinationSlot);
+            var lockKey = client.TamerId != 0 ? client.TamerId : client.AccountId;
+            var itemMoveLock = ItemMoveLocks.GetOrAdd(lockKey, _ => new SemaphoreSlim(1, 1));
+
+            if (!await itemMoveLock.WaitAsync(TimeSpan.FromMilliseconds(ItemMoveLockWaitMilliseconds)))
+            {
+                _logger.Warning(
+                    "ItemMove rejected because a previous move is still processing: tamer={TamerId} account={AccountId} movement={Movement} origin={OriginSlot} destination={DestinationSlot}",
+                    client.TamerId,
+                    client.AccountId,
+                    itemListMovimentation,
+                    originSlot,
+                    destinationSlot);
+
+                client.Send(
+                    UtilitiesFunctions.GroupPackets(BuildMoveResultPackets(client, itemListMovimentation, false, originSlot, destinationSlot))
+                );
+                return;
+            }
+
+            try
+            {
+                await ProcessLockedAsync(client, originSlot, destinationSlot, itemListMovimentation);
+            }
+            finally
+            {
+                itemMoveLock.Release();
+            }
+        }
+
+        private async Task ProcessLockedAsync(
+            GameClient client,
+            short originSlot,
+            short destinationSlot,
+            ItemListMovimentationEnum itemListMovimentation)
+        {
+            var responseDestinationSlot = destinationSlot;
+            if (IsChipsetMovement(itemListMovimentation))
+            {
+                var sourceItem = FindMoveEndpointItem(client, originSlot);
+                var destinationItem = FindMoveEndpointItem(client, destinationSlot);
+                _logger.Information(
+                    "Chipset ItemMove request: tamer={TamerId} movement={Movement} origin={OriginSlot} destination={DestinationSlot} source={Source} destinationItem={DestinationItem}",
+                    client.TamerId,
+                    itemListMovimentation,
+                    originSlot,
+                    destinationSlot,
+                    DescribeItem(sourceItem),
+                    DescribeItem(destinationItem));
+            }
+
+            if (IsDigiviceMovement(itemListMovimentation))
+            {
+                var sourceItem = FindMoveEndpointItem(client, originSlot);
+                var destinationItem = FindMoveEndpointItem(client, destinationSlot);
+                _logger.Information(
+                    "Digivice ItemMove request: tamer={TamerId} movement={Movement} origin={OriginSlot} destination={DestinationSlot} source={Source} destinationItem={DestinationItem} digiviceNow={DigiviceNow}",
+                    client.TamerId,
+                    itemListMovimentation,
+                    originSlot,
+                    destinationSlot,
+                    DescribeItem(sourceItem),
+                    DescribeItem(destinationItem),
+                    DescribeItem(client.Tamer.Digivice.FindItemBySlot(0)));
+            }
+
             if (IsExtraInventoryMovement(itemListMovimentation))
             {
                 _logger.Information(
@@ -78,7 +191,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     itemListMovimentation);
             }
 
-            var success = SwapItems(client, originSlot, destinationSlot, itemListMovimentation);
+            var success = SwapItems(client, originSlot, destinationSlot, itemListMovimentation, ref responseDestinationSlot);
             if (!success)
             {
                 _logger.Warning(
@@ -88,12 +201,37 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             if (success)
             {
+                if (IsChipsetMovement(itemListMovimentation))
+                {
+                    var responseItem = FindMoveEndpointItem(client, responseDestinationSlot);
+                    _logger.Information(
+                        "Chipset ItemMove success: tamer={TamerId} movement={Movement} origin={OriginSlot} responseDestination={DestinationSlot} destinationItem={DestinationItem}",
+                        client.TamerId,
+                        itemListMovimentation,
+                        originSlot,
+                        responseDestinationSlot,
+                        DescribeItem(responseItem));
+                }
+
+                if (IsDigiviceMovement(itemListMovimentation))
+                {
+                    var responseItem = FindMoveEndpointItem(client, responseDestinationSlot);
+                    _logger.Information(
+                        "Digivice ItemMove success: tamer={TamerId} movement={Movement} origin={OriginSlot} responseDestination={DestinationSlot} responseItem={ResponseItem} digiviceNow={DigiviceNow}",
+                        client.TamerId,
+                        itemListMovimentation,
+                        originSlot,
+                        responseDestinationSlot,
+                        DescribeItem(responseItem),
+                        DescribeItem(client.Tamer.Digivice.FindItemBySlot(0)));
+                }
+
                 switch (itemListMovimentation)
                 {
                     case ItemListMovimentationEnum.InventoryToInventory:
                         {
                             client.Tamer.Inventory.CheckEmptyItems();
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
+                            await PersistMovedItemsAsync(client.Tamer.Inventory);
                         }
                         break;
 
@@ -102,8 +240,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         {
                             client.Tamer.Inventory.CheckEmptyItems();
                             client.Tamer.Equipment.CheckEmptyItems();
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.Equipment));
+                            await PersistMovedItemsAsync(client.Tamer.Inventory);
+                            await PersistMovedItemsAsync(client.Tamer.Equipment);
                     
                             
                         }
@@ -114,8 +252,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         {
                             client.Tamer.Inventory.CheckEmptyItems();
                             client.Tamer.Digivice.CheckEmptyItems();
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.Digivice));
+                            await PersistMovedItemsAsync(client.Tamer.Inventory);
+                            await PersistMovedItemsAsync(client.Tamer.Digivice);
                         }
                         break;
 
@@ -124,8 +262,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         {
                             client.Tamer.Inventory.CheckEmptyItems();
                             client.Tamer.ChipSets.CheckEmptyItems();
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.ChipSets));
+                            await PersistMovedItemsAsync(client.Tamer.Inventory);
+                            await PersistMovedItemsAsync(client.Tamer.ChipSets);
                         }
                         break;
                     case ItemListMovimentationEnum.InventoryToJogressChipset:
@@ -133,8 +271,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         {
                             client.Tamer.Inventory.CheckEmptyItems();
                             client.Tamer.JogressChipSet.CheckEmptyItems();
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.JogressChipSet));
+                            await PersistMovedItemsAsync(client.Tamer.Inventory);
+                            await PersistMovedItemsAsync(client.Tamer.JogressChipSet);
                         }
                         break;
 
@@ -143,8 +281,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         {
                             client.Tamer.Inventory.CheckEmptyItems();
                             client.Tamer.Warehouse.CheckEmptyItems();
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.Warehouse));
+                            await PersistMovedItemsAsync(client.Tamer.Inventory);
+                            await PersistMovedItemsAsync(client.Tamer.Warehouse);
                         }
                         break;
 
@@ -153,8 +291,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         {
                             client.Tamer.Inventory.CheckEmptyItems();
                             client.Tamer.AccountWarehouse.CheckEmptyItems();
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.AccountWarehouse));
+                            await PersistMovedItemsAsync(client.Tamer.Inventory);
+                            await PersistMovedItemsAsync(client.Tamer.AccountWarehouse);
                         }
                         break;
 
@@ -163,15 +301,15 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         {
                             client.Tamer.AccountWarehouse.CheckEmptyItems();
                             client.Tamer.Warehouse.CheckEmptyItems();
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.Warehouse));
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.AccountWarehouse));
+                            await PersistMovedItemsAsync(client.Tamer.Warehouse);
+                            await PersistMovedItemsAsync(client.Tamer.AccountWarehouse);
                         }
                         break;
 
                     case ItemListMovimentationEnum.AccountWarehouseToAccountWarehouse:
                         {
                             client.Tamer.AccountWarehouse.CheckEmptyItems();
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.AccountWarehouse));
+                            await PersistMovedItemsAsync(client.Tamer.AccountWarehouse);
                         }
                         break;
 
@@ -208,14 +346,23 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     case ItemListMovimentationEnum.WarehouseToWarehouse:
                         {
                             client.Tamer.Warehouse.CheckEmptyItems();
-                            await _sender.Send(new UpdateItemsCommand(client.Tamer.Warehouse));
+                            await PersistMovedItemsAsync(client.Tamer.Warehouse);
                         }
                         break;
                 }
 
                 client.Send(
-                    UtilitiesFunctions.GroupPackets(BuildMoveResultPackets(client, itemListMovimentation, true, originSlot, destinationSlot))
+                    UtilitiesFunctions.GroupPackets(BuildMoveResultPackets(client, itemListMovimentation, true, originSlot, responseDestinationSlot))
                 );
+
+                if (itemListMovimentation is ItemListMovimentationEnum.EquipmentToInventory
+                    or ItemListMovimentationEnum.InventoryToEquipment)
+                {
+                    _equipmentSetBonusService.SyncPartnerPassiveBuffs(
+                        client,
+                        packet => BroadcastForViewsAndSelf(client, packet),
+                        true);
+                }
 
                 if (originSlot == GeneralSizeEnum.XaiSlot.GetHashCode())
                 {
@@ -255,8 +402,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                 if (IsDigimonStatAffectingMove(itemListMovimentation))
                 {
-                    LogDigimonStatSnapshot(client, originSlot, destinationSlot, itemListMovimentation);
-                    LogEquipmentPacketSnapshot(client, originSlot, destinationSlot, itemListMovimentation);
+                    LogDigimonStatSnapshot(client, originSlot, responseDestinationSlot, itemListMovimentation);
+                    LogEquipmentPacketSnapshot(client, originSlot, responseDestinationSlot, itemListMovimentation);
                     AccessoryParitySnapshot.LogEquippedSnapshot(
                         _logger,
                         $"equip-move:{itemListMovimentation}",
@@ -264,10 +411,20 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         client.Tamer.Equipment.EquippedItems);
                 }
 
-                _logger.Verbose($"Character {client.TamerId} moved an item from {originSlot} to {destinationSlot}.");
+                _logger.Verbose($"Character {client.TamerId} moved an item from {originSlot} to {responseDestinationSlot}.");
             }
             else
             {
+                if (IsChipsetMovement(itemListMovimentation))
+                {
+                    _logger.Warning(
+                        "Chipset ItemMove failed: tamer={TamerId} movement={Movement} origin={OriginSlot} destination={DestinationSlot}",
+                        client.TamerId,
+                        itemListMovimentation,
+                        originSlot,
+                        destinationSlot);
+                }
+
                 client.Send(
                     UtilitiesFunctions.GroupPackets(BuildMoveResultPackets(client, itemListMovimentation, false, originSlot, destinationSlot))
                 );
@@ -286,6 +443,62 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 or ItemListMovimentationEnum.ChipsetToInventory
                 or ItemListMovimentationEnum.InventoryToJogressChipset
                 or ItemListMovimentationEnum.JogressChipsetToInventory;
+        }
+
+        private static bool IsChipsetMovement(ItemListMovimentationEnum movimentation)
+        {
+            return movimentation is ItemListMovimentationEnum.InventoryToChipset
+                or ItemListMovimentationEnum.ChipsetToInventory
+                or ItemListMovimentationEnum.InventoryToJogressChipset
+                or ItemListMovimentationEnum.JogressChipsetToInventory;
+        }
+
+        private static bool IsDigiviceMovement(ItemListMovimentationEnum movimentation)
+        {
+            return movimentation is ItemListMovimentationEnum.InventoryToDigivice
+                or ItemListMovimentationEnum.DigiviceToInventory;
+        }
+
+        private static ItemModel? FindMoveEndpointItem(GameClient client, short slot)
+        {
+            if (slot >= GeneralSizeEnum.InventoryMinSlot.GetHashCode() &&
+                slot < GeneralSizeEnum.InventoryMaxSlot.GetHashCode())
+                return client.Tamer.Inventory.FindItemBySlot(slot - GeneralSizeEnum.InventoryMinSlot.GetHashCode());
+
+            if (slot >= GeneralSizeEnum.ChipsetMinSlot.GetHashCode() &&
+                slot <= GeneralSizeEnum.ChipsetMaxSlot.GetHashCode())
+                return client.Tamer.ChipSets.FindItemBySlot(slot - GeneralSizeEnum.ChipsetMinSlot.GetHashCode());
+
+            if (slot == GeneralSizeEnum.JogressChipSetSlot.GetHashCode())
+                return client.Tamer.JogressChipSet.FindItemBySlot(0);
+
+            if (slot == GeneralSizeEnum.DigiviceSlot.GetHashCode())
+                return client.Tamer.Digivice.FindItemBySlot(0);
+
+            return null;
+        }
+
+        private static string DescribeItem(ItemModel? item)
+        {
+            if (item == null || item.ItemId <= 0)
+                return "empty";
+
+            var statuses = string.Join(
+                ",",
+                item.AccessoryStatus
+                    .OrderBy(x => x.Slot)
+                    .Where(x => x.EffectiveValue > 0 || x.Type != default || x.HasInvalidNegativeValue)
+                    .Select(x => $"{x.Slot}:{x.Type}:raw={x.Value}:eff={x.EffectiveValue}"));
+
+            return $"item={item.ItemId} amount={item.Amount} type={item.ItemInfo?.Type ?? 0} skill={item.ItemInfo?.SkillCode ?? 0} power={item.Power} reroll={item.RerollLeft} family={item.FamilyType} status=[{statuses}]";
+        }
+
+        private void BroadcastForViewsAndSelf(GameClient client, byte[] packet)
+        {
+            if (client.DungeonMap)
+                _dungeonServer.BroadcastForTamerViewsAndSelf(client.TamerId, packet);
+            else
+                _mapServer.BroadcastForTamerViewsAndSelf(client.TamerId, packet);
         }
 
         private static bool IsExtraInventoryMovement(ItemListMovimentationEnum movimentation)
@@ -314,8 +527,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         {
             inventory.CheckEmptyItems();
             extraInventory.CheckEmptyItems();
-            await _sender.Send(new UpdateItemsCommand(inventory));
-            await _sender.Send(new UpdateItemsCommand(extraInventory));
+            await PersistMovedItemsAsync(inventory);
+            await PersistMovedItemsAsync(extraInventory);
+        }
+
+        private Task PersistMovedItemsAsync(ItemListModel itemList)
+        {
+            return _sender.Send(new UpdateItemsCommand(itemList, preserveUnreferencedInstances: true));
         }
 
         private void LogDigimonStatSnapshot(
@@ -432,7 +650,12 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
         }
 
-        private bool SwapItems(GameClient client, short originSlot, short destinationSlot, ItemListMovimentationEnum itemListMovimentation)
+        private bool SwapItems(
+            GameClient client,
+            short originSlot,
+            short destinationSlot,
+            ItemListMovimentationEnum itemListMovimentation,
+            ref short responseDestinationSlot)
         {
             switch (itemListMovimentation)
             {
@@ -447,7 +670,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                             return false;
 
                         var equippedItem = client.Tamer.Digivice.FindItemBySlot(dstSlot) ?? new ItemModel();
-                        BroadcastAppearanceUpdate(client, 13, equippedItem, 1);
+                        _logger.Information(
+                            "InventoryToDigivice moved: tamer={TamerId} srcSlot={SrcSlot} dstSlot={DstSlot} item={Item}",
+                            client.TamerId,
+                            srcSlot,
+                            dstSlot,
+                            DescribeItem(equippedItem));
+                        BroadcastAppearanceUpdate(client, TamerDigiviceVisualSlot, equippedItem, 1);
                         SendStatusAndSpeed(client);
                         return true;
                     }
@@ -467,6 +696,19 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     {
                         var srcSlot = originSlot - GeneralSizeEnum.InventoryMinSlot.GetHashCode();
                         var dstSlot = destinationSlot - GeneralSizeEnum.ChipsetMinSlot.GetHashCode();
+                        var sourceItem = client.Tamer.Inventory.FindItemBySlot(srcSlot);
+                        if (!IsNormalChipsetItem(sourceItem))
+                            return false;
+
+                        if (_accessoryEnchantService.EnsureChipsetFamilyType(sourceItem))
+                        {
+                            _logger.Information(
+                                "InventoryToChipset normalized chipset family: tamer={TamerId} srcSlot={SrcSlot} item={Item}",
+                                client.TamerId,
+                                srcSlot,
+                                DescribeItem(sourceItem));
+                        }
+
                         if (!client.Tamer.Inventory.TryMoveAcrossLists(client.Tamer.ChipSets, srcSlot, dstSlot))
                             return false;
 
@@ -477,6 +719,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     {
                         var srcSlot = originSlot - GeneralSizeEnum.InventoryMinSlot.GetHashCode();
                         const int dstSlot = 0;
+                        var sourceItem = client.Tamer.Inventory.FindItemBySlot(srcSlot);
+                        if (!IsJogressChipsetItem(sourceItem))
+                            return false;
+
                         if (!client.Tamer.Inventory.TryMoveAcrossLists(client.Tamer.JogressChipSet, srcSlot, dstSlot))
                             return false;
 
@@ -500,6 +746,54 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         var srcSlot = originSlot - GeneralSizeEnum.InventoryMinSlot.GetHashCode();
                         var dstSlot = destinationSlot == GeneralSizeEnum.XaiSlot.GetHashCode() ? 11 : destinationSlot - GeneralSizeEnum.EquipmentMinSlot.GetHashCode();
                         var srcItemBefore = client.Tamer.Inventory.FindItemBySlot(srcSlot);
+                        if (IsDigiviceItem(srcItemBefore))
+                        {
+                            _logger.Warning(
+                                "InventoryToEquipment rejected digivice item routed to equipment list: tamer={TamerId} srcSlot={SrcSlot} requestedDstSlot={RequestedDstSlot} itemId={ItemId}",
+                                client.TamerId,
+                                srcSlot,
+                                dstSlot,
+                                srcItemBefore?.ItemId ?? 0);
+                            return false;
+                        }
+
+                        var resolvedDstSlot = ResolveEquipmentSlot(srcItemBefore, dstSlot);
+                        if (!IsTamerEquipmentSlot(resolvedDstSlot))
+                        {
+                            _logger.Warning(
+                                "InventoryToEquipment rejected invalid equipment slot: tamer={TamerId} srcSlot={SrcSlot} requestedDstSlot={RequestedDstSlot} resolvedDstSlot={ResolvedDstSlot} itemId={ItemId} type={Type} name={Name}",
+                                client.TamerId,
+                                srcSlot,
+                                dstSlot,
+                                resolvedDstSlot,
+                                srcItemBefore?.ItemId ?? 0,
+                                srcItemBefore?.ItemInfo?.Type ?? 0,
+                                srcItemBefore?.ItemInfo?.Name ?? string.Empty);
+                            return false;
+                        }
+
+                        if (resolvedDstSlot != dstSlot)
+                        {
+                            _logger.Information(
+                                "InventoryToEquipment redirected equipment slot: tamer={TamerId} srcSlot={SrcSlot} requestedDstSlot={RequestedDstSlot} forcedDstSlot={ForcedDstSlot} itemId={ItemId} type={Type} name={Name}",
+                                client.TamerId,
+                                srcSlot,
+                                dstSlot,
+                                resolvedDstSlot,
+                                srcItemBefore?.ItemId ?? 0,
+                                srcItemBefore?.ItemInfo?.Type ?? 0,
+                                srcItemBefore?.ItemInfo?.Name ?? string.Empty);
+
+                            dstSlot = resolvedDstSlot;
+                            responseDestinationSlot = ToEquipmentPacketSlot(dstSlot);
+                        }
+
+                        if (dstSlot >= client.Tamer.Equipment.Size && dstSlot < GeneralSizeEnum.Equipment.GetHashCode())
+                        {
+                            client.Tamer.Equipment.AddSlots((byte)(dstSlot + 1 - client.Tamer.Equipment.Size));
+                            client.Tamer.Equipment.CheckEmptyItems();
+                        }
+
                         var dstItemBefore = client.Tamer.Equipment.FindItemBySlot(dstSlot);
                         if (!client.Tamer.Inventory.TryMoveAcrossLists(client.Tamer.Equipment, srcSlot, dstSlot))
                         {
@@ -586,9 +880,17 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                             return false;
 
                         var digiviceItem = client.Tamer.Digivice.FindItemBySlot(srcSlot) ?? new ItemModel();
+                        var inventoryItem = client.Tamer.Inventory.FindItemBySlot(dstSlot) ?? new ItemModel();
+                        _logger.Information(
+                            "DigiviceToInventory moved: tamer={TamerId} srcSlot={SrcSlot} dstSlot={DstSlot} inventoryItem={InventoryItem} digiviceNow={DigiviceNow}",
+                            client.TamerId,
+                            srcSlot,
+                            dstSlot,
+                            DescribeItem(inventoryItem),
+                            DescribeItem(digiviceItem));
                         BroadcastAppearanceUpdate(
                             client,
-                            13,
+                            TamerDigiviceVisualSlot,
                             digiviceItem.ItemId > 0 ? digiviceItem : new ItemModel(),
                             0);
                         SendStatusAndSpeed(client);
@@ -807,6 +1109,32 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 ?.Type ?? 0;
         }
 
+        private long ResolveSkillCode(ItemModel item)
+        {
+            if (item.ItemInfo != null)
+                return item.ItemInfo.SkillCode;
+
+            return _itemListBinLoader.Data.Items
+                .FirstOrDefault(x => x.ItemId == item.ItemId)
+                ?.SkillCode ?? 0;
+        }
+
+        private bool IsNormalChipsetItem(ItemModel? item)
+        {
+            return item != null
+                && item.ItemId > 0
+                && ResolveTypeL(item) == ChipsetItemType
+                && ResolveSkillCode(item) != JogressXrossChipsetSkillCode;
+        }
+
+        private bool IsJogressChipsetItem(ItemModel? item)
+        {
+            return item != null
+                && item.ItemId > 0
+                && ResolveTypeL(item) == ChipsetItemType
+                && ResolveSkillCode(item) == JogressXrossChipsetSkillCode;
+        }
+
         private static bool IsAllowedExtraInventoryType(int category, int type)
         {
             return category switch
@@ -818,6 +1146,129 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 CategoryMaterial => MaterialTypes.Contains(type),
                 _ => false
             };
+        }
+
+        private bool IsGlassSlotItem(ItemModel? item)
+        {
+            var itemInfo = GetEquipmentItemInfo(item);
+            return itemInfo.HasValue && IsGlassSlotItemInfo(itemInfo.Value.Type, itemInfo.Value.Name);
+        }
+
+        private int ResolveEquipmentSlot(ItemModel? item, int fallbackSlot)
+        {
+            var itemInfo = GetEquipmentItemInfo(item);
+            if (!itemInfo.HasValue)
+                return fallbackSlot;
+
+            var type = itemInfo.Value.Type;
+            var name = itemInfo.Value.Name;
+
+            if (type == GogglesItemType)
+                return TamerGogglesSlot;
+            if (IsGlassSlotItemInfo(type, name))
+                return TamerGlassSlot;
+            if (type == NamePlateItemType)
+                return TamerNamePlateSlot;
+            if (type == KeyringItemType)
+                return TamerKeyringSlot;
+            if (type == CostumeItemType || IsCostumeSlotName(name))
+                return TamerCostumeSlot;
+
+            return type switch
+            {
+                HeadItemType => TamerHeadSlot,
+                CoatItemType => TamerCoatSlot,
+                GloveItemType => TamerGloveSlot,
+                PantsItemType => TamerPantsSlot,
+                ShoesItemType => TamerShoesSlot,
+                GlassItemType => TamerGlassSlot,
+                NecklaceItemType => TamerNecklaceSlot,
+                RingItemType => TamerRingSlot,
+                EarringItemType => TamerEarringSlot,
+                EquipAuraItemType => TamerEquipAuraSlot,
+                XaiItemType => TamerXaiSlot,
+                BraceletItemType => TamerBraceletSlot,
+                NamePlateItemType => TamerNamePlateSlot,
+                KeyringItemType => TamerKeyringSlot,
+                GogglesItemType => TamerGogglesSlot,
+                _ => fallbackSlot
+            };
+        }
+
+        private bool IsDigiviceItem(ItemModel? item)
+        {
+            var itemInfo = GetEquipmentItemInfo(item);
+            return itemInfo.HasValue && itemInfo.Value.Type == DigiviceItemType;
+        }
+
+        private static bool IsTamerEquipmentSlot(int slot)
+        {
+            return slot >= TamerHeadSlot && slot <= TamerKeyringSlot;
+        }
+
+        private (int Type, string? Name)? GetEquipmentItemInfo(ItemModel? item)
+        {
+            if (item == null || item.ItemId <= 0)
+                return null;
+
+            if (item.ItemInfo != null)
+                return (item.ItemInfo.Type, item.ItemInfo.Name);
+
+            var binItemInfo = _itemListBinLoader.Load().Items.FirstOrDefault(x => x.ItemId == item.ItemId);
+            return binItemInfo != null
+                ? (binItemInfo.Type, binItemInfo.Name)
+                : null;
+        }
+
+        private static bool IsGlassSlotItemInfo(int type, string? name)
+        {
+            if (type == GlassItemType)
+                return true;
+
+            return false;
+        }
+
+        private static bool IsGogglesName(string? itemName)
+        {
+            if (string.IsNullOrWhiteSpace(itemName))
+                return false;
+
+            return itemName.Contains("goggle", StringComparison.OrdinalIgnoreCase)
+                || itemName.Contains("glass", StringComparison.OrdinalIgnoreCase)
+                || itemName.Contains("sunglass", StringComparison.OrdinalIgnoreCase)
+                || itemName.Contains("eyeglass", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static bool IsCostumeSlotName(string? itemName)
+        {
+            if (string.IsNullOrWhiteSpace(itemName))
+                return false;
+
+            if (ContainsAny(itemName,
+                    "boot", "shoe", "sneaker", "glove", "trouser", "pants",
+                    "hat", "robe", "top", "bottom", "jacket", "bouquet",
+                    "sunglass", "glass", "goggle"))
+            {
+                return false;
+            }
+
+            return ContainsAny(itemName, "suit", "dress", "costume", "outfit")
+                || ContainsAny(itemName,
+                    "soccer uniform", "school uniform", "taekwondo uniform",
+                    "fencing uniform", "archery uniform", "archer uniform",
+                    "tennisuniform", "tennis uniform");
+        }
+
+        private static bool ContainsAny(string value, params string[] tokens)
+        {
+            return tokens.Any(token => value.Contains(token, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private static short ToEquipmentPacketSlot(int equipmentSlot)
+        {
+            return equipmentSlot == 11
+                ? (short)GeneralSizeEnum.XaiSlot.GetHashCode()
+                : (short)(GeneralSizeEnum.EquipmentMinSlot.GetHashCode() + equipmentSlot);
         }
 
         private void BroadcastAppearanceUpdate(GameClient client, byte slot, ItemModel item, byte mode)
@@ -911,7 +1362,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         private static bool IsVisualEquipmentSlot(byte slot)
         {
-            return slot <= 6 || slot == 10 || slot == 11 || slot == 13;
+            return slot <= 6 || slot == 10 || slot == 11 || slot == TamerNamePlateSlot || slot == TamerGogglesSlot || slot == TamerDigiviceVisualSlot;
         }
 
         private static int GetPacketNumber(byte[] packet)

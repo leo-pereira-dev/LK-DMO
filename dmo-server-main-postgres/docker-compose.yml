@@ -4,15 +4,15 @@ services:
     container_name: dmo-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: dso
-      POSTGRES_USER: dso
-      POSTGRES_PASSWORD: dso_password
+      POSTGRES_DB: ${POSTGRES_DB:-dso}
+      POSTGRES_USER: ${POSTGRES_USER:-dso}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dso_password}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - dmo_postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dso -d dso"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-dso} -d ${POSTGRES_DB:-dso}"]
       interval: 10s
       timeout: 5s
       retries: 30
@@ -40,15 +40,18 @@ services:
         condition: service_healthy
     environment:
       APP_DLL: DigitalWorldOnline.Account.dll
-      Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
-      DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      DOTNET_ENVIRONMENT: ${DOTNET_ENVIRONMENT:-Development}
+      Database__Connection: ${DMO_DATABASE_CONNECTION:-Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;}
+      DSO_Database__Connection: ${DMO_DATABASE_CONNECTION:-Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;}
       DSO_AuthenticationServer__Address: 0.0.0.0
-      DSO_AuthenticationServer__Port: 7029
-      DSO_AuthenticationServer__Backlog: 5
+      DSO_AuthenticationServer__Port: ${ACCOUNT_INTERNAL_PORT:-17029}
+      DSO_AuthenticationServer__Backlog: ${SERVER_BACKLOG:-5}
       DSO_AuthenticationServer__Hash: "true"
-      DSO_CharacterServer__Address: 127.0.0.1
+      DSO_CharacterServer__Address: ${CHARACTER_SERVER_ADDRESS:-127.0.0.1}
+      DSO_CharacterServer__PublicPort: ${CHARACTER_PUBLIC_PORT:-17050}
     ports:
-      - "17029:7029"
+      - "${ACCOUNT_PORT:-17029}:${ACCOUNT_INTERNAL_PORT:-17029}"
     restart: unless-stopped
 
   character:
@@ -63,15 +66,18 @@ services:
         condition: service_healthy
     environment:
       APP_DLL: DigitalWorldOnline.Character.dll
-      Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
-      DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      DOTNET_ENVIRONMENT: ${DOTNET_ENVIRONMENT:-Development}
+      Database__Connection: ${DMO_DATABASE_CONNECTION:-Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;}
+      DSO_Database__Connection: ${DMO_DATABASE_CONNECTION:-Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;}
       DSO_CharacterServer__Address: 0.0.0.0
-      DSO_CharacterServer__Port: 7050
-      DSO_CharacterServer__Backlog: 5
-      DSO_GameServer__Address: 127.0.0.1
-      DSO_GameServer__Port: 7608
+      DSO_CharacterServer__Port: ${CHARACTER_INTERNAL_PORT:-17050}
+      DSO_CharacterServer__Backlog: ${SERVER_BACKLOG:-5}
+      DSO_GameServer__Address: ${GAME_SERVER_ADDRESS:-127.0.0.1}
+      DSO_GameServer__Port: ${GAME_INTERNAL_PORT:-17608}
+      DSO_GameServer__PublicPort: ${GAME_PUBLIC_PORT:-17608}
     ports:
-      - "17050:7050"
+      - "${CHARACTER_PORT:-17050}:${CHARACTER_INTERNAL_PORT:-17050}"
     volumes:
       - ./Bins:/app/Bins:ro
     restart: unless-stopped
@@ -88,15 +94,18 @@ services:
         condition: service_healthy
     environment:
       APP_DLL: DigitalWorldOnline.Game.dll
-      Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
-      DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      DOTNET_ENVIRONMENT: ${DOTNET_ENVIRONMENT:-Development}
+      Database__Connection: ${DMO_DATABASE_CONNECTION:-Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;}
+      DSO_Database__Connection: ${DMO_DATABASE_CONNECTION:-Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;}
       DSO_GameServer__Address: 0.0.0.0
-      DSO_GameServer__Port: 7608
-      DSO_GameServer__Backlog: 5
-      DSO_GameServer__PublicAddress: 127.0.0.1
-      DSO_Fatigue__Enabled: "false"
+      DSO_GameServer__Port: ${GAME_INTERNAL_PORT:-17608}
+      DSO_GameServer__Backlog: ${SERVER_BACKLOG:-5}
+      DSO_GameServer__PublicAddress: ${GAME_PUBLIC_ADDRESS:-127.0.0.1}
+      DSO_GameServer__PublicPort: ${GAME_PUBLIC_PORT:-17608}
+      DSO_Fatigue__Enabled: ${DSO_FATIGUE_ENABLED:-false}
     ports:
-      - "17608:7608"
+      - "${GAME_PORT:-17608}:${GAME_INTERNAL_PORT:-17608}"
     volumes:
       - ./Bins:/app/Bins:ro
       - ./xml:/app/xml:ro
@@ -114,8 +123,10 @@ services:
         condition: service_healthy
     environment:
       APP_DLL: DigitalWorldOnline.Routine.dll
-      Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
-      DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      DOTNET_ENVIRONMENT: ${DOTNET_ENVIRONMENT:-Development}
+      Database__Connection: ${DMO_DATABASE_CONNECTION:-Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;}
+      DSO_Database__Connection: ${DMO_DATABASE_CONNECTION:-Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;}
     volumes:
       - ./Bins:/app/Bins:ro
       - ./xml:/app/xml:ro
@@ -133,11 +144,13 @@ services:
         condition: service_healthy
     environment:
       APP_DLL: DigitalWorldOnline.Api.dll
-      ASPNETCORE_URLS: http://+:5189
-      Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
-      DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      DOTNET_ENVIRONMENT: ${DOTNET_ENVIRONMENT:-Development}
+      ASPNETCORE_URLS: http://+:${API_INTERNAL_PORT:-5189}
+      Database__Connection: ${DMO_DATABASE_CONNECTION:-Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;}
+      DSO_Database__Connection: ${DMO_DATABASE_CONNECTION:-Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;}
     ports:
-      - "15189:5189"
+      - "${API_PORT:-15189}:${API_INTERNAL_PORT:-5189}"
     restart: unless-stopped
 
   admin:
@@ -152,11 +165,13 @@ services:
         condition: service_healthy
     environment:
       APP_DLL: DigitalWorldOnline.Admin.dll
-      ASPNETCORE_URLS: http://+:5000
-      Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
-      DSO_Database__Connection: Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      DOTNET_ENVIRONMENT: ${DOTNET_ENVIRONMENT:-Development}
+      ASPNETCORE_URLS: http://+:${ADMIN_INTERNAL_PORT:-5000}
+      Database__Connection: ${DMO_DATABASE_CONNECTION:-Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;}
+      DSO_Database__Connection: ${DMO_DATABASE_CONNECTION:-Host=postgres;Port=5432;Database=dso;Username=dso;Password=dso_password;Search Path=dso;}
     ports:
-      - "15000:5000"
+      - "${ADMIN_PORT:-15000}:${ADMIN_INTERNAL_PORT:-5000}"
     volumes:
       - ./Bins:/app/Bins:ro
     restart: unless-stopped

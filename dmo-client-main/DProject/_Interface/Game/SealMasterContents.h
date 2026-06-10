@@ -45,7 +45,7 @@ public:
 	//맵 그룹 정보
 	struct sMapGroup
 	{
-		sMapGroup(): sGoupType(0){};
+		sMapGroup(): sGoupType(0), sCount(0){};
 		virtual ~sMapGroup()	{};
 		DWORD					sGoupType;
 		std::wstring			sMapGroupName;
@@ -111,8 +111,8 @@ public:
 
 private:
 	void				SetMapGroupMap();
-	void				SetMapInfo(DWORD groupID, DWORD mapID, DWORD sealID);
-	void				SetSealInfo(DWORD groupID, DWORD mapID, DWORD sealID);
+	bool				SetMapInfo(DWORD groupID, DWORD mapID, DWORD sealID);
+	bool				SetSealInfo(DWORD groupID, DWORD mapID, DWORD sealID);
 	void				ClearMapGroupMap();
 	void				ClearSealInfoMap();
 	void				ResetSealInfoValues();

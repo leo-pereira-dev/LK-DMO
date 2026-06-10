@@ -187,14 +187,16 @@ void NewCashshopEquipViewer::_CreateEquipSlot(void)
 		m_pkRightEquipGrid->AddItem( addItem );
 		addItem = _EmptyEquipSlotItem(2, nTamer::Earring, 0 );
 		m_pkRightEquipGrid->AddItem( addItem );
-		addItem = _EmptyEquipSlotItem(3, nTamer::Glass, 0 );
+		addItem = _EmptyEquipSlotItem(3, nTamer::Goggles, 0 );
 		m_pkRightEquipGrid->AddItem( addItem );
-		addItem = _EmptyEquipSlotItem(4, nTamer::EquipAura, 0 );
+		addItem = _EmptyEquipSlotItem(4, nTamer::Glass, 0 );
 		m_pkRightEquipGrid->AddItem( addItem );
 		addItem = _EmptyEquipSlotItem(5, nTamer::MaxParts, 0 );// 디지바이스
 		m_pkRightEquipGrid->AddItem( addItem );
+		addItem = _EmptyEquipSlotItem(6, nTamer::EquipAura, 0 );
+		m_pkRightEquipGrid->AddItem( addItem );
 #ifdef SERVER_KSW_XEVOLUTION_1_180615
-		addItem = _EmptyEquipSlotItem(6, nTamer::XAI, 0 );
+		addItem = _EmptyEquipSlotItem(7, nTamer::XAI, 0 );
 		m_pkRightEquipGrid->AddItem( addItem );
 #endif
 	}

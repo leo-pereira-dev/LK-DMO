@@ -25,7 +25,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
 
             foreach (var status in identifiedItem.AccessoryStatus.OrderBy(x => x.Slot))
             {
-                WriteShort(status.Value);
+                WriteUShort(status.WireValue);
             }
         }
     }

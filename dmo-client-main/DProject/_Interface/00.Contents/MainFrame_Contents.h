@@ -138,6 +138,7 @@ public:
 
 	int				GetOpenedChipsetSlot() const;
 	cItemInfo*		GetChipsetItem( int nChipsetIndex ) const;
+	cItemInfo*		GetEvoChipsetItem() const;
 
 	int				GetSkillType( int nIndex, eSkillType eType ) const;
 	int				GetSkillIndex( int nIndex, eSkillType eType ) const;
@@ -156,6 +157,7 @@ public:
 	void			WearEquipItem( int nIconSlot );
 	void			MoveEquipItem( int nEquipType );
 	void			MoveChipsetItem( int nIconSlot, int nChipsetIndex, bool bToInven, bool bFromChip );
+	void			MoveEvoChipsetItem( int nIconSlot, bool bToInven, bool bFromEquipped );
 
 	void			OnClickTactitcs( int nTacticsIndex );
 

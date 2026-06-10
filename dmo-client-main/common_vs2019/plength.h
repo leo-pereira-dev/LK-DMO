@@ -20,7 +20,7 @@ namespace pLength
 		MonsterName		= 63,
 		SkillName		= 32,
 
-		ip				= 16,
+		ip				= 64,
 #if defined VERSION_TH
 		map_name		= 64,
 #else

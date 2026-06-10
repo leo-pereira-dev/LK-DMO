@@ -6,15 +6,13 @@ namespace enPartyInviteResult
 {
 	enum eResult
 	{
-		Impossible		= -3,	// 파티 요청을 응답할 수 없는 상태임
-		OffLine			= -2,	// 접속중이지 아니하거나, 존재하지 아니함
-		Reject			= -1,	// 파티 거부
-		AlreadyParty	= 0,	// 다른 파티에 가입중
-		Accept			= 1,	// 수락
+		Impossible		= 5,
+		OffLine			= 6,
+		Reject			= 7,
+		AlreadyParty	= 8,
+		Accept			= 9,
 	};
 };
-
-// 파티원 주사위 결과
 struct TDiceResult
 {
 	TDiceResult():m_nDiceNumber(0)

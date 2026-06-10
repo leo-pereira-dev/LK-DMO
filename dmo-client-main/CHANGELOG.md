@@ -1,5 +1,74 @@
 # Changelog
 
+## 2026-06-08 - Tamer Keyring/NamePlate equipment slots
+
+- Added the missing Keyring item type (`TypeL 35`) to the client equipment
+  flow, fixing the `DataMng.cpp` item-use assert for modern keyrings such as
+  `Ghost Keyring [VB]`.
+- Expanded the Tamer equipment contract to 16 equipment slots:
+  Digivice remains the special visual part above XAI, XAI uses the right-column
+  slot directly below Digivice, Keyring uses the separate side slot in front of
+  XAI, and Magnetic ID/NamePlate stays in the left bottom overlay next to
+  Costume.
+- Updated client/server slot resolution so modern `TypeL 34/35/36` items no
+  longer rely on the old `type - Head` shortcut that mapped them to the wrong
+  slots.
+- Kept NamePlate, Goggles, and Keyring out of the 3D part loader so these
+  logical equipment slots do not assert on missing `.nif` data or leave a
+  placeholder cube on the Tamer model.
+- Rebuilt the x64 bridge client and copied it to
+  `C:\0-NewDmo\ClientDist1_x64\lk-dmo-x64.exe`; verified timestamp:
+  `08/06/2026 18:27:42`, length `13691392`.
+- Full technical notes:
+  `C:\0-NewDmo\dmo-client-main\docs\portability\22_2026-06-08_TAMER_KEYRING_SLOT_FIX.md`.
+
+## 2026-06-08 - ChipSet CT/EV tooltip percent display
+
+- Updated item tooltip parsing so ChipSet CT/EV effects render as percent
+  values, matching the server/client basis-point stat scale.
+- A raw ChipSet CT value such as `436` now displays as `4.36%` instead of a
+  plain integer increase.
+- Integer ChipSet stats such as HT still display as integer values.
+- Full operational documentation:
+  `C:\0-NewDmo\dmo-server-main-postgres\docs\2026-06-08_ITEM_STATUS_AND_ACCESSORY_FIXES.md`.
+
+## 2026-06-08 - Status tooltip source attribution and DUnit icon
+
+- Removed the fake red equipment residual row from Digimon stat tooltips. When
+  the client cannot attribute a leftover stat delta, it now logs
+  `STAT_TOOLTIP_UNRESOLVED` instead of displaying that leftover as equipment.
+- Added a server-detail equipment fallback for Digimon stat tooltips. If the
+  server's `TamerDetail*` bonus contains a positive source that the old local
+  `FMDigimon::GetTamerEquipValue` path cannot decompose, the tooltip shows that
+  missing positive detail as an equipment row only while tamer equipment is
+  equipped.
+- Added the DUnit/Unit tooltip source row with `Union\Filter_icon.png`, matching
+  the original pseudo-code icon reference.
+- CT tooltip base now resolves from the authoritative server total so a Digimon
+  with no equipment no longer shows a phantom equipment CT bonus.
+- BL remains integer-percent in the server and in the main client status panel.
+  Tooltip math converts the authoritative BL total to basis points internally
+  only, so server combat and main BL display stay aligned.
+- Active deck display remains on the existing `DECKBUFF` flow; no separate
+  passive deck source row was added in this pass.
+- Rebuilt the x64 bridge client and copied it to
+  `C:\0-NewDmo\ClientDist1_x64\lk-dmo-x64.exe`; verified timestamp:
+  `08/06/2026 13:17:10`, length `13686272`.
+
+## 2026-06-08 - Digivice Jogress/Xros dedicated slot
+
+- Added the GDMO-style dedicated Jogress/Xros chip slot on the Tamer
+  Information Digivice tab, separate from the normal ChipSet grid.
+- Added client-side EvoChip storage, initial-packet parsing, UI slot rendering,
+  and drag/drop routing for container `3000`; normal ChipSet remains on
+  container `4000`.
+- Clarified that `CI_EVOCHIP` is only an internal drag/drop item type and does
+  not change the visual mouse cursor.
+- Built the x64 bridge client and copied the runtime to
+  `C:\0-NewDmo\ClientDist1_x64\lk-dmo-x64.exe`.
+- Full technical notes:
+  `C:\0-NewDmo\dmo-client-main\docs\portability\20_2026-06-08_DIGIVICE_JOGRESS_SLOT.md`.
+
 All notable client-side patches applied while bringing the upstream v487 source up against a private DSO-style server. Earliest items at the bottom of each section.
 
 > Server-side patches (DSO emulator) are tracked in that repo. This file only covers what was changed in the client tree.

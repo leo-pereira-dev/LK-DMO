@@ -1,9 +1,31 @@
 
 #include "stdafx.h"
 #include "Data_Inven.h"
+#include "../LibProj/CsFunc/CrashLogger.h"
 
 namespace
 {
+void LogCropItemData( const char* pszSource, cItemData* const pItemData, int nCount )
+{
+	if( pItemData == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "%s null item data requestedCount=%d", pszSource, nCount );
+		return;
+	}
+
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"%s item=%u count=%u rate=%u level=%u limited=%u end=%u requestedCount=%d itemMng=%p",
+		pszSource,
+		(unsigned)pItemData->GetType(),
+		(unsigned)pItemData->GetCount(),
+		(unsigned)pItemData->m_nRate,
+		(unsigned)pItemData->m_nLevel,
+		(unsigned)pItemData->m_nLimited,
+		(unsigned)pItemData->m_nEndTime,
+		nCount,
+		(void*)nsCsFileTable::g_pItemMng );
+}
+
 void CopyItemInfoFields( cItemInfo& dest, const cItemInfo& src )
 {
 	dest.m_nAll = src.m_nAll;
@@ -290,11 +312,11 @@ void cData_Inven::InitNetOff()
 	for( uint i=0; i<m_nInvenSlotCount; ++i )
 	{
 		sprintf_s( key, 32, "%d_IDX", i );
-		m_pInven[ i ].m_nType = x.GetInt( "ITEM", key );
+		m_pInven[ i ].SetType( x.GetInt( "ITEM", key ) );
 		sprintf_s( key, 32, "%d_CNT", i );
 		m_pInven[ i ].m_nCount = x.GetInt( "ITEM", key );
 
-		if( m_pInven[ i ].m_nType != 0 )
+		if( m_pInven[ i ].GetType() != 0 )
 		{
 			m_pInven[ i ].m_nRate = 50;
 			m_pInven[ i ].m_nEndTime = 600 + _TIME_TS;
@@ -343,7 +365,7 @@ u4	 cData_Inven::GetTypeToIndex(nItem::eType eType)
 	{
 		//if( m_pInven[i] != NULL)
 		{
-			CsItem*  pkItem = nsCsFileTable::g_pItemMng->GetItem( m_pInven[i].m_nType );
+			CsItem*  pkItem = nsCsFileTable::g_pItemMng->GetItem( m_pInven[i].GetType() );
 			if(pkItem != NULL)
 			{
 				CsItem::sINFO* pFTItemInfo = pkItem->GetInfo();
@@ -363,7 +385,7 @@ u4	 cData_Inven::GetTypeToIndex(int Type)
 {
 	for(int i=0; i<nLimit::Inven; ++i)
 	{
-		if( m_pInven[i].m_nType == Type )
+		if( m_pInven[i].GetType() == Type )
 			return i;
 	}
 	return	INVALIDE_INVEN_INDEX;
@@ -373,7 +395,7 @@ u4	 cData_Inven::GetTypeToConut(int Type)
 	u4	uCnt = 0;
 	for(int i=0; i<nLimit::Inven; ++i)
 	{
-		if( m_pInven[i].m_nType == Type )
+		if( m_pInven[i].GetType() == Type )
 			uCnt += m_pInven[i].GetCount();
 	}
 	return uCnt;
@@ -382,7 +404,7 @@ cItemInfo*	cData_Inven::GetTypeToItem(int Type)
 {
 	for(int i=0; i<nLimit::Inven; ++i)
 	{
-		if( m_pInven[i].m_nType == Type )
+		if( m_pInven[i].GetType() == Type )
 			return &m_pInven[i];
 	}
 	return NULL;
@@ -514,7 +536,7 @@ bool cData_Inven::IsSlot( int nItemID, int nCount )
 			return true;
 
 		// 같은 타입이 존재 한다면
-		if( m_pInven[ i ].m_nType != nItemID )
+		if( m_pInven[ i ].GetType() != nItemID )
 			continue;
 
 		// 7일 거래 제한이 걸려 있는 아이템인 경우
@@ -609,7 +631,7 @@ int cData_Inven::GetFirstSlot_Item_ID( int nItemID )
 	{
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
-		if( m_pInven[ i ].m_nType == nItemID )
+		if( m_pInven[ i ].GetType() == nItemID )
 			return i;
 	}
 	return INVALIDE_INVEN_INDEX;
@@ -624,7 +646,7 @@ int cData_Inven::GetSlot_Item_ID_ReverseToSlot( int nSlot, int nItemID )
 	{
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
-		if( m_pInven[ i ].m_nType == nItemID )
+		if( m_pInven[ i ].GetType() == nItemID )
 			return i;
 	}
 	return INVALIDE_INVEN_INDEX;
@@ -636,7 +658,7 @@ int cData_Inven::GetSlot_Item_ID_Count(uint const& nItemID, uint const& nItemCou
 	{
 		if( !m_pInven[ i ].IsEnable() )
 			continue;
-		if( nItemID != m_pInven[ i ].m_nType )
+		if( nItemID != m_pInven[ i ].GetType() )
 			continue;
 		if( nItemCount > m_pInven[ i ].GetCount() )
 			continue;
@@ -656,7 +678,7 @@ int	 cData_Inven::GetSlot_Item_ID_ReverseToSlot_G(int nSlot, int nItemID )
 	{
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
-		if( m_pInven[ i ].m_nType == nItemID )
+		if( m_pInven[ i ].GetType() == nItemID )
 			return i;
 	}
 	return INVALIDE_INVEN_INDEX;
@@ -669,7 +691,7 @@ int cData_Inven::GetFirstSlot_Item_ID_Rate( int nItemID, int nRate, bool bPassLi
 	{
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
-		if( m_pInven[ i ].m_nType != nItemID )
+		if( m_pInven[ i ].GetType() != nItemID )
 			continue;
 		if( m_pInven[ i ].m_nRate != nRate )
 			continue;
@@ -693,7 +715,7 @@ int cData_Inven::GetFirstSlot_Item_TypeLS(int nTypeL, int nTypeS )
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
 
-		unsigned int nItemType = m_pInven[ i ].m_nType;
+		unsigned int nItemType = m_pInven[ i ].GetType();
 
 		CsItem* pItemInfo = nsCsFileTable::g_pItemMng->GetItem( nItemType );
 		SAFE_POINTER_CON( pItemInfo );
@@ -713,7 +735,7 @@ int cData_Inven::GetFirstSlot_ItemID( int nItemID1, int nItemID2 )
 	{
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
-		if( ( m_pInven[ i ].m_nType == nItemID1 )||( m_pInven[ i ].m_nType == nItemID2 ) )
+		if( ( m_pInven[ i ].GetType() == nItemID1 )||( m_pInven[ i ].GetType() == nItemID2 ) )
 			return i;
 	}
 	return INVALIDE_INVEN_INDEX;
@@ -727,7 +749,7 @@ DWORD cData_Inven::GetCount_Item_ID( uint const& dwItemID, bool const& bCheckLim
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
 		
-		if( m_pInven[ i ].m_nType != dwItemID )
+		if( m_pInven[ i ].GetType() != dwItemID )
 			continue;
 
 		if( bCheckLimitedTime )
@@ -749,7 +771,7 @@ void cData_Inven::GetItemDatas_ItemID( uint const& dwItemID, DWORD const& nTotal
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
 
-		if( m_pInven[ i ].m_nType != dwItemID )
+		if( m_pInven[ i ].GetType() != dwItemID )
 			continue;
 
 		if( bCheckLimitedTime )
@@ -792,7 +814,7 @@ void cData_Inven::GetItemDatas_ItemType( uint const& dwItemType, DWORD const& nT
 				continue;
 		}
 
-		CsItem* pItem = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType );
+		CsItem* pItem = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() );
 		SAFE_POINTER_CON( pItem );
 		CsItem::sINFO* pInfo = pItem->GetInfo();
 		SAFE_POINTER_CON( pInfo );
@@ -828,10 +850,10 @@ int cData_Inven::GetCount_Item_TypeL( int nType_L )
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
 
-		if( nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType ) == NULL )
+		if( nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() ) == NULL )
 			continue;
 
-		pInfo = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType )->GetInfo();
+		pInfo = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() )->GetInfo();
 		SAFE_POINTER_CON( pInfo );
 		if( pInfo->s_nType_L != nType_L )
 			continue;
@@ -849,13 +871,13 @@ int cData_Inven::GetCount_Item_TypeLS(int nType_L, int nType_S )
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
 
-		if( nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType ) == NULL )
+		if( nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() ) == NULL )
 		{
 			//DUMPLOG( " C004 - %s, %d, %d ", g_pCharMng->GetTamerUser()->GetName(), m_nInvenSlotCount, i );
 			continue;
 		}
 
-		pInfo = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType )->GetInfo();
+		pInfo = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() )->GetInfo();
 		if( ( pInfo->s_nType_L == nType_L )&&( pInfo->s_nType_S == nType_S ) )
 			nReturn += m_pInven[ i ].GetCount();
 	}
@@ -873,7 +895,7 @@ int cData_Inven::GetCount_Item_ID_Rate( int nItemID, int nRate )
 		if( m_pInven[ i ].m_nRate != nRate )
 			continue;
 
-		if( m_pInven[ i ].m_nType != nItemID )
+		if( m_pInven[ i ].GetType() != nItemID )
 			continue;
 
 		nReturn += m_pInven[ i ].GetCount();
@@ -1000,7 +1022,7 @@ void cData_Inven::ItemLock_ItemID( int nItemID )
 	{
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
-		if( m_pInven[ i ].m_nType == nItemID )
+		if( m_pInven[ i ].GetType() == nItemID )
 			g_pDataMng->ItemLock( TO_INVEN_SID( i ) );
 	}
 }
@@ -1012,10 +1034,10 @@ void cData_Inven::ItemLock_ItemID_ELSE( int nItemID )
 	{
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
-		if( m_pInven[ i ].m_nType == nItemID )
+		if( m_pInven[ i ].GetType() == nItemID )
 			continue;
 
-		_InsertLock_ItemID(m_pInven[ i ].m_nType);
+		_InsertLock_ItemID(m_pInven[ i ].GetType());
 		g_pDataMng->ItemLock( TO_INVEN_SID( i ) );
 	}
 }
@@ -1026,7 +1048,7 @@ void cData_Inven::ItemUnlock_AllItem()
 	{
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
-		_ReleaseLock_ItemID( m_pInven[ i ].m_nType );
+		_ReleaseLock_ItemID( m_pInven[ i ].GetType() );
 		g_pDataMng->ItemUnlock( TO_INVEN_SID( i ) );
 	}
 }
@@ -1039,7 +1061,7 @@ void cData_Inven::ItemUnlock_ItemID( int nItemID )
 	{
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
-		if( m_pInven[ i ].m_nType == nItemID )
+		if( m_pInven[ i ].GetType() == nItemID )
 			g_pDataMng->ItemUnlock( TO_INVEN_SID( i ) );
 	}
 }
@@ -1052,7 +1074,7 @@ void cData_Inven::Itemlock_InvenSlot( int nIndex )
 	if( !m_pInven[nIndex].IsEnable() )
 		return;
 
-	_InsertLock_ItemID( m_pInven[nIndex].m_nType );
+	_InsertLock_ItemID( m_pInven[nIndex].GetType() );
 	g_pDataMng->ItemLock( nIndex );
 }
 
@@ -1064,7 +1086,7 @@ void cData_Inven::ItemUnlock_InvenSlot( int nIndex )
 	if( !m_pInven[nIndex].IsEnable() )
 		return;
 
-	_ReleaseLock_ItemID( m_pInven[nIndex].m_nType );
+	_ReleaseLock_ItemID( m_pInven[nIndex].GetType() );
 	g_pDataMng->ItemUnlock( nIndex );
 }
 
@@ -1115,7 +1137,7 @@ bool cData_Inven::UpdateInvenItem( int const& nInvenPos, cItemData const& cItemD
 	cItemInfo* pItemInfo = GetData( nInvenPos );
 	SAFE_POINTER_RETVAL( pItemInfo, false );
 
-	DWORD dwItemCode = cItemData.m_nType;
+	DWORD dwItemCode = cItemData.GetType();
 	if( 0 == dwItemCode )// 인벤토리 슬롯 위치의 아이템이 삭제 榮?
 	{
 		dwItemCode = pItemInfo->GetType();
@@ -1166,7 +1188,7 @@ void cData_Inven::DecreaseItem( int const& nItemID, int nCount, bool bCoolDown, 
 				continue;
 		}
 
-		if( m_pInven[ i ].m_nType == nItemID )
+		if( m_pInven[ i ].GetType() == nItemID )
 		{
 			if( (int)m_pInven[ i ].GetCount() < nCount )
 			{
@@ -1219,7 +1241,7 @@ void cData_Inven::DecreaseItem( int const& nItemID, int nRate, int nCount, bool 
 				continue;
 		}
 
-		if( m_pInven[ i ].m_nType != nItemID )
+		if( m_pInven[ i ].GetType() != nItemID )
 			continue;
 
 		if( m_pInven[ i ].m_nRate != nRate )
@@ -1286,10 +1308,10 @@ void cData_Inven::DecreaseItem_TypeLS( int nTypeL, int nTypeS, int nCount, bool 
 				continue;
 		}
 
-		if( nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType ) == NULL )
+		if( nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() ) == NULL )
 			continue;
 
-		pInfo = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType )->GetInfo();
+		pInfo = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() )->GetInfo();
 		SAFE_POINTER_CON( pInfo );
 		if( ( pInfo->s_nType_L != nTypeL )||( pInfo->s_nType_S != nTypeS ) )
 			continue;
@@ -1374,10 +1396,10 @@ int cData_Inven::GetFirstSlot_ItemType( int nType_L, int nType_S )
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
 
-		if( nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType ) == NULL )
+		if( nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() ) == NULL )
 			continue;
 
-		pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType )->GetInfo();
+		pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() )->GetInfo();
 		SAFE_POINTER_RETVAL( pFTItem, INVALIDE_INVEN_INDEX );
 		if( ( pFTItem->s_nType_L == nType_L )&&( pFTItem->s_nType_S == nType_S ) )
 			return i;
@@ -1401,10 +1423,10 @@ void cData_Inven::ItemLock_ItemType( int nType_L, int nType_S )
 		// mismatch, slot left stale post-consume).  Original code only checked pFTItem
 		// (the inner GetInfo() result), so the GetItem()->GetInfo() chain AV'd before
 		// SAFE_POINTER_CON could trip.
-		if( nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType ) == NULL )
+		if( nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() ) == NULL )
 			continue;
 
-		pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType )->GetInfo();
+		pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() )->GetInfo();
 		SAFE_POINTER_CON( pFTItem );
 		if( ( pFTItem->s_nType_L == nType_L )&&( pFTItem->s_nType_S == nType_S ) )
 			g_pDataMng->ItemLock( TO_INVEN_SID( i ) );
@@ -1421,10 +1443,10 @@ void cData_Inven::ItemUnlock_ItemType( int nType_L, int nType_S )
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
 
-		if( nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType ) == NULL )
+		if( nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() ) == NULL )
 			continue;
 
-		pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType )->GetInfo();
+		pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() )->GetInfo();
 		SAFE_POINTER_CON( pFTItem );
 		if( ( pFTItem->s_nType_L == nType_L )&&( pFTItem->s_nType_S == nType_S ) )
 			g_pDataMng->ItemUnlock( TO_INVEN_SID( i ) );
@@ -1841,7 +1863,7 @@ int cData_Inven::ItemCrop( cItemData* pItemData, int nCount )
 				break;
 
 			// 같은 타입인가
-			if( m_pInven[ i ].m_nType != pItemData->GetType() )
+			if( m_pInven[ i ].GetType() != pItemData->GetType() )
 				continue;
 
 			// 갯수가 맥스인가		
@@ -1906,7 +1928,7 @@ int cData_Inven::ItemCrop( cItemData* pItemData, int nCount )
 			m_pInven[ nEmptySlot ].m_nLimited = 1;			
 
 		// 이미 아이템 ID 闡려像繭窄?闡?
-		if( _IsLock_ItemID( m_pInven[ nEmptySlot ].m_nType ) == true )
+		if( _IsLock_ItemID( m_pInven[ nEmptySlot ].GetType() ) == true )
 		{
 			g_pDataMng->ItemLock( TO_INVEN_SID( nEmptySlot ) );
 		}
@@ -1967,7 +1989,7 @@ int cData_Inven::ItemCrop_Repurchase( cItemData* pItemData )
 				break;
 
 			// 같은 타입인가
-			if( m_pInven[ i ].m_nType != pItemData->GetType() )
+			if( m_pInven[ i ].GetType() != pItemData->GetType() )
 				continue;
 
 			// 갯수가 맥스인가		
@@ -2025,7 +2047,7 @@ int cData_Inven::ItemCrop_Repurchase( cItemData* pItemData )
 // 			m_pInven[ nEmptySlot ].m_nLimited = 1;			
 
 		// 이미 아이템 ID 闡려像繭窄?闡?
-		if( _IsLock_ItemID( m_pInven[ nEmptySlot ].m_nType ) == true )
+		if( _IsLock_ItemID( m_pInven[ nEmptySlot ].GetType() ) == true )
 		{
 			g_pDataMng->ItemLock( TO_INVEN_SID( nEmptySlot ) );
 		}
@@ -2059,9 +2081,9 @@ float cData_Inven::GetEventTime()
 	{		
 		if( m_pInven[ i ].IsEnable() )
 		{
-			SAFE_POINTER_RETVAL(nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType ), 0.0f);
+			SAFE_POINTER_RETVAL(nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() ), 0.0f);
 
-			CsItem::sINFO* pFTInfo = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].m_nType )->GetInfo();
+			CsItem::sINFO* pFTInfo = nsCsFileTable::g_pItemMng->GetItem( m_pInven[ i ].GetType() )->GetInfo();
 			SAFE_POINTER_RETVAL(pFTInfo, 0.0f);
 			if( 3 == pFTInfo->s_btUseTimeType && (nItem::TimeSet == pFTInfo->s_nType_L) )//&& g_pDataMng->GetQuest()->IsProcess( pFTInfo->s_nQuest1 ))
 			{
@@ -2166,7 +2188,7 @@ void cData_Inven::ItemRemove_NoServer( int nItemID,  bool bCalQuest )
 	{
 		if( m_pInven[ i ].IsEnable() == false )
 			continue;
-		if(m_pInven[ i ].m_nType == nItemID)
+		if(m_pInven[ i ].GetType() == nItemID)
 		{
 			ItemUnlock_ItemID( nItemID );
 			m_pInven[ i ].Reset();
@@ -2280,11 +2302,27 @@ void cData_Inven::ItemRemove_NoServer( int nItemID, int nRate, int nCount, bool 
 void cData_Inven::OutputCropMsg( cItemData* const pItemData, int nCount )
 {
 	SAFE_POINTER_RET(pItemData);
-	
-	assert_csm( pItemData->GetType() != 0, _T( "cData_Inven::OutputCropMsg" ) );
-	assert_csm( nsCsFileTable::g_pItemMng->IsItem( pItemData->GetType() ), _T("cData_Inven::OutputCropMsg Error : not Resist ItemID"));
 
-	CsItem::sINFO* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItemData->GetType() )->GetInfo();	
+	if( pItemData->GetType() == 0 )
+	{
+		LogCropItemData( "ITEM_CROP_MSG invalid zero item", pItemData, nCount );
+		return;
+	}
+
+	if( nsCsFileTable::g_pItemMng == NULL )
+	{
+		LogCropItemData( "ITEM_CROP_MSG missing item manager", pItemData, nCount );
+		return;
+	}
+
+	CsItem* pItem = nsCsFileTable::g_pItemMng->GetItem( pItemData->GetType() );
+	if( pItem == NULL || pItem->GetInfo() == NULL )
+	{
+		LogCropItemData( "ITEM_CROP_MSG missing item table entry", pItemData, nCount );
+		return;
+	}
+
+	CsItem::sINFO* pFTItem = pItem->GetInfo();
 
 	int GetItemCount = 0;
 	if( 0 == nCount )

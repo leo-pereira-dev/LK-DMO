@@ -109,10 +109,26 @@ int FMTamer::_CalEquip( sTINFO* pInfo, nTable_Parameter eA )
 		dwSkillFTID = pFTItem->GetInfo()->s_dwSkill;
 		if( dwSkillFTID != 0 )
 		{
-			pSkillFT = nsCsFileTable::g_pSkillMng->GetSkill( dwSkillFTID )->GetInfo();
-			assert_cs( pSkillFT->s_nFamilyType == 0 );
-			if( pItemInfo->GetSkillRate() )
+			CsSkill* pSkill = nsCsFileTable::g_pSkillMng->GetSkill( dwSkillFTID );
+			if( pSkill )
 			{
+				pSkillFT = pSkill->GetInfo();
+				assert_cs( pSkillFT->s_nFamilyType == 0 );
+				if( pItemInfo->GetSkillRate() )
+				{
+					nReturnValue += _GetSkillApplyValue( pInfo, pSkillFT->s_Apply, eA, pItemInfo->GetSkillRate(), -1 );
+				}
+			}
+		}
+
+		dwSkillFTID = pItemInfo->GetTamerEquipmentUpgradeSkillID();
+		if( dwSkillFTID != 0 )
+		{
+			CsSkill* pStageSkill = nsCsFileTable::g_pSkillMng->GetSkill( dwSkillFTID );
+			if( pStageSkill && pItemInfo->GetSkillRate() )
+			{
+				pSkillFT = pStageSkill->GetInfo();
+				assert_cs( pSkillFT->s_nFamilyType == 0 );
 				nReturnValue += _GetSkillApplyValue( pInfo, pSkillFT->s_Apply, eA, pItemInfo->GetSkillRate(), -1 );
 			}
 		}
@@ -166,8 +182,15 @@ int FMTamer::_CalEquip( sTINFO* pInfo, nTable_Parameter eA )
 }
 __int64 FMTamer::GetMaxExp( int nLevel )
 {
-	return CsFloat2Int64( nsCsFileTable::g_pBaseMng->GetTamerBase( nLevel, CsBaseMng::BT_TAMER_EXP )->GetInfo()->s_dwExp*0.01f );
-	//return nsCsFileTable::g_pBaseMng->GetTamerBase( nLevel, CsBaseMng::BT_TAMER_EXP )->GetInfo()->s_dwExp;
+	CsBase* pTamerExpBase = nsCsFileTable::g_pBaseMng->GetTamerBase( nLevel, CsBaseMng::BT_TAMER_EXP );
+	if( pTamerExpBase && pTamerExpBase->GetInfo()->s_dwExp > 0 )
+		return CsFloat2Int64( pTamerExpBase->GetInfo()->s_dwExp*0.01f );
+
+	CsBase* pDigimonExpBase = nsCsFileTable::g_pBaseMng->GetDigimonBase( nLevel, CsBaseMng::BT_DIGIMON_EXP );
+	if( pDigimonExpBase )
+		return CsFloat2Int64( pDigimonExpBase->GetInfo()->s_dwExp*0.01f );
+
+	return 1;
 }
 
 //==========================================================================================================
@@ -272,4 +295,3 @@ int FMTamer::GetTotalDef_FriendShip( sTINFO* pInfo )
 {
 	return CsFloat2Int( (GetBaseDef( pInfo ) + GetEquipDef( pInfo ))*pInfo->s_nDigimonFriendShip*0.01f );
 }
-

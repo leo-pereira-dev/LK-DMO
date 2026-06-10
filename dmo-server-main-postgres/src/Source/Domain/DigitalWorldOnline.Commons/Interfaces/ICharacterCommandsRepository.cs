@@ -63,7 +63,7 @@ namespace DigitalWorldOnline.Commons.Interfaces
 
         Task UpdateItemListBitsAsync(long itemListId, long bits);
 
-        Task UpdateItemsAsync(List<ItemModel> items);
+        Task UpdateItemsAsync(List<ItemModel> items, bool preserveUnreferencedInstances = false);
 
         Task UpdateItemAccessoryStatusAsync(ItemModel item);
 

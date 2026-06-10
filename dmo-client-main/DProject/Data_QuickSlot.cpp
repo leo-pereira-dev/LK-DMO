@@ -375,7 +375,7 @@ int cData_QuickSlot::InvenToQuickSlot( int nInvenIndex, int nDestParentIndex, cR
 	int nReturn = 0;
 
 	cItemInfo* pItem = g_pDataMng->GetInven()->GetData( nInvenIndex );
-	CsItem::sINFO* pFTInfo = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType )->GetInfo();
+	CsItem::sINFO* pFTInfo = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() )->GetInfo();
 
 	// 퀵슬롯 장착 가능한 물품인지 확인
 	switch( pFTInfo->s_nType_L )
@@ -406,6 +406,7 @@ int cData_QuickSlot::InvenToQuickSlot( int nInvenIndex, int nDestParentIndex, cR
 	case nItem::DigimonSlotInc:
 	case nItem::Cash_DigimonCareSlot:	
 	case nItem::ScanUse_Item:
+	case nItem::SelectionBox:
 	case nItem::Item_TamerSKillConsume:
 	case nItem::PersonStore:
 #ifdef CROSSWARS_SYSTEM
@@ -439,9 +440,9 @@ int cData_QuickSlot::InvenToQuickSlot( int nInvenIndex, int nDestParentIndex, cR
 	}
 
 	pData->s_QuickSlotInfo[ nSlotIndex ].s_eType = cResist::ITEM;
-	pData->s_QuickSlotInfo[ nSlotIndex ].s_nID = pItem->m_nType;
-	pData->s_QuickSlotInfo[ nSlotIndex ].s_nCount = g_pDataMng->GetInven()->GetCount_Item_ID( pItem->m_nType );
-	pData->s_QuickSlotInfo[ nSlotIndex ].s_nCount += g_pDataMng->GetTEquip()->GetCount_Item_ID( pItem->m_nType );
+	pData->s_QuickSlotInfo[ nSlotIndex ].s_nID = pItem->GetType();
+	pData->s_QuickSlotInfo[ nSlotIndex ].s_nCount = g_pDataMng->GetInven()->GetCount_Item_ID( pItem->GetType() );
+	pData->s_QuickSlotInfo[ nSlotIndex ].s_nCount += g_pDataMng->GetTEquip()->GetCount_Item_ID( pItem->GetType() );
 	assert_cs( pData->s_QuickSlotInfo[ nSlotIndex ].s_nCount > 0 );
 	return nReturn;
 }

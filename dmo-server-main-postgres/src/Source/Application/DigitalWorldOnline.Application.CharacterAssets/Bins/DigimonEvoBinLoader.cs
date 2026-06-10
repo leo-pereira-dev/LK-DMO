@@ -108,8 +108,10 @@ public sealed class DigimonEvoBinLoader
         ushort openQualification = BitConverter.ToUInt16(rec[90..92]);
         ushort openLevel = BitConverter.ToUInt16(rec[92..94]);
         ushort openQuest = BitConverter.ToUInt16(rec[94..96]);
+        ushort openItem = BitConverter.ToUInt16(rec[96..98]);
+        ushort openItemNum = BitConverter.ToUInt16(rec[98..100]);
         ushort useItem = BitConverter.ToUInt16(rec[100..102]);
         ushort useItemNum = BitConverter.ToUInt16(rec[102..104]);
-        return new DigimonEvoLine((int)type, evoSlot, enableSlot, openQualification, openLevel, openQuest, useItem, useItemNum);
+        return new DigimonEvoLine((int)type, evoSlot, enableSlot, openQualification, openLevel, openQuest, openItem, openItemNum, useItem, useItemNum);
     }
 }

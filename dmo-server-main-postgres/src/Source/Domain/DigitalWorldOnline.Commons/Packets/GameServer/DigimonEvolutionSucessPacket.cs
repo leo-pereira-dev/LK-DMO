@@ -14,7 +14,8 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         /// <param name="newType">The new form type</param>
         /// <param name="evoSlotNo">Client evolution slot/stage byte</param>
         /// <param name="hpRate">Current HP percentage after evolving</param>
-        public DigimonEvolutionSucessPacket(uint tamerHandler, uint digimonHandler, int newType, byte evoSlotNo, byte hpRate = 100)
+        /// <param name="partsEffectType">Optional Digimon parts/skin item applied after the model swap.</param>
+        public DigimonEvolutionSucessPacket(uint tamerHandler, uint digimonHandler, int newType, byte evoSlotNo, byte hpRate = 100, uint partsEffectType = 0)
         {
             Type(PacketNumber);
             WriteUInt(digimonHandler);
@@ -22,6 +23,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteInt(newType);
             WriteByte(evoSlotNo);
             WriteByte(hpRate);
+            WriteUInt(partsEffectType);
         }
     }
 }

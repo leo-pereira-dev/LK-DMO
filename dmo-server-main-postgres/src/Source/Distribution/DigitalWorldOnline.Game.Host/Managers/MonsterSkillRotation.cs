@@ -60,31 +60,31 @@ namespace DigitalWorldOnline.Game.Managers
 
                 // ─── target HP ──────────────────────────────────────────
                 case TermTargetHpPercentDown:
-                    return target is not null && target.HP > 0 && TargetHpPercent(target) <= threshold;
+                    return threshold <= 0 || (target is not null && target.HP > 0 && TargetHpPercent(target) <= threshold);
                 case TermTargetHpPercentUp:
                     return target is not null && target.HP > 0 && TargetHpPercent(target) >= threshold;
                 case TermTargetHpValueDown:
-                    return target is not null && target.CurrentHp <= threshold;
+                    return threshold <= 0 || (target is not null && target.CurrentHp <= threshold);
                 case TermTargetHpValueUp:
                     return target is not null && target.CurrentHp >= threshold;
 
                 // ─── own HP ─────────────────────────────────────────────
                 case TermOwnHpPercentDown:
-                    return mob.HPValue > 0 && (mob.CurrentHP * 100 / mob.HPValue) <= threshold;
+                    return threshold <= 0 || (mob.HPValue > 0 && (mob.CurrentHP * 100 / mob.HPValue) <= threshold);
                 case TermOwnHpPercentUp:
                     return mob.HPValue > 0 && (mob.CurrentHP * 100 / mob.HPValue) >= threshold;
                 case TermOwnHpValueDown:
-                    return mob.CurrentHP <= threshold;
+                    return threshold <= 0 || mob.CurrentHP <= threshold;
                 case TermOwnHpValueUp:
                     return mob.CurrentHP >= threshold;
 
                 // ─── target DS ──────────────────────────────────────────
                 case TermTargetDsPercentDown:
-                    return target is not null && target.DS > 0 && TargetDsPercent(target) <= threshold;
+                    return threshold <= 0 || (target is not null && target.DS > 0 && TargetDsPercent(target) <= threshold);
                 case TermTargetDsPercentUp:
                     return target is not null && target.DS > 0 && TargetDsPercent(target) >= threshold;
                 case TermTargetDsValueDown:
-                    return target is not null && target.CurrentDs <= threshold;
+                    return threshold <= 0 || (target is not null && target.CurrentDs <= threshold);
                 case TermTargetDsValueUp:
                     return target is not null && target.CurrentDs >= threshold;
 

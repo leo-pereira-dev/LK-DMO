@@ -10,6 +10,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         public DateTime CooldownEndsAt { get; private set; }
 
         public bool IsOnCooldown => CooldownEndsAt > DateTime.UtcNow;
+        public static DateTime ReadyCooldownEndsAt => new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
         // Default ctor for AutoMapper / EF.
         public DigimonMemorySkillModel() { }
@@ -19,7 +20,8 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             SkillId = skillId,
             CurrentLevel = 1,
             MaxLevel = maxLevel,
-            AcquiredAt = DateTime.UtcNow
+            AcquiredAt = DateTime.UtcNow,
+            CooldownEndsAt = ReadyCooldownEndsAt
         };
 
         public void SetCurrentLevel(byte level) => CurrentLevel = level;

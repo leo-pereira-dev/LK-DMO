@@ -1,4 +1,4 @@
-﻿using DigitalWorldOnline.Application;
+using DigitalWorldOnline.Application;
 using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Commons.Entities;
@@ -69,6 +69,28 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
 
             _logger.Verbose($"Character {client.TamerId} delivered quest {questId}.");
+
+            if (!client.Tamer.Progress.HasQuestInProgress(questId))
+            {
+                _logger.Warning(
+                    "Character {TamerId} tried to deliver quest {QuestId}, but it is not active.",
+                    client.TamerId,
+                    questId);
+                client.Send(new SystemMessagePacket($"Quest {questId} is not active."));
+                return;
+            }
+
+            if (!HasInventoryRoomForQuestRewards(client, questInfo))
+            {
+                _logger.Warning(
+                    "Character {TamerId} tried to deliver quest {QuestId}, but inventory has no room for item rewards. emptySlots={EmptySlots}",
+                    client.TamerId,
+                    questId,
+                    client.Tamer.Inventory.TotalEmptySlots);
+                client.Send(new PickItemFailPacket(PickItemFailReasonEnum.InventoryFull));
+                client.Send(new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory));
+                return;
+            }
 
             DeliverItems(client, questId, questInfo);
             ReturnSupplies(client, questId, questInfo);
@@ -158,6 +180,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         private void UpdateQuestComplete(GameClient client, int qIDX)
         {
+            client.Tamer.Progress.EnsureQuestProgressCapacity();
+
             int intValue = GetBitValue(client.Tamer.Progress.CompletedDataValue, qIDX - 1);
 
             if (intValue == 0)
@@ -239,6 +263,16 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         break;
                 }
             }
+        }
+
+        private static bool HasInventoryRoomForQuestRewards(GameClient client, QuestAssetModel questInfo)
+        {
+            var itemRewardCount = questInfo.QuestRewards
+                .Where(x => x.RewardType == QuestRewardTypeEnum.ItemReward)
+                .SelectMany(x => x.RewardObjectList)
+                .Count(x => x.Reward > 0 && x.Amount > 0);
+
+            return client.Tamer.Inventory.TotalEmptySlots >= itemRewardCount;
         }
 
         private void QuestItemReward(GameClient client, QuestRewardAssetModel questReward)

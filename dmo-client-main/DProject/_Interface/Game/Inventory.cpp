@@ -5,8 +5,40 @@
 #define IF_INVENTORY_ICON_SIZE CsPoint( 32, 32 )
 #define ICON_HALF		16
 
+namespace
+{
+	const int TUTORIAL_HATCH_EGG_ITEM_IDS[] =
+	{
+		114240,
+		114241,
+		114242,
+		114243,
+		114244,
+		114245,
+	};
+
+	int GetFirstTutorialHatchEggSlot( cData_Inven* pInven )
+	{
+		if( pInven == NULL )
+			return cData_Inven::INVALIDE_INVEN_INDEX;
+
+		int nFirstSlot = cData_Inven::INVALIDE_INVEN_INDEX;
+		for( int i = 0; i < sizeof( TUTORIAL_HATCH_EGG_ITEM_IDS ) / sizeof( TUTORIAL_HATCH_EGG_ITEM_IDS[0] ); ++i )
+		{
+			int const nSlot = pInven->GetFirstSlot_Item_ID( TUTORIAL_HATCH_EGG_ITEM_IDS[i] );
+			if( nSlot == cData_Inven::INVALIDE_INVEN_INDEX )
+				continue;
+
+			if( nFirstSlot == cData_Inven::INVALIDE_INVEN_INDEX || nSlot < nFirstSlot )
+				nFirstSlot = nSlot;
+		}
+
+		return nFirstSlot;
+	}
+}
+
 cInventory::cInventory():m_pMoney(NULL),m_pBlock(NULL),m_pBlockInItem(NULL)
-,m_pCancelButton(NULL),m_pSort(NULL),m_nInvenIndex(0),m_nDataStartIndex(NULL)
+,m_pTutorialItemArrow(NULL),m_pCancelButton(NULL),m_pSort(NULL),m_nInvenIndex(0),m_nDataStartIndex(NULL)
 #ifdef UI_INVENTORY_RENEWAL
 ,m_pFilterTab(NULL), m_pScrollBar(NULL), m_pNewMark(NULL), m_pSearchEdit(NULL)
 ,m_pSearchResetButton(NULL), m_pHelpButton(NULL), m_pSlotCountText(NULL), m_eCurrentTab(eTabNone), m_bIsFiltering(false)
@@ -37,6 +69,7 @@ void cInventory::DeleteResource()
 
 	SAFE_NIDELETE( m_pBlock );
 	SAFE_NIDELETE( m_pBlockInItem );
+	SAFE_NIDELETE( m_pTutorialItemArrow );
 #ifdef UI_INVENTORY_RENEWAL
 	SAFE_NIDELETE( m_pNewMark );
 #endif
@@ -219,6 +252,16 @@ void cInventory::Create(int nValue /* = 0  */)
 			m_pCancelButton->AddEvent( cButton::BUTTON_LBUP_EVENT, this, &cInventory::CloseInvenBtnClick );
 	}
 #endif // UI_INVENTORY
+
+	if( m_pTutorialItemArrow == NULL )
+	{
+		m_pTutorialItemArrow = NiNew cSpriteAni;
+		if( m_pTutorialItemArrow )
+		{
+			m_pTutorialItemArrow->Init( cSpriteAni::LOOP, NULL, CsPoint::ZERO, CsPoint( 60, 45 ), "Tutorial\\tutorial_ani.tga", NULL, 11, false, CsPoint(60,0), cSpriteAni::SPRITE_POS );
+			m_pTutorialItemArrow->SetAniTime( 0.1f );
+		}
+	}
 
 	cBaseWindow::Init();
 
@@ -544,7 +587,7 @@ void cInventory::_UpdateTooltip(CsPoint ptPos, int nIndex)
 			if( !PlayerpData->IsEnable() )
 				continue;
 
-			if(PlayerpData->m_nType != 0)
+			if(PlayerpData->GetType() != 0)
 			{
 				CsItem* pFTEquip = nsCsFileTable::g_pItemMng->GetItem( PlayerpData->GetType() );
 				SAFE_POINTER_CON( pFTEquip );
@@ -567,6 +610,7 @@ void cInventory::_UpdateTooltip(CsPoint ptPos, int nIndex)
 void cInventory::Render()
 {
 	RenderScript();
+	_ResetTutorialHatchView();
 
 	SAFE_POINTER_RET( g_pDataMng );
 	SAFE_POINTER_RET( g_pIconMng );
@@ -688,6 +732,7 @@ void cInventory::Render()
 			}
 		}
 	}
+	_RenderTutorialHatchItemArrow();
 	g_pIconMng->RenderTime( m_pSort->GetDefaultPos() + GetRootClient(), 10.0f, g_pDataMng->GetSortCoolTime() );
 
 	EndRenderScript();
@@ -1120,6 +1165,36 @@ bool cInventory::CursorIconLBtnUp( CURSOR_ICON::eTYPE eIconType, int nIconSlot, 
 					}
 				}
 				break;
+			case CURSOR_ICON::CI_EVOCHIP:
+				{
+					if( g_pDataMng->IsItemUse( nIconSlot ) == true )
+					{
+						cItemInfo* pChipset = g_pDataMng->GetDigivice()->GetEvoChipset( 0 );
+						cItemInfo* pInven = g_pDataMng->GetInven()->GetData( nSlotIndex );
+
+						if( ( pInven->IsEnable() )&&( pChipset->IsEnable() ) )
+						{
+							SAFE_POINTER_CON( nsCsFileTable::g_pItemMng );
+							CsItem* pSrcItem = nsCsFileTable::g_pItemMng->GetItem( pChipset->GetType() );
+							CsItem* pDestItem = nsCsFileTable::g_pItemMng->GetItem( pInven->GetType() );
+							SAFE_POINTER_CON( pSrcItem );
+							SAFE_POINTER_CON( pDestItem );
+							CsItem::sINFO* pFTSrc = pSrcItem->GetInfo();
+							CsItem::sINFO* pFTDest = pDestItem->GetInfo();
+							SAFE_POINTER_CON( pFTSrc );
+							SAFE_POINTER_CON( pFTDest );
+							if( pFTSrc->s_nType_L == pFTDest->s_nType_L )
+								g_pDataMng->SendItemMove( nIconSlot, TO_INVEN_SID( nSlotIndex ), nIconCount );
+							else
+								g_pDataMng->SendItemMoveInven( nIconSlot, nIconCount );
+						}
+						else
+						{
+							g_pDataMng->SendItemMove( nIconSlot, TO_INVEN_SID( nSlotIndex ), nIconCount );
+						}
+					}
+				}
+				break;
 			case CURSOR_ICON::CI_INCUBATOR:
 
 				break;
@@ -1175,10 +1250,34 @@ void cInventory::NewInstDigimonName( int nInvenIndex )
 
 CsPoint cInventory::GetInvenItemPos(int const & nInvenPos)
 {
-	if( nInvenPos < 0 || nInvenPos >= IF_INVENTORY_COUNT )
+	if( nInvenPos < 0 )
 		return CsPoint(0,0);
 
-	return	m_IFIcon[ nInvenPos ].GetPos() + GetRootClient();
+#ifdef UI_INVENTORY_RENEWAL
+	if( nInvenPos >= nLimit::Inven )
+		return CsPoint(0,0);
+	if( m_pScrollBar == NULL )
+		return CsPoint(0,0);
+
+	if( m_bIsFiltering )
+	{
+		for( int i = 0; i < IF_INVENTORY_COUNT; ++i )
+		{
+			int const nSlotIndex = GetSystem()->GetFilteringItemIdx( i + m_pScrollBar->GetCurPosIndex() * IF_INVENTORY_COL );
+			if( nSlotIndex == nInvenPos )
+				return m_IFIcon[ i ].GetPos() + GetRootClient();
+		}
+		return CsPoint(0,0);
+	}
+
+	int const nIconIndex = nInvenPos - m_pScrollBar->GetCurPosIndex() * IF_INVENTORY_COL;
+#else
+	int const nIconIndex = nInvenPos - m_nDataStartIndex;
+#endif
+	if( nIconIndex < 0 || nIconIndex >= IF_INVENTORY_COUNT )
+		return CsPoint(0,0);
+
+	return	m_IFIcon[ nIconIndex ].GetPos() + GetRootClient();
 }
 
 bool cInventory::OnEscapeKey()
@@ -1319,6 +1418,53 @@ void cInventory::OnSearchResetClick(void* pSender, void* pData)
 		m_pSearchEdit->SetText( _T( "" ) );
 
 	_UpdateFilter();
+}
+
+void cInventory::_ResetTutorialHatchView()
+{
+	if( GetSystem() == NULL || GetSystem()->IsPlayingTutorial() == false )
+		return;
+	if( g_pGameIF == NULL || g_pGameIF->IsActiveWindow( cBaseWindow::WT_MAKE_TACTICS, 0 ) == false )
+		return;
+
+	m_eCurrentTab = eTabNone;
+	m_bIsFiltering = false;
+	GetSystem()->SetSearchText( L"" );
+	GetSystem()->SetFilterMode( SystemType::eNone );
+
+	if( m_pFilterTab )
+		m_pFilterTab->SetCheckIndex( 0 );
+	if( m_pSearchEdit )
+		m_pSearchEdit->SetText( _T( "" ) );
+	if( m_pSearchResetButton )
+		m_pSearchResetButton->SetVisible( false );
+
+	_UpdateScrollRange();
+	if( m_pScrollBar && m_pScrollBar->IsEnableScroll() )
+		m_pScrollBar->SetCurPosIndex( 0 );
+}
+
+void cInventory::_RenderTutorialHatchItemArrow()
+{
+	if( m_pTutorialItemArrow == NULL || GetSystem() == NULL || GetSystem()->IsPlayingTutorial() == false )
+		return;
+	if( g_pGameIF == NULL || g_pGameIF->IsActiveWindow( cBaseWindow::WT_MAKE_TACTICS, 0 ) == false )
+		return;
+
+	SAFE_POINTER_RET( g_pDataMng );
+	cData_Inven* pInven = g_pDataMng->GetInven();
+	SAFE_POINTER_RET( pInven );
+
+	int const nEggSlot = GetFirstTutorialHatchEggSlot( pInven );
+	if( nEggSlot == cData_Inven::INVALIDE_INVEN_INDEX )
+		return;
+
+	CsPoint ptItem = GetInvenItemPos( nEggSlot );
+	if( ptItem == CsPoint::ZERO )
+		return;
+
+	m_pTutorialItemArrow->Update( g_fDeltaTime );
+	m_pTutorialItemArrow->Render( ptItem + CsPoint( -50, ( IF_INVENTORY_ICON_SIZE.y - 45 ) / 2 ) );
 }
 
 void cInventory::_UpdateFilter()

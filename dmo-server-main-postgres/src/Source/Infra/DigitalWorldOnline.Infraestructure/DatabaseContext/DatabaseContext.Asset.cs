@@ -40,7 +40,6 @@ namespace DigitalWorldOnline.Infraestructure
         public DbSet<HatchAssetDTO> Hatchs { get; set; }
         public DbSet<CloneAssetDTO> Clones { get; set; }
         public DbSet<CloneValueAssetDTO> CloneValues { get; set; }
-        public DbSet<NpcAssetDTO> Npcs { get; set; }
         public DbSet<NpcColiseumAssetDTO> NpcColiseum { get; set; }
         public DbSet<TamerSkillAssetDTO> TamerSkills { get; set; }
         public DbSet<ArenaRankingDailyItemRewardsDTO> ArenaDailyItemRewards { get; set; }
@@ -90,11 +89,6 @@ namespace DigitalWorldOnline.Infraestructure
             builder.ApplyConfiguration(new HatchAssetConfiguration());
             builder.ApplyConfiguration(new CloneAssetConfiguration());
             builder.ApplyConfiguration(new CloneValueAssetConfiguration());
-            builder.ApplyConfiguration(new NpcAssetConfiguration());
-            builder.ApplyConfiguration(new NpcItemAssetConfiguration());
-            builder.ApplyConfiguration(new NpcPortalsAssetConfiguration());
-            builder.ApplyConfiguration(new NpcPortalAssetConfiguration());
-            builder.ApplyConfiguration(new NpcPortalsAmountAssetConfiguration());
             builder.ApplyConfiguration(new NpcColiseumAssetConfiguration());
             builder.ApplyConfiguration(new NpcMobInfoAssetConfiguration());
             builder.ApplyConfiguration(new TamerSkillAssetConfiguration());

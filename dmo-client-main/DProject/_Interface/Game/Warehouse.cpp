@@ -481,7 +481,7 @@ bool cWarehouse::_UpdateIcon_ForMouse()
 						cItemInfo* PlayerpData = g_pDataMng->GetTEquip()->GetData( i );
 						SAFE_POINTER_CON( PlayerpData );
 
-						if(PlayerpData->m_nType != 0)
+						if(PlayerpData->GetType() != 0)
 						{
 							CsItem* pEquipItem = nsCsFileTable::g_pItemMng->GetItem( PlayerpData->GetType() );
 							SAFE_POINTER_CON( pEquipItem );

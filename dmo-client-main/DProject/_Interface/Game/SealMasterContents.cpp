@@ -2,6 +2,69 @@
 #include "stdafx.h"
 #include "SealMasterContents.h"
 
+namespace
+{
+	void SealMasterDebugLog(const char* reason, DWORD groupID, DWORD mapID, DWORD sealID)
+	{
+		CreateDirectoryA("logs", NULL);
+
+		FILE* pFile = NULL;
+		if( fopen_s(&pFile, "logs\\seal_master_debug.log", "a") != 0 || pFile == NULL )
+			return;
+
+		SYSTEMTIME st;
+		GetLocalTime(&st);
+
+		fprintf(
+			pFile,
+			"[%04u-%02u-%02u %02u:%02u:%02u.%03u] [SEALMASTER] %s groupID=%lu mapID=%lu sealID=%lu\n",
+			st.wYear,
+			st.wMonth,
+			st.wDay,
+			st.wHour,
+			st.wMinute,
+			st.wSecond,
+			st.wMilliseconds,
+			reason != NULL ? reason : "unknown",
+			groupID,
+			mapID,
+			sealID);
+
+		fclose(pFile);
+	}
+
+	CsMaster_Card* GetValidatedSealMasterCard(DWORD groupID, DWORD mapID, DWORD sealID, const char* step)
+	{
+		if( nsCsFileTable::g_pMaster_CardMng == NULL )
+		{
+			SealMasterDebugLog("missing-card-manager", groupID, mapID, sealID);
+			return NULL;
+		}
+
+		CsMaster_Filter::sINFO* pFilterInfo = nsCsFileTable::g_pMaster_CardMng->GetMasterFilter(groupID, mapID, sealID);
+		if( pFilterInfo == NULL )
+		{
+			SealMasterDebugLog(step != NULL ? step : "missing-filter-info", groupID, mapID, sealID);
+			return NULL;
+		}
+
+		CsMaster_Card* pSealMasterInfo = nsCsFileTable::g_pMaster_CardMng->GetMasterCard(sealID);
+		if( pSealMasterInfo == NULL )
+		{
+			SealMasterDebugLog("missing-master-card", groupID, mapID, sealID);
+			return NULL;
+		}
+
+		if( pSealMasterInfo->GetInfo() == NULL )
+		{
+			SealMasterDebugLog("missing-master-card-info", groupID, mapID, sealID);
+			return NULL;
+		}
+
+		return pSealMasterInfo;
+	}
+}
+
 int const cSealMasterContents::IsContentsIdentity(void)
 {
 	return E_CT_SEALMASTER;
@@ -109,77 +172,131 @@ void cSealMasterContents::SetMapGroupMap()
 				sealID = sealItr->first;
 				if( IsHaveSeal(groupID, mapID, sealID) )
 					continue;
+				if( GetValidatedSealMasterCard(groupID, mapID, sealID, "invalid-filter-row") == NULL )
+					continue;
 				if( IsHaveGroup( groupID ) == false )
 				{
 					sMapGroup mapGroupInfo;
 					mapGroupInfo.sGoupType = groupID;
 					mapGroupInfo.sMapGroupName = nsCsFileTable::g_pWorldMapMng->GetWorldName( groupID );
-					mapGroupInfo.sCount++;
 
 					std::pair<DWORD, sMapGroup> mapGroupInfoPair;
 					mapGroupInfoPair.first = groupID;
 					mapGroupInfoPair.second = mapGroupInfo;
 					m_MapGroupMap.insert(mapGroupInfoPair);
 
-					SetMapInfo(groupID, mapID, sealID);
+					if( SetMapInfo(groupID, mapID, sealID) )
+					{
+						MGItr gItr = m_MapGroupMap.find(groupID);
+						if( gItr != m_MapGroupMap.end() )
+							gItr->second.sCount++;
+					}
 				}
 				else
 				{
 					MGItr gItr = m_MapGroupMap.find(groupID);
-					gItr->second.sCount++;
-					SetMapInfo(groupID, mapID, sealID);
+					if( gItr == m_MapGroupMap.end() )
+					{
+						SealMasterDebugLog("missing-group-after-lookup", groupID, mapID, sealID);
+						continue;
+					}
+
+					if( SetMapInfo(groupID, mapID, sealID) )
+						gItr->second.sCount++;
 				}
 			}
 		}
 	}
 }
-void cSealMasterContents::SetMapInfo(DWORD groupID, DWORD mapID, DWORD sealID)
+bool cSealMasterContents::SetMapInfo(DWORD groupID, DWORD mapID, DWORD sealID)
 {
 	if( IsHaveSeal(groupID, mapID, sealID) )
-		return;
+		return false;
 
 	
 	CsMaster_Filter::sINFO*	Data = nsCsFileTable::g_pMaster_CardMng->GetMasterFilter(groupID, mapID, sealID);
+	if( Data == NULL )
+	{
+		SealMasterDebugLog("missing-filter-info-set-map", groupID, mapID, sealID);
+		return false;
+	}
+
+	if( GetValidatedSealMasterCard(groupID, mapID, sealID, "invalid-set-map-card") == NULL )
+		return false;
+
+	MGItr gItr = m_MapGroupMap.find(groupID);
+	if( gItr == m_MapGroupMap.end() )
+	{
+		SealMasterDebugLog("missing-group-set-map", groupID, mapID, sealID);
+		return false;
+	}
+
 	if( IsHaveMap(groupID, mapID) == false)
 	{
 		sMapInfo mapInfo;
 		mapInfo.sMapID = mapID;
 		mapInfo.sMapName = nsCsFileTable::g_pWorldMapMng->GetAreaName( mapID );
-		mapInfo.sCount++;
 
 		std::pair<DWORD,sMapInfo> mapInfoPair;
 		mapInfoPair.first = mapID;
 		mapInfoPair.second = mapInfo;
-		MGItr gItr = m_MapGroupMap.find(groupID);
 		gItr->second.sMapInfoMap.insert(mapInfoPair);
-		SetSealInfo(groupID, mapID, sealID);
 	}
-	else
+
+	MItr mItr = gItr->second.sMapInfoMap.find(mapID);
+	if( mItr == gItr->second.sMapInfoMap.end() )
 	{
-		MGItr gItr = m_MapGroupMap.find(groupID);
-		MItr mItr = gItr->second.sMapInfoMap.find(mapID);
-		mItr->second.sCount++;
-		SetSealInfo(groupID, mapID, sealID);
+		SealMasterDebugLog("missing-map-after-insert", groupID, mapID, sealID);
+		return false;
 	}
-	return;
+
+	if( SetSealInfo(groupID, mapID, sealID) )
+	{
+		mItr->second.sCount++;
+		return true;
+	}
+
+	return false;
 }
-void cSealMasterContents::SetSealInfo(DWORD groupID, DWORD mapID, DWORD sealID)
+bool cSealMasterContents::SetSealInfo(DWORD groupID, DWORD mapID, DWORD sealID)
 {
 	CsMaster_Filter::sINFO* Data = nsCsFileTable::g_pMaster_CardMng->GetMasterFilter(groupID, mapID, sealID);
+	if( Data == NULL )
+	{
+		SealMasterDebugLog("missing-filter-info-set-seal", groupID, mapID, sealID);
+		return false;
+	}
 
 	if( IsHaveSeal(groupID, mapID, sealID) == false )
 	{
+		CsMaster_Card* pSealMasterInfo = GetValidatedSealMasterCard(groupID, mapID, sealID, "invalid-set-seal-card");
+		if( pSealMasterInfo == NULL )
+			return false;
+
+		MGItr gItr = m_MapGroupMap.find(groupID);
+		if( gItr == m_MapGroupMap.end() )
+		{
+			SealMasterDebugLog("missing-group-set-seal", groupID, mapID, sealID);
+			return false;
+		}
+
+		MItr mItr = gItr->second.sMapInfoMap.find(mapID);
+		if( mItr == gItr->second.sMapInfoMap.end() )
+		{
+			SealMasterDebugLog("missing-map-set-seal", groupID, mapID, sealID);
+			return false;
+		}
+
 		std::pair<DWORD, std::wstring> sealPair;
 		sealPair.first = sealID;
-		sealPair.second = nsCsFileTable::g_pMaster_CardMng->GetMasterCard(sealID)->GetInfo()->s_szName;
-		MGItr gItr = m_MapGroupMap.find(groupID);
-		MItr mItr = gItr->second.sMapInfoMap.find(mapID);
+		sealPair.second = pSealMasterInfo->GetInfo()->s_szName;
 		mItr->second.sSealInfoMap.insert(sealPair);
 
 		AddSealInfoVecter(groupID, mapID, sealID);
+		return true;
 	}
 	else
-		return;
+		return false;
 }
 
 void cSealMasterContents::ClearMapGroupMap()
@@ -205,10 +322,13 @@ void cSealMasterContents::ResetSealInfoValues()
 		itr->second.sEffectValue = 0;
 
 		CsMaster_Card* pSealMasterInfo = nsCsFileTable::g_pMaster_CardMng->GetMasterCard(itr->second.sSealID);
-		if (pSealMasterInfo)
+		if (pSealMasterInfo && pSealMasterInfo->GetInfo())
 			itr->second.sEffectType = pSealMasterInfo->GetInfo()->s_stGradeInfo[CsMaster_Card::FT_CARD_NORMAL].s_nEff1;
 		else
+		{
+			SealMasterDebugLog("missing-card-reset-values", 0, 0, itr->second.sSealID);
 			itr->second.sEffectType = 0;
+		}
 	}
 }
 
@@ -224,7 +344,10 @@ bool cSealMasterContents::AddSealInfoVecter(DWORD groupID, DWORD mapID, DWORD se
 	sSealInfo sealInfo;
 	sealInfo.sSealID = sealID;
 
-	CsMaster_Card* pSealMasterInfo = nsCsFileTable::g_pMaster_CardMng->GetMasterCard(sealInfo.sSealID);
+	CsMaster_Card* pSealMasterInfo = GetValidatedSealMasterCard(groupID, mapID, sealInfo.sSealID, "invalid-add-seal-vector-card");
+	if( pSealMasterInfo == NULL )
+		return false;
+
 	sealInfo.sEffectType = pSealMasterInfo->GetInfo()->s_stGradeInfo[CsMaster_Card::FT_CARD_NORMAL].s_nEff1;
 	sealInfo.sEffectValue = 0;
 	

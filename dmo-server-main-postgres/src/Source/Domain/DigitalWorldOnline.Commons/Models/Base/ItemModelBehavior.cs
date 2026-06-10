@@ -74,6 +74,12 @@ namespace DigitalWorldOnline.Commons.Models.Base
             return (uint)time;
         }
 
+        private static void WriteItemExtraBytes(Stream stream, int itemId)
+        {
+            stream.Write(BitConverter.GetBytes((uint)itemId), 0, 4);
+            stream.Write(BitConverter.GetBytes(0), 0, 4);
+        }
+
         /// <summary>
         /// Flags the current item if it has been expired.
         /// </summary>
@@ -89,7 +95,7 @@ namespace DigitalWorldOnline.Commons.Models.Base
         /// <summary>
         /// Flag for acessory status.
         /// </summary>
-        public bool HasAccessoryStatus => AccessoryStatus.Any(x => x.Value > 0);
+        public bool HasAccessoryStatus => AccessoryStatus.Any(x => x.EffectiveValue > 0);
 
         /// <summary>
         /// Returns the flag with the information about item duration.
@@ -202,19 +208,16 @@ namespace DigitalWorldOnline.Commons.Models.Base
                 // service layer (CheckEmptyItems), not represented as a half-state row.
                 if (ItemId > 0 && Amount > 0)
                 {
-                    // v487 client recv (cCliGameReceive.cpp:8505 RecvInvenResult,
-                    // and the warehouse + sharestash branches at the same site)
-                    // memcpys each entry into `cItemData`, where ItemId + Amount
-                    // share ONE u4 as a packed bitfield (`m_nType : 17 | m_nCount : 15`).
-                    // Same situation the GiftToArray fix handled. Writing two
-                    // separate u4s leaves m_nCount = 0 → the client's icon renderer
-                    // falls back to "1" / 0-count assert. Pack here.
+                    // Keep the legacy packed field for amount compatibility. Modern
+                    // BINs exceed the 17-bit ItemId field, so the full ItemId is also
+                    // written to COMPAT_487 ExtraBytes and read by cItemData::GetType().
                     uint mNAll = ((uint)ItemId & 0x1FFFFu) | (((uint)Amount & 0x7FFFu) << 17);
                     m.Write(BitConverter.GetBytes(mNAll), 0, 4); // cItemData::m_nAll
 
                     if (simplified)
                     {
-                        m.Write(new byte[64]); // remaining bytes in sizeof(cItemData)=68
+                        m.Write(new byte[56]); // remaining bytes before COMPAT_487 ExtraBytes
+                        WriteItemExtraBytes(m, ItemId);
                     }
                     else
                     {
@@ -248,7 +251,7 @@ namespace DigitalWorldOnline.Commons.Models.Base
 
                         foreach (var accessoryStatus in AccessoryStatus.OrderBy(x => x.Slot))
                         {
-                            m.Write(BitConverter.GetBytes(accessoryStatus.Value), 0, 2);
+                            m.Write(BitConverter.GetBytes(accessoryStatus.WireValue), 0, 2);
                         }
 
                         m.Write(BitConverter.GetBytes((ushort)0), 0, 2); // alignment padding before u4
@@ -265,9 +268,7 @@ namespace DigitalWorldOnline.Commons.Models.Base
 
                         m.Write(BitConverter.GetBytes(0), 0, 4); // m_nRemainTradeLimitTime
 
-                        // ExtraBytes (u8 in COMPAT_487)
-                        m.Write(BitConverter.GetBytes(0), 0, 4);
-                        m.Write(BitConverter.GetBytes(0), 0, 4);
+                        WriteItemExtraBytes(m, ItemId);
                     }
                 }
                 else
@@ -295,13 +296,8 @@ namespace DigitalWorldOnline.Commons.Models.Base
                 return Array.Empty<byte>();
             }
 
-            // v487 client packs ItemId + Count into ONE u4 bitfield (cItemData::m_nAll
-            // — type:17, count:15, common_vs2019/cItemData.h). Writing them as two
-            // separate u4s left m_nCount=0, which is why DailyEvent/Attendance gifts
-            // displayed "1" (the icon renderer's 0/1 fallback). Everything *past* the
-            // first 8 bytes is unchanged from the legacy layout — the in-game gift
-            // expiry, accessory and socket fields were already at their previous
-            // offsets and shouldn't be reshuffled in this fix.
+            // Keep the legacy packed field for amount compatibility. The full ItemId is
+            // carried in COMPAT_487 ExtraBytes so high-id items do not alias to low ids.
             uint mNAll = ((uint)ItemId & 0x1FFFFu) | (((uint)Amount & 0x7FFFu) << 17);
 
             using (MemoryStream m = new())
@@ -310,7 +306,8 @@ namespace DigitalWorldOnline.Commons.Models.Base
 
                 if (simplified)
                 {
-                    m.Write(new byte[64]); // remaining bytes in sizeof(cItemData)=68
+                    m.Write(new byte[56]); // remaining bytes before COMPAT_487 ExtraBytes
+                    WriteItemExtraBytes(m, ItemId);
                 }
                 else
                 {
@@ -337,7 +334,7 @@ namespace DigitalWorldOnline.Commons.Models.Base
 
                     foreach (var accessoryStatus in orderedAccessoryStatus)
                     {
-                        m.Write(BitConverter.GetBytes(accessoryStatus.Value), 0, 2);
+                        m.Write(BitConverter.GetBytes(accessoryStatus.WireValue), 0, 2);
                     }
 
                     m.Write(BitConverter.GetBytes((ushort)0), 0, 2); // alignment padding before u4
@@ -360,8 +357,7 @@ namespace DigitalWorldOnline.Commons.Models.Base
                     }
                     m.Write(BitConverter.GetBytes(giftRemainingMin), 0, 4);
                     m.Write(BitConverter.GetBytes(0), 0, 4); // m_nRemainTradeLimitTime
-                    m.Write(BitConverter.GetBytes(0), 0, 4); // ExtraBytes low
-                    m.Write(BitConverter.GetBytes(0), 0, 4); // ExtraBytes high
+                    WriteItemExtraBytes(m, ItemId);
                 }
 
                 return m.ToArray();

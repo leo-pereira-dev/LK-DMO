@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "DigimonUser.h"
+#include "../LibProj/CsFunc/CrashLogger.h"
 
 #define		PARENT_CLASS		CDigimon
 CsCRTTI_CPP( PARENT_CLASS, CDigimonUser, RTTI_DIGIMON_USER )
@@ -2102,12 +2103,9 @@ void CDigimonUser::_DecreaseChipset(USHORT const& nChipsetType, USHORT const& nC
 	SAFE_POINTER_RET( pDigivice );
 
 	// 디지바이스에 소모 칩셋이 있는지 검사 후 인덱스 리턴/* 인자값: 테이블에 정의된 칩셋 타입, 소모 인덱스*/
-	int nRemoveIndex = pDigivice->GetChipsetIndex_TypeLT( nChipsetType, nChipsetTypeC );
-	if( cData_Digivice::INVALIDE_DIGIVICE_INDEX == nRemoveIndex )
-		return;
+	cItemInfo* pChipset = pDigivice->GetJointProgressChipset_TypeLT( nChipsetType, nChipsetTypeC );
 
 	// 인덱스 값을 가지고 아이템 개수 감소
-	cItemInfo* pChipset = pDigivice->GetChipset( nRemoveIndex );
 	SAFE_POINTER_RET( pChipset );
 	if( !pChipset->IsEnable() )
 		return;
@@ -2123,30 +2121,51 @@ bool CDigimonUser::Scene_Evol( UINT nNextFTID, bool bAbsoluteEvolution )
 	GetProp_Attack()->AbsoluteSkillProcess();
 	DeletePath();
 
-	CDigimonEvolveObj* pObj = GetFTEvol()->GetEvolveObjByID( nNextFTID );	
+	if( GetFTEvol() == NULL || GetFTEvol()->GetEvolveObjByID( nNextFTID ) == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"EVOLUTION user missing evolve info base=%u nextType=%u absolute=%d",
+			(unsigned)GetBaseDigimonFTID(),
+			(unsigned)nNextFTID,
+			(int)bAbsoluteEvolution );
+	}
 
-	cDigimonTalk::sTalkEle sEle;
-	sEle.s_dwDigimon = nNextFTID;
-	cDigimonTalk::Print( 30010, &sEle );
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"EVOLUTION digimon talk skipped nextType=%u absolute=%d",
+		(unsigned)nNextFTID,
+		(int)bAbsoluteEvolution );
 
 	// 쿨다운 적용
-	g_pGameIF->GetQuickEvol()->GetEvolCoolTimeSeq()->Start();
+	if( g_pGameIF && g_pGameIF->GetQuickEvol() )
+		g_pGameIF->GetQuickEvol()->GetEvolCoolTimeSeq()->Start();
+	else
+		nsCSDEBUG::CrashLogger::LogMessage( "EVOLUTION quick evol UI unavailable nextType=%u", (unsigned)nNextFTID );
 
 	assert_cs( g_pGameIF );
-	assert_cs( g_pGameIF->IsActiveWindow( cBaseWindow::WT_QUICKEVOL ) );
+	if( g_pGameIF )
+		assert_cs( g_pGameIF->IsActiveWindow( cBaseWindow::WT_QUICKEVOL ) );
 
 	// == 강제 진화가 아닐시
 	// 아이템 갯수 감소
 	if( bAbsoluteEvolution == false )
 	{
-		CDigimonEvolveObj* pFTEvolObj = nsCsFileTable::g_pEvolMng->GetEvolveInfo( GetBaseDigimonFTID() )->GetEvolveObjByID( nNextFTID );
-		if( pFTEvolObj->m_nUseItem != 0 )
+		CDigimonEvolveInfo* pFTEvolInfo = nsCsFileTable::g_pEvolMng ? nsCsFileTable::g_pEvolMng->GetEvolveInfo( GetBaseDigimonFTID() ) : NULL;
+		CDigimonEvolveObj* pFTEvolObj = pFTEvolInfo ? pFTEvolInfo->GetEvolveObjByID( nNextFTID ) : NULL;
+		if( pFTEvolObj == NULL )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"EVOLUTION user skip local item decrease missing evolve info base=%u nextType=%u",
+				(unsigned)GetBaseDigimonFTID(),
+				(unsigned)nNextFTID );
+		}
+
+		if( pFTEvolObj && pFTEvolObj->m_nUseItem != 0 )
 		{
 			g_pDataMng->GetInven()->DecreaseItem( pFTEvolObj->m_nUseItem, pFTEvolObj->m_nUseItemNum, false, false );
 		}
 
 		// 조그레스 진화중 이면 소모 칩셋 제거..여기에 정의 해도 되고..Req_ActivateEvolve() 에 해도 되고..
-		if(IsJointProgressing())
+		if( pFTEvolObj && IsJointProgressing())
 		{
 			_DecreaseChipset( pFTEvolObj->m_nChipsetType, pFTEvolObj->m_nChipsetTypeC, pFTEvolObj->m_nChipsetNum );
 		}
@@ -2164,10 +2183,14 @@ bool CDigimonUser::Scene_Degenerate( UINT nNextFTID )
 		return false;
 
 	// 쿨다운 적용
-	g_pGameIF->GetQuickEvol()->GetEvolCoolTimeSeq()->Start();	
+	if( g_pGameIF && g_pGameIF->GetQuickEvol() )
+		g_pGameIF->GetQuickEvol()->GetEvolCoolTimeSeq()->Start();
+	else
+		nsCSDEBUG::CrashLogger::LogMessage( "EVOLUTION quick evol UI unavailable on degenerate nextType=%u", (unsigned)nNextFTID );
 
 	assert_cs( g_pGameIF );
-	assert_cs( g_pGameIF->IsActiveWindow( cBaseWindow::WT_QUICKEVOL ) );
+	if( g_pGameIF )
+		assert_cs( g_pGameIF->IsActiveWindow( cBaseWindow::WT_QUICKEVOL ) );
 
 	int nSuccess = 1;
 	g_pDataMng->GetServerSync()->RecvServer( cData_ServerSync::CHANGE_KFM, 0, &nSuccess );

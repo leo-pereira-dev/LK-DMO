@@ -7,6 +7,7 @@ using DigitalWorldOnline.Application.Separar.Commands.Create;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
 using DigitalWorldOnline.Application.GameAssets.Queries;
+using DigitalWorldOnline.Commons.Constants;
 using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums;
 using DigitalWorldOnline.Commons.Enums.Character;
@@ -23,6 +24,7 @@ using DigitalWorldOnline.Commons.Packets.Items;
 using DigitalWorldOnline.Commons.Utils;
 using DigitalWorldOnline.Game.Diagnostics;
 using DigitalWorldOnline.Game.Managers;
+using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
 using MediatR;
 using Serilog;
@@ -33,7 +35,14 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 {
     public class InitialInformationPacketProcessor : IGamePacketProcessor
     {
-        private const int MaxClientEvolutionUnits = 16;
+        private const int MaxClientEvolutionUnits = 17;
+        private const int TutorialMapId = 4;
+        private const int YokohamaVillageMapId = 105;
+        private const short TutorialStartQuestId = 4020;
+        private const int TutorialCompletedMarkerQuestId = 8999;
+        private const byte TutorialMaxStarterLevel = 10;
+        private const short TutorialCraftQuestId = 4054;
+        private const int TutorialCraftMaterialItemId = 70261;
 
         public GameServerPacketEnum Type => GameServerPacketEnum.InitialInformation;
 
@@ -46,6 +55,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private readonly AssetsLoader _assets;
         private readonly DigimonEvoBinLoader _digimonEvo;
         private readonly DUnitCollectionService _dUnitCollections;
+        private readonly EquipmentSetBonusService _equipmentSetBonusService;
         private readonly ILogger _logger;
         private readonly ISender _sender;
         private readonly IMapper _mapper;
@@ -59,6 +69,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             AssetsLoader assets,
             DigimonEvoBinLoader digimonEvo,
             DUnitCollectionService dUnitCollections,
+            EquipmentSetBonusService equipmentSetBonusService,
             ILogger logger,
             ISender sender,
             IMapper mapper)
@@ -71,6 +82,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _assets = assets;
             _digimonEvo = digimonEvo;
             _dUnitCollections = dUnitCollections;
+            _equipmentSetBonusService = equipmentSetBonusService;
             _logger = logger;
             _sender = sender;
             _mapper = mapper;
@@ -95,7 +107,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _logger.Debug($"Getting character base information...");
             _logger.Information($"Searching character with id {account.LastPlayedCharacter} for account {account.Id}...");
             var character = _mapper.Map<CharacterModel>(await _sender.Send(new CharacterByIdQuery(account.LastPlayedCharacter)));
-            if (character.Partner == null)
+            if (character == null || !character.Digimons.Any())
             {
                 _logger.Error($"Invalid character information for tamer id {account.LastPlayedCharacter}.");
                 return;
@@ -185,6 +197,29 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     itemList.Size);
             }
 
+            async Task EnsureCharacterItemListSizeAsync(ItemListEnum type, byte targetSize)
+            {
+                var itemList = character.ItemList.FirstOrDefault(x => x.Type == type);
+                if (itemList == null)
+                    throw new InvalidOperationException($"Missing character item list {type} for character {character.Id}.");
+
+                if (itemList.Size >= targetSize)
+                    return;
+
+                itemList.CheckEmptyItems();
+                itemList.AddSlots((byte)(targetSize - itemList.Size));
+                itemList.CheckEmptyItems();
+
+                await _sender.Send(new UpdateItemListSizeCommand(itemList));
+                await _sender.Send(new UpdateItemsCommand(itemList));
+
+                _logger.Information(
+                    "Expanded character item list for character {CharacterId}: type={Type} size={Size}.",
+                    character.Id,
+                    type,
+                    itemList.Size);
+            }
+
             await EnsureCharacterListAsync(ItemListEnum.Equipment);
             await EnsureCharacterListAsync(ItemListEnum.Inventory);
             await EnsureCharacterListAsync(ItemListEnum.Warehouse);
@@ -207,6 +242,45 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             await EnsureExtraInventoryListSizeAsync(ItemListEnum.ExtraInventoryMaterial);
             await EnsureCharacterListAsync(ItemListEnum.TamerShop);
             await EnsureCharacterListAsync(ItemListEnum.ConsignedShop);
+            await EnsureCharacterItemListSizeAsync(ItemListEnum.Equipment, (byte)GeneralSizeEnum.Equipment);
+
+            async Task EnsureTutorialCraftMaterialAsync()
+            {
+                if (!character.Progress.InProgressQuestData.Any(x => x.QuestId == TutorialCraftQuestId))
+                    return;
+
+                var alreadyHasMaterial = character.Inventory.FindItemsById(TutorialCraftMaterialItemId).Any();
+                var alreadyCraftedTutorialItem = character.Inventory.FindItemsById(70262).Any() ||
+                    character.Inventory.FindItemsById(70263).Any() ||
+                    character.Inventory.FindItemsById(70264).Any() ||
+                    character.Inventory.FindItemsById(70265).Any() ||
+                    character.Inventory.FindItemsById(70266).Any() ||
+                    character.Inventory.FindItemsById(70267).Any();
+
+                if (alreadyHasMaterial || alreadyCraftedTutorialItem)
+                    return;
+
+                var material = new ItemModel(TutorialCraftMaterialItemId, 1);
+                material.SetItemInfo(_assets.ItemInfo.FirstOrDefault(x => x.ItemId == material.ItemId));
+                material.SetDefaultRemainingTime();
+
+                if (material.ItemInfo == null)
+                {
+                    _logger.Error("Tutorial craft material {ItemId} item info was not found for tamer {TamerId}.", TutorialCraftMaterialItemId, character.Id);
+                    return;
+                }
+
+                if (!character.Inventory.AddItem(material))
+                {
+                    _logger.Warning("Could not add tutorial craft material {ItemId} to tamer {TamerId}; inventory may be full.", TutorialCraftMaterialItemId, character.Id);
+                    return;
+                }
+
+                await _sender.Send(new UpdateItemsCommand(character.Inventory));
+                _logger.Information("Granted tutorial craft material {ItemId} x1 to tamer {TamerId} for active quest {QuestId}.", TutorialCraftMaterialItemId, character.Id, TutorialCraftQuestId);
+            }
+
+            await EnsureTutorialCraftMaterialAsync();
 
             var duplicateItemListTypes = character.ItemList
                 .GroupBy(x => x.Type)
@@ -307,6 +381,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             foreach (var buff in character.Partner.BuffList.ActiveBuffs)
                 buff.SetBuffInfo(_assets.BuffInfo.FirstOrDefault(x => x.SkillCode == buff.SkillId || x.DigimonSkillCode == buff.SkillId));
 
+            await NormalizeMembershipBuffsAsync(client, character);
+
             _logger.Information($"Waiting an available channel for character {character.Id}...");
             _logger.Debug($"Getting available channels...");
 
@@ -347,6 +423,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 _assets.XmlUnion.GetRequiredExperience(character.XmlUnionProgress.Level));
 
             client.SetCharacter(character);
+            _equipmentSetBonusService.SyncPartnerPassiveBuffs(client);
 
             _logger.Debug($"Updating character state...");
             await _sender.Send(new UpdateCharacterStateCommand(character.Id, CharacterStateEnum.Loading));
@@ -417,6 +494,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return 0;
             }
 
+            await EnsureInitialTutorialQuestAsync(character);
+
             LogInitialInfoDiagnostics(character, EvoSlotFor);
 
             var __pkt = new InitialInfoPacket(character, party, EvoSlotFor, account.AccessLevel);
@@ -451,6 +530,47 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             _logger.Debug($"Updating character channel...");
             await _sender.Send(new UpdateCharacterChannelCommand(character.Id, character.Channel));
+        }
+
+        private async Task NormalizeMembershipBuffsAsync(GameClient client, CharacterModel character)
+        {
+            var changed = character.BuffList.Remove(MembershipConstants.MoveSpeedBuffId);
+
+            if (!client.HasActiveMembership)
+            {
+                foreach (var (buffId, _) in MembershipConstants.VisibleBuffs)
+                    changed |= character.BuffList.Remove(buffId);
+            }
+            else
+            {
+                var duration = Math.Max(
+                    1,
+                    (int)Math.Ceiling(client.MembershipExpirationDate!.Value.Subtract(DateTime.Now).TotalSeconds));
+
+                foreach (var (buffId, skillCode) in MembershipConstants.VisibleBuffs)
+                {
+                    changed |= character.BuffList.Remove(buffId);
+
+                    var buffInfo = _assets.BuffInfo.FirstOrDefault(x => x.SkillCode == skillCode);
+                    if (buffInfo == null)
+                    {
+                        _logger.Warning(
+                            "Membership visible buff asset missing. tamer={TamerId} buffId={BuffId} skillCode={SkillCode}",
+                            character.Id,
+                            buffId,
+                            skillCode);
+                        continue;
+                    }
+
+                    var membershipBuff = CharacterBuffModel.Create(buffId, skillCode, 0, duration);
+                    membershipBuff.SetBuffInfo(buffInfo);
+                    character.BuffList.Add(membershipBuff);
+                    changed = true;
+                }
+            }
+
+            if (changed)
+                await _sender.Send(new UpdateCharacterBuffListCommand(character.BuffList));
         }
 
         private void LogInitialInfoDiagnostics(CharacterModel character, Func<int, byte> evoSlotFor)
@@ -498,6 +618,84 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 character.ActiveSkill.Count,
                 string.Join("|", character.ActiveSkill.Select(x =>
                     $"{x.Type}:{x.SkillId}:cd={x.RemainingCooldownSeconds}:min={x.RemainingMinutes}:dur={x.Duration}:cool={x.Cooldown}")));
+
+            var progress = character.Progress;
+            if (progress != null)
+            {
+                _logger.Information(
+                    "[INIT-TRACE] quests activeCount={ActiveCount} active={ActiveQuests} q4020Active={Quest4020Active} q4020Complete={Quest4020Complete} q8999Complete={TutorialMarkerComplete}",
+                    progress.InProgressQuestData.Count,
+                    string.Join("|", progress.InProgressQuestData.Select(x =>
+                        $"{x.QuestId}:{x.FirstCondition},{x.SecondCondition},{x.ThirdCondition},{x.FourthCondition},{x.FifthCondition}")),
+                    progress.HasQuestInProgress(TutorialStartQuestId),
+                    progress.IsQuestCompleted(TutorialStartQuestId),
+                    progress.IsQuestCompleted(TutorialCompletedMarkerQuestId));
+            }
+        }
+
+        private async Task EnsureInitialTutorialQuestAsync(CharacterModel character)
+        {
+            var progress = character.Progress;
+            if (progress == null)
+            {
+                _logger.Warning("[TUTORIAL-QUEST] tamer={TamerId} has null progress; cannot grant quest {QuestId}.", character.Id, TutorialStartQuestId);
+                return;
+            }
+
+            progress.EnsureQuestProgressCapacity();
+
+            var shouldGrant = ShouldGrantInitialTutorialQuest(character);
+            _logger.Information(
+                "[TUTORIAL-QUEST] initial check tamer={TamerId} map={MapId} level={Level} activeCount={ActiveCount} q4020Active={Quest4020Active} q4020Complete={Quest4020Complete} q8999Complete={TutorialMarkerComplete} shouldGrant={ShouldGrant}",
+                character.Id,
+                character.Location.MapId,
+                character.Level,
+                progress.InProgressQuestData.Count,
+                progress.HasQuestInProgress(TutorialStartQuestId),
+                progress.IsQuestCompleted(TutorialStartQuestId),
+                progress.IsQuestCompleted(TutorialCompletedMarkerQuestId),
+                shouldGrant);
+
+            PortalTrace.Write(
+                $"InitialTutorialQuest check tamer={character.Id} map={character.Location.MapId} level={character.Level} active={progress.InProgressQuestData.Count} q4020Active={progress.HasQuestInProgress(TutorialStartQuestId)} q4020Done={progress.IsQuestCompleted(TutorialStartQuestId)} q8999Done={progress.IsQuestCompleted(TutorialCompletedMarkerQuestId)} shouldGrant={shouldGrant}");
+
+            if (!shouldGrant)
+                return;
+
+            if (!progress.AcceptQuest(TutorialStartQuestId))
+            {
+                _logger.Warning(
+                    "[TUTORIAL-QUEST] tamer={TamerId} matched grant rule but AcceptQuest failed. activeCount={ActiveCount}",
+                    character.Id,
+                    progress.InProgressQuestData.Count);
+                return;
+            }
+
+            await _sender.Send(new AddCharacterProgressCommand(progress));
+
+            _logger.Information(
+                "[TUTORIAL-QUEST] granted quest {QuestId} to tamer={TamerId} before InitialInfoPacket. activeCount={ActiveCount}",
+                TutorialStartQuestId,
+                character.Id,
+                progress.InProgressQuestData.Count);
+
+            PortalTrace.Write($"InitialTutorialQuest granted tamer={character.Id} quest={TutorialStartQuestId} active={progress.InProgressQuestData.Count}");
+        }
+
+        private static bool ShouldGrantInitialTutorialQuest(CharacterModel character)
+        {
+            var progress = character.Progress;
+            if (progress == null)
+                return false;
+
+            if (progress.IsQuestCompleted(TutorialCompletedMarkerQuestId) ||
+                progress.IsQuestCompleted(TutorialStartQuestId) ||
+                progress.HasQuestInProgress(TutorialStartQuestId))
+                return false;
+
+            return character.Level <= TutorialMaxStarterLevel &&
+                   (character.Location.MapId == YokohamaVillageMapId ||
+                    character.Location.MapId == TutorialMapId);
         }
 
         private static string BuildBuffSummary(IEnumerable<DigitalWorldOnline.Commons.Models.Buff> buffs)
@@ -688,14 +886,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         private static bool ShouldAutoUnlockEvolution(DigimonEvoLine line)
         {
-            if (line.EvoSlot <= 2)
-                return true;
-
-            return line.EnableSlot > 0 &&
-                   line.OpenQualification == 0 &&
-                   line.OpenQuest <= 0 &&
-                   line.UseItem <= 0 &&
-                   line.UseItemNum <= 0;
+            // Official DEvolutionList/DigimonEvo data identifies normal Rookie->Champion->Ultimate
+            // progression as slots 1..3. Slots 4+ must stay locked so item/quest unlocks work.
+            return line.EvoSlot <= 3;
         }
 
         private bool RepairInitialTamerResources(CharacterModel character)

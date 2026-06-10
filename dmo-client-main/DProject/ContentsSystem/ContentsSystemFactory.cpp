@@ -3,7 +3,6 @@
 #include "ContentsSystem.h"
 #include "ContentsSystemDef.h"
 
-#include "../_Interface/00.Contents/ResourceIntegrityChecker.h"
 #include "../_Interface/00.Contents/LogoContents.h"
 #include "../_Interface/00.Contents/LoginContents.h"
 #include "../_Interface/00.Contents/SecondPasswordContents.h"
@@ -65,7 +64,6 @@ IUIContentBase* ContentsSystem::UIContentsContructor(int const& iContentsType)
 {
 	switch( iContentsType )
 	{
-	case E_CT_RESOURCEINTEGRITYCHECKER:	return new cResourectIntegrityChecker();
 	case E_CT_LOGO:						return new LogoContents();
 	case E_CT_LOGIN:					return new LoginContents();
 	case E_CT_SECOND_PASSWORD:			return new SecondPasswordContents();

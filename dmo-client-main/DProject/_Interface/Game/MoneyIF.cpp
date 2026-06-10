@@ -178,7 +178,7 @@ void cMoneyIF::SetMoney( sMONEY money, cItemInfo ItemInfo )
 
 		m_Money = money;
 
-		CsItemExchange::sINFO* pFTItemInfo = nsCsFileTable::g_pItemMng->GetExchangeItem( m_dwNpcID, ItemInfo.m_nType )->GetInfo();
+		CsItemExchange::sINFO* pFTItemInfo = nsCsFileTable::g_pItemMng->GetExchangeItem( m_dwNpcID, ItemInfo.GetType() )->GetInfo();
 
 		m_pString->Delete();
 

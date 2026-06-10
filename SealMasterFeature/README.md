@@ -8,8 +8,8 @@ newer Global DMO layout shown in the reference screenshot.
 - Active client window: `dmo-client-main/DProject/_Interface/Game/SealMaster.*`
 - Runtime content model: `SealMasterContents.*`
 - Table loader: `dmo-client-main/LibProj/CsFileTable/Master_CardMng.*`
-- Official/decompiled source: `unpacked_exe_all/functions`
-- Official table references: `Dcommerce/xml/AllBins/Data/Seal*.xml`
+- Local reverse-map notes and generated data under this feature folder are the
+  active references for Seal Master work.
 
 ## Findings
 

@@ -1,4 +1,4 @@
-﻿using DigitalWorldOnline.Application;
+using DigitalWorldOnline.Application;
 using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
@@ -11,6 +11,7 @@ using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Packets.Chat;
 using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.MapServer;
+using DigitalWorldOnline.Game.Configuration;
 using DigitalWorldOnline.Game.Diagnostics;
 using DigitalWorldOnline.Game.Managers;
 using DigitalWorldOnline.Game.Services;
@@ -130,7 +131,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 var destX = destination.DestinationX;
                 var destY = destination.DestinationY;
 
-                // Validate destination coordinates — fall back to map's default spawn if invalid
+                // Validate destination coordinates � fall back to map's default spawn if invalid
                 if (destX <= 0 && destY <= 0)
                 {
                     var waypoints = await _sender.Send(new MapRegionListAssetsByMapIdQuery(destMapId));
@@ -165,16 +166,35 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     client.Tamer.Location.Y,
                     destination.Source);
 
-                client.Send(
-                    new MapSwapPacket(
-                        _configuration[GamerServerPublic],
-                        _configuration[GameServerPort],
-                        client.Tamer.Location.MapId,
-                        client.Tamer.Location.X,
-                        client.Tamer.Location.Y
-                    )
+                var serverAddress = _configuration[GamerServerPublic];
+                var serverPort = _configuration.GetPublicGameServerPort();
+                var mapSwapPacket = new MapSwapPacket(
+                    serverAddress,
+                    serverPort,
+                    client.Tamer.Location.MapId,
+                    client.Tamer.Location.X,
+                    client.Tamer.Location.Y
                 );
+                var mapSwapBytes = mapSwapPacket.Serialize();
+
+                _logger.Warning(
+                    "[MAPSWAP-TRACE] send tamer={TamerId} client={Client} portal={PortalId} endpoint={Address}:{Port} destMap={DestMapId} destX={DestX} destY={DestY} state={State} loading={Loading} bytes={Bytes} hex={Hex}",
+                    client.TamerId,
+                    client.HiddenAddress,
+                    portal.Id,
+                    serverAddress,
+                    serverPort,
+                    client.Tamer.Location.MapId,
+                    client.Tamer.Location.X,
+                    client.Tamer.Location.Y,
+                    client.Tamer.State,
+                    client.Loading,
+                    mapSwapBytes.Length,
+                    ToHexPreview(mapSwapBytes));
+
+                client.Send(mapSwapBytes);
                 PortalTrace.Write($"MapSwap sent tamer={client.TamerId} portal={portalId} destMap={client.Tamer.Location.MapId}");
+                ScheduleMapSwapWatchdog(client, portal.Id, client.Tamer.Location.MapId, client.Tamer.Location.X, client.Tamer.Location.Y);
 
                 var party = _partyManager.FindParty(client.TamerId);
                 if (party != null)
@@ -185,6 +205,41 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         new PartyMemberWarpGatePacket(party[client.TamerId]).Serialize());
                 }
             }
+        }
+
+        private void ScheduleMapSwapWatchdog(GameClient client, int portalId, int mapId, int x, int y)
+        {
+            var clientHash = System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(client);
+            var tamerId = client.TamerId;
+            var clientAddress = client.HiddenAddress;
+
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(TimeSpan.FromSeconds(12));
+
+                if (client.Tamer?.State == CharacterStateEnum.Loading || client.Loading)
+                {
+                    _logger.Warning(
+                        "[MAPSWAP-WATCHDOG] no post-load yet tamer={TamerId} clientHash={ClientHash} client={Client} portal={PortalId} targetMap={MapId} targetX={X} targetY={Y} connected={Connected} gameQuit={GameQuit} state={State} loading={Loading}",
+                        tamerId,
+                        clientHash,
+                        clientAddress,
+                        portalId,
+                        mapId,
+                        x,
+                        y,
+                        client.IsConnected,
+                        client.GameQuit,
+                        client.Tamer?.State,
+                        client.Loading);
+                }
+            });
+        }
+
+        private static string ToHexPreview(byte[] bytes)
+        {
+            var length = Math.Min(bytes.Length, 96);
+            return Convert.ToHexString(bytes.AsSpan(0, length));
         }
 
         private async Task<bool> TryConsumePortalRequirementAsync(GameClient client, Commons.Models.Asset.PortalAssetModel portal)

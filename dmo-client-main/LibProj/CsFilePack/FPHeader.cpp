@@ -28,7 +28,7 @@ namespace CsFPS
 		if( 0 == tr.length() )
 			return 0;
 
-		size_t result = 5381;
+		DWORD result = 5381;
 		for( size_t n = 0; n < tr.size(); ++n )
 		{
 			if( (tr.at(n) == '.') || (tr.at(n) == '\\') )
@@ -36,7 +36,7 @@ namespace CsFPS
 
 			result = ( (result<< 5) + result ) + (DWORD)tr.at(n); // hash * 33 + ch
 		}
-		return result;
+		return static_cast<size_t>( result );
 	}
 
 	// 소문자로 변환
@@ -64,7 +64,7 @@ namespace CsFPS
 		if( 0 == tr.length() )
 			return 0;
 
-		size_t result = 5381;
+		DWORD result = 5381;
 		for( size_t n = 0; n < tr.size(); ++n )
 		{
 			if( (tr.at(n) == L'.') || (tr.at(n) == L'\\') )
@@ -72,7 +72,7 @@ namespace CsFPS
 
 			result = ( (result<< 5) + result ) + (DWORD)tr.at(n); // hash * 33 + ch
 		}
-		return result;
+		return static_cast<size_t>( result );
 	}
 
 	bool ExistFile(LPCSTR szPath)

@@ -2,6 +2,14 @@
 #include "stdafx.h"
 #include "FmDigimon.h"
 
+namespace
+{
+	int ClampEvolutionCost( int nCost )
+	{
+		return nCost < 0 ? 0 : nCost;
+	}
+}
+
 int FMDigimon::_GetSkillApplyValue( sDINFO* pInfo, CsSkill::sINFO::sAPPLY* pApplyArray, nTable_Parameter eA )
 {
 	int nReturnValue = 0;
@@ -91,12 +99,7 @@ __int64 FMDigimon::GetTamerEquipValue( sDINFO* pInfo, nTable_Parameter eA, int c
 	{
 	case 1:break;		//테이머 & 디지몬 동시 사용
 	case 2:break;		//디지몬 전용
-	case 3:				//테이머 전용
-		{
-			if( nTamer::MaxParts != part )
-				return nReturnValue;
-		}
-		break;
+	case 3:break;		//테이머 전용
 	case 0:				//해당사항없음
 	default:
 		return nReturnValue;
@@ -104,9 +107,10 @@ __int64 FMDigimon::GetTamerEquipValue( sDINFO* pInfo, nTable_Parameter eA, int c
 
 	if( pEItemInfo->s_dwSkill != 0 )
 	{
-		CsSkill::sINFO* pSkillFT = nsCsFileTable::g_pSkillMng->GetSkill( pEItemInfo->s_dwSkill )->GetInfo();
-		if(pSkillFT)
+		CsSkill* pSkill = nsCsFileTable::g_pSkillMng->GetSkill( pEItemInfo->s_dwSkill );
+		if( pSkill )
 		{
+			CsSkill::sINFO* pSkillFT = pSkill->GetInfo();
 			assert_cs( pSkillFT->s_nFamilyType == 0 );
 			if( pItemInfo->GetSkillRate() )
 				nReturnValue +=	(__int64)( _GetSkillApplyValue( pInfo, pSkillFT->s_Apply, eA )*pItemInfo->m_nRate*0.01f );			
@@ -115,6 +119,18 @@ __int64 FMDigimon::GetTamerEquipValue( sDINFO* pInfo, nTable_Parameter eA, int c
 	}
 	
 	// 소켓 아이템
+	DWORD dwStageSkillID = pItemInfo->GetTamerEquipmentUpgradeSkillID();
+	if( dwStageSkillID != 0 )
+	{
+		CsSkill* pStageSkill = nsCsFileTable::g_pSkillMng->GetSkill( dwStageSkillID );
+		if( pStageSkill && pItemInfo->GetSkillRate() )
+		{
+			CsSkill::sINFO* pSkillFT = pStageSkill->GetInfo();
+			assert_cs( pSkillFT->s_nFamilyType == 0 );
+			nReturnValue += (__int64)( _GetSkillApplyValue( pInfo, pSkillFT->s_Apply, eA )*pItemInfo->m_nRate*0.01f );
+		}
+	}
+
 	for( int s=0; s<nLimit::SocketSlot; ++s )
 	{
 		if( pItemInfo->m_nSockItemType[ s ] == 0 )
@@ -539,16 +555,17 @@ int FMDigimon::GetCostEvlove( DWORD dwSrcDigimonID, int nSrcLevel, DWORD dwDestD
 	
 	int nNextStep = pDestFTD->s_eEvolutionType;
 	int nCurrStep = pSrcFTD->s_eEvolutionType;
+	int nLevelFactor = ( static_cast<int>( pDestFTD->s_dwBaseLevel ) - nSrcLevel + 110 ) / 5;
 
 	// 캡슐진화체 진화 DS 공식
 	if( pDestFTD->s_eEvolutionType == nsCsDigimonTable::ET_CAPSULE )
 	{
-		return
+		return ClampEvolutionCost(
 		( 
 		( ( nsCsDigimonTable::ET_ULTIMATE*nsCsDigimonTable::ET_ULTIMATE ) -
 		( nCurrStep*nCurrStep ) - 5 )*
-		( ( pDestFTD->s_dwBaseLevel - nSrcLevel + 110 )/5 )
-		) + 20;
+		nLevelFactor
+		) + 20 );
 	}
 
 #ifdef SDM_TAMER_XGUAGE_20180628
@@ -557,14 +574,14 @@ int FMDigimon::GetCostEvlove( DWORD dwSrcDigimonID, int nSrcLevel, DWORD dwDestD
 		int nStep = abs(nNextStep - nCurrStep);
 		int nLv   = (30 + pDestFTD->s_dwBaseLevel) / 5;
 		int nConsumeXG = 20 + nStep * nLv;
-		return nConsumeXG;
+		return ClampEvolutionCost( nConsumeXG );
 	}
 #endif
 
 	if( pDestFTD->s_eEvolutionType == nsCsDigimonTable::ET_JOINTPROGRESSMODE )
 	{
 		int nStep = abs( nNextStep*nNextStep - nCurrStep*nCurrStep ) - 5;
-		return ( nStep * ( nSrcLevel / 5 )	) + 20;
+		return ClampEvolutionCost( ( nStep * ( nSrcLevel / 5 )	) + 20 );
 	}
 	// 조그레스에서 스피릿 진화체 퇴화시 예외 처리.. 
 	// 추후 수정 필요.. 꼭...
@@ -579,7 +596,7 @@ int FMDigimon::GetCostEvlove( DWORD dwSrcDigimonID, int nSrcLevel, DWORD dwDestD
 	else
 	{
 		int nStep = ( nNextStep*nNextStep - nCurrStep*nCurrStep ) - 5;
-		return	( nStep * ( ( pDestFTD->s_dwBaseLevel - nSrcLevel + 110 )/5 ) ) + 20;
+		return ClampEvolutionCost( ( nStep * nLevelFactor ) + 20 );
 	}
 }
 

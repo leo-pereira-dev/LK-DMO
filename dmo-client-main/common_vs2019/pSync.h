@@ -113,6 +113,7 @@ namespace pSync
 		PartyBooster,		// party booster값이 변경됨을 core 서버에 알림
 		Achievement,		// 업적 달성 - 동기화
 		BuffSync,           // 다른 사람 버프 동기화
+		Rotation = 0x7f,	// LK-DMO: sensitive facing sync for nearby tamers/digimons
 		State = 0x80,
 		MsgGuildShout,		// 길드확성기
 		Dummy = 0xffff,		// 쓰이지 않는 값
@@ -209,8 +210,5 @@ namespace nSync
 
 	}; // enum eCondition
 }; // namespace nSync
-
-
-
 
 

@@ -32,7 +32,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             client.Tamer.UpdateTargetHandler(targetHandler);
 
-            var targetMob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler, true);
+            var targetMob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler, true, client.TamerId);
 
             if (targetMob != null)
             {

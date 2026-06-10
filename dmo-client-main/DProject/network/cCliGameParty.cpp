@@ -24,7 +24,7 @@ void cCliGame::RecvItemCropParty(void)
 	pop(itemCount);
 	pop(itemRate);
 
-	ntfPartyItemGet.m_GetItem.m_nType=itemType;
+	ntfPartyItemGet.m_GetItem.SetType( itemType );
 	ntfPartyItemGet.m_GetItem.m_nCount=itemCount;
 	ntfPartyItemGet.m_GetItem.m_nRate=itemRate;
 	ntfPartyItemGet.m_GetItem.m_nLevel = 0;
@@ -745,7 +745,6 @@ void cCliGame::SendBuddyBan(std::wstring const& szTamerName)	// 기존에 친구
 	endp(pBuddy::Ban);
 	send();
 }
-
 
 
 

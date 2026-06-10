@@ -29,12 +29,12 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         private int _baseHp => BaseStatus.HPValue;
         private int _baseDs => BaseStatus.DSValue;
         private int _baseAt => BaseStatus.ATValue;
-        private short _baseBl => Digiclone.BLValue;
-        private short _baseCc => (short)BaseStatus.CTValue;
+        private int _baseBl => Digiclone.BLValue;
+        private int _baseCc => BaseStatus.CTValue;
         private short _baseCd => 0;
         private short _baseAtt => 0;
         private int _baseDe => BaseStatus.DEValue;
-        private short _baseEv => (short)BaseStatus.EVValue;
+        private int _baseEv => BaseStatus.EVValue;
         private int _baseHt => BaseStatus.HTValue;
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             BuffAttribute(_baseAs, SkillCodeApplyAttributeEnum.AS) -
             (Character?.EncyclopediaDeckPassiveBonus(EncyclopediaDeckOptionAttackSpeed, _baseAs) ?? 0));
 
-        public short AR => (short)_baseAr;
+        public ushort AR => ClampToUShort(_baseAr);
 
         public int AT => ClampPartnerAttack(BuildAttackStatusParts().Total);
 
@@ -154,7 +154,17 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             return parts.ToLogString(raw, safe, MaxPartnerAttack);
         }
 
-        public short BL => ClampToShort(
+        public string CriticalStatusDebugBreakdown()
+        {
+            var parts = BuildCriticalStatusParts();
+            var raw = NonNegative(parts.Total);
+            var safe = ClampToUShort(parts.Total);
+            var detail = TamerDetailCT;
+
+            return parts.ToLogString(raw, safe, detail);
+        }
+
+        public ushort BL => ClampToUShort(
             _baseBl +
             (Digiclone.BLValue) +
             GetSealStatus(StatusTypeEnum.BL) +
@@ -164,7 +174,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.BL) ?? 0) +
             BuffAttribute(_baseBl, SkillCodeApplyAttributeEnum.BL));
 
-        public short CC => ClampToShort(
+        public ushort CC => ClampToUShort(
             _baseCc +
             (_baseCc * Digiclone.CTValue / 100) +
             (Character?.EquipmentAttributeForPartner(_baseCc, SkillCodeApplyAttributeEnum.CA) ?? 0) +
@@ -182,6 +192,46 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             BuffAttribute(_baseCd, SkillCodeApplyAttributeEnum.CAT);
 
         public double CriticalDamagePercent => CD / 100.0;
+
+        public int IncomingDamageReductionPercent(bool skillDamage)
+        {
+            var reduction =
+                (Character?.EquipmentAttributeForPartner(0,
+                    SkillCodeApplyAttributeEnum.RDD,
+                    SkillCodeApplyAttributeEnum.TotalDamageTaken) ?? 0) +
+                BuffAttribute(0,
+                    SkillCodeApplyAttributeEnum.RDD,
+                    SkillCodeApplyAttributeEnum.TotalDamageTaken);
+
+            if (skillDamage)
+            {
+                reduction +=
+                    (Character?.EquipmentAttributeForPartner(0,
+                        SkillCodeApplyAttributeEnum.SDR,
+                        SkillCodeApplyAttributeEnum.ReceivedSkillDamageDecrease) ?? 0) +
+                    BuffAttribute(0,
+                        SkillCodeApplyAttributeEnum.SDR,
+                        SkillCodeApplyAttributeEnum.ReceivedSkillDamageDecrease);
+            }
+
+            if (reduction < 0)
+                return 0;
+
+            return reduction > 95 ? 95 : reduction;
+        }
+
+        public int ApplyIncomingDamageReduction(int damage, bool skillDamage)
+        {
+            if (damage <= 0)
+                return damage;
+
+            var reduction = IncomingDamageReductionPercent(skillDamage);
+            if (reduction <= 0)
+                return damage;
+
+            var adjusted = (int)Math.Floor(damage * (100.0 - reduction) / 100.0);
+            return adjusted < 0 ? 0 : adjusted;
+        }
 
         public int ATT =>
            _baseAtt +
@@ -284,7 +334,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             (Character?.ChipsetStatus(AccessoryStatusTypeEnum.DSRate, _baseDs) ?? 0) +
             BuffAttribute(_baseDs, SkillCodeApplyAttributeEnum.MaxDS, SkillCodeApplyAttributeEnum.DS);
 
-        public short EV => ClampToShort(
+        public ushort EV => ClampToUShort(
             _baseEv +
             (_baseEv * Digiclone.EVValue / 100) +
             GetSealStatus(StatusTypeEnum.EV) +
@@ -469,6 +519,31 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
                 buff);
         }
 
+        private CriticalStatusParts BuildCriticalStatusParts()
+        {
+            var clone = _baseCc * Digiclone.CTValue / 100;
+            var sealCore = GetSealStatus(StatusTypeEnum.CT);
+            var sealDetail = GetSealDetailStatus(StatusTypeEnum.CT);
+            var title = GetTitleStatus(StatusTypeEnum.CT);
+            var dUnit = Character?.DUnitCollectionBonus.CT ?? 0;
+            var equipment = Character?.EquipmentAttributeForPartner(_baseCc, SkillCodeApplyAttributeEnum.CA) ?? 0;
+            var accessory = Character?.AccessoryStatus(AccessoryStatusTypeEnum.CT, _baseCc) ?? 0;
+            var chipset = Character?.ChipsetStatus(AccessoryStatusTypeEnum.CT) ?? 0;
+            var buff = BuffAttribute(_baseCc, SkillCodeApplyAttributeEnum.CA);
+
+            return new CriticalStatusParts(
+                _baseCc,
+                clone,
+                sealCore,
+                sealDetail,
+                title,
+                dUnit,
+                equipment,
+                accessory,
+                chipset,
+                buff);
+        }
+
         private static int NonNegative(int value) => value < 0 ? 0 : value;
 
         private static long NonNegativeLong(long value) => value < 0 ? 0 : value;
@@ -495,15 +570,15 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             return value;
         }
 
-        private static short ClampToShort(int value)
+        private static ushort ClampToUShort(int value)
         {
-            if (value > short.MaxValue)
-                return short.MaxValue;
+            if (value <= 0)
+                return 0;
 
-            if (value < short.MinValue)
-                return short.MinValue;
+            if (value > ushort.MaxValue)
+                return ushort.MaxValue;
 
-            return (short)value;
+            return (ushort)value;
         }
 
         private readonly struct AttackStatusParts
@@ -563,6 +638,57 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             }
         }
 
+        private readonly struct CriticalStatusParts
+        {
+            public CriticalStatusParts(
+                int baseCt,
+                int clone,
+                int sealCore,
+                int sealDetail,
+                int title,
+                int dUnit,
+                int equipment,
+                int accessory,
+                int chipset,
+                int buff)
+            {
+                BaseCt = baseCt;
+                Clone = clone;
+                SealCore = sealCore;
+                SealDetail = sealDetail;
+                Title = title;
+                DUnit = dUnit;
+                Equipment = equipment;
+                Accessory = accessory;
+                Chipset = chipset;
+                Buff = buff;
+            }
+
+            public int BaseCt { get; }
+            public int Clone { get; }
+            public int SealCore { get; }
+            public int SealDetail { get; }
+            public int Title { get; }
+            public int DUnit { get; }
+            public int Equipment { get; }
+            public int Accessory { get; }
+            public int Chipset { get; }
+            public int Buff { get; }
+
+            public int BonusTotal =>
+                SealCore + Title + DUnit + Equipment + Accessory + Chipset + Buff;
+
+            public int DetailBonusTotal =>
+                SealDetail + Title + DUnit + Equipment + Accessory + Chipset + Buff;
+
+            public int Total => BaseCt + Clone + BonusTotal;
+
+            public string ToLogString(int raw, ushort safe, int detail)
+            {
+                return $"base={BaseCt} clone={Clone} sealCore={SealCore} sealDetail={SealDetail} title={Title} dunit={DUnit} equipment={Equipment} accessory={Accessory} chipset={Chipset} buff={Buff} bonus={BonusTotal} detailExpected={DetailBonusTotal} detailSent={detail} raw={raw} safe={safe}";
+            }
+        }
+
         /// <summary>
         /// Returns the current evolution of the partner.
         /// </summary>
@@ -604,13 +730,27 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
                                         totalValue = SomaValue * 100;
                                         break;
                                     }
-                                    else if(apply.Attribute == SkillCodeApplyAttributeEnum.CAT)
+                                    else if(apply.Attribute == SkillCodeApplyAttributeEnum.CAT ||
+                                            apply.Attribute == SkillCodeApplyAttributeEnum.RDD ||
+                                            apply.Attribute == SkillCodeApplyAttributeEnum.SDR ||
+                                            apply.Attribute == SkillCodeApplyAttributeEnum.TotalDamageTaken ||
+                                            apply.Attribute == SkillCodeApplyAttributeEnum.ReceivedSkillDamageDecrease)
                                     {
                                         totalValue = SomaValue;
                                         break;
                                     }
 
                                     totalValue += (int)Math.Ceiling((double)(SomaValue) / 100 * baseValue);
+                                }
+                                break;
+
+                            case SkillCodeApplyTypeEnum.Unknown200:
+                                if (apply.Attribute == SkillCodeApplyAttributeEnum.RDD ||
+                                    apply.Attribute == SkillCodeApplyAttributeEnum.SDR ||
+                                    apply.Attribute == SkillCodeApplyAttributeEnum.TotalDamageTaken ||
+                                    apply.Attribute == SkillCodeApplyAttributeEnum.ReceivedSkillDamageDecrease)
+                                {
+                                    totalValue += apply.Value != 0 ? apply.Value : apply.AdditionalValue;
                                 }
                                 break;
                         }
@@ -727,26 +867,18 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
 
         private static bool ShouldAutoUnlockEvolution(EvolutionLineAssetModel evolutionLine, int index)
         {
-            if (index < 2)
-                return true;
-
-            return evolutionLine.EnableSlot > 0 &&
-                   evolutionLine.OpenQualification == 0 &&
-                   evolutionLine.UnlockQuestId <= 0 &&
-                   evolutionLine.UnlockItemSection <= 0 &&
-                   evolutionLine.UnlockItemSectionAmount <= 0;
+            // Official DEvolutionList/DigimonEvo data identifies normal Rookie->Champion->Ultimate
+            // progression as slots 1..3. Slots 4+ must stay locked so item/quest unlocks work.
+            var slotLevel = evolutionLine.SlotLevel > 0 ? evolutionLine.SlotLevel : index + 1;
+            return slotLevel <= 3;
         }
 
         private static bool ShouldAutoUnlockEvolution(EvolutionLineAssetDTO evolutionLine, int index)
         {
-            if (index < 2)
-                return true;
-
-            return evolutionLine.EnableSlot > 0 &&
-                   evolutionLine.OpenQualification == 0 &&
-                   evolutionLine.UnlockQuestId <= 0 &&
-                   evolutionLine.UnlockItemSection <= 0 &&
-                   evolutionLine.UnlockItemSectionAmount <= 0;
+            // Official DEvolutionList/DigimonEvo data identifies normal Rookie->Champion->Ultimate
+            // progression as slots 1..3. Slots 4+ must stay locked so item/quest unlocks work.
+            var slotLevel = evolutionLine.SlotLevel > 0 ? evolutionLine.SlotLevel : index + 1;
+            return slotLevel <= 3;
         }
 
         /// <summary>
@@ -791,7 +923,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
             {
                 StatusTypeEnum.AS => SealStatusList.Sum(x => x.ASValue),
                 StatusTypeEnum.AT => SealStatusList.Sum(x => x.ATValue),
-                StatusTypeEnum.BL => (SealStatusList.Sum(x => x.BLValue) / 10000),
+                StatusTypeEnum.BL => SealStatusList.Sum(x => x.BLValue) / 10000,
                 StatusTypeEnum.CT => SealStatusList.Sum(x => x.CTValue / 100),
                 StatusTypeEnum.DE => SealStatusList.Sum(x => x.DEValue),
                 StatusTypeEnum.DS => SealStatusList.Sum(x => x.DSValue),

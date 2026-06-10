@@ -4,6 +4,37 @@
 
 CSGBMEMPOOL_CPP( CsGBObject );
 
+#if defined(DMO_X64_WINDX9_BRIDGE)
+namespace
+{
+	struct sDiskPathInfoWin32
+	{
+		UINT	s_uiPEGroupCount;
+		UINT	s_uiTotalPECount;
+		DWORD	s_pptTranse;
+		DWORD	s_pPECount;
+		DWORD	s_pData;
+	};
+
+	struct sDiskObjectInfoPrefixWin32
+	{
+		DWORD						s_dwUniqID;
+		char						s_cObjectPath[ OBJECT_PATH_LEN ];
+		bool						s_bCheckDoAnimation;
+		float						s_fStopAniTime;
+		float						s_fAniSpeed;
+		char						s_Dummy[ 88 ];
+		NiTransform					s_trObject;
+		nsCSGBFUNC::sTERRAIN_BOUND	s_Bound;
+		DWORD						s_dwUserDefinePlag;
+		DWORD						s_dwTexTypePlag;
+	};
+
+	static_assert(sizeof(sDiskPathInfoWin32) == 20, "Unexpected Win32 path info disk size");
+	static_assert(sizeof(sDiskObjectInfoPrefixWin32) == 340, "Unexpected Win32 object info prefix disk size");
+}
+#endif
+
 CsGBObject::CsGBObject()
 {
 	m_pUserDefine = NULL;	
@@ -703,10 +734,31 @@ void CsGBObject::LoadExtraData( char* pData, UINT& uiOffset, DWORD dwCheckPlag )
 void CsGBObject::LoadObjectInfo( sINFO* pInfo, char* pData, UINT& uiOffset )
 {
 	assert_cs( pInfo != NULL );
+#if defined(DMO_X64_WINDX9_BRIDGE)
+	const sDiskObjectInfoPrefixWin32* pDiskInfo = (const sDiskObjectInfoPrefixWin32*)&pData[ uiOffset ];
+	pInfo->s_dwUniqID = pDiskInfo->s_dwUniqID;
+	memcpy( pInfo->s_cObjectPath, pDiskInfo->s_cObjectPath, sizeof( pInfo->s_cObjectPath ) );
+	pInfo->s_bCheckDoAnimation = pDiskInfo->s_bCheckDoAnimation;
+	pInfo->s_fStopAniTime = pDiskInfo->s_fStopAniTime;
+	pInfo->s_fAniSpeed = pDiskInfo->s_fAniSpeed;
+	memcpy( pInfo->s_Dummy, pDiskInfo->s_Dummy, sizeof( pInfo->s_Dummy ) );
+	pInfo->s_trObject = pDiskInfo->s_trObject;
+	pInfo->s_Bound = pDiskInfo->s_Bound;
+	pInfo->s_dwUserDefinePlag = pDiskInfo->s_dwUserDefinePlag;
+	pInfo->s_dwTexTypePlag = pDiskInfo->s_dwTexTypePlag;
+	uiOffset += sizeof(sDiskObjectInfoPrefixWin32);
+
+	const sDiskPathInfoWin32* pDiskPath = (const sDiskPathInfoWin32*)&pData[ uiOffset ];
+	pInfo->s_PathInfo.Reset();
+	pInfo->s_PathInfo.s_uiPEGroupCount = pDiskPath->s_uiPEGroupCount;
+	pInfo->s_PathInfo.s_uiTotalPECount = pDiskPath->s_uiTotalPECount;
+	uiOffset += sizeof(sDiskPathInfoWin32);
+#else
 	memcpy( pInfo, &pData[ uiOffset ], sizeof( sINFO ) );
-	pInfo->s_dwUniqID += CsGBTerrainLeaf::m_dwObjectUniqIDConstant;
 	uiOffset += sizeof( sINFO );
 	pInfo->s_PathInfo.s_pData = NULL;
+#endif
+	pInfo->s_dwUniqID += CsGBTerrainLeaf::m_dwObjectUniqIDConstant;
 	// Path Engine
 	if( pInfo->s_PathInfo.s_uiPEGroupCount != 0 )
 	{

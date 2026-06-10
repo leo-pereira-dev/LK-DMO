@@ -218,4 +218,3 @@ void cTacticsWindow::SetDisable()
 	m_bDisable = true;
 	m_pTargetImgae->SetColor( FONT_GLAY );
 }
-

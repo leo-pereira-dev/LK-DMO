@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#02070a"/>
+      <stop offset="0.48" stop-color="#08141b"/>
+      <stop offset="1" stop-color="#020303"/>
+    </linearGradient>
+    <linearGradient id="yellow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff35a"/>
+      <stop offset="0.42" stop-color="#ffd400"/>
+      <stop offset="1" stop-color="#f4aa00"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#35e7ff"/>
+      <stop offset="1" stop-color="#0864d7"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.02 0 0 0 0 0.72 0 0 0 0 1 0 0 0 .8 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="goldGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#ffd000" flood-opacity=".28"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity=".75"/>
+    </filter>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M 64 0 L 0 0 0 64" fill="none" stroke="#12303c" stroke-width="1" opacity=".35"/>
+    </pattern>
+    <style>
+      .label{font-family:Arial Black, Impact, sans-serif;font-size:24px;fill:#d8f6ff;letter-spacing:1px}
+      .tiny{font-family:Arial, sans-serif;font-weight:700;font-size:18px;fill:#8aa3ad}
+      .logoMain{font-family:Arial Black, Impact, sans-serif;font-size:86px;font-style:italic;font-weight:900}
+      .logoSub{font-family:Arial Black, Impact, sans-serif;font-size:34px;font-weight:900}
+      .btnText{font-family:Arial Black, Impact, sans-serif;font-size:30px;font-weight:900}
+      .btnSmall{font-family:Arial Black, Impact, sans-serif;font-size:22px;font-weight:900}
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)" opacity=".55"/>
+  <path d="M0 190 C250 120 420 250 650 160 C930 50 1120 240 1600 120 L1600 0 L0 0 Z" fill="#062131" opacity=".58"/>
+  <path d="M1180 0 L1600 0 L1600 900 L1320 900 C1260 710 1340 575 1240 410 C1160 275 1100 170 1180 0 Z" fill="#07100d" opacity=".85"/>
+
+  <text x="76" y="88" class="label">LOGOS ORIGINAIS</text>
+  <text x="76" y="126" class="tiny">Direcao visual para LKDMO Tamers, sem usar marca oficial.</text>
+
+  <g transform="translate(80 175)" filter="url(#goldGlow)">
+    <path d="M0 18 L42 0 L470 0 L520 34 L488 134 L44 134 L0 104 Z" fill="#061018" stroke="#18bfff" stroke-width="5"/>
+    <path d="M22 32 L62 16 L450 16 L492 42 L470 116 L58 116 L22 92 Z" fill="#092232" stroke="#ffe100" stroke-width="3"/>
+    <text x="58" y="85" class="logoMain" fill="url(#yellow)" stroke="#052a68" stroke-width="7" paint-order="stroke">LKDMO</text>
+    <text x="255" y="121" class="logoSub" fill="#ffffff" stroke="#064eac" stroke-width="5" paint-order="stroke">TAMERS</text>
+  </g>
+
+  <g transform="translate(660 175)" filter="url(#glow)">
+    <path d="M0 28 L85 0 L430 0 L518 60 L480 144 L52 144 Z" fill="#020708" stroke="#1bcfff" stroke-width="4"/>
+    <text x="45" y="85" class="logoMain" fill="#fff021" stroke="#000" stroke-width="10" paint-order="stroke">LKDMO</text>
+    <text x="256" y="124" class="logoSub" fill="#44dfff" stroke="#001b33" stroke-width="6" paint-order="stroke">TAMERS</text>
+  </g>
+
+  <g transform="translate(80 385)" filter="url(#goldGlow)">
+    <path d="M35 0 L458 0 L520 58 L482 122 L0 122 L0 36 Z" fill="#07090a" stroke="#ffd700" stroke-width="4"/>
+    <text x="42" y="77" class="logoMain" fill="#ffffff" stroke="#0b5dff" stroke-width="7" paint-order="stroke">LKDMO</text>
+    <text x="292" y="108" class="logoSub" fill="url(#yellow)" stroke="#000" stroke-width="5" paint-order="stroke">TAMERS</text>
+  </g>
+
+  <g transform="translate(660 385)" filter="url(#glow)">
+    <path d="M15 8 L516 8 L492 132 L40 132 Z" fill="#00131b" stroke="#62eeff" stroke-width="3"/>
+    <path d="M50 0 L465 0 L520 40 L488 140 L0 140 L30 42 Z" fill="none" stroke="#ffe100" stroke-width="3" opacity=".85"/>
+    <text x="48" y="83" class="logoMain" fill="url(#blue)" stroke="#ffffff" stroke-width="5" paint-order="stroke">LKDMO</text>
+    <text x="302" y="120" class="logoSub" fill="#fff023" stroke="#00101a" stroke-width="5" paint-order="stroke">TAMERS</text>
+  </g>
+
+  <text x="76" y="610" class="label">BOTOES E COMPONENTES</text>
+  <text x="76" y="648" class="tiny">Botao amarelo com texto preto, secundario escuro e variantes de download/login.</text>
+
+  <g transform="translate(80 695)">
+    <rect x="0" y="0" width="300" height="72" rx="6" fill="url(#yellow)" filter="url(#goldGlow)"/>
+    <text x="82" y="48" class="btnText" fill="#050606">JOGUE AGORA</text>
+    <path d="M245 28 L265 36 L245 44 Z" fill="#050606"/>
+  </g>
+
+  <g transform="translate(420 695)">
+    <rect x="0" y="0" width="300" height="72" rx="6" fill="#020607" stroke="#20404b" stroke-width="2"/>
+    <text x="83" y="48" class="btnText" fill="#ffffff">SAIBA MAIS</text>
+  </g>
+
+  <g transform="translate(760 695)">
+    <rect x="0" y="0" width="300" height="72" rx="6" fill="url(#yellow)" filter="url(#goldGlow)"/>
+    <path d="M64 20 v22 h-16 l27 23 27-23 h-16 v-22 z" fill="#050606"/>
+    <text x="126" y="48" class="btnText" fill="#050606">DOWNLOAD</text>
+  </g>
+
+  <g transform="translate(1100 695)">
+    <rect x="0" y="0" width="190" height="64" rx="6" fill="#03080a" stroke="#ffe100" stroke-width="3"/>
+    <text x="57" y="42" class="btnSmall" fill="#fff021">ENTRAR</text>
+  </g>
+
+  <g transform="translate(1320 695)">
+    <rect x="0" y="0" width="210" height="64" rx="6" fill="url(#yellow)" filter="url(#goldGlow)"/>
+    <text x="42" y="42" class="btnSmall" fill="#050606">REGISTRAR</text>
+  </g>
+
+  <g transform="translate(80 802)">
+    <rect x="0" y="0" width="280" height="58" rx="5" fill="#071116" stroke="#1b3c49"/>
+    <text x="24" y="38" class="btnSmall" fill="#e9faff">EVENTOS</text>
+    <circle cx="242" cy="29" r="16" fill="none" stroke="#92a8b0" stroke-width="3"/>
+    <path d="M232 29 h20 M242 19 v20" stroke="#92a8b0" stroke-width="3"/>
+  </g>
+
+  <g transform="translate(400 802)">
+    <rect x="0" y="0" width="280" height="58" rx="5" fill="#071116" stroke="#1b3c49"/>
+    <text x="24" y="38" class="btnSmall" fill="#fff021">RANKINGS</text>
+    <path d="M230 43 L242 17 L254 43 Z" fill="none" stroke="#92a8b0" stroke-width="3"/>
+  </g>
+
+  <g transform="translate(720 802)">
+    <rect x="0" y="0" width="280" height="58" rx="5" fill="#071116" stroke="#1b3c49"/>
+    <text x="24" y="38" class="btnSmall" fill="#fff021">PATCH NOTES</text>
+    <path d="M226 18 L256 44 M256 18 L226 44" stroke="#92a8b0" stroke-width="4"/>
+  </g>
+
+  <g transform="translate(1040 802)">
+    <rect x="0" y="0" width="280" height="58" rx="5" fill="#071116" stroke="#1b3c49"/>
+    <text x="24" y="38" class="btnSmall" fill="#fff021">LOJA</text>
+    <path d="M225 18 h16 l6 22 h30 M238 48 h34" fill="none" stroke="#92a8b0" stroke-width="3"/>
+  </g>
+</svg>

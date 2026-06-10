@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -56,6 +56,10 @@
     <ProjectConfiguration Include="Release_English|Win32">
       <Configuration>Release_English</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="X64_WinDX9_Bridge|x64">
+      <Configuration>X64_WinDX9_Bridge</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release_Hong|Win32">
       <Configuration>Release_Hong</Configuration>
@@ -206,6 +210,16 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v143</PlatformToolset>
+    <IncludePath>C:\0-NewDmo\dmo-client-main\DirectX_June2010\Include;C:\0-NewDmo\dmo-client-main\packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include;C:\0-NewDmo\dmo-client-main\Gamebryo2.3\GB_Include\ado;C:\0-NewDmo\dmo-client-main\Gamebryo2.3\GB_Include;$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.44.35207\lib\x64;C:\0-NewDmo\dmo-client-main\packages\freetype.2.8.0.1\build\native\lib\x64\v141\static\Release;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\um\x64;C:\0-NewDmo\dmo-client-main\packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\release\lib\x64;C:\0-NewDmo\dmo-client-main\Lib\x64\X64_WinDX9_Bridge;C:\0-NewDmo\dmo-client-main\Gamebryo2.3\GB_Lib\x64\ReleaseLib;C:\0-NewDmo\dmo-client-main\Gamebryo2.3\GB_Lib\x64\ThirdPartyLib;C:\0-NewDmo\dmo-client-main\LibProj\MilesSoundX64\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Give_Hong_QA|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
@@ -282,6 +296,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Give_Hong_QA|Win32'" Label="PropertySheets">
@@ -452,7 +469,7 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">DProject_R</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">DProject_R_ENG</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">lk-dmo</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release_Hong|Win32'">DProject_R_HONGKONG</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release_Steam|Win32'">DProject_R_ENG_Steam</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release_Taiwan|Win32'">DProject_R_TAIWAN</TargetName>
@@ -469,6 +486,12 @@
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Give_Hong|Win32'">DigimonMastersHK</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Give|Win32'">DigimonMasters</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Give_QA|Win32'">DigimonMasters</TargetName>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">..\..\Release\GSP_x64\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">true</GenerateManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">true</EmbedManifest>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">lk-dmo-x64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Thai|Win32'">
     <IncludePath>$(WindowsSDK_IncludePath);..\DirectX_June2010\Include;$(IncludePath)</IncludePath>
@@ -736,6 +759,44 @@
       <TargetMachine>MachineX86</TargetMachine>
       <AllowIsolation>true</AllowIsolation>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>C:\0-NewDmo\dmo-client-main\DirectX_June2010\Include;C:\0-NewDmo\dmo-client-main\packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include;.\;..\;..\..\..\;C:\0-NewDmo\dmo-client-main\Gamebryo2.3\ThirdPartyCode\ZLib\zlib123;C:\0-NewDmo\dmo-client-main\Gamebryo2.3\GB_Include\ado;C:\0-NewDmo\dmo-client-main\Gamebryo2.3\GB_Include;..\libproj\Freetype\include;..\libproj\PathEngine;..\libproj\MilesSound\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;WIN64;_WIN64;DMO_X64_WINDX9_BRIDGE;NDEBUG;_WINDOWS;NIRELEASE;VERSION_USA;D3DXFX_LARGEADDRESS_HANDLE;COMPAT_487;COMPAT_487_2;PATCH_QUESTS_SPINZ;PATCH_DAILYCHECK_EVENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CallingConvention>Cdecl</CallingConvention>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;VERSION_USA;%(PreprocessorDefinitions);DMO_X64_WINDX9_BRIDGE</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>d3d9.lib;dinput8.lib;dxguid.lib;d3dx9.lib;Version.lib;Imm32.lib;mss64.lib;zlib.lib;libpng.lib;freetype28.lib;NiSystem.lib;NiMain.lib;NiAnimation.lib;NiParticle.lib;NiVisualTracker.lib;NiInput.lib;NiCollision.lib;NiMilesAudio.lib;NiPNGReader.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.44.35207\atlmfc\lib\x64;C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.44.35207\lib\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\ucrt\x64;C:\0-NewDmo\dmo-client-main\packages\freetype.2.8.0.1\build\native\lib\x64\v141\static\Release;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\um\x64;C:\0-NewDmo\dmo-client-main\packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\release\lib\x64;C:\0-NewDmo\dmo-client-main\Lib\x64\X64_WinDX9_Bridge;C:\0-NewDmo\dmo-client-main\Gamebryo2.3\GB_Lib\x64\ReleaseLib;C:\0-NewDmo\dmo-client-main\Gamebryo2.3\GB_Lib\x64\ThirdPartyLib;C:\0-NewDmo\dmo-client-main\LibProj\MilesSoundX64_94d\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EnableUAC>true</EnableUAC>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <StackReserveSize>0</StackReserveSize>
+      <StackCommitSize>0</StackCommitSize>
+      <LargeAddressAware>true</LargeAddressAware>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <FixedBaseAddress>false</FixedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AllowIsolation>true</AllowIsolation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Give_English|Win32'">
@@ -1216,7 +1277,7 @@
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.\;..\;..\..\..\;..\Gamebryo2.3\ThirdPartyCode\ZLib\zlib123;..\Gamebryo2.3\GB_Include;..\libproj\Freetype\include;..\ibproj\PathEngine;..\libproj\MilesSound\include;..\SteamSDK;..\SteamSDK\steam;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\;..\..\..\;..\Gamebryo2.3\ThirdPartyCode\ZLib\zlib123;..\Gamebryo2.3\GB_Include;..\libproj\Freetype\include;..\ibproj\PathEngine;..\libproj\MilesSound\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;NIRELEASE;VERSION_USA;VERSION_STEAM;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -1231,7 +1292,7 @@
     <Link>
       <AdditionalDependencies>Version.lib;Imm32.lib;mss32.lib;zlib.lib;libpng.lib;freetype213.lib;net-dmc_v14.lib;common_r.lib;NiSystem.lib;NiMain.lib;NiAnimation.lib;NiParticle.lib;NiVisualTracker.lib;NiInput.lib;NiCollision.lib;NiMilesAudio.lib;NiPNGReader.lib;CsDM.lib;CsFilePack.lib;CsFunc.lib;CsThread.lib;CsFileTable.lib;CsGB2.3.lib;CsGBChar.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\nlib;..\..\..\common_vs2015;..\Lib\common;..\DirectX_June2010\Lib\x86;..\libproj\Freetype\lib;..\libproj\MilesSound\lib;..\Gamebryo2.3\GB_Lib\ThirdPartyLib;..\Gamebryo2.3\GB_Lib\ReleaseLib;..\SteamSDK;..\Lib\Release_English;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\nlib;..\..\..\common_vs2015;..\Lib\common;..\DirectX_June2010\Lib\x86;..\libproj\Freetype\lib;..\libproj\MilesSound\lib;..\Gamebryo2.3\GB_Lib\ThirdPartyLib;..\Gamebryo2.3\GB_Lib\ReleaseLib;..\Lib\Release_English;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EnableUAC>true</EnableUAC>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -1255,7 +1316,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.\;..\;..\..\..\;..\Gamebryo2.3\ThirdPartyCode\ZLib\zlib123;..\Gamebryo2.3\GB_Include;..\libproj\Freetype\include;..\ibproj\PathEngine;..\libproj\MilesSound\include;..\SteamSDK;..\SteamSDK\steam;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\;..\..\..\;..\Gamebryo2.3\ThirdPartyCode\ZLib\zlib123;..\Gamebryo2.3\GB_Include;..\libproj\Freetype\include;..\ibproj\PathEngine;..\libproj\MilesSound\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_GIVE;NDEBUG;_WINDOWS;NISHIPPING;VERSION_USA;VERSION_QA;VERSION_STEAM;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -1270,7 +1331,7 @@
     <Link>
       <AdditionalDependencies>Version.lib;Imm32.lib;mss32.lib;zlib.lib;libpng.lib;freetype213.lib;net-dmc_v14.lib;common_r.lib;NiSystem.lib;NiMain.lib;NiAnimation.lib;NiParticle.lib;NiVisualTracker.lib;NiInput.lib;NiCollision.lib;NiMilesAudio.lib;NiPNGReader.lib;CsDM.lib;CsFilePack.lib;CsFunc.lib;CsThread.lib;CsFileTable.lib;CsGB2.3.lib;CsGBChar.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\nlib;..\..\..\common_vs2015;..\Lib\common;..\DirectX_June2010\Lib\x86;..\libproj\Freetype\lib;..\libproj\MilesSound\lib;..\Gamebryo2.3\GB_Lib\ThirdPartyLib;..\Gamebryo2.3\GB_Lib\ShippingLib;..\Lib\Give_English;..\SteamSDK;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\nlib;..\..\..\common_vs2015;..\Lib\common;..\DirectX_June2010\Lib\x86;..\libproj\Freetype\lib;..\libproj\MilesSound\lib;..\Gamebryo2.3\GB_Lib\ThirdPartyLib;..\Gamebryo2.3\GB_Lib\ShippingLib;..\Lib\Give_English;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EnableUAC>true</EnableUAC>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -1297,7 +1358,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.\;..\;..\..\..\;..\Gamebryo2.3\ThirdPartyCode\ZLib\zlib123;..\Gamebryo2.3\GB_Include;..\libproj\Freetype\include;..\ibproj\PathEngine;..\libproj\MilesSound\include;..\SteamSDK;..\SteamSDK\steam;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\;..\..\..\;..\Gamebryo2.3\ThirdPartyCode\ZLib\zlib123;..\Gamebryo2.3\GB_Include;..\libproj\Freetype\include;..\ibproj\PathEngine;..\libproj\MilesSound\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_GIVE;NDEBUG;_WINDOWS;NISHIPPING;VERSION_USA;VERSION_STEAM;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -1312,7 +1373,7 @@
     <Link>
       <AdditionalDependencies>Version.lib;Imm32.lib;mss32.lib;zlib.lib;libpng.lib;freetype213.lib;net-dmc_v14.lib;common_r.lib;NiSystem.lib;NiMain.lib;NiAnimation.lib;NiParticle.lib;NiVisualTracker.lib;NiInput.lib;NiCollision.lib;NiMilesAudio.lib;NiPNGReader.lib;CsDM.lib;CsFilePack.lib;CsFunc.lib;CsThread.lib;CsFileTable.lib;CsGB2.3.lib;CsGBChar.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\nlib;..\..\..\common_vs2015;..\Lib\common;..\DirectX_June2010\Lib\x86;..\libproj\Freetype\lib;..\libproj\MilesSound\lib;..\Gamebryo2.3\GB_Lib\ThirdPartyLib;..\Gamebryo2.3\GB_Lib\ShippingLib;..\Lib\Give_English;..\SteamSDK;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\nlib;..\..\..\common_vs2015;..\Lib\common;..\DirectX_June2010\Lib\x86;..\libproj\Freetype\lib;..\libproj\MilesSound\lib;..\Gamebryo2.3\GB_Lib\ThirdPartyLib;..\Gamebryo2.3\GB_Lib\ShippingLib;..\Lib\Give_English;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EnableUAC>true</EnableUAC>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -1335,6 +1396,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="D3DX9Guid.cpp" />
     <ClCompile Include="DirectShow.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Engine_Render.cpp" />
@@ -1391,6 +1453,7 @@
       <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release_Thai|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
       <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">$(IntDir)Root_DigimonTalk.obj</ObjectFileName>
     </ClCompile>
     <ClCompile Include="DigimonUser.cpp">
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
@@ -2224,7 +2287,9 @@
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
       <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
     </ClCompile>
-    <ClCompile Include="_Interface\base\PopUp.cpp" />
+    <ClCompile Include="_Interface\base\PopUp.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">$(IntDir)Base_PopUp.obj</ObjectFileName>
+    </ClCompile>
     <ClCompile Include="_Interface\Base\RenderTex.cpp" />
     <ClCompile Include="_Interface\base\Icon.cpp">
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
@@ -2311,7 +2376,9 @@
     <ClCompile Include="_Interface\Game\_BaseWindow.cpp" />
     <ClCompile Include="_Interface\Game\_GameIF.cpp" />
     <ClCompile Include="_Interface\Game\HpBar.cpp" />
-    <ClCompile Include="_Interface\Game\DigimonTalk.cpp" />
+    <ClCompile Include="_Interface\Game\DigimonTalk.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">$(IntDir)Game_DigimonTalk.obj</ObjectFileName>
+    </ClCompile>
     <ClCompile Include="_Interface\Game\Tip.cpp" />
     <ClCompile Include="_Interface\Game\TalkBalloon.cpp" />
     <ClCompile Include="_Interface\Game\HelpArrow.cpp" />
@@ -2370,6 +2437,7 @@
       <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release_Thai|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
       <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">$(IntDir)Game_Popup.obj</ObjectFileName>
     </ClCompile>
     <ClCompile Include="_Interface\Game\Store.cpp" />
     <ClCompile Include="_Interface\Game\StoreContents.cpp" />
@@ -2497,6 +2565,9 @@
     <ClCompile Include="_Interface\Game\QuestDiscript.cpp" />
     <ClCompile Include="_Interface\Game\MainOption.cpp" />
     <ClCompile Include="_Interface\Game\GMPanel.cpp" />
+    <ClCompile Include="_Interface\Game\DungeonEntranceWindow.cpp" />
+    <ClCompile Include="_Interface\Game\DungeonClearAnnounceWindow.cpp" />
+    <ClCompile Include="_Interface\Game\DungeonClearResultWindow.cpp" />
     <ClCompile Include="_Interface\Game\OptionBase.cpp" />
     <ClCompile Include="_Interface\Game\OptionBase_Op.cpp" />
     <ClCompile Include="_Interface\Game\OptionGraphic.cpp" />
@@ -2815,47 +2886,6 @@
     <ClCompile Include="_Interface\08.Loading\Loading.cpp" />
     <ClCompile Include="_Interface\00.Contents\LoadingContents.cpp" />
     <ClCompile Include="_Interface\00.Contents\ShutDownContents.cpp" />
-    <ClCompile Include="_Interface\13.ResourceIntegrityChecker\ResourceChecker.cpp" />
-    <ClCompile Include="_Interface\00.Contents\ResourceIntegrityChecker.cpp">
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Give_English_QA|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Give_English_QA|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Give_English|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Give_English|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Give_Hong_QA|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Give_Hong_QA|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Give_Hong|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Give_Hong|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Give_QA|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Give_QA|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Give_Steam_QA|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Give_Steam_QA|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Give_Steam|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Give_Steam|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan_QA|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan_QA|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Give_Thai_QA|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Give_Thai_QA|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Give_Thai|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Give_Thai|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Give|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Give|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release_Hong|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release_Hong|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release_Steam|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release_Steam|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release_Taiwan|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release_Taiwan|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release_Thai|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release_Thai|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
-      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_English_QA|Win32'">Create</PrecompiledHeader>
@@ -2876,6 +2906,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Taiwan|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Thai|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="_Lan_English.cpp" />
     <ClCompile Include="_Lan_HongKong.cpp" />
@@ -2887,212 +2918,10 @@
     <ClCompile Include="ContentsSystem\ContentsStream.cpp" />
     <ClCompile Include="ContentsSystem\ContentsSystem.cpp" />
     <ClCompile Include="ContentsSystem\ContentsSystemFactory.cpp" />
-    <ClCompile Include="..\SimpleSecurity\SecuritySelf.cpp" />
-    <ClCompile Include="..\SteamSDK\Steam_Client.cpp" />
     <ClCompile Include="GlobalData.cpp" />
     <ClCompile Include="_ResourceMng\ResourceMng.cpp" />
     <ClCompile Include="_ResourceMng\TextureMng.cpp" />
     <ClCompile Include="_ResourceMng\TextureResource.cpp" />
-    <ClCompile Include="..\FtpClient\BlockingSocket.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_English_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_English|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Hong_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Hong|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Steam_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Steam|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Thai_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Thai|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Hong|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Steam|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Taiwan|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Thai|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\FtpClient\FTPClient.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_English_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_English|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Hong_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Hong|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Steam_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Steam|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Thai_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Thai|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Hong|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Steam|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Taiwan|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Thai|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\FtpClient\FTPDataTypes.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_English_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_English|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Hong_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Hong|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Steam_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Steam|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Thai_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Thai|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Hong|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Steam|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Taiwan|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Thai|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\FtpClient\FTPFileStatus.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_English_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_English|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Hong_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Hong|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Steam_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Steam|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Thai_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Thai|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Hong|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Steam|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Taiwan|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Thai|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\FtpClient\FTPListParse.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_English_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_English|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Hong_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Hong|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Steam_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Steam|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Taiwan|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Thai_QA|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Thai|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Hong|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Steam|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Taiwan|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_Thai|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h" />
@@ -3344,6 +3173,9 @@
     <ClInclude Include="_Interface\Game\QuestDiscript.h" />
     <ClInclude Include="_Interface\Game\MainOption.h" />
     <ClInclude Include="_Interface\Game\GMPanel.h" />
+    <ClInclude Include="_Interface\Game\DungeonEntranceWindow.h" />
+    <ClInclude Include="_Interface\Game\DungeonClearAnnounceWindow.h" />
+    <ClInclude Include="_Interface\Game\DungeonClearResultWindow.h" />
     <ClInclude Include="_Interface\Game\OptionBase.h" />
     <ClInclude Include="_Interface\Game\OptionGraphic.h" />
     <ClInclude Include="_Interface\Game\OptionInterface.h" />
@@ -3568,8 +3400,6 @@
     <ClInclude Include="_Interface\08.Loading\Loading.h" />
     <ClInclude Include="_Interface\00.Contents\LoadingContents.h" />
     <ClInclude Include="_Interface\00.Contents\ShutDownContents.h" />
-    <ClInclude Include="_Interface\13.ResourceIntegrityChecker\ResourceChecker.h" />
-    <ClInclude Include="_Interface\00.Contents\ResourceIntegrityChecker.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="_Lan_English.h" />
@@ -3587,27 +3417,15 @@
     <ClInclude Include="ContentsSystem\ContentsSystem.h" />
     <ClInclude Include="ContentsSystem\ContentsSystemDef.h" />
     <ClInclude Include="NetProtocol_Include.h" />
-    <ClInclude Include="..\SimpleSecurity\SecuritySelf.h" />
-    <ClInclude Include="..\SteamSDK\steam\steam_api.h" />
-    <ClInclude Include="..\SteamSDK\Steam_Client.h" />
-    <ClInclude Include="..\SteamSDK\steam\steam_gameserver.h" />
     <ClInclude Include="GlobalData.h" />
     <ClInclude Include="_ResourceMng\ResourceMng.h" />
     <ClInclude Include="_ResourceMng\TextureMng.h" />
     <ClInclude Include="_ResourceMng\TextureResource.h" />
-    <ClInclude Include="..\FtpClient\BlockingSocket.h" />
-    <ClInclude Include="..\FtpClient\Definements.h" />
-    <ClInclude Include="..\FtpClient\FTPClient.h" />
-    <ClInclude Include="..\FtpClient\FTPDataTypes.h" />
-    <ClInclude Include="..\FtpClient\FTPFileStatus.h" />
-    <ClInclude Include="..\FtpClient\FTPListParse.h" />
-    <ClInclude Include="..\FtpClient\smart_ptr.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Flow\Flow.inl" />
     <None Include="Flow\InstMgr.inl" />
-    <None Include="packages.config" />
     <None Include="_Interface\base\IconMng.inl" />
     <None Include="MakeTacticsContects.inl" />
     <None Include="Minigame.inl" />
@@ -3659,14 +3477,10 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets" Condition="Exists('..\packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets')" />
-    <Import Project="..\packages\freetype.2.8.0.1\build\native\freetype.targets" Condition="Exists('..\packages\freetype.2.8.0.1\build\native\freetype.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets'))" />
-    <Error Condition="!Exists('..\packages\freetype.2.8.0.1\build\native\freetype.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\freetype.2.8.0.1\build\native\freetype.targets'))" />
   </Target>
 </Project>

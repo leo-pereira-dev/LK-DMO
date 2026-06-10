@@ -60,8 +60,10 @@ namespace DigitalWorldOnline.Application.CharacterAssets.Queries
                     OpenQualification = (byte)Math.Min(line.OpenQualification, byte.MaxValue),
                     UnlockLevel = (byte)Math.Min(line.OpenLevel, byte.MaxValue),
                     UnlockQuestId = (short)line.OpenQuest,
-                    UnlockItemSection = line.UseItem,
-                    UnlockItemSectionAmount = line.UseItemNum,
+                    UnlockItemSection = line.OpenItem,
+                    UnlockItemSectionAmount = line.OpenItemNum,
+                    RequiredItem = line.UseItem,
+                    RequiredAmount = line.UseItemNum,
                     SkillMaxLevels = skillMaxLevels
                 });
             }

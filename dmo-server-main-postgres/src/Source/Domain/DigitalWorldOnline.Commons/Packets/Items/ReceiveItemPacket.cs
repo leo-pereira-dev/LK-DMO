@@ -1,4 +1,4 @@
-﻿using DigitalWorldOnline.Commons.Enums.ClientEnums;
+using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Models.Base;
 using DigitalWorldOnline.Commons.Utils;
 using DigitalWorldOnline.Commons.Writers;
@@ -10,19 +10,19 @@ namespace DigitalWorldOnline.Commons.Packets.Items
         private const int PacketNumber = 3936;
 
         /// <summary>
-        /// Receives and highlight a new item to the target inventory.
+        /// Receives and highlights a new item in the target inventory.
         /// </summary>
         /// <param name="item">The item received.</param>
         /// <param name="inventoryType">The target inventory enumeration.</param>
-        /// <param name="slot">The affected slot.</param>
-        public ReceiveItemPacket(ItemModel item, InventoryTypeEnum inventoryType, int slot = 0)
+        /// <param name="deleteIndex">The gift-storage index to delete after receiving, when applicable.</param>
+        public ReceiveItemPacket(ItemModel item, InventoryTypeEnum inventoryType, ushort deleteIndex = 0)
         {
             Type(PacketNumber);
             WriteByte((byte)inventoryType);
             WriteByte((byte)item.Slot);
-            WriteInt(item.ItemId);
+            WriteUInt((uint)item.ItemId);
             WriteShort((short)item.Amount);
-            WriteByte(0);
+            WriteByte(item.Power);
 
             if (item.RemainingMinutes() == 4294967280)
             {
@@ -30,11 +30,11 @@ namespace DigitalWorldOnline.Commons.Packets.Items
             }
             else
             {
-                var ts = UtilitiesFunctions.RemainingTimeMinutes((int)item.RemainingMinutes());
-
-                WriteInt(ts);
+                var endTime = UtilitiesFunctions.RemainingTimeMinutes((int)item.RemainingMinutes());
+                WriteInt(endTime);
             }
-            WriteByte(0);
+
+            WriteUShort(deleteIndex);
         }
     }
 }

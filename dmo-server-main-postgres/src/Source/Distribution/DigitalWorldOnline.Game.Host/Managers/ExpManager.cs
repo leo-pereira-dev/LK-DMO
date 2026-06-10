@@ -1,5 +1,6 @@
 ﻿using DigitalWorldOnline.Application;
 using DigitalWorldOnline.Application.GameAssets;
+using DigitalWorldOnline.Commons.Constants;
 using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Models.Character;
 using DigitalWorldOnline.Commons.Models.Config;
@@ -35,19 +36,19 @@ namespace DigitalWorldOnline.Game.Managers
 
         public ReceiveExpResult ReceiveMaxTamerExperience(CharacterModel tamer)
         {
-            if (tamer.Level >= 120) return new ReceiveExpResult(0, true);
+            if (tamer.Level >= LevelConstants.MaxLevel) return new ReceiveExpResult(0, true);
 
             var tamerInfos = _assets.TamerLevelInfo
                 .Where(x => x.Type == tamer.Model)
                 .ToList();
 
-            if (tamerInfos == null || !tamerInfos.Any() || tamerInfos.Count != 120)
+            if (tamerInfos == null || !tamerInfos.Any() || tamerInfos.Count < LevelConstants.MaxLevel)
             {
                 _logger.Error($"Incomplete level config for tamer {tamer.Model}.");
                 return new ReceiveExpResult(0, false);
             }
 
-            var levelGain = (byte)(120 - tamer.Level);
+            var levelGain = (byte)(LevelConstants.MaxLevel - tamer.Level);
             tamer.LevelUp(levelGain);
             tamer.SetExp(0);
 
@@ -61,7 +62,7 @@ namespace DigitalWorldOnline.Game.Managers
             decimal fatigueMultiplier = 1m   // FATIGUE_HOOK — caller passes FatigueService.GetMultipliers(client).exp; 1.0 when disabled
         )
         {
-            if (tamer.Level >= 120) return new ReceiveExpResult(0, true);
+            if (tamer.Level >= LevelConstants.MaxLevel) return new ReceiveExpResult(0, true);
 
             // FATIGUE_HOOK: scale incoming exp by fatigue multiplier (DMBase.bin section 9).
             if (fatigueMultiplier <= 0m)
@@ -73,7 +74,7 @@ namespace DigitalWorldOnline.Game.Managers
                 .Where(x => x.Type == tamer.Model)
                 .ToList();
 
-            if (tamerInfos == null || !tamerInfos.Any() || tamerInfos.Count != 120)
+            if (tamerInfos == null || !tamerInfos.Any() || tamerInfos.Count < LevelConstants.MaxLevel)
             {
                 _logger.Error($"Incomplete level config for tamer {tamer.Model}.");
                 return new ReceiveExpResult(0, false);
@@ -97,7 +98,7 @@ namespace DigitalWorldOnline.Game.Managers
                     tamer.LevelUp();
                     currentLevel = tamerInfos.First(x => x.Level == tamer.Level);
 
-                    if (tamer.Level == 120)
+                    if (tamer.Level == LevelConstants.MaxLevel)
                     {
                         tamer.SetExp(0);
                         expToGain = 0;
@@ -124,7 +125,7 @@ namespace DigitalWorldOnline.Game.Managers
             decimal fatigueMultiplier = 1m   // FATIGUE_HOOK
         )
         {
-            if (digimon.Level >= 120) return new ReceiveExpResult(0, true);
+            if (digimon.Level >= LevelConstants.MaxLevel) return new ReceiveExpResult(0, true);
 
             // FATIGUE_HOOK: scale partner exp by the same multiplier the tamer received.
             if (fatigueMultiplier <= 0m)
@@ -136,7 +137,7 @@ namespace DigitalWorldOnline.Game.Managers
                 .Where(x => x.ScaleType == digimon.BaseInfo.ScaleType)
                 .ToList();
 
-            if (digimonInfos == null || !digimonInfos.Any() || digimonInfos.Count != 120)
+            if (digimonInfos == null || !digimonInfos.Any() || digimonInfos.Count < LevelConstants.MaxLevel)
             {
                 _logger.Error($"Incomplete level config for digimon {digimon.Model} {digimon.BaseInfo.ScaleType}.");
                 return new ReceiveExpResult(0, false);
@@ -160,7 +161,7 @@ namespace DigitalWorldOnline.Game.Managers
                     digimon.LevelUp();
                     currentLevel = digimonInfos.First(x => x.Level == digimon.Level);
 
-                    if (digimon.Level == 120)
+                    if (digimon.Level == LevelConstants.MaxLevel)
                     {
                         digimon.SetExp(0);
                         expToGain = 0;
@@ -183,19 +184,19 @@ namespace DigitalWorldOnline.Game.Managers
 
         public ReceiveExpResult ReceiveMaxDigimonExperience(DigimonModel digimon)
         {
-            if (digimon.Level >= 120) return new ReceiveExpResult(0, true);
+            if (digimon.Level >= LevelConstants.MaxLevel) return new ReceiveExpResult(0, true);
 
             var digimonInfos = _assets.DigimonLevelInfo
                 .Where(x => x.ScaleType == digimon.BaseInfo.ScaleType)
                 .ToList();
 
-            if (digimonInfos == null || !digimonInfos.Any() || digimonInfos.Count != 120)
+            if (digimonInfos == null || !digimonInfos.Any() || digimonInfos.Count < LevelConstants.MaxLevel)
             {
                 _logger.Error($"Incomplete level config for digimon {digimon.Model} {digimon.BaseInfo.ScaleType}.");
                 return new ReceiveExpResult(0, false);
             }
 
-            var levelGain = (byte)(120 - digimon.Level);
+            var levelGain = (byte)(LevelConstants.MaxLevel - digimon.Level);
 
             digimon.LevelUp(levelGain);
             digimon.SetExp(0);

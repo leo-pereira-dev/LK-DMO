@@ -14,6 +14,7 @@
         JungleTrooper = 13,
         NightmareSoldier = 14,
         VirusBuster = 15,
-        Tbd = 16
+        Tbd = 16,
+        All = 17
     }
 }

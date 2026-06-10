@@ -53,7 +53,7 @@ namespace DigitalWorldOnline.Commons.Models.Digimon
         public void ResetCooldown()
         {
             Duration = 0;
-            EndDate = DateTime.MaxValue;
+            EndDate = DateTime.MinValue;
         }
     }
 }

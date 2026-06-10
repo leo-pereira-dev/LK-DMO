@@ -19,6 +19,9 @@ public:
 	void		GetDigimonReqLevel(int& nMinLv, int& nMaxLv ) const;
 
 	int			GetSkillRate() const;
+	DWORD		GetTamerEquipmentUpgradeSkillID() const;
+
+	static DWORD	GetTamerEquipmentUpgradeSkillID( int nItemType, int nStage );
 
 	static int	GetSocketRate( int nType );
 	int			GetSocketRate();

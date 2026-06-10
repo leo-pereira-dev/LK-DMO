@@ -8,11 +8,13 @@ using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Models;
+using DigitalWorldOnline.Commons.Models.Asset;
 using DigitalWorldOnline.Commons.Models.Base;
 using DigitalWorldOnline.Commons.Packets.Chat;
 using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.Items;
 using DigitalWorldOnline.Commons.Utils;
+using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
 using MediatR;
 using Serilog;
@@ -23,23 +25,29 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 {
     public class ItemScanPacketProcessor : IGamePacketProcessor
     {
+        private const int TutorialSuppliesKitItemId = 70259;
+        private const int TutorialReturnItemId = 70260;
+
         public GameServerPacketEnum Type => GameServerPacketEnum.ItemScan;
 
         private readonly AssetsLoader _assets;
         private readonly MapServer _mapServer;
         private readonly ISender _sender;
         private readonly ILogger _logger;
+        private readonly AccessoryEnchantService _accessoryEnchantService;
 
         public ItemScanPacketProcessor(
             AssetsLoader assets,
             MapServer mapServer,
             ISender sender,
-            ILogger logger)
+            ILogger logger,
+            AccessoryEnchantService accessoryEnchantService)
         {
             _assets = assets;
             _mapServer = mapServer;
             _sender = sender;
             _logger = logger;
+            _accessoryEnchantService = accessoryEnchantService;
         }
 
         public async Task Process(GameClient client, byte[] packetData)
@@ -112,7 +120,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return;
             }
 
-            var scanAsset = _assets.ScanDetail.FirstOrDefault(x => x.ItemId == scannedItem.ItemId);
+            var scanAsset = _assets.ScanDetail.FirstOrDefault(x => x.ItemId == scannedItem.ItemId)
+                ?? TryBuildTutorialScanAsset(scannedItem.ItemId);
 
             if (scanAsset == null)
             {
@@ -169,9 +178,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                             break;
                         }
 
-                        if (contentItem.ItemInfo.Section == 5200)
+                        if (contentItem.ItemInfo.Type == 52)
                         {
-                            _ = ApplyValuesChipset(contentItem);
+                            _ = _accessoryEnchantService.ApplyRandomChipsetStats(contentItem);
                         }
 
 
@@ -297,6 +306,35 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             );
         }
 
+        private static ScanDetailAssetModel? TryBuildTutorialScanAsset(int itemId)
+        {
+            if (itemId != TutorialSuppliesKitItemId)
+                return null;
+
+            return new ScanDetailAssetModel
+            {
+                Id = -TutorialSuppliesKitItemId,
+                MinAmount = 1,
+                MaxAmount = 1,
+                ItemId = TutorialSuppliesKitItemId,
+                ItemName = "Supplies Kit",
+                Rewards = new List<ScanRewardDetailAssetModel>
+                {
+                    new()
+                    {
+                        Id = -TutorialReturnItemId,
+                        ItemId = TutorialReturnItemId,
+                        ItemName = "Return Item [Tutorial]",
+                        MinAmount = 1,
+                        MaxAmount = 1,
+                        Chance = 100.0,
+                        Rare = false,
+                        ScanDetailAssetId = -TutorialSuppliesKitItemId,
+                    }
+                }
+            };
+        }
+
         private async Task UpdateClientActionQuestProgress(GameClient client, int itemId, string actionName)
         {
             if (!client.Tamer.Progress.InProgressQuestData.Any())
@@ -377,61 +415,6 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     targetGoalValue);
                 return;
             }
-        }
-
-        private ItemModel? ApplyValuesChipset(ItemModel newItem)
-        {
-            var skillCodeInfo = _assets.SkillCodeInfo.FirstOrDefault(x => x.SkillCode == newItem.ItemInfo.SkillCode);
-            var chipsetInfo = skillCodeInfo?.Apply?.FirstOrDefault(x => x.Type > 0);
-            var skillInfo = _assets.SkillInfo.FirstOrDefault(x => x.SkillId == newItem.ItemInfo.SkillCode);
-            if (chipsetInfo == null || skillInfo == null)
-                return newItem;
-
-            var chipsetSkill = skillInfo.FamilyType;
-            // Definindo o valor mínimo e máximo para o RNG
-
-            Random random = new Random();
-            int ApplyRate = random.Next(newItem.ItemInfo.ApplyValueMin, newItem.ItemInfo.ApplyValueMax);
-            var nValue = chipsetInfo.Value + (newItem.ItemInfo.TypeN) * chipsetInfo.AdditionalValue;
-
-            int valorAleatorio = (int)((double)ApplyRate * nValue / 100);
-
-            newItem.AccessoryStatus = newItem.AccessoryStatus.OrderBy(x => x.Slot).ToList();
-
-            if (!TryMapAccessoryStatusType(chipsetInfo.Attribute, out var possibleStatus))
-                return newItem;
-
-            newItem.AccessoryStatus[0].SetType(possibleStatus);
-            newItem.AccessoryStatus[0].SetValue((short)valorAleatorio);
-
-            newItem.SetPower((byte)ApplyRate); //TODO: externalizar
-            newItem.SetReroll((byte)100);
-            newItem.SetFamilyType(chipsetSkill);
-            return newItem;
-        }
-
-        private static bool TryMapAccessoryStatusType(
-            SkillCodeApplyAttributeEnum attribute,
-            out AccessoryStatusTypeEnum mappedType)
-        {
-            mappedType = attribute switch
-            {
-                SkillCodeApplyAttributeEnum.AT => AccessoryStatusTypeEnum.AT,
-                SkillCodeApplyAttributeEnum.DP => AccessoryStatusTypeEnum.DE,
-                SkillCodeApplyAttributeEnum.HP => AccessoryStatusTypeEnum.HP,
-                SkillCodeApplyAttributeEnum.DS => AccessoryStatusTypeEnum.DS,
-                SkillCodeApplyAttributeEnum.SCD => AccessoryStatusTypeEnum.SCD,
-                SkillCodeApplyAttributeEnum.SkillDamageByAttribute => AccessoryStatusTypeEnum.ATT,
-                SkillCodeApplyAttributeEnum.CA => AccessoryStatusTypeEnum.CT,
-                SkillCodeApplyAttributeEnum.ER => AccessoryStatusTypeEnum.CD,
-                SkillCodeApplyAttributeEnum.AS => AccessoryStatusTypeEnum.AS,
-                SkillCodeApplyAttributeEnum.EV => AccessoryStatusTypeEnum.EV,
-                SkillCodeApplyAttributeEnum.BL => AccessoryStatusTypeEnum.BL,
-                SkillCodeApplyAttributeEnum.HT => AccessoryStatusTypeEnum.HT,
-                _ => default
-            };
-
-            return mappedType != default;
         }
 
     }

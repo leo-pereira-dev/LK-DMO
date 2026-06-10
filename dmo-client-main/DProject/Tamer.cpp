@@ -2,6 +2,250 @@
 #include "stdafx.h"
 #include "Tamer.h"
 
+#include <chrono>
+#include <cstdarg>
+#include <ctime>
+#include <fstream>
+
+namespace
+{
+	void TamerSyncTrace(const char* fmt, ...)
+	{
+		try
+		{
+			CreateDirectoryA("logs", NULL);
+
+			char msg[1024] = { 0, };
+			va_list args;
+			va_start(args, fmt);
+			vsnprintf_s(msg, sizeof(msg), _TRUNCATE, fmt, args);
+			va_end(args);
+
+			auto now = std::chrono::system_clock::now();
+			auto tt = std::chrono::system_clock::to_time_t(now);
+			tm localTime = {};
+			localtime_s(&localTime, &tt);
+
+			char stamp[64] = { 0, };
+			strftime(stamp, sizeof(stamp), "%Y-%m-%d %H:%M:%S", &localTime);
+
+			std::ofstream log("logs\\network_pgsql.log", std::ios::app);
+			log << stamp << " " << msg << std::endl;
+		}
+		catch (...) {}
+	}
+
+	const char* GetNamePlateEffectFile( DWORD nID )
+	{
+		struct sEffectRange
+		{
+			DWORD s_nBegin;
+			DWORD s_nEnd;
+			const char* s_pFile;
+		};
+
+		static const sEffectRange kNamePlateEffects[] =
+		{
+			{ 39000, 39000, "system\\Nameplate\\Gear_1.nif" },
+			{ 39001, 39001, "system\\Nameplate\\ShootingStar_1.nif" },
+			{ 39002, 39002, "system\\Nameplate\\Flex_1.nif" },
+			{ 39003, 39003, "system\\Nameplate\\Gold Coin.nif" },
+			{ 39008, 39008, "system\\Nameplate\\mirrorball.nif" },
+			{ 39009, 39009, "system\\Nameplate\\star.nif" },
+			{ 39010, 39010, "system\\Nameplate\\sun_spotight.nif" },
+			{ 39011, 39011, "system\\Nameplate\\featherlight.nif" },
+			{ 39018, 39018, "system\\Nameplate\\blaze_step_1.nif" },
+			{ 39019, 39019, "system\\Nameplate\\poop.nif" },
+			{ 39020, 39020, "system\\Nameplate\\lightning_03.nif" },
+			{ 39021, 39021, "system\\Nameplate\\FoxTail.nif" },
+			{ 39026, 39026, "system\\Nameplate\\Pumpkin_1.nif" },
+			{ 39027, 39027, "system\\Nameplate\\Ghost_Fire_1.nif" },
+			{ 39030, 39030, "system\\Nameplate\\Gear_1.nif" },
+			{ 39031, 39031, "system\\Nameplate\\ShootingStar_1.nif" },
+			{ 39032, 39032, "system\\Nameplate\\Flex_1.nif" },
+			{ 39033, 39033, "system\\Nameplate\\Gold Coin.nif" },
+			{ 39034, 39034, "system\\Nameplate\\mirrorball.nif" },
+			{ 39035, 39035, "system\\Nameplate\\star.nif" },
+			{ 39036, 39036, "system\\Nameplate\\sun_spotight.nif" },
+			{ 39037, 39037, "system\\Nameplate\\featherlight.nif" },
+			{ 39038, 39038, "system\\Nameplate\\blaze_step_1.nif" },
+			{ 39039, 39039, "system\\Nameplate\\poop.nif" },
+			{ 39040, 39040, "system\\Nameplate\\FoxTail.nif" },
+			{ 39041, 39041, "system\\Nameplate\\Pumpkin_1.nif" },
+			{ 39042, 39042, "system\\Nameplate\\Ghost_Fire_1.nif" },
+			{ 39043, 39043, "system\\Nameplate\\SnowFlower_1.nif" },
+			{ 39044, 39044, "system\\Nameplate\\ICE_step_1.nif" },
+			{ 39045, 39045, "system\\Nameplate\\dark_aura_1.nif" },
+			{ 39046, 39046, "system\\Nameplate\\SnowFlower_1.nif" },
+			{ 39047, 39047, "system\\Nameplate\\ICE_step_1.nif" },
+			{ 39048, 39048, "system\\Nameplate\\dark_aura_1.nif" },
+			{ 39065, 39066, "system\\Nameplate\\solar_system_2.nif" },
+			{ 39067, 39067, "system\\Nameplate\\lightning_03.nif" },
+			{ 39068, 39068, "system\\Nameplate\\Hurricane_1.nif" },
+			{ 39069, 39069, "system\\Nameplate\\Tornado_1.nif" },
+			{ 39070, 39070, "system\\Nameplate\\Hurricane_1.nif" },
+			{ 39071, 39071, "system\\Nameplate\\Tornado_1.nif" },
+			{ 39073, 39073, "system\\Nameplate\\windwave_1.nif" },
+			{ 39074, 39074, "system\\Nameplate\\Butterfly_1.nif" },
+			{ 39075, 39075, "system\\Nameplate\\windwave_1.nif" },
+			{ 39076, 39076, "system\\Nameplate\\Butterfly_1.nif" },
+			{ 39102, 39102, "system\\Nameplate\\Fireball_3.nif" },
+			{ 39103, 39103, "system\\Nameplate\\FlawerShower_7.nif" },
+			{ 39104, 39104, "system\\Nameplate\\Fireball_3.nif" },
+			{ 39105, 39105, "system\\Nameplate\\FlawerShower_7.nif" },
+			{ 39107, 39107, "system\\Nameplate\\Fireball_3.nif" },
+			{ 39108, 39108, "system\\Nameplate\\FlawerShower_7.nif" },
+			{ 39109, 39109, "system\\Nameplate\\Hurricane_1.nif" },
+			{ 39110, 39110, "system\\Nameplate\\Tornado_1.nif" },
+			{ 39111, 39111, "system\\Nameplate\\windwave_1.nif" },
+			{ 39112, 39112, "system\\Nameplate\\Butterfly_1.nif" },
+			{ 39113, 39113, "system\\Nameplate\\solar_system_2.nif" },
+			{ 39114, 39114, "system\\Nameplate\\lightning_03.nif" },
+			{ 39290, 39295, "system\\Nameplate\\Butterfly_Blue.nif" },
+			{ 39296, 39298, "system\\Nameplate\\Butterfly_Blue_S.nif" },
+			{ 39299, 39299, "system\\Nameplate\\Butterfly_Blue.nif" },
+			{ 39300, 39300, "system\\Nameplate\\Butterfly_Blue_S.nif" },
+			{ 39301, 39309, "system\\Nameplate\\Butterfly_Blue.nif" },
+			{ 39311, 39316, "system\\Nameplate\\Butterfly_Blue.nif" },
+			{ 39317, 39319, "system\\Nameplate\\Butterfly_Blue_S.nif" },
+			{ 39320, 39320, "system\\Nameplate\\Butterfly_Blue.nif" },
+			{ 39321, 39321, "system\\Nameplate\\Butterfly_Blue_S.nif" },
+			{ 39322, 39330, "system\\Nameplate\\Butterfly_Blue.nif" },
+			{ 39356, 39356, "system\\Nameplate\\zeed_1.nif" },
+			{ 39358, 39358, "system\\Nameplate\\zeed_1.nif" },
+			{ 39360, 39360, "system\\Nameplate\\ShoutX7_3.nif" },
+			{ 39362, 39362, "system\\Nameplate\\zeed_1.nif" },
+			{ 47336, 47341, "system\\Nameplate\\Butterfly_Yellow.nif" },
+			{ 47342, 47344, "system\\Nameplate\\Butterfly_Yellow_S.nif" },
+			{ 47345, 47345, "system\\Nameplate\\Butterfly_Yellow.nif" },
+			{ 47346, 47346, "system\\Nameplate\\Butterfly_Yellow_S.nif" },
+			{ 47347, 47355, "system\\Nameplate\\Butterfly_Yellow.nif" },
+			{ 128419, 128419, "system\\Nameplate\\Gear_1.nif" },
+			{ 128420, 128420, "system\\Nameplate\\ShootingStar_1.nif" },
+			{ 128421, 128421, "system\\Nameplate\\Flex_1.nif" },
+			{ 128422, 128422, "system\\Nameplate\\Gold Coin.nif" },
+			{ 128423, 128423, "system\\Nameplate\\mirrorball.nif" },
+			{ 128424, 128424, "system\\Nameplate\\star.nif" },
+			{ 128425, 128425, "system\\Nameplate\\sun_spotight.nif" },
+			{ 128426, 128426, "system\\Nameplate\\featherlight.nif" },
+			{ 128427, 128427, "system\\Nameplate\\blaze_step_1.nif" },
+			{ 128428, 128428, "system\\Nameplate\\poop.nif" },
+			{ 128430, 128430, "system\\Nameplate\\FoxTail.nif" },
+			{ 141110, 141110, "system\\Nameplate\\Gear_1.nif" },
+			{ 141111, 141111, "system\\Nameplate\\ShootingStar_1.nif" },
+			{ 141112, 141112, "system\\Nameplate\\Flex_1.nif" },
+			{ 141113, 141113, "system\\Nameplate\\Gold Coin.nif" },
+			{ 141114, 141114, "system\\Nameplate\\mirrorball.nif" },
+			{ 141115, 141115, "system\\Nameplate\\star.nif" },
+			{ 141116, 141116, "system\\Nameplate\\sun_spotight.nif" },
+			{ 141117, 141117, "system\\Nameplate\\featherlight.nif" },
+			{ 141118, 141118, "system\\Nameplate\\blaze_step_1.nif" },
+			{ 141119, 141119, "system\\Nameplate\\poop.nif" },
+			{ 151043, 151043, "system\\Nameplate\\Gear_1.nif" },
+			{ 151044, 151044, "system\\Nameplate\\ShootingStar_1.nif" },
+			{ 151045, 151045, "system\\Nameplate\\Flex_1.nif" },
+			{ 151046, 151046, "system\\Nameplate\\Gold Coin.nif" },
+			{ 151047, 151047, "system\\Nameplate\\mirrorball.nif" },
+			{ 151048, 151048, "system\\Nameplate\\star.nif" },
+			{ 151049, 151049, "system\\Nameplate\\sun_spotight.nif" },
+			{ 151050, 151050, "system\\Nameplate\\featherlight.nif" },
+			{ 151051, 151051, "system\\Nameplate\\blaze_step_1.nif" },
+			{ 151052, 151052, "system\\Nameplate\\poop.nif" },
+			{ 152217, 152218, "system\\Nameplate\\Arena_master_1.nif" },
+			{ 152753, 152758, "system\\Nameplate\\Butterfly_Purple.nif" },
+			{ 152759, 152761, "system\\Nameplate\\Butterfly_Purple_S.nif" },
+			{ 152762, 152762, "system\\Nameplate\\Butterfly_Purple.nif" },
+			{ 152763, 152763, "system\\Nameplate\\Butterfly_Purple_S.nif" },
+			{ 152764, 152772, "system\\Nameplate\\Butterfly_Purple.nif" },
+			{ 155251, 155251, "system\\Nameplate\\dark_aura_1.nif" },
+			{ 155298, 155298, "system\\Nameplate\\Flex_1.nif" },
+			{ 160386, 160391, "system\\Nameplate\\Butterfly_Green.nif" },
+			{ 160392, 160394, "system\\Nameplate\\Butterfly_Green_S.nif" },
+			{ 160395, 160395, "system\\Nameplate\\Butterfly_Green.nif" },
+			{ 160396, 160396, "system\\Nameplate\\Butterfly_Green_S.nif" },
+			{ 160397, 160411, "system\\Nameplate\\Butterfly_Green.nif" },
+			{ 160412, 160414, "system\\Nameplate\\Butterfly_Green_S.nif" },
+			{ 160415, 160415, "system\\Nameplate\\Butterfly_Green.nif" },
+			{ 160416, 160416, "system\\Nameplate\\Butterfly_Green_S.nif" },
+			{ 160417, 160425, "system\\Nameplate\\Butterfly_Green.nif" },
+			{ 160637, 160637, "system\\Nameplate\\Butterfly_Green.nif" },
+			{ 160639, 160639, "system\\Nameplate\\Butterfly_Green.nif" },
+			{ 180503, 180509, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180510, 180511, "system\\Nameplate\\Heaven1_S.nif" },
+			{ 180512, 180512, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180513, 180513, "system\\Nameplate\\Heaven1_S.nif" },
+			{ 180514, 180522, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180543, 180549, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180550, 180551, "system\\Nameplate\\Heaven1_S.nif" },
+			{ 180552, 180552, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180553, 180553, "system\\Nameplate\\Heaven1_S.nif" },
+			{ 180554, 180562, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180583, 180589, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180590, 180591, "system\\Nameplate\\Heaven1_S.nif" },
+			{ 180592, 180592, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180593, 180593, "system\\Nameplate\\Heaven1_S.nif" },
+			{ 180594, 180602, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180623, 180629, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180630, 180631, "system\\Nameplate\\Heaven1_S.nif" },
+			{ 180632, 180632, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180633, 180633, "system\\Nameplate\\Heaven1_S.nif" },
+			{ 180634, 180642, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180663, 180669, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180670, 180671, "system\\Nameplate\\Heaven1_S.nif" },
+			{ 180672, 180672, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180673, 180673, "system\\Nameplate\\Heaven1_S.nif" },
+			{ 180674, 180682, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 180720, 180739, "system\\Nameplate\\zeed_1.nif" },
+			{ 180760, 180779, "system\\Nameplate\\zeed_1.nif" },
+			{ 180800, 180819, "system\\Nameplate\\zeed_1.nif" },
+			{ 180840, 180859, "system\\Nameplate\\zeed_1.nif" },
+			{ 180880, 180899, "system\\Nameplate\\zeed_1.nif" },
+			{ 180976, 180995, "system\\Nameplate\\ShoutX7_1.nif" },
+			{ 181016, 181035, "system\\Nameplate\\ShoutX7_1.nif" },
+			{ 181056, 181075, "system\\Nameplate\\ShoutX7_1.nif" },
+			{ 181096, 181115, "system\\Nameplate\\ShoutX7_1.nif" },
+			{ 181171, 181175, "system\\Nameplate\\Heaven1_D.nif" },
+			{ 181176, 181180, "system\\Nameplate\\zeed_1.nif" },
+			{ 181181, 181184, "system\\Nameplate\\ShoutX7_1.nif" },
+			{ 1310332, 1310332, "system\\Nameplate\\Gear_1.nif" },
+			{ 1310333, 1310333, "system\\Nameplate\\ShootingStar_1.nif" },
+			{ 1310334, 1310334, "system\\Nameplate\\Flex_1.nif" },
+			{ 1310335, 1310335, "system\\Nameplate\\Gold Coin.nif" },
+			{ 1310336, 1310336, "system\\Nameplate\\featherlight.nif" },
+			{ 1310337, 1310337, "system\\Nameplate\\blaze_step_1.nif" },
+			{ 1310338, 1310338, "system\\Nameplate\\FoxTail.nif" },
+			{ 1310339, 1310339, "system\\Nameplate\\SnowFlower_1.nif" },
+			{ 1310340, 1310340, "system\\Nameplate\\ICE_step_1.nif" },
+			{ 1310341, 1310341, "system\\Nameplate\\dark_aura_1.nif" },
+			{ 1310362, 1310362, "system\\Nameplate\\Gear_1.nif" },
+			{ 1310363, 1310363, "system\\Nameplate\\ShootingStar_1.nif" },
+			{ 1310364, 1310364, "system\\Nameplate\\Flex_1.nif" },
+			{ 1310365, 1310365, "system\\Nameplate\\Gold Coin.nif" },
+			{ 1310366, 1310366, "system\\Nameplate\\mirrorball.nif" },
+			{ 1310367, 1310367, "system\\Nameplate\\star.nif" },
+			{ 1310368, 1310368, "system\\Nameplate\\sun_spotight.nif" },
+			{ 1310369, 1310369, "system\\Nameplate\\featherlight.nif" },
+			{ 1310370, 1310370, "system\\Nameplate\\blaze_step_1.nif" },
+			{ 1310371, 1310371, "system\\Nameplate\\poop.nif" },
+			{ 1310372, 1310372, "system\\Nameplate\\FoxTail.nif" },
+			{ 1310373, 1310373, "system\\Nameplate\\Pumpkin_1.nif" },
+			{ 1310374, 1310374, "system\\Nameplate\\Ghost_Fire_1.nif" },
+			{ 1310375, 1310375, "system\\Nameplate\\SnowFlower_1.nif" },
+			{ 1310376, 1310376, "system\\Nameplate\\ICE_step_1.nif" },
+			{ 1310377, 1310377, "system\\Nameplate\\dark_aura_1.nif" },
+		};
+
+		for( int i = 0; i < sizeof( kNamePlateEffects ) / sizeof( kNamePlateEffects[ 0 ] ); ++i )
+		{
+			if( nID >= kNamePlateEffects[ i ].s_nBegin && nID <= kNamePlateEffects[ i ].s_nEnd )
+				return kNamePlateEffects[ i ].s_pFile;
+		}
+
+		return NULL;
+	}
+
+}
+
 THREAD_MEMPOOL_CPP( CTamer )
 #define		PARENT_CLASS		CsC_PartObject
 CsCRTTI_CPP( PARENT_CLASS, CTamer, RTTI_TAMER )
@@ -70,23 +314,54 @@ void CTamer::PreDelete()
 
 void CTamer::Init( uint nIDX, uint nFileTableID, nSync::Pos sPos, float fRot, LPCTSTR szName, sCREATEINFO* pProp, DWORD dwSyncOption )
 {
+	TamerSyncTrace("TAMER InitPos begin this=%p idx=%u ftid=%u pos=%d,%d rot=%.4f root=%p",
+		this,
+		(unsigned)nIDX,
+		(unsigned)nFileTableID,
+		sPos.m_nX,
+		sPos.m_nY,
+		(double)fRot,
+		nsCsGBTerrain::g_pCurRoot);
 	NiPoint3 vPos = NiPoint3( (float)sPos.m_nX, (float)sPos.m_nY, 0.0f );
+	TamerSyncTrace("TAMER InitPos height begin this=%p idx=%u x=%.1f y=%.1f",
+		this,
+		(unsigned)nIDX,
+		(double)vPos.x,
+		(double)vPos.y);
 	vPos.z = nsCsGBTerrain::g_pCurRoot->GetHeight( vPos );
+	TamerSyncTrace("TAMER InitPos height end this=%p idx=%u z=%.3f",
+		this,
+		(unsigned)nIDX,
+		(double)vPos.z);
 
 	Init( nIDX, nFileTableID, vPos, fRot, szName, pProp, dwSyncOption );
+	TamerSyncTrace("TAMER InitPos end this=%p idx=%u", this, (unsigned)nIDX);
 }
 
 void CTamer::Init( uint nIDX, uint nFileTableID, NiPoint3 vPos, float fRot, LPCTSTR szName, sCREATEINFO* pProp, DWORD dwSyncOption )
 {
+	TamerSyncTrace("TAMER Init begin this=%p idx=%u ftid=%u modelData=%p tamerMng=%p",
+		this,
+		(unsigned)nIDX,
+		(unsigned)nFileTableID,
+		g_pModelDataMng,
+		nsCsFileTable::g_pTamerMng);
 	m_dwSyncOption_OnThreadBackup = m_dwSyncOption = dwSyncOption;
 
+	TamerSyncTrace("TAMER Init isTamer begin this=%p idx=%u ftid=%u", this, (unsigned)nIDX, (unsigned)nFileTableID);
 	assert_cs( nsCsFileTable::g_pTamerMng->IsTamer( nFileTableID ) );
+	TamerSyncTrace("TAMER Init getTamer begin this=%p idx=%u ftid=%u", this, (unsigned)nIDX, (unsigned)nFileTableID);
 	m_pFT_Tamer = nsCsFileTable::g_pTamerMng->GetTamer( nFileTableID );	
+	TamerSyncTrace("TAMER Init getTamer end this=%p idx=%u ft=%p", this, (unsigned)nIDX, m_pFT_Tamer);
 	m_SkillMng.SetTamer( this, m_pFT_Tamer );
 	m_Condition.Init( this );
 
+	TamerSyncTrace("TAMER Init parent begin this=%p idx=%u", this, (unsigned)nIDX);
 	PARENT_CLASS::Init( nIDX, nFileTableID, vPos, fRot, pProp );
+	TamerSyncTrace("TAMER Init parent end this=%p idx=%u model=%u", this, (unsigned)nIDX, (unsigned)GetModelID());
+	TamerSyncTrace("TAMER Init _Init begin this=%p idx=%u name=%p", this, (unsigned)nIDX, szName);
 	_Init( szName );
+	TamerSyncTrace("TAMER Init _Init end this=%p idx=%u image=%p", this, (unsigned)nIDX, m_pCharImage);
 
 	m_eTamerState = TAMER_NORMAL;
 	m_eTamerMove = TM_NONE;
@@ -99,13 +374,24 @@ void CTamer::Init( uint nIDX, uint nFileTableID, NiPoint3 vPos, float fRot, LPCT
 
 void CTamer::_Init( LPCTSTR szName )
 {
+	TamerSyncTrace("TAMER _Init option begin this=%p leaf=%d model=%u name=%p",
+		this,
+		(int)GetLeafRTTI(),
+		(unsigned)GetModelID(),
+		szName);
 	m_Option.Init( this, szName );	
+	TamerSyncTrace("TAMER _Init option end this=%p", this);
 
 	//테이머 추가시 팀이 정해진 놈이면 
 	if( szName != NULL )
 		m_Option.SetMatchIcon( m_dwMatchTeam );//마스터즈매칭 아이콘 세팅
 
+	TamerSyncTrace("TAMER _Init image begin this=%p model=%u charRes=%p",
+		this,
+		(unsigned)GetModelID(),
+		g_pCharResMng);
 	m_pCharImage = g_pCharResMng->CharImageResLoad( GetModelID() );
+	TamerSyncTrace("TAMER _Init image end this=%p image=%p", this, m_pCharImage);
 }
 
 void CTamer::Update( float fDeltaTime, bool bAnimation )
@@ -285,8 +571,13 @@ void CTamer::DeletePart( int nPartIndex )
 {
 	PARENT_CLASS::DeletePart( nPartIndex );
 
+	if( nPartIndex >= 0 && nPartIndex < nsPART::MAX_TOTAL_COUNT )
+		m_SettingPart[ nPartIndex ].Reset();
+
 	sCHANGE_PART_INFO cpi;
 	cpi.s_nPartIndex = nPartIndex;	
+	cpi.s_nFileTableID = 0;
+	cpi.s_nRemainTime = 0;
 	_CheckPart( &cpi );
 }
 
@@ -295,6 +586,7 @@ void CTamer::_CheckPart( sCHANGE_PART_INFO* pPartInfo )
 	CsC_EffectProp::eLOOP_EFFECT le;
 	switch( pPartInfo->s_nPartIndex )
 	{
+	case nsPART::NamePlate:	le = CsC_EffectProp::LE_NAMEPLATE;	break;
 	case nsPART::EquipAura:	le = CsC_EffectProp::LE_AURA;		break;
 	case nsPART::Costume:	le = CsC_EffectProp::LE_COSEFFECT;	break;
 #ifdef LJW_ENCHANT_OPTION_DIGIVICE_190904
@@ -315,17 +607,27 @@ void CTamer::_CheckPart( sCHANGE_PART_INFO* pPartInfo )
 		pProp->DeleteLoopEffect( le );
 
 	DWORD dwPartID = m_SettingPart[pPartInfo->s_nPartIndex].s_nSettingID;
+	if( pPartInfo->s_nPartIndex == nsPART::NamePlate )
+		m_Option.SetTamerIcon( dwPartID );
+
 	if( 0 == dwPartID )
 		return;
 
+	std::string strEffect;
 	if( nsCsFileTable::g_pEffectTBMng )
-	{
-		std::string strEffect = nsCsFileTable::g_pEffectTBMng->GetEquipEffectFile( dwPartID );
-		if( strEffect.empty() )
-			return;
+		strEffect = nsCsFileTable::g_pEffectTBMng->GetEquipEffectFile( dwPartID );
 
-		pProp->AddLoopEffect( le, strEffect.c_str() );
+	if( strEffect.empty() && pPartInfo->s_nPartIndex == nsPART::NamePlate )
+	{
+		const char* pNamePlateEffect = GetNamePlateEffectFile( dwPartID );
+		if( pNamePlateEffect != NULL )
+			strEffect = pNamePlateEffect;
 	}
+
+	if( strEffect.empty() )
+		return;
+
+	pProp->AddLoopEffect( le, strEffect.c_str() );
 }
 
 void CTamer::_CheckPcbangCostume()

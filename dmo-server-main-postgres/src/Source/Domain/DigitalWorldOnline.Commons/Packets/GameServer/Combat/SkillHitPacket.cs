@@ -14,7 +14,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer.Combat
         /// <param name="skillSlot">The skill source slot</param>
         /// <param name="finalDamage">The final damage of the skill</param>
         /// <param name="targetCurrentHpRate">The final hp rate of the target</param>
-        public SkillHitPacket(int attackerHandler, int targetHandler, byte skillSlot, int finalDamage, byte targetCurrentHpRate)
+        public SkillHitPacket(int attackerHandler, int targetHandler, int skillSlot, int finalDamage, byte targetCurrentHpRate)
         {
             // pSkill::ApplyAround (1102) → _RecvSkillApplyAround_ExistHitter
             // (cCliGameSkill.cpp:924). v487 wire format:

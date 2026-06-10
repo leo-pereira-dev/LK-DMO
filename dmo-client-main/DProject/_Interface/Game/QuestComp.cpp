@@ -1,17 +1,35 @@
 
 #include "stdafx.h"
+#include "../Base/SpriteAni.h"
 #include "QuestComp.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 #define IF_QUESTCOMP_ICON_SIZE	CsPoint( 32, 32 )
 #define IF_QUESTCOMP_STRLIST_POS		CsPoint( 16, 59 )
 #define IF_QUESTCOMP_REQUITE_POS		CsPoint( 90, 238 )
 #define IF_QUESTCOMP_REQUITE_ITEM_DELTA_POS		CsPoint( 0, -5 )
 
+namespace
+{
+	bool IsTutorialGuideQuest( CsQuest* pQuest )
+	{
+		if( !pQuest )
+			return false;
+
+		if( pQuest->GetQuestType() == CsQuest::QT_TUTORIAL )
+			return true;
+
+		return _tcsstr( pQuest->m_szTitleTab, _T( "<Tutorial>" ) ) != NULL;
+	}
+}
+
 cQuestComp::cQuestComp()
 :m_nRequiteItemIconCount(0),
 m_OpenSlotIdx(0),
 m_pkSPOpenSlot(NULL),
-m_pkBTOpenSlot(NULL)
+m_pkBTOpenSlot(NULL),
+m_pQuestFT(NULL),
+m_pTutorialQuestArrow(NULL)
 {
 	m_pTarget = NULL; 
 }
@@ -40,6 +58,7 @@ void cQuestComp::DeleteResource()
 	m_RequiteString.Delete();
 	SAFE_NIDELETE( m_pBGWindow );
 	SAFE_NIDELETE( m_pExpSprite );
+	SAFE_NIDELETE( m_pTutorialQuestArrow );
 }
 
 void cQuestComp::Create(int nValue /* = 0  */)
@@ -64,6 +83,14 @@ void cQuestComp::Create(int nValue /* = 0  */)
 
 	m_pExpSprite = NiNew cSprite;
 	m_pExpSprite->Init( NULL, CsPoint::ZERO, CsPoint( 27, 17 ), "System\\Exp.tga", false );
+
+	m_pTutorialQuestArrow = NiNew cSpriteAni;
+	if( m_pTutorialQuestArrow )
+	{
+		m_pTutorialQuestArrow->Init( cSpriteAni::LOOP, NULL, CsPoint::ZERO, CsPoint( 60, 45 ), "Tutorial\\tutorial_ani.tga", NULL, 11, false, CsPoint(60,0), cSpriteAni::SPRITE_POS );
+		m_pTutorialQuestArrow->SetAniTime( 0.1f );
+	}
+
 
 	m_pScrollBar = AddScrollBar( cScrollBar::TYPE_2, CsPoint( 521, 60 ), CsPoint( 16, 153 ), cScrollBar::GetDefaultBtnSize(), CsRect( CsPoint( 11, 60 ), CsPoint( 505, 236 ) ), 6 );
 
@@ -92,6 +119,13 @@ void cQuestComp::Update(float const& fDeltaTime)
 
 	if( m_bUseTamerDistCancel )
 	{
+		if( m_pTarget == NULL || m_pTarget->GetLeafRTTI() != RTTI_NPC )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP_UPDATE invalid dist target target=%d",
+				m_pTarget ? m_pTarget->GetLeafRTTI() : -1 );
+			DisableTamerDistCancel();
+			return;
+		}
 		// 테이머와의 거리 체크
 		if( ( (CNpc*)m_pTarget )->CheckTamerDist() == false )
 		{
@@ -174,13 +208,27 @@ void cQuestComp::Render()
 			m_RequiteItemIFIcon[ i ].RenderMask( GetRootClient() + m_RequiteItemIFIcon[ i ].GetPos(), IF_QUESTCOMP_ICON_SIZE );
 		}		
 	}
+
+	if( m_pTutorialQuestArrow && IsTutorialGuideQuest( m_pQuestFT ) )
+	{
+		m_pTutorialQuestArrow->Update( g_fDeltaTime );
+		m_pTutorialQuestArrow->Render( GetRootClient() + CsPoint( 384, 226 ) );
+	}
 }
+
 
 
 void cQuestComp::SetTarget( CsC_AvObject* pTarget, int nQuestFTID )
 {
-	assert_cs( m_pTarget == NULL );
-	assert_cs( pTarget != NULL );
+	if( m_pTarget != NULL || pTarget == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP_SET_TARGET rejected oldTarget=%d newTarget=%d quest=%d",
+			m_pTarget != NULL ? 1 : 0,
+			pTarget != NULL ? 1 : 0,
+			nQuestFTID );
+		Close( false );
+		return;
+	}
 	
 	m_pTarget = pTarget;
 	if( m_pTarget->GetLeafRTTI() == RTTI_NPC )
@@ -190,6 +238,14 @@ void cQuestComp::SetTarget( CsC_AvObject* pTarget, int nQuestFTID )
 	}
 	
 	m_pQuestFT = nsCsFileTable::g_pQuestMng->GetQuest( nQuestFTID );
+	if( m_pQuestFT == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP_SET_TARGET missing quest=%d targetRtti=%d",
+			nQuestFTID,
+			m_pTarget ? m_pTarget->GetLeafRTTI() : -1 );
+		Close( false );
+		return;
+	}
 
 	// 이름	
 	m_pName->SetText( m_pQuestFT->m_szTitleText );
@@ -211,6 +267,13 @@ void cQuestComp::SetTarget( CsC_AvObject* pTarget, int nQuestFTID )
 
 	// 보상	
 	CsQuestRequiteGroup* pRequiteGroup = m_pQuestFT->GetRequiteGroup();
+	if( pRequiteGroup == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP_SET_TARGET missing reward group quest=%lu",
+			(unsigned long)m_pQuestFT->GetUniqID() );
+		Close( false );
+		return;
+	}
 	int nRequiteCount = pRequiteGroup->GetListCount();
 
 	int nExp = 0;
@@ -226,8 +289,23 @@ void cQuestComp::SetTarget( CsC_AvObject* pTarget, int nQuestFTID )
 	for( int i=0; i<nRequiteCount; ++i )
 	{
 		pRequite = pRequiteGroup->Get( i );
+		if( pRequite == NULL )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP_REWARD null quest=%lu index=%d",
+				(unsigned long)m_pQuestFT->GetUniqID(),
+				i );
+			continue;
+		}
 
-		assert_cs( pRequite->GetMethodID() == CsQuestRequite::RM_GIVE );
+		if( pRequite->GetMethodID() != CsQuestRequite::RM_GIVE )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP_REWARD invalid method quest=%lu index=%d method=%d type=%d",
+				(unsigned long)m_pQuestFT->GetUniqID(),
+				i,
+				pRequite->GetMethodID(),
+				pRequite->GetType() );
+			continue;
+		}
 		switch( pRequite->GetType() )
 		{
 		case CsQuestRequite::EXP:
@@ -243,6 +321,15 @@ void cQuestComp::SetTarget( CsC_AvObject* pTarget, int nQuestFTID )
 			break;
 		case CsQuestRequite::ITEM:
 			{
+				if( m_nRequiteItemIconCount >= 6 )
+				{
+					nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP_REWARD item overflow quest=%lu index=%d item=%lu count=%lu",
+						(unsigned long)m_pQuestFT->GetUniqID(),
+						i,
+						(unsigned long)pRequite->GetTypeID(),
+						(unsigned long)pRequite->GetTypeCount() );
+					break;
+				}
 				item[ m_nRequiteItemIconCount ].m_nType = pRequite->GetTypeID();
 				item[ m_nRequiteItemIconCount ].m_nCount = pRequite->GetTypeCount();
 				++m_nRequiteItemIconCount;
@@ -256,7 +343,10 @@ void cQuestComp::SetTarget( CsC_AvObject* pTarget, int nQuestFTID )
 			break;
 
 		default:
-			assert_cs( false );
+			nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP_REWARD unknown type quest=%lu index=%d type=%d",
+				(unsigned long)m_pQuestFT->GetUniqID(),
+				i,
+				pRequite->GetType() );
 		}
 	}
 
@@ -352,44 +442,67 @@ bool cQuestComp::OnMacroKey(const MSG& p_kMsg)
 void cQuestComp::_CompleteQuest()
 {
 	CsC_AvObject* pTarget = m_pTarget;
+	CsQuest* pQuestFT = m_pQuestFT;
+
+	if( pQuestFT == NULL || pTarget == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP_COMPLETE rejected quest=%d target=%d",
+			pQuestFT != NULL ? 1 : 0,
+			pTarget != NULL ? 1 : 0 );
+		Close( false );
+		return;
+	}
+
 	Close( false );
 	// 즉각 퀘스트라면 바로 수락해 버리자
-	if( m_pQuestFT->IsImmediate() == true )
+	if( pQuestFT->IsImmediate() == true )
 	{
 		// 퀘스트 시작
-		switch( m_pQuestFT->GetStartTarget_Type() )
+		switch( pQuestFT->GetStartTarget_Type() )
 		{
 		case CsQuest::ST_NPC:
 			{					
-				g_pDataMng->GetQuest()->RevQuest_ByNpc( m_pQuestFT, pTarget );
+				g_pDataMng->GetQuest()->RevQuest_ByNpc( pQuestFT, pTarget );
 				g_pDataMng->GetQuest()->CalProcess();
 			}
 			break;
 		case CsQuest::ST_DIGIVICE:
 			{
-				g_pDataMng->GetQuest()->RevQuest_ByDigivice( m_pQuestFT );
+				g_pDataMng->GetQuest()->RevQuest_ByDigivice( pQuestFT );
 				g_pDataMng->GetQuest()->CalProcess();
 			}
 			break;
 		default:
-			assert_cs( false );
+			nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP_COMPLETE unknown immediate start quest=%lu startType=%d",
+				(unsigned long)pQuestFT->GetUniqID(),
+				pQuestFT->GetStartTarget_Type() );
+			return;
 		}
 	}
 
 	// 퀘스트 완료
-	if( g_pDataMng->GetQuest()->CompQuest( m_pQuestFT, pTarget ) )
+	if( g_pDataMng->GetQuest()->CompQuest( pQuestFT, pTarget ) )
 	{
-		( (CNpc*)pTarget )->Try_Yes();
+		CNpc* pNpc = NULL;
+		if( pTarget->GetLeafRTTI() == RTTI_NPC )
+			pNpc = (CNpc*)pTarget;
+
+		if( pNpc )
+			pNpc->Try_Yes();
 
 		// 남아 있는 디지바이스 퀘가 있는지 체크
 		if( g_pDataMng->GetQuestOwner()->IF_DigiviceQuest_Exist() )
 			g_pDataMng->GetQuestOwner()->IF_DigiviceQuest_Open();
 
-		int nEventSceneNum = nsCsFileTable::g_pQuestMng->GetQuest( m_pQuestFT->GetUniqID() )->m_nEvent[ CsQuest::EVENT_QUEST_REQUITE ];
-		if( nsCsFileTable::g_pSceneDataMng->IsData( (DWORD)nEventSceneNum ) )
-			g_pEventScene->EventStart( nEventSceneNum );
+		CsQuest* pEventQuest = nsCsFileTable::g_pQuestMng->GetQuest( pQuestFT->GetUniqID() );
+		if( pEventQuest )
+		{
+			int nEventSceneNum = pEventQuest->m_nEvent[ CsQuest::EVENT_QUEST_REQUITE ];
+			if( nsCsFileTable::g_pSceneDataMng->IsData( (DWORD)nEventSceneNum ) )
+				g_pEventScene->EventStart( nEventSceneNum );
+		}
 
-		if( cTalk::IsHaveQuest((CNpc*)pTarget ) )
+		if( pNpc && cTalk::IsHaveQuest( pNpc ) )
 		{
 			cBaseWindow* pBase = g_pGameIF->GetDynamicIF( cBaseWindow::WT_TALK );
 			if( pBase )
@@ -403,8 +516,8 @@ void cQuestComp::_CompleteQuest()
 	else
 	{
 		// 즉각 퀘스트라면 퀘스트 취소
-		if( m_pQuestFT->IsImmediate() )
-			g_pDataMng->GetQuest()->DropProcQuest( m_pQuestFT->GetUniqID() );
+		if( pQuestFT->IsImmediate() )
+			g_pDataMng->GetQuest()->DropProcQuest( pQuestFT->GetUniqID() );
 
 		Close( false );
 	}

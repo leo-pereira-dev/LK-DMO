@@ -257,7 +257,7 @@ void DataTradeSelect::_SetTooltip(cGridListBoxItem const* pOverItem)
 	SAFE_POINTER_RET( TOOLTIPMNG_STPTR );
 	cTooltip* pTooltip = TOOLTIPMNG_STPTR->GetTooltip();
 	SAFE_POINTER_RET( pTooltip );
-	pTooltip->SetTooltip( pItemIcon->GetWorldPos(), CsPoint( 34, 34 ), TOOLTIP_MAX_SIZE, cTooltip::ITEM, itemInfo.m_nType, cBaseWindow::WT_INVENTORY, 0, 0, &itemInfo );
+	pTooltip->SetTooltip( pItemIcon->GetWorldPos(), CsPoint( 34, 34 ), TOOLTIP_MAX_SIZE, cTooltip::ITEM, itemInfo.GetType(), cBaseWindow::WT_INVENTORY, 0, 0, &itemInfo );
 }
 
 void DataTradeSelect::_OnClickSelectButton(void* pSender, void* pData)

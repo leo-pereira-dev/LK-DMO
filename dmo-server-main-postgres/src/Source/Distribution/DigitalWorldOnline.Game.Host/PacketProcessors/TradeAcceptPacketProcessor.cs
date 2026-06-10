@@ -30,10 +30,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         public async Task Process(GameClient client, byte[] packetData)
         {
             var packet = new GamePacketReader(packetData);
-            var TargetHandle = packet.ReadInt();
+            var targetHandleRaw = packet.ReadInt();
+            var targetHandle = (ushort)targetHandleRaw;
 
+            _logger.Information("TRADE accept senderTamerId={SenderTamerId} senderHandle={SenderHandle} targetHandleRaw={TargetHandleRaw} targetHandle={TargetHandle}",
+                client.TamerId, client.Tamer.GeneralHandler, targetHandleRaw, targetHandle);
 
-            var targetClient = _mapServer.FindClientByTamerHandle(TargetHandle);
+            var targetClient = _mapServer.FindClientByTamerHandle(targetHandle);
 
             if (targetClient != null)
             {
@@ -48,10 +51,16 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                     client.Tamer.SetTrade(true, targetClient.Tamer.GeneralHandler);
                     targetClient.Send(new TradeAcceptPacket(client.Tamer.GeneralHandler));
-                    client.Send(new TradeAcceptPacket(TargetHandle));
+                    client.Send(new TradeAcceptPacket(targetHandle));
                     _logger.Verbose($"Character {client.TamerId} sent trade request to {targetClient.TamerId} and the tamer accept trade"); ;
 
                 }
+            }
+            else
+            {
+                client.Send(new TradeRequestErrorPacket(TradeRequestErrorEnum.othertransact));
+                _logger.Warning("TRADE accept target not found senderTamerId={SenderTamerId} senderHandle={SenderHandle} targetHandleRaw={TargetHandleRaw} targetHandle={TargetHandle}",
+                    client.TamerId, client.Tamer.GeneralHandler, targetHandleRaw, targetHandle);
             }
 
         }

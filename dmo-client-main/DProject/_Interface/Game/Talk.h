@@ -4,6 +4,8 @@
 
 #define TALK_LINE_DELTA				5
 
+class cSpriteAni;
+
 class cTalk : public cBaseWindow
 {
 public:
@@ -49,10 +51,12 @@ private:
 	bool					_SelectedStringList( cString* pSelectString, int nValue1, int nValue2 );
 	bool					_SelectList( bool bUpArrow );
 	bool					_CheckInputKey( const WPARAM& wParam );
+	CsRect					_GetTutorialQuestControlPos();
 
 	// 메모리잡힌 컨트롤
 protected:
 	cSprite*		m_pSelMask;
+	cSpriteAni*		 m_pTutorialQuestArrow;
 	cPopUp*			m_pBGWindow;
 
 	// 포인터만 있는 컨트롤

@@ -45,7 +45,8 @@ public sealed class SkillBinLoader
         for (int i = 0; i < skillCount; i++)
         {
             int id = r.ReadInt32();
-            r.BaseStream.Seek(64 + 512, SeekOrigin.Current);   // skip s_szName + s_szComment
+            var name = ReadFixedWideString(r, 64);
+            var comment = ReadFixedWideString(r, 512);
             var apply0 = ReadSkillApply(r);
             var apply1 = ReadSkillApply(r);
             var apply2 = ReadSkillApply(r);
@@ -88,7 +89,7 @@ public sealed class SkillBinLoader
                 continue;
 
             skills[id] = new SkillRecord(
-                id, apply0, apply1, apply2,
+                id, name, comment, apply0, apply1, apply2,
                 levelupPoint, maxLevel, attrType, natureType, familyType,
                 useHp, useDs, icon, target, attType,
                 attRange, attRangeMin, attRangeNor, attRangeMax, attSphere,
@@ -138,6 +139,14 @@ public sealed class SkillBinLoader
         }
 
         return new Skill(skills, tamerSkills, areaChecks);
+    }
+
+    private static string ReadFixedWideString(BinaryReader r, int byteCount)
+    {
+        var bytes = r.ReadBytes(byteCount);
+        var value = System.Text.Encoding.Unicode.GetString(bytes);
+        var end = value.IndexOf('\0');
+        return end >= 0 ? value[..end] : value;
     }
 
     private static SkillApply ReadSkillApply(BinaryReader r)

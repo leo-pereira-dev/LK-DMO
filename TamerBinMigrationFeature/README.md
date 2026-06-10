@@ -5,11 +5,11 @@ bins compatíveis com o template antigo do LK-DMO.
 
 ## Fonte
 
-XML/bin atualizados:
+Fontes locais usadas pela migracao:
 
 ```text
-C:\0-NewDmo\Dcommerce\xml\AllBins\Data
-C:\0-NewDmo\Dcommerce\Bin\Language\English
+C:\0-NewDmo\TamerBinMigrationFeature\source_xml_language
+C:\0-NewDmo\TamerBinMigrationFeature\generated\pack03-source
 ```
 
 XML de strings gerado para esta migração:
@@ -39,7 +39,7 @@ Os bins convertidos foram copiados para:
 
 ```text
 C:\0-NewDmo\dmo-server-main-postgres\Bins\data\bin\english
-C:\0-NewDmo\DigiCombineFeature\assets\extracted_pack03\data\bin\english
+C:\0-NewDmo\TamerBinMigrationFeature\generated\pack03-source
 ```
 
 O pack ativo do cliente tambem foi atualizado:

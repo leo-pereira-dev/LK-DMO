@@ -36,7 +36,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             var packet = new GamePacketReader(packetData);
             var inviteResult = packet.ReadInt();
-            var leaderName = packet.ReadString();
+            var leaderName = packet.ReadString().Replace("\0", string.Empty).Trim();
+
+            _logger.Information("PARTY response senderTamerId={SenderTamerId} senderName={SenderName} result={InviteResult} leaderName={LeaderName}",
+                client.TamerId, client.Tamer.Name, inviteResult, leaderName);
 
             var leaderClient = _mapServer.FindClientByTamerName(leaderName);
             if (leaderClient == null)
@@ -112,7 +115,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             }
 
-            if (inviteResult == -1)
+            if (inviteResult == -1 || inviteResult == (int)PartyRequestFailedResultEnum.Rejected)
             {
                 leaderClient.Send(new PartyRequestSentFailedPacket(PartyRequestFailedResultEnum.Rejected, client.Tamer.Name));
                 _logger.Verbose($"Character {client.TamerId} refused party invite from {leaderClient.TamerId}.");

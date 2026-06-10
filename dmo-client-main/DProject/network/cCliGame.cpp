@@ -316,6 +316,7 @@ void cCliGame::OnExecute(void)
 	case pSvr::Change				: RecvChangeServer();			return;
 	case pSvr::LocalPortal			: RecvLocalPortalSuccess();		return;
 	case pInsMap::DungeonFail		: RecvInsMap_DungeonFail();		return;
+	case pInsMap::DungeonClearResult: RecvDungeonClearResult();		return;
 	case pItem::CropFailure			: RecvCropFailure();			return;
 
 	case pGame::Ting				: RecvTing();					return;

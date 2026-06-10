@@ -35,10 +35,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         public async Task Process(GameClient client, byte[] packetData)
         {
             var packet = new GamePacketReader(packetData);
-            var TargetHandle = packet.ReadInt();
+            var targetHandleRaw = packet.ReadInt();
+            var targetHandle = (ushort)targetHandleRaw;
 
+            _logger.Information("TRADE request senderTamerId={SenderTamerId} senderHandle={SenderHandle} targetHandleRaw={TargetHandleRaw} targetHandle={TargetHandle}",
+                client.TamerId, client.Tamer.GeneralHandler, targetHandleRaw, targetHandle);
 
-            var targetClient = _mapServer.FindClientByTamerHandle(TargetHandle);
+            var targetClient = _mapServer.FindClientByTamerHandle(targetHandle);
 
             if (targetClient != null)
             {
@@ -56,8 +59,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
             else
             {
-                targetClient.Send(new TradeRequestErrorPacket(TradeRequestErrorEnum.othertransact));
-                _logger.Verbose($"Character {client.TamerId} sent trade request to {targetClient.TamerId} and the tamer was impossible to trade.");
+                client.Send(new TradeRequestErrorPacket(TradeRequestErrorEnum.othertransact));
+                _logger.Warning("TRADE request target not found senderTamerId={SenderTamerId} senderHandle={SenderHandle} targetHandleRaw={TargetHandleRaw} targetHandle={TargetHandle}",
+                    client.TamerId, client.Tamer.GeneralHandler, targetHandleRaw, targetHandle);
             }
         }
     }

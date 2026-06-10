@@ -115,5 +115,11 @@
             var baseType = type.NormalizeAccessoryStatus();
             return baseType >= AccessoryStatusTypeEnum.ATRate && baseType <= AccessoryStatusTypeEnum.FinalDamageRate;
         }
+
+        public static bool UsesBaseValueScaling(this AccessoryStatusTypeEnum type)
+        {
+            var baseType = type.NormalizeAccessoryStatus();
+            return baseType == AccessoryStatusTypeEnum.AS || baseType.IsRatioStatus();
+        }
     }
 }

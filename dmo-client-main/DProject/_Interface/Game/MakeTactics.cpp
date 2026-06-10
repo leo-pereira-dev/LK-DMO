@@ -1,6 +1,39 @@
 #include "stdafx.h"
 #include "MakeTactics.h"
 
+namespace
+{
+	const int TUTORIAL_HATCH_EGG_ITEM_IDS[] =
+	{
+		114240,
+		114241,
+		114242,
+		114243,
+		114244,
+		114245,
+	};
+	const int TUTORIAL_HATCH_FIRST_SLOT = 0;
+
+	int GetFirstTutorialHatchEggSlot( cData_Inven* pInven )
+	{
+		if( pInven == NULL )
+			return cData_Inven::INVALIDE_INVEN_INDEX;
+
+		int nFirstSlot = cData_Inven::INVALIDE_INVEN_INDEX;
+		for( int i = 0; i < sizeof( TUTORIAL_HATCH_EGG_ITEM_IDS ) / sizeof( TUTORIAL_HATCH_EGG_ITEM_IDS[0] ); ++i )
+		{
+			int const nSlot = pInven->GetFirstSlot_Item_ID( TUTORIAL_HATCH_EGG_ITEM_IDS[i] );
+			if( nSlot == cData_Inven::INVALIDE_INVEN_INDEX )
+				continue;
+
+			if( nFirstSlot == cData_Inven::INVALIDE_INVEN_INDEX || nSlot < nFirstSlot )
+				nFirstSlot = nSlot;
+		}
+
+		return nFirstSlot;
+	}
+}
+
 cMakeTactics::sBAR::sBAR()
 {
 	s_nRenderDelta[ 0 ] = ( 37 + 33*4 );
@@ -240,6 +273,7 @@ cMakeTactics::cMakeTactics():iPotableIndex(-1)
 
 
 	m_pRenderTex = NULL;
+	m_pTutorialArrow = NULL;
 	m_pTarget = NULL;
 	m_pNPCObejct = NULL;	
 
@@ -330,6 +364,7 @@ void cMakeTactics::DeleteResource()
 	cMessageBox::DelMsg( 30054, false );
 
 	SAFE_NIDELETE( m_pRenderTex );
+	SAFE_NIDELETE( m_pTutorialArrow );
 	// 아이템 언롹킹
 	g_pDataMng->GetInven()->ItemUnlock_ItemType( nItem::Portable_Item, eHATCH);
 }
@@ -414,6 +449,16 @@ void cMakeTactics::Create(int nValue /* = 0  */)
 		SAFE_NIDELETE( m_pRenderTex );
 	}
 
+	if( m_pTutorialArrow == NULL )
+	{
+		m_pTutorialArrow = NiNew cSpriteAni;
+		if( m_pTutorialArrow )
+		{
+			m_pTutorialArrow->Init( cSpriteAni::LOOP, NULL, CsPoint::ZERO, CsPoint( 60, 45 ), "Tutorial\\tutorial_ani.tga", NULL, 11, false, CsPoint(60,0), cSpriteAni::SPRITE_POS );
+			m_pTutorialArrow->SetAniTime( 0.1f );
+		}
+	}
+
 	m_rcBackupDisk.SetRect( CsPoint( 18, 279 ), (CsSIZE)IF_MT_ICONSIZE );
 	m_rcResiDigitama.SetRect( ptDigiIconPos, (CsSIZE)IF_MT_ICONSIZE );	//용병알 이미지 좌표
 	m_rcDataChange.SetRect( DATACHANGE_BUTTON_POS, (CsSIZE)DATACHANGE_BUTTON_SIZE );
@@ -431,6 +476,7 @@ void cMakeTactics::Create(int nValue /* = 0  */)
 
 
 	CreateData();	
+	_MoveTutorialEggToFirstSlot();
 
 	// 아이템 롹킹
 	g_pDataMng->GetInven()->ItemLock_ItemType( nItem::Portable_Item, eHATCH);
@@ -689,7 +735,56 @@ void cMakeTactics::Render()
 	m_StringBody.Render( ptStringPos + GetRootClient(), 4 );
 #endif
 
+	_RenderTutorialArrow();
+
 	cCreateName::RenderInstance( GetWindowType(), 0 );
+}
+
+void cMakeTactics::_MoveTutorialEggToFirstSlot()
+{
+	if( GetSystem() == NULL || GetSystem()->IsTutorialPlaying() == false )
+		return;
+
+	if( GetSystem()->GetDigimonEggType() != 0 )
+		return;
+
+	SAFE_POINTER_RET( g_pDataMng );
+	cData_Inven* pInven = g_pDataMng->GetInven();
+	SAFE_POINTER_RET( pInven );
+
+	int const nEggSlot = GetFirstTutorialHatchEggSlot( pInven );
+	if( nEggSlot == cData_Inven::INVALIDE_INVEN_INDEX || nEggSlot == TUTORIAL_HATCH_FIRST_SLOT )
+		return;
+
+	int const nSrcSrvID = TO_INVEN_SID( nEggSlot );
+	int const nDestSrvID = TO_INVEN_SID( TUTORIAL_HATCH_FIRST_SLOT );
+	if( g_pDataMng->IsItemLock( nSrcSrvID ) || g_pDataMng->IsItemLock( nDestSrvID ) )
+		return;
+
+	g_pDataMng->SendItemMove( nSrcSrvID, nDestSrvID );
+}
+
+void cMakeTactics::_RenderTutorialArrow()
+{
+	if( m_pTutorialArrow == NULL || GetSystem() == NULL || GetSystem()->IsTutorialPlaying() == false )
+		return;
+
+	if( GetSystem()->GetDigimonEggType() == 0 )
+		return;
+
+	CsRect rcTarget = m_rcAutoReg;
+	cButton* pTargetButton = m_pAutoResistBtn;
+	if( GetSystem()->GetDigimonEggCount() >= IF_MAKE_TACTICS_REQUITE_LEVEL && m_pRequiteBtn && m_pRequiteBtn->IsEnable() )
+	{
+		rcTarget = m_rcRecv;
+		pTargetButton = m_pRequiteBtn;
+	}
+
+	if( pTargetButton == NULL || pTargetButton->IsEnable() == false )
+		return;
+
+	m_pTutorialArrow->Update( g_fDeltaTime );
+	m_pTutorialArrow->Render( GetRootClient() + rcTarget.GetPos() + CsPoint( -50, ( rcTarget.Height() - 45 ) / 2 ) );
 }
 
 bool cMakeTactics::CursorIconLBtnUp( CURSOR_ICON::eTYPE eIconType, int nIconSlot, int nIconCount )
@@ -913,8 +1008,11 @@ void cMakeTactics::PressCloseBtn( void* pSender, void* pData )
 
 void cMakeTactics::PressRequiteBtn( void* pSender, void* pData )
 {
-	assert_cs( GetSystem()->GetDigimonEggType() != 0 );
-	assert_cs( GetSystem()->GetDigimonEggCount() >= 3 );
+	if( GetSystem()->RestoreDigimonEggType() == false || GetSystem()->GetDigimonEggCount() < 3 )
+	{
+		cPrintMsg::PrintMsg( 20002 );
+		return;
+	}
 
 	if( nsCsFileTable::g_pTacticsMng->IsTactics( GetSystem()->GetDigimonEggType() ) == false )
 	{
@@ -945,6 +1043,9 @@ void cMakeTactics::PressMiniGameBtn( void* pSender, void* pData )
 #ifdef MINIGAME
 	if(GetWindowType() != WT_MINIGAME)	//미니게임이 안떠있을 때만 물어봐야지
 	{
+		if( nsCsFileTable::g_pTacticsMng->IsTactics( GetSystem()->GetDigimonEggType() ) == false )
+			return;
+
 		CsTactics::sINFO* pFTTactics = nsCsFileTable::g_pTacticsMng->GetTactics( GetSystem()->GetDigimonEggType() )->GetInfo();
 
 		if( ( pFTTactics->s_nViewWarning[CsTactics::DATA_LV1] )&&( GetSystem()->GetDigimonEggCount() < pFTTactics->s_nViewWarning[CsTactics::DATA_LV1]) )
@@ -1042,6 +1143,14 @@ void cMakeTactics::_ResistDigitamaEnableControl()
 	_RefreshGradeString();
 
 	// 최대 사용 가능 DATA 등급 책정
+	if( nsCsFileTable::g_pTacticsMng->IsTactics( GetSystem()->GetDigimonEggType() ) == false )
+	{
+		m_pRequiteBtn->SetEnable( false );
+		m_pDataChangeBtn->SetEnable( false );
+		m_pAutoResistBtn->SetEnable( false );
+		return;
+	}
+
 	CsTactics::sINFO* pFTTactics = nsCsFileTable::g_pTacticsMng->GetTactics( GetSystem()->GetDigimonEggType() )->GetInfo();
 
 	SAFE_POINTER_RET(pFTTactics);
@@ -1279,8 +1388,11 @@ void cMakeTactics::ResistBackupDisk( int nInvenIndex )
 
 void cMakeTactics::RequiteTactics( TCHAR* szName )
 {
-	assert_cs( GetSystem()->GetDigimonEggType() != 0 );
-	assert_cs( GetSystem()->GetDigimonEggCount() >= 3 );
+	if( GetSystem()->RestoreDigimonEggType() == false || GetSystem()->GetDigimonEggCount() < 3 )
+	{
+		cPrintMsg::PrintMsg( 20002 );
+		return;
+	}
 
 	g_pTacticsAni->Set_bAniProcess(false);	//2016-03-02-nova 디지몬부화시 카메라 이동 애니메이션 작동
 
@@ -1412,10 +1524,9 @@ void cMakeTactics::ProcessResult()
 #ifdef MINIGAME
 			GetSystem()->SetMinigameComp(false);
 #endif			
-			assert_cs( GetSystem()->GetDigimonEgg()->IsEnable() == true );
-			SetNpcAnimation( ANI::NPC_OPEN_IDLE1 );	
-
 			GetSystem()->SetSuccessLevel();
+			assert_cs( GetSystem()->GetDigimonEgg()->IsEnable() == true && GetSystem()->GetDigimonEggType() != 0 );
+			SetNpcAnimation( ANI::NPC_OPEN_IDLE1 );	
 
 			_CancelDisableControl();
 

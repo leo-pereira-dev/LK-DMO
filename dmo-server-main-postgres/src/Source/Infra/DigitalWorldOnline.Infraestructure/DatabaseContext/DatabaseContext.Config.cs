@@ -17,6 +17,9 @@ namespace DigitalWorldOnline.Infraestructure
         public DbSet<HatchConfigDTO> HatchConfig { get; set; }
         public DbSet<FruitConfigDTO> FruitConfig { get; set; }
         public DbSet<SummonDTO> SummonsConfig { get; set; }
+        public DbSet<KillSpawnConfigDTO> KillSpawnConfig { get; set; }
+        public DbSet<KillSpawnSourceMobConfigDTO> KillSpawnSourceMobConfig { get; set; }
+        public DbSet<KillSpawnTargetMobConfigDTO> KillSpawnTargetMobConfig { get; set; }
 
         internal static void ConfigEntityConfiguration(ModelBuilder builder)
         {

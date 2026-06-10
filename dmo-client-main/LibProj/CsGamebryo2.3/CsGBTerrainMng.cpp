@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "CsGBTerrainMng.h"
+#include "../CsFunc/CrashLogger.h"
 
 CsGBTerrainMng*					nsCsGBTerrain::g_pTRMng = NULL;
 nsCsGBTerrain::sSERVERTIME		nsCsGBTerrain::g_ServerTime;
@@ -284,10 +285,13 @@ void CsGBTerrainMng::_UpdateOclusionObject()
 
 bool CsGBTerrainMng::CreateRoot( DWORD dwMapID )
 {
+	nsCSDEBUG::CrashLogger::LogMessage( "TRMNG CreateRoot begin map=%u reload=%d curRoot=%p backup=%u",
+		(unsigned)dwMapID, nsCsGBTerrain::g_bReloadMap ? 1 : 0, nsCsGBTerrain::g_pCurRoot, (unsigned)m_dwBackupMapID );
 	if( nsCsGBTerrain::g_bReloadMap == false )
 	{
 		if( ( nsCsGBTerrain::g_pCurRoot != NULL )&&( nsCsGBTerrain::g_pCurRoot->GetInfo()->s_dwMapID == dwMapID ) )
 		{
+			nsCSDEBUG::CrashLogger::LogMessage( "TRMNG CreateRoot reload existing map=%u", (unsigned)dwMapID );
 			nsCsGBTerrain::g_pCurRoot->ReloadMap();
 			return true;
 		}		
@@ -299,16 +303,28 @@ bool CsGBTerrainMng::CreateRoot( DWORD dwMapID )
 
 	CsMapList* pMapList	= nsCsMapTable::g_pMapListMng->GetList( dwMapID );
 	CsMapList::sINFO* pMapInfo = pMapList->GetInfo();
+	nsCSDEBUG::CrashLogger::LogMessage( "TRMNG CreateRoot mapInfo map=%u list=%p path=%s",
+		(unsigned)dwMapID, pMapList, pMapInfo ? pMapInfo->s_cMapPath.c_str() : "<null>" );
 
+	nsCSDEBUG::CrashLogger::LogMessage( "TRMNG CreateRoot NewRoot begin map=%u", (unsigned)dwMapID );
 	_NewRoot();
+	nsCSDEBUG::CrashLogger::LogMessage( "TRMNG CreateRoot NewRoot end map=%u curRoot=%p", (unsigned)dwMapID, nsCsGBTerrain::g_pCurRoot );
+	nsCSDEBUG::CrashLogger::LogMessage( "TRMNG CreateRoot PreMapLoad begin map=%u", (unsigned)dwMapID );
 	g_Sorting.PreMapLoad();
+	nsCSDEBUG::CrashLogger::LogMessage( "TRMNG CreateRoot Load begin map=%u path=%s",
+		(unsigned)dwMapID, pMapInfo ? pMapInfo->s_cMapPath.c_str() : "<null>" );
 	bool bSuccess = nsCsGBTerrain::g_pCurRoot->Load( pMapInfo->s_cMapPath.c_str(), nsCsGBTerrain::CT_FILELOAD );
+	nsCSDEBUG::CrashLogger::LogMessage( "TRMNG CreateRoot Load end map=%u success=%d",
+		(unsigned)dwMapID, bSuccess ? 1 : 0 );
 	g_Sorting.PostMapLoad();
+	nsCSDEBUG::CrashLogger::LogMessage( "TRMNG CreateRoot PostMapLoad end map=%u", (unsigned)dwMapID );
 
 
 	nsCsGBTerrain::g_bReloadMap = false;
 
+	nsCSDEBUG::CrashLogger::LogMessage( "TRMNG CreateRoot UpdateOclusionObject begin map=%u", (unsigned)dwMapID );
 	_UpdateOclusionObject();
+	nsCSDEBUG::CrashLogger::LogMessage( "TRMNG CreateRoot end map=%u success=%d", (unsigned)dwMapID, bSuccess ? 1 : 0 );
 
 	return bSuccess;
 }
@@ -418,5 +434,3 @@ void CsGBTerrainMng::DeleteTerrainFile( LPCTSTR szFile )
 	_stprintf_s( &sz[ len - 4 ], MAX_PATH - (len-4), _T( "_SMorg.cst" ) );
 	DeleteFile( sz );
 }
-
-

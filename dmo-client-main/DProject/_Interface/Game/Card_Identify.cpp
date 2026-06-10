@@ -92,7 +92,7 @@ void cCardIdentify::_ClearItemLock()
 
 	if( m_arrSLOT[SLOT_SEAL].s_ItemInfo.IsEnable() )
 	{	// 씰 아이템의 락 해제
-		uint nSealItemID = m_arrSLOT[SLOT_SEAL].s_ItemInfo.m_nType;
+		uint nSealItemID = m_arrSLOT[SLOT_SEAL].s_ItemInfo.GetType();
 		CsItem FTItem = *nsCsFileTable::g_pItemMng->GetItem(nSealItemID);
 		CsItem::sINFO FTInfo = *(FTItem.GetInfo());
 
@@ -101,7 +101,7 @@ void cCardIdentify::_ClearItemLock()
 
 	if( m_arrSLOT[SLOT_UNSEAL].s_ItemInfo.IsEnable() )
 	{	// 봉인 해제 아이템의 락 해제
-		uint nSealItemID = m_arrSLOT[SLOT_UNSEAL].s_ItemInfo.m_nType;
+		uint nSealItemID = m_arrSLOT[SLOT_UNSEAL].s_ItemInfo.GetType();
 		CsItem FTItem = *nsCsFileTable::g_pItemMng->GetItem(nSealItemID);
 		CsItem::sINFO FTInfo = *(FTItem.GetInfo());
 
@@ -158,7 +158,7 @@ cBaseWindow::eMU_TYPE cCardIdentify::Update_ForMouse()
 
 		if( m_bIsRegistUnSeal == false )	// 봉인 해제 아이템 등록되지 않았거나 수량 부족
 		{
-			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_arrSLOT[SLOT_UNSEAL].s_ItemInfo.m_nType );	// 봉인 해제 아이템 INDEX
+			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_arrSLOT[SLOT_UNSEAL].s_ItemInfo.GetType() );	// 봉인 해제 아이템 INDEX
 			CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 			cPrintMsg::PrintMsg(30650, pFTInfo->s_szName);	// 봉인 해제 아이템이 부족합니다.
 			return muReturn;
@@ -179,7 +179,7 @@ cBaseWindow::eMU_TYPE cCardIdentify::Update_ForMouse()
 				CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
 				CProtocol.m_wStr = _T( "아이템이 부족합니다." );
 				GAME_EVENT_STPTR->OnEvent( EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol );
-				CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_arrSLOT[SLOT_UNSEAL].s_ItemInfo.m_nType );
+				CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_arrSLOT[SLOT_UNSEAL].s_ItemInfo.GetType() );
 				CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 
 				cPrintMsg::PrintMsg( 30650, pFTInfo->s_szName );
@@ -187,8 +187,8 @@ cBaseWindow::eMU_TYPE cCardIdentify::Update_ForMouse()
 				return muReturn;
 			}
 			//아이템 ID와 수량
-			std::pair<int, int> openSealInfo;// = make_pair(m_arrSLOT[SLOT_SEAL].s_ItemInfo.m_nType, m_arrSLOT[SLOT_SEAL].s_ItemInfo.GetCount());
-			openSealInfo.first = m_arrSLOT[SLOT_SEAL].s_ItemInfo.m_nType;
+			std::pair<int, int> openSealInfo;// = make_pair(m_arrSLOT[SLOT_SEAL].s_ItemInfo.GetType(), m_arrSLOT[SLOT_SEAL].s_ItemInfo.GetCount());
+			openSealInfo.first = m_arrSLOT[SLOT_SEAL].s_ItemInfo.GetType();
 			openSealInfo.second = m_arrSLOT[SLOT_SEAL].s_ItemInfo.GetCount();
 			GAME_EVENT_STPTR->OnEvent(EVENT_CODE::CHECK_SEALMASTER_UNSEAL, &openSealInfo);
 		}
@@ -222,7 +222,7 @@ bool cCardIdentify::_UpdateIcon_ForMouse()
 					IF_INVENTORY_ICON_SIZE,				// 아이콘 크기
 					TOOLTIP_MAX_SIZE,					// 툴팁 길이
 					cTooltip::ITEM,						// 툴팁 유형
-					m_arrSLOT[i].s_ItemInfo.m_nType,	// 아이템 ID
+					m_arrSLOT[i].s_ItemInfo.GetType(),	// 아이템 ID
 					cBaseWindow::WT_CARDIDENTIFY,		// 중복 툴팁을 방지하는 Key
 					eSlot, 0, 
 					&m_arrSLOT[i].s_ItemInfo			// ItemInfo
@@ -471,7 +471,7 @@ void cCardIdentify::SendUnSeal()
 void cCardIdentify::GetINFO( IN int nInvenIndex, OUT CsItem& FTItem, OUT CsItem::sINFO& FTInfo, OUT cItemInfo& ItemINFO )
 {
 	ItemINFO	= *g_pDataMng->GetInven()->GetData( nInvenIndex );
-	FTItem	= *nsCsFileTable::g_pItemMng->GetItem( ItemINFO.m_nType );
+	FTItem	= *nsCsFileTable::g_pItemMng->GetItem( ItemINFO.GetType() );
 	FTInfo	= *FTItem.GetInfo();
 }
 
@@ -484,7 +484,7 @@ void cCardIdentify::RecvUnSealProcess( int nSealInvenIdx, int nSealUse, int nUnS
 	g_pDataMng->GetInven()->DecreaseItem_TypeLS(nItem::UnSealCardMaster, 1, nUnSealUse, false, false);
 
 	{
-		CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_arrSLOT[SLOT_SEAL].s_ItemInfo.m_nType );
+		CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_arrSLOT[SLOT_SEAL].s_ItemInfo.GetType() );
 		CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 		cPrintMsg::PrintMsg( 30652, pFTInfo->s_szName );
 		
@@ -501,7 +501,7 @@ void cCardIdentify::RecvUnSealProcess( int nSealInvenIdx, int nSealUse, int nUnS
 	
 	// 3. 씰 마스터 데이터를 수정합니다.(data)
 	GS2C_RECV_SEALMASTER_OPENSEAL recv;
-	recv.m_nSealItemID =  m_arrSLOT[SLOT_SEAL].s_ItemInfo.m_nType;
+	recv.m_nSealItemID =  m_arrSLOT[SLOT_SEAL].s_ItemInfo.GetType();
 	recv.m_nSealAmount = nSealUse;			// 씰 사용량
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_SEALOPEN, &recv );
 }

@@ -3,11 +3,7 @@
 
 #define KIND_OF_ENCHENT_ITEM	3	// 디지클론 아이템 종류 ( 일반 / 강화 / 궁극 )
 
-#ifdef SDM_DIGIMON_TRANSCENDENCE_CONTENTS_20190507
-	#define MAX_ENCHANT_STAT_COUNT	5
-#else
-	#define MAX_ENCHANT_STAT_COUNT	4
-#endif
+#define MAX_ENCHANT_STAT_COUNT	5
 
 class cEnchantTactics : public cBaseWindow
 {

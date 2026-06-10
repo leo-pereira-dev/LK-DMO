@@ -11,9 +11,11 @@ namespace DigitalWorldOnline.Commons.Utils
     {
         public static List<short> DungeonMapIds = new List<short>()
         {
-            17, 13, 20, 50, 210, 215, 252, 1110, 1308, 1311,
+            13, 14, 17, 20, 50, 205, 210, 211, 215, 252, 328,
+            1110, 1111, 1304, 1308, 1311, 1400, 1403, 1404, 1500,
             1600, 1601, 1602, 1603, 1604, 1605, 1606, 1607, 1608,
-            1609, 1610, 1611, 1612, 1613, 1614,2001,2002
+            1609, 1610, 1611, 1612, 1613, 1614, 1615, 1700, 1701, 1702,
+            1703, 1704, 1705, 1706, 2001, 2002
         };
 
         public static List<int> IncreasePerLevelStun = new List<int>()
@@ -327,21 +329,15 @@ namespace DigitalWorldOnline.Commons.Utils
 
         public static int RemainingTimeSeconds(int seconds)
         {
-            return (int)DateTimeOffset.Now
-                .AddSeconds(DateTime.Now
-                .AddSeconds(seconds)
-                .Subtract(DateTime.Now).TotalSeconds)
-                .ToUnixTimeSeconds();
+            return Math.Clamp(seconds, 0, int.MaxValue);
         }
 
         public static int RemainingTimeMinutes(int minutes)
         {
-           
-
             if (minutes == 0)
                 return 0;
 
-            return (int)DateTimeOffset.UtcNow.AddMinutes(minutes).ToUnixTimeSeconds();
+            return (int)Math.Clamp((long)minutes * 60, 0, int.MaxValue);
         }
 
       
@@ -446,8 +442,9 @@ namespace DigitalWorldOnline.Commons.Utils
 
         public readonly struct EncyclopediaDeckEffect
         {
-            public EncyclopediaDeckEffect(int condition, int attackType, int option, int value, int probability, int time)
+            public EncyclopediaDeckEffect(int index, int condition, int attackType, int option, int value, int probability, int time)
             {
+                Index = index;
                 Condition = condition;
                 AttackType = attackType;
                 Option = option;
@@ -456,6 +453,7 @@ namespace DigitalWorldOnline.Commons.Utils
                 Time = time;
             }
 
+            public int Index { get; }
             public int Condition { get; }
             public int AttackType { get; }
             public int Option { get; }
@@ -490,6 +488,67 @@ namespace DigitalWorldOnline.Commons.Utils
             }
 
             return total;
+        }
+
+        public static int GetEncyclopediaDeckActivePercent(
+            int deckId,
+            IEnumerable<int> activeEffectIndexes,
+            int option)
+        {
+            if (deckId <= 0 || _encyclopediaDeckEffects is null)
+                return 0;
+
+            if (!_encyclopediaDeckEffects.TryGetValue(deckId, out var effects))
+                return 0;
+
+            var activeIndexes = activeEffectIndexes.ToHashSet();
+            var total = 0;
+            foreach (var effect in effects)
+            {
+                if (activeIndexes.Contains(effect.Index) && effect.Option == option)
+                    total += effect.Value;
+            }
+
+            return total;
+        }
+
+        public static bool TryRollEncyclopediaDeckEffect(
+            int deckId,
+            int attackType,
+            out EncyclopediaDeckEffect effect)
+        {
+            const int ProbabilisticPassiveCondition = 2;
+            const int ActiveCondition = 3;
+
+            effect = default;
+
+            if (deckId <= 0 || _encyclopediaDeckEffects is null)
+                return false;
+
+            if (!_encyclopediaDeckEffects.TryGetValue(deckId, out var effects))
+                return false;
+
+            foreach (var candidate in effects)
+            {
+                if (candidate.AttackType != attackType)
+                    continue;
+
+                if (candidate.Condition != ProbabilisticPassiveCondition &&
+                    candidate.Condition != ActiveCondition)
+                    continue;
+
+                if (candidate.Probability <= 0)
+                    continue;
+
+                var roll = RandomInt(1, 10000);
+                if (roll > candidate.Probability)
+                    continue;
+
+                effect = candidate;
+                return true;
+            }
+
+            return false;
         }
 
         public static int GetEncyclopediaDeckPassiveBonus(int deckId, int option, int baseValue)
@@ -694,7 +753,7 @@ namespace DigitalWorldOnline.Commons.Utils
         }
         public static int MapGroup(int mapId)
         {
-            if (mapId >= 1600 && mapId <= 1650|| mapId >= 2001 && mapId <= 2100)
+            if ((mapId >= 1600 && mapId <= 1650) || mapId == 1700 || (mapId >= 2001 && mapId <= 2100))
             {
                 return 2; // Dterminal
             }

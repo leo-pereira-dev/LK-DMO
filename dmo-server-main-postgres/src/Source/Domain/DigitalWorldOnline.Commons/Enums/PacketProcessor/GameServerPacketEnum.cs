@@ -555,6 +555,21 @@ namespace DigitalWorldOnline.Commons.Enums.PacketProcessor
         ArenaDailyInsertPoints = 4131,
 
         /// <summary>
+        /// Dungeon clear result notification.
+        /// </summary>
+        DungeonClearResult = 4135,
+
+        /// <summary>
+        /// Dungeon clear exit request.
+        /// </summary>
+        DungeonClearExit = 4136,
+
+        /// <summary>
+        /// Dungeon clear re-enter request.
+        /// </summary>
+        DungeonReEnter = 4137,
+
+        /// <summary>
         /// Update the quest status.
         /// </summary>
         QuestUpdate = 11001,
@@ -594,6 +609,11 @@ namespace DigitalWorldOnline.Commons.Enums.PacketProcessor
         /// Consumes an item.
         /// </summary>
         ConsumeItem = 3901,
+
+        /// <summary>
+        /// Hatches a level 5 mercenary DigiEgg directly from inventory.
+        /// </summary>
+        DirectHatch = 3955,
 
         /// <summary>
         /// sends the loading Tamer Account Warehouse.

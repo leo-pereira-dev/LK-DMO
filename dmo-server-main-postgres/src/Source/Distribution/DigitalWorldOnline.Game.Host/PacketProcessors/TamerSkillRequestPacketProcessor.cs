@@ -20,6 +20,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 {
     public class TamerSkillRequestPacketProcessor : IGamePacketProcessor
     {
+        private const short ClientBuffVisualClearCount = 1;
+
         public GameServerPacketEnum Type => GameServerPacketEnum.TamerSkillRequest;
 
         private readonly ILogger _logger;
@@ -143,10 +145,6 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             client.Send(new TamerSkillRequestPacket(SkillId, targetBuffInfo.BuffId, duration));
 
-            var newDigimonSkillBuff = DigimonBuffModel.Create(targetBuffInfo.BuffId, targetSkill.SkillCode, 0, targetSkill.Duration, (int)(TargetSkillInfo.Cooldown / 1000.0));
-            newDigimonSkillBuff.SetBuffInfo(targetBuffInfo);
-
-
             var activeSkill = client.Tamer.ActiveSkill.FirstOrDefault(x => x.SkillId == SkillId);
 
             if (activeSkill != null)
@@ -160,25 +158,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
             if (!targetBuffInfo.Pray && !targetBuffInfo.Cheer)
             {
-                var buffToRemove = client.Tamer.Partner.BuffList.ActiveBuffs.FirstOrDefault(x => x.SkillId == newDigimonSkillBuff.SkillId);
-
-                if (buffToRemove != null)
-                {
-                    duration = Math.Max(1, targetSkill.Duration);
-
-                    client.Tamer.Partner.BuffList.Buffs.Remove(buffToRemove);
-
-                    if (client.DungeonMap)
-                    {
-                        _dungeonServer.BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Tamer.Partner.GeneralHandler, newDigimonSkillBuff.BuffId).Serialize());
-                    }
-                    else
-                    {
-                        _mapServer.BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Tamer.Partner.GeneralHandler, newDigimonSkillBuff.BuffId).Serialize());
-                    }
-                }
-
-                client.Tamer.Partner.BuffList.Add(newDigimonSkillBuff);
+                ReplacePartnerSkillBuff(client, targetBuffInfo, targetSkill.SkillCode, duration, (int)(TargetSkillInfo.Cooldown / 1000.0));
 
                 if (client.DungeonMap)
                 {
@@ -280,16 +260,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                                 if (targetBuffInfo.Type != 1)
                                 {
-
-                                    var newDigimonSkillBuff = DigimonBuffModel.Create(targetBuffInfo.BuffId, targetSkill.SkillCode, 0, targetSkill.Duration, (int)(TargetSkillInfo.Cooldown / 1000.0));
-                                    newDigimonSkillBuff.SetBuffInfo(targetBuffInfo);
-
-                                    if (targetClient.Tamer.Partner.BuffList.ActiveBuffs.FirstOrDefault(x => x.SkillId == newDigimonSkillBuff.SkillId) != null)
-                                    {
-                                        targetClient.Tamer.Partner.BuffList.Buffs.Remove(newDigimonSkillBuff);
-                                    }
-
-                                    targetClient.Tamer.Partner.BuffList.Add(newDigimonSkillBuff);
+                                    ReplacePartnerSkillBuff(targetClient, targetBuffInfo, targetSkill.SkillCode, duration, (int)(TargetSkillInfo.Cooldown / 1000.0));
 
                                     _dungeonServer.BroadcastForTamerViewsAndSelf(targetClient.TamerId, new AddBuffPacket(targetClient.Tamer.Partner.GeneralHandler, targetBuffInfo, (short)0, duration).Serialize());
                                     _dungeonServer.BroadcastForTargetTamers(targetClient.TamerId, new UpdateCurrentHPRatePacket(targetClient.Tamer.Partner.GeneralHandler, targetClient.Tamer.Partner.HpRate).Serialize());
@@ -361,29 +332,11 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                                 if (!targetBuffInfo.Pray && !targetBuffInfo.Cheer)
                                 {
-
-                                    var newDigimonSkillBuff = DigimonBuffModel.Create(targetBuffInfo.BuffId, targetSkill.SkillCode, 0, targetSkill.Duration, (int)(TargetSkillInfo.Cooldown / 1000.0));
-                                    newDigimonSkillBuff.SetBuffInfo(targetBuffInfo);
-
-                                    var buffToRemove = targetClient.Tamer.Partner.BuffList.ActiveBuffs.FirstOrDefault(x => x.SkillId == newDigimonSkillBuff.SkillId);
-
+                                    var buffToRemove = targetClient.Tamer.Partner.BuffList.ActiveBuffs.FirstOrDefault(x => x.SkillId == targetSkill.SkillCode);
                                     if (buffToRemove != null)
-                                    {
                                         duration = Math.Max(1, targetSkill.Duration + buffToRemove.RemainingSeconds);
 
-                                        targetClient.Tamer.Partner.BuffList.Buffs.Remove(buffToRemove);
-
-                                        if (targetClient.DungeonMap)
-                                        {
-                                            _dungeonServer.BroadcastForTamerViewsAndSelf(targetClient.TamerId, new RemoveBuffPacket(targetClient.Tamer.Partner.GeneralHandler, newDigimonSkillBuff.BuffId).Serialize());
-                                        }
-                                        else
-                                        {
-                                            _mapServer.BroadcastForTamerViewsAndSelf(targetClient.TamerId, new RemoveBuffPacket(targetClient.Tamer.Partner.GeneralHandler, newDigimonSkillBuff.BuffId).Serialize());
-                                        }
-                                    }
-
-                                    targetClient.Tamer.Partner.BuffList.Add(newDigimonSkillBuff);
+                                    ReplacePartnerSkillBuff(targetClient, targetBuffInfo, targetSkill.SkillCode, duration, (int)(TargetSkillInfo.Cooldown / 1000.0));
 
                                     _mapServer.BroadcastForTamerViewsAndSelf(targetClient.TamerId, new AddBuffPacket(targetClient.Tamer.Partner.GeneralHandler, targetBuffInfo, (short)0, duration).Serialize());
                                     _mapServer.BroadcastForTargetTamers(targetClient.TamerId, new UpdateCurrentHPRatePacket(targetClient.Tamer.Partner.GeneralHandler, targetClient.Tamer.Partner.HpRate).Serialize());
@@ -438,29 +391,12 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                 if (!targetBuffInfo.Pray && !targetBuffInfo.Cheer)
                 {
-                    var newDigimonSkillBuff = DigimonBuffModel.Create(targetBuffInfo.BuffId, targetSkill.SkillCode, 0, targetSkill.Duration, (int)(TargetSkillInfo.Cooldown / 1000.0));
-                    newDigimonSkillBuff.SetBuffInfo(targetBuffInfo);
-
-                    var buffToRemove = client.Tamer.Partner.BuffList.ActiveBuffs.FirstOrDefault(x => x.SkillId == newDigimonSkillBuff.SkillId);
+                    var buffToRemove = client.Tamer.Partner.BuffList.ActiveBuffs.FirstOrDefault(x => x.SkillId == targetSkill.SkillCode);
 
                     if (buffToRemove != null)
-                    {
                         duration = Math.Max(1, targetSkill.Duration + buffToRemove.RemainingSeconds);
 
-                        client.Tamer.Partner.BuffList.Buffs.Remove(buffToRemove);
-
-                        if (client.DungeonMap)
-                        {
-                            _dungeonServer.BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Tamer.Partner.GeneralHandler, newDigimonSkillBuff.BuffId).Serialize());
-                        }
-                        else
-                        {
-                            _mapServer.BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Tamer.Partner.GeneralHandler, newDigimonSkillBuff.BuffId).Serialize());
-                        }
-                    }
-
-
-                    client.Tamer.Partner.BuffList.Add(newDigimonSkillBuff);
+                    ReplacePartnerSkillBuff(client, targetBuffInfo, targetSkill.SkillCode, duration, (int)(TargetSkillInfo.Cooldown / 1000.0));
 
                     var activeSkill = client.Tamer.ActiveSkill.FirstOrDefault(x => x.SkillId == SkillId);
 
@@ -535,6 +471,36 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     await _sender.Send(new UpdateTamerSkillCooldownByIdCommand(activeSkill));
                 }
             }
+        }
+
+        private DigimonBuffModel ReplacePartnerSkillBuff(GameClient targetClient, BuffInfoAssetModel buffInfo, int skillCode, int duration, int cooldown)
+        {
+            var partner = targetClient.Tamer.Partner;
+            var buffIdsToClear = partner.BuffList.ActiveBuffs
+                .Where(buff => buff.BuffId == buffInfo.BuffId || buff.SkillId == skillCode)
+                .Select(buff => buff.BuffId)
+                .Append(buffInfo.BuffId)
+                .Distinct()
+                .ToList();
+
+            partner.BuffList.Buffs.RemoveAll(buff => buff.BuffId == buffInfo.BuffId || buff.SkillId == skillCode);
+
+            foreach (var buffId in buffIdsToClear)
+                BroadcastForTamerViewsAndSelf(targetClient, new RemoveBuffPacket(partner.GeneralHandler, buffId, ClientBuffVisualClearCount).Serialize());
+
+            var newBuff = DigimonBuffModel.Create(buffInfo.BuffId, skillCode, 0, duration, cooldown);
+            newBuff.SetBuffInfo(buffInfo);
+            partner.BuffList.Add(newBuff);
+
+            return newBuff;
+        }
+
+        private void BroadcastForTamerViewsAndSelf(GameClient targetClient, byte[] packet)
+        {
+            if (targetClient.DungeonMap)
+                _dungeonServer.BroadcastForTamerViewsAndSelf(targetClient.TamerId, packet);
+            else
+                _mapServer.BroadcastForTamerViewsAndSelf(targetClient.TamerId, packet);
         }
     }
 }

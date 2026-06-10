@@ -8,7 +8,7 @@
 #endif
 */
 
-#define		ACCOUNT_PORT		7029
+#define		ACCOUNT_PORT		17029
 
 
 #define	NAME_MIN_LEN				2//3
@@ -162,4 +162,3 @@
 #define USE_DMO_INI					//	ini파일에서 초기 설정값 읽어옴
 #define SKIP_LOGO						// 로고 스킵
 #endif
-

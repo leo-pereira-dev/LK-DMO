@@ -19,6 +19,7 @@
 #include "common_vs2019/pCashShop.h"
 #include "common_vs2019/pManager.h"
 #include "common_vs2019/pBuff.h"
+#include "../../LibProj/CsFunc/CrashLogger.h"
 
 void cCliGame::RecvBuffCreate()
 {
@@ -41,6 +42,26 @@ void cCliGame::RecvBuffCreate()
 
 	if( (nEndTS - _TIME_TS) <= 0.f )
 		return;
+
+	nsCSDEBUG::CrashLogger::LogMessage( "BUFF_RECV create uid=%u buffId=%u level=%u endTS=%u hitter=%u skillCode=%u rtti=%d",
+		nUID,
+		nBuffCode,
+		nBuffClassLevel,
+		nEndTS,
+		nHitterUID,
+		dwSkillCode,
+		pObject->GetLeafRTTI() );
+	if( nsCsFileTable::g_pBuffMng == NULL || nsCsFileTable::g_pBuffMng->IsBuff( nBuffCode ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "BUFF_RECV ignored missing create buffId=%u uid=%u level=%u endTS=%u hitter=%u skillCode=%u",
+			nBuffCode,
+			nUID,
+			nBuffClassLevel,
+			nEndTS,
+			nHitterUID,
+			dwSkillCode );
+		return;
+	}
 
 	switch( pObject->GetLeafRTTI() )
 	{
@@ -89,6 +110,28 @@ void cCliGame::RecvBuffChange()
 	CsC_AvObject* pObject = g_pMngCollector->GetObject( nUID );	
 	if( pObject == NULL )
 		return;
+
+	nsCSDEBUG::CrashLogger::LogMessage( "BUFF_RECV change uid=%u before=%u buffId=%u level=%u endTS=%u hitter=%u skillCode=%u rtti=%d",
+		nUID,
+		nBeforeCode,
+		nBuffCode,
+		nBuffClassLevel,
+		nEndTS,
+		nHitterUID,
+		dwSkillCode,
+		pObject->GetLeafRTTI() );
+	if( nsCsFileTable::g_pBuffMng == NULL || nsCsFileTable::g_pBuffMng->IsBuff( nBuffCode ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "BUFF_RECV ignored missing change buffId=%u before=%u uid=%u level=%u endTS=%u hitter=%u skillCode=%u",
+			nBuffCode,
+			nBeforeCode,
+			nUID,
+			nBuffClassLevel,
+			nEndTS,
+			nHitterUID,
+			dwSkillCode );
+		return;
+	}
 
 	switch( pObject->GetLeafRTTI() )
 	{
@@ -161,6 +204,15 @@ void cCliGame::RecvBuffClear()
 		break;
 	}	
 
+	if( nsCsFileTable::g_pBuffMng == NULL || nsCsFileTable::g_pBuffMng->IsBuff( nBuffCode ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "BUFF_RECV clear missing buffId=%u uid=%u count=%u",
+			nBuffCode,
+			nUID,
+			nCount );
+		return;
+	}
+
 	TCHAR sz[512];
 	_stprintf_s( sz, 512, L"%d %s 해제", nUID, nsCsFileTable::g_pBuffMng->GetBuff( nBuffCode )->GetInfo()->s_szName );
 	ST_CHAT_PROTOCOL	CProtocol;
@@ -207,6 +259,25 @@ void cCliGame::RecvBuffSkill()
 
 	// 디지몬 UID 저장
 	nDigimonUID = pDigimon->GetUniqID();
+
+	nsCSDEBUG::CrashLogger::LogMessage( "BUFF_RECV skill tamerUid=%u digimonUid=%u buffId=%u level=%u endTS=%u skillCode=%u",
+		nTamerUID,
+		nDigimonUID,
+		nBuffCode,
+		nBuffClassLevel,
+		nEndTS,
+		nSkillCode );
+	if( nsCsFileTable::g_pBuffMng == NULL || nsCsFileTable::g_pBuffMng->IsBuff( nBuffCode ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "BUFF_RECV ignored missing skill buffId=%u tamerUid=%u digimonUid=%u level=%u endTS=%u skillCode=%u",
+			nBuffCode,
+			nTamerUID,
+			nDigimonUID,
+			nBuffClassLevel,
+			nEndTS,
+			nSkillCode );
+		return;
+	}
 
 	//* ----- 버프 스킬 등록 -> 이미 등록된 버프가 있다면 삭제하고 다시 등록합니다. ----- *//
 	switch( pDigimon->GetLeafRTTI() )

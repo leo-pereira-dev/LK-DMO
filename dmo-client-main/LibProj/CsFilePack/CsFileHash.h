@@ -14,19 +14,19 @@ namespace CsFPS
 			{};
 
 			int				s_nPlag;
-			size_t			s_nDataSize;				// 청크헤더를 제외한 실 데이터 사이즈	( 가변적 - 추가 데이터 넣을경우에 작아질수도 있다 )
-			size_t			s_nAllocSize;				// 청크헤더를 제외한 실 데이터 사이즈	( 고정적 - 초기 Add 시에 해당 사이즈 만큼 고정 )
-			size_t			s_nHash;			
+			DWORD			s_nDataSize;				// 청크헤더를 제외한 실 데이터 사이즈	( 가변적 - 추가 데이터 넣을경우에 작아질수도 있다 )
+			DWORD			s_nAllocSize;				// 청크헤더를 제외한 실 데이터 사이즈	( 고정적 - 초기 Add 시에 해당 사이즈 만큼 고정 )
+			DWORD			s_nHash;			
 			UINT64			s_nOffset;					// 청크헤더를 건너띈 실 데이터 오프셋
 		};
 
 		struct sINFONew
 		{
-			size_t			s_nHash;
+			DWORD			s_nHash;
 			int				s_nPlag;
 			UINT64			s_nOffset;
-			size_t			s_nDataSize;				// 청크헤더를 제외한 실 데이터 사이즈	( 가변적 - 추가 데이터 넣을경우에 작아질수도 있다 )
-			size_t			s_nAllocSize;				// 청크헤더를 제외한 실 데이터 사이즈	( 고정적 - 초기 Add 시에 해당 사이즈 만큼 고정 )
+			DWORD			s_nDataSize;				// 청크헤더를 제외한 실 데이터 사이즈	( 가변적 - 추가 데이터 넣을경우에 작아질수도 있다 )
+			DWORD			s_nAllocSize;				// 청크헤더를 제외한 실 데이터 사이즈	( 고정적 - 초기 Add 시에 해당 사이즈 만큼 고정 )
 		};
 
 		CsFileHash();

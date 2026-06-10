@@ -51,7 +51,7 @@ void	cType::Reset()
 {
 	m_nTypeAll = 0;
 }
-void	cType::SetTypeAll(u4 TypeAll)
+void	cType::SetTypeAll(u8 TypeAll)
 { 
 	m_nTypeAll = TypeAll;
 }
@@ -128,7 +128,7 @@ void cType::SetType(uint nType)
 	m_nType = nType;
 }
 
-u4	 cType::GetTypeAll(void) 
+u8	 cType::GetTypeAll(void) 
 { 
 	return m_nTypeAll;
 }

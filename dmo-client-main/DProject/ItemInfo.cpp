@@ -8,6 +8,22 @@ int cItemInfo::GetSkillRate() const
 	return m_nRate;
 }
 
+DWORD cItemInfo::GetTamerEquipmentUpgradeSkillID() const
+{
+	return GetTamerEquipmentUpgradeSkillID( GetType(), m_nLevel );
+}
+
+DWORD cItemInfo::GetTamerEquipmentUpgradeSkillID( int nItemType, int nStage )
+{
+	if( nItemType < 47359 || nItemType > 47394 )
+		return 0;
+
+	if( nStage < 1 || nStage > 15 )
+		return 0;
+
+	return 2702320 + ( nItemType - 47359 ) * 16 + ( nStage - 1 );
+}
+
 bool cItemInfo::IsRemainSocket() const
 {
 	for( int i=0; i<nLimit::SocketSlot; ++i )
@@ -39,7 +55,7 @@ int cItemInfo::GetSocketRate( int nType )
 		return 0;
 
 	cItemInfo item;
-	item.m_nType = nType;
+	item.SetType( nType );
 	item.m_nRate = pFT->s_btApplyElement;
 	item.m_nEndTime = _TIME_TS + pFT->s_nUseTime_Min*60;
 	return item.GetSocketRate();

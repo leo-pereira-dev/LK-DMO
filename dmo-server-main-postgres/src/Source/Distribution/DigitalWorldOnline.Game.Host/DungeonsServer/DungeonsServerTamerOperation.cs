@@ -41,7 +41,6 @@ namespace DigitalWorldOnline.GameHost
                 if (client == null || !client.IsConnected || client.Partner == null)
                     continue;
 
-                CheckLocationDebuff(client);
                 GetInViewMobs(map, tamer);
                 GetInViewMobs(map, tamer, true);
 
@@ -53,6 +52,7 @@ namespace DigitalWorldOnline.GameHost
                 _ = _dailyEvent.TickAsync(client);
 
                 tamer.AutoRegen();
+                _verdandiXProgram.Tick(client, map, BroadcastForTamerViewsAndSelf, BroadcastForTargetTamers);
                 tamer.ActiveEvolutionReduction();
 
                 if (tamer.BreakEvolution)
@@ -71,10 +71,15 @@ namespace DigitalWorldOnline.GameHost
                             new RideModeStopPacket(tamer.GeneralHandler, tamer.Partner.GeneralHandler).Serialize());
                     }
 
-                    var buffToRemove = client.Tamer.Partner.BuffList.TamerBaseSkill();
-                    if (buffToRemove != null)
+                    var passiveBuffIdsToRemove = client.Tamer.Partner.BuffList.Buffs
+                        .Where(x => x.SkillId / 1000000 == 8 && x.Duration == 0)
+                        .Select(x => x.BuffId)
+                        .Distinct()
+                        .ToList();
+
+                    foreach (var buffIdToRemove in passiveBuffIdsToRemove)
                     {
-                        BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Partner.GeneralHandler, buffToRemove.BuffId).Serialize());
+                        BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Partner.GeneralHandler, buffIdToRemove).Serialize());
                     }
 
                     client.Tamer.RemovePartnerPassiveBuff();
@@ -389,44 +394,6 @@ namespace DigitalWorldOnline.GameHost
 
             if (totalTime >= 1000)
                 Console.WriteLine($"TamersOperation ({map.ConnectedTamers.Count}): {totalTime}.");
-        }
-
-        private void CheckLocationDebuff(GameClient client)
-        {
-            if (client.Tamer.DebuffTime)
-            {
-                client.Tamer.UpdateDebuffTime();
-
-                if (client.Tamer.Location.MapId == 2001 || client.Tamer.Location.MapId == 2002)
-                {
-                    var debuff = client.Tamer.Partner.DebuffList.ActiveBuffs.FirstOrDefault(x => x.BuffId == 63000);
-                    var evolutionType = _assets.DigimonBaseInfo.First(x => x.Type == client.Partner.CurrentType).EvolutionType;
-
-                    if (debuff == null)
-                    {
-
-                        if ((EvolutionRankEnum)evolutionType == EvolutionRankEnum.Jogress|| (EvolutionRankEnum)evolutionType == EvolutionRankEnum.JogressX)
-                        {
-
-                            var duration = 0xffffffff;
-
-                            var buffInfo = _assets.BuffInfo.FirstOrDefault(x => x.BuffId == 63000);
-
-                            var newDigimonDebuff = DigimonDebuffModel.Create(buffInfo.BuffId, buffInfo.SkillCode, 0, 0);
-                            newDigimonDebuff.SetBuffInfo(buffInfo);
-                            client.Tamer.Partner.DebuffList.Buffs.Add(newDigimonDebuff);
-
-                            BroadcastForTamerViewsAndSelf(client.TamerId, new AddBuffPacket(client.Tamer.Partner.GeneralHandler, buffInfo, (short)0, duration).Serialize());
-                        }
-                    }
-                    else if ((EvolutionRankEnum)evolutionType != EvolutionRankEnum.Jogress && (EvolutionRankEnum)evolutionType != EvolutionRankEnum.JogressX)
-                    {
-                        BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Tamer.Partner.GeneralHandler, debuff.BuffId).Serialize());
-                        client.Tamer.Partner.DebuffList.Buffs.Remove(debuff);
-                    }
-
-                }
-            }
         }
 
         private void GetInViewMobs(MapInstance map, CharacterModel tamer)

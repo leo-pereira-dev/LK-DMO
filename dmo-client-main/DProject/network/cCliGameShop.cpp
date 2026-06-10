@@ -13,6 +13,25 @@
 #include "common_vs2019/pPass2.h"
 #include "common_vs2019/pParty.h"
 
+#include "../../LibProj/CsFunc/CrashLogger.h"
+
+namespace
+{
+	int ResolveTamerEquipSlotFromPacket( int nSlotNo )
+	{
+		if( nSlotNo < nItem::Head )
+			return nSlotNo;
+
+		switch( nSlotNo )
+		{
+		case nItem::Goggles:		return nTamer::Goggles;
+		case nItem::NamePlate:	return nTamer::NamePlate;
+		case nItem::Keyring:	return nTamer::Keyring;
+		default:				return nSlotNo - nItem::Head;
+		}
+	}
+}
+
 
 void cCliGame::SendBuy( u4 NpcFTID, n4 ShopSlotIndex, u2 ItemCount )
 {
@@ -134,8 +153,16 @@ void cCliGame::RecvItemCropSuccess(void) // crop success
 	pop(nRate);
 	pop(nPickUpTamerIDX);
 
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"ITEM_CROP_RECV tamer=%u item=%u count=%u rate=%u pickup=%u",
+		(unsigned)nTamerIDX,
+		(unsigned)nItemType,
+		(unsigned)nCount,
+		(unsigned)nRate,
+		(unsigned)nPickUpTamerIDX );
+
 	cItemData item;
-	item.m_nType = nItemType;
+	item.SetType( nItemType );
 	item.m_nCount = nCount;
 	item.m_nRate = nRate;
 	item.m_nLevel = 0;
@@ -181,6 +208,15 @@ void cCliGame::RecvCropGiftItemSuccess(void)
 	pop(nItemRate);
 	pop(nItemEndTime);
 
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"ITEM_GIFT_CROP_RECV slotType=%u slotNo=%u item=%u count=%u rate=%u end=%u",
+		(unsigned)nSlotType,
+		(unsigned)nSlotNo,
+		(unsigned)nItemType,
+		(unsigned)nItemCount,
+		(unsigned)nItemRate,
+		(unsigned)nItemEndTime );
+
 	// 아이템 남아있는 시간 = nItemEndTime - GetTimeTS()
 	switch( nSlotType )
 	{
@@ -189,7 +225,7 @@ void cCliGame::RecvCropGiftItemSuccess(void)
 			g_pDataMng->GetQuest()->CalProcess();
 
 			cItemData data;
-			data.m_nType = nItemType;
+			data.SetType( nItemType );
 			data.m_nCount = nItemCount;
 			data.m_nRate = nItemRate;
 			data.m_nEndTime = nItemEndTime;
@@ -202,13 +238,13 @@ void cCliGame::RecvCropGiftItemSuccess(void)
 			g_pDataMng->GetQuest()->CalProcess();
 
 			cItemInfo info;
-			info.m_nType = nItemType;
+			info.SetType( nItemType );
 			info.m_nCount = nItemCount;
 			info.m_nRate = nItemRate;
 			info.m_nEndTime = nItemEndTime;
 #pragma todo("29가 들어와서 임시 셋팅")
+			nSlotNo = ResolveTamerEquipSlotFromPacket( nSlotNo );
 			assert_csm1( nSlotNo < nTamer::MaxParts, _T( "type > MaxParts, type = %d" ), nSlotNo );
-			nSlotNo = nSlotNo > nTamer::MaxParts ? nSlotNo - 21 : nSlotNo;
 			g_pDataMng->GetTEquip()->SetData( nSlotNo, &info, true );
 		}
 		break;
@@ -282,6 +318,18 @@ void cCliGame::RecvCropCashItemSuccess(void)
 #ifdef SDM_CASHITEM_TRADE_LIMITED_20170214
 	pop(recv.m_nRemainTradeLimitTime);
 #endif
+
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"ITEM_CASH_CROP_RECV result=%u rtime=%u cashSlot=%u slotType=%u slotNo=%u item=%u count=%u rate=%u end=%u",
+		(unsigned)recv.m_nResult,
+		(unsigned)recv.m_nRTime,
+		(unsigned)recv.m_nCashWarehouseSlotNum,
+		(unsigned)recv.m_nSlotType,
+		(unsigned)recv.m_nSlotNo,
+		(unsigned)recv.m_nItemType,
+		(unsigned)recv.m_nItemCount,
+		(unsigned)recv.m_nItemRate,
+		(unsigned)recv.m_nItemEndTime );
 
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_CASHSHOP_ITEM_CROP, &recv );
 

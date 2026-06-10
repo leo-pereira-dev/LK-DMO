@@ -1189,14 +1189,14 @@ void CStoreContents::ChangeMyItem( void* pData )
 
 CStoreContents::RepurchaseItemData* CStoreContents::MakeRepurchaseItemdata( const cItemData& rItemData )
 {
-	CsItem* pItem = nsCsFileTable::g_pItemMng->GetItem( rItemData.m_nType );
+	CsItem* pItem = nsCsFileTable::g_pItemMng->GetItem( rItemData.GetType() );
 	SAFE_POINTER_RETVAL(pItem,NULL);
 	const CsItem::sINFO* pInfo = pItem->GetInfo();
 	SAFE_POINTER_RETVAL(pInfo,NULL);
 
 	CStoreContents::RepurchaseItemData* pData = new CStoreContents::RepurchaseItemData;
 
-	pData->m_nItemID		= rItemData.m_nType;
+	pData->m_nItemID		= rItemData.GetType();
 	pData->m_nItemShowCount = rItemData.GetCount();
 	pData->m_strName.assign(pInfo->s_szName);
 	pData->m_nSellType		= REPURCHASE_ITEM_SELLCLASS;
@@ -1221,7 +1221,7 @@ void CStoreContents::CalcChangeItemInfo( std::map< int, int >& mapAcquire, std::
 	int nDiffCount = NewInvenInfo.GetCount() - OldInvenInfo.GetCount();
 	if( nDiffCount < 0 ) // 소모
 	{
-		int nConsumeItemID = OldInvenInfo.m_nType;
+		int nConsumeItemID = OldInvenInfo.GetType();
 		
 		mapIter = mapConsume.find( nConsumeItemID );
 		if( mapIter != mapConsume.end() )
@@ -1233,7 +1233,7 @@ void CStoreContents::CalcChangeItemInfo( std::map< int, int >& mapAcquire, std::
 	}
 	else if( nDiffCount > 0 ) // 획득
 	{
-		int nAcquireItemID = NewInvenInfo.m_nType;
+		int nAcquireItemID = NewInvenInfo.GetType();
 		
 		mapIter = mapAcquire.find( nAcquireItemID );
 		if( mapIter != mapAcquire.end() )

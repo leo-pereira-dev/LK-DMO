@@ -215,12 +215,6 @@ namespace net
 			_stricmp(profile.c_str(), "postgresql") == 0;
 	}
 
-	bool IsDebugMysqlProfile(std::string const& profile)
-	{
-		return _stricmp(profile.c_str(), "mysql") == 0 ||
-			_stricmp(profile.c_str(), "mariadb") == 0;
-	}
-
 	uint ReadDebugPort(cProfile& profile, char const* key, uint fallback)
 	{
 		int value = profile.GetInt("DEBUG", key);
@@ -242,16 +236,6 @@ namespace net
 			{
 			case type::gate: return ReadDebugPort(profile, "PgSqlCharacterPort", 17050);
 			case type::game: return ReadDebugPort(profile, "PgSqlGamePort", 17608);
-			default: return receivedPort;
-			}
-		}
-
-		if (IsDebugMysqlProfile(debugServer))
-		{
-			switch (serverType)
-			{
-			case type::gate: return ReadDebugPort(profile, "MySqlCharacterPort", 7050);
-			case type::game: return ReadDebugPort(profile, "MySqlGamePort", 7608);
 			default: return receivedPort;
 			}
 		}

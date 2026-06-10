@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "TargetWindow.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 
 cTargetWindow::cTargetWindow()
@@ -841,9 +842,26 @@ void cTargetWindow::OnRButtonUp( CsPoint pos )
 	switch( m_pTargetObject->GetLeafRTTI() )
 	{
 	case RTTI_TAMER:
+		nsCSDEBUG::CrashLogger::LogMessage( "SOCIAL TargetWindow popup tamer uid=%u idx=%u",
+			m_pTargetObject->GetUniqID(), m_pTargetObject->GetIDX() );
 		g_pGameIF->GetPopup()->SetPopup( CURSOR_ST.GetPos() + CsPoint( 15, 0 ), CsPoint( 130, 0 ), cPopUpWindow::OTHER_TAMER, m_pTargetObject->GetUniqID() );
 		break;
 	case RTTI_DIGIMON:
+		{
+			CDigimon* pDigimon = static_cast< CDigimon* >( m_pTargetObject );
+			int nTamerObj = pDigimon ? pDigimon->GetTamerLink() : 0;
+			CsC_AvObject* pTamer = ( g_pCharMng && nTamerObj > 0 ) ? g_pCharMng->GetTamer( nTamerObj ) : NULL;
+			if( pTamer && pTamer->GetLeafRTTI() == RTTI_TAMER )
+			{
+				nsCSDEBUG::CrashLogger::LogMessage( "SOCIAL TargetWindow popup digimon-owner digimonUid=%u digimonIdx=%u ownerIdx=%d ownerUid=%u",
+					m_pTargetObject->GetUniqID(), m_pTargetObject->GetIDX(), nTamerObj, pTamer->GetUniqID() );
+				g_pGameIF->GetPopup()->SetPopup( CURSOR_ST.GetPos() + CsPoint( 15, 0 ), CsPoint( 130, 0 ), cPopUpWindow::OTHER_TAMER, pTamer->GetUniqID() );
+				break;
+			}
+
+			nsCSDEBUG::CrashLogger::LogMessage( "SOCIAL TargetWindow popup digimon-fallback digimonUid=%u digimonIdx=%u ownerIdx=%d",
+				m_pTargetObject->GetUniqID(), m_pTargetObject->GetIDX(), nTamerObj );
+		}
 		g_pGameIF->GetPopup()->SetPopup( CURSOR_ST.GetPos() + CsPoint( 15, 0 ), CsPoint( 130, 0 ), cPopUpWindow::OTHER_DIGIMON, m_pTargetObject->GetUniqID() );
 		break;
 	}	

@@ -302,6 +302,11 @@ void cData_QuestOwner::sNpcOwner::GetQuestInfoList( DWORD nRevPlag, std::list< s
 	std::map< DWORD, sQuestInfo* >::iterator itEnd = s_mapQuest.end();
 	for( ; it!=itEnd; ++it )
 	{
+		if( it->second->s_pProcess != NULL )
+		{
+			it->second->s_eType = it->second->s_pProcess->s_bCompleate == true ? REQUITE : PROCESS;
+		}
+
 		if( ( it->second->s_eType & nRevPlag ) != 0 )
 		{
 			pList->push_back( it->second );

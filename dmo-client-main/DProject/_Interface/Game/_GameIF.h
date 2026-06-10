@@ -50,6 +50,9 @@
 #include "OptionInterface.h"
 #include "OptionUserGrade.h"
 #include "GMPanel.h"
+#include "DungeonEntranceWindow.h"
+#include "DungeonClearAnnounceWindow.h"
+#include "DungeonClearResultWindow.h"
 #include "TalkBalloon.h"
 #include "HpBar.h"
 #include "Tip.h"
@@ -271,6 +274,8 @@ public:
 
 protected:
 	void			_UpdateReserveFocusWindow();
+	void			_RenderDebugHud();
+	void			_ProcessQueuedRaidRankingList();
 
 protected:
 	bool			m_bRenderIF;	
@@ -286,6 +291,7 @@ protected:
 	cPopUpWindow*			m_pPopupWindow;
 	cBossScene*				m_pBossScene;
 	cSprite*				m_pBright;
+	cText					m_DebugHudText;
 	CsVectorPB< cBaseWindow* >	m_vpReserveFocusWindow;
 	CsVectorPB< bool >			m_vpReserveFocusCallFunc;
 
@@ -345,6 +351,9 @@ public:
 	cUnionStore*			GetUnionStore(){ return (cUnionStore*)_GetPointer( cBaseWindow::WT_UNIONSTORE, 0 ); }
 	cXmlUnionDUnit*			GetXmlUnionDUnit(){ return (cXmlUnionDUnit*)_GetPointer( cBaseWindow::WT_XML_UNION, 0 ); }
 	cDetailInfoUI*			GetDetailInfoUI(){ return (cDetailInfoUI*)_GetPointer( cBaseWindow::WT_DETAIL_INFO, 0 ); }
+	cDungeonEntranceWindow*	GetDungeonEntranceWindow(){ return (cDungeonEntranceWindow*)_GetPointer( cBaseWindow::WT_DUNGEON_ENTRANCE, 0 ); }
+	cDungeonClearAnnounceWindow* GetDungeonClearAnnounceWindow(){ return (cDungeonClearAnnounceWindow*)_GetPointer( cBaseWindow::WT_DUNGEON_CLEAR_ANNOUNCE, 0 ); }
+	cDungeonClearResultWindow* GetDungeonClearResultWindow(){ return (cDungeonClearResultWindow*)_GetPointer( cBaseWindow::WT_DUNGEON_CLEAR_RESULT, 0 ); }
 	
 	cCenterbar*				GetCenterBar( int nIndex ) { return (cCenterbar*)_GetPointer( cBaseWindow::WT_CENTERBAR, nIndex ); }	
 
@@ -359,6 +368,33 @@ public:
 	cBuffInfo*				GetBuffInfo( int nIndex ){ return (cBuffInfo*)_GetPointer( cBaseWindow::WT_BUFFINFO, nIndex ); }		
 
 	cRaidRank*				GetRaidRank(){ return (cRaidRank*)_GetPointer( cBaseWindow::WT_RAIDRANK, 0 ); }
+	enum
+	{
+		RAID_RANK_QUEUE_MAX = 10,
+		RAID_RANK_QUEUE_NAME_LEN = 63,
+	};
+
+	struct sQueuedRaidRanker
+	{
+		bool		s_bVisible;
+		int			s_nRank;
+		TCHAR		s_szTamer[ RAID_RANK_QUEUE_NAME_LEN + 1 ];
+		TCHAR		s_szDigimon[ RAID_RANK_QUEUE_NAME_LEN + 1 ];
+		int			s_nDamage;
+		NiColor		s_Color;
+
+		void Reset()
+		{
+			s_bVisible = false;
+			s_nRank = 0;
+			s_szTamer[ 0 ] = 0;
+			s_szDigimon[ 0 ] = 0;
+			s_nDamage = 0;
+			s_Color = NiColor::WHITE;
+		}
+	};
+
+	void					QueueRaidRankingList( const sQueuedRaidRanker* pRanker, int nCount );
 #ifdef SIMPLEFICATION
 	cSimplification*		GetSimple(){ return (cSimplification*)_GetPointer( cBaseWindow::WT_SIMPLE_BTN, 0 ); }
 #endif
@@ -428,6 +464,10 @@ private:
 	// 동작
 protected:
 	cBaseWindow*		m_pStaticFocusWindow;
+	CRITICAL_SECTION		m_csRaidRankingList;
+	sQueuedRaidRanker		m_QueuedRaidRanker[ RAID_RANK_QUEUE_MAX ];
+	int						m_nQueuedRaidRankerCount;
+	bool					m_bHasQueuedRaidRankingList;
 
 protected:
 	void			_PointerDetach( cBaseWindow* pWindow );	

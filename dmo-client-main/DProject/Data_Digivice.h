@@ -19,6 +19,7 @@ protected:
 	int				m_nChipsetCount;
 	int				m_nTamerSkillCount;
 
+	cItemInfo		m_EvoChipset[ 1 ];
 	cItemInfo		m_Chipset[ nLimit::Chipset ];
 	cItemInfo		m_TamerSkill[ nLimit::SkillSlot ];
 
@@ -30,11 +31,14 @@ public:
 
 	cItemInfo*		GetChipset( int nIndex ){ assert_cs( nIndex < nLimit::Chipset ); return &m_Chipset[ nIndex ]; }
 	cItemInfo*		GetChipsetArray(){ return m_Chipset; }
+	cItemInfo*		GetEvoChipset( int nIndex ){ assert_cs( nIndex < 1 ); return &m_EvoChipset[ nIndex ]; }
+	cItemInfo*		GetEvoChipsetArray(){ return m_EvoChipset; }
 
 	cItemInfo*		GetTamerSkill( int nIndex ){ assert_cs( nIndex < nLimit::SkillSlot ); return &m_TamerSkill[ nIndex ]; }
 	cItemInfo*		GetTamerSkillArray(){ return m_TamerSkill; }
 
 	cItemInfo*		GetChipset_TypeL( int nType_L );
+	cItemInfo*		GetJointProgressChipset_TypeLT( int nType_L, int nType_T );
 	int				GetChipsetIndex_TypeLT( int nType_L, int nType_T );
 	int				GetCount_Item_TypeL( int nType_L );
 
@@ -43,6 +47,8 @@ public:
 	bool			DoYouHaveJointProgressChipset();
 
 public:
+	void			EvoChipsetToInven( int nInvenIndex );
+	void			InvenToEvoChipset( int nInvenIndex );
 	void			ChipsetToInven( int nSrcIndex, int nInvenIndex );
 	void			ChipsetToChipset( int nSrcIndex, int nDestIndex );
 

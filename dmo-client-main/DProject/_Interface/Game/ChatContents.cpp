@@ -442,7 +442,7 @@ void ChatContents::_CreateEditWindow()
 
 #pragma warning( disable : 4311 )
 #pragma warning( disable : 4312 )
-	WndProc=(WNDPROC)SetWindowLong(m_hEdit,GWL_WNDPROC, (LONG)(EditCallProc) );
+	WndProc=(WNDPROC)SetWindowLongPtr(m_hEdit,GWLP_WNDPROC, (LONG_PTR)(EditCallProc) );
 #pragma warning( default : 4311 )
 #pragma warning( default : 4312 )
 }

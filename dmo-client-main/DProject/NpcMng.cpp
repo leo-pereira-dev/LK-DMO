@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "NpcMng.h"
+#include "../LibProj/CsFunc/CrashLogger.h"
 
 CNpcMng*	g_pNpcMng = NULL;
 
@@ -122,10 +123,18 @@ bool CNpcMng::LoadMap( DWORD dwMapID )
 
 	// 엔피씨 생성 - 일단은 걍 다~!!
 	MAP_MAPNPC* pmapNpc = nsCsMapTable::g_pMapNpcMng->GetGroup( dwMapID )->GetNpcMap();
+	nsCSDEBUG::CrashLogger::LogMessage( "NPC_LOAD map=%lu count=%u", dwMapID, (unsigned)pmapNpc->size() );
 	MAP_MAPNPC_IT itmapNpc = pmapNpc->begin();
 	MAP_MAPNPC_IT itEndmapNpc = pmapNpc->end();
 	for( ;itmapNpc!=itEndmapNpc; ++itmapNpc )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "NPC_LOAD map=%lu mapNpcKey=%lu npcFT=%lu pos=%ld,%ld rot=%f",
+			dwMapID,
+			(unsigned long)itmapNpc->first,
+			(unsigned long)itmapNpc->second->GetInfo()->s_dwNpcID,
+			(long)itmapNpc->second->GetInfo()->s_nInitPosX,
+			(long)itmapNpc->second->GetInfo()->s_nInitPosY,
+			(float)itmapNpc->second->GetInfo()->s_fRotation );
 		assert_csm1( nsCsFileTable::g_pNpcMng->IsNpc( itmapNpc->second->GetInfo()->s_dwNpcID ), _T( "Map.xls에는 존재 하지만 Npc.xls 에 %d Npc가 존재하지 않습니다." ), itmapNpc->second->GetInfo()->s_dwNpcID );
 		assert_cs( itmapNpc->second->GetInfo()->s_dwNpcID > NPC_FT_MASK );
 		AddNpc( itmapNpc->second->GetInfo()->s_dwNpcID%NPC_FT_MASK, itmapNpc->second->GetInfo()->s_dwNpcID );
@@ -197,6 +206,12 @@ void CNpcMng::AddNpc( uint nIDX, uint nFileTableID )
 	SAFE_POINTER_RET( pNpcTB );
 	CsNpc::sINFO* pNpcTbInfo = pNpcTB->GetInfo();
 	SAFE_POINTER_RET( pNpcTbInfo );
+	nsCSDEBUG::CrashLogger::LogMessage( "NPC_ADD idx=%u ftid=%u model=%lu type=%d moveType=%d",
+		nIDX,
+		nFileTableID,
+		(unsigned long)pNpcTbInfo->s_dwModelID,
+		(int)pNpcTbInfo->s_eType,
+		(int)pNpcTbInfo->s_eMoveType );
 
 	std::wstring wsAwardGuildName;
 	bool bIsAwarNpc = _CheckAwardNpc( nFileTableID, pNpcTbInfo, wsAwardGuildName );	

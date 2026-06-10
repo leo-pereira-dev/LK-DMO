@@ -484,6 +484,10 @@ void cTooltip::_AddSkillState( CsSkill::sINFO* pFTInfo )
 		case APPLY_RDD:			// 받는 데미지 감소
 			ti.SetText( UISTRING_TEXT("SKILL_APPLY_TYPE_NAME_RDD").c_str() );
 			break;
+		case 90:
+		case 91:
+			ti.SetText( UISTRING_TEXT( "TOOLTIP_SKILL_SKILL_EFFECT" ).c_str() );
+			break;
 		default:
 			assert_csm3( false, _T( "Undefined skill tooltip apply type. SkillID=%d ApplyIndex=%d ApplyA=%d" ), pFTInfo->s_dwID, i, pFTInfo->s_Apply[ i ].s_nA );
 			break;
@@ -1217,6 +1221,10 @@ void cTooltip::_SimpleAddSkillState( CsSkill::sINFO* pFTInfo, int const& nSkillL
 			break;
 		case APPLY_RDD:			// 받는 데미지 감소
 			ti.SetText( UISTRING_TEXT("SKILL_APPLY_TYPE_NAME_RDD").c_str() );
+			break;
+		case 90:
+		case 91:
+			ti.SetText( UISTRING_TEXT( "TOOLTIP_SKILL_SKILL_EFFECT" ).c_str() );
 			break;
 		default:
 			assert_csm3( false, _T( "Undefined simple skill tooltip apply type. SkillID=%d ApplyIndex=%d ApplyA=%d" ), pFTInfo->s_dwID, i, pFTInfo->s_Apply[ i ].s_nA );

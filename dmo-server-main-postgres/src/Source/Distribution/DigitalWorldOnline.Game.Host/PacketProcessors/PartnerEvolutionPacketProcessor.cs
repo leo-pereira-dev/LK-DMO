@@ -181,17 +181,21 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return;
 
 
-            var buffToRemove = client.Tamer.Partner.BuffList.TamerBaseSkill();
+            var passiveBuffIdsToRemove = client.Tamer.Partner.BuffList.Buffs
+                .Where(x => x.SkillId / 1000000 == 8 && x.Duration == 0)
+                .Select(x => x.BuffId)
+                .Distinct()
+                .ToList();
 
-            if (buffToRemove != null)
+            foreach (var buffIdToRemove in passiveBuffIdsToRemove)
             {
                 if (client.DungeonMap)
                 {
-                    _dungeonServer.BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Partner.GeneralHandler, buffToRemove.BuffId).Serialize());
+                    _dungeonServer.BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Partner.GeneralHandler, buffIdToRemove).Serialize());
                 }
                 else
                 {
-                    _mapServer.BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Partner.GeneralHandler, buffToRemove.BuffId).Serialize());
+                    _mapServer.BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Partner.GeneralHandler, buffIdToRemove).Serialize());
 
                 }
             }
@@ -282,30 +286,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         {
                             evoEffect = DigimonEvolutionEffectEnum.BurstMode;
 
-                            var accelerator = client.Tamer.Inventory.FindItemById(9400);
-
-                            if (accelerator == null)
-                                accelerator = client.Tamer.Inventory.FindItemById(41002);
-                            if (evoInfo.RequiredItem > 0)
+                            if (client.Partner.Level < evoInfo.UnlockLevel || !client.Tamer.ConsumeDs(148))
                             {
-                            if (client.Partner.Level < evoInfo.UnlockLevel || !client.Tamer.ConsumeDs(148)
-                                || !client.Tamer.Inventory.RemoveOrReduceItem(accelerator, 3))
-                                {
-                                    client.Send(new DigimonEvolutionFailPacket());
-                                    return;
-                                }
-                            }
-                            else
-                            {
-                                if (client.Partner.Level < evoInfo.UnlockLevel || !client.Tamer.ConsumeDs(148))
-                                {
-                                    client.Send(new DigimonEvolutionFailPacket());
-                                    return;
-                                }
+                                client.Send(new DigimonEvolutionFailPacket());
+                                return;
                             }
 
                             client.Tamer.ActiveEvolution.SetDs(40);
-                            client.Send(new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory));
                         }
                         break;
 
@@ -313,18 +300,20 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         {
                             evoEffect = DigimonEvolutionEffectEnum.Default;
 
-                            if (!HasRequiredJogressChipsetEquipped(client, evoInfo.RequiredItem))
+                            var requiresEvolutionAccelerator = IsEvolutionAcceleratorRequired(evoInfo.RequiredItem);
+
+                            if (!requiresEvolutionAccelerator && !HasRequiredJogressChipsetEquipped(client, evoInfo.RequiredItem))
                             {
                                 client.Send(new DigimonEvolutionFailPacket());
                                 return;
                             }
 
-                            if (evoInfo.RequiredItem > 0)
+                            if (evoInfo.RequiredItem > 0 && !requiresEvolutionAccelerator)
                             {
-                                var accelerator = client.Tamer.Inventory.FindItemById(evoInfo.RequiredItem);
+                                var requiredItem = client.Tamer.Inventory.FindItemById(evoInfo.RequiredItem);
 
                                 if (client.Partner.Level < evoInfo.UnlockLevel || !client.Tamer.ConsumeDs(180)
-                                    || !client.Tamer.Inventory.RemoveOrReduceItem(accelerator, 1))
+                                    || !client.Tamer.Inventory.RemoveOrReduceItem(requiredItem, 1))
                                 {
                                     client.Send(new DigimonEvolutionFailPacket());
                                     return;
@@ -428,6 +417,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                             evoEffect = DigimonEvolutionEffectEnum.BurstMode;
 
                             if ((EvolutionRankEnum)evolutionType == EvolutionRankEnum.JogressX &&
+                                !IsEvolutionAcceleratorRequired(evoInfo.RequiredItem) &&
                                 !HasRequiredJogressChipsetEquipped(client, evoInfo.RequiredItem))
                             {
                                 client.Send(new DigimonEvolutionFailPacket());
@@ -658,20 +648,25 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         private bool HasRequiredEvolutionUseItem(GameClient client, EvolutionLineAssetModel? targetEvoInfo, int targetType, byte evoStage)
         {
-            if (!TryGetRequiredEvolutionUseItem(targetEvoInfo, out var itemSection, out var requiredAmount))
+            if (!TryGetRequiredEvolutionUseItem(targetEvoInfo, out var requiredItemId, out var requiredAmount))
                 return true;
 
-            var availableAmount = client.Tamer.Inventory.FindItemsBySection(itemSection).Sum(x => x.Amount);
+            var acceptedItemIds = ResolveRequiredEvolutionUseItemIds(requiredItemId);
+            var acceptedItemIdSet = acceptedItemIds.ToHashSet();
+            var availableAmount = client.Tamer.Inventory.Items
+                .Where(x => x.Amount > 0 && acceptedItemIdSet.Contains(x.ItemId))
+                .Sum(x => x.Amount);
 
             _logger.Debug(
-                "Evolution item check tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, target {TargetType}, stage {Stage}, itemSection {ItemSection}, required {RequiredAmount}, available {AvailableAmount}.",
+                "Evolution item check tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, target {TargetType}, stage {Stage}, requiredItemId {RequiredItemId}, acceptedItemIds {AcceptedItemIds}, required {RequiredAmount}, available {AvailableAmount}.",
                 client.TamerId,
                 client.Partner.Id,
                 client.Partner.BaseType,
                 client.Partner.CurrentType,
                 targetType,
                 evoStage,
-                itemSection,
+                requiredItemId,
+                string.Join(",", acceptedItemIds),
                 requiredAmount,
                 availableAmount);
 
@@ -679,14 +674,15 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return true;
 
             _logger.Warning(
-                "Evolution request rejected because required use item is missing. Tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, target {TargetType}, stage {Stage}, itemSection {ItemSection}, required {RequiredAmount}, available {AvailableAmount}.",
+                "Evolution request rejected because required use item is missing. Tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, target {TargetType}, stage {Stage}, requiredItemId {RequiredItemId}, acceptedItemIds {AcceptedItemIds}, required {RequiredAmount}, available {AvailableAmount}.",
                 client.TamerId,
                 client.Partner.Id,
                 client.Partner.BaseType,
                 client.Partner.CurrentType,
                 targetType,
                 evoStage,
-                itemSection,
+                requiredItemId,
+                string.Join(",", acceptedItemIds),
                 requiredAmount,
                 availableAmount);
 
@@ -696,46 +692,81 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         private bool ConsumeRequiredEvolutionUseItem(GameClient client, EvolutionLineAssetModel? targetEvoInfo, int targetType, byte evoStage)
         {
-            if (!TryGetRequiredEvolutionUseItem(targetEvoInfo, out var itemSection, out var requiredAmount))
+            if (!TryGetRequiredEvolutionUseItem(targetEvoInfo, out var requiredItemId, out var requiredAmount))
                 return true;
 
-            if (client.Tamer.Inventory.RemoveOrReduceItemsBySection(itemSection, requiredAmount))
+            var acceptedItemIds = ResolveRequiredEvolutionUseItemIds(requiredItemId);
+
+            if (client.Tamer.Inventory.RemoveOrReduceItemsByItemIds(acceptedItemIds, requiredAmount))
             {
                 _logger.Information(
-                    "Evolution consumed required use item. Tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, target {TargetType}, stage {Stage}, itemSection {ItemSection}, amount {RequiredAmount}.",
+                    "Evolution consumed required use item. Tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, target {TargetType}, stage {Stage}, requiredItemId {RequiredItemId}, acceptedItemIds {AcceptedItemIds}, amount {RequiredAmount}.",
                     client.TamerId,
                     client.Partner.Id,
                     client.Partner.BaseType,
                     client.Partner.CurrentType,
                     targetType,
                     evoStage,
-                    itemSection,
+                    requiredItemId,
+                    string.Join(",", acceptedItemIds),
                     requiredAmount);
 
                 return true;
             }
 
             _logger.Warning(
-                "Evolution request rejected because required use item could not be consumed. Tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, target {TargetType}, stage {Stage}, itemSection {ItemSection}, required {RequiredAmount}.",
+                "Evolution request rejected because required use item could not be consumed. Tamer {TamerId}, partner {PartnerId}, base {BaseType}, current {CurrentType}, target {TargetType}, stage {Stage}, requiredItemId {RequiredItemId}, acceptedItemIds {AcceptedItemIds}, required {RequiredAmount}.",
                 client.TamerId,
                 client.Partner.Id,
                 client.Partner.BaseType,
                 client.Partner.CurrentType,
                 targetType,
                 evoStage,
-                itemSection,
+                requiredItemId,
+                string.Join(",", acceptedItemIds),
                 requiredAmount);
 
             client.Send(new DigimonEvolutionFailPacket());
             return false;
         }
 
-        private static bool TryGetRequiredEvolutionUseItem(EvolutionLineAssetModel? targetEvoInfo, out int itemSection, out int requiredAmount)
+        private static bool TryGetRequiredEvolutionUseItem(EvolutionLineAssetModel? targetEvoInfo, out int requiredItemId, out int requiredAmount)
         {
-            itemSection = targetEvoInfo?.UnlockItemSection ?? 0;
-            requiredAmount = targetEvoInfo?.UnlockItemSectionAmount ?? 0;
+            requiredItemId = targetEvoInfo?.RequiredItem ?? 0;
+            requiredAmount = targetEvoInfo?.RequiredAmount ?? 0;
 
-            return itemSection > 0 && requiredAmount > 0;
+            return requiredItemId > 0 && requiredAmount > 0;
+        }
+
+        private IReadOnlyCollection<int> ResolveRequiredEvolutionUseItemIds(int requiredItemId)
+        {
+            if (!IsEvolutionAcceleratorRequired(requiredItemId))
+                return new[] { requiredItemId };
+
+            var acceleratorItemIds = _assets.ItemInfo
+                .Where(IsEvolutionAcceleratorItem)
+                .Select(x => x.ItemId)
+                .Distinct()
+                .ToArray();
+
+            return acceleratorItemIds.Length > 0 ? acceleratorItemIds : new[] { requiredItemId };
+        }
+
+        private bool IsEvolutionAcceleratorRequired(int requiredItemId)
+        {
+            var requiredItem = _assets.ItemInfo.FirstOrDefault(x => x.ItemId == requiredItemId);
+            return IsEvolutionAcceleratorItem(requiredItem);
+        }
+
+        private static bool IsEvolutionAcceleratorItem(ItemAssetModel? item)
+        {
+            if (string.IsNullOrWhiteSpace(item?.Name))
+                return false;
+
+            var name = item.Name;
+            return name.Contains("Accelerator", StringComparison.OrdinalIgnoreCase) &&
+                   !name.Contains("Spirit", StringComparison.OrdinalIgnoreCase) &&
+                   !name.Contains("Box", StringComparison.OrdinalIgnoreCase);
         }
 
         private bool IsInsideLimitEvolutionRegion(GameClient client)

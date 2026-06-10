@@ -138,7 +138,7 @@ void cCliGame::RecvPCBangItemCropResult(void)
 
 	// pc방 아이템 찾음
 	cItemData data;	
-	data.m_nType = nItemType;
+	data.SetType( nItemType );
 	data.m_nCount = nItemCount;
 	data.m_nRate = nItemRate;
 	data.m_nEndTime = nEndTime;

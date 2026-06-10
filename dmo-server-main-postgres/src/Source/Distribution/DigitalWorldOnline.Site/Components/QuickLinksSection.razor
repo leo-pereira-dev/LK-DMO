@@ -1,0 +1,58 @@
+<section class="quick-links" aria-label="Atalhos">
+    @foreach (var link in Links)
+    {
+        <a class="quick-link" href="@link.Url">
+            <span class="quick-icon" aria-hidden="true">
+                @switch (link.Icon)
+                {
+                    case "calendar":
+                        <svg viewBox="0 0 48 48" role="img">
+                            <path d="M15 6v8M33 6v8M8 18h32M12 10h24a4 4 0 0 1 4 4v24a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4Z" />
+                            <path d="M15 26h4M23 26h4M31 26h4M15 34h4M23 34h4M31 34h4" />
+                        </svg>
+                        break;
+                    case "gift":
+                        <svg viewBox="0 0 48 48" role="img">
+                            <path d="M8 20h32v8H8zM12 28v14h24V28M24 20v22" />
+                            <path d="M24 18c-5-8-14-8-14-2 0 5 7 4 14 4m0-2c5-8 14-8 14-2 0 5-7 4-14 4" />
+                        </svg>
+                        break;
+                    case "shield":
+                        <svg viewBox="0 0 48 48" role="img">
+                            <path d="M24 6 39 12v11c0 10-6 16-15 20C15 39 9 33 9 23V12z" />
+                            <path d="m24 15 4 6 7 2-5 5 1 7-7-3-7 3 1-7-5-5 7-2z" />
+                        </svg>
+                        break;
+                    case "swords":
+                        <svg viewBox="0 0 48 48" role="img">
+                            <path d="m10 38 7-7M6 42l6-2 2-6L35 13l7-7-3 10-21 21-6 2z" />
+                            <path d="m38 38-7-7M42 42l-6-2-2-6L13 13 6 6l3 10 21 21 6 2z" />
+                        </svg>
+                        break;
+                    case "cart":
+                        <svg viewBox="0 0 48 48" role="img">
+                            <path d="M6 9h5l5 23h18l6-16H15M19 39a2 2 0 1 0 0 .1M34 39a2 2 0 1 0 0 .1" />
+                        </svg>
+                        break;
+                }
+            </span>
+            <span>
+                <strong>@link.Title</strong>
+                <small>@link.Description</small>
+            </span>
+        </a>
+    }
+</section>
+
+@code {
+    private static readonly QuickLink[] Links =
+    [
+        new("Eventos", "Confira os eventos ativos e ganhe recompensas!", "#noticias", "calendar"),
+        new("Recompensas", "Faca login diariamente e garanta premios incriveis.", "/login", "gift"),
+        new("Rankings", "Veja os melhores Tamers e Digimons do servidor.", "#ranking", "shield"),
+        new("Patch notes", "Fique por dentro de todas as atualizacoes do jogo.", "#noticias", "swords"),
+        new("Loja", "Compre itens, buffs e muito mais na loja oficial.", "#loja", "cart")
+    ];
+
+    private sealed record QuickLink(string Title, string Description, string Url, string Icon);
+}

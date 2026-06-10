@@ -309,6 +309,7 @@ void CsNpcMng::Save_Npc()
 			case nsCsNpcTable::NT_GUILD:
 			case nsCsNpcTable::NT_DIGICORE:
 			case nsCsNpcTable::NT_EVENT_STORE:
+			case nsCsNpcTable::NT_GDMO_PORTAL_TEST_NPC:
 			case nsCsNpcTable::NT_PROPERTY_STORE:
 				{
 					sNPC_TYPE_TRADE* pType = (sNPC_TYPE_TRADE*)pNpc->GetType();
@@ -703,6 +704,7 @@ void CsNpcMng::_LoadExcel_Npc()
 		case nsCsNpcTable::NT_GUILD:
 		case nsCsNpcTable::NT_DIGICORE:
 		case nsCsNpcTable::NT_EVENT_STORE:
+		case nsCsNpcTable::NT_GDMO_PORTAL_TEST_NPC:
 		case nsCsNpcTable::NT_PROPERTY_STORE:
 			{
 				sNPC_TYPE_TRADE* pType = (sNPC_TYPE_TRADE*)pNew->GetType();
@@ -1082,6 +1084,7 @@ void CsNpcMng::_SaveBin_Npc( FILE *fp )
 		case nsCsNpcTable::NT_GUILD:
 		case nsCsNpcTable::NT_DIGICORE:
 		case nsCsNpcTable::NT_EVENT_STORE:
+		case nsCsNpcTable::NT_GDMO_PORTAL_TEST_NPC:
 		case nsCsNpcTable::NT_PROPERTY_STORE:
 			{
 				sNPC_TYPE_TRADE* pType = (sNPC_TYPE_TRADE*)pNpc->GetType();
@@ -1308,6 +1311,7 @@ void CsNpcMng::_LoadBin_Npc( FILE* fp )
 		case nsCsNpcTable::NT_GUILD:
 		case nsCsNpcTable::NT_DIGICORE:
 		case nsCsNpcTable::NT_EVENT_STORE:
+		case nsCsNpcTable::NT_GDMO_PORTAL_TEST_NPC:
 		case nsCsNpcTable::NT_PROPERTY_STORE:
 			{
 				int cnt;
@@ -1521,6 +1525,7 @@ void CsNpcMng::_LoadFilePack_Npc( int nHandle )
 		case nsCsNpcTable::NT_GUILD:
 		case nsCsNpcTable::NT_DIGICORE:
 		case nsCsNpcTable::NT_EVENT_STORE:
+		case nsCsNpcTable::NT_GDMO_PORTAL_TEST_NPC:
 		case nsCsNpcTable::NT_PROPERTY_STORE:
 			{
 				int cnt;

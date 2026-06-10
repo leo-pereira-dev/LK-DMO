@@ -118,7 +118,7 @@ CTamer* CharacterSelectContents::sCharacterInfo::CreateTamer(cItemData const* pE
 			break;
 		}
 
-		cp[ tp ].s_nFileTableID = pEquipInfo[ tp ].m_nType;
+		cp[ tp ].s_nFileTableID = pEquipInfo[ tp ].GetType();
 		cp[ tp ].s_nRemainTime	= pEquipInfo[ tp ].m_nEndTime;			
 		cp[ tp ].s_nPartIndex = tp;	
 	}

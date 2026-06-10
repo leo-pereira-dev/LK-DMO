@@ -41,8 +41,9 @@ namespace DigitalWorldOnline.Commons.Packets.MapServer
     public class SelectPortalFailurePacket : PacketWriter
     {
         private const int PacketNumber = 1710;
+        private const int DefaultFailureMessageId = 10004;
 
-        public SelectPortalFailurePacket(int result = 0)
+        public SelectPortalFailurePacket(int result = DefaultFailureMessageId)
         {
             Type(PacketNumber);
             WriteInt(result);

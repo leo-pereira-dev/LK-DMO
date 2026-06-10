@@ -8,6 +8,11 @@ namespace DigitalWorldOnline.Infraestructure
     {
         private const string DesignTimeEnvVar = "DSO_DB_CONNECTION";
 
+        static DatabaseContext()
+        {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        }
+
         public DatabaseContext()
         {
         }

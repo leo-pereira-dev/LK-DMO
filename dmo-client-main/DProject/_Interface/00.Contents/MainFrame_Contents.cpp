@@ -7,6 +7,42 @@
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------
+namespace
+{
+	const DWORD JOGRESS_XROSS_CHIPSET_SKILL_CODE = 2500245;
+	const int DETAILINFO_STAT_CT = 4;
+
+	bool IsJogressXrossChipsetItem( const CsItem::sINFO* pFTInfo )
+	{
+		return pFTInfo != NULL &&
+			pFTInfo->s_nType_L == nItem::Chipset &&
+			pFTInfo->s_dwSkill == JOGRESS_XROSS_CHIPSET_SKILL_CODE;
+	}
+
+	int ResolveAuthoritativeCriticalBase( int nLocalBase, CDigimonUser* pDigimonUser, CDigimonUser::sUSER_STAT* pDStat, CTamerUser::sUSER_STAT* pTStat )
+	{
+		if( pDigimonUser == NULL || pDStat == NULL || pTStat == NULL )
+			return nLocalBase;
+
+		CDigimon::sENCHENT_STAT* pEnchantInfo = pDigimonUser->GetEnchantStat();
+		const int nClonePercent = pEnchantInfo ? pEnchantInfo->GetEnchantValue( ET_CR ) : 0;
+		const int nDenominator = 100 + nClonePercent;
+		if( nDenominator <= 0 )
+			return nLocalBase;
+
+		const int nDetailValue = pTStat->GetDetailInfoStat( DETAILINFO_STAT_CT );
+		const int nTotalWithoutDetail = pDStat->GetCritical() - nDetailValue;
+		if( nTotalWithoutDetail <= 0 )
+			return nLocalBase;
+
+		const __int64 nResolvedBase = ( ( (__int64)nTotalWithoutDetail * 100 ) + ( nDenominator / 2 ) ) / nDenominator;
+		if( nResolvedBase <= 0 || nResolvedBase > INT_MAX )
+			return nLocalBase;
+
+		return (int)nResolvedBase;
+	}
+}
+
 int const CMainFrameContents::IsContentsIdentity(void)
 {
 	return E_CT_MAINFRAME_CONTENTS;
@@ -515,6 +551,12 @@ void CMainFrameContents::_SetActionKeyNpc(void* pData)
 		return;
 
 	bool bIsOpen = g_pGameIF->IsActiveWindow( cBaseWindow::WT_ACTIONKEY );
+	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_DUNGEON_ENTRANCE ) )
+	{
+		if( bIsOpen )
+			g_pGameIF->CloseDynamicIF( cBaseWindow::WT_ACTIONKEY );
+		return;
+	}
 
 	if( nFTID == 0 )
 	{
@@ -866,6 +908,19 @@ cItemInfo * CMainFrameContents::GetChipsetItem(int nChipsetIndex) const
 	return pChipset;
 }
 
+cItemInfo * CMainFrameContents::GetEvoChipsetItem() const
+{
+	SAFE_POINTER_RETVAL( g_pDataMng, NULL );
+	cData_Digivice* pDigivice = g_pDataMng->GetDigivice();
+	SAFE_POINTER_RETVAL( pDigivice, NULL );
+	cItemInfo* pChipset = pDigivice->GetEvoChipset( 0 );
+	SAFE_POINTER_RETVAL( pChipset, NULL );
+	if( !pChipset->IsEnable() )
+		return NULL;
+
+	return pChipset;
+}
+
 int CMainFrameContents::GetSkillType(int nIndex, eSkillType eType) const
 {
 	SAFE_POINTER_RETVAL( g_pCharMng, -1 );
@@ -1099,6 +1154,8 @@ void CMainFrameContents::WearEquipItem(int nIconSlot)
 	case nItem::Costume:
 	case nItem::Glass:
 	case nItem::Digivice:
+	case nItem::NamePlate:
+	case nItem::Keyring:
 #ifdef SDM_TAMER_XGUAGE_20180628
 	case nItem::XAI:
 #endif
@@ -1138,8 +1195,18 @@ void CMainFrameContents::MoveChipsetItem(int nIconSlot, int nChipsetIndex, bool 
 {
 	SAFE_POINTER_RET( g_pDataMng );
 
-	if( GetOpenedChipsetSlot() <= nChipsetIndex )
+	const int nOpenedChipsetSlot = GetOpenedChipsetSlot();
+	if( nOpenedChipsetSlot <= nChipsetIndex )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel blocked unopened iconSlot=%d dstChipset=%d opened=%d toInven=%d fromChip=%d",
+			nIconSlot,
+			nChipsetIndex,
+			nOpenedChipsetSlot,
+			bToInven ? 1 : 0,
+			bFromChip ? 1 : 0 );
 		return;
+	}
 
 	if( bToInven )
 	{
@@ -1154,27 +1221,214 @@ void CMainFrameContents::MoveChipsetItem(int nIconSlot, int nChipsetIndex, bool 
 			g_pDataMng->SendItemMove( nIconSlot, TO_CHIPSET_SID( nChipsetIndex ) );
 			return;
 		}
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel blocked IsItemUse equipped iconSlot=%d dstChipset=%d",
+			nIconSlot,
+			nChipsetIndex );
 	}
 
 	SAFE_POINTER_RET( nsCsFileTable::g_pItemMng );
 	cData_Inven* pInven = g_pDataMng->GetInven();
-	SAFE_POINTER_RET( pInven );
-	cItemInfo* pItemInfo = pInven->GetData( TO_ID( nIconSlot ) );
-	SAFE_POINTER_RET( pItemInfo );
-	if( !pItemInfo->IsEnable() )
+	if( !pInven )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel missing inventory iconSlot=%d dstChipset=%d",
+			nIconSlot,
+			nChipsetIndex );
 		return;
+	}
+	cItemInfo* pItemInfo = pInven->GetData( TO_ID( nIconSlot ) );
+	if( !pItemInfo )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel missing item iconSlot=%d invSlot=%d dstChipset=%d",
+			nIconSlot,
+			TO_ID( nIconSlot ),
+			nChipsetIndex );
+		return;
+	}
+	if( !pItemInfo->IsEnable() )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel disabled item iconSlot=%d invSlot=%d rawType=%u resolvedType=%u dstChipset=%d",
+			nIconSlot,
+			TO_ID( nIconSlot ),
+			(unsigned)pItemInfo->m_nType,
+			(unsigned)pItemInfo->GetType(),
+			nChipsetIndex );
+		return;
+	}
 
 	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItemInfo->GetType() );
-	SAFE_POINTER_RET( pFTItem );
-	CsItem::sINFO* pFTItemInfo = pFTItem->GetInfo();
-	SAFE_POINTER_RET( pFTItemInfo );
-
-	if( pFTItemInfo->s_nType_L == nItem::Chipset )
+	if( !pFTItem )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel missing table item iconSlot=%d invSlot=%d rawType=%u resolvedType=%u dstChipset=%d",
+			nIconSlot,
+			TO_ID( nIconSlot ),
+			(unsigned)pItemInfo->m_nType,
+			(unsigned)pItemInfo->GetType(),
+			nChipsetIndex );
+		return;
+	}
+	CsItem::sINFO* pFTItemInfo = pFTItem->GetInfo();
+	if( !pFTItemInfo )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel missing table info iconSlot=%d invSlot=%d rawType=%u resolvedType=%u dstChipset=%d",
+			nIconSlot,
+			TO_ID( nIconSlot ),
+			(unsigned)pItemInfo->m_nType,
+			(unsigned)pItemInfo->GetType(),
+			nChipsetIndex );
+		return;
+	}
+
+	if( pFTItemInfo->s_nType_L == nItem::Chipset && !IsJogressXrossChipsetItem( pFTItemInfo ) )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel normal iconSlot=%d dstChipset=%d item=%u typeL=%d class=%d skill=%u",
+			nIconSlot,
+			nChipsetIndex,
+			(unsigned)pFTItemInfo->s_dwItemID,
+			pFTItemInfo->s_nType_L,
+			pFTItemInfo->s_nClass,
+			(unsigned)pFTItemInfo->s_dwSkill );
 		if( g_pDataMng->IsItemUse( nIconSlot ) )
 		{
 			g_pDataMng->SendItemMove( nIconSlot, TO_CHIPSET_SID( nChipsetIndex ) );
 		}
+		else
+		{
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"CHIPSET_ROUTE panel normal blocked IsItemUse iconSlot=%d dstChipset=%d item=%u rawType=%u resolvedType=%u",
+				nIconSlot,
+				nChipsetIndex,
+				(unsigned)pFTItemInfo->s_dwItemID,
+				(unsigned)pItemInfo->m_nType,
+				(unsigned)pItemInfo->GetType() );
+		}
+	}
+	else
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel reject iconSlot=%d dstChipset=%d item=%u typeL=%d class=%d skill=%u jogress=%d",
+			nIconSlot,
+			nChipsetIndex,
+			(unsigned)pFTItemInfo->s_dwItemID,
+			pFTItemInfo->s_nType_L,
+			pFTItemInfo->s_nClass,
+			(unsigned)pFTItemInfo->s_dwSkill,
+			IsJogressXrossChipsetItem( pFTItemInfo ) ? 1 : 0 );
+		cPrintMsg::PrintMsg( 11014 );
+	}
+}
+
+void CMainFrameContents::MoveEvoChipsetItem(int nIconSlot, bool bToInven, bool bFromEquipped)
+{
+	SAFE_POINTER_RET( g_pDataMng );
+
+	if( bToInven )
+	{
+		g_pDataMng->SendItemMoveInven( TO_EVOCHIP_SID( 0 ) );
+		return;
+	}
+
+	cItemInfo* pItemInfo = NULL;
+	if( bFromEquipped )
+		pItemInfo = g_pDataMng->SrvID2ItemInfo( nIconSlot );
+	else
+	{
+		cData_Inven* pInven = g_pDataMng->GetInven();
+		if( !pInven )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"CHIPSET_ROUTE panel jogress missing inventory iconSlot=%d fromEquipped=%d",
+				nIconSlot,
+				bFromEquipped ? 1 : 0 );
+			return;
+		}
+		pItemInfo = pInven->GetData( TO_ID( nIconSlot ) );
+	}
+
+	if( !pItemInfo )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel jogress missing item iconSlot=%d invSlot=%d fromEquipped=%d",
+			nIconSlot,
+			TO_ID( nIconSlot ),
+			bFromEquipped ? 1 : 0 );
+		return;
+	}
+	if( !pItemInfo->IsEnable() )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel jogress disabled item iconSlot=%d invSlot=%d rawType=%u resolvedType=%u fromEquipped=%d",
+			nIconSlot,
+			TO_ID( nIconSlot ),
+			(unsigned)pItemInfo->m_nType,
+			(unsigned)pItemInfo->GetType(),
+			bFromEquipped ? 1 : 0 );
+		return;
+	}
+
+	SAFE_POINTER_RET( nsCsFileTable::g_pItemMng );
+	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItemInfo->GetType() );
+	if( !pFTItem )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel jogress missing table item iconSlot=%d invSlot=%d rawType=%u resolvedType=%u fromEquipped=%d",
+			nIconSlot,
+			TO_ID( nIconSlot ),
+			(unsigned)pItemInfo->m_nType,
+			(unsigned)pItemInfo->GetType(),
+			bFromEquipped ? 1 : 0 );
+		return;
+	}
+	CsItem::sINFO* pFTItemInfo = pFTItem->GetInfo();
+	if( !pFTItemInfo )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel jogress missing table info iconSlot=%d invSlot=%d rawType=%u resolvedType=%u fromEquipped=%d",
+			nIconSlot,
+			TO_ID( nIconSlot ),
+			(unsigned)pItemInfo->m_nType,
+			(unsigned)pItemInfo->GetType(),
+			bFromEquipped ? 1 : 0 );
+		return;
+	}
+
+	if( IsJogressXrossChipsetItem( pFTItemInfo ) )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel jogress iconSlot=%d item=%u typeL=%d class=%d skill=%u",
+			nIconSlot,
+			(unsigned)pFTItemInfo->s_dwItemID,
+			pFTItemInfo->s_nType_L,
+			pFTItemInfo->s_nClass,
+			(unsigned)pFTItemInfo->s_dwSkill );
+		if( g_pDataMng->IsItemUse( nIconSlot ) )
+			g_pDataMng->SendItemMove( nIconSlot, TO_EVOCHIP_SID( 0 ) );
+		else
+		{
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"CHIPSET_ROUTE panel jogress blocked IsItemUse iconSlot=%d item=%u rawType=%u resolvedType=%u",
+				nIconSlot,
+				(unsigned)pFTItemInfo->s_dwItemID,
+				(unsigned)pItemInfo->m_nType,
+				(unsigned)pItemInfo->GetType() );
+		}
+	}
+	else
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE panel jogress reject iconSlot=%d item=%u typeL=%d class=%d skill=%u",
+			nIconSlot,
+			(unsigned)pFTItemInfo->s_dwItemID,
+			pFTItemInfo->s_nType_L,
+			pFTItemInfo->s_nClass,
+			(unsigned)pFTItemInfo->s_dwSkill );
+		cPrintMsg::PrintMsg( 11014 );
 	}
 }
 
@@ -2025,19 +2279,58 @@ void CMainFrameContents::OpenRideDigimon(int nIndex)
 	CsRide::sINFO* pFTRideInfo = pFTRide->GetInfo();
 	SAFE_POINTER_RET( pFTRideInfo );
 
+	struct sRideOpenItemInfo
+	{
+		int s_nItemID;
+		int s_nItemTypeS;
+		int s_nNeedCount;
+	};
+	sRideOpenItemInfo OpenItemInfo[ FT_RIDE_OPENINFO ] = {};
 	int nOpenInfoCnt = 0;
+	int nConfiguredOpenInfoCnt = 0;
+	int nBlockedUseCnt = 0;
 
 	for( int o = 0; o < FT_RIDE_OPENINFO; ++o )
 	{
 		CsRide::sINFO::sOPEN_INFO* pOpenInfo = &pFTRideInfo->s_OpenInfo[ o ];
 		SAFE_POINTER_CON( pOpenInfo );
 		SAFE_POINTER_CON( nsCsFileTable::g_pItemMng );
-		int nItemId = nsCsFileTable::g_pItemMng->TypeT_to_Disp( pOpenInfo->s_nItemType_S );
-		if( nItemId == 0 )				
+		int nOpenItemTypeS = pOpenInfo->s_nItemType_S;
+		if( nOpenItemTypeS == 60905 )
+			nOpenItemTypeS = 15051;
+		else if( nOpenItemTypeS == 60906 )
+			nOpenItemTypeS = 15052;
+
+		int nItemId = nsCsFileTable::g_pItemMng->TypeT_to_Disp( nOpenItemTypeS );
+		if( nItemId == 0 && pOpenInfo->s_nItemType_S != 0 )
+		{
+			CsItem* pDirectItem = nsCsFileTable::g_pItemMng->GetItem( pOpenInfo->s_nItemType_S );
+			if( pDirectItem && pDirectItem->GetInfo() )
+			{
+				CsItem::sINFO* pDirectItemInfo = pDirectItem->GetInfo();
+				nOpenItemTypeS = pDirectItemInfo->s_nType_L * 100 + pDirectItemInfo->s_nType_S;
+				nItemId = nsCsFileTable::g_pItemMng->TypeT_to_Disp( nOpenItemTypeS );
+				if( nItemId == 0 && nOpenItemTypeS != 0 )
+					nItemId = pOpenInfo->s_nItemType_S;
+			}
+		}
+		if( nItemId == 0 )
+		{
+			if( pOpenInfo->s_nItemType_S != 0 )
+			{
+				nsCSDEBUG::CrashLogger::LogMessage( "RIDE_OPEN invalid item type digimon=%u slot=%d itemTypeS=%d",
+					pFTRideInfo->s_dwDigimonID, o, pOpenInfo->s_nItemType_S );
+			}
+			continue;
+		}
+
+		if( pOpenInfo->s_nNeedCount <= 0 )
 			continue;
 
+		++nConfiguredOpenInfoCnt;
+
 		int nTypeL = 0, nTypeS = 0;
-		CsItem::TypeS_to_TypeLS( pOpenInfo->s_nItemType_S, nTypeL, nTypeS );
+		CsItem::TypeS_to_TypeLS( nOpenItemTypeS, nTypeL, nTypeS );
 
 		// 아이템 갯수 체크
 		SAFE_POINTER_CON( g_pDataMng );
@@ -2065,21 +2358,43 @@ void CMainFrameContents::OpenRideDigimon(int nIndex)
 				{
 					pMBox->SetValue1( nIndex );
 					pMBox->SetValue2( pOpenInfo->s_nNeedCount );
-					pMBox->SetValue3( pOpenInfo->s_nItemType_S );
+					pMBox->SetValue3( nOpenItemTypeS );
 				}
+			}
+			else
+			{
+				++nBlockedUseCnt;
+				nsCSDEBUG::CrashLogger::LogMessage( "RIDE_OPEN item present but blocked digimon=%u evoSlot=%d itemTypeS=%d itemId=%d need=%d firstSlot=%d",
+					pFTRideInfo->s_dwDigimonID, nIndex, nOpenItemTypeS, nItemId, pOpenInfo->s_nNeedCount, nFirstSlot );
 			}
 			return;
 		}
 
+		if( nOpenInfoCnt < FT_RIDE_OPENINFO )
+		{
+			OpenItemInfo[ nOpenInfoCnt ].s_nItemID = nItemId;
+			OpenItemInfo[ nOpenInfoCnt ].s_nItemTypeS = nOpenItemTypeS;
+			OpenItemInfo[ nOpenInfoCnt ].s_nNeedCount = pOpenInfo->s_nNeedCount;
+		}
 		++nOpenInfoCnt;
+	}
+
+	if( nOpenInfoCnt <= 0 )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "RIDE_OPEN no usable open info digimon=%u evoSlot=%d configured=%d blocked=%d rawOpen0=%d:%d rawOpen1=%d:%d",
+			pFTRideInfo->s_dwDigimonID, nIndex, nConfiguredOpenInfoCnt, nBlockedUseCnt,
+			pFTRideInfo->s_OpenInfo[ 0 ].s_nItemType_S, pFTRideInfo->s_OpenInfo[ 0 ].s_nNeedCount,
+			pFTRideInfo->s_OpenInfo[ 1 ].s_nItemType_S, pFTRideInfo->s_OpenInfo[ 1 ].s_nNeedCount );
+		if( nBlockedUseCnt == 0 )
+			cPrintMsg::PrintMsg( 30507 );
+		return;
 	}
 
 	switch( nOpenInfoCnt )
 	{
 	case 1:
 		{
-			int nItemId = nsCsFileTable::g_pItemMng->TypeT_to_Disp( pFTRideInfo->s_OpenInfo[ 0 ].s_nItemType_S );
-			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( nItemId );
+			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( OpenItemInfo[ 0 ].s_nItemID );
 			SAFE_POINTER_RET( pFTItem );
 			CsItem::sINFO* pFTItemInfo = pFTItem->GetInfo();
 			SAFE_POINTER_RET( pFTItemInfo );
@@ -2088,15 +2403,12 @@ void CMainFrameContents::OpenRideDigimon(int nIndex)
 		break;
 	case 2:
 		{
-			int nItemId1 = nsCsFileTable::g_pItemMng->TypeT_to_Disp( pFTRideInfo->s_OpenInfo[ 0 ].s_nItemType_S );
-			int nItemId2 = nsCsFileTable::g_pItemMng->TypeT_to_Disp( pFTRideInfo->s_OpenInfo[ 1 ].s_nItemType_S );
-
-			CsItem* pFTItem1 = nsCsFileTable::g_pItemMng->GetItem( nItemId1 );
+			CsItem* pFTItem1 = nsCsFileTable::g_pItemMng->GetItem( OpenItemInfo[ 0 ].s_nItemID );
 			SAFE_POINTER_RET( pFTItem1 );
 			CsItem::sINFO* pFTItemInfo1 = pFTItem1->GetInfo();
 			SAFE_POINTER_RET( pFTItemInfo1 );
 
-			CsItem* pFTItem2 = nsCsFileTable::g_pItemMng->GetItem( nItemId2 );
+			CsItem* pFTItem2 = nsCsFileTable::g_pItemMng->GetItem( OpenItemInfo[ 1 ].s_nItemID );
 			SAFE_POINTER_RET( pFTItem2 );
 			CsItem::sINFO* pFTItemInfo2 = pFTItem2->GetInfo();
 			SAFE_POINTER_RET( pFTItemInfo2 );
@@ -2105,7 +2417,7 @@ void CMainFrameContents::OpenRideDigimon(int nIndex)
 		}					
 		break;
 	default:
-		assert_cs( false );
+		cPrintMsg::PrintMsg( 30507 );
 	}
 }
 
@@ -2593,6 +2905,7 @@ void CMainFrameContents::GetDigimonStatInfo(eAbilType eType, int& nType, int& nB
 	case eCT:
 		nType = APPLY_CA;
 		nBase = FMDigimon::GetBaseCr( &info );
+		nBase = ResolveAuthoritativeCriticalBase( nBase, pDigimonUser, pDStat, pTStat );
 		nEvol = 0;
 		nChipset = FMDigimon::GetChipsetCr( &info );
 		nFriendShip = 0;
@@ -2626,7 +2939,11 @@ void CMainFrameContents::GetDigimonStatInfo(eAbilType eType, int& nType, int& nB
 		nFriendShip = 0;
 		break;
 	default:
-		assert_cs( false );
+		nsCSDEBUG::CrashLogger::LogMessage( "DIGIMON_DETAIL_STAT invalid type=%d digimon=%u current=%u",
+			(int)eType,
+			(unsigned)info.s_nDigimonID,
+			(unsigned)pDigimonUser->GetFTID() );
+		return;
 	}
 
 	//덱 적용 효과 버프
@@ -2960,9 +3277,26 @@ void CMainFrameContents::OpenPopUpWindow()
 	switch( m_pTarget->GetLeafRTTI() )
 	{
 	case RTTI_TAMER:
+		nsCSDEBUG::CrashLogger::LogMessage( "SOCIAL OpenPopUpWindow tamer uid=%u idx=%u",
+			m_pTarget->GetUniqID(), m_pTarget->GetIDX() );
 		pPopUpWin->SetPopup( CURSOR_ST.GetPos() + CsPoint( 15, 0 ), CsPoint( 130, 0 ), cPopUpWindow::OTHER_TAMER, m_pTarget->GetUniqID() );
 		break;
 	case RTTI_DIGIMON:
+		{
+			CDigimon* pDigimon = static_cast< CDigimon* >( m_pTarget );
+			int nTamerObj = pDigimon ? pDigimon->GetTamerLink() : 0;
+			CsC_AvObject* pTamer = ( g_pCharMng && nTamerObj > 0 ) ? g_pCharMng->GetTamer( nTamerObj ) : NULL;
+			if( pTamer && pTamer->GetLeafRTTI() == RTTI_TAMER )
+			{
+				nsCSDEBUG::CrashLogger::LogMessage( "SOCIAL OpenPopUpWindow digimon-owner digimonUid=%u digimonIdx=%u ownerIdx=%d ownerUid=%u",
+					m_pTarget->GetUniqID(), m_pTarget->GetIDX(), nTamerObj, pTamer->GetUniqID() );
+				pPopUpWin->SetPopup( CURSOR_ST.GetPos() + CsPoint( 15, 0 ), CsPoint( 130, 0 ), cPopUpWindow::OTHER_TAMER, pTamer->GetUniqID() );
+				break;
+			}
+
+			nsCSDEBUG::CrashLogger::LogMessage( "SOCIAL OpenPopUpWindow digimon-fallback digimonUid=%u digimonIdx=%u ownerIdx=%d",
+				m_pTarget->GetUniqID(), m_pTarget->GetIDX(), nTamerObj );
+		}
 		pPopUpWin->SetPopup( CURSOR_ST.GetPos() + CsPoint( 15, 0 ), CsPoint( 130, 0 ), cPopUpWindow::OTHER_DIGIMON, m_pTarget->GetUniqID() );
 		break;
 	}

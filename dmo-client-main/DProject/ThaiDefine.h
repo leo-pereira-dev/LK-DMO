@@ -3,7 +3,7 @@
 	// 본섭 로그인 IP주소
 	//#define		ACCOUNT_IP			"61.91.124.121"
 //	#define		ACCOUNT_IP			"94.237.64.220"
-	#define		ACCOUNT_PORT		7029
+	#define		ACCOUNT_PORT		17029
 
 
 	#define	NAME_MIN_LEN				3

@@ -338,7 +338,7 @@ void cGotchaMachineContents::GetGotchaItem(void* pData)
 	Notify( eRefresh );
 
 	// 시스템 창이랑 가운데에 획득 메세지 뿌리기
-	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_GotchaItem.m_nType );
+	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_GotchaItem.GetType() );
 	SAFE_POINTER_RET( pFTItem );
 	CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 	SAFE_POINTER_RET( pFTInfo );
@@ -463,7 +463,7 @@ void cGotchaMachineContents::_UpdateInventory()
 	SAFE_POINTER_RET( pInven );
 
 	// 뽑은 아이템 인벤에 넣기
-	pInven->ItemCrop( m_GotchaItem.m_nType, m_GotchaItem.GetCount(), m_GotchaItem.m_nRemainTradeLimitTime );
+	pInven->ItemCrop( m_GotchaItem.GetType(), m_GotchaItem.GetCount(), m_GotchaItem.m_nRemainTradeLimitTime );
 
 	// 인벤에 있는 필요 아이템 감소
 	if( eMachineType::GOTCHA == m_eType )

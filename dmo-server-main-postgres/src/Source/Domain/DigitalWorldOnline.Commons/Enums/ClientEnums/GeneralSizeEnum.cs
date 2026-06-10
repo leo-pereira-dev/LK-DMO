@@ -62,7 +62,7 @@
         /// <summary>
         /// Tamer equipment size.
         /// </summary>
-        Equipment = 13, //654=14
+        Equipment = 16,
 
         /// <summary>
         /// Max size for secondary password.
@@ -88,7 +88,7 @@
         /// <summary>
         /// Digivice chipsets size.
         /// </summary>
-        Chipsets = 12,
+        Chipsets = 8,
 
         /// <summary>
         /// Max size for tamer's seals.
@@ -219,8 +219,8 @@
 
         ItemSizeInBytes = 68,
 
-        TamerLevelMax = 120,
-        DigimonLevelMax = 120,
+        TamerLevelMax = 150,
+        DigimonLevelMax = 150,
 
         /// <summary>
         /// Inventory minimal slot value.
@@ -240,7 +240,7 @@
         /// <summary>
         /// Equipment maximum slot value.
         /// </summary>
-        EquipmentMaxSlot = 1013,
+        EquipmentMaxSlot = 1015,
 
         /// <summary>
         /// Warehouse minimal slot value.

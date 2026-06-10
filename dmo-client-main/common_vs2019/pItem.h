@@ -251,6 +251,9 @@ namespace nItem
 #ifdef SERVER_KSW_ADD_BRACELET_181106
 		Bracelet				= 33,
 #endif
+		NamePlate				= 34,	// Magnetic ID / nameplate
+		Keyring					= 35,
+		Goggles					= 36,
 
 		
 
@@ -389,6 +392,7 @@ namespace nItem
 		AntiX					= 201,	// X게이지,크리스탈 충전
 		SkillLevelOpen			= 202,	// 디지몬 스킬레벨 확장 대분류
 		AntiXEvoluter		= 400,
+		SelectionBox			= 611,	// selection/container box
 
 
 		SockAll					= EItem_All,

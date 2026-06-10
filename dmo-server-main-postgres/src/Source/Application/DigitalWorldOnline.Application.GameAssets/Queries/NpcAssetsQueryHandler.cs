@@ -1,21 +1,21 @@
-﻿using DigitalWorldOnline.Commons.DTOs.Assets;
-using DigitalWorldOnline.Commons.Interfaces;
+﻿using DigitalWorldOnline.Application.GameAssets.Bins;
+using DigitalWorldOnline.Commons.DTOs.Assets;
 using MediatR;
 
 namespace DigitalWorldOnline.Application.GameAssets.Queries
 {
     public class NpcAssetsQueryHandler : IRequestHandler<NpcAssetsQuery, List<NpcAssetDTO>>
     {
-        private readonly IServerQueriesRepository _repository;
+        private readonly NpcBinLoader _npcBinLoader;
 
-        public NpcAssetsQueryHandler(IServerQueriesRepository repository)
+        public NpcAssetsQueryHandler(NpcBinLoader npcBinLoader)
         {
-            _repository = repository;
+            _npcBinLoader = npcBinLoader;
         }
 
         public async Task<List<NpcAssetDTO>> Handle(NpcAssetsQuery request, CancellationToken cancellationToken)
         {
-            return await _repository.GetNpcAssetsAsync();
+            return await Task.FromResult(_npcBinLoader.Load().Npcs.ToList());
         }
     }
 }

@@ -174,6 +174,24 @@ void cCliGame::RecvItemMove(void)		// 아이템 이동
 	pop(nSrcPos);
 	pop(nDstPos);
 
+	if( TO_CONSTANT( nSrcPos ) == SERVER_DATA_INVEN_CONSTANT ||
+		TO_CONSTANT( nSrcPos ) == SERVER_DATA_CHIPSET_CONSTANT ||
+		TO_CONSTANT( nSrcPos ) == SERVER_DATA_EVOCHIP_CONSTANT ||
+		TO_CONSTANT( nDstPos ) == SERVER_DATA_CHIPSET_CONSTANT ||
+		TO_CONSTANT( nDstPos ) == SERVER_DATA_EVOCHIP_CONSTANT )
+	{
+		cItemInfo* pSrcItem = g_pDataMng ? g_pDataMng->SrvID2ItemInfo( nSrcPos ) : NULL;
+		cItemInfo* pDstItem = g_pDataMng ? g_pDataMng->SrvID2ItemInfo( nDstPos ) : NULL;
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_ROUTE recv3904 src=%d dst=%d srcConst=%d dstConst=%d srcItem=%u dstItem=%u",
+			nSrcPos,
+			nDstPos,
+			TO_CONSTANT( nSrcPos ),
+			TO_CONSTANT( nDstPos ),
+			pSrcItem && pSrcItem->IsEnable() ? pSrcItem->GetType() : 0,
+			pDstItem && pDstItem->IsEnable() ? pDstItem->GetType() : 0 );
+	}
+
 	if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrcPos ) ) || IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nDstPos ) ) )
 		ExtraInventoryDebugLog( "[ExtraInventory][Network] RecvItemMove success src=%d dst=%d srcConst=%d dstConst=%d",
 			nSrcPos, nDstPos, TO_CONSTANT( nSrcPos ), TO_CONSTANT( nDstPos ) );
@@ -214,7 +232,7 @@ void cCliGame::RecvRaidItemReward(void)
 		pop(nNum);
 
 		cItemData item;
-		item.m_nType = nType;
+		item.SetType( nType );
 		item.m_nCount = nNum;
 		item.m_nRate = 0;
 		item.m_nLevel = 0;
@@ -251,6 +269,9 @@ void cCliGame::RecvItemActive()
 	case nItem::Shoes:
 	case nItem::Costume:
 	case nItem::Glass:
+	case nItem::Goggles:
+	case nItem::NamePlate:
+	case nItem::Keyring:
 	case nItem::EquipAura:
 		{			
 			g_pDataMng->SendItemUse( TO_INVEN_SID( invenPos ) );

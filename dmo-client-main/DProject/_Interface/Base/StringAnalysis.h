@@ -137,6 +137,8 @@ public:
 
 	void		ItemComment_Parcing( cStringList* pList, cItemInfo* pEquipItem );
 	void		ItemComment_Parcing( cStringList* pList, int nEquipType );
+	bool		IsSetBonusTooltipItem( DWORD dwItemID );
+	bool		ItemSetBonus_Parcing( cStringList* pList, DWORD dwItemID );
 
 	void		Equip_EItemComment_Parcing( cStringList* pList, cString* pBeginString, cItemInfo* pEquip, int nSocketIndex, bool bCashEndItem = false );	
 	

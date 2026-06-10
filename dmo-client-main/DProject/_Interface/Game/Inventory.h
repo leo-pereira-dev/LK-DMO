@@ -1,6 +1,8 @@
 #pragma once 
 #include "InventoryContents.h"
 
+class cSpriteAni;
+
 #define IF_INVENTORY_ROW		10
 #define IF_INVENTORY_COL		10
 #define IF_INVENTORY_COUNT		100
@@ -64,6 +66,7 @@ protected:
 	cMoneyIF*		m_pMoney;
 	cSprite*		m_pBlock;
 	cSprite*		m_pBlockInItem;
+	cSpriteAni*		m_pTutorialItemArrow;
 
 	// 포인터만 있는 컨트롤
 protected:
@@ -104,6 +107,8 @@ private:
 	void			_UpdateInventoryCountText();
 	void			_UpdateHelpTooltip();
 	int				_GetUsedSlotCount() const;
+	void			_ResetTutorialHatchView();
+	void			_RenderTutorialHatchItemArrow();
 
 	// button event
 	void		OnClickFilterTab( void* pSender, void* pData );

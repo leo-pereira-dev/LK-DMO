@@ -118,7 +118,7 @@ void PersonStoreContents::Req_PresonStoreOpen(void* pData)
 	cItemInfo* pItem = pInven->GetData( nInvenSlotNum );
 	SAFE_POINTER_RET( pItem );
 
-	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 	SAFE_POINTER_RET( pFTItem );
 	CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 	SAFE_POINTER_RET( pFTInfo );
@@ -623,7 +623,7 @@ bool PersonStoreContents::SendOpenCommissionStore(std::wstring const& wsShopName
 			cItemInfo* pItem = pInven->GetData( k );
 			SAFE_POINTER_CON( pItem );
 
-			if( pItemData->GetType() != pItem->m_nType )
+			if( pItemData->GetType() != pItem->GetType() )
 				continue;
 
 			if( pItemData->GetEndTime() != pItem->m_nEndTime )
@@ -1142,7 +1142,7 @@ PersonStoreContents::sSellInfo* PersonStoreContents::GetSellItemInfo( cItemData*
 		SAFE_POINTER_RETVAL( pInfo, NULL );
 		cItemData pItemData = pInfo->ItemData;
 
-		if( ( pItemData.m_nType == pCmpItem->GetType() )&&
+		if( ( pItemData.GetType() == pCmpItem->GetType() )&&
 			( pItemData.m_nRate == pCmpItem->m_nRate )&&
 			( pInfo->uPrice == uPrice ) )
 		{
@@ -1205,7 +1205,7 @@ void PersonStoreContents::SellResult( sSellInfo* pSellInfo, int nCount )
 		cItemData* pItemData = &pSellInfo->ItemData;
 		SAFE_POINTER_CON( pItemData );
 
-		if( pItemData->GetType() != pItem->m_nType )
+		if( pItemData->GetType() != pItem->GetType() )
 			continue;
 
 		if( pItemData->GetEndTime() != pItem->m_nEndTime )
@@ -1391,7 +1391,7 @@ void PersonStoreContents::PressItemButton( int nIndex )
 					if( !pItemInfo->IsEnable() )
 						continue;
 
-					if( pItemInfo->m_nType == pItemData->GetType() && 
+					if( pItemInfo->GetType() == pItemData->GetType() && 
 						pItemInfo->m_nEndTime == pItemData->GetEndTime() ) //등록한 아이템일때
 						g_pDataMng->ItemUnlock( TO_INVEN_SID( i ) );
 				}

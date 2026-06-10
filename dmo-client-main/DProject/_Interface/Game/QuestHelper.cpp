@@ -1,11 +1,30 @@
 
 #include "stdafx.h"
+#include "../Base/SpriteAni.h"
 #include "QuestHelper.h"
 #include "LibProj/CsFunc/CrashLogger.h"
 
 namespace
 {
 	int g_nQuestHelperLastRenderSize = -1;
+
+	bool IsTutorialPlaying()
+	{
+		bool bTutorialPlaying = false;
+		GAME_EVENT_ST.OnEvent( EVENT_CODE::GET_IS_TUTORIAL_PLAYING, &bTutorialPlaying );
+		return bTutorialPlaying;
+	}
+
+	bool IsTutorialGuideQuest( CsQuest* pQuest )
+	{
+		if( !pQuest )
+			return false;
+
+		if( pQuest->GetQuestType() == CsQuest::QT_TUTORIAL )
+			return true;
+
+		return _tcsstr( pQuest->m_szTitleTab, _T( "<Tutorial>" ) ) != NULL;
+	}
 
 	class cQuestHelperStringListGuard
 	{
@@ -26,7 +45,8 @@ namespace
 }
 
 cQuestHelper::cQuestHelper():m_bView(false),m_pScrollBar(NULL),m_pBGWindow(NULL)
-,m_pHelperStateImage(NULL),m_pLineLeft(NULL),m_pLineRight(NULL)
+,m_pHelperStateImage(NULL),m_pLineLeft(NULL),m_pLineRight(NULL),m_pTutorialObjectiveArrow(NULL)
+,m_pTutorialObjectiveArrowTarget(NULL)
 {
 	InitializeCriticalSection( &m_csStringList );
 }
@@ -52,6 +72,8 @@ void cQuestHelper::DeleteResource()
 	SAFE_NIDELETE( m_pHelperStateImage );
 	SAFE_NIDELETE( m_pLineLeft );
 	SAFE_NIDELETE( m_pLineRight );
+	SAFE_NIDELETE( m_pTutorialObjectiveArrow );
+	m_pTutorialObjectiveArrowTarget = NULL;
 }
 
 void cQuestHelper::Create(int nValue /* = 0  */)
@@ -86,6 +108,13 @@ void cQuestHelper::Create(int nValue /* = 0  */)
 	m_pLineRight = NiNew cSprite;
 	m_pLineRight->Init( NULL, CsPoint::ZERO, CsPoint( 20, 1 ), "Control_G\\Popup\\N2Dlg_Line.tga", false );
 	m_pLineRight->SetAlpha( 0.7f );
+
+	m_pTutorialObjectiveArrow = NiNew cSpriteAni;
+	if( m_pTutorialObjectiveArrow )
+	{
+		m_pTutorialObjectiveArrow->Init( cSpriteAni::LOOP, NULL, CsPoint::ZERO, CsPoint( 60, 45 ), "Tutorial\\tutorial_ani.tga", NULL, 11, false, CsPoint(60,0), cSpriteAni::SPRITE_POS );
+		m_pTutorialObjectiveArrow->SetAniTime( 0.1f );
+	}
 
 	m_bView = true;
 }
@@ -165,6 +194,31 @@ void cQuestHelper::Render()
 		m_pScrollBar->Render();
 
 	m_StringList.Render( GetRootClient() + CsPoint( 7, 5 ), 4 );
+	_RenderTutorialObjectiveArrow();
+}
+
+void cQuestHelper::_RenderTutorialObjectiveArrow()
+{
+	if( !m_pTutorialObjectiveArrow || !m_pTutorialObjectiveArrowTarget || !IsTutorialPlaying() )
+		return;
+
+	int nIndex = 0;
+	std::list< cString* >::iterator it = m_StringList.GetList()->begin();
+	std::list< cString* >::iterator itEnd = m_StringList.GetList()->end();
+	for( ; it != itEnd; ++it, ++nIndex )
+	{
+		if( *it != m_pTutorialObjectiveArrowTarget )
+			continue;
+
+		int nPosY = m_StringList.GetStringPosY( 5, nIndex, 4 );
+		if( nPosY == cStringList::INVALIDE_FIND )
+			return;
+
+		int nLineHeight = (*it)->GetMaxSize().y;
+		m_pTutorialObjectiveArrow->Update( g_fDeltaTime );
+		m_pTutorialObjectiveArrow->Render( GetRootClient() + CsPoint( -43, nPosY + ( nLineHeight - 45 ) / 2 ) );
+		return;
+	}
 }
 
 void cQuestHelper::ResetDevice()
@@ -205,6 +259,7 @@ void cQuestHelper::ResetHelperString()
 
 	cQuestHelperStringListGuard guard( m_csStringList );
 	int nOldPos = m_pScrollBar->GetCurPosIndex();
+	m_pTutorialObjectiveArrowTarget = NULL;
 
 	nsCSDEBUG::CrashLogger::LogMessage(
 		"QUEST_HELPER reset begin oldSize=%d oldScroll=%d",
@@ -272,6 +327,11 @@ void cQuestHelper::_ResetHelperString( CsQuest::eQUEST_TYPE eType )
 
 		CsQuest* pFTQuest = nsCsFileTable::g_pQuestMng->GetQuest( ExeInfo.m_nIDX );
 		if( !pFTQuest->IsQuestType( eType ) )
+			continue;
+
+		bool bTutorialGuideQuest = IsTutorialGuideQuest( pFTQuest );
+		bool bTutorialPlaying = IsTutorialPlaying();
+		if( bTutorialGuideQuest && !bTutorialPlaying )
 			continue;
 
 		// 해당 타입의 첫번째 퀘스트
@@ -348,6 +408,9 @@ void cQuestHelper::_ResetHelperString( CsQuest::eQUEST_TYPE eType )
 				{
 					cString* pButtonString = MakeFindWayButton( (*iter), g_pStringAnalysis->m_vecStringTotalText[i].c_str() );
 					SAFE_POINTER_CON(pButtonString);
+
+					if( bTutorialGuideQuest && bTutorialPlaying && !bComplete && !(*iter)->IsCompleat() && m_pTutorialObjectiveArrowTarget == NULL )
+						m_pTutorialObjectiveArrowTarget = pButtonString;
 
 					if( bComplete ) // 완료 퀘스트라면
 						m_StringList.AddTail( pButtonString );

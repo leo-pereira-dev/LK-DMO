@@ -11,6 +11,7 @@ using DigitalWorldOnline.Commons.Packets.Items;
 using DigitalWorldOnline.Commons.Packets.MapServer;
 using DigitalWorldOnline.Commons.Utils;
 using DigitalWorldOnline.Commons.Writers;
+using DigitalWorldOnline.GameHost;
 
 
 namespace DigitalWorldOnline.GameHost.EventsServer
@@ -283,24 +284,22 @@ namespace DigitalWorldOnline.GameHost.EventsServer
                 if (targetClient == null)
                     continue;
 
-                double expBonusMultiplier = tamer.BonusEXP / 100.0;
+                double expBonusMultiplier = CalculateExperienceMultiplier(tamer.BonusEXP, 0);
 
-                var tamerExpToReceive = (long)(CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.TamerExperience) * expBonusMultiplier); //TODO: +bonus
+                var basePartnerExperience = CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.DigimonExperience);
+                var partnerExpToReceive = (long)(basePartnerExperience * expBonusMultiplier); //TODO: +bonus
 
-
-                if (CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.TamerExperience) == 0)
-                    tamerExpToReceive = 0;
-
-                if (tamerExpToReceive > 100) tamerExpToReceive += UtilitiesFunctions.RandomInt(-15, 15);
-                var fatigueExp = _fatigueService.GetMultipliers(targetClient).exp;   // FATIGUE_HOOK
-                var tamerResult = ReceiveTamerExp(targetClient.Tamer, tamerExpToReceive, fatigueExp);
-
-                var partnerExpToReceive = (long)(CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.DigimonExperience) * expBonusMultiplier); //TODO: +bonus
-
-                if (CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.DigimonExperience) == 0)
+                if (basePartnerExperience == 0)
                     partnerExpToReceive = 0;
 
                 if (partnerExpToReceive > 100) partnerExpToReceive += UtilitiesFunctions.RandomInt(-15, 15);
+                var tamerExpToReceive = ExperienceRewardCalculator.CalculateTamerExperienceFromKilledDigimon(
+                    tamer.Level,
+                    mob.Level,
+                    mob.ExpReward.DigimonExperience);
+
+                var fatigueExp = _fatigueService.GetMultipliers(targetClient).exp;   // FATIGUE_HOOK
+                var tamerResult = ReceiveTamerExp(targetClient.Tamer, tamerExpToReceive, fatigueExp);
                 var partnerResult = ReceivePartnerExp(targetClient.Partner, mob, partnerExpToReceive, fatigueExp);   // FATIGUE_HOOK
 
                 targetClient.Send(
@@ -361,28 +360,17 @@ namespace DigitalWorldOnline.GameHost.EventsServer
                 //}
             }
         }
+        private static double CalculateExperienceMultiplier(int bonusExperience, int serverExperience)
+        {
+            var serverMultiplier = serverExperience > 0 ? serverExperience / 100.0 : 1.0;
+            var bonusMultiplier = bonusExperience > 0 ? bonusExperience / 100.0 : 0.0;
+
+            return Math.Max(0.0, serverMultiplier + bonusMultiplier);
+        }
+
         public long CalculateExperience(int tamerLevel, int mobLevel, long baseExperience)
         {
-            int levelDifference = mobLevel - tamerLevel;
-
-            if (levelDifference >= -30 && levelDifference <= 30)
-            {
-                if (levelDifference > 0)
-                {
-                    return (long)(baseExperience / (2 * levelDifference));
-                }
-                else if (levelDifference < 0)
-                {
-                    return (long)(baseExperience * (2 * Math.Abs(levelDifference)));
-                }
-                // Se a diferença for 0, não é aplicado redutor, a experiência base é mantida.
-            }
-            else
-            {
-                return 0; // A diferença de níveis é maior que 30, o tamer não recebe experiência
-            }
-
-            return baseExperience; // Se não houver redutor, a experiência base é mantida
+            return ExperienceRewardCalculator.CalculateKillExperience(tamerLevel, mobLevel, baseExperience);
         }
 
         private void DropReward(MapInstance map, MobConfigModel mob)
@@ -462,23 +450,32 @@ namespace DigitalWorldOnline.GameHost.EventsServer
 
         private void RaidReward(MapInstance map, MobConfigModel mob)
         {
-            Console.WriteLine($"Raid {mob.Name} rankers {mob.RaidDamage.Count}.");
+            var raidResult = mob.RaidDamage
+                .Where(x => x.Key > 0)
+                .DistinctBy(x => x.Key)
+                .OrderByDescending(x => x.Value)
+                .ToList();
+
+            Console.WriteLine($"Raid {mob.Name} rankers {raidResult.Count}.");
             var writer = new PacketWriter();
             writer.Type(1604);
-            writer.WriteInt(mob.RaidDamage.Count);
+            writer.WriteInt(Math.Min(10, raidResult.Count));
 
             int i = 1;
 
             var updateItemList = new List<ItemListModel>();
 
-            foreach (var raidTamer in mob.RaidDamage.OrderByDescending(x => x.Value))
+            foreach (var raidTamer in raidResult)
             {
                 var targetClient = map.Clients.FirstOrDefault(x => x.TamerId == raidTamer.Key);
 
-                writer.WriteInt(i);
-                writer.WriteString(targetClient?.Tamer?.Name ?? $"Tamer{i}");
-                writer.WriteString(targetClient?.Partner?.Name ?? $"Partner{i}");
-                writer.WriteInt(raidTamer.Value);
+                if (i <= 10)
+                {
+                    writer.WriteInt(i);
+                    writer.WriteString(targetClient?.Tamer?.Name ?? $"Tamer{i}");
+                    writer.WriteString(targetClient?.Partner?.Name ?? $"Partner{i}");
+                    writer.WriteInt(raidTamer.Value);
+                }
 
                 var bitsReward = mob.DropReward.BitsDrop;
                 if (targetClient != null && bitsReward != null && bitsReward.Chance >= UtilitiesFunctions.RandomDouble())

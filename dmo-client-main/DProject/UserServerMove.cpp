@@ -1,24 +1,54 @@
 #include "stdafx.h"
 #include "UserServerMove.h"
+#include "../LibProj/CsFunc/CrashLogger.h"
 
 CUserServerMove*		g_pServerMoveOwner = NULL;
+
+namespace
+{
+	const float kSensitiveMoveRotDelta = 0.03f;
+
+	int SensitiveMoveCoord(float value)
+	{
+		return (int)(value >= 0.0f ? value + 0.5f : value - 0.5f);
+	}
+
+	float SensitiveMoveRotDelta(float lhs, float rhs)
+	{
+		float delta = fabsf(lhs - rhs);
+		while (delta > NI_PI * 2.0f)
+			delta -= NI_PI * 2.0f;
+		if (delta > NI_PI)
+			delta = NI_PI * 2.0f - delta;
+		return fabsf(delta);
+	}
+
+	bool IsSameSensitiveMove(nSync::Pos const& lastPos, float lastRot, int nextX, int nextY, float nextRot)
+	{
+		return lastPos.m_nX == nextX &&
+			lastPos.m_nY == nextY &&
+			SensitiveMoveRotDelta(lastRot, nextRot) < kSensitiveMoveRotDelta;
+	}
+}
 
 void CUserServerMove::Init( CsC_AvObject* pParent )
 {
 	m_pParent = pParent;
 
-	m_LastSyncPos.m_nX = (int)m_pParent->GetPos().x;
-	m_LastSyncPos.m_nY = (int)m_pParent->GetPos().y;
+	m_LastSyncPos.m_nX = SensitiveMoveCoord(m_pParent->GetPos().x);
+	m_LastSyncPos.m_nY = SensitiveMoveCoord(m_pParent->GetPos().y);
+	m_fLastSyncRot = m_pParent->GetCurRot();
+	m_dwRotateOnlyKeyCheck = KEY_NONE;
 
 	switch( nsCsGBTerrain::g_nSvrLibType )
 	{
 	case nLIB::SVR_DUNGEON:
 	case nLIB::SVR_GAME:
-		m_SendMoveTimeSeq.SetDeltaTime( 300 );
+		m_SendMoveTimeSeq.SetDeltaTime( 150 );
 		m_RetryKeyCheckTimeSeq.SetDeltaTime( 100 );
 		break;
 	case nLIB::SVR_BATTLE:
-		m_SendMoveTimeSeq.SetDeltaTime( 200 );
+		m_SendMoveTimeSeq.SetDeltaTime( 120 );
 		m_RetryKeyCheckTimeSeq.SetDeltaTime( 100 );
 		break;
 	default:
@@ -160,14 +190,62 @@ void CUserServerMove::DBClick_Object( cType type, CsC_AvObject* pObject )
 void CUserServerMove::SetPos_FromMouse( POINT ptMouse, float fConnectLength, bool bRenderMoveModel, bool bAttack )
 {
 	if( ( m_KeyboardMoveLock & eMouseLock ) == eMouseLock )
+	{
+#ifdef DMO_X64_WINDX9_BRIDGE
+		nsCSDEBUG::CrashLogger::LogMessage( "MOVE-MOUSE locked parent=%p mouse=%ld,%ld lock=%d", m_pParent, ptMouse.x, ptMouse.y, (int)m_KeyboardMoveLock );
+#endif
 		return;
+	}
 
 	NiPick::Record* pRecord = nsCsGBTerrain::g_pCurRoot->Pick_Terrain( CAMERA_ST.GetCameraObj(), ptMouse.x, ptMouse.y );
-	SAFE_POINTER_RET( pRecord );
+	if( pRecord == NULL )
+	{
+#ifdef DMO_X64_WINDX9_BRIDGE
+		static int s_moveMouseNullPickLogCount = 0;
+		if( s_moveMouseNullPickLogCount < 80 )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "MOVE-MOUSE pick null parent=%p mouse=%ld,%ld curRoot=%p camera=%p",
+				m_pParent, ptMouse.x, ptMouse.y, nsCsGBTerrain::g_pCurRoot, CAMERA_ST.GetCameraObj() );
+			++s_moveMouseNullPickLogCount;
+		}
+#endif
+		return;
+	}
 
 	NiPoint3 vIntersect = pRecord->GetIntersection();
 	if( !nsCsGBTerrain::g_pCurRoot->IsInTerrain( vIntersect.x, vIntersect.y ) )
+	{
+#ifdef DMO_X64_WINDX9_BRIDGE
+		static int s_moveMouseOutTerrainLogCount = 0;
+		if( s_moveMouseOutTerrainLogCount < 80 )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "MOVE-MOUSE out terrain parent=%p mouse=%ld,%ld hit=%.3f,%.3f,%.3f",
+				m_pParent, ptMouse.x, ptMouse.y, vIntersect.x, vIntersect.y, vIntersect.z );
+			++s_moveMouseOutTerrainLogCount;
+		}
+#endif
 		return;
+	}
+
+#ifdef DMO_X64_WINDX9_BRIDGE
+	static int s_moveMouseLogCount = 0;
+	if( s_moveMouseLogCount < 120 )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "MOVE-MOUSE hit parent=%p rtti=%d mouse=%ld,%ld hit=%.3f,%.3f,%.3f moveDigimon=%d connect=%.3f renderPoint=%d attack=%d",
+			m_pParent,
+			m_pParent ? (int)m_pParent->GetLeafRTTI() : -1,
+			ptMouse.x,
+			ptMouse.y,
+			vIntersect.x,
+			vIntersect.y,
+			vIntersect.z,
+			g_pResist->m_Global.s_bMoveDigimon ? 1 : 0,
+			fConnectLength,
+			bRenderMoveModel ? 1 : 0,
+			bAttack ? 1 : 0 );
+		++s_moveMouseLogCount;
+	}
+#endif
 
 	switch( nsCsGBTerrain::g_nSvrLibType )
 	{
@@ -269,6 +347,37 @@ void CUserServerMove::SetPos_FromMouse( POINT ptMouse, float fConnectLength, boo
 		assert_cs( false );
 	}
 }
+
+void CUserServerMove::SetRotateOnly_FromMouse( POINT ptMouse )
+{
+	if( ( m_KeyboardMoveLock & eMouseLock ) == eMouseLock )
+		return;
+
+	NiPick::Record* pRecord = nsCsGBTerrain::g_pCurRoot->Pick_Terrain( CAMERA_ST.GetCameraObj(), ptMouse.x, ptMouse.y );
+	SAFE_POINTER_RET( pRecord );
+
+	NiPoint3 vIntersect = pRecord->GetIntersection();
+	if( !nsCsGBTerrain::g_pCurRoot->IsInTerrain( vIntersect.x, vIntersect.y ) )
+		return;
+
+	vIntersect.z = nsCsGBTerrain::g_pCurRoot->GetHeight( vIntersect );
+	SetRotateOnly_FromTargetPos( vIntersect );
+}
+
+void CUserServerMove::SetRotateOnly_FromTargetPos( NiPoint3 vTargetPos )
+{
+	if( !CheckStateTamerMoved() )
+		return;
+
+	m_dwRotateOnlyKeyCheck = KEY_NONE;
+	m_dwKeyCheck = KEY_NONE;
+
+	CsC_AvObject* pMoveObject = GetControlledMoveObject();
+	SAFE_POINTER_RET( pMoveObject );
+
+	NiPoint3 vDir = vTargetPos - pMoveObject->GetPos();
+	ApplyRotateOnly( pMoveObject, vDir );
+}
 #ifdef ZONEMAP_CLICK_MOVE
 void CUserServerMove::SetPos_FromZoneMap( CsPoint ptPos, float fConnectLength /*= 0.f*/, bool bRenderMoveModel /*= true*/, bool bAttack /*= false*/ )
 {
@@ -339,6 +448,7 @@ void CUserServerMove::KeyReset()
 {
 	m_vKeyDir = NiPoint3::ZERO;
 	m_dwKeyCheck = KEY_NONE;
+	m_dwRotateOnlyKeyCheck = KEY_NONE;
 }
 
 void CUserServerMove::KeyAutoMapping()
@@ -385,18 +495,29 @@ void CUserServerMove::KeyAutoMapping()
 	}
 
 	if( bUpdate )
-		RetryKeyCheck();
+	{
+		if( m_dwRotateOnlyKeyCheck != KEY_NONE )
+			SetRotateOnlyKeyCheck( m_dwRotateOnlyKeyCheck );
+		else
+			RetryKeyCheck();
+	}
 }
 
 void CUserServerMove::_Update_RetryKeyCheck()
 {
-	if( m_dwKeyCheck == KEY_NONE )
+	if( m_dwKeyCheck == KEY_NONE && m_dwRotateOnlyKeyCheck == KEY_NONE )
 	{
 		return;
 	}
 
 	if( m_RetryKeyCheckTimeSeq.IsEnable() == false )
 		return;
+
+	if( m_dwRotateOnlyKeyCheck != KEY_NONE )
+	{
+		SetRotateOnlyKeyCheck( m_dwRotateOnlyKeyCheck );
+		return;
+	}
 
 	RetryKeyCheck();
 
@@ -467,11 +588,83 @@ bool CUserServerMove::CheckStateTamerMoved()
 	return true;
 }
 
+CsC_AvObject* CUserServerMove::GetControlledMoveObject()
+{
+	if( m_pParent == NULL )
+		return NULL;
+
+	CsC_AvObject* pMoveObject = m_pParent;
+	switch( m_pParent->GetLeafRTTI() )
+	{
+	case RTTI_TUTORIAL_TAMER:
+	case RTTI_TAMER_USER:
+		{
+			if( static_cast<CTamerUser*>(m_pParent)->IsRide() )
+				pMoveObject = g_pCharMng->GetDigimonUser( 0 );
+		}
+		break;
+	case RTTI_TUTORIAL_DIGIMON:
+	case RTTI_DIGIMON_USER:
+		break;
+	default:
+		return NULL;
+	}
+
+	return pMoveObject;
+}
+
+void CUserServerMove::ApplyRotateOnly( CsC_AvObject* pMoveObject, NiPoint3 vDir )
+{
+	SAFE_POINTER_RET( pMoveObject );
+
+	vDir.z = 0.0f;
+	if( vDir.Length() < 0.01f )
+		return;
+
+	g_pCharResMng->ReleaseMovePoint();
+	pMoveObject->DeletePath();
+
+	if( pMoveObject->GetProp_Animation()->GetAnimationID() == ANI::MOVE_RUN )
+		pMoveObject->GetProp_Animation()->SetAnimation( ANI::IDLE_NORMAL );
+
+	pMoveObject->SetRotation_AniDir( vDir );
+}
+
+void CUserServerMove::SetRotateOnlyKeyCheck( DWORD dwKey )
+{
+#ifdef KEYBOARD_MOVE
+	if( g_pServerMoveOwner != this )
+		return;
+
+	if( !CheckStateTamerMoved() )
+		return;
+
+	m_dwKeyCheck = KEY_NONE;
+	m_dwRotateOnlyKeyCheck = dwKey;
+	m_vKeyDir = NiPoint3::ZERO;
+
+	if( KEY_NONE == dwKey )
+		return;
+
+	CsC_AvObject* pMoveObject = GetControlledMoveObject();
+	SAFE_POINTER_RET( pMoveObject );
+
+	if( m_dwRotateOnlyKeyCheck & KEY_LEFT )		m_vKeyDir += m_vMappingKeyDir[ KMAP_LEFT ];
+	if( m_dwRotateOnlyKeyCheck & KEY_RIGHT )		m_vKeyDir += m_vMappingKeyDir[ KMAP_RIGHT ];
+	if( m_dwRotateOnlyKeyCheck & KEY_UP )		m_vKeyDir += m_vMappingKeyDir[ KMAP_UP ];
+	if( m_dwRotateOnlyKeyCheck & KEY_DOWN )		m_vKeyDir += m_vMappingKeyDir[ KMAP_DOWN ];
+
+	ApplyRotateOnly( pMoveObject, m_vKeyDir );
+#endif
+}
+
 void CUserServerMove::SetKeyCheck( DWORD dwKey )
 {
 #ifdef KEYBOARD_MOVE
 	if( g_pServerMoveOwner != this )	// 이동 주체가 자신이 아닐 때
 		return;
+
+	m_dwRotateOnlyKeyCheck = KEY_NONE;
 
 	if( m_dwKeyCheck == dwKey )
 		return;
@@ -656,15 +849,18 @@ void CUserServerMove::SetServerMove( uint nUID, float fCurX, float fCurY, float 
 #ifndef _GIVE
 	if( net::game == NULL )
 	{
-		m_LastSyncPos.m_nX = (int)fCurX;
-		m_LastSyncPos.m_nY = (int)fCurY;
+		m_LastSyncPos.m_nX = SensitiveMoveCoord(fCurX);
+		m_LastSyncPos.m_nY = SensitiveMoveCoord(fCurY);
+		m_fLastSyncRot = fRot;
 		return;
 	}
 #endif
 
 	if( pPath == NULL )
 	{
-		if( ( m_LastSyncPos.m_nX == (int)fCurX )&&( m_LastSyncPos.m_nY == (int)fCurY ) )
+		const int nCurX = SensitiveMoveCoord(fCurX);
+		const int nCurY = SensitiveMoveCoord(fCurY);
+		if( IsSameSensitiveMove( m_LastSyncPos, m_fLastSyncRot, nCurX, nCurY, fRot ) )
 		{
 			return;
 		}
@@ -829,15 +1025,19 @@ void CUserServerMove::__SetServerInitPos( NiPoint2 vOrg, NiPoint2 vPos, int nInd
 
 bool CUserServerMove::__SendMoveTo( uint nUID, NiPoint2 vOrg, NiPoint2 vPos, float fRot, int nIndex )
 {
-	if( ( m_LastSyncPos.m_nX == (int)vPos.x )&&( m_LastSyncPos.m_nY == (int)vPos.y ) )
+	const int nPosX = SensitiveMoveCoord(vPos.x);
+	const int nPosY = SensitiveMoveCoord(vPos.y);
+
+	if( IsSameSensitiveMove( m_LastSyncPos, m_fLastSyncRot, nPosX, nPosY, fRot ) )
 	{
 		return false;
 	}
 
 	if( nsCsGBTerrain::g_pCurRoot->IsValidEmr( vPos ) == true )
 	{
-		m_LastSyncPos.m_nX = (int)vPos.x;
-		m_LastSyncPos.m_nY = (int)vPos.y;
+		m_LastSyncPos.m_nX = nPosX;
+		m_LastSyncPos.m_nY = nPosY;
+		m_fLastSyncRot = fRot;
 
 		_SendMove_Server( nUID, m_LastSyncPos, fRot );
 		return true;
@@ -845,8 +1045,9 @@ bool CUserServerMove::__SendMoveTo( uint nUID, NiPoint2 vOrg, NiPoint2 vPos, flo
 
 	if( nIndex == 12 )
 	{
-		m_LastSyncPos.m_nX = (int)vOrg.x;
-		m_LastSyncPos.m_nY = (int)vOrg.y;
+		m_LastSyncPos.m_nX = SensitiveMoveCoord(vOrg.x);
+		m_LastSyncPos.m_nY = SensitiveMoveCoord(vOrg.y);
+		m_fLastSyncRot = fRot;
 
 		_SendMove_Server( nUID, m_LastSyncPos, fRot );		
 		return true;
@@ -886,11 +1087,12 @@ bool CUserServerMove::__SendMoveTo( uint nUID, NiPoint2 vOrgStart, NiPoint2 vOrg
 			if( nsCsGBTerrain::g_pCurRoot->IsValidEmr( vEnd ) == false )
 				continue;
 
-			m_LastSyncPos.m_nX = (int)vEnd.x;
-			m_LastSyncPos.m_nY = (int)vEnd.y;
+			m_LastSyncPos.m_nX = SensitiveMoveCoord(vEnd.x);
+			m_LastSyncPos.m_nY = SensitiveMoveCoord(vEnd.y);
+			m_fLastSyncRot = fRot;
 			nSync::Pos sp;
-			sp.m_nX = (int)vStart.x;
-			sp.m_nY = (int)vStart.y;
+			sp.m_nX = SensitiveMoveCoord(vStart.x);
+			sp.m_nY = SensitiveMoveCoord(vStart.y);
 
 			_SendMove_Server( nUID, sp, m_LastSyncPos, fRot );
 			return true;			
@@ -898,8 +1100,9 @@ bool CUserServerMove::__SendMoveTo( uint nUID, NiPoint2 vOrgStart, NiPoint2 vOrg
 	}
 
 	//assert_cs( false );
-	m_LastSyncPos.m_nX = (int)vOrgEnd.x;
-	m_LastSyncPos.m_nY = (int)vOrgEnd.y;
+	m_LastSyncPos.m_nX = SensitiveMoveCoord(vOrgEnd.x);
+	m_LastSyncPos.m_nY = SensitiveMoveCoord(vOrgEnd.y);
+	m_fLastSyncRot = fRot;
 
 	_SendMove_Server( nUID, m_LastSyncPos, fRot );
 	return false;

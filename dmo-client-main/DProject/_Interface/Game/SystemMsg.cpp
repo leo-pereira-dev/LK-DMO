@@ -30,7 +30,8 @@ bool cSystemMsg::sMSG_INFO::Update()
 	}
 	else if( s_fLifeTime < SYSTEM_MSG_HIDE_TIME )
 	{
-		assert_cs(s_pString);
+		if( s_pString == NULL )
+			return false;
 		s_pString->SetAlpha( s_fLifeTime/SYSTEM_MSG_HIDE_TIME*NEXT_ALPHA );		
 	}	
 	return true;
@@ -38,7 +39,8 @@ bool cSystemMsg::sMSG_INFO::Update()
 
 int cSystemMsg::sMSG_INFO::Render( int ny, bool bFirst, int nType/* = 0*/ )
 {
-	assert_cs( s_pString );
+	if( s_pString == NULL )
+		return 0;
 
 	switch( (eMSG_TYPE)nType )
 	{
@@ -181,6 +183,8 @@ void cSystemMsg::Render()
 	if( m_listMsgInfo.empty() == false )
 	{
 		sMSG_INFO* pFirst = ( *m_listMsgInfo.begin() );
+		if( pFirst == NULL || pFirst->s_pString == NULL )
+			return;
 		int nSize = pFirst->s_pString->GetSize();
 		if( pFirst->s_fLifeTime < SYSTEM_MSG_HIDE_TIME )
 			m_pBGSprite->SetAlpha( pFirst->s_fLifeTime/SYSTEM_MSG_HIDE_TIME );
@@ -219,6 +223,8 @@ void cSystemMsg::Render()
 	std::list< sMSG_INFO* >::iterator it = m_listMsgInfo.begin();
 	for( ; it!=m_listMsgInfo.end(); ++it )
 	{
+		if( (*it) == NULL || (*it)->s_pString == NULL )
+			continue;
 		nListCount = (*it)->s_pString->GetSize();
 		if( ( bFirst == false )&&( nListCount > 1 ) )
 		{

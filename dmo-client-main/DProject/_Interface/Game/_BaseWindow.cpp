@@ -222,6 +222,9 @@ cBaseWindow* cBaseWindow::NewWindow( cBaseWindow::eWINDOW_TYPE wt, int nPointerI
 	case WT_SEASONPASS_WINDOW:				return CreateNewWindow<SeasonPassWindow>("SeasonPassWindow", nPointerIndex);
 	case WT_XML_UNION:						return CreateNewWindow<cXmlUnionDUnit>("XmlUnionDUnit", nPointerIndex);
 	case WT_DETAIL_INFO:					return CreateNewWindow<cDetailInfoUI>("DetailInfoUI", nPointerIndex);
+	case WT_DUNGEON_ENTRANCE:				return CreateNewWindow<cDungeonEntranceWindow>("DungeonEntrance", nPointerIndex);
+	case WT_DUNGEON_CLEAR_ANNOUNCE:			return CreateNewWindow<cDungeonClearAnnounceWindow>("DungeonClearAnnounce", nPointerIndex);
+	case WT_DUNGEON_CLEAR_RESULT:			return CreateNewWindow<cDungeonClearResultWindow>("DungeonClearResult", nPointerIndex);
 
 	default:
 		assert_csm( false,  "Fail to Create cBaseWindow::NewWindow");

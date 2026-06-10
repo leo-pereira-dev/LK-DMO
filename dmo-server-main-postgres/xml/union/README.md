@@ -12,6 +12,13 @@ Supported files:
 - `DM_Union-DigimonCollections.xml`
 - optional `DM_Union-Level.xml`
 
+Current client tooltip note:
+
+- DUnit/Unit stat rows are displayed with `Union\Filter_icon.png`.
+- XML content warnings for invalid groups or missing Digimon ids are treated as
+  content cleanup warnings, not deploy blockers, unless they are paired with a
+  runtime exception.
+
 Optional level format:
 
 ```xml

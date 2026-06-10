@@ -147,9 +147,14 @@ namespace DigitalWorldOnline.Commons.Models.Map
 
         public void ShowTamer(long tamerKey, long tamerTarget)
         {
-            TamersView
-                .FirstOrDefault(x => x.Key == tamerKey).Value?
-                .Add(tamerTarget);
+            if (!TamersView.TryGetValue(tamerKey, out var views))
+            {
+                views = new List<long>();
+                TamersView[tamerKey] = views;
+            }
+
+            if (!views.Contains(tamerTarget))
+                views.Add(tamerTarget);
         }
 
         public void HideTamer(long tamerKey, long tamerTarget)

@@ -1,4 +1,4 @@
-﻿using DigitalWorldOnline.Application.Separar.Commands.Update;
+using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
@@ -41,6 +41,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         private void UpdateQuestComplete(GameClient client, int qIDX)
         {
+            client.Tamer.Progress.EnsureQuestProgressCapacity();
+
             int intValue = GetBitValue(client.Tamer.Progress.CompletedDataValue, qIDX - 1);
 
             if (intValue == 0)

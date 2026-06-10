@@ -75,7 +75,7 @@ public:
 	//u2 GetUID(void);	// unique id	(nClass 값 포함됨)
 	//u2 GetIDX(void);	// nClass 내에서 unique idx
 	void	Reset();
-	void	SetTypeAll(u4 TypeAll=0);
+	void	SetTypeAll(u8 TypeAll=0);
 
 public:
 	bool IsDigimon(void);
@@ -101,7 +101,7 @@ public:
 	void SetIDX(uint nIDX);				// 특수한 경우가 아니라면 사용하면 안됨
 	void SetIDX( u4 nIDX, u4 nClass );	// 던젼에서 사용
 	void SetType(uint nType);
-	u4	 GetTypeAll(void);
+	u8	 GetTypeAll(void);
 	 
 public:
 	enum

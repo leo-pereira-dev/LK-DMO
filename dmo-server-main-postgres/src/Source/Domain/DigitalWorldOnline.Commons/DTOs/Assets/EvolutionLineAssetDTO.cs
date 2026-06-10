@@ -46,9 +46,9 @@
         /// </summary>
         public int UnlockItemSectionAmount { get; set; }
 
-        public int RequiredItem { get; private set; }
+        public int RequiredItem { get; set; }
 
-        public int RequiredAmount { get; private set; }
+        public int RequiredAmount { get; set; }
 
         /// <summary>
         /// Per-slot max skill levels for this evolution form, sourced from <c>DMBase.bin</c>

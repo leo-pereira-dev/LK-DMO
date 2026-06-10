@@ -378,7 +378,7 @@ void cPersonStore::_UpdateItemBtn()
 							m_pInven = g_pDataMng->GetInven()->GetData(i); //해당 슬롯의 아이템
 							if(  m_pInven->IsEnable() == false )
 								continue;
-							if(  m_pInven->m_nType == info.m_nType && m_pInven->m_nEndTime == info.m_nEndTime ) //등록한 아이템일때
+							if(  m_pInven->GetType() == info.GetType() && m_pInven->m_nEndTime == info.m_nEndTime ) //등록한 아이템일때
 							{
 								g_pDataMng->ItemUnlock( TO_INVEN_SID( i ) );
 								//break;
@@ -421,7 +421,7 @@ void cPersonStore::_UpdateItemBtn()
 							m_pInven = g_pDataMng->GetInven()->GetData(i);//해당 슬롯의 아이템
 							if(  m_pInven->IsEnable() == false )
 								continue;
-							if(  m_pInven->m_nType == info.m_nType && m_pInven->m_nEndTime == info.m_nEndTime ) //등록한 아이템일때
+							if(  m_pInven->GetType() == info.GetType() && m_pInven->m_nEndTime == info.m_nEndTime ) //등록한 아이템일때
 							{
 								g_pDataMng->ItemUnlock( TO_INVEN_SID( i ) );
 								//break;
@@ -556,7 +556,7 @@ void cPersonStore::_UpdateDynamicBtn()
 				for( int k=0; k<m_nInvenSlotCount; ++k )
 				{
 					 cItemInfo* m_Item = g_pDataMng->GetInven()->GetData(k);
-					if( ( pInfo->s_Item.m_nType == m_Item->m_nType ) && (pInfo->s_Item.m_nEndTime == m_Item->m_nEndTime))
+					if( ( pInfo->s_Item.GetType() == m_Item->GetType() ) && (pInfo->s_Item.m_nEndTime == m_Item->m_nEndTime))
 					{
 						uint nCount = pInfo->s_Item.GetCount();
 						for(int j = k; j<m_nInvenSlotCount; ++j )
@@ -1071,7 +1071,7 @@ void cPersonStore::ItemTrade_BuySuccess( int nSlotIndex, int nCount )
 			for( int k=0; k<m_nInvenSlotCount; ++k )
 			{
 				cItemInfo* m_Item = g_pDataMng->GetInven()->GetData(k);
-				if( ( pInfo->s_Item.m_nType == m_Item->m_nType ) && (pInfo->s_Item.m_nEndTime == m_Item->m_nEndTime))
+				if( ( pInfo->s_Item.GetType() == m_Item->GetType() ) && (pInfo->s_Item.m_nEndTime == m_Item->m_nEndTime))
 				{
 					//int InvenCount = pInfo->s_Item.GetCount();
 					//g_pDataMng->ItemUnlock( TO_INVEN_SID( k ) );
@@ -1229,7 +1229,7 @@ bool cPersonStore::_ResistItem( CsVectorPB< sINFO* >* pVector, cItemInfo* pItem,
 				m_pInven = g_pDataMng->GetInven()->GetData(i);
 				if(  m_pInven->IsEnable() == false )
 					continue;
-				if(  m_pInven->m_nType == pItem->m_nType && m_pInven->m_nEndTime == pItem->m_nEndTime ) //타입과 기간이 같으면 잠궈줘 중복 등록 안되게
+				if(  m_pInven->GetType() == pItem->GetType() && m_pInven->m_nEndTime == pItem->m_nEndTime ) //타입과 기간이 같으면 잠궈줘 중복 등록 안되게
 				{
 					g_pDataMng->ItemLock( TO_INVEN_SID( i ) );
 					//break;
@@ -1519,7 +1519,7 @@ int cPersonStore::GetResItemCount( int nItemID, int nRate )
 	for( int i=0; i<nCnt; ++i )
 	{
 		sINFO* pInfo = pVec->GetData( i );
-		if( ( pInfo->s_Item.m_nType == nItemID )&&
+		if( ( pInfo->s_Item.GetType() == nItemID )&&
 			( pInfo->s_Item.m_nRate == nRate ) )
 		{
 			nRes += pInfo->s_Item.GetCount();

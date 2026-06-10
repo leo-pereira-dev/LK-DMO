@@ -7,6 +7,7 @@ using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Utils;
 using DigitalWorldOnline.Game.Managers;
+using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
 using MediatR;
 using Serilog;
@@ -25,6 +26,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private readonly DungeonsServer _dungeonServer;
         private readonly ILogger _logger;
         private readonly ISender _sender;
+        private readonly EquipmentSetBonusService _equipmentSetBonusService;
 
         public PartnerSwitchPacketProcessor(
             PartyManager partyManager,
@@ -33,7 +35,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             MapServer mapServer,
             DungeonsServer dungeonServer,
             ILogger logger,
-            ISender sender
+            ISender sender,
+            EquipmentSetBonusService equipmentSetBonusService
         )
         {
             _partyManager = partyManager;
@@ -43,6 +46,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _dungeonServer = dungeonServer;
             _logger = logger;
             _sender = sender;
+            _equipmentSetBonusService = equipmentSetBonusService;
         }
 
         public async Task Process(GameClient client, byte[] packetData)
@@ -122,7 +126,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 }
                 else
                 {
-                    _mapServer.SwapDigimonHandlers(client.Tamer.Location.MapId, previousPartner, newPartner);
+                    _mapServer.SwapDigimonHandlers(client.Tamer.Location.MapId, previousPartner, newPartner, client.TamerId);
                 }
 
                 client.Tamer.SwitchPartner(targetRealSlot);
@@ -158,6 +162,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 }
 
                 client.Tamer.SetPartnerPassiveBuff();
+                _equipmentSetBonusService.SyncPartnerPassiveBuffs(client);
 
                 foreach (var buff in client.Tamer.Partner.BuffList.ActiveBuffs)
                     buff.SetBuffInfo(_assets.BuffInfo.FirstOrDefault(x => x.SkillCode == buff.SkillId && buff.BuffInfo == null || x.DigimonSkillCode == buff.SkillId && buff.BuffInfo == null));

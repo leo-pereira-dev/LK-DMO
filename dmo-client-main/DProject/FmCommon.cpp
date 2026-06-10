@@ -220,9 +220,17 @@ bool FMCommon::GetSkillAttStr( int nA, int nLen, TCHAR* sz, int nB /*= 0*/ )
 		case nsCsDigimonTable::NT_STEEL/*25*/:		// 강철
 			_stprintf_s( sz, nLen, UISTRING_TEXT( "COMMON_TXT_STEEL_ATTRIBUTE_DAMAGE" ).c_str() );
 			break;
+		default:
+			_stprintf_s( sz, nLen, UISTRING_TEXT( "FMCOMMON_ATTRIBUTE_DAMAGE" ).c_str() );
+			break;
 		}
 		return true;
 
+	case APPLY_HPDMG:		_stprintf_s( sz, nLen, UISTRING_TEXT( "COMMON_TXT_SKILL_DAMAGE" ).c_str() );	return false;
+	case APPLY_HPDEF:		_stprintf_s( sz, nLen, UISTRING_TEXT( "FMCOMMON_DAMAGE_DECREASE" ).c_str() );	return false;
+	case APPLY_ATDEF:		_stprintf_s( sz, nLen, UISTRING_TEXT( "FMCOMMON_DAMAGE_DECREASE" ).c_str() );	return false;
+	case APPLY_PROVOKE:		_stprintf_s( sz, nLen, UISTRING_TEXT( "FMCOMMON_CROWD_CONTROL" ).c_str() );	return false;
+	case APPLY_INSURANCE:	_stprintf_s( sz, nLen, UISTRING_TEXT( "FMCOMMON_HP_RECOVERY" ).c_str() );	return false;
 	case APPLY_WEAKNESS:		_stprintf_s( sz, nLen, UISTRING_TEXT( "FMCOMMON_WEAKNESS" ).c_str() );	return true;// 쇠약 = 받는 피해량
 	case APPLY_ATTRIBUTEDAMAGE:	_stprintf_s( sz, nLen, UISTRING_TEXT( "FMCOMMON_ATTRIBUTE_DAMAGE" ).c_str() );	return true;// 속성 피해량	
 	case APPLY_ATTRIBUTEDR:		_stprintf_s( sz, nLen, UISTRING_TEXT( "FMCOMMON_ATTRIBUTE_DR" ).c_str() );	return true;// 속성 반사 = 속성 피해량 반사
@@ -243,8 +251,8 @@ bool FMCommon::GetSkillAttStr( int nA, int nLen, TCHAR* sz, int nB /*= 0*/ )
 	case APPLY_NatureTypeDamageIncrease:	_stprintf_s( sz, nLen, UISTRING_TEXT( "FMCOMMON_ATTRIBUTE_DAMAGE_INCREASE" ).c_str() );return true;// 지역 버프 방어 증가
 	case APPLY_FixMoveSpeed:				_stprintf_s( sz, nLen, UISTRING_TEXT( "BUFF_APPLY_FixMoveSpeed" ).c_str() );return true;// 이동속도 보정 문자열
 	default:
-		assert_csm( false, L"정의 되지 않은 스탯값임 pParameter참조!!" )
-		break;
+		_stprintf_s( sz, nLen, _T( " " ) );
+		return false;
 	}
 
 	_stprintf_s( sz, nLen, _T( " " ) );
@@ -349,8 +357,8 @@ bool FMCommon::GetStrApply_ID( TCHAR* sz, int nStrLen, int nID, bool bMinus )
 	case nSkill::Me_205:
 	case 501:
 		return false;	
-	default:		assert_cs( false );
+	default:
+		return false;
 	}
 	return false;
 }
-

@@ -6,6 +6,61 @@
 CsCRTTI_CPP( PARENT_CLASS, CsC_PartObject, RTTI_PARTOBJECT )
 THREAD_MEMPOOL_CPP( CsC_PartObject )
 
+namespace
+{
+	bool IsGoggleName( const TCHAR* szName )
+	{
+		return szName != NULL &&
+			( _tcsstr( szName, _T( "Goggle" ) ) != NULL ||
+			_tcsstr( szName, _T( "goggle" ) ) != NULL ||
+			_tcsstr( szName, _T( "Glass" ) ) != NULL ||
+			_tcsstr( szName, _T( "glass" ) ) != NULL ||
+			_tcsstr( szName, _T( "Sunglass" ) ) != NULL ||
+			_tcsstr( szName, _T( "sunglass" ) ) != NULL ||
+			_tcsstr( szName, _T( "Eyeglass" ) ) != NULL ||
+			_tcsstr( szName, _T( "eyeglass" ) ) != NULL );
+	}
+
+	bool IsGlassSlotItem( const CsItem::sINFO* pFTItem )
+	{
+		if( pFTItem == NULL )
+			return false;
+
+		if( pFTItem->s_nType_L == 27 )
+			return true;
+
+		return false;
+	}
+
+	int GetExpectedPartIndex( const CsItem::sINFO* pFTItem )
+	{
+		if( pFTItem == NULL )
+			return -1;
+
+		if( pFTItem->s_nType_L == 31 )
+			return nsPART::EquipAura;
+
+#ifdef LJW_ENCHANT_OPTION_DIGIVICE_190904
+		if( pFTItem->s_nType_L == 53 )
+			return nsPART::Digivice;
+#endif
+
+		if( pFTItem->s_nType_L == 36 )
+			return nsPART::Goggles;
+
+		if( pFTItem->s_nType_L == 35 )
+			return nsPART::Keyring;
+
+		if( pFTItem->s_nType_L == 34 )
+			return nsPART::NamePlate;
+
+		if( IsGlassSlotItem( pFTItem ) )
+			return nsPART::Glass;
+
+		return pFTItem->s_nType_L - 21;
+	}
+}
+
 //CsCRTTI_CPP( PARENT_CLASS, CsC_CardObject, RTTI_CARDOBJECT )
 //THREAD_MEMPOOL_CPP( CsC_CardObject )
 
@@ -22,7 +77,7 @@ CsC_PartObject::CsC_PartObject()
 	for( int i=0; i<PART_INFO_COUNT; ++i )
 		m_PartInfo[ i ].Reset();	
 
-	for( int i=0; i<nsPART::MAX_CHANGE_PART_COUNT; ++i )
+	for( int i=0; i<nsPART::MAX_TOTAL_COUNT; ++i )
 		m_SettingPart[ i ].Reset();
 }
 
@@ -60,7 +115,7 @@ void CsC_PartObject::Delete()
 	for( int i=0; i<PART_INFO_COUNT; ++i )
 		m_PartInfo[ i ].Reset();	
 
-	for( int i=0; i<nsPART::MAX_CHANGE_PART_COUNT; ++i )
+	for( int i=0; i<nsPART::MAX_TOTAL_COUNT; ++i )
 		m_SettingPart[ i ].Reset();
 }
 
@@ -383,6 +438,12 @@ void CsC_PartObject::ThreadCallBack_AttachPart( std::queue< sLOAD_PART* >* pPart
 
 void CsC_PartObject::ChangePart( sCHANGE_PART_INFO* pPartInfo )
 {
+	if( pPartInfo->s_nPartIndex < nsPART::MAX_TOTAL_COUNT )
+	{
+		m_SettingPart[ pPartInfo->s_nPartIndex ].s_nSettingID = pPartInfo->s_nFileTableID;
+		m_SettingPart[ pPartInfo->s_nPartIndex ].s_nRemainTime = pPartInfo->s_nRemainTime;
+	}
+
 	// 보여지는 부위여야만 한다
 	if( pPartInfo->s_nPartIndex >= PART_INFO_COUNT )
 		return;
@@ -577,6 +638,9 @@ void CsC_PartObject::ChangePart( sCHANGE_PART_INFO* pPartInfo )
 #ifdef SDM_TAMER_EQUIP_ADD_BRACELET_20181031
 				&& ( pPartInfo->s_nPartIndex != nsPART::Bracelet ) 
 #endif
+				&& ( pPartInfo->s_nPartIndex != nsPART::NamePlate )
+				&& ( pPartInfo->s_nPartIndex != nsPART::Goggles )
+				&& ( pPartInfo->s_nPartIndex != nsPART::Keyring )
 #ifdef LJW_ENCHANT_OPTION_DIGIVICE_190904
 				&& ( pPartInfo->s_nPartIndex != nsPART::Digivice )
 #endif
@@ -826,33 +890,15 @@ bool CsC_PartObject::GetFileName_FromID( char* pOut, sCHANGE_PART_INFO* pPartInf
 		}
 
 		// 디지오라일 때
-		if( nsCsFileTable::g_pItemMng->GetItem( pPartInfo->s_nFileTableID )->GetInfo()->s_nType_L == 31) 
+		if( pPartInfo->s_nFileTableID != 0 )
 		{
-			if( nsCsFileTable::g_pItemMng->GetItem( pPartInfo->s_nFileTableID )->GetInfo()->s_nType_L - 22 != pPartInfo->s_nPartIndex )
+			CsItem::sINFO* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pPartInfo->s_nFileTableID )->GetInfo();
+			if( GetExpectedPartIndex( pFTItem ) != pPartInfo->s_nPartIndex )
 			{
 				assert_csm2( false, _T( "FT = %d, nPart = %d" ), pPartInfo->s_nFileTableID, pPartInfo->s_nPartIndex );
 				pPartInfo->s_nFileTableID = 0;
 			}
 		}
-#ifdef LJW_ENCHANT_OPTION_DIGIVICE_190904
-		// 디지바이스일 때
-		else if( nsCsFileTable::g_pItemMng->GetItem( pPartInfo->s_nFileTableID )->GetInfo()->s_nType_L == 53 )
-		{
-			if( nsCsFileTable::g_pItemMng->GetItem( pPartInfo->s_nFileTableID )->GetInfo()->s_nType_L - 40 != pPartInfo->s_nPartIndex )
-			{
-				assert_csm2( false, _T( "FT = %d, nPart = %d" ), pPartInfo->s_nFileTableID, pPartInfo->s_nPartIndex );
-				pPartInfo->s_nFileTableID = 0;
-			}
-		}
-#endif
-		else
-		{
-			if( nsCsFileTable::g_pItemMng->GetItem( pPartInfo->s_nFileTableID )->GetInfo()->s_nType_L - 21 != pPartInfo->s_nPartIndex )
-			{
-				assert_csm2( false, _T( "FT = %d, nPart = %d" ), pPartInfo->s_nFileTableID, pPartInfo->s_nPartIndex );
-				pPartInfo->s_nFileTableID = 0;
-			}
-		}																																																														   //
 	}						
 
 /************************************************************************************************************************************************************************************************************************/
@@ -870,6 +916,8 @@ bool CsC_PartObject::GetFileName_FromID( char* pOut, sCHANGE_PART_INFO* pPartInf
 #ifdef SDM_TAMER_XGUAGE_20180628
 		case nsPART::XAI:				return true;//chu8820
 #endif
+		case nsPART::Goggles:			return false;
+		case nsPART::Keyring:			return false;
 #ifdef LJW_ENCHANT_OPTION_DIGIVICE_190904
 		case nsPART::Digivice:			return true;
 #endif
@@ -878,6 +926,26 @@ bool CsC_PartObject::GetFileName_FromID( char* pOut, sCHANGE_PART_INFO* pPartInf
 	}
 
 	CsItem::sINFO* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pPartInfo->s_nFileTableID )->GetInfo();
+
+	// Some stat-only/event equipment rows use a drop placeholder or no model.
+	// Treat those as no custom appearance instead of loading Event_Item/0/.nif.
+	if( strcmp( pFTItem->s_cNif, "Event_Item" ) == 0 ||
+		strcmp( pFTItem->s_cNif, "0" ) == 0 ||
+		strcmp( pFTItem->s_cNif, "" ) == 0 )
+	{
+		switch( pPartInfo->s_nPartIndex )
+		{
+		case nsPART::Head:					strcpy_s( pOut, OBJECT_NAME_LEN, "Head.nif" );			return true;
+		case nsPART::Coat:					strcpy_s( pOut, OBJECT_NAME_LEN, "Up.nif" );			return true;
+		case nsPART::Glove:					strcpy_s( pOut, OBJECT_NAME_LEN, "Hand.nif" );			return true;
+		case nsPART::Pants:					strcpy_s( pOut, OBJECT_NAME_LEN, "Down.nif" );			return true;
+		case nsPART::Shoes:					strcpy_s( pOut, OBJECT_NAME_LEN, "Shoes.nif" );			return true;
+		case nsPART::Costume:				strcpy_s( pOut, OBJECT_NAME_LEN, "NoneCostume.nif" );	return true;
+		case nsPART::Glass:					return false;
+		case nsPART::Goggles:				return false;
+		case nsPART::Keyring:				return false;
+		}
+	}
 /************************************************************************/
 //오라 파츠 비교부분에서 Type의 enum값이 29 다음이 31(오라)이어서 계산과정에 21을 빼는 부분은 오라만 따로 계산... 추후 수정 필요함
 // 	if(pFTItem->s_nType_L != 31)//오라가 아닐 때chu8820
@@ -908,6 +976,8 @@ bool CsC_PartObject::GetFileName_FromID( char* pOut, sCHANGE_PART_INFO* pPartInf
 #ifdef SDM_TAMER_XGUAGE_20180628
 				case nsPART::XAI:				return true;//chu8820
 #endif
+				case nsPART::Goggles:			return false;
+				case nsPART::Keyring:			return false;
 #ifdef LJW_ENCHANT_OPTION_DIGIVICE_190904
 				case nsPART::Digivice:			return true;
 #endif
@@ -1256,4 +1326,3 @@ bool CsC_PartObject::GetFileName_FromID( char* pOut, sCHANGE_PART_INFO* pPartInf
 // 	return true;
 // }
 #undef		PARENT_CLASS
-

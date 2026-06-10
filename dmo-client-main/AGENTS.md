@@ -1,247 +1,173 @@
-# AGENTS.md — DMO Client Build & Development Guide
+# AGENTS.md - DMO Client Build & Development Guide
 
-**Project:** DMO Client (Release_English, v487)  
-**Repository:** `F:\Juegos\DMO\client-repo`  
-**Runtime:** `F:\Juegos\DMO\Client v487`  
-**Last Updated:** 2026-05-13
+## Scope
 
----
+Work from this client repository only:
 
-## Quick Start
+```text
+C:\0-NewDmo\dmo-client-main
+```
 
-### Build the Client
+Do not use historical external paths as active references. If an old note points
+outside `C:\0-NewDmo`, treat it as obsolete unless the user explicitly provides
+a current local replacement inside this workspace.
+
+## Build
+
+Default client build:
+
 ```powershell
-& "C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe" `
-  "F:\Juegos\DMO\client-repo\DProject.sln" `
-  /p:Configuration=Release_English `
-  /p:Platform=Win32 `
-  /m /verbosity:minimal
+& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" `
+  "C:\0-NewDmo\dmo-client-main\DProject.sln" `
+  /m /p:Configuration=X64_WinDX9_Bridge /p:Platform=x64 /v:minimal
 ```
 
-### Copy to Runtime Directory
-```powershell
-Copy-Item "F:\Juegos\Release\GSP\DProject_R_ENG.exe" `
-  "F:\Juegos\DMO\Client v487\DProject_R_ENG.exe" -Force
+Expected output:
+
+```text
+C:\0-NewDmo\Release\GSP_x64\lk-dmo-x64.exe
 ```
 
-### Launch
-Run `DProject_R_ENG.exe` from `F:\Juegos\DMO\Client v487\` (NOT from the build output directory). The client expects `Data\`, `mss32.dll`, and other runtime assets in its working directory.
+Copy the built executable to the local runtime that is being tested:
 
----
-
-## Critical Build Notes
-
-### 1. MSVC Toolset Version
-The solution uses **v143** (VS2022). If you upgrade the toolset, verify that:
-- `DProject.vcxproj` retains `ImageHasSafeExceptionHandlers=false` for Release_English|Win32
-- The `/OPT:ICF` linker optimization does NOT strip `NiMilesAudioSDM::Init`
-
-### 2. The `mss32.lib` Import Library
-**DO NOT** regenerate `mss32.lib` with `dlltool` or third-party tools. The MSVC linker (`link.exe`) requires import libraries in **MSVC short import format** to generate proper PE Import Address Table (IAT) entries.
-
-If you must regenerate it (e.g., `mss32.dll` changed):
-```cmd
-dumpbin /exports mss32.dll > exports.txt
-# Parse exports.txt into a .def with ordinal hints
-lib.exe /def:mss32_ordinal.def /machine:ix86 /out:mss32.lib
+```text
+C:\0-NewDmo\ClientDist1_x64\lk-dmo-x64.exe
 ```
 
-**Always verify with:**
-```cmd
-dumpbin /imports DProject_R_ENG.exe | findstr mss32
-```
-The output MUST show `mss32.dll` with its imports. If absent, the client will crash during audio initialization.
+Build through `DProject.sln` only. Do not build `DProject.vcxproj` directly for
+normal testing. Do not use `Release_English|x64` as the x64 default because the
+solution maps several projects back to Win32; use `X64_WinDX9_Bridge|x64` for a
+real x64 build.
 
-### 3. Missing `UITextSafe.h`
-Commit `8224493` references `../Base/UITextSafe.h` which was never committed. A stub exists at:
-```
-DProject/_Interface/Base/UITextSafe.h
-```
-This is a **minimal passthrough implementation**. If the upstream author provides a real implementation, replace the stub.
+## Active Runtime Data
 
-### 4. Forced Windowed Mode
-`Resist.cpp` forces `s_bFullScreen = false` unconditionally. The fullscreen resolution assert was also removed to support non-standard desktop resolutions.
+Use local runtime data only:
 
----
+```text
+C:\0-NewDmo\ClientDist\Data
+C:\0-NewDmo\ClientDist1\Data
+C:\0-NewDmo\ClientDist1_x64\Data
+```
+
+For BIN sync, compare the server BIN folder with the active local client pack or
+generated local source folder:
+
+```text
+C:\0-NewDmo\dmo-server-main-postgres\Bins\data\bin\english
+C:\0-NewDmo\TamerBinMigrationFeature\generated\pack03-source
+C:\0-NewDmo\ClientDist1\Data\Pack03
+C:\0-NewDmo\ClientDist1_x64\Data\Pack03
+```
+
+Patch only the active local `Pack03.pf/.hf` pair when the client pack needs the
+same files.
+
+## Current Status Tooltip Notes
+
+Recent stat-tooltip work fixed source attribution for Digimon stats without
+changing the server stat contract.
+
+- Do not synthesize a red equipment row for leftover/unresolved stat
+  differences. Current client code logs `STAT_TOOLTIP_UNRESOLVED` instead.
+- DUnit/Unit tooltip rows use `Union\Filter_icon.png`, matching the original
+  pseudo-code icon reference for Union/DUnit source rows.
+- CT tooltip base can resolve from the authoritative server total to avoid a
+  false equipment residual row when no equipment is worn.
+- BL remains an integer-percent stat in the server and in the main client
+  status display. The tooltip converts the authoritative BL total to basis
+  points only for internal tooltip math. Do not change server BL/combat to basis
+  points unless the main client BL display and combat comparison are changed at
+  the same time.
+
+## Current Live Incident Notes
+
+Recent local work focused on players in the same channel/location not seeing
+each other, map/combat freezes, channel-change failures, bad stats, and crashes
+around packets `3969`, `1006`, and `1308`.
+
+Client-side packet/object findings:
+
+- `common_vs2019/pType.h` and `common_vs2019/pType.cpp`: `cType::SetTypeAll`
+  and `GetTypeAll` must use `u8`. `pop<cType>` reads/writes `u8`; truncating to
+  `u4` dropped high object/model bits and caused object sync/creation failures.
+- `DProject/network/cCliGameSync.cpp`: sync/crash logs exist around
+  `RecvSyncData`, `SyncNewObject`, `SyncInObject`, `SyncInTamer`,
+  `SyncInDigimon`, and `SyncInMonster`.
+- `DProject/network/cCliGateReceive.cpp`: packet 1308 /
+  `RecvTamerSelectSuccess` parse logging exists.
+- Current server `UpdateStatusPacket` writes partner AT as `int32`; keep the
+  client `RecvAllStat` reader and server writer aligned before changing stats.
 
 ## Runtime Dependencies
 
-The following MUST be present in `F:\Juegos\DMO\Client v487\`:
+The local runtime directory used for launch must contain:
 
 | File | Purpose |
 |------|---------|
-| `mss32.dll` | Miles Sound System audio engine |
+| `mss64.dll` | x64 Miles Sound System runtime/stub used by the x64 bridge |
 | `Data\NP\Sound\*.asi, *.flt` | Miles audio codecs and filters |
-| `Data\Pack01.hf / .pf` | Game data pack (headers + content) |
-| `Data\Pack03.hf / .pf` | Additional game data |
+| `Data\Pack01.hf / .pf` | Game data pack |
+| `Data\Pack03.hf / .pf` | English tables/data pack |
 | `d3dx9_43.dll` | DirectX 9 extensions |
-| `d3d9.dll` | DirectX 9 runtime (system) |
-| `dmo.ini` | Client configuration (IP, resolution, etc.) |
+| `d3d9.dll` | DirectX 9 runtime |
+| `PathEngine.dll` | x64 PathEngine runtime loaded by the client |
+| `dmo.ini` | Client configuration |
 
-**Note:** `mss32.dll` in `Client v487\` and `dmobrasil\client\` are **identical** (same MD5: `D560E68431D937CB4681612C741D639D`).
+## Critical Build Notes
 
----
+### MSVC Toolset
 
-## Audio Subsystem Initialization Order
+The solution uses v143. If you change the toolset, verify:
 
-1. `wWinMain` → `App::CWin32App::Run`
-2. `App::CGameApp::OnInitialize`
-3. `CMngCollector::ShotInit`
-4. `CSoundMgr::GlobalInit` → `CSoundMgr::Init`
-5. `CSoundMgr::_InitMiles`
-6. `NiMilesAudioSystem::Startup("Data\\NP\\Sound")`
-7. `AIL_set_redist_directory` → `AIL_quick_startup`
+- `DProject.vcxproj` retains `ImageHasSafeExceptionHandlers=false` for
+  `Release_English|Win32`.
+- `/OPT:ICF` does not strip `NiMilesAudioSDM::Init`.
 
-**Crash points:**
-- Before fix: `NiMilesAudioSystem::Startup+0xf` (null `this` / missing IAT)
-- After fix: Works if `Data\NP\Sound\` exists and `mss32.lib` is correct
+### Miles Import Library
 
----
+Do not regenerate `mss32.lib` with `dlltool` or third-party tools. The MSVC
+linker requires import libraries in MSVC short import format.
 
-## Project Structure
+If it must be regenerated from the local runtime DLL:
 
-```
-client-repo/
-├── DProject.sln              # Main solution
-├── DProject/
-│   ├── DProject.vcxproj      # Main project
-│   ├── main.cpp              # Entry point + NiMilesAudioSDM linker pragma
-│   ├── Resist.cpp            # Resolution/windowed settings
-│   ├── CSoundMgr.cpp         # Audio manager
-│   └── _Interface/           # UI code
-├── common_vs2019/            # Shared static library (protocol, data parsers)
-│   ├── common.sln
-│   └── Protocol/             # 42+ protocol headers (C++)
-├── nlib/                     # Networking library (ASIO-based)
-│   ├── client.cpp            # TCP client with ASIO
-│   └── packet.cpp            # Packet read/write (NO bounds checking!)
-├── Gamebryo2.3/              # Gamebryo engine libs
-│   └── GB_Lib/ReleaseLib/    # NiSystem, NiMain, NiMilesAudio, etc.
-└── LibProj/
-    └── MilesSound/
-        ├── lib/
-        │   └── mss32.lib     # IMPORT LIBRARY — see critical notes above
-        └── include/
-            └── mss.h         # Miles SDK headers
+```cmd
+dumpbin /exports mss32.dll > exports.txt
+lib.exe /def:mss32_ordinal.def /machine:ix86 /out:mss32.lib
 ```
 
----
+Verify the built EXE imports `mss32.dll`:
 
-## Known Issues (Not Yet Fixed)
-
-### Security / Stability
-These are documented in detail in `BUILD_FIXES.md` and should be addressed before production deployment:
-
-| Priority | Issue | File |
-|----------|-------|------|
-| CRITICAL | `cPacket::pop()` has no bounds checking | `nlib/packet.cpp:70-80` |
-| CRITICAL | nProtect/Xigncode buffer overflows | `cNetwork.cpp`, `cCliGameSend.cpp` |
-| CRITICAL | Cash Shop stack overflow | `cCliGameShop.cpp:415-421` |
-| HIGH | Channel info OOB array write | `cCliGameReceive.cpp:53-65` |
-| HIGH | `cClient` destructor race (detach vs join) | `nlib/client.cpp:170-202` |
-
-### Protocol Mismatch
-The client and server use manually-implemented protocols (no protobuf). Any change to packet structures in `common_vs2019/Protocol/` must be mirrored in the server C# codebase at `server/src/Source/Domain/DigitalWorldOnline.Commons/Packets/`.
-
----
-
-## Git Workflow
-
-### Before Building
-```bash
-git status                    # Check for local changes
-git stash push -u -m "wip"   # Stash if needed
-git pull                      # Get latest
-git stash pop                 # Restore local changes
+```cmd
+dumpbin /imports DProject_R_ENG.exe | findstr mss32
 ```
 
-### Files That Should NOT Be Committed
-- `LibProj/MilesSound/lib/*.exp`
-- `LibProj/MilesSound/lib/*.def` (except `mss32_ordinal.def` as reference)
-- `LibProj/MilesSound/lib/mss32.dll` (runtime DLL, not source)
-- Build outputs: `Release/`, `Lib/`, `Release_DLL/`
+### UITextSafe
 
-### Files That SHOULD Be Committed (if modified)
-- `DProject/DProject.vcxproj`
-- `DProject/Resist.cpp`
-- `DProject/main.cpp`
-- `DProject/_Interface/Base/UITextSafe.h`
-- `LibProj/MilesSound/lib/mss32.lib` (if regenerated)
+The stub header exists at:
 
----
+```text
+DProject/_Interface/Base/UITextSafe.h
+```
 
-## Troubleshooting
+If a real implementation is added later, replace the stub carefully.
 
-### "The procedure entry point AIL_xxx could not be located in mss32.dll"
-The import library `mss32.lib` does not match the runtime `mss32.dll`. Regenerate `mss32.lib` from the exact DLL in `Client v487\`.
+## Known Client Issues
 
-### Client crashes immediately with no window
-Check `logs/crash.log` in the runtime directory. If it shows `NiMilesAudioSystem::Startup`, the IAT is broken (see Critical Build Notes).
+### Tamer.bin Model Table
 
-### Client asserts on resolution
-The assert at `Resist.cpp:106` was removed. If it reappears, the code was reverted.
+Older client data only had models through `80010`. Current local migration work
+adds later tamers through local BIN conversion; verify the active pack and
+server BINs before assuming a model is missing.
 
-### Build fails with `UITextSafe.h` not found
-The stub header is at `DProject/_Interface/Base/UITextSafe.h`. If missing, recreate it.
+### Magenta Icons
 
-### Linker errors for `__imp__AIL_*`
-`mss32.lib` is corrupted or has the wrong symbol format. Use the pre-built `mss32_final.lib` or regenerate with `lib.exe` using ordinal-based `.def`.
+Magenta UI icons usually mean the active client data files are missing or
+incomplete for that feature. Check local `Pack03`/asset data before changing
+server logic.
 
----
+## Bug Investigation Checklist
 
-## Contact / Context
-
-This client is being adapted to run with custom server files (the `server/` directory at `F:\Juegos\DMO\server`). The original `dmobrasil/` client works with its own server; this repo is the development branch for cross-compatibility.
-
-## Server Startup & Restart (CRITICAL)
-
-**ALWAYS** restart servers using `start_servers.bat` at `F:\Juegos\DMO\server\`.  
-**DO NOT** kill or start individual server processes directly — the .bat handles cleanup of stale processes, rebuilds from source, and starts all 6 servers in the correct order:
-
-Run `F:\Juegos\DMO\server\start_servers.bat` to start all 6 servers:
-- Account (7030), Character (7050), Game (7608), Routine, Api, Admin
-
-The .bat kills existing processes before starting new ones. All servers must be running for the client to function.
-
-## Known Server Issues (Fixed)
-
-### Async Fire-and-Forget Bug
-All three TCP servers (`AuthenticationServer`, `CharacterServer`, `GameServer`) had `OnDataReceivedEvent` calling `ProcessPacketAsync()` without `await`. This swallowed any exception after the first `await`, making the server appear to hang. Fixed in all three by introducing `ProcessPacketSafeAsync`.
-
-### MediatR Assembly Registration
-`Account.Host` and `Character.Host` registered `AddMediatR` with the wrong assembly, causing handlers from `DigitalWorldOnline.Application` to not be found. Fixed by scanning `typeof(AccountByUsernameQuery).Assembly` and `typeof(CharactersByAccountIdQuery).Assembly` respectively, plus adding missing `*BinLoader` singletons.
-
-## Known Client Issues (Unfixed)
-
-### Tamer.bin Model Table Incomplete
-The client's `Data\Tamer.bin` only contains models up to **80010** (Sora). Characters with Tamers-season models (Takato=80011, Rika=80012, Henry=80013, etc.) cause assertion failures at `Tamer.cpp:83` because `IsTamer(nFileTableID)` returns false for those IDs.
-
-**Workaround:** Only create characters using models 80001–80010 (Adventure 01 cast).
-**Proper fix:** Source or generate a `Tamer.bin` that includes models 80011–80020.
-
-### Magenta Icons (Event Notice, Season Pass)
-UI elements render as magenta squares — the client's data files for these features are missing or incomplete. Not a server issue.
-
-## Known Server Issues (Gameplay)
-
-### Melee Attack Animations
-`PartnerAttackPacketProcessor` lacks handler masking (`&= 0x7FFFF`). Mob lookups fail because the client sends handlers with type bits encoded. Fix: add masking matching `PartnerSkillPacketProcessor`.
-
-### Digivolution Requirements
-Boolean logic bug in `PartnerEvolutionPacketProcessor`: uses `&&` instead of `||`, allowing evolutions to bypass level/DS/item requirements.
-
-### Skill Crash
-`PartnerSkillPacketProcessor` has multiple NRE paths from unguarded `FirstOrDefault` chains. Fix: add null-checks and try-catch.
-
-### Cash Shop Delivery
-Purchased items go to the Account Cash Warehouse, not the player's inventory. Items must be manually withdrawn. By design, but may be confusing.
-
-For full technical details, see `BUILD_FIXES.md` in the workspace root.
----
-
-## DMO Bug Investigation Rules (CRITICAL)
-
-For every DMO bug, explicitly use this checklist before proposing or implementing a fix:
+For every DMO bug, explicitly check:
 
 - Packet mismatches
 - Race conditions
@@ -250,6 +176,7 @@ For every DMO bug, explicitly use this checklist before proposing or implementin
 - Pipelines
 - Overflow
 
-When the issue involves client/server contracts, packets, loading, map transitions, UI rendering, movement, mobs, or crashes, the unpacked/decompiled client dump at `F:\Juegos\DMO\unpacked_exe_all` is a required source of truth. Compare the dump's client behavior against client source, server source, database/bin assets, and live logs before deciding root cause.
-
-Do not treat the dump as optional context. For packet and lifecycle bugs, start by finding the relevant pseudocode/functions in the dump and mapping them to the server flow.
+When the issue involves client/server contracts, packets, loading, map
+transitions, UI rendering, movement, mobs, or crashes, compare local client
+source, local server source, active local BIN data, and local logs before
+deciding root cause.

@@ -13,6 +13,8 @@ public:
 	void			UpdateCamera();
 	void			DBClick_Object( cType type, CsC_AvObject* pObject );
 	void			SetPos_FromMouse( POINT ptMouse, float fConnectLength, bool bRenderMoveModel, bool bAttack );
+	void			SetRotateOnly_FromMouse( POINT ptMouse );
+	void			SetRotateOnly_FromTargetPos( NiPoint3 vTargetPos );
 #ifdef ZONEMAP_CLICK_MOVE
 	void			SetPos_FromZoneMap(CsPoint ptPos, float fConnectLength = 0.f, bool bRenderMoveModel = true, bool bAttack = false);
 #endif
@@ -36,6 +38,7 @@ protected:
 	NiPoint3			m_vKeyDir;	
 	NiPoint3			m_vMappingKeyDir[ MAX_KMAP ];
 	DWORD				m_dwKeyCheck;
+	DWORD				m_dwRotateOnlyKeyCheck;
 	CsTimeSeq			m_RetryKeyCheckTimeSeq;
 #ifdef KEYBOARD_MOVE
 	NiPoint3			m_vMoveUpDir;		// 키보드 이동 방향
@@ -63,12 +66,16 @@ public:
 	void				RetryKeyCheck();						// 동일 값으로 키체크 다시 할때
 	void				SetKeyCheck( DWORD dwKey );	
 	DWORD				GetKeyCheck(){ return m_dwKeyCheck; }
+	void				SetRotateOnlyKeyCheck( DWORD dwKey );
+	DWORD				GetRotateOnlyKeyCheck(){ return m_dwRotateOnlyKeyCheck; }
 
 protected:
 	void				_Update_RetryKeyCheck();
 
 private:
 	bool				CheckStateTamerMoved();
+	CsC_AvObject*		GetControlledMoveObject();
+	void				ApplyRotateOnly( CsC_AvObject* pMoveObject, NiPoint3 vDir );
 
 	//=============================================================================================================
 	//	서버 이동
@@ -79,6 +86,7 @@ protected:
 	bool				m_bNewPath;
 	long				m_nOldTotalSize;
 	nSync::Pos			m_LastSyncPos;	
+	float				m_fLastSyncRot;
 
 public:
 	void				Delete();

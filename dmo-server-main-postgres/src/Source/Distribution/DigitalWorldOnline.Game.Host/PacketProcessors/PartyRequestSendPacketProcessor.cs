@@ -37,7 +37,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         public async Task Process(GameClient client, byte[] packetData)
         {
             var packet = new GamePacketReader(packetData);
-            var receiverName = packet.ReadString();
+            var receiverName = packet.ReadString().Replace("\0", string.Empty).Trim();
+
+            _logger.Information("PARTY request senderTamerId={SenderTamerId} senderName={SenderName} receiverName={ReceiverName}",
+                client.TamerId, client.Tamer.Name, receiverName);
 
             var targetCharacter = await _sender.Send(new CharacterByNameQuery(receiverName));
             if (targetCharacter == null)
@@ -66,6 +69,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         else
                         {
                             targetClient.Send(new PartyRequestSentSuccessPacket(client.Tamer.Name));
+                            _logger.Information("PARTY invite sent senderTamerId={SenderTamerId} targetTamerId={TargetTamerId} targetName={TargetName}",
+                                client.TamerId, targetClient.TamerId, targetClient.Tamer.Name);
                             _logger.Verbose($"Character {client.TamerId} sent party request to {targetCharacter.Id}.");
                         }
                     }

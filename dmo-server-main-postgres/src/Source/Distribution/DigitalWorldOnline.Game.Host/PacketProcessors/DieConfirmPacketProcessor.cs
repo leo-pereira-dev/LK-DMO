@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
 using DigitalWorldOnline.Application.GameAssets.Queries;
@@ -9,7 +9,7 @@ using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Models.Asset;
 using DigitalWorldOnline.Commons.Packets.Chat;
 using DigitalWorldOnline.Commons.Packets.MapServer;
-using DigitalWorldOnline.Commons.Utils;
+using DigitalWorldOnline.Game.Configuration;
 using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
 using MediatR;
@@ -30,13 +30,15 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private readonly IConfiguration _configuration;
         private readonly DungeonsServer _dungeonServer;
         private readonly OwnerStorageFlushService _ownerStorageFlushService;
+        private readonly DungeonExitDestinationResolver _dungeonExitDestinationResolver;
         public DieConfirmPacketProcessor(
             MapServer mapServer,
             ISender sender,
             IMapper mapper,
             IConfiguration configuration,
             DungeonsServer dungeonsServer,
-            OwnerStorageFlushService ownerStorageFlushService)
+            OwnerStorageFlushService ownerStorageFlushService,
+            DungeonExitDestinationResolver dungeonExitDestinationResolver)
         {
             _mapServer = mapServer;
             _sender = sender;
@@ -44,22 +46,22 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _configuration = configuration;
             _dungeonServer = dungeonsServer;
             _ownerStorageFlushService = ownerStorageFlushService;
+            _dungeonExitDestinationResolver = dungeonExitDestinationResolver;
         }
 
         public async Task Process(GameClient client, byte[] packetData)
         {
             if (client.DungeonMap)
             {
-                var map = UtilitiesFunctions.MapGroup(client.Tamer.Location.MapId);
+                var instance = _dungeonServer.FindMapByTamer(client.TamerId);
+                instance?.IncrementDungeonFailCount();
 
-                var waypoints = await _sender.Send(new MapRegionListAssetsByMapIdQuery(map));
-                if (waypoints == null || !waypoints.Regions.Any())
+                var destination = _dungeonExitDestinationResolver.Resolve(instance, client.Tamer.Location.MapId);
+                if (destination == null)
                 {
-                    client.Send(new SystemMessagePacket($"Map information not found for map Id {map}."));
+                    client.Send(new SystemMessagePacket($"Map information not found for dungeon {client.Tamer.Location.MapId}."));
                     return;
                 }
-
-                var destination = waypoints.Regions.First();
 
                 client.Tamer.Die();
 
@@ -67,10 +69,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 await _sender.Send(new UpdateCharacterActiveEvolutionCommand(client.Tamer.ActiveEvolution));
 
 
-                client.Tamer.NewLocation(map, destination.X, destination.Y);
+                client.Tamer.NewLocation(destination.MapId, destination.X, destination.Y);
                 await _sender.Send(new UpdateCharacterLocationCommand(client.Tamer.Location));
 
-                client.Tamer.Partner.NewLocation(map, destination.X, destination.Y);
+                client.Tamer.Partner.NewLocation(destination.MapId, destination.X, destination.Y);
                 await _sender.Send(new UpdateDigimonLocationCommand(client.Tamer.Partner.Location));
 
                 client.Tamer.UpdateState(CharacterStateEnum.Loading);
@@ -78,10 +80,11 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                 await _ownerStorageFlushService.FlushForTransitionAsync(client);
                 _dungeonServer.RemoveClient(client);
+                client.ClearLastDungeonEntry();
 
                 client.Send(new MapSwapPacket(
                     _configuration[GamerServerPublic],
-                    _configuration[GameServerPort],
+                    _configuration.GetPublicGameServerPort(),
                     client.Tamer.Location.MapId,
                     client.Tamer.Location.X,
                     client.Tamer.Location.Y)
@@ -109,7 +112,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                 client.Send(new MapSwapPacket(
                     _configuration[GamerServerPublic],
-                    _configuration[GameServerPort],
+                    _configuration.GetPublicGameServerPort(),
                     client.Tamer.Location.MapId,
                     client.Tamer.Location.X,
                     client.Tamer.Location.Y)

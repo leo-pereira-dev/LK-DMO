@@ -8,7 +8,9 @@ CSoundMgr::CSoundMgr()
 	m_pMusicAmbient		=	NULL;
 	m_pMusicOldAmbient	=	NULL;
 	m_pmapSound			=	NULL;
+	m_bEnableSound		=	false;
 	m_bActiveFocus		=	true;
+	m_bDeleteMusic		=	false;
 }
 
 CSoundMgr::~CSoundMgr()
@@ -68,7 +70,8 @@ void CSoundMgr::Destroy()
 		NISAFE_DELETE(*it3);
 	m_listCloneSound_System.clear();
 
-	NiAudioSystem::GetAudioSystem()->Shutdown();
+	if( m_bEnableSound )
+		NiAudioSystem::GetAudioSystem()->Shutdown();
 }
 
 NiAudioListener* CSoundMgr::GetListener()
@@ -696,5 +699,3 @@ CSound* CSoundMgr::GetStaticSound( char const* cSound, bool b3DSound, float fMin
 	}
 	return pSound->Clone();
 }
-
-

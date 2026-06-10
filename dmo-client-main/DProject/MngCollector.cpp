@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "MngCollector.h"
+#include "../LibProj/CsFunc/CrashLogger.h"
 
 CsGBTerrainMng*		g_pTerrainMng = NULL;
 CMngCollector*		g_pMngCollector = NULL;
@@ -279,25 +280,37 @@ void CMngCollector::Init()
 
 void CMngCollector::LoadTerrain( DWORD dwMapID )
 {
+	nsCSDEBUG::CrashLogger::LogMessage( "MNG LoadTerrain begin map=%u terrainMng=%p curRoot=%p",
+		(unsigned)dwMapID, g_pTerrainMng, nsCsGBTerrain::g_pCurRoot );
 	SetWindowTitle(-1, dwMapID);
 	int nValue = 62;
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::LOADING_PROGRESS_VALUE, &nValue );
 
 	//영역체크 이벤트 셋팅
+	nsCSDEBUG::CrashLogger::LogMessage( "MNG LoadTerrain ResetScene begin map=%u", (unsigned)dwMapID );
 	g_pEventSceneMng->ResetScene();
+	nsCSDEBUG::CrashLogger::LogMessage( "MNG LoadTerrain ResetScene end map=%u", (unsigned)dwMapID );
 
 	nValue = 64;
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::LOADING_PROGRESS_VALUE, &nValue );
 
+	nsCSDEBUG::CrashLogger::LogMessage( "MNG LoadTerrain ReLoadScene begin map=%u", (unsigned)dwMapID );
 	g_pGameEventMng->ReLoadScene( dwMapID );
+	nsCSDEBUG::CrashLogger::LogMessage( "MNG LoadTerrain ReLoadScene end map=%u", (unsigned)dwMapID );
 	nValue = 66;
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::LOADING_PROGRESS_VALUE, &nValue );
 
+	nsCSDEBUG::CrashLogger::LogMessage( "MNG LoadTerrain EventScene LoadScene begin map=%u", (unsigned)dwMapID );
 	g_pEventScene->LoadScene( dwMapID );
+	nsCSDEBUG::CrashLogger::LogMessage( "MNG LoadTerrain EventScene LoadScene end map=%u", (unsigned)dwMapID );
 	nValue = 68;
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::LOADING_PROGRESS_VALUE, &nValue );
 
+	nsCSDEBUG::CrashLogger::LogMessage( "MNG LoadTerrain CreateRoot begin map=%u terrainMng=%p",
+		(unsigned)dwMapID, g_pTerrainMng );
 	bool bSuccess = g_pTerrainMng->CreateRoot( dwMapID );
+	nsCSDEBUG::CrashLogger::LogMessage( "MNG LoadTerrain CreateRoot end map=%u success=%d curRoot=%p",
+		(unsigned)dwMapID, bSuccess ? 1 : 0, nsCsGBTerrain::g_pCurRoot );
 	assert_cs( bSuccess == true );			
 
 	nValue = 70;
@@ -309,6 +322,7 @@ void CMngCollector::LoadTerrain( DWORD dwMapID )
 	nsCsGBTerrain::g_pCurRoot->GetInfo()->s_fFogStart = fRate*nsCsGBTerrain::g_pCurRoot->GetOrgFogObject_Start();
 	nsCsGBTerrain::g_pCurRoot->GetInfo()->s_fFogEndObject = fRate*nsCsGBTerrain::g_pCurRoot->GetOrgFogObject_End();
 	nsCsGBTerrain::g_pCurRoot->CalFogDateValue();	
+	nsCSDEBUG::CrashLogger::LogMessage( "MNG LoadTerrain end map=%u clipRate=%.3f", (unsigned)dwMapID, fRate );
 }
 
 void CMngCollector::LoadChar( DWORD dwMapID )

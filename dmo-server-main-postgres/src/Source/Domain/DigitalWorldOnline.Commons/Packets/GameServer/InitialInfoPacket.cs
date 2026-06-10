@@ -10,8 +10,17 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
     public class InitialInfoPacket : PacketWriter
     {
         private const int PacketNumber = 1003;
+        private const int DoTutorialClientOption = 0x00000001;
+        private const int TutorialIntroVideoClientOption = 0x00000002;
         private const int GmPanelClientOption = unchecked((int)0x80000000);
-        private const int MaxClientEvolutionUnits = 16;
+        private const int MaxClientEvolutionUnits = 17;
+        private const int TutorialMapId = 4;
+        private const int YokohamaVillageMapId = 105;
+        private const int TutorialStartQuestId = 4020;
+        private const int TutorialFinalQuestId = 4053;
+        private const int TutorialIntroVideoMarkerQuestId = 8998;
+        private const int TutorialCompletedMarkerQuestId = 8999;
+        private const byte TutorialMaxStarterLevel = 10;
 
         /// <summary>
         /// Initial information for character spawn.
@@ -51,6 +60,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteInt(character.MS);
             WriteBytes(character.Equipment.ToArray());
             WriteBytes(character.ChipSets.ToArray());
+            WriteBytes(character.JogressChipSet.ToArray());
             WriteBytes(character.Digivice.ToArray());
             WriteBytes(character.TamerSkill.ToArray());
             WriteBytes(character.Progress.ToArray());
@@ -322,6 +332,10 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
                 WriteInt(0);
 
             var clientOption = accessLevel >= AccountAccessLevelEnum.Moderator ? GmPanelClientOption : 0;
+            if (ShouldRunTutorial(character))
+                clientOption |= DoTutorialClientOption;
+            if (ShouldPlayTutorialIntroVideo(character))
+                clientOption |= TutorialIntroVideoClientOption;
             WriteInt(clientOption); //clientOption (tutorial flags + local custom GM panel flag)
             WriteInt(0); //Achievement rank
 
@@ -490,6 +504,34 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
                     }
                 }
             }
+        }
+
+        private static bool ShouldRunTutorial(CharacterModel character)
+        {
+            var progress = character.Progress;
+            if (progress == null)
+                return false;
+
+            if (progress.IsQuestCompleted(TutorialCompletedMarkerQuestId) ||
+                progress.IsQuestCompleted(TutorialFinalQuestId))
+                return false;
+
+            if (progress.HasQuestInProgress(TutorialStartQuestId))
+                return true;
+
+            return character.Level <= TutorialMaxStarterLevel &&
+                   (character.Location.MapId == YokohamaVillageMapId ||
+                    character.Location.MapId == TutorialMapId);
+        }
+
+        private static bool ShouldPlayTutorialIntroVideo(CharacterModel character)
+        {
+            var progress = character.Progress;
+            if (progress == null)
+                return false;
+
+            return !progress.IsQuestCompleted(TutorialIntroVideoMarkerQuestId) &&
+                   ShouldRunTutorial(character);
         }
     }
 }

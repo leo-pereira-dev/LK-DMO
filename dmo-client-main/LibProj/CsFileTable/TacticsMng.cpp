@@ -2,6 +2,68 @@
 #include "stdafx.h"
 #include "TacticsMng.h"
 
+namespace
+{
+	struct sHatchTacticsSeed
+	{
+		DWORD dwDigitamaID;
+		int nDigimonID;
+		int nLowDataItem;
+		int nMidDataItem;
+		USHORT nLowDataCount;
+		USHORT nMidDataCount;
+		BYTE nLowLimitLevel;
+		BYTE nMidLimitLevel;
+		BYTE nLowViewWarning;
+		BYTE nMidViewWarning;
+	};
+
+	void UpsertHatchTacticsSeed( CsTactics::MAP& mapTactics, sHatchTacticsSeed const& seed )
+	{
+		CsTactics::sINFO info;
+		memset( &info, 0, sizeof( info ) );
+
+		info.s_nDigimonID = seed.nDigimonID;
+		info.s_nReqItemS_Type[ CsTactics::DATA_LV1 ] = seed.nLowDataItem;
+		info.s_nReqItemCount[ CsTactics::DATA_LV1 ] = seed.nLowDataCount;
+		info.s_nLimitLevel[ CsTactics::DATA_LV1 ] = seed.nLowLimitLevel;
+		info.s_nViewWarning[ CsTactics::DATA_LV1 ] = seed.nLowViewWarning;
+
+#ifdef TACTICS_USE_DATA_LV2
+		info.s_nReqItemS_Type[ CsTactics::DATA_LV2 ] = seed.nMidDataItem;
+		info.s_nReqItemCount[ CsTactics::DATA_LV2 ] = seed.nMidDataCount;
+		info.s_nLimitLevel[ CsTactics::DATA_LV2 ] = seed.nMidLimitLevel;
+		info.s_nViewWarning[ CsTactics::DATA_LV2 ] = seed.nMidViewWarning;
+#endif
+
+		CsTactics::MAP_IT it = mapTactics.find( seed.dwDigitamaID );
+		if( it != mapTactics.end() )
+		{
+			it->second->Init( &info );
+			return;
+		}
+
+		CsTactics* pObject = csnew CsTactics;
+		pObject->Init( &info );
+		mapTactics[ seed.dwDigitamaID ] = pObject;
+	}
+
+	void EnsureEosmonHatchTactics( CsTactics::MAP& mapTactics )
+	{
+		static sHatchTacticsSeed const seeds[] =
+		{
+			{ 78032, 35153, 8108, 8117, 10, 10, 3, 5, 0, 3 },
+			{ 78033, 35153, 8108, 8117, 10, 10, 4, 5, 0, 4 },
+			{ 78034, 35153, 8108, 8117, 10, 10, 5, 5, 0, 5 },
+			{ 78035, 35153, 8108, 8117, 10, 10, 3, 5, 0, 3 },
+			{ 78036, 35153, 8108, 8117, 10, 10, 4, 5, 0, 4 },
+		};
+
+		for( int i = 0; i < sizeof( seeds ) / sizeof( seeds[0] ); ++i )
+			UpsertHatchTacticsSeed( mapTactics, seeds[i] );
+	}
+}
+
 CsTacticsMng::CsTacticsMng()
 {
 
@@ -980,6 +1042,7 @@ bool CsTacticsMng::_LoadBin( char* cPath )
 	//////////////////////////////////////////////////////////////////////////
 
 	fclose( fp );
+	EnsureEosmonHatchTactics( m_mapTactics );
 	return true;
 }
 
@@ -1224,6 +1287,7 @@ void CsTacticsMng::_LoadFilePack( char* cPath )
 	//////////////////////////////////////////////////////////////////////////
 
 	CsFPS::CsFPSystem::SeekUnLock( FT_PACKHANDLE );
+	EnsureEosmonHatchTactics( m_mapTactics );
 }
 
 sTranscendInfo const*  CsTacticsMng::GetTranscendInfo(int const& nCurrentEvoIdx, int const& nCurrentGrowth) const

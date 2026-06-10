@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "FileTableMng.h"
+#include "../CsFunc/CrashLogger.h"
 
 CsFileTableMng::CsFileTableMng()
 {
@@ -89,16 +90,26 @@ bool CsFileTableMng::Init( nsCsFileTable::eFILE_TYPE eFileType, nsCsFileTable::e
 #define INIT_MNG_PATH( class, mng, bUse )\
 	if( ( bUse == true )&&( mng == NULL ) )\
 	{\
+		nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init begin class=%s path=%s", #class, cPath );\
 		mng = csnew class;\
 		if( mng->Init( cPath ) == false )\
+		{\
+			nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init failed class=%s path=%s", #class, cPath );\
 			return false;\
+		}\
+		nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init end class=%s", #class );\
 	}
 #define INIT_MNG_NOPATH( class, mng, bUse )\
 	if( ( bUse == true )&&( mng == NULL ) )\
 	{\
+		nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init begin class=%s", #class );\
 		mng = csnew class;\
 		if( mng->Init() == false )\
+		{\
+			nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init failed class=%s", #class );\
 			return false;\
+		}\
+		nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init end class=%s", #class );\
 	}
 
 	nsCsFileTable::g_eFileType = eFileType;
@@ -113,6 +124,7 @@ bool CsFileTableMng::Init( nsCsFileTable::eFILE_TYPE eFileType, nsCsFileTable::e
 
 	char cPath[ MAX_PATH ];
 	GetLanguagePath( eLanguage, cPath );
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE Init begin fileType=%d language=%d path=%s", eFileType, eLanguage, cPath );
 
 	INIT_MNG_PATH( CsTotalExcelMng, nsCsFileTable::g_pTotalExcelMng, nsCsFileTable::g_bUseTotalExcel_None );
 	INIT_MNG_PATH( CsDigimonMng, nsCsFileTable::g_pDigimonMng, nsCsFileTable::g_bUseDigimon );
@@ -137,24 +149,49 @@ bool CsFileTableMng::Init( nsCsFileTable::eFILE_TYPE eFileType, nsCsFileTable::e
 	INIT_MNG_PATH( CsGotchaMng, nsCsFileTable::g_pGotchaMng, nsCsFileTable::g_bUseGotcha );
 
 	nsCsFileTable::g_pEvolMng = csnew CDigimonEvolution;
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init begin class=%s path=%s", "CDigimonEvolution", cPath );
 	if( nsCsFileTable::g_pEvolMng->Init( cPath ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init failed class=%s path=%s", "CDigimonEvolution", cPath );
 		return false;
+	}
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init end class=%s", "CDigimonEvolution" );
 
 	nsCsFileTable::g_pTalkMng = csnew CsTalkMng;
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init begin class=%s path=%s", "CsTalkMng", cPath );
 	if( nsCsFileTable::g_pTalkMng->Init( cPath ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init failed class=%s path=%s", "CsTalkMng", cPath );
 		return false;
+	}
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init end class=%s", "CsTalkMng" );
 
 	nsCsFileTable::g_pTacticsMng = csnew CsTacticsMng;
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init begin class=%s path=%s", "CsTacticsMng", cPath );
 	if( nsCsFileTable::g_pTacticsMng->Init( cPath ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init failed class=%s path=%s", "CsTacticsMng", cPath );
 		return false;
+	}
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init end class=%s", "CsTacticsMng" );
 
 	nsCsFileTable::g_pWorldMapMng = csnew CsWorldMapMng;
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init begin class=%s path=%s", "CsWorldMapMng", cPath );
 	if( nsCsFileTable::g_pWorldMapMng->Init( cPath ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init failed class=%s path=%s", "CsWorldMapMng", cPath );
 		return false;
+	}
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init end class=%s", "CsWorldMapMng" );
 
 	nsCsFileTable::g_pTamerMng = csnew CsTamerMng;
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init begin class=%s path=%s", "CsTamerMng", cPath );
 	if( nsCsFileTable::g_pTamerMng->Init( cPath ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init failed class=%s path=%s", "CsTamerMng", cPath );
 		return false;
+	}
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE init end class=%s", "CsTamerMng" );
 
 	INIT_MNG_NOPATH( CsHelpMng, nsCsFileTable::g_pHelpMng, nsCsFileTable::g_bUseHelp );
 	INIT_MNG_NOPATH( CsMoveObjectMng, nsCsFileTable::g_pMoveObjectMng, nsCsFileTable::g_bUseMoveObject );	
@@ -170,6 +207,7 @@ bool CsFileTableMng::Init( nsCsFileTable::eFILE_TYPE eFileType, nsCsFileTable::e
 	INIT_MNG_PATH( CsEffectMng, nsCsFileTable::g_pEffectTBMng, nsCsFileTable::g_bEffectTBMng);
 	INIT_MNG_PATH( CsTimeChargeMng, nsCsFileTable::g_pTimeChargeMng, nsCsFileTable::g_bTimeChargeMng );
 	INIT_MNG_PATH( CsUnionTableMng, nsCsFileTable::g_pUnionTableMng, nsCsFileTable::g_bUnionTableMng );
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE Init end" );
 	return true;
 }
 

@@ -1450,6 +1450,7 @@ void CPartyContents::Recv_PartyInfoInit(void* pData)
 	else if( !m_PartyData.IsParty() && 0 != pRecv->m_nPartyIDX)
 	{
 		m_PartyData.m_unPartyID = pRecv->m_nPartyIDX;
+		m_PartyData.m_nMySlotNumber = pRecv->m_nMySlotNo;
 
 		std::list<TPartyMember>::const_iterator it = pRecv->m_listMemberInfo.begin();
 		for( ; it != pRecv->m_listMemberInfo.end(); ++it )
@@ -1745,7 +1746,7 @@ void CPartyContents::NTF_PartyMemberLootItem(void* pData)
 	if( !IsJoinParty() )
 		return;
 
-	CsItem* pGetItem = nsCsFileTable::g_pItemMng->GetItem( recv->m_GetItem.m_nType );
+	CsItem* pGetItem = nsCsFileTable::g_pItemMng->GetItem( recv->m_GetItem.GetType() );
 	SAFE_POINTER_RET(pGetItem);
 
 	CsItem::sINFO* pItemInfo = pGetItem->GetInfo();
@@ -1782,7 +1783,7 @@ void CPartyContents::NTF_PartyMemberLootItem(void* pData)
 
 	lootingInfo.m_nItemCount = recv->m_GetItem.GetCount();
 	lootingInfo.m_nSlotNum = nMemberSlot;
-	lootingInfo.m_dwItemType = recv->m_GetItem.m_nType;
+	lootingInfo.m_dwItemType = recv->m_GetItem.GetType();
 	cIconMng::_IconIDToTexIndex( lootingInfo.m_dwItemIconType, lootingInfo.m_dwItemIconIdx, NULL, pItemInfo->s_nIcon );
 	lootingInfo.m_sLootingrule = m_PartyData.m_sLootingRule;	
 	lootingInfo.m_ItemColor = g_pDataMng->GetItemColor( pItemInfo );

@@ -4,6 +4,22 @@
 
 namespace
 {
+const DWORD JOGRESS_XROSS_CHIPSET_SKILL_CODE = 2500245;
+
+bool IsJointProgressChipsetItem( cItemInfo const& item )
+{
+	if( item.IsEnable() == false )
+		return false;
+
+	SAFE_POINTER_RETVAL( nsCsFileTable::g_pItemMng, false );
+	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( item.GetType() );
+	SAFE_POINTER_RETVAL( pFTItem, false );
+	CsItem::sINFO* pInfo = pFTItem->GetInfo();
+	SAFE_POINTER_RETVAL( pInfo, false );
+
+	return pInfo->s_nType_L == nItem::Chipset && pInfo->s_dwSkill == JOGRESS_XROSS_CHIPSET_SKILL_CODE;
+}
+
 void CopyItemInfoFields( cItemInfo& dest, const cItemInfo& src )
 {
 	dest.m_nAll = src.m_nAll;
@@ -43,13 +59,19 @@ void cData_Digivice::Reset()
 	m_nChipsetCount = 0;
 	m_nTamerSkillCount = 0;
 
+	memset( m_EvoChipset, 0, sizeof(cItemInfo) );
 	memset( m_Chipset, 0, sizeof(cItemInfo)*nLimit::Chipset );
 	memset( m_TamerSkill, 0, sizeof(cItemInfo)*nLimit::SkillSlot );
 }
 
 void cData_Digivice::SetChipsetCount(int nCount)
 {
-	m_nChipsetCount = nCount;
+	if( nCount < 0 )
+		m_nChipsetCount = 0;
+	else if( nCount > nLimit::Chipset )
+		m_nChipsetCount = nLimit::Chipset;
+	else
+		m_nChipsetCount = nCount;
 }
 
 cItemInfo*	cData_Digivice::GetChipset_TypeL( int nType_L )
@@ -70,6 +92,8 @@ cItemInfo*	cData_Digivice::GetChipset_TypeL( int nType_L )
 
 bool cData_Digivice::DoYouHaveJointProgressChipset( )
 {
+	return IsJointProgressChipsetItem( m_EvoChipset[ 0 ] );
+
 	CsItem::sINFO* pInfo = NULL;
 
 	for( uint i=0; i<nLimit::Chipset; ++i )
@@ -77,7 +101,7 @@ bool cData_Digivice::DoYouHaveJointProgressChipset( )
 		if( m_Chipset[ i ].IsEnable() == false )
 			continue;		 
 
-		pInfo = nsCsFileTable::g_pItemMng->GetItem( m_Chipset[ i ].m_nType )->GetInfo();
+		pInfo = nsCsFileTable::g_pItemMng->GetItem( m_Chipset[ i ].GetType() )->GetInfo();
 		if( 0 != pInfo->s_nType_S )	// data테이블에 정의된 52"01"~"02" 값으로 비교..
 			return true;
 	}
@@ -88,12 +112,18 @@ int cData_Digivice::GetCount_Item_TypeL( int nType_L )
 {
 	CsItem::sINFO* pInfo = NULL;
 	int nReturn = 0;
+	if( m_EvoChipset[ 0 ].IsEnable() )
+	{
+		pInfo = nsCsFileTable::g_pItemMng->GetItem( m_EvoChipset[ 0 ].GetType() )->GetInfo();
+		if( pInfo->s_nType_L == nType_L )
+			nReturn += m_EvoChipset[ 0 ].GetCount();
+	}
 	for( uint i=0; i<nLimit::Chipset; ++i )
 	{
 		if( m_Chipset[ i ].IsEnable() == false )
 			continue;
 
-		pInfo = nsCsFileTable::g_pItemMng->GetItem( m_Chipset[ i ].m_nType )->GetInfo();
+		pInfo = nsCsFileTable::g_pItemMng->GetItem( m_Chipset[ i ].GetType() )->GetInfo();
 		if( pInfo->s_nType_L == nType_L )
 			nReturn += m_Chipset[ i ].GetCount();
 	}
@@ -101,6 +131,18 @@ int cData_Digivice::GetCount_Item_TypeL( int nType_L )
 }
 
 // 01, 02 값으로 디지바이스에 아이템있으면 인덱스를 리턴
+cItemInfo* cData_Digivice::GetJointProgressChipset_TypeLT( int nType_L, int nType_T )
+{
+	if( m_EvoChipset[ 0 ].IsEnable() )
+	{
+		CsItem::sINFO* pInfo = nsCsFileTable::g_pItemMng->GetItem( m_EvoChipset[ 0 ].GetType() )->GetInfo();
+		DWORD nTotalType = pInfo->s_nType_L * 100 + pInfo->s_nType_S;
+		if( pInfo->s_nType_L == nType_L && nTotalType == (DWORD)nType_T )
+			return &m_EvoChipset[ 0 ];
+	}
+	return NULL;
+}
+
 int	cData_Digivice::GetChipsetIndex_TypeLT( int nType_L, int nType_T )
 {
 	CsItem::sINFO* pInfo = NULL;
@@ -109,7 +151,7 @@ int	cData_Digivice::GetChipsetIndex_TypeLT( int nType_L, int nType_T )
 		cItemInfo *pItem = &m_Chipset[ i ];
 		if( pItem->IsEnable()){			
 
-			pInfo = nsCsFileTable::g_pItemMng->GetItem( m_Chipset[ i ].m_nType )->GetInfo();
+			pInfo = nsCsFileTable::g_pItemMng->GetItem( m_Chipset[ i ].GetType() )->GetInfo();
 			DWORD t = pInfo->s_nType_L * 100 + pInfo->s_nType_S;
 			if( t == nType_T)			
 				return i;			
@@ -138,6 +180,42 @@ bool cData_Digivice::ItemRemove_NoServer( int nIndex, bool bCalQuest )
 	return true;
 }
 
+void cData_Digivice::EvoChipsetToInven( int nInvenIndex )
+{
+	cData_Inven* pInven = g_pDataMng->GetInven();
+	SAFE_POINTER_RET( pInven );
+
+	if( pInven->GetData( nInvenIndex )->IsEnable() == false )
+	{
+		assert_cs( m_EvoChipset[ 0 ].IsEnable() );
+		CopyItemInfoFields( *pInven->GetData( nInvenIndex ), m_EvoChipset[ 0 ] );
+		m_EvoChipset[ 0 ].Reset();
+	}
+	else
+	{
+		cItemInfo Temp;
+		CopyItemInfoFields( Temp, *pInven->GetData( nInvenIndex ) );
+		CopyItemInfoFields( *pInven->GetData( nInvenIndex ), m_EvoChipset[ 0 ] );
+
+		if( nsCsFileTable::g_pItemMng->GetItem( Temp.GetType() )->GetInfo()->s_nBelonging == 1 )
+			Temp.m_nLimited = 1;
+
+		CopyItemInfoFields( m_EvoChipset[ 0 ], Temp );
+	}
+
+#ifdef UI_INVENTORY_RENEWAL
+	std::pair< int, bool > pairInfo( nInvenIndex, false );
+	GAME_EVENT_ST.OnEvent( EVENT_CODE::ADD_NEWITEM_INVENTORY, &pairInfo );
+#endif
+
+	GAME_EVENT_ST.OnEvent( EVENT_CODE::UPDATE_TAMERSTATUS, NULL );
+}
+
+void cData_Digivice::InvenToEvoChipset( int nInvenIndex )
+{
+	EvoChipsetToInven( nInvenIndex );
+}
+
 void cData_Digivice::ChipsetToInven( int nSrcIndex, int nInvenIndex )
 {
 	// 비여있는 인벤토리인가
@@ -162,7 +240,7 @@ void cData_Digivice::ChipsetToInven( int nSrcIndex, int nInvenIndex )
 		CopyItemInfoFields( *pInven->GetData( nInvenIndex ), *GetChipset( nSrcIndex ) );		
 
 		// 귀속 처리
-		if( nsCsFileTable::g_pItemMng->GetItem( Temp.m_nType )->GetInfo()->s_nBelonging == 1 )
+		if( nsCsFileTable::g_pItemMng->GetItem( Temp.GetType() )->GetInfo()->s_nBelonging == 1 )
 			Temp.m_nLimited = 1;
 
 		// 칩셋에 넣어주자

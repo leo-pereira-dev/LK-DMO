@@ -1,0 +1,13 @@
+#include "stdafx.h"
+
+#if defined(_WIN64)
+#include <initguid.h>
+
+// D3DX9 effect GUIDs are declared by the NuGet headers but not provided by
+// the x64 library package in this build path.
+DEFINE_GUID(IID_ID3DXEffectStateManager,
+    0x79aab587, 0x6dbc, 0x4fa7, 0x82, 0xde, 0x37, 0xfa, 0x17, 0x81, 0xc5, 0xce);
+
+DEFINE_GUID(IID_ID3DXEffect,
+    0xf6ceb4b3, 0x4e4c, 0x40dd, 0xb8, 0x83, 0x8d, 0x8d, 0xe5, 0xea, 0x0c, 0xd5);
+#endif

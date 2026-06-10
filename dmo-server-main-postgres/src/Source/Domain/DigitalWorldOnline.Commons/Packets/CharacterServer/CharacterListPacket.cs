@@ -12,8 +12,10 @@ namespace DigitalWorldOnline.Commons.Packets.CharacterServer
         {
             Type(PacketNumber);
 
-            foreach (var character in characters.Where(x => x.Partner != null))
+            foreach (var character in characters.Where(x => x.Digimons.Any()))
             {
+                var partner = character.Partner;
+
                 WriteByte(character.Position);
                 WriteShort(character.Location.MapId);
                 WriteInt(character.Model.GetHashCode());
@@ -28,10 +30,10 @@ namespace DigitalWorldOnline.Commons.Packets.CharacterServer
                         WriteBytes(character.Equipment.Items[i].ToArray(true));
                 }
 
-                WriteInt(character.Partner.BaseType);
-                WriteByte(character.Partner.Level);
-                WriteString(character.Partner.Name);
-                WriteShort(character.Partner.Size);
+                WriteInt(partner.BaseType);
+                WriteByte(partner.Level);
+                WriteString(partner.Name);
+                WriteShort(partner.Size);
 
                 // Keep legacy 6-byte tail for this client build:
                 // u2 patLeader + n4 reserved/relocate.

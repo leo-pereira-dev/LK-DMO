@@ -2,6 +2,30 @@
 #include "stdafx.h"
 #include "CsGBTerrainLeaf.h"
 
+#if defined(DMO_X64_WINDX9_BRIDGE)
+namespace
+{
+	struct sDiskNiTriInfoWin32
+	{
+		NiPoint2		s_ptOffsetPos;
+		int				s_nVertCount;
+		int				s_nTemp1;
+		float			s_fTemp2;
+		unsigned short	s_usNiTerrainIndex;
+		DWORD			s_dwObjectCount;
+		char			s_cDetail_Map0[ MAX_PATH ];
+		char			s_cDetail_Map1[ MAX_PATH ];
+		char			s_cDetail_Map2[ MAX_PATH ];
+		char			s_cDetail_Map3[ MAX_PATH ];
+		char			s_cDetail_Map4[ MAX_PATH ];
+		int				s_nShaderCord;
+		DWORD			s_pfHeight;
+	};
+
+	static_assert(sizeof(sDiskNiTriInfoWin32) == 1336, "Unexpected Win32 leaf tri info disk size");
+}
+#endif
+
 DWORD CsGBTerrainLeaf::m_dwObjectUniqIDConstant = 0;
 
 CsGBTerrainLeaf::sNiTriINFO::sNiTriINFO():s_ptOffsetPos(NiPoint2::ZERO),s_nVertCount(0),s_nTemp1(0),s_fTemp2(0.0f),s_usNiTerrainIndex(0),s_dwObjectCount(0),s_nShaderCord(0),s_pfHeight(NULL)
@@ -1047,8 +1071,26 @@ void CsGBTerrainLeaf::_LoadExtraData( CsNiNodePtr pBaseNiNode )
 
 	// 값할당
 	UINT uiOffset = 0;
+#if defined(DMO_X64_WINDX9_BRIDGE)
+	const sDiskNiTriInfoWin32* pDiskInfo = (const sDiskNiTriInfoWin32*)pData;
+	m_NiTriInfo.s_ptOffsetPos = pDiskInfo->s_ptOffsetPos;
+	m_NiTriInfo.s_nVertCount = pDiskInfo->s_nVertCount;
+	m_NiTriInfo.s_nTemp1 = pDiskInfo->s_nTemp1;
+	m_NiTriInfo.s_fTemp2 = pDiskInfo->s_fTemp2;
+	m_NiTriInfo.s_usNiTerrainIndex = pDiskInfo->s_usNiTerrainIndex;
+	m_NiTriInfo.s_dwObjectCount = pDiskInfo->s_dwObjectCount;
+	memcpy( m_NiTriInfo.s_cDetail_Map0, pDiskInfo->s_cDetail_Map0, sizeof( m_NiTriInfo.s_cDetail_Map0 ) );
+	memcpy( m_NiTriInfo.s_cDetail_Map1, pDiskInfo->s_cDetail_Map1, sizeof( m_NiTriInfo.s_cDetail_Map1 ) );
+	memcpy( m_NiTriInfo.s_cDetail_Map2, pDiskInfo->s_cDetail_Map2, sizeof( m_NiTriInfo.s_cDetail_Map2 ) );
+	memcpy( m_NiTriInfo.s_cDetail_Map3, pDiskInfo->s_cDetail_Map3, sizeof( m_NiTriInfo.s_cDetail_Map3 ) );
+	memcpy( m_NiTriInfo.s_cDetail_Map4, pDiskInfo->s_cDetail_Map4, sizeof( m_NiTriInfo.s_cDetail_Map4 ) );
+	m_NiTriInfo.s_nShaderCord = pDiskInfo->s_nShaderCord;
+	m_NiTriInfo.s_pfHeight = NULL;
+	uiOffset += sizeof(sDiskNiTriInfoWin32);
+#else
 	memcpy( &m_NiTriInfo, pData, sizeof( sNiTriINFO ) );
 	uiOffset += sizeof( sNiTriINFO );
+#endif
 
 	// Height Field	
 	m_NiTriInfo.s_pfHeight = csnew float[ m_NiTriInfo.s_nVertCount ];

@@ -8,7 +8,9 @@
 //---------------------------------------------------------------------------
 #include "stdafx.h"
 #include "DXVersionChecker.h"
+#if !defined(_WIN64)
 #include "Dsetup.h"
+#endif
 #include <shellapi.h>
 
 
@@ -40,7 +42,13 @@ DXVersionChecker::VERSION_RESULT DXVersionChecker::CheckDXVersionRequirement( DW
 {
 	DWORD dwVersion = 0;
 	DWORD dwRevision = 0;
+#if defined(_WIN64)
+	dwVersion = p_dwDXVersion;
+	dwRevision = p_dwRevision;
+	INT nResult = 1;
+#else
 	INT nResult = DirectXSetupGetVersion( &dwVersion, &dwRevision );
+#endif
 	if( 0 == nResult )
 		return DX_RESULT_DO_NOT_DXINSTALL;
 

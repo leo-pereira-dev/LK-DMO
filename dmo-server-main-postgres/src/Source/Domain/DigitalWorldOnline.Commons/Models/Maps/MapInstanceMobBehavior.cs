@@ -215,6 +215,7 @@ namespace DigitalWorldOnline.Commons.Models.Map
                 (baseDamage * levelBonusMultiplier));
             #endregion
 
+            finalDmg = ApplyIncomingPartnerDamageReduction(mob.Target, finalDmg, skillDamage: false);
             if (finalDmg <= 0) finalDmg = 1;
 
             var previousHp = mob.Target.CurrentHp;
@@ -280,6 +281,7 @@ namespace DigitalWorldOnline.Commons.Models.Map
                 (baseDamage * levelBonusMultiplier));
             #endregion
 
+            finalDmg = ApplyIncomingPartnerDamageReduction(mob.Target, finalDmg, skillDamage: false);
             if (finalDmg <= 0) finalDmg = 1;
 
             var previousHp = mob.Target.CurrentHp;
@@ -303,6 +305,17 @@ namespace DigitalWorldOnline.Commons.Models.Map
 
             mob.UpdateLastHit();
             mob.UpdateLastHitTry();
+        }
+
+        private static int ApplyIncomingPartnerDamageReduction(
+            DigimonModel target,
+            int damage,
+            bool skillDamage)
+        {
+            if (target == null || damage <= 0)
+                return damage;
+
+            return target.ApplyIncomingDamageReduction(damage, skillDamage);
         }
         /// <summary>
         /// Resolve a skill's AoE radius: prefer the bin-joined value from
@@ -451,12 +464,13 @@ namespace DigitalWorldOnline.Commons.Models.Map
             var hits = new List<MobAreaSkillPacket.Hit>(markCount);
             foreach (var partner in marks)
             {
-                var newHp = partner.ReceiveDamage(perTarget);
+                var hitDamage = ApplyIncomingPartnerDamageReduction(partner, perTarget, skillDamage: true);
+                var newHp = partner.ReceiveDamage(hitDamage);
                 var hpRate = (byte)((long)partner.CurrentHp * 255L / Math.Max(1, partner.HP));
                 bool died = newHp <= 0;
                 if (died) partner.Die();
                 markHandlers.Add(partner.GeneralHandler);
-                hits.Add(new MobAreaSkillPacket.Hit(partner.GeneralHandler, perTarget, hpRate, died));
+                hits.Add(new MobAreaSkillPacket.Hit(partner.GeneralHandler, hitDamage, hpRate, died));
             }
 
             BroadcastForTargetTamers(mob.TamersViewing,
@@ -535,6 +549,7 @@ namespace DigitalWorldOnline.Commons.Models.Map
         private void ApplyFallbackDamageSkill(MobConfigModel mob, MonsterSkillInfoAssetModel targetSkill, int damage)
         {
             List<CharacterModel> targetTamers = new();
+            var targetDamages = new Dictionary<long, int>();
             var targetTamersCopy = new List<CharacterModel>(mob.TargetTamers);
 
             foreach (var target in targetTamersCopy)
@@ -551,7 +566,9 @@ namespace DigitalWorldOnline.Commons.Models.Map
                 if (diff > MobSkillRadius(targetSkill))
                     continue;
 
-                var newHp = clientToModify.Partner.ReceiveDamage(damage);
+                var hitDamage = ApplyIncomingPartnerDamageReduction(clientToModify.Partner, damage, skillDamage: true);
+                var newHp = clientToModify.Partner.ReceiveDamage(hitDamage);
+                targetDamages[target.Partner.Id] = hitDamage;
                 targetTamers.Add(target);
 
                 if (newHp <= 0)
@@ -569,14 +586,18 @@ namespace DigitalWorldOnline.Commons.Models.Map
             foreach (var hitTarget in targetTamers)
             {
                 var hpRate = (byte)((long)hitTarget.Partner.CurrentHp * 255L / Math.Max(1, hitTarget.Partner.HP));
+                var hitDamage = targetDamages.TryGetValue(hitTarget.Partner.Id, out var reducedDamage)
+                    ? reducedDamage
+                    : damage;
                 BroadcastForTargetTamers(mob.TamersViewing, new SkillHitPacket(
-                    mob.GeneralHandler, hitTarget.Partner.GeneralHandler, 0, damage, hpRate).Serialize());
+                    mob.GeneralHandler, hitTarget.Partner.GeneralHandler, targetSkill.SkillId, hitDamage, hpRate).Serialize());
             }
         }
 
         private void ApplyFallbackDamageSkill(SummonMobModel mob, MonsterSkillInfoAssetModel targetSkill, int damage)
         {
             List<CharacterModel> targetTamers = new();
+            var targetDamages = new Dictionary<long, int>();
             var targetTamersCopy = new List<CharacterModel>(mob.TargetTamers);
 
             foreach (var target in targetTamersCopy)
@@ -593,7 +614,9 @@ namespace DigitalWorldOnline.Commons.Models.Map
                 if (diff > MobSkillRadius(targetSkill))
                     continue;
 
-                var newHp = targetPartner.ReceiveDamage(damage);
+                var hitDamage = ApplyIncomingPartnerDamageReduction(targetPartner, damage, skillDamage: true);
+                var newHp = targetPartner.ReceiveDamage(hitDamage);
+                targetDamages[target.Partner.Id] = hitDamage;
                 targetTamers.Add(target);
 
                 if (newHp <= 0)
@@ -611,8 +634,11 @@ namespace DigitalWorldOnline.Commons.Models.Map
             foreach (var hitTarget in targetTamers)
             {
                 var hpRate = (byte)((long)hitTarget.Partner.CurrentHp * 255L / Math.Max(1, hitTarget.Partner.HP));
+                var hitDamage = targetDamages.TryGetValue(hitTarget.Partner.Id, out var reducedDamage)
+                    ? reducedDamage
+                    : damage;
                 BroadcastForTargetTamers(mob.TamersViewing, new SkillHitPacket(
-                    mob.GeneralHandler, hitTarget.Partner.GeneralHandler, 0, damage, hpRate).Serialize());
+                    mob.GeneralHandler, hitTarget.Partner.GeneralHandler, targetSkill.SkillId, hitDamage, hpRate).Serialize());
             }
         }
 
@@ -715,7 +741,10 @@ namespace DigitalWorldOnline.Commons.Models.Map
                         mob.CurrentLocation.Y, target.Location.Y);
                     if (d > MobSkillRadius(targetSkill)) break;
 
-                    var dmg = RollMonsterSkillValue(targetSkill);
+                    var dmg = ApplyIncomingPartnerDamageReduction(
+                        target,
+                        RollMonsterSkillValue(targetSkill),
+                        skillDamage: true);
                     var newHp = target.ReceiveDamage(dmg);
                     if (newHp <= 0) clientToModify.Partner.Die();
 
@@ -723,7 +752,7 @@ namespace DigitalWorldOnline.Commons.Models.Map
                     BroadcastForTargetTamers(mob.TamersViewing,
                         new MonsterSkillVisualPacket(mob.GeneralHandler, targetSkill.SkillId).Serialize());
                     BroadcastForTargetTamers(mob.TamersViewing,
-                        new SkillHitPacket(mob.GeneralHandler, target.GeneralHandler, 0, dmg, hpRate).Serialize());
+                        new SkillHitPacket(mob.GeneralHandler, target.GeneralHandler, targetSkill.SkillId, dmg, hpRate).Serialize());
 
                     // Debuff stack — EffectFactor[0] = debuff BuffId, EffectFactorValue[0] = duration ms.
                     int debuffId = targetSkill.EffectFactor.Length > 0 ? targetSkill.EffectFactor[0] : 0;
@@ -805,13 +834,16 @@ namespace DigitalWorldOnline.Commons.Models.Map
                     // link as a fresh roll of [MinValue..MaxValue]).
                     foreach (var link in chain)
                     {
-                        var dmg = RollMonsterSkillValue(targetSkill);
+                        var dmg = ApplyIncomingPartnerDamageReduction(
+                            link,
+                            RollMonsterSkillValue(targetSkill),
+                            skillDamage: true);
                         var newHp = link.ReceiveDamage(dmg);
                         var hpRate = (byte)((long)link.CurrentHp * 255L / System.Math.Max(1, (int)link.HP));
                         bool died = newHp <= 0;
                         if (died) link.Die();
                         BroadcastForTargetTamers(mob.TamersViewing,
-                            new SkillHitPacket(mob.GeneralHandler, link.GeneralHandler, 0, dmg, hpRate).Serialize());
+                            new SkillHitPacket(mob.GeneralHandler, link.GeneralHandler, targetSkill.SkillId, dmg, hpRate).Serialize());
                     }
 
                     // Chain-VFX broadcast (cosmetic): the chain packet only renders the
@@ -839,10 +871,11 @@ namespace DigitalWorldOnline.Commons.Models.Map
                         var partner = c.Tamer?.Partner;
                         if (partner == null || !partner.Alive) continue;
                         if (partner.Location.MapId != mob.Location.MapId) continue;
-                        var newHp = partner.ReceiveDamage(dmg);
+                        var hitDamage = ApplyIncomingPartnerDamageReduction(partner, dmg, skillDamage: true);
+                        var newHp = partner.ReceiveDamage(hitDamage);
                         var hpRate = (byte)((long)partner.CurrentHp * 255L / Math.Max(1, partner.HP));
                         BroadcastForTargetTamers(mob.TamersViewing,
-                            new SkillHitPacket(mob.GeneralHandler, partner.GeneralHandler, 0, dmg, hpRate).Serialize());
+                            new SkillHitPacket(mob.GeneralHandler, partner.GeneralHandler, targetSkill.SkillId, hitDamage, hpRate).Serialize());
                         if (newHp <= 0) partner.Die();
                     }
                     break;
@@ -1068,11 +1101,12 @@ namespace DigitalWorldOnline.Commons.Models.Map
                                         z.CenterX, partner.Location.X,
                                         z.CenterY, partner.Location.Y) > z.Radius) continue;
 
-                                    var newHp = partner.ReceiveDamage(dmg);
+                                    var hitDamage = ApplyIncomingPartnerDamageReduction(partner, dmg, skillDamage: true);
+                                    var newHp = partner.ReceiveDamage(hitDamage);
                                     var hpRate = (byte)((long)partner.CurrentHp * 255L / System.Math.Max(1, (int)partner.HP));
                                     bool died = newHp <= 0;
                                     if (died) partner.Die();
-                                    hits.Add(new MobAreaSkillPacket.Hit(partner.GeneralHandler, dmg, hpRate, died));
+                                    hits.Add(new MobAreaSkillPacket.Hit(partner.GeneralHandler, hitDamage, hpRate, died));
                                 }
                                 if (hits.Count > 0)
                                     map.BroadcastForTargetTamers(viewing,
@@ -1120,11 +1154,12 @@ namespace DigitalWorldOnline.Commons.Models.Map
                                 if (partner.Location.MapId != mapId) continue;
                                 if (UtilitiesFunctions.CalculateDistance(
                                     cx, partner.Location.X, cy, partner.Location.Y) > z.Radius) continue;
-                                var newHp = partner.ReceiveDamage(dmg);
+                                var hitDamage = ApplyIncomingPartnerDamageReduction(partner, dmg, skillDamage: true);
+                                var newHp = partner.ReceiveDamage(hitDamage);
                                 var hpRate = (byte)((long)partner.CurrentHp * 255L / System.Math.Max(1, (int)partner.HP));
                                 bool died = newHp <= 0;
                                 if (died) partner.Die();
-                                hits.Add(new MobAreaSkillPacket.Hit(partner.GeneralHandler, dmg, hpRate, died));
+                                hits.Add(new MobAreaSkillPacket.Hit(partner.GeneralHandler, hitDamage, hpRate, died));
                             }
                             if (hits.Count > 0)
                                 map.BroadcastForTargetTamers(viewing,
@@ -1232,11 +1267,12 @@ namespace DigitalWorldOnline.Commons.Models.Map
                             { inAny = true; break; }
                         }
                         if (!inAny) continue;
-                        var newHp = partner.ReceiveDamage(dmg);
+                        var hitDamage = ApplyIncomingPartnerDamageReduction(partner, dmg, skillDamage: true);
+                        var newHp = partner.ReceiveDamage(hitDamage);
                         var hpRate = (byte)((long)partner.CurrentHp * 255L / System.Math.Max(1, (int)partner.HP));
                         bool died = newHp <= 0;
                         if (died) partner.Die();
-                        hits.Add(new MobAreaSkillPacket.Hit(partner.GeneralHandler, dmg, hpRate, died));
+                        hits.Add(new MobAreaSkillPacket.Hit(partner.GeneralHandler, hitDamage, hpRate, died));
                     }
                     if (hits.Count > 0)
                         BroadcastForTargetTamers(mob.TamersViewing,
@@ -1250,6 +1286,7 @@ namespace DigitalWorldOnline.Commons.Models.Map
                 case EffectLegacyHardcoded:
                     {
                         List<CharacterModel> targetTamers = new List<CharacterModel>();
+                        var targetDamages = new Dictionary<long, int>();
 
                         var finalDamage = RollMonsterSkillValue(targetSkill);
 
@@ -1271,7 +1308,12 @@ namespace DigitalWorldOnline.Commons.Models.Map
 
                                 if (diff <= MobSkillRadius(targetSkill))
                                 {
-                                    var newHp = clientToModify.Partner.ReceiveDamage(finalDamage);
+                                    var hitDamage = ApplyIncomingPartnerDamageReduction(
+                                        clientToModify.Partner,
+                                        finalDamage,
+                                        skillDamage: true);
+                                    var newHp = clientToModify.Partner.ReceiveDamage(hitDamage);
+                                    targetDamages[target.Partner.Id] = hitDamage;
 
                                     targetTamers.Add(target);
 
@@ -1314,8 +1356,11 @@ namespace DigitalWorldOnline.Commons.Models.Map
                                 foreach (var hitTarget in targetTamers)
                                 {
                                     var hpRate = (byte)((long)hitTarget.Partner.CurrentHp * 255L / Math.Max(1, hitTarget.Partner.HP));
+                                    var hitDamage = targetDamages.TryGetValue(hitTarget.Partner.Id, out var reducedDamage)
+                                        ? reducedDamage
+                                        : finalDamage;
                                     BroadcastForTargetTamers(mob.TamersViewing, new SkillHitPacket(
-                                        mob.GeneralHandler, hitTarget.Partner.GeneralHandler, 0, finalDamage, hpRate).Serialize());
+                                        mob.GeneralHandler, hitTarget.Partner.GeneralHandler, targetSkill.SkillId, hitDamage, hpRate).Serialize());
                                 }
 
                                 Task.Run(() =>
@@ -1360,6 +1405,7 @@ namespace DigitalWorldOnline.Commons.Models.Map
                 case EffectLegacyHardcoded:
                     {
                         List<CharacterModel> targetTamers = new List<CharacterModel>();
+                        var targetDamages = new Dictionary<long, int>();
 
                         var finalDamage = RollMonsterSkillValue(targetSkill);
 
@@ -1381,7 +1427,12 @@ namespace DigitalWorldOnline.Commons.Models.Map
 
                                 if (diff <= MobSkillRadius(targetSkill))
                                 {
-                                    var newHp = clientToModify.ReceiveDamage(finalDamage);
+                                    var hitDamage = ApplyIncomingPartnerDamageReduction(
+                                        clientToModify,
+                                        finalDamage,
+                                        skillDamage: true);
+                                    var newHp = clientToModify.ReceiveDamage(hitDamage);
+                                    targetDamages[target.Partner.Id] = hitDamage;
 
                                     targetTamers.Add(target);
 
@@ -1411,8 +1462,11 @@ namespace DigitalWorldOnline.Commons.Models.Map
                                 foreach (var hitTarget in targetTamers)
                                 {
                                     var hpRate = (byte)((long)hitTarget.Partner.CurrentHp * 255L / Math.Max(1, hitTarget.Partner.HP));
+                                    var hitDamage = targetDamages.TryGetValue(hitTarget.Partner.Id, out var reducedDamage)
+                                        ? reducedDamage
+                                        : finalDamage;
                                     BroadcastForTargetTamers(mob.TamersViewing, new SkillHitPacket(
-                                        mob.GeneralHandler, hitTarget.Partner.GeneralHandler, 0, finalDamage, hpRate).Serialize());
+                                        mob.GeneralHandler, hitTarget.Partner.GeneralHandler, targetSkill.SkillId, hitDamage, hpRate).Serialize());
                                 }
 
                                 Task.Run(() =>

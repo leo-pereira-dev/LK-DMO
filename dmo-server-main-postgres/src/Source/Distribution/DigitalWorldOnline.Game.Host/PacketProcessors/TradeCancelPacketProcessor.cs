@@ -30,20 +30,29 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         public async Task Process(GameClient client, byte[] packetData)
         {
             var packet = new GamePacketReader(packetData);
-            var TargetHandle = packet.ReadInt();
+            var targetHandleRaw = packet.ReadInt();
+            var targetHandle = (ushort)targetHandleRaw;
 
+            _logger.Information("TRADE cancel senderTamerId={SenderTamerId} senderHandle={SenderHandle} targetHandleRaw={TargetHandleRaw} targetHandle={TargetHandle}",
+                client.TamerId, client.Tamer.GeneralHandler, targetHandleRaw, targetHandle);
 
-            var targetClient = _mapServer.FindClientByTamerHandle(TargetHandle);
+            var targetClient = _mapServer.FindClientByTamerHandle(targetHandle);
+            if (targetClient == null)
+            {
+                client.Tamer.ClearTrade();
+                _logger.Warning("TRADE cancel target not found senderTamerId={SenderTamerId} senderHandle={SenderHandle} targetHandleRaw={TargetHandleRaw} targetHandle={TargetHandle}",
+                    client.TamerId, client.Tamer.GeneralHandler, targetHandleRaw, targetHandle);
+                return;
+            }
 
             client.Tamer.ClearTrade();
             targetClient.Tamer.ClearTrade();
 
             targetClient.Send(new TradeCancelPacket(client.Tamer.GeneralHandler));
-            client.Send(new TradeCancelPacket(TargetHandle));
+            client.Send(new TradeCancelPacket(targetHandle));
             _logger.Verbose($"Character {client.TamerId} and  {targetClient.TamerId} cancel trade or refuse"); ;
 
         }
 
     }
 }
-

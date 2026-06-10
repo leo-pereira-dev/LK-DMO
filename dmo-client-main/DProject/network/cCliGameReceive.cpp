@@ -23,12 +23,35 @@
 #include "../Flow/FlowMgr.h"
 #include "../../LibProj/CsFunc/CrashLogger.h"
 #include "../_Interface/Game/_GameIF.h"
+#include "../FmDigimon.h"
+#include "../FmTamer.h"
 #include "common_vs2019/pEvent.h"
 #include "../nProtect/Client_nProtect.h"
 #ifndef ENCY_PACKET_PERF_LOG
 #define ENCY_PACKET_PERF_LOG 1
 #endif
 #define ENCY_PACKET_PERF( ... ) do { if( ENCY_PACKET_PERF_LOG ) nsCSDEBUG::CrashLogger::LogMessage( "[ENCYPACKET] " __VA_ARGS__ ); } while( 0 )
+
+namespace
+{
+	const int MAX_CLIENT_LEVEL = 150;
+
+	__int64 NormalizeReceivedExp( __int64 nExp, int nLevel, bool bDigimon )
+	{
+		if( nExp < 0 )
+			return 0;
+		if( nLevel < 1 || nLevel > MAX_CLIENT_LEVEL )
+			return 0;
+
+		__int64 nMaxExp = bDigimon ? FMDigimon::GetMaxExp( nLevel ) : FMTamer::GetMaxExp( nLevel );
+		if( nMaxExp <= 0 )
+			return 0;
+		if( nExp >= nMaxExp )
+			return nMaxExp > 1 ? nMaxExp - 1 : 0;
+
+		return nExp;
+	}
+}
 //bool g_bTempRevPortal = false; // ì•ˆì“°ëŠ” ë³€ìˆ˜ì´ë‹¤.
 #ifdef SDM_DEF_XIGNCODE3_20181107
 #include "../xigncode3/Client_Xigncode3.h"
@@ -217,6 +240,15 @@ void cCliGame::RecvInitGameData(void)
 			}
 		}
 	}
+	pItemInfo = pDigivice->GetEvoChipset(0);
+	pop(*pItemInfo);
+	if (pItemInfo->IsEnable())
+	{
+		if (nsCsFileTable::g_pItemMng->IsItem(pItemInfo->GetType()) == false)
+		{
+			CsMessageBox(MB_OK, _ONLY_ENG("You have one item that does not exist on Tamer EvoChipset.\nID = %d"), pItemInfo->GetType());
+		}
+	}
 	assert(nLimit::Digivice == 1);
 	cItemData digiviceItem;
 	pop(digiviceItem);
@@ -264,9 +296,9 @@ void cCliGame::RecvInitGameData(void)
 		mapNormalWareHouse.insert(make_pair(i, pwItemInfo));
 		if (pwItemInfo.IsEnable())
 		{
-			if (nsCsFileTable::g_pItemMng->IsItem(pwItemInfo.m_nType) == false)
+			if (nsCsFileTable::g_pItemMng->IsItem(pwItemInfo.GetType()) == false)
 			{
-				CsMessageBox(MB_OK, _ONLY_KOR("ì°½ê³ ì— ì¡´ìž¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œì„ ê°€ì§€ê³  ìžˆìŠµë‹ˆë‹¤.\nWareHouseIndex = %d, ID = %d"), i, pItemInfo->GetType());
+				CsMessageBox(MB_OK, _ONLY_KOR("ì°½ê³ ì— ì¡´ìž¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œì„ ê°€ì§€ê³  ìžˆìŠµë‹ˆë‹¤.\nWareHouseIndex = %d, ID = %d"), i, pwItemInfo.GetType());
 				PostQuitMessage(0);//SetNextGameStep( GAME_EXIT );
 			}
 		}
@@ -283,9 +315,9 @@ void cCliGame::RecvInitGameData(void)
 			mapShareWareHouse.insert(make_pair(i, pwItemInfo));
 			if (pwItemInfo.IsEnable())
 			{
-				if (nsCsFileTable::g_pItemMng->IsItem(pwItemInfo.m_nType) == false)
+				if (nsCsFileTable::g_pItemMng->IsItem(pwItemInfo.GetType()) == false)
 				{
-					CsMessageBox(MB_OK, _ONLY_KOR("ê³µìœ  ì°½ê³ ì— ì¡´ìž¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œì„ ê°€ì§€ê³  ìžˆìŠµë‹ˆë‹¤.\nShareStashIndex = %d, ID = %d"), i, pItemInfo->GetType());
+					CsMessageBox(MB_OK, _ONLY_KOR("ê³µìœ  ì°½ê³ ì— ì¡´ìž¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œì„ ê°€ì§€ê³  ìžˆìŠµë‹ˆë‹¤.\nShareStashIndex = %d, ID = %d"), i, pwItemInfo.GetType());
 					PostQuitMessage(0);//SetNextGameStep( GAME_EXIT );
 				}
 			}
@@ -297,11 +329,23 @@ void cCliGame::RecvInitGameData(void)
 	pop(*g_pDataMng->GetQuest()->GetInfo());
 	DBG("Quests em progresso: %d\n", g_pDataMng->GetQuest()->GetInfo()->GetExecuteCount());
 	DBG("Quests completadas: %d\n", g_pDataMng->GetQuest()->GetInfo()->GetQuestCompletionInfo());
+	nsCSDEBUG::CrashLogger::LogMessage( "QUEST_INIT active=%u q4020State=%u q8999State=%u",
+		g_pDataMng->GetQuest()->GetInfo()->GetExecuteCount(),
+		g_pDataMng->GetQuest()->GetInfo()->Check( 4020 ),
+		g_pDataMng->GetQuest()->GetInfo()->Check( 8999 ) );
 	for (int i = 0; i < g_pDataMng->GetQuest()->GetInfo()->GetExecuteCount(); i++) {
 		DBG("Quest ativada com index: %d\n", g_pDataMng->GetQuest()->GetInfo()->GetExeInfo(i).m_nIDX);
 		for (int j = 0; j < 5; j++) {
 			DBG("Condicao %d da quest: ", g_pDataMng->GetQuest()->GetInfo()->GetExeInfo(i).m_nCondition[j]);
 		}
+		nsCSDEBUG::CrashLogger::LogMessage( "QUEST_INIT active[%d] id=%u cond=%u,%u,%u,%u,%u",
+			i,
+			g_pDataMng->GetQuest()->GetInfo()->GetExeInfo(i).m_nIDX,
+			g_pDataMng->GetQuest()->GetInfo()->GetExeInfo(i).m_nCondition[0],
+			g_pDataMng->GetQuest()->GetInfo()->GetExeInfo(i).m_nCondition[1],
+			g_pDataMng->GetQuest()->GetInfo()->GetExeInfo(i).m_nCondition[2],
+			g_pDataMng->GetQuest()->GetInfo()->GetExeInfo(i).m_nCondition[3],
+			g_pDataMng->GetQuest()->GetInfo()->GetExeInfo(i).m_nCondition[4] );
 	}
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_QUEST_INFO_INIT );
 	nsCSDEBUG::CrashLogger::LogMessage( "RECV InitGameData quests parsed active=%d",
@@ -1344,7 +1388,10 @@ void cCliGame::RecvSelectPortalFailure(void)
 	if( net::bChangeChannel == false )
 	{
 		// ìž…ìž¥ì‹œê°„ ì•„ë‹Œë° ë“¤ì–´ì™”ë‹¤
-		cPrintMsg::PrintMsg(recv.nResult);
+		if (recv.nResult > 0)
+		{
+			cPrintMsg::PrintMsg(recv.nResult);
+		}
 // 		ST_CHAT_PROTOCOL	CProtocol;
 // 		CProtocol.m_Type = NS_CHAT::NORMAL_TEXT;
 // 		CProtocol.m_wStr = _T( "portal failure" );
@@ -1705,6 +1752,12 @@ void cCliGame::RecvGetExp(void)
 	nDigimonGainExp = nDigimonGainExp / 100;
 	nDigimonBonusExp = nDigimonBonusExp / 100;
 	nDigimonExp = nDigimonExp / 100;
+	SAFE_POINTER_RET( g_pCharMng );
+	CTamerUser* pTamerUser = g_pCharMng->GetTamerUser();
+	SAFE_POINTER_RET( pTamerUser );
+	CsC_AvObject::sBASE_STAT* pTamerStat = pTamerUser->GetBaseStat();
+	SAFE_POINTER_RET( pTamerStat );
+	nTamerExp = NormalizeReceivedExp( nTamerExp, pTamerStat->GetLevel(), false );
 #ifdef PLAY_PANELTY
 	if( ( nTamerGainExp == 0 )&&( nDigimonGainExp == 0 )&&( g_pDataMng->PlayTime_Get_PaneltyType() == nPlayTime::MAX_PENALTY ) )
 	{
@@ -1752,23 +1805,28 @@ void cCliGame::RecvGetExp(void)
 		cPrintMsg::PrintMsg( 30008, &TGainMsg, &TBonusGainMsg, &DGainMsg, &DBonusGainMsg );
 	}
 #endif	
-	g_pCharMng->GetTamerUser()->GetBaseStat()->SetExp( nTamerExp );
+	pTamerStat->SetExp( nTamerExp );
 	uint nDigimonIDX = GetIDX( nDigimonUID );
 	CDigimon* pDigimon = g_pCharMng->GetDigimon( nDigimonIDX );
 	if( pDigimon )
 	{
-		pDigimon->GetBaseStat()->SetExp( nDigimonExp );
+		CsC_AvObject::sBASE_STAT* pDigimonStat = pDigimon->GetBaseStat();
+		if( pDigimonStat )
+		{
+			nDigimonExp = NormalizeReceivedExp( nDigimonExp, pDigimonStat->GetLevel(), true );
+			pDigimonStat->SetExp( nDigimonExp );
+		}
 	}
 	
 // begin ìŠ¤í‚¬ ê²½í—˜ì¹˜+
 	if(nSkillExp > 0)
 	{
-		assert_cs( g_pCharMng->GetDigimon( GetIDX( nDigimonUID ) )->GetLeafRTTI() == RTTI_DIGIMON_USER );
-		if( pDigimon )
+		if( pDigimon && pDigimon->GetLeafRTTI() == RTTI_DIGIMON_USER )
 		{
 			CDigimonUser* pDigimonUser = (CDigimonUser*)pDigimon;
 			cEvoUnit* pEvoUnit = pDigimonUser->GetAttributeEvoUnit( pDigimonUser->GetFTEvolCurObj()->m_nEvoSlot );
-			pEvoUnit->m_nSkillExp = CsFloat2Int( nSkillExp );
+			if( pEvoUnit )
+				pEvoUnit->m_nSkillExp = CsFloat2Int( nSkillExp );
 		}		
 	}
 // end ìŠ¤í‚¬ ê²½í—˜ì¹˜+
@@ -1782,8 +1840,18 @@ void cCliGame::RecvLevelUp(void)
 	CsC_AvObject* pObject = g_pMngCollector->GetObject( nUID );
 	if( pObject == NULL )
 		return;
-	assert_cs( ( pObject->IsKindOf( RTTI_DIGIMON ) )||( pObject->IsKindOf( RTTI_TAMER ) ) );
-	pObject->GetProp_Attack()->InsertEvent( CsC_AttackProp::EVENT_LEVEL_UP, (int)cLevel, 0, 0, 0 );
+	if( cLevel < 1 || cLevel > MAX_CLIENT_LEVEL )
+		return;
+	if( ( pObject->IsKindOf( RTTI_DIGIMON ) == false ) && ( pObject->IsKindOf( RTTI_TAMER ) == false ) )
+		return;
+
+	CsC_AvObject::sBASE_STAT* pBaseStat = pObject->GetBaseStat();
+	if( pBaseStat && pBaseStat->GetLevel() > cLevel )
+		return;
+
+	CsC_AttackProp* pAttackProp = pObject->GetProp_Attack();
+	SAFE_POINTER_RET( pAttackProp );
+	pAttackProp->InsertEvent( CsC_AttackProp::EVENT_LEVEL_UP, (int)cLevel, 0, 0, 0 );
 	if( pObject->IsKindOf( RTTI_DIGIMON_USER ) )//ë””ì§€ëª¬ì´ ë ˆë²¨ì—… í•œê±°ë©´
 	{
 		GS2C_RECV_ENCYCLOPEDIA_TACTICSHOUSE recv;
@@ -1959,9 +2027,29 @@ void cCliGame::RecvEvolution(void)
 	pop(nEvoSlotNo);
 	u1 nHPRate = 0;
 	pop(nHPRate);
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"EVOLUTION_RECV uid=%u tamer=%u nextType=%u slot=%u hpRate=%u packetSize=%u avail=%u",
+		(unsigned)nUID,
+		(unsigned)nTamerUID,
+		(unsigned)nEvoType,
+		(unsigned)nEvoSlotNo,
+		(unsigned)nHPRate,
+		(unsigned)iReceiver::GetPacket()->m_wSize,
+		(unsigned)GetReadAvailable() );
 #ifdef SDM_DIGIMON_PARTSSYSTEM_20200115
 	u4 nPartsType = 0;
-	pop( nPartsType );	// ë””ì§€ëª¬ íŒŒì¸  ì•„ì´í…œ ì •ë³´
+	if( GetReadAvailable() >= sizeof( nPartsType ) )
+	{
+		pop( nPartsType );	// ë””ì§€ëª¬ íŒŒì¸  ì•„ì´í…œ ì •ë³´
+	}
+	else
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"EVOLUTION_RECV missing parts field uid=%u nextType=%u slot=%u",
+			(unsigned)nUID,
+			(unsigned)nEvoType,
+			(unsigned)nEvoSlotNo );
+	}
 #endif
 	cType t( nUID );
 	CDigimon* pDigimon = g_pCharMng->GetDigimon( t.m_nIDX );	// ìžì‹ ì´ë©´ DigimonUser
@@ -2009,9 +2097,19 @@ void cCliGame::RecvEvolution(void)
 		// ì´ì „ ì´íŽ™íŠ¸ íŒŒì¸  ì •ë³´ ì œê±°
 		pDigimon->ClearAllPostDParts();
 		// ì´íŽ™íŠ¸ íŒŒì¸  ì •ë³´ ì¶”ê°€
-		pDigimon->SetPostDParts( nPartsType );
+		if( nPartsType != 0 )
+			pDigimon->SetPostDParts( nPartsType );
 #endif
 	}	
+	else
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"EVOLUTION_RECV ignored missing digimon uid=%u idx=%u nextType=%u slot=%u",
+			(unsigned)nUID,
+			(unsigned)t.m_nIDX,
+			(unsigned)nEvoType,
+			(unsigned)nEvoSlotNo );
+	}
 #ifdef _DEBUG
 	ST_CHAT_PROTOCOL	CProtocol;
 	CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
@@ -2614,11 +2712,15 @@ void cCliGame::RecvRaidRankingList()
 	u4 Damage;
 	TCHAR	tszTamer[ Language::pLength::id + 1 ];
 	TCHAR	tszDigimon[ Language::pLength::id + 1 ];
-	if(g_pGameIF->IsActiveWindow( cBaseWindow::WT_RAIDRANK ) == false)
-	{
-		g_pGameIF->GetDynamicIF( cBaseWindow::WT_RAIDRANK );
-	}
-	g_pGameIF->GetRaidRank()->ResetRankList();
+	cGameInterface::sQueuedRaidRanker raidRanker[ cGameInterface::RAID_RANK_QUEUE_MAX ];
+	for( int i = 0; i < cGameInterface::RAID_RANK_QUEUE_MAX; ++i )
+		raidRanker[ i ].Reset();
+
+	int nQueuedCount = 0;
+	const TCHAR* pMyTamerName = NULL;
+	if( g_pCharMng != NULL && g_pCharMng->GetTamerUser() != NULL )
+		pMyTamerName = g_pCharMng->GetTamerUser()->GetName();
+
 	pop( Count );
 	for( u4 i=0; i < Count; i++)
 	{
@@ -2626,17 +2728,32 @@ void cCliGame::RecvRaidRankingList()
 		pop( szTamer );
 		pop( szDigimon );
 		pop( Damage );
+
+		if( nQueuedCount >= cGameInterface::RAID_RANK_QUEUE_MAX )
+			continue;
 		
 		_tcscpy_s( tszTamer, Language::pLength::id + 1, LanConvertT( szTamer ) );
 		_tcscpy_s( tszDigimon, Language::pLength::id + 1, LanConvertT( szDigimon ) );
+
+		raidRanker[ nQueuedCount ].s_bVisible = true;
+		raidRanker[ nQueuedCount ].s_nRank = (int)Rank;
+		raidRanker[ nQueuedCount ].s_nDamage = (int)Damage;
+		_tcscpy_s( raidRanker[ nQueuedCount ].s_szTamer, cGameInterface::RAID_RANK_QUEUE_NAME_LEN + 1, tszTamer );
+		_tcscpy_s( raidRanker[ nQueuedCount ].s_szDigimon, cGameInterface::RAID_RANK_QUEUE_NAME_LEN + 1, tszDigimon );
+
 		if(1==Rank)
-			g_pGameIF->GetRaidRank()->SetRanker(i,Rank, tszTamer , tszDigimon, Damage, NiColor(CsB2F(180), CsB2F(175), CsB2F(94)));
-		else if( _tcscmp( g_pCharMng->GetTamerUser()->GetName(), tszTamer ) == 0)
-			g_pGameIF->GetRaidRank()->SetRanker(i,Rank, tszTamer , tszDigimon, Damage, NiColor(CsB2F(252), CsB2F(255), CsB2F(25)));
+			raidRanker[ nQueuedCount ].s_Color = NiColor(CsB2F(180), CsB2F(175), CsB2F(94));
+		else if( pMyTamerName != NULL && _tcscmp( pMyTamerName, tszTamer ) == 0)
+			raidRanker[ nQueuedCount ].s_Color = NiColor(CsB2F(252), CsB2F(255), CsB2F(25));
 		else
-			g_pGameIF->GetRaidRank()->SetRanker(i,Rank, tszTamer , tszDigimon, Damage);
+			raidRanker[ nQueuedCount ].s_Color = NiColor::WHITE;
+
+		++nQueuedCount;
 	
-	}	 
+	}
+
+	if( g_pGameIF != NULL )
+		g_pGameIF->QueueRaidRankingList( raidRanker, nQueuedCount );
 }
 //===============================================================================================
 //
@@ -2686,6 +2803,17 @@ void cCliGame::SetSkillInfo( sRECV_HITTER_INFO* pHitterInfo, sRECV_TARGET_INFO* 
 				return;
 			}
 			pFTSkillInfo = ( (CDigimon*)pHitter )->GetSkillMng()->GetFTSkill( pHitterInfo->s_nSkillIndex )->GetInfo();
+		}
+		break;
+	case RTTI_TUTORIAL_MONSTER:
+	case RTTI_MONSTER:
+		{
+			if( ( (CMonster*)pHitter )->GetSkillMng()->IsSkill( pHitterInfo->s_nSkillIndex ) == false )
+			{
+				g_CriticalLog.Log( _T( "SetSKillInfo_1 : monster skill not found ( model = %d, SkillIndex = %d, RTTI = %d )" ), pHitter->GetModelID(), pHitterInfo->s_nSkillIndex, pHitter->GetLeafRTTI() );
+				return;
+			}
+			pFTSkillInfo = ( (CMonster*)pHitter )->GetSkillMng()->GetFTSkill( pHitterInfo->s_nSkillIndex )->GetInfo();
 		}
 		break;
 	case RTTI_TUTORIAL_TAMER:
@@ -2938,6 +3066,22 @@ void cCliGame::SetSkillInfo( sRECV_HITTER_INFO* pHitterInfo, sRECV_TARGET_INFO* 
 			pFTSkillInfo = nsCsFileTable::g_pSkillMng->GetSkill( pHitterInfo->s_nSkillCode )->GetInfo();
 		else
 			pFTSkillInfo = ( (CDigimon*)pHitter )->GetSkillMng()->GetFTSkill( pHitterInfo->s_nSkillIndex )->GetInfo();
+		break;
+	case RTTI_TUTORIAL_MONSTER:
+	case RTTI_MONSTER:
+		if( pHitterInfo->s_nSkillIndex == -1 )
+		{
+			pFTSkillInfo = nsCsFileTable::g_pSkillMng->GetSkill( pHitterInfo->s_nSkillCode )->GetInfo();
+		}
+		else
+		{
+			if( ( (CMonster*)pHitter )->GetSkillMng()->IsSkill( pHitterInfo->s_nSkillIndex ) == false )
+			{
+				g_CriticalLog.Log( _T( "SetSKillInfo_3 : monster skill not found ( model = %d, SkillIndex = %d, SkillCode = %d, RTTI = %d )" ), pHitter->GetModelID(), pHitterInfo->s_nSkillIndex, pHitterInfo->s_nSkillCode, pHitter->GetLeafRTTI() );
+				return;
+			}
+			pFTSkillInfo = ( (CMonster*)pHitter )->GetSkillMng()->GetFTSkill( pHitterInfo->s_nSkillIndex )->GetInfo();
+		}
 		break;
 	default:
 		assert_cs( false );
@@ -3888,7 +4032,7 @@ void cCliGame::RecvCapsuleToItem(void)
 #endif
 		assert_csm( nOverlapItemCount == 1, _T( "í•œë²ˆì— í•˜ë‚˜ì˜ ìº¡ìŠë§Œ ì–»ì–´ì•¼ í•œë‹¤." ) );
 		cItemData data;
-		data.m_nType = nItemType;
+		data.SetType( nItemType );
 		data.m_nRate = nItemRate;	
 		data.m_nCount = nOverlapItemCount;
 		data.m_nLevel = 1;
@@ -3966,31 +4110,36 @@ void cCliGame::RecvHatchUpSuccess(void)
 	assert( nHatchLevel <= 5 );
 	#pragma todo("ìš©ë³‘ ë¶€í™” ë‹¨ìˆ˜ MAX ìˆ˜ì¹˜ ì¡°ì ˆ")	
 	CsC_AvObject* pTamer = g_pMngCollector->GetObject( nTamerUID );
-	if( pTamer == NULL )
+	bool bLocalMakeTacticsFallback = ( pTamer == NULL && g_pGameIF && g_pGameIF->IsActiveWindow( cBaseWindow::WT_MAKE_TACTICS ) );
+	if( pTamer == NULL && bLocalMakeTacticsFallback == false )
 		return;
-	switch( nHatchLevel )
+
+	if( pTamer )
 	{
-	case 3:
-	case 4:
-	case 5:
 		if( pTamer->GetLeafRTTI() != RTTI_TAMER_USER )
 		{
-			pTamer->SetAnimation( ANI::NPC_YES );
-			pTamer->GetProp_Effect()->AddEffect( "System\\Tactics_success.nif", 1.0f, nsEFFECT::POS_CHARPOS );		
-		}		
-		break;
-	}	
-	if( pTamer->GetLeafRTTI() != RTTI_TAMER_USER )
-		return;
-	// ì‚¬ìš´ë“œëŠ” ë‚˜ë§Œ
-	switch( nHatchLevel )
-	{
-	case 3:
-	case 4:
-	case 5:	
-		pTamer->PlaySound( "system\\Tactics_yes.wav" );
-		break;
+			switch( nHatchLevel )
+			{
+			case 3:
+			case 4:
+			case 5:
+				pTamer->SetAnimation( ANI::NPC_YES );
+				pTamer->GetProp_Effect()->AddEffect( "System\\Tactics_success.nif", 1.0f, nsEFFECT::POS_CHARPOS );
+				break;
+			}
+			return;
+		}
+		// ì‚¬ìš´ë“œëŠ” ë‚˜ë§Œ
+		switch( nHatchLevel )
+		{
+		case 3:
+		case 4:
+		case 5:
+			pTamer->PlaySound( "system\\Tactics_yes.wav" );
+			break;
+		}
 	}
+
 	GS2C_RECV_MAKE_DIGITAMA_SCLV recv;
 	recv.m_nSuccessLevel = nHatchLevel;
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::MAKETACTICS_DIGITAMA_SC_LV, &recv );
@@ -4012,18 +4161,24 @@ void cCliGame::RecvHatchUpFailure(void)
 	u1 nType = 0;
 	pop(nType);
 	CsC_AvObject* pTamer = g_pMngCollector->GetObject( nTamerUID );
-	if( pTamer == NULL )
+	bool bLocalMakeTacticsFallback = ( pTamer == NULL && g_pGameIF && g_pGameIF->IsActiveWindow( cBaseWindow::WT_MAKE_TACTICS ) );
+	if( pTamer == NULL && bLocalMakeTacticsFallback == false )
 		return;
-	if( nType == 0 )
+
+	if( pTamer )
 	{
-		if( pTamer->GetLeafRTTI() != RTTI_TAMER_USER )
+		if( nType == 0 )
 		{
-			pTamer->SetAnimation( ANI::NPC_NO );
-			pTamer->GetProp_Effect()->AddEffect( "System\\Tactics_fail.nif", 1.0f, nsEFFECT::POS_CHARPOS );			
-		}		
+			if( pTamer->GetLeafRTTI() != RTTI_TAMER_USER )
+			{
+				pTamer->SetAnimation( ANI::NPC_NO );
+				pTamer->GetProp_Effect()->AddEffect( "System\\Tactics_fail.nif", 1.0f, nsEFFECT::POS_CHARPOS );
+			}
+		}
+		if( pTamer->GetLeafRTTI() != RTTI_TAMER_USER )
+			return;
 	}
-	if( pTamer->GetLeafRTTI() != RTTI_TAMER_USER )
-		return;
+
 	switch(nType)
 	{
 	case 0 :
@@ -4157,13 +4312,14 @@ void cCliGame::RecvCrossNotReg(void)
 #endif
 void cCliGame::RecvHatchOut(void)	// ë¶€í™” í™•ì¸ ê²°ê³¼
 {
+	nsCSDEBUG::CrashLogger::LogMessage( "HATCH_OUT recv begin readable=%u", (unsigned)GetReadAvailable() );
 	u4 nArrIDX;
 	pop(nArrIDX);
 	cData_PostLoad::sDATA Tactics;	
 	pop( Tactics.s_Type );
 	std::wstring szTempName;
 	pop( szTempName );
-	_tcscpy_s( Tactics.s_szName, szTempName.c_str() );
+	_tcscpy_s( Tactics.s_szName, Language::pLength::name + 1, szTempName.c_str() );
 	u2 nScale;
 	pop( nScale );
 	Tactics.s_fScale = nScale*0.0001f;
@@ -4177,6 +4333,38 @@ void cCliGame::RecvHatchOut(void)	// ë¶€í™” í™•ì¸ ê²°ê³¼
 	pop( Tactics.s_dwBaseDigimonID );
 	DBG("nBaseEvoUnitIDX : %d", Tactics.s_dwBaseDigimonID );
 	pop( Tactics.s_nMaxEvoUnit);
+
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"HATCH_OUT recv parsed slot=%u uid=%u type=%u base=%u hatch=%u scale=%u level=%d evoCount=%d readable=%u",
+		(unsigned)nArrIDX,
+		(unsigned)Tactics.s_Type.m_nUID,
+		(unsigned)Tactics.s_Type.m_nType,
+		(unsigned)Tactics.s_dwBaseDigimonID,
+		(unsigned)Tactics.s_HatchLevel,
+		(unsigned)nScale,
+		(int)Tactics.s_nLevel,
+		(int)Tactics.s_nMaxEvoUnit,
+		(unsigned)GetReadAvailable() );
+
+	if( nArrIDX == 0 )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "HATCH_OUT rejected invalid slot=0 type=%u base=%u", (unsigned)Tactics.s_Type.m_nType, (unsigned)Tactics.s_dwBaseDigimonID );
+		return;
+	}
+
+	if( Tactics.s_nMaxEvoUnit < 0 || Tactics.s_nMaxEvoUnit >= nLimit::EvoUnit )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"HATCH_OUT rejected invalid evoCount=%d limit=%d type=%u base=%u slot=%u readable=%u",
+			(int)Tactics.s_nMaxEvoUnit,
+			(int)nLimit::EvoUnit,
+			(unsigned)Tactics.s_Type.m_nType,
+			(unsigned)Tactics.s_dwBaseDigimonID,
+			(unsigned)nArrIDX,
+			(unsigned)GetReadAvailable() );
+		return;
+	}
+
 	pop( &Tactics.s_EvoUnit[ 1 ], sizeof(cEvoUnit)*Tactics.s_nMaxEvoUnit );
 	memset(&Tactics.s_AttributeExp, NULL, sizeof(n2)*NewAttribute::MaxDigitalType );
 	memset(&Tactics.s_NatureExp, NULL, sizeof(n2)*NewAttribute::MaxNatualType );
@@ -4186,6 +4374,13 @@ void cCliGame::RecvHatchOut(void)	// ë¶€í™” í™•ì¸ ê²°ê³¼
 	pop( Tactics.s_ExtendAttribute, sizeof( Tactics.s_ExtendAttribute ) );
 	pop( Tactics.s_ExtendAttributeLV, sizeof( Tactics.s_ExtendAttributeLV ) );
 	g_pDataMng->GetTactics()->AddTactics( &Tactics, nArrIDX - 1 );
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"HATCH_OUT add tactics done slot=%u type=%u base=%u evoCount=%d readable=%u",
+		(unsigned)nArrIDX,
+		(unsigned)Tactics.s_Type.m_nType,
+		(unsigned)Tactics.s_dwBaseDigimonID,
+		(int)Tactics.s_nMaxEvoUnit,
+		(unsigned)GetReadAvailable() );
 	//==========================================================================================================
 	// ì—…ì  ì²´í¬
 	//==========================================================================================================
@@ -4203,6 +4398,7 @@ void cCliGame::RecvHatchOut(void)	// ë¶€í™” í™•ì¸ ê²°ê³¼
 	}
 	GAME_EVENT_STPTR->OnEvent( EVENT_CODE::ENCYCLOPEDIA_EVOL_UPDATE, &recv );	
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::RECV_HATCHOUT_COMPLETE, NULL );
+	nsCSDEBUG::CrashLogger::LogMessage( "HATCH_OUT recv end slot=%u type=%u base=%u", (unsigned)nArrIDX, (unsigned)Tactics.s_Type.m_nType, (unsigned)Tactics.s_dwBaseDigimonID );
 }
 void cCliGame::RecvBattleTagSuccess(void)	// ì „íˆ¬ì¤‘ ìš©ë³‘ ë³€ê²½ ì„±ê³µ
 {
@@ -5672,7 +5868,7 @@ void cCliGame::RecvGiftBoxUseSuccess()
 		cItemData data;
 		u4 nType = 0;
 		pop(nType);
-		data.m_nType  = nType;
+		data.SetType( nType );
 		u4 nItemCount = 0;
 		pop(nItemCount);
 		data.m_nCount = nItemCount;
@@ -5747,7 +5943,7 @@ void cCliGame::RecvNatureExp()
 				return;
 			
 			cItemData item;
-			item.m_nType = pItem->s_dwItemID;
+			item.SetType( pItem->s_dwItemID );
 			item.m_nCount = 1;
 			item.m_nRate = 0;
 			item.m_nLevel = 0;
@@ -5776,7 +5972,7 @@ void cCliGame::RecvNatureExp()
 			if( pTamerUser == NULL )
 				return;			
 			cItemData item;
-			item.m_nType = pItem->s_dwItemID;
+			item.SetType( pItem->s_dwItemID );
 			item.m_nCount = 1;
 			item.m_nRate = 0;
 			item.m_nLevel = 0;
@@ -5804,8 +6000,10 @@ void cCliGame::RecvNatureExp()
 // ì˜¤ë¥¸ìª½ ë²„íŠ¼ìœ¼ë¡œ ì¼ë¶€ ì•Œ(ì´ë²¤íŠ¸) ë¶€í™”ë˜ëŠ” ê¸°ëŠ¥
 void cCliGame::RecvRClickDigimonHatch(void)
 {
+	nsCSDEBUG::CrashLogger::LogMessage( "DIRECT_HATCH recv begin readable=%u", (unsigned)GetReadAvailable() );
 	u1 nSuccess;
 	pop(nSuccess);	// ë¶€í™” ì„±ê³µ ì‹¤íŒ¨ ì—¬ë¶€ (1 : ì„±ê³µ, 0: ì‹¤íŒ¨)
+	nsCSDEBUG::CrashLogger::LogMessage( "DIRECT_HATCH result=%u readable=%u", (unsigned)nSuccess, (unsigned)GetReadAvailable() );
 	
 	if( nSuccess != 0 )
 	{
@@ -5832,6 +6030,40 @@ void cCliGame::RecvRClickDigimonHatch(void)
 		pop( Tactics.s_dwBaseDigimonID );
 		DBG("nBaseEvoUnitIDX : %d", Tactics.s_dwBaseDigimonID );
 		pop( Tactics.s_nMaxEvoUnit);
+
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"DIRECT_HATCH recv parsed itemSlot=%d slot=%u uid=%u type=%u base=%u hatch=%u scale=%u level=%d evoCount=%d readable=%u",
+			nInvenPos,
+			(unsigned)nArrIDX,
+			(unsigned)Tactics.s_Type.m_nUID,
+			(unsigned)Tactics.s_Type.m_nType,
+			(unsigned)Tactics.s_dwBaseDigimonID,
+			(unsigned)Tactics.s_HatchLevel,
+			(unsigned)nScale,
+			(int)Tactics.s_nLevel,
+			(int)Tactics.s_nMaxEvoUnit,
+			(unsigned)GetReadAvailable() );
+
+		if( nArrIDX == 0 )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "DIRECT_HATCH rejected invalid slot=0 itemSlot=%d type=%u base=%u", nInvenPos, (unsigned)Tactics.s_Type.m_nType, (unsigned)Tactics.s_dwBaseDigimonID );
+			return;
+		}
+
+		if( Tactics.s_nMaxEvoUnit < 0 || Tactics.s_nMaxEvoUnit >= nLimit::EvoUnit )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"DIRECT_HATCH rejected invalid evoCount=%d limit=%d itemSlot=%d type=%u base=%u slot=%u readable=%u",
+				(int)Tactics.s_nMaxEvoUnit,
+				(int)nLimit::EvoUnit,
+				nInvenPos,
+				(unsigned)Tactics.s_Type.m_nType,
+				(unsigned)Tactics.s_dwBaseDigimonID,
+				(unsigned)nArrIDX,
+				(unsigned)GetReadAvailable() );
+			return;
+		}
+
 		pop( &Tactics.s_EvoUnit[ 1 ], sizeof(cEvoUnit)*Tactics.s_nMaxEvoUnit );
 		memset(&Tactics.s_AttributeExp, NULL, sizeof(n2)*NewAttribute::MaxDigitalType );
 		memset(&Tactics.s_NatureExp, NULL, sizeof(n2)*NewAttribute::MaxNatualType );
@@ -5841,6 +6073,14 @@ void cCliGame::RecvRClickDigimonHatch(void)
 		pop( Tactics.s_ExtendAttribute, sizeof( Tactics.s_ExtendAttribute ) );
 		pop( Tactics.s_ExtendAttributeLV, sizeof( Tactics.s_ExtendAttributeLV ) );
 		g_pDataMng->GetTactics()->AddTactics( &Tactics, nArrIDX - 1 );
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"DIRECT_HATCH add tactics done itemSlot=%d slot=%u type=%u base=%u evoCount=%d readable=%u",
+			nInvenPos,
+			(unsigned)nArrIDX,
+			(unsigned)Tactics.s_Type.m_nType,
+			(unsigned)Tactics.s_dwBaseDigimonID,
+			(int)Tactics.s_nMaxEvoUnit,
+			(unsigned)GetReadAvailable() );
 		//=============================================================================
 		//	ì¸ë²¤ ë‚´ ì•„ì´í…œ ê°ì†Œ ë° ë¶€í™” ì• ë‹ˆë©”ì´ì…˜ í™œì„±í™”
 		//=============================================================================

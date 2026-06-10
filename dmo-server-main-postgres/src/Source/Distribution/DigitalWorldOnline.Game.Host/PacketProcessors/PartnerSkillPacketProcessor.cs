@@ -14,6 +14,7 @@ using DigitalWorldOnline.Commons.Models.Summon;
 using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.GameServer.Combat;
 using DigitalWorldOnline.Commons.Utils;
+using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 {
     public partial class PartnerSkillPacketProcessor : IGamePacketProcessor
     {
+        private const short ClientBuffVisualClearCount = 1;
+
         public GameServerPacketEnum Type => GameServerPacketEnum.PartnerSkill;
 
         private readonly AssetsLoader _assets;
@@ -32,6 +35,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private readonly ILogger _logger;
         private readonly ISender _sender;
         private readonly DamageFormulaConfig _damageFormulaConfig;
+        private readonly EquipmentSetBonusService _equipmentSetBonusService;
 
         public PartnerSkillPacketProcessor(
 
@@ -40,6 +44,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             ILogger logger,
             ISender sender,
             DungeonsServer dungeonServer,
+            EquipmentSetBonusService equipmentSetBonusService,
             IConfiguration configuration)
         {
             _assets = assets;
@@ -47,6 +52,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _logger = logger;
             _sender = sender;
             _dungeonServer = dungeonServer;
+            _equipmentSetBonusService = equipmentSetBonusService;
             _damageFormulaConfig = LoadDamageFormulaConfig(configuration);
         }
 
@@ -101,6 +107,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             // crafted client can't trigger damage/cooldown logic on a non-active skill.
             if (skill.SkillInfo.IsPassive)
                 return Task.CompletedTask;
+
+            var skillCodeInfo = _assets.SkillCodeInfo.FirstOrDefault(x => x.SkillCode == skill.SkillId);
+            if (!HasDamageApply(skillCodeInfo) && IsMobTargetHandler(client, targetHandler))
+            {
+                ApplyNonDamagePartnerSkill(client, skill, skillCodeInfo, skillSlot);
+                return Task.CompletedTask;
+            }
 
             var targetSummonMobs = new List<SummonMobModel>();
             SkillTypeEnum skillType;
@@ -314,7 +327,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     {
                         skillType = SkillTypeEnum.Implosion;
 
-                        var targets = _mapServer.GetMobsNearbyPartner(client.Partner.Location, skill.SkillInfo.AreaOfEffect);
+                        var targets = _mapServer.GetMobsNearbyPartner(client.Partner.Location, skill.SkillInfo.AreaOfEffect, client.TamerId);
 
                         targetMobs.AddRange(targets);
                     }
@@ -322,7 +335,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     {
                         skillType = SkillTypeEnum.TargetArea;
 
-                        var targets = _mapServer.GetMobsNearbyTargetMob(client.Tamer.Location.MapId, targetHandler, skill.SkillInfo.Range / 10);
+                        var targets = _mapServer.GetMobsNearbyTargetMob(client.Tamer.Location.MapId, targetHandler, skill.SkillInfo.Range / 10, client.TamerId);
 
                         targetMobs.AddRange(targets);
                     }
@@ -330,7 +343,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     {
                         skillType = SkillTypeEnum.Single;
 
-                        var mob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler);
+                        var mob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler, client.TamerId);
                         if (mob == null)
                         {
                             _logger.Information("Skill target mob not found: currentType={CurrentType} slot={Slot} skillId={SkillId} targetHandler={TargetHandler} tamer={TamerId} map={MapId}",
@@ -517,14 +530,14 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
             else
             {
-                if (_mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler, true) != null)
+                if (_mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler, true, client.TamerId) != null)
                 {
 
                     if (IsImplosionSkill(skill.SkillInfo))
                     {
                         skillType = SkillTypeEnum.Implosion;
 
-                        var targets = _mapServer.GetMobsNearbyPartner(client.Partner.Location, skill.SkillInfo.AreaOfEffect, true);
+                        var targets = _mapServer.GetMobsNearbyPartner(client.Partner.Location, skill.SkillInfo.AreaOfEffect, true, client.TamerId);
 
                         targetSummonMobs.AddRange(targets);
                     }
@@ -532,7 +545,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     {
                         skillType = SkillTypeEnum.TargetArea;
 
-                        var targets = _mapServer.GetMobsNearbyTargetMob(client.Tamer.Location.MapId, targetHandler, skill.SkillInfo.Range / 10, true);
+                        var targets = _mapServer.GetMobsNearbyTargetMob(client.Tamer.Location.MapId, targetHandler, skill.SkillInfo.Range / 10, true, client.TamerId);
 
                         targetSummonMobs.AddRange(targets);
                     }
@@ -540,7 +553,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     {
                         skillType = SkillTypeEnum.Single;
 
-                        var mob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler, true);
+                        var mob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler, true, client.TamerId);
                         if (mob == null)
                             return Task.CompletedTask;
 
@@ -727,7 +740,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     {
                         skillType = SkillTypeEnum.Implosion;
 
-                        var targets = _mapServer.GetMobsNearbyPartner(client.Partner.Location, skill.SkillInfo.AreaOfEffect);
+                        var targets = _mapServer.GetMobsNearbyPartner(client.Partner.Location, skill.SkillInfo.AreaOfEffect, client.TamerId);
 
                         targetMobs.AddRange(targets);
                     }
@@ -735,7 +748,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     {
                         skillType = SkillTypeEnum.TargetArea;
 
-                        var targets = _mapServer.GetMobsNearbyTargetMob(client.Tamer.Location.MapId, targetHandler, skill.SkillInfo.Range / 10);
+                        var targets = _mapServer.GetMobsNearbyTargetMob(client.Tamer.Location.MapId, targetHandler, skill.SkillInfo.Range / 10, client.TamerId);
 
                         targetMobs.AddRange(targets);
 
@@ -748,7 +761,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         // AreaOfEffect > 0 and take the first branch.
                         if (!targetMobs.Any())
                         {
-                            var mob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler);
+                            var mob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler, client.TamerId);
                             if (mob != null)
                             {
                                 skillType = SkillTypeEnum.Single;
@@ -760,7 +773,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     {
                         skillType = SkillTypeEnum.Single;
 
-                        var mob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler);
+                        var mob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler, client.TamerId);
                         if (mob == null)
                         {
                             _logger.Information("Skill target mob not found: currentType={CurrentType} slot={Slot} skillId={SkillId} targetHandler={TargetHandler} tamer={TamerId} map={MapId}",
@@ -970,10 +983,14 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             DigimonSkillAssetModel skill,
             IEnumerable<MobConfigModel> targetMobs,
             byte skillSlot,
-            bool dungeonBroadcast)
+            bool dungeonBroadcast,
+            bool triggerEquipmentSet = true)
         {
             if (client?.Partner == null || skill?.SkillInfo == null)
                 return;
+
+            if (triggerEquipmentSet)
+                TryApplyEquipmentSetTrigger(client, EquipmentSetBonusTrigger.DigimonSkill);
 
             var buffInfos = _assets.BuffInfo
                 .Where(buff => buff.SkillId == skill.SkillId && buff.SkillInfo?.Apply != null)
@@ -1011,6 +1028,15 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
         }
 
+        private void TryApplyEquipmentSetTrigger(GameClient client, EquipmentSetBonusTrigger trigger)
+        {
+            Action<byte[]> broadcast = client.DungeonMap
+                ? packet => _dungeonServer.BroadcastForTamerViewsAndSelf(client.TamerId, packet)
+                : packet => _mapServer.BroadcastForTamerViewsAndSelf(client.TamerId, packet);
+
+            _equipmentSetBonusService.TryApplyPartnerTrigger(client, trigger, broadcast);
+        }
+
         private void ApplyPartnerSkillBuff(
             GameClient client,
             BuffInfoAssetModel buffInfo,
@@ -1018,13 +1044,18 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             int duration,
             bool dungeonBroadcast)
         {
-            var existing = client.Partner.BuffList.ActiveBuffs
-                .FirstOrDefault(buff => buff.BuffId == buffInfo.BuffId || buff.SkillId == buffInfo.SkillId);
+            var buffIdsToClear = client.Partner.BuffList.ActiveBuffs
+                .Where(buff => buff.BuffId == buffInfo.BuffId || buff.SkillId == buffInfo.SkillId)
+                .Select(buff => buff.BuffId)
+                .Append(buffInfo.BuffId)
+                .Distinct()
+                .ToList();
 
-            if (existing != null)
+            client.Partner.BuffList.Buffs.RemoveAll(buff => buff.BuffId == buffInfo.BuffId || buff.SkillId == buffInfo.SkillId);
+
+            foreach (var buffId in buffIdsToClear)
             {
-                client.Partner.BuffList.Buffs.Remove(existing);
-                var removePacket = new RemoveBuffPacket(client.Partner.GeneralHandler, existing.BuffId).Serialize();
+                var removePacket = new RemoveBuffPacket(client.Partner.GeneralHandler, buffId, ClientBuffVisualClearCount).Serialize();
                 if (dungeonBroadcast)
                     _dungeonServer.BroadcastForTamerViewsAndSelf(client.TamerId, removePacket);
                 else
@@ -1123,6 +1154,69 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             return 1;
         }
 
+        private bool IsMobTargetHandler(GameClient client, int targetHandler)
+        {
+            if (client.DungeonMap)
+            {
+                return _dungeonServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler, true, client.TamerId) != null;
+            }
+
+            return _mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler, client.TamerId) != null ||
+                _mapServer.GetMobByHandler(client.Tamer.Location.MapId, targetHandler, true, client.TamerId) != null;
+        }
+
+        private static bool HasDamageApply(SkillCodeAssetModel? skillInfo)
+        {
+            return skillInfo?.Apply?.Any(apply =>
+                apply.Type == SkillCodeApplyTypeEnum.Unknown1 ||
+                apply.Type == SkillCodeApplyTypeEnum.Unknown2 ||
+                apply.Type == SkillCodeApplyTypeEnum.Unknown10) == true;
+        }
+
+        private void ApplyNonDamagePartnerSkill(
+            GameClient client,
+            DigimonSkillAssetModel skill,
+            SkillCodeAssetModel? skillInfo,
+            byte skillSlot)
+        {
+            client.Partner.ReceiveDamage(skill.SkillInfo.HPUsage);
+            client.Partner.UseDs(skill.SkillInfo.DSUsage);
+            client.Partner.SetEndCasting(0);
+
+            var skillLevel = GetCurrentSkillLevel(client, skillSlot);
+            var hpApply = skillInfo?.Apply?.FirstOrDefault(apply =>
+                apply.Attribute == SkillCodeApplyAttributeEnum.HP &&
+                (apply.Type == SkillCodeApplyTypeEnum.Unknown207 ||
+                 apply.Type == SkillCodeApplyTypeEnum.Percent));
+
+            if (hpApply != null)
+            {
+                var percent = hpApply.Value + Math.Max(0, skillLevel - 1) * hpApply.IncreaseValue;
+                if (percent > 0)
+                    client.Partner.RecoverHp((int)Math.Ceiling(client.Partner.HP * (percent / 100.0)));
+            }
+
+            foreach (var debuff in client.Partner.DebuffList.ActiveBuffs.ToList())
+            {
+                client.Partner.DebuffList.Buffs.Remove(debuff);
+                var packet = new RemoveBuffPacket(client.Partner.GeneralHandler, debuff.BuffId).Serialize();
+                if (client.DungeonMap)
+                    _dungeonServer.BroadcastForTamerViewsAndSelf(client.TamerId, packet);
+                else
+                    _mapServer.BroadcastForTamerViewsAndSelf(client.TamerId, packet);
+            }
+
+            client.Send(new UpdateStatusPacket(client.Tamer).Serialize());
+            ApplyDigimonSkillEffects(client, skill, Enumerable.Empty<MobConfigModel>(), skillSlot, client.DungeonMap, false);
+
+            var evolution = client.Partner.Evolutions.FirstOrDefault(x => x.Type == client.Partner.CurrentType);
+            if (evolution != null && skill.SkillInfo.Cooldown / 1000 > 59)
+            {
+                evolution.Skills[skillSlot].SetCooldown(skill.SkillInfo.Cooldown / 1000);
+                _sender.Send(new UpdateEvolutionCommand(evolution));
+            }
+        }
+
         private static int DebuffReductionDamage(GameClient client, int finalDmg)
         {
             if (client.Tamer.Partner.DebuffList.ActiveDebuffReductionDamage())
@@ -1187,6 +1281,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         {
             if (targetMob == null || client?.Tamer?.Partner == null)
                 return 0;
+
+            TryActivateEncyclopediaDeckEffect(client, 2);
 
             double SkillValueVal = 0;
             double SkillValueInc = 0;
@@ -1259,6 +1355,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         {
             if (targetMob == null || client?.Tamer?.Partner == null)
                 return 0;
+
+            TryActivateEncyclopediaDeckEffect(client, 2);
 
             double SkillValueVal = 0;
             double SkillValueInc = 0;
@@ -1354,6 +1452,34 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 ApplyFinalDamageToSkill = configuration.GetValue("DamageFormula:ApplyFinalDamageToSkill", true),
                 ApplyElementDamage = configuration.GetValue("DamageFormula:ApplyElementDamage", true)
             };
+        }
+
+        private void TryActivateEncyclopediaDeckEffect(GameClient client, int attackType)
+        {
+            if (!UtilitiesFunctions.TryRollEncyclopediaDeckEffect(
+                    client.Tamer.EncyclopediaDeckId,
+                    attackType,
+                    out var effect))
+                return;
+
+            if (effect.Option == 4)
+            {
+                foreach (var skill in client.Tamer.Partner.CurrentEvolution.Skills)
+                    skill.ResetCooldown();
+
+                client.Send(new EncyclopediaDeckEffectPacket(100, 0).Serialize());
+                return;
+            }
+
+            var endDate = client.Tamer.ActivateEncyclopediaDeckEffect(effect.Index, effect.Time);
+            var endTimestamp = (int)new DateTimeOffset(endDate).ToUnixTimeSeconds();
+            client.Send(new EncyclopediaDeckEffectPacket(effect.Index, endTimestamp).Serialize());
+
+            if (effect.Option == 5 || effect.Option == 6 || effect.Option == 7 || effect.Option == 10)
+            {
+                client.Send(new EncyclopediaDeckStatusPacket(client.Tamer).Serialize());
+                client.Send(new UpdateStatusPacket(client.Tamer).Serialize());
+            }
         }
 
         private DamageFormulaInput CreateDamageFormulaInput(

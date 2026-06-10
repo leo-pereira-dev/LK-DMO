@@ -916,16 +916,12 @@ bool cQuickEvol::CheckDigiviceChipset(CDigimonEvolveObj* pFTEvolObj)
 
 	// 칩셋 소분류 타입 확인
 	// 1. 기간형 칩셋 존재
-	int nRequireIdx = pDigivice->GetChipsetIndex_TypeLT( pFTEvolObj->m_nChipsetType, pFTEvolObj->m_nChipsetTypeP );
-	if( cData_Digivice::INVALIDE_DIGIVICE_INDEX != nRequireIdx )
+	cItemInfo* pChipset = pDigivice->GetJointProgressChipset_TypeLT( pFTEvolObj->m_nChipsetType, pFTEvolObj->m_nChipsetTypeP );
+	if( pChipset && pChipset->IsEnable() )
 		return true;
 
 	// 2. 소모형 칩셋 존재
-	nRequireIdx = pDigivice->GetChipsetIndex_TypeLT( pFTEvolObj->m_nChipsetType, pFTEvolObj->m_nChipsetTypeC );
-	if( cData_Digivice::INVALIDE_DIGIVICE_INDEX == nRequireIdx )
-		return false;
-
-	cItemInfo* pChipset = pDigivice->GetChipset( nRequireIdx );
+	pChipset = pDigivice->GetJointProgressChipset_TypeLT( pFTEvolObj->m_nChipsetType, pFTEvolObj->m_nChipsetTypeC );
 	SAFE_POINTER_RETVAL( pChipset, false );
 	if( !pChipset->IsEnable() )
 		return false;

@@ -1,4 +1,4 @@
-﻿using DigitalWorldOnline.Application.GameAssets.Bins;
+using DigitalWorldOnline.Application.GameAssets.Bins;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
 using DigitalWorldOnline.Application.GameAssets.Queries;
@@ -8,6 +8,7 @@ using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Packets.Chat;
 using DigitalWorldOnline.Commons.Packets.MapServer;
+using DigitalWorldOnline.Game.Configuration;
 using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
 using MediatR;
@@ -111,7 +112,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                 // Validate the (item -> destination) pair against DMBase.bin section 4.
                 // The client UI already filters destinations via IsUseJumpBuster (see
-                // JumpBuster.cpp:114/170) — the server mirrors that allowlist so a desynced
+                // JumpBuster.cpp:114/170) � the server mirrors that allowlist so a desynced
                 // or tampered client can't teleport to a map this bomb shouldn't reach.
                 if (!_dmBase.Data.JumpBusterDestinations.TryGetValue(bombItem.ItemId, out var allowedMaps)
                     || !allowedMaps.Contains(mapId))
@@ -156,7 +157,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             client.Send(new MapSwapPacket(
                 _configuration[GamerServerPublic],
-                _configuration[GameServerPort],
+                _configuration.GetPublicGameServerPort(),
                 client.Tamer.Location.MapId,
                 client.Tamer.Location.X,
                 client.Tamer.Location.Y)

@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "cCliGame.h"
 #include "common_vs2019/pInsMap.h"
+#include "../_Interface/Game/DungeonClearAnnounceWindow.h"
+#include "../_Interface/Game/DungeonClearResultWindow.h"
 
 void cCliGame::SetInsMap_DungeonRestoreFlag()
 {
@@ -64,6 +66,89 @@ void cCliGame::SendInsMap_DungeonIN(uint nPortalNo)
 	net::game->DoSend( p );
 
 	//cClient::SetSendBlock(true);
+}
+
+void cCliGame::SendDungeonClearExit()
+{
+	cPacket p;
+	p.newp( pInsMap::DungeonClearExit );
+	p.endp( pInsMap::DungeonClearExit );
+	net::game->DoSend( p );
+}
+
+void cCliGame::SendDungeonReEnter()
+{
+	cPacket p;
+	p.newp( pInsMap::DungeonReEnter );
+	p.endp( pInsMap::DungeonReEnter );
+	net::game->DoSend( p );
+}
+
+void cCliGame::RecvDungeonClearResult()
+{
+	cDungeonClearResultWindow::sResultData data;
+	pop( data.s_dwDungeonId );
+	pop( data.s_dwEntryPortalId );
+	pop( data.s_byRank );
+	pop( data.s_wDifficulty );
+	pop( data.s_dwElapsedSeconds );
+	pop( data.s_wPartyCount );
+	pop( data.s_wPartyMax );
+	pop( data.s_wFailCount );
+	pop( data.s_wFailMax );
+	pop( data.s_dwExp );
+	pop( data.s_dwBits );
+	pop( data.s_wsDungeonName );
+
+	WORD wDefaultRewardCount = 0;
+	pop( wDefaultRewardCount );
+	for( WORD i = 0; i < wDefaultRewardCount && i < 128; ++i )
+	{
+		cDungeonClearResultWindow::sReward reward;
+		pop( reward.s_dwItemId );
+		pop( reward.s_dwAmount );
+		data.s_vDefaultRewards.push_back( reward );
+	}
+
+	WORD wExtraRewardCount = 0;
+	pop( wExtraRewardCount );
+	for( WORD i = 0; i < wExtraRewardCount && i < 128; ++i )
+	{
+		cDungeonClearResultWindow::sReward reward;
+		pop( reward.s_dwItemId );
+		pop( reward.s_dwAmount );
+		data.s_vExtraRewards.push_back( reward );
+	}
+
+	if( GetReadAvailable() >= sizeof( WORD ) )
+	{
+		WORD wDetailCount = 0;
+		pop( wDetailCount );
+		for( WORD i = 0; i < wDetailCount && i < 16; ++i )
+		{
+			cDungeonClearResultWindow::sDetailResult detail;
+			pop( detail.s_byCategory );
+			pop( detail.s_dwTamerModelId );
+			pop( detail.s_dwDigimonModelId );
+			pop( detail.s_wTamerLevel );
+			pop( detail.s_wDigimonLevel );
+			pop( detail.s_dwValue );
+			pop( detail.s_wsTamerName );
+			pop( detail.s_wsDigimonName );
+			data.s_vDetailResults.push_back( detail );
+		}
+	}
+
+	cDungeonClearAnnounceWindow* pAnnounce = (cDungeonClearAnnounceWindow*)g_pGameIF->GetDynamicIF( cBaseWindow::WT_DUNGEON_CLEAR_ANNOUNCE );
+	if( pAnnounce )
+	{
+		pAnnounce->SetResultData( data );
+		return;
+	}
+
+	cDungeonClearResultWindow* pWindow = (cDungeonClearResultWindow*)g_pGameIF->GetDynamicIF( cBaseWindow::WT_DUNGEON_CLEAR_RESULT );
+	if( pWindow )
+		pWindow->SetResultData( data );
 }
 
 void cCliGame::RecvBattleEvoPoint()

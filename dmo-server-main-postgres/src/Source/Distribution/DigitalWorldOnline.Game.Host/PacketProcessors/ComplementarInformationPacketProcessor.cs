@@ -128,10 +128,14 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 client.Send(new ServerExperiencePacket(serverInfo));
             }
 
-            if (client.MembershipExpirationDate != null)
+            if (client.HasActiveMembership)
             {
                 _logger.Debug($"Sending account membership duration packet for character {client.TamerId}...");
-                client.Send(new MembershipPacket(client.MembershipExpirationDate.Value, client.MembershipUtcSeconds));
+                client.Send(new MembershipPacket(client.MembershipExpirationDate!.Value, client.MembershipUtcSeconds));
+            }
+            else
+            {
+                client.Send(new MembershipPacket());
             }
 
             //TODO: verificar se a visualização do client não esta duplicando

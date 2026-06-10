@@ -65,7 +65,7 @@ public:
 		u4		nUID;
 		u1		nNextArrIDX;
 		n4		nNextType;
-		n1		nNextLevel;
+		u1		nNextLevel;
 		u2		nNextScale;
 		wchar	szNextDigimonName[Language::pLength::name];
 	};

@@ -47,8 +47,11 @@ private:
 	};
 
 	std::map< int, sEquipList >		m_mapEquip;
+	cGridListBox*			m_pLTopEquipList;
 	cGridListBox*			m_pLEquipList;
+	cGridListBox*			m_pLBottomEquipList;
 	cGridListBox*			m_pREquipList;
+	cGridListBox*			m_pRBottomEquipList;
 /////////////////////////////////////////////////////////////////////////////////
 	enum eAbilityType{ eAT, eDE, eHP, eDS };
 	struct sAbilInfo : public CUSTOMDATA

@@ -1,0 +1,30 @@
+<div class="news-panel panel" id="noticias">
+    <div class="panel-heading">
+        <h2>Noticias recentes</h2>
+        <a href="#noticias">Ver todas</a>
+    </div>
+
+    @foreach (var news in News)
+    {
+        <article class="news-item">
+            <img src="@news.Image" alt="" />
+            <div>
+                <span class="tag @news.TagClass">@news.Tag</span>
+                <h3>@news.Title</h3>
+                <p>@news.Description</p>
+                <time>@news.Date</time>
+            </div>
+        </article>
+    }
+</div>
+
+@code {
+    private static readonly NewsItem[] News =
+    [
+        new("Evento de Fim de Semana: Bonus de EXP!", "Aproveite o bonus de 200% de EXP e evolua mais rapido.", "10/05/2026", "Evento", "event", "assets/img/news-event.png"),
+        new("Patch Note 2026.05.10", "Confira mudancas, correcoes e novidades desta semana.", "10/05/2026", "Atualizacao", "patch", "assets/img/news-patch.png"),
+        new("Novo Sistema de Titulos", "Personalize seu titulo e mostre sua jornada no mundo digital.", "09/05/2026", "Noticia", "info", "assets/img/news-title.png")
+    ];
+
+    private sealed record NewsItem(string Title, string Description, string Date, string Tag, string TagClass, string Image);
+}

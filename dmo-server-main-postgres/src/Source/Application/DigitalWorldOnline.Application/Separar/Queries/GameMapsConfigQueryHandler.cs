@@ -30,6 +30,7 @@ namespace DigitalWorldOnline.Application.Separar.Queries
                 foreach (var map in _mapBin.Data.MapsById.Values.OrderBy(x => x.MapId))
                 {
                     var mobs = BuildMapMobs(map.MapId);
+                    _mapBin.Data.MonstersByMapId.TryGetValue(map.MapId, out var mapMobs);
                     result.Add(new MapConfigDTO
                     {
                         Id = map.MapId,
@@ -37,7 +38,9 @@ namespace DigitalWorldOnline.Application.Separar.Queries
                         Name = $"Map {map.MapId}",
                         Type = request.Type,
                         Mobs = mobs,
-                        KillSpawns = new()
+                        KillSpawns = MapKillSpawnBuilder.Build(
+                            map.MapId,
+                            mapMobs ?? Array.Empty<MapMonsterRecord>())
                     });
                 }
 
@@ -56,11 +59,11 @@ namespace DigitalWorldOnline.Application.Separar.Queries
             long id = 1;
             foreach (var mapMob in mapMobs)
             {
+                if (!_monsterBin.Data.ByType.TryGetValue(mapMob.MonsterTableId, out var mon))
+                    continue;
+
                 foreach (var spawn in MapMonsterSpawnMaterializer.Expand(mapMob))
                 {
-                    if (!_monsterBin.Data.ByType.TryGetValue(spawn.MonsterTableId, out var mon))
-                        continue;
-
                     long mobId = id++;
                     var digimon = _digimonListBin.Data.FindByType(spawn.MonsterTableId);
                     var attribute = digimon != null && Enum.IsDefined(typeof(DigimonAttributeEnum), digimon.Attribute)
@@ -124,10 +127,10 @@ namespace DigitalWorldOnline.Application.Separar.Queries
                         {
                             Id = mobId,
                             MobId = mobId,
-                            TamerExperience = mon.ExpMax,
-                            DigimonExperience = mon.ExpMax,
-                            NatureExperience = 0,
-                            ElementExperience = 0,
+                            TamerExperience = mon.Exp / 10,
+                            DigimonExperience = mon.Exp,
+                            NatureExperience = (short)mon.ExpMin,
+                            ElementExperience = (short)mon.ExpMax,
                             SkillExperience = 0
                         },
                         DropReward = new MobDropRewardConfigDTO
@@ -144,5 +147,6 @@ namespace DigitalWorldOnline.Application.Separar.Queries
 
             return result;
         }
+
     }
 }

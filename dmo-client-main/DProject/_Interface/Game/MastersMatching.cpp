@@ -387,7 +387,7 @@ cMastersMatching::Update_ForMouse()
 
 				//요청
 				// Npc테이블의 해당 기부아이템 인덱스
-				int nFTNpcIdx = m_pFTInsertItem->IsItem( m_ResistItem.m_nType );
+				int nFTNpcIdx = m_pFTInsertItem->IsItem( m_ResistItem.GetType() );
 				assert_cs( nFTNpcIdx != -1 );//Npc 테이블에 없는데 왔으니 문제가 있네
 				net::game->SendMastersMatchInsert( nUserID, nNpcID, m_nItemSlot, m_nItemCnt, (u1)nFTNpcIdx );
 
@@ -457,7 +457,7 @@ cMastersMatching::Update_ForMouse()
 			return muReturn;
 		}
 
-		TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( CURSOR_ST.GetPos() + CsPoint( 20, 20 ) , CsPoint::ZERO, TOOLTIP_MAX_SIZE, cTooltip::ITEM, m_ResistItem.m_nType, cBaseWindow::WT_MASTERS_MATCHING, 0, 0, &m_ResistItem );
+		TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( CURSOR_ST.GetPos() + CsPoint( 20, 20 ) , CsPoint::ZERO, TOOLTIP_MAX_SIZE, cTooltip::ITEM, m_ResistItem.GetType(), cBaseWindow::WT_MASTERS_MATCHING, 0, 0, &m_ResistItem );
 	}
 
 
@@ -602,7 +602,7 @@ void cMastersMatching::SetResist( int nInvenIndex, int nCount )
 		cText::sTEXTINFO ti;
 		ti.Init();
 
-		int nItemID = m_ResistItem.m_nType;
+		int nItemID = m_ResistItem.GetType();
 		_tcscpy_s( szName, ITEM_NAME_LEN, nsCsFileTable::g_pItemMng->GetItem( nItemID )->GetInfo()->s_szName );
 
 		g_pStringAnalysis->Cut_LimitWigth( pStrList, 158, szName, &ti );

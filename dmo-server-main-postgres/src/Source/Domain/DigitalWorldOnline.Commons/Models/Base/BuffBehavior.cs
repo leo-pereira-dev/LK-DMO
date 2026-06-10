@@ -80,7 +80,7 @@ namespace DigitalWorldOnline.Commons.Models
             Duration += duration;
             EndDate = EndDate.AddSeconds(duration);
         }
-        public void SetEndDate(DateTime EndDate) => EndDate = EndDate;
+        public void SetEndDate(DateTime endDate) => EndDate = endDate;
         /// <summary>
         /// Serializes the buff object.
         /// </summary>

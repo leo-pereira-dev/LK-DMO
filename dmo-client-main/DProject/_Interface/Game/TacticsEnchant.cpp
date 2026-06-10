@@ -85,9 +85,7 @@ void cEnchantTactics::Create(int nValue /* = 0  */)
 		m_rcRect[ i ] = CsRect( startRC, sizeRC );				
 	}
 
-#ifdef SDM_DIGIMON_TRANSCENDENCE_CONTENTS_20190507
 	m_pHpStatimg = AddSprite( CsPoint( 257, 156 ), CsPoint( 63, 16 ), "EnchantTactics\\Enchant_HP.tga" );
-#endif
 	m_pCancelButton = AddButton( CsPoint( 433, 13 ), CsPoint( 16, 16 ), CsPoint( 0, 16 ), "System\\Ch_Close.tga" );	
 
 	// 디지클론 장착 영역
@@ -430,12 +428,9 @@ cEnchantTactics::Update_ForMouse()
 		if( m_rcRect[ i ].PtInRect( ptMouseLocalPos ) == FALSE )
 			continue;
 
-#ifdef SDM_DIGIMON_TRANSCENDENCE_CONTENTS_20190507
 		int nStat = GetSelAbilityType( i );
 		TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( m_rcRect[ i ].GetPos() + GetRootClient(), CsPoint( 64, 32 ), TOOLTIP_MAX_SIZE, cTooltip::ENCHANT_EXPLAIN, nStat );
-#else
-		TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( m_rcRect[ i ].GetPos() + GetRootClient(), CsPoint( 64, 32 ), TOOLTIP_MAX_SIZE, cTooltip::STAT_EXPLAIN, i );
-#endif
+
 		if( i == m_nSelectAbility )
 			continue;
 

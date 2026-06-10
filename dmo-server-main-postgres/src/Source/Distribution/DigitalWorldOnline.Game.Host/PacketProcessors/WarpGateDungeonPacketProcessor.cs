@@ -1,4 +1,4 @@
-﻿using DigitalWorldOnline.Application;
+using DigitalWorldOnline.Application;
 using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
@@ -11,6 +11,7 @@ using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Packets.Chat;
 using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.MapServer;
+using DigitalWorldOnline.Game.Configuration;
 using DigitalWorldOnline.Game.Managers;
 using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
@@ -35,6 +36,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private readonly ISender _sender;
         private readonly ILogger _logger;
         private readonly OwnerStorageFlushService _ownerStorageFlushService;
+        private readonly PortalDestinationResolver _portalDestinationResolver;
 
         public WarpGateDungeonPacketProcessor(
             PartyManager partyManager,
@@ -44,7 +46,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             ISender sender,
             ILogger logger,
             DungeonsServer dungeonServer,
-            OwnerStorageFlushService ownerStorageFlushService)
+            OwnerStorageFlushService ownerStorageFlushService,
+            PortalDestinationResolver portalDestinationResolver)
         {
             _partyManager = partyManager;
             _configuration = configuration;
@@ -54,6 +57,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _logger = logger;
             _dungeonServer = dungeonServer;
             _ownerStorageFlushService = ownerStorageFlushService;
+            _portalDestinationResolver = portalDestinationResolver;
         }
 
         public async Task Process(GameClient client, byte[] packetData)
@@ -105,7 +109,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 client.Send(
                     new MapSwapPacket(
                         _configuration[GamerServerPublic],
-                        _configuration[GameServerPort],
+                        _configuration.GetPublicGameServerPort(),
                         mapId,
                         destination.X,
                         destination.Y
@@ -114,11 +118,29 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
             else
             {
+                var destination = _portalDestinationResolver.Resolve(client, portal);
+                if (!destination.Success)
+                {
+                    client.Send(new SystemMessagePacket(destination.FailureReason ?? "Invalid dungeon portal."));
+                    client.Send(new SelectPortalFailurePacket());
+                    _logger.Warning(
+                        "Dungeon warp rejected: tamer={TamerId} portal={PortalId} map={MapId} x={X} y={Y} reason={Reason}",
+                        client.TamerId,
+                        portalId,
+                        client.Tamer.Location.MapId,
+                        client.Tamer.Location.X,
+                        client.Tamer.Location.Y,
+                        destination.FailureReason);
+                    return;
+                }
+
                 if (!await TryConsumePortalRequirementAsync(client, portal))
                 {
                     client.Send(new SelectPortalFailurePacket());
                     return;
                 }
+
+                client.SetLastDungeonEntry(portalId, client.Tamer.Location.MapId);
 
                 await _ownerStorageFlushService.FlushForTransitionAsync(client);
                 if (client.DungeonMap)
@@ -126,10 +148,10 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 else
                     _mapServer.RemoveClient(client);
 
-                client.Tamer.NewLocation(portal.DestinationMapId, portal.DestinationX, portal.DestinationY);
+                client.Tamer.NewLocation(destination.DestinationMapId, destination.DestinationX, destination.DestinationY);
                 await _sender.Send(new UpdateCharacterLocationCommand(client.Tamer.Location));
 
-                client.Tamer.Partner.NewLocation(portal.DestinationMapId, portal.DestinationX, portal.DestinationY);
+                client.Tamer.Partner.NewLocation(destination.DestinationMapId, destination.DestinationX, destination.DestinationY);
                 await _sender.Send(new UpdateDigimonLocationCommand(client.Tamer.Partner.Location));
 
                 client.Tamer.UpdateState(CharacterStateEnum.Loading);
@@ -140,7 +162,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 client.Send(
                     new MapSwapPacket(
                         _configuration[GamerServerPublic],
-                        _configuration[GameServerPort],
+                        _configuration.GetPublicGameServerPort(),
                         client.Tamer.Location.MapId,
                         client.Tamer.Location.X,
                         client.Tamer.Location.Y

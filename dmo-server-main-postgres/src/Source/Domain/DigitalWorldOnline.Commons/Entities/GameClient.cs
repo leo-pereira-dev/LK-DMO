@@ -77,6 +77,10 @@ namespace DigitalWorldOnline.Commons.Entities
 
         public bool GameQuit { get; private set; }
 
+        public int LastDungeonEntryPortalId { get; private set; }
+
+        public int LastDungeonEntranceMapId { get; private set; }
+
         public bool PvpMap => Tamer?.Location.MapId == 9101;
 
         public bool DungeonMap => UtilitiesFunctions.DungeonMapIds.Contains(Tamer?.Location.MapId ?? 0);
@@ -98,7 +102,9 @@ namespace DigitalWorldOnline.Commons.Entities
             SessionStart = DateTime.UtcNow;
         }
 
-        public int MembershipUtcSeconds => MembershipExpirationDate.GetUtcSeconds();
+        public bool HasActiveMembership => MembershipExpirationDate != null && MembershipExpirationDate > DateTime.Now;
+
+        public int MembershipUtcSeconds => HasActiveMembership ? MembershipExpirationDate.GetUtcSeconds() : 0;
 
         public int PartnerDeleteValidation(string validation)
         {
@@ -174,18 +180,13 @@ namespace DigitalWorldOnline.Commons.Entities
 
         public void IncreaseMembershipDuration(int seconds)
         {
-            if (MembershipExpirationDate == null)
+            if (!HasActiveMembership)
             {
                 MembershipExpirationDate = DateTime.Now.AddSeconds(seconds);
             }
             else
             {
-                if (MembershipExpirationDate < DateTime.Now)
-                {
-                    MembershipExpirationDate = DateTime.Now.AddSeconds(seconds);
-                }
-                else
-                    MembershipExpirationDate = MembershipExpirationDate.Value.AddSeconds(seconds);
+                MembershipExpirationDate = MembershipExpirationDate.Value.AddSeconds(seconds);
             }
         }
 
@@ -206,6 +207,18 @@ namespace DigitalWorldOnline.Commons.Entities
         public void SetGameQuit(bool gameQuit)
         {
             GameQuit = gameQuit;
+        }
+
+        public void SetLastDungeonEntry(int portalId, int sourceMapId)
+        {
+            LastDungeonEntryPortalId = portalId;
+            LastDungeonEntranceMapId = sourceMapId;
+        }
+
+        public void ClearLastDungeonEntry()
+        {
+            LastDungeonEntryPortalId = 0;
+            LastDungeonEntranceMapId = 0;
         }
 
         public void Enable()

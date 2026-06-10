@@ -511,6 +511,7 @@ void cEnchantOption::_MakeOptionValueBox()
 void cEnchantOption::_SetOptionValueBox()
 {
 	SAFE_POINTER_RET( m_pOptValCombo );
+	uint nSelectedOption = GetSystem()->GetSelectedOptionValue();
 	m_pOptValCombo->RemoveAllItem();
 	m_pOptValCombo->SetVisible( true );
 
@@ -525,8 +526,15 @@ void cEnchantOption::_SetOptionValueBox()
 		_AddOptionValueItem( pAccItem->m_nAccOption[ i ], pAccItem->m_nAccValues[ i ], i );
 	}
 
-	m_pOptValCombo->SetCurSel( 0 );
-	int nAccIndex = m_pOptValCombo->GetData( 0 );
+	if( m_pOptValCombo->GetCount() <= 0 )
+		return;
+
+	if( !m_pOptValCombo->SetCurSel_FromData( nSelectedOption ) )
+		m_pOptValCombo->SetCurSel( 0 );
+
+	int nAccIndex = m_pOptValCombo->GetCurSel_Data();
+	if( nAccIndex < 0 )
+		nAccIndex = m_pOptValCombo->GetData( 0 );
 	GetSystem()->SelectOptionValue( nAccIndex );
 }
 
@@ -873,6 +881,9 @@ void cEnchantOption::_OnClickClose(void* pSender, void* pData)
 
 void cEnchantOption::_OnClickEnchant(void* pSender, void* pData)
 {
+	if( GetSystem()->IsProcessingEnchant() )
+		return;
+
 	GetSystem()->EnchantItem();
 }
 
@@ -949,7 +960,7 @@ void cEnchantOption::_SetTooltipEnchantStone(cListBoxItem const* pOverItem)
 	SAFE_POINTER_RET( TOOLTIPMNG_STPTR );
 	cTooltip* pTooltip = TOOLTIPMNG_STPTR->GetTooltip();
 	SAFE_POINTER_RET( pTooltip );
-	pTooltip->SetTooltip( pOverItem->GetWorldPos(), CsPoint( 32, 32 ), TOOLTIP_MAX_SIZE, cTooltip::ITEM, cEnchantItem.m_nType, cBaseWindow::WT_INVENTORY, 0, 0, &cEnchantItem );
+	pTooltip->SetTooltip( pOverItem->GetWorldPos(), CsPoint( 32, 32 ), TOOLTIP_MAX_SIZE, cTooltip::ITEM, cEnchantItem.GetType(), cBaseWindow::WT_INVENTORY, 0, 0, &cEnchantItem );
 }
 
 void cEnchantOption::_SetTooltipEnchantItem(cListBoxItem const* pOverItem)
@@ -963,7 +974,7 @@ void cEnchantOption::_SetTooltipEnchantItem(cListBoxItem const* pOverItem)
 	SAFE_POINTER_RET( TOOLTIPMNG_STPTR );
 	cTooltip* pTooltip = TOOLTIPMNG_STPTR->GetTooltip();
 	SAFE_POINTER_RET( pTooltip );
-	pTooltip->SetTooltip( pOverItem->GetWorldPos(), CsPoint( 32, 32 ), TOOLTIP_MAX_SIZE, cTooltip::ITEM, cAccItem.m_nType, cBaseWindow::WT_INVENTORY, 0, 0, &cAccItem );
+	pTooltip->SetTooltip( pOverItem->GetWorldPos(), CsPoint( 32, 32 ), TOOLTIP_MAX_SIZE, cTooltip::ITEM, cAccItem.GetType(), cBaseWindow::WT_INVENTORY, 0, 0, &cAccItem );
 }
 
 //////////////////////////////////////////////////////////////////////////

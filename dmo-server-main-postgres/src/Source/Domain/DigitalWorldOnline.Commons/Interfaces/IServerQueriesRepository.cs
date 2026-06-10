@@ -31,8 +31,6 @@ namespace DigitalWorldOnline.Commons.Interfaces
 
         Task<List<CloneValueAssetDTO>> GetCloneValueAssetsAsync();
 
-        Task<List<NpcAssetDTO>> GetNpcAssetsAsync();
-
         Task<IList<ServerDTO>> GetServersAsync(AccountAccessLevelEnum accessLevel);
 
         Task<List<WelcomeMessageConfigDTO>> GetActiveWelcomeMessagesAssetsAsync();
@@ -137,3 +135,4 @@ namespace DigitalWorldOnline.Commons.Interfaces
         Task<List<ExtraEvolutionNpcAssetDTO>> GetExtraEvolutionNpcAssetAsync();
     }
 }
+

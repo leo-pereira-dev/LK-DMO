@@ -64,7 +64,8 @@ public sealed class DefaultMapDriver : MapDriver
         ILogger logger,
         CancellationToken ct)
     {
-        var dtos = BuildDefaultMapsFromBins();
+        var killSpawns = await sender.Send(new KillSpawnsConfigQuery(), ct);
+        var dtos = BuildDefaultMapsFromBins(killSpawns);
 
         foreach (var dto in dtos)
         {
@@ -146,17 +147,23 @@ public sealed class DefaultMapDriver : MapDriver
         }
     }
 
-    private List<MapConfigDTO> BuildDefaultMapsFromBins()
+    private List<MapConfigDTO> BuildDefaultMapsFromBins(IReadOnlyList<KillSpawnConfigDTO> configuredKillSpawns)
     {
         if (!_mapBin.IsLoaded || !_monsterBin.IsLoaded)
             throw new InvalidOperationException("Map static catalogs must come from bins (DefaultMapDriver).");
+
+        var killSpawnsByMap = configuredKillSpawns
+            .GroupBy(x => x.GameMapConfigId)
+            .ToDictionary(x => x.Key, x => x.ToList());
 
         var result = new List<MapConfigDTO>(_mapBin.Data.MapsById.Count);
         foreach (var map in _mapBin.Data.MapsById.Values.OrderBy(x => x.MapId))
         {
             var mobs = new List<MobConfigDTO>();
-            if (_mapBin.Data.MonstersByMapId.TryGetValue(map.MapId, out var mapMobs))
+            IReadOnlyList<MapMonsterRecord> mapMobs = Array.Empty<MapMonsterRecord>();
+            if (_mapBin.Data.MonstersByMapId.TryGetValue(map.MapId, out var loadedMapMobs))
             {
+                mapMobs = loadedMapMobs;
                 long id = 1;
                 foreach (var mapMob in mapMobs)
                 {
@@ -228,8 +235,10 @@ public sealed class DefaultMapDriver : MapDriver
                             {
                                 Id = mobId,
                                 MobId = mobId,
-                                TamerExperience = mon.ExpMax,
-                                DigimonExperience = mon.ExpMax
+                                TamerExperience = mon.Exp / 10,
+                                DigimonExperience = mon.Exp,
+                                NatureExperience = (short)mon.ExpMin,
+                                ElementExperience = (short)mon.ExpMax
                             },
                             DropReward = new MobDropRewardConfigDTO
                             {
@@ -249,8 +258,59 @@ public sealed class DefaultMapDriver : MapDriver
                 Name = $"Map {map.MapId}",
                 Type = MapTypeEnum.Default,
                 Mobs = mobs,
-                KillSpawns = new()
+                KillSpawns = killSpawnsByMap.TryGetValue(map.MapId, out var dbKillSpawns) && dbKillSpawns.Count > 0
+                    ? dbKillSpawns
+                    : BuildKillSpawns(map.MapId, mapMobs)
             });
+        }
+
+        return result;
+    }
+
+    private static List<KillSpawnConfigDTO> BuildKillSpawns(int mapId, IReadOnlyList<MapMonsterRecord> mapMobs)
+    {
+        var killSpawnRows = mapMobs
+            .Where(x => x.KillGenMonsterTableId > 0 && x.KillGenCount > 0)
+            .ToList();
+
+        var result = new List<KillSpawnConfigDTO>(killSpawnRows.Count);
+        long killSpawnId = 1;
+        long sourceId = 1;
+        long targetId = 1;
+
+        foreach (var row in killSpawnRows)
+        {
+            var requiredKills = (byte)Math.Clamp(row.KillGenCount, 1, byte.MaxValue);
+            var targetAmount = (byte)Math.Clamp(row.Count, 1, byte.MaxValue);
+
+            result.Add(new KillSpawnConfigDTO
+            {
+                Id = killSpawnId,
+                GameMapConfigId = mapId,
+                ShowOnMinimap = row.KillGenViewCount > 0,
+                SourceMobs = new List<KillSpawnSourceMobConfigDTO>
+                {
+                    new()
+                    {
+                        Id = sourceId++,
+                        KillSpawnId = killSpawnId,
+                        SourceMobType = row.KillGenMonsterTableId,
+                        SourceMobRequiredAmount = requiredKills
+                    }
+                },
+                TargetMobs = new List<KillSpawnTargetMobConfigDTO>
+                {
+                    new()
+                    {
+                        Id = targetId++,
+                        KillSpawnId = killSpawnId,
+                        TargetMobType = row.MonsterTableId,
+                        TargetMobAmount = targetAmount
+                    }
+                }
+            });
+
+            killSpawnId++;
         }
 
         return result;

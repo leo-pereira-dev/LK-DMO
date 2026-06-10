@@ -9,6 +9,7 @@
         RepeatableEventQuest = 4,
         AchievementQuest = 5,
         CombineQuest = 6,
-        TutorialQuest = 7
+        TutorialQuest = 7,
+        XantiJointProgressQuest = 8
     }
 }

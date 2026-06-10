@@ -4,6 +4,7 @@ using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Commons.Enums;
 using DigitalWorldOnline.Commons.Models.Map;
 using DigitalWorldOnline.Game.Managers;
+using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.Commons.Interfaces;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,8 @@ namespace DigitalWorldOnline.GameHost
         private readonly DropManager _dropManager;
         private readonly FatigueService _fatigueService;   // FATIGUE_HOOK
         private readonly DailyEventService _dailyEvent;    // C7
+        private readonly VerdandiXProgramService _verdandiXProgram;
+        private readonly EquipmentSetBonusService _equipmentSetBonusService;
         private readonly AssetsLoader _assets;
         private readonly ConfigsLoader _configs;
         private readonly ILogger _logger;
@@ -45,6 +48,8 @@ namespace DigitalWorldOnline.GameHost
             DropManager dropManager,
             FatigueService fatigueService,   // FATIGUE_HOOK
             DailyEventService dailyEvent,    // C7
+            VerdandiXProgramService verdandiXProgram,
+            EquipmentSetBonusService equipmentSetBonusService,
             ILogger logger,
             ISender sender,
             IMapper mapper,
@@ -58,6 +63,8 @@ namespace DigitalWorldOnline.GameHost
             _dropManager = dropManager;
             _fatigueService = fatigueService;   // FATIGUE_HOOK
             _dailyEvent = dailyEvent;          // C7
+            _verdandiXProgram = verdandiXProgram;
+            _equipmentSetBonusService = equipmentSetBonusService;
             _assets = assets.Load();
             _configs = configs.Load();
             _logger = logger;

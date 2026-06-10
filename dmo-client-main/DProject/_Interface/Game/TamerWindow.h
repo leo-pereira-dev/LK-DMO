@@ -59,4 +59,24 @@ public:
 
 private: 
 	TOwnershipGuard<AdaptPartySystem> m_pAdaptParty; 
+
+private:
+	void ResetCachedValues();
+
+	bool m_bStatusCacheReady;
+
+	int m_nLastLevel;
+
+	int m_nLastHP;
+	int m_nLastMaxHP;
+	int m_nLastFP;
+
+	int m_nLastDS;
+	int m_nLastMaxDS;
+
+	int m_nLastExpBar;
+	int m_nLastExpBarMax;
+
+	TCHAR m_szLastExpPercent[32];
+
 };

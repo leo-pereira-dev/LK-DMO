@@ -21,12 +21,6 @@ namespace GData
 				_stricmp(profile.c_str(), "postgresql") == 0;
 		}
 
-		bool IsDebugMysqlProfile(std::string const& profile)
-		{
-			return _stricmp(profile.c_str(), "mysql") == 0 ||
-				_stricmp(profile.c_str(), "mariadb") == 0;
-		}
-
 		int ReadDebugInt(cProfile& profile, char const* key, int fallback)
 		{
 			int value = profile.GetInt("DEBUG", key);
@@ -516,7 +510,7 @@ namespace GData
 		if (eType == eCountry_GSP)
 			m_Account_IP = cNetBase::GetIP(ACCOUNT_IP);
 		else
-			m_Account_IP = cNetBase::GetIP("127.0.0.1");
+			m_Account_IP = cNetBase::GetIP(ACCOUNT_IP);
 			m_Account_Port = ACCOUNT_PORT;
 	}
 
@@ -540,14 +534,12 @@ namespace GData
 				if (accountIp.empty())
 					accountIp = debug.GetStr("network", "ip");
 				if (accountIp.empty())
-					accountIp = "127.0.0.1";
+					accountIp = ACCOUNT_IP;
 
 				m_Account_IP = cNetBase::GetIP(accountIp.c_str());
 
 				if (IsDebugPostgresProfile(debugServer))
 					m_Account_Port = ReadDebugInt(debug, "PgSqlAccountPort", 17029);
-				else if (IsDebugMysqlProfile(debugServer))
-					m_Account_Port = ReadDebugInt(debug, "MySqlAccountPort", ACCOUNT_PORT);
 				else
 					m_Account_Port = ReadDebugInt(debug, "AccountPort", ACCOUNT_PORT);
 			}

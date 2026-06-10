@@ -1,6 +1,8 @@
 
 #include "stdafx.h"
 #include "QuestList.h"
+#include "../../Data_Quest.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 
 
@@ -135,6 +137,19 @@ int cQuestList::_CreateQuestTab( TCHAR* szTab, bool bQTMain )
 void cQuestList::AddQuest( int nQuestExeIndex, DWORD dwQuestFTID, bool bInitial /*=false*/ )
 {
 	CsQuest* pFTQuest = nsCsFileTable::g_pQuestMng->GetQuest( dwQuestFTID );
+	cData_Quest* pDataQuest = g_pDataMng->GetQuest();
+	if( pFTQuest == NULL || pDataQuest == NULL || pDataQuest->IsProcess( dwQuestFTID ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "QUEST_LIST_SKIP_MISSING_PROCESS quest=%lu exeIndex=%d initial=%d hasQuest=%d hasData=%d",
+			(unsigned long)dwQuestFTID,
+			nQuestExeIndex,
+			bInitial ? 1 : 0,
+			pFTQuest != NULL ? 1 : 0,
+			pDataQuest != NULL ? 1 : 0 );
+		return;
+	}
+
+	cData_Quest::sPROCESS* pQuestProcess = pDataQuest->GetProcess( dwQuestFTID );
 
 	cScrollBar* pScroll = NULL;
 	cStringList* pStringList = NULL;
@@ -171,7 +186,7 @@ void cQuestList::AddQuest( int nQuestExeIndex, DWORD dwQuestFTID, bool bInitial 
 	ti.SetText( UISTRING_TEXT( "COMMON_TXT_LV" ).c_str() );
 	pString->AddText( &ti, CsPoint( 0, 3 ));	
 	
-	ti.s_Color = g_pDataMng->GetQuest()->GetTitleColor( pFTQuest );	
+	ti.s_Color = pDataQuest->GetTitleColor( pFTQuest );
 	ti.s_eFontSize = CFont::FS_10;	
 	ti.SetText( pFTQuest->GetLevel() );	
 	pString->AddText( &ti );	
@@ -181,9 +196,9 @@ void cQuestList::AddQuest( int nQuestExeIndex, DWORD dwQuestFTID, bool bInitial 
 	cText::GetStringSize( &ti, ptPos, nBase, ti.GetText() );
 	pString->TailAddSizeX( 20 - ptPos.x );	
 	pString->AddCheckBox( "System\\Check.tga", bQuestHelperView, CsPoint( 0, 20 ), CsPoint( 15, 18 ), CsPoint( 0, -2 ) )->s_ptSize.x += 3;
-	pString->AddImage( m_pProcessImage, g_pDataMng->GetQuest()->GetProcess( dwQuestFTID )->s_bCompleate ? 1 : 0, CsPoint( 0, -2 ) )->s_ptSize.x += 3;
+	pString->AddImage( m_pProcessImage, pQuestProcess->s_bCompleate ? 1 : 0, CsPoint( 0, -2 ) )->s_ptSize.x += 3;
 
-	ti.s_Color = g_pDataMng->GetQuest()->GetTitleColor( pFTQuest );
+	ti.s_Color = pDataQuest->GetTitleColor( pFTQuest );
 	ti.SetText( pFTQuest->m_szTitleText );
 	pString->AddText( &ti );
 	pString->SetValue1( IF_QL_TITLE );

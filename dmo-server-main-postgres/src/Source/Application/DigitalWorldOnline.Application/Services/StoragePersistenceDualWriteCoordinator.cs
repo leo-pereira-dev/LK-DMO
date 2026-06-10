@@ -12,8 +12,8 @@ namespace DigitalWorldOnline.Application.Services
             _repository = repository;
         }
 
-        public Task UpdateItemsAsync(List<ItemModel> items)
-            => _repository.UpdateItemsAsync(items);
+        public Task UpdateItemsAsync(List<ItemModel> items, bool preserveUnreferencedInstances = false)
+            => _repository.UpdateItemsAsync(items, preserveUnreferencedInstances);
 
         public Task UpdateItemListBitsAsync(long itemListId, long bits)
             => _repository.UpdateItemListBitsAsync(itemListId, bits);

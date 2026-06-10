@@ -1,5 +1,6 @@
 using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Application.GameAssets.Bins;
+using DigitalWorldOnline.Commons.DTOs.Assets;
 using DigitalWorldOnline.Commons.Enums;
 using DigitalWorldOnline.Commons.Models.Asset;
 using DigitalWorldOnline.Commons.Models.Base;
@@ -13,6 +14,10 @@ namespace DigitalWorldOnline.Game.Services
         private const byte Failed = 2;
         private const byte Preserved = 3;
         private const byte MaxAccessorySlots = 8;
+        private const byte MinDigiPower = 1;
+        private const byte MaxDigiPower = 200;
+        private const int DefaultDigiPowerSuccessChance = 80;
+        private const int DefaultDigiPowerFailureLoss = 1;
 
         private static readonly HashSet<int> LegacyRenewalStones = new()
         {
@@ -32,6 +37,21 @@ namespace DigitalWorldOnline.Game.Services
         private static readonly HashSet<int> LegacyOptionValueStones = new()
         {
             10053, 45002, 47002, 47006
+        };
+
+        private static readonly Dictionary<int, DigiPowerStoneRule> DigiPowerStoneRules = new()
+        {
+            [45000] = new(80, 1),
+            [47000] = new(80, 1),
+            [46997] = new(85, 1),
+            [46999] = new(85, 1),
+            [10026] = new(90, 1),
+            [47004] = new(90, 1),
+            [10259] = new(95, 1),
+            [47009] = new(95, 1),
+            [47107] = new(95, 1),
+            [128407] = new(100, 0, 1),
+            [128408] = new(100, 0, -1)
         };
 
         private readonly AssetsLoader _assets;
@@ -58,6 +78,137 @@ namespace DigitalWorldOnline.Game.Services
             return AccessoryIdentifyResult.Success(optionInfo.MaxStatusCount);
         }
 
+        public bool ApplyMaximumDefaultStats(ItemModel targetAccessory)
+        {
+            EnsureAccessoryState(targetAccessory);
+
+            if (ResolveItemInfo(targetAccessory)?.Type == 52)
+                return ApplyChipsetStats(targetAccessory, ResolveMaximumChipsetApplyRate);
+
+            var optionInfo = ResolveAccessoryOptionInfo(targetAccessory);
+            if (optionInfo == null)
+                return false;
+
+            targetAccessory.AccessoryStatus = targetAccessory.AccessoryStatus.OrderBy(x => x.Slot).ToList();
+            foreach (var status in targetAccessory.AccessoryStatus)
+            {
+                status.SetType(default);
+                status.SetValue(0);
+            }
+
+            var statusAmount = Math.Max(0, Math.Min(targetAccessory.AccessoryStatus.Count, optionInfo.MaxStatusCount));
+            for (var i = 0; i < statusAmount && i < optionInfo.Options.Count; i++)
+            {
+                var option = optionInfo.Options[i];
+                targetAccessory.AccessoryStatus[i].SetType(option.Type);
+                targetAccessory.AccessoryStatus[i].SetValue(option.MaxValue);
+            }
+
+            targetAccessory.SetPower(ResolveMaximumPower(targetAccessory));
+            targetAccessory.SetReroll((byte)Math.Clamp(optionInfo.MaxReroll, byte.MinValue, byte.MaxValue));
+            ApplyFamilyType(targetAccessory);
+
+            return targetAccessory.HasAccessoryStatus;
+        }
+
+        public bool EnsureChipsetFamilyType(ItemModel targetAccessory)
+        {
+            var itemInfo = ResolveItemInfo(targetAccessory);
+            if (itemInfo?.Type != 52)
+                return false;
+
+            var skillInfo = _assets.SkillInfo.FirstOrDefault(x => x.SkillId == itemInfo.SkillCode);
+            if (skillInfo == null || skillInfo.FamilyType == 0)
+                return false;
+
+            if (targetAccessory.FamilyType == skillInfo.FamilyType)
+                return false;
+
+            targetAccessory.SetFamilyType(skillInfo.FamilyType);
+            return true;
+        }
+
+        public bool ApplyRandomChipsetStats(ItemModel targetAccessory)
+        {
+            EnsureAccessoryState(targetAccessory);
+
+            if (ResolveItemInfo(targetAccessory)?.Type != 52)
+                return false;
+
+            return ApplyChipsetStats(targetAccessory, ResolveRandomChipsetApplyRate);
+        }
+
+        private bool ApplyChipsetStats(
+            ItemModel targetAccessory,
+            Func<ItemAssetModel, byte> resolveApplyRate)
+        {
+            var itemInfo = ResolveItemInfo(targetAccessory);
+            if (itemInfo == null)
+                return false;
+
+            var skillCodeInfo = _assets.SkillCodeInfo.FirstOrDefault(x => x.SkillCode == itemInfo.SkillCode);
+            var skillInfo = _assets.SkillInfo.FirstOrDefault(x => x.SkillId == itemInfo.SkillCode);
+            var chipsetOptions = skillCodeInfo?.Apply?
+                .Where(x => x.Type > 0 && TryMapAccessoryStatusType(x.Attribute, out _))
+                .Take(MaxAccessorySlots)
+                .ToList();
+
+            if (chipsetOptions == null || !chipsetOptions.Any())
+                return false;
+
+            targetAccessory.AccessoryStatus = targetAccessory.AccessoryStatus.OrderBy(x => x.Slot).ToList();
+            foreach (var status in targetAccessory.AccessoryStatus)
+            {
+                status.SetType(default);
+                status.SetValue(0);
+            }
+
+            var applyRate = resolveApplyRate(itemInfo);
+
+            for (var i = 0; i < chipsetOptions.Count; i++)
+            {
+                var option = chipsetOptions[i];
+                if (!TryMapAccessoryStatusType(option.Attribute, out var statusType))
+                    continue;
+
+                var baseValue = option.Value + itemInfo.TypeN * option.AdditionalValue;
+                var finalValue = (short)Math.Clamp((double)applyRate * baseValue / 100, short.MinValue, short.MaxValue);
+
+                targetAccessory.AccessoryStatus[i].SetType(statusType);
+                targetAccessory.AccessoryStatus[i].SetValue(finalValue);
+            }
+
+            targetAccessory.SetPower((byte)applyRate);
+            targetAccessory.SetReroll(100);
+            if (skillInfo != null)
+                targetAccessory.SetFamilyType(skillInfo.FamilyType);
+
+            return targetAccessory.HasAccessoryStatus;
+        }
+
+        private static byte ResolveMaximumChipsetApplyRate(ItemAssetModel itemInfo)
+        {
+            var applyRate = itemInfo.ApplyValueMax > 0 ? itemInfo.ApplyValueMax : itemInfo.ApplyValueMin;
+            return (byte)Math.Clamp(applyRate, byte.MinValue, byte.MaxValue);
+        }
+
+        private static byte ResolveRandomChipsetApplyRate(ItemAssetModel itemInfo)
+        {
+            var min = Math.Min(itemInfo.ApplyValueMin, itemInfo.ApplyValueMax);
+            var max = Math.Max(itemInfo.ApplyValueMin, itemInfo.ApplyValueMax);
+
+            if (max <= 0)
+                max = min;
+
+            if (min <= 0)
+                min = max;
+
+            min = (short)Math.Clamp(min, byte.MinValue, byte.MaxValue);
+            max = (short)Math.Clamp(max, min, byte.MaxValue);
+
+            return UtilitiesFunctions.RandomByte((byte)min, (byte)max);
+        }
+
         public AccessoryEnchantResult Enchant(ItemModel stone, ItemModel targetAccessory, byte selectedOptionSlot, byte lockedOptionMask = 0)
         {
             EnsureAccessoryState(targetAccessory);
@@ -72,7 +223,7 @@ namespace DigitalWorldOnline.Game.Services
 
             return stoneInfo.Type switch
             {
-                AccessoryEnchantStoneType.DigiPower => ApplyDigiPower(stoneInfo, targetAccessory),
+                AccessoryEnchantStoneType.DigiPower => ApplyDigiPower(stoneInfo, stone, targetAccessory),
                 AccessoryEnchantStoneType.Renewal => ApplyRenewal(stoneInfo, targetAccessory, optionInfo),
                 AccessoryEnchantStoneType.AccOption => ApplyAccOption(stone, targetAccessory, optionInfo, lockedOptionMask),
                 AccessoryEnchantStoneType.OptionValue => ApplyOptionValue(targetAccessory, optionInfo, selectedOptionSlot),
@@ -80,21 +231,34 @@ namespace DigitalWorldOnline.Game.Services
             };
         }
 
-        private AccessoryEnchantResult ApplyDigiPower(AccessoryEnchantStoneInfo stoneInfo, ItemModel targetAccessory)
+        private AccessoryEnchantResult ApplyDigiPower(
+            AccessoryEnchantStoneInfo stoneInfo,
+            ItemModel stone,
+            ItemModel targetAccessory)
         {
-            if (targetAccessory.Power >= 200)
+            var rule = ResolveDigiPowerStoneRule(stone.ItemId);
+            var isDecreaseStone = IsDigiPowerDecreaseStone(stone.ItemId, stoneInfo, rule);
+
+            if (targetAccessory.Power >= MaxDigiPower && !isDecreaseStone)
                 return AccessoryEnchantResult.Preserve("Accessory power is already at maximum.");
 
             var oldPower = targetAccessory.Power;
-            var delta = RollStoneValue(stoneInfo, fallbackValue: 1);
-            if (delta == 0)
-                delta = 1;
+            var successful = isDecreaseStone || RollDigiPowerSuccess(rule);
+            var delta = isDecreaseStone
+                ? -ResolveDigiPowerDecreaseAmount(rule)
+                : successful
+                    ? ResolveDigiPowerIncreaseAmount(stoneInfo, rule)
+                    : -ResolveDigiPowerFailureLoss(rule);
 
-            var newPower = Math.Clamp(oldPower + delta, 0, 200);
+            var newPower = Math.Clamp(oldPower + delta, MinDigiPower, MaxDigiPower);
             targetAccessory.SetPower((byte)newPower);
 
-            var result = newPower > oldPower ? Success : newPower < oldPower ? Failed : Preserved;
-            return new AccessoryEnchantResult(result, true, $"DigiPower changed from {oldPower} to {newPower}.");
+            var result = successful ? Success : Failed;
+            var message = successful
+                ? $"DigiPower changed from {oldPower} to {newPower}."
+                : $"DigiPower enchant failed and changed from {oldPower} to {newPower}.";
+
+            return new AccessoryEnchantResult(result, true, message);
         }
 
         private AccessoryEnchantResult ApplyRenewal(
@@ -230,6 +394,26 @@ namespace DigitalWorldOnline.Game.Services
             return UtilitiesFunctions.RandomByte(95, 102);
         }
 
+        private byte ResolveMaximumPower(ItemModel targetAccessory)
+        {
+            var rankRange = _itemListBinLoader.Data.Rank.FirstOrDefault(x => x.ItemId == targetAccessory.ItemId);
+            if (rankRange != null)
+                return (byte)Math.Clamp(rankRange.Max, byte.MinValue, byte.MaxValue);
+
+            return 100;
+        }
+
+        private void ApplyFamilyType(ItemModel targetAccessory)
+        {
+            var itemInfo = ResolveItemInfo(targetAccessory);
+            if (itemInfo == null)
+                return;
+
+            var skillInfo = _assets.SkillInfo.FirstOrDefault(x => x.SkillId == itemInfo.SkillCode);
+            if (skillInfo != null)
+                targetAccessory.SetFamilyType(skillInfo.FamilyType);
+        }
+
         private AccessoryEnchantStoneInfo ResolveStoneInfo(ItemModel stone)
         {
             var itemInfo = ResolveItemInfo(stone);
@@ -282,6 +466,45 @@ namespace DigitalWorldOnline.Game.Services
             return 1;
         }
 
+        private static DigiPowerStoneRule ResolveDigiPowerStoneRule(int itemId)
+        {
+            return DigiPowerStoneRules.TryGetValue(itemId, out var rule)
+                ? rule
+                : new DigiPowerStoneRule(DefaultDigiPowerSuccessChance, DefaultDigiPowerFailureLoss);
+        }
+
+        private static bool RollDigiPowerSuccess(DigiPowerStoneRule rule)
+        {
+            return rule.SuccessChance >= 100 || UtilitiesFunctions.RandomInt(1, 100) <= rule.SuccessChance;
+        }
+
+        private static int ResolveDigiPowerIncreaseAmount(AccessoryEnchantStoneInfo stoneInfo, DigiPowerStoneRule rule)
+        {
+            if (rule.FixedDelta is > 0)
+                return rule.FixedDelta.Value;
+
+            var delta = RollStoneValue(stoneInfo, fallbackValue: 1);
+            return Math.Max(1, delta);
+        }
+
+        private static int ResolveDigiPowerFailureLoss(DigiPowerStoneRule rule)
+        {
+            return Math.Max(1, rule.FailureLoss);
+        }
+
+        private static int ResolveDigiPowerDecreaseAmount(DigiPowerStoneRule rule)
+        {
+            return Math.Max(1, Math.Abs(rule.FixedDelta ?? rule.FailureLoss));
+        }
+
+        private static bool IsDigiPowerDecreaseStone(
+            int itemId,
+            AccessoryEnchantStoneInfo stoneInfo,
+            DigiPowerStoneRule rule)
+        {
+            return rule.FixedDelta < 0 || itemId == 128408 || (stoneInfo.FromOfficialTable && stoneInfo.MaxValue == 0);
+        }
+
         private static short ResolveLegacyRenewalDelta(int itemId)
         {
             return itemId is 47008 or 47106 ? (short)5 : (short)1;
@@ -304,8 +527,7 @@ namespace DigitalWorldOnline.Game.Services
             if (itemInfo == null)
                 return null;
 
-            var optionKey = ResolveAccessoryOptionKey(itemInfo);
-            var record = _itemListBinLoader.Data.AccessoryOptions.FirstOrDefault(x => x.ItemType == optionKey);
+            var record = ResolveAccessoryOptionRecord(targetAccessory, itemInfo);
             if (record == null)
                 return null;
 
@@ -348,12 +570,58 @@ namespace DigitalWorldOnline.Game.Services
             return new AccessoryOptionInfo(maxStatusCount, maxReroll, weightedOptions, ranges);
         }
 
-        private uint ResolveAccessoryOptionKey(ItemAssetModel itemInfo)
+        private ItemAccessoryOptionRecord? ResolveAccessoryOptionRecord(ItemModel targetAccessory, ItemAssetModel itemInfo)
         {
-            if (itemInfo.SkillCode > 0 && _itemListBinLoader.Data.AccessoryOptions.Any(x => x.ItemType == (uint)itemInfo.SkillCode))
-                return (uint)itemInfo.SkillCode;
+            var binItemInfo = _itemListBinLoader.Data.Items.FirstOrDefault(x => x.ItemId == targetAccessory.ItemId);
+            foreach (var optionKey in ResolveAccessoryOptionKeys(itemInfo, binItemInfo))
+            {
+                var record = _itemListBinLoader.Data.AccessoryOptions.FirstOrDefault(x => x.ItemType == optionKey);
+                if (record != null)
+                    return record;
+            }
 
-            return (uint)itemInfo.Type;
+            return null;
+        }
+
+        private static IEnumerable<uint> ResolveAccessoryOptionKeys(
+            ItemAssetModel itemInfo,
+            ItemAssetDTO? binItemInfo)
+        {
+            if (itemInfo.SkillCode > 0 && itemInfo.SkillCode <= uint.MaxValue)
+                yield return (uint)itemInfo.SkillCode;
+
+            if (binItemInfo?.SkillCode > 0 && binItemInfo.SkillCode <= uint.MaxValue)
+                yield return (uint)binItemInfo.SkillCode;
+
+            if (itemInfo.Type > 0)
+                yield return (uint)itemInfo.Type;
+
+            if (binItemInfo?.Type > 0)
+                yield return (uint)binItemInfo.Type;
+        }
+
+        private static bool TryMapAccessoryStatusType(
+            SkillCodeApplyAttributeEnum attribute,
+            out AccessoryStatusTypeEnum mappedType)
+        {
+            mappedType = attribute switch
+            {
+                SkillCodeApplyAttributeEnum.AT => AccessoryStatusTypeEnum.AT,
+                SkillCodeApplyAttributeEnum.DP => AccessoryStatusTypeEnum.DE,
+                SkillCodeApplyAttributeEnum.HP => AccessoryStatusTypeEnum.HP,
+                SkillCodeApplyAttributeEnum.DS => AccessoryStatusTypeEnum.DS,
+                SkillCodeApplyAttributeEnum.SCD => AccessoryStatusTypeEnum.SCD,
+                SkillCodeApplyAttributeEnum.SkillDamageByAttribute => AccessoryStatusTypeEnum.ATT,
+                SkillCodeApplyAttributeEnum.CA => AccessoryStatusTypeEnum.CT,
+                SkillCodeApplyAttributeEnum.ER => AccessoryStatusTypeEnum.CD,
+                SkillCodeApplyAttributeEnum.AS => AccessoryStatusTypeEnum.AS,
+                SkillCodeApplyAttributeEnum.EV => AccessoryStatusTypeEnum.EV,
+                SkillCodeApplyAttributeEnum.BL => AccessoryStatusTypeEnum.BL,
+                SkillCodeApplyAttributeEnum.HT => AccessoryStatusTypeEnum.HT,
+                _ => default
+            };
+
+            return mappedType != default;
         }
 
         private ItemAssetModel? ResolveItemInfo(ItemModel item)
@@ -398,6 +666,8 @@ namespace DigitalWorldOnline.Game.Services
             short MinValue,
             short MaxValue,
             bool FromOfficialTable);
+
+        private sealed record DigiPowerStoneRule(int SuccessChance, int FailureLoss, int? FixedDelta = null);
 
         private sealed record AccessoryOptionInfo(
             int MaxStatusCount,

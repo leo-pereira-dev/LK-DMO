@@ -33,8 +33,8 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
 
                 WriteInt(member.Value.Location.MapId);
                 WriteInt(member.Value.Channel);
-                WriteInt(member.Value.GeneralHandler);
-                WriteInt(member.Value.Partner.GeneralHandler);
+                WriteUShort((ushort)member.Value.GeneralHandler);
+                WriteUShort((ushort)member.Value.Partner.GeneralHandler);
             }
 
             WriteInt(-1);

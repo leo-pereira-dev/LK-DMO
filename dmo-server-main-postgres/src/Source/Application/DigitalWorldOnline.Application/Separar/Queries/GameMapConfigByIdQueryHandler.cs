@@ -19,6 +19,7 @@ namespace DigitalWorldOnline.Application.Separar.Queries
             int mapId = (int)request.Id;
             if (_mapBin.IsLoaded && _mapBin.Data.MapsById.ContainsKey(mapId))
             {
+                _mapBin.Data.MonstersByMapId.TryGetValue(mapId, out var mapMobs);
                 return Task.FromResult<MapConfigDTO?>(new MapConfigDTO
                 {
                     Id = mapId,
@@ -26,7 +27,9 @@ namespace DigitalWorldOnline.Application.Separar.Queries
                     Name = $"Map {mapId}",
                     Type = MapTypeEnum.Default,
                     Mobs = new(),
-                    KillSpawns = new()
+                    KillSpawns = MapKillSpawnBuilder.Build(
+                        mapId,
+                        mapMobs ?? Array.Empty<MapMonsterRecord>())
                 });
             }
 

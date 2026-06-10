@@ -1,0 +1,1326 @@
+buff_id,source,name,icon,type,life_type,time_type,class,skill_code,digimon_skill_code,deleted,effect_file
+10101,gdmo_replaced_legacy,GM Buff,2001,1,2,1,999,1150000,0,0,Buff06_Attack_Red
+40101,gdmo_replaced_legacy,Increase AT,2151,1,1,1,401,2500201,800211,1,Buff06_Attack_Red
+40102,gdmo_replaced_legacy,Increase DE,2152,1,1,2,402,2500202,800512,1,Buff06_Attack_Green
+40103,gdmo_replaced_legacy,Increase HP maximum,2153,1,1,1,403,2500203,800811,1,Buff06_Attack_Red
+40104,gdmo_replaced_legacy,Increase DS maximum,2154,1,1,2,404,2500204,800812,1,Buff06_Attack_Blue
+40105,gdmo_replaced_legacy,,2001,1,1,1,405,2500205,0,1,
+40106,gdmo_replaced_legacy,,2001,1,1,2,406,2500206,0,0,
+40107,gdmo_replaced_legacy,,2001,1,1,1,407,2500207,0,1,
+40108,gdmo_replaced_legacy,Increase Skill Damage,2165,1,1,1,408,2500208,0,1,Buff06_Attack_Yellow
+40109,gdmo_replaced_legacy,,2001,1,1,1,409,2500209,0,1,
+40110,gdmo_replaced_legacy,,2001,1,1,2,410,2500210,0,0,Buff06_Attack_Red
+40111,gdmo_replaced_legacy,,2001,1,1,1,411,2500211,0,1,Buff06_Attack_Red
+40112,gdmo_replaced_legacy,,2001,1,1,2,412,2500212,0,0,Buff06_Attack_Blue
+40113,gdmo_replaced_legacy,,2001,1,1,1,413,2500213,0,1,
+40114,gdmo_replaced_legacy,,2001,1,1,2,414,2500214,800512,0,
+40115,gdmo_replaced_legacy,,2001,1,1,1,415,2500246,800513,1,
+40116,gdmo_replaced_legacy,,2001,1,1,1,416,2500215,0,1,
+40117,gdmo_replaced_legacy,,2001,1,1,1,417,2500216,0,1,
+40118,gdmo_replaced_legacy,,2155,1,1,1,418,2500217,0,1,Buff06_Attack_Green
+40119,gdmo_replaced_legacy,,2156,1,1,1,419,2500218,0,1,Buff06_Attack_Violet
+40120,gdmo_replaced_legacy,,2001,1,1,1,420,2500219,0,1,
+40121,gdmo_replaced_legacy,,2001,1,1,1,421,2500220,0,1,
+40122,gdmo_replaced_legacy,,2157,1,1,1,422,2500221,0,1,Buff06_Attack_Yellow
+40123,gdmo_replaced_legacy,,2163,1,1,1,423,2500222,0,0,Buff06_Attack_Blue
+40124,gdmo_replaced_legacy,,2164,1,1,1,424,2500223,0,1,Buff06_Attack_Green
+40125,gdmo_replaced_legacy,,2166,1,1,1,425,2500224,0,1,Buff06_Attack_Green
+40126,gdmo_replaced_legacy,Flame,2041,2,1,4,426,7500011,0,0,Debuff_Fire
+40127,gdmo_replaced_legacy,Flash,2042,2,1,4,427,7500211,0,0,Debuff_Light
+40128,gdmo_replaced_legacy,Fury,2043,1,1,4,428,7500111,0,1,Buff_SkillPowerUp
+40129,gdmo_replaced_legacy,Rage,2043,1,1,4,429,7500311,0,1,Buff_SkillPowerUp
+40130,gdmo_replaced_legacy,,2160,2,1,2,430,2500230,0,0,Buff24_Poison
+40131,gdmo_replaced_legacy,,2160,2,1,1,431,2500231,0,0,Buff03_Stun
+40132,gdmo_replaced_legacy,,2160,2,1,1,432,2500232,0,0,Buff08_Trap
+40133,gdmo_replaced_legacy,,2160,2,1,1,431,2500233,0,0,Buff17_Sleep
+40134,gdmo_replaced_legacy,,2160,2,1,1,434,2500234,0,0,Buff18_Attackspeed_E
+40135,gdmo_replaced_legacy,,2160,2,1,2,435,2500235,0,0,Buff09_Conver
+40136,gdmo_replaced_legacy,,2160,2,1,1,436,2500236,0,0,Dash
+40137,gdmo_replaced_legacy,Increase CAT,3055,1,1,1,603,2500280,0,1,Buff06_Attack_Red
+40138,gdmo_replaced_legacy,Corrosion,2045,2,1,4,427,7572111,0,0,Debuff_metal
+40139,gdmo_replaced_legacy,Overflowing Power,2043,1,1,4,428,7572131,0,1,Buff_SkillPowerUp
+40140,gdmo_replaced_legacy,,2160,2,1,2,437,2500241,0,0,Buff24_Poison
+40141,gdmo_replaced_legacy,,2160,4,1,2,438,2500242,0,0,Buff06_Attack_Red
+40142,gdmo_replaced_legacy,,2160,2,1,1,439,2500243,0,0,Buff03_Stun
+40143,gdmo_replaced_legacy,,2032,1,2,1,440,2500244,0,1,Buff06_Attack_Red
+40144,gdmo_replaced_legacy,Hope of File island,2031,1,1,4,441,2500225,0,0,
+40145,gdmo_replaced_legacy,Bless of File Island,2001,1,1,1,442,2500226,0,0,
+40146,gdmo_replaced_legacy,Berserker,3037,1,1,4,443,2500247,0,1,Buff06_Attack_Red
+40147,gdmo_replaced_legacy,Attribute EXP Booster,2033,1,2,1,20,2500227,0,0,
+40148,gdmo_replaced_legacy,,3038,1,2,1,444,0,0,0,
+40150,gdmo_replaced_legacy,,2019,1,1,1,445,2500250,0,0,
+40151,gdmo_replaced_legacy,,2009,1,1,1,446,2500251,0,0,
+40152,gdmo_replaced_legacy,Increase AT,2151,1,2,2,401,2599994,0,1,Buff06_Attack_Red
+40153,gdmo_replaced_legacy,Increase DE,2152,1,2,2,402,2599995,0,1,Buff06_Attack_Green
+40154,gdmo_replaced_legacy,Increase HP maximum,2153,1,2,2,403,2599996,0,1,Buff06_Attack_Red
+40155,gdmo_replaced_legacy,Increase DS maximum,2154,1,2,2,404,2599997,0,1,Buff06_Attack_Blue
+40156,gdmo_replaced_legacy,Increase Skill Damage,2165,1,2,2,408,2599998,0,1,Buff06_Attack_Yellow
+40157,gdmo_replaced_legacy,Increase CAT,3055,1,2,2,603,2599999,0,1,Buff06_Attack_Red
+40158,gdmo_replaced_legacy,Increase EV,2155,1,2,2,418,2599978,0,1,Buff06_Attack_Green
+40159,gdmo_replaced_legacy,Increase HT,2156,1,2,2,419,2599979,0,1,Buff06_Attack_Violet
+40160,gdmo_replaced_legacy,Protection,3051,1,1,4,441,0,8000311,0,
+40161,gdmo_replaced_legacy,Plan A,3053,1,1,4,450,0,8000211,0,
+40162,gdmo_replaced_legacy,Growth,2009,1,1,4,451,0,0,0,
+40163,gdmo_replaced_legacy,Flash,2042,2,1,4,463,7500411,0,0,Debuff_Light
+40164,gdmo_replaced_legacy,Rage,2043,1,1,4,464,7500421,0,1,Buff_SkillPowerUp
+40165,gdmo_replaced_legacy,Stun,2044,2,1,4,465,7500511,0,0,Debuff_Stun
+40166,gdmo_replaced_legacy,Invincible,2046,1,1,4,466,7500711,0,1,Buff_Invincible
+40167,gdmo_replaced_legacy,Lapidification,2045,2,1,4,467,7500811,0,0,Debuff_Stone
+40168,gdmo_replaced_legacy,Evasion,2051,1,1,4,468,7501011,0,1,Buff_Dodge
+40169,gdmo_replaced_legacy,Shield,2048,1,1,4,469,7501111,0,1,Buff_Shield
+40170,gdmo_replaced_legacy,Critical Up,2049,1,1,4,470,7501211,0,1,Buff_Critical
+40171,gdmo_replaced_legacy,Reflection,2047,1,1,4,471,7501311,0,1,Buff_Reflect
+40172,gdmo_replaced_legacy,Stun,2044,2,1,4,472,7501411,0,0,Debuff_Stun
+40173,gdmo_replaced_legacy,"HP, DS Increase",2028,1,2,1,999,1240016,0,0,Buff06_Attack_Red
+40174,gdmo_replaced_legacy,"HP, Skill Damage",2028,1,2,1,999,2500268,0,0,Buff06_Attack_Red
+40175,gdmo_replaced_legacy,Skill Damage,2028,1,2,1,999,2500229,0,0,Buff06_Attack_Red
+40176,gdmo_replaced_legacy,"HP, Skill Damage",2028,1,2,1,999,2000017,0,0,Buff06_Attack_Red
+40177,gdmo_replaced_legacy,"HP, DS Increase",2028,1,2,1,999,1240017,0,0,Buff06_Attack_Red
+40178,gdmo_replaced_legacy,Skill Damage,2028,1,2,1,999,2500249,0,0,Buff06_Attack_Red
+40179,gdmo_replaced_legacy,Fire Attribute skill damage increased,2028,1,2,1,999,1900000,0,0,Buff06_Attack_Red
+40180,gdmo_replaced_legacy,"AP, Skill Damage Increase",2028,1,2,1,999,2500273,0,0,Buff06_Attack_Red
+40181,gdmo_replaced_legacy,Wind Attribute skill damage increased,2028,1,2,1,999,1900001,0,0,Buff06_Attack_Violet
+40182,gdmo_replaced_legacy,Ice Attribute skill damage increased,2028,1,2,1,999,1900002,0,0,Buff06_Attack_Blue
+40183,gdmo_replaced_legacy,Wood Attribute skill damage increased,2028,1,2,1,999,1900003,0,0,Buff06_Attack_Green
+40184,gdmo_replaced_legacy,Earth Attribute skill damage increased,2028,1,2,1,999,1900004,0,0,Buff06_Attack_Yellow
+40185,gdmo_replaced_legacy,HP Increase,2028,1,2,1,999,2500272,0,0,Buff06_Attack_Red
+40186,gdmo_replaced_legacy,Hyper Spirit Evolution (Fire),2028,1,2,1,999,1900005,0,0,Buff06_Attack_Red
+40187,gdmo_replaced_legacy,Light Attribute skill damage increased,2028,1,2,1,999,1900006,0,0,Buff06_Attack_Yellow
+40188,gdmo_replaced_legacy,Thunder Attribute skill damage increased,2028,1,2,1,999,1900007,0,0,Buff06_Attack_Yellow
+40189,gdmo_replaced_legacy,Water Attribute skill damage increased,2028,1,2,1,999,1900008,0,0,Buff06_Attack_Blue
+40190,gdmo_replaced_legacy,Darkness Attribute skill damage increased,2028,1,2,1,999,1900009,0,0,Buff06_Attack_Violet
+40191,gdmo_replaced_legacy,Steel Attribute skill damage increased,2028,1,2,1,999,1900010,0,0,Buff06_Attack_Green
+40192,gdmo_replaced_legacy,Hyper Spirit Evolution (Light),2028,1,2,1,999,1900011,0,0,Buff06_Attack_Yellow
+40193,gdmo_replaced_legacy,"HP, Thunder Attribute skill damage increased",2028,1,2,1,999,1900012,0,0,Buff06_Attack_Yellow
+40194,gdmo_replaced_legacy,HP Increase,2028,1,2,1,999,1240101,0,0,Buff06_Attack_Red
+40195,gdmo_replaced_legacy,"HP, DS Increase",2028,1,2,1,999,2000034,0,0,Buff06_Attack_Red
+40198,gdmo_replaced_legacy,"HP, DS, AT Increase",2028,1,2,1,999,2000032,0,0,Buff06_Attack_Red
+40199,gdmo_replaced_legacy,"HP, DS, AT Increase",2028,1,2,1,999,2000033,0,0,Buff06_Attack_Red
+40200,gdmo_replaced_legacy,"Increase AT, SP, HP",2028,1,1,1,999,1900013,0,1,Buff06_Attack_Red
+40201,gdmo_replaced_legacy,"HP, DS Increase",2028,1,2,1,999,1240021,0,0,Buff06_Attack_Red
+40202,gdmo_replaced_legacy,Increase AT,2151,1,2,1,473,2500274,0,1,Buff06_Attack_Red
+40203,gdmo_replaced_legacy,Increase DP,2152,1,2,1,474,2500275,0,1,Buff06_Attack_Green
+40204,gdmo_replaced_legacy,Increase HP maximum,2153,1,2,1,475,2500276,0,1,Buff06_Attack_Red
+40205,gdmo_replaced_legacy,Increase DS maximum,2154,1,2,1,476,2500277,0,1,Buff06_Attack_Blue
+40206,gdmo_replaced_legacy,Increase AT,2151,1,1,1,477,2500282,0,1,
+40207,gdmo_replaced_legacy,Increase DP,2152,1,1,1,478,2500283,0,1,
+40208,gdmo_replaced_legacy,Increase HP maximum,2153,1,1,1,479,2500284,0,1,
+40209,gdmo_replaced_legacy,Increase DS maximum,2154,1,1,1,480,2500285,0,1,
+40210,gdmo_replaced_legacy,Evasion,2155,1,1,1,481,2500286,0,1,
+40211,gdmo_replaced_legacy,Valor of Marcus(Va),3075,1,2,4,301,0,8000121,0,
+40212,gdmo_replaced_legacy,Valor of Marcus(Da),3075,1,2,4,301,0,8000131,0,
+40213,gdmo_replaced_legacy,Insight,3054,1,1,4,601,0,8000211,1,Buff06_Attack_Red
+40214,gdmo_replaced_legacy,Strategy of Thomas(Da),3076,1,2,4,302,0,8000221,0,
+40215,gdmo_replaced_legacy,Strategy of Thomas(Vi),3076,1,2,4,302,0,8000231,0,
+40216,gdmo_replaced_legacy,Protection,3051,1,1,4,602,0,8000311,1,Buff06_Attack_Blue
+40217,gdmo_replaced_legacy,Devotion of Yoshi(Da),3077,1,2,4,303,0,8000321,0,
+40218,gdmo_replaced_legacy,Devotion of Yoshi(Va),3077,1,2,4,303,0,8000331,0,
+40219,gdmo_replaced_legacy,Shock,3055,1,1,4,603,0,8000411,1,Buff06_Attack_Red
+40220,gdmo_replaced_legacy,Rage of Keenan(Va),3078,1,2,4,304,0,8000421,0,
+40221,gdmo_replaced_legacy,Rage of Keenan(No),3078,1,2,4,304,0,8000431,0,
+40222,gdmo_replaced_legacy,Berserker,3037,1,1,4,604,0,8000511,1,Buff06_Attack_Red
+40223,gdmo_replaced_legacy,Brave of Tai(Va),3079,1,2,4,305,0,8000521,0,
+40224,gdmo_replaced_legacy,Brave of Tai(Vi),3079,1,2,4,305,0,8000531,0,
+40225,gdmo_replaced_legacy,Pray,3056,1,1,4,605,0,8000611,1,Buff06_Attack_Green
+40226,gdmo_replaced_legacy,Purity of Mimi(Da),3081,1,2,4,306,0,8000621,0,
+40227,gdmo_replaced_legacy,Purity of Mimi(No),3081,1,2,4,306,0,8000631,0,
+40228,gdmo_replaced_legacy,Vigor,3057,1,1,4,606,0,8000711,1,Buff06_Attack_Red
+40229,gdmo_replaced_legacy,Friendship of Matt(Vi),3082,1,2,4,307,0,8000721,0,
+40230,gdmo_replaced_legacy,Friendship of Matt(Da),3082,1,2,4,307,0,8000731,0,
+40231,gdmo_replaced_legacy,Cheer,3041,1,1,4,607,0,8000811,1,Buff06_Attack_Green
+40232,gdmo_replaced_legacy,Hope of T.K.(Vi),3083,1,2,4,308,0,8000821,0,
+40233,gdmo_replaced_legacy,Hope of T.K.(No),3083,1,2,4,308,0,8000831,0,
+40234,gdmo_replaced_legacy,Encouragement,3058,1,1,4,608,0,8000911,1,Buff06_Attack_Green
+40235,gdmo_replaced_legacy,Light of Kari(Vi),3084,1,2,4,309,0,8000921,0,
+40236,gdmo_replaced_legacy,Light of Kari(Va),3084,1,2,4,309,0,8000931,0,
+40237,gdmo_replaced_legacy,Impregnableness,3074,1,1,4,609,0,8001011,1,Buff06_Attack_Blue
+40238,gdmo_replaced_legacy,Love of Sora(Va),3085,1,2,4,310,0,8001021,0,
+40239,gdmo_replaced_legacy,Love of Sora(Un),3085,1,2,4,310,0,8001031,0,
+40251,gdmo_replaced_legacy,Infinite Boost Attack +15%,2191,1,2,2,550,2000069,0,1,Buff06_Attack_Red
+40252,gdmo_replaced_legacy,Infinite Boost Defense +30%,2192,1,2,2,551,2000070,0,1,Buff06_Attack_Green
+40253,gdmo_replaced_legacy,Infinite Boost Max HP +20%,2193,1,2,2,552,2000071,0,1,Buff06_Attack_Red
+40254,gdmo_replaced_legacy,Infinite Boost Max DS +50%,2194,1,2,2,553,2000072,0,1,Buff06_Attack_Blue
+40255,gdmo_replaced_legacy,Infinite Boost Skill Damage +30%,2195,1,2,2,554,2000073,0,1,Buff06_Attack_Yellow
+40256,gdmo_replaced_legacy,Infinite Boost Critical Damage +30%,2196,1,2,2,555,2000074,0,1,Buff06_Attack_Red
+40258,gdmo_replaced_legacy,Reinforced Naivety,3106,1,1,4,629,0,8001216,1,Buff06_Attack_Green
+40259,gdmo_replaced_legacy,Reinforced Suppression,3108,1,1,4,630,0,8001217,1,Buff06_Attack_Blue
+40260,gdmo_replaced_legacy,New Year's Blessing Buff (HP),1003,1,2,4,311,0,8100000,0,
+40261,gdmo_replaced_legacy,New Year's Blessing Buff (AT),1003,1,2,4,311,0,8100001,0,
+40262,gdmo_replaced_legacy,Impregnableness,3074,1,1,4,482,2500287,0,1,Buff06_Attack_Blue
+40263,gdmo_replaced_legacy,Pray,3086,1,1,4,483,2500288,0,1,Buff06_Attack_Green
+40264,gdmo_replaced_legacy,Protection,3051,1,1,4,484,2500289,0,1,Buff06_Attack_Blue
+40265,gdmo_replaced_legacy,Protection,3051,1,1,4,485,2500290,0,1,Buff06_Attack_Blue
+40266,gdmo_replaced_legacy,Encouragement,3058,1,1,4,486,2500291,0,1,Buff06_Attack_Green
+40267,gdmo_replaced_legacy,Ultimate Berserker,3087,1,1,4,443,2700027,0,1,Buff06_Attack_Red
+40268,gdmo_replaced_legacy,Ultimate Impregnableness,3089,1,1,4,482,2700028,0,1,Buff06_Attack_Blue
+40269,gdmo_replaced_legacy,Ultimate Pray,3091,1,1,4,483,2700029,0,1,Buff06_Attack_Green
+40270,gdmo_replaced_legacy,Ultimate Protection,3092,1,1,4,484,2700030,0,1,Buff06_Attack_Blue
+40271,gdmo_replaced_legacy,Ultimate Encouragement,3093,1,1,4,486,2700031,0,1,Buff06_Attack_Green
+40272,gdmo_replaced_legacy,Enhanced Analysis,3096,1,1,4,620,0,8001211,1,Buff06_Attack_Red
+40273,gdmo_replaced_legacy,Enhanced Evade,3097,1,1,4,621,0,8001212,1,Buff06_Attack_Green
+40274,gdmo_replaced_legacy,Analysis,3096,1,1,4,620,0,8001411,1,Buff06_Attack_Red
+40275,gdmo_replaced_legacy,Izzy's Knowledge(Vi),3094,1,2,4,312,0,8001421,0,
+40276,gdmo_replaced_legacy,Izzy's Knowledge(Un),3094,1,2,4,312,0,8001431,0,
+40277,gdmo_replaced_legacy,Evade,3097,1,1,4,621,0,8001511,1,Buff06_Attack_Green
+40278,gdmo_replaced_legacy,Joe's Sincerity(Vi),3095,1,2,4,313,0,8001521,0,
+40279,gdmo_replaced_legacy,Joe's Sincerity(Un),3095,1,2,4,313,0,8001531,0,
+40280,gdmo_replaced_legacy,Enhanced Vigor,3057,1,1,4,606,0,8000714,1,Buff06_Attack_Red
+40281,gdmo_replaced_legacy,Focus,3099,1,1,4,626,0,8001611,1,Buff06_Attack_Red
+40282,gdmo_replaced_legacy,Warm heart of Takato (Vi),3098,1,2,4,314,0,8001621,0,
+40283,gdmo_replaced_legacy,Warm heart of Takato (Va),3098,1,2,4,314,0,8001631,0,
+40284,gdmo_replaced_legacy,Aim,3102,1,1,4,627,0,8001711,1,Buff06_Attack_Green
+40285,gdmo_replaced_legacy,Rika's coolness (Da),3101,1,2,4,315,0,8001721,0,
+40286,gdmo_replaced_legacy,Rika's coolness (Vi),3101,1,2,4,315,0,8001731,0,
+40287,gdmo_replaced_legacy,Guard,3104,1,1,4,628,0,8001811,1,Buff06_Attack_Red
+40288,gdmo_replaced_legacy,Henry's sweetness (Va),3103,1,2,4,316,0,8001821,0,
+40289,gdmo_replaced_legacy,Henry's sweetness (Da),3103,1,2,4,316,0,8001831,0,
+40290,gdmo_replaced_legacy,Reinforced Focus,3099,1,1,4,626,0,8001214,1,Buff06_Attack_Red
+40291,gdmo_replaced_legacy,Reinforced Aim,3102,1,1,4,627,0,8001215,1,Buff06_Attack_Blue
+40292,gdmo_replaced_legacy,Reinforced Guard,3104,1,1,4,628,0,8001216,1,Buff06_Attack_Green
+40293,gdmo_replaced_legacy,Naivety,3106,1,1,4,629,0,8001911,1,Buff06_Attack_Green
+40294,gdmo_replaced_legacy,Destiny of Jeri(Va),3105,1,2,4,317,0,8001921,0,
+40295,gdmo_replaced_legacy,Destiny of Jeri(Un),3105,1,2,4,317,0,8001931,0,
+40296,gdmo_replaced_legacy,Suppression,3108,1,1,4,630,0,8002011,1,Buff06_Attack_Blue
+40297,gdmo_replaced_legacy,Versatility of Ryo(Va),3107,1,2,4,318,0,8002021,0,
+40298,gdmo_replaced_legacy,Versatility of Ryo(No),3107,1,2,4,318,0,8002031,0,
+40300,gdmo_replaced_legacy,"HP, DS, AT Increase",2028,1,2,1,999,2000032,0,0,Buff06_Attack_Red
+40301,gdmo_replaced_legacy,"HP, DS, AT Increase",2028,1,2,1,999,2000033,0,0,Buff06_Attack_Red
+40302,gdmo_replaced_legacy,"HP, SCD, AT Increase",2028,1,2,1,999,2000036,0,0,Buff06_Attack_Red
+40303,gdmo_replaced_legacy,"HP, SCD, AT Increase",2028,1,2,1,999,2000037,0,0,Buff06_Attack_Red
+40304,gdmo_replaced_legacy,"HP, SCD, AT Increase",2028,1,2,1,999,2000037,0,0,Buff06_Attack_Red
+40305,gdmo_replaced_legacy,"HP, DP, AT Increase",2028,1,2,1,999,2000038,0,0,Buff06_Attack_Red
+40306,gdmo_replaced_legacy,Treasure Master,2028,1,2,1,999,2000051,0,0,Buff06_Attack_Red
+40307,gdmo_replaced_legacy,Treasure Expert,2028,1,2,1,999,2000052,0,0,Buff06_Attack_Red
+40308,gdmo_replaced_legacy,Treasure Hunter,2028,1,2,1,999,2000053,0,0,Buff06_Attack_Red
+40311,gdmo_replaced_legacy,7 Years in DMO,2028,1,2,1,999,2000059,0,1,Buff06_Attack_Red
+40317,gdmo_replaced_legacy,Rose Thorns,2028,1,2,1,999,2000061,0,0,Buff06_Attack_Red
+40318,gdmo_replaced_legacy,Breath of Wyvern,2028,1,2,1,999,2000061,0,0,Buff06_Attack_Red
+40319,gdmo_replaced_legacy,Claws of the Dragon Emperor,2028,1,2,1,999,2000061,0,0,Buff06_Attack_Red
+40320,gdmo_replaced_legacy,Decision of Fate,2028,1,2,1,999,2000061,0,0,Buff06_Attack_Red
+40321,gdmo_replaced_legacy,Red Horse Rampage,2028,1,2,1,999,2000061,0,0,Buff06_Attack_Red
+40322,gdmo_replaced_legacy,The Chivalry is Fading,2028,1,2,1,999,2000061,0,0,Buff06_Attack_Red
+40323,gdmo_replaced_legacy,Savage Frontier,2028,1,2,1,999,2000062,0,0,Buff06_Attack_Red
+40324,gdmo_replaced_legacy,Brutal Predator,2028,1,2,1,999,2000062,0,0,Buff06_Attack_Red
+40325,gdmo_replaced_legacy,Generation of Evil,2028,1,2,1,999,2000062,0,0,Buff06_Attack_Red
+40326,gdmo_replaced_legacy,Fall of the Royal Family,2028,1,2,1,999,2000063,0,0,Buff06_Attack_Red
+40327,gdmo_replaced_legacy,Jumping Master,2028,1,2,1,999,2000064,0,0,Buff06_Attack_Red
+40328,gdmo_replaced_legacy,Dream of Youngest Brother,2028,1,2,1,999,2000065,0,0,Buff06_Attack_Red
+40329,gdmo_replaced_legacy,,2028,1,2,1,999,2000087,0,0,Buff06_Attack_Red
+40330,gdmo_replaced_legacy,,2028,1,2,1,999,2000088,0,0,Buff06_Attack_Red
+40331,gdmo_replaced_legacy,,2028,1,2,1,999,2000089,0,0,Buff06_Attack_Red
+40332,gdmo_replaced_legacy,Legendary Holy Knight,2028,1,2,1,999,2000090,0,0,Buff06_Attack_Red
+40333,gdmo_replaced_legacy,Fire Attribute Skill Damage Up,2028,1,2,1,999,1900014,0,0,Buff06_Attack_Red
+40334,gdmo_replaced_legacy,Wind Attribute Skill Damage Up,2028,1,2,1,999,1900015,0,0,Buff06_Attack_Violet
+40335,gdmo_replaced_legacy,Ice Attribute Skill Damage Up,2028,1,2,1,999,1900016,0,0,Buff06_Attack_Blue
+40336,gdmo_replaced_legacy,Wood Attribute Skill Damage Up,2028,1,2,1,999,1900017,0,0,Buff06_Attack_Green
+40337,gdmo_replaced_legacy,Land Attribute Skill Damage Up,2028,1,2,1,999,1900018,0,0,Buff06_Attack_Yellow
+40338,gdmo_replaced_legacy,Light Attribute Skill Damage Up,2028,1,2,1,999,1900019,0,0,Buff06_Attack_Yellow
+40339,gdmo_replaced_legacy,Thunder Attribute Skill Damage Up,2028,1,2,1,999,1900020,0,0,Buff06_Attack_Yellow
+40340,gdmo_replaced_legacy,Water Attribute Skill Damage Up,2028,1,2,1,999,1900021,0,0,Buff06_Attack_Blue
+40341,gdmo_replaced_legacy,Darkness Attribute Skill Damage Up,2028,1,2,1,999,1900022,0,0,Buff06_Attack_Violet
+40342,gdmo_replaced_legacy,Steel Attribute Skill Damage Up,2028,1,2,1,999,1900023,0,0,Buff06_Attack_Green
+40343,legacy_preserved,For GM Buff     Skill Damage Up Up  ncreased 톈온얄쭴K,2151,1,2,1,999,2000091,0,0,Buff06_Attack_Red n  c  T 0u8w         4w@      
+40344,gdmo_replaced_legacy,GM Offensive Set Buff,3004,1,2,1,622,2000093,0,1,Buff06_Attack_Red
+40345,gdmo_replaced_legacy,GM Defensive Set Buff,2019,1,2,1,623,2000094,0,1,Buff06_Attack_Blue
+40346,gdmo_replaced_legacy,Strange Growth Potion,2101,1,2,2,624,2100116,0,1,Buff06_Attack_Green
+40348,gdmo_replaced_legacy,Super Speed,2085,1,2,1,415,2599977,0,1,
+40349,gdmo_replaced_legacy,GM's Speed Buff,2085,1,2,1,625,2000095,0,1,Buff06_Attack_Green
+40350,gdmo_replaced_legacy,Move Speed up,2085,1,2,1,415,2599976,800513,1,
+40351,gdmo_replaced_legacy,Ultimate Analysis,3096,1,1,4,620,0,8001219,1,Buff06_Attack_Red
+40352,gdmo_replaced_legacy,Ultimate Evade,3097,1,1,4,621,0,8001220,1,Buff06_Attack_Green
+40353,gdmo_replaced_legacy,Ultimate Vigor,3057,1,1,4,606,0,8001221,1,Buff06_Attack_Red
+40354,gdmo_replaced_legacy,Ultimate Focus,3099,1,1,4,626,0,8001222,1,Buff06_Attack_Red
+40355,gdmo_replaced_legacy,Ultimate Aim,3102,1,1,4,627,0,8001223,1,Buff06_Attack_Blue
+40356,gdmo_replaced_legacy,Ultimate Guard,3104,1,1,4,628,0,8001224,1,Buff06_Attack_Green
+40357,gdmo_replaced_legacy,Ultimate Naivety,3106,1,1,4,629,0,8001225,1,Buff06_Attack_Green
+40358,gdmo_replaced_legacy,Ultimate Suppression,3108,1,1,4,630,0,8001226,1,Buff06_Attack_Blue
+40359,gdmo_replaced_legacy,Brave of Tamer(Va),2063,1,2,4,301,0,8001230,0,
+40360,gdmo_replaced_legacy,Brave of Tamer(Da),2065,1,2,4,302,0,8001231,0,
+40361,gdmo_replaced_legacy,Brave of Tamer(Vi),2064,1,2,4,303,0,8001232,0,
+40362,gdmo_replaced_legacy,Brave of Tamer(Un),3138,1,2,4,304,0,8001233,0,
+40363,gdmo_replaced_legacy,Bond with Tamer(Va),2078,1,2,4,305,0,8001234,0,
+40364,gdmo_replaced_legacy,Bond with Tamer(Da),2080,1,2,4,306,0,8001235,0,
+40365,gdmo_replaced_legacy,Bond with Tamer(Vi),2079,1,2,4,307,0,8001236,0,
+40366,gdmo_replaced_legacy,Bond with Tamer(Un),3137,1,2,4,308,0,8001237,0,
+40367,gdmo_replaced_legacy,Super Critical test,3140,1,1,4,875,0,8001238,1,Buff06_Attack_Red
+40368,gdmo_replaced_legacy,Super Hit test,3140,1,1,4,875,0,8001239,1,Buff06_Attack_Green
+40369,gdmo_replaced_legacy,Super Evasion test,3140,1,1,4,875,0,8001240,1,Buff06_Attack_Red
+40370,gdmo_replaced_legacy,Overdrive,3139,1,1,4,875,0,8001241,1,Buff06_Attack_Red
+40371,gdmo_replaced_legacy,Enhanced Overdrive,3139,1,1,4,875,0,8001242,1,Buff06_Attack_Red
+40372,gdmo_replaced_legacy,Mega Overdrive,3139,1,1,4,875,0,8001243,1,Buff06_Attack_Red
+40500,gdmo_replaced_legacy,Last Effort [Low],2052,1,1,1,500,9000001,0,1,Memory_Buff_Attack_Skill
+40501,gdmo_replaced_legacy,Last Effort [Mid],2052,1,1,1,500,9000002,0,1,Memory_Buff_Attack_Skill
+40502,gdmo_replaced_legacy,Last Effort [High],2052,1,1,1,500,9000003,0,1,Memory_Buff_Attack_Skill
+40503,gdmo_replaced_legacy,The Ruler of Fire [Low],2053,1,1,1,501,9000004,0,1,Memory_Buff_Attack_Skill
+40504,gdmo_replaced_legacy,The Ruler of Fire [Mid],2053,1,1,1,501,9000005,0,1,Memory_Buff_Attack_Skill
+40505,gdmo_replaced_legacy,The Ruler of Fire [High],2053,1,1,1,501,9000006,0,1,Memory_Buff_Attack_Skill
+40506,gdmo_replaced_legacy,The Ruler of Water [Low],2054,1,1,1,502,9000007,0,1,Memory_Buff_Attack_Skill
+40507,gdmo_replaced_legacy,The Ruler of Water [Mid],2054,1,1,1,502,9000008,0,1,Memory_Buff_Attack_Skill
+40508,gdmo_replaced_legacy,The Ruler of Water [High],2054,1,1,1,502,9000009,0,1,Memory_Buff_Attack_Skill
+40509,gdmo_replaced_legacy,The Ruler of Ice [Low],2055,1,1,1,503,9000010,0,1,Memory_Buff_Attack_Skill
+40510,gdmo_replaced_legacy,The Ruler of Ice [Mid],2055,1,1,1,503,9000011,0,1,Memory_Buff_Attack_Skill
+40511,gdmo_replaced_legacy,The Ruler of Ice [High],2055,1,1,1,503,9000012,0,1,Memory_Buff_Attack_Skill
+40512,gdmo_replaced_legacy,The Ruler of Light [Low],2056,1,1,1,504,9000013,0,1,Memory_Buff_Attack_Skill
+40513,gdmo_replaced_legacy,The Ruler of Light [Mid],2056,1,1,1,504,9000014,0,1,Memory_Buff_Attack_Skill
+40514,gdmo_replaced_legacy,The Ruler of Light [High],2056,1,1,1,504,9000015,0,1,Memory_Buff_Attack_Skill
+40515,gdmo_replaced_legacy,The Ruler of Darkness [Low],2057,1,1,1,505,9000016,0,1,Memory_Buff_Attack_Skill
+40516,gdmo_replaced_legacy,The Ruler of Darkness [Mid],2057,1,1,1,505,9000017,0,1,Memory_Buff_Attack_Skill
+40517,gdmo_replaced_legacy,The Ruler of Darkness [High],2057,1,1,1,505,9000018,0,1,Memory_Buff_Attack_Skill
+40518,gdmo_replaced_legacy,The Ruler of Thunder [Low],2058,1,1,1,506,9000019,0,1,Memory_Buff_Attack_Skill
+40519,gdmo_replaced_legacy,The Ruler of Thunder [Mid],2058,1,1,1,506,9000020,0,1,Memory_Buff_Attack_Skill
+40520,gdmo_replaced_legacy,The Ruler of Thunder [High],2058,1,1,1,506,9000021,0,1,Memory_Buff_Attack_Skill
+40521,gdmo_replaced_legacy,The Ruler of Iron [Low],2059,1,1,1,507,9000022,0,1,Memory_Buff_Attack_Skill
+40522,gdmo_replaced_legacy,The Ruler of Iron [Mid],2059,1,1,1,507,9000023,0,1,Memory_Buff_Attack_Skill
+40523,gdmo_replaced_legacy,The Ruler of Iron [High],2059,1,1,1,507,9000024,0,1,Memory_Buff_Attack_Skill
+40524,gdmo_replaced_legacy,The Ruler of Wind [Low],2060,1,1,1,508,9000025,0,1,Memory_Buff_Attack_Skill
+40525,gdmo_replaced_legacy,The Ruler of Wind [Mid],2060,1,1,1,508,9000026,0,1,Memory_Buff_Attack_Skill
+40526,gdmo_replaced_legacy,The Ruler of Wind [High],2060,1,1,1,508,9000027,0,1,Memory_Buff_Attack_Skill
+40527,gdmo_replaced_legacy,The Ruler of Wood [Low],2061,1,1,1,509,9000028,0,1,Memory_Buff_Attack_Skill
+40528,gdmo_replaced_legacy,The Ruler of Wood [Mid],2061,1,1,1,509,9000029,0,1,Memory_Buff_Attack_Skill
+40529,gdmo_replaced_legacy,The Ruler of Wood [High],2061,1,1,1,509,9000030,0,1,Memory_Buff_Attack_Skill
+40530,gdmo_replaced_legacy,The Ruler of Earth [Low],2062,1,1,1,510,9000031,0,1,Memory_Buff_Attack_Skill
+40531,gdmo_replaced_legacy,The Ruler of Earth [Mid],2062,1,1,1,510,9000032,0,1,Memory_Buff_Attack_Skill
+40532,gdmo_replaced_legacy,The Ruler of Earth [High],2062,1,1,1,510,9000033,0,1,Memory_Buff_Attack_Skill
+40533,gdmo_replaced_legacy,The Vaccine Master [Low],2063,1,1,1,511,9000034,0,1,Memory_Buff_Attack_Skill
+40534,gdmo_replaced_legacy,The Vaccine Master [Mid],2063,1,1,1,511,9000035,0,1,Memory_Buff_Attack_Skill
+40535,gdmo_replaced_legacy,The Vaccine Master [High],2063,1,1,1,511,9000036,0,1,Memory_Buff_Attack_Skill
+40536,gdmo_replaced_legacy,The Virus Master [Low],2064,1,1,1,512,9000037,0,1,Memory_Buff_Attack_Skill
+40537,gdmo_replaced_legacy,The Virus Master [Mid],2064,1,1,1,512,9000038,0,1,Memory_Buff_Attack_Skill
+40538,gdmo_replaced_legacy,The Virus Master [High],2064,1,1,1,512,9000039,0,1,Memory_Buff_Attack_Skill
+40539,gdmo_replaced_legacy,The Data Master [Low],2065,1,1,1,513,9000040,0,1,Memory_Buff_Attack_Skill
+40540,gdmo_replaced_legacy,The Data Master [Mid],2065,1,1,1,513,9000041,0,1,Memory_Buff_Attack_Skill
+40541,gdmo_replaced_legacy,The Data Master [High],2065,1,1,1,513,9000042,0,1,Memory_Buff_Attack_Skill
+40700,gdmo_replaced_legacy,Iron Will [Low],2067,1,1,1,514,9000301,0,1,Memory_Buff_Defense_Skill
+40701,gdmo_replaced_legacy,Iron Will [Mid],2067,1,1,1,514,9000302,0,1,Memory_Buff_Defense_Skill
+40702,gdmo_replaced_legacy,Iron Will [High],2067,1,1,1,514,9000303,0,1,Memory_Buff_Defense_Skill
+40703,gdmo_replaced_legacy,The Guardian of Fire [Low],2068,1,1,1,515,9000304,0,1,Memory_Buff_Defense_Skill
+40704,gdmo_replaced_legacy,The Guardian of Fire [Mid],2068,1,1,1,515,9000305,0,1,Memory_Buff_Defense_Skill
+40705,gdmo_replaced_legacy,The Guardian of Fire [High],2068,1,1,1,515,9000306,0,1,Memory_Buff_Defense_Skill
+40706,gdmo_replaced_legacy,The Guardian of Water [Low],2069,1,1,1,516,9000307,0,1,Memory_Buff_Defense_Skill
+40707,gdmo_replaced_legacy,The Guardian of Water [Mid],2069,1,1,1,516,9000308,0,1,Memory_Buff_Defense_Skill
+40708,gdmo_replaced_legacy,The Guardian of Water [High],2069,1,1,1,516,9000309,0,1,Memory_Buff_Defense_Skill
+40709,gdmo_replaced_legacy,The Guardian of Ice [Low],2070,1,1,1,517,9000310,0,1,Memory_Buff_Defense_Skill
+40710,gdmo_replaced_legacy,The Guardian of ice [Mid],2070,1,1,1,517,9000311,0,1,Memory_Buff_Defense_Skill
+40711,gdmo_replaced_legacy,The Guardian of Ice [High],2070,1,1,1,517,9000312,0,1,Memory_Buff_Defense_Skill
+40712,gdmo_replaced_legacy,The Guardian of Light [Low],2071,1,1,1,518,9000313,0,1,Memory_Buff_Defense_Skill
+40713,gdmo_replaced_legacy,The Guardian of Light [Mid],2071,1,1,1,518,9000314,0,1,Memory_Buff_Defense_Skill
+40714,gdmo_replaced_legacy,The Guardian of Light [High],2071,1,1,1,518,9000315,0,1,Memory_Buff_Defense_Skill
+40715,gdmo_replaced_legacy,The Guardian of Darkness [Low],2072,1,1,1,519,9000316,0,1,Memory_Buff_Defense_Skill
+40716,gdmo_replaced_legacy,The Guardian of Darkness [Mid],2072,1,1,1,519,9000317,0,1,Memory_Buff_Defense_Skill
+40717,gdmo_replaced_legacy,The Guardian of Darkness [High],2072,1,1,1,519,9000318,0,1,Memory_Buff_Defense_Skill
+40718,gdmo_replaced_legacy,The Guardian of Thunder [Low],2073,1,1,1,520,9000319,0,1,Memory_Buff_Defense_Skill
+40719,gdmo_replaced_legacy,The Guardian of Thunder [Mid],2073,1,1,1,520,9000320,0,1,Memory_Buff_Defense_Skill
+40720,gdmo_replaced_legacy,The Guardian of Thunder [High],2073,1,1,1,520,9000321,0,1,Memory_Buff_Defense_Skill
+40721,gdmo_replaced_legacy,The Guardian of Iron [Low],2074,1,1,1,521,9000322,0,1,Memory_Buff_Defense_Skill
+40722,gdmo_replaced_legacy,The Guardian of Iron [Mid],2074,1,1,1,521,9000323,0,1,Memory_Buff_Defense_Skill
+40723,gdmo_replaced_legacy,The Guardian of Iron [High],2074,1,1,1,521,9000324,0,1,Memory_Buff_Defense_Skill
+40724,gdmo_replaced_legacy,The Guardian of Wind [Low],2075,1,1,1,522,9000325,0,1,Memory_Buff_Defense_Skill
+40725,gdmo_replaced_legacy,The Guardian of Wind [Mid],2075,1,1,1,522,9000326,0,1,Memory_Buff_Defense_Skill
+40726,gdmo_replaced_legacy,The Guardian of Wind [High],2075,1,1,1,522,9000327,0,1,Memory_Buff_Defense_Skill
+40727,gdmo_replaced_legacy,The Guardian of Wood [Low],2076,1,1,1,523,9000328,0,1,Memory_Buff_Defense_Skill
+40728,gdmo_replaced_legacy,The Guardian of Wood [Mid],2076,1,1,1,523,9000329,0,1,Memory_Buff_Defense_Skill
+40729,gdmo_replaced_legacy,The Guardian of Wood [High],2076,1,1,1,523,9000330,0,1,Memory_Buff_Defense_Skill
+40730,gdmo_replaced_legacy,The Guardian of Earth [Low],2077,1,1,1,524,9000331,0,1,Memory_Buff_Defense_Skill
+40731,gdmo_replaced_legacy,The Guardian of Earth [Mid],2077,1,1,1,524,9000332,0,1,Memory_Buff_Defense_Skill
+40732,gdmo_replaced_legacy,The Guardian of Earth [High],2077,1,1,1,524,9000333,0,1,Memory_Buff_Defense_Skill
+40733,gdmo_replaced_legacy,The Vaccine Defender [Low],2078,1,1,1,525,9000334,0,1,Memory_Buff_Defense_Skill
+40734,gdmo_replaced_legacy,The Vaccine Defender [Mid],2078,1,1,1,525,9000335,0,1,Memory_Buff_Defense_Skill
+40735,gdmo_replaced_legacy,The Vaccine Defender [High],2078,1,1,1,525,9000336,0,1,Memory_Buff_Defense_Skill
+40736,gdmo_replaced_legacy,The Virus Defender [Low],2079,1,1,1,526,9000337,0,1,Memory_Buff_Defense_Skill
+40737,gdmo_replaced_legacy,The Virus Defender [Mid],2079,1,1,1,526,9000338,0,1,Memory_Buff_Defense_Skill
+40738,gdmo_replaced_legacy,The Virus Defender [High],2079,1,1,1,526,9000339,0,1,Memory_Buff_Defense_Skill
+40739,gdmo_replaced_legacy,The Data Defender [Low],2080,1,1,1,527,9000340,0,1,Memory_Buff_Defense_Skill
+40740,gdmo_replaced_legacy,The Data Defender [Mid],2080,1,1,1,527,9000341,0,1,Memory_Buff_Defense_Skill
+40741,gdmo_replaced_legacy,The Data Defender [High],2080,1,1,1,527,9000342,0,1,Memory_Buff_Defense_Skill
+40742,gdmo_replaced_legacy,Provocation [Low],2081,2,1,1,528,9000343,0,1,Memory_Buff_Defense_Skill
+40743,gdmo_replaced_legacy,Provocation [Mid],2081,2,1,1,528,9000344,0,1,Memory_Buff_Defense_Skill
+40744,gdmo_replaced_legacy,Provocation [High],2081,2,1,1,528,9000345,0,1,Memory_Buff_Defense_Skill
+40900,gdmo_replaced_legacy,The Hand of Healing [Low],2082,1,1,1,529,9000601,0,1,Memory_Buff_Support_Skill
+40901,gdmo_replaced_legacy,The Hand of Healing [Mid],2082,1,1,1,529,9000602,0,1,Memory_Buff_Support_Skill
+40902,gdmo_replaced_legacy,The Hand of Healing [High],2082,1,1,1,529,9000603,0,1,Memory_Buff_Support_Skill
+40903,gdmo_replaced_legacy,Regenerative Ability [Low],2083,1,1,1,530,9000604,0,1,Memory_Buff_Support_Skill
+40904,gdmo_replaced_legacy,Regenerative Ability [Mid],2083,1,1,1,530,9000605,0,1,Memory_Buff_Support_Skill
+40905,gdmo_replaced_legacy,Regenerative Ability [High],2083,1,1,1,530,9000606,0,1,Memory_Buff_Support_Skill
+40906,gdmo_replaced_legacy,The Tree of Life [Low],2084,1,1,1,531,9000607,0,1,Memory_Buff_Support_Skill
+40907,gdmo_replaced_legacy,The Tree of Life [Mid],2084,1,1,1,531,9000608,0,1,Memory_Buff_Support_Skill
+40908,gdmo_replaced_legacy,The Tree of Life [High],2084,1,1,1,531,9000609,0,1,Memory_Buff_Support_Skill
+40909,gdmo_replaced_legacy,Speeding [Low],2085,1,1,1,532,9000610,0,1,Memory_Buff_Support_Skill
+40910,gdmo_replaced_legacy,Speeding [Mid],2085,1,1,1,532,9000611,0,1,Memory_Buff_Support_Skill
+40911,gdmo_replaced_legacy,Speeding [High],2085,1,1,1,532,9000612,0,1,Memory_Buff_Support_Skill
+40912,gdmo_replaced_legacy,Quick Movements [Low],2086,1,1,1,533,9000613,0,1,Memory_Buff_Support_Skill
+40913,gdmo_replaced_legacy,Quick Movements [Mid],2086,1,1,1,533,9000614,0,1,Memory_Buff_Support_Skill
+40914,gdmo_replaced_legacy,Quick Movements [High],2086,1,1,1,533,9000615,0,1,Memory_Buff_Support_Skill
+40915,gdmo_replaced_legacy,Narrow Escape [Low],2087,1,1,1,534,9000616,0,1,Memory_Buff_Support_Skill
+40916,gdmo_replaced_legacy,Narrow Escape [Mid],2087,1,1,1,534,9000617,0,1,Memory_Buff_Support_Skill
+40917,gdmo_replaced_legacy,Narrow Escape [High],2087,1,1,1,534,9000618,0,1,Memory_Buff_Support_Skill
+41500,gdmo_replaced_legacy,Last Effort Lv.1,2052,1,1,1,500,9100001,0,1,Memory_Buff_Attack_Skill
+41501,gdmo_replaced_legacy,Last Effort Lv.2,2052,1,1,1,500,9100002,0,1,Memory_Buff_Attack_Skill
+41502,gdmo_replaced_legacy,Last Effort Lv.3,2052,1,1,1,500,9100003,0,1,Memory_Buff_Attack_Skill
+41503,gdmo_replaced_legacy,The Ruler of Fire Lv.1,2053,1,1,1,501,9100004,0,1,Memory_Buff_Attack_Skill
+41504,gdmo_replaced_legacy,The Ruler of Fire Lv.2,2053,1,1,1,501,9100005,0,1,Memory_Buff_Attack_Skill
+41505,gdmo_replaced_legacy,The Ruler of Fire Lv.3,2053,1,1,1,501,9100006,0,1,Memory_Buff_Attack_Skill
+41506,gdmo_replaced_legacy,The Ruler of Water Lv.1,2054,1,1,1,502,9100007,0,1,Memory_Buff_Attack_Skill
+41507,gdmo_replaced_legacy,The Ruler of Water Lv.2,2054,1,1,1,502,9100008,0,1,Memory_Buff_Attack_Skill
+41508,gdmo_replaced_legacy,The Ruler of Water Lv.3,2054,1,1,1,502,9100009,0,1,Memory_Buff_Attack_Skill
+41509,gdmo_replaced_legacy,The Ruler of Ice Lv.1,2055,1,1,1,503,9100010,0,1,Memory_Buff_Attack_Skill
+41510,gdmo_replaced_legacy,The Ruler of Ice Lv.2,2055,1,1,1,503,9100011,0,1,Memory_Buff_Attack_Skill
+41511,gdmo_replaced_legacy,The Ruler of Ice Lv.3,2055,1,1,1,503,9100012,0,1,Memory_Buff_Attack_Skill
+41512,gdmo_replaced_legacy,The Ruler of Light Lv.1,2056,1,1,1,504,9100013,0,1,Memory_Buff_Attack_Skill
+41513,gdmo_replaced_legacy,The Ruler of Light Lv.2,2056,1,1,1,504,9100014,0,1,Memory_Buff_Attack_Skill
+41514,gdmo_replaced_legacy,The Ruler of Light Lv.3,2056,1,1,1,504,9100015,0,1,Memory_Buff_Attack_Skill
+41515,gdmo_replaced_legacy,The Ruler of Darkness Lv.1,2057,1,1,1,505,9100016,0,1,Memory_Buff_Attack_Skill
+41516,gdmo_replaced_legacy,The Ruler of Darkness Lv.2,2057,1,1,1,505,9100017,0,1,Memory_Buff_Attack_Skill
+41517,gdmo_replaced_legacy,The Ruler of Darkness Lv.3,2057,1,1,1,505,9100018,0,1,Memory_Buff_Attack_Skill
+41518,gdmo_replaced_legacy,The Ruler of Thunder Lv.1,2058,1,1,1,506,9100019,0,1,Memory_Buff_Attack_Skill
+41519,gdmo_replaced_legacy,The Ruler of Thunder Lv.2,2058,1,1,1,506,9100020,0,1,Memory_Buff_Attack_Skill
+41520,gdmo_replaced_legacy,The Ruler of Thunder Lv.3,2058,1,1,1,506,9100021,0,1,Memory_Buff_Attack_Skill
+41521,gdmo_replaced_legacy,The Ruler of Iron Lv.1,2059,1,1,1,507,9100022,0,1,Memory_Buff_Attack_Skill
+41522,gdmo_replaced_legacy,The Ruler of Iron Lv.2,2059,1,1,1,507,9100023,0,1,Memory_Buff_Attack_Skill
+41523,gdmo_replaced_legacy,The Ruler of Iron Lv.3,2059,1,1,1,507,9100024,0,1,Memory_Buff_Attack_Skill
+41524,gdmo_replaced_legacy,The Ruler of Wind Lv.1,2060,1,1,1,508,9100025,0,1,Memory_Buff_Attack_Skill
+41525,gdmo_replaced_legacy,The Ruler of Wind Lv.2,2060,1,1,1,508,9100026,0,1,Memory_Buff_Attack_Skill
+41526,gdmo_replaced_legacy,The Ruler of Wind Lv.3,2060,1,1,1,508,9100027,0,1,Memory_Buff_Attack_Skill
+41527,gdmo_replaced_legacy,The Ruler of Wood Lv.1,2061,1,1,1,509,9100028,0,1,Memory_Buff_Attack_Skill
+41528,gdmo_replaced_legacy,The Ruler of Wood Lv.2,2061,1,1,1,509,9100029,0,1,Memory_Buff_Attack_Skill
+41529,gdmo_replaced_legacy,The Ruler of Wood Lv.3,2061,1,1,1,509,9100030,0,1,Memory_Buff_Attack_Skill
+41530,gdmo_replaced_legacy,The Ruler of Earth Lv.1,2062,1,1,1,510,9100031,0,1,Memory_Buff_Attack_Skill
+41531,gdmo_replaced_legacy,The Ruler of Earth Lv.2,2062,1,1,1,510,9100032,0,1,Memory_Buff_Attack_Skill
+41532,gdmo_replaced_legacy,The Ruler of Earth Lv.3,2062,1,1,1,510,9100033,0,1,Memory_Buff_Attack_Skill
+41533,gdmo_replaced_legacy,The Vaccine Master Lv.1,2063,1,1,1,511,9100034,0,1,Memory_Buff_Attack_Skill
+41534,gdmo_replaced_legacy,The Vaccine Master Lv.2,2063,1,1,1,511,9100035,0,1,Memory_Buff_Attack_Skill
+41535,gdmo_replaced_legacy,The Vaccine Master Lv.3,2063,1,1,1,511,9100036,0,1,Memory_Buff_Attack_Skill
+41536,gdmo_replaced_legacy,The Virus Master Lv.1,2064,1,1,1,512,9100037,0,1,Memory_Buff_Attack_Skill
+41537,gdmo_replaced_legacy,The Virus Master Lv.2,2064,1,1,1,512,9100038,0,1,Memory_Buff_Attack_Skill
+41538,gdmo_replaced_legacy,The Virus Master Lv.3,2064,1,1,1,512,9100039,0,1,Memory_Buff_Attack_Skill
+41539,gdmo_replaced_legacy,The Data Master Lv.1,2065,1,1,1,513,9100040,0,1,Memory_Buff_Attack_Skill
+41540,gdmo_replaced_legacy,The Data Master Lv.2,2065,1,1,1,513,9100041,0,1,Memory_Buff_Attack_Skill
+41541,gdmo_replaced_legacy,The Data Master Lv.3,2065,1,1,1,513,9100042,0,1,Memory_Buff_Attack_Skill
+41542,gdmo_replaced_legacy,Last Effort Lv.4,2052,1,1,1,500,9100046,0,1,Memory_Buff_Attack_Skill
+41543,gdmo_replaced_legacy,The Ruler of Fire Lv.4,2053,1,1,1,501,9100047,0,1,Memory_Buff_Attack_Skill
+41544,gdmo_replaced_legacy,The Ruler of Water Lv.4,2054,1,1,1,502,9100048,0,1,Memory_Buff_Attack_Skill
+41545,gdmo_replaced_legacy,The Ruler of Ice Lv.4,2055,1,1,1,503,9100049,0,1,Memory_Buff_Attack_Skill
+41546,gdmo_replaced_legacy,The Ruler of Light Lv.4,2056,1,1,1,504,9100050,0,1,Memory_Buff_Attack_Skill
+41547,gdmo_replaced_legacy,The Ruler of Darkness Lv.4,2057,1,1,1,505,9100051,0,1,Memory_Buff_Attack_Skill
+41548,gdmo_replaced_legacy,The Ruler of Thunder Lv.4,2058,1,1,1,506,9100052,0,1,Memory_Buff_Attack_Skill
+41549,gdmo_replaced_legacy,The Ruler of Iron Lv.4,2059,1,1,1,507,9100053,0,1,Memory_Buff_Attack_Skill
+41550,gdmo_replaced_legacy,The Ruler of Wind Lv.4,2060,1,1,1,508,9100054,0,1,Memory_Buff_Attack_Skill
+41551,gdmo_replaced_legacy,The Ruler of Wood Lv.4,2061,1,1,1,509,9100055,0,1,Memory_Buff_Attack_Skill
+41552,gdmo_replaced_legacy,The Ruler of Earth Lv.4,2062,1,1,1,510,9100056,0,1,Memory_Buff_Attack_Skill
+41553,gdmo_replaced_legacy,The Vaccine Master Lv.4,2063,1,1,1,511,9100057,0,1,Memory_Buff_Attack_Skill
+41554,gdmo_replaced_legacy,The Virus Master Lv.4,2064,1,1,1,512,9100058,0,1,Memory_Buff_Attack_Skill
+41555,gdmo_replaced_legacy,The Data Master Lv.4,2065,1,1,1,513,9100059,0,1,Memory_Buff_Attack_Skill
+41700,gdmo_replaced_legacy,Iron Will Lv.1,2067,1,1,1,514,9100301,0,1,Memory_Buff_Defense_Skill
+41701,gdmo_replaced_legacy,Iron Will Lv.2,2067,1,1,1,514,9100302,0,1,Memory_Buff_Defense_Skill
+41702,gdmo_replaced_legacy,Iron Will Lv.3,2067,1,1,1,514,9100303,0,1,Memory_Buff_Defense_Skill
+41703,gdmo_replaced_legacy,The Guardian of Fire Lv.1,2068,1,1,1,515,9100304,0,1,Memory_Buff_Defense_Skill
+41704,gdmo_replaced_legacy,The Guardian of Fire Lv.2,2068,1,1,1,515,9100305,0,1,Memory_Buff_Defense_Skill
+41705,gdmo_replaced_legacy,The Guardian of Fire Lv.3,2068,1,1,1,515,9100306,0,1,Memory_Buff_Defense_Skill
+41706,gdmo_replaced_legacy,The Guardian of Water Lv.1,2069,1,1,1,516,9100307,0,1,Memory_Buff_Defense_Skill
+41707,gdmo_replaced_legacy,The Guardian of Water Lv.2,2069,1,1,1,516,9100308,0,1,Memory_Buff_Defense_Skill
+41708,gdmo_replaced_legacy,The Guardian of Water Lv.3,2069,1,1,1,516,9100309,0,1,Memory_Buff_Defense_Skill
+41709,gdmo_replaced_legacy,The Guardian of Ice Lv.1,2070,1,1,1,517,9100310,0,1,Memory_Buff_Defense_Skill
+41710,gdmo_replaced_legacy,The Guardian of ice Lv.2,2070,1,1,1,517,9100311,0,1,Memory_Buff_Defense_Skill
+41711,gdmo_replaced_legacy,The Guardian of Ice Lv.3,2070,1,1,1,517,9100312,0,1,Memory_Buff_Defense_Skill
+41712,gdmo_replaced_legacy,The Guardian of Light Lv.1,2071,1,1,1,518,9100313,0,1,Memory_Buff_Defense_Skill
+41713,gdmo_replaced_legacy,The Guardian of Light Lv.2,2071,1,1,1,518,9100314,0,1,Memory_Buff_Defense_Skill
+41714,gdmo_replaced_legacy,The Guardian of Light Lv.3,2071,1,1,1,518,9100315,0,1,Memory_Buff_Defense_Skill
+41715,gdmo_replaced_legacy,The Guardian of Darkness Lv.1,2072,1,1,1,519,9100316,0,1,Memory_Buff_Defense_Skill
+41716,gdmo_replaced_legacy,The Guardian of Darkness Lv.2,2072,1,1,1,519,9100317,0,1,Memory_Buff_Defense_Skill
+41717,gdmo_replaced_legacy,The Guardian of Darkness Lv.3,2072,1,1,1,519,9100318,0,1,Memory_Buff_Defense_Skill
+41718,gdmo_replaced_legacy,The Guardian of Thunder Lv.1,2073,1,1,1,520,9100319,0,1,Memory_Buff_Defense_Skill
+41719,gdmo_replaced_legacy,The Guardian of Thunder Lv.2,2073,1,1,1,520,9100320,0,1,Memory_Buff_Defense_Skill
+41720,gdmo_replaced_legacy,The Guardian of Thunder Lv.3,2073,1,1,1,520,9100321,0,1,Memory_Buff_Defense_Skill
+41721,gdmo_replaced_legacy,The Guardian of Iron Lv.1,2074,1,1,1,521,9100322,0,1,Memory_Buff_Defense_Skill
+41722,gdmo_replaced_legacy,The Guardian of Iron Lv.2,2074,1,1,1,521,9100323,0,1,Memory_Buff_Defense_Skill
+41723,gdmo_replaced_legacy,The Guardian of Iron Lv.3,2074,1,1,1,521,9100324,0,1,Memory_Buff_Defense_Skill
+41724,gdmo_replaced_legacy,The Guardian of Wind Lv.1,2075,1,1,1,522,9100325,0,1,Memory_Buff_Defense_Skill
+41725,gdmo_replaced_legacy,The Guardian of Wind Lv.2,2075,1,1,1,522,9100326,0,1,Memory_Buff_Defense_Skill
+41726,gdmo_replaced_legacy,The Guardian of Wind Lv.3,2075,1,1,1,522,9100327,0,1,Memory_Buff_Defense_Skill
+41727,gdmo_replaced_legacy,The Guardian of Wood Lv.1,2076,1,1,1,523,9100328,0,1,Memory_Buff_Defense_Skill
+41728,gdmo_replaced_legacy,The Guardian of Wood Lv.2,2076,1,1,1,523,9100329,0,1,Memory_Buff_Defense_Skill
+41729,gdmo_replaced_legacy,The Guardian of Wood Lv.3,2076,1,1,1,523,9100330,0,1,Memory_Buff_Defense_Skill
+41730,gdmo_replaced_legacy,The Guardian of Earth Lv.1,2077,1,1,1,524,9100331,0,1,Memory_Buff_Defense_Skill
+41731,gdmo_replaced_legacy,The Guardian of Earth Lv.2,2077,1,1,1,524,9100332,0,1,Memory_Buff_Defense_Skill
+41732,gdmo_replaced_legacy,The Guardian of Earth Lv.3,2077,1,1,1,524,9100333,0,1,Memory_Buff_Defense_Skill
+41733,gdmo_replaced_legacy,The Vaccine Defender Lv.1,2078,1,1,1,525,9100334,0,1,Memory_Buff_Defense_Skill
+41734,gdmo_replaced_legacy,The Vaccine Defender Lv.2,2078,1,1,1,525,9100335,0,1,Memory_Buff_Defense_Skill
+41735,gdmo_replaced_legacy,The Vaccine Defender Lv.3,2078,1,1,1,525,9100336,0,1,Memory_Buff_Defense_Skill
+41736,gdmo_replaced_legacy,The Virus Defender Lv.1,2079,1,1,1,526,9100337,0,1,Memory_Buff_Defense_Skill
+41737,gdmo_replaced_legacy,The Virus Defender Lv.2,2079,1,1,1,526,9100338,0,1,Memory_Buff_Defense_Skill
+41738,gdmo_replaced_legacy,The Virus Defender Lv.3,2079,1,1,1,526,9100339,0,1,Memory_Buff_Defense_Skill
+41739,gdmo_replaced_legacy,The Data Defender Lv.1,2080,1,1,1,527,9100340,0,1,Memory_Buff_Defense_Skill
+41740,gdmo_replaced_legacy,The Data Defender Lv.2,2080,1,1,1,527,9100341,0,1,Memory_Buff_Defense_Skill
+41741,gdmo_replaced_legacy,The Data Defender Lv.3,2080,1,1,1,527,9100342,0,1,Memory_Buff_Defense_Skill
+41742,gdmo_replaced_legacy,Provocation Lv.1,2081,2,1,1,528,9100343,0,1,Memory_Buff_Defense_Skill
+41743,gdmo_replaced_legacy,Provocation Lv.2,2081,2,1,1,528,9100344,0,1,Memory_Buff_Defense_Skill
+41744,gdmo_replaced_legacy,Provocation Lv.3,2081,2,1,1,528,9100345,0,1,Memory_Buff_Defense_Skill
+41745,gdmo_replaced_legacy,Iron Will Lv.4,2067,1,1,1,514,9100346,0,1,Memory_Buff_Defense_Skill
+41746,gdmo_replaced_legacy,The Guardian of Fire Lv.4,2068,1,1,1,515,9100347,0,1,Memory_Buff_Defense_Skill
+41747,gdmo_replaced_legacy,The Guardian of Water Lv.4,2069,1,1,1,516,9100348,0,1,Memory_Buff_Defense_Skill
+41748,gdmo_replaced_legacy,The Guardian of Ice Lv.4,2070,1,1,1,517,9100349,0,1,Memory_Buff_Defense_Skill
+41749,gdmo_replaced_legacy,The Guardian of Light Lv.4,2071,1,1,1,518,9100350,0,1,Memory_Buff_Defense_Skill
+41750,gdmo_replaced_legacy,The Guardian of Darkness Lv.4,2072,1,1,1,519,9100351,0,1,Memory_Buff_Defense_Skill
+41751,gdmo_replaced_legacy,The Guardian of Thunder Lv.4,2073,1,1,1,520,9100352,0,1,Memory_Buff_Defense_Skill
+41752,gdmo_replaced_legacy,The Guardian of Iron Lv.4,2074,1,1,1,521,9100353,0,1,Memory_Buff_Defense_Skill
+41753,gdmo_replaced_legacy,The Guardian of Wind Lv.4,2075,1,1,1,522,9100354,0,1,Memory_Buff_Defense_Skill
+41754,gdmo_replaced_legacy,The Guardian of Wood Lv.4,2076,1,1,1,523,9100355,0,1,Memory_Buff_Defense_Skill
+41755,gdmo_replaced_legacy,The Guardian of Earth Lv.4,2077,1,1,1,524,9100356,0,1,Memory_Buff_Defense_Skill
+41756,gdmo_replaced_legacy,The Vaccine Defender Lv.4,2078,1,1,1,525,9100357,0,1,Memory_Buff_Defense_Skill
+41757,gdmo_replaced_legacy,The Virus Defender Lv.4,2079,1,1,1,526,9100358,0,1,Memory_Buff_Defense_Skill
+41758,gdmo_replaced_legacy,The Data Defender Lv.4,2080,1,1,1,527,9100359,0,1,Memory_Buff_Defense_Skill
+41759,gdmo_replaced_legacy,Provocation Lv.4,2081,2,1,1,528,9100360,0,1,Memory_Buff_Defense_Skill
+41900,gdmo_replaced_legacy,The Hand of Healing Lv.1,2082,1,1,1,529,9100601,0,1,Memory_Buff_Support_Skill
+41901,gdmo_replaced_legacy,The Hand of Healing Lv.2,2082,1,1,1,529,9100602,0,1,Memory_Buff_Support_Skill
+41902,gdmo_replaced_legacy,The Hand of Healing Lv.3,2082,1,1,1,529,9100603,0,1,Memory_Buff_Support_Skill
+41903,gdmo_replaced_legacy,Regenerative Ability Lv.1,2083,1,1,1,530,9100604,0,1,Memory_Buff_Support_Skill
+41904,gdmo_replaced_legacy,Regenerative Ability Lv.2,2083,1,1,1,530,9100605,0,1,Memory_Buff_Support_Skill
+41905,gdmo_replaced_legacy,Regenerative Ability Lv.3,2083,1,1,1,530,9100606,0,1,Memory_Buff_Support_Skill
+41906,gdmo_replaced_legacy,The Tree of Life Lv.1,2084,1,1,1,531,9100607,0,1,Memory_Buff_Support_Skill
+41907,gdmo_replaced_legacy,The Tree of Life Lv.2,2084,1,1,1,531,9100608,0,1,Memory_Buff_Support_Skill
+41908,gdmo_replaced_legacy,The Tree of Life Lv.3,2084,1,1,1,531,9100609,0,1,Memory_Buff_Support_Skill
+41909,gdmo_replaced_legacy,Speeding Lv.1,2085,1,1,1,532,9100610,0,1,Memory_Buff_Support_Skill
+41910,gdmo_replaced_legacy,Speeding Lv.2,2085,1,1,1,532,9100611,0,1,Memory_Buff_Support_Skill
+41911,gdmo_replaced_legacy,Speeding Lv.3,2085,1,1,1,532,9100612,0,1,Memory_Buff_Support_Skill
+41912,gdmo_replaced_legacy,Quick Movements Lv.1,2086,1,1,1,533,9100613,0,1,Memory_Buff_Support_Skill
+41913,gdmo_replaced_legacy,Quick Movements Lv.2,2086,1,1,1,533,9100614,0,1,Memory_Buff_Support_Skill
+41914,gdmo_replaced_legacy,Quick Movements Lv.3,2086,1,1,1,533,9100615,0,1,Memory_Buff_Support_Skill
+41915,gdmo_replaced_legacy,Narrow Escape Lv.1,2087,1,1,1,534,9100616,0,1,Memory_Buff_Support_Skill
+41916,gdmo_replaced_legacy,Narrow Escape Lv.2,2087,1,1,1,534,9100617,0,1,Memory_Buff_Support_Skill
+41917,gdmo_replaced_legacy,Narrow Escape Lv.3,2087,1,1,1,534,9100618,0,1,Memory_Buff_Support_Skill
+41918,gdmo_replaced_legacy,The Hand of Healing Lv.4,2082,1,1,1,529,9100619,0,1,Memory_Buff_Support_Skill
+41919,gdmo_replaced_legacy,Regenerative Ability Lv.4,2083,1,1,1,530,9100620,0,1,Memory_Buff_Support_Skill
+41920,gdmo_replaced_legacy,The Tree of Life Lv.4,2084,1,1,1,531,9100621,0,1,Memory_Buff_Support_Skill
+41921,gdmo_replaced_legacy,Speeding Lv.4,2085,1,1,1,532,9100622,0,1,Memory_Buff_Support_Skill
+41922,gdmo_replaced_legacy,Quick Movements Lv.4,2086,1,1,1,533,9100623,0,1,Memory_Buff_Support_Skill
+41923,gdmo_replaced_legacy,Narrow Escape Lv.4,2087,1,1,1,534,9100624,0,1,Memory_Buff_Support_Skill
+42502,gdmo_replaced_legacy,Last Effort [High],2052,1,1,1,500,9010001,0,1,Memory_Buff_Attack_Skill
+42505,gdmo_replaced_legacy,The Ruler of Fire [High],2053,1,1,1,501,9010004,0,1,Memory_Buff_Attack_Skill
+42508,gdmo_replaced_legacy,The Ruler of Water [High],2054,1,1,1,502,9010007,0,1,Memory_Buff_Attack_Skill
+42511,gdmo_replaced_legacy,The Ruler of Ice [High],2055,1,1,1,503,9010010,0,1,Memory_Buff_Attack_Skill
+42514,gdmo_replaced_legacy,The Ruler of Light [High],2056,1,1,1,504,9010013,0,1,Memory_Buff_Attack_Skill
+42517,gdmo_replaced_legacy,The Ruler of Darkness [High],2057,1,1,1,505,9010016,0,1,Memory_Buff_Attack_Skill
+42520,gdmo_replaced_legacy,The Ruler of Thunder [High],2058,1,1,1,506,9010019,0,1,Memory_Buff_Attack_Skill
+42523,gdmo_replaced_legacy,The Ruler of Iron [High],2059,1,1,1,507,9010022,0,1,Memory_Buff_Attack_Skill
+42526,gdmo_replaced_legacy,The Ruler of Wind [High],2060,1,1,1,508,9010025,0,1,Memory_Buff_Attack_Skill
+42529,gdmo_replaced_legacy,The Ruler of Wood [High],2061,1,1,1,509,9010028,0,1,Memory_Buff_Attack_Skill
+42532,gdmo_replaced_legacy,The Ruler of Earth [High],2062,1,1,1,510,9010031,0,1,Memory_Buff_Attack_Skill
+42535,gdmo_replaced_legacy,The Vaccine Master [High],2063,1,1,1,511,9010034,0,1,Memory_Buff_Attack_Skill
+42538,gdmo_replaced_legacy,The Virus Master [High],2064,1,1,1,512,9010037,0,1,Memory_Buff_Attack_Skill
+42541,gdmo_replaced_legacy,The Data Master [High],2065,1,1,1,513,9010040,0,1,Memory_Buff_Attack_Skill
+42702,gdmo_replaced_legacy,Iron Will [High],2067,1,1,1,514,9010301,0,1,Memory_Buff_Defense_Skill
+42705,gdmo_replaced_legacy,The Guardian of Fire [High],2068,1,1,1,515,9010304,0,1,Memory_Buff_Defense_Skill
+42708,gdmo_replaced_legacy,The Guardian of Water [High],2069,1,1,1,516,9010307,0,1,Memory_Buff_Defense_Skill
+42711,gdmo_replaced_legacy,The Guardian of Ice [High],2070,1,1,1,517,9010310,0,1,Memory_Buff_Defense_Skill
+42714,gdmo_replaced_legacy,The Guardian of Light [High],2071,1,1,1,518,9010313,0,1,Memory_Buff_Defense_Skill
+42717,gdmo_replaced_legacy,The Guardian of Darkness [High],2072,1,1,1,519,9010316,0,1,Memory_Buff_Defense_Skill
+42720,gdmo_replaced_legacy,The Guardian of Thunder [High],2073,1,1,1,520,9010319,0,1,Memory_Buff_Defense_Skill
+42723,gdmo_replaced_legacy,The Guardian of Iron [High],2074,1,1,1,521,9010322,0,1,Memory_Buff_Defense_Skill
+42726,gdmo_replaced_legacy,The Guardian of Wind [High],2075,1,1,1,522,9010325,0,1,Memory_Buff_Defense_Skill
+42729,gdmo_replaced_legacy,The Guardian of Wood [High],2076,1,1,1,523,9010328,0,1,Memory_Buff_Defense_Skill
+42732,gdmo_replaced_legacy,The Guardian of Earth [High],2077,1,1,1,524,9010331,0,1,Memory_Buff_Defense_Skill
+42735,gdmo_replaced_legacy,The Vaccine Defender [High],2078,1,1,1,525,9010334,0,1,Memory_Buff_Defense_Skill
+42738,gdmo_replaced_legacy,The Virus Defender [High],2079,1,1,1,526,9010337,0,1,Memory_Buff_Defense_Skill
+42741,gdmo_replaced_legacy,The Data Defender [High],2080,1,1,1,527,9010340,0,1,Memory_Buff_Defense_Skill
+42744,gdmo_replaced_legacy,Provocation [High],2081,2,1,1,528,9010343,0,1,Memory_Buff_Defense_Skill
+42902,gdmo_replaced_legacy,The Hand of Healing [High],2082,1,1,1,529,9010601,0,1,Memory_Buff_Support_Skill
+42905,gdmo_replaced_legacy,Regenerative Ability [High],2083,1,1,1,530,9010604,0,1,Memory_Buff_Support_Skill
+42908,gdmo_replaced_legacy,The Tree of Life [High],2084,1,1,1,531,9010607,0,1,Memory_Buff_Support_Skill
+42911,gdmo_replaced_legacy,Speeding [High],2085,1,1,1,532,9010610,0,1,Memory_Buff_Support_Skill
+42914,gdmo_replaced_legacy,Quick Movements [High],2086,1,1,1,533,9010613,0,1,Memory_Buff_Support_Skill
+42917,gdmo_replaced_legacy,Narrow Escape [High],2087,1,1,1,534,9010616,0,1,Memory_Buff_Support_Skill
+50101,gdmo_replaced_legacy,Dark Tower Area,2001,2,1,1,100,0,0,0,
+50102,gdmo_replaced_legacy,ExpBooster,2002,3,2,1,1,2500102,0,1,
+50103,gdmo_replaced_legacy,Exp up_B,2007,1,2,1,2,2500103,0,0,
+50104,gdmo_replaced_legacy,Friendliness Increase,2003,1,2,1,3,0,0,0,
+50105,gdmo_replaced_legacy,Overflow,2004,1,2,1,4,0,0,0,
+50106,gdmo_replaced_legacy,Exp up_A,2005,1,2,2,5,0,0,0,
+50107,gdmo_replaced_legacy,Exp up_B,2006,1,2,2,5,0,0,0,
+50108,gdmo_replaced_legacy,Scale_up,2008,1,1,1,110,2100110,0,0,
+50109,gdmo_replaced_legacy,Hot pepper,2009,1,2,1,6,2500109,0,0,
+50110,gdmo_replaced_legacy,Melon Snowflakes,2009,1,2,1,6,2500110,0,0,
+50111,gdmo_replaced_legacy,Macro Preventor,2012,1,2,1,200,0,0,0,Eye0001
+50112,gdmo_replaced_legacy,Macro Preventor (Shield),2013,1,2,1,201,0,0,0,Shield0001
+50113,gdmo_replaced_legacy,Thanksgiving,2009,3,2,1,12,2500113,0,1,
+50114,gdmo_replaced_legacy,Amplification Booster,2015,3,2,2,10,2500114,0,1,
+50115,gdmo_replaced_legacy,Exp up_A,2016,1,2,1,210,0,0,0,
+50116,gdmo_replaced_legacy,Exp up_B,2017,1,2,3,211,0,0,0,
+50117,gdmo_replaced_legacy,Exp up_A,2018,1,2,3,220,0,0,0,
+50118,gdmo_replaced_legacy,Exp up_B,2019,1,2,1,7,2500118,0,0,
+50119,gdmo_replaced_legacy,Exp up_B,2021,1,2,1,221,2500119,0,0,
+50120,gdmo_replaced_legacy,Satiety,2009,1,2,1,6,2500112,0,0,
+50121,gdmo_replaced_legacy,Masters Membership [Speed],2027,1,2,5,617,2700022,0,0,
+50122,gdmo_replaced_legacy,Masters Membership [EXP],2026,1,2,5,618,2700023,0,0,
+50123,gdmo_replaced_legacy,Masters Membership [FS],2019,1,2,5,619,2700024,0,0,
+50124,gdmo_replaced_legacy,Soft Candy,2009,1,2,1,6,2500109,0,0,
+50200,gdmo_replaced_legacy,Exp up_B,2009,1,2,1,8,2500111,0,0,
+50201,gdmo_replaced_legacy,Exp up_B,2015,1,2,1,9,2500115,0,0,
+50202,gdmo_replaced_legacy,HP decrease,2015,2,1,4,501,2500258,0,0,
+50204,gdmo_replaced_legacy,Amplification Booster,2015,3,2,2,10,2500116,0,1,
+50206,gdmo_replaced_legacy,Speed Up,2085,1,2,1,415,2500266,0,1,
+50207,gdmo_replaced_legacy,Speed Up,2085,1,2,1,415,2500267,0,1,
+50208,gdmo_replaced_legacy,Amplification Booster,2015,3,2,2,601,2500117,0,1,
+50209,gdmo_replaced_legacy,Impregnableness,3074,1,1,4,610,7109731,0,1,Buff06_Attack_Blue
+50211,gdmo_replaced_legacy,Time to start for my dream,3004,1,2,1,999,1240101,0,0,Buff06_Attack_Red
+50212,gdmo_replaced_legacy,Masters Match Rookie,3004,1,2,1,999,1240102,0,0,Buff06_Attack_Red
+50213,gdmo_replaced_legacy,Earn one's keep,3004,1,2,1,999,1240103,0,0,Buff06_Attack_Red
+50214,gdmo_replaced_legacy,King of Real World,3004,1,2,1,999,1240104,0,0,Buff06_Attack_Red
+50215,gdmo_replaced_legacy,Living Legend,3004,1,2,1,999,1240105,0,0,Buff06_Attack_Red
+50216,gdmo_replaced_legacy,Happy Solo,2009,3,2,1,999,1240106,0,0,
+50217,gdmo_replaced_legacy,"HP, AT Increase",2028,1,2,1,999,1240107,0,0,Buff06_Attack_Red
+50218,gdmo_replaced_legacy,Thanksgiving Buff,2101,1,1,1,108,2500293,0,1,Buff06_Attack_Red
+50219,gdmo_replaced_legacy,Thanksgiving Buff,2101,1,1,1,109,2500294,0,1,Buff06_Attack_Red
+50220,gdmo_replaced_legacy,Thanksgiving Buff,2101,1,1,1,110,2500295,0,1,Buff06_Attack_Red
+51000,gdmo_replaced_legacy,Premium EXP,2026,3,2,1,50,2500130,0,1,
+51001,gdmo_replaced_legacy,Amplification Booster,2015,3,2,2,10,2500115,0,1,
+51002,gdmo_replaced_legacy,Volition of Andventurer,2028,1,2,1,999,2500281,0,0,Buff06_Attack_Red
+51050,gdmo_replaced_legacy,Speed Up,2027,1,2,3,55,0,0,0,
+59998,gdmo_replaced_legacy,1st-degree burn,2091,2,1,4,701,4000198,0,0,Debuff_Burn_1deg
+59999,gdmo_replaced_legacy,2nd-degree burn,2092,2,1,4,701,4000199,0,0,Debuff_Burn_2deg
+60000,gdmo_replaced_legacy,Return (Fire),2097,2,1,4,703,4000200,0,0,
+60001,gdmo_replaced_legacy,1st-degree burn,2091,2,1,4,701,4000201,0,0,Debuff_Burn_1deg
+60002,gdmo_replaced_legacy,2nd-degree burn,2092,2,1,4,701,4000202,0,0,Debuff_Burn_2deg
+60003,gdmo_replaced_legacy,3rd-degree burn,2093,2,1,4,701,4000203,0,0,Debuff_Burn_3deg
+60004,gdmo_replaced_legacy,4th-degree burn,2094,2,1,4,701,4000204,0,0,Debuff_Burn_4deg
+60005,gdmo_replaced_legacy,Degeneration,2096,2,1,4,702,4000205,0,0,
+60006,gdmo_replaced_legacy,Return (Fire),2097,2,1,4,703,4000206,0,0,
+60007,gdmo_replaced_legacy,Silence,2099,2,1,4,704,4000207,0,0,
+60008,gdmo_replaced_legacy,Berserk Rage (Strengthen),2101,1,1,1,705,4000208,0,0,Buff25_Berserk_Reinforce_2
+60009,gdmo_replaced_legacy,Berserk Rage (Reflection),2102,1,1,1,705,4000209,0,0,Buff25_Berserk_Reflect
+60010,gdmo_replaced_legacy,Metallic Poison Lv.1,2103,2,1,4,706,4000210,0,0,Debuff_metal
+60011,gdmo_replaced_legacy,Metallic Poison Lv.2,2104,2,1,4,706,4000211,0,0,Debuff_metal
+60012,gdmo_replaced_legacy,Metallic Poison Lv.3,2105,2,1,4,706,4000212,0,0,Debuff_metal
+60013,gdmo_replaced_legacy,Metallic Poison Lv.4,2106,2,1,4,706,4000213,0,0,Debuff_metal
+60014,gdmo_replaced_legacy,Grace of Tombstone [Att] Lv.1,2109,1,1,4,707,4000214,0,0,
+60015,gdmo_replaced_legacy,Grace of Tombstone [Att] Lv.2,2111,1,1,4,707,4000215,0,0,
+60016,gdmo_replaced_legacy,Grace of Tombstone [Att] Lv.3,2112,1,1,4,707,4000216,0,0,
+60017,gdmo_replaced_legacy,Grace of Tombstone [Skill] Lv.1,2109,1,1,4,708,4000217,0,0,
+60018,gdmo_replaced_legacy,Grace of Tombstone [Skill] Lv.2,2111,1,1,4,708,4000218,0,0,
+60019,gdmo_replaced_legacy,Grace of Tombstone [Skill] Lv.3,2112,1,1,4,708,4000219,0,0,
+60020,gdmo_replaced_legacy,Grace of Tombstone [Def] Lv.1,2109,1,1,4,709,4000220,0,0,
+60021,gdmo_replaced_legacy,Grace of Tombstone [Def] Lv.2,2111,1,1,4,709,4000221,0,0,
+60022,gdmo_replaced_legacy,Grace of Tombstone [Def] Lv.3,2112,1,1,4,709,4000222,0,0,
+60023,gdmo_replaced_legacy,Iron Resistance,2113,1,1,4,710,4000223,0,0,
+60024,gdmo_replaced_legacy,Yuki Buff,1010,1,1,1,711,4000224,0,1,
+60026,gdmo_replaced_legacy,Metallic Poison Lv.1,2103,2,1,4,706,4000225,0,0,Debuff_metal
+60027,gdmo_replaced_legacy,Metallic Poison Lv.2,2104,2,1,4,706,4000226,0,0,Debuff_metal
+60028,gdmo_replaced_legacy,Grace of Tombstone [Att] Lv.1,2109,1,1,4,707,4000227,0,0,
+60029,gdmo_replaced_legacy,Grace of Tombstone [Att] Lv.2,2111,1,1,4,707,4000228,0,0,
+60030,gdmo_replaced_legacy,Grace of Tombstone [Skill] Lv.1,2109,1,1,4,708,4000229,0,0,
+60031,gdmo_replaced_legacy,Grace of Tombstone [Skill] Lv.2,2111,1,1,4,708,4000230,0,0,
+60032,gdmo_replaced_legacy,Grace of Tombstone [Def] Lv.1,2109,1,1,4,709,4000231,0,0,
+60033,gdmo_replaced_legacy,Stone_Resistance,2113,1,1,4,710,4000232,0,0,
+60034,gdmo_replaced_legacy,Vaccine + 50%,2048,1,1,4,713,4000233,0,0,
+60035,gdmo_replaced_legacy,Silence + Slow,2097,2,1,4,714,4000234,0,0,
+60036,gdmo_replaced_legacy,Burn,2095,2,1,4,715,4000235,0,0,
+60037,gdmo_replaced_legacy,Slow,2044,2,1,4,716,4000236,0,0,
+60038,gdmo_replaced_legacy,Burn,2095,2,1,4,715,4000238,0,0,
+60039,gdmo_replaced_legacy,Annihilation Countdown,1021,1,1,4,730,4000252,0,0,
+60040,gdmo_replaced_legacy,Protection,2102,1,1,4,731,4000253,0,0,
+60041,gdmo_replaced_legacy,Enhancement,2101,1,1,4,732,4000254,0,0,
+60042,gdmo_replaced_legacy,Despise the Weak,2124,1,1,4,733,4000255,0,0,
+60043,gdmo_replaced_legacy,Freezing,2127,2,1,4,716,4000256,0,0,
+60044,gdmo_replaced_legacy,Core Emergency Operation,2132,1,1,4,732,4000257,0,0,
+60045,gdmo_replaced_legacy,X-Program Ignition,2171,1,1,4,732,4000257,0,0,
+60046,gdmo_replaced_legacy,Power of Breath,2046,1,1,4,732,4000257,0,0,
+60047,gdmo_replaced_legacy,X-Program Activation Level 1,2171,1,1,4,733,4000258,0,0,
+60048,gdmo_replaced_legacy,X-Program Activation Level 2,2171,1,1,4,733,4000259,0,0,
+60049,gdmo_replaced_legacy,X-Program Activation Level 3,2171,1,1,4,733,4000260,0,0,
+60050,gdmo_replaced_legacy,Healing,1021,1,1,4,730,4000261,0,0,
+60051,gdmo_replaced_legacy,X-Program Activation,2171,1,1,4,733,4000259,0,0,
+60052,gdmo_replaced_legacy,Weakening,2103,2,1,4,734,4000316,0,0,
+60053,gdmo_replaced_legacy,Reinforce,2048,1,1,1,735,4000317,0,0,
+60054,gdmo_replaced_legacy,Berserker,2102,1,1,1,736,4000320,0,0,Buff25_Berserk_Reflect
+61000,gdmo_replaced_legacy,Vaccine +15%,2048,1,1,4,740,4000274,0,0,
+61001,gdmo_replaced_legacy,Virus +15%,2048,1,1,4,741,4000275,0,0,
+61002,gdmo_replaced_legacy,Bleeding Lv.1,2047,2,1,4,742,4000276,0,0,
+61003,gdmo_replaced_legacy,Bleeding Lv.2,2047,2,1,4,742,4000277,0,0,
+61004,gdmo_replaced_legacy,Bleeding Lv.3,2047,2,1,4,742,4000278,0,0,
+61005,gdmo_replaced_legacy,Bleeding Lv.4,2047,2,1,4,742,4000279,0,0,
+61006,gdmo_replaced_legacy,Frostbite Lv.1,2019,2,1,4,743,4000280,0,0,
+61007,gdmo_replaced_legacy,Frostbite Lv.2,2019,2,1,4,743,4000281,0,0,
+61008,gdmo_replaced_legacy,Frostbite Lv.3,2019,2,1,4,743,4000282,0,0,
+61009,gdmo_replaced_legacy,Frostbite Lv.4,2019,2,1,4,743,4000283,0,0,
+61010,gdmo_replaced_legacy,Freeze,2127,2,1,4,744,4000284,0,0,
+61011,gdmo_replaced_legacy,Silence,2099,2,1,4,745,4000207,0,0,
+61012,gdmo_replaced_legacy,Deadly Poison,2113,2,1,4,746,4000285,0,0,
+61013,gdmo_replaced_legacy,Nightmare Lv.1,2011,2,1,4,747,4000286,0,0,
+61014,gdmo_replaced_legacy,Nightmare Lv.2,2011,2,1,4,747,4000287,0,0,
+61015,gdmo_replaced_legacy,Nightmare Lv.3,2011,2,1,4,747,4000288,0,0,
+61016,gdmo_replaced_legacy,Nightmare Lv.4,2011,2,1,4,747,4000289,0,0,
+61017,gdmo_replaced_legacy,Petrify Lv.1,2045,2,1,4,748,4000290,0,0,
+61018,gdmo_replaced_legacy,Petrify Lv.2,2045,2,1,4,748,4000291,0,0,
+61019,gdmo_replaced_legacy,Petrify Lv.3,2045,2,1,4,748,4000292,0,0,
+61020,gdmo_replaced_legacy,Petrify Lv.4,2045,2,1,4,748,4000293,0,0,
+61021,gdmo_replaced_legacy,Purgatory,2011,2,1,4,749,4000299,0,0,
+61022,gdmo_replaced_legacy,Fatal Venom Lv.2,0,2,1,4,746,4000300,0,0,
+61023,gdmo_replaced_legacy,Fatal Venom Lv.3,0,2,1,4,746,4000301,0,0,
+61024,gdmo_replaced_legacy,Rage of Earth,0,2,1,4,750,4000302,0,0,
+61025,gdmo_replaced_legacy,Blessing of Earth,0,1,1,4,709,4000231,0,0,
+61026,gdmo_replaced_legacy,Leadership,2048,1,1,4,751,4000303,0,0,
+61027,gdmo_replaced_legacy,Dignity of Superior,2048,1,1,4,752,4000304,0,0,
+61028,gdmo_replaced_legacy,Savior of Real World,0,1,2,1,999,4000305,0,0,Buff06_Attack_Red
+61029,gdmo_replaced_legacy,Ambition of Dark Lord,2048,1,1,4,752,4000306,0,0,
+61030,gdmo_replaced_legacy,,2102,2,1,4,902,4000322,0,0,
+61031,gdmo_replaced_legacy,,2197,2,1,4,903,4000323,0,0,
+61032,gdmo_replaced_legacy,,2015,1,1,4,733,4000324,0,0,
+61033,gdmo_replaced_legacy,,2015,1,1,4,733,4000325,0,0,
+61034,gdmo_replaced_legacy,,2015,1,1,4,733,4000326,0,0,
+61035,gdmo_replaced_legacy,MetalSeadramon's Dominions,2133,2,1,4,900,4000352,0,0,
+61036,gdmo_replaced_legacy,Minions' Cheers [Offense] Lv.1,2101,1,1,4,707,4000214,0,0,
+61037,gdmo_replaced_legacy,Minions' Cheers [Offense] Lv.2,2101,1,1,4,707,4000215,0,0,
+61038,gdmo_replaced_legacy,Minions' Cheers [Offense] Lv.3,2101,1,1,4,707,4000216,0,0,
+61039,gdmo_replaced_legacy,Minions' Cheers [Skill] Lv.1,2102,1,1,4,708,4000217,0,0,
+61040,gdmo_replaced_legacy,Minions' Cheers [Skill] Lv.2,2102,1,1,4,708,4000218,0,0,
+61041,gdmo_replaced_legacy,Minions' Cheers [Skill] Lv.3,2102,1,1,4,708,4000219,0,0,
+61042,gdmo_replaced_legacy,Minions' Cheers [Protection] Lv.1,2046,1,1,4,709,4000220,0,0,
+61043,gdmo_replaced_legacy,Minions' Cheers [Protection] Lv.2,2046,1,1,4,709,4000221,0,0,
+61044,gdmo_replaced_legacy,Minions' Cheers [Protection] Lv.3,2046,1,1,4,709,4000222,0,0,
+61045,gdmo_replaced_legacy,Puppetmon's Dominions,2133,2,1,4,900,4000353,0,0,
+61046,gdmo_replaced_legacy,Power of Secret weapon Lv.1,2046,1,1,4,707,4000354,0,0,
+61047,gdmo_replaced_legacy,Power of Secret weapon Lv.2,2046,1,1,4,707,4000355,0,0,
+61048,gdmo_replaced_legacy,Power of Secret weapon Lv.3,2046,1,1,4,707,4000356,0,0,
+61049,gdmo_replaced_legacy,Petrifaction,2045,2,1,4,748,4000293,0,0,
+63000,gdmo_replaced_legacy,Tidal Wave of Darkness,2133,2,1,4,900,2700003,0,0,
+63001,gdmo_replaced_legacy,Extreme Evolution,2134,1,2,1,717,2700004,0,1,
+63002,gdmo_replaced_legacy,Warrior of Nightmare,2135,1,1,4,900,4000239,0,0,
+63003,gdmo_replaced_legacy,Guardian of Heaven,2136,1,1,4,900,4000240,0,0,
+63004,gdmo_replaced_legacy,Defender of Ocean,2137,1,1,4,900,4000241,0,0,
+63005,gdmo_replaced_legacy,Wild Howling,2138,1,1,4,900,4000242,0,0,
+63006,gdmo_replaced_legacy,Ruler of Steel,2139,1,1,4,906,4000243,0,0,
+63007,gdmo_replaced_legacy,Descendant of Dragon,2141,1,1,4,907,4000244,0,0,
+63008,gdmo_replaced_legacy,Justice Bringer,2142,1,1,4,908,4000245,0,0,
+63009,gdmo_replaced_legacy,Forest Overseer,2143,1,1,4,909,4000246,0,0,
+63010,gdmo_replaced_legacy,Source of Darkness,2144,1,1,4,910,4000247,0,0,
+63011,gdmo_replaced_legacy,Chaotic Being,2145,1,1,4,911,4000248,0,0,
+63012,gdmo_replaced_legacy,Warrior of Nightmare,2135,1,2,1,718,2700005,0,1,
+63013,gdmo_replaced_legacy,Guardian of Heaven,2136,1,2,1,719,2700006,0,1,
+63014,gdmo_replaced_legacy,Defender of Ocean,2137,1,2,1,720,2700007,0,1,
+63015,gdmo_replaced_legacy,Wild Howling,2138,1,2,1,721,2700008,0,1,
+63016,gdmo_replaced_legacy,Ruler of Steel,2139,1,2,1,722,2700009,0,1,
+63017,gdmo_replaced_legacy,Descendant of Dragon,2141,1,2,1,723,2700010,0,1,
+63018,gdmo_replaced_legacy,Justice Bringer,2142,1,2,1,724,2700011,0,1,
+63019,gdmo_replaced_legacy,Forest Overseer,2143,1,2,1,725,2700012,0,1,
+63020,gdmo_replaced_legacy,Source of Darkness,2144,1,2,1,726,2700013,0,1,
+63021,gdmo_replaced_legacy,Chaotic Being,2145,1,2,1,727,2700014,0,1,
+63022,gdmo_replaced_legacy,Peak of X-evolution,2202,1,2,2,728,2700033,0,1,
+63023,gdmo_replaced_legacy,Extreme Evolution,2134,1,2,1,717,2700034,0,1,
+63024,gdmo_replaced_legacy,Jogress Peak of evolution  ,2134,1,2,2,728,2700048,0,1,
+63025,gdmo_replaced_legacy,Jogress X-Peak of evolution,2202,1,2,2,728,2700049,0,1,
+64000,gdmo_replaced_legacy,X-Program,2172,2,1,4,900,2700000,0,0,
+64001,gdmo_replaced_legacy,X-Protector,2048,1,2,1,901,2700001,0,1,
+64002,gdmo_replaced_legacy,Survival,2101,1,2,1,901,2700002,0,1,
+64003,gdmo_replaced_legacy,X-Protector,2048,1,2,1,900,2700001,0,1,
+64004,gdmo_replaced_legacy,Apocalypse,2144,1,1,4,900,4000249,0,0,
+64005,gdmo_replaced_legacy,Return of Nothingness,2048,1,1,4,713,4000250,0,0,
+64006,gdmo_replaced_legacy,Peace in Verdandi Terminal,4098,1,1,4,902,4000251,0,0,
+64007,gdmo_replaced_legacy,Constant HP Loss,2067,2,1,4,902,2700015,0,0,
+64008,gdmo_replaced_legacy,Weaken,2098,2,1,4,902,2700016,0,0,
+64009,gdmo_replaced_legacy,Cursed,2066,2,1,4,902,2700017,0,0,
+64010,gdmo_replaced_legacy,Endurance,2031,1,1,4,902,2700018,0,0,
+64011,gdmo_replaced_legacy,Slow,2096,2,1,4,902,2700019,0,0,
+64012,gdmo_replaced_legacy,Disruption,2111,2,1,4,902,2700020,0,0,
+64013,gdmo_replaced_legacy,Life Absorption,2172,2,1,4,902,2700021,0,0,
+64014,gdmo_replaced_legacy,X-Protector,2048,1,2,1,901,2700001,0,0,
+64015,gdmo_replaced_legacy,MarinDevimon's Aura,2177,2,1,4,903,4000262,0,0,
+64016,gdmo_replaced_legacy,MegaSeadramon's Aura,2176,2,1,4,904,4000263,0,0,
+64017,gdmo_replaced_legacy,Vikaralamon's Aura,2175,2,1,4,905,4000264,0,0,
+64018,gdmo_replaced_legacy,Gulfmon's Aura,2178,2,1,4,903,4000265,0,0,
+64019,gdmo_replaced_legacy,Ornismon's Aura,2179,2,1,4,904,4000266,0,0,
+64020,gdmo_replaced_legacy,Phoenixmon's Aura,2181,2,1,4,905,4000267,0,0,
+64021,gdmo_replaced_legacy,Gryphonmon's Aura,2184,2,1,4,903,4000268,0,0,
+64022,gdmo_replaced_legacy,SaberLeomon's Aura,2183,2,1,4,904,4000269,0,0,
+64023,gdmo_replaced_legacy,Sinduramon's Aura,2182,2,1,4,905,4000270,0,0,
+64024,gdmo_replaced_legacy,Antylamon's Aura,2185,2,1,4,903,4000271,0,0,
+64025,gdmo_replaced_legacy,Mihiramon's Aura,2186,2,1,4,904,4000272,0,0,
+64026,gdmo_replaced_legacy,Majiramon's Aura,2187,2,1,4,905,4000273,0,0,
+64027,gdmo_replaced_legacy,Safe Zone,2048,1,2,1,900,2700001,0,1,
+64028,gdmo_replaced_legacy,The New Sprouts,2028,1,2,1,999,4000294,0,0,Buff06_Attack_Red
+64029,gdmo_replaced_legacy,Miraculous Light,2152,1,2,1,999,4000295,0,0,Buff06_Attack_Red
+64030,gdmo_replaced_legacy,Tactician of Power and Intelligence,2028,1,2,1,999,4000297,0,0,Buff06_Attack_Red
+64031,gdmo_replaced_legacy,Plant Poison,2103,2,1,4,706,4000225,0,0,Debuff_metal
+64032,gdmo_replaced_legacy,MugenDramon Offense Program,2109,1,1,4,707,4000214,0,0,
+64033,gdmo_replaced_legacy,MugenDramon Skill Program,2109,1,1,4,708,4000217,0,0,
+64034,gdmo_replaced_legacy,MugenDramon Defense Program,2109,1,1,4,709,4000220,0,0,
+64035,gdmo_replaced_legacy,Execution Sword,2028,1,2,1,999,4000298,0,0,Buff06_Attack_Red
+64036,gdmo_replaced_legacy,Burning Heart,2028,1,2,1,999,4000307,0,0,Buff06_Attack_Red
+64037,gdmo_replaced_legacy,Specialist of Love,2028,1,2,1,999,4000308,0,0,Buff06_Attack_Red
+64038,gdmo_replaced_legacy,Rampage,2043,1,1,4,429,7110931,0,1,Buff_SkillPowerUp
+64039,gdmo_replaced_legacy,twisted space-time,4241,2,1,4,427,7111011,0,0,Debuff_Light
+64040,gdmo_replaced_legacy,Cracked space-time,4243,2,1,4,472,7111031,0,0,Debuff_Stun
+64041,gdmo_replaced_legacy,Chosen Child,2028,1,2,1,999,4000309,0,0,Buff06_Attack_Red
+64042,gdmo_replaced_legacy,Talented Child,2028,1,2,1,999,4000310,0,0,Buff06_Attack_Red
+64043,gdmo_replaced_legacy,Child who able to draw,2028,1,2,1,999,4000311,0,0,Buff06_Attack_Red
+64044,gdmo_replaced_legacy,_,2028,1,2,1,999,4000312,0,0,Buff06_Attack_Red
+64045,gdmo_replaced_legacy,Freezing,2132,2,1,4,790,7571431,0,0,Debuff_Freezing
+64046,gdmo_replaced_legacy,Demon Lord of Gluttony,2028,1,2,1,999,1900024,0,0,Buff06_Attack_Red
+64047,gdmo_replaced_legacy,Knight of Steel,2028,1,2,1,999,1900025,0,0,Buff06_Attack_Red
+64048,gdmo_replaced_legacy,Fascination,2132,2,1,4,791,7111531,0,0,Debuff_Stun
+64050,gdmo_replaced_legacy,Lucky Bomb,2028,1,2,1,999,1900027,0,0,Buff06_Attack_Red
+64051,gdmo_replaced_legacy,All is well,2028,1,2,1,999,1900028,0,0,Buff06_Attack_Red
+64052,gdmo_replaced_legacy,Jackpot,2028,1,2,1,999,1900029,0,0,Buff06_Attack_Red
+64053,gdmo_replaced_legacy,1st-degree burn,2091,2,1,4,701,4000201,0,0,Debuff_Burn_1deg
+64054,gdmo_replaced_legacy,2nd-degree burn,2092,2,1,4,701,4000202,0,0,Debuff_Burn_2deg
+64055,gdmo_replaced_legacy,3rd-degree burn,2093,2,1,4,701,4000203,0,0,Debuff_Burn_3deg
+64056,gdmo_replaced_legacy,4th-degree burn,2094,2,1,4,701,4000204,0,0,Debuff_Burn_4deg
+64057,gdmo_replaced_legacy,Degeneration,2096,2,1,4,702,4000205,0,0,
+64058,gdmo_replaced_legacy,Return (Fire),2097,2,1,4,703,4000206,0,0,
+64059,gdmo_replaced_legacy,Silence,2099,2,1,4,704,4000207,0,0,
+64060,gdmo_replaced_legacy,Berserk Rage (Strengthen),2101,1,1,1,705,4000208,0,0,Buff25_Berserk_Reinforce_2
+64061,gdmo_replaced_legacy,Berserk Rage (Reflection),2102,1,1,1,705,4000209,0,0,Buff25_Berserk_Reflect
+64062,gdmo_replaced_legacy,Silence + Slow,2097,2,1,4,714,4000234,0,0,
+64063,gdmo_replaced_legacy,Burn,2095,2,1,4,715,4000235,0,0,
+64064,gdmo_replaced_legacy,Fallen Angel,2028,1,2,1,999,1900024,0,0,Buff06_Attack_Red
+64065,gdmo_replaced_legacy,King of Marbles,2151,1,2,1,999,4000321,0,0,Buff06_Attack_Red
+64066,gdmo_replaced_legacy,Attroibute Shield (Da) Lv.1,2048,1,1,4,713,4000328,0,0,
+64067,gdmo_replaced_legacy,Attroibute Shield (Da) Lv.2,2048,1,1,4,713,4000329,0,0,
+64068,gdmo_replaced_legacy,Attroibute Shield (Da) Lv.3,2048,1,1,4,713,4000330,0,0,
+64069,gdmo_replaced_legacy,Attroibute Shield (Da) Lv.4,2048,1,1,4,713,4000331,0,0,
+64070,gdmo_replaced_legacy,Attroibute Shield (Va) Lv.1,2048,1,1,4,713,4000332,0,0,
+64071,gdmo_replaced_legacy,Attroibute Shield (Va) Lv.2,2048,1,1,4,713,4000333,0,0,
+64072,gdmo_replaced_legacy,Attroibute Shield (Va) Lv.3,2048,1,1,4,713,4000334,0,0,
+64073,gdmo_replaced_legacy,Attroibute Shield (Va) Lv.4,2048,1,1,4,713,4000335,0,0,
+64074,gdmo_replaced_legacy,Attroibute Shield (Vi) Lv.1,2048,1,1,4,713,4000336,0,0,
+64075,gdmo_replaced_legacy,Attroibute Shield (Vi) Lv.2,2048,1,1,4,713,4000337,0,0,
+64076,gdmo_replaced_legacy,Attroibute Shield (Vi) Lv.3,2048,1,1,4,713,4000338,0,0,
+64077,gdmo_replaced_legacy,Attroibute Shield (Vi) Lv.4,2048,1,1,4,713,4000339,0,0,
+64078,gdmo_replaced_legacy,Water Pressure Lv.1,2011,2,1,4,747,4000340,0,0,
+64079,gdmo_replaced_legacy,Water Pressure Lv.2,2011,2,1,4,747,4000341,0,0,
+64080,gdmo_replaced_legacy,Water Pressure Lv.3,2011,2,1,4,747,4000342,0,0,
+64081,gdmo_replaced_legacy,Water Pressure Lv.4,2011,2,1,4,747,4000343,0,0,
+64082,gdmo_replaced_legacy,Silence Lv.1,2099,2,1,4,745,4000344,0,0,
+64083,gdmo_replaced_legacy,Silence Lv.2,2099,2,1,4,745,4000345,0,0,
+64084,gdmo_replaced_legacy,Silence Lv.3,2099,2,1,4,745,4000346,0,0,
+64085,gdmo_replaced_legacy,Silence Lv.4,2099,2,1,4,745,4000347,0,0,
+64086,gdmo_replaced_legacy,Slow,2096,2,1,4,902,4000348,0,0,
+64087,gdmo_replaced_legacy,Indigenous Peoples' Day,2028,1,2,1,999,4000349,0,0,Buff06_Attack_Red
+64088,gdmo_replaced_legacy,10th Birthday Celebration,2028,1,2,1,999,4000350,0,0,Buff06_Attack_Red
+64089,gdmo_replaced_legacy,Royal,2028,1,2,1,999,4000351,0,0,Buff06_Attack_Red
+64091,gdmo_replaced_legacy,Fury,2043,1,1,4,429,7591041,0,1,Buff_SkillPowerUp
+64092,gdmo_replaced_legacy,Stun,2044,2,1,4,465,7110731,0,0,Debuff_Stun
+64093,gdmo_replaced_legacy,Flame,2041,2,1,4,426,7572211,0,0,Debuff_Fire
+64094,gdmo_replaced_legacy,Lapidification,2045,2,1,4,467,7572231,0,0,Debuff_Stone
+64095,gdmo_replaced_legacy,Upsurge of Rage,5138,2,1,4,556,7591111,0,0,Debuff_Fire
+64096,gdmo_replaced_legacy,Upsurge of Rage,5139,2,1,4,557,7591121,0,0,Debuff_Fire
+64097,gdmo_replaced_legacy,Demon God of Rage,5141,1,1,4,558,7591131,0,0,Buff_SkillPowerUp
+64098,gdmo_replaced_legacy,Demon King of Rage,2028,1,2,1,999,4000358,0,0,Buff06_Attack_Red
+64099,gdmo_replaced_legacy,Red Carnation,2028,1,2,1,999,4000359,0,0,Buff06_Attack_Red
+64100,gdmo_replaced_legacy,Silent Immune,2046,1,2,4,746,7110921,0,0,Buff06_Attack_Red
+64101,gdmo_replaced_legacy,Fourth of July,2028,1,2,1,999,4000361,0,0,Buff06_Attack_Red
+64102,gdmo_replaced_legacy,Fury,2043,1,1,4,429,7591041,0,1,Buff_SkillPowerUp
+64103,gdmo_replaced_legacy,X7,2028,1,2,1,999,4000362,0,0,Buff06_Attack_Red
+64104,gdmo_replaced_legacy,Encouragement,3111,1,1,4,608,0,8002111,1,Buff06_Attack_Blue
+64105,gdmo_replaced_legacy,Hiro’s Solidity(Vi),3109,1,2,4,309,0,8002121,0,
+64106,gdmo_replaced_legacy,Hiro’s Solidity(Va),3109,1,2,4,309,0,8002131,0,
+64107,gdmo_replaced_legacy,Preparation for the Final Battle,2028,1,2,1,999,4000363,0,0,Buff06_Attack_Red
+64108,gdmo_replaced_legacy,A New World,2028,1,2,1,999,4000364,0,0,Buff06_Attack_Red
+64109,gdmo_replaced_legacy,Despair,4077,2,1,4,706,4000365,0,0,
+64110,gdmo_replaced_legacy,Deep Despair,4077,2,1,4,706,4000366,0,0,
+64111,gdmo_replaced_legacy,Naivety,3113,1,1,4,629,0,8001911,1,Buff06_Attack_Green
+64112,gdmo_replaced_legacy,Ruli’s Affinity(Va),3112,1,2,4,316,0,8001821,0,
+64113,gdmo_replaced_legacy,Ruli’s Affinity(Da),3112,1,2,4,316,0,8001831,0,
+64114,gdmo_replaced_legacy,Vigor,3115,1,1,4,606,0,8000711,1,Buff06_Attack_Red
+64115,gdmo_replaced_legacy,Kiyoshiro’s Fluster(Da),3114,1,2,4,315,0,8001721,0,
+64116,gdmo_replaced_legacy,Kiyoshiro’s Fluster(Vi),3114,1,2,4,315,0,8001731,0,
+64117,gdmo_replaced_legacy,11 Years Together,2028,1,2,1,999,4000367,0,0,Buff06_Attack_Red
+64118,gdmo_replaced_legacy,Knight Aspirant,2028,1,2,1,999,4000368,0,0,Buff06_Attack_Red
+64119,gdmo_replaced_legacy,Battle Angel,2028,1,2,1,999,1900025,0,0,Buff06_Attack_Red
+64120,gdmo_replaced_legacy,Diligent Person,2028,1,2,1,999,2000100,0,0,Buff06_Attack_Red
+64121,gdmo_replaced_legacy,Tenacious Person,2028,1,2,1,999,2000101,0,0,Buff06_Attack_Red
+64122,gdmo_replaced_legacy,Flame,2041,2,1,4,426,7112521,0,0,Debuff_Fire
+64124,gdmo_replaced_legacy,Speed Up,2085,1,2,4,400,0,8001229,0,
+64125,gdmo_replaced_legacy,2022 Christmas,2028,1,2,1,999,2000102,0,0,Buff06_Attack_Red
+64126,gdmo_replaced_legacy,Poison Lv.1,2113,2,1,4,746,2700015,0,0,
+64127,gdmo_replaced_legacy,AT Amplification Lv.1,2109,1,1,4,707,4000369,0,0,
+64128,gdmo_replaced_legacy,AT Amplification Lv.2,2111,1,1,4,707,4000370,0,0,
+64129,gdmo_replaced_legacy,AT Amplification Lv.3,2112,1,1,4,707,4000371,0,0,
+64130,gdmo_replaced_legacy,Bleeding Lv.1,2047,2,1,4,742,4000375,0,0,
+64131,gdmo_replaced_legacy,DE Amplification Lv.1,2109,1,1,4,709,4000372,0,0,
+64132,gdmo_replaced_legacy,DE Amplification Lv.2,2111,1,1,4,709,4000373,0,0,
+64133,gdmo_replaced_legacy,DE Amplification Lv.3,2112,1,1,4,709,4000374,0,0,
+64134,gdmo_replaced_legacy,Bleeding Lv.2,2047,2,1,4,742,4000376,0,0,
+64135,gdmo_replaced_legacy,Poison Lv.2,2113,2,1,4,746,4000300,0,0,
+64136,gdmo_replaced_legacy,Silence,2099,2,1,4,745,4000207,0,0,
+64137,gdmo_replaced_legacy,Bleeding Lv.3,2047,2,1,4,742,4000377,0,0,
+64138,gdmo_replaced_legacy,Petrify,2045,2,1,4,748,4000293,0,0,
+64139,gdmo_replaced_legacy,Poison Lv.3,2113,2,1,4,746,4000301,0,0,
+64140,gdmo_replaced_legacy,Silence + Slow,2097,2,1,4,714,4000234,0,0,
+64141,gdmo_replaced_legacy,Pressure Lv.1,2172,2,1,4,912,4000378,0,0,
+64142,gdmo_replaced_legacy,Pressure Lv.2,2172,2,1,4,912,4000379,0,0,
+64143,gdmo_replaced_legacy,Pressure Lv.3,2172,2,1,4,912,4000380,0,0,
+64144,gdmo_replaced_legacy,barrier Lv.1,2048,1,2,1,913,4000381,0,1,
+64145,gdmo_replaced_legacy,barrier Lv.2,2048,1,2,1,913,4000382,0,1,
+64146,gdmo_replaced_legacy,barrier Lv.3,2048,1,2,1,913,4000383,0,1,
+64147,gdmo_replaced_legacy,Herb efficacy Lv.1,2101,1,1,1,901,4000384,0,1,
+64148,gdmo_replaced_legacy,Herb efficacy Lv.2,2101,1,1,1,901,4000385,0,1,
+64149,gdmo_replaced_legacy,Herb efficacy Lv.3,2101,1,1,1,901,4000386,0,1,
+64150,gdmo_replaced_legacy,Project - DE [100%] Lv.2,2192,1,1,2,914,2000070,0,1,Buff06_Attack_Green
+64151,gdmo_replaced_legacy,Project - HP [100%] Lv.2,2193,1,1,2,915,2000071,0,1,Buff06_Attack_Red
+64152,gdmo_replaced_legacy,Project - DS [100%] Lv.2,2194,1,1,2,916,2000072,0,1,Buff06_Attack_Blue
+64153,gdmo_replaced_legacy,Project - DE [150%] Lv.3,2192,1,1,2,914,2000070,0,1,Buff06_Attack_Green
+64154,gdmo_replaced_legacy,Project - HP [150%] Lv.3,2193,1,1,2,915,2000071,0,1,Buff06_Attack_Red
+64155,gdmo_replaced_legacy,Project - DS [150%] Lv.3,2194,1,1,2,916,2000072,0,1,Buff06_Attack_Blue
+64156,gdmo_replaced_legacy,Project - Weakness [Examon] Lv.1,2015,2,1,4,501,4000396,0,0,
+64157,gdmo_replaced_legacy,Project - Weakness [Death-X-mon] Lv.2,2015,2,1,4,501,4000397,0,0,
+64158,gdmo_replaced_legacy,Project - Weakness [MetalSeadramon] Lv.3,2015,2,1,4,501,4000398,0,0,
+64159,gdmo_replaced_legacy,Project - Weakness [MugenDramon] Lv.3,2015,2,1,4,501,4000399,0,0,
+64160,gdmo_replaced_legacy,Project - Weakness [Piedmon] Lv.3,2015,2,1,4,501,4000400,0,0,
+64161,gdmo_replaced_legacy,Project - Weakness [Apocalymon] Lv.3,2015,2,1,4,501,4000401,0,0,
+64162,gdmo_replaced_legacy,Evil Data,2028,1,2,1,999,2000103,0,0,Buff06_Attack_Red
+64163,gdmo_replaced_legacy,(Shin)Crimson Kinght,2028,1,2,1,999,2000104,0,0,Buff06_Attack_Red
+64164,gdmo_replaced_legacy,Fury,2043,1,1,4,429,6700131,0,1,Buff_SkillPowerUp
+64165,gdmo_replaced_legacy,Silence Lv.1,2099,2,1,4,745,4000207,0,0,
+64166,gdmo_replaced_legacy,Silence Lv.2,2099,2,1,4,745,4000207,0,0,
+64167,gdmo_replaced_legacy,Attroibute Protector [Da/Vi],2048,1,1,4,713,4000407,0,0,
+64168,gdmo_replaced_legacy,Deadly Poison Lv.1,2113,2,1,4,746,4000408,0,0,
+64169,gdmo_replaced_legacy,Deadly Poison Lv.2,2113,2,1,4,746,4000409,0,0,
+64170,gdmo_replaced_legacy,Fear Lv.1,2172,2,1,4,912,4000410,0,0,
+64171,gdmo_replaced_legacy,Fear Lv.2,2172,2,1,4,912,4000411,0,0,
+64172,gdmo_replaced_legacy,Victory,2048,1,1,4,912,4000412,0,0,
+64173,gdmo_replaced_legacy,Goddess of Battle,2028,1,2,1,999,2000105,0,0,Buff06_Attack_Red
+64174,gdmo_replaced_legacy,Bond of Bravery,2028,1,2,1,999,2000106,0,0,Buff06_Attack_Red
+64175,gdmo_replaced_legacy,Agumon's Courage,2043,1,1,1,433,7105041,0,1,Buff_SkillPowerUp
+64176,gdmo_replaced_legacy,Greatest emperor of evil,2028,1,1,1,999,2000107,0,0,Buff06_Attack_Red
+64177,gdmo_replaced_legacy,Hell Fire,2066,2,1,4,426,7500011,0,0,Debuff_Fire
+64178,gdmo_replaced_legacy,Lapidification,2045,2,1,4,467,7113321,0,0,Debuff_Stone
+64179,gdmo_replaced_legacy,D-Reaper Lv 1,2047,2,1,4,742,4000413,0,0,
+64180,gdmo_replaced_legacy,D-Reaper Lv 2,2047,2,1,4,742,4000414,0,0,
+64181,gdmo_replaced_legacy,D-Reaper Lv 3,2047,2,1,4,742,4000415,0,0,
+64182,gdmo_replaced_legacy,D-Reaper Lv 4,2047,2,1,4,742,4000416,0,0,
+64183,gdmo_replaced_legacy,The Glroy of Tamers!,2028,1,2,1,999,2000109,0,0,Buff06_Attack_Red
+64197,gdmo_replaced_legacy,Ultimate Giant Machine,2028,1,2,1,999,2000110,0,0,Buff06_Attack_Red
+64198,gdmo_replaced_legacy,Mandara,2101,1,1,1,448,6700331,0,1,Buff_SkillPowerUp_Sakuyamon
+64199,gdmo_replaced_legacy,Awakened Shaman,2028,1,2,1,999,2000111,0,0,Buff06_Attack_Red
+64200,gdmo_replaced_legacy,12th Anniversary Digimon Masters,2028,1,2,1,999,2000112,0,0,Buff06_Attack_Red
+64201,gdmo_replaced_legacy,12th Tamer,2028,1,2,1,999,2000113,0,0,Buff06_Attack_Red
+64202,gdmo_replaced_legacy,Stregthend Data - Fire,2207,1,2,4,1000,2700050,0,0,Buff06_Attack_Red
+64203,gdmo_replaced_legacy,Stregthend Data - Ice,2205,1,2,4,1001,2700051,0,0,Buff06_Attack_Red
+64204,gdmo_replaced_legacy,Stregthend Data - Water,2206,1,2,4,1002,2700052,0,0,Buff06_Attack_Red
+64205,gdmo_replaced_legacy,Stregthend Data - Wood,2211,1,2,4,1003,2700053,0,0,Buff06_Attack_Red
+64206,gdmo_replaced_legacy,Stregthend Data - Earth,2208,1,2,4,1004,2700054,0,0,Buff06_Attack_Red
+64207,gdmo_replaced_legacy,Stregthend Data - Wind,2209,1,2,4,1005,2700055,0,0,Buff06_Attack_Red
+64208,gdmo_replaced_legacy,Stregthend Data - Steel,2215,1,2,4,1006,2700056,0,0,Buff06_Attack_Red
+64209,gdmo_replaced_legacy,Stregthend Data - Light,2212,1,2,4,1007,2700057,0,0,Buff06_Attack_Red
+64210,gdmo_replaced_legacy,Stregthend Data - Darkness,2213,1,2,4,1008,2700058,0,0,Buff06_Attack_Red
+64211,gdmo_replaced_legacy,Stregthend Data - Thunder,2214,1,2,4,1009,2700059,0,0,Buff06_Attack_Red
+64212,gdmo_replaced_legacy,Weakened Data - Water,2096,2,2,4,1010,2700060,0,0,
+64213,gdmo_replaced_legacy,Weakened Data - Fire,2096,2,2,4,1011,2700061,0,0,
+64214,gdmo_replaced_legacy,Weakened Data - Ice,2096,2,2,4,1012,2700062,0,0,
+64215,gdmo_replaced_legacy,Weakened Data - Wind,2096,2,2,4,1013,2700063,0,0,
+64216,gdmo_replaced_legacy,Weakened Data - Wood,2096,2,2,4,1014,2700064,0,0,
+64217,gdmo_replaced_legacy,Weakened Data - Earth,2096,2,2,4,1015,2700065,0,0,
+64218,gdmo_replaced_legacy,Weakened Data - Thunder,2096,2,2,4,1016,2700066,0,0,
+64219,gdmo_replaced_legacy,Weakened Data - Steel,2096,2,2,4,1017,2700067,0,0,
+64220,gdmo_replaced_legacy,Weakened Data - Light,2096,2,2,4,1018,2700068,0,0,
+64221,gdmo_replaced_legacy,Weakened Data - Darkness,2096,2,2,4,1019,2700069,0,0,
+64222,gdmo_replaced_legacy,Awakened Darkness,2028,1,2,1,999,2000115,0,0,Buff06_Attack_Red
+64225,gdmo_replaced_legacy,Rage,2043,1,1,4,429,7700231,0,1,Buff_SkillPowerUp
+64226,gdmo_replaced_legacy,Constant HP Loss,2067,2,1,4,1020,2700107,0,0,
+64227,gdmo_replaced_legacy,Weaken,2098,2,1,4,1021,2700108,0,0,
+64228,gdmo_replaced_legacy,Cursed,2066,2,1,4,1022,2700109,0,0,
+64229,gdmo_replaced_legacy,Endurance,2031,1,1,4,1023,2700110,0,0,
+64230,gdmo_replaced_legacy,Slow,2096,2,1,4,1024,2700111,0,0,
+64231,gdmo_replaced_legacy,Disruption,2111,2,1,4,1025,2700112,0,0,
+64232,gdmo_replaced_legacy,Life Absorption,2172,2,1,4,1026,2700113,0,0,
+64233,gdmo_replaced_legacy,Silence + Slow,2097,2,1,4,714,4000234,0,0,
+64234,gdmo_replaced_legacy,X-Program Activation Level 4,2171,1,1,4,733,4000487,0,0,
+64235,gdmo_replaced_legacy,X-Program Activation Level 5,2171,1,1,4,733,4000488,0,0,
+64236,gdmo_replaced_legacy,Constant HP Loss,2067,2,1,4,1020,2700114,0,0,
+64237,gdmo_replaced_legacy,Invader from another dimension,2028,1,2,1,999,2000116,0,0,Buff06_Attack_Red
+64238,gdmo_replaced_legacy,Perpetual Hunger,2028,1,2,1,999,2000117,0,0,Buff06_Attack_Red
+64239,gdmo_replaced_legacy,Our Future ,2028,1,2,1,999,2000114,0,0,Buff06_Attack_Red
+64240,gdmo_replaced_legacy,Bond of Friendship,2028,1,2,1,999,2000108,0,0,Buff06_Attack_Red
+64241,gdmo_replaced_legacy,Gabumon's Friendship,2108,1,1,1,447,7105141,0,1,Buff_SkillPowerUp
+64242,gdmo_replaced_legacy,Glorious DigiXros,2028,1,2,1,999,2000118,0,0,Buff06_Attack_Red
+64243,gdmo_replaced_legacy,Power of Code Crown,2048,1,1,4,429,7900431,0,0,
+64244,gdmo_replaced_legacy,Gold Digizoid,2046,1,1,4,466,7900441,0,1,Buff_Invincible
+64245,gdmo_replaced_legacy,Grace of Tombstone [Skill] Lv.1,2109,1,1,4,641,2700116,0,0,
+64246,gdmo_replaced_legacy,Grace of Tombstone [Skill] Lv.2,2109,1,1,4,641,2700117,0,0,
+64247,gdmo_replaced_legacy,Grace of Tombstone [Skill] Lv.3,2109,1,1,4,641,2700118,0,0,
+64248,gdmo_replaced_legacy,Grace of Tombstone [Skill] Lv.4,2109,1,1,4,641,2700119,0,0,
+64249,gdmo_replaced_legacy,Grace of Tombstone [Skill] Lv.5,2109,1,1,4,641,2700120,0,0,
+64250,gdmo_replaced_legacy,Grace of Tombstone [Att] Lv.1,2109,1,1,4,642,2700121,0,0,
+64251,gdmo_replaced_legacy,Grace of Tombstone [Att] Lv.2,2109,1,1,4,642,2700122,0,0,
+64252,gdmo_replaced_legacy,Grace of Tombstone [Att] Lv.3,2109,1,1,4,642,2700123,0,0,
+64253,gdmo_replaced_legacy,Grace of Tombstone [Att] Lv.4,2109,1,1,4,642,2700124,0,0,
+64254,gdmo_replaced_legacy,Grace of Tombstone [Att] Lv.5,2109,1,1,4,642,2700125,0,0,
+64255,gdmo_replaced_legacy,Grace of Tombstone [SkillDef] Lv.1,2109,1,1,4,643,2700126,0,0,
+64256,gdmo_replaced_legacy,Grace of Tombstone [SkillDef] Lv.2,2109,1,1,4,643,2700127,0,0,
+64257,gdmo_replaced_legacy,Grace of Tombstone [SkillDef] Lv.3,2109,1,1,4,643,2700128,0,0,
+64258,gdmo_replaced_legacy,Grace of Tombstone [SkillDef] Lv.4,2109,1,1,4,643,2700129,0,0,
+64259,gdmo_replaced_legacy,Grace of Tombstone [SkillDef] Lv.5,2109,1,1,4,643,2700130,0,0,
+64260,gdmo_replaced_legacy,Grace of Tombstone [AttDef] Lv.1,2109,1,1,4,644,2700131,0,0,
+64261,gdmo_replaced_legacy,Grace of Tombstone [AttDef] Lv.2,2109,1,1,4,644,2700132,0,0,
+64262,gdmo_replaced_legacy,Grace of Tombstone [AttDef] Lv.3,2109,1,1,4,644,2700133,0,0,
+64263,gdmo_replaced_legacy,Grace of Tombstone [AttDef] Lv.4,2109,1,1,4,644,2700134,0,0,
+64264,gdmo_replaced_legacy,Grace of Tombstone [AttDef] Lv.5,2109,1,1,4,644,2700135,0,0,
+64265,gdmo_replaced_legacy,Grace of Tombstone [EV] Lv.1,2109,1,1,4,645,2700136,0,0,
+64266,gdmo_replaced_legacy,Grace of Tombstone [EV] Lv.2,2109,1,1,4,645,2700137,0,0,
+64267,gdmo_replaced_legacy,Grace of Tombstone [EV] Lv.3,2109,1,1,4,645,2700138,0,0,
+64268,gdmo_replaced_legacy,Grace of Tombstone [EV] Lv.4,2109,1,1,4,645,2700139,0,0,
+64269,gdmo_replaced_legacy,Grace of Tombstone [EV] Lv.5,2109,1,1,4,645,2700140,0,0,
+64270,gdmo_replaced_legacy,Block rate decrease,2031,2,1,4,646,2700141,0,0,
+64271,gdmo_replaced_legacy,Silence,2099,2,1,4,748,2700142,0,0,
+64272,gdmo_replaced_legacy,Emperor's Majesty,2149,1,2,1,999,2000120,0,0,Buff06_Attack_Red
+64273,gdmo_replaced_legacy,Challenger's Spirit,2101,1,2,1,999,2000121,0,0,Buff06_Attack_Red
+64275,gdmo_replaced_legacy,Purification,2046,1,1,1,489,7200131,0,1,Buff_SkillPowerUp_KuzuhamonMikoMode
+64276,gdmo_replaced_legacy,Will of the Gods,2101,1,1,1,490,7200141,0,1,Buff_SkillPowerUp_Sakuyamon
+64277,gdmo_replaced_legacy,Damage Reduction Level 1,2031,1,1,4,642,2700143,0,0,
+64278,gdmo_replaced_legacy,Damage Reduction Level 2,2031,1,1,4,642,2700144,0,0,
+64279,gdmo_replaced_legacy,Damage Reduction Level 1,2031,1,1,4,642,2700145,0,0,
+64280,gdmo_replaced_legacy,Damage Reduction Level 2,2031,1,1,4,642,2700146,0,0,
+64281,gdmo_replaced_legacy,Damage Reduction Level 3,2031,1,1,4,642,2700147,0,0,
+64282,gdmo_replaced_legacy,Damage Increase Level 1,2015,1,1,4,643,2700148,0,0,
+64283,gdmo_replaced_legacy,Damage Increase Level 2,2015,1,1,4,643,2700149,0,0,
+64284,gdmo_replaced_legacy,Damage Increase Level 3,2015,1,1,4,643,2700150,0,0,
+64285,gdmo_replaced_legacy,Damage Increase Level 4,2015,1,1,4,643,2700151,0,0,
+64286,gdmo_replaced_legacy,Damage Increase Level 5,2015,1,1,4,643,2700152,0,0,
+64287,gdmo_replaced_legacy,Remove Buff,2204,2,1,4,622,2500214,0,0,
+64288,gdmo_replaced_legacy,Remove Buff,2204,2,1,4,623,2500214,0,0,
+64289,gdmo_replaced_legacy,Block Rate Reduction,2031,2,1,4,646,2700153,0,0,
+64290,gdmo_replaced_legacy,Comprehensive Attack Buff,3004,1,2,1,647,2000093,0,1,Buff06_Attack_Red
+64291,gdmo_replaced_legacy,Comprehensive Defense Buff,2019,1,2,1,648,2000094,0,1,Buff06_Attack_Blue
+64292,gdmo_replaced_legacy,Cleanser of Corruption,2028,1,2,1,999,2000123,0,0,Buff06_Attack_Red
+64293,gdmo_replaced_legacy,Movement Speed Reduction Level 1,2096,2,1,1,649,2700158,0,0,
+64294,gdmo_replaced_legacy,Movement Speed Reduction Level 2,2096,2,1,1,649,2700159,0,0,
+64295,gdmo_replaced_legacy,Movement Speed Reduction Level 3,2096,2,1,1,649,2700160,0,0,
+64296,gdmo_replaced_legacy,Movement Speed Reduction Level 4,2096,2,1,1,649,2700161,0,0,
+64297,gdmo_replaced_legacy,Dealing Damage Reduction Level 1,2098,2,1,1,650,2700162,0,0,
+64298,gdmo_replaced_legacy,Dealing Damage Reduction Level 2,2098,2,1,1,650,2700163,0,0,
+64299,gdmo_replaced_legacy,Dealing Damage Reduction Level 3,2098,2,1,1,650,2700164,0,0,
+64300,gdmo_replaced_legacy,Dealing Damage Reduction Level 4,2098,2,1,1,650,2700165,0,0,
+64301,gdmo_replaced_legacy,Dealing Damage Reduction Level 5,2098,2,1,1,650,2700166,0,0,
+64302,gdmo_replaced_legacy,Block Rate Reduction Level 1,2031,2,1,1,651,2700167,0,0,
+64303,gdmo_replaced_legacy,Block Rate Reduction Level 2,2031,2,1,1,651,2700168,0,0,
+64304,gdmo_replaced_legacy,Block Rate Reduction Level 3,2031,2,1,1,651,2700169,0,0,
+64305,gdmo_replaced_legacy,Block Rate Reduction Level 4,2031,2,1,1,651,2700170,0,0,
+64306,gdmo_replaced_legacy,HP Continuous Decrease Level 1,2067,2,1,1,652,2700171,0,0,
+64307,gdmo_replaced_legacy,HP Continuous Decrease Level 2,2067,2,1,1,652,2700172,0,0,
+64308,gdmo_replaced_legacy,HP Continuous Decrease Level 3,2067,2,1,1,652,2700173,0,0,
+64309,gdmo_replaced_legacy,HP Continuous Decrease Level 4,2067,2,1,1,652,2700174,0,0,
+64310,gdmo_replaced_legacy,HP Continuous Decrease Level 5,2067,2,1,1,652,2700175,0,0,
+64311,gdmo_replaced_legacy,Damage Taken Increase Level 1,2066,2,1,1,653,2700176,0,0,
+64312,gdmo_replaced_legacy,Damage Taken Increase Level 2,2066,2,1,1,653,2700177,0,0,
+64313,gdmo_replaced_legacy,Damage Taken Increase Level 3,2066,2,1,1,653,2700178,0,0,
+64314,gdmo_replaced_legacy,Damage Taken Increase Level 4,2066,2,1,1,653,2700179,0,0,
+64315,gdmo_replaced_legacy,Damage Taken Increase Level 5,2066,2,1,1,653,2700180,0,0,
+64316,gdmo_replaced_legacy,Love Poision,2066,2,1,4,491,7112931,0,0,Debuff_Fire
+64317,gdmo_replaced_legacy,Charm,2132,2,1,4,492,7112921,0,0,Debuff_Stun
+64318,gdmo_replaced_legacy,XrosUP!,2028,1,2,1,999,2000124,0,0,Buff06_Attack_Red
+64319,gdmo_replaced_legacy,Master Craftsman,2028,1,2,1,999,2000125,0,0,Buff06_Attack_Red
+64320,gdmo_replaced_legacy,Master Scientist,2028,1,2,1,999,2000126,0,0,Buff06_Attack_Red
+64321,gdmo_replaced_legacy,Endurance,2066,1,1,4,640,2700115,0,0,
+64322,gdmo_replaced_legacy,Energy Release,2139,1,1,1,855,6700531,0,0,
+64323,gdmo_replaced_legacy,Digital Disintegration,2141,2,1,1,856,6700541,0,0,
+64324,gdmo_replaced_legacy,Almighty Gallantmon Crimson Mode,2009,1,2,1,999,2000127,0,0,
+64325,gdmo_replaced_legacy,Data Attribute (SSS),2065,1,1,4,860,2702009,0,0,
+64326,gdmo_replaced_legacy,Data Attribute (SSS),2065,1,1,4,860,2702010,0,0,
+64327,gdmo_replaced_legacy,Data Attribute (SSS),2065,1,1,4,860,2702011,0,0,
+64328,gdmo_replaced_legacy,Data Attribute (SSS),2065,1,1,4,860,2702012,0,0,
+64329,gdmo_replaced_legacy,Data Attribute (SSS),2065,1,1,4,860,2702013,0,0,
+64330,gdmo_replaced_legacy,Data Attribute (SSS+),2065,1,1,4,860,2702014,0,0,
+64331,gdmo_replaced_legacy,Data Attribute (SSS+),2065,1,1,4,860,2702015,0,0,
+64332,gdmo_replaced_legacy,Data Attribute (SSS+),2065,1,1,4,860,2702016,0,0,
+64333,gdmo_replaced_legacy,Data Attribute (SSS+),2065,1,1,4,860,2702017,0,0,
+64334,gdmo_replaced_legacy,Data Attribute (SSS+),2065,1,1,4,860,2702018,0,0,
+64335,gdmo_replaced_legacy,Data Attribute (U),2065,1,1,4,860,2702019,0,0,
+64336,gdmo_replaced_legacy,Data Attribute (U),2065,1,1,4,860,2702020,0,0,
+64337,gdmo_replaced_legacy,Data Attribute (U),2065,1,1,4,860,2702021,0,0,
+64338,gdmo_replaced_legacy,Data Attribute (U),2065,1,1,4,860,2702022,0,0,
+64339,gdmo_replaced_legacy,Data Attribute (U),2065,1,1,4,860,2702023,0,0,
+64340,gdmo_replaced_legacy,Vaccine Attribute (SSS),2063,1,1,4,860,2702024,0,0,
+64341,gdmo_replaced_legacy,Vaccine Attribute (SSS),2063,1,1,4,860,2702025,0,0,
+64342,gdmo_replaced_legacy,Vaccine Attribute (SSS),2063,1,1,4,860,2702026,0,0,
+64343,gdmo_replaced_legacy,Vaccine Attribute (SSS),2063,1,1,4,860,2702027,0,0,
+64344,gdmo_replaced_legacy,Vaccine Attribute (SSS),2063,1,1,4,860,2702028,0,0,
+64345,gdmo_replaced_legacy,Vaccine Attribute (SSS+),2063,1,1,4,860,2702029,0,0,
+64346,gdmo_replaced_legacy,Vaccine Attribute (SSS+),2063,1,1,4,860,2702030,0,0,
+64347,gdmo_replaced_legacy,Vaccine Attribute (SSS+),2063,1,1,4,860,2702031,0,0,
+64348,gdmo_replaced_legacy,Vaccine Attribute (SSS+),2063,1,1,4,860,2702032,0,0,
+64349,gdmo_replaced_legacy,Vaccine Attribute (SSS+),2063,1,1,4,860,2702033,0,0,
+64350,gdmo_replaced_legacy,Vaccine Attribute (U),2063,1,1,4,860,2702034,0,0,
+64351,gdmo_replaced_legacy,Vaccine Attribute (U),2063,1,1,4,860,2702035,0,0,
+64352,gdmo_replaced_legacy,Vaccine Attribute (U),2063,1,1,4,860,2702036,0,0,
+64353,gdmo_replaced_legacy,Vaccine Attribute (U),2063,1,1,4,860,2702037,0,0,
+64354,gdmo_replaced_legacy,Vaccine Attribute (U),2063,1,1,4,860,2702038,0,0,
+64355,gdmo_replaced_legacy,Virus Attribute (SSS),2064,1,1,4,350,2702039,0,0,
+64356,gdmo_replaced_legacy,Virus Attribute (SSS+),2064,1,1,4,350,2702040,0,0,
+64357,gdmo_replaced_legacy,Virus Attribute (U),2064,1,1,4,350,2702041,0,0,
+64358,gdmo_replaced_legacy,Unknown Attribute (SSS),2171,1,1,4,350,2702042,0,0,
+64359,gdmo_replaced_legacy,Unknown Attribute (SSS+),2171,1,1,4,350,2702043,0,0,
+64360,gdmo_replaced_legacy,Unknown Attribute (U),2171,1,1,4,350,2702044,0,0,
+64361,gdmo_replaced_legacy,Ice Attribute (SSS),2205,1,1,4,351,2702045,0,0,
+64362,gdmo_replaced_legacy,Ice Attribute (SSS+),2205,1,1,4,351,2702046,0,0,
+64363,gdmo_replaced_legacy,Ice Attribute (U),2205,1,1,4,351,2702047,0,0,
+64364,gdmo_replaced_legacy,Water Attribute (SSS),2206,1,1,4,351,2702048,0,0,
+64365,gdmo_replaced_legacy,Water Attribute (SSS+),2206,1,1,4,351,2702049,0,0,
+64366,gdmo_replaced_legacy,Water Attribute (U),2206,1,1,4,351,2702050,0,0,
+64367,gdmo_replaced_legacy,Fire Attribute (SSS),2207,1,1,4,861,2702051,0,0,
+64368,gdmo_replaced_legacy,Fire Attribute (SSS),2207,1,1,4,861,2702052,0,0,
+64369,gdmo_replaced_legacy,Fire Attribute (SSS),2207,1,1,4,861,2702053,0,0,
+64370,gdmo_replaced_legacy,Fire Attribute (SSS+),2207,1,1,4,861,2702054,0,0,
+64371,gdmo_replaced_legacy,Fire Attribute (SSS+),2207,1,1,4,861,2702055,0,0,
+64372,gdmo_replaced_legacy,Fire Attribute (SSS+),2207,1,1,4,861,2702056,0,0,
+64373,gdmo_replaced_legacy,Fire Attribute (U),2207,1,1,4,861,2702057,0,0,
+64374,gdmo_replaced_legacy,Fire Attribute (U),2207,1,1,4,861,2702058,0,0,
+64375,gdmo_replaced_legacy,Fire Attribute (U),2207,1,1,4,861,2702059,0,0,
+64376,gdmo_replaced_legacy,Earth Attribute (SSS),2208,1,1,4,351,2702060,0,0,
+64377,gdmo_replaced_legacy,Earth Attribute (SSS+),2208,1,1,4,351,2702061,0,0,
+64378,gdmo_replaced_legacy,Earth Attribute (U),2208,1,1,4,351,2702062,0,0,
+64379,gdmo_replaced_legacy,Wind Attribute (SSS),2209,1,1,4,351,2702063,0,0,
+64380,gdmo_replaced_legacy,Wind Attribute (SSS+),2209,1,1,4,351,2702064,0,0,
+64381,gdmo_replaced_legacy,Wind Attribute (U),2209,1,1,4,351,2702065,0,0,
+64382,gdmo_replaced_legacy,Wood Attribute (SSS),2211,1,1,4,351,2702066,0,0,
+64383,gdmo_replaced_legacy,Wood Attribute (SSS+),2211,1,1,4,351,2702067,0,0,
+64384,gdmo_replaced_legacy,Wood Attribute (U),2211,1,1,4,351,2702068,0,0,
+64385,gdmo_replaced_legacy,Light Attribute (SSS),2212,1,1,4,351,2702069,0,0,
+64386,gdmo_replaced_legacy,Light Attribute (SSS+),2212,1,1,4,351,2702070,0,0,
+64387,gdmo_replaced_legacy,Light Attribute (U),2212,1,1,4,351,2702071,0,0,
+64388,gdmo_replaced_legacy,Dark Attribute (SSS),2213,1,1,4,861,2702072,0,0,
+64389,gdmo_replaced_legacy,Dark Attribute (SSS),2213,1,1,4,861,2702073,0,0,
+64390,gdmo_replaced_legacy,Dark Attribute (SSS),2213,1,1,4,861,2702074,0,0,
+64391,gdmo_replaced_legacy,Dark Attribute (SSS+),2213,1,1,4,861,2702075,0,0,
+64392,gdmo_replaced_legacy,Dark Attribute (SSS+),2213,1,1,4,861,2702076,0,0,
+64393,gdmo_replaced_legacy,Dark Attribute (SSS+),2213,1,1,4,861,2702077,0,0,
+64394,gdmo_replaced_legacy,Dark Attribute (U),2213,1,1,4,861,2702078,0,0,
+64395,gdmo_replaced_legacy,Dark Attribute (U),2213,1,1,4,861,2702079,0,0,
+64396,gdmo_replaced_legacy,Dark Attribute (U),2213,1,1,4,861,2702080,0,0,
+64397,gdmo_replaced_legacy,Electric Attribute (SSS),2214,1,1,4,351,2702081,0,0,
+64398,gdmo_replaced_legacy,Electric Attribute (SSS+),2214,1,1,4,351,2702082,0,0,
+64399,gdmo_replaced_legacy,Electric Attribute (U),2214,1,1,4,351,2702083,0,0,
+64400,gdmo_replaced_legacy,Steel Attribute (SSS),2215,1,1,4,861,2702084,0,0,
+64401,gdmo_replaced_legacy,Steel Attribute (SSS+),2215,1,1,4,861,2702085,0,0,
+64402,gdmo_replaced_legacy,Steel Attribute (U),2215,1,1,4,861,2702086,0,0,
+64403,gdmo_replaced_legacy,Power of Courage 4-set,2135,1,1,4,862,2702279,0,0,
+64404,gdmo_replaced_legacy,Power of Courage 6-set,2136,1,1,4,863,2702280,0,0,
+64405,gdmo_replaced_legacy,Light of Hope 4-set,2137,1,1,4,352,2702281,0,0,
+64406,gdmo_replaced_legacy,Light of Hope 6-set,2138,1,1,4,864,2702282,0,0,
+64407,gdmo_replaced_legacy,Heart of Love 4-set,2139,1,1,4,352,2702283,0,0,
+64408,gdmo_replaced_legacy,Heart of Love 6-set,2141,1,1,4,865,2702284,0,0,
+64409,gdmo_replaced_legacy,GM Offensive Set Buff,3004,1,1,4,647,2000093,0,1,Buff06_Attack_Red
+64410,gdmo_replaced_legacy,GM Defensive Set Buff,2019,1,1,4,648,2000094,0,1,Buff06_Attack_Blue
+64411,gdmo_replaced_legacy,Gotsumon's Blessing,2066,1,1,4,641,2700118,0,0,
+64412,gdmo_replaced_legacy,Mojyamon's Blessing,2053,1,1,4,642,2700123,0,0,
+64413,gdmo_replaced_legacy,Roachmon's Blessing,2101,1,1,4,643,2700128,0,0,
+64414,gdmo_replaced_legacy,Starmon's Blessing,2031,1,1,4,644,2700133,0,0,
+64415,gdmo_replaced_legacy,DarkTyrannomon's Blessing,2102,1,1,4,645,2700138,0,0,
+64416,gdmo_replaced_legacy,Gotsumon's Blessing,2066,1,1,4,641,2700118,0,0,
+64417,gdmo_replaced_legacy,Mojyamon's Blessing,2053,1,1,4,642,2700123,0,0,
+64418,gdmo_replaced_legacy,Roachmon's Blessing,2101,1,1,4,643,2700128,0,0,
+64419,gdmo_replaced_legacy,Starmon's Blessing,2031,1,1,4,644,2700133,0,0,
+64420,gdmo_replaced_legacy,DarkTyrannomon's Blessing,2102,1,1,4,645,2700138,0,0,
+64421,gdmo_replaced_legacy,Resolve,5226,1,1,1,857,7112731,0,0,
+64422,gdmo_replaced_legacy,Endurance,2066,1,1,4,640,2700115,0,0,
+64423,gdmo_replaced_legacy,Endurance,2066,1,1,4,640,2700115,0,0,
+64424,gdmo_replaced_legacy,13th Anniversary Digimon Masters,2028,1,2,1,999,2000132,0,0,Buff06_Attack_Red
+64425,gdmo_replaced_legacy,Freeze,2096,2,1,4,680,2702285,0,0,
+64426,gdmo_replaced_legacy,Freeze+,2096,2,1,4,680,2702286,0,0,
+64427,gdmo_replaced_legacy,Endurance,2066,1,1,4,640,2700115,0,0,
+64428,gdmo_replaced_legacy,Endurance,2066,1,1,4,640,2700115,0,0,
+64429,gdmo_replaced_legacy,Endurance,2066,1,1,4,640,2700115,0,0,
+64430,gdmo_replaced_legacy,Endurance,2066,1,1,4,640,2700115,0,0,
+64431,gdmo_replaced_legacy,Endurance,2066,1,1,4,640,2700115,0,0,
+64432,gdmo_replaced_legacy,Endurance,2066,1,1,4,640,2700115,0,0,
+64433,gdmo_replaced_legacy,Return of the Emperor,2028,1,2,1,999,2000133,0,0,Buff06_Attack_Red
+64434,gdmo_replaced_legacy,Children's wishes,2043,1,1,4,429,7700331,0,1,Buff_SkillPowerUp
+64435,gdmo_replaced_legacy,Welcome to the Neverland,2098,2,1,1,858,7900341,0,0,
+64436,gdmo_replaced_legacy,Destroyer in the Mirror  ,2028,1,2,1,999,2000134,0,0,Buff06_Attack_Red
+64437,gdmo_replaced_legacy,Creator of the Mirror World,2101,1,1,1,859,7900331,0,0,
+64438,gdmo_replaced_legacy,Happy Christmas,2028,1,2,1,999,2000135,0,0,Buff06_Attack_Red
+64439,gdmo_replaced_legacy,Fallen Angel of Sorrow and Rage,2028,1,2,1,999,2000142,0,0,Buff06_Attack_Red
+64440,gdmo_replaced_legacy,Stun,2044,2,1,4,465,7900741,0,0,Debuff_Stun
+64441,gdmo_replaced_legacy,Frostbite,2132,2,1,4,790,6701221,0,0,Debuff_Freezing
+64442,gdmo_replaced_legacy,Frostbite,2132,2,1,4,790,6701231,0,0,Debuff_Freezing
+64443,gdmo_replaced_legacy,The Tamer of Radiant Courage,2028,1,2,1,999,2000143,0,0,
+64444,gdmo_replaced_legacy,The Tamer of Hopeful Friendship,2028,1,2,1,999,2000144,0,0,
+64445,gdmo_replaced_legacy,Heatwave,2041,2,1,4,427,6701121,0,0,Debuff_Fire
+64446,gdmo_replaced_legacy,Master of Season 6,2028,1,2,1,999,2000128,0,0,
+64447,gdmo_replaced_legacy,Blessing of Nature,2028,1,2,1,999,2000146,0,0,
+64448,gdmo_replaced_legacy,Photosynthesis,2101,1,1,1,855,7200231,0,0,
+64449,gdmo_replaced_legacy,Shadow Bind,2044,2,1,4,465,7200241,0,0,Debuff_Stun
+64450,gdmo_replaced_legacy,Invincibility,2101,1,1,4,653,2702474,0,0,Buff06_Attack_Blue
+64451,gdmo_replaced_legacy,Buff Removal  ,2204,2,1,4,653,2500214,0,0,Buff06_Attack_Red
+64452,gdmo_replaced_legacy,Bakemon's Blessing (Defense) ,2101,1,1,4,654,2702475,0,0,Buff06_Attack_Blue
+64453,gdmo_replaced_legacy,Bakemon's Blessing (Defense) ,2101,1,1,4,654,2702476,0,0,Buff06_Attack_Blue
+64454,gdmo_replaced_legacy,Bakemon's Blessing (Defense) ,2101,1,1,4,654,2702477,0,0,Buff06_Attack_Blue
+64455,gdmo_replaced_legacy,Bakemon's Blessing (Attack),2066,1,1,4,655,2702478,0,0,Buff06_Attack_Red
+64456,gdmo_replaced_legacy,Bakemon's Blessing (Attack),2066,1,1,4,655,2702479,0,0,Buff06_Attack_Red
+64457,gdmo_replaced_legacy,Bakemon's Blessing (Attack),2066,1,1,4,655,2702480,0,0,Buff06_Attack_Red
+64458,gdmo_replaced_legacy,Kuwagamon's Blessing  ,2053,1,1,4,656,2702481,0,0,Buff06_Attack_Red
+64459,gdmo_replaced_legacy,Kuwagamon's Blessing  ,2053,1,1,4,656,2702482,0,0,Buff06_Attack_Red
+64460,gdmo_replaced_legacy,Kuwagamon's Blessing  ,2053,1,1,4,656,2702483,0,0,Buff06_Attack_Red
+64461,gdmo_replaced_legacy,Power of Darkness ,2213,1,1,4,657,2702484,0,0,Buff06_Attack_Red
+64462,gdmo_replaced_legacy,Power of Darkness ,2213,1,1,4,657,2702485,0,0,Buff06_Attack_Red
+64463,gdmo_replaced_legacy,Power of Darkness ,2213,1,1,4,657,2702486,0,0,Buff06_Attack_Red
+64464,gdmo_replaced_legacy,Silence,2099,2,1,4,748,2700142,0,0,
+64465,gdmo_replaced_legacy,Bronze,2028,1,2,1,999,2000136,0,0,
+64466,gdmo_replaced_legacy,Silver,2028,1,2,1,999,2000137,0,0,
+64467,gdmo_replaced_legacy,Gold,2028,1,2,1,999,2000138,0,0,
+64468,gdmo_replaced_legacy,Platinum,2028,1,2,1,999,2000139,0,0,
+64469,gdmo_replaced_legacy,Diamond,2028,1,2,1,999,2000140,0,0,
+64470,gdmo_replaced_legacy,Master,2028,1,2,1,999,2000141,0,0,
+64471,gdmo_replaced_legacy,Wood Attribute (SSS),2211,1,1,4,866,2702465,0,0,
+64472,gdmo_replaced_legacy,Wood Attribute (SSS),2211,1,1,4,866,2702466,0,0,
+64473,gdmo_replaced_legacy,Wood Attribute (SSS),2211,1,1,4,866,2702467,0,0,
+64474,gdmo_replaced_legacy,Wood Attribute (SSS+),2211,1,1,4,866,2702468,0,0,
+64475,gdmo_replaced_legacy,Wood Attribute (SSS+),2211,1,1,4,866,2702469,0,0,
+64476,gdmo_replaced_legacy,Wood Attribute (SSS+),2211,1,1,4,866,2702470,0,0,
+64477,gdmo_replaced_legacy,Wood Attribute (U),2211,1,1,4,866,2702471,0,0,
+64478,gdmo_replaced_legacy,Wood Attribute (U),2211,1,1,4,866,2702472,0,0,
+64479,gdmo_replaced_legacy,Wood Attribute (U),2211,1,1,4,866,2702473,0,0,
+64480,gdmo_replaced_legacy,Destroyer of the Digital World,2028,1,2,1,999,2000148,0,0,
+64481,gdmo_replaced_legacy,Ruined Past,2066,2,1,1,856,7700511,0,0,
+64482,gdmo_replaced_legacy,Distorted Time and Space,2098,2,1,1,858,7700521,0,0,
+64483,gdmo_replaced_legacy,Fabricated World,2101,1,1,1,855,7700531,0,0,
+64484,gdmo_replaced_legacy,Block rate decrease,2031,2,1,4,646,2700194,0,0,
+64485,gdmo_replaced_legacy,Master of Season 7,2028,1,2,1,999,2000129,0,0,
+64486,gdmo_replaced_legacy,Blessing of Dorulumon  ,2135,1,1,4,641,2700140,0,0,Buff06_Attack_Red
+64487,gdmo_replaced_legacy,Blessing of Starmons  ,2136,1,1,4,642,2700127,0,0,Buff06_Attack_Red
+64488,gdmo_replaced_legacy,Blessing of Sparrowmon  ,2137,1,1,4,643,2700132,0,0,Buff06_Attack_Red
+64489,gdmo_replaced_legacy,Blessing of ZekeGreymon  ,2138,1,1,4,644,2700122,0,0,Buff06_Attack_Red
+64490,gdmo_replaced_legacy,Blessing of OmegaShoutmon  ,2139,1,1,4,645,2700120,0,0,Buff06_Attack_Red
+64491,gdmo_replaced_legacy,Remove Buff  ,2204,2,1,4,641,2500214,0,0,
+64492,gdmo_replaced_legacy,Remove Buff  ,2204,2,1,4,642,2500214,0,0,
+64493,gdmo_replaced_legacy,Remove Buff  ,2204,2,1,4,643,2500214,0,0,
+64494,gdmo_replaced_legacy,Remove Buff  ,2204,2,1,4,644,2500214,0,0,
+64495,gdmo_replaced_legacy,Remove Buff  ,2204,2,1,4,645,2500214,0,0,
+64496,gdmo_replaced_legacy,Silence  ,2099,2,1,4,748,2700142,0,0,
+64497,gdmo_replaced_legacy,Remove Buff  ,2204,1,1,4,641,2500214,0,0,
+64498,gdmo_replaced_legacy,Unknown Shadow  ,2145,1,1,4,912,4002107,0,0,
+64499,gdmo_replaced_legacy,Unknown Shadow  ,2145,1,2,1,729,2702488,0,1,
+64500,gdmo_replaced_legacy,The Strongest Dragon Warrior  ,2028,1,2,1,999,2000149,0,0,
+64501,gdmo_replaced_legacy,Heavenly Blessing  ,2046,1,1,1,493,0,0,1,Buff_heal_ImperialdramonPaladinMode_Re
+64502,gdmo_replaced_legacy,Dragon’s Energy  ,2101,1,1,1,494,7700441,0,1,Buff_heal_ImperialdramonPaladinMode_Re
+64503,gdmo_replaced_legacy,Ancient Power  ,2102,1,1,1,867,7700431,0,1,Buff_heal_ImperialdramonPaladinMode_Re
+64504,gdmo_replaced_legacy,Taunt,2081,2,1,1,528,7900411,0,1,
+64505,gdmo_replaced_legacy,America’s Showdown Champion,2028,1,2,1,999,2000150,0,0,
+64506,gdmo_replaced_legacy,First Page of Tale,2028,1,2,1,999,2000151,0,0,
+64507,gdmo_replaced_legacy,Start of the Voyage,2028,1,2,1,999,2000152,0,0,
+64508,gdmo_replaced_legacy,Path of Light and Darkness,2028,1,2,1,999,2000153,0,0,
+64509,gdmo_replaced_legacy,At the Center of Tale,2028,1,2,1,999,2000154,0,0,
+64510,gdmo_replaced_legacy,Brilliant Voyager of Ice,2028,1,2,1,999,2000155,0,0,
+64511,gdmo_replaced_legacy,Brilliant Voyager of Water,2028,1,2,1,999,2000156,0,0,
+64512,gdmo_replaced_legacy,Brilliant Voyager of Fire,2028,1,2,1,999,2000157,0,0,
+64513,gdmo_replaced_legacy,Brilliant Voyager of Earth,2028,1,2,1,999,2000158,0,0,
+64514,gdmo_replaced_legacy,Brilliant Voyager of Wind,2028,1,2,1,999,2000159,0,0,
+64515,gdmo_replaced_legacy,Brilliant Voyager of Wood,2028,1,2,1,999,2000160,0,0,
+64516,gdmo_replaced_legacy,Brilliant Voyager of Light,2028,1,2,1,999,2000161,0,0,
+64517,gdmo_replaced_legacy,Brilliant Voyager of Darkness,2028,1,2,1,999,2000162,0,0,
+64518,gdmo_replaced_legacy,Brilliant Voyager of Electricity,2028,1,2,1,999,2000163,0,0,
+64519,gdmo_replaced_legacy,Brilliant Voyager of Steel,2028,1,2,1,999,2000164,0,0,
+64520,gdmo_replaced_legacy,Master of Season 8,2028,1,2,1,999,2000130,0,0,
+64521,gdmo_replaced_legacy,Our War Game  ,2204,1,1,4,645,2500214,0,0,Buff02_Defup_E
+64522,gdmo_replaced_legacy,Our War Game  ,2204,1,1,4,645,2500214,0,0,
+64523,gdmo_replaced_legacy,Invincible  ,2101,1,1,4,645,2702474,0,0,Buff06_Attack_Red
+64524,gdmo_replaced_legacy,Invincibility Removed  ,2096,2,1,4,645,2500214,0,0,
+64525,gdmo_replaced_legacy,Damage Taken Decreased  ,2101,1,1,4,645,2702489,0,0,Buff06_Attack_Red
+64526,gdmo_replaced_legacy,Buff Removed  ,2096,2,1,4,645,2500214,0,0,
+64527,gdmo_replaced_legacy,System Fail [Lv 1]  ,2066,5,1,4,645,2702490,0,0,
+64528,gdmo_replaced_legacy,System Fail [Lv 2]  ,2066,5,1,4,645,2702491,0,0,
+64529,gdmo_replaced_legacy,System Fail [Lv 3]  ,2066,5,1,4,645,2702492,0,0,
+64530,gdmo_replaced_legacy,Silence + Movement Speed Decrease  ,2097,2,1,4,649,2702493,0,0,
+64531,gdmo_replaced_legacy,Silence + Movement Speed Decrease  ,2097,2,1,4,650,2702494,0,0,
+64532,gdmo_replaced_legacy,Venom of Armagemon,2067,2,1,4,651,2702495,0,0,
+64533,gdmo_replaced_legacy,Four Holy Beasts Power 6-Set,2125,1,1,4,353,2702826,0,0,
+64534,gdmo_replaced_legacy,Ultimate Power,6052,1,1,1,489,7700631,0,1,Buff_heal_ImperialdramonPaladinMode_Re
+64535,gdmo_replaced_legacy,Alpha Inforce,6053,1,1,1,495,7700641,0,1,Buff_heal_ImperialdramonPaladinMode_Re
+64536,gdmo_replaced_legacy,Evolution Beyond the Ultimate,2028,1,2,1,999,2000183,0,0,
+64537,gdmo_replaced_legacy,Time and Space,2204,1,1,4,641,2702487,0,0,
+64538,gdmo_replaced_legacy,Master of Season 9,2028,1,2,1,999,2000131,0,0,
+64539,gdmo_replaced_legacy,[Achievement] God of Enhancement,2028,1,2,1,999,2000165,0,0,
+64540,gdmo_replaced_legacy,Master of Season 10,2028,1,2,1,999,2000166,0,0,
+64541,gdmo_replaced_legacy,Master of Season 11,2028,1,2,1,999,2000167,0,0,
+64542,gdmo_replaced_legacy,[Achievement] Dungeon Overlord!  ,2028,1,2,1,999,2000168,0,0,
+64543,gdmo_replaced_legacy,[Achievement] Valengel Battle,2028,1,2,1,999,2000169,0,0,
+64554,gdmo_replaced_legacy,Slow,2096,2,1,4,641,2702829,0,0,
+64555,gdmo_replaced_legacy,Weaken,2098,2,1,4,642,2702830,0,0,
+64556,gdmo_replaced_legacy,Cursed,2066,2,1,4,643,2702831,0,0,
+64557,gdmo_replaced_legacy,Constant HP Loss,2067,5,1,4,644,2702832,0,0,
+64558,gdmo_replaced_legacy,Silence,2099,2,1,4,645,2702833,0,0,
+64559,gdmo_replaced_legacy,Invincible  ,2101,1,1,4,646,2702834,0,0,
+64560,gdmo_replaced_legacy,Invincibility Removed  ,2096,2,1,4,646,2702835,0,0,
+64561,gdmo_replaced_legacy,Silence,2099,2,1,4,647,2702836,0,0,
+64562,gdmo_replaced_legacy,Movement Speed Reduction Level 1,2096,5,1,4,648,2702837,0,0,
+64563,gdmo_replaced_legacy,Movement Speed Reduction Level 2,2096,5,1,4,648,2702838,0,0,
+64564,gdmo_replaced_legacy,Movement Speed Reduction Level 3,2096,5,1,4,648,2702839,0,0,
+64565,gdmo_replaced_legacy,Movement Speed Reduction Level 4,2096,5,1,4,648,2702840,0,0,
+64566,gdmo_replaced_legacy,Block rate decrease,2031,5,1,4,649,2702841,0,0,
+64567,gdmo_replaced_legacy,Slow,2096,2,1,4,641,2702829,0,0,
+64568,gdmo_replaced_legacy,Dimension Barrier,6058,1,1,4,466,7700731,0,1,Buff_Invincible
+64569,gdmo_replaced_legacy,Roar of Satan,6057,2,1,1,868,7700741,0,0,
+64570,gdmo_replaced_legacy,Dragon of the Apocalypse,2028,1,2,1,999,2000198,0,0,
+64571,gdmo_replaced_legacy,Digimon Master,2028,1,2,1,999,2000199,0,0,
+64572,gdmo_replaced_legacy,Frozen Friendship,6059,2,1,4,790,7701711,0,0,Debuff_Freezing
+64573,gdmo_replaced_legacy,Crest of Friendship,3082,1,1,1,869,7701731,0,0,
+64574,gdmo_replaced_legacy,Crest of Courage,3079,1,1,1,870,7701741,0,0,
+64575,gdmo_replaced_legacy,[Achievement] Last Evolution,2028,1,2,1,999,2000200,0,0,
+64576,gdmo_replaced_legacy,[Achievement] Golden Dragon God,2028,1,2,1,999,2000201,0,0,
+64577,gdmo_replaced_legacy,[Achievement] Prince of the Sky,2028,1,2,1,999,2000202,0,0,
+64578,gdmo_replaced_legacy,[Achievement] Ultimate Martial God of the East,2028,1,2,1,999,2000203,0,0,
+64579,gdmo_replaced_legacy,Flame of Hope,2041,2,1,4,6069,7701011,0,0,Debuff_Fire
+64580,gdmo_replaced_legacy,Unleashed Divine Power,3082,1,1,1,6072,7701031,0,0,
+64581,gdmo_replaced_legacy,Divine Flame,2041,2,1,4,6073,7701051,0,0,Debuff_Fire
+64582,gdmo_replaced_legacy,[Achievement] 16th DigimonMasters,2028,1,2,1,999,2000204,0,0,
+64583,gdmo_replaced_legacy,Attack Reflection,2102,1,1,4,641,2702842,0,0,
+64584,gdmo_replaced_legacy,Cutting Edge Lv 1,2109,5,1,4,642,2702843,0,0,
+64585,gdmo_replaced_legacy,Cutting Edge Lv 2,2111,5,1,4,642,2702844,0,0,
+64586,gdmo_replaced_legacy,Last Evolution,6062,1,1,4,354,2702846,0,0,
+64587,gdmo_replaced_legacy,Last Evolution,6062,1,1,4,643,2702847,0,0,
+64588,gdmo_replaced_legacy,Reflect Attack,2102,1,1,4,644,2702848,0,0,
+64589,gdmo_replaced_legacy,Reflect Attack,2102,1,1,4,645,2702849,0,0,
+64590,gdmo_replaced_legacy,Reflect Attack,2102,1,1,4,646,2702850,0,0,
+64591,gdmo_replaced_legacy,[Achievement] The Ultimate Beauty,2028,1,1,4,999,2000205,0,0,
+64592,gdmo_replaced_legacy,Breath of the Demon Lord,6082,2,1,1,872,7702021,0,0,
+64593,gdmo_replaced_legacy,Whisper of the Demon Lord,6084,2,1,1,873,7702041,0,0,Debuff_Stun
+64594,gdmo_replaced_legacy,Max HP Reduction Lv 1,2171,5,1,4,642,2702901,0,0,
+64595,gdmo_replaced_legacy,Max HP Reduction Lv 2,2171,5,1,4,642,2702902,0,0,
+64596,gdmo_replaced_legacy,Max HP Reduction Lv 3,2171,5,1,4,642,2702903,0,0,
+64597,gdmo_replaced_legacy,Max HP Reduction Lv 4,2171,5,1,4,642,2702904,0,0,
+64598,gdmo_replaced_legacy,Max HP Reduction Lv 5,2171,5,1,4,642,2702905,0,0,
+64599,gdmo_replaced_legacy,Movement Speed Reduction Lv 1,2044,5,1,4,641,2702908,0,0,
+64600,gdmo_replaced_legacy,Movement Speed Reduction Lv 2,2044,5,1,4,641,2702909,0,0,
+64601,gdmo_replaced_legacy,Movement Speed Reduction Lv 3,2044,5,1,4,641,2702910,0,0,
+64602,gdmo_replaced_legacy,Movement Speed Reduction Lv 4,2044,5,1,4,641,2702911,0,0,
+64603,gdmo_replaced_legacy,Movement Speed Reduction Lv 5,2044,5,1,4,641,2702912,0,0,
+64604,gdmo_replaced_legacy,HP Continuous Damage Lv 1,2067,5,1,4,643,2702913,0,0,
+64605,gdmo_replaced_legacy,HP Continuous Damage Lv 2,2067,5,1,4,643,2702914,0,0,
+64606,gdmo_replaced_legacy,HP Continuous Damage Lv 3,2067,5,1,4,643,2702915,0,0,
+64607,gdmo_replaced_legacy,HP Continuous Damage Lv 4,2067,5,1,4,643,2702916,0,0,
+64608,gdmo_replaced_legacy,HP Continuous Damage Lv 5,2067,5,1,4,643,2702917,0,0,
+64609,gdmo_replaced_legacy,Curse of VenomMyotismon,2066,5,1,4,658,2702907,0,0,
+64610,gdmo_replaced_legacy,Buff Removal,2068,5,1,4,658,2702906,0,0,
+64611,gdmo_replaced_legacy,Max HP Reduction Lv 1,2171,5,1,4,642,2702901,0,0,
+64612,gdmo_replaced_legacy,Max HP Reduction Lv 2,2171,5,1,4,642,2702902,0,0,
+64613,gdmo_replaced_legacy,Max HP Reduction Lv 3,2171,5,1,4,642,2702903,0,0,
+64614,gdmo_replaced_legacy,Max HP Reduction Lv 4,2171,5,1,4,642,2702904,0,0,
+64615,gdmo_replaced_legacy,Max HP Reduction Lv 5,2171,5,1,4,642,2702905,0,0,
+64616,gdmo_replaced_legacy,[Achievement] Final Phase,2028,1,1,4,999,2000206,0,0,
+64617,gdmo_replaced_legacy,Status Abnormality,6091,2,1,1,873,7702141,0,0,Debuff_Stun
+64618,gdmo_replaced_legacy,Power of the Spirit,2135,1,1,4,358,2703014,0,0,
+64619,gdmo_replaced_legacy,Fire : Power of the Spirit,2207,1,1,4,359,2703015,0,0,
+64620,gdmo_replaced_legacy,Light : Power of the Spirit,2212,1,1,4,359,2703016,0,0,
+64621,gdmo_replaced_legacy,Ice : Power of the Spirit,2205,1,1,4,359,2703017,0,0,
+64622,gdmo_replaced_legacy,Wind : Power of the Spirit,2209,1,1,4,359,2703018,0,0,
+64623,gdmo_replaced_legacy,Thunder : Power of the Spirit,2214,1,1,4,359,2703019,0,0,
+64624,gdmo_replaced_legacy,Heart of Unity,6092,1,1,4,429,7900451,0,0,
+64625,gdmo_replaced_legacy,[Achievement] Fear of the Abyss,2028,1,1,4,999,2000207,0,0,
+64626,gdmo_replaced_legacy,[Achievement] End of the Adventure,2028,1,1,4,999,2000208,0,0,
+64627,gdmo_replaced_legacy,Corrosion,6104,2,1,4,874,7702211,0,0,
+64628,gdmo_replaced_legacy,Twisted Friendship,6059,2,1,4,790,7700921,0,0,Debuff_Freezing
+64629,gdmo_replaced_legacy,[Achievement] Silver White Holy Knight,2028,1,1,4,999,2000209,0,0,
+64630,gdmo_replaced_legacy,[Achievement] Life Reversal No.1,2028,1,1,4,999,2000210,0,0,
+64631,gdmo_replaced_legacy,[Achievement] Life Reversal No.2,2028,1,1,4,999,2000211,0,0,
+64632,gdmo_replaced_legacy,[Achievement] Life Reversal No.3,2028,1,1,4,999,2000212,0,0,
+64633,gdmo_replaced_legacy,HP Continuous Decrease Lv 1,2067,5,1,4,643,2703023,0,0,
+64634,gdmo_replaced_legacy,HP Continuous Decrease Lv 2,2067,5,1,4,643,2703024,0,0,
+64635,gdmo_replaced_legacy,HP Continuous Decrease Lv 3,2067,5,1,4,643,2703025,0,0,
+64636,gdmo_replaced_legacy,HP Continuous Decrease Lv 4,2067,5,1,4,643,2703026,0,0,
+64637,gdmo_replaced_legacy,HP Continuous Decrease Lv 5,2067,5,1,4,643,2703027,0,0,
+64638,gdmo_replaced_legacy,Movement Speed Reduction Lv 1,2044,5,1,4,641,2703028,0,0,
+64639,gdmo_replaced_legacy,Movement Speed Reduction Lv 2,2044,5,1,4,641,2703029,0,0,
+64640,gdmo_replaced_legacy,Movement Speed Reduction Lv 3,2044,5,1,4,641,2703030,0,0,
+64641,gdmo_replaced_legacy,Movement Speed Reduction Lv 4,2044,5,1,4,641,2703031,0,0,
+64642,gdmo_replaced_legacy,Movement Speed Reduction Lv 5,2044,5,1,4,641,2703032,0,0,
+64643,gdmo_replaced_legacy,Silence,2099,2,1,4,647,2703033,0,0,
+64644,gdmo_replaced_legacy,Attack Reflection,2102,1,1,4,646,2703034,0,0,
+64645,gdmo_replaced_legacy,…..,2204,1,1,4,645,2500214,0,0,Buff02_Defup_E
+64646,gdmo_replaced_legacy,…..,2204,1,1,4,645,2500214,0,0,

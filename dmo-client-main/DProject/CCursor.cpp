@@ -412,6 +412,14 @@ void CCursor::Render()
 			else
 				ReleaseIcon();
 		}
+		break;
+	case CURSOR_ICON::CI_EVOCHIP:
+		{
+			if( g_pDataMng->GetDigivice()->GetEvoChipset( 0 )->IsEnable() == true )
+				g_pIconMng->RenderCursorIconItem( g_pDataMng->GetDigivice()->GetEvoChipset( 0 ), m_ptCursorPos );
+			else
+				ReleaseIcon();
+		}
 		break;	
 	case CURSOR_ICON::CI_TSKILL:
 		{
@@ -556,6 +564,7 @@ bool CCursor::IconDropMessageTry()
 		break;
 	case CURSOR_ICON::CI_TEQUIP:
 	case CURSOR_ICON::CI_CHIPSET:
+	case CURSOR_ICON::CI_EVOCHIP:
 		{
 			if( g_pDataMng->IsItemUse( m_nIconSlot ) == true )
 			{
@@ -671,6 +680,7 @@ void CCursor::SetIcon( CURSOR_ICON::eTYPE eType, int nSlot, int nCount, void* pI
 	case CURSOR_ICON::CI_CENTERBAR:
 	case CURSOR_ICON::CI_INCUBATOR:
 	case CURSOR_ICON::CI_EXTRAINVEN:
+	case CURSOR_ICON::CI_EVOCHIP:
 		m_nIconSlot = nSlot;
 		break;
 	case CURSOR_ICON::CI_INVEN:		m_nIconSlot = TO_INVEN_SID( nSlot );			break;	
@@ -751,7 +761,7 @@ void CCursor::SetCursorRes( CURSOR_RES::eTYPE type )
 	m_eCurCursor = type;
 
 #pragma warning( disable : 4311 )
-	SetClassLong( GAMEAPP_ST.GetHWnd(), GCL_HCURSOR, (LONG)m_hCursor[ m_eCurCursor ] );
+	SetClassLongPtr( GAMEAPP_ST.GetHWnd(), GCLP_HCURSOR, (LONG_PTR)m_hCursor[ m_eCurCursor ] );
 	::SetCursor( m_hCursor[ m_eCurCursor ] );
 #pragma warning( default : 4311 )
 }
@@ -810,7 +820,7 @@ void CCursor::HideCursorRes()
 	m_eCurCursor = CURSOR_RES::NONE;
 	m_bShowCursor = false;
 
-	SetClassLong( GAMEAPP_ST.GetHWnd(), GCL_HCURSOR, (LONG)NULL );
+	SetClassLongPtr( GAMEAPP_ST.GetHWnd(), GCLP_HCURSOR, (LONG_PTR)NULL );
 	::SetCursor( NULL );
 }
 

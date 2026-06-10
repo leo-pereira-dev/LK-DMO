@@ -26,11 +26,11 @@ void cData_Inven_Cross::InitNetOff()
 	for( uint i=0; i<m_nInvenSlotCount; ++i )
 	{
 		sprintf_s( key, 32, "%d_CR_IDX", i );
-		m_pInven[ i ].m_nType = x.GetInt( "ITEM", key );
+		m_pInven[ i ].SetType( x.GetInt( "ITEM", key ) );
 		sprintf_s( key, 32, "%d_CR_CNT", i );
 		m_pInven[ i ].m_nCount = x.GetInt( "ITEM", key );
 
-		if( m_pInven[ i ].m_nType != 0 )
+		if( m_pInven[ i ].GetType() != 0 )
 		{
 			m_pInven[ i ].m_nRate = 50;
 			m_pInven[ i ].m_nEndTime = 600 + _TIME_TS;
@@ -431,7 +431,7 @@ int cData_Inven_Cross::ItemCrop( cItemData* pItemData )
 				break;
 
 			// 같은 타입인가
-			if( m_pInven[ i ].m_nType != pItemData->GetType() )
+			if( m_pInven[ i ].GetType() != pItemData->GetType() )
 				continue;
 
 			// 갯수가 맥스인가		
@@ -482,7 +482,7 @@ int cData_Inven_Cross::ItemCrop( cItemData* pItemData )
 			m_pInven[ nEmptySlot ].m_nLimited = 1;			
 
 		// 이미 아이템 ID 闡려像繭窄?闡?
-		if( _IsLock_ItemID( m_pInven[ nEmptySlot ].m_nType ) == true )
+		if( _IsLock_ItemID( m_pInven[ nEmptySlot ].GetType() ) == true )
 		{
 			g_pDataMng->ItemLock( TO_INVEN_SID( nEmptySlot ) );
 		}

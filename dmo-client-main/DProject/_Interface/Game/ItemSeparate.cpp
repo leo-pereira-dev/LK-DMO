@@ -404,7 +404,7 @@ void cItemSeparate::Init( cBaseWindow::eWINDOW_TYPE wt, int nWTValue1, eTYPE eSe
 		assert_cs( false );
 	}
 
-	CsItem::sINFO* pFTItemInfo = nsCsFileTable::g_pItemMng->GetItem( m_ItemInfo.m_nType )->GetInfo();
+	CsItem::sINFO* pFTItemInfo = nsCsFileTable::g_pItemMng->GetItem( m_ItemInfo.GetType() )->GetInfo();
 	ti.s_eFontSize = CFont::FS_12;
 	ti.s_eTextAlign = DT_LEFT;
 	ti.s_Color = g_pDataMng->GetItemColor( pFTItemInfo );
@@ -859,7 +859,7 @@ cItemSeparate::Update_ForMouse()
 		ItemInfo.m_nCount = _GetCount();
 
 		CsPoint pos = rcItem.GetPos() + GetRootClient();		
-		TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( pos, rcItem.GetSize(), TOOLTIP_MAX_SIZE, cTooltip::ITEM, m_ItemInfo.m_nType, cBaseWindow::WT_ITEM_SEPARATE, 0, 0, &ItemInfo );
+		TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip( pos, rcItem.GetSize(), TOOLTIP_MAX_SIZE, cTooltip::ITEM, m_ItemInfo.GetType(), cBaseWindow::WT_ITEM_SEPARATE, 0, 0, &ItemInfo );
 		return muReturn;
 	}
 
@@ -1093,10 +1093,10 @@ void cItemSeparate::CreateEditBox()
 	{
 		if( m_eDispType == cMoneyIF::DISP_PROPERTY )
 		{
-			EditProc_ItemSeparate=(WNDPROC)SetWindowLong(m_EditPropertyA,GWL_WNDPROC,(LONG)EditSubProc_ItemSeparate);
-			EditProc_ItemSeparate=(WNDPROC)SetWindowLong(m_EditPropertyB,GWL_WNDPROC,(LONG)EditSubProc_ItemSeparate);
-			EditProc_ItemSeparate=(WNDPROC)SetWindowLong(m_EditPropertyC,GWL_WNDPROC,(LONG)EditSubProc_ItemSeparate);
-			EditProc_ItemSeparate=(WNDPROC)SetWindowLong(m_EditPropertyD,GWL_WNDPROC,(LONG)EditSubProc_ItemSeparate);
+			EditProc_ItemSeparate=(WNDPROC)SetWindowLongPtr(m_EditPropertyA,GWLP_WNDPROC,(LONG_PTR)EditSubProc_ItemSeparate);
+			EditProc_ItemSeparate=(WNDPROC)SetWindowLongPtr(m_EditPropertyB,GWLP_WNDPROC,(LONG_PTR)EditSubProc_ItemSeparate);
+			EditProc_ItemSeparate=(WNDPROC)SetWindowLongPtr(m_EditPropertyC,GWLP_WNDPROC,(LONG_PTR)EditSubProc_ItemSeparate);
+			EditProc_ItemSeparate=(WNDPROC)SetWindowLongPtr(m_EditPropertyD,GWLP_WNDPROC,(LONG_PTR)EditSubProc_ItemSeparate);
 		}
 	}	
 	ST_CHAT_PROTOCOL	CProtocol;
@@ -1288,7 +1288,7 @@ void cItemSeparate::ChangeInputItemCount( void* pSender, void* pData )
 
 uint cItemSeparate::GetRegistItemTypeID() const
 {
-	return m_ItemInfo.m_nType;
+	return m_ItemInfo.GetType();
 }
 // 구매할 때 구매할 수 있는 최대 갯수 셋팅
 void cItemSeparate::SetMaxBuyCount( int nCount )
@@ -1296,7 +1296,7 @@ void cItemSeparate::SetMaxBuyCount( int nCount )
 	cData_Inven* pInven = g_pDataMng->GetInven();
 	SAFE_POINTER_RET(pInven);
 
-	int nMaxCropCount = pInven->GetCount_Item_EnableCrop( m_ItemInfo.m_nType );
+	int nMaxCropCount = pInven->GetCount_Item_EnableCrop( m_ItemInfo.GetType() );
 	if(nCount > nMaxCropCount)
 		nCount = nMaxCropCount;
 
@@ -1316,7 +1316,7 @@ void cItemSeparate::SetMaxSelCount( int nCount )
 	cData_Inven* pInven = g_pDataMng->GetInven();
 	SAFE_POINTER_RET(pInven);
 
-	DWORD dwHaveItemCount = pInven->GetCount_Item_ID( m_ItemInfo.m_nType, true );
+	DWORD dwHaveItemCount = pInven->GetCount_Item_ID( m_ItemInfo.GetType(), true );
 	if( nCount > dwHaveItemCount )
 		nCount = dwHaveItemCount;
 
@@ -1330,5 +1330,4 @@ void cItemSeparate::SetMaxSelCount( int nCount )
 		m_nItemMaxCount = nCount;
 	}	
 }
-
 

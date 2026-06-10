@@ -577,7 +577,7 @@ void cStore::CheckItemIconMouseOver()
 		{
 			cItemInfo* PlayerpData = g_pDataMng->GetTEquip()->GetData( i );
 
-			if(PlayerpData->m_nType != 0)
+			if(PlayerpData->GetType() != 0)
 			{
 				CsItem::sINFO* pFTSrc = nsCsFileTable::g_pItemMng->GetItem( PlayerpData->GetType() )->GetInfo();
 

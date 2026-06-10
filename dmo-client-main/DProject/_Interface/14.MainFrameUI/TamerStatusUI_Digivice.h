@@ -29,12 +29,13 @@ public:
 private:
 	struct sChipsetInfo : public CUSTOMDATA
 	{
-		sChipsetInfo( uint nType, int nRate, int nIndex ) : nItemType( nType ), nItemRate( nRate ), nChipsetIndex( nIndex ) {}
+		sChipsetInfo( uint nType, int nRate, int nIndex, bool bEvoChipset = false ) : nItemType( nType ), nItemRate( nRate ), nChipsetIndex( nIndex ), bIsEvoChipset( bEvoChipset ) {}
 		~sChipsetInfo() {}
 
 		uint				nItemType;
 		int					nItemRate;
 		int					nChipsetIndex;
+		bool				bIsEvoChipset;
 	};
 	struct sChipset
 	{
@@ -48,7 +49,9 @@ private:
 		cString::sICON*			pChipsetIcon;
 		cGridListBoxItem*		pGridItem;
 	};
+	std::map< int, sChipset >	m_mapEvoChipset;
 	std::map< int, sChipset >	m_mapChipset;
+	cGridListBox*			m_pEvoChipset;
 	cGridListBox*			m_pChipset;
 	cText*					m_pChipsetText;
 
@@ -82,7 +85,9 @@ private:
 	BOOL					_SetTacticsTooltip( cListBoxItem const* pOverItem );
 
 	void					_MakeChipsetGrid();
+	void					_MakeEvoChipsetGrid();
 	void					_AddChipsetGridItem( int nIndex, uint nItemType, int nItemRate, int nCount = 1 );
+	void					_AddEvoChipsetGridItem( int nIndex, uint nItemType, int nItemRate, int nCount = 1 );
 
 	void					_MakeTacticsList();
 	void					_AddTacticsListItem( cListBox* pListBox, int nIndex, CsPoint ptPos, bool bIsLeft );
@@ -94,4 +99,3 @@ private:
 
 	void					_OnClickTactics( void* pSender, void* pData );
 };
-

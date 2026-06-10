@@ -280,7 +280,7 @@ void WareHouseContents::WareHouse_ItemRemoveNoserver(void* pData)
 
 		if( it->second.IsEnable() == false )
 			continue;
-		if(it->second.m_nType == nItemIDX)
+		if(it->second.GetType() == nItemIDX)
 		{
 			it->second.Reset();
 		}
@@ -341,7 +341,7 @@ bool WareHouseContents::_DeleteWareHouseItem( map<int,cItemInfo>& mapData, int c
 
 	if( 0 != dwItemCode )
 	{
-		if( it->second.m_nType != dwItemCode )
+		if( it->second.GetType() != dwItemCode )
 			return false;
 	}
 
@@ -371,7 +371,7 @@ void WareHouseContents::WareHouse_GetEventTime(void* pData)
 		it = m_mapData.find(i);
 		if( it->second.IsEnable() )
 		{
-			CsItem::sINFO* pFTInfo = nsCsFileTable::g_pItemMng->GetItem( it->second.m_nType )->GetInfo();			
+			CsItem::sINFO* pFTInfo = nsCsFileTable::g_pItemMng->GetItem( it->second.GetType() )->GetInfo();			
 			if( 3 == pFTInfo->s_btUseTimeType && (nItem::TimeSet == pFTInfo->s_nType_L) )
 			{
 				float ftime = (float) it->second.m_nEndTime - _TIME_TS;
@@ -753,7 +753,7 @@ int WareHouseContents::GetCount_Item_ID2( int nItemID ) const
 		it = m_mapShareData.find(i);
 		if( it->second.IsEnable() == false )
 			continue;
-		if( it->second.m_nType == nItemID )
+		if( it->second.GetType() == nItemID )
 			nReturn += it->second.GetCount();
 	}
 	return nReturn;
@@ -767,7 +767,7 @@ int WareHouseContents::GetSlot_Item_ID_ReverseToSlot2( int nSlot, int nItemID ) 
 		it = m_mapShareData.find(i);
 		if( it->second.IsEnable() == false ) // 슬롯에 아이템이 활당 되있나?
 			continue;
-		if( it->second.m_nType == nItemID ) // 있으면 슬롯의 아이템 인덱스를 리턴한다.
+		if( it->second.GetType() == nItemID ) // 있으면 슬롯의 아이템 인덱스를 리턴한다.
 			return i;
 	}
 	return INVALIDE_WAREHOUSE_INDEX;	// 모두 돌렸는데 없다. 
@@ -787,7 +787,7 @@ int WareHouseContents::GetCount_Item_ID( int nItemID ) const
 		it = m_mapData.find(i);
 		if( it->second.IsEnable() == false )
 			continue;
-		if( it->second.m_nType == nItemID )
+		if( it->second.GetType() == nItemID )
 			nReturn += it->second.GetCount();
 	}
 	return nReturn;
@@ -802,7 +802,7 @@ int WareHouseContents::GetSlot_Item_ID_ReverseToSlot( int nSlot, int nItemID ) c
 		it = m_mapData.find(i);
 		if( it->second.IsEnable() == false ) // 슬롯에 아이템이 활당 되있나?
 			continue;
-		if( it->second.m_nType == nItemID ) // 있으면 슬롯의 아이템 인덱스를 리턴한다.
+		if( it->second.GetType() == nItemID ) // 있으면 슬롯의 아이템 인덱스를 리턴한다.
 			return i;
 	}
 	return INVALIDE_WAREHOUSE_INDEX;	// 모두 돌렸는데 없다.
@@ -819,7 +819,7 @@ void WareHouseContents::ItemRemove_NoServer( int nItemID,  bool bCalQuest )
 		it = m_mapData.find(i);
 		if( it->second.IsEnable() == false )
 			continue;
-		if(it->second.m_nType == nItemID)
+		if(it->second.GetType() == nItemID)
 		{
 			it->second.Reset();
 		}
@@ -843,7 +843,7 @@ float WareHouseContents::GetEventTime()
 		it = m_mapData.find(i);
 		if( it->second.IsEnable() )
 		{
-			CsItem::sINFO* pFTInfo = nsCsFileTable::g_pItemMng->GetItem( it->second.m_nType )->GetInfo();			
+			CsItem::sINFO* pFTInfo = nsCsFileTable::g_pItemMng->GetItem( it->second.GetType() )->GetInfo();			
 			if( 3 == pFTInfo->s_btUseTimeType && (nItem::TimeSet == pFTInfo->s_nType_L) )
 			{
 				float ftime = (float) it->second.m_nEndTime - _TIME_TS;

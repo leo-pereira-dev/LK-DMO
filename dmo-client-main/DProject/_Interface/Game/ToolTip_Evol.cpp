@@ -186,12 +186,10 @@ void cTooltip::_MakeTooltip_QuickEvol()
 		if( pFTEvolObj->m_nChipsetTypeC % (nItem::Chipset * 100) == 3 )
 		{
 			bool bEnable = false;
-			int nReqIndex = pDigivice->GetChipsetIndex_TypeLT( pFTEvolObj->m_nChipsetType, pFTEvolObj->m_nChipsetTypeC );
-			if( nReqIndex != cData_Digivice::INVALIDE_DIGIVICE_INDEX )
+			cItemInfo* pChipset = pDigivice->GetJointProgressChipset_TypeLT( pFTEvolObj->m_nChipsetType, pFTEvolObj->m_nChipsetTypeC );
+			if( pChipset && pChipset->IsEnable() )
 			{
-				cItemInfo* pChipset = pDigivice->GetChipset( nReqIndex );
-				if( pChipset && pChipset->IsEnable() )
-					bEnable = pChipset->GetCount() < pFTEvolObj->m_nChipsetNum ? false : true;
+				bEnable = pChipset->GetCount() < pFTEvolObj->m_nChipsetNum ? false : true;
 			}
 			ti.s_Color = bEnable ? FONT_WHITE : TOOLTIP_CANNOT_COLOR;
 			DmCS::StringFn::Replace( wsNeedItem, L"#Name#", UISTRING_TEXT( "TOOLTIP_EVOL_CROSS_CHIP" ).c_str() );
@@ -555,36 +553,50 @@ void cTooltip::_MakeTooltip_QuickEvol()
 			int nRideNeedItemCnt2 = pRide->GetInfo()->s_OpenInfo[ 1 ].s_nNeedCount;
 			if( nRideNeedItemID1 == 0 )
 			{
-				assert_cs( nRideNeedItemID2 != 0 );
-				nRideNeedItemID1 = nRideNeedItemID2;
-				nRideNeedItemCnt1 = nRideNeedItemCnt2;
-				nRideNeedItemID2 = 0;
-				nRideNeedItemCnt2 = 0;
+				if( nRideNeedItemID2 != 0 )
+				{
+					nRideNeedItemID1 = nRideNeedItemID2;
+					nRideNeedItemCnt1 = nRideNeedItemCnt2;
+					nRideNeedItemID2 = 0;
+					nRideNeedItemCnt2 = 0;
+				}
 			}
 
-			assert_cs( nRideNeedItemID1 != 0 );
-
-			std::wstring wsItemName;
-			if( nsCsFileTable::g_pItemMng )
+			if( nRideNeedItemID1 != 0 )
 			{
-				CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( nRideNeedItemID1 );
-				if( pFTItem )
-					wsItemName = pFTItem->GetName();
+				std::wstring wsItemName;
+				if( nsCsFileTable::g_pItemMng )
+				{
+					CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( nRideNeedItemID1 );
+					if( pFTItem )
+						wsItemName = pFTItem->GetName();
+				}
+				if( wsItemName.empty() )
+					wsItemName = L"Unknown Item";
+
+				std::wstring wsNeedItem = UISTRING_TEXT( "TOOLTIP_ITEM_NAME_COUNT" );
+				DmCS::StringFn::Replace( wsNeedItem, L"#Name#", wsItemName.c_str() );
+				DmCS::StringFn::Replace( wsNeedItem, L"#Count#", nRideNeedItemCnt1 );
+
+				if( nRideNeedItemID2 != 0 )
+				{
+					std::wstring wsOr = L" " + UISTRING_TEXT( "TOOLTIP_EVOL_OR" );
+					wsNeedItem.append( wsOr.c_str() );
+				}
+
+				ti.s_Color = FONT_WHITE;
+				ti.SetText( wsNeedItem.c_str() );
+				pString->AddText( &ti );
 			}
-
-			std::wstring wsNeedItem = UISTRING_TEXT( "TOOLTIP_ITEM_NAME_COUNT" );
-			DmCS::StringFn::Replace( wsNeedItem, L"#Name#", wsItemName.c_str() );
-			DmCS::StringFn::Replace( wsNeedItem, L"#Count#", nRideNeedItemCnt1 );
-
-			if( nRideNeedItemID2 != 0 )
+			else
 			{
-				std::wstring wsOr = L" " + UISTRING_TEXT( "TOOLTIP_EVOL_OR" );
-				wsNeedItem.append( wsOr.c_str() );
+				std::wstring wsRideComment = UiTextSafe::Safe( pRide->GetInfo()->s_szComment );
+				if( wsRideComment.empty() )
+					wsRideComment = L"No riding unlock item configured.";
+				ti.s_Color = FONT_WHITE;
+				ti.SetText( wsRideComment.c_str() );
+				pString->AddText( &ti );
 			}
-
-			ti.s_Color = FONT_WHITE;
-			ti.SetText( wsNeedItem.c_str() );
-			pString->AddText( &ti );
 
 			m_StringList.AddTail( pString );
 

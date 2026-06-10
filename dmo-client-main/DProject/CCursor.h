@@ -36,6 +36,7 @@ namespace CURSOR_ICON
 #endif
 		CI_TEQUIP,
 		CI_CHIPSET,
+		CI_EVOCHIP,
 		CI_TSKILL,
 		CI_DSKILL,
 		CI_QUICKSLOT,					// 퀵슬롯에서의 아이콘 갯수는 의미를 두지 않겠다
@@ -201,4 +202,3 @@ private:
 #define CURSOR_ST		CCursor::GetSingleton()
 #define CURSOR_STPTR	CCursor::GetSingletonPtr()
 //---------------------------------------------------------------------------
-

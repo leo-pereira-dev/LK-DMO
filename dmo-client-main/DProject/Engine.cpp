@@ -1,6 +1,9 @@
 #include "stdafx.h"
+#include "../LibProj/CsFunc/CrashLogger.h"
 #include "Engine.h"
+#if !defined(_WIN64)
 #include "Dsetup.h"
+#endif
 
 #include <NiDX9SystemDesc.h>
 #include <NiPNGReader.h>
@@ -12,7 +15,9 @@
 #pragma comment(lib, "NiD3D10Renderer.lib")
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "NiD3DXEffectShaderLib.lib")
+#if !defined(_WIN64)
 #pragma comment(lib, "dsetup.lib" )
+#endif
 
 static IDirectDraw*	g_lpDD = NULL;
 CEngine*	g_pEngine = NULL;
@@ -168,35 +173,44 @@ bool CEngine::Init()
 
 bool CEngine::Create()
 {
-	//ToggleWindow( g_pResist->IsFullScreen(), true );
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE Create begin" );
 
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE Font GlobalInit begin" );
 	CFont::GlobalInit();
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE Font GlobalInit end" );
 
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE CreateFont begin" );
  	if( CreateFont() == false )
  	{
+		nsCSDEBUG::CrashLogger::LogMessage( "ENGINE CreateFont failed" );
  		return false;
  	}
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE CreateFont end" );
 
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE Input begin" );
 	g_pEngine->m_pInput = NiNew CInput;
 	if( g_pEngine->m_pInput->CreateInputSystem() == false )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "ENGINE Input failed" );
 		return false;
 	}
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE Input end" );
 
-	//CURSOR_ST.Init();
-
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE CreateCamera begin" );
 	g_pEngine->CreateCamera();
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE CreateCamera end" );
 
-	// 전역 호출	
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE Billboard GlobalInit begin" );
 	CBillboard::GlobalInit();
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE Billboard GlobalInit end" );
 
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE SetPostEffect begin" );
 	SetPostEffect( m_ePostEffect_Set );
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE SetPostEffect end" );
 
-	//CreateLine(); // Line 객체 생성
-
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE Create end" );
 	return true;
 }
-
 void CEngine::Delete()
 {
 	_DeletePostEffect();
@@ -547,8 +561,11 @@ bool CEngine::_CheckDeviceCaps()
 	m_DeviceCaps.s_bTRsw_Blend_Enalbe = ( ( D_Cap.TextureOpCaps & D3DTEXOPCAPS_BLENDCURRENTALPHA ) != 0 );
 
 	// DirectX 버젼
-	DWORD dwVersion, dwRevision;
+	DWORD dwVersion = 0x00040009;
+	DWORD dwRevision = 0;
+#if !defined(_WIN64)
 	DirectXSetupGetVersion( &dwVersion, &dwRevision );
+#endif
 	m_DeviceCaps.s_bDxVersion_9_0 = ( dwVersion >= 0x00040009 );
 
 	// DeviceCaps
@@ -928,38 +945,27 @@ bool CEngine::CreateFont()
 
 	std::string systemFontName = GLOBALDATA_STPTR->GetSystemFontFileName();
 	std::string textFontName = GLOBALDATA_STPTR->GetTextFontFileName();
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE CreateFont names system=%s text=%s", systemFontName.c_str(), textFontName.c_str() );
 
-// 	HRESULT hr = D3DXCreateFontA(	m_spRenderer->GetD3DDevice(), 11,0,FW_NORMAL,1,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,
-// 		DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE, systemFontName.c_str(), &m_pD3DXFont );
-// 
-// 	assert_cs( SUCCEEDED( hr ) );
-// 	SAFE_POINTER_RETVAL( SUCCEEDED( hr ), false );
-
-// #if ( defined VERSION_TW || defined VERSION_HK )
-// 	HRESULT hr = D3DXCreateFont(	m_spRenderer->GetD3DDevice(), 11,0,FW_NORMAL,1,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,
-// 		DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE, _T( "Data\\Font\\msjh.ttc" ), &m_pD3DXFont );
-//if (defined VERSION_USA)
-// 	HRESULT hr = D3DXCreateFont(	m_spRenderer->GetD3DDevice(), 11,0,FW_NORMAL,1,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,
-// 		DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE, _T( "Data\\Font\\tahoma.ttf" ), &m_pD3DXFont );
-// #else
-// 	HRESULT hr = D3DXCreateFont(	m_spRenderer->GetD3DDevice(), 11,0,FW_NORMAL,1,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,
-// 		DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE, _T( "Data\\Font\\NanumGothicBold.ttf" ), &m_pD3DXFont );
-// #endif
-	
-
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE FontSystem Init begin" );
 	if( m_FontSystem.Init( systemFontName.c_str() ) == false )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "ENGINE FontSystem Init failed" );
 		CsMessageBoxA( MB_OK, "Create Font Failed! %s", systemFontName.c_str());
 		return false;
 	}
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE FontSystem Init end" );
+
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE FontText Init begin" );
 	if( m_FontText.Init( textFontName.c_str() ) == false )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "ENGINE FontText Init failed" );
 		CsMessageBoxA( MB_OK, "Create Font Failed! %s", textFontName.c_str());
 		return false;
 	}
+	nsCSDEBUG::CrashLogger::LogMessage( "ENGINE FontText Init end" );
 	return true;
 }
-
 void CEngine::DeleteFont()
 {
 //	SAFE_RELEASE( m_pD3DXFont );

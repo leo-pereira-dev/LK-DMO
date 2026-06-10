@@ -54,16 +54,17 @@ void cTamerStatus::_CreateEquip()
 {
 	float fStartPosY = 45.0f;
 	m_IFIcon_Equip[ nTamer::Head ].Init( CsRect( CsPoint( 9, 45 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
-	m_IFIcon_Equip[ nTamer::Coat ].Init( CsRect( CsPoint( 9, 87 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
-	m_IFIcon_Equip[ nTamer::Pants ].Init( CsRect( CsPoint( 9, 129 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
-	m_IFIcon_Equip[ nTamer::Glove ].Init( CsRect( CsPoint( 9, 172 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
-	m_IFIcon_Equip[ nTamer::Shoes ].Init( CsRect( CsPoint( 9, 214 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
-	m_IFIcon_Equip[ nTamer::Costume ].Init( CsRect( CsPoint( 9, 256 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
+	m_IFIcon_Equip[ nTamer::Goggles ].Init( CsRect( CsPoint( 51, 45 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
+	m_IFIcon_Equip[ nTamer::Glass ].Init( CsRect( CsPoint( 9, 87 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
+	m_IFIcon_Equip[ nTamer::Coat ].Init( CsRect( CsPoint( 9, 129 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
+	m_IFIcon_Equip[ nTamer::Pants ].Init( CsRect( CsPoint( 9, 172 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
+	m_IFIcon_Equip[ nTamer::Glove ].Init( CsRect( CsPoint( 9, 214 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
+	m_IFIcon_Equip[ nTamer::Shoes ].Init( CsRect( CsPoint( 9, 256 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
+	m_IFIcon_Equip[ nTamer::Costume ].Init( CsRect( CsPoint( 9, 299 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
 
 	m_IFIcon_Equip[ nTamer::Ring ].Init( CsRect( CsPoint( 215, 45 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
  	m_IFIcon_Equip[ nTamer::Necklace ].Init( CsRect( CsPoint( 215, 87 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );	
 	m_IFIcon_Equip[ nTamer::Earring ].Init( CsRect( CsPoint( 215, 129 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
-	m_IFIcon_Equip[ nTamer::Glass ].Init( CsRect( CsPoint( 215, 172 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
 
 	m_IFIcon_Equip[ nTamer::EquipAura ].Init( CsRect( CsPoint( 215, 214 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );//캐릭터 장비창 오라 추가 chu8820
 
@@ -74,8 +75,10 @@ void cTamerStatus::_CreateEquip()
 #endif
 
 #ifdef SDM_TAMER_EQUIP_ADD_BRACELET_20181031
-	m_IFIcon_Equip[ nTamer::Bracelet ].Init( CsRect( CsPoint( 9, 299 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
+	m_IFIcon_Equip[ nTamer::Bracelet ].Init( CsRect( CsPoint( 51, 299 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
 #endif
+	m_IFIcon_Equip[ nTamer::NamePlate ].Init( CsRect( CsPoint( 51, 341 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
+	m_IFIcon_Equip[ nTamer::Keyring ].Init( CsRect( CsPoint( 215, 341 ), (CsSIZE)IF_TAMER_EQUIP_ICON_SIZE ) );
 }
 
 void cTamerStatus::_InitEquip()
@@ -680,6 +683,9 @@ bool cTamerStatus::_CursorIconLBtnUp_Equip( CURSOR_ICON::eTYPE eIconType, int nI
 			case nItem::Shoes:
 			case nItem::Costume:
 			case nItem::Glass:
+			case nItem::Goggles:
+			case nItem::NamePlate:
+			case nItem::Keyring:
 			case nItem::Digivice:
 #ifdef SDM_TAMER_XGUAGE_20180628
 			case nItem::XAI:

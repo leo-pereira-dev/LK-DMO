@@ -2,6 +2,47 @@
 #include "stdafx.h"
 #include "CharMng.h"
 
+#include <chrono>
+#include <cstdarg>
+#include <ctime>
+#include <fstream>
+
+namespace
+{
+	bool IsSameObjectUIDX(uint lhs, uint rhs)
+	{
+		if( lhs == 0 || rhs == 0 )
+			return lhs == rhs;
+		return lhs == rhs || ((lhs & 0xFFFF) == (rhs & 0xFFFF));
+	}
+
+	void CharSyncTrace(const char* fmt, ...)
+	{
+		try
+		{
+			CreateDirectoryA("logs", NULL);
+
+			char msg[1024] = { 0, };
+			va_list args;
+			va_start(args, fmt);
+			vsnprintf_s(msg, sizeof(msg), _TRUNCATE, fmt, args);
+			va_end(args);
+
+			auto now = std::chrono::system_clock::now();
+			auto tt = std::chrono::system_clock::to_time_t(now);
+			tm localTime = {};
+			localtime_s(&localTime, &tt);
+
+			char stamp[64] = { 0, };
+			strftime(stamp, sizeof(stamp), "%Y-%m-%d %H:%M:%S", &localTime);
+
+			std::ofstream log("logs\\network_pgsql.log", std::ios::app);
+			log << stamp << " " << msg << std::endl;
+		}
+		catch (...) {}
+	}
+}
+
 CCharMng*		g_pCharMng = NULL;
 
 CCharMng::CCharMng()
@@ -598,31 +639,51 @@ void CCharMng::_RenderPostChar_Tamer()
 
 CTamer* CCharMng::AddTamer( uint nIDX, uint nFileTableID, nSync::Pos sPos, float fRot, TCHAR const* szName, CsC_PartObject::sCHANGE_PART_INFO* pPartCordArray, DWORD dwSyncOption )
 {
+	CharSyncTrace("CHAR AddTamer begin idx=%u ftid=%u pos=%d,%d rot=%.4f sync=0x%X this=%p",
+		(unsigned)nIDX,
+		(unsigned)nFileTableID,
+		sPos.m_nX,
+		sPos.m_nY,
+		(double)fRot,
+		(unsigned)dwSyncOption,
+		this);
 	CTamer* pTamer = GetTamer( nIDX );
 
 	if (NULL != pTamer) {
+		CharSyncTrace("CHAR AddTamer existing idx=%u result=%p", (unsigned)nIDX, pTamer);
 		return pTamer;
 	}
 	
 
 	sCREATEINFO prop;
+	CharSyncTrace("CHAR AddTamer prop begin idx=%u", (unsigned)nIDX);
 	prop.s_dwPropPlag = PR_ANI_ENABLE | PR_ATTACK_ENABLE | PR_EFFECT_ENABLE | PR_PATH_NORMAL;
 	prop.s_dwOptionPlag = _OP_ALL;
 	prop.s_eInsertGeomType = CGeometry::GetCharOutLineType();
+	CharSyncTrace("CHAR AddTamer prop end idx=%u geom=%d", (unsigned)nIDX, (int)prop.s_eInsertGeomType);
 
+	CharSyncTrace("CHAR AddTamer new begin idx=%u", (unsigned)nIDX);
 	pTamer = CTamer::NewInstance();
+	CharSyncTrace("CHAR AddTamer new end idx=%u result=%p", (unsigned)nIDX, pTamer);
 
 
 
+	CharSyncTrace("CHAR AddTamer init begin idx=%u tamer=%p", (unsigned)nIDX, pTamer);
 	pTamer->Init( nIDX, nFileTableID, sPos, fRot, szName, &prop, dwSyncOption );
+	CharSyncTrace("CHAR AddTamer init end idx=%u tamer=%p", (unsigned)nIDX, pTamer);
+	CharSyncTrace("CHAR AddTamer insert begin idx=%u", (unsigned)nIDX);
 	m_mapTamer.insert(std::make_pair(nIDX, pTamer));
+	CharSyncTrace("CHAR AddTamer insert end idx=%u mapSize=%u", (unsigned)nIDX, (unsigned)m_mapTamer.size());
+	CharSyncTrace("CHAR AddTamer threadload begin idx=%u", (unsigned)nIDX);
 	pTamer->ThreadLoad_Part( pPartCordArray );
+	CharSyncTrace("CHAR AddTamer threadload end idx=%u", (unsigned)nIDX);
 
 	
 
 	/*if( nsCsGBTerrain::g_nSvrLibType == nLIB::SVR_BATTLE )
 		pTamer->SetEnableObject( false );*/
 
+	CharSyncTrace("CHAR AddTamer end idx=%u result=%p", (unsigned)nIDX, pTamer);
 	return pTamer;
 }
 
@@ -2534,7 +2595,7 @@ bool CCharMng::IsTamerFromUIDX( uint const& nUIDX )
 	for( ; it != m_mapTamer.end(); ++it )
 	{
 		SAFE_POINTER_CON( it->second );
-		if( it->second->GetUniqID() == nUIDX )
+		if( IsSameObjectUIDX( it->second->GetUniqID(), nUIDX ) )
 			return true;
 	}
 
@@ -2546,7 +2607,7 @@ bool CCharMng::IsTamerUserFromUIDX( uint const& nUIDX )
 	if( NULL == m_pTamerUser )
 		return false;
 
-	return m_pTamerUser->GetUniqID() == nUIDX ? true : false;
+	return IsSameObjectUIDX( m_pTamerUser->GetUniqID(), nUIDX ) ? true : false;
 }
 
 bool CCharMng::IsDigimonUserFromUIDX( uint const& nUIDX )
@@ -2554,7 +2615,7 @@ bool CCharMng::IsDigimonUserFromUIDX( uint const& nUIDX )
 	if( NULL == m_pDigimonUser[0] )
 		return false;
 
-	return m_pDigimonUser[0]->GetUniqID() == nUIDX ? true : false;
+	return IsSameObjectUIDX( m_pDigimonUser[0]->GetUniqID(), nUIDX ) ? true : false;
 }
 
 CTamer* CCharMng::GetTamerFromUIDX(uint const& nUIDX)
@@ -2564,7 +2625,7 @@ CTamer* CCharMng::GetTamerFromUIDX(uint const& nUIDX)
 	{
 		SAFE_POINTER_CON( it->second );
 
-		if( it->second->GetUniqID() == nUIDX )
+		if( IsSameObjectUIDX( it->second->GetUniqID(), nUIDX ) )
 			return it->second;
 	}
 	return NULL;
@@ -2577,7 +2638,7 @@ CDigimon* CCharMng::GetDigimonFromUIDX(uint const& nUIDX)
 	{
 		SAFE_POINTER_CON( it->second );
 
-		if( it->second->GetUniqID() == nUIDX )
+		if( IsSameObjectUIDX( it->second->GetUniqID(), nUIDX ) )
 			return it->second;
 	}
 	return NULL;

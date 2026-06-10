@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "ToolTip.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 namespace
 {
@@ -31,7 +32,93 @@ int GetServerDetailStatIndex(nTable_Parameter eParam)
 	}
 }
 
-__int64 GetServerDetailBonusForTooltip(nTable_Parameter eParam)
+int GetXmlUnionCollectionBonusIndex(nTable_Parameter eParam)
+{
+	switch (eParam)
+	{
+	case APPLY_MAXHP:
+		return 0;
+	case APPLY_MAXDS:
+		return 1;
+	case APPLY_AP:
+		return 2;
+	case APPLY_DP:
+		return 3;
+	case APPLY_EV:
+		return 4;
+	case APPLY_HT:
+		return 5;
+	case APPLY_CA:
+		return 6;
+	case APPLY_BL:
+		return 8;
+	default:
+		return -1;
+	}
+}
+
+__int64 GetXmlUnionDUnitBonusForTooltip(nTable_Parameter eParam)
+{
+	const int nIndex = GetXmlUnionCollectionBonusIndex(eParam);
+	if (nIndex < 0 || g_pGameIF == NULL || g_pGameIF->GetXmlUnionDUnit() == NULL)
+		return 0;
+
+	__int64 nValue = g_pGameIF->GetXmlUnionDUnit()->GetCollectionBonusValue(nIndex);
+	if (eParam == APPLY_BL)
+		nValue *= 100;
+
+	return nValue;
+}
+
+int ClampTooltipStatToInt(__int64 nValue)
+{
+	if (nValue > INT_MAX)
+		return INT_MAX;
+	if (nValue < INT_MIN)
+		return INT_MIN;
+	return (int)nValue;
+}
+}
+
+#define IF_TOOLTIP_STAT_STRLEN			64
+#define IF_TOOLTIP_STAT_ICON_SIZE CsPoint( 32, 32 )
+
+cString* MakeTooltipSpriteStat(char const* pIconPath, __int64 const& nValue, bool const& bFloat, bool const& bFloat2, NiColor const& color)
+{
+	cString* pString = NiNew cString;
+	SAFE_POINTER_RETVAL(pString, NULL);
+
+	cSprite* pSprite = NiNew cSprite;
+	if (pSprite)
+	{
+		pSprite->Init(NULL, CsPoint::ZERO, CsPoint(26, 26), pIconPath, false);
+		cString::sSPRITE* pSpriteInfo = pString->AddSprite(pSprite, CsPoint(12, -5), CsPoint(26, 26));
+		if (pSpriteInfo)
+		{
+			pSpriteInfo->SetAutoPointerDelete(true);
+			pSpriteInfo->s_ptSize.x = 61;
+			pSpriteInfo->s_ptSize.y = 20;
+		}
+	}
+
+	cText::sTEXTINFO ti;
+	ti.Init(&g_pEngine->m_FontSystem, CFont::FS_11);
+	ti.s_Color = color;
+
+	std::wstring txt;
+	if (bFloat)		DmCS::StringFn::Format(txt, _T("%.3f"), (float)(nValue * 0.001f));
+	else if (bFloat2)	DmCS::StringFn::Format(txt, _T("%.2f%%"), (float)(nValue * 0.01f));
+	else				DmCS::StringFn::Format(txt, _T("%I64d"), nValue);
+
+	ti.SetText(txt.c_str());
+	pString->AddText(&ti);
+	pString->CalMaxSize();
+	return pString;
+}
+
+namespace
+{
+__int64 GetServerDetailBonusForLog(nTable_Parameter eParam)
 {
 	const int nIndex = GetServerDetailStatIndex(eParam);
 	if (nIndex < 0 || !g_pCharMng)
@@ -48,7 +135,23 @@ __int64 GetServerDetailBonusForTooltip(nTable_Parameter eParam)
 	return pTamerStat->GetDetailInfoStat(nIndex);
 }
 
-__int64 GetAuthoritativeDigimonStatForTooltip(nTable_Parameter eParam, CDigimonUser::sUSER_STAT const* pUserStat)
+bool HasTamerEquipmentEquippedForTooltip()
+{
+	if (!g_pDataMng)
+		return false;
+
+	cData_TEquip* pTEquip = g_pDataMng->GetTEquip();
+	if (!pTEquip)
+		return false;
+
+	if (pTEquip->GetEquipedCount() > 0)
+		return true;
+
+	cItemInfo* pDigiviceItem = pTEquip->GetDigiviceItem();
+	return pDigiviceItem != NULL && pDigiviceItem->IsEnable();
+}
+
+__int64 GetAuthoritativeDigimonStatForLog(nTable_Parameter eParam, CDigimonUser::sUSER_STAT const* pUserStat)
 {
 	if (!pUserStat)
 		return 0;
@@ -70,7 +173,7 @@ __int64 GetAuthoritativeDigimonStatForTooltip(nTable_Parameter eParam, CDigimonU
 	case APPLY_DP:
 		return pUserStat->GetDef();
 	case APPLY_BL:
-		return pUserStat->GetBL();
+		return pUserStat->GetBL() * 100;
 	case APPLY_EV:
 		return pUserStat->GetEvade();
 	default:
@@ -78,9 +181,6 @@ __int64 GetAuthoritativeDigimonStatForTooltip(nTable_Parameter eParam, CDigimonU
 	}
 }
 }
-
-#define IF_TOOLTIP_STAT_STRLEN			64
-#define IF_TOOLTIP_STAT_ICON_SIZE CsPoint( 32, 32 )
 
 //=================================================================================================================
 //
@@ -111,7 +211,7 @@ cString* cTooltip::_MakeTooltip_Stat_Title( int const& nStatType, bool& bFloat, 
 	case nTable_Parameter::APPLY_AS:	pString = _AddIcon( ICONITEM::Stat, 7, IF_TOOLTIP_STAT_ICON_SIZE, 60 );	ti.SetText( UISTRING_TEXT( "COMMON_TXT_ATTACK_SPEED" ).c_str() );	bFloat = true;	break;
 	case nTable_Parameter::APPLY_BL:	pString = _AddIcon( ICONITEM::Stat, 9, IF_TOOLTIP_STAT_ICON_SIZE, 60 );	ti.SetText( UISTRING_TEXT( "COMMON_TXT_BLOCK" ).c_str() );	bFloat2 = true;	break;
 	case nTable_Parameter::APPLY_UB:	pString = _AddIcon( ICONITEM::Stat, 9, IF_TOOLTIP_STAT_ICON_SIZE, 60 );	ti.SetText( UISTRING_TEXT( "COMMON_TXT_UNBEATABLE" ).c_str() );	bFloat2 = true;	break;
-	default:			assert_csm( false, L"정의 되지 않은 스탯값임 pParameter참조!!" )	return NULL;
+	default:			return NULL;
 	}
 
 	pString->AddText( &ti );
@@ -228,6 +328,7 @@ void cTooltip::_MakeTooltip_Stat_Digimon()
 	_AddLine( true );
 
 	int nTotalResult = m_nSubID_1;
+	__int64 nServerDetailShown = 0;
 
 	CDigimonUser* pDigiUser = static_cast<CDigimonUser*>(m_pData);
 	SAFE_POINTER_RET( pDigiUser );
@@ -250,6 +351,7 @@ void cTooltip::_MakeTooltip_Stat_Digimon()
 	}
 
 	nTotalResult += nBuffVal;
+	nServerDetailShown += nBuffVal;
 
 	{
 		__int64 accValue = FMDigimon::GetAccessoryEquipValue( (nTable_Parameter)m_nMainID, nTamer::Ring );
@@ -264,6 +366,7 @@ void cTooltip::_MakeTooltip_Stat_Digimon()
 			SAFE_POINTER_RET( pAccStat );
 			m_StringList.AddTail( pAccStat );
 			nTotalResult += accValue;
+			nServerDetailShown += accValue;
 		}		
 
 
@@ -275,6 +378,7 @@ void cTooltip::_MakeTooltip_Stat_Digimon()
 		__int64 equipValue = 0;
 		for( int part = nsPART::Head; part <= nsPART::Glass; ++part )
 			equipValue += FMDigimon::GetTamerEquipValue( &info, (nTable_Parameter)m_nMainID, part );
+		equipValue += FMDigimon::GetTamerEquipValue( &info, (nTable_Parameter)m_nMainID, nTamer::Goggles );
 		equipValue += FMDigimon::GetTamerEquipValue( &info, (nTable_Parameter)m_nMainID, nTamer::MaxParts );		// 디지바이스
 		if( equipValue )
 		{
@@ -282,6 +386,7 @@ void cTooltip::_MakeTooltip_Stat_Digimon()
 			SAFE_POINTER_RET( pEquipStat );
 			m_StringList.AddTail( pEquipStat );
 			nTotalResult += equipValue;
+			nServerDetailShown += equipValue;
 		}
 	}
 
@@ -295,6 +400,7 @@ void cTooltip::_MakeTooltip_Stat_Digimon()
 		m_StringList.AddTail( pBaseStat );
 
 		nTotalResult += m_nSubID_2;
+		nServerDetailShown += m_nSubID_2;
 	}
 
 	// 추가 스탯 2
@@ -376,19 +482,64 @@ void cTooltip::_MakeTooltip_Stat_Digimon()
 		_MakeAddValueText( pString, true, CFont::FS_11, FONT_GREEN, PlusPair.second, bFloat, bFloat2 );
 		m_StringList.AddTail(pString);
 		nTotalResult = nTotalResult + PlusPair.second;
+		nServerDetailShown += PlusPair.second;
 	}
 
-	// The server is authoritative. When the old client-side breakdown misses a
-	// newer source, show the residual so the tooltip total matches the real stat.
-	__int64 const nAuthoritativeTotal = GetAuthoritativeDigimonStatForTooltip( (nTable_Parameter)m_nMainID, pUserStat );
-	__int64 const nMissingTooltipValue = nAuthoritativeTotal - nTotalResult;
-	if( nAuthoritativeTotal > 0 && nMissingTooltipValue != 0 )
+	__int64 const nDUnitValue = GetXmlUnionDUnitBonusForTooltip( stateType );
+	if( nDUnitValue != 0 )
 	{
-		NiColor color = nMissingTooltipValue > 0 ? FONT_GREEN : FONT_RED;
-		cString* pServerStat = _MakeAddStat( true, ICONITEM::Stat, 13, CFont::FS_11, color, nMissingTooltipValue, bFloat, bFloat2 );
-		SAFE_POINTER_RET( pServerStat );
-		m_StringList.AddTail( pServerStat );
-		nTotalResult += nMissingTooltipValue;
+		cString* pEmptyString = NiNew cString;
+		if( pEmptyString )
+		{
+			pEmptyString->AddSizeY( 6 );
+			m_StringList.AddTail( pEmptyString );
+		}
+
+		cString* pDUnitStat = MakeTooltipSpriteStat( "Union\\Filter_icon.png", nDUnitValue, bFloat, bFloat2, FONT_GREEN );
+		SAFE_POINTER_RET( pDUnitStat );
+		m_StringList.AddTail( pDUnitStat );
+		nTotalResult = ClampTooltipStatToInt( (__int64)nTotalResult + nDUnitValue );
+		nServerDetailShown += nDUnitValue;
+	}
+
+	__int64 const nAuthoritativeTotal = GetAuthoritativeDigimonStatForLog( stateType, pUserStat );
+	__int64 const nServerDetailBonus = GetServerDetailBonusForLog( stateType );
+	__int64 const nServerDetailDelta = nServerDetailBonus - nServerDetailShown;
+	__int64 const nAuthoritativeDelta = nAuthoritativeTotal - nTotalResult;
+	__int64 const nServerEquipmentDelta =
+		(nServerDetailDelta < nAuthoritativeDelta) ? nServerDetailDelta : nAuthoritativeDelta;
+
+	if( nServerEquipmentDelta > 0 && HasTamerEquipmentEquippedForTooltip() )
+	{
+		int const nServerEquipmentDisplay = ClampTooltipStatToInt( nServerEquipmentDelta );
+		cString* pServerEquipStat = _MakeAddStat( true, ICONITEM::Stat, 13, CFont::FS_11, FONT_GREEN, nServerEquipmentDisplay, bFloat, bFloat2 );
+		SAFE_POINTER_RET( pServerEquipStat );
+		m_StringList.AddTail( pServerEquipStat );
+		nTotalResult = ClampTooltipStatToInt( (__int64)nTotalResult + nServerEquipmentDisplay );
+		nServerDetailShown += nServerEquipmentDisplay;
+
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"STAT_TOOLTIP_SERVER_DETAIL_EQUIP stat=%d detail=%I64d shownDetail=%I64d display=%I64d total=%d authoritative=%I64d",
+			m_nMainID,
+			nServerDetailBonus,
+			nServerDetailShown,
+			(__int64)nServerEquipmentDisplay,
+			nTotalResult,
+			nAuthoritativeTotal );
+	}
+
+	__int64 const nUnresolvedTooltipValue = nAuthoritativeTotal - nTotalResult;
+	if( nAuthoritativeTotal > 0 && nUnresolvedTooltipValue != 0 )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"STAT_TOOLTIP_UNRESOLVED stat=%d authoritative=%I64d shown=%d unresolved=%I64d detail=%I64d dunit=%I64d",
+			m_nMainID,
+			nAuthoritativeTotal,
+			nTotalResult,
+			nUnresolvedTooltipValue,
+			GetServerDetailBonusForLog( stateType ),
+			nDUnitValue );
+		nTotalResult = ClampTooltipStatToInt( nAuthoritativeTotal );
 	}
 
 	if( nTotalResult < 0 )

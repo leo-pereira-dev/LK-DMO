@@ -475,16 +475,23 @@ void cCreateName::OnOk()
 				return;
 			}
 
+			cMakeTactics* pMakeTactics = static_cast<cMakeTactics*>( g_pGameIF->_GetPointer( cBaseWindow::WT_MAKE_TACTICS, 0 ) );
+			if( pMakeTactics == NULL )
+				pMakeTactics = g_pGameIF->GetMakeTactics();
+
 			assert_cs( g_pGameIF->IsActiveWindow( cBaseWindow::WT_MAKE_TACTICS ) );
-			assert_cs( g_pGameIF->GetMakeTactics()->IsShowWindow() );
-			g_pGameIF->GetMakeTactics()->RequiteTactics( szName );
+			assert_cs( pMakeTactics && pMakeTactics->IsShowWindow() );
+			if( pMakeTactics == NULL )
+				return;
+
+			pMakeTactics->RequiteTactics( szName );
 
 			Close();		
 
-			if( g_pGameIF->GetMakeTactics()->getBackDiskBtnStatus() )
+			if( pMakeTactics->getBackDiskBtnStatus() )
 			{
-				g_pDataMng->GetInven()->ItemCrop( g_pGameIF->GetMakeTactics()->_GetBackupDiskType(), 1 );
-				g_pGameIF->GetMakeTactics()->_ResistBackupDiskDisableControl();
+				g_pDataMng->GetInven()->ItemCrop( pMakeTactics->_GetBackupDiskType(), 1 );
+				pMakeTactics->_ResistBackupDiskDisableControl();
 			}
 		}
 		break;

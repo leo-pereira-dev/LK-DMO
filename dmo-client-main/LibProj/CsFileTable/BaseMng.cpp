@@ -137,17 +137,28 @@ bool CsBaseMng::Init( char* cPath )
 
 CsBase* CsBaseMng::GetTamerBase( int nLevel, int nTamerType )
 {
+	if( nLevel < 1 )
+		nLevel = 1;
+
 	DWORD dwID = nLevel + nTamerType*BASE_CHARTYPE_CONSTANT;
 
 	MAP_IT it = m_mapTamer.find( dwID );
 	if( it == m_mapTamer.end() )
 	{
+		while( nLevel > 1 )
+		{
+			--nLevel;
+			dwID = nLevel + nTamerType*BASE_CHARTYPE_CONSTANT;
+			it = m_mapTamer.find( dwID );
+			if( it != m_mapTamer.end() )
+				return it->second;
+		}
+
 		assert_cs( IsTamerBase( dwID ) == true );
 		return NULL;
 	}
 	return it->second;
 }
-
 CsBase* CsBaseMng::GetDigimonBase( int nLevel, int nDigimonType )
 {
 // #ifndef _GIVE
@@ -159,15 +170,25 @@ CsBase* CsBaseMng::GetDigimonBase( int nLevel, int nDigimonType )
 		nLevel = 1;
 
 	DWORD dwID = nLevel + nDigimonType*BASE_CHARTYPE_CONSTANT;
-	assert_csm2( IsDigimonBase( dwID ) == true, _T( "레벨 = %d, 타입 = %d" ), nLevel, nDigimonType );
 
 	MAP_IT it = m_mapDigimon.find( dwID );
 	if( it == m_mapDigimon.end() )
+	{
+		while( nLevel > 1 )
+		{
+			--nLevel;
+			dwID = nLevel + nDigimonType*BASE_CHARTYPE_CONSTANT;
+			it = m_mapDigimon.find( dwID );
+			if( it != m_mapDigimon.end() )
+				return it->second;
+		}
+
+		assert_cs( IsDigimonBase( dwID ) == true );
 		return NULL;
+	}
 
 	return it->second;
 }
-
 bool CsBaseMng::IsUseJumpBuster( int nJumpBusterItemID, int nDestMapID )
 {
 	MAP_JUMPBUSTER_IT it = m_mapJumpBuster.find( nJumpBusterItemID );

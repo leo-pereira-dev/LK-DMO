@@ -1,5 +1,148 @@
 # CHANGELOG
 
+## 2026-06-08 - Sealed accessory unseal fallback
+
+- Fixed modern sealed accessories such as
+  `1310631 - Sealed Zero Unit Necklace` not responding to right-click unseal
+  when they are type `170` items without a server `Container.bin` reward entry.
+- `ItemConsumePacketProcessor` now keeps configured containers on the normal
+  container path, then falls back only for sealed ring/necklace/earring/
+  bracelet names that resolve to a real final accessory with valid
+  `AccOption` data.
+- The fallback consumes one sealed item, creates the resolved accessory,
+  applies the normal accessory identify/options flow, persists inventory, and
+  reloads inventory for the client.
+- Stacked sealed items require one free inventory slot before unsealing,
+  because consuming one item from a stack does not open the original slot.
+- Local BIN coverage check resolved 103/103 type-170 sealed accessory
+  candidates and found 0 missing `AccOption` targets.
+- Local server build passed with no errors; existing project warnings remain.
+- VPS deploy archive:
+  `.codex-tmp\dmo-server-main-postgres-20260608-155153.tar.gz`.
+- Remote backup:
+  `/home/ubuntu/deploy-backups/dmo-server-main-postgres-20260608-185210`.
+- Full operational documentation:
+  `C:\0-NewDmo\dmo-server-main-postgres\docs\2026-06-08_ITEM_STATUS_AND_ACCESSORY_FIXES.md`.
+
+## 2026-06-08 - ChipSet scan multi-status generation
+
+- Fixed scanned ChipSets only receiving the first status from `Skill.bin`.
+  `ItemScanPacketProcessor` previously used `FirstOrDefault` on
+  `SkillCodeInfo.Apply`, so double ChipSets such as CT/HT and CT/EV were
+  created with only CT in the server item instance.
+- Added `AccessoryEnchantService.ApplyRandomChipsetStats`, sharing the same
+  multi-apply generation path used by GM-created max ChipSets while keeping
+  scan power/range random.
+- `!item`/GM creation still uses maximum allowed ChipSet values. Normal scan
+  ChipSets keep RNG and now populate every valid apply status from the skill.
+- Confirmed the active `Skill.bin` contains the expected second applies for
+  `4002112` (`CA` + `HT`) and `4002113` (`CA` + `EV`).
+- Local server build passed with no errors; existing project warnings remain.
+- VPS deploy archive:
+  `.codex-tmp\dmo-server-main-postgres-20260608-145315.tar.gz`.
+- Remote backup:
+  `/home/ubuntu/deploy-backups/dmo-server-main-postgres-20260608-175334`.
+- `account`, `character`, `game`, `routine`, `api`, and `admin` were
+  rebuilt/recreated and reported Up. `postgres` was not deployed or recreated.
+- Post-deploy log scan found no recent `ERR`, `Exception`, DI failure,
+  `duplicate key`, or `ItemMove rejected` entries in the checked app logs.
+
+## 2026-06-08 - ItemMove serialization and ChipSet CT/EV percent scale
+
+- Fixed the remaining Digivice unequip race seen when the client sent two
+  `ChipsetToInventory` item moves during one Digivice removal. The first move
+  saved successfully and the second could still attempt a duplicate insert into
+  `Shared_ItemStorageInstance`.
+- `ItemMovePacketProcessor` now queues item movement per tamer with a
+  `SemaphoreSlim` keyed by `TamerId`/`AccountId`, covering the full swap,
+  persistence, stat update, and response-packet path.
+- Kept the 8 normal ChipSet slots plus the dedicated Jogress/Xros chip slot
+  unchanged. This pass does not alter Digivice layout or client packet shape.
+- Corrected ChipSet CT/EV server math so raw status values remain in the
+  client's basis-point percent scale. `raw=436` now contributes `436`
+  (`4.36%`) instead of `43600`.
+- Client `StringAnalysis::ItemComment_Parcing` now formats ChipSet CT/EV item
+  effects as percentages while leaving integer stats such as HT unchanged.
+- Local server build passed with no errors; existing project warnings remain.
+- x64 bridge client built and copied to:
+  `C:\0-NewDmo\ClientDist1_x64\lk-dmo-x64.exe`
+  (`08/06/2026 14:27:23`, `13686784` bytes).
+- VPS deploy archive:
+  `.codex-tmp\dmo-server-main-postgres-20260608-142831.tar.gz`.
+- Remote backup:
+  `/home/ubuntu/deploy-backups/dmo-server-main-postgres-20260608-172850`.
+- `account`, `character`, `game`, `routine`, `api`, and `admin` were
+  rebuilt/recreated and reported Up. `postgres` was not deployed or recreated.
+- Post-deploy log scan found no recent `ERR`, `duplicate key`, `Exception`, or
+  `ItemMove rejected` entries in the checked app logs.
+
+## 2026-06-08 - Owner storage move persistence hardening and VPS deploy
+
+- Fixed a normalized owner-storage persistence failure hit while unequipping a
+  final Digivice with chipsets attached. The server moved the Digivice in
+  memory, but the per-list save tried to insert an already-existing
+  `Shared_ItemStorageInstance` id, causing a duplicate-key exception before the
+  client received the clean item-move success/reload.
+- `UpdateItemsCommand` now carries an explicit
+  `preserveUnreferencedInstances` mode for item moves. `ItemMovePacketProcessor`
+  uses it for inventory/equipment/Digivice/chipset/warehouse/extra inventory
+  moves so an item that is temporarily between two lists is not deleted as an
+  orphan halfway through the move.
+- Owner-storage upsert now loads item instances by both current slot references
+  and incoming payload ids. This makes moving an existing instance into another
+  list an update, not a duplicate insert.
+- Accessory/socket rows are replaced authoritatively for seen payload items,
+  preventing stale or duplicated detail rows when an existing instance moves
+  across lists.
+- Local build passed with no errors; existing project warnings remain.
+- VPS deploy archive:
+  `.codex-tmp\dmo-server-main-postgres-20260608-135154.tar.gz`.
+- Remote backup:
+  `/home/ubuntu/deploy-backups/dmo-server-main-postgres-20260608-165214`.
+- `account`, `character`, `game`, `routine`, `api`, and `admin` were
+  rebuilt/recreated and reported Up. `postgres` was not deployed or recreated.
+- Post-deploy log scan found no recent `error`, `exception`, `duplicate key`,
+  `ItemMovePacketProcessor`, or entity-save failure matches.
+
+## 2026-06-08 - Status tooltip contract validation and final VPS deploy
+
+- Confirmed BL must stay as integer percent on the server and in combat:
+  `DigimonModelBehavior.BL` and combat RNG comparisons are intentionally not
+  basis-point values.
+- Reverted the intermediate BL basis-point experiment before the final deploy.
+  Client tooltip code now does the basis-point conversion locally only for
+  tooltip attribution math.
+- DUnit/CT tooltip source fixes are client-side; no scan RNG, normal family
+  ChipSet RNG, or server BL combat rule was changed by this pass.
+- Final production VPS deploy used:
+  `.codex-tmp\dmo-server-main-postgres-20260608-130112.tar.gz`.
+- Remote backup:
+  `/home/ubuntu/deploy-backups/dmo-server-main-postgres-20260608-160131`.
+- `account`, `character`, `game`, `routine`, `api`, and `admin` were
+  rebuilt/recreated and reported Up. `postgres` was not deployed or recreated.
+- Post-deploy grep for `ERR`, `FTL`, `Unhandled`, and `Exception` in app
+  services returned no matches. Game logs still can contain DUnit XML content
+  warnings for invalid groups or missing Digimon ids.
+
+## 2026-06-08 - Digivice Jogress/Xros dedicated slot and VPS deploy
+
+- `InitialInfoPacket` now serializes `JogressChipSet` immediately after normal
+  `ChipSets`, matching the updated client read order for the Digivice tab.
+- `ItemMovePacketProcessor` now separates normal ChipSet moves from Jogress/Xros
+  EvoChip moves:
+  - normal ChipSet target accepts `Type=52/SkillCode!=2500245`;
+  - dedicated EvoChip target accepts `Type=52/SkillCode=2500245`;
+  - the two groups no longer share the same target slot.
+- Deployed to the production VPS with the root password wrapper:
+  `C:\0-NewDmo\Publish-DmoServerToVpsDockerComposeWithPassword.ps1`.
+- Deployed app services only: `account`, `character`, `game`, `routine`,
+  `api`, and `admin`.
+- `postgres` was not deployed or recreated. Post-deploy validation showed the
+  existing container was created on 2026-05-25, remained healthy, and had
+  restart count `0`.
+- Final same-day remote backup kept at:
+  `/home/ubuntu/deploy-backups/dmo-server-main-postgres-20260608-160131`.
+
 Notable patches applied during the v487-client compatibility work. Grouped by area, not strictly chronological.
 
 ## 2026-05-13 — Stability pass, item/storage cutover hardening, and DB refresh

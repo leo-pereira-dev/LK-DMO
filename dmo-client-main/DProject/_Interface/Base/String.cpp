@@ -636,7 +636,7 @@ void cString::sICON::Render( CsPoint pos )
 	case ICONITEM::ITEM_ICON49:
 		{
 			cItemInfo item;
-			item.m_nType  = s_nIndex_1;
+			item.SetType( s_nIndex_1 );
 			item.m_nCount = s_nIndex_2;
 			item.m_nRate  = s_nIndex_3;
 
@@ -652,7 +652,7 @@ void cString::sICON::Render( CsPoint pos )
 			else
 			{
 				cItemInfo item;
-				item.m_nType  = s_nIndex_1;
+				item.SetType( s_nIndex_1 );
 				item.m_nCount = s_nIndex_2;
 				item.m_nRate  = s_nIndex_3;
 				m_MouseOverCheckRect.SetRect( s_ptLastPos, CsSIZE(s_ptIconSize));
@@ -1627,6 +1627,7 @@ void cString::ResetDevice()
 cString::sTEXT* cString::AddText( cText::sTEXTINFO* pTextInfo, CsPoint deltaPos )
 {
 	sTEXT* pText = sTEXT::NewInstance();
+	pText->Delete();
 	pText->s_Text.Init( NULL, CsPoint::ZERO, pTextInfo, true );
 	pText->s_ptSize = pText->s_Text.GetStringSize();
 	pText->s_ptDeltaPos = deltaPos;
@@ -1643,6 +1644,7 @@ cString::sTEXT* cString::AddText( cText::sTEXTINFO* pTextInfo, CsPoint deltaPos 
 cString::sTEXT* cString::AddText( NiStencilProperty* pPropStencil, cText::sTEXTINFO* pTextInfo, CsPoint deltaPos )
 {
 	sTEXT* pText = sTEXT::NewInstance();
+	pText->Delete();
 	pText->s_Text.InitStencil( NULL, CsPoint::ZERO, pTextInfo, true, pPropStencil );
 	pText->s_ptSize = pText->s_Text.GetStringSize();
 	pText->s_ptDeltaPos = deltaPos;
@@ -1662,6 +1664,7 @@ void cString::AddText_Head( cText::sTEXTINFO* pTextInfo )
 	SAFE_POINTER_RET( pTextInfo );
 
 	sTEXT* pText = sTEXT::NewInstance();
+	pText->Delete();
 	pText->s_Text.Init( NULL, CsPoint::ZERO, pTextInfo, true );
 	pText->s_ptSize = pText->s_Text.GetStringSize();
 

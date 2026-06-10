@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "DigimonTalk.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 CsTimeSeq cDigimonTalk::m_SoundTimeSeq;
 
@@ -10,10 +11,22 @@ bool cDigimonTalk::Print( DWORD dwMessageID, sTalkEle* pEle /* = NULL */ )
 	if( nsCsGBTerrain::g_nSvrLibType == nLIB::SVR_BATTLE )
 		return true;
 
+	if( g_pResist == NULL || g_pCharMng == NULL || g_pTalkBallone == NULL || nsCsFileTable::g_pTalkMng == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "DIGIMON_TALK skipped missing globals msg=%u", (unsigned)dwMessageID );
+		return false;
+	}
+
 	if( g_pResist->m_Global.s_bDigimonBalloone == false )
 		return true;
 
 	CDigimonUser* pDigimonUser = g_pCharMng->GetDigimonUser( 0 );
+	if( pDigimonUser == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "DIGIMON_TALK skipped missing partner msg=%u", (unsigned)dwMessageID );
+		return false;
+	}
+
 	CsTalk_Digimon* pFTDTalk = nsCsFileTable::g_pTalkMng->GetTalk_Digimon( dwMessageID );
 	if( pFTDTalk == NULL )
 		return false;
@@ -51,7 +64,11 @@ bool cDigimonTalk::Print( DWORD dwMessageID, sTalkEle* pEle /* = NULL */ )
 	else
 		_tcscpy_s( sz, 256, pFTDTalk->GetText() );	
 
-	g_pTalkBallone->SetBalloone( cTalkBalloon::TYPE_3, pDigimonUser->GetUniqID(), cDigimonTalk::Parcing_Talk( sz, 256, pEle ) );
+	TCHAR* szParsed = cDigimonTalk::Parcing_Talk( sz, 256, pEle );
+	if( szParsed == NULL || szParsed[ 0 ] == 0 )
+		return false;
+
+	g_pTalkBallone->SetBalloone( cTalkBalloon::TYPE_3, pDigimonUser->GetUniqID(), szParsed, false );
 
 	return true;
 }
@@ -71,28 +88,40 @@ TCHAR* cDigimonTalk::Parcing_Talk( TCHAR* szMsg, int nLen, sTalkEle* pEle )
 	TCHAR szQuestTitle[ 128 ] = {0, };
 	if( pEle->s_dwQuest != 0 )
 	{
-		_stprintf_s( szQuestTitle, 128, _T( "%s" ), nsCsFileTable::g_pQuestMng->GetQuest( pEle->s_dwQuest )->m_szTitleText );
+		if( nsCsFileTable::g_pQuestMng && nsCsFileTable::g_pQuestMng->GetQuest( pEle->s_dwQuest ) )
+			_stprintf_s( szQuestTitle, 128, _T( "%s" ), nsCsFileTable::g_pQuestMng->GetQuest( pEle->s_dwQuest )->m_szTitleText );
+		else
+			nsCSDEBUG::CrashLogger::LogMessage( "DIGIMON_TALK missing quest id=%u", (unsigned)pEle->s_dwQuest );
 	}
 
 	// NPC 인자 파싱
 	TCHAR szNpc[ 128 ] = {0, };
 	if( pEle->s_dwNpc != 0 )
 	{
-		_stprintf_s( szNpc, 128, _T( "%s" ), nsCsFileTable::g_pNpcMng->GetNpc( pEle->s_dwNpc )->GetInfo()->s_szName );
+		if( nsCsFileTable::g_pNpcMng && nsCsFileTable::g_pNpcMng->GetNpc( pEle->s_dwNpc ) && nsCsFileTable::g_pNpcMng->GetNpc( pEle->s_dwNpc )->GetInfo() )
+			_stprintf_s( szNpc, 128, _T( "%s" ), nsCsFileTable::g_pNpcMng->GetNpc( pEle->s_dwNpc )->GetInfo()->s_szName );
+		else
+			nsCSDEBUG::CrashLogger::LogMessage( "DIGIMON_TALK missing npc id=%u", (unsigned)pEle->s_dwNpc );
 	}
 
 	// 디지몬 이름 파싱
 	TCHAR szDigimon[ 128 ] = {0, };
 	if( pEle->s_dwDigimon != 0 )
 	{
-		_stprintf_s( szDigimon, 128, _T( "%s" ), nsCsFileTable::g_pDigimonMng->GetDigimon( pEle->s_dwDigimon )->GetInfo()->s_szName );
+		if( nsCsFileTable::g_pDigimonMng && nsCsFileTable::g_pDigimonMng->GetDigimon( pEle->s_dwDigimon ) && nsCsFileTable::g_pDigimonMng->GetDigimon( pEle->s_dwDigimon )->GetInfo() )
+			_stprintf_s( szDigimon, 128, _T( "%s" ), nsCsFileTable::g_pDigimonMng->GetDigimon( pEle->s_dwDigimon )->GetInfo()->s_szName );
+		else
+			nsCSDEBUG::CrashLogger::LogMessage( "DIGIMON_TALK missing digimon id=%u", (unsigned)pEle->s_dwDigimon );
 	}
 
 	// 스킬 이름 파싱
 	TCHAR szSkill[ 128 ] = {0, };
 	if( pEle->s_dwSkill != 0 )
 	{
-		_stprintf_s( szSkill, 128, _T( "%s" ), nsCsFileTable::g_pSkillMng->GetSkill( pEle->s_dwSkill )->GetInfo()->s_szName );
+		if( nsCsFileTable::g_pSkillMng && nsCsFileTable::g_pSkillMng->GetSkill( pEle->s_dwSkill ) && nsCsFileTable::g_pSkillMng->GetSkill( pEle->s_dwSkill )->GetInfo() )
+			_stprintf_s( szSkill, 128, _T( "%s" ), nsCsFileTable::g_pSkillMng->GetSkill( pEle->s_dwSkill )->GetInfo()->s_szName );
+		else
+			nsCSDEBUG::CrashLogger::LogMessage( "DIGIMON_TALK missing skill id=%u", (unsigned)pEle->s_dwSkill );
 	}
 
 	TCHAR szOut[ FT_TALK_MSG_BODY_LEN ] = {0, };
@@ -789,5 +818,3 @@ void cDigimonTalk::_LoadEditDigimonTalk()
 		}
 	}	
 }
-
-

@@ -1,10 +1,11 @@
-using AspNetCoreRateLimit;
+﻿using AspNetCoreRateLimit;
 using DigitalWorldOnline.Api.Dtos.Errors;
 using DigitalWorldOnline.Application.Admin.Commands;
 using DigitalWorldOnline.Application.Admin.Repositories;
 using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Application.GameAssets.Bins;
 using DigitalWorldOnline.Application.GameAssets.Mapping;
+using DigitalWorldOnline.Application.GameAssets.Xml;
 using DigitalWorldOnline.Application.Extensions;
 using DigitalWorldOnline.Application.Services;
 using DigitalWorldOnline.Commons.Interfaces;
@@ -82,9 +83,26 @@ namespace DigitalWorldOnline.Api
             services.AddSingleton<MonsterBinLoader>();
             services.AddSingleton<MapBinLoader>();
             services.AddSingleton<ContainerBinLoader>();
+            services.AddSingleton<ExtraExchangeBinLoader>();
             services.AddSingleton<QuestBinLoader>();
+            services.AddSingleton<NpcBinLoader>();
+            services.AddSingleton<UnionXmlAssetLoader>();
             services.AddSingleton<AssetsLoader>();
             services.AddScoped<StoragePersistenceDualWriteCoordinator>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("SiteCors", builder =>
+                    builder
+                    .WithOrigins(
+                        "http://localhost:5177",
+                        "https://localhost:5177",
+                        "http://lkdmo.com.br",
+                        "https://lkdmo.com.br",
+                        "http://www.lkdmo.com.br",
+                        "https://www.lkdmo.com.br")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
             services.AddControllers();
             services.AddValidatorsFromAssemblyContaining<CreateUserAccountCommandValidator>(ServiceLifetime.Transient);
             services.AddEndpointsApiExplorer();
@@ -165,8 +183,9 @@ namespace DigitalWorldOnline.Api
             //app.UseClientRateLimiting();
             //app.UseMvc();
 
-            app.UseAuthentication();
             app.UseRouting();
+            app.UseCors("SiteCors");
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
@@ -175,3 +194,4 @@ namespace DigitalWorldOnline.Api
         }
     }
 }
+

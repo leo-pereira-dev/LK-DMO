@@ -3,6 +3,8 @@
 
 namespace
 {
+	const int DIGIMON_STATUS_EXP_BAR_MAX = 10000;
+
 	std::wstring BuildSafeOwnedText( TCHAR const* pText )
 	{
 		cText::sTEXTINFO textInfo;
@@ -55,6 +57,22 @@ namespace
 	void SetSafeOwnedText( cText::sTEXTINFO& textInfo, std::wstring const& value )
 	{
 		SetSafeOwnedText( textInfo, value.c_str() );
+	}
+
+	int CalcScaledExpBar( __int64 nCurExp, __int64 nMaxExp )
+	{
+		if( nMaxExp < 1 )
+			nMaxExp = 1;
+		if( nCurExp < 0 )
+			nCurExp = 0;
+
+		double dRate = static_cast<double>( nCurExp ) / static_cast<double>( nMaxExp );
+		if( dRate < 0.0 )
+			dRate = 0.0;
+		if( dRate > 1.0 )
+			dRate = 1.0;
+
+		return static_cast<int>( dRate * DIGIMON_STATUS_EXP_BAR_MAX );
 	}
 }
 
@@ -379,8 +397,8 @@ void cDigimonStatusUI::Update(float const& fDeltaTime)
 	CDigimonUser::sUSER_STAT* pStat = GetSystem()->GetDigimonBaseStat();
 	if( pStat && m_pDigimonExpBar )
 	{
-		m_pDigimonExpBar->SetRange( static_cast<int>( FMDigimon::GetMaxExp( pStat->GetLevel() ) ) );
-		m_pDigimonExpBar->SetProgressPos( static_cast<int>( pStat->GetExp() ) );
+		m_pDigimonExpBar->SetRange( DIGIMON_STATUS_EXP_BAR_MAX );
+		m_pDigimonExpBar->SetProgressPos( CalcScaledExpBar( pStat->GetExp(), FMDigimon::GetMaxExp( pStat->GetLevel() ) ) );
 	}
 
 	// 스킬 경험치

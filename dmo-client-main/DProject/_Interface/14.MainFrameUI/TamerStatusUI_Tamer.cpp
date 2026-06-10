@@ -3,8 +3,11 @@
 
 
 cTamerStatusUI_Tamer::cTamerStatusUI_Tamer()
-: m_pLEquipList(NULL),
+: m_pLTopEquipList(NULL),
+m_pLEquipList(NULL),
+m_pLBottomEquipList(NULL),
 m_pREquipList(NULL),
+m_pRBottomEquipList(NULL),
 m_pTamerAbilList(NULL),
 m_pApplyAbilList(NULL),
 #ifdef WEB_INFOMATION
@@ -62,6 +65,21 @@ void cTamerStatusUI_Tamer::Create(cWindow* pkRoot, int nValue /*= 0 */)
 	CsPoint ptGab = CsPoint( 0, 14 );
 	CsPoint ptItemSize = CsPoint( 32, 32 );
 
+	m_pLTopEquipList = NiNew cGridListBox;
+	if( m_pLTopEquipList )
+	{
+		m_pLTopEquipList->Init( GetRoot(), ptPos, CsPoint( 78, 32 ), CsPoint( 14, 0 ), ptItemSize, cGridListBox::LowRightDown, cGridListBox::LeftTop, NULL, false, 2 );
+		m_pLTopEquipList->SetUsePressedMoveEvent( true );
+		m_pLTopEquipList->SetMouseOverImg( "Icon\\Mask_Over.tga" );
+		m_pLTopEquipList->SetBackOverAndSelectedImgRender( false );
+		m_pLTopEquipList->SetAutoSelection( false );
+		m_pLTopEquipList->AddEvent( cGridListBox::GRID_SELECTED_ITEM_RIGHT,	this, &cTamerStatusUI_Tamer::_OnRClickEquipItem );
+		m_pLTopEquipList->AddEvent( cGridListBox::GRID_MOUSE_DOWN_ON_ITEM,	this, &cTamerStatusUI_Tamer::_OnLClickDownEquipItem );
+		AddChildControl( m_pLTopEquipList );
+	}
+
+	ptPos.y += 46;
+	ptSize.y -= 46;
 	m_pLEquipList = NiNew cGridListBox;
 	if( m_pLEquipList )
 	{
@@ -74,11 +92,24 @@ void cTamerStatusUI_Tamer::Create(cWindow* pkRoot, int nValue /*= 0 */)
 		m_pLEquipList->AddEvent( cGridListBox::GRID_MOUSE_DOWN_ON_ITEM,		this, &cTamerStatusUI_Tamer::_OnLClickDownEquipItem );
 		AddChildControl( m_pLEquipList );
 	}
+	m_pLBottomEquipList = NiNew cGridListBox;
+	if( m_pLBottomEquipList )
+	{
+		CsPoint ptNamePlatePos = ptPos + CsPoint( 46, 230 );
+		m_pLBottomEquipList->Init( GetRoot(), ptNamePlatePos, ptItemSize, ptGab, ptItemSize, cGridListBox::LowLeftDown, cGridListBox::LeftTop, NULL, false, 1 );
+		m_pLBottomEquipList->SetUsePressedMoveEvent( true );
+		m_pLBottomEquipList->SetMouseOverImg( "Icon\\Mask_Over.tga" );
+		m_pLBottomEquipList->SetBackOverAndSelectedImgRender( false );
+		m_pLBottomEquipList->SetAutoSelection( false );
+		m_pLBottomEquipList->AddEvent( cGridListBox::GRID_SELECTED_ITEM_RIGHT,	this, &cTamerStatusUI_Tamer::_OnRClickEquipItem );
+		m_pLBottomEquipList->AddEvent( cGridListBox::GRID_MOUSE_DOWN_ON_ITEM,	this, &cTamerStatusUI_Tamer::_OnLClickDownEquipItem );
+		AddChildControl( m_pLBottomEquipList );
+	}
+	CsPoint ptRightEquipPos( 340, 143 );
 	m_pREquipList = NiNew cGridListBox;
 	if( m_pREquipList )
 	{
-		ptPos.x = 340;
-		m_pREquipList->Init( GetRoot(), ptPos, ptSize, ptGab, ptItemSize, cGridListBox::LowLeftDown, cGridListBox::LeftTop, NULL, false, 1 );
+		m_pREquipList->Init( GetRoot(), ptRightEquipPos, CsPoint( 32, 356 ), ptGab, ptItemSize, cGridListBox::LowLeftDown, cGridListBox::LeftTop, NULL, false, 1 );
 		m_pREquipList->SetUsePressedMoveEvent( true );
 		m_pREquipList->SetMouseOverImg( "Icon\\Mask_Over.tga" );
 		m_pREquipList->SetBackOverAndSelectedImgRender( false );
@@ -86,6 +117,19 @@ void cTamerStatusUI_Tamer::Create(cWindow* pkRoot, int nValue /*= 0 */)
 		m_pREquipList->AddEvent( cGridListBox::GRID_SELECTED_ITEM_RIGHT,	this, &cTamerStatusUI_Tamer::_OnRClickEquipItem );
 		m_pREquipList->AddEvent( cGridListBox::GRID_MOUSE_DOWN_ON_ITEM,		this, &cTamerStatusUI_Tamer::_OnLClickDownEquipItem );
 		AddChildControl( m_pREquipList );
+	}
+	m_pRBottomEquipList = NiNew cGridListBox;
+	if( m_pRBottomEquipList )
+	{
+		CsPoint ptKeyringPos = ptRightEquipPos + CsPoint( -46, 276 );
+		m_pRBottomEquipList->Init( GetRoot(), ptKeyringPos, ptItemSize, ptGab, ptItemSize, cGridListBox::LowLeftDown, cGridListBox::LeftTop, NULL, false, 1 );
+		m_pRBottomEquipList->SetUsePressedMoveEvent( true );
+		m_pRBottomEquipList->SetMouseOverImg( "Icon\\Mask_Over.tga" );
+		m_pRBottomEquipList->SetBackOverAndSelectedImgRender( false );
+		m_pRBottomEquipList->SetAutoSelection( false );
+		m_pRBottomEquipList->AddEvent( cGridListBox::GRID_SELECTED_ITEM_RIGHT,	this, &cTamerStatusUI_Tamer::_OnRClickEquipItem );
+		m_pRBottomEquipList->AddEvent( cGridListBox::GRID_MOUSE_DOWN_ON_ITEM,	this, &cTamerStatusUI_Tamer::_OnLClickDownEquipItem );
+		AddChildControl( m_pRBottomEquipList );
 	}
 	_MakeEquipGrid();
 
@@ -217,8 +261,17 @@ BOOL cTamerStatusUI_Tamer::Update_ForMouse()
 	if( m_pLEquipList && m_pLEquipList->Update_ForMouse( CURSOR_ST.GetPos() ) )
 		return _SetEquipTooltip( m_pLEquipList->GetMouseOverItem() );
 
+	if( m_pLTopEquipList && m_pLTopEquipList->Update_ForMouse( CURSOR_ST.GetPos() ) )
+		return _SetEquipTooltip( m_pLTopEquipList->GetMouseOverItem() );
+
+	if( m_pLBottomEquipList && m_pLBottomEquipList->Update_ForMouse( CURSOR_ST.GetPos() ) )
+		return _SetEquipTooltip( m_pLBottomEquipList->GetMouseOverItem() );
+
 	if( m_pREquipList && m_pREquipList->Update_ForMouse( CURSOR_ST.GetPos() ) )
 		return _SetEquipTooltip( m_pREquipList->GetMouseOverItem() );
+
+	if( m_pRBottomEquipList && m_pRBottomEquipList->Update_ForMouse( CURSOR_ST.GetPos() ) )
+		return _SetEquipTooltip( m_pRBottomEquipList->GetMouseOverItem() );
 
 #ifdef WEB_INFOMATION
 	if( m_pWebInfoButton && m_pWebInfoButton->Update_ForMouse() )
@@ -306,9 +359,30 @@ void cTamerStatusUI_Tamer::OnLButtonUp(CsPoint pos)
 			return;
 	}
 
+	if( m_pLTopEquipList )
+	{
+		cGridListBoxItem const* pOverItem = m_pLTopEquipList->GetMouseOverItem();
+		if( _OnClickEquipItem( pOverItem ) )
+			return;
+	}
+
+	if( m_pLBottomEquipList )
+	{
+		cGridListBoxItem const* pOverItem = m_pLBottomEquipList->GetMouseOverItem();
+		if( _OnClickEquipItem( pOverItem ) )
+			return;
+	}
+
 	if( m_pREquipList )
 	{
 		cGridListBoxItem const* pOverItem = m_pREquipList->GetMouseOverItem();
+		if( _OnClickEquipItem( pOverItem ) )
+			return;
+	}
+
+	if( m_pRBottomEquipList )
+	{
+		cGridListBoxItem const* pOverItem = m_pRBottomEquipList->GetMouseOverItem();
 		if( _OnClickEquipItem( pOverItem ) )
 			return;
 	}
@@ -381,17 +455,31 @@ BOOL cTamerStatusUI_Tamer::_SetStatTooltip(cListBoxItem const* pOverItem)
 
 void cTamerStatusUI_Tamer::_MakeEquipGrid()
 {
+	if( m_pLTopEquipList )
+	{
+		int nIndex = 0;
+		m_pLTopEquipList->RemoveAllItem();
+		_AddEquipGridItem( m_pLTopEquipList, nIndex++, nTamer::Head );
+		_AddEquipGridItem( m_pLTopEquipList, nIndex++, nTamer::Goggles );
+	}
+
 	if( m_pLEquipList )
 	{
 		int nIndex = 0;
 		m_pLEquipList->RemoveAllItem();
-		_AddEquipGridItem( m_pLEquipList, nIndex++, nTamer::Head );
 		_AddEquipGridItem( m_pLEquipList, nIndex++, nTamer::Glass );
 		_AddEquipGridItem( m_pLEquipList, nIndex++, nTamer::Coat );
 		_AddEquipGridItem( m_pLEquipList, nIndex++, nTamer::Pants );
 		_AddEquipGridItem( m_pLEquipList, nIndex++, nTamer::Glove );
 		_AddEquipGridItem( m_pLEquipList, nIndex++, nTamer::Shoes );
 		_AddEquipGridItem( m_pLEquipList, nIndex++, nTamer::Costume );
+	}
+
+	if( m_pLBottomEquipList )
+	{
+		int nIndex = 0;
+		m_pLBottomEquipList->RemoveAllItem();
+		_AddEquipGridItem( m_pLBottomEquipList, nIndex++, nTamer::NamePlate );
 	}
 
 	if( m_pREquipList )
@@ -409,6 +497,12 @@ void cTamerStatusUI_Tamer::_MakeEquipGrid()
 #ifdef SDM_TAMER_XGUAGE_20180628
 		_AddEquipGridItem( m_pREquipList, nIndex++, nTamer::XAI );
 #endif
+	}
+	if( m_pRBottomEquipList )
+	{
+		int nIndex = 0;
+		m_pRBottomEquipList->RemoveAllItem();
+		_AddEquipGridItem( m_pRBottomEquipList, nIndex++, nTamer::Keyring );
 	}
 }
 

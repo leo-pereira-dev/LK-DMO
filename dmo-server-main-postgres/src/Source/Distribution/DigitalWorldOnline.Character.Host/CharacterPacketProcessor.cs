@@ -8,6 +8,7 @@ using DigitalWorldOnline.Application.CharacterAssets.Queries;
 using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums;
 using DigitalWorldOnline.Commons.Enums.Character;
+using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Extensions;
 using DigitalWorldOnline.Commons.Interfaces;
@@ -35,6 +36,7 @@ namespace DigitalWorldOnline.Character
         private const string GameServerAddress = "GameServer:Address";
         private const string GamerServerPublic = "GameServer:PublicAddress";
         private const string GameServerPort = "GameServer:Port";
+        private const string GameServerPublicPort = "GameServer:PublicPort";
         private const int HandshakeDegree = 32321;
         private const int HandshakeStampDegree = 65535;
 
@@ -275,9 +277,12 @@ namespace DigitalWorldOnline.Character
                         await EnsureRequiredCharacterListsAsync(new List<CharacterModel> { character });
 
                         DebugLog($"Sending selected server info...");
+                        var gameServerAddress = _configuration[GamerServerPublic] ?? _configuration[GameServerAddress] ?? string.Empty;
+                        var gameServerPort = _configuration[GameServerPublicPort] ?? _configuration[GameServerPort] ?? "0";
+
                         client.Send(new ConnectGameServerInfoPacket(
-                            _configuration[GameServerAddress],
-                            _configuration[GameServerPort],
+                            gameServerAddress,
+                            gameServerPort,
                             character.Location.MapId).Serialize());
                     }
                     break;
@@ -328,6 +333,18 @@ namespace DigitalWorldOnline.Character
                         await _sender.Send(new CreateCharacterItemListCommand(character.Id, type));
                         loadedTypes.Add(type);
                     }
+                }
+
+                var equipment = character.ItemList.FirstOrDefault(x => x.Type == ItemListEnum.Equipment);
+                var targetEquipmentSize = (byte)GeneralSizeEnum.Equipment;
+                if (equipment != null && equipment.Size < targetEquipmentSize)
+                {
+                    equipment.CheckEmptyItems();
+                    equipment.AddSlots((byte)(targetEquipmentSize - equipment.Size));
+                    equipment.CheckEmptyItems();
+
+                    await _sender.Send(new UpdateItemListSizeCommand(equipment));
+                    await _sender.Send(new UpdateItemsCommand(equipment));
                 }
             }
 

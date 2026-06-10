@@ -14,6 +14,7 @@
 #include "common_vs2019/pParty.h"
 
 #include "../LibProj/csFileTable/MapListMng.h"
+#include "../LibProj/CsFunc/CrashLogger.h"
 
 
 void cCliGame::RecvCheatLevel(void)
@@ -110,6 +111,7 @@ void cCliGame::RecvInit2ndPass()
 
 void cCliGame::SendChangeChannel(uint nChannelIDX)
 {
+	nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL SendChangeChannel packet=1050 target=%u", nChannelIDX );
 	newp(pGame::ChangeChannel);
 	push(nChannelIDX);
 	endp(pGame::ChangeChannel);

@@ -1,0 +1,23 @@
+namespace DProject.Flow;
+
+public sealed class CCharacterServerRelocateFlow : CFlow
+{
+    public CCharacterServerRelocateFlow(FLOW_IDS id, FlowContext context) : base(id, context)
+    {
+    }
+
+    protected override bool Initialize()
+    {
+        Context.ContentsSystem.InitializeContents(ContentsSystem.eContentsType.E_CT_SERVERCHANGE_CONTENTS);
+        return true;
+    }
+
+    protected override void UpdateFrame()
+    {
+        Context.ContentsSystem.Update(1.0f / 60.0f);
+        if (Context.Config.Porting.AutoAdvanceFlow)
+        {
+            Context.FlowMgr.ChangeFlow(FLOW_IDS.FLW_SERVERSEL);
+        }
+    }
+}

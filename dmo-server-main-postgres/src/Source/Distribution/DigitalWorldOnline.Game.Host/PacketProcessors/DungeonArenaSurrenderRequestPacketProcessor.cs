@@ -1,4 +1,4 @@
-﻿using DigitalWorldOnline.Application.Separar.Commands.Update;
+using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
 using DigitalWorldOnline.Application.GameAssets.Queries;
 using DigitalWorldOnline.Commons.Entities;
@@ -7,6 +7,7 @@ using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Packets.Chat;
 using DigitalWorldOnline.Commons.Packets.MapServer;
+using DigitalWorldOnline.Game.Configuration;
 using DigitalWorldOnline.Game.Managers;
 using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
@@ -89,7 +90,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                         targetClient.Send(new MapSwapPacket(
                             _configuration[GamerServerPublic],
-                            _configuration[GameServerPort],
+                            _configuration.GetPublicGameServerPort(),
                            targetClient.Tamer.Location.MapId,
                            targetClient.Tamer.Location.X,
                            targetClient.Tamer.Location.Y)
@@ -115,7 +116,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             client.Send(new MapSwapPacket(
                 _configuration[GamerServerPublic],
-                _configuration[GameServerPort],
+                _configuration.GetPublicGameServerPort(),
                 client.Tamer.Location.MapId,
                 client.Tamer.Location.X,
                 client.Tamer.Location.Y)

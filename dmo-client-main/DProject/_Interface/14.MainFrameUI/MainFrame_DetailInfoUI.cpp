@@ -293,12 +293,59 @@ namespace
 		return wsText;
 	}
 
+	std::wstring FormatBasisPointPercentValueForAdditionalStat(int nValue)
+	{
+		std::wstring wsText;
+		DmCS::StringFn::Format( wsText, L"%.2f%%", nValue / 100.0f );
+		return wsText;
+	}
+
 	int GetXmlUnionCollectionBonusValue(int nIndex)
 	{
 		if( nIndex < 0 || nIndex >= eXmlUnionBonusMax || g_pGameIF == NULL || g_pGameIF->GetXmlUnionDUnit() == NULL )
 			return 0;
 
 		return g_pGameIF->GetXmlUnionDUnit()->GetCollectionBonusValue( nIndex );
+	}
+
+	int GetAdditionalStatIndexFromAccessoryOption(int nOption)
+	{
+		switch( nOption )
+		{
+		case nItem::AP_ATTRIBUTE_IC: return 0;
+		case nItem::AP_ATTRIBUTE_WA: return 1;
+		case nItem::AP_ATTRIBUTE_FI: return 2;
+		case nItem::AP_ATTRIBUTE_EA: return 3;
+		case nItem::AP_ATTRIBUTE_WI: return 4;
+		case nItem::AP_ATTRIBUTE_WO: return 5;
+		case nItem::AP_ATTRIBUTE_LI: return 6;
+		case nItem::AP_ATTRIBUTE_DK: return 7;
+		case nItem::AP_ATTRIBUTE_TH: return 8;
+		case nItem::AP_ATTRIBUTE_ST: return 9;
+		case nItem::AP_ATTRIBUTE_DA: return 11;
+		case nItem::AP_ATTRIBUTE_VA: return 12;
+		case nItem::AP_ATTRIBUTE_VI: return 13;
+		case nItem::AP_ATTRIBUTE_UN: return 14;
+		default: return -1;
+		}
+	}
+
+	void AddAccessoryAdditionalStatValue(int (&nAdditionalStatValue)[DETAILINFO_ADDITIONAL_STAT_COUNT], cItemInfo* pItem)
+	{
+		if( !pItem || !pItem->IsEnable() || pItem->m_nRate <= 0 )
+			return;
+
+		for( int i = 0; i < nLimit::MAX_ACCESSORY_OPTION; ++i )
+		{
+			if( 0 == pItem->m_nAccOption[i] )
+				break;
+
+			int const nStatIndex = GetAdditionalStatIndexFromAccessoryOption( pItem->m_nAccOption[i] );
+			if( nStatIndex < 0 || nStatIndex >= DETAILINFO_ADDITIONAL_STAT_COUNT )
+				continue;
+
+			nAdditionalStatValue[nStatIndex] += static_cast<int>( ( pItem->m_nAccValues[i] * pItem->m_nRate + 50 ) / 100 );
+		}
 	}
 
 	std::wstring FormatTamerDetailInfoValue(int nIndex, int nValue)
@@ -330,8 +377,11 @@ m_pDigimonZoomButton(NULL),
 m_pAdditionalStatCloseButton(NULL),
 m_pAdditionalStatScrollBar(NULL),
 m_pAdditionalStatPopup(NULL),
+m_pTamerTopEquipList(NULL),
 m_pTamerLeftEquipList(NULL),
+m_pTamerBottomEquipList(NULL),
 m_pTamerRightEquipList(NULL),
+m_pTamerRightBottomEquipList(NULL),
 m_pDigimonSkillGrid(NULL),
 m_pTamerRenderTex(NULL),
 m_pDigimonRenderTex(NULL),
@@ -485,10 +535,20 @@ void cDetailInfoUI::Update(float const& fDeltaTime)
 {
 	UpdateScript( fDeltaTime );
 
+	bool bRefreshed = false;
 	if( m_bPendingRefresh )
 	{
 		m_bPendingRefresh = false;
 		_UpdateAll();
+		bRefreshed = true;
+	}
+
+	if( !bRefreshed )
+	{
+		if( eTabTamer == m_eCurrentTab )
+			_UpdateTamerPage();
+		if( m_bAdditionalStatVisible )
+			_UpdateAdditionalStatPopup();
 	}
 
 	if( eTabTamer == m_eCurrentTab )
@@ -539,15 +599,33 @@ cBaseWindow::eMU_TYPE cDetailInfoUI::Update_ForMouse()
 
 	if( eTabTamer == m_eCurrentTab )
 	{
+		if( m_pTamerTopEquipList && m_pTamerTopEquipList->Update_ForMouse( CURSOR_ST.GetPos() ) )
+		{
+			if( _SetEquipTooltip( m_pTamerTopEquipList->GetMouseOverItem() ) )
+				return muReturn;
+		}
+
 		if( m_pTamerLeftEquipList && m_pTamerLeftEquipList->Update_ForMouse( CURSOR_ST.GetPos() ) )
 		{
 			if( _SetEquipTooltip( m_pTamerLeftEquipList->GetMouseOverItem() ) )
 				return muReturn;
 		}
 
+		if( m_pTamerBottomEquipList && m_pTamerBottomEquipList->Update_ForMouse( CURSOR_ST.GetPos() ) )
+		{
+			if( _SetEquipTooltip( m_pTamerBottomEquipList->GetMouseOverItem() ) )
+				return muReturn;
+		}
+
 		if( m_pTamerRightEquipList && m_pTamerRightEquipList->Update_ForMouse( CURSOR_ST.GetPos() ) )
 		{
 			if( _SetEquipTooltip( m_pTamerRightEquipList->GetMouseOverItem() ) )
+				return muReturn;
+		}
+
+		if( m_pTamerRightBottomEquipList && m_pTamerRightBottomEquipList->Update_ForMouse( CURSOR_ST.GetPos() ) )
+		{
+			if( _SetEquipTooltip( m_pTamerRightBottomEquipList->GetMouseOverItem() ) )
 				return muReturn;
 		}
 
@@ -590,10 +668,16 @@ void cDetailInfoUI::Render()
 				m_pTamerRenderTex->RenderObject( GET_SUBCAMERA( CAMERA_02 ), pTamer, true );
 				m_pTamerRenderTex->EndRender( GET_SUBCAMERA( CAMERA_02 ), GetTotalPosition() + CsPoint( DETAILINFO_TAMER_RENDER_X, DETAILINFO_TAMER_RENDER_Y ) );
 
+				if( m_pTamerTopEquipList )
+					m_pTamerTopEquipList->Render();
 				if( m_pTamerLeftEquipList )
 					m_pTamerLeftEquipList->Render();
+				if( m_pTamerBottomEquipList )
+					m_pTamerBottomEquipList->Render();
 				if( m_pTamerRightEquipList )
 					m_pTamerRightEquipList->Render();
+				if( m_pTamerRightBottomEquipList )
+					m_pTamerRightBottomEquipList->Render();
 			}
 		}
 
@@ -1113,14 +1197,28 @@ void cDetailInfoUI::_UpdateAll()
 
 void cDetailInfoUI::_MakeTamerEquipGrid()
 {
-	CsPoint ptSize( 32, 304 );
+	CsPoint ptSize( 32, 310 );
 	CsPoint ptGap( 0, 14 );
 	CsPoint ptItemSize( 32, 32 );
+	CsPoint ptLeftPos( DETAILINFO_TAMER_RENDER_X + 24, DETAILINFO_TAMER_RENDER_Y + 28 );
+
+	m_pTamerTopEquipList = NiNew cGridListBox;
+	if( m_pTamerTopEquipList )
+	{
+		m_pTamerTopEquipList->Init( m_pRoot, ptLeftPos, CsPoint( 78, 32 ), CsPoint( 14, 0 ), ptItemSize, cGridListBox::LowRightDown, cGridListBox::LeftTop, NULL, false, 2 );
+		m_pTamerTopEquipList->SetMouseOverImg( "Icon\\Mask_Over.tga" );
+		m_pTamerTopEquipList->SetBackOverAndSelectedImgRender( false );
+		m_pTamerTopEquipList->SetAutoSelection( false );
+		AddChildControl( m_pTamerTopEquipList );
+		m_vTamerControls.push_back( m_pTamerTopEquipList );
+	}
 
 	m_pTamerLeftEquipList = NiNew cGridListBox;
 	if( m_pTamerLeftEquipList )
 	{
-		m_pTamerLeftEquipList->Init( m_pRoot, CsPoint( DETAILINFO_TAMER_RENDER_X + 24, DETAILINFO_TAMER_RENDER_Y + 28 ), ptSize, ptGap, ptItemSize, cGridListBox::LowLeftDown, cGridListBox::LeftTop, NULL, false, 1 );
+		ptLeftPos.y += 46;
+		ptSize.y -= 46;
+		m_pTamerLeftEquipList->Init( m_pRoot, ptLeftPos, ptSize, ptGap, ptItemSize, cGridListBox::LowLeftDown, cGridListBox::LeftTop, NULL, false, 1 );
 		m_pTamerLeftEquipList->SetMouseOverImg( "Icon\\Mask_Over.tga" );
 		m_pTamerLeftEquipList->SetBackOverAndSelectedImgRender( false );
 		m_pTamerLeftEquipList->SetAutoSelection( false );
@@ -1128,27 +1226,64 @@ void cDetailInfoUI::_MakeTamerEquipGrid()
 		m_vTamerControls.push_back( m_pTamerLeftEquipList );
 	}
 
+	m_pTamerBottomEquipList = NiNew cGridListBox;
+	if( m_pTamerBottomEquipList )
+	{
+		CsPoint ptNamePlatePos = ptLeftPos + CsPoint( 46, 230 );
+		m_pTamerBottomEquipList->Init( m_pRoot, ptNamePlatePos, ptItemSize, ptGap, ptItemSize, cGridListBox::LowLeftDown, cGridListBox::LeftTop, NULL, false, 1 );
+		m_pTamerBottomEquipList->SetMouseOverImg( "Icon\\Mask_Over.tga" );
+		m_pTamerBottomEquipList->SetBackOverAndSelectedImgRender( false );
+		m_pTamerBottomEquipList->SetAutoSelection( false );
+		AddChildControl( m_pTamerBottomEquipList );
+		m_vTamerControls.push_back( m_pTamerBottomEquipList );
+	}
+
 	m_pTamerRightEquipList = NiNew cGridListBox;
 	if( m_pTamerRightEquipList )
 	{
-		m_pTamerRightEquipList->Init( m_pRoot, CsPoint( DETAILINFO_TAMER_RENDER_X + 330, DETAILINFO_TAMER_RENDER_Y + 28 ), ptSize, ptGap, ptItemSize, cGridListBox::LowLeftDown, cGridListBox::LeftTop, NULL, false, 1 );
+		CsPoint ptRightEquipPos( DETAILINFO_TAMER_RENDER_X + 330, DETAILINFO_TAMER_RENDER_Y + 28 );
+		m_pTamerRightEquipList->Init( m_pRoot, ptRightEquipPos, CsPoint( 32, 356 ), ptGap, ptItemSize, cGridListBox::LowLeftDown, cGridListBox::LeftTop, NULL, false, 1 );
 		m_pTamerRightEquipList->SetMouseOverImg( "Icon\\Mask_Over.tga" );
 		m_pTamerRightEquipList->SetBackOverAndSelectedImgRender( false );
 		m_pTamerRightEquipList->SetAutoSelection( false );
 		AddChildControl( m_pTamerRightEquipList );
 		m_vTamerControls.push_back( m_pTamerRightEquipList );
+
+		m_pTamerRightBottomEquipList = NiNew cGridListBox;
+		if( m_pTamerRightBottomEquipList )
+		{
+			CsPoint ptKeyringPos = ptRightEquipPos + CsPoint( -46, 276 );
+			m_pTamerRightBottomEquipList->Init( m_pRoot, ptKeyringPos, ptItemSize, ptGap, ptItemSize, cGridListBox::LowLeftDown, cGridListBox::LeftTop, NULL, false, 1 );
+			m_pTamerRightBottomEquipList->SetMouseOverImg( "Icon\\Mask_Over.tga" );
+			m_pTamerRightBottomEquipList->SetBackOverAndSelectedImgRender( false );
+			m_pTamerRightBottomEquipList->SetAutoSelection( false );
+			AddChildControl( m_pTamerRightBottomEquipList );
+			m_vTamerControls.push_back( m_pTamerRightBottomEquipList );
+		}
+	}
+
+	if( m_pTamerTopEquipList )
+	{
+		int nIndex = 0;
+		_AddTamerEquipGridItem( m_pTamerTopEquipList, nIndex++, nTamer::Head );
+		_AddTamerEquipGridItem( m_pTamerTopEquipList, nIndex++, nTamer::Goggles );
 	}
 
 	if( m_pTamerLeftEquipList )
 	{
 		int nIndex = 0;
-		_AddTamerEquipGridItem( m_pTamerLeftEquipList, nIndex++, nTamer::Head );
 		_AddTamerEquipGridItem( m_pTamerLeftEquipList, nIndex++, nTamer::Glass );
 		_AddTamerEquipGridItem( m_pTamerLeftEquipList, nIndex++, nTamer::Coat );
 		_AddTamerEquipGridItem( m_pTamerLeftEquipList, nIndex++, nTamer::Pants );
 		_AddTamerEquipGridItem( m_pTamerLeftEquipList, nIndex++, nTamer::Glove );
 		_AddTamerEquipGridItem( m_pTamerLeftEquipList, nIndex++, nTamer::Shoes );
 		_AddTamerEquipGridItem( m_pTamerLeftEquipList, nIndex++, nTamer::Costume );
+	}
+
+	if( m_pTamerBottomEquipList )
+	{
+		int nIndex = 0;
+		_AddTamerEquipGridItem( m_pTamerBottomEquipList, nIndex++, nTamer::NamePlate );
 	}
 
 	if( m_pTamerRightEquipList )
@@ -1165,6 +1300,11 @@ void cDetailInfoUI::_MakeTamerEquipGrid()
 #ifdef SDM_TAMER_XGUAGE_20180628
 		_AddTamerEquipGridItem( m_pTamerRightEquipList, nIndex++, nTamer::XAI );
 #endif
+	}
+	if( m_pTamerRightBottomEquipList )
+	{
+		int nIndex = 0;
+		_AddTamerEquipGridItem( m_pTamerRightBottomEquipList, nIndex++, nTamer::Keyring );
 	}
 }
 
@@ -1319,26 +1459,28 @@ void cDetailInfoUI::_UpdateAdditionalStatPopup()
 		_SetText( m_pAdditionalStatValue[i], _T("0.00%") );
 
 	int nAdditionalStatValue[eAddStatMax] = { 0, };
-	nAdditionalStatValue[eAddStatIce] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusIce );
-	nAdditionalStatValue[eAddStatWater] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusWater );
-	nAdditionalStatValue[eAddStatFire] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusFire );
-	nAdditionalStatValue[eAddStatEarth] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusEarth );
-	nAdditionalStatValue[eAddStatWind] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusWind );
-	nAdditionalStatValue[eAddStatWood] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusWood );
-	nAdditionalStatValue[eAddStatLight] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusLight );
-	nAdditionalStatValue[eAddStatDarkness] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusDarkness );
-	nAdditionalStatValue[eAddStatThunder] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusThunder );
-	nAdditionalStatValue[eAddStatSteel] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusSteel );
-	nAdditionalStatValue[eAddStatBaseDamage] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusBasic );
-	nAdditionalStatValue[eAddStatData] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusData );
-	nAdditionalStatValue[eAddStatVaccine] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusVaccine );
-	nAdditionalStatValue[eAddStatVirus] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusVirus );
-	nAdditionalStatValue[eAddStatUnknown] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusUnknown );
+	nAdditionalStatValue[eAddStatIce] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusIce ) * 100;
+	nAdditionalStatValue[eAddStatWater] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusWater ) * 100;
+	nAdditionalStatValue[eAddStatFire] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusFire ) * 100;
+	nAdditionalStatValue[eAddStatEarth] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusEarth ) * 100;
+	nAdditionalStatValue[eAddStatWind] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusWind ) * 100;
+	nAdditionalStatValue[eAddStatWood] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusWood ) * 100;
+	nAdditionalStatValue[eAddStatLight] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusLight ) * 100;
+	nAdditionalStatValue[eAddStatDarkness] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusDarkness ) * 100;
+	nAdditionalStatValue[eAddStatThunder] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusThunder ) * 100;
+	nAdditionalStatValue[eAddStatSteel] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusSteel ) * 100;
+	nAdditionalStatValue[eAddStatBaseDamage] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusBasic ) * 100;
+	nAdditionalStatValue[eAddStatData] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusData ) * 100;
+	nAdditionalStatValue[eAddStatVaccine] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusVaccine ) * 100;
+	nAdditionalStatValue[eAddStatVirus] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusVirus ) * 100;
+	nAdditionalStatValue[eAddStatUnknown] = GetXmlUnionCollectionBonusValue( eXmlUnionBonusUnknown ) * 100;
+
+	AddAccessoryAdditionalStatValue( nAdditionalStatValue, GetSystem()->GetEquipItem( nTamer::MaxParts ) );
 
 	for( int i = 0; i < eAddStatMax; ++i )
 	{
 		if( nAdditionalStatValue[i] > 0 )
-			_SetText( m_pAdditionalStatValue[i], FormatWholePercentValue( nAdditionalStatValue[i] ) );
+			_SetText( m_pAdditionalStatValue[i], FormatBasisPointPercentValueForAdditionalStat( nAdditionalStatValue[i] ) );
 	}
 
 	_UpdateAdditionalStatRows();

@@ -30,6 +30,9 @@ namespace nsPART
 #ifdef SDM_TAMER_EQUIP_ADD_BRACELET_20181031
 		Bracelet		= 12,
 #endif
+		NamePlate		= 13,
+		Goggles			= 14,
+		Keyring			= 15,
 #ifdef LJW_ENCHANT_OPTION_DIGIVICE_190904
 		Digivice,					// 디지바이스 이펙트를 위해 추가 - 서버에는 없음 주의할 것
 #endif

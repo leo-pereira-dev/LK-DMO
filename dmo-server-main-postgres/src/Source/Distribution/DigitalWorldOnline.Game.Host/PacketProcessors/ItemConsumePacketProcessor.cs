@@ -1,10 +1,11 @@
-﻿using DigitalWorldOnline.Application;
+using DigitalWorldOnline.Application;
 using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Application.GameAssets.Bins;
 using DigitalWorldOnline.Application.Separar.Commands.Create;
 using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
 using DigitalWorldOnline.Application.GameAssets.Queries;
+using DigitalWorldOnline.Commons.Constants;
 using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums;
 using DigitalWorldOnline.Commons.Enums.Character;
@@ -23,8 +24,10 @@ using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.GameServer.Combat;
 using DigitalWorldOnline.Commons.Packets.Items;
 using DigitalWorldOnline.Commons.Packets.MapServer;
+using DigitalWorldOnline.Game.Configuration;
 using DigitalWorldOnline.Commons.Utils;
 using DigitalWorldOnline.Game.Managers;
+using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +36,7 @@ using Serilog;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.Eventing.Reader;
+using System.Text.RegularExpressions;
 
 namespace DigitalWorldOnline.Game.PacketProcessors
 {
@@ -50,12 +54,15 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private readonly ItemListBinLoader _itemListBinLoader;
         private readonly ExpManager _expManager;
         private readonly FatigueService _fatigueService;   // FATIGUE_HOOK
+        private readonly VerdandiXProgramService _verdandiXProgram;
+        private readonly AccessoryEnchantService _accessoryEnchantService;
         private readonly DMBaseBinLoader _dmBase;
         private readonly DigimonListBinLoader _digimonList;
         private readonly ISender _sender;
         private readonly ILogger _logger;
         private readonly IConfiguration _configuration;
         private static readonly ConcurrentDictionary<(long TamerId, int GroupKey), DateTime> _itemCooldownByTamer = new();
+        private static readonly HashSet<int> UnsealedAccessoryTypes = new() { 28, 29, 30, 33 };
 
         public ItemConsumePacketProcessor(
             StatusManager statusManager,
@@ -65,6 +72,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             ItemListBinLoader itemListBinLoader,
             ExpManager expManager,
             FatigueService fatigueService,   // FATIGUE_HOOK
+            VerdandiXProgramService verdandiXProgram,
+            AccessoryEnchantService accessoryEnchantService,
             ConfigsLoader configs,
             DMBaseBinLoader dmBase,
             DigimonListBinLoader digimonList,
@@ -77,6 +86,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _dungeonServer = dungeonsServer;
             _expManager = expManager;
             _fatigueService = fatigueService;   // FATIGUE_HOOK
+            _verdandiXProgram = verdandiXProgram;
+            _accessoryEnchantService = accessoryEnchantService;
             _assets = assets;
             _itemListBinLoader = itemListBinLoader;
             _configs = configs;
@@ -594,7 +605,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (skillInfo == null || !skillInfo.IsMemorySkill)
             {
                 _logger.Warning(
-                    "Memory-skill register: chip {ItemId} → skill {SkillId} but bin says it's not a memory skill.",
+                    "Memory-skill register: chip {ItemId} -> skill {SkillId} but bin says it's not a memory skill.",
                     chipItem.ItemId, skillId);
                 client.Send(new ItemConsumeFailPacket(itemSlot, chipItem.ItemInfo.Type));
                 client.Send(new SystemMessagePacket($"Skill {skillId} is not a memory skill."));
@@ -614,8 +625,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             // Same memory-type slot already occupied (one ATK, one DEF, one AST per evo).
             // The bin's s_nMemorySkill maps 1=ATK / 2=DEF / 3=AST.  Chip Type_L matches:
-            //   67 → ATK (1), 68 → DEF (2), 69 → AST (3).
-            int chipMemoryType = chipItem.ItemInfo.Type - 66;  // 67→1, 68→2, 69→3
+            //   67 -> ATK (1), 68 -> DEF (2), 69 -> AST (3).
+            int chipMemoryType = chipItem.ItemInfo.Type - 66;  // 67->1, 68->2, 69->3
             foreach (var existing in evolution.MemorySkills)
             {
                 var existingInfo = _assets.SkillInfo.FirstOrDefault(x => x.SkillId == existing.SkillId);
@@ -868,7 +879,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                         mob.SetDuration();
                         mob.SetTargetSummonHandle(client.Tamer.GeneralHandler);
-                        _mapServer.AddSummonMobs(client.Tamer.Location.MapId, mob);
+                        _mapServer.AddSummonMobs(client.Tamer.Location.MapId, mob, client.TamerId);
 
                     }
                 }
@@ -943,7 +954,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                 client.Send(new MapSwapPacket(
                         _configuration[GamerServerPublic],
-                        _configuration[GameServerPort],
+                        _configuration.GetPublicGameServerPort(),
                         client.Tamer.Location.MapId,
                         client.Tamer.Location.X,
                         client.Tamer.Location.Y)
@@ -1184,7 +1195,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     {
                         rare = size.Size == availableSizes.Max(x => x.Size);
 
-                        newSize = (short)(size.Size * 100);
+                        newSize = RollFruitSize(size.Size);
                         changeSize = true;
                         break;
                     }
@@ -1276,6 +1287,14 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
                 )
             );
+        }
+
+        private static short RollFruitSize(double configuredSize)
+        {
+            var wholePercent = (int)Math.Truncate(configuredSize);
+            var randomDecimal = UtilitiesFunctions.RandomInt(1, 99);
+
+            return (short)(wholePercent * 100 + randomDecimal);
         }
 
         private async Task ConsumeFoodItem(GameClient client, short itemSlot, ItemModel targetItem)
@@ -1656,7 +1675,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         /// (item-pos, item-type, evolution-slot-array-index). The server replies with an
         /// updated <c>cEvoUnit</c> whose <c>m_nSkillMaxLevel[nLimit::Skill]</c> array reflects
         /// the new cap. The bin's <c>DskillOpenExpansion</c> entries provide the allowlist of
-        /// evolution stages each item rank may target; the actual rank → cap-delta mapping is
+        /// evolution stages each item rank may target; the actual rank ? cap-delta mapping is
         /// not in the bin (server-side decision).
         ///
         /// This server doesn't yet implement <c>DigimonSkillLimitOpen</c> — that's a future
@@ -1736,6 +1755,14 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         {
             var containerItem = client.Tamer.Inventory.FindItemBySlot(itemSlot);
             var ItemId = 0;
+            _logger.Information(
+                "Container use request: tamer {TamerId} slot {Slot} item {ItemId} name {ItemName} amount {Amount} type {ItemType}.",
+                client.TamerId,
+                itemSlot,
+                containerItem?.ItemId ?? targetItem.ItemId,
+                containerItem?.ItemInfo?.Name ?? targetItem.ItemInfo?.Name,
+                containerItem?.Amount ?? targetItem.Amount,
+                containerItem?.ItemInfo?.Type ?? targetItem.ItemInfo?.Type);
 
             if (containerItem == null || containerItem.ItemId == 0 || containerItem.ItemInfo == null)
             {
@@ -1753,6 +1780,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var containerAsset = _assets.Container.FirstOrDefault(x => x.ItemId == containerItem.ItemId);
             if (containerAsset == null)
             {
+                if (await TryUnsealAccessoryItemAsync(client, itemSlot, containerItem))
+                    return;
+
                 client.Send(
                     UtilitiesFunctions.GroupPackets(
                         new ItemConsumeFailPacket(itemSlot, targetItem.ItemInfo.Type).Serialize(),
@@ -1764,6 +1794,14 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return;
             }
 
+            _logger.Information(
+                "Container config found: tamer {TamerId} slot {Slot} item {ItemId} containerAssetId {ContainerAssetId} rewardAmount {RewardAmount} rewardCount {RewardCount}.",
+                client.TamerId,
+                itemSlot,
+                containerItem.ItemId,
+                containerAsset.Id,
+                containerAsset.RewardAmount,
+                containerAsset.Rewards?.Count ?? 0);
             if (!containerAsset.Rewards.Any())
             {
                 client.Send(
@@ -1800,13 +1838,28 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     if (contentItem.ItemInfo == null)
                     {
                         client.Send(new SystemMessagePacket($"Invalid item info for item {possibleReward.ItemId}."));
-                        _logger.Warning($"Invalid item info for item {possibleReward.ItemId} in tamer {client.TamerId} scan.");
+                        _logger.Warning(
+                            "Container reward rejected: tamer {TamerId} containerItem {ContainerItemId} containerAssetId {ContainerAssetId} rewardItem {RewardItemId} has no ItemInfo.",
+                            client.TamerId,
+                            containerItem.ItemId,
+                            containerAsset.Id,
+                            possibleReward.ItemId);
                         error = true;
                         return;
                     }
 
                     contentItem.SetItemId(possibleReward.ItemId);
                     contentItem.SetAmount(UtilitiesFunctions.RandomInt(possibleReward.MinAmount, possibleReward.MaxAmount));
+                    _logger.Information(
+                        "Container reward selected: tamer {TamerId} containerItem {ContainerItemId} containerAssetId {ContainerAssetId} rewardItem {RewardItemId} rewardName {RewardName} amount {Amount} chance {Chance} rare {Rare}.",
+                        client.TamerId,
+                        containerItem.ItemId,
+                        containerAsset.Id,
+                        possibleReward.ItemId,
+                        contentItem.ItemInfo.Name,
+                        contentItem.Amount,
+                        possibleReward.Chance,
+                        possibleReward.Rare);
 
                     if (contentItem.IsTemporary)
                         contentItem.SetRemainingTime((uint)contentItem.ItemInfo.UsageTimeMinutes);
@@ -1833,22 +1886,38 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             {
                 var receiveList = string.Join(',', receivedItems.Select(x => $"{x.ItemId} x{x.Amount}"));
 
-                _logger.Verbose($"Character {client.TamerId} openned box {containerItem.ItemId} and obtained {receiveList}");
+                _logger.Information(
+                    "Container open success: tamer {TamerId} containerItem {ContainerItemId} containerAssetId {ContainerAssetId} rewards {Rewards}.",
+                    client.TamerId,
+                    containerItem.ItemId,
+                    containerAsset.Id,
+                    receiveList);
 
-                var inventoryItems = new List<ItemModel>();
                 var giftItems = new List<ItemModel>();
                 foreach (var receivedItem in receivedItems)
                 {
                     if (client.Tamer.Inventory.AddItem(receivedItem))
                     {
-                        inventoryItems.Add(receivedItem);
+                        _logger.Information(
+                            "Container reward delivered to inventory: tamer {TamerId} containerItem {ContainerItemId} rewardItem {RewardItemId} rewardName {RewardName} amount {Amount}.",
+                            client.TamerId,
+                            containerItem.ItemId,
+                            receivedItem.ItemId,
+                            receivedItem.ItemInfo?.Name,
+                            receivedItem.Amount);
                         continue;
                     }
 
                     receivedItem.EndDate = DateTime.UtcNow.AddDays(14);
                     if (client.Tamer.GiftWarehouse.AddGiftItem(receivedItem))
                     {
-                        giftItems.Add(receivedItem);
+                        giftItems.Add(receivedItem);                        _logger.Information(
+                            "Container reward delivered to gift warehouse: tamer {TamerId} containerItem {ContainerItemId} rewardItem {RewardItemId} rewardName {RewardName} amount {Amount}.",
+                            client.TamerId,
+                            containerItem.ItemId,
+                            receivedItem.ItemId,
+                            receivedItem.ItemInfo?.Name,
+                            receivedItem.Amount);
                         continue;
                     }
 
@@ -1875,9 +1944,6 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     )
                 );
 
-                inventoryItems.ForEach(receivedItem =>
-                    client.Send(new ReceiveItemPacket(receivedItem, InventoryTypeEnum.Inventory)));
-
                 await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
                 if (giftItems.Count > 0)
                     await _sender.Send(new UpdateItemsCommand(client.Tamer.GiftWarehouse));
@@ -1887,64 +1953,285 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         "Container item {ContainerItemId} for tamer {TamerId} delivered {GiftCount} reward stack(s) to GiftWarehouse because inventory had no room.",
                         containerItem.ItemId, client.TamerId, giftItems.Count);
 
-                if (ItemId == 70102) // TODO: Mudar 
-                {
-                    var buffData = new List<(int BuffId, int Value1, int Value2)>
-                    {
-                        (50121, 2700022, 2592000),
-                        (50122, 2700023, 2592000),
-                        (50123, 2700024, 2592000)
-                    };
-
-                    foreach (var (BuffId, Value1, Value2) in buffData)
-                    {
-                        var buff = _assets.BuffInfo.FirstOrDefault(x => x.SkillCode == Value1);
-                        if (buff != null)
-                        {
-                            if (!client.Tamer.BuffList.Buffs.Any(x => x.BuffId == BuffId))
-                            {
-
-                                var duration = Math.Max(1, Value2);
-
-                                var newCharacterBuff = CharacterBuffModel.Create(BuffId, Value1, Value2);
-                                newCharacterBuff.SetBuffInfo(buff);
-
-                                client.Tamer.BuffList.Add(newCharacterBuff);
-                                await _sender.Send(new UpdateCharacterBuffListCommand(client.Tamer.BuffList));
-
-                                _mapServer.BroadcastForTamerViewsAndSelf(client.TamerId,
-                                new AddBuffPacket(client.Tamer.GeneralHandler, buff, (short)0, duration).Serialize());
-
-                            }
-                            else
-                            {
-
-                                var BuffInfo = client.Tamer.BuffList.Buffs.FirstOrDefault(x => x.BuffId == BuffId);
-
-                                if (BuffInfo != null)
-                                {
-
-                                    BuffInfo.SetDuration(Value2);
-
-                                    var duration = BuffInfo.Duration == 0 ? unchecked((int)uint.MaxValue) : Math.Max(1, BuffInfo.Duration);
-
-                                    _mapServer.BroadcastForTamerViewsAndSelf(client.TamerId,
-                                  new UpdateBuffPacket(client.Tamer.GeneralHandler, buff, (short)0, duration).Serialize());
-
-
-                                    await _sender.Send(new UpdateCharacterBuffListCommand(client.Tamer.BuffList));
-                                }
-                            }
-                        }
-
-                        client.IncreaseMembershipDuration(2592000);
-                        client.Send(new MembershipPacket(client.MembershipExpirationDate!.Value, client.MembershipUtcSeconds));
-                        await _sender.Send(new UpdateAccountMembershipCommand(client.AccountId, client.MembershipExpirationDate));
-
-                        client.Send(new UpdateStatusPacket(client.Tamer));
-                    }
-                }
+                if (MembershipConstants.DurationSecondsByItemId.TryGetValue(ItemId, out var membershipDurationSeconds))
+                    await ApplyMembershipAsync(client, membershipDurationSeconds);
             }
+        }
+
+        private async Task<bool> TryUnsealAccessoryItemAsync(GameClient client, short itemSlot, ItemModel sealedItem)
+        {
+            if (!IsSealedAccessoryCandidate(sealedItem.ItemInfo))
+                return false;
+
+            var sealedItemInfo = sealedItem.ItemInfo!;
+            var sealedItemId = sealedItem.ItemId;
+            var sealedItemName = sealedItemInfo.Name;
+            var finalItemInfo = ResolveUnsealedAccessoryInfo(sealedItemInfo);
+
+            _logger.Information(
+                "Sealed accessory unseal request: tamer {TamerId} slot {Slot} sealedItem {SealedItemId} sealedName {SealedName} resolvedItem {ResolvedItemId} resolvedName {ResolvedName}.",
+                client.TamerId,
+                itemSlot,
+                sealedItemId,
+                sealedItemName,
+                finalItemInfo?.ItemId,
+                finalItemInfo?.Name);
+
+            if (finalItemInfo == null)
+            {
+                SendUnsealFail(client, itemSlot, sealedItem, $"No unsealed accessory target found for item id {sealedItemId}.");
+                _logger.Warning(
+                    "Sealed accessory unseal failed: no target found. Tamer={TamerId} Slot={Slot} SealedItem={SealedItemId} SealedName={SealedName}.",
+                    client.TamerId,
+                    itemSlot,
+                    sealedItemId,
+                    sealedItemName);
+                return true;
+            }
+
+            var unsealedItem = new ItemModel();
+            unsealedItem.SetItemInfo(finalItemInfo);
+            unsealedItem.SetItemId(finalItemInfo.ItemId);
+            unsealedItem.SetAmount(1);
+
+            if (unsealedItem.IsTemporary)
+                unsealedItem.SetDefaultRemainingTime();
+
+            var identifyResult = _accessoryEnchantService.Identify(unsealedItem);
+            if (!identifyResult.Applied)
+            {
+                SendUnsealFail(client, itemSlot, sealedItem, $"Invalid accessory option data for item id {finalItemInfo.ItemId}.");
+                _logger.Warning(
+                    "Sealed accessory unseal failed: identify rejected target. Tamer={TamerId} Slot={Slot} SealedItem={SealedItemId} TargetItem={TargetItemId} Reason={Reason}.",
+                    client.TamerId,
+                    itemSlot,
+                    sealedItemId,
+                    finalItemInfo.ItemId,
+                    identifyResult.Message);
+                return true;
+            }
+
+            if (sealedItem.Amount > 1 && client.Tamer.Inventory.TotalEmptySlots <= 0)
+            {
+                SendUnsealFail(client, itemSlot, sealedItem, $"Not enough inventory space to unseal item id {sealedItemId}.");
+                _logger.Warning(
+                    "Sealed accessory unseal failed: no inventory slot for stack split. Tamer={TamerId} Slot={Slot} SealedItem={SealedItemId} Amount={Amount}.",
+                    client.TamerId,
+                    itemSlot,
+                    sealedItemId,
+                    sealedItem.Amount);
+                return true;
+            }
+
+            var replaceSameSlot = sealedItem.Amount <= 1;
+            if (!client.Tamer.Inventory.RemoveOrReduceItem(sealedItem, 1, itemSlot))
+            {
+                SendUnsealFail(client, itemSlot, sealedItem, $"Unable to consume sealed accessory item id {sealedItemId}.");
+                _logger.Warning(
+                    "Sealed accessory unseal failed: source consume rejected. Tamer={TamerId} Slot={Slot} SealedItem={SealedItemId}.",
+                    client.TamerId,
+                    itemSlot,
+                    sealedItemId);
+                return true;
+            }
+
+            var added = replaceSameSlot
+                ? client.Tamer.Inventory.AddItemWithSlot(unsealedItem, itemSlot)
+                : client.Tamer.Inventory.AddItem(unsealedItem);
+
+            if (!added)
+            {
+                var restoreItem = new ItemModel();
+                restoreItem.SetItemInfo(_assets.ItemInfo.FirstOrDefault(x => x.ItemId == sealedItemId));
+                restoreItem.SetItemId(sealedItemId);
+                restoreItem.SetAmount(1);
+                client.Tamer.Inventory.AddItem(restoreItem);
+
+                SendUnsealFail(client, itemSlot, sealedItem, $"Unable to place unsealed accessory item id {finalItemInfo.ItemId}.");
+                _logger.Warning(
+                    "Sealed accessory unseal failed: target add rejected after consume. Tamer={TamerId} Slot={Slot} SealedItem={SealedItemId} TargetItem={TargetItemId}.",
+                    client.TamerId,
+                    itemSlot,
+                    sealedItemId,
+                    finalItemInfo.ItemId);
+                return true;
+            }
+
+            client.Send(
+                UtilitiesFunctions.GroupPackets(
+                    new ItemConsumeSuccessPacket(client.Tamer.GeneralHandler, itemSlot).Serialize(),
+                    new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
+                )
+            );
+
+            await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
+
+            _logger.Information(
+                "Sealed accessory unseal success: tamer {TamerId} slot {Slot} sealedItem {SealedItemId} sealedName {SealedName} targetItem {TargetItemId} targetName {TargetName} targetSlot {TargetSlot} statusCount {StatusCount}.",
+                client.TamerId,
+                itemSlot,
+                sealedItemId,
+                sealedItemName,
+                unsealedItem.ItemId,
+                unsealedItem.ItemInfo?.Name,
+                unsealedItem.Slot,
+                unsealedItem.AccessoryStatus.Count(x => x.EffectiveValue > 0));
+
+            return true;
+        }
+
+        private bool IsSealedAccessoryCandidate(ItemAssetModel? itemInfo)
+        {
+            if (itemInfo?.Type != 170 || string.IsNullOrWhiteSpace(itemInfo.Name))
+                return false;
+
+            return Regex.IsMatch(itemInfo.Name, @"\bsealed\b", RegexOptions.IgnoreCase) &&
+                   Regex.IsMatch(itemInfo.Name, @"\b(ring|necklace|earring|bracelet)\b", RegexOptions.IgnoreCase);
+        }
+
+        private ItemAssetModel? ResolveUnsealedAccessoryInfo(ItemAssetModel sealedItemInfo)
+        {
+            var normalizedTargetName = NormalizeUnsealedAccessoryName(sealedItemInfo.Name);
+            if (string.IsNullOrWhiteSpace(normalizedTargetName))
+                return null;
+
+            var adjacentItem = _assets.ItemInfo.FirstOrDefault(x => x.ItemId == sealedItemInfo.ItemId - 1);
+            if (IsValidUnsealedAccessoryInfo(adjacentItem) &&
+                NormalizeAccessoryName(adjacentItem!.Name) == normalizedTargetName)
+            {
+                return adjacentItem;
+            }
+
+            return _assets.ItemInfo
+                .Where(IsValidUnsealedAccessoryInfo)
+                .Where(x => NormalizeAccessoryName(x.Name) == normalizedTargetName)
+                .OrderBy(x => Math.Abs(x.ItemId - sealedItemInfo.ItemId))
+                .ThenBy(x => x.ItemId)
+                .FirstOrDefault();
+        }
+
+        private bool IsValidUnsealedAccessoryInfo(ItemAssetModel? itemInfo)
+        {
+            if (itemInfo == null || !UnsealedAccessoryTypes.Contains(itemInfo.Type) || itemInfo.SkillCode <= 0)
+                return false;
+
+            var skillCodeKey = itemInfo.SkillCode <= uint.MaxValue ? (uint)itemInfo.SkillCode : 0;
+            var itemTypeKey = (uint)itemInfo.Type;
+            return _itemListBinLoader.Data.AccessoryOptions.Any(x =>
+                x.ItemType == skillCodeKey ||
+                x.ItemType == itemTypeKey);
+        }
+
+        private static string NormalizeUnsealedAccessoryName(string name)
+        {
+            var withoutTags = Regex.Replace(name, @"\[[^\]]+\]", " ");
+            var withoutSealed = Regex.Replace(withoutTags, @"\bsealed\b", " ", RegexOptions.IgnoreCase);
+            return NormalizeAccessoryName(withoutSealed);
+        }
+
+        private static string NormalizeAccessoryName(string name)
+        {
+            var withoutTags = Regex.Replace(name, @"\[[^\]]+\]", " ");
+            var normalized = Regex.Replace(withoutTags, @"[^a-zA-Z0-9]+", " ").Trim().ToLowerInvariant();
+            return Regex.Replace(normalized, @"\s+", " ");
+        }
+
+        private static void SendUnsealFail(GameClient client, short itemSlot, ItemModel sealedItem, string message)
+        {
+            client.Send(
+                UtilitiesFunctions.GroupPackets(
+                    new ItemConsumeFailPacket(itemSlot, sealedItem.ItemInfo?.Type ?? 170).Serialize(),
+                    new SystemMessagePacket(message).Serialize(),
+                    new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()
+                )
+            );
+        }
+
+        private async Task ApplyMembershipAsync(GameClient client, int membershipDurationSeconds)
+        {
+            var buffListChanged = RemoveMembershipSpeedBuff(client, true);
+
+            client.IncreaseMembershipDuration(membershipDurationSeconds);
+
+            var visibleBuffDuration = Math.Max(
+                1,
+                (int)Math.Ceiling(client.MembershipExpirationDate!.Value.Subtract(DateTime.Now).TotalSeconds));
+
+            foreach (var (buffId, skillCode) in MembershipConstants.VisibleBuffs)
+                buffListChanged |= AddOrRefreshMembershipBuff(client, buffId, skillCode, visibleBuffDuration);
+
+            if (buffListChanged)
+                await _sender.Send(new UpdateCharacterBuffListCommand(client.Tamer.BuffList));
+
+            client.Send(new MembershipPacket(client.MembershipExpirationDate!.Value, client.MembershipUtcSeconds));
+            await _sender.Send(new UpdateAccountMembershipCommand(client.AccountId, client.MembershipExpirationDate));
+
+            client.Send(new UpdateStatusPacket(client.Tamer));
+            BroadcastForTamerViewsAndSelf(client, new UpdateMovementSpeedPacket(client.Tamer).Serialize());
+        }
+
+        private bool RemoveMembershipSpeedBuff(GameClient client, bool broadcast)
+        {
+            if (!client.Tamer.BuffList.Remove(MembershipConstants.MoveSpeedBuffId))
+                return false;
+
+            if (broadcast)
+            {
+                BroadcastForTamerViewsAndSelf(
+                    client,
+                    new RemoveBuffPacket(client.Tamer.GeneralHandler, MembershipConstants.MoveSpeedBuffId).Serialize());
+            }
+
+            return true;
+        }
+
+        private bool AddOrRefreshMembershipBuff(GameClient client, int buffId, int skillCode, int duration)
+        {
+            var buffInfo = _assets.BuffInfo.FirstOrDefault(x => x.SkillCode == skillCode);
+            if (buffInfo == null)
+            {
+                _logger.Warning(
+                    "Membership visible buff asset missing. tamer={TamerId} buffId={BuffId} skillCode={SkillCode}",
+                    client.TamerId,
+                    buffId,
+                    skillCode);
+                return false;
+            }
+
+            var existingBuff = client.Tamer.BuffList.Buffs.FirstOrDefault(x => x.BuffId == buffId);
+            if (existingBuff == null)
+            {
+                var newCharacterBuff = CharacterBuffModel.Create(buffId, skillCode, 0, duration);
+                newCharacterBuff.SetBuffInfo(buffInfo);
+                client.Tamer.BuffList.Add(newCharacterBuff);
+
+                BroadcastForTamerViewsAndSelf(
+                    client,
+                    new AddBuffPacket(client.Tamer.GeneralHandler, buffInfo, (short)0, duration).Serialize());
+                return true;
+            }
+
+            var wasActive = !existingBuff.Expired;
+            existingBuff.SetSkillId(skillCode);
+            existingBuff.SetTypeN(0);
+            existingBuff.IncreaseEndDate(duration);
+            existingBuff.SetBuffInfo(buffInfo);
+
+            BroadcastForTamerViewsAndSelf(
+                client,
+                wasActive
+                    ? new UpdateBuffPacket(client.Tamer.GeneralHandler, buffInfo, (short)0, duration).Serialize()
+                    : new AddBuffPacket(client.Tamer.GeneralHandler, buffInfo, (short)0, duration).Serialize());
+
+            return true;
+        }
+
+        private void BroadcastForTamerViewsAndSelf(GameClient client, byte[] packet)
+        {
+            if (client.DungeonMap)
+                _dungeonServer.BroadcastForTamerViewsAndSelf(client.TamerId, packet);
+            else
+                _mapServer.BroadcastForTamerViewsAndSelf(client.TamerId, packet);
         }
 
         private async Task BuffItem(GameClient client, short itemSlot, ItemModel targetItem)
@@ -2079,6 +2366,12 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
                 await _sender.Send(new UpdateCharacterBuffListCommand(client.Tamer.BuffList));
                 await _sender.Send(new UpdateDigimonBuffListCommand(client.Partner.BuffList));
+
+                if (VerdandiXProgramService.IsXProtectorItem(targetItem))
+                    _verdandiXProgram.RemoveXProgram(
+                        client,
+                        packet => BroadcastForTamerViewsAndSelf(client, packet),
+                        "X-Protector item");
 
                 client.Send(
                     UtilitiesFunctions.GroupPackets(

@@ -1,5 +1,6 @@
 ﻿using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Application.GameAssets;
+using DigitalWorldOnline.Commons.Enums.Character;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Models.Asset;
@@ -26,6 +27,17 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         public Task Process(GameClient client, byte[] packetData)
         {
             var stopwatch = Stopwatch.StartNew();
+            if (client.Tamer?.State == CharacterStateEnum.Loading || client.Loading)
+            {
+                _logger.Warning(
+                    "[EncyclopediaLoad] skipped during loading tamerId={TamerId} state={State} loading={Loading} requestBytes={RequestBytes}",
+                    client.TamerId,
+                    client.Tamer?.State,
+                    client.Loading,
+                    packetData?.Length ?? 0);
+                return Task.CompletedTask;
+            }
+
             var activeDigimonCount = client.Tamer.Digimons?.Count ?? 0;
             var archiveSlotCount = client.Tamer.DigimonArchive?.DigimonArchives?.Count ?? 0;
             var archiveLoadedCount = client.Tamer.DigimonArchive?.DigimonArchives?.Count(x => x.Digimon != null) ?? 0;

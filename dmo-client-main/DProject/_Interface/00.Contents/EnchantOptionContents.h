@@ -106,9 +106,9 @@ private:
 
 	void				_RegistEnchantItem( cItemInfo* pInvenItem, uint nInvenIndex );
 	void				_RegistEnchantStone( cItemInfo* pInvenItem, uint nInvenIndex );
-	bool				_TryAutoRegistEnchantStone( uint nPreferredStoneType );
-	int					_FindAutoEnchantStoneSlot( uint nPreferredStoneType ) const;
-	bool				_IsUsableAutoEnchantStone( cItemInfo* pInvenItem, uint nInvenIndex, uint nPreferredStoneType ) const;
+	bool				_TryAutoRegistEnchantStone( uint nPreferredStoneType, uint nPreferredItemType = 0, bool bAllowDifferentItem = true );
+	int					_FindAutoEnchantStoneSlot( uint nPreferredStoneType, uint nPreferredItemType = 0 ) const;
+	bool				_IsUsableAutoEnchantStone( cItemInfo* pInvenItem, uint nInvenIndex, uint nPreferredStoneType, uint nPreferredItemType = 0 ) const;
 
 public:
 	void				RegistEnchantItem( int const& nInvenIndex );
@@ -133,6 +133,7 @@ public:
 	uint				GetEnchantStoneEnchantType() const;
 	uint				GetEnchantStoneItemType() const;
 	uint				GetEnchantItemType() const;
+	uint				GetSelectedOptionValue() const;
 	std::wstring		GetEnchantItemTypeName() const;
 	uint				GetItemUserUID( uint nItemType ) const;
 	const cItemInfo*	GetEnchantStone() const;

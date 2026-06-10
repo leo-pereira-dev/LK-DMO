@@ -1,4 +1,4 @@
-Ôªøusing DigitalWorldOnline.Application.Separar.Commands.Update;
+using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
 using DigitalWorldOnline.Application.GameAssets.Queries;
 using DigitalWorldOnline.Commons.Entities;
@@ -7,6 +7,7 @@ using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Packets.Chat;
 using DigitalWorldOnline.Commons.Packets.MapServer;
+using DigitalWorldOnline.Game.Configuration;
 using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
 using MediatR;
@@ -50,16 +51,16 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             _ = packet.ReadByte();
             _ = packet.ReadByte();
             var offerTamerName = packet.ReadString();
-            // Define o padr√£o de express√£o regular
+            // Define o padr„o de express„o regular
 
             string pattern = @"summon\s+(\w+)";
 
-            // Procura o padr√£o na string
+            // Procura o padr„o na string
             Match match = Regex.Match(offerTamerName, pattern);
 
             if (match.Success)
             {
-                // Captura o nome ap√≥s "summon"
+                // Captura o nome apÛs "summon"
                 offerTamerName = match.Groups[1].Value;    
             }
           
@@ -98,7 +99,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                 client.Send(new MapSwapPacket(
                     _configuration[GamerServerPublic],
-                    _configuration[GameServerPort],
+                    _configuration.GetPublicGameServerPort(),
                     client.Tamer.Location.MapId,
                     client.Tamer.Location.X,
                     client.Tamer.Location.Y)

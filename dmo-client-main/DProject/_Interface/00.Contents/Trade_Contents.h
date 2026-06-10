@@ -126,6 +126,8 @@ public:
 private:
 	void		ResetData(void);
 	void		CloseTrade(void);
+	void		RequestCloseTrade(char const* pReason);
+	void		ProcessTradeFinalSuccess(void);
 	void		RequestTrade( CsC_AvObject* pTarget );
 	void		SetTradeTargetObjectIdx( uint const& nTargetIdx );
 	bool		CheckIsRegistAble( int const& nInvenSlotNum, int & nCount, int & nItemCode );
@@ -155,6 +157,10 @@ private:
 
 private:
 	uint			m_TradeTargetObjectUIDX;	// 거래 대상의 인덱스
+
+	bool			m_bPendingCloseTrade;
+	bool			m_bPendingTradeFinalSuccess;
+	uint			m_nPendingTradeFinalTargetUID;
 
 	sTradeInfo		m_MyTradeData;
 	sTradeInfo		m_TargetTradeData;

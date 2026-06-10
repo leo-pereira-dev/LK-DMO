@@ -472,7 +472,7 @@ void cIconMng::_IconIDToTexIndex( DWORD& dwTex, int& nIconIdx, cItemInfo* pItemI
 
 void cIconMng::RenderItem( cItemInfo* pItem, CsPoint pos, bool bRenderCount )
 {
-	CsItem* pFT = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+	CsItem* pFT = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 	SAFE_POINTER_RET( pFT );
 
 	DWORD dwTex;
@@ -493,7 +493,7 @@ void cIconMng::RenderItem( cItemInfo* pItem, CsPoint pos, bool bRenderCount )
 
 void cIconMng::RenderItem( cItemInfo* pItem, CsPoint pos, CsPoint size, bool bRenderCount )
 {
-	CsItem* pFT = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+	CsItem* pFT = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 	SAFE_POINTER_RET( pFT );
 
 	DWORD dwTex;
@@ -1009,26 +1009,35 @@ void cIconMng::RenderMask( ICONMASK::eMASK_TYPE mt, CsPoint pos, CsPoint size )
 
 void cIconMng::RenderCursorIconItem( cItemInfo* pItem, CsPoint pos )
 {
-	assert_cs( pItem->IsEnable() == true );	
+	SAFE_POINTER_RET( pItem );
+	if( pItem->IsEnable() == false )
+		return;
 
 	// 아이템 테이블에서 정보 가져 온다.
-	CsItem* pFT = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
-	assert_cs( pFT != NULL );
+	CsItem* pFT = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
+	SAFE_POINTER_RET( pFT );
 
 	DWORD dwTex;
 	int nIconIdx;
 	_IconIDToTexIndex( dwTex, nIconIdx, pItem, pFT->GetInfo()->s_nIcon );
-	assert_cs( m_mapIconItem.find( dwTex ) != m_mapIconItem.end() );
 
 	// 아이콘 랜더링 - 사이즈 작게 해서
-	cIcon* pIcon = m_mapIconItem[ dwTex ];
+	std::map< DWORD, cIcon* >::iterator itIcon = m_mapIconItem.find( dwTex );
+	if( itIcon == m_mapIconItem.end() || itIcon->second == NULL )
+		itIcon = m_mapIconItem.find( ICONITEM::ITEM_ICON );
+	if( itIcon == m_mapIconItem.end() || itIcon->second == NULL )
+		return;
+
+	cIcon* pIcon = itIcon->second;
 	pIcon->Render( nIconIdx, pos+CsPoint( 1, 1 ), CsPoint( 25, 25 ) );	
 
 	// 마스크 랜더링
-	m_pIconMask[ ICONMASK::IF_CURSOR_ICON ]->Render( pos );
+	if( m_pIconMask[ ICONMASK::IF_CURSOR_ICON ] )
+		m_pIconMask[ ICONMASK::IF_CURSOR_ICON ]->Render( pos );
 
 	// 사이즈 원상 복귀
-	pIcon->GetSprite()->SetSize( IF_ICONSIZE );
+	if( pIcon->GetSprite() )
+		pIcon->GetSprite()->SetSize( IF_ICONSIZE );
 }
 
 
@@ -1037,17 +1046,24 @@ void cIconMng::RenderCursorIconItem( int nIconIndex, CsPoint pos )
 	DWORD dwTex;
 	int nIconIdx;
 	_IconIDToTexIndex( dwTex, nIconIdx, NULL, nIconIndex );
-	assert_cs( m_mapIconItem.find( dwTex ) != m_mapIconItem.end() );
 
 	// 아이콘 랜더링 - 사이즈 작게 해서
-	cIcon* pIcon = m_mapIconItem[ dwTex ];
+	std::map< DWORD, cIcon* >::iterator itIcon = m_mapIconItem.find( dwTex );
+	if( itIcon == m_mapIconItem.end() || itIcon->second == NULL )
+		itIcon = m_mapIconItem.find( ICONITEM::ITEM_ICON );
+	if( itIcon == m_mapIconItem.end() || itIcon->second == NULL )
+		return;
+
+	cIcon* pIcon = itIcon->second;
 	pIcon->Render( nIconIdx, pos+CsPoint( 1, 1 ), CsPoint( 25, 25 ) );	
 
 	// 마스크 랜더링
-	m_pIconMask[ ICONMASK::IF_CURSOR_ICON ]->Render( pos );
+	if( m_pIconMask[ ICONMASK::IF_CURSOR_ICON ] )
+		m_pIconMask[ ICONMASK::IF_CURSOR_ICON ]->Render( pos );
 
 	// 사이즈 원상 복귀
-	pIcon->GetSprite()->SetSize( IF_ICONSIZE );
+	if( pIcon->GetSprite() )
+		pIcon->GetSprite()->SetSize( IF_ICONSIZE );
 }
 
 

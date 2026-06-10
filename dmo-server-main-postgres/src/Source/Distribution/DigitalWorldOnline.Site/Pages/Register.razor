@@ -1,0 +1,107 @@
+@page "/register"
+@inject AccountApiClient AccountApi
+@inject NavigationManager Navigation
+
+<PageTitle>Registrar | LKDMO Tamers</PageTitle>
+
+<div class="site-shell">
+    <SiteHeader />
+
+    <main class="auth-page">
+        <img class="auth-art" src="assets/img/banner.png" alt="" aria-hidden="true" />
+        <div class="auth-overlay" aria-hidden="true"></div>
+
+        <section class="auth-shell">
+            <div class="auth-copy">
+                <p class="eyebrow">Nova Jornada</p>
+                <h1>Crie sua conta de Tamer.</h1>
+                <p>Preencha seus dados para liberar o acesso ao servidor e comecar sua aventura.</p>
+            </div>
+
+            <div class="auth-card">
+                <div class="auth-tabs" role="tablist" aria-label="Conta">
+                    <a href="/login">Entrar</a>
+                    <a class="active" href="/register">Registrar</a>
+                </div>
+
+                <EditForm Model="@registerModel" OnValidSubmit="@SubmitRegister">
+                    <DataAnnotationsValidator />
+                    <div class="form-field">
+                        <label for="register-user">Usuario</label>
+                        <InputText id="register-user" @bind-Value="registerModel.Username" autocomplete="username" />
+                        <ValidationMessage For="@(() => registerModel.Username)" />
+                    </div>
+                    <div class="form-field">
+                        <label for="register-email">E-mail</label>
+                        <InputText id="register-email" type="email" @bind-Value="registerModel.Email" autocomplete="email" />
+                        <ValidationMessage For="@(() => registerModel.Email)" />
+                    </div>
+                    <div class="form-field">
+                        <label for="register-discord">Discord ID</label>
+                        <InputText id="register-discord" @bind-Value="registerModel.DiscordId" />
+                        <ValidationMessage For="@(() => registerModel.DiscordId)" />
+                    </div>
+                    <div class="form-field two-columns">
+                        <span>
+                            <label for="register-pass">Senha</label>
+                            <InputText id="register-pass" type="password" @bind-Value="registerModel.Password" autocomplete="new-password" />
+                            <ValidationMessage For="@(() => registerModel.Password)" />
+                        </span>
+                        <span>
+                            <label for="register-confirm">Confirmar</label>
+                            <InputText id="register-confirm" type="password" @bind-Value="registerModel.ConfirmPassword" autocomplete="new-password" />
+                            <ValidationMessage For="@(() => registerModel.ConfirmPassword)" />
+                        </span>
+                    </div>
+                    <button class="form-submit" type="submit" disabled="@registerBusy">@GetButtonText(registerBusy, "Criar conta")</button>
+                </EditForm>
+
+                @if (!string.IsNullOrWhiteSpace(statusMessage))
+                {
+                    <div class="form-status @(statusSuccess ? "success" : "error")" role="status">@statusMessage</div>
+                }
+            </div>
+        </section>
+    </main>
+</div>
+
+@code {
+    private readonly RegisterFormModel registerModel = new();
+    private string? statusMessage;
+    private bool statusSuccess;
+    private bool registerBusy;
+
+    private static string GetButtonText(bool busy, string text) => busy ? "Aguarde..." : text;
+
+    private async Task SubmitRegister()
+    {
+        registerBusy = true;
+        statusMessage = null;
+
+        try
+        {
+            var result = await AccountApi.CreateAccountAsync(
+                registerModel.Username,
+                registerModel.Email,
+                registerModel.DiscordId,
+                registerModel.Password);
+
+            statusSuccess = result.Success;
+            statusMessage = result.Message;
+
+            if (result.Success)
+            {
+                Navigation.NavigateTo("/login");
+            }
+        }
+        catch (Exception ex)
+        {
+            statusSuccess = false;
+            statusMessage = $"Falha ao conectar na API: {ex.Message}";
+        }
+        finally
+        {
+            registerBusy = false;
+        }
+    }
+}

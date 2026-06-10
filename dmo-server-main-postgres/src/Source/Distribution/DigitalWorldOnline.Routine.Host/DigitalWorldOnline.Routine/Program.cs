@@ -131,7 +131,9 @@ namespace DigitalWorldOnline.Routine
                     services.AddSingleton<MapBinLoader>();
                     services.AddSingleton<ItemListBinLoader>();
                     services.AddSingleton<ContainerBinLoader>();
+                    services.AddSingleton<ExtraExchangeBinLoader>();
                     services.AddSingleton<QuestBinLoader>();
+                    services.AddSingleton<NpcBinLoader>();
                     services.AddSingleton<UnionXmlAssetLoader>();
                     services.AddSingleton<DUnitCollectionService>();
                     services.AddSingleton<AssetsLoader>();
@@ -166,6 +168,7 @@ namespace DigitalWorldOnline.Routine
             var monster = host.Services.GetRequiredService<MonsterBinLoader>().Load();
             var map = host.Services.GetRequiredService<MapBinLoader>().Load();
             var quest = host.Services.GetRequiredService<QuestBinLoader>().Load();
+            var npcAssets = host.Services.GetRequiredService<NpcBinLoader>().Load();
 
             return host;
         }
@@ -181,3 +184,5 @@ namespace DigitalWorldOnline.Routine
         }
     }
 }
+
+

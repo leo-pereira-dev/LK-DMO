@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "CsGBTerrainRoot.h"
+#include "../CsFunc/CrashLogger.h"
 
 //==========================================================================================
 //
@@ -10,17 +11,23 @@
 
 bool CsGBTerrainRoot::Load( const char* cFile, nsCsGBTerrain::eCREATE_TYPE ct )
 {
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT Load begin file=%s ct=%d this=%p",
+		cFile ? cFile : "<null>", (int)ct, this );
 	assert_cs( ct != nsCsGBTerrain::CT_MAKE );
 	assert_cs( m_RootNode.GetNiNode() == NULL );
 
 	//assert_csm1( _access_s( cFile, 0 ) == 0, "맵 데이터가 존재하지 않습니다.\n\n %s", cFile );
 
 	NiStream stream;
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT NiStream.Load begin file=%s", cFile ? cFile : "<null>" );
 	if( !stream.Load( cFile ) )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "TRROOT NiStream.Load failed file=%s", cFile ? cFile : "<null>" );
 		assert_csm1( false, "맵 데이터가 존재하지 않습니다.\n\n %s", cFile );
 		return false;
 	}
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT NiStream.Load end file=%s objects=%d",
+		cFile ? cFile : "<null>", stream.GetObjectCount() );
 
 	int nNodeIndex;
 	if( stream.GetObjectCount() == 1 )
@@ -34,10 +41,16 @@ bool CsGBTerrainRoot::Load( const char* cFile, nsCsGBTerrain::eCREATE_TYPE ct )
 	}
 
 	CsNiNodePtr pNiNode = (CsNiNode*)stream.GetObjectAt( nNodeIndex );
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData begin file=%s nodeIndex=%d node=%p",
+		cFile ? cFile : "<null>", nNodeIndex, (void*)pNiNode );
 	if( LoadExtraData( pNiNode, cFile ) == false )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData failed file=%s", cFile ? cFile : "<null>" );
 		return false;
 	}
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData end file=%s map=%u leaf=%d pathGroups=%u pathData=%d",
+		cFile ? cFile : "<null>", (unsigned)m_Info.s_dwMapID, m_Info.s_nTotalLeafCount,
+		(unsigned)m_TrPathInfo.s_PathInfo.s_uiPEGroupCount, m_TrPathInfo.s_nDataTotalCount );
 
 	// 로드 관련 디바이스 셋팅
 	//_LoadDeviceSetting();
@@ -46,28 +59,41 @@ bool CsGBTerrainRoot::Load( const char* cFile, nsCsGBTerrain::eCREATE_TYPE ct )
 	nsCSFILE::GetRelativePath( m_cFilePath, MAX_PATH, (char*)cFile );
 
 	// PathEngine Ground
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadPathEngine begin file=%s", cFile ? cFile : "<null>" );
 	_LoadPathEngine( cFile );
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadPathEngine end file=%s", cFile ? cFile : "<null>" );
 
 	// Create Node
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT CreateFromFile begin file=%s", cFile ? cFile : "<null>" );
 	CreateFromFile( pNiNode, ct );
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT CreateFromFile end file=%s", cFile ? cFile : "<null>" );
 
 	switch( ct )
 	{
 	case nsCsGBTerrain::CT_FILELOAD:
 		{
+			nsCSDEBUG::CrashLogger::LogMessage( "TRROOT Load textures begin file=%s", cFile ? cFile : "<null>" );
 			_LoadBMTexture( cFile );
+			nsCSDEBUG::CrashLogger::LogMessage( "TRROOT Load BM end file=%s", cFile ? cFile : "<null>" );
 			_LoadSMTexture( cFile );
+			nsCSDEBUG::CrashLogger::LogMessage( "TRROOT Load SM end file=%s", cFile ? cFile : "<null>" );
 			if( nsCsGBTerrain::g_Device.g_bPixelShader2 == true )
 				_LoadAMTexture( cFile );
+			nsCSDEBUG::CrashLogger::LogMessage( "TRROOT Load AM maybe end file=%s pixelShader2=%d",
+				cFile ? cFile : "<null>", nsCsGBTerrain::g_Device.g_bPixelShader2 ? 1 : 0 );
 
 			for( int i=0; i<m_Info.s_nTotalLeafCount; ++i )
 			{
 				GetNode( i )->SetShaderMap( 6, g_pShadow->GetZBufferTex() );
 			}
 
+			nsCSDEBUG::CrashLogger::LogMessage( "TRROOT SkyBox.Create begin file=%s", cFile ? cFile : "<null>" );
 			m_SkyBox.Create();
+			nsCSDEBUG::CrashLogger::LogMessage( "TRROOT SkyBox.Create end file=%s", cFile ? cFile : "<null>" );
 
+			nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadEmrFile begin file=%s", cFile ? cFile : "<null>" );
 			LoadEmrFile( cFile );
+			nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadEmrFile end file=%s", cFile ? cFile : "<null>" );
 		}
 		break;
 	case nsCsGBTerrain::CT_FILELOAD_BYTOOL:
@@ -89,6 +115,7 @@ bool CsGBTerrainRoot::Load( const char* cFile, nsCsGBTerrain::eCREATE_TYPE ct )
 
 	m_RootNode.GetNiNode()->UpdateProperties();
 	m_RootNode.GetNiNode()->Update( 0.0f );	
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT Load end file=%s", cFile ? cFile : "<null>" );
 
 #ifdef TERRAIN_RENDER_DEEPCOPY
 	UpdateMapUVSize();
@@ -106,7 +133,10 @@ void CsGBTerrainRoot::_LoadDeviceSetting()
 void CsGBTerrainRoot::_LoadPathEngine( const char* cFile)
 {
 	if( g_pCsPathEngine == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "TRROOT PathEngine skip null file=%s", cFile ? cFile : "<null>" );
 		return;
+	}
 
 	g_pCsPathEngine->DestroyMesh();
 
@@ -115,8 +145,11 @@ void CsGBTerrainRoot::_LoadPathEngine( const char* cFile)
 	size_t nLen = strlen( cStr );
 	sprintf_s( &cStr[ nLen - 3 ], MAX_PATH - (nLen-3), "xml" );
 
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT PathEngine CreateMesh begin xml=%s", cStr );
 	g_pCsPathEngine->CreateMesh( cStr );
-	ApplyTerrainPath();
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT PathEngine CreateMesh end xml=%s", cStr );
+	int nPathError = ApplyTerrainPath();
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT PathEngine ApplyTerrainPath end xml=%s errorIndex=%d", cStr, nPathError );
 }
 
 void CsGBTerrainRoot::_LoadBMTexture( const char* cFile )
@@ -742,6 +775,3 @@ void CsGBTerrainRoot::_SaveAMswTexture( LPCTSTR szFile )
 	// 메모리 제거
 	pNiInfoNode = 0;
 }
-
-
-

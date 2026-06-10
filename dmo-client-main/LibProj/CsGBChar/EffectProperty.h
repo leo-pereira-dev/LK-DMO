@@ -24,6 +24,7 @@ public:
 #ifdef SDM_TAMER_XGUAGE_20180628
 		LE_XAI,
 #endif
+		LE_NAMEPLATE,
 		LE_MAX_COUNT, };
 public:
 	CsC_EffectProp();

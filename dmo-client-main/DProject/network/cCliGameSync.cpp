@@ -8,6 +8,45 @@
 #include "common_vs2019/pSync.h"
 #include "../../LibProj/CsFunc/CrashLogger.h"
 
+#include <chrono>
+#include <cstdarg>
+#include <ctime>
+#include <fstream>
+
+namespace
+{
+	void SyncTrace(const char* fmt, ...)
+	{
+#ifndef LKDMO_VERBOSE_SYNC_TRACE
+		(void)fmt;
+		return;
+#else
+		try
+		{
+			CreateDirectoryA("logs", NULL);
+
+			char msg[1024] = { 0, };
+			va_list args;
+			va_start(args, fmt);
+			vsnprintf_s(msg, sizeof(msg), _TRUNCATE, fmt, args);
+			va_end(args);
+
+			auto now = std::chrono::system_clock::now();
+			auto tt = std::chrono::system_clock::to_time_t(now);
+			tm localTime = {};
+			localtime_s(&localTime, &tt);
+
+			char stamp[64] = { 0, };
+			strftime(stamp, sizeof(stamp), "%Y-%m-%d %H:%M:%S", &localTime);
+
+			std::ofstream log("logs\\network_pgsql.log", std::ios::app);
+			log << stamp << " " << msg << std::endl;
+		}
+		catch (...) {}
+#endif
+	}
+}
+
 #ifdef GM_CLOCKING
 #define CLOCKING_ITEM_ID		30				//투명 아이템 아이템번호(장비아이템) chu8820
 #endif
@@ -216,10 +255,25 @@ void cCliGame::RecvChangePartnerScale(void)		// 용병의 크기 변경
 
 void cCliGame::RecvSyncData(void)
 {
+	nsCSDEBUG::CrashLogger::SetContext(
+		"RecvSyncData begin packet=1006 size=%u portalProcessing=%d",
+		(unsigned)iReceiver::GetPacket()->m_wSize,
+		(int)m_bPortalProcessing);
+	SyncTrace("SYNC1006 begin packetSize=%u portal=%d avail=%u",
+		(unsigned)iReceiver::GetPacket()->m_wSize,
+		(int)m_bPortalProcessing,
+		(unsigned)GetReadAvailable());
+
 	if (m_bPortalProcessing)
 	{
 		// 처리하지 않는다.
 		DBG("PORTAL PROCESS LOCKING");
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"SYNC RecvSyncData ignored by portal lock size=%u",
+			(unsigned)iReceiver::GetPacket()->m_wSize);
+		SyncTrace("SYNC1006 ignored portal packetSize=%u avail=%u",
+			(unsigned)iReceiver::GetPacket()->m_wSize,
+			(unsigned)GetReadAvailable());
 		return;
 	}
 
@@ -232,13 +286,38 @@ void cCliGame::RecvSyncData(void)
 
 	u1 cSyncType;
 	pop(cSyncType);
+	SyncTrace("SYNC1006 first syncType=%u avail=%u",
+		(unsigned)cSyncType,
+		(unsigned)GetReadAvailable());
 
+	int nSyncLoopGuard = 0;
 	while (cSyncType)
 	{
+		if (++nSyncLoopGuard > 64)
+		{
+			SyncTrace("SYNC1006 abort loop guard lastSyncType=%u avail=%u",
+				(unsigned)cSyncType,
+				(unsigned)GetReadAvailable());
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"SYNC RecvSyncData abort loop guard lastSyncType=%u avail=%u",
+				(unsigned)cSyncType,
+				(unsigned)GetReadAvailable());
+			break;
+		}
+
+		nsCSDEBUG::CrashLogger::SetContext(
+			"RecvSyncData dispatch syncType=%u packetSize=%u",
+			(unsigned)cSyncType,
+			(unsigned)iReceiver::GetPacket()->m_wSize);
+		SyncTrace("SYNC1006 dispatch begin syncType=%u avail=%u",
+			(unsigned)cSyncType,
+			(unsigned)GetReadAvailable());
+
 		switch (cSyncType)
 		{
 		case pSync::Walk: SyncWalkObject();		break;
 		case pSync::Move: SyncMoveObject();		break;
+		case pSync::Rotation: SyncRotationObject();	break;
 
 		case pSync::In: SyncInObject();		break;
 		case pSync::Out: SyncOutObject();		break;
@@ -262,8 +341,27 @@ void cCliGame::RecvSyncData(void)
 		default: xassert1(false, "(SyncType:%d)", cSyncType);
 		}
 
+		SyncTrace("SYNC1006 dispatch end syncType=%u avail=%u",
+			(unsigned)cSyncType,
+			(unsigned)GetReadAvailable());
+
+		if (GetReadAvailable() == 0)
+		{
+			SyncTrace("SYNC1006 no terminator byte after syncType=%u; breaking to avoid stuck network thread",
+				(unsigned)cSyncType);
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"SYNC RecvSyncData no terminator after syncType=%u; break",
+				(unsigned)cSyncType);
+			break;
+		}
+
 		pop(cSyncType);
+		SyncTrace("SYNC1006 next syncType=%u avail=%u",
+			(unsigned)cSyncType,
+			(unsigned)GetReadAvailable());
 	}
+
+	SyncTrace("SYNC1006 end avail=%u", (unsigned)GetReadAvailable());
 }
 
 
@@ -323,6 +421,32 @@ void cCliGame::SyncNewObject(void)
 	{
 		pop(pos);
 		pop(type);
+		nsCSDEBUG::CrashLogger::SetContext(
+			"SyncNewObject entry class=%u idx=%u type=%u typeAll=0x%I64X pos=%d,%d cntLeft=%u",
+			(unsigned)type.m_nClass,
+			(unsigned)type.m_nIDX,
+			(unsigned)type.m_nType,
+			(unsigned __int64)type.GetTypeAll(),
+			pos.m_nX,
+			pos.m_nY,
+			(unsigned)cnt);
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"SYNC-NEW entry class=%u idx=%u type=%u typeAll=0x%I64X pos=%d,%d",
+			(unsigned)type.m_nClass,
+			(unsigned)type.m_nIDX,
+			(unsigned)type.m_nType,
+			(unsigned __int64)type.GetTypeAll(),
+			pos.m_nX,
+			pos.m_nY);
+		SyncTrace("SYNC1006 new entry class=%u idx=%u type=%u typeAll=0x%I64X pos=%d,%d cntLeft=%u avail=%u",
+			(unsigned)type.m_nClass,
+			(unsigned)type.m_nIDX,
+			(unsigned)type.m_nType,
+			(unsigned __int64)type.GetTypeAll(),
+			pos.m_nX,
+			pos.m_nY,
+			(unsigned)cnt,
+			(unsigned)GetReadAvailable());
 
 		xassert2(pos.m_nX > 0, "(%d, %d)", pos.m_nX, pos.m_nY);
 		xassert2(pos.m_nY > 0, "(%d, %d)", pos.m_nX, pos.m_nY);
@@ -346,6 +470,7 @@ void cCliGame::SyncInObject(void)
 	pop(cnt);
 
 	xassert1(cnt < 1000, "cnt(%d) is too big", cnt);
+	nsCSDEBUG::CrashLogger::LogMessage("SYNC-IN cnt=%u", (unsigned)cnt);
 
 	nSync::Pos pos;
 	cType type;
@@ -354,6 +479,32 @@ void cCliGame::SyncInObject(void)
 	{
 		pop(pos);
 		pop(type);
+		nsCSDEBUG::CrashLogger::SetContext(
+			"SyncInObject entry class=%u idx=%u type=%u typeAll=0x%I64X pos=%d,%d cntLeft=%u",
+			(unsigned)type.m_nClass,
+			(unsigned)type.m_nIDX,
+			(unsigned)type.m_nType,
+			(unsigned __int64)type.GetTypeAll(),
+			pos.m_nX,
+			pos.m_nY,
+			(unsigned)cnt);
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"SYNC-IN entry class=%u idx=%u type=%u typeAll=0x%I64X pos=%d,%d",
+			(unsigned)type.m_nClass,
+			(unsigned)type.m_nIDX,
+			(unsigned)type.m_nType,
+			(unsigned __int64)type.GetTypeAll(),
+			pos.m_nX,
+			pos.m_nY);
+		SyncTrace("SYNC1006 in entry class=%u idx=%u type=%u typeAll=0x%I64X pos=%d,%d cntLeft=%u avail=%u",
+			(unsigned)type.m_nClass,
+			(unsigned)type.m_nIDX,
+			(unsigned)type.m_nType,
+			(unsigned __int64)type.GetTypeAll(),
+			pos.m_nX,
+			pos.m_nY,
+			(unsigned)cnt,
+			(unsigned)GetReadAvailable());
 
 		xassert2(pos.m_nX > 0, "(%d, %d)", pos.m_nX, pos.m_nY);
 		xassert2(pos.m_nY > 0, "(%d, %d)", pos.m_nX, pos.m_nY);
@@ -580,6 +731,50 @@ void cCliGame::SyncWalkObject(void)
 	}
 }
 
+void cCliGame::SyncRotationObject(void)
+{
+	u2 cnt = 0;
+	pop(cnt);
+
+	xassert1(cnt < 1000, "rotation cnt(%d) is too big", cnt);
+
+	u4 nUID = 0;
+	float fDirect = 0.0f;
+	cType type;
+
+	while (cnt)
+	{
+		pop(nUID);
+		pop(fDirect);
+
+		type.m_nUID = nUID;
+
+		CsC_AvObject* pObject = NULL;
+		switch (type.m_nClass)
+		{
+		case nClass::Tamer:
+			if (g_pCharMng->IsTamerUser(type.m_nIDX) == false)
+				pObject = g_pCharMng->GetTamer(type.m_nIDX);
+			break;
+		case nClass::Digimon:
+			if (g_pCharMng->IsDigimonUser(type.m_nIDX) == false)
+				pObject = g_pCharMng->GetDigimon(type.m_nIDX);
+			break;
+		case nClass::Monster:
+			pObject = g_pCharMng->GetMonster(type.m_nIDX);
+			break;
+		default:
+			break;
+		}
+
+		if (pObject)
+		{
+			pObject->SetRotation(fDirect, true);
+		}
+
+		--cnt;
+	}
+}
 
 void cCliGame::SyncNewDigimon(nSync::Pos& pos, cType& type)
 {
@@ -627,7 +822,8 @@ void cCliGame::SyncInTamer(nSync::Pos& pos, cType& type, bool bNew)
 	xstop(!g_pCharMng->IsTamerUser(type.m_nIDX), "내테이머는 받지 말자");
 
 #ifdef COMPAT_487
-	uint fDirect;
+	uint nDirectRaw;
+	float fDirect;
 #else
 	float fDirect;
 #endif
@@ -642,8 +838,59 @@ void cCliGame::SyncInTamer(nSync::Pos& pos, cType& type, bool bNew)
 	std::wstring szName;
 	pop(szName);
 	pop(nLevel);
+#ifdef COMPAT_487
+	pop(nDirectRaw);
+	{
+		union
+		{
+			uint raw;
+			float value;
+		} directConverter;
+		directConverter.raw = nDirectRaw;
+		fDirect = directConverter.value;
+	}
+#else
 	pop(fDirect);
+#endif
 	pop(nMoveSpeed);
+
+#ifdef COMPAT_487
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"SYNC-TAMER basic idx=%u type=%u typeAll=0x%I64X nameLen=%u level=%u dst=%d,%d directRaw=%u direct=%.4f ms=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		(unsigned __int64)type.GetTypeAll(),
+		(unsigned)szName.length(),
+		(unsigned)nLevel,
+		DstPos.m_nX,
+		DstPos.m_nY,
+		(unsigned)nDirectRaw,
+		(double)fDirect,
+		(unsigned)nMoveSpeed);
+#else
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"SYNC-TAMER basic idx=%u type=%u typeAll=0x%I64X nameLen=%u level=%u dst=%d,%d direct=%.3f ms=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		(unsigned __int64)type.GetTypeAll(),
+		(unsigned)szName.length(),
+		(unsigned)nLevel,
+		DstPos.m_nX,
+		DstPos.m_nY,
+		(double)fDirect,
+		(unsigned)nMoveSpeed);
+#endif
+	SyncTrace("SYNC1006 tamer basic idx=%u type=%u typeAll=0x%I64X nameLen=%u level=%u dst=%d,%d direct=%.4f ms=%u avail=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		(unsigned __int64)type.GetTypeAll(),
+		(unsigned)szName.length(),
+		(unsigned)nLevel,
+		DstPos.m_nX,
+		DstPos.m_nY,
+		(double)fDirect,
+		(unsigned)nMoveSpeed,
+		(unsigned)GetReadAvailable());
 
 	u1 nHpRate;
 	pop(nHpRate);
@@ -664,11 +911,11 @@ void cCliGame::SyncInTamer(nSync::Pos& pos, cType& type, bool bNew)
 			cp[i].s_nPartIndex = i;
 			break;
 		}
-		cp[i].s_nFileTableID = ItemData[i].m_nType;
+		cp[i].s_nFileTableID = ItemData[i].GetType();
 		cp[i].s_nRemainTime = ItemData[i].m_nEndTime;
 		cp[i].s_nPartIndex = i;
 #ifdef GM_CLOCKING
-		if (ItemData[i].m_nType == CLOCKING_ITEM_ID)
+		if (ItemData[i].GetType() == CLOCKING_ITEM_ID)
 		{
 			bIsClocking = true;
 		}
@@ -679,8 +926,13 @@ void cCliGame::SyncInTamer(nSync::Pos& pos, cType& type, bool bNew)
 	// 디지바이스 정보 받아서 처리해줘야 디지바이스 이펙트 띄워줄 수 있음
 	cItemData cDigiviceItem;
 	pop(&cDigiviceItem, sizeof(cDigiviceItem));
-	cp[nTamer::MaxParts].s_nFileTableID = cDigiviceItem.m_nType;
+	cp[nTamer::MaxParts].s_nFileTableID = cDigiviceItem.GetType();
 	cp[nTamer::MaxParts].s_nRemainTime = cDigiviceItem.GetEndTime();
+	SyncTrace("SYNC1006 tamer digivice idx=%u itemType=%u remain=%u avail=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)cDigiviceItem.GetType(),
+		(unsigned)cDigiviceItem.GetEndTime(),
+		(unsigned)GetReadAvailable());
 #endif
 
 	u4 nCondition;
@@ -690,27 +942,86 @@ void cCliGame::SyncInTamer(nSync::Pos& pos, cType& type, bool bNew)
 	pop(nCondition);
 	pop(nSync);
 	pop(nPartnerUID);
+	nsCSDEBUG::CrashLogger::SetContext(
+		"SyncInTamer parsed idx=%u type=%u typeAll=0x%I64X condition=0x%X sync=0x%X partnerUID=0x%X",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		(unsigned __int64)type.GetTypeAll(),
+		(unsigned)nCondition,
+		(unsigned)nSync,
+		(unsigned)nPartnerUID);
+	SyncTrace("SYNC1006 tamer parsed idx=%u type=%u condition=0x%X sync=0x%X partnerUID=0x%X avail=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		(unsigned)nCondition,
+		(unsigned)nSync,
+		(unsigned)nPartnerUID,
+		(unsigned)GetReadAvailable());
 
 	float fTamerScale = 1.0f;
 	u2 u2TamerScale;
+	SyncTrace("SYNC1006 tamer scale pop begin idx=%u avail=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)GetReadAvailable());
 	pop(u2TamerScale);
 	if (u2TamerScale > 0)
 		fTamerScale = u2TamerScale * 0.0001f;
+	SyncTrace("SYNC1006 tamer scale pop end idx=%u raw=%u scale=%.4f avail=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)u2TamerScale,
+		(double)fTamerScale,
+		(unsigned)GetReadAvailable());
 
 	CTamer* pTamer = NULL;
 
 	// 현재의 맵 번호.
-	int dwMapID = nsCsGBTerrain::g_pCurRoot->GetInfo()->s_dwMapID;
+	SyncTrace("SYNC1006 tamer terrain begin idx=%u root=%p avail=%u",
+		(unsigned)type.m_nIDX,
+		nsCsGBTerrain::g_pCurRoot,
+		(unsigned)GetReadAvailable());
+	int dwMapID = -1;
+	if (nsCsGBTerrain::g_pCurRoot && nsCsGBTerrain::g_pCurRoot->GetInfo())
+		dwMapID = nsCsGBTerrain::g_pCurRoot->GetInfo()->s_dwMapID;
+	SyncTrace("SYNC1006 tamer terrain end idx=%u map=%d avail=%u",
+		(unsigned)type.m_nIDX,
+		dwMapID,
+		(unsigned)GetReadAvailable());
 
 	// 튜토 리얼 중에만 닷트본부 지하수도에 있음. 이 경우에만 출력안함.
 	if (dwMapID == 4)
 	{
 		pTamer = NULL;
 	}
+	else if (dwMapID < 0)
+	{
+		SyncTrace("SYNC1006 tamer add skipped invalid map idx=%u root=%p",
+			(unsigned)type.m_nIDX,
+			nsCsGBTerrain::g_pCurRoot);
+	}
 	else
 	{
+		SyncTrace("SYNC1006 tamer add begin idx=%u model=%u pos=%d,%d direct=%.4f nameLen=%u sync=0x%X",
+			(unsigned)type.m_nIDX,
+			(unsigned)type.m_nType,
+			pos.m_nX,
+			pos.m_nY,
+			(double)fDirect,
+			(unsigned)szName.length(),
+			(unsigned)nSync);
 		pTamer = g_pCharMng->AddTamer(type.m_nIDX, type.m_nType, pos, fDirect, szName.c_str(), cp, nSync);
+		SyncTrace("SYNC1006 tamer add returned idx=%u result=%p",
+			(unsigned)type.m_nIDX,
+			pTamer);
 	}
+	SyncTrace("SYNC1006 tamer add idx=%u model=%u result=%p map=%d pos=%d,%d scaleRaw=%u avail=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		pTamer,
+		dwMapID,
+		pos.m_nX,
+		pos.m_nY,
+		(unsigned)u2TamerScale,
+		(unsigned)GetReadAvailable());
 	if (pTamer)
 	{
 		int DigimonIDX = GetIDX(nPartnerUID);
@@ -766,26 +1077,48 @@ void cCliGame::SyncInTamer(nSync::Pos& pos, cType& type, bool bNew)
 
 	u2 nCard = 0;
 	pop(nCard);
+	SyncTrace("SYNC1006 tamer card idx=%u card=%u avail=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)nCard,
+		(unsigned)GetReadAvailable());
 
 	if (0 != nCard) {
 
-		CsMaster_CardLeader::sINFO* sInfo = nsCsFileTable::g_pMaster_CardMng->GetMasterCardLeader(nCard)->GetInfo();
+		CsMaster_CardLeader* pLeader = nsCsFileTable::g_pMaster_CardMng ?
+			nsCsFileTable::g_pMaster_CardMng->GetMasterCardLeader(nCard) : NULL;
+		CsMaster_CardLeader::sINFO* sInfo = pLeader ? pLeader->GetInfo() : NULL;
 
-		CsMaster_Card::MAP_IT	it = nsCsFileTable::g_pMaster_CardMng->GetMasterCardMap()->begin();
-		CsMaster_Card::MAP_IT	it_end = nsCsFileTable::g_pMaster_CardMng->GetMasterCardMap()->end();
-		float fscale = 0.1f;
-
-		for (; it != it_end; ++it)
+		if (sInfo == NULL)
 		{
-			if (it->second->GetInfo()->s_nDigimonID == sInfo->s_nDigimonID)
-			{
-				fscale = it->second->GetInfo()->s_nScale * 0.01f;
-			}
+			SyncTrace("SYNC1006 tamer invalid card idx=%u card=%u masterMng=%p leader=%p",
+				(unsigned)type.m_nIDX,
+				(unsigned)nCard,
+				nsCsFileTable::g_pMaster_CardMng,
+				pLeader);
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"SYNC-TAMER invalid card idx=%u card=%u",
+				(unsigned)type.m_nIDX,
+				(unsigned)nCard);
 		}
-		if (pTamer)
+		else
 		{
-			pTamer->DeletePat();
-			pTamer->AddPat(sInfo->s_nDigimonID, fscale);
+
+			CsMaster_Card::MAP_IT	it = nsCsFileTable::g_pMaster_CardMng->GetMasterCardMap()->begin();
+			CsMaster_Card::MAP_IT	it_end = nsCsFileTable::g_pMaster_CardMng->GetMasterCardMap()->end();
+			float fscale = 0.1f;
+
+			for (; it != it_end; ++it)
+			{
+				if (it->second->GetInfo()->s_nDigimonID == sInfo->s_nDigimonID)
+				{
+					fscale = it->second->GetInfo()->s_nScale * 0.01f;
+				}
+			}
+			if (pTamer)
+			{
+				pTamer->DeletePat();
+				pTamer->AddPat(sInfo->s_nDigimonID, fscale);
+			}
 		}
 	}
 
@@ -797,11 +1130,20 @@ void cCliGame::SyncInTamer(nSync::Pos& pos, cType& type, bool bNew)
 		if (szShopTitle.empty())
 			szShopTitle = L"???";
 
-		ContentsStream kTmp;
-		uint checkid = pTamer->GetUniqID();
-		int nType = cTalkBalloon::MAX_TYPE;
-		kTmp << checkid << szShopTitle << nType;
-		GAME_EVENT_ST.OnEvent(EVENT_CODE::SET_BALLOON_TITLE, &kTmp);
+		if (pTamer)
+		{
+			ContentsStream kTmp;
+			uint checkid = pTamer->GetUniqID();
+			int nType = cTalkBalloon::MAX_TYPE;
+			kTmp << checkid << szShopTitle << nType;
+			GAME_EVENT_ST.OnEvent(EVENT_CODE::SET_BALLOON_TITLE, &kTmp);
+		}
+		else
+		{
+			SyncTrace("SYNC1006 tamer shop skipped null tamer idx=%u condition=0x%X",
+				(unsigned)type.m_nIDX,
+				(unsigned)nCondition);
+		}
 
 		// 		GS2C_RECV_STORE_NAME recv;
 		// 		recv.szShopTitle = szShopTitle;
@@ -839,6 +1181,12 @@ void cCliGame::SyncInTamer(nSync::Pos& pos, cType& type, bool bNew)
 		pTamer->SetClocking(bIsClocking);
 #endif
 	}
+	SyncTrace("SYNC1006 tamer end idx=%u hpRate=%u condition=0x%X pTamer=%p avail=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)nHpRate,
+		(unsigned)nCondition,
+		pTamer,
+		(unsigned)GetReadAvailable());
 
 #ifdef GUILD_RENEWAL
 	int nColorLv = 0;	// 색 변경 우선순위. 색 변경 스킬 효과 추가 시 우선순위 체크
@@ -913,6 +1261,31 @@ void cCliGame::SyncInDigimon(nSync::Pos& pos, cType& type, bool bNew)
 	pop(fDirect);
 	pop(nMoveSpeed);
 	pop(nAttackSpeed);
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"SYNC-DIGIMON basic idx=%u type=%u typeAll=0x%I64X nameLen=%u scale=%u level=%u dst=%d,%d direct=%.3f ms=%u as=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		(unsigned __int64)type.GetTypeAll(),
+		(unsigned)szName.length(),
+		(unsigned)nScale,
+		(unsigned)nLevel,
+		DstPos.m_nX,
+		DstPos.m_nY,
+		(double)fDirect,
+		(unsigned)nMoveSpeed,
+		(unsigned)nAttackSpeed);
+	SyncTrace("SYNC1006 digimon basic idx=%u type=%u typeAll=0x%I64X nameLen=%u scale=%u level=%u dst=%d,%d ms=%u as=%u avail=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		(unsigned __int64)type.GetTypeAll(),
+		(unsigned)szName.length(),
+		(unsigned)nScale,
+		(unsigned)nLevel,
+		DstPos.m_nX,
+		DstPos.m_nY,
+		(unsigned)nMoveSpeed,
+		(unsigned)nAttackSpeed,
+		(unsigned)GetReadAvailable());
 
 	CDigimon* pDigimon = NULL;
 	// 현재의 맵 번호.
@@ -926,6 +1299,14 @@ void cCliGame::SyncInDigimon(nSync::Pos& pos, cType& type, bool bNew)
 		else
 			pDigimon = g_pCharMng->AddDigimon(type.m_nIDX, type.m_nType, NULL, pos, fDirect, szName.c_str());
 	}
+	SyncTrace("SYNC1006 digimon add idx=%u model=%u result=%p map=%d pos=%d,%d avail=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		pDigimon,
+		dwMapID,
+		pos.m_nX,
+		pos.m_nY,
+		(unsigned)GetReadAvailable());
 
 	if (pDigimon)
 	{
@@ -960,6 +1341,21 @@ void cCliGame::SyncInDigimon(nSync::Pos& pos, cType& type, bool bNew)
 
 	u4 nCondition = 0;
 	pop(nCondition);
+	nsCSDEBUG::CrashLogger::SetContext(
+		"SyncInDigimon parsed idx=%u type=%u typeAll=0x%I64X tamerUID=0x%X hp=%u condition=0x%X",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		(unsigned __int64)type.GetTypeAll(),
+		(unsigned)nTamerUID,
+		(unsigned)nHpRate,
+		(unsigned)nCondition);
+	SyncTrace("SYNC1006 digimon parsed idx=%u type=%u tamerUID=0x%X hp=%u condition=0x%X avail=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		(unsigned)nTamerUID,
+		(unsigned)nHpRate,
+		(unsigned)nCondition,
+		(unsigned)GetReadAvailable());
 	if (pDigimon)
 		pDigimon->SetCondition(nCondition);
 
@@ -993,6 +1389,11 @@ void cCliGame::SyncInDigimon(nSync::Pos& pos, cType& type, bool bNew)
 #ifdef COMPAT_487
 	int remainingBytes = 0;
 	pop(remainingBytes);
+	SyncTrace("SYNC1006 digimon compat idx=%u enchant=%u remainingBytes=%d avail=%u",
+		(unsigned)type.m_nIDX,
+		(unsigned)nInchantLevel,
+		remainingBytes,
+		(unsigned)GetReadAvailable());
 #endif
 
 #ifdef SDM_DIGIMON_PARTSSYSTEM_20200115
@@ -1029,6 +1430,11 @@ void cCliGame::SyncInDigimon(nSync::Pos& pos, cType& type, bool bNew)
 		if (pDigimon)
 			pDigimon->SetEnableObject(false);
 	}
+	SyncTrace("SYNC1006 digimon end idx=%u pDigimon=%p linkedTamer=%p avail=%u",
+		(unsigned)type.m_nIDX,
+		pDigimon,
+		pTamer,
+		(unsigned)GetReadAvailable());
 
 }
 
@@ -1082,6 +1488,16 @@ void cCliGame::SyncInMonster(nSync::Pos& pos, cType& type, bool bNew)
 
 	CMonster* pMonster = g_pCharMng->GetMonster(type.m_nIDX);
 	CsMapMonster* tmpMon = nsCsMapTable::g_pMapMonsterMng->GetGroup(nsCsGBTerrain::g_pCurRoot->GetInfo()->s_dwMapID)->GetMonster_ByMonsterID(type.m_nType);
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"SYNC-MONSTER begin idx=%u type=%u typeAll=0x%I64X pos=%d,%d bNew=%d found=%d table=%d",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		(unsigned __int64)type.GetTypeAll(),
+		pos.m_nX,
+		pos.m_nY,
+		(int)bNew,
+		(int)(pMonster != NULL),
+		(int)(tmpMon != NULL));
 	if (pMonster == NULL)
 	{
 		if (tmpMon != NULL && tmpMon->GetInfo()->s_nMoveType == 4)//오브젝트형 체크. 오브젝트형은 안돌고 안따라가야되
@@ -1198,6 +1614,17 @@ void cCliGame::SyncInMonster(nSync::Pos& pos, cType& type, bool bNew)
 #endif
 	u4 nCondition;
 	pop(nCondition);
+	nsCSDEBUG::CrashLogger::SetContext(
+		"SyncInMonster parsed idx=%u type=%u typeAll=0x%I64X dst=%d,%d hp=%u level=%u condition=0x%X found=%d",
+		(unsigned)type.m_nIDX,
+		(unsigned)type.m_nType,
+		(unsigned __int64)type.GetTypeAll(),
+		DstPos.m_nX,
+		DstPos.m_nY,
+		(unsigned)nHpRate,
+		(unsigned)nLevel,
+		(unsigned)nCondition,
+		(int)(pMonster != NULL));
 	if (pMonster)
 		pMonster->SetCondition(nCondition);
 
@@ -1454,7 +1881,6 @@ void cCliGame::SyncMoveMonster(u4 nIDX, nSync::Pos& pos, bool bWalk)
 	{
 		u4 nMonID = pMonster->GetFTID();
 		CsMapMonster* tmpMon = nsCsMapTable::g_pMapMonsterMng->GetGroup(nsCsGBTerrain::g_pCurRoot->GetInfo()->s_dwMapID)->GetMonster_ByMonsterID(nMonID);
-
 		if (tmpMon != NULL && tmpMon->GetInfo()->s_nMoveType == 4)//오브젝트형 체크. 오브젝트형은 안돌고 안따라가야되
 		{
 			return;
@@ -1925,6 +2351,10 @@ void cCliGame::_SyncInBuffObject(int nObjectCnt)
 
 		u1 nBuffCnt = 0;		// 버프 개수
 		pop(nBuffCnt);
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"SYNC-BUFF object uid=0x%X buffCnt=%u",
+			(unsigned)nObjectUID,
+			(unsigned)nBuffCnt);
 
 		while (nBuffCnt > 0)
 		{
@@ -1934,25 +2364,26 @@ void cCliGame::_SyncInBuffObject(int nObjectCnt)
 			u2 nBuffLv = 1;			// 버프 레벨
 			pop(nBuffLv);
 
-			ST_CHAT_PROTOCOL	CProtocol;
-			CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
-			//CProtocol.m_wStr = GetVAString( _T("nBuffCode : %d"), nBuffCode );
-			DmCS::StringFn::Format(CProtocol.m_wStr, _T("nBuffCode : %d"), nBuffCode);
-			GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
 			u4 nEndTS = 0;			// 종료 시간			
 			pop(nEndTS);
 
 			u4 dwSkillCode = 0;
 			pop(dwSkillCode);
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"SYNC-BUFF entry uid=0x%X code=%u lv=%u end=%u skill=%u",
+				(unsigned)nObjectUID,
+				(unsigned)nBuffCode,
+				(unsigned)nBuffLv,
+				(unsigned)nEndTS,
+				(unsigned)dwSkillCode);
 
 			CsC_AvObject* pObject = g_pMngCollector->GetObject(nObjectUID);
 			if (!pObject)
 			{
-				ST_CHAT_PROTOCOL	CProtocol;
-				CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
-				//CProtocol.m_wStr = GetVAString( _T("Not Find UID : %d"), nObjectUID );
-				DmCS::StringFn::Format(CProtocol.m_wStr, _T("Not Find UID : %d"), nObjectUID);
-				GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
+				nsCSDEBUG::CrashLogger::LogMessage(
+					"SYNC-BUFF target missing uid=0x%X code=%u",
+					(unsigned)nObjectUID,
+					(unsigned)nBuffCode);
 			}
 
 			else
@@ -2006,11 +2437,11 @@ void cCliGame::_SyncInBuffObject(int nObjectCnt)
 				break;
 
 				default:
-					ST_CHAT_PROTOCOL	CProtocol;
-					CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
-					//CProtocol.m_wStr = GetVAString(_T("Not Find RTTI : %d"), pObject->GetLeafRTTI());
-					DmCS::StringFn::Format(CProtocol.m_wStr, _T("Not Find RTTI : %d"), pObject->GetLeafRTTI());
-					GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
+					nsCSDEBUG::CrashLogger::LogMessage(
+						"SYNC-BUFF unsupported rtti=%d uid=0x%X code=%u",
+						pObject->GetLeafRTTI(),
+						(unsigned)nObjectUID,
+						(unsigned)nBuffCode);
 					break;
 				}
 			}//else
@@ -2025,19 +2456,14 @@ void cCliGame::_SyncInBuffObject(int nObjectCnt)
 
 void cCliGame::SyncInBuff(void)
 {
-	ST_CHAT_PROTOCOL	CProtocol;
-	CProtocol.m_Type = NS_CHAT::DEBUG_TEXT;
-	CProtocol.m_wStr = _T("Recv BuffSync");
-	GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
+	nsCSDEBUG::CrashLogger::LogMessage("SYNC-BUFF begin");
 	{	// 테이머 버프 처리
 		u2 nTamerCnt = 0;
 		pop(nTamerCnt);
 
 		xassert1(nTamerCnt < 1000, "nTamerCnt(%d) is too big", nTamerCnt);
 
-		//CProtocol.m_wStr = GetVAString( _T("nTamerCnt : %d"), nTamerCnt );
-		DmCS::StringFn::Format(CProtocol.m_wStr, _T("nTamerCnt : %d"), nTamerCnt);
-		GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
+		nsCSDEBUG::CrashLogger::LogMessage("SYNC-BUFF tamerCnt=%u", (unsigned)nTamerCnt);
 		_SyncInBuffObject(nTamerCnt);
 	}
 
@@ -2047,10 +2473,7 @@ void cCliGame::SyncInBuff(void)
 
 		xassert1(nDigimonCnt < 1000, "nDigimonCnt(%d) is too big", nDigimonCnt);
 
-		//CProtocol.m_wStr = GetVAString( _T("nDigimonCnt : %d"), nDigimonCnt );
-		DmCS::StringFn::Format(CProtocol.m_wStr, _T("nDigimonCnt : %d"), nDigimonCnt);
-
-		GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
+		nsCSDEBUG::CrashLogger::LogMessage("SYNC-BUFF digimonCnt=%u", (unsigned)nDigimonCnt);
 		_SyncInBuffObject(nDigimonCnt);
 	}
 
@@ -2060,9 +2483,7 @@ void cCliGame::SyncInBuff(void)
 
 		xassert1(nMonsterCnt < 1000, "nMonsterCnt(%d) is too big", nMonsterCnt);
 
-		//CProtocol.m_wStr = GetVAString( _T("nMonsterCnt : %d"), nMonsterCnt );
-		DmCS::StringFn::Format(CProtocol.m_wStr, _T("nMonsterCnt : %d"), nMonsterCnt);
-		GAME_EVENT_STPTR->OnEvent(EVENT_CODE::EVENT_CHAT_PROCESS, &CProtocol);
+		nsCSDEBUG::CrashLogger::LogMessage("SYNC-BUFF monsterCnt=%u", (unsigned)nMonsterCnt);
 		_SyncInBuffObject(nMonsterCnt);
 	}
 }

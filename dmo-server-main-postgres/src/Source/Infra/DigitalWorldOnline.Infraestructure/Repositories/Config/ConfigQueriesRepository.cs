@@ -8,6 +8,8 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Config
     {
         private static readonly SemaphoreSlim DropRewardsCacheLock = new(1, 1);
         private static IReadOnlyList<MobConfigDTO>? _mobDropRewardsCache;
+        private static readonly SemaphoreSlim KillSpawnsCacheLock = new(1, 1);
+        private static IReadOnlyList<KillSpawnConfigDTO>? _killSpawnsCache;
 
         private readonly DatabaseContext _context;
 
@@ -26,6 +28,13 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Config
             {
                 if (_mobDropRewardsCache != null)
                     return _mobDropRewardsCache;
+
+                var binMobs = MobDropRewardBinLoader.LoadIfExists();
+                if (binMobs != null)
+                {
+                    _mobDropRewardsCache = binMobs;
+                    return _mobDropRewardsCache;
+                }
 
                 var mobs = await _context.MobConfig
                     .AsNoTracking()
@@ -48,6 +57,55 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Config
             finally
             {
                 DropRewardsCacheLock.Release();
+            }
+        }
+
+        public async Task<IReadOnlyList<KillSpawnConfigDTO>> GetKillSpawnsAsync(CancellationToken cancellationToken)
+        {
+            if (_killSpawnsCache != null)
+                return _killSpawnsCache;
+
+            await KillSpawnsCacheLock.WaitAsync(cancellationToken);
+            try
+            {
+                if (_killSpawnsCache != null)
+                    return _killSpawnsCache;
+
+                _killSpawnsCache = await _context.KillSpawnConfig
+                    .AsNoTracking()
+                    .Include(x => x.SourceMobs)
+                    .Include(x => x.TargetMobs)
+                    .Select(x => new KillSpawnConfigDTO
+                    {
+                        Id = x.Id,
+                        GameMapConfigId = x.GameMapConfigId,
+                        ShowOnMinimap = x.ShowOnMinimap,
+                        SourceMobs = x.SourceMobs
+                            .Select(source => new KillSpawnSourceMobConfigDTO
+                            {
+                                Id = source.Id,
+                                KillSpawnId = source.KillSpawnId,
+                                SourceMobType = source.SourceMobType,
+                                SourceMobRequiredAmount = source.SourceMobRequiredAmount
+                            })
+                            .ToList(),
+                        TargetMobs = x.TargetMobs
+                            .Select(target => new KillSpawnTargetMobConfigDTO
+                            {
+                                Id = target.Id,
+                                KillSpawnId = target.KillSpawnId,
+                                TargetMobType = target.TargetMobType,
+                                TargetMobAmount = target.TargetMobAmount
+                            })
+                            .ToList()
+                    })
+                    .ToListAsync(cancellationToken);
+
+                return _killSpawnsCache;
+            }
+            finally
+            {
+                KillSpawnsCacheLock.Release();
             }
         }
 

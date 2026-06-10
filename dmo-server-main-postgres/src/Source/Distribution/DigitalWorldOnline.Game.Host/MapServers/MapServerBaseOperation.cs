@@ -25,6 +25,11 @@ namespace DigitalWorldOnline.GameHost
         //TODO: externalizar
         private readonly int _startToSee = 6000;
         private readonly int _stopSeeing = 9000;
+        private static readonly TimeSpan _visibilityPairLogInterval = TimeSpan.FromSeconds(5);
+        private static readonly TimeSpan _visibilityRepairInterval = TimeSpan.FromSeconds(5);
+        private readonly object _visibilityPairLogLock = new();
+        private readonly Dictionary<string, DateTime> _visibilityPairLogTimes = new();
+        private readonly Dictionary<string, DateTime> _visibilityRepairTimes = new();
       
         /// <summary>
         /// Cleans unused running maps.  Lifecycle hoisted into <see cref="DefaultMapDriver"/>.
@@ -155,6 +160,7 @@ namespace DigitalWorldOnline.GameHost
         /// <param name="client">The game client to be added.</param>
         public Task AddClient(GameClient client)
         {
+            var requestedChannel = client.Tamer.Channel;
             var map = PickChannelFor(client);
 
             client.SetLoading();
@@ -162,6 +168,18 @@ namespace DigitalWorldOnline.GameHost
 
             if (map != null)
             {
+                _logger.Information(
+                    "Map AddClient channel selected tamer={TamerId}:{TamerName} map={MapId} requestedChannel={RequestedChannel} chosenChannel={ChosenChannel} populationBefore={PopulationBefore} state={State} pos={X},{Y}",
+                    client.TamerId,
+                    client.Tamer.Name,
+                    map.MapId,
+                    requestedChannel,
+                    map.Channel,
+                    map.Clients.Count,
+                    client.Tamer.State,
+                    client.Tamer.Location.X,
+                    client.Tamer.Location.Y);
+
                 client.Tamer.MobsInView.Clear();
                 map.AddClient(client);
                 _registry.OnTamerEnter(map, client.TamerId);
@@ -194,6 +212,18 @@ namespace DigitalWorldOnline.GameHost
                     }
                     else
                     {
+                        _logger.Information(
+                            "Map AddClient channel selected after wait tamer={TamerId}:{TamerName} map={MapId} requestedChannel={RequestedChannel} chosenChannel={ChosenChannel} populationBefore={PopulationBefore} state={State} pos={X},{Y}",
+                            client.TamerId,
+                            client.Tamer.Name,
+                            map.MapId,
+                            requestedChannel,
+                            map.Channel,
+                            map.Clients.Count,
+                            client.Tamer.State,
+                            client.Tamer.Location.X,
+                            client.Tamer.Location.Y);
+
                         ClearTamerMobViewState(client.TamerId);
                         client.Tamer.MobsInView.Clear();
                         map.AddClient(client);
@@ -463,8 +493,23 @@ namespace DigitalWorldOnline.GameHost
         public void AddSummonMobs(short mapId, SummonMobModel summon)
             => _driver.AddSummonMobs(_registry, mapId, summon);
 
+        public void AddSummonMobs(short mapId, SummonMobModel summon, long tamerId)
+        {
+            var map = FindMapByTamerOnMap(tamerId, mapId);
+
+            if (map != null)
+                map.AddMob(summon);
+        }
+
         public MobConfigModel? GetMobByHandler(short mapId, int handler)
             => _driver.GetMobByHandler(_registry, mapId, handler);
+
+        public MobConfigModel? GetMobByHandler(short mapId, int handler, long tamerId)
+        {
+            var map = FindMapByTamerOnMap(tamerId, mapId);
+
+            return map?.Mobs.FirstOrDefault(x => x.GeneralHandler == handler);
+        }
 
         public SummonMobModel? GetMobByHandler(short mapId, int handler, bool summon)
         {
@@ -473,11 +518,52 @@ namespace DigitalWorldOnline.GameHost
             return map?.SummonMobs.FirstOrDefault(x => x.GeneralHandler == handler);
         }
 
+        public SummonMobModel? GetMobByHandler(short mapId, int handler, bool summon, long tamerId)
+        {
+            var map = FindMapByTamerOnMap(tamerId, mapId);
+
+            return map?.SummonMobs.FirstOrDefault(x => x.GeneralHandler == handler);
+        }
+
         public List<MobConfigModel> GetMobsNearbyPartner(Location location, int range)
             => _driver.GetMobsNearbyPartner(_registry, location, range);
 
+        public List<MobConfigModel> GetMobsNearbyPartner(Location location, int range, long tamerId)
+        {
+            var targetMap = FindMapByTamerOnMap(tamerId, location.MapId);
+            if (targetMap == null)
+                return new List<MobConfigModel>();
+
+            var originX = location.X;
+            var originY = location.Y;
+
+            return GetTargetMobs(targetMap.Mobs.Where(x => x.Alive).ToList(), originX, originY, range).DistinctBy(x => x.Id).ToList();
+        }
+
         public List<MobConfigModel> GetMobsNearbyTargetMob(short mapId, int handler, int range)
             => _driver.GetMobsNearbyTargetMob(_registry, mapId, handler, range);
+
+        public List<MobConfigModel> GetMobsNearbyTargetMob(short mapId, int handler, int range, long tamerId)
+        {
+            var targetMap = FindMapByTamerOnMap(tamerId, mapId);
+            if (targetMap == null)
+                return new List<MobConfigModel>();
+
+            var originMob = targetMap.Mobs.FirstOrDefault(x => x.GeneralHandler == handler);
+
+            if (originMob == null)
+                return new List<MobConfigModel>();
+
+            var originX = originMob.CurrentLocation.X;
+            var originY = originMob.CurrentLocation.Y;
+
+            var targetMobs = new List<MobConfigModel>();
+            targetMobs.Add(originMob);
+
+            targetMobs.AddRange(GetTargetMobs(targetMap.Mobs.Where(x => x.Alive).ToList(), originX, originY, range));
+
+            return targetMobs.DistinctBy(x => x.Id).ToList();
+        }
 
         public static List<MobConfigModel> GetTargetMobs(List<MobConfigModel> mobs, int originX, int originY, int range)
         {
@@ -513,10 +599,44 @@ namespace DigitalWorldOnline.GameHost
             return GetTargetMobs(targetMap.SummonMobs.Where(x => x.Alive).ToList(), originX, originY, range).DistinctBy(x => x.Id).ToList();
         }
 
+        public List<SummonMobModel> GetMobsNearbyPartner(Location location, int range, bool Summon, long tamerId)
+        {
+            var targetMap = FindMapByTamerOnMap(tamerId, location.MapId);
+            if (targetMap == null)
+                return new List<SummonMobModel>();
+
+            var originX = location.X;
+            var originY = location.Y;
+
+            return GetTargetMobs(targetMap.SummonMobs.Where(x => x.Alive).ToList(), originX, originY, range).DistinctBy(x => x.Id).ToList();
+        }
+
         public List<SummonMobModel> GetMobsNearbyTargetMob(short mapId, int handler, int range, bool Summon)
         {
             // TODO Phase E: channel ambiguity.
             var targetMap = _registry.GetChannelsOf(MapTypeEnum.Default, mapId).FirstOrDefault();
+            if (targetMap == null)
+                return new List<SummonMobModel>();
+
+            var originMob = targetMap.SummonMobs.FirstOrDefault(x => x.GeneralHandler == handler);
+
+            if (originMob == null)
+                return new List<SummonMobModel>();
+
+            var originX = originMob.CurrentLocation.X;
+            var originY = originMob.CurrentLocation.Y;
+
+            var targetMobs = new List<SummonMobModel>();
+            targetMobs.Add(originMob);
+
+            targetMobs.AddRange(GetTargetMobs(targetMap.SummonMobs.Where(x => x.Alive).ToList(), originX, originY, range));
+
+            return targetMobs.DistinctBy(x => x.Id).ToList();
+        }
+
+        public List<SummonMobModel> GetMobsNearbyTargetMob(short mapId, int handler, int range, bool Summon, long tamerId)
+        {
+            var targetMap = FindMapByTamerOnMap(tamerId, mapId);
             if (targetMap == null)
                 return new List<SummonMobModel>();
 
@@ -562,6 +682,16 @@ namespace DigitalWorldOnline.GameHost
             var deltaX = x2 - x1;
             var deltaY = y2 - y1;
             return Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
+        }
+
+        private MapInstance? FindMapByTamerOnMap(long tamerId, short mapId)
+        {
+            var map = _registry.FindByTamer(tamerId);
+
+            if (map?.MapId != mapId)
+                return null;
+
+            return map;
         }
     }
 }

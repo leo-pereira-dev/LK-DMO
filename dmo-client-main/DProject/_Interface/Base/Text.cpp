@@ -361,6 +361,8 @@ void cText::Init( cWindow* pParent, CsPoint pos, sTEXTINFO* pTextInfo, bool bApp
 	if( pTextInfo->s_pFont->IsInitialize() == false )
 		return;
 
+	Delete();
+
 	m_TextInfo = *pTextInfo;
 	// 값 초기화
 	m_ptStrSize = CsPoint::ZERO;	
@@ -379,10 +381,15 @@ void cText::Init( cWindow* pParent, CsPoint pos, sTEXTINFO* pTextInfo, bool bApp
 
 void cText::InitStencil( cWindow* pParent, CsPoint pos, sTEXTINFO* pTextInfo, bool bApplyWindowSize, NiStencilProperty* pPropStencil )
 {
+	if( pTextInfo->s_pFont == NULL )
+		return;
+
 	if( pTextInfo->s_pFont->IsInitialize() == false )
 	{
 		return;
 	}
+
+	Delete();
 
 	m_TextInfo = *pTextInfo;
 	// 값 초기화

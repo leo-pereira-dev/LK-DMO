@@ -20,6 +20,7 @@ namespace DigitalWorldOnline.Application.GameAssets
         private readonly MonsterBinLoader _monster;
         private readonly QuestBinLoader _questBin;
         private readonly ContainerBinLoader _containerBin;
+        private readonly ExtraExchangeBinLoader _extraExchangeBin;
         private readonly UnionXmlAssetLoader _xmlUnion;
         private bool? _loading;
 
@@ -56,6 +57,7 @@ namespace DigitalWorldOnline.Application.GameAssets
         public List<HatchAssetModel> Hatchs { get; private set; }
         public List<QuestAssetModel> Quest { get; private set; }
         public List<int> QuestItemList { get; private set; }
+        public Dictionary<int, List<int>> QuestLootItemDropsByMob { get; private set; }
         public List<short> DailyQuestList { get; private set; }
         public List<MapAssetModel> Maps { get; private set; }
         public List<CloneAssetModel> Clones { get; private set; }
@@ -74,6 +76,7 @@ namespace DigitalWorldOnline.Application.GameAssets
             MonsterBinLoader monster,
             QuestBinLoader questBin,
             ContainerBinLoader containerBin,
+            ExtraExchangeBinLoader extraExchangeBin,
             UnionXmlAssetLoader xmlUnion)
         {
             _sender = sender;
@@ -81,6 +84,7 @@ namespace DigitalWorldOnline.Application.GameAssets
             _monster = monster;
             _questBin = questBin;
             _containerBin = containerBin;
+            _extraExchangeBin = extraExchangeBin;
             _xmlUnion = xmlUnion;
         }
 
@@ -122,7 +126,9 @@ namespace DigitalWorldOnline.Application.GameAssets
             Npcs = _mapper.Map<List<NpcAssetModel>>(await _sender.Send(new NpcAssetsQuery()));
             NpcColiseum = _mapper.Map<List<NpcColiseumAssetModel>>(await _sender.Send(new NpcColiseumAssetsQuery()));
             Quest = _questBin.Load().Quests.ToList();
+            QuestLootItemDropsByMob = BuildQuestLootItemDropsByMob(Quest);
             Hatchs = _mapper.Map<List<HatchAssetModel>>(await _sender.Send(new HatchAssetsQuery()));
+            EnsureTutorialHatchAssets();
             Maps = _mapper.Map<List<MapAssetModel>>(await _sender.Send(new MapAssetsQuery()));
             Clones = _mapper.Map<List<CloneAssetModel>>(await _sender.Send(new CloneAssetsQuery()));
             CloneValues = _mapper.Map<List<CloneValueAssetModel>>(await _sender.Send(new CloneValueAssetsQuery()));
@@ -132,11 +138,16 @@ namespace DigitalWorldOnline.Application.GameAssets
             AchievementAssets = _mapper.Map<List<AchievementAssetModel>>(await _sender.Send(new AchievementAssetsQuery()));
             ArenaRankingDailyItemRewards = _mapper.Map<List<ArenaRankingDailyItemRewardsModel>>(await _sender.Send(new ArenaRankingDailyItemRewardsQuery()));
             EvolutionsArmor = _mapper.Map<List<EvolutionArmorAssetModel>>(await _sender.Send(new EvolutionArmorAssetsQuery()));
-            ExtraEvolutions = _mapper.Map<List<ExtraEvolutionNpcAssetModel>>(await _sender.Send(new ExtraEvolutionNpcAssetQuery()));
+            var extraEvolutionsFromBin = _extraExchangeBin.Load();
+            ExtraEvolutions = extraEvolutionsFromBin.Any()
+                ? extraEvolutionsFromBin.ToList()
+                : _mapper.Map<List<ExtraEvolutionNpcAssetModel>>(await _sender.Send(new ExtraEvolutionNpcAssetQuery()));
             ItemInfo.ForEach(item => { item.SetSkillInfo(SkillCodeInfo.FirstOrDefault(x => x.SkillCode == item.SkillCode)); });
+            TamerEquipmentUpgradeStageRegistry.ReplaceRules(SkillCodeInfo);
+            EquipmentSetBonusRegistry.ReplaceRules(EquipmentSetBonusRegistry.BuildFrom(ItemInfo, SkillCodeInfo, SkillInfo, BuffInfo));
             BuffInfo.ForEach(buff => { buff.SetSkillInfo(SkillCodeInfo.FirstOrDefault(x => x.SkillCode == buff.SkillCode || x.SkillCode == buff.DigimonSkillCode)); });
             DigimonSkillInfo.ForEach(skill => { skill.SetSkillInfo(SkillInfo.FirstOrDefault(x => x.SkillId == skill.SkillId)); });
-            MonsterSkill.ForEach(skill => { skill.SetSkillInfo(MonsterSkillInfo.FirstOrDefault(x => x.SkillId == skill.SkillId)); });
+            MonsterSkill.ForEach(skill => { skill.SetSkillInfo(MonsterSkillInfo.FirstOrDefault(x => x.Type == skill.Type && x.SkillId == skill.SkillId)); });
 
             // Terms join — resolve each skill's RangeId against Monster.bin §4 so the
             // dispatcher can read the bin's actual AoE radius / shape instead of falling
@@ -160,6 +171,71 @@ namespace DigitalWorldOnline.Application.GameAssets
 
 
             _loading = false;
+        }
+
+        private void EnsureTutorialHatchAssets()
+        {
+            var tutorialHatches = new[]
+            {
+                new { ItemId = 114240, SourceItemId = 113561 },
+                new { ItemId = 114241, SourceItemId = 113874 },
+                new { ItemId = 114242, SourceItemId = 113810 },
+                new { ItemId = 114243, SourceItemId = 113534 },
+                new { ItemId = 114244, SourceItemId = 113628 },
+                new { ItemId = 114245, SourceItemId = 113687 }
+            };
+
+            var nextId = Hatchs.Count == 0 ? 1 : Hatchs.Max(x => x.Id) + 1;
+            foreach (var tutorialHatch in tutorialHatches)
+            {
+                if (Hatchs.Any(x => x.ItemId == tutorialHatch.ItemId))
+                    continue;
+
+                var source = Hatchs.FirstOrDefault(x => x.ItemId == tutorialHatch.SourceItemId);
+                if (source == null)
+                    continue;
+
+                Hatchs.Add(_mapper.Map<HatchAssetModel>(new HatchAssetDTO
+                {
+                    Id = nextId++,
+                    ItemId = tutorialHatch.ItemId,
+                    HatchType = source.HatchType,
+                    LowClassDataSection = source.LowClassDataSection,
+                    MidClassDataSection = source.MidClassDataSection,
+                    LowClassDataAmount = source.LowClassDataAmount,
+                    MidClassDataAmount = source.MidClassDataAmount,
+                    LowClassBreakPoint = source.LowClassBreakPoint,
+                    MidClassBreakPoint = source.MidClassBreakPoint
+                }));
+            }
+        }
+
+        private static Dictionary<int, List<int>> BuildQuestLootItemDropsByMob(IEnumerable<QuestAssetModel> quests)
+        {
+            var result = new Dictionary<int, List<int>>();
+
+            foreach (var quest in quests)
+            {
+                foreach (var questGoal in quest.QuestGoals)
+                {
+                    if (questGoal.GoalType != QuestGoalTypeEnum.LootItem)
+                        continue;
+
+                    if (questGoal.GoalId <= 0 || questGoal.SubValue <= 0)
+                        continue;
+
+                    if (!result.TryGetValue(questGoal.SubValue, out var itemIds))
+                    {
+                        itemIds = new List<int>();
+                        result.Add(questGoal.SubValue, itemIds);
+                    }
+
+                    if (!itemIds.Contains(questGoal.GoalId))
+                        itemIds.Add(questGoal.GoalId);
+                }
+            }
+
+            return result;
         }
     }
    

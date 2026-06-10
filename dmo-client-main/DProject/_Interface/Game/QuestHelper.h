@@ -2,6 +2,8 @@
 
 #pragma once 
 
+class cSpriteAni;
+
 class cQuestHelper : public cBaseWindow
 {
 	struct QuestHelperButtonInfo : public CUSTOMDATA
@@ -44,6 +46,7 @@ protected:
 	cImage*			m_pHelperStateImage;
 	cSprite*		m_pLineLeft;
 	cSprite*		m_pLineRight;
+	cSpriteAni*		m_pTutorialObjectiveArrow;
 
 	// 포인터만 있는 컨트롤
 protected:
@@ -52,6 +55,7 @@ protected:
 protected:
 	CRITICAL_SECTION	m_csStringList;
 	cStringList		m_StringList;
+	cString*		m_pTutorialObjectiveArrowTarget;
 	bool			m_bView;
 
 public:
@@ -68,5 +72,5 @@ public:
 protected:
 	void			_ResetHelperString( CsQuest::eQUEST_TYPE eType );
 	void			_AddLine( CsQuest::eQUEST_TYPE eType );
+	void			_RenderTutorialObjectiveArrow();
 };
-

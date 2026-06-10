@@ -12,7 +12,7 @@ namespace DigitalWorldOnline.Commons.Models.Character
         /// <summary>
         /// Returns character's active buffs list.
         /// </summary>
-        public List<CharacterBuffModel> ActiveBuffs => Buffs.Where(x => x.BuffId > 0).ToList();
+        public List<CharacterBuffModel> ActiveBuffs => Buffs.Where(x => x.BuffId > 0 && !x.Expired).ToList();
 
         /// <summary>
         /// Adds a new buff to the list.

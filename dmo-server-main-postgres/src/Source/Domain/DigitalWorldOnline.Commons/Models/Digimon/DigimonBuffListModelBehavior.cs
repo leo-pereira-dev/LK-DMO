@@ -10,7 +10,7 @@
         /// <summary>
         /// Returns digimon's active buffs list.
         /// </summary>
-        public List<DigimonBuffModel> ActiveBuffs => Buffs.Where(x => x.BuffId > 0).ToList();
+        public List<DigimonBuffModel> ActiveBuffs => Buffs.Where(x => x.BuffId > 0 && !x.Expired).ToList();
 
         /// <summary>
         /// Adds a new buff to the list.

@@ -5,7 +5,7 @@ using System.Text;
 Console.WriteLine("Hello, World!");
 
 var address = "192.168.0.66";
-var port = 7029;
+var port = 17029;
 
 
 try

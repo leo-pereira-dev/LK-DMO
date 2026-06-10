@@ -55,18 +55,18 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var packet = new GamePacketReader(packetData);
 
             var targetType = packet.ReadInt();
-
             var digiName = NormalizeHatchName(packet.ReadString(), client.Tamer.Name);
+            var npcId = ReadOptionalNpcId(packet);
 
-            var NpcId = 90005; // TODO: Ajustar leitura do packet.
-
-            var extraEvolutionNpc = _assets.ExtraEvolutions.FirstOrDefault(x => x.NpcId == NpcId);
+            var extraEvolutionNpc = ResolveNpc(npcId);
 
             if (extraEvolutionNpc == null)
                 return;
 
-            var extraEvolutionInfo = extraEvolutionNpc.ExtraEvolutionInformation.FirstOrDefault(x => x.ExtraEvolution.Any(x => x.DigimonId == targetType))?.ExtraEvolution;
-
+            var extraEvolutionInfo = extraEvolutionNpc.ExtraEvolutionInformation
+                .FirstOrDefault(x => (x.IndexId == 1 || x.IndexId == 0) &&
+                                     x.ExtraEvolution.Any(extra => extra.DigimonId == targetType))
+                ?.ExtraEvolution;
 
             if (extraEvolutionInfo == null)
                 return;
@@ -80,62 +80,33 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 return;
             }        
 
-            if (!client.Tamer.Inventory.RemoveBits(extraEvolution.Price))
+            if (!TrySelectRequireds(client.Tamer.Inventory, extraEvolution, out var requiredsToPacket) ||
+                !TrySelectMaterials(client.Tamer.Inventory, extraEvolution, out var materialToPacket))
             {
-                //client.Send(new SystemMessagePacket($"Insuficient bits for item craft NPC id {npcId} and id {sequencialId}."));
-                //_logger.Warning($"Insuficient bits for item craft NPC id {npcId} and id {sequencialId} for tamer {client.TamerId}.");
+                client.Send(new SystemMessagePacket("Missing materials for extra evolution."));
                 return;
             }
 
-            var materialToPacket = new List<ExtraEvolutionMaterialAssetModel>();
-            var requiredsToPacket = new List<ExtraEvolutionRequiredAssetModel>();
-
-
-            foreach (var material in extraEvolution.Materials)
+            if (client.Tamer.Inventory.Bits < extraEvolution.Price)
             {
-                var itemToRemove = client.Tamer.Inventory.FindItemById(material.ItemId);
-                if (itemToRemove != null)
-                {
-                    materialToPacket.Add(material);
-                    client.Tamer.Inventory.RemoveOrReduceItemWithoutSlot(new ItemModel(material.ItemId, material.Amount));
-                 
-                    break;
-                }
+                client.Send(new SystemMessagePacket("Insufficient bits for extra evolution."));
+                return;
             }
 
-            foreach (var material in extraEvolution.Requireds)
+            var slot = FindEmptyDigimonSlot(client);
+            if (slot < 0)
             {
-                var itemToRemove = client.Tamer.Inventory.FindItemById(material.ItemId);
-
-                if (itemToRemove != null)
-                {
-                    requiredsToPacket.Add(material);
-                    client.Tamer.Inventory.RemoveOrReduceItemWithoutSlot(new ItemModel(material.ItemId, material.Amount));
-
-                    if(extraEvolution.Requireds.Count <=3)
-                    {
-                        break;
-                    }    
-                }
+                client.Send(new SystemMessagePacket("No empty digimon slot available."));
+                return;
             }
 
-
-            byte i = 0;
-            while (i < client.Tamer.DigimonSlots)
-            {
-                if (client.Tamer.Digimons.FirstOrDefault(x => x.Slot == i) == null)
-                    break;
-
-                i++;
-            }
-            
             var newDigimon = DigimonModel.Create(
                 digiName,
                 targetType,
                 targetType,
                 DigimonHatchGradeEnum.Default,
                 UtilitiesFunctions.GetLevelSize(3),
-                i
+                (byte)slot
             );
 
             newDigimon.NewLocation(
@@ -159,14 +130,26 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             );
             newDigimon.FullHeal();
 
-            newDigimon.AddEvolutions(
-                _assets.EvolutionInfo.First(x => x.Type == newDigimon.BaseType)
-            );
+            var evolutionInfo = _assets.EvolutionInfo.FirstOrDefault(x => x.Type == newDigimon.BaseType);
+            if (evolutionInfo != null)
+                newDigimon.AddEvolutions(evolutionInfo);
 
             if (newDigimon.BaseInfo == null || newDigimon.BaseStatus == null || !newDigimon.Evolutions.Any())
             {
                 _logger.Warning($"Unknown digimon info for {newDigimon.BaseType}.");
                 client.Send(new SystemMessagePacket($"Unknown digimon info for {newDigimon.BaseType}."));
+                return;
+            }
+
+            if (!client.Tamer.Inventory.RemoveOrReduceItems(BuildRemovalItems(materialToPacket, requiredsToPacket)))
+            {
+                client.Send(new SystemMessagePacket("Missing materials for extra evolution."));
+                return;
+            }
+
+            if (!client.Tamer.Inventory.RemoveBits(extraEvolution.Price))
+            {
+                client.Send(new SystemMessagePacket("Insufficient bits for extra evolution."));
                 return;
             }
 
@@ -199,13 +182,13 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (digimonInfo != null)
             {
                 newDigimon.SetId(digimonInfo.Id);
-                var slot = -1;
+                var evolutionSlot = -1;
 
                 foreach (var digimon in newDigimon.Evolutions)
                 {
-                    slot++;
+                    evolutionSlot++;
 
-                    var evolution = digimonInfo.Evolutions[slot];
+                    var evolution = digimonInfo.Evolutions[evolutionSlot];
 
                     if (evolution != null)
                     {
@@ -227,6 +210,145 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             _logger.Verbose($"Character {client.TamerId} hatched spirit {newDigimon.Id}({newDigimon.BaseType}) with grade {newDigimon.HatchGrade} and size {newDigimon.Size}.");
         }
+
+        private ExtraEvolutionNpcAssetModel? ResolveNpc(int npcId)
+        {
+            return _assets.ExtraEvolutions.FirstOrDefault(x => x.NpcId == npcId)
+                   ?? _assets.ExtraEvolutions.FirstOrDefault(x => x.NpcId == 90005);
+        }
+
+        private static int ReadOptionalNpcId(GamePacketReader packet)
+        {
+            return RemainingPayloadBytes(packet) >= sizeof(int) ? packet.ReadInt() : 90005;
+        }
+
+        private static int RemainingPayloadBytes(GamePacketReader packet)
+        {
+            return Math.Max(0, packet.Length - 2 - (int)packet.Packet.Position);
+        }
+
+        private static int FindEmptyDigimonSlot(GameClient client)
+        {
+            for (var slot = 0; slot < client.Tamer.DigimonSlots; slot++)
+            {
+                if (client.Tamer.Digimons.FirstOrDefault(x => x.Slot == slot) == null)
+                    return slot;
+            }
+
+            return -1;
+        }
+
+        private static bool TrySelectRequireds(
+            ItemListModel inventory,
+            ExtraEvolutionAssetModel extraEvolution,
+            out List<ExtraEvolutionRequiredAssetModel> selected)
+        {
+            selected = new List<ExtraEvolutionRequiredAssetModel>();
+            var candidates = extraEvolution.Requireds
+                .Where(x => x.ItemId > 0)
+                .Select(x => new ExtraEvolutionRequiredAssetModel
+                {
+                    Id = x.Id,
+                    ItemId = x.ItemId,
+                    Amount = NormalizeAmount(x.Amount)
+                })
+                .ToList();
+
+            if (!candidates.Any())
+                return true;
+
+            if (IsNeedOne(extraEvolution))
+            {
+                var candidate = candidates.FirstOrDefault(x => HasInventoryItem(inventory, x.ItemId, x.Amount));
+                if (candidate == null)
+                    return false;
+
+                selected.Add(candidate);
+                return true;
+            }
+
+            if (!HasInventoryItems(inventory, candidates.Select(x => (x.ItemId, x.Amount))))
+                return false;
+
+            selected.AddRange(candidates);
+            return true;
+        }
+
+        private static bool TrySelectMaterials(
+            ItemListModel inventory,
+            ExtraEvolutionAssetModel extraEvolution,
+            out List<ExtraEvolutionMaterialAssetModel> selected)
+        {
+            selected = new List<ExtraEvolutionMaterialAssetModel>();
+            var candidates = extraEvolution.Materials
+                .Where(x => x.ItemId > 0)
+                .Select(x => new ExtraEvolutionMaterialAssetModel
+                {
+                    Id = x.Id,
+                    ItemId = x.ItemId,
+                    Amount = NormalizeAmount(x.Amount)
+                })
+                .ToList();
+
+            if (!candidates.Any())
+                return true;
+
+            if (IsNeedOne(extraEvolution))
+            {
+                var candidate = candidates.FirstOrDefault(x => HasInventoryItem(inventory, x.ItemId, x.Amount));
+                if (candidate == null)
+                    return false;
+
+                selected.Add(candidate);
+                return true;
+            }
+
+            if (!HasInventoryItems(inventory, candidates.Select(x => (x.ItemId, x.Amount))))
+                return false;
+
+            selected.AddRange(candidates);
+            return true;
+        }
+
+        private static bool IsNeedOne(ExtraEvolutionAssetModel extraEvolution) => extraEvolution.WayType == 2;
+
+        private static bool HasInventoryItem(ItemListModel inventory, int itemId, int amount)
+        {
+            return inventory.FindItemsById(itemId).Sum(x => x.Amount) >= NormalizeAmount(amount);
+        }
+
+        private static bool HasInventoryItems(ItemListModel inventory, IEnumerable<(int ItemId, int Amount)> materials)
+        {
+            return materials
+                .GroupBy(x => x.ItemId)
+                .All(group => HasInventoryItem(inventory, group.Key, group.Sum(x => NormalizeAmount(x.Amount))));
+        }
+
+        private static List<ItemModel> BuildRemovalItems(
+            IReadOnlyCollection<ExtraEvolutionMaterialAssetModel> materials,
+            IReadOnlyCollection<ExtraEvolutionRequiredAssetModel> requireds)
+        {
+            var totals = new Dictionary<int, int>();
+
+            foreach (var material in materials)
+                AddRemovalTotal(totals, material.ItemId, material.Amount);
+
+            foreach (var required in requireds)
+                AddRemovalTotal(totals, required.ItemId, required.Amount);
+
+            return totals.Select(x => new ItemModel(x.Key, x.Value)).ToList();
+        }
+
+        private static void AddRemovalTotal(IDictionary<int, int> totals, int itemId, int amount)
+        {
+            if (itemId <= 0)
+                return;
+
+            totals.TryGetValue(itemId, out var current);
+            totals[itemId] = current + NormalizeAmount(amount);
+        }
+
+        private static int NormalizeAmount(int amount) => amount <= 0 ? 1 : amount;
 
         private static string NormalizeHatchName(string? value, string fallbackName)
         {

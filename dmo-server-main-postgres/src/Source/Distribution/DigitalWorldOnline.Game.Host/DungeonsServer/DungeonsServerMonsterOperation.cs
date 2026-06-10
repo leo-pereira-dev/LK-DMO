@@ -1,8 +1,10 @@
 ﻿using DigitalWorldOnline.Application.Separar.Commands.Update;
+using DigitalWorldOnline.Application.GameAssets.Bins;
 using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Enums.Map;
 using DigitalWorldOnline.Commons.Extensions;
+using DigitalWorldOnline.Commons.Models.Asset;
 using DigitalWorldOnline.Commons.Models.Base;
 using DigitalWorldOnline.Commons.Models.Config;
 using DigitalWorldOnline.Commons.Models.Map;
@@ -24,6 +26,25 @@ namespace DigitalWorldOnline.GameHost
 {
     public sealed partial class DungeonsServer
     {
+        private Dictionary<int, List<QuestLootDropRule>>? _questLootDropRulesByMob;
+
+        private readonly record struct QuestLootDropRule(int ItemId);
+
+        private void TryApplyEquipmentSetWhenHit(MapInstance map, long? tamerId)
+        {
+            if (tamerId == null)
+                return;
+
+            var targetClient = map.Clients.FirstOrDefault(x => x.TamerId == tamerId.Value);
+            if (targetClient == null)
+                return;
+
+            _equipmentSetBonusService.TryApplyPartnerTrigger(
+                targetClient,
+                EquipmentSetBonusTrigger.WhenHit,
+                packet => map.BroadcastForTamerViewsAndSelf(targetClient.TamerId, packet));
+        }
+
         private void MonsterOperation(MapInstance map)
         {
             if (!map.ConnectedTamers.Any())
@@ -185,12 +206,18 @@ namespace DigitalWorldOnline.GameHost
 
                 case MobActionEnum.Reward:
                     {
+                        _verdandiXProgram.RemoveXProgramAfterOmegamonDefeat(map, mob, BroadcastForTamerViewsAndSelf);
                         ItemsReward(map, mob);
                         QuestKillReward(map, mob);
                         ExperienceReward(map, mob);
+                        HandleDungeonStepProgression(map, mob.Id, mob.Type);
 
-                        SourceKillSpawn(map, mob);
-                        TargetKillSpawn(map, mob);
+                        var dungeonClearHandled = TryHandleDungeonClear(map, mob.Type, mob.RaidDamage);
+                        if (!dungeonClearHandled)
+                        {
+                            SourceKillSpawn(map, mob);
+                            TargetKillSpawn(map, mob);
+                        }
 
                         ColiseumStageClear(map, mob);
 
@@ -298,7 +325,9 @@ namespace DigitalWorldOnline.GameHost
                                     break;
                                 }
 
+                                var hitTamerId = mob.TargetTamer?.Id;
                                 map.AttackTarget(mob, _assets.NpcColiseum);
+                                TryApplyEquipmentSetWhenHit(map, hitTamerId);
                             }
                             else
                             {
@@ -352,8 +381,13 @@ namespace DigitalWorldOnline.GameHost
                             mob.FinishCast();
                             if (castingSkill != null && !mob.Dead && !mob.Chasing && mob.TargetAlive)
                             {
+                                var hitTamerId = mob.TargetTamer?.Id;
                                 map.SkillTarget(mob, castingSkill, _assets.NpcColiseum);
+                                TryApplyEquipmentSetWhenHit(map, hitTamerId);
                                 mob.MarkSkillCooldown(castingId, castingSkill.Cooldown);
+                                mob.UpdateLastSkill();
+                                mob.UpdateLastSkillTry();
+                                mob.UpdateCheckSkill(false);
                                 if (mob.Target != null)
                                 {
                                     mob.UpdateCurrentAction(MobActionEnum.Wait);
@@ -364,17 +398,18 @@ namespace DigitalWorldOnline.GameHost
                         }
 
                         // Pick a skill off cooldown AND satisfying its s_nUse_Terms gate (Step 7).
-                        var skillList = _assets.MonsterSkillInfo
+                        var offCooldownSkills = _assets.MonsterSkillInfo
                             .Where(x => x.Type == mob.Type
-                                     && !mob.IsSkillOnCooldown(x.SkillId)
-                                     && MonsterSkillRotation.TermMatches(x, mob, mob.Target))
+                                     && !mob.IsSkillOnCooldown(x.SkillId))
+                            .ToList();
+                        var skillList = offCooldownSkills
+                            .Where(x => MonsterSkillRotation.TermMatches(x, mob, mob.Target))
                             .ToList();
 
                         if (!skillList.Any())
                         {
-                            mob.UpdateCheckSkill(true);
+                            mob.UpdateCheckSkill(false);
                             mob.UpdateCurrentAction(MobActionEnum.Wait);
-                            mob.UpdateLastSkill();
                             mob.UpdateLastSkillTry();
                             mob.SetNextAction();
                             break;
@@ -460,6 +495,217 @@ namespace DigitalWorldOnline.GameHost
 
         }
 
+        private DungeonListRecord? ResolveDungeonRecord(MapInstance map)
+        {
+            return map.DungeonRecordId > 0
+                ? _dungeonBins.Data.ListByDungeonId.GetValueOrDefault(map.DungeonRecordId)
+                : _dungeonBins.Data.ResolveByRuntimeMapId(map.MapId, map.DungeonEntryPortalId);
+        }
+
+        private bool IsDungeonRaidBoss(MapInstance map, int mobType, int mobClass)
+        {
+            if (mobClass == 8)
+                return true;
+
+            var dungeonRecord = ResolveDungeonRecord(map);
+            return dungeonRecord != null && _dungeonBins.Data.IsStepObjective(dungeonRecord.DungeonId, mobType);
+        }
+
+        private void HandleDungeonStepProgression(MapInstance map, long mobId, int mobType)
+        {
+            var dungeonRecord = ResolveDungeonRecord(map);
+            if (dungeonRecord == null)
+                return;
+
+            var step = _dungeonBins.Data.GetObjectiveStep(dungeonRecord.DungeonId, mobType);
+            if (step == null)
+                return;
+
+            if (!map.TryRegisterDungeonObjectiveKill(mobId, mobType))
+                return;
+
+            if (!IsDungeonStepComplete(map, step))
+                return;
+
+            if (!map.MarkDungeonStepCompleted(step.StepKey))
+                return;
+
+            var nextStep = _dungeonBins.Data.GetNextStep(dungeonRecord.DungeonId, step.StepKey);
+            if (nextStep != null)
+                UnlockDungeonStep(map, nextStep);
+
+            _logger.Debug(
+                "Dungeon step completed: dungeonId={DungeonId} map={MapId} step={StepKey} nextStep={NextStep}",
+                dungeonRecord.DungeonId,
+                map.MapId,
+                step.StepKey,
+                nextStep?.StepKey);
+        }
+
+        private static bool IsDungeonStepComplete(MapInstance map, DungeonStepGroup step)
+        {
+            foreach (var objective in step.Objectives)
+            {
+                var requiredAmount = Math.Max(1, objective.Amount);
+                if (map.GetDungeonObjectiveKillCount(objective.TargetMonsterType) < requiredAmount)
+                    return false;
+            }
+
+            return true;
+        }
+
+        private static void UnlockDungeonStep(MapInstance map, DungeonStepGroup step)
+        {
+            var objectiveTypes = step.Objectives
+                .Select(x => x.TargetMonsterType)
+                .ToHashSet();
+
+            foreach (var mob in map.Mobs.Where(x => objectiveTypes.Contains(x.Type)))
+                mob.SetAwaitingKillSpawn(false);
+
+            foreach (var mob in map.SummonMobs.Where(x => objectiveTypes.Contains(x.Type)))
+                mob.SetAwaitingKillSpawn(false);
+        }
+
+        private bool TryHandleDungeonClear(MapInstance map, int mobType, IReadOnlyDictionary<long, int>? raidDamage)
+        {
+            var dungeonRecord = ResolveDungeonRecord(map);
+
+            if (dungeonRecord == null)
+                return false;
+
+            if (!_dungeonBins.Data.IsFinalObjective(dungeonRecord.DungeonId, mobType))
+                return false;
+
+            var finalStep = _dungeonBins.Data.GetObjectiveStep(dungeonRecord.DungeonId, mobType);
+            if (finalStep != null && !_dungeonBins.Data.HasCompletedPriorSteps(dungeonRecord.DungeonId, finalStep.StepKey, map.DungeonCompletedStepKeys))
+            {
+                _logger.Warning(
+                    "Dungeon final objective killed before prior steps were completed: dungeonId={DungeonId} map={MapId} mob={MobType} step={StepKey}",
+                    dungeonRecord.DungeonId,
+                    map.MapId,
+                    mobType,
+                    finalStep.StepKey);
+                return true;
+            }
+
+            if (!map.TryMarkDungeonClear())
+                return true;
+
+            _dungeonBins.Data.ClearInfo.TryGetValue(dungeonRecord.DungeonId, out var clearInfo);
+            _dungeonBins.Data.Rewards.TryGetValue(dungeonRecord.DungeonId, out var rewardInfo);
+
+            var elapsedSeconds = map.DungeonClearElapsedSeconds;
+            var failCount = Math.Max(0, map.DungeonFailCount);
+            var partyCount = (ushort)Math.Max(1, map.Clients.Count);
+            var partyMax = (ushort)Math.Max(partyCount, _dungeonBins.Data.GetMaxPlayers(dungeonRecord.DungeonId));
+            var rank = _dungeonBins.Data.CalculateRank(dungeonRecord.DungeonId, elapsedSeconds, failCount);
+            var failMax = (ushort)Math.Max(0, clearInfo?.FailLimit ?? 0);
+            var defaultRewards = ToDungeonClearPacketRewards(rewardInfo, 0);
+            var extraRewards = ToDungeonClearPacketRewards(rewardInfo, 1);
+            var detailResults = BuildDungeonClearDetailResults(map, raidDamage);
+            var dungeonName = _dungeonBins.Data.GetDisplayName(dungeonRecord);
+
+            foreach (var client in map.Clients.ToList())
+            {
+                client.Send(new DungeonClearResultPacket(
+                    dungeonRecord.DungeonId,
+                    dungeonRecord.PortalId,
+                    rank,
+                    dungeonRecord.Difficulty,
+                    elapsedSeconds,
+                    partyCount,
+                    partyMax,
+                    (ushort)Math.Min(ushort.MaxValue, failCount),
+                    failMax,
+                    0,
+                    0,
+                    dungeonName,
+                    defaultRewards,
+                    extraRewards,
+                    detailResults));
+            }
+
+            _logger.Information(
+                "Dungeon clear result sent: dungeonId={DungeonId} name={DungeonName} map={MapId} mob={MobType} rank={Rank} elapsed={Elapsed}s limit={Limit}s fail={Fail}/{FailMax} clients={Clients}",
+                dungeonRecord.DungeonId,
+                dungeonName,
+                map.MapId,
+                mobType,
+                rank,
+                elapsedSeconds,
+                clearInfo?.TimeLimitSeconds ?? 0,
+                failCount,
+                failMax,
+                map.Clients.Count);
+
+            return true;
+        }
+
+        private static IReadOnlyList<DungeonClearRewardPacketItem> ToDungeonClearPacketRewards(DungeonRewardRecord? rewardInfo, byte groupKey)
+        {
+            if (rewardInfo == null)
+                return Array.Empty<DungeonClearRewardPacketItem>();
+
+            return rewardInfo.Groups
+                .Where(x => groupKey == 0 ? x.GroupKey == 0 : x.GroupKey != 0)
+                .SelectMany(x => x.Items)
+                .Select(x => new DungeonClearRewardPacketItem(x.ItemId, Math.Max(1, x.Amount)))
+                .ToList();
+        }
+
+        private static IReadOnlyList<DungeonClearDetailPacketItem> BuildDungeonClearDetailResults(
+            MapInstance map,
+            IReadOnlyDictionary<long, int>? raidDamage)
+        {
+            var orderedDamage = (raidDamage ?? new Dictionary<long, int>())
+                .Where(x => x.Key > 0 && x.Value > 0)
+                .GroupBy(x => x.Key)
+                .Select(x => new { TamerId = x.Key, Damage = x.Sum(y => (long)y.Value) })
+                .OrderByDescending(x => x.Damage)
+                .Take(3)
+                .ToList();
+
+            var detailResults = new List<DungeonClearDetailPacketItem>();
+            byte category = 0;
+
+            foreach (var entry in orderedDamage)
+            {
+                var client = map.Clients.FirstOrDefault(x => x.TamerId == entry.TamerId);
+                var detail = CreateDungeonClearDetail(client, category, entry.Damage);
+                if (detail != null)
+                    detailResults.Add(detail);
+
+                category++;
+            }
+
+            if (!detailResults.Any())
+            {
+                var firstClient = map.Clients.FirstOrDefault(x => x.Tamer != null && x.Partner != null);
+                var detail = CreateDungeonClearDetail(firstClient, 0, 0);
+                if (detail != null)
+                    detailResults.Add(detail);
+            }
+
+            return detailResults;
+        }
+
+        private static DungeonClearDetailPacketItem? CreateDungeonClearDetail(GameClient? client, byte category, long value)
+        {
+            if (client?.Tamer == null || client.Partner == null)
+                return null;
+
+            return new DungeonClearDetailPacketItem(
+                category,
+                client.Tamer.Model.GetHashCode(),
+                client.Partner.CurrentType,
+                client.Tamer.Level,
+                client.Partner.Level,
+                (int)Math.Min(int.MaxValue, Math.Max(0, value)),
+                client.Tamer.Name ?? string.Empty,
+                client.Partner.Name ?? string.Empty);
+        }
+
         private void ColiseumStageClear(MapInstance map, MobConfigModel mob)
         {
             if (map.ColiseumMobs.Contains((int)mob.Id))
@@ -517,7 +763,7 @@ namespace DigitalWorldOnline.GameHost
 
             var sourceKillSpawn = sourceMobKillSpawn.SourceMobs.FirstOrDefault(x => x.SourceMobType == mob.Type);
 
-            if (sourceKillSpawn != null && sourceKillSpawn.CurrentSourceMobRequiredAmount <= sourceKillSpawn.SourceMobRequiredAmount)
+            if (sourceKillSpawn != null && sourceKillSpawn.CurrentSourceMobRequiredAmount > 0)
             {
                 sourceKillSpawn.DecreaseCurrentSourceMobAmount();
 
@@ -668,14 +914,14 @@ namespace DigitalWorldOnline.GameHost
 
         private void ItemsReward(MapInstance map, MobConfigModel mob)
         {
-            if (mob.DropReward == null)
-                return;
+            var isRaidBoss = IsDungeonRaidBoss(map, mob.Type, mob.Class);
 
-            QuestDropReward(map, mob);
+            if (mob.DropReward != null)
+                QuestDropReward(map, mob);
 
-            if (mob.Class == 8)
+            if (isRaidBoss)
                 RaidReward(map, mob);
-            else
+            else if (mob.DropReward != null)
                 DropReward(map, mob);
         }
 
@@ -691,23 +937,22 @@ namespace DigitalWorldOnline.GameHost
                 var targetClient = map.Clients.FirstOrDefault(x => x.TamerId == tamer?.Id);
                 if (targetClient == null)
                     continue;
-                double expBonusMultiplier = tamer.BonusEXP / 100.0 + targetClient.ServerExperience / 100.0;
+                double expBonusMultiplier = CalculateExperienceMultiplier(tamer.BonusEXP, targetClient.ServerExperience);
 
-                var tamerExpToReceive = (long)(CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.TamerExperience) * expBonusMultiplier); //TODO: +bonus
+                var basePartnerExperience = CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.DigimonExperience);
+                var partnerExpToReceive = (long)(basePartnerExperience * expBonusMultiplier); //TODO: +bonus
 
-                if (CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.TamerExperience) == 0)
-                    tamerExpToReceive = 0;
-
-                if (tamerExpToReceive > 100) tamerExpToReceive += UtilitiesFunctions.RandomInt(-15, 15);
-                var fatigueExp = _fatigueService.GetMultipliers(targetClient).exp;   // FATIGUE_HOOK
-                var tamerResult = ReceiveTamerExp(targetClient.Tamer, tamerExpToReceive, fatigueExp);
-
-                var partnerExpToReceive = (long)(CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.DigimonExperience) * expBonusMultiplier); //TODO: +bonus
-
-                if (CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.DigimonExperience) == 0)
+                if (basePartnerExperience == 0)
                     partnerExpToReceive = 0;
 
                 if (partnerExpToReceive > 100) partnerExpToReceive += UtilitiesFunctions.RandomInt(-15, 15);
+                var tamerExpToReceive = ExperienceRewardCalculator.CalculateTamerExperienceFromKilledDigimon(
+                    tamer.Level,
+                    mob.Level,
+                    mob.ExpReward.DigimonExperience);
+
+                var fatigueExp = _fatigueService.GetMultipliers(targetClient).exp;   // FATIGUE_HOOK
+                var tamerResult = ReceiveTamerExp(targetClient.Tamer, tamerExpToReceive, fatigueExp);
                 var partnerResult = ReceivePartnerExp(targetClient.Partner, mob, partnerExpToReceive, fatigueExp);   // FATIGUE_HOOK
 
                 targetClient.Send(
@@ -743,24 +988,17 @@ namespace DigitalWorldOnline.GameHost
             partyIdList.Clear();
         }
 
+        private static double CalculateExperienceMultiplier(int bonusExperience, int serverExperience)
+        {
+            var serverMultiplier = serverExperience > 0 ? serverExperience / 100.0 : 1.0;
+            var bonusMultiplier = bonusExperience > 0 ? bonusExperience / 100.0 : 0.0;
+
+            return Math.Max(0.0, serverMultiplier + bonusMultiplier);
+        }
+
         public long CalculateExperience(int tamerLevel, int mobLevel, long baseExperience)
         {
-            int levelDifference = tamerLevel - mobLevel; // Invertido para verificar se o Tamer está 30 níveis acima do Mob
-
-            if (levelDifference <= 30)
-            {
-                if (levelDifference > 0)
-                {
-                    return (long)(baseExperience * (1.0 - levelDifference * 0.03)); // 0.03 é o redutor por nível (3%)
-                }
-                // Se a diferença for 0 ou negativa, o Tamer não perde experiência.
-            }
-            else
-            {
-                return 0; // Se a diferença de níveis for maior que 30, o Tamer não recebe experiência
-            }
-
-            return baseExperience; // Se não houver redutor, a experiência base é mantida
+            return ExperienceRewardCalculator.CalculateKillExperience(tamerLevel, mobLevel, baseExperience);
         }
 
 
@@ -815,12 +1053,15 @@ namespace DigitalWorldOnline.GameHost
                         continue;
 
                     var fatiguePartyExp = _fatigueService.GetMultipliers(partyMemberClient).exp;   // FATIGUE_HOOK
-                    tamerExpToReceive = (long)((double)(mob.ExpReward.TamerExperience * 0.80)); //TODO: +bonus
-                    if (tamerExpToReceive > 100) tamerExpToReceive += UtilitiesFunctions.RandomInt(-15, 15);
-                    tamerResult = ReceiveTamerExp(partyMemberClient.Tamer, tamerExpToReceive, fatiguePartyExp);
-
-                    partnerExpToReceive = (long)((double)(mob.ExpReward.DigimonExperience) * 0.80); //TODO: +bonus
+                    const double partyExperienceShare = 0.80;
+                    partnerExpToReceive = (long)((double)(mob.ExpReward.DigimonExperience) * partyExperienceShare); //TODO: +bonus
                     if (partnerExpToReceive > 100) partnerExpToReceive += UtilitiesFunctions.RandomInt(-15, 15);
+                    tamerExpToReceive = ExperienceRewardCalculator.CalculateTamerExperienceFromKilledDigimon(
+                        partyMemberClient.Tamer.Level,
+                        mob.Level,
+                        mob.ExpReward.DigimonExperience,
+                        partyExperienceShare);
+                    tamerResult = ReceiveTamerExp(partyMemberClient.Tamer, tamerExpToReceive, fatiguePartyExp);
                     partnerResult = ReceivePartnerExp(partyMemberClient.Partner, mob, partnerExpToReceive, fatiguePartyExp);   // FATIGUE_HOOK
 
                     partyMemberClient.Send(
@@ -872,12 +1113,15 @@ namespace DigitalWorldOnline.GameHost
                         continue;
 
                     var fatiguePartyExp = _fatigueService.GetMultipliers(partyMemberClient).exp;   // FATIGUE_HOOK
-                    tamerExpToReceive = (long)((double)(mob.ExpReward.TamerExperience * 0.80)); //TODO: +bonus
-                    if (tamerExpToReceive > 100) tamerExpToReceive += UtilitiesFunctions.RandomInt(-15, 15);
-                    tamerResult = ReceiveTamerExp(partyMemberClient.Tamer, tamerExpToReceive, fatiguePartyExp);
-
-                    partnerExpToReceive = (long)((double)(mob.ExpReward.DigimonExperience) * 0.80); //TODO: +bonus
+                    const double partyExperienceShare = 0.80;
+                    partnerExpToReceive = (long)((double)(mob.ExpReward.DigimonExperience) * partyExperienceShare); //TODO: +bonus
                     if (partnerExpToReceive > 100) partnerExpToReceive += UtilitiesFunctions.RandomInt(-15, 15);
+                    tamerExpToReceive = ExperienceRewardCalculator.CalculateTamerExperienceFromKilledDigimon(
+                        partyMemberClient.Tamer.Level,
+                        mob.Level,
+                        mob.ExpReward.DigimonExperience,
+                        partyExperienceShare);
+                    tamerResult = ReceiveTamerExp(partyMemberClient.Tamer, tamerExpToReceive, fatiguePartyExp);
                     partnerResult = ReceivePartnerExp(partyMemberClient.Partner, mob, partnerExpToReceive, fatiguePartyExp);   // FATIGUE_HOOK
 
                     partyMemberClient.Send(
@@ -1062,11 +1306,120 @@ namespace DigitalWorldOnline.GameHost
             }
         }
 
-        private void QuestDropReward(MapInstance map, MobConfigModel mob)
+        private Dictionary<int, List<QuestLootDropRule>> QuestLootDropRulesByMob()
+        {
+            if (_questLootDropRulesByMob != null)
+                return _questLootDropRulesByMob;
+
+            var rulesByMob = new Dictionary<int, List<QuestLootDropRule>>();
+            var ruleCount = 0;
+
+            foreach (var questDrop in _assets.QuestLootItemDropsByMob)
+            {
+                if (!rulesByMob.TryGetValue(questDrop.Key, out var rules))
+                {
+                    rules = new List<QuestLootDropRule>();
+                    rulesByMob.Add(questDrop.Key, rules);
+                }
+
+                foreach (var itemId in questDrop.Value)
+                {
+                    if (rules.Any(x => x.ItemId == itemId))
+                        continue;
+
+                    rules.Add(new QuestLootDropRule(itemId));
+                    ruleCount++;
+                }
+            }
+
+            _questLootDropRulesByMob = rulesByMob;
+            _logger.Information(
+                "QuestLootDropIndex attached mobs={MobCount} rules={RuleCount}",
+                rulesByMob.Count,
+                ruleCount);
+
+            return _questLootDropRulesByMob;
+        }
+
+        private List<ItemDropConfigModel> BuildQuestItemRewards(MobConfigModel mob)
         {
             var itemsReward = new List<ItemDropConfigModel>();
-            itemsReward.AddRange(mob.DropReward.Drops);
-            itemsReward.RemoveAll(x => !_assets.QuestItemList.Contains(x.ItemId));
+            var questDropChance = QuestItemDropChanceByMonsterLevel(mob.Level);
+
+            if (QuestLootDropRulesByMob().TryGetValue(mob.Type, out var runtimeRules))
+            {
+                foreach (var rule in runtimeRules)
+                {
+                    var runtimeDrop = new ItemDropConfigModel();
+                    runtimeDrop.SetItemId(rule.ItemId);
+                    runtimeDrop.SetMinAmount(1);
+                    runtimeDrop.SetMaxAmount(1);
+                    runtimeDrop.SetChance(questDropChance);
+                    itemsReward.Add(runtimeDrop);
+                }
+            }
+
+            if (mob.DropReward?.Drops != null)
+            {
+                foreach (var configuredDrop in mob.DropReward.Drops.Where(x => _assets.QuestItemList.Contains(x.ItemId)))
+                {
+                    if (itemsReward.Any(x => x.ItemId == configuredDrop.ItemId))
+                        continue;
+
+                    itemsReward.Add(configuredDrop);
+                }
+            }
+
+            return itemsReward;
+        }
+
+        private List<SummonMobItemDropModel> BuildQuestItemRewards(SummonMobModel mob)
+        {
+            var itemsReward = new List<SummonMobItemDropModel>();
+            var questDropChance = QuestItemDropChanceByMonsterLevel(mob.Level);
+
+            if (QuestLootDropRulesByMob().TryGetValue(mob.Type, out var runtimeRules))
+            {
+                foreach (var rule in runtimeRules)
+                {
+                    itemsReward.Add(new SummonMobItemDropModel
+                    {
+                        ItemId = rule.ItemId,
+                        MinAmount = 1,
+                        MaxAmount = 1,
+                        Chance = questDropChance
+                    });
+                }
+            }
+
+            if (mob.DropReward?.Drops != null)
+            {
+                foreach (var configuredDrop in mob.DropReward.Drops.Where(x => _assets.QuestItemList.Contains(x.ItemId)))
+                {
+                    if (itemsReward.Any(x => x.ItemId == configuredDrop.ItemId))
+                        continue;
+
+                    itemsReward.Add(configuredDrop);
+                }
+            }
+
+            return itemsReward;
+        }
+
+        private static double QuestItemDropChanceByMonsterLevel(int monsterLevel)
+        {
+            const double levelOneChance = 70.0;
+            const double levelOneHundredFiftyChance = 35.0;
+            const double maxRuleLevel = 150.0;
+
+            var clampedLevel = Math.Clamp(monsterLevel, 1, (int)maxRuleLevel);
+            var progress = (clampedLevel - 1) / (maxRuleLevel - 1);
+            return levelOneChance - ((levelOneChance - levelOneHundredFiftyChance) * progress);
+        }
+
+        private void QuestDropReward(MapInstance map, MobConfigModel mob)
+        {
+            var itemsReward = BuildQuestItemRewards(mob);
 
             if (!itemsReward.Any())
                 return;
@@ -1164,17 +1517,21 @@ namespace DigitalWorldOnline.GameHost
 
         private void RaidReward(MapInstance map, MobConfigModel mob)
         {
-            var raidResult = mob.RaidDamage.Where(x => x.Key > 0).DistinctBy(x => x.Key);
+            var raidResult = mob.RaidDamage
+                .Where(x => x.Key > 0)
+                .DistinctBy(x => x.Key)
+                .OrderByDescending(x => x.Value)
+                .ToList();
 
             var writer = new PacketWriter();
             writer.Type(1604);
-            writer.WriteInt(raidResult.Count());
+            writer.WriteInt(Math.Min(10, raidResult.Count));
 
             int i = 1;
 
             var updateItemList = new List<ItemListModel>();
 
-            foreach (var raidTamer in raidResult.OrderByDescending(x => x.Value))
+            foreach (var raidTamer in raidResult)
             {
                 _logger.Verbose($"Character {raidTamer.Key} rank {i} on raid {mob.Id} - {mob.Name} with damage {raidTamer.Value}.");
 
@@ -1188,7 +1545,7 @@ namespace DigitalWorldOnline.GameHost
                     writer.WriteInt(raidTamer.Value);
                 }
 
-                var bitsReward = mob.DropReward.BitsDrop;
+                var bitsReward = mob.DropReward?.BitsDrop;
                 if (targetClient != null && bitsReward != null && bitsReward.Chance >= UtilitiesFunctions.RandomDouble())
                 {
                     var drop = _dropManager.CreateBitDrop(
@@ -1204,8 +1561,9 @@ namespace DigitalWorldOnline.GameHost
                     map.DropsToAdd.Add(drop);
                 }
 
-                var raidRewards = mob.DropReward.Drops;
-                raidRewards.RemoveAll(x => _assets.QuestItemList.Contains(x.ItemId));
+                var raidRewards = mob.DropReward?.Drops?
+                    .Where(x => !_assets.QuestItemList.Contains(x.ItemId))
+                    .ToList() ?? new List<ItemDropConfigModel>();
 
                 if (targetClient != null && raidRewards != null && raidRewards.Any())
                 {
@@ -1258,17 +1616,21 @@ namespace DigitalWorldOnline.GameHost
         }
         private void RaidReward(MapInstance map, SummonMobModel mob)
         {
-            var raidResult = mob.RaidDamage.Where(x => x.Key > 0).DistinctBy(x => x.Key);
+            var raidResult = mob.RaidDamage
+                .Where(x => x.Key > 0)
+                .DistinctBy(x => x.Key)
+                .OrderByDescending(x => x.Value)
+                .ToList();
 
             var writer = new PacketWriter();
             writer.Type(1604);
-            writer.WriteInt(raidResult.Count());
+            writer.WriteInt(Math.Min(10, raidResult.Count));
 
             int i = 1;
 
             var updateItemList = new List<ItemListModel>();
 
-            foreach (var raidTamer in raidResult.OrderByDescending(x => x.Value))
+            foreach (var raidTamer in raidResult)
             {
                 _logger.Verbose($"Character {raidTamer.Key} rank {i} on raid {mob.Id} - {mob.Name} with damage {raidTamer.Value}.");
 
@@ -1282,7 +1644,7 @@ namespace DigitalWorldOnline.GameHost
                     writer.WriteInt(raidTamer.Value);
                 }
 
-                var bitsReward = mob.DropReward.BitsDrop;
+                var bitsReward = mob.DropReward?.BitsDrop;
                 if (targetClient != null && bitsReward != null && bitsReward.Chance >= UtilitiesFunctions.RandomDouble())
                 {
                     var drop = _dropManager.CreateBitDrop(
@@ -1298,8 +1660,9 @@ namespace DigitalWorldOnline.GameHost
                     map.DropsToAdd.Add(drop);
                 }
 
-                var raidRewards = mob.DropReward.Drops;
-                raidRewards.RemoveAll(x => _assets.QuestItemList.Contains(x.ItemId));
+                var raidRewards = mob.DropReward?.Drops?
+                    .Where(x => !_assets.QuestItemList.Contains(x.ItemId))
+                    .ToList() ?? new List<SummonMobItemDropModel>();
 
                 if (targetClient != null && raidRewards != null && raidRewards.Any())
                 {
@@ -1362,9 +1725,12 @@ namespace DigitalWorldOnline.GameHost
 
                 case MobActionEnum.Reward:
                     {
+                        _verdandiXProgram.RemoveXProgramAfterOmegamonDefeat(map, mob, BroadcastForTamerViewsAndSelf);
                         ItemsReward(map, mob);
                         QuestKillReward(map, mob);
                         ExperienceReward(map, mob);
+                        HandleDungeonStepProgression(map, mob.Id, mob.Type);
+                        TryHandleDungeonClear(map, mob.Type, mob.RaidDamage);
                     }
                     break;
 
@@ -1458,7 +1824,9 @@ namespace DigitalWorldOnline.GameHost
                                     break;
                                 }
 
+                                var hitTamerId = mob.TargetTamer?.Id;
                                 map.AttackTarget(mob);
+                                TryApplyEquipmentSetWhenHit(map, hitTamerId);
                             }
                             else
                             {
@@ -1491,9 +1859,8 @@ namespace DigitalWorldOnline.GameHost
 
                         if (!skillList.Any())
                         {
-                            mob.UpdateCheckSkill(true);
+                            mob.UpdateCheckSkill(false);
                             mob.UpdateCurrentAction(MobActionEnum.Wait);
-                            mob.UpdateLastSkill();
                             mob.UpdateLastSkillTry();
                             mob.SetNextAction();
                             break;
@@ -1516,7 +1883,9 @@ namespace DigitalWorldOnline.GameHost
                                 if (DateTime.Now < mob.LastSkillTime.AddMilliseconds(mob.Cooldown) && mob.Cooldown > 0)
                                     break;
 
+                                var hitTamerId = mob.TargetTamer?.Id;
                                 map.SkillTarget(mob, targetSkill);
+                                TryApplyEquipmentSetWhenHit(map, hitTamerId);
 
 
 
@@ -1673,14 +2042,14 @@ namespace DigitalWorldOnline.GameHost
 
         private void ItemsReward(MapInstance map, SummonMobModel mob)
         {
-            if (mob.DropReward == null)
-                return;
+            var isRaidBoss = IsDungeonRaidBoss(map, mob.Type, mob.Class);
 
-            QuestDropReward(map, mob);
+            if (mob.DropReward != null)
+                QuestDropReward(map, mob);
 
-            if (mob.Class == 8)
+            if (isRaidBoss)
                 RaidReward(map, mob);
-            else
+            else if (mob.DropReward != null)
                 DropReward(map, mob);
         }
 
@@ -1696,23 +2065,22 @@ namespace DigitalWorldOnline.GameHost
                 var targetClient = map.Clients.FirstOrDefault(x => x.TamerId == tamer?.Id);
                 if (targetClient == null)
                     continue;
-                double expBonusMultiplier = tamer.BonusEXP / 100.0 + targetClient.ServerExperience / 100.0;
+                double expBonusMultiplier = CalculateExperienceMultiplier(tamer.BonusEXP, targetClient.ServerExperience);
 
-                var tamerExpToReceive = (long)(CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.TamerExperience) * expBonusMultiplier); //TODO: +bonus
+                var basePartnerExperience = CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.DigimonExperience);
+                var partnerExpToReceive = (long)(basePartnerExperience * expBonusMultiplier); //TODO: +bonus
 
-                if (CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.TamerExperience) == 0)
-                    tamerExpToReceive = 0;
-
-                if (tamerExpToReceive > 100) tamerExpToReceive += UtilitiesFunctions.RandomInt(-15, 15);
-                var fatigueExp = _fatigueService.GetMultipliers(targetClient).exp;   // FATIGUE_HOOK
-                var tamerResult = ReceiveTamerExp(targetClient.Tamer, tamerExpToReceive, fatigueExp);
-
-                var partnerExpToReceive = (long)(CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.DigimonExperience) * expBonusMultiplier); //TODO: +bonus
-
-                if (CalculateExperience(tamer.Partner.Level, mob.Level, mob.ExpReward.DigimonExperience) == 0)
+                if (basePartnerExperience == 0)
                     partnerExpToReceive = 0;
 
                 if (partnerExpToReceive > 100) partnerExpToReceive += UtilitiesFunctions.RandomInt(-15, 15);
+                var tamerExpToReceive = ExperienceRewardCalculator.CalculateTamerExperienceFromKilledDigimon(
+                    tamer.Level,
+                    mob.Level,
+                    mob.ExpReward.DigimonExperience);
+
+                var fatigueExp = _fatigueService.GetMultipliers(targetClient).exp;   // FATIGUE_HOOK
+                var tamerResult = ReceiveTamerExp(targetClient.Tamer, tamerExpToReceive, fatigueExp);
                 var partnerResult = ReceivePartnerExp(targetClient.Partner, mob, partnerExpToReceive, fatigueExp);   // FATIGUE_HOOK
 
                 targetClient.Send(
@@ -1905,9 +2273,7 @@ namespace DigitalWorldOnline.GameHost
 
         private void QuestDropReward(MapInstance map, SummonMobModel mob)
         {
-            var itemsReward = new List<SummonMobItemDropModel>();
-            itemsReward.AddRange(mob.DropReward.Drops);
-            itemsReward.RemoveAll(x => !_assets.QuestItemList.Contains(x.ItemId));
+            var itemsReward = BuildQuestItemRewards(mob);
 
             if (!itemsReward.Any())
                 return;

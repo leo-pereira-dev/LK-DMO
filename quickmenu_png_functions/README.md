@@ -28,6 +28,8 @@ usada pelos subprojetos com backend:
 
 - Union (`XmlUnionDUnit`) envia `11050` e `11051`; o client recebe `11050`,
   `11052` e `11053`.
+- A linha de status DUnit/Unit no tooltip usa `Union\Filter_icon.png`; deck
+  ativo continua pelo fluxo visual existente de `DECKBUFF`.
 - No server, Union registra `XmlUnionProgressRequest = 11050` e
   `XmlUnionRewardClaim = 11051`; as respostas sao `XmlUnionProgressPacket`
   (`11050`), `XmlUnionRewardClaimResultPacket` (`11052`) e

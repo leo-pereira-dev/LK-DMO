@@ -10,6 +10,23 @@
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
+namespace
+{
+	const DWORD TUTORIAL_FINAL_QUEST_ID = 4053;
+
+	bool IsTutorialFinalQuestComplete()
+	{
+		if( !g_pDataMng )
+			return false;
+
+		cData_Quest* pQuestInfo = g_pDataMng->GetQuest();
+		if( !pQuestInfo )
+			return false;
+
+		return pQuestInfo->IsCompleate( TUTORIAL_FINAL_QUEST_ID );
+	}
+}
+
 int const CTutorialContents::IsContentsIdentity(void)
 {
 	return E_CT_TUTORIAL_CONTENTS;
@@ -148,7 +165,7 @@ void CTutorialContents::OnOverride(int const& nNextFlowID)
 
 bool CTutorialContents::IsTutorialPlaying() const
 {
-	if( m_bTutorialQuestCompleted )
+	if( m_bTutorialQuestCompleted && IsTutorialFinalQuestComplete() )
 		return false;
 
 	SAFE_POINTER_RETVAL( m_pQuestIndicatorInfo, false );
@@ -187,7 +204,17 @@ void CTutorialContents::MakeWorldData(void)
 
 	// 예전 튜토리얼 퀘스트를 스킵하지 않고 완료했으면
 	// -> 완료 처리가 되지 않은 경우
-	m_bTutorialQuestCompleted = _CheckPreTutorialQuestComplete();
+	if (pTamer->IsServerOption(CTamerUser::SO_TUTORIAL_INTRO_VIDEO))
+	{
+		if (_TutorialEvent_PlayVideo(L"Data\\NP\\Media\\Tutorial_End.wmv"))
+		{
+			pTamer->RemoveServerOption(CTamerUser::SO_TUTORIAL_INTRO_VIDEO);
+			if (net::game)
+				net::game->SendClientOptionSave(pTamer->GetServerOption());
+		}
+	}
+
+	m_bTutorialQuestCompleted = _CheckPreTutorialQuestComplete() && IsTutorialFinalQuestComplete();
 	if (m_bTutorialQuestCompleted)
 	{
 		// 튜토리얼 퀘스트 완료 처리
@@ -313,6 +340,12 @@ void CTutorialContents::_TutorialQuest_AskCancel(void* pData)
 	SAFE_POINTER_RET( pData );	
 	DWORD dwQuestID = *static_cast<DWORD*>(pData);
 
+	if( dwQuestID == 4022 )
+	{
+		g_pDataMng->GetQuest()->DropProcQuest( dwQuestID );
+		return;
+	}
+
 	//20062 튜토리얼 퀘스트 포기 못한다는 메시지 번호
 	cPrintMsg::PrintMsg( 20062 );
 
@@ -394,7 +427,7 @@ void CTutorialContents::_TutorialQuest_Complete( void* data )
 	Notify( eTutorialQuestCompleted, kTmp );
 
 #ifdef LJW_TUTORIAL_RENEWAL_20191128
-	m_bTutorialQuestCompleted = _CheckCurTutorialQuestComplete();
+	m_bTutorialQuestCompleted = _CheckCurTutorialQuestComplete() && IsTutorialFinalQuestComplete();
 #else
 	m_bTutorialQuestCompleted = _CheckTutorialQuestAllComplete();
 #endif
@@ -701,9 +734,9 @@ void CTutorialContents::_TutorialEvent_ClearData()
 		g_pGameIF->CloseDynamicIF( cBaseWindow::WT_TUTORIAL_SKIP_UI );
 }
 
-void CTutorialContents::_TutorialEvent_PlayVideo(std::wstring const& wsPath)
+bool CTutorialContents::_TutorialEvent_PlayVideo(std::wstring const& wsPath)
 {
-	SAFE_POINTER_RET(g_pRenderer);
+	SAFE_POINTER_RETVAL(g_pRenderer, false);
 
 	g_pRenderer->SetBackgroundColor( NiColorA( 16.0f/255.0f, 16.0f/255.0f, 16.0f/255.0f, 1 ) );
 	g_pRenderer->BeginFrame();
@@ -712,10 +745,16 @@ void CTutorialContents::_TutorialEvent_PlayVideo(std::wstring const& wsPath)
 	g_pRenderer->EndFrame();
 	g_pRenderer->DisplayFrame();
 
+	bool bPlayed = false;
 	if( nsDIRECTSHOW::InitDShowWindow( const_cast<TCHAR*>(wsPath.c_str()), CsPoint::ZERO, CsPoint::ZERO, true ) == true )
+	{
 		nsDIRECTSHOW::WaitForKey_ForWindow( NiInputKeyboard::KEY_RETURN, NiInputKeyboard::KMOD_NONE );
+		bPlayed = true;
+	}
 		//nsDIRECTSHOW::WaitForKey_ForWindow_AniKey();
 	g_pRenderer->SetBackgroundColor( NiColor::BLACK );
+
+	return bPlayed;
 }
 
 void CTutorialContents::_TutorialEvent_Skip(void* pData)
@@ -812,7 +851,7 @@ bool CTutorialContents::_CheckPreTutorialQuestComplete()
 //////////////////////////////////////////////////////////////////////////
 bool CTutorialContents::IsTutorialPlaying_ClientMode() const
 {
-	if( m_bTutorialQuestCompleted )
+	if( m_bTutorialQuestCompleted && IsTutorialFinalQuestComplete() )
 		return false;
 
 	if( net::next_map_no == 4 )

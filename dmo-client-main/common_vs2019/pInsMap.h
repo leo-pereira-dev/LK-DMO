@@ -81,6 +81,9 @@ namespace pInsMap
 //#endif
 		DungeonRoomIn,	// 특정 방 번호로 직접 들어갈수있다
 		DungeonCreateCount,		//통계파악용
+		DungeonClearResult,
+		DungeonClearExit,
+		DungeonReEnter,
 
 
 		End

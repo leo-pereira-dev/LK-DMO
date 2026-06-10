@@ -168,6 +168,9 @@ namespace nTamer
 		EquipAura,		// DigiAura
 		XAI,			// XAI
 		Bracelet,		// Bracelete
+		NamePlate,		// Magnetic ID / nameplate
+		Goggles,		// Goggles
+		Keyring,		// Keyring
 
 		MaxParts
 	};

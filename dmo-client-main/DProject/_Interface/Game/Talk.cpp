@@ -1,5 +1,6 @@
 
 #include "stdafx.h"
+#include "../Base/SpriteAni.h"
 #include "Talk.h"
 
 #include "../../Flow/Flow.h"
@@ -9,8 +10,30 @@
 
 #define IF_TALK_STRLIST_POS		CsPoint( 16, 59 )
 
+namespace
+{
+	bool IsTutorialPlaying()
+	{
+		bool bTutorialPlaying = false;
+		GAME_EVENT_ST.OnEvent( EVENT_CODE::GET_IS_TUTORIAL_PLAYING, &bTutorialPlaying );
+		return bTutorialPlaying;
+	}
+
+	bool IsTutorialGuideQuest( CsQuest* pQuest )
+	{
+		if( !pQuest )
+			return false;
+
+		if( pQuest->GetQuestType() == CsQuest::QT_TUTORIAL )
+			return true;
+
+		return _tcsstr( pQuest->m_szTitleTab, _T( "<Tutorial>" ) ) != NULL;
+	}
+}
+
 cTalk::cTalk() :
 m_pSelMask(NULL),
+m_pTutorialQuestArrow(NULL),
 m_pBGWindow(NULL),
 m_pCancelButton(NULL),
 m_pName(NULL),	
@@ -63,6 +86,7 @@ void cTalk::DeleteResource()
 
 	m_StringList.Delete();
 	SAFE_NIDELETE( m_pSelMask );
+	SAFE_NIDELETE( m_pTutorialQuestArrow );
 	SAFE_NIDELETE( m_pBGWindow );
 }
 
@@ -85,12 +109,20 @@ void cTalk::Create(int nValue /* = 0  */)
 	m_pSelMask = NiNew cSprite;
 	m_pSelMask->Init( NULL, CsPoint::ZERO, CsPoint( 500, 22 ), "Talk\\Common_Seletbar.tga", false );
 
+	m_pTutorialQuestArrow = NiNew cSpriteAni;
+	if( m_pTutorialQuestArrow )
+	{
+		m_pTutorialQuestArrow->Init( cSpriteAni::LOOP, NULL, CsPoint::ZERO, CsPoint( 60, 45 ), "Tutorial\\tutorial_ani.tga", NULL, 11, false, CsPoint(60,0), cSpriteAni::SPRITE_POS );
+		m_pTutorialQuestArrow->SetAniTime( 0.1f );
+	}
+
 	//제목 위치
 	CsPoint ptNamePos = CsPoint( 40, 10 );
 
 	cText::sTEXTINFO ti;
 	ti.Init( &g_pEngine->m_FontSystem, CFont::FS_20, NiColor( 0.2f, 0.6f, 0.8f ) );	
 	ti.s_bOutLine = false;
+
 	m_pName = AddText( &ti, ptNamePos );
 
 	m_pScrollBar->SetEnableRenderFromEnableScroll( true );
@@ -295,6 +327,17 @@ bool cTalk::_SelectedStringList(cString* pSelectString, int nValue1, int nValue2
 		break;			
 	case cBaseWindow::WT_ITEM_PRODUCTION_SHOP:// 아이템 제작 창 오픈
 		GAME_EVENT_ST.OnEvent( EVENT_CODE::OPEN_ITEM_PRODUCTION_SHOP, m_pTarget );
+		break;
+	case 250025:
+		{
+			CsC_AvObject* pDungeonTarget = m_pTarget;
+			cDungeonEntranceWindow* pWindow = (cDungeonEntranceWindow*)g_pGameIF->GetDynamicIF( cBaseWindow::WT_DUNGEON_ENTRANCE );
+			if( pWindow )
+			{
+				pWindow->SetTarget( pDungeonTarget );
+				Close( false );
+			}
+		}
 		break;
 	case cBaseWindow::WT_DIGITAMA_SELL:
 		{
@@ -748,6 +791,16 @@ void cTalk::Render()
 		m_pSelMask->Render( m_ptSelMarkPos );
 
 	m_StringList.Render( IF_TALK_STRLIST_POS + GetRootClient(), TALK_LINE_DELTA );
+
+	if( m_pTutorialQuestArrow )
+	{
+		CsRect rtOption = _GetTutorialQuestControlPos();
+		if( !( rtOption == CsRect::ZERO ) )
+		{
+			m_pTutorialQuestArrow->Update( g_fDeltaTime );
+			m_pTutorialQuestArrow->Render( rtOption.GetPos() + CsPoint( -50, ( rtOption.Height() - 45 ) / 2 ) );
+		}
+	}
 
 	if( m_eNpcType == nsCsNpcTable::NT_GUILD )
 		cCreateName::RenderInstance( cBaseWindow::WT_CREATE_GUILD_NAME, 0 );
@@ -1380,7 +1433,7 @@ void cTalk::SetTarget( CsC_AvObject* pTarget, bool bNew /*=true*/, TCHAR* szTalk
 			{
 				cString* pStringType = NiNew cString;
 				//아이콘
-				pStringType->AddIcon( TALK_ICON_SIZE, ICONITEM::Talk, DIGIBALL, 0, CsPoint( 0, -2 ) );
+				pStringType->AddIcon( TALK_ICON_SIZE, ICONITEM::Talk, PORTAL, 0, CsPoint( 0, -2 ) );
 
 				ti.s_pFont = &g_pEngine->m_FontSystem;
 				ti.s_bOutLine = false;
@@ -1478,6 +1531,22 @@ void cTalk::SetTarget( CsC_AvObject* pTarget, bool bNew /*=true*/, TCHAR* szTalk
 				pStringType->AddText( &ti );
 
 				pStringType->SetValue1( cBaseWindow::WT_SPIRIT_EVOLUTION );
+				listType.push_back( pStringType );
+			}
+			break;
+		case nsCsNpcTable::NT_GDMO_PORTAL_TEST_NPC:
+			{
+				cString* pStringType = NiNew cString;
+				pStringType->AddIcon( TALK_ICON_SIZE, ICONITEM::Talk, DIGIBALL, 0, CsPoint( 0, -2 ) );
+
+				ti.s_pFont = &g_pEngine->m_FontSystem;
+				ti.s_bOutLine = false;
+				ti.s_eFontSize = CFont::FS_14;
+				ti.SetText( _T( "Enter Dungeon" ) );
+				pStringType->TailAddSizeX( 10 );
+				pStringType->AddText( &ti );
+
+				pStringType->SetValue1( 250025 );
 				listType.push_back( pStringType );
 			}
 			break;
@@ -1624,6 +1693,10 @@ bool cTalk::IsHaveQuest( CNpc* pTargetNpc )
 	if( ( pTargetNpc->GetQuestOwner() == NULL )&&( pTargetNpc != g_pNpcMng->GetDigivice() ) )
 		return false;
 
+	// LK-DMO: tutorial quest flow is driven by the server/Quest.bin now.
+	// Do not hide tutorial guide quests from NPC talk just because the legacy
+	// client-side tutorial controller is not active.
+	bool bTutorialPlaying = true;
 	cData_QuestOwner::sNpcOwner* pQuestOwner = pTargetNpc->GetQuestOwner();
 	if( pQuestOwner )
 	{
@@ -1636,6 +1709,9 @@ bool cTalk::IsHaveQuest( CNpc* pTargetNpc )
 		{
 			SAFE_POINTER_CON( *it );
 			SAFE_POINTER_CON( (*it)->s_pProcess );
+			SAFE_POINTER_CON( (*it)->s_pFTQuest );
+			if( !bTutorialPlaying && IsTutorialGuideQuest( (*it)->s_pFTQuest ) )
+				continue;
 			
 			if( (*it)->s_pProcess->s_bCompleate )
 				return true;
@@ -1646,8 +1722,16 @@ bool cTalk::IsHaveQuest( CNpc* pTargetNpc )
 		DWORD dwPlag =	cData_QuestOwner::sNpcOwner::ENABLE_REV_MAIN | cData_QuestOwner::sNpcOwner::ENABLE_REV_SUB |
 			cData_QuestOwner::sNpcOwner::ENABLE_REV_REPEAT | cData_QuestOwner::sNpcOwner::ENABLE_REV_EVENTREPEAT;
 		pQuestOwner->GetQuestInfoList( dwPlag, &listQuestInfo );
-		if( !listQuestInfo.empty() )
+		it = listQuestInfo.begin();
+		for( ; it != listQuestInfo.end(); ++it )
+		{
+			SAFE_POINTER_CON( *it );
+			SAFE_POINTER_CON( (*it)->s_pFTQuest );
+			if( !bTutorialPlaying && IsTutorialGuideQuest( (*it)->s_pFTQuest ) )
+				continue;
+
 			return true;
+		}
 
 		return false;
 	}
@@ -1655,15 +1739,27 @@ bool cTalk::IsHaveQuest( CNpc* pTargetNpc )
 	{
 		// 보상받을 퀘스트
 		std::map< DWORD, cData_QuestOwner::sDigiviceOwner::sQuestInfo* >* pQuestMap = g_pDataMng->GetQuestOwner()->GetReadyRevDigiviceOwner()->GetMap();
-		if( !pQuestMap->empty() )
+		std::map< DWORD, cData_QuestOwner::sDigiviceOwner::sQuestInfo* >::iterator it = pQuestMap->begin();
+		for( ; it != pQuestMap->end(); ++it )
+		{
+			SAFE_POINTER_CON( it->second );
+			SAFE_POINTER_CON( it->second->s_pFTQuest );
+			if( !bTutorialPlaying && IsTutorialGuideQuest( it->second->s_pFTQuest ) )
+				continue;
+
 			return true;
+		}
 		// 보상받을 퀘스트
 		pQuestMap = g_pDataMng->GetQuestOwner()->GetProcDigiviceOwner()->GetMap();		
-		std::map< DWORD, cData_QuestOwner::sDigiviceOwner::sQuestInfo* >::iterator it = pQuestMap->begin();
+		it = pQuestMap->begin();
 		for( ; it!=pQuestMap->end(); ++it )
 		{
 			SAFE_POINTER_CON( it->second );
 			SAFE_POINTER_CON( it->second->s_pProcess );
+			SAFE_POINTER_CON( it->second->s_pFTQuest );
+			if( !bTutorialPlaying && IsTutorialGuideQuest( it->second->s_pFTQuest ) )
+				continue;
+
 			if( it->second->s_pProcess->s_bCompleate )
 				return true;
 		}
@@ -1683,6 +1779,11 @@ void cTalk::_CheckQuest( std::list< cString* >* pList )
 	ti.Init( &g_pEngine->m_FontSystem, CFont::FS_14, NiColor( 1, 0.8f, 0 ) );	//퀘스트 리스트 색상
 	ti.s_bOutLine = false;
 
+	// LK-DMO: tutorial quest flow is driven by the server/Quest.bin now.
+	// Do not hide tutorial guide quests from NPC talk just because the legacy
+	// client-side tutorial controller is not active.
+	bool bTutorialPlaying = true;
+
 	if( pNpc->GetQuestOwner() )
 	{
 		cData_QuestOwner::sNpcOwner* pQuestOwner = pNpc->GetQuestOwner();
@@ -1694,6 +1795,9 @@ void cTalk::_CheckQuest( std::list< cString* >* pList )
 		std::list< cData_QuestOwner::sNpcOwner::sQuestInfo* >::iterator itEnd = listQuestInfo.end();
 		for( ; it!=itEnd; ++it )
 		{
+			if( !bTutorialPlaying && IsTutorialGuideQuest( (*it)->s_pFTQuest ) )
+				continue;
+
 			cString* pStringType = NiNew cString;
 
 			switch( (*it)->s_pFTQuest->GetQuestType() )
@@ -1741,6 +1845,9 @@ void cTalk::_CheckQuest( std::list< cString* >* pList )
 		itEnd = listQuestInfo.end();
 		for( ; it!=itEnd; ++it )
 		{
+			if( !bTutorialPlaying && IsTutorialGuideQuest( (*it)->s_pFTQuest ) )
+				continue;
+
 			cString* pStringType = NiNew cString;
 
 			switch( (*it)->s_pFTQuest->GetQuestType() )
@@ -1812,6 +1919,9 @@ void cTalk::_CheckQuest( std::list< cString* >* pList )
 		std::map< DWORD, cData_QuestOwner::sDigiviceOwner::sQuestInfo* >::iterator itEnd = pQuestMap->end();
 		for( ; it!=itEnd; ++it )
 		{
+			if( !bTutorialPlaying && IsTutorialGuideQuest( it->second->s_pFTQuest ) )
+				continue;
+
 			cString* pStringType = NiNew cString;
 			switch( it->second->s_pFTQuest->GetQuestType() )
 			{
@@ -1855,6 +1965,9 @@ void cTalk::_CheckQuest( std::list< cString* >* pList )
 		itEnd = pQuestMap->end();
 		for( ; it!=itEnd; ++it )
 		{
+			if( !bTutorialPlaying && IsTutorialGuideQuest( it->second->s_pFTQuest ) )
+				continue;
+
 			if( it->second->s_pProcess->s_bCompleate == false )
 				continue;
 
@@ -2039,10 +2152,20 @@ void cTalk::EnableString( int nNPCIdx ,int nTalkIdx, bool bNpcIDCheck )
 
 CsRect cTalk::GetControlPos( int nTalkIdx, int nSubValue )
 {
+	CsRect rtFallback = CsRect::ZERO;
 	std::list< cString* >::iterator it = m_StringList.GetList()->begin();
 	std::list< cString* >::iterator itEnd = m_StringList.GetList()->end();
 	for( ; it != itEnd ; ++it )
 	{
+		if( rtFallback == CsRect::ZERO &&
+			(*it)->GetEnabled() &&
+			cString::INVALIDE_STRING_VALUE != (*it)->GetValue1() )
+		{
+			cString::sELEMENT* pElFallback = (*it)->GetElement(0);
+			if( pElFallback )
+				rtFallback = pElFallback->GetWorldRect();
+		}
+
 		if( nTalkIdx != (*it)->GetValue1() )
 			continue;
 
@@ -2053,5 +2176,51 @@ CsRect cTalk::GetControlPos( int nTalkIdx, int nSubValue )
 		SAFE_POINTER_RETVAL( pEl, NULL );
 		return pEl->GetWorldRect();
 	}
-	return CsRect::ZERO;
+
+	return rtFallback;
+}
+
+CsRect cTalk::_GetTutorialQuestControlPos()
+{
+	if( !IsTutorialPlaying() )
+		return CsRect::ZERO;
+
+	CsRect rtItemProduction = CsRect::ZERO;
+
+	std::list< cString* >::iterator it = m_StringList.GetList()->begin();
+	std::list< cString* >::iterator itEnd = m_StringList.GetList()->end();
+
+	for( ; it != itEnd ; ++it )
+	{
+		if( !(*it)->GetEnabled() )
+			continue;
+
+		if( (*it)->GetValue1() == cBaseWindow::WT_ITEM_PRODUCTION_SHOP )
+		{
+			cString::sELEMENT* pEl = (*it)->GetElement(0);
+			if( pEl )
+				rtItemProduction = pEl->GetWorldRect();
+			continue;
+		}
+
+		if( (*it)->GetValue1() != cBaseWindow::WT_QUEST_REV &&
+			(*it)->GetValue1() != cBaseWindow::WT_QUEST_COMP )
+			continue;
+
+		DWORD dwQuestID = (*it)->GetValue2();
+		if( !nsCsFileTable::g_pQuestMng->IsQuest( dwQuestID ) )
+			continue;
+
+		CsQuest* pQuest = nsCsFileTable::g_pQuestMng->GetQuest( dwQuestID );
+		if( !IsTutorialGuideQuest( pQuest ) )
+			continue;
+
+		cString::sELEMENT* pEl = (*it)->GetElement(0);
+		if( !pEl )
+			continue;
+
+		return pEl->GetWorldRect();
+	}
+
+	return rtItemProduction;
 }

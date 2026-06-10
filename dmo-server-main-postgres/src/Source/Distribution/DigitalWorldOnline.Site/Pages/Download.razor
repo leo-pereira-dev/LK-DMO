@@ -1,0 +1,113 @@
+@page "/download"
+
+<PageTitle>Download | LKDMO Tamers</PageTitle>
+
+<div class="site-shell">
+    <SiteHeader />
+
+    <main class="download-page">
+        <section class="download-hero">
+            <img class="download-art" src="assets/img/banner.png" alt="" aria-hidden="true" />
+            <div class="download-hero-overlay" aria-hidden="true"></div>
+
+            <div class="download-hero-content">
+                <p class="eyebrow">Cliente oficial</p>
+                <h1>Baixe o LKDMO Tamers.</h1>
+                <p>Instale o cliente completo, entre com sua conta e comece sua jornada no Digital World com os arquivos oficiais do servidor.</p>
+
+                <div class="download-actions">
+                    <a class="download-primary download-image-button" href="@DownloadUrl" target="_blank" rel="noopener noreferrer" aria-label="Fazer download do cliente LKDMO Tamers">
+                        <img src="assets/generated/fazer-download-button.png" alt="" aria-hidden="true" />
+                    </a>
+                    <a class="download-secondary account-image-button" href="/register" aria-label="Criar conta no LKDMO Tamers">
+                        <img src="assets/generated/criar-conta-button.png" alt="" aria-hidden="true" />
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="download-shell">
+            <div class="download-main">
+                <section class="download-panel download-release">
+                    <div>
+                        <span class="download-label">Versao atual</span>
+                        <h2>Cliente completo</h2>
+                        <p>Pacote principal hospedado no Google Drive. Recomendado para nova instalacao ou para reinstalar o jogo limpo.</p>
+                    </div>
+                    <div class="release-meta">
+                        <strong>LKDMO</strong>
+                        <small>Tamers</small>
+                    </div>
+                </section>
+
+                <section class="download-grid" aria-label="Requisitos">
+                    <article>
+                        <span>01</span>
+                        <h2>Sistema</h2>
+                        <p>Windows 10 ou superior, com drivers de video atualizados.</p>
+                    </article>
+                    <article>
+                        <span>02</span>
+                        <h2>Espaco</h2>
+                        <p>Reserve espaco livre para o cliente e futuras atualizacoes.</p>
+                    </article>
+                    <article>
+                        <span>03</span>
+                        <h2>Conta</h2>
+                        <p>Crie sua conta no site antes de abrir o cliente pela primeira vez.</p>
+                    </article>
+                </section>
+
+                <section class="download-panel install-steps">
+                    <div class="section-heading">
+                        <h2>Instalacao</h2>
+                        <a class="download-mini-button" href="@DownloadUrl" target="_blank" rel="noopener noreferrer" aria-label="Fazer download do cliente LKDMO Tamers">
+                            <img src="assets/generated/fazer-download-button.png" alt="" aria-hidden="true" />
+                        </a>
+                    </div>
+
+                    <ol>
+                        <li>
+                            <strong>Baixe o pacote oficial</strong>
+                            <span>Use o botao de download e aguarde o arquivo terminar de baixar.</span>
+                        </li>
+                        <li>
+                            <strong>Extraia em uma pasta dedicada</strong>
+                            <span>Evite instalar dentro de pastas protegidas do Windows.</span>
+                        </li>
+                        <li>
+                            <strong>Abra o launcher como administrador</strong>
+                            <span>Permita que o cliente valide arquivos e prepare as atualizacoes.</span>
+                        </li>
+                    </ol>
+                </section>
+            </div>
+
+            <aside class="download-aside">
+                <section class="download-panel">
+                    <h2>Status do pacote</h2>
+                    <div class="download-status">
+                        <span></span>
+                        Disponivel
+                    </div>
+                    <p>Arquivo oficial pronto para download.</p>
+                </section>
+
+                <section class="download-panel support-box">
+                    <h2>Antes de jogar</h2>
+                    <ul>
+                        <li>Desative bloqueios indevidos do antivirus para a pasta do jogo.</li>
+                        <li>Mantenha o cliente em uma pasta fixa.</li>
+                        <li>Use uma conta criada no site.</li>
+                    </ul>
+                </section>
+            </aside>
+        </section>
+    </main>
+
+    <SiteFooter />
+</div>
+
+@code {
+    private const string DownloadUrl = "https://drive.google.com/file/d/1PpIiYWXYfKwP4fDJ-bJ8MkW3kHjTF1Ol/view?usp=sharing";
+}

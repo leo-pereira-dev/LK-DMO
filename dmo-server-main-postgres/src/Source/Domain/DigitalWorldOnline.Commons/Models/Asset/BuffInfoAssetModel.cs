@@ -22,6 +22,22 @@ namespace DigitalWorldOnline.Commons.Models.Asset
         public short EffectValue => (short)(SkillInfo.Apply.First().Value / 5);
         public void SetSkillInfo(SkillCodeAssetModel? skillCode) => SkillInfo ??= skillCode;
 
+        public static BuffInfoAssetModel CreateRuntimeEquipmentSetBuff(
+            int buffId,
+            int skillCode,
+            string name,
+            SkillCodeAssetModel skillInfo)
+        {
+            return new BuffInfoAssetModel
+            {
+                BuffId = buffId,
+                Name = name,
+                SkillCode = skillCode,
+                DigimonSkillCode = 0,
+                SkillInfo = skillInfo
+            };
+        }
+
         public bool Pray => (SkillPrayType)DigimonSkillCode == SkillPrayType.Normal
             || (SkillPrayType)DigimonSkillCode == SkillPrayType.Normal1 ||
             (SkillPrayType)DigimonSkillCode == SkillPrayType.Ultimate

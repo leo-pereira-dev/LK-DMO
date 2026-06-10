@@ -29,6 +29,10 @@ namespace DigitalWorldOnline.Commons.Packets.MapServer
             WriteShort((short)tamer.MS);
             WriteByte(tamer.HpRate);
             WriteBytes(tamer.Equipment.ToArray());
+            // v487 English client is built with LJW_ENCHANT_OPTION_DIGIVICE_190904.
+            // After the normal equipment block it reads one extra cItemData for
+            // the visible tamer's Digivice; omitting it shifts Condition/Sync and
+            // corrupts the rest of packet 1006 when another player enters view.
             WriteBytes(tamer.Digivice.ToArray());
             WriteInt(tamer.CurrentCondition.GetHashCode());
             WriteInt(0); //Sync
@@ -73,7 +77,7 @@ namespace DigitalWorldOnline.Commons.Packets.MapServer
             WriteShort(0); // ?
             WriteShort(0); // ?
 
-            WriteShort(0);
+            WriteInt(0);
         }
     }
 }

@@ -18,11 +18,11 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         /// Set the target as out of combat.
         /// </summary>
         /// <param name="handler">The target handler to set</param>
-        public MonsterSkillVisualPacket(int  AttackHandler,int TargetSkillId)
+        public MonsterSkillVisualPacket(int attackHandler, int targetSkillId)
         {
            Type(1123);
-           WriteInt(AttackHandler);
-           WriteInt(TargetSkillId);
+           WriteInt(attackHandler);
+           WriteInt(targetSkillId);
         }
     }
 }

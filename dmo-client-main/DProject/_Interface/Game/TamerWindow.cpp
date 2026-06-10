@@ -3,14 +3,55 @@
 #include "TamerWindow.h"
 #include "../Adapt/AdaptPartySystem.h"
 
-cTamerWindow::cTamerWindow():m_pTargetObject(NULL),m_pWindowBG(NULL),m_pTamerLvBG(NULL),
-m_pHPBarMin(NULL),m_pHPBarMax(NULL),m_pFPBar(NULL),m_pHostSprite(NULL),m_pNameText(NULL),
-m_pLevelText(NULL),m_pDSBar(NULL),m_pExpBar(NULL),m_pExpPercentText(NULL),m_pHPText(NULL),
-m_pAdaptParty(NULL)
+cTamerWindow::cTamerWindow()
+	: m_pTargetObject(NULL)
+	, m_pWindowBG(NULL)
+	, m_pTamerLvBG(NULL)
+	, m_pHPBarMin(NULL)
+	, m_pHPBarMax(NULL)
+	, m_pFPBar(NULL)
+	, m_pHostSprite(NULL)
+	, m_pNameText(NULL)
+	, m_pLevelText(NULL)
+	, m_pDSBar(NULL)
+	, m_pExpBar(NULL)
+	, m_pExpPercentText(NULL)
+	, m_pHPText(NULL)
+	, m_bStatusCacheReady(false)
+	, m_nLastLevel(0)
+	, m_nLastHP(0)
+	, m_nLastMaxHP(0)
+	, m_nLastFP(0)
+	, m_nLastDS(0)
+	, m_nLastMaxDS(0)
+	, m_nLastExpBar(0)
+	, m_nLastExpBarMax(0)
+	, m_pAdaptParty(NULL)
 {
+	m_szLastExpPercent[0] = 0;
+
 	m_pAdaptParty = new AdaptPartySystem;
-	if( m_pAdaptParty )
-		m_pAdaptParty->SetContents( CONTENTSSYSTEM_PTR->GetContents( E_CT_PARTYSYSTEM ) );
+	if (m_pAdaptParty)
+		m_pAdaptParty->SetContents(CONTENTSSYSTEM_PTR->GetContents(E_CT_PARTYSYSTEM));
+}
+
+void cTamerWindow::ResetCachedValues()
+{
+	m_bStatusCacheReady = false;
+
+	m_nLastLevel = 0;
+
+	m_nLastHP = 0;
+	m_nLastMaxHP = 0;
+	m_nLastFP = 0;
+
+	m_nLastDS = 0;
+	m_nLastMaxDS = 0;
+
+	m_nLastExpBar = 0;
+	m_nLastExpBarMax = 0;
+
+	m_szLastExpPercent[0] = 0;
 }
 
 void cTamerWindow::Destroy()
@@ -23,14 +64,23 @@ void cTamerWindow::DeleteResource()
 {
 	DeleteScript();
 
-	SAFE_NIDELETE( m_pWindowBG );
-	SAFE_NIDELETE( m_pHPBarMin );
-	SAFE_NIDELETE( m_pHPBarMax );
-	SAFE_NIDELETE( m_pFPBar );
-	SAFE_NIDELETE( m_pHostSprite );
-	SAFE_NIDELETE( m_pDSBar );
-	SAFE_NIDELETE( m_pExpBar );
-	SAFE_NIDELETE( m_pHPText );
+	// Esses são criados por AddSprite/AddText e normalmente são destruídos pelo DeleteScript().
+	// Zera para evitar ponteiro pendurado caso algum Update/Render rode depois.
+	m_pTamerLvBG = NULL;
+	m_pNameText = NULL;
+	m_pLevelText = NULL;
+	m_pExpPercentText = NULL;
+
+	SAFE_NIDELETE(m_pWindowBG);
+	SAFE_NIDELETE(m_pHPBarMin);
+	SAFE_NIDELETE(m_pHPBarMax);
+	SAFE_NIDELETE(m_pFPBar);
+	SAFE_NIDELETE(m_pHostSprite);
+	SAFE_NIDELETE(m_pDSBar);
+	SAFE_NIDELETE(m_pExpBar);
+	SAFE_NIDELETE(m_pHPText);
+
+	ResetCachedValues();
 }
 
 void cTamerWindow::Create( int nValue /* = 0  */)
@@ -98,79 +148,199 @@ void cTamerWindow::Create( int nValue /* = 0  */)
 
 void cTamerWindow::Update(float const& fDeltaTime)
 {
-	SAFE_POINTER_RET( m_pTargetObject );
+	SAFE_POINTER_RET(m_pTargetObject);
+
 	CsC_AvObject::sBASE_STAT* pBaseStat = m_pTargetObject->GetBaseStat();
-	SAFE_POINTER_RET( pBaseStat );
-	// 레벨
-	if( m_pLevelText )
+	SAFE_POINTER_RET(pBaseStat);
+
+	const bool bFullRefresh = !m_bStatusCacheReady;
+
+	// Level
+	const int nLevel = pBaseStat->GetLevel();
+
+	if (m_pLevelText)
 	{
-		if( pBaseStat->GetLevel() != CsC_AvObject::INVALIDE_STAT )
-			m_pLevelText->SetText( pBaseStat->GetLevel() );
-		else
-			m_pLevelText->SetText( _T( "?" ) );
+		if (bFullRefresh || m_nLastLevel != nLevel)
+		{
+			if (nLevel != CsC_AvObject::INVALIDE_STAT)
+				m_pLevelText->SetText(nLevel);
+			else
+				m_pLevelText->SetText(_T("?"));
+		}
 	}
 
-	if( m_pHPBarMin )
+	// HP / FP
+	int nMaxHP = pBaseStat->GetMaxHP();
+	int nHP = pBaseStat->GetHP();
+	int nFP = pBaseStat->GetFP();
+
+	if (nMaxHP < 1)
+		nMaxHP = 1;
+
+	if (nHP < 0)
+		nHP = 0;
+	if (nHP > nMaxHP)
+		nHP = nMaxHP;
+
+	if (nFP < 0)
+		nFP = 0;
+	if (nFP > nMaxHP)
+		nFP = nMaxHP;
+
+	const bool bHPRangeChanged = (bFullRefresh || m_nLastMaxHP != nMaxHP);
+	const bool bHPChanged = (bFullRefresh || m_nLastHP != nHP);
+	const bool bFPChanged = (bFullRefresh || m_nLastFP != nFP);
+
+	if (m_pHPBarMin)
 	{
-		m_pHPBarMin->SetRange( CsPoint( 0, pBaseStat->GetMaxHP() ) );
-		m_pHPBarMin->SetBarPos( pBaseStat->GetHP() );
-	}
-	if( m_pHPBarMax )
-	{
-		m_pHPBarMax->SetRange( CsPoint( 0, pBaseStat->GetMaxHP() ) );
-		m_pHPBarMax->SetBarPos( pBaseStat->GetHP() );
-	}
-	if( m_pFPBar )
-	{
-		m_pFPBar->SetRange( CsPoint( 0, pBaseStat->GetMaxHP() ) );
-		m_pFPBar->SetBarPos( pBaseStat->GetFP() );
+		if (bHPRangeChanged)
+			m_pHPBarMin->SetRange(CsPoint(0, nMaxHP));
+
+		if (bHPChanged)
+			m_pHPBarMin->SetBarPos(nHP);
 	}
 
-	if( m_pHPText )
+	if (m_pHPBarMax)
 	{
-		std::wstring wsText;
-		DmCS::StringFn::Format( wsText, L"%d / %d", pBaseStat->GetHP(), pBaseStat->GetMaxHP() );
-		m_pHPText->SetText( wsText.c_str() );
+		if (bHPRangeChanged)
+			m_pHPBarMax->SetRange(CsPoint(0, nMaxHP));
+
+		if (bHPChanged)
+			m_pHPBarMax->SetBarPos(nHP);
 	}
 
-	// Ds
-	if( m_pDSBar )
+	if (m_pFPBar)
 	{
-		m_pDSBar->SetRange( CsPoint( 0, pBaseStat->GetMaxDS() ) );
-		m_pDSBar->SetBarPos( pBaseStat->GetDS() );
+		if (bHPRangeChanged)
+			m_pFPBar->SetRange(CsPoint(0, nMaxHP));
+
+		if (bFPChanged)
+			m_pFPBar->SetBarPos(nFP);
 	}
 
-	// Exp
-	int nMaxEXP = static_cast<int>(FMTamer::GetMaxExp( pBaseStat->GetLevel() ));
-	int nCurEXP = static_cast<int>(pBaseStat->GetExp());
-	if( m_pExpBar )
+	if (m_pHPText)
 	{
-		m_pExpBar->SetRange( CsPoint( 0, nMaxEXP ) );
-		m_pExpBar->SetBarPos( nCurEXP );
+		if (bFullRefresh || m_nLastHP != nHP || m_nLastMaxHP != nMaxHP)
+		{
+			std::wstring wsText;
+			DmCS::StringFn::Format(wsText, L"%d / %d", nHP, nMaxHP);
+			m_pHPText->SetText(wsText.c_str());
+		}
 	}
 
-	if( m_pExpPercentText )
+	// DS
+	int nMaxDS = pBaseStat->GetMaxDS();
+	int nDS = pBaseStat->GetDS();
+
+	if (nMaxDS < 1)
+		nMaxDS = 1;
+
+	if (nDS < 0)
+		nDS = 0;
+	if (nDS > nMaxDS)
+		nDS = nMaxDS;
+
+	const bool bDSRangeChanged = (bFullRefresh || m_nLastMaxDS != nMaxDS);
+	const bool bDSChanged = (bFullRefresh || m_nLastDS != nDS);
+
+	if (m_pDSBar)
 	{
-		TCHAR sz[ 32 ];
-		_stprintf_s( sz, 32, _T( "%.3f%%" ), nCurEXP/(float)nMaxEXP*100.0f );
-		m_pExpPercentText->SetText( sz );
+		if (bDSRangeChanged)
+			m_pDSBar->SetRange(CsPoint(0, nMaxDS));
+
+		if (bDSChanged)
+			m_pDSBar->SetBarPos(nDS);
 	}
+
+	// EXP
+	// Evita overflow em level alto. Em vez de usar EXP bruto como range do progress,
+	// usamos escala fixa 0..10000.
+	const int EXP_BAR_MAX = 10000;
+
+	double dMaxEXP = 0.0;
+	double dCurEXP = 0.0;
+
+	if (nLevel != CsC_AvObject::INVALIDE_STAT)
+		dMaxEXP = static_cast<double>(FMTamer::GetMaxExp(nLevel));
+
+	dCurEXP = static_cast<double>(pBaseStat->GetExp());
+
+	if (dMaxEXP < 1.0)
+		dMaxEXP = 1.0;
+
+	if (dCurEXP < 0.0)
+		dCurEXP = 0.0;
+
+	double dExpRate = dCurEXP / dMaxEXP;
+
+	if (dExpRate < 0.0)
+		dExpRate = 0.0;
+	if (dExpRate > 1.0)
+		dExpRate = 1.0;
+
+	const int nExpBar = static_cast<int>(dExpRate * EXP_BAR_MAX);
+
+	if (m_pExpBar)
+	{
+		if (bFullRefresh || m_nLastExpBarMax != EXP_BAR_MAX)
+			m_pExpBar->SetRange(CsPoint(0, EXP_BAR_MAX));
+
+		if (bFullRefresh || m_nLastExpBar != nExpBar)
+			m_pExpBar->SetBarPos(nExpBar);
+	}
+
+	if (m_pExpPercentText)
+	{
+		TCHAR sz[32] = { 0 };
+		_stprintf_s(sz, 32, _T("%.3f%%"), dExpRate * 100.0);
+
+		if (bFullRefresh || _tcscmp(m_szLastExpPercent, sz) != 0)
+		{
+			m_pExpPercentText->SetText(sz);
+			_tcscpy_s(m_szLastExpPercent, 32, sz);
+		}
+	}
+
+	m_nLastLevel = nLevel;
+
+	m_nLastHP = nHP;
+	m_nLastMaxHP = nMaxHP;
+	m_nLastFP = nFP;
+
+	m_nLastDS = nDS;
+	m_nLastMaxDS = nMaxDS;
+
+	m_nLastExpBar = nExpBar;
+	m_nLastExpBarMax = EXP_BAR_MAX;
+
+	m_bStatusCacheReady = true;
 }
 
 cBaseWindow::eMU_TYPE
 cTamerWindow::Update_ForMouse()
 {
 	cBaseWindow::eMU_TYPE muReturn = cBaseWindow::Update_ForMouse();
-	if( muReturn == MUT_OUT_WINDOW )
+	if (muReturn == MUT_OUT_WINDOW)
 		return muReturn;
 
-	CsPoint ptMouseLocalPos = MousePosToWindowPos( CURSOR_ST.GetPos() );
-	if( m_rcExpRegion.PtInRect( ptMouseLocalPos ) == TRUE )
+	if (m_pTargetObject == NULL)
+		return muReturn;
+
+	CsC_AvObject::sBASE_STAT* pBaseStat = m_pTargetObject->GetBaseStat();
+	if (pBaseStat == NULL)
+		return muReturn;
+
+	CsPoint ptMouseLocalPos = MousePosToWindowPos(CURSOR_ST.GetPos());
+	if (m_rcExpRegion.PtInRect(ptMouseLocalPos) == TRUE)
 	{
-		// 경험치 툴팁
-		CsC_AvObject::sBASE_STAT* pBaseStat = m_pTargetObject->GetBaseStat();
-		TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip(	m_rcExpRegion.GetPos(), m_rcExpRegion.GetSize(), TOOLTIP_MAX_SIZE, cTooltip::EXP,
-												pBaseStat->GetExp(), FMTamer::GetMaxExp( pBaseStat->GetLevel() ) );
+		TOOLTIPMNG_STPTR->GetTooltip()->SetTooltip(
+			m_rcExpRegion.GetPos(),
+			m_rcExpRegion.GetSize(),
+			TOOLTIP_MAX_SIZE,
+			cTooltip::EXP,
+			pBaseStat->GetExp(),
+			FMTamer::GetMaxExp(pBaseStat->GetLevel())
+		);
 	}
 
 	return muReturn;
@@ -178,37 +348,51 @@ cTamerWindow::Update_ForMouse()
 
 void cTamerWindow::Render()
 {
+	if (m_pWindowBG == NULL)
+		return;
+
 	// 뒷 배경
 	m_pWindowBG->Render();
 
+	if (m_pTargetObject == NULL)
+		return;
+
 	// 얼굴 이미지
-	if( m_pTargetObject != NULL )
-	{
-		sCHAR_IMAGE* pCharImage = ( (CTamerUser*)m_pTargetObject )->GetCharImage();
-		if( pCharImage != NULL )
-			pCharImage->Render_L( CsPoint( m_pRoot->GetClient().x + 6, m_pRoot->GetClient().y + 6 ), CsPoint( 84, 84 ) );
-	}
+	sCHAR_IMAGE* pCharImage = ((CTamerUser*)m_pTargetObject)->GetCharImage();
+	if (pCharImage != NULL)
+		pCharImage->Render_L(CsPoint(m_pRoot->GetClient().x + 6, m_pRoot->GetClient().y + 6), CsPoint(84, 84));
 
 	RenderScript();
 
 	CsC_AvObject::sBASE_STAT* pBaseStat = m_pTargetObject->GetBaseStat();
-	if( pBaseStat->GetFP() < pBaseStat->GetHP() )
+	if (pBaseStat == NULL)
+		return;
+
+	if (m_pHPBarMax && m_pFPBar && m_pHPBarMin)
 	{
-		m_pHPBarMax->Render();
-		m_pFPBar->Render();
-	}
-	else		// hp 보다 피로도가 더 높을 때
-	{
-		m_pFPBar->Render();
-		m_pHPBarMin->Render();
+		if (pBaseStat->GetFP() < pBaseStat->GetHP())
+		{
+			m_pHPBarMax->Render();
+			m_pFPBar->Render();
+		}
+		else
+		{
+			m_pFPBar->Render();
+			m_pHPBarMin->Render();
+		}
 	}
 
-	if( m_pHPText )
+	if (m_pHPText)
 		m_pHPText->Render();
 
-	m_pDSBar->Render();
-	m_pExpBar->Render();
-	m_pHostSprite->Render();
+	if (m_pDSBar)
+		m_pDSBar->Render();
+
+	if (m_pExpBar)
+		m_pExpBar->Render();
+
+	if (m_pHostSprite)
+		m_pHostSprite->Render();
 }
 
 void cTamerWindow::OnRButtonUp( CsPoint pos )
@@ -235,28 +419,59 @@ void cTamerWindow::OnLButtonUp( CsPoint pos )
 		g_pCharResMng->SetTargetMark( m_pTargetObject );	
 }
 
-void cTamerWindow::SetTargetObject( CsC_AvObject* pTarget )
+void cTamerWindow::SetTargetObject(CsC_AvObject* pTarget)
 {
-	m_pTargetObject = pTarget;	
+	m_pTargetObject = pTarget;
+	ResetCachedValues();
 
-	if( m_pTargetObject != NULL )
+	if (m_pNameText == NULL)
+		return;
+
+	if (m_pTargetObject == NULL)
 	{
-		// 이름
-		m_pNameText->SetText( ( (CTamerUser*)m_pTargetObject )->GetCharOption()->GetName() );		
-	}	
+		m_pNameText->SetText(_T(""));
+		return;
+	}
+
+	CTamerUser* pTamerUser = (CTamerUser*)m_pTargetObject;
+	if (pTamerUser == NULL || pTamerUser->GetCharOption() == NULL)
+	{
+		m_pNameText->SetText(_T(""));
+		return;
+	}
+
+	m_pNameText->SetText(pTamerUser->GetCharOption()->GetName());
 }
 
 void cTamerWindow::ResetDevice()
 {
 	ResetDeviceScript();
-	m_pWindowBG->ResetDevice();
-	m_pHPBarMin->ResetDevice();
-	m_pHPBarMax->ResetDevice();
-	m_pFPBar->ResetDevice();
-	m_pDSBar->ResetDevice();
-	m_pExpBar->ResetDevice();
-	m_pHostSprite->ResetDevice();
-	m_pHPText->ResetDevice();
+
+	if (m_pWindowBG)
+		m_pWindowBG->ResetDevice();
+
+	if (m_pHPBarMin)
+		m_pHPBarMin->ResetDevice();
+
+	if (m_pHPBarMax)
+		m_pHPBarMax->ResetDevice();
+
+	if (m_pFPBar)
+		m_pFPBar->ResetDevice();
+
+	if (m_pDSBar)
+		m_pDSBar->ResetDevice();
+
+	if (m_pExpBar)
+		m_pExpBar->ResetDevice();
+
+	if (m_pHostSprite)
+		m_pHostSprite->ResetDevice();
+
+	if (m_pHPText)
+		m_pHPText->ResetDevice();
+
+	ResetCachedValues();
 }
 
 void cTamerWindow::SetPartyMaster(bool bValue)

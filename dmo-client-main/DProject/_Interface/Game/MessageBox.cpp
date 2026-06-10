@@ -1578,7 +1578,7 @@ void cMessageBox::_Ok( bool bAbsolute )
 			cItemInfo* pItem = pInven->GetData( m_nValue1 );
 			SAFE_POINTER_BEK( pItem );
 			SAFE_POINTER_BEK( nsCsFileTable::g_pItemMng );
-			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 			SAFE_POINTER_BEK( pFTItem );
 			CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 			SAFE_POINTER_BEK( pFTInfo );
@@ -1614,7 +1614,7 @@ void cMessageBox::_Ok( bool bAbsolute )
 
 			int nSlot = pDigimonUser->GetFTEvolCurObj()->m_nEvoSlot;
  			if( net::game )
- 				net::game->SendSkillMaxLvUp( m_nValue1, pItem->m_nType, nSlot );
+ 				net::game->SendSkillMaxLvUp( m_nValue1, pItem->GetType(), nSlot );
 
 		}break;
 

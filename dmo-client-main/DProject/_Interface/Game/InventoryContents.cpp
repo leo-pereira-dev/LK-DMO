@@ -3,6 +3,7 @@
 #include "../../ContentsSystem/ContentsSystemDef.h"
 #include "../Adapt/AdaptTutorialQuest.h"
 #include <algorithm>
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 #ifdef UI_INVENTORY_RENEWAL
 namespace
@@ -419,8 +420,26 @@ void cInventoryContents::UseItem(int const& nInvenIndex)
 			cItemInfo* pItem = pInven->GetData( nInvenIndex );
 			SAFE_POINTER_RET( pItem );
 
-			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
-			SAFE_POINTER_RET( pFTItem );
+			const uint nItemType = pItem->GetType();
+			if( nItemType != pItem->m_nType )
+			{
+				nsCSDEBUG::CrashLogger::LogMessage(
+					"ITEM_USE inventory highid resolved slot=%d rawType=%u resolvedType=%u",
+					nInvenIndex,
+					(unsigned)pItem->m_nType,
+					(unsigned)nItemType );
+			}
+
+			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( nItemType );
+			if( !pFTItem )
+			{
+				nsCSDEBUG::CrashLogger::LogMessage(
+					"ITEM_USE inventory missing table item slot=%d rawType=%u resolvedType=%u",
+					nInvenIndex,
+					(unsigned)pItem->m_nType,
+					(unsigned)nItemType );
+				return;
+			}
 
 			CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 			SAFE_POINTER_RET( pFTInfo );
@@ -616,6 +635,9 @@ bool cInventoryContents::IsEqualItemType(eFilterMode eMode, int const& nType) co
 			case nItem::Shoes:
 			case nItem::Costume:
 			case nItem::Glass:
+			case nItem::Goggles:
+			case nItem::NamePlate:
+			case nItem::Keyring:
 			case nItem::Necklace:
 			case nItem::Ring:
 			case nItem::Earring:
@@ -669,6 +691,7 @@ bool cInventoryContents::IsEqualItemType(eFilterMode eMode, int const& nType) co
 			case nItem::Cash_Shouter_ST:
 			case nItem::GM_Shouter_T:
 			case nItem::ScanUse_Item:
+			case nItem::SelectionBox:
 			case nItem::TimeSet:
 			case nItem::Item_TamerSKillConsume:
 			case nItem::Fire_Work:
@@ -853,6 +876,14 @@ void cInventoryContents::SetGiftBoxWindow(void* pData)
 	SAFE_POINTER_RET( pData );
 	nsInventory::sGiftBox* pItem = static_cast< nsInventory::sGiftBox* >( pData );
 
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"ITEM_GIFTBOX_WINDOW usedItem=%u rewardItem=%u count=%u rate=%u end=%u",
+		(unsigned)pItem->nUsedItemType,
+		(unsigned)pItem->itemData.GetType(),
+		(unsigned)pItem->itemData.GetCount(),
+		(unsigned)pItem->itemData.m_nRate,
+		(unsigned)pItem->itemData.m_nEndTime );
+
 	if( g_pDataMng )
 	{
 		cData_Inven* pInven = g_pDataMng->GetInven();
@@ -863,7 +894,7 @@ void cInventoryContents::SetGiftBoxWindow(void* pData)
 		}
 	}
 
-	sRankInfo const * rankInfo = nsCsFileTable::g_pItemMng->GetRankInfo( pItem->nUsedItemType, pItem->itemData.m_nType );
+	sRankInfo const * rankInfo = nsCsFileTable::g_pItemMng->GetRankInfo( pItem->nUsedItemType, pItem->itemData.GetType() );
 	if( !rankInfo )
 	{
 		g_pGameIF->CloseDynamicIF( cBaseWindow::WT_GIFTBOX );
@@ -881,7 +912,7 @@ void cInventoryContents::SetGiftBoxWindow(void* pData)
 
 	m_nPreRankNo = rankInfo->nRank;
 
-	std::wstring wsItemName = nsCsFileTable::g_pItemMng->GetItemName( pItem->itemData.m_nType );
+	std::wstring wsItemName = nsCsFileTable::g_pItemMng->GetItemName( pItem->itemData.GetType() );
 	if( wsItemName.empty() )
 		wsItemName = L"???";
 	ContentsStream kSend;

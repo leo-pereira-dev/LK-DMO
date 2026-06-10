@@ -22,19 +22,19 @@ void cData_Cash::Init()
 
 void cData_Cash::InitNetOff()
 {
-	m_pCashData[ 0 ].m_nType = 5001;
+	m_pCashData[ 0 ].SetType( 5001 );
 	m_pCashData[ 0 ].m_nCount = 1;
-	m_pCashData[ 1 ].m_nType = 5002;
+	m_pCashData[ 1 ].SetType( 5002 );
 	m_pCashData[ 1 ].m_nCount = 1;
-	m_pCashData[ 2 ].m_nType = 5003;
+	m_pCashData[ 2 ].SetType( 5003 );
 	m_pCashData[ 2 ].m_nCount = 1;
-	m_pCashData[ 3 ].m_nType = 5004;
+	m_pCashData[ 3 ].SetType( 5004 );
 	m_pCashData[ 3 ].m_nCount = 1;
-	m_pCashData[ 4 ].m_nType = 6001;
+	m_pCashData[ 4 ].SetType( 6001 );
 	m_pCashData[ 4 ].m_nCount = 1;
-	m_pCashData[ 5 ].m_nType = 6002;
+	m_pCashData[ 5 ].SetType( 6002 );
 	m_pCashData[ 5 ].m_nCount = 1;
-	m_pCashData[ 6 ].m_nType = 6003;
+	m_pCashData[ 6 ].SetType( 6003 );
 	m_pCashData[ 6 ].m_nCount = 1;
 
 	m_nCashCount = 7;

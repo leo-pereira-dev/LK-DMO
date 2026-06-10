@@ -97,7 +97,7 @@ void cCardReSeal::_ClearItemLock()
 
 	if( m_arrSLOT[SLOT_SEAL].s_ItemInfo.IsEnable() )
 	{	// 씰 아이템의 락 해제
-		uint nSealItemID = m_arrSLOT[SLOT_SEAL].s_ItemInfo.m_nType;
+		uint nSealItemID = m_arrSLOT[SLOT_SEAL].s_ItemInfo.GetType();
 		CsItem FTItem = *nsCsFileTable::g_pItemMng->GetItem(nSealItemID);
 		CsItem::sINFO FTInfo = *(FTItem.GetInfo());
 
@@ -106,7 +106,7 @@ void cCardReSeal::_ClearItemLock()
 
 	if( m_arrSLOT[SLOT_RESEAL].s_ItemInfo.IsEnable() )
 	{	// 밀봉 아이템의 락 해제
-		uint nSealItemID = m_arrSLOT[SLOT_RESEAL].s_ItemInfo.m_nType;
+		uint nSealItemID = m_arrSLOT[SLOT_RESEAL].s_ItemInfo.GetType();
 		CsItem FTItem = *nsCsFileTable::g_pItemMng->GetItem(nSealItemID);
 		CsItem::sINFO FTInfo = *(FTItem.GetInfo());
 
@@ -164,7 +164,7 @@ cBaseWindow::eMU_TYPE cCardReSeal::Update_ForMouse()
 		if( m_bIsRegistReSeal == false 
 			|| m_nHaveReSeal < m_nNeedReSeal)	// 밀봉 아이템 수량 부족
 		{
-			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_arrSLOT[SLOT_RESEAL].s_ItemInfo.m_nType );	// 밀봉 아이템 INDEX
+			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_arrSLOT[SLOT_RESEAL].s_ItemInfo.GetType() );	// 밀봉 아이템 INDEX
 			CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 			cPrintMsg::PrintMsg(30650, pFTInfo->s_szName);	// 밀봉 아이템이 부족합니다.
 
@@ -181,7 +181,7 @@ cBaseWindow::eMU_TYPE cCardReSeal::Update_ForMouse()
 			m_arrSLOT[SLOT_RESEAL].s_ItemInfo.IsEnable() &&
 			m_nHaveReSeal >= m_nNeedReSeal )	// 필요 개수 이상으로 필요함
 		{
-			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_arrSLOT[SLOT_SEAL].s_ItemInfo.m_nType );	// 씰 아이템
+			CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_arrSLOT[SLOT_SEAL].s_ItemInfo.GetType() );	// 씰 아이템
 			CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 
 			// 밀봉 하시겠습니까?
@@ -219,7 +219,7 @@ bool cCardReSeal::_UpdateIcon_ForMouse()
 					IF_INVENTORY_ICON_SIZE,				// 아이콘 크기
 					TOOLTIP_MAX_SIZE,					// 툴팁 길이
 					cTooltip::ITEM,						// 툴팁 유형
-					m_arrSLOT[i].s_ItemInfo.m_nType,	// 아이템 ID
+					m_arrSLOT[i].s_ItemInfo.GetType(),	// 아이템 ID
 					cBaseWindow::WT_CARDRESEAL,			// 중복 툴팁을 방지하는 Key
 					eSlot, 0, 
 					&m_arrSLOT[i].s_ItemInfo			// ItemInfo
@@ -334,7 +334,7 @@ void cCardReSeal::SendReSeal()
 	}
 
 
-	int nSealItemID = m_arrSLOT[SLOT_SEAL].s_ItemInfo.m_nType;	// 선택 카드 아이템ID
+	int nSealItemID = m_arrSLOT[SLOT_SEAL].s_ItemInfo.GetType();	// 선택 카드 아이템ID
 	int nCardID = nsCsFileTable::g_pMaster_CardMng->GetMasterCard(nSealItemID)->GetInfo()->s_nID;	// 카드ID
 
 	//CsItem::sINFO* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_ResistStone.m_nType )->GetInfo();
@@ -349,7 +349,7 @@ void cCardReSeal::SendReSeal()
 void cCardReSeal::GetINFO( IN int nInvenIndex, OUT CsItem& FTItem, OUT CsItem::sINFO& FTInfo, OUT cItemInfo& ItemINFO )
 {
 	ItemINFO	= *g_pDataMng->GetInven()->GetData( nInvenIndex );
-	FTItem	= *nsCsFileTable::g_pItemMng->GetItem( ItemINFO.m_nType );
+	FTItem	= *nsCsFileTable::g_pItemMng->GetItem( ItemINFO.GetType() );
 	FTInfo	= *FTItem.GetInfo();
 }
 

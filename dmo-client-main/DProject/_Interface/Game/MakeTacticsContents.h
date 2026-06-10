@@ -31,6 +31,7 @@ protected:
 	cItemInfo		m_pBackupDisk;
 
 	int				iSuccessLevel;
+	uint			m_nLastDigimonEggType;
 	int				iDigimonEggIdx;		//디지몬알 인덱스
 	int				iBackupDiskIdx;		//백업디스크 인덱스
 	int				iRequireDataCnt;
@@ -53,6 +54,7 @@ public:
 	void			SetSuccessLevel();
 
 	void			ResetDigimonEgg();
+	bool			RestoreDigimonEggType();
 	bool			AutoResistDigiMonEgg();
 	bool			InputDataDigimonEgg(int invenIDX, n4 NpcID, bool bVipMemberShip);
 	void			RemoveDigimonEgg();	

@@ -14,6 +14,110 @@ cDataMng*	g_pDataMng = NULL;
 
 #define		SORT_COOLTIME	20.0f
 
+namespace
+{
+	const DWORD JOGRESS_XROSS_CHIPSET_SKILL_CODE = 2500245;
+
+	bool IsJogressXrossChipsetItem( const CsItem::sINFO* pFTInfo )
+	{
+		return pFTInfo != NULL &&
+			pFTInfo->s_nType_L == nItem::Chipset &&
+			pFTInfo->s_dwSkill == JOGRESS_XROSS_CHIPSET_SKILL_CODE;
+	}
+
+	bool IsGoggleName( const TCHAR* szName )
+	{
+		return szName != NULL &&
+			( _tcsstr( szName, _T( "Goggle" ) ) != NULL ||
+			_tcsstr( szName, _T( "goggle" ) ) != NULL ||
+			_tcsstr( szName, _T( "Glass" ) ) != NULL ||
+			_tcsstr( szName, _T( "glass" ) ) != NULL ||
+			_tcsstr( szName, _T( "Sunglass" ) ) != NULL ||
+			_tcsstr( szName, _T( "sunglass" ) ) != NULL ||
+			_tcsstr( szName, _T( "Eyeglass" ) ) != NULL ||
+			_tcsstr( szName, _T( "eyeglass" ) ) != NULL );
+	}
+
+	bool HasNameToken( const TCHAR* szName, const TCHAR* szToken )
+	{
+		return szName != NULL && szToken != NULL && _tcsstr( szName, szToken ) != NULL;
+	}
+
+	bool HasAnyNameToken( const TCHAR* szName, const TCHAR* const* pTokens, int nTokenCount )
+	{
+		if( szName == NULL )
+			return false;
+
+		for( int i = 0; i < nTokenCount; ++i )
+		{
+			if( HasNameToken( szName, pTokens[ i ] ) )
+				return true;
+		}
+
+		return false;
+	}
+
+	bool IsGlassSlotItem( const CsItem::sINFO* pFTInfo )
+	{
+		if( pFTInfo == NULL )
+			return false;
+
+		if( pFTInfo->s_nType_L == nItem::Glass )
+			return true;
+
+		return false;
+	}
+
+	bool IsCostumeSlotName( const TCHAR* szName )
+	{
+		static const TCHAR* const kPartTokens[] =
+		{
+			_T( "Boot" ), _T( "boot" ), _T( "Shoe" ), _T( "shoe" ),
+			_T( "Sneaker" ), _T( "sneaker" ), _T( "Glove" ), _T( "glove" ),
+			_T( "Trouser" ), _T( "trouser" ), _T( "Pants" ), _T( "pants" ),
+			_T( "Hat" ), _T( "hat" ), _T( "Robe" ), _T( "robe" ),
+			_T( "Top" ), _T( "top" ), _T( "Bottom" ), _T( "bottom" ),
+			_T( "Jacket" ), _T( "jacket" ), _T( "Bouquet" ), _T( "bouquet" ),
+			_T( "Sunglass" ), _T( "sunglass" ), _T( "Glass" ), _T( "glass" ),
+			_T( "Goggle" ), _T( "goggle" )
+		};
+
+		if( HasAnyNameToken( szName, kPartTokens, sizeof( kPartTokens ) / sizeof( kPartTokens[ 0 ] ) ) )
+			return false;
+
+		static const TCHAR* const kCostumeTokens[] =
+		{
+			_T( "Suit" ), _T( "suit" ), _T( "Dress" ), _T( "dress" ),
+			_T( "Costume" ), _T( "costume" ), _T( "Outfit" ), _T( "outfit" ),
+			_T( "Soccer Uniform" ), _T( "soccer Uniform" ), _T( "Soccer uniform" ),
+			_T( "School Uniform" ), _T( "school Uniform" ), _T( "School uniform" ),
+			_T( "Taekwondo Uniform" ), _T( "Fencing Uniform" ),
+			_T( "Archery Uniform" ), _T( "Archer Uniform" ),
+			_T( "TennisUniform" ), _T( "Tennis Uniform" )
+		};
+
+		return HasAnyNameToken( szName, kCostumeTokens, sizeof( kCostumeTokens ) / sizeof( kCostumeTokens[ 0 ] ) );
+	}
+
+	int GetTamerEquipSlot( const CsItem::sINFO* pFTInfo )
+	{
+		if( pFTInfo == NULL )
+			return nTamer::Head;
+		if( pFTInfo->s_nType_L == nItem::Goggles )
+			return nTamer::Goggles;
+		if( IsGlassSlotItem( pFTInfo ) )
+			return nTamer::Glass;
+		if( pFTInfo->s_nType_L == nItem::NamePlate )
+			return nTamer::NamePlate;
+		if( pFTInfo->s_nType_L == nItem::Keyring )
+			return nTamer::Keyring;
+		if( pFTInfo->s_nType_L == nItem::Costume || IsCostumeSlotName( pFTInfo->s_szName ) )
+			return nTamer::Costume;
+
+		return pFTInfo->s_nType_L - nItem::Head;
+	}
+}
+
 void cDataMng::GlobalInit()
 {
 	cData_Quest::GlobalInit();
@@ -379,6 +483,10 @@ bool cDataMng::_IsEnableItemMove( int nSrcSrvID, int nDestSrvID )
 			case SERVER_DATA_MEMORY_CONSTANT:
 				if( g_pDataMng->GetTactics()->GetTactics( TO_ID( nDestSrvID ) )->s_Type != 0 )
 					return false;
+			case SERVER_DATA_EVOCHIP_CONSTANT:
+				if( g_pDataMng->GetDigivice()->GetEvoChipset( 0 )->IsEnable() == true )
+					return false;
+				break;
 			case SERVER_DATA_CHIPSET_CONSTANT:
 				if( g_pDataMng->GetDigivice()->GetChipset( TO_ID( nDestSrvID ) )->IsEnable() == true )
 					return false;
@@ -414,6 +522,10 @@ bool cDataMng::_IsEnableItemMove( int nSrcSrvID, int nDestSrvID )
 			case SERVER_DATA_MEMORY_CONSTANT:
 				if( g_pDataMng->GetTactics()->GetTactics( TO_ID( nDestSrvID ) )->s_Type != 0 )
 					return false;
+			case SERVER_DATA_EVOCHIP_CONSTANT:
+				if( g_pDataMng->GetDigivice()->GetEvoChipset( 0 )->IsEnable() == true )
+					return false;
+				break;
 			case SERVER_DATA_CHIPSET_CONSTANT:
 				if( g_pDataMng->GetDigivice()->GetChipset( TO_ID( nDestSrvID ) )->IsEnable() == true )
 					return false;
@@ -464,6 +576,7 @@ bool cDataMng::_IsEnableItemMove( int nSrcSrvID, int nDestSrvID )
 
 	case SERVER_DATA_TEQUIP_CONSTANT:
 	case SERVER_DATA_MEMORY_CONSTANT:
+	case SERVER_DATA_EVOCHIP_CONSTANT:
 	case SERVER_DATA_CHIPSET_CONSTANT:
 	case SERVER_DATA_DIGIVICE_CONSTANT:
 		break;
@@ -495,6 +608,7 @@ bool cDataMng::_IsEnableItemMove( int nSrcSrvID, int nDestSrvID )
 #endif
 	case SERVER_DATA_TEQUIP_CONSTANT:
 	case SERVER_DATA_MEMORY_CONSTANT:
+	case SERVER_DATA_EVOCHIP_CONSTANT:
 	case SERVER_DATA_CHIPSET_CONSTANT:
 	case SERVER_DATA_DIGIVICE_CONSTANT:
 		break;
@@ -544,7 +658,7 @@ bool cDataMng::IsItemUse( int nSrvIndex )
 	if( pItem == NULL )
 		return false;
 
-	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 	CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 
 	//=============================================================================================================
@@ -632,6 +746,9 @@ bool cDataMng::IsItemUse( int nSrvIndex )
 		case nItem::Shoes:
 		case nItem::Costume:
 		case nItem::Glass:
+		case nItem::Goggles:
+		case nItem::NamePlate:
+		case nItem::Keyring:
 		case nItem::Necklace:
 		case nItem::Earring:
 		case nItem::Ring:
@@ -699,6 +816,9 @@ bool cDataMng::IsItemUse( int nSrvIndex )
 	case nItem::Shoes:
 	case nItem::Costume:
 	case nItem::Glass:
+	case nItem::Goggles:
+	case nItem::NamePlate:
+	case nItem::Keyring:
 	case nItem::Necklace:
 	case nItem::Earring:
 	case nItem::Ring:
@@ -744,6 +864,11 @@ cItemInfo* cDataMng::SrvID2ItemInfo( int nSrvID )
 		if( GetTEquip()->IsExistItem( TO_ID( nSrvID ) ) == false )
 			return NULL;
 		return GetTEquip()->GetData( TO_ID( nSrvID ) );
+
+	case SERVER_DATA_EVOCHIP_CONSTANT:
+		if( GetDigivice()->GetEvoChipset( 0 )->IsEnable() == false )
+			return NULL;
+		return GetDigivice()->GetEvoChipset( 0 );
 
 	case SERVER_DATA_CHIPSET_CONSTANT:
 		if( GetDigivice()->GetChipset( TO_ID( nSrvID ) )->IsEnable() == false )
@@ -801,6 +926,7 @@ void cDataMng::SendItemUse( int nSrvID )
 		break;
 	case SERVER_DATA_TEQUIP_CONSTANT:
 	case SERVER_DATA_MEMORY_CONSTANT:
+	case SERVER_DATA_EVOCHIP_CONSTANT:
 	case SERVER_DATA_CHIPSET_CONSTANT:
 		break;
 #ifdef CROSSWARS_SYSTEM
@@ -818,13 +944,13 @@ void cDataMng::_SendItemUse_Extra( int nExtraSrvID )
 
 	cItemInfo* pItem = SrvID2ItemInfo( nExtraSrvID );
 	SAFE_POINTER_RET( pItem );
-	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 	SAFE_POINTER_RET( pFTItem );
 	CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 	SAFE_POINTER_RET( pFTInfo );
 
 	ExtraInventoryDebugLog( "[ExtraInventory][DataMng] SendItemUse extra srv=%d item=%d typeL=%d count=%d",
-		nExtraSrvID, pItem->m_nType, pFTInfo->s_nType_L, pItem->GetCount() );
+		nExtraSrvID, pItem->GetType(), pFTInfo->s_nType_L, pItem->GetCount() );
 
 	switch( pFTInfo->s_nType_L )
 	{
@@ -867,13 +993,13 @@ void cDataMng::_UpdatePendingExtraSealUse()
 	cItemInfo* pItem = GetInven()->GetData( TO_ID( m_nPendingExtraSealUseDestSrvID ) );
 	if( pItem && pItem->IsEnable() )
 	{
-		CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+		CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 		CsItem::sINFO* pFTInfo = pFTItem ? pFTItem->GetInfo() : NULL;
 		if( pFTInfo && pFTInfo->s_nType_L == nItem::CardMaster )
 		{
 			int nInvenIndex = TO_ID( m_nPendingExtraSealUseDestSrvID );
 			ExtraInventoryDebugLog( "[ExtraInventory][DataMng] Pending extra seal open dest=%d invenIndex=%d item=%d count=%d",
-				m_nPendingExtraSealUseDestSrvID, nInvenIndex, pItem->m_nType, pItem->GetCount() );
+				m_nPendingExtraSealUseDestSrvID, nInvenIndex, pItem->GetType(), pItem->GetCount() );
 			m_nPendingExtraSealUseDestSrvID = -1;
 			m_nPendingExtraSealUseRetry = 0;
 			g_pGameIF->CloseDynamicIF( cBaseWindow::WT_CARDRESEAL );
@@ -897,7 +1023,7 @@ void cDataMng::_SendItemUse_InvenCross( int nInvenIndex )
 		return; 
 
 	cItemInfo* pItem = GetInvenCross()->GetData( nInvenIndex );
-	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 	CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 
 	CsC_AvObject* pTarget = NULL;
@@ -1146,12 +1272,12 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 	}
 
 	cItemInfo* pItem = GetInven()->GetData( nInvenIndex );
-	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 	CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 
 	nsCSDEBUG::CrashLogger::LogMessage( "ITEM_USE inventory slot=%d item=%d count=%d typeL=%d typeS=%d typeValue=%d invenSlots=%u empty=%d",
 		nInvenIndex,
-		pItem->m_nType,
+		pItem->GetType(),
 		pItem->GetCount(),
 		pFTInfo->s_nType_L,
 		pFTInfo->s_nType_S,
@@ -1189,10 +1315,15 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 	case nItem::Shoes:
 	case nItem::Costume:
 	case nItem::Glass:
+	case nItem::NamePlate:
+	case nItem::Keyring:
 #ifdef SDM_TAMER_XGUAGE_20180628
 	case nItem::XAI:
 #endif
-		SendItemMove( TO_INVEN_SID( nInvenIndex ), TO_TEQUIP_SID( pFTInfo->s_nType_L - nItem::Head ) );
+		SendItemMove( TO_INVEN_SID( nInvenIndex ), TO_TEQUIP_SID( GetTamerEquipSlot( pFTInfo ) ) );
+		break;
+	case nItem::Goggles:
+		SendItemMove( TO_INVEN_SID( nInvenIndex ), TO_TEQUIP_SID( nTamer::Goggles ) );
 		break;
 	case nItem::EquipAura: //오라 추가 chu8820
 		SendItemMove( TO_INVEN_SID( nInvenIndex ), TO_TEQUIP_SID( (pFTInfo->s_nType_L - nItem::Head) ) ); //장비 타입 30번 없이 31번으로 넘어와서 1 더 빼줘야되
@@ -1336,12 +1467,13 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 // #endif
 		
 	case nItem::ScanUse_Item:
+	case nItem::SelectionBox:
 		{
 			cItemInfo* pTempItem = g_pDataMng->GetInven()->GetData(nInvenIndex);
 
-			int count = nsCsFileTable::g_pItemMng->GetDropCount(pTempItem->m_nType);
+			int count = nsCsFileTable::g_pItemMng->GetDropCount(pTempItem->GetType());
 
-			if( nsCsFileTable::g_pItemMng->GetDropCount(pTempItem->m_nType) > g_pDataMng->GetInven()->GetEmptySlotCount() )
+			if( nsCsFileTable::g_pItemMng->GetDropCount(pTempItem->GetType()) > g_pDataMng->GetInven()->GetEmptySlotCount() )
 			{
 				cPrintMsg::PrintMsg( 11015 );
 				break;
@@ -1356,6 +1488,22 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 				ServerItemUseSuccess( pTarget->GetUniqID(), nInvenIndex );
 		}
 		break;
+	case nItem::Digitama3:
+		{
+			if( _tcsstr( pFTInfo->s_szName, _T("Level 5") ) ||
+				_tcsstr( pFTInfo->s_szName, _T("Level5") ) ||
+				_tcsstr( pFTInfo->s_szName, _T("Lv.5") ) ||
+				_tcsstr( pFTInfo->s_szName, _T("Lv5") ) )
+			{
+				cPrintMsg::PrintMsg( 30534,  pFTInfo->s_szName );
+				cMessageBox::GetFirstMessageBox()->SetValue1( nInvenIndex );
+			}
+			else
+			{
+				assert_cs( false );
+			}
+			break;
+		}
 	case nItem::RClick_Hatch:
 		{
 			cPrintMsg::PrintMsg( 30534,  pFTInfo->s_szName );
@@ -1455,7 +1603,6 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 	case nItem::Capsule_Coin:
 	case nItem::Digitama1:
 	case nItem::Digitama2:
-	case nItem::Digitama3:
 	case nItem::Digitama4:
 	case nItem::Digitama5:
 	case nItem::Digitama6:
@@ -1504,14 +1651,37 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 		// 칩셋
 	case nItem::Chipset:
 		{
-			int nEmptyChipset = GetDigivice()->GetEmptyChipsetSlot();
-			if( nEmptyChipset != -1 )
+			const bool bJogressXrossChipset = IsJogressXrossChipsetItem( pFTInfo );
+			const int nEmptyChipset = GetDigivice()->GetEmptyChipsetSlot();
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"CHIPSET_ROUTE rightclick invSlot=%d item=%u typeL=%d class=%d skill=%u jogress=%d emptyNormal=%d normalCount=%d evoEnabled=%d",
+				nInvenIndex,
+				pFTInfo ? (unsigned)pFTInfo->s_dwItemID : 0,
+				pFTInfo ? pFTInfo->s_nType_L : -1,
+				pFTInfo ? pFTInfo->s_nClass : -1,
+				pFTInfo ? (unsigned)pFTInfo->s_dwSkill : 0,
+				bJogressXrossChipset ? 1 : 0,
+				nEmptyChipset,
+				GetDigivice()->GetChipsetCount(),
+				GetDigivice()->GetEvoChipset( 0 )->IsEnable() ? 1 : 0 );
+
+			if( bJogressXrossChipset )
 			{
-				SendItemMove( TO_INVEN_SID( nInvenIndex ), TO_CHIPSET_SID( nEmptyChipset ) );
+				if( !GetDigivice()->GetEvoChipset( 0 )->IsEnable() )
+					SendItemMove( TO_INVEN_SID( nInvenIndex ), TO_EVOCHIP_SID( 0 ) );
+				else
+					cPrintMsg::PrintMsg( cPrintMsg::CHIPSET_FULL );
 			}
 			else
 			{
-				cPrintMsg::PrintMsg( cPrintMsg::CHIPSET_FULL );
+				if( nEmptyChipset != -1 )
+				{
+					SendItemMove( TO_INVEN_SID( nInvenIndex ), TO_CHIPSET_SID( nEmptyChipset ) );
+				}
+				else
+				{
+					cPrintMsg::PrintMsg( cPrintMsg::CHIPSET_FULL );
+				}
 			}
 		}		
 		break;	
@@ -1579,20 +1749,40 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 	case nItem::Rescale:
 		{
 			DWORD dwBaseDigimonFTID = g_pCharMng->GetDigimonUser( 0 )->GetBaseDigimonFTID();
+			// LK-DMO: starter/partner Digimon can use resize fruits; log it for live testing.
 			if( nsCsFileTable::g_pDigimonMng->IsStartDigimon( dwBaseDigimonFTID ) )
 			{	// 파트너 디지몬은 크기 변경 불가
-				cPrintMsg::PrintMsg( 30162 );
-				return;
+				nsCSDEBUG::CrashLogger::LogMessage( "FRUIT_RESCALE allowing starter/partner digimon base=%u slot=%d item=%d",
+					dwBaseDigimonFTID,
+					nInvenIndex,
+					pItem->GetType() );
 			}
 
 			DWORD dwTotalType = pFTInfo->s_nType_L*100 + pFTInfo->s_nType_S;
+			nsCSDEBUG::CrashLogger::LogMessage( "FRUIT_RESCALE begin slot=%d item=%d count=%d typeL=%d typeS=%d totalType=%u typeValue=%d digimonBase=%u start=%d",
+				nInvenIndex,
+				pItem->GetType(),
+				pItem->GetCount(),
+				pFTInfo->s_nType_L,
+				pFTInfo->s_nType_S,
+				dwTotalType,
+				pFTInfo->s_nTypeValue,
+				dwBaseDigimonFTID,
+				nsCsFileTable::g_pDigimonMng->IsStartDigimon( dwBaseDigimonFTID ) ? 1 : 0 );
 
 			// 분양 디지몬의 경우 분양 전용 아이템만 사용 가능			
 			bool bParcelDigimon = nsCsFileTable::g_pDigimonParcelTBMng->IsParcelDigimon( dwBaseDigimonFTID );
+			nsCSDEBUG::CrashLogger::LogMessage( "FRUIT_RESCALE parcel-check totalType=%u parcel=%d",
+				dwTotalType,
+				bParcelDigimon ? 1 : 0 );
 			if( dwTotalType == nItem::DigimonScaleParcelOut )// 분양 디지몬 전용인 아이템을 사용할 때
 			{
 				if( !bParcelDigimon )
 				{
+					nsCSDEBUG::CrashLogger::LogMessage( "FRUIT_RESCALE blocked: parcel-only item used on non-parcel digimon base=%u slot=%d item=%d",
+						dwBaseDigimonFTID,
+						nInvenIndex,
+						pItem->GetType() );
 					cPrintMsg::PrintMsg( 31000 );
 					return;
 				}				
@@ -1601,6 +1791,10 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 			{
 				if( bParcelDigimon )
 				{
+					nsCSDEBUG::CrashLogger::LogMessage( "FRUIT_RESCALE blocked: normal fruit used on parcel digimon base=%u slot=%d item=%d",
+						dwBaseDigimonFTID,
+						nInvenIndex,
+						pItem->GetType() );
 					cPrintMsg::PrintMsg( 31001 );
 					return;
 				}	
@@ -1620,6 +1814,11 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 				{											// 6단 전용 아이템인경우 디지몬이 6단 이상이여만 사용 가능
 					if( pkDigimonData->s_HatchLevel < 6 )	// 6단 디지몬의 6단 전용 아이템으로만 크기 변경 가능
 					{
+						nsCSDEBUG::CrashLogger::LogMessage( "FRUIT_RESCALE blocked: hatch level too low for level-6 fruit hatch=%d totalType=%u slot=%d item=%d",
+							pkDigimonData->s_HatchLevel,
+							dwTotalType,
+							nInvenIndex,
+							pItem->GetType() );
 						cPrintMsg::PrintMsg( 31000 );
 						return;
 					}
@@ -1634,6 +1833,11 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 					// 일반 크기 변경 아이템인 경우 6단 이상인 디지몬은 사용 못함.
 					if( pkDigimonData->s_HatchLevel >= 6 )
 					{
+						nsCSDEBUG::CrashLogger::LogMessage( "FRUIT_RESCALE blocked: normal fruit used on level-6 digimon hatch=%d totalType=%u slot=%d item=%d",
+							pkDigimonData->s_HatchLevel,
+							dwTotalType,
+							nInvenIndex,
+							pItem->GetType() );
 						cPrintMsg::PrintMsg( 31000 );
 						return;	
 					}
@@ -1641,6 +1845,12 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 				break;
 			}
 
+			nsCSDEBUG::CrashLogger::LogMessage( "FRUIT_RESCALE accepted: opening confirmation slot=%d item=%d hatch=%d totalType=%u digimonBase=%u",
+				nInvenIndex,
+				pItem->GetType(),
+				pkDigimonData->s_HatchLevel,
+				dwTotalType,
+				dwBaseDigimonFTID );
 			cPrintMsg::PrintMsg( 30160 );
 			assert_cs( cMessageBox::IsMessageBox() );
 			cMessageBox::GetFirstMessageBox()->SetValue1( nInvenIndex );
@@ -1660,7 +1870,7 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 		{
 			nsCSDEBUG::CrashLogger::LogMessage( "ITEM_USE Cash_ExtraInven send slot=%d item=%d target=%p netGame=%p",
 				nInvenIndex,
-				pItem->m_nType,
+				pItem->GetType(),
 				pTarget,
 				net::game );
 
@@ -2398,7 +2608,7 @@ void cDataMng::_SendItemUse_Inven( int nInvenIndex )
 void cDataMng::ServerCrossItemUseSuccess( uint nTargetUID, int nInvenIndex )
 {
 	cItemInfo* pItem = GetInvenCross()->GetData(  nInvenIndex );
-	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 	CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 
 	//=============================================================================================================
@@ -2487,7 +2697,7 @@ void cDataMng::ServerCrossItemUseSuccess( uint nTargetUID, int nInvenIndex )
 void cDataMng::ServerItemUseSuccess( uint nTargetUID, int nInvenIndex )
 {
 	cItemInfo* pItem = GetInven()->GetData( nInvenIndex );
-	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 	CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 
 	//=============================================================================================================
@@ -2568,6 +2778,9 @@ void cDataMng::ServerItemUseSuccess( uint nTargetUID, int nInvenIndex )
 	case nItem::Shoes:
 	case nItem::Costume:
 	case nItem::Glass:
+	case nItem::Goggles:
+	case nItem::NamePlate:
+	case nItem::Keyring:
 	case nItem::Earring:
 	case nItem::Necklace:
 	case nItem::Ring:
@@ -2647,6 +2860,7 @@ void cDataMng::ServerItemUseSuccess( uint nTargetUID, int nInvenIndex )
 		break;
 #endif
 	case nItem::ScanUse_Item:
+	case nItem::SelectionBox:
 		{
 			// 아이템 갯수 감소
 			pItem->DecreaseCount( 1 );
@@ -2884,7 +3098,7 @@ void cDataMng::ServerItemUseFailed( int nInvenIndex )
 	cItemInfo* pItem = GetInven()->GetData( nInvenIndex );
 	if( pItem != NULL )
 	{
-		CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType );
+		CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() );
 		if( pFTItem != NULL )
 		{
 			CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
@@ -2939,6 +3153,9 @@ void cDataMng::SetChangeItemLimited(u2 Itempos, u1 limit)
 		//	break;
 	case SERVER_DATA_CHIPSET_CONSTANT:
 		pItemInfo = m_Digivice.GetChipset( nSlot );
+		break;
+	case SERVER_DATA_EVOCHIP_CONSTANT:
+		pItemInfo = m_Digivice.GetEvoChipset( 0 );
 		break;
 	case SERVER_DATA_DIGIVICE_CONSTANT:
 		pItemInfo = GetTEquip()->GetDigiviceItem();
@@ -3404,6 +3621,7 @@ int cDataMng::SendItemMove( int nSrcSrvID, int nDestSrvID, int nCount /*=0*/ )
 #endif
 	case SERVER_DATA_TEQUIP_CONSTANT:
 	case SERVER_DATA_MEMORY_CONSTANT:
+	case SERVER_DATA_EVOCHIP_CONSTANT:
 	case SERVER_DATA_CHIPSET_CONSTANT:
 	case SERVER_DATA_DIGIVICE_CONSTANT:
 		{
@@ -3583,8 +3801,19 @@ bool cDataMng::_SendItemMove_Digivice( int nTEquipSrvID, int nInvenSrvID )
 
 void cDataMng::ServerItemMoveSuccess( int nSrcSrvID, int nDestSrvID )
 {
-	assert_cs( IsItemLock( nSrcSrvID ) == true );
-	assert_cs( IsItemLock( nDestSrvID ) == true );
+	if( IsItemLock( nSrcSrvID ) == false || IsItemLock( nDestSrvID ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "ITEM_MOVE_SUCCESS unlocked response src=%d dst=%d srcLocked=%d dstLocked=%d tryCount=%d",
+			nSrcSrvID,
+			nDestSrvID,
+			IsItemLock( nSrcSrvID ) ? 1 : 0,
+			IsItemLock( nDestSrvID ) ? 1 : 0,
+			m_nItemTryCount );
+		m_nItemTryCount = 0;
+		ItemUnlock( nSrcSrvID );
+		ItemUnlock( nDestSrvID );
+		return;
+	}
 	ItemUnlock( nSrcSrvID );
 	ItemUnlock( nDestSrvID );
 
@@ -3598,6 +3827,23 @@ void cDataMng::ServerItemMoveSuccess( int nSrcSrvID, int nDestSrvID )
 		ExtraInventoryDebugLog( "[ExtraInventory][DataMng] ServerItemMoveSuccess extra src=%d dest=%d srcConst=%d destConst=%d tryCount=%d",
 			nSrcSrvID, nDestSrvID, nSrcConstant, nDestConstant, m_nItemTryCount );
 		cWindow::PlaySound( cWindow::SD_At3 );
+		m_nItemTryCount = 0;
+		return;
+	}
+
+	if( nSrcConstant == SERVER_DATA_EVOCHIP_CONSTANT )
+	{
+		switch( nDestConstant )
+		{
+		case SERVER_DATA_INVEN_CONSTANT:
+			GetDigivice()->EvoChipsetToInven( nDestID );
+			cWindow::PlaySound( cWindow::SD_Np1 );
+			break;
+		default:
+			assert_cs( false );
+			break;
+		}
+
 		m_nItemTryCount = 0;
 		return;
 	}
@@ -3677,6 +3923,10 @@ void cDataMng::ServerItemMoveSuccess( int nSrcSrvID, int nDestSrvID )
 				// 디지바이스 아이템으로
 			case SERVER_DATA_DIGIVICE_CONSTANT:
 				GetTEquip()->ToInven_Digivice( TO_ID( nSrcSrvID ) );
+				cWindow::PlaySound( cWindow::SD_At1 );
+				break;
+			case SERVER_DATA_EVOCHIP_CONSTANT:
+				GetDigivice()->InvenToEvoChipset( TO_ID( nSrcSrvID ) );
 				cWindow::PlaySound( cWindow::SD_At1 );
 				break;
 				// 칩셋으로
@@ -3828,8 +4078,20 @@ void cDataMng::ItemTryCount()
 
 void cDataMng::ServerItemMoveFailed( int nSrcSrvID, int nDestSrvID )
 {
-	assert_cs( IsItemLock( nSrcSrvID ) == true );
-	assert_cs( IsItemLock( nDestSrvID ) == true );
+	if( IsItemLock( nSrcSrvID ) == false || IsItemLock( nDestSrvID ) == false )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "ITEM_MOVE_FAILED unlocked response src=%d dst=%d srcLocked=%d dstLocked=%d tryCount=%d",
+			nSrcSrvID,
+			nDestSrvID,
+			IsItemLock( nSrcSrvID ) ? 1 : 0,
+			IsItemLock( nDestSrvID ) ? 1 : 0,
+			m_nItemTryCount );
+		m_nItemTryCount = 0;
+		ItemUnlock( nSrcSrvID );
+		ItemUnlock( nDestSrvID );
+		_ReleaseSort(false);
+		return;
+	}
 
 	if( IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nSrcSrvID ) ) || IS_EXTRAINVEN_CONSTANT( TO_CONSTANT( nDestSrvID ) ) )
 	{
@@ -4028,6 +4290,11 @@ bool cDataMng::IsScanItem(cItemInfo* pItemInfo)
 	SAFE_POINTER_RETVAL( pItemInfo, false );	
 	SAFE_POINTER_RETVAL( nsCsFileTable::g_pItemMng, false );
 
+	// GDMO tutorial scan flow: Supplies Kit is an event/tutorial item, but it
+	// must still be accepted by the digitama scan NPC.
+	if( pItemInfo->GetType() == 70259 )
+		return true;
+
 	bool bIsRank = false;
 	bool bIsType = false;
 
@@ -4069,6 +4336,7 @@ bool cDataMng::IsScanItem(cItemInfo* pItemInfo)
 
 bool cDataMng::IsSellItem(cItemInfo* pItemInfo)
 {
+	SAFE_POINTER_RETVAL( pItemInfo, false );
 	SAFE_POINTER_RETVAL( nsCsFileTable::g_pItemMng, false );
 	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItemInfo->GetType() );
 	SAFE_POINTER_RETVAL( pFTItem, false );
@@ -4083,6 +4351,11 @@ bool cDataMng::IsSellItem(cItemInfo* pItemInfo)
 	}
 
 	// 타입 체크
+	// GDMO tutorial return flow: Return Item [Tutorial] can be returned even
+	// when its imported type metadata does not match the old client whitelist.
+	if( pItemInfo->GetType() == 70260 )
+		return true;
+
 	switch(pFTItemInfo->s_nType_L)
 	{
 	case nItem::Digitama1:		//	91

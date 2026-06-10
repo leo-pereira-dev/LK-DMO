@@ -28,10 +28,33 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         {
             var packet = new GamePacketReader(packetData);
 
-            var evoIdx = packet.ReadInt() -1;
+            var evoSlot = packet.ReadInt();
+            var evoIdx = evoSlot - 1;
             var itemSection = packet.ReadInt(); //TODO: obter a quantidade e section do Ride.bin
 
+            if (client.Partner == null ||
+                evoIdx < 0 ||
+                evoIdx >= client.Partner.Evolutions.Count)
+            {
+                _logger.Warning(
+                    "Rejected ride unlock for tamer {TamerId}: invalid evolution slot {EvoSlot} for partner {PartnerId}.",
+                    client.TamerId,
+                    evoSlot,
+                    client.Partner?.Id);
+                return;
+            }
+
             var inventoryItem = client.Tamer.Inventory.FindItemBySection(itemSection);
+            if (inventoryItem == null || inventoryItem.ItemId == 0)
+            {
+                _logger.Warning(
+                    "Rejected ride unlock for tamer {TamerId}: missing item section {ItemSection} for partner {PartnerId}, evo slot {EvoSlot}.",
+                    client.TamerId,
+                    itemSection,
+                    client.Partner.Id,
+                    evoSlot);
+                return;
+            }
 
             client.Tamer.Inventory.RemoveOrReduceItem(inventoryItem, 1);
 

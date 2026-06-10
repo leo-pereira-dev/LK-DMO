@@ -4,6 +4,98 @@
 
 namespace
 {
+bool IsGoggleName( const TCHAR* szName )
+{
+	return szName != NULL &&
+		( _tcsstr( szName, _T( "Goggle" ) ) != NULL ||
+		_tcsstr( szName, _T( "goggle" ) ) != NULL ||
+		_tcsstr( szName, _T( "Glass" ) ) != NULL ||
+		_tcsstr( szName, _T( "glass" ) ) != NULL ||
+		_tcsstr( szName, _T( "Sunglass" ) ) != NULL ||
+		_tcsstr( szName, _T( "sunglass" ) ) != NULL ||
+		_tcsstr( szName, _T( "Eyeglass" ) ) != NULL ||
+		_tcsstr( szName, _T( "eyeglass" ) ) != NULL );
+}
+
+bool HasNameToken( const TCHAR* szName, const TCHAR* szToken )
+{
+	return szName != NULL && szToken != NULL && _tcsstr( szName, szToken ) != NULL;
+}
+
+bool HasAnyNameToken( const TCHAR* szName, const TCHAR* const* pTokens, int nTokenCount )
+{
+	if( szName == NULL )
+		return false;
+
+	for( int i = 0; i < nTokenCount; ++i )
+	{
+		if( HasNameToken( szName, pTokens[ i ] ) )
+			return true;
+	}
+
+	return false;
+}
+
+bool IsGlassSlotItem( const CsItem::sINFO* pFTInfo )
+{
+	if( pFTInfo == NULL )
+		return false;
+
+	if( pFTInfo->s_nType_L == nItem::Glass )
+		return true;
+
+	return false;
+}
+
+bool IsCostumeSlotName( const TCHAR* szName )
+{
+	static const TCHAR* const kPartTokens[] =
+	{
+		_T( "Boot" ), _T( "boot" ), _T( "Shoe" ), _T( "shoe" ),
+		_T( "Sneaker" ), _T( "sneaker" ), _T( "Glove" ), _T( "glove" ),
+		_T( "Trouser" ), _T( "trouser" ), _T( "Pants" ), _T( "pants" ),
+		_T( "Hat" ), _T( "hat" ), _T( "Robe" ), _T( "robe" ),
+		_T( "Top" ), _T( "top" ), _T( "Bottom" ), _T( "bottom" ),
+		_T( "Jacket" ), _T( "jacket" ), _T( "Bouquet" ), _T( "bouquet" ),
+		_T( "Sunglass" ), _T( "sunglass" ), _T( "Glass" ), _T( "glass" ),
+		_T( "Goggle" ), _T( "goggle" )
+	};
+
+	if( HasAnyNameToken( szName, kPartTokens, sizeof( kPartTokens ) / sizeof( kPartTokens[ 0 ] ) ) )
+		return false;
+
+	static const TCHAR* const kCostumeTokens[] =
+	{
+		_T( "Suit" ), _T( "suit" ), _T( "Dress" ), _T( "dress" ),
+		_T( "Costume" ), _T( "costume" ), _T( "Outfit" ), _T( "outfit" ),
+		_T( "Soccer Uniform" ), _T( "soccer Uniform" ), _T( "Soccer uniform" ),
+		_T( "School Uniform" ), _T( "school Uniform" ), _T( "School uniform" ),
+		_T( "Taekwondo Uniform" ), _T( "Fencing Uniform" ),
+		_T( "Archery Uniform" ), _T( "Archer Uniform" ),
+		_T( "TennisUniform" ), _T( "Tennis Uniform" )
+	};
+
+	return HasAnyNameToken( szName, kCostumeTokens, sizeof( kCostumeTokens ) / sizeof( kCostumeTokens[ 0 ] ) );
+}
+
+int GetTamerEquipSlot( const CsItem::sINFO* pFTInfo )
+{
+	if( pFTInfo == NULL )
+		return nTamer::Head;
+	if( pFTInfo->s_nType_L == nItem::Goggles )
+		return nTamer::Goggles;
+	if( IsGlassSlotItem( pFTInfo ) )
+		return nTamer::Glass;
+	if( pFTInfo->s_nType_L == nItem::NamePlate )
+		return nTamer::NamePlate;
+	if( pFTInfo->s_nType_L == nItem::Keyring )
+		return nTamer::Keyring;
+	if( pFTInfo->s_nType_L == nItem::Costume || IsCostumeSlotName( pFTInfo->s_szName ) )
+		return nTamer::Costume;
+
+	return pFTInfo->s_nType_L - nItem::Head;
+}
+
 void CopyItemInfoFields( cItemInfo& dest, const cItemInfo& src )
 {
 	dest.m_nAll = src.m_nAll;
@@ -35,11 +127,11 @@ cData_TEquip::cData_TEquip()
 
 void cData_TEquip::InitNetOff()
 {
-	/*m_pEquip[ nsPART::Glass ].m_nType = 11001;
+	/*m_pEquip[ nsPART::Glass ].SetType( 11001 );
 	m_pEquip[ nsPART::Glass ].m_nCount = 1;
 	m_pEquip[ nsPART::Glass ].m_nRate = 40;
 	
-	m_pEquip[ nsPART::Coat ].m_nType = 12008;
+	m_pEquip[ nsPART::Coat ].SetType( 12008 );
 	m_pEquip[ nsPART::Coat ].m_nCount = 1;
 	m_pEquip[ nsPART::Coat ].m_nRate = 40;
 	m_pEquip[ nsPART::Coat ].m_nSockItemType[ 0 ] = 1;
@@ -47,15 +139,15 @@ void cData_TEquip::InitNetOff()
 	m_pEquip[ nsPART::Coat ].m_nSockItemType[ 1 ] = 1;
 	m_pEquip[ nsPART::Coat ].m_nSockAppRate[ 1 ] = 30;
 
-	m_pEquip[ nsPART::Glove ].m_nType = 13002;
+	m_pEquip[ nsPART::Glove ].SetType( 13002 );
 	m_pEquip[ nsPART::Glove ].m_nCount = 1;
 	m_pEquip[ nsPART::Glove ].m_nRate = 40;
 
-	m_pEquip[ nsPART::Costume ].m_nType = 17042;
+	m_pEquip[ nsPART::Costume ].SetType( 17042 );
 	m_pEquip[ nsPART::Costume ].m_nCount = 1;
 
 	cItemData digi;
-	digi.m_nType = 40001;
+	digi.SetType( 40001 );
 	digi.m_nCount = 1;
 	SetDigiviceItem( &digi );*/
 }
@@ -68,6 +160,9 @@ void cData_TEquip::Reset()
 
 void cData_TEquip::SetDigiviceItem( cItemData* pDigiviceItem )
 {
+	int nDigiviceItemType = 0;
+	int nDigiviceEndTime = 0;
+
 	if( ( pDigiviceItem == NULL )||( pDigiviceItem->GetType() == 0 ) )
 	{
 		// 장비 해제
@@ -84,8 +179,10 @@ void cData_TEquip::SetDigiviceItem( cItemData* pDigiviceItem )
 		// 장비 장착
 		m_DigiviceItem = *pDigiviceItem;
 		assert_cs( m_DigiviceItem.IsEnable() == true );
+		nDigiviceItemType = m_DigiviceItem.GetType();
+		nDigiviceEndTime = m_DigiviceItem.m_nEndTime;
 
-		CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_DigiviceItem.m_nType );
+		CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( m_DigiviceItem.GetType() );
 		if( pFTItem )
 		{
 			CsItem::sINFO* pInfo = pFTItem->GetInfo();
@@ -99,6 +196,15 @@ void cData_TEquip::SetDigiviceItem( cItemData* pDigiviceItem )
 				}
 			}
 		}
+	}
+
+	if( g_pCharMng && g_pCharMng->GetTamerUser() )
+	{
+		CsC_PartObject::sCHANGE_PART_INFO cp;
+		cp.s_nFileTableID = nDigiviceItemType;
+		cp.s_nPartIndex = nsPART::Digivice;
+		cp.s_nRemainTime = nDigiviceEndTime;
+		g_pCharMng->GetTamerUser()->ChangePart( &cp );
 	}
 
 	GAME_EVENT_ST.OnEvent( EVENT_CODE::UPDATE_TAMERSTATUS, NULL );
@@ -121,7 +227,7 @@ void cData_TEquip::SetData( int nIndex, cItemInfo* pItem, bool bCallChangePart )
 			//==========================================================================================================
 			GS2C_RECV_CHECKTYPE recv;
 			recv.nType = AchieveContents::CA_Equip_Costume_1;
-			recv.nValue1 = pItem->m_nType;
+			recv.nValue1 = pItem->GetType();
 			GAME_EVENT_ST.OnEvent( EVENT_CODE::ACHIEVE_SET_CHECKTYPE, &recv );
 
 			recv.nType = AchieveContents::CA_Equip_Costume_2;
@@ -220,13 +326,14 @@ void cData_TEquip::ToInven( int nEquipIndex, int nInvenIndex )
 	else
 	{
 		// 인벤에 있는거와 파츠타입이 동일 해야만 한다.
-		if(nsCsFileTable::g_pItemMng->GetItem( pInven->GetData( nInvenIndex )->GetType() )->GetInfo()->s_nType_L != nItem::EquipAura) //오라 추가 chu8820
+		CsItem::sINFO* pInvenItemInfo = nsCsFileTable::g_pItemMng->GetItem( pInven->GetData( nInvenIndex )->GetType() )->GetInfo();
+		if(pInvenItemInfo->s_nType_L != nItem::EquipAura) //오라 추가 chu8820
 		{
-			assert_cs( nsCsFileTable::g_pItemMng->GetItem( pInven->GetData( nInvenIndex )->GetType() )->GetInfo()->s_nType_L - nItem::Head == nEquipIndex );
+			assert_cs( GetTamerEquipSlot( pInvenItemInfo ) == nEquipIndex );
 		}
 		else //오라장비일 경우 Head(21)을 빼도 type값이 10이 되기때문에 1 더 빼줘
 		{
-			assert_cs( ((nsCsFileTable::g_pItemMng->GetItem( pInven->GetData( nInvenIndex )->GetType() )->GetInfo()->s_nType_L - nItem::Head)) == nEquipIndex );
+			assert_cs( ((pInvenItemInfo->s_nType_L - nItem::Head)) == nEquipIndex );
 		}
 
 		// 임시보관
@@ -315,7 +422,7 @@ int cData_TEquip::GetCount_Item_ID( int nItemID )
 		if( m_pEquip[ i ].IsEnable() == false )
 			continue;
 
-		if( m_pEquip[ i ].m_nType == nItemID )
+		if( m_pEquip[ i ].GetType() == nItemID )
 			nReturn += m_pEquip[ i ].GetCount();
 	}
 	return nReturn;

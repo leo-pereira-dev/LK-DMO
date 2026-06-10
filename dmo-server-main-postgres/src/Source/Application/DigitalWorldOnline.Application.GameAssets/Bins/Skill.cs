@@ -87,6 +87,8 @@ public sealed class Skill
 /// </summary>
 public sealed record SkillRecord(
     int Id,
+    string Name,
+    string Comment,
     SkillApply Apply0,
     SkillApply Apply1,
     SkillApply Apply2,

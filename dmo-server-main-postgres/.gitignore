@@ -422,5 +422,7 @@ appsettings.Development.json
 start_servers.local.bat
 
 # Environment-specific configs (contain local paths and secrets)
+.env.local
+.env.production
 src/Source/Distribution/DigitalWorldOnline.Account.Api/appsettings.Production.json
 src/Source/Distribution/DigitalWorldOnline.Account.Api/appsettings.Staging.json

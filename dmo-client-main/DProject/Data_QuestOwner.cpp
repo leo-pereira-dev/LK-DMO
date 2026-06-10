@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "Data_QuestOwner.h"
+#include "../LibProj/CsFunc/CrashLogger.h"
 
 //=======================================================================================================
 //
@@ -62,6 +63,11 @@ void cData_QuestOwner::Update()
 void cData_QuestOwner::AddQuest_New( nQuest::cInfo* pOrgInfo, CsQuest* pFT )
 {
 	DWORD dwSTID = pFT->GetStartTarget_ID();
+	nsCSDEBUG::CrashLogger::LogMessage( "QUEST_OWNER_NEW quest=%lu startType=%d startId=%lu npcExists=%d",
+		(unsigned long)pFT->GetUniqID(),
+		(int)pFT->GetStartTarget_Type(),
+		(unsigned long)dwSTID,
+		(g_pNpcMng && g_pNpcMng->IsNpc( dwSTID )) ? 1 : 0 );
 
 	// 시작대상
 	switch( pFT->GetStartTarget_Type() )
@@ -105,6 +111,15 @@ void cData_QuestOwner::AddQuest_Process( nQuest::cInfo* pOrgInfo, CsQuest* pFT, 
 {
 	SAFE_POINTER_RET( pOrgInfo );
 	SAFE_POINTER_RET( pFT );
+	nsCSDEBUG::CrashLogger::LogMessage( "QUEST_OWNER_PROCESS quest=%lu startType=%d startId=%lu target=%d target1=%lu startNpcExists=%d targetNpcExists=%d complete=%d",
+		(unsigned long)pFT->GetUniqID(),
+		(int)pFT->GetStartTarget_Type(),
+		(unsigned long)pFT->GetStartTarget_ID(),
+		(int)pFT->GetQuestTarget(),
+		(unsigned long)pFT->GetQuestTargetValue1(),
+		(g_pNpcMng && g_pNpcMng->IsNpc( pFT->GetStartTarget_ID() )) ? 1 : 0,
+		(g_pNpcMng && g_pNpcMng->IsNpc( pFT->GetQuestTargetValue1() )) ? 1 : 0,
+		pProcess ? (pProcess->s_bCompleate ? 1 : 0) : -1 );
 
 	// 시작 대상
 	DWORD dwSTID = pFT->GetStartTarget_ID();
@@ -300,4 +315,3 @@ void cData_QuestOwner::Check_DigimonTalk( bool const& bPostLoad )
 		break;
 	}
 }
-

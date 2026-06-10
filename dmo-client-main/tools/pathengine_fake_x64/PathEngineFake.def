@@ -1,0 +1,5 @@
+LIBRARY PathEngine
+EXPORTS
+    DLLExport_GetIPathEngine @1
+    DLLExport_RefWrapperPointer @2
+    DllExport_GetIPathEngine @3

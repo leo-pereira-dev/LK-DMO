@@ -14,7 +14,7 @@ namespace DigitalWorldOnline.Application.Separar.Commands.Update
 
         public async Task<Unit> Handle(UpdateItemsCommand request, CancellationToken cancellationToken)
         {
-            await _dualWriteCoordinator.UpdateItemsAsync(request.Items);
+            await _dualWriteCoordinator.UpdateItemsAsync(request.Items, request.PreserveUnreferencedInstances);
 
             return Unit.Value;
         }

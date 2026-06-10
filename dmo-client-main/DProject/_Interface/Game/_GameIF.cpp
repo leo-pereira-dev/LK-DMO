@@ -8,9 +8,14 @@
 cGameInterface*		g_pGameIF = NULL;
 
 cGameInterface::cGameInterface() :	m_pStaticFocusWindow(NULL), m_bRenderIF(true), 
-									m_pBright(NULL), /*m_pTooltip(NULL),*/ m_pAlime(NULL), /*m_pCompareTooltip(NULL), m_pRightTooltip(NULL), */m_pPopupWindow(NULL), m_pBossScene(NULL)						
+									m_pBright(NULL), /*m_pTooltip(NULL),*/ m_pAlime(NULL), /*m_pCompareTooltip(NULL), m_pRightTooltip(NULL), */m_pPopupWindow(NULL), m_pBossScene(NULL),
+									m_nQueuedRaidRankerCount(0), m_bHasQueuedRaidRankingList(false)
 
 {
+	InitializeCriticalSection( &m_csRaidRankingList );
+	for( int i = 0; i < RAID_RANK_QUEUE_MAX; ++i )
+		m_QueuedRaidRanker[ i ].Reset();
+
 	m_pGlobalMsg = NULL;
 	m_vpReserveFocusWindow.Destroy();
 	m_vpReserveFocusCallFunc.Destroy();
@@ -21,6 +26,7 @@ cGameInterface::cGameInterface() :	m_pStaticFocusWindow(NULL), m_bRenderIF(true)
 cGameInterface::~cGameInterface()
 {
 	Destroy();
+	DeleteCriticalSection( &m_csRaidRankingList );
 }
 
 void cGameInterface::GlobalInit()
@@ -63,6 +69,13 @@ void cGameInterface::GlobalShotDown()
 
 void cGameInterface::Destroy()
 {
+	m_DebugHudText.Delete();
+
+	EnterCriticalSection( &m_csRaidRankingList );
+	m_bHasQueuedRaidRankingList = false;
+	m_nQueuedRaidRankerCount = 0;
+	LeaveCriticalSection( &m_csRaidRankingList );
+
 	SAFE_NIDELETE( m_pBright );
 	SAFE_NIDELETE( m_pAlime );
 	SAFE_NIDELETE( m_pPopupWindow );
@@ -105,6 +118,85 @@ void cGameInterface::Destroy()
 // #endif
 }
 
+void cGameInterface::QueueRaidRankingList( const sQueuedRaidRanker* pRanker, int nCount )
+{
+	int nSafeCount = nCount;
+	if( nSafeCount < 0 )
+		nSafeCount = 0;
+	if( nSafeCount > RAID_RANK_QUEUE_MAX )
+		nSafeCount = RAID_RANK_QUEUE_MAX;
+
+	EnterCriticalSection( &m_csRaidRankingList );
+
+	for( int i = 0; i < RAID_RANK_QUEUE_MAX; ++i )
+		m_QueuedRaidRanker[ i ].Reset();
+
+	if( pRanker != NULL )
+	{
+		for( int i = 0; i < nSafeCount; ++i )
+			m_QueuedRaidRanker[ i ] = pRanker[ i ];
+	}
+
+	m_nQueuedRaidRankerCount = nSafeCount;
+	m_bHasQueuedRaidRankingList = true;
+
+	LeaveCriticalSection( &m_csRaidRankingList );
+}
+
+void cGameInterface::_ProcessQueuedRaidRankingList()
+{
+	sQueuedRaidRanker queuedRanker[ RAID_RANK_QUEUE_MAX ];
+	for( int i = 0; i < RAID_RANK_QUEUE_MAX; ++i )
+		queuedRanker[ i ].Reset();
+
+	int nCount = 0;
+	bool bHasQueuedRanking = false;
+
+	EnterCriticalSection( &m_csRaidRankingList );
+
+	if( m_bHasQueuedRaidRankingList )
+	{
+		nCount = m_nQueuedRaidRankerCount;
+		if( nCount < 0 )
+			nCount = 0;
+		if( nCount > RAID_RANK_QUEUE_MAX )
+			nCount = RAID_RANK_QUEUE_MAX;
+
+		for( int i = 0; i < nCount; ++i )
+			queuedRanker[ i ] = m_QueuedRaidRanker[ i ];
+
+		m_bHasQueuedRaidRankingList = false;
+		bHasQueuedRanking = true;
+	}
+
+	LeaveCriticalSection( &m_csRaidRankingList );
+
+	if( bHasQueuedRanking == false )
+		return;
+
+	cRaidRank* pRaidRank = GetRaidRank();
+	if( pRaidRank == NULL || pRaidRank->IsShowWindow() == false )
+		pRaidRank = (cRaidRank*)GetDynamicIF( cBaseWindow::WT_RAIDRANK, 0, 0, false );
+
+	if( pRaidRank == NULL )
+		return;
+
+	pRaidRank->ResetRankList();
+
+	for( int i = 0; i < nCount; ++i )
+	{
+		if( queuedRanker[ i ].s_bVisible == false )
+			continue;
+
+		pRaidRank->SetRanker( i,
+			queuedRanker[ i ].s_nRank,
+			queuedRanker[ i ].s_szTamer,
+			queuedRanker[ i ].s_szDigimon,
+			queuedRanker[ i ].s_nDamage,
+			queuedRanker[ i ].s_Color );
+	}
+}
+
 void cGameInterface::Init()
 {
 	m_pBright = NiNew cSprite;		// 화면 밝기
@@ -121,6 +213,11 @@ void cGameInterface::Init()
 	m_pBossScene->Init();
 
 	m_pGlobalMsg = NiNew cGlobalMessage;	// 글로벌 메세지
+
+	cText::sTEXTINFO tiDebugHud;
+	tiDebugHud.Init( &g_pEngine->m_FontSystem, CFont::FS_10, NiColor( 0.45f, 1.0f, 0.45f ) );
+	tiDebugHud.s_bOutLine = true;
+	m_DebugHudText.Init( NULL, CsPoint::ZERO, &tiDebugHud, false );
 
 	CreateStaticWindow(cBaseWindow::WT_MAIN_BAR );						// MAIN BAR (SHORTCUT ICONS)
 
@@ -300,6 +397,7 @@ void cGameInterface::DeleteWindowUpdate()
 cGlobalInput::eMOUSE_INPUT cGameInterface::Update(float const& fDeltaTime)
 {
 	cGlobalInput::eMOUSE_INPUT resInput = cGlobalInput::MOUSEINPUT_ENABLE;
+	_ProcessQueuedRaidRankingList();
 
 	// 파트너몬 변경시에 닫아야 하는 인터페이스 설정
 	if( g_pDataMng->GetServerSync()->IsChageDigimon() )
@@ -935,6 +1033,7 @@ void cGameInterface::Render()
 		}
 //		cMessageBox::RenderList();
 
+		_RenderDebugHud();
 		return;
 	}
 	g_pHpBar->Render();
@@ -1011,6 +1110,37 @@ void cGameInterface::Render()
 		m_pGlobalMsg->Render();
 	if( m_pAlime )
 		m_pAlime->Render();
+
+	_RenderDebugHud();
+}
+
+void cGameInterface::_RenderDebugHud()
+{
+	if( g_pEngine == NULL || g_pCharMng == NULL || g_pCharMng->GetTamerUser() == NULL )
+		return;
+
+	CTamerUser* pTamer = g_pCharMng->GetTamerUser();
+	NiPoint3 const vPos = pTamer->GetPos();
+	float fRotDeg = pTamer->GetCurRot() * 180.0f / NI_PI;
+
+	while( fRotDeg > 180.0f )
+		fRotDeg -= 360.0f;
+	while( fRotDeg < -180.0f )
+		fRotDeg += 360.0f;
+
+	TCHAR szHud[ 256 ] = { 0, };
+	_stprintf_s(
+		szHud,
+		256,
+		_T( "FPS %.1f | X %.1f  Y %.1f  Z %.1f | Rot %.1f" ),
+		g_pEngine->m_Frame.GetFrameRate(),
+		vPos.x,
+		vPos.y,
+		vPos.z,
+		fRotDeg );
+
+	m_DebugHudText.SetText( szHud );
+	m_DebugHudText.Render( CsPoint( g_nScreenWidth / 2, 8 ), DT_CENTER );
 }
 
 void cGameInterface::OnLButtonUp( CsPoint pos )

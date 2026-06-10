@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "Data_Quest.h"
+#include "../LibProj/CsFunc/CrashLogger.h"
 
 //=======================================================================================================
 //
@@ -204,6 +205,14 @@ void cData_Quest::PostRevPostLoad( DWORD dwMapID )
 void cData_Quest::PostRevAddQuest( CsQuest* pQuest )
 {
 	// 이미 완료한 퀘스트 인지 체크
+
+	nsCSDEBUG::CrashLogger::LogMessage( "QUEST_POST_REV quest=%lu state=%u startType=%d startId=%lu target=%d target1=%lu",
+		(unsigned long)pQuest->GetUniqID(),
+		m_Info.Check( pQuest->GetUniqID() ),
+		(int)pQuest->GetStartTarget_Type(),
+		(unsigned long)pQuest->GetStartTarget_ID(),
+		(int)pQuest->GetQuestTarget(),
+		(unsigned long)pQuest->GetQuestTargetValue1() );
 
 	switch( m_Info.Check( pQuest->GetUniqID() ) )
 	{
@@ -1531,15 +1540,27 @@ void cData_Quest::_NewBiQuestCheck( CsQuest* pQuestFT )
 
 bool cData_Quest::CompQuest( CsQuest* pQuestFT, CsC_AvObject* pNpc )
 {
-	assert_cs( m_mapProcQuest[ pQuestFT->GetUniqID() ]->s_bCompleate == true );
 	SAFE_POINTER_RETVAL( pQuestFT, false );
 
 	std::map< DWORD, sPROCESS* >::iterator it = m_mapProcQuest.find( pQuestFT->GetUniqID() );
 	if( it == m_mapProcQuest.end() )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP missing process quest=%lu target=%d",
+			(unsigned long)pQuestFT->GetUniqID(),
+			pNpc ? pNpc->GetLeafRTTI() : -1 );
 		return false;
+	}
 
 	sPROCESS* pProcess = it->second;	// 완료하기이전에 수행중 정보를 가져온다.
 	SAFE_POINTER_RETVAL( pProcess, false );
+
+	if( pProcess->s_bCompleate != true )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP incomplete process quest=%lu target=%d",
+			(unsigned long)pQuestFT->GetUniqID(),
+			pNpc ? pNpc->GetLeafRTTI() : -1 );
+		return false;
+	}
 
 	//===================================================================================================
 	// 조그레스 퀘스트 검사
@@ -1570,10 +1591,23 @@ bool cData_Quest::CompQuest( CsQuest* pQuestFT, CsC_AvObject* pNpc )
 
 	// 넣어 줄수 있는 상황인제 체크
 	CsQuestRequiteGroup* pRequiteGroup = pQuestFT->GetRequiteGroup();
+	if( pRequiteGroup == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP missing reward group quest=%lu",
+			(unsigned long)pQuestFT->GetUniqID() );
+		return false;
+	}
 	for( int i=0; i<pRequiteGroup->GetListCount(); ++i )
 	{
 		CsQuestRequite* pRequite = pRequiteGroup->Get( i );
-		assert_cs( pRequite->GetMethodID() == CsQuestRequite::RM_GIVE );
+		if( pRequite == NULL || pRequite->GetMethodID() != CsQuestRequite::RM_GIVE )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP invalid reward precheck quest=%lu index=%d hasReward=%d",
+				(unsigned long)pQuestFT->GetUniqID(),
+				i,
+				pRequite != NULL ? 1 : 0 );
+			return false;
+		}
 		if( pRequite->GetType() == CsQuestRequite::ITEM )
 		{
 			++nReqItemCount;
@@ -1627,7 +1661,14 @@ bool cData_Quest::CompQuest( CsQuest* pQuestFT, CsC_AvObject* pNpc )
 	for( int i=0; i<pRequiteGroup->GetListCount(); ++i )
 	{
 		CsQuestRequite* pRequite = pRequiteGroup->Get( i );
-		assert_cs( pRequite->GetMethodID() == CsQuestRequite::RM_GIVE );
+		if( pRequite == NULL || pRequite->GetMethodID() != CsQuestRequite::RM_GIVE )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP invalid reward apply quest=%lu index=%d hasReward=%d",
+				(unsigned long)pQuestFT->GetUniqID(),
+				i,
+				pRequite != NULL ? 1 : 0 );
+			return false;
+		}
 		switch( pRequite->GetType() )
 		{
 		case CsQuestRequite::MONEY:
@@ -1658,7 +1699,11 @@ bool cData_Quest::CompQuest( CsQuest* pQuestFT, CsC_AvObject* pNpc )
 
 			break;
 		default:
-			assert_cs( false );
+			nsCSDEBUG::CrashLogger::LogMessage( "QUEST_COMP unknown reward type quest=%lu index=%d type=%d",
+				(unsigned long)pQuestFT->GetUniqID(),
+				i,
+				pRequite->GetType() );
+			return false;
 		}
 	}
 
@@ -1764,9 +1809,12 @@ bool cData_Quest::CompQuest( CsQuest* pQuestFT, CsC_AvObject* pNpc )
 	assert_cs( bSuccess == true );
 
 	// Owner쪽에 Process제거
-	if( ( (CNpc*)pNpc )->GetQuestOwner() )
+	CNpc* pNpcTarget = NULL;
+	if( pNpc && pNpc->GetLeafRTTI() == RTTI_NPC )
+		pNpcTarget = (CNpc*)pNpc;
+	if( pNpcTarget && pNpcTarget->GetQuestOwner() )
 	{
-		( (CNpc*)pNpc )->GetQuestOwner()->DeleteQuest( pQuestFT->GetUniqID() );		
+		pNpcTarget->GetQuestOwner()->DeleteQuest( pQuestFT->GetUniqID() );
 	}
 	// 디지바이스
 	else

@@ -31,6 +31,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             client.Tamer.SetEncyclopediaDeck(deckId);
             await _sender.Send(new UpdateCharacterEncyclopediaDeckCommand(client.TamerId, deckId));
+            client.Send(new EncyclopediaDeckStatusPacket(client.Tamer));
             client.Send(new UpdateStatusPacket(client.Tamer));
 
             var deckEffects = "none";

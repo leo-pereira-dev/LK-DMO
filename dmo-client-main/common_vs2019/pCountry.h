@@ -69,8 +69,8 @@ namespace Language
 
 			enum eData
 			{
-				TamerLevelMax		= 120,
-				DigimonLevelMax		= 120,
+				TamerLevelMax		= 150,
+				DigimonLevelMax		= 150,
 				EvoStep				= 9, // 최대 9단계 진화(0~7), 8번째는 퇴화
 				MaxAttrInchantLevel = 15,
 				#ifdef SERVER_KOREANDNS_DIGIMON_TRANSCENDENCE_190412
@@ -141,8 +141,8 @@ namespace Language
 
 			enum eData
 			{
-				TamerLevelMax			= 120,		// Max Level tamer
-				DigimonLevelMax			= 120,		// Max Digimon Level
+				TamerLevelMax			= 150,		// Max Level tamer
+				DigimonLevelMax			= 150,		// Max Digimon Level
 				EvoStep					= 9,		// EvoStep
 				MaxAttrInchantLevel		= 15,		// Max Clon Level
 				MaxInchantLevel			= 75,		// Total Clon Level

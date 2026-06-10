@@ -8,7 +8,6 @@ public sealed class ItemListBinLoader
 {
     private const string FileName = "ItemList.bin";
     private const string SplitItemDataFileName = "ItemData.bin";
-    private const string SplitItemStringFileName = "Item_Str.bin";
     private const string SplitAccessoryOptionFileName = "AccOption.bin";
     private const string SplitAccessoryEnchantFileName = "AccEnchant.bin";
     private const int Utf16Bytes = 2;
@@ -35,37 +34,43 @@ public sealed class ItemListBinLoader
         if (_data != null) return _data;
 
         var binDirectory = BinPath.ResolveDirectory();
-        if (TryLoadSplit(binDirectory, out var splitData))
+        var path = Path.Combine(binDirectory, FileName);
+        if (File.Exists(path))
         {
-            _data = splitData;
+            using var fs = File.OpenRead(path);
+            using var r = new BinaryReader(fs);
+            _data = Parse(r);
+            if (TryLoadSplit(binDirectory, out var splitData))
+                _data = MergeSplitData(_data, splitData);
+
             return _data;
         }
 
-        var path = Path.Combine(binDirectory, FileName);
-        using var fs = File.OpenRead(path);
-        using var r = new BinaryReader(fs);
-        _data = Parse(r);
-        return _data;
+        if (TryLoadSplit(binDirectory, out var splitOnlyData))
+        {
+            _data = splitOnlyData;
+            return _data;
+        }
+
+        throw new FileNotFoundException($"Could not locate {FileName} or split item list bins in {binDirectory}.");
     }
 
     private static bool TryLoadSplit(string binDirectory, out ItemList data)
     {
         var itemDataPath = Path.Combine(binDirectory, SplitItemDataFileName);
-        var itemStringPath = Path.Combine(binDirectory, SplitItemStringFileName);
         var accessoryOptionPath = Path.Combine(binDirectory, SplitAccessoryOptionFileName);
         var accessoryEnchantPath = Path.Combine(binDirectory, SplitAccessoryEnchantFileName);
 
-        if (!File.Exists(itemDataPath) ||
-            !File.Exists(itemStringPath) ||
-            !File.Exists(accessoryOptionPath) ||
+        if (!File.Exists(accessoryOptionPath) ||
             !File.Exists(accessoryEnchantPath))
         {
             data = null!;
             return false;
         }
 
-        var itemNames = ReadSplitItemStrings(itemStringPath);
-        var items = ReadSplitItems(itemDataPath, itemNames);
+        var items = File.Exists(itemDataPath)
+            ? ReadSplitItems(itemDataPath, new Dictionary<int, string>())
+            : Array.Empty<ItemAssetDTO>();
         var accessoryOptions = ReadSplitAccessoryOptions(accessoryOptionPath);
         var accessoryEnchants = ReadSplitAccessoryEnchants(accessoryEnchantPath);
 
@@ -95,6 +100,91 @@ public sealed class ItemListBinLoader
                 accessoryEnchants.Count));
 
         return true;
+    }
+
+    private static ItemList MergeSplitData(ItemList fullData, ItemList splitData)
+    {
+        var items = MergeItemData(fullData.Items, splitData.Items);
+        var accessoryOptions = MergeByKey(fullData.AccessoryOptions, splitData.AccessoryOptions, x => x.ItemType);
+        var accessoryEnchants = MergeByKey(fullData.AccessoryEnchants, splitData.AccessoryEnchants, x => x.Index);
+        var rank = MergeByKey(fullData.Rank, splitData.Rank, x => x.ItemId);
+
+        return new ItemList(
+            items,
+            fullData.ItemTap,
+            fullData.ItemCoolTime,
+            fullData.MapDisp,
+            fullData.MapTypeName,
+            rank,
+            fullData.ElementItem1,
+            fullData.ElementItem2,
+            fullData.Exchange,
+            accessoryOptions,
+            accessoryEnchants,
+            new ItemListSectionCounts(
+                items.Count,
+                fullData.ItemTap.Count,
+                fullData.ItemCoolTime.Count,
+                fullData.MapDisp.Count,
+                fullData.MapTypeName.Count,
+                rank.Count,
+                fullData.ElementItem1.Count,
+                fullData.ElementItem2.Count,
+                fullData.Exchange.Count,
+                accessoryOptions.Count,
+                accessoryEnchants.Count));
+    }
+
+    private static IReadOnlyList<T> MergeByKey<T, TKey>(
+        IReadOnlyList<T> baseRecords,
+        IReadOnlyList<T> extraRecords,
+        Func<T, TKey> keySelector)
+        where TKey : notnull
+    {
+        if (extraRecords.Count == 0)
+            return baseRecords;
+
+        var keys = new HashSet<TKey>(baseRecords.Select(keySelector));
+        var merged = new List<T>(baseRecords.Count + extraRecords.Count);
+        merged.AddRange(baseRecords);
+        foreach (var record in extraRecords)
+        {
+            if (keys.Add(keySelector(record)))
+                merged.Add(record);
+        }
+
+        return merged;
+    }
+
+    private static IReadOnlyList<ItemAssetDTO> MergeItemData(
+        IReadOnlyList<ItemAssetDTO> baseRecords,
+        IReadOnlyList<ItemAssetDTO> extraRecords)
+    {
+        if (extraRecords.Count == 0)
+            return baseRecords;
+
+        var extraById = extraRecords
+            .GroupBy(x => x.ItemId)
+            .ToDictionary(x => x.Key, x => x.First());
+        var merged = new List<ItemAssetDTO>(baseRecords.Count + extraById.Count);
+
+        foreach (var record in baseRecords)
+        {
+            if (extraById.Remove(record.ItemId, out var extraRecord))
+            {
+                if (extraRecord.SkillCode > 0)
+                    record.SkillCode = extraRecord.SkillCode;
+                if (record.Type <= 0 && extraRecord.Type > 0)
+                    record.Type = extraRecord.Type;
+                if (record.TypeN <= 0 && extraRecord.TypeN > 0)
+                    record.TypeN = extraRecord.TypeN;
+            }
+
+            merged.Add(record);
+        }
+
+        merged.AddRange(extraById.Values);
+        return merged;
     }
 
     private static IReadOnlyDictionary<int, string> ReadSplitItemStrings(string path)

@@ -51,6 +51,14 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             packet.Skip(4); // Portable incubator inventory slot.
             var digiName = NormalizeHatchName(packet.ReadString(), client.Tamer.Name);
+
+            if (client.Partner == null)
+            {
+                _logger.Warning("Rejected hatch finish for tamer {TamerId}: invalid partner.", client.TamerId);
+                client.Send(new SystemMessagePacket("Unable to hatch without an active partner."));
+                return;
+            }
+
             _logger.Information(
                 "Hatch finish request: tamer {TamerId} name {DigimonName} incubatorEgg {EggId} hatchLevel {HatchLevel} backupDisk {BackupDiskId} currentSlots [{Slots}].",
                 client.TamerId,
@@ -95,6 +103,23 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             var targetSlot = (byte)activeSlotCount;
 
+            var digimonBaseInfo = _assets.DigimonBaseInfo.FirstOrDefault(x => x.Type == hatchInfo.HatchType);
+            var evolutionInfo = _assets.EvolutionInfo.FirstOrDefault(x => x.Type == hatchInfo.HatchType);
+
+            if (digimonBaseInfo == null || evolutionInfo == null || !evolutionInfo.Lines.Any())
+            {
+                _logger.Warning(
+                    "Rejected hatch finish for tamer {TamerId}: egg {EggId} resolves to digimon {BaseType}, but baseInfo={HasBaseInfo}, evolutionInfo={HasEvolutionInfo}, evolutionLines={EvolutionLines}.",
+                    client.TamerId,
+                    client.Tamer.Incubator.EggId,
+                    hatchInfo.HatchType,
+                    digimonBaseInfo != null,
+                    evolutionInfo != null,
+                    evolutionInfo?.Lines.Count ?? 0);
+                client.Send(new SystemMessagePacket($"Unknown digimon info for {hatchInfo.HatchType}."));
+                return;
+            }
+
             var newDigimon = DigimonModel.Create(
                 digiName,
                 hatchInfo.HatchType,
@@ -110,24 +135,34 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 client.Tamer.Location.Y
             );
 
-            newDigimon.SetBaseInfo(
-                _statusManager.GetDigimonBaseInfo(
-                    newDigimon.BaseType
-                )
-            );
+            newDigimon.SetBaseInfo(digimonBaseInfo);
 
-            newDigimon.SetBaseStatus(
-                _statusManager.GetDigimonBaseStatus(
+            try
+            {
+                newDigimon.SetBaseStatus(
+                    _statusManager.GetDigimonBaseStatus(
+                        newDigimon.BaseType,
+                        newDigimon.Level,
+                        newDigimon.Size
+                    )
+                );
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(
+                    ex,
+                    "Rejected hatch finish for tamer {TamerId}: could not resolve base status for digimon {BaseType}, level {Level}, size {Size}.",
+                    client.TamerId,
                     newDigimon.BaseType,
                     newDigimon.Level,
-                    newDigimon.Size
-                )
-            );
+                    newDigimon.Size);
+                client.Send(new SystemMessagePacket($"Unknown digimon status for {newDigimon.BaseType}."));
+                return;
+            }
+
             newDigimon.FullHeal();
 
-            newDigimon.AddEvolutions(
-                _assets.EvolutionInfo.First(x => x.Type == newDigimon.BaseType)
-            );
+            newDigimon.AddEvolutions(evolutionInfo);
 
             if (newDigimon.BaseInfo == null || newDigimon.BaseStatus == null || !newDigimon.Evolutions.Any())
             {
@@ -138,7 +173,22 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             newDigimon.SetTamer(client.Tamer);
 
-            var digimonInfo = await _sender.Send(new CreateDigimonCommand(newDigimon));
+            DigitalWorldOnline.Commons.DTOs.Digimon.DigimonDTO? digimonInfo;
+            try
+            {
+                digimonInfo = await _sender.Send(new CreateDigimonCommand(newDigimon));
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(
+                    ex,
+                    "Rejected hatch finish for tamer {TamerId}: failed to persist digimon {BaseType}.",
+                    client.TamerId,
+                    newDigimon.BaseType);
+                client.Send(new SystemMessagePacket($"Could not hatch digimon {newDigimon.BaseType}."));
+                return;
+            }
+
             if (digimonInfo == null)
             {
                 _logger.Warning($"Could not persist hatched digimon {newDigimon.BaseType} for character {client.TamerId}.");
@@ -153,6 +203,17 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             {
                 evolutionSlot++;
 
+                if (evolutionSlot >= digimonInfo.Evolutions.Count)
+                {
+                    _logger.Warning(
+                        "Hatch finish persisted fewer evolutions than expected for tamer {TamerId}, digimon {DigimonId}: expected slot {EvolutionSlot}, persisted count {PersistedCount}.",
+                        client.TamerId,
+                        newDigimon.Id,
+                        evolutionSlot,
+                        digimonInfo.Evolutions.Count);
+                    continue;
+                }
+
                 var evolution = digimonInfo.Evolutions[evolutionSlot];
 
                 if (evolution != null)
@@ -164,6 +225,18 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     foreach (var skill in digimon.Skills)
                     {
                         skillSlot++;
+
+                        if (skillSlot >= evolution.Skills.Count)
+                        {
+                            _logger.Warning(
+                                "Hatch finish persisted fewer evolution skills than expected for tamer {TamerId}, digimon {DigimonId}, evolution {EvolutionId}: expected slot {SkillSlot}, persisted count {PersistedCount}.",
+                                client.TamerId,
+                                newDigimon.Id,
+                                evolution.Id,
+                                skillSlot,
+                                evolution.Skills.Count);
+                            continue;
+                        }
 
                         var dtoSkill = evolution.Skills[skillSlot];
 

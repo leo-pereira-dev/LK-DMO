@@ -3,9 +3,25 @@
 #include "../../ContentsSystem/ContentsSystemDef.h"
 #include "../../ContentsSystem/ContentsSystem.h"
 
+#include "../Base/SpriteAni.h"
 #include "ItemProductionShop.h"
 
 //////////////////////////////////////////////////////////////////////////
+
+namespace
+{
+	bool IsTutorialPlaying()
+	{
+		bool bTutorialPlaying = false;
+		GAME_EVENT_ST.OnEvent( EVENT_CODE::GET_IS_TUTORIAL_PLAYING, &bTutorialPlaying );
+		return bTutorialPlaying;
+	}
+
+	bool IsSameTextNoCase( std::wstring const& lhs, const wchar_t* rhs )
+	{
+		return _wcsicmp( lhs.c_str(), rhs ) == 0;
+	}
+}
 
 void cItemProductionShop::sAssistItemUIControls::SetLock(bool bLock)
 {
@@ -134,6 +150,7 @@ m_pCloseButton(NULL),m_pProductionCost(NULL)
 ,m_pMakingBtn(NULL),m_dwNeedCost(0),m_pSelectedItemInfo(0),m_pEditBox(NULL), m_pItemInfo(NULL)
 ,m_pSucessPrecentageText(NULL),m_pAddPrecentageText(NULL),m_pProgressBar(NULL),m_pAssisteItemList(NULL)
 ,m_pSetProtectItemImg(NULL),m_pPercentageUpText(NULL),m_pProtectText(NULL)
+,m_pTutorialCategoryArrow(NULL),m_pTutorialMainCategoryItem(NULL),m_pTutorialSubCategoryItem(NULL)
 {
 
 }
@@ -163,6 +180,10 @@ void cItemProductionShop::DeleteResource()
 	//SAFE_NIDELETE( m_pProductionCost );
 	if( g_pGameIF && g_pGameIF->GetPopup() )
 		g_pGameIF->GetPopup()->ClosePopup( cPopUpWindow::ITEM_MAKE_ASSIST_ITEM_REG );
+
+	SAFE_NIDELETE( m_pTutorialCategoryArrow );
+	m_pTutorialMainCategoryItem = NULL;
+	m_pTutorialSubCategoryItem = NULL;
 
 	DeleteScript();	
 }
@@ -400,6 +421,13 @@ void cItemProductionShop::Create(int nValue /* = 0  */)
 		m_pEditBox->AddEvent( cEditBox::eEditbox_ChangeText, this, &cItemProductionShop::ChangeInputMakeCount );
 
 		AddChildControl( m_pEditBox );
+	}
+
+	m_pTutorialCategoryArrow = NiNew cSpriteAni;
+	if( m_pTutorialCategoryArrow )
+	{
+		m_pTutorialCategoryArrow->Init( cSpriteAni::LOOP, NULL, CsPoint::ZERO, CsPoint( 60, 45 ), "Tutorial\\tutorial_ani.tga", NULL, 11, false, CsPoint(60,0), cSpriteAni::SPRITE_POS );
+		m_pTutorialCategoryArrow->SetAniTime( 0.1f );
 	}
 
 	_SetAssistItemSlotData();
@@ -677,6 +705,69 @@ void cItemProductionShop::Render()
 {
 	RenderScript();
 	EndRenderScript();
+	_RenderTutorialCategoryArrow();
+}
+
+int cItemProductionShop::_GetTutorialCategoryRow( cTreeBoxItem*& pTargetItem )
+{
+	pTargetItem = NULL;
+	if( !m_pTreeCategoty || !m_pTutorialMainCategoryItem )
+		return -1;
+
+	int nRow = 0;
+	size_t nItemCount = m_pTreeCategoty->GetItemCount();
+	for( size_t i = 0; i < nItemCount; ++i )
+	{
+		cTreeBoxItem* pMainItem = const_cast< cTreeBoxItem* >( m_pTreeCategoty->GetItem( static_cast<int>( i ) ) );
+		if( !pMainItem )
+			continue;
+
+		if( pMainItem == m_pTutorialMainCategoryItem )
+		{
+			pTargetItem = pMainItem;
+			if( pMainItem->getIsOpen() && m_pTutorialSubCategoryItem )
+			{
+				int nSubRow = 0;
+				cTreeBoxItem::LBItemList& subItemList = pMainItem->getItemList();
+				cTreeBoxItem::LBItemList::iterator it = subItemList.begin();
+				cTreeBoxItem::LBItemList::iterator itEnd = subItemList.end();
+				for( ; it != itEnd; ++it, ++nSubRow )
+				{
+					if( *it != m_pTutorialSubCategoryItem )
+						continue;
+
+					pTargetItem = m_pTutorialSubCategoryItem;
+					return nRow + 1 + nSubRow;
+				}
+			}
+
+			return nRow;
+		}
+
+		++nRow;
+		if( pMainItem->getIsOpen() )
+			nRow += static_cast<int>( pMainItem->getItemCount() );
+	}
+
+	return -1;
+}
+
+void cItemProductionShop::_RenderTutorialCategoryArrow()
+{
+	if( !m_pTutorialCategoryArrow || !IsTutorialPlaying() )
+		return;
+
+	cTreeBoxItem* pTargetItem = NULL;
+	int nRow = _GetTutorialCategoryRow( pTargetItem );
+	if( nRow < 0 || !pTargetItem )
+		return;
+
+	int nItemHeight = pTargetItem->getItemHeight();
+	if( nItemHeight <= 0 )
+		nItemHeight = 22;
+
+	m_pTutorialCategoryArrow->Update( g_fDeltaTime );
+	m_pTutorialCategoryArrow->Render( m_pTreeCategoty->GetClient() + CsPoint( -50, nRow * nItemHeight + ( nItemHeight - 45 ) / 2 ) );
 }
 
 void cItemProductionShop::ResetDevice()
@@ -922,6 +1013,9 @@ void cItemProductionShop::MakeSubCategoty( cTreeBoxItem & Root, MAP_Sub_Categoty
 		pAddItem->SetItem( pItem );			
 		pAddItem->SetUserData( new sCategotyType( nMainIdx, it->first ) );
 		Root.AddChildItem( pAddItem );
+
+		if( &Root == m_pTutorialMainCategoryItem && IsSameTextNoCase( it->second.m_wsCategotyName, L"Supplies" ) )
+			m_pTutorialSubCategoryItem = pAddItem;
 	}
 }
 
@@ -929,6 +1023,11 @@ void cItemProductionShop::MakeCategoty()
 {
 	MAP_Main_Categoty const* pList = GetSystem()->GetItemProductionList();
 	SAFE_POINTER_RET( pList );
+
+	if( m_pTreeCategoty )
+		m_pTreeCategoty->RemoveAllItem();
+	m_pTutorialMainCategoryItem = NULL;
+	m_pTutorialSubCategoryItem = NULL;
 
 	MAP_Main_Categoty_CIT it = pList->begin();
 	for( ; it != pList->end(); ++it )
@@ -952,6 +1051,8 @@ void cItemProductionShop::MakeCategoty()
 		pItem->AddText( &tiGroup, CsPoint(25, 5) );
 
 		pAddItem->SetItem( pItem );
+		if( IsSameTextNoCase( it->second.m_wsCategotyName, L"Tutorial" ) )
+			m_pTutorialMainCategoryItem = pAddItem;
 
 		cButton* pOpenBtn = NiNew cButton;
 		SAFE_POINTER_BEK( pOpenBtn );

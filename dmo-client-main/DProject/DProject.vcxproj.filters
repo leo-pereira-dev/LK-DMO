@@ -607,9 +607,6 @@
     <Filter Include="03.Interface\ShutDownSystem">
       <UniqueIdentifier>{021d57b0-1750-4323-a269-7785adcb4cbb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Interface\00.ResourceIntegrityChecker">
-      <UniqueIdentifier>{e4eae241-de09-4013-8f78-14417926db57}</UniqueIdentifier>
-    </Filter>
     <Filter Include="09.Etc Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
@@ -628,9 +625,6 @@
     </Filter>
     <Filter Include="13.NetProtocol">
       <UniqueIdentifier>{9462e5d6-2b63-4485-a3b9-5e90ee176d2f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="14.SimpleSecurity">
-      <UniqueIdentifier>{09e215f9-2ca4-44f2-b94b-8393e35c9867}</UniqueIdentifier>
     </Filter>
     <Filter Include="15.Steam">
       <UniqueIdentifier>{cb5dc0a1-ea66-4136-ba1a-9d1f671eed46}</UniqueIdentifier>
@@ -1402,6 +1396,15 @@
     <ClCompile Include="_Interface\Game\GMPanel.cpp">
       <Filter>03.Interface\Game\02_기본팝업\07_옵션</Filter>
     </ClCompile>
+    <ClCompile Include="_Interface\Game\DungeonEntranceWindow.cpp">
+      <Filter>03.Interface\Game\02_기본팝업\07_옵션</Filter>
+    </ClCompile>
+    <ClCompile Include="_Interface\Game\DungeonClearAnnounceWindow.cpp">
+      <Filter>03.Interface\Game\02_기본팝업\07_옵션</Filter>
+    </ClCompile>
+    <ClCompile Include="_Interface\Game\DungeonClearResultWindow.cpp">
+      <Filter>03.Interface\Game\02_기본팝업\07_옵션</Filter>
+    </ClCompile>
     <ClCompile Include="_Interface\Game\OptionBase.cpp">
       <Filter>03.Interface\Game\02_기본팝업\07_옵션</Filter>
     </ClCompile>
@@ -2122,12 +2125,6 @@
     <ClCompile Include="_Interface\00.Contents\ShutDownContents.cpp">
       <Filter>03.Interface\ShutDownSystem</Filter>
     </ClCompile>
-    <ClCompile Include="_Interface\13.ResourceIntegrityChecker\ResourceChecker.cpp">
-      <Filter>03.Interface\00.ResourceIntegrityChecker</Filter>
-    </ClCompile>
-    <ClCompile Include="_Interface\00.Contents\ResourceIntegrityChecker.cpp">
-      <Filter>03.Interface\00.ResourceIntegrityChecker</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>09.Etc Files</Filter>
     </ClCompile>
@@ -2161,12 +2158,6 @@
     <ClCompile Include="ContentsSystem\ContentsSystemFactory.cpp">
       <Filter>12.ContentsSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\SimpleSecurity\SecuritySelf.cpp">
-      <Filter>14.SimpleSecurity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SteamSDK\Steam_Client.cpp">
-      <Filter>15.Steam</Filter>
-    </ClCompile>
     <ClCompile Include="GlobalData.cpp">
       <Filter>16.GlobalData</Filter>
     </ClCompile>
@@ -2178,21 +2169,6 @@
     </ClCompile>
     <ClCompile Include="_ResourceMng\TextureResource.cpp">
       <Filter>17.ResourceMng</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FtpClient\BlockingSocket.cpp">
-      <Filter>18.util\01.Ftp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FtpClient\FTPClient.cpp">
-      <Filter>18.util\01.Ftp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FtpClient\FTPDataTypes.cpp">
-      <Filter>18.util\01.Ftp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FtpClient\FTPFileStatus.cpp">
-      <Filter>18.util\01.Ftp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FtpClient\FTPListParse.cpp">
-      <Filter>18.util\01.Ftp</Filter>
     </ClCompile>
     <ClCompile Include="TutorialDigimonUser.cpp">
       <Filter>01.Game\TutorialCharacter</Filter>
@@ -2934,6 +2910,15 @@
     <ClInclude Include="_Interface\Game\GMPanel.h">
       <Filter>03.Interface\Game\02_기본팝업\07_옵션</Filter>
     </ClInclude>
+    <ClInclude Include="_Interface\Game\DungeonEntranceWindow.h">
+      <Filter>03.Interface\Game\02_기본팝업\07_옵션</Filter>
+    </ClInclude>
+    <ClInclude Include="_Interface\Game\DungeonClearAnnounceWindow.h">
+      <Filter>03.Interface\Game\02_기본팝업\07_옵션</Filter>
+    </ClInclude>
+    <ClInclude Include="_Interface\Game\DungeonClearResultWindow.h">
+      <Filter>03.Interface\Game\02_기본팝업\07_옵션</Filter>
+    </ClInclude>
     <ClInclude Include="_Interface\Game\OptionBase.h">
       <Filter>03.Interface\Game\02_기본팝업\07_옵션</Filter>
     </ClInclude>
@@ -3600,12 +3585,6 @@
     <ClInclude Include="_Interface\00.Contents\ShutDownContents.h">
       <Filter>03.Interface\ShutDownSystem</Filter>
     </ClInclude>
-    <ClInclude Include="_Interface\13.ResourceIntegrityChecker\ResourceChecker.h">
-      <Filter>03.Interface\00.ResourceIntegrityChecker</Filter>
-    </ClInclude>
-    <ClInclude Include="_Interface\00.Contents\ResourceIntegrityChecker.h">
-      <Filter>03.Interface\00.ResourceIntegrityChecker</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>09.Etc Files</Filter>
     </ClInclude>
@@ -3657,18 +3636,6 @@
     <ClInclude Include="NetProtocol_Include.h">
       <Filter>13.NetProtocol</Filter>
     </ClInclude>
-    <ClInclude Include="..\SimpleSecurity\SecuritySelf.h">
-      <Filter>14.SimpleSecurity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SteamSDK\steam\steam_api.h">
-      <Filter>15.Steam</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SteamSDK\Steam_Client.h">
-      <Filter>15.Steam</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SteamSDK\steam\steam_gameserver.h">
-      <Filter>15.Steam</Filter>
-    </ClInclude>
     <ClInclude Include="GlobalData.h">
       <Filter>16.GlobalData</Filter>
     </ClInclude>
@@ -3680,27 +3647,6 @@
     </ClInclude>
     <ClInclude Include="_ResourceMng\TextureResource.h">
       <Filter>17.ResourceMng</Filter>
-    </ClInclude>
-    <ClInclude Include="..\FtpClient\BlockingSocket.h">
-      <Filter>18.util\01.Ftp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\FtpClient\Definements.h">
-      <Filter>18.util\01.Ftp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\FtpClient\FTPClient.h">
-      <Filter>18.util\01.Ftp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\FtpClient\FTPDataTypes.h">
-      <Filter>18.util\01.Ftp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\FtpClient\FTPFileStatus.h">
-      <Filter>18.util\01.Ftp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\FtpClient\FTPListParse.h">
-      <Filter>18.util\01.Ftp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\FtpClient\smart_ptr.h">
-      <Filter>18.util\01.Ftp</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="TutorialDigimonUser.h">
@@ -3774,7 +3720,6 @@
     <None Include="ClientVersion\Jenkins_Build_VersionFile.txt">
       <Filter>09.Etc Files\Version</Filter>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DProject.rc">

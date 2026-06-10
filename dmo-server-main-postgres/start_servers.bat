@@ -1,6 +1,6 @@
 @echo off
 set ASPNETCORE_ENVIRONMENT=Development
-set DSO_GameServer__Port=7608
+set DSO_GameServer__Port=17608
 
 REM Load local credentials (start_servers.local.bat is gitignored).
 REM Create that file with your real DB password, e.g.:

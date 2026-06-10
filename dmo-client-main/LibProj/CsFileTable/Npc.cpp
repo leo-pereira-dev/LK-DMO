@@ -48,6 +48,7 @@ void CsNpc::_DeleteType()
 		case nsCsNpcTable::NT_GUILD:
 		case nsCsNpcTable::NT_DIGICORE:
 		case nsCsNpcTable::NT_EVENT_STORE:
+		case nsCsNpcTable::NT_GDMO_PORTAL_TEST_NPC:
 		case nsCsNpcTable::NT_PROPERTY_STORE:
 			delete ( (sNPC_TYPE_TRADE*)m_pType );
 			break;
@@ -125,6 +126,9 @@ void CsNpc::SetType()
 	case nsCsNpcTable::NT_GUILD:
 	case nsCsNpcTable::NT_DIGICORE:
 	case nsCsNpcTable::NT_EVENT_STORE:
+		m_pType = csnew sNPC_TYPE_TRADE( m_Info.s_eType );
+		break;
+	case nsCsNpcTable::NT_GDMO_PORTAL_TEST_NPC:
 		m_pType = csnew sNPC_TYPE_TRADE( m_Info.s_eType );
 		break;
 	case nsCsNpcTable::NT_DIGITAMA_TRADE:

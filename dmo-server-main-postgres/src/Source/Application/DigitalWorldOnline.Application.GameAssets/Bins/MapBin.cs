@@ -69,4 +69,7 @@ public sealed record MapMonsterRecord(
     int CenterY,
     int Radius,
     int Count,
-    int RespawnSeconds);
+    int RespawnSeconds,
+    int KillGenMonsterTableId,
+    int KillGenCount,
+    int KillGenViewCount);

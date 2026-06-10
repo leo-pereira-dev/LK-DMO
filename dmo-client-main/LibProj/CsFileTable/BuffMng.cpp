@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "BuffMng.h"
+#include "../CsFunc/CrashLogger.h"
 
 
 void CsBuffMng::Delete()
@@ -40,6 +41,11 @@ bool CsBuffMng::Init( char* cPath )
 CsBuff* CsBuffMng::GetBuff( USHORT nID )
 {
 	bool bExist = IsBuff( nID );
+	if( !bExist )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "BUFF_TABLE missing buffId=%u", nID );
+		return NULL;
+	}
 	assert_csm1( bExist, _T( "버프 코드 %d는 존재하지 않습니다." ), nID );
 	if( !bExist )
 		return NULL;
@@ -256,5 +262,3 @@ void CsBuffMng::_LoadFilePack( char* cPath )
 		CsFPS::CsFPSystem::SeekUnLock( FT_PACKHANDLE );
 	}	
 }
-
-

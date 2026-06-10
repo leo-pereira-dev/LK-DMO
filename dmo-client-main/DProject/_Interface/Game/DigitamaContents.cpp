@@ -192,7 +192,7 @@ void DigitamaContents::_UpdateScannedItems(uint nUsedItem, std::list<nsItemScan:
 		else
 			itemInfo.SetCount( it->itemData.GetCount() );
 
-		std::map< uint, cItemInfo >::iterator mit = mapMerge.find( itemInfo.m_nType );
+		std::map< uint, cItemInfo >::iterator mit = mapMerge.find( itemInfo.GetType() );
 		if( mit == mapMerge.end() )
 			mapMerge.insert( std::make_pair( itemInfo.GetType(), itemInfo));
 		else
@@ -203,7 +203,7 @@ void DigitamaContents::_UpdateScannedItems(uint nUsedItem, std::list<nsItemScan:
 	it = lScanItems.begin();
 	for( ; it != lScanItems.end(); ++it )
 	{
-		CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( it->itemData.m_nType );
+		CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( it->itemData.GetType() );
 		if( pFTItem )
 		{
 			CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
@@ -250,7 +250,7 @@ void DigitamaContents::_UpdateScannedItems(uint nUsedItem, std::list<nsItemScan:
 		if( m_lScanItem.size() > IF_SCAN_MAX_COUNT )
 			m_lScanItem.pop_back();
 
-		uint nItemType = mit->second.m_nType;
+		uint nItemType = mit->second.GetType();
 		uint nCount = mit->second.GetCount();
 
 		// ui 갱신
@@ -399,7 +399,7 @@ void DigitamaContents::_AddScannedItem(cItemData& pData)
 	pInven->ItemCrop( &pData );
 
 	SAFE_POINTER_RET( nsCsFileTable::g_pItemMng );
-	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pData.m_nType );
+	CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pData.GetType() );
 	SAFE_POINTER_RET( pFTItem );
 	CsItem::sINFO* pFTInfo = pFTItem->GetInfo();
 	SAFE_POINTER_RET( pFTInfo );

@@ -15,7 +15,7 @@
 //#endif
 
 #define ACCOUNT_IP "26.60.202.44"
-#define		ACCOUNT_PORT		7029
+#define		ACCOUNT_PORT		17029
 
 #include "_Lan_Korea.h"
 

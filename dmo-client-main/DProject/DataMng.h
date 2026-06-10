@@ -26,6 +26,7 @@ class AdaptEnchantOption;
 #endif
 #define SERVER_DATA_DIGIVICE_CONSTANT	( nItem::TabDigivice*1000 )
 #define SERVER_DATA_TSKILL_CONSTANT		( nItem::TabSkill*1000 )
+#define SERVER_DATA_EVOCHIP_CONSTANT	SERVER_DATA_TSKILL_CONSTANT
 
 #ifdef CROSSWARS_SYSTEM
 #define SERVER_DATA_INVENCROSS_CONSTANT		( nItem::TabCrossWars*1000 )
@@ -47,6 +48,7 @@ class AdaptEnchantOption;
 #define TO_TEQUIP_SID( id )				( id + SERVER_DATA_TEQUIP_CONSTANT )
 #define TO_MEMORY_SID( id )				( id + SERVER_DATA_MEMORY_CONSTANT )
 #define TO_TSKILL_SID( id )				( id + SERVER_DATA_TSKILL_CONSTANT )
+#define TO_EVOCHIP_SID( id )			( id + SERVER_DATA_EVOCHIP_CONSTANT )
 #define TO_CHIPSET_SID( id )			( id + SERVER_DATA_CHIPSET_CONSTANT )
 #define TO_WAREHOUSE_SID( id )			( id + SERVER_DATA_WAREHOUSE_CONSTANT )
 #ifdef NEW_SHARESTASH

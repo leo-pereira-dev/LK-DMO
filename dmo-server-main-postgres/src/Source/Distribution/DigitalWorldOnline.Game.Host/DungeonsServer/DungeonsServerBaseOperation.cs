@@ -98,8 +98,16 @@ namespace DigitalWorldOnline.GameHost
                 var newDungeon = new MapInstance(def, channelIdx: 0, cfg.Mobs, cfg.SummonMobs, cfg.KillSpawns);
 
                 FilterDungeonMobs(newDungeon, dto.MapId);
+                RemoveLegacyDungeonExitPortals(newDungeon);
 
                 newDungeon.SetId((int)dungeonKey);
+                var dungeonRecord = _dungeonBins.Data.ResolveByRuntimeMapId(dto.MapId, client.LastDungeonEntryPortalId);
+                newDungeon.StartDungeonRun(
+                    client.LastDungeonEntryPortalId,
+                    client.LastDungeonEntranceMapId,
+                    dungeonRecord?.DungeonId ?? 0,
+                    dungeonRecord?.Difficulty ?? 0);
+                GateDungeonStepMobs(newDungeon, dungeonRecord?.DungeonId ?? 0);
 
                 _logger.Debug(IsParty
                     ? $"Initializing new instance for {def.Type} party {dungeonKey} - {def.Name}..."
@@ -109,6 +117,19 @@ namespace DigitalWorldOnline.GameHost
                 return; // one match per call
             }
         }
+
+        private static void RemoveLegacyDungeonExitPortals(MapInstance dungeon)
+        {
+            dungeon.Mobs.RemoveAll(x => IsLegacyDungeonExitPortal(x.Type));
+            dungeon.SummonMobs.RemoveAll(x => IsLegacyDungeonExitPortal(x.Type));
+
+            foreach (var killSpawn in dungeon.KillSpawns)
+                killSpawn.TargetMobs.RemoveAll(x => IsLegacyDungeonExitPortal(x.TargetMobType));
+
+            dungeon.KillSpawns.RemoveAll(x => !x.TargetMobs.Any());
+        }
+
+        private static bool IsLegacyDungeonExitPortal(int mobType) => mobType == 51991 || mobType == 51992;
 
         private static void FilterDungeonMobs(MapInstance dungeon, int mapId)
         {
@@ -122,6 +143,29 @@ namespace DigitalWorldOnline.GameHost
                 foreach (var mob in wrongDay)
                     dungeon.Mobs.Remove(mob);
             }
+        }
+
+        private void GateDungeonStepMobs(MapInstance dungeon, int dungeonId)
+        {
+            if (dungeonId <= 0)
+                return;
+
+            var steps = _dungeonBins.Data.GetOrderedSteps(dungeonId);
+            if (steps.Count <= 1)
+                return;
+
+            var firstStepKey = steps[0].StepKey;
+            var lockedObjectiveTypes = steps
+                .Where(x => x.StepKey != firstStepKey)
+                .SelectMany(x => x.Objectives)
+                .Select(x => x.TargetMonsterType)
+                .ToHashSet();
+
+            foreach (var mob in dungeon.Mobs.Where(x => lockedObjectiveTypes.Contains(x.Type)))
+                mob.SetAwaitingKillSpawn();
+
+            foreach (var mob in dungeon.SummonMobs.Where(x => lockedObjectiveTypes.Contains(x.Type)))
+                mob.SetAwaitingKillSpawn();
         }
         /// <summary>
         /// Gets the maps objects.
@@ -228,7 +272,8 @@ namespace DigitalWorldOnline.GameHost
                 try
                 {
                     await CleanMaps();
-                    await GetMapObjects(cancellationToken);
+                    // Dungeon mob lists are per-instance runtime state. Re-syncing them
+                    // from static config here respawns killed bosses and prevents clears.
 
                     var tasks = new List<Task>();
 

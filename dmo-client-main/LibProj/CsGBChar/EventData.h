@@ -75,7 +75,7 @@ public:
 	{
 		sEventEffect_Info(){ s_InfoType = ET_Effect; }
 
-		size_t		s_EffectHashCode;				/**< 이펙트 해쉬코드값 */
+		DWORD		s_EffectHashCode; 				/**< 이펙트 해쉬코드값 */
 	};
 
 public:

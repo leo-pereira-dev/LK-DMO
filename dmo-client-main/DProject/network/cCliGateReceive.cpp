@@ -8,6 +8,8 @@
 
 #include "common_vs2019/pPass2.h"
 
+#include "../../LibProj/CsFunc/CrashLogger.h"
+
 #include "../Flow/Flow.h"
 #include "../Flow/FlowMgr.h"
 
@@ -130,9 +132,23 @@ void cCliGate::RecvTamerCreateFailure(void)
 
 void cCliGate::RecvTamerSelectSuccess(void)
 {
-	pop(net::ip);
+	nsCSDEBUG::CrashLogger::SetContext("RecvTamerSelectSuccess begin packet=1308");
+
+	std::string serverIp;
+	pop(serverIp);
+	strncpy_s(net::ip, sizeof(net::ip), serverIp.c_str(), _TRUNCATE);
 	pop(net::port);
 	pop(net::next_map_no);
+	nsCSDEBUG::CrashLogger::SetContext(
+		"RecvTamerSelectSuccess parsed ipLen=%u port=%d map=%d",
+		(unsigned)serverIp.length(),
+		(int)net::port,
+		(int)net::next_map_no);
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"GATE SelectSuccess ipLen=%u port=%d map=%d",
+		(unsigned)serverIp.length(),
+		(int)net::port,
+		(int)net::next_map_no);
 
 	GAME_EVENT_STPTR->OnEvent( EVENT_CODE::RECV_CHAR_SELECT_RESULT );
 }

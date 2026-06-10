@@ -1,7 +1,8 @@
-using Blazored.LocalStorage;
+﻿using Blazored.LocalStorage;
 using DigitalWorldOnline.Admin.Data;
 using DigitalWorldOnline.Application.Admin.Repositories;
 using DigitalWorldOnline.Application.GameAssets.Bins;
+using DigitalWorldOnline.Application.GameAssets.Xml;
 using DigitalWorldOnline.Application.Extensions;
 using DigitalWorldOnline.Application.GameAssets;
 using DigitalWorldOnline.Application.Services;
@@ -131,7 +132,10 @@ namespace DigitalWorldOnline.Admin
             services.AddSingleton<MapBinLoader>();
             services.AddSingleton<ItemListBinLoader>();
             services.AddSingleton<ContainerBinLoader>();
+            services.AddSingleton<ExtraExchangeBinLoader>();
             services.AddSingleton<QuestBinLoader>();
+            services.AddSingleton<NpcBinLoader>();
+            services.AddSingleton<UnionXmlAssetLoader>();
             services.AddScoped<StoragePersistenceDualWriteCoordinator>();
             services.AddSingleton<AssetsLoader>();
 
@@ -183,3 +187,4 @@ namespace DigitalWorldOnline.Admin
         }
     }
 }
+

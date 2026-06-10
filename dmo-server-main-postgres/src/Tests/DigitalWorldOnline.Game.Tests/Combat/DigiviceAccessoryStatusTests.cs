@@ -52,6 +52,33 @@ public sealed class DigiviceAccessoryStatusTests
     }
 
     [Fact]
+    public void Accessory_attack_speed_scales_against_partner_base_speed()
+    {
+        var character = TestDigimonFactory.CharacterWithSlots(1);
+        character.SetLevelStatus(new CharacterLevelStatusAssetModel());
+
+        var partner = TestDigimonFactory.Digimon(1, 0);
+        var baseStatus = new StatusAssetModel();
+        baseStatus.SetAS(2200);
+        partner.SetBaseStatus(baseStatus);
+        partner.SetBaseInfo(new DigimonBaseInfoAssetModel());
+        partner.SetTamer(character);
+        character.AddDigimon(partner);
+
+        var accessory = character.Equipment.Items[0];
+        accessory.SetItemId(47420);
+        accessory.SetAmount(1);
+        accessory.SetPower(100);
+        accessory.SetItemInfo(new ItemAssetModel());
+
+        SetAccessoryStatus(accessory, 0, AccessoryStatusTypeEnum.AS, 8000);
+
+        Assert.Equal(1760, character.AccessoryStatus(AccessoryStatusTypeEnum.AS, 2200));
+        Assert.Equal(1760, partner.TamerDetailAS);
+        Assert.Equal(440, partner.AS);
+    }
+
+    [Fact]
     public void Accessory_percent_statuses_are_exposed_as_basis_points_for_detail_info()
     {
         var character = TestDigimonFactory.CharacterWithSlots(1);

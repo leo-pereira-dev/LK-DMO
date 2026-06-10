@@ -16,7 +16,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         {
             Type(PacketNumber);
             WriteUInt((uint)handler);
-            WriteShort(amount);
+            WriteShort(1);
             WriteUShort((ushort)buffId);
         }
     }

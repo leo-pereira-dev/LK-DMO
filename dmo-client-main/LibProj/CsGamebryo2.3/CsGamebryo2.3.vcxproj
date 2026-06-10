@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -28,6 +28,10 @@
     <ProjectConfiguration Include="Release_English|Win32">
       <Configuration>Release_English</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="X64_WinDX9_Bridge|x64">
+      <Configuration>X64_WinDX9_Bridge</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release_Hong|Win32">
       <Configuration>Release_Hong</Configuration>
@@ -103,6 +107,12 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Give_English|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
@@ -148,6 +158,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Give_English|Win32'" Label="PropertySheets">
@@ -231,6 +244,8 @@
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Give_Thai|Win32'">CsGB2.3</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CsGB2.3</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Give|Win32'">CsGB2.3</TargetName>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">..\..\Lib\x64\X64_WinDX9_Bridge\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(WindowsSDK_IncludePath);..\..\DirectX_June2010\Include;$(IncludePath)</IncludePath>
@@ -343,6 +358,27 @@
       <AdditionalDependencies>NiInput.lib;NiMain.lib;NiAnimation.lib;NiDX9Renderer.lib;NiD3D10Renderer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <AdditionalLibraryDirectories>..\..\DirectX_June2010\Lib\x86;..\..\Gamebryo2.3\GB_Lib\ReleaseLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">
+    <ClCompile>
+      <AdditionalOptions>/MP -Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>C:\0-NewDmo\dmo-client-main\packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include;C:\0-NewDmo\dmo-client-main\Gamebryo2.3\GB_Include\ado;C:\0-NewDmo\dmo-client-main\Gamebryo2.3\GB_Include;.\;..\;..\..\Gamebryo2.3\GB_Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN64;_WIN64;DMO_X64_WINDX9_BRIDGE;NDEBUG;_LIB;NIRELEASE;IDV_DIRECTX9;VERSION_USA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>NiInput.lib;NiMain.lib;NiAnimation.lib;NiDX9Renderer.lib;NiD3D10Renderer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>C:\0-NewDmo\dmo-client-main\packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\release\lib\x64;C:\0-NewDmo\dmo-client-main\Gamebryo2.3\GB_Lib\x64\ReleaseLib;..\..\Lib\x64\X64_WinDX9_Bridge;;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <TargetMachine>MachineX64</TargetMachine>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Give_English|Win32'">
@@ -501,6 +537,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give_Thai|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Give|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='X64_WinDX9_Bridge|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PathEngine.cpp" />
     <ClCompile Include="CsGBAttachCamera.cpp" />

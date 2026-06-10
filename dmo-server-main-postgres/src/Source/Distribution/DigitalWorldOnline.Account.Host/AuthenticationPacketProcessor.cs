@@ -26,6 +26,7 @@ namespace DigitalWorldOnline.Account
         private readonly ILogger _logger;
 
         private const string CharacterServerAddress = "CharacterServer:Address";
+        private const string CharacterServerPublicPort = "CharacterServer:PublicPort";
         private const string AuthenticationServerHash = "AuthenticationServer:Hash";
 
         private const int HandshakeDegree = 32321;
@@ -332,7 +333,7 @@ namespace DigitalWorldOnline.Account
                         client.Send(new ConnectCharacterServerPacket(
                             client.AccountId,
                             _configuration[CharacterServerAddress],
-                            targetServer.Port.ToString())
+                            _configuration[CharacterServerPublicPort] ?? targetServer.Port.ToString())
                         );
                     }
                     break;

@@ -380,7 +380,7 @@ inline void CsSetThreadName( DWORD dwThreadID, LPCSTR szThreadName)
 
 	__try
 	{
-		RaiseException( 0x406D1388, 0, sizeof(info)/sizeof(DWORD), (DWORD*)&info );
+		RaiseException( 0x406D1388, 0, sizeof(info)/sizeof(ULONG_PTR), reinterpret_cast<const ULONG_PTR*>(&info) );
 	}
 	__except( EXCEPTION_CONTINUE_EXECUTION )
 	{

@@ -34,6 +34,13 @@ namespace
 			( GetAsyncKeyState( VK_LCONTROL ) & 0x8000 ) != 0 ||
 			( GetAsyncKeyState( VK_RCONTROL ) & 0x8000 ) != 0;
 	}
+
+	bool IsShiftDown()
+	{
+		return ( GetAsyncKeyState( VK_SHIFT ) & 0x8000 ) != 0 ||
+			( GetAsyncKeyState( VK_LSHIFT ) & 0x8000 ) != 0 ||
+			( GetAsyncKeyState( VK_RSHIFT ) & 0x8000 ) != 0;
+	}
 }
 
 cGlobalInput::cGlobalInput()
@@ -280,6 +287,7 @@ void cGlobalInput::_Mouse_Input( eMOUSE_INPUT eMouse )
 	default:
 		assert_cs( false );
 	}
+	bool bShiftRotateClick = IsShiftDown();
 #ifdef KEYBOARD_MOVE
 	bool bIsKeyBoardMove = false;
 
@@ -306,6 +314,16 @@ void cGlobalInput::_Mouse_Input( eMOUSE_INPUT eMouse )
 		CTamerUser* pTamer = g_pCharMng->GetTamerUser();
 		if( ( pPickObject = g_pMngCollector->PickObject( type, CURSOR_ST.GetPos(), false ) ) != NULL )
 		{
+			if( bShiftRotateClick && g_pServerMoveOwner )
+			{
+				pTamer->ReleaseArriveTarget();
+				if( type.m_nClass != nClass::Item )
+					g_pCharResMng->SetTargetMark( pPickObject );
+				g_pServerMoveOwner->SetRotateOnly_FromTargetPos( pPickObject->GetPos() );
+				m_PickData.s_Type = type;
+				return;
+			}
+
 			switch( type.m_nClass )
 			{
 				// 아이템 쪽은 원클릭 즉시 실행
@@ -363,7 +381,7 @@ void cGlobalInput::_Mouse_Input( eMOUSE_INPUT eMouse )
 		else
 		{
 #ifdef KEYBOARD_MOVE
-			if( !bIsKeyBoardMove )
+			if( !bIsKeyBoardMove || bShiftRotateClick )
 			{
 				bool bDoorPick = false;
 				if( ( bDoorPick == false && g_pResist->m_Global.s_bMove_Mouse
@@ -375,7 +393,10 @@ void cGlobalInput::_Mouse_Input( eMOUSE_INPUT eMouse )
 
 					pTamer->ReleaseArriveTarget();
 					CsPoint ptCursor = CURSOR_ST.GetPos();
-					g_pServerMoveOwner->SetPos_FromMouse( ptCursor, 0.0f, true, false );
+					if( bShiftRotateClick )
+						g_pServerMoveOwner->SetRotateOnly_FromMouse( ptCursor );
+					else
+						g_pServerMoveOwner->SetPos_FromMouse( ptCursor, 0.0f, true, false );
 	#ifdef ZONEMAP_CLICK_MOVE	// 존맵 클릭 이동 중에 터레인 픽킹 이동 시 존맵의 도착 지점 갱신
 					if(g_pGameIF->IsActiveWindow(cBaseWindow::WT_ZONEMAP))	
 					{
@@ -387,7 +408,10 @@ void cGlobalInput::_Mouse_Input( eMOUSE_INPUT eMouse )
 #else	// KEYBOARD_MOVE
 			pTamer->ReleaseArriveTarget();
 			CsPoint ptCursor = CURSOR_ST.GetPos();
-			g_pServerMoveOwner->SetPos_FromMouse( ptCursor, 0.0f, true, false );
+			if( bShiftRotateClick )
+				g_pServerMoveOwner->SetRotateOnly_FromMouse( ptCursor );
+			else
+				g_pServerMoveOwner->SetPos_FromMouse( ptCursor, 0.0f, true, false );
 #ifdef ZONEMAP_CLICK_MOVE	// 존맵 클릭 이동 중에 터레인 픽킹 이동 시 존맵의 도착 지점 갱신
 			if(g_pGameIF->IsActiveWindow(cBaseWindow::WT_ZONEMAP))	
 			{
@@ -1253,7 +1277,8 @@ void cGlobalInput::KeyBoardMove(const MSG& p_kMsg)
 			(g_pMngCollector->IsSceneState( CMngCollector::eSCENE_NONE ) ||
 			g_pMngCollector->IsSceneState( CMngCollector::eSCENE_TUTORIAL_EVENT )) )							// 씬 이벤트 중이 아닐 때 , 다트센터 내부가 아닐 때
 		{
-			DWORD nKeyCheck = g_pServerMoveOwner->GetKeyCheck();			
+			bool bShiftRotate = IsShiftDown();
+			DWORD nKeyCheck = bShiftRotate ? g_pServerMoveOwner->GetRotateOnlyKeyCheck() : g_pServerMoveOwner->GetKeyCheck();
 
 			UINT wParam;
 
@@ -1270,31 +1295,56 @@ void cGlobalInput::KeyBoardMove(const MSG& p_kMsg)
 				wParam=p_kMsg.wParam;
 			}			
 
+			bool bShiftKeyMessage =
+				wParam == VK_SHIFT ||
+				wParam == VK_LSHIFT ||
+				wParam == VK_RSHIFT;
+
+			if( bShiftKeyMessage &&
+				( p_kMsg.message == WM_KEYUP || p_kMsg.message == WM_SYSKEYUP ) )
+			{
+				g_pServerMoveOwner->SetRotateOnlyKeyCheck( CUserServerMove::KEY_NONE );
+				return;
+			}
+
+			if( bShiftKeyMessage &&
+				( p_kMsg.message == WM_KEYDOWN || p_kMsg.message == WM_SYSKEYDOWN ) )
+			{
+				DWORD nActiveMoveKeys = g_pServerMoveOwner->GetKeyCheck();
+				if( nActiveMoveKeys != CUserServerMove::KEY_NONE )
+				{
+					g_pServerMoveOwner->SetRotateOnlyKeyCheck( nActiveMoveKeys );
+					return;
+				}
+			}
+
+			uint nMoveModifier = bShiftRotate ? DMKEYBOARD::KMOD_NONE : iModifier;
+
 			switch(p_kMsg.message)
 			{
 			case WM_KEYDOWN:
 			case WM_SYSKEYDOWN:
 				{
-					if( wParam    == mHotKey->m_MKey[DMKEY::KM_UP].s_nKey &&
-						iModifier  == mHotKey->m_MKey[DMKEY::KM_UP].s_nModifier)
+					if( wParam       == mHotKey->m_MKey[DMKEY::KM_UP].s_nKey &&
+						nMoveModifier == mHotKey->m_MKey[DMKEY::KM_UP].s_nModifier)
 					{						
 						nKeyCheck |= CUserServerMove::KEY_UP;	
 					}	
 
-					if( wParam	 == mHotKey->m_MKey[DMKEY::KM_RIGHT].s_nKey &&
-						iModifier == mHotKey->m_MKey[DMKEY::KM_RIGHT].s_nModifier)
+					if( wParam       == mHotKey->m_MKey[DMKEY::KM_RIGHT].s_nKey &&
+						nMoveModifier == mHotKey->m_MKey[DMKEY::KM_RIGHT].s_nModifier)
 					{
 						nKeyCheck |= CUserServerMove::KEY_RIGHT;	
 					}
 
-					if( wParam	 == mHotKey->m_MKey[DMKEY::KM_LEFT].s_nKey &&
-						iModifier == mHotKey->m_MKey[DMKEY::KM_LEFT].s_nModifier)
+					if( wParam       == mHotKey->m_MKey[DMKEY::KM_LEFT].s_nKey &&
+						nMoveModifier == mHotKey->m_MKey[DMKEY::KM_LEFT].s_nModifier)
 					{
 						nKeyCheck |= CUserServerMove::KEY_LEFT;	
 					}
 
-					if( wParam	 == mHotKey->m_MKey[DMKEY::KM_DOWN].s_nKey &&
-						iModifier == mHotKey->m_MKey[DMKEY::KM_DOWN].s_nModifier)
+					if( wParam       == mHotKey->m_MKey[DMKEY::KM_DOWN].s_nKey &&
+						nMoveModifier == mHotKey->m_MKey[DMKEY::KM_DOWN].s_nModifier)
 					{
 						nKeyCheck |= CUserServerMove::KEY_DOWN;	
 					}					
@@ -1304,22 +1354,22 @@ void cGlobalInput::KeyBoardMove(const MSG& p_kMsg)
 			case WM_KEYUP:
 			case WM_SYSKEYUP:
 				{
-					if( p_kMsg.wParam == mHotKey->m_MKey[DMKEY::KM_UP].s_nKey )
+					if( wParam == mHotKey->m_MKey[DMKEY::KM_UP].s_nKey )
 					{
 						nKeyCheck &= ~CUserServerMove::KEY_UP;
 					}					
 
-					if( p_kMsg.wParam == mHotKey->m_MKey[DMKEY::KM_RIGHT].s_nKey )
+					if( wParam == mHotKey->m_MKey[DMKEY::KM_RIGHT].s_nKey )
 					{
 						nKeyCheck &= ~CUserServerMove::KEY_RIGHT;
 					}
 
-					if( p_kMsg.wParam == mHotKey->m_MKey[DMKEY::KM_LEFT].s_nKey )
+					if( wParam == mHotKey->m_MKey[DMKEY::KM_LEFT].s_nKey )
 					{
 						nKeyCheck &= ~CUserServerMove::KEY_LEFT;
 					}
 
-					if( p_kMsg.wParam == mHotKey->m_MKey[DMKEY::KM_DOWN].s_nKey )
+					if( wParam == mHotKey->m_MKey[DMKEY::KM_DOWN].s_nKey )
 					{
 						nKeyCheck &= ~CUserServerMove::KEY_DOWN;	
 					}	
@@ -1327,7 +1377,10 @@ void cGlobalInput::KeyBoardMove(const MSG& p_kMsg)
 				break;
 			}
 
-			g_pServerMoveOwner->SetKeyCheck( nKeyCheck );
+			if( bShiftRotate )
+				g_pServerMoveOwner->SetRotateOnlyKeyCheck( nKeyCheck );
+			else
+				g_pServerMoveOwner->SetKeyCheck( nKeyCheck );
 		}
 	}
 }
@@ -1571,7 +1624,7 @@ bool cGlobalInput::IsEscape()
 
 bool cGlobalInput::IsShift()
 {
-	if(iModifier == DMKEYBOARD::KMOD_LSHIFT || iModifier == DMKEYBOARD::KMOD_RSHIFT)
+	if( IsShiftDown() || iModifier == DMKEYBOARD::KMOD_LSHIFT || iModifier == DMKEYBOARD::KMOD_RSHIFT )
 	{
 		return true;
 	}

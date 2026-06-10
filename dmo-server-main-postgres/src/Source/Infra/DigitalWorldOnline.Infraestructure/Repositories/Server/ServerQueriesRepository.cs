@@ -242,17 +242,6 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Server
                 .ToListAsync();
         }
 
-        public async Task<List<NpcAssetDTO>> GetNpcAssetsAsync()
-        {
-            return await _context.Npcs
-                .AsNoTracking()
-                .Include(x => x.Items)
-                .Include(x => x.Portals)
-                    .ThenInclude(y => y.PortalsAsset)
-                        .ThenInclude(pa => pa.npcPortalsAsset) // Verifique o nome correto da propriedade
-                .ToListAsync();
-        }
-
         public async Task<List<ItemAssetDTO>> GetCloneItemAssetsAsync()
         {
             return await _context.ItemAsset
@@ -551,3 +540,4 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Server
         }
     }
 }
+

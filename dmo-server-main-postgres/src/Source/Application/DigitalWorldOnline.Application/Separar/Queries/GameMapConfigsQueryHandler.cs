@@ -20,14 +20,20 @@ namespace DigitalWorldOnline.Application.Separar.Queries
             {
                 IList<MapConfigDTO> maps = _mapBin.Data.MapsById.Values
                     .OrderBy(x => x.MapId)
-                    .Select(map => new MapConfigDTO
+                    .Select(map =>
                     {
-                        Id = map.MapId,
-                        MapId = map.MapId,
-                        Name = $"Map {map.MapId}",
-                        Type = MapTypeEnum.Default,
-                        Mobs = new(),
-                        KillSpawns = new()
+                        _mapBin.Data.MonstersByMapId.TryGetValue(map.MapId, out var mapMobs);
+                        return new MapConfigDTO
+                        {
+                            Id = map.MapId,
+                            MapId = map.MapId,
+                            Name = $"Map {map.MapId}",
+                            Type = MapTypeEnum.Default,
+                            Mobs = new(),
+                            KillSpawns = MapKillSpawnBuilder.Build(
+                                map.MapId,
+                                mapMobs ?? Array.Empty<MapMonsterRecord>())
+                        };
                     })
                     .ToList();
 

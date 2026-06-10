@@ -1,10 +1,12 @@
-﻿namespace DigitalWorldOnline.Commons.DTOs.Character
+using DigitalWorldOnline.Commons.Models.Character;
+
+namespace DigitalWorldOnline.Commons.DTOs.Character
 {
     public class CharacterProgressDTO
     {
         public long Id { get; set; }
-        public byte[] CompletedData { get; set; } = new byte[768];
-        public int[] CompletedDataValue { get; set; } = new int[192];
+        public byte[] CompletedData { get; set; } = new byte[CharacterProgressModel.CompletedQuestByteCount];
+        public int[] CompletedDataValue { get; set; } = new int[CharacterProgressModel.CompletedQuestIntCount];
         public List<InProgressQuestDTO> InProgressQuestData { get; set; }
 
         //FK

@@ -7,7 +7,7 @@
 #endif
 */
 
-#define		ACCOUNT_PORT		7029
+#define		ACCOUNT_PORT		17029
 
 
 //#define VERSION_TW							// pLength 길이 관련 디파인		lks007	13.10.31

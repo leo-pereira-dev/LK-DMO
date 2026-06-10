@@ -7,6 +7,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
     public class HatchFinishPacket : PacketWriter
     {
         private const int PacketNumber = 1038;
+        private const int MaxClientEvolutionUnits = 17;
 
         /// <summary>
         /// Finishes the hatch of a new partner.
@@ -29,15 +30,15 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteInt(newDigimon.DS);
             WriteInt(newDigimon.DE);
             WriteInt(newDigimon.AT);
-            WriteInt(newDigimon.HP);
-            WriteInt(newDigimon.DS);
-            WriteInt(0); //28
+            WriteInt(newDigimon.CurrentHp);
+            WriteInt(newDigimon.CurrentDs);
+            WriteInt(newDigimon.FS);
             WriteInt(0);
             WriteInt(newDigimon.EV);
             WriteInt(newDigimon.CC);
             WriteInt(newDigimon.MS);
             WriteInt(newDigimon.AS);
-            WriteInt(newDigimon.AR);
+            WriteInt(0);
             WriteInt(newDigimon.HT);
             WriteInt(0);
             WriteInt(0);
@@ -46,8 +47,9 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteByte((byte)newDigimon.HatchGrade);
             WriteInt(newDigimon.BaseType);
 
-            WriteByte((byte)newDigimon.Evolutions.Count);
-            for (int i = 0; i < newDigimon.Evolutions.Count; i++)
+            var evolutionCount = System.Math.Min(newDigimon.Evolutions.Count, MaxClientEvolutionUnits);
+            WriteByte((byte)evolutionCount);
+            for (int i = 0; i < evolutionCount; i++)
             {
                 var form = newDigimon.Evolutions[i];
                 WriteBytes(form.ToArray());

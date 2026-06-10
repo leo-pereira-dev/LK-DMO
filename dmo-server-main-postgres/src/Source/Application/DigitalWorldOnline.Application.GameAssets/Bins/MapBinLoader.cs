@@ -266,9 +266,9 @@ public sealed class MapBinLoader
                     int radius = r.ReadInt32();
                     int count = r.ReadInt32();
                     int respawn = r.ReadInt32();
-                    _ = r.ReadInt32();
-                    _ = r.ReadInt32();
-                    _ = r.ReadInt32();
+                    int killGenMonsterTableId = r.ReadInt32();
+                    int killGenCount = r.ReadInt32();
+                    int killGenViewCount = r.ReadInt32();
                     _ = r.ReadInt32();
                     _ = r.ReadBoolean();
                     _ = r.ReadBytes(3);
@@ -278,7 +278,17 @@ public sealed class MapBinLoader
                         list = new List<MapMonsterRecord>();
                         result.Add(mapId, list);
                     }
-                    list.Add(new MapMonsterRecord(rowMapId, monsterTableId, centerX, centerY, radius, count, respawn));
+                    list.Add(new MapMonsterRecord(
+                        rowMapId,
+                        monsterTableId,
+                        centerX,
+                        centerY,
+                        radius,
+                        count,
+                        respawn,
+                        killGenMonsterTableId,
+                        killGenCount,
+                        killGenViewCount));
                 }
             }
         }

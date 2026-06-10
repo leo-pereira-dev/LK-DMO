@@ -13,27 +13,13 @@
 #include "nlib/md5.h"
 #include "common_vs2019/pPass2.h"
 
-namespace
-{
-	uint ProtocolPortForAccessCode(uint port)
-	{
-		if (port == 17050)
-			return 7050;
-		if (port == 17608)
-			return 7608;
-		return port;
-	}
-}
-
 void cCliGate::SendAccessCode(void)
 {
 	xassert(net::access_code, "code is null");
 	xassert(net::account_idx, "account idx is null");
 
-	uint protocolPort = ProtocolPortForAccessCode(net::gate->port);
-
 	newp(pSvr::AccessCode);
-		push(protocolPort^net::access_code|net::account_idx);
+		push(net::gate->port^net::access_code|net::account_idx);
 		push(net::account_idx);
 		push(net::access_code);
 	endp(pSvr::AccessCode);
@@ -218,4 +204,3 @@ void cCliGate::NTF_Send_Xigncode( char* pBuffer, SIZE_T BufferSize )
 // 	send();
 #endif
 }
-

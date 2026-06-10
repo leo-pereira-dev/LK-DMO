@@ -39,6 +39,17 @@ namespace DigitalWorldOnline.Commons.Models.Map
         /// </summary>
         public long DungeonId { get; private set; }
 
+        public int DungeonEntryPortalId { get; private set; }
+        public int DungeonEntranceMapId { get; private set; }
+        public int DungeonRecordId { get; private set; }
+        public ushort DungeonDifficulty { get; private set; }
+        public DateTime DungeonStartedAt { get; private set; } = DateTime.UtcNow;
+        public int DungeonFailCount { get; private set; }
+        public bool DungeonClearAnnounced { get; private set; }
+        public HashSet<byte> DungeonCompletedStepKeys { get; private set; } = new();
+        public Dictionary<int, int> DungeonObjectiveKillCounts { get; private set; } = new();
+        public HashSet<long> DungeonObjectiveRewardedMobIds { get; private set; } = new();
+
         public byte Channel { get; private set; }
         public DateTime WithoutTamers { get; private set; }
         public DateTime NextDatabaseOperation { get; private set; }
@@ -158,5 +169,54 @@ namespace DigitalWorldOnline.Commons.Models.Map
         // ─── mutators (for code that previously used MapConfigModelBehavior) ──
 
         public void SetId(int dungeonId) => DungeonId = dungeonId;
+
+        public void StartDungeonRun(int entryPortalId, int entranceMapId, int dungeonRecordId, ushort difficulty)
+        {
+            DungeonEntryPortalId = entryPortalId;
+            DungeonEntranceMapId = entranceMapId;
+            DungeonRecordId = dungeonRecordId;
+            DungeonDifficulty = difficulty;
+            DungeonStartedAt = DateTime.UtcNow;
+            DungeonFailCount = 0;
+            DungeonClearAnnounced = false;
+            DungeonCompletedStepKeys.Clear();
+            DungeonObjectiveKillCounts.Clear();
+            DungeonObjectiveRewardedMobIds.Clear();
+        }
+
+        public int DungeonClearElapsedSeconds => Math.Max(0, (int)(DateTime.UtcNow - DungeonStartedAt).TotalSeconds);
+
+        public void IncrementDungeonFailCount()
+        {
+            DungeonFailCount++;
+        }
+
+        public bool TryMarkDungeonClear()
+        {
+            if (DungeonClearAnnounced)
+                return false;
+
+            DungeonClearAnnounced = true;
+            return true;
+        }
+
+        public bool MarkDungeonStepCompleted(byte stepKey) => DungeonCompletedStepKeys.Add(stepKey);
+
+        public bool IsDungeonStepCompleted(byte stepKey) => DungeonCompletedStepKeys.Contains(stepKey);
+
+        public bool TryRegisterDungeonObjectiveKill(long mobId, int mobType)
+        {
+            if (!DungeonObjectiveRewardedMobIds.Add(mobId))
+                return false;
+
+            DungeonObjectiveKillCounts.TryGetValue(mobType, out var amount);
+            DungeonObjectiveKillCounts[mobType] = amount + 1;
+            return true;
+        }
+
+        public int GetDungeonObjectiveKillCount(int mobType)
+        {
+            return DungeonObjectiveKillCounts.TryGetValue(mobType, out var amount) ? amount : 0;
+        }
     }
 }

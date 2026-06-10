@@ -55,12 +55,27 @@ void cTutorialTraceWindow::_TraceItemUI()
 	SAFE_POINTER_RET( pInvenData );
 
 	int nSlot =pInvenData->GetFirstSlot_Item_ID( m_CurrentData.m_dwTargetValue );
+	if( nSlot == cData_Inven::INVALIDE_INVEN_INDEX )
+	{
+		SetVisible( false );
+		return;
+	}
+
+#ifdef UI_INVENTORY_RENEWAL
+	int nInvenCount = 0;
+#else
 	int nInvenCount = nSlot / nLimit::FirstInven;
+#endif
 	cInventory* pInven = g_pGameIF->GetInventory( nInvenCount );
 	SAFE_POINTER_RET( pInven );
 
 	SetVisible(pInven->IsShowWindow());
 	CsPoint itemPo = pInven->GetInvenItemPos( nSlot );
+	if( itemPo == CsPoint::ZERO )
+	{
+		SetVisible( false );
+		return;
+	}
 	CsPoint pos = itemPo - CsPoint(m_ptRootSize.x - 10, 0);
 	SetWindowPosition( pos );
 }

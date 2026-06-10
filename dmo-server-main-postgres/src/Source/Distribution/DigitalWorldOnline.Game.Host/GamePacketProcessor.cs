@@ -35,8 +35,22 @@ namespace DigitalWorldOnline.Game
         {
             while (_assets.Loading || _configs.Loading) await Task.Delay(1000);
 
+            if (client.Loading || client.Tamer?.State == DigitalWorldOnline.Commons.Enums.Character.CharacterStateEnum.Loading)
+            {
+                _logger.Warning(
+                    "[LOADING-PKT-RAW] recv tamer={TamerId} client={Client} len={Length} header={HeaderHex} state={State} loading={Loading}",
+                    client.TamerId,
+                    client.HiddenAddress,
+                    data.Length,
+                    ToHexPreview(data, 32),
+                    client.Tamer?.State,
+                    client.Loading);
+            }
+
             var packet = new GamePacketReader(data);
             if (client.TamerId == 3 ||
+                client.Loading ||
+                client.Tamer?.State == DigitalWorldOnline.Commons.Enums.Character.CharacterStateEnum.Loading ||
                 packet.Enum == GameServerPacketEnum.InitialInformation ||
                 packet.Enum == GameServerPacketEnum.ComplementarInformation ||
                 packet.Enum == GameServerPacketEnum.PostLoadComplete)
@@ -85,8 +99,14 @@ namespace DigitalWorldOnline.Game
                             //throw new NotImplementedException();
                         }
                     }
-                    break;
+                break;
             }
+        }
+
+        private static string ToHexPreview(byte[] bytes, int maxBytes)
+        {
+            var length = Math.Min(bytes.Length, maxBytes);
+            return Convert.ToHexString(bytes.AsSpan(0, length));
         }
 
         /// <summary>

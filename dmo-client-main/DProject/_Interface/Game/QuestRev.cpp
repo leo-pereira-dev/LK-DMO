@@ -1,5 +1,6 @@
 
 #include "stdafx.h"
+#include "../Base/SpriteAni.h"
 #include "QuestRev.h"
 
 #define IF_QUESTRECV_ICON_SIZE			CsPoint( 32, 32 )
@@ -7,9 +8,25 @@
 #define IF_QUESTRECV_REQUITE_POS		CsPoint( 90, 238 )
 #define IF_QUESTRECV_REQUITE_ITEM_DELTA_POS		CsPoint( 0, -5 )
 
+namespace
+{
+	bool IsTutorialGuideQuest( CsQuest* pQuest )
+	{
+		if( !pQuest )
+			return false;
+
+		if( pQuest->GetQuestType() == CsQuest::QT_TUTORIAL )
+			return true;
+
+		return _tcsstr( pQuest->m_szTitleTab, _T( "<Tutorial>" ) ) != NULL;
+	}
+}
+
 cQuestRev::cQuestRev()
 :m_OpenSlotIdx(0),
-m_pkBTOpenSlot(NULL)
+m_pkBTOpenSlot(NULL),
+m_pQuestFT(NULL),
+m_pTutorialQuestArrow(NULL)
 { 
 	m_pTarget = NULL; 
 }
@@ -28,6 +45,7 @@ void cQuestRev::DeleteResource()
 	m_RequiteString.Delete();
 	SAFE_NIDELETE( m_pBGWindow );
 	SAFE_NIDELETE( m_pExpSprite );
+	SAFE_NIDELETE( m_pTutorialQuestArrow );
 }
 
 void cQuestRev::Create(int nValue /* = 0  */)
@@ -52,6 +70,13 @@ void cQuestRev::Create(int nValue /* = 0  */)
 
 	m_pExpSprite = NiNew cSprite;
 	m_pExpSprite->Init( NULL, CsPoint::ZERO, CsPoint( 27, 17 ), "System\\Exp.tga", false );
+
+	m_pTutorialQuestArrow = NiNew cSpriteAni;
+	if( m_pTutorialQuestArrow )
+	{
+		m_pTutorialQuestArrow->Init( cSpriteAni::LOOP, NULL, CsPoint::ZERO, CsPoint( 60, 45 ), "Tutorial\\tutorial_ani.tga", NULL, 11, false, CsPoint(60,0), cSpriteAni::SPRITE_POS );
+		m_pTutorialQuestArrow->SetAniTime( 0.1f );
+	}
 
 	m_pScrollBar = AddScrollBar( cScrollBar::TYPE_2, CsPoint( 521, 60 ), CsPoint( 16, 153 ), cScrollBar::GetDefaultBtnSize(), CsRect( CsPoint( 11, 60 ), CsPoint( 505, 236 ) ), 6 );
 
@@ -168,6 +193,12 @@ void cQuestRev::Render()
 			m_RequiteItemIFIcon[ i ].RenderMask( GetRootClient() + m_RequiteItemIFIcon[ i ].GetPos(), IF_QUESTRECV_ICON_SIZE );
 		}		
 	}
+	if( m_pTutorialQuestArrow && IsTutorialGuideQuest( m_pQuestFT ) )
+	{
+		m_pTutorialQuestArrow->Update( g_fDeltaTime );
+		m_pTutorialQuestArrow->Render( GetRootClient() + CsPoint( 384, 226 ) );
+	}
+
 }
 
 DWORD cQuestRev::GetQuestUIDX() const

@@ -1,4 +1,5 @@
 using DigitalWorldOnline.Application.GameAssets.Bins;
+using DigitalWorldOnline.Commons.Constants;
 using DigitalWorldOnline.Commons.DTOs.Assets;
 using MediatR;
 
@@ -54,7 +55,54 @@ namespace DigitalWorldOnline.Application.GameAssets.Queries
                     HTValue = rec.HitRate
                 });
             }
+            ExtendSyntheticLevels(list);
+
             return Task.FromResult(list);
+        }
+
+        private static void ExtendSyntheticLevels(List<DigimonLevelStatusAssetDTO> list)
+        {
+            foreach (var group in list.GroupBy(x => x.ScaleType).ToList())
+            {
+                var ordered = group.OrderBy(x => x.Level).ToList();
+                if (!ordered.Any() || ordered.Last().Level >= LevelConstants.MaxLevel)
+                    continue;
+
+                var last = ordered.Last();
+                var previous = ordered.Count > 1 ? ordered[^2] : last;
+
+                for (var level = last.Level + 1; level <= LevelConstants.MaxLevel; level++)
+                {
+                    var offset = level - last.Level;
+
+                    list.Add(new DigimonLevelStatusAssetDTO
+                    {
+                        Id = last.Id + offset,
+                        Type = last.Type,
+                        ScaleType = last.ScaleType,
+                        StatusId = last.ScaleType * 1000 + level,
+                        Level = (byte)level,
+                        ExpValue = last.ExpValue,
+                        HPValue = Extrapolate(last.HPValue, previous.HPValue, offset),
+                        DSValue = Extrapolate(last.DSValue, previous.DSValue, offset),
+                        MSValue = last.MSValue,
+                        DEValue = Extrapolate(last.DEValue, previous.DEValue, offset),
+                        EVValue = Extrapolate(last.EVValue, previous.EVValue, offset),
+                        CTValue = Extrapolate(last.CTValue, previous.CTValue, offset),
+                        ATValue = Extrapolate(last.ATValue, previous.ATValue, offset),
+                        HTValue = Extrapolate(last.HTValue, previous.HTValue, offset),
+                        ASValue = last.ASValue,
+                        ARValue = last.ARValue,
+                        BLValue = last.BLValue,
+                        WSValue = last.WSValue
+                    });
+                }
+            }
+        }
+
+        private static int Extrapolate(int last, int previous, int offset)
+        {
+            return last + Math.Max(0, last - previous) * offset;
         }
     }
 }

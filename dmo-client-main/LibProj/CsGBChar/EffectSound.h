@@ -18,7 +18,7 @@ public:
 			memset(szFilePath, 0, sizeof(char)*MAX_PATH);
 		}
 
-		size_t		HashCode; /**< 헤시코드 */	
+		DWORD		HashCode;  /**< 헤시코드 */	
 		char		szFilePath[ MAX_PATH ];	/**< 이펙트의 파일명 */	
 		int			nSoundNum; /**< 사운드리스트 수*/
 	};

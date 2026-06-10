@@ -9,6 +9,8 @@
 
 #include "StdAfx.h"
 #include "GameApp.h"
+#include "../../LibProj/CsFunc/CrashLogger.h"
+#include "../../LibProj/CsFilePack/CsFilePackSystem.h"
 
 #include "../Flow/FlowMgr.h"
 #include "../Flow/Flow.h"
@@ -41,19 +43,18 @@ int GetGlobalState()
 }
 void Thread_LoadFileTable()
 {
-	// ==== 파일 테이블
-	// 로드 안할 목록	
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE_THREAD begin" );
+
 	nsCsMapTable::g_bUseMapStart = false;
 	nsCsMapTable::g_bUseMapResurrection = false;
 	nsCsMapTable::g_eModeMapMonster = nsCsMapTable::eMode_Client;
 
-	// 특별 로드 목록
 	nsCsFileTable::g_bAddExp = true;
 	nsCsFileTable::g_bUseMoveObject = true;
 	nsCsFileTable::g_bUseHelp = true;
 	nsCsFileTable::g_bUseAchieve = true;
 	nsCsFileTable::g_bAddExp = true;
-	nsCsFileTable::g_bBuffMng = true;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+	nsCsFileTable::g_bBuffMng = true;
 	nsCsFileTable::g_bSceneDataMng = true;
 
 #ifndef BATTLE_MATCH
@@ -90,96 +91,164 @@ void Thread_LoadFileTable()
 	else
 		nsCsFileTable::g_eFileType = nsCsFileTable::FT_BIN;
 #else
-	// Release_English (non-DEBUG, non-GIVE): honor dmo.ini [DEBUG] FilePack=1 like the other configs.
-	// Without this, FT_BIN is forced and managers try fopen on Data\Bin\<lang>\*.bin which only exist
-	// inside Pack03, producing the "<path> 파일이 존재 하지 않습니다." popup.
 	if( g_bUseFilePack )
 		nsCsFileTable::g_eFileType = nsCsFileTable::FT_FILEPACK;
 	else
 		nsCsFileTable::g_eFileType = nsCsFileTable::FT_BIN;
 #endif
-#ifdef PC_BANG_SERVICE_TEST//PC방 테스트 관련 알파서버 접속 클라 생성
+#ifdef PC_BANG_SERVICE_TEST
 	nsCsFileTable::g_eFileType = nsCsFileTable::FT_FILEPACK;
 #endif
+
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE_THREAD Init begin fileType=%d language=%d usePack=%d", nsCsFileTable::g_eFileType, g_pResist->m_Global.s_eFTLanguage, g_bUseFilePack ? 1 : 0 );
 	if( nsCsFileTable::g_FileTableMng.Init( nsCsFileTable::g_eFileType, g_pResist->m_Global.s_eFTLanguage ) == false )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE_THREAD Init failed" );
 		SetGlobalState( 2 );
-		return;		
-	}	
+		return;
+	}
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE_THREAD Init end" );
 
 #ifndef _DEBUG
 #ifndef _GIVE
-#ifndef PC_BANG_SERVICE_TEST//PC방 테스트 관련 알파서버 접속 클라 생성
-	// 위치찾기에 필요한 데이터 bin파일로 Reload
-	// Skip when running from packs — Reload() fopen's bins from disk and they
-	// only exist inside Pack03 in this build; the file-not-found assert would
-	// otherwise cascade into the GameApp.cpp:117 bResult assert.
+#ifndef PC_BANG_SERVICE_TEST
 	if( nsCsFileTable::g_eFileType != nsCsFileTable::FT_FILEPACK )
 	{
 		char cPath[ MAX_PATH ];
 		nsCsFileTable::g_FileTableMng.GetLanguagePath( g_pResist->m_Global.s_eFTLanguage, cPath );
+		nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE_THREAD Quest reload begin path=%s", cPath );
 		bool bResult = nsCsFileTable::g_pQuestMng->Reload( cPath );
 		assert_cs( bResult );
 		nsCsMapTable::g_pMapMonsterMng->Reload( cPath );
+		nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE_THREAD Quest reload end" );
 	}
 #endif
 #endif
 #endif
 
 	SetGlobalState( 1 );
+	nsCSDEBUG::CrashLogger::LogMessage( "FILETABLE_THREAD success state=1" );
 }
-
-bool IsUiTexture( char const* pName )
+class CsPackNiFile : public NiFile
 {
-	assert_cs( pName[ 0 ] != '\\' );
+	NiDeclareDerivedBinaryStream();
 
-	bool bUiTex = false;
+public:
+	virtual void SetEndianSwap( bool bDoSwap );
 
-	if( pName[ 0 ] == '.' )
-		bUiTex = ( strnicmp( &pName[ 2 ], "data\\Interface", 14 ) == 0 );
-	else
-		bUiTex = ( strnicmp( pName, "data\\Interface", 14 ) == 0 );
-
-	if( bUiTex )
-		return (_access_s( pName, 0 ) == 0)?true:false;
-
-	return false;
-}
-
-NiFile* CsFilePackFileCreateFunc(const char *pcName, NiFile::OpenMode eMode, unsigned int uiBufferSize)
-{
-	//BHPRT( "Load File : %s", pcName );
-#ifdef SDM_USER_UI_SKIN_CHANGE_20160331
-	if( IsUiTexture( pcName ) )
-		return NiNew NiFile(pcName, eMode, uiBufferSize);
-#endif
-
-	CsFPS::CsFileHash::sINFO* pHashInfo = CsFPS::CsFPSystem::GetHashData(0, pcName);
-	if( pHashInfo == NULL )
-		return NiNew NiFile(pcName, eMode, uiBufferSize);
-
-	char* pBuffer = NiAlloc( char, pHashInfo->s_nDataSize );
-	if( NULL == pBuffer )
+	CsPackNiFile( char* pData, unsigned int uiSize )
+		: m_pPackData( pData )
+		, m_uiPackSize( uiSize )
+		, m_uiPackPos( 0 )
 	{
-		//DUMPLOGA( "NiAlloc False : %s", pcName );
-		//CsMessageBoxA( MB_OK, "NiAlloc Fail : %s, %d", pcName, pHashInfo->s_nDataSize );
-		return NULL;
+		m_pBuffer = NULL;
+		m_pFile = NULL;
+		m_eMode = READ_ONLY;
+		m_bGood = ( m_pPackData != NULL && m_uiPackSize > 0 );
+		m_uiBufferAllocSize = 0;
+		m_uiBufferReadSize = 0;
+		m_uiPos = 0;
+		m_uiAbsoluteCurrentPos = 0;
+		SetEndianSwap( false );
 	}
 
+	virtual ~CsPackNiFile()
+	{
+		SAFE_DELETE_ARRAY( m_pPackData );
+	}
 
-	CsFPS::CsFPSystem::GetFileData( 0, &pBuffer, pHashInfo->s_nOffset, pHashInfo->s_nDataSize );
-	
-	return NiNew NiMemFile( pBuffer, NiFile::READ_ONLY, pHashInfo->s_nDataSize );
+	virtual operator bool() const
+	{
+		return m_bGood;
+	}
+
+	virtual void Seek( int iNumBytes )
+	{
+		Seek( iNumBytes, ms_iSeekCur );
+	}
+
+	virtual void Seek( int iOffset, int iWhence )
+	{
+		int iNewPos = 0;
+
+		if( iWhence == ms_iSeekSet )
+			iNewPos = iOffset;
+		else if( iWhence == ms_iSeekCur )
+			iNewPos = static_cast<int>( m_uiPackPos ) + iOffset;
+		else if( iWhence == ms_iSeekEnd )
+			iNewPos = static_cast<int>( m_uiPackSize ) + iOffset;
+		else
+			return;
+
+		if( iNewPos < 0 )
+			iNewPos = 0;
+
+		if( static_cast<unsigned int>( iNewPos ) > m_uiPackSize )
+			iNewPos = static_cast<int>( m_uiPackSize );
+
+		m_uiPackPos = static_cast<unsigned int>( iNewPos );
+		m_uiAbsoluteCurrentPos = m_uiPackPos;
+	}
+
+	virtual unsigned int GetFileSize() const
+	{
+		return m_uiPackSize;
+	}
+
+protected:
+	unsigned int MemRead( void* pvBuffer, unsigned int uiBytes )
+	{
+		if( !m_bGood || pvBuffer == NULL )
+			return 0;
+
+		unsigned int uiLeft = m_uiPackSize - m_uiPackPos;
+		if( uiBytes > uiLeft )
+			uiBytes = uiLeft;
+
+		if( uiBytes > 0 )
+		{
+			memcpy( pvBuffer, m_pPackData + m_uiPackPos, uiBytes );
+			m_uiPackPos += uiBytes;
+		}
+
+		return uiBytes;
+	}
+
+	unsigned int MemWrite( const void*, unsigned int )
+	{
+		return 0;
+	}
+
+private:
+	char* m_pPackData;
+	unsigned int m_uiPackSize;
+	unsigned int m_uiPackPos;
+};
+
+NiImplementDerivedBinaryStream( CsPackNiFile, MemRead, MemWrite );
+
+NiFile* CsFilePackFileCreateFunc( const char* pcName, NiFile::OpenMode eMode, unsigned int uiBufferSize )
+{
+	if( eMode == NiFile::READ_ONLY && pcName != NULL && CsFPS::CsFPSystem::IsExistOnlyPack( 0, pcName ) )
+	{
+		char* pData = NULL;
+		size_t nDataSize = CsFPS::CsFPSystem::Allocate_GetFileData( 0, &pData, pcName );
+		if( nDataSize > 0 && pData != NULL )
+			return NiNew CsPackNiFile( pData, static_cast<unsigned int>( nDataSize ) );
+
+		SAFE_DELETE_ARRAY( pData );
+	}
+
+	return NiNew NiFile( pcName, eMode, uiBufferSize );
 }
 
-bool CsFilePackFileAccessFunc(const char *pcName, NiFile::OpenMode eMode)
+bool CsFilePackFileAccessFunc( const char* pcName, NiFile::OpenMode eMode )
 {
-	assert_cs( pcName[ 0 ] != '\\' );
+	if( eMode == NiFile::READ_ONLY && pcName != NULL && CsFPS::CsFPSystem::IsExistOnlyPack( 0, pcName ) )
+		return true;
 
-	if( pcName[ 0 ] == '.' )
-		return ( strnicmp( &pcName[ 2 ], "data\\", 5 ) == 0 );
-
-	return ( strnicmp( pcName, "data\\", 5 ) == 0 );
+	NiFile kFile( pcName, eMode, 0 );
+	return kFile ? true : false;
 }
 
 namespace App
@@ -258,34 +327,47 @@ namespace App
  		//CLOCK_ST.SetMaxFrameRate(0.0f);
  		//CLOCK_ST.SetCheckFps(TRUE);
 
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP OnInitialize pre-filetable begin usePack=%d", g_bUseFilePack ? 1 : 0 );
+
 		if( g_bUseFilePack )
-		{		
-			// 파일패킹 콜백, 엔진 생성 이후에
-			//CsMessageBox(MB_OK, _T("Loading File packs"));
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP FilePack callbacks begin" );
 			NiFile::SetFileCreateFunc( CsFilePackFileCreateFunc );
 			NiFile::SetFileAccessFunc( CsFilePackFileAccessFunc );
+			nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP FilePack callbacks end" );
+		}
 
-			/*AIL_set_file_callbacks( Sound_file_open_callback,
-			Sound_file_close_callback,
-			Sound_file_seek_callback,
-			Sound_file_read_callback );*/
-		}	
-
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP Collector ShotInit begin" );
 		CMngCollector::ShotInit();
-		 
-		// 쓰레드로 파일테이블 로드
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP Collector ShotInit end" );
+
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP LoadFileTable enqueue begin" );
 		sTCUnit* pUnit = sTCUnit::NewInstance( sTCUnit::LoadFileTable );
 		pUnit->s_pLoadedObject = NULL;
 		g_pThread->LoadChar( pUnit );
-		
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP LoadFileTable enqueue end" );
+
 		bool bLoad = true;
+		int nWaitLoop = 0;
 		while( bLoad )
 		{
-			switch(GetGlobalState())
+			int nState = GetGlobalState();
+			switch( nState )
 			{
-			case 0:	Sleep( 100 );	break;
-			case 1:		bLoad = false;	break;
+			case 0:
+				if( ( nWaitLoop % 10 ) == 0 )
+				{
+					nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP waiting filetable loops=%d state=%d", nWaitLoop, nState );
+				}
+				++nWaitLoop;
+				Sleep( 100 );
+				break;
+			case 1:
+				nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP filetable success loops=%d", nWaitLoop );
+				bLoad = false;
+				break;
 			case 2:
+				nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP filetable failed loops=%d", nWaitLoop );
 				bLoad = false;
 				CsMessageBox( MB_OK, _LAN( "파일테이블이 잘못 되었습니다" ) );
 				return false;
@@ -295,36 +377,41 @@ namespace App
 		if( GAME_EVENT_STPTR )
 			GAME_EVENT_STPTR->OnEvent(EVENT_CODE::TABLE_LOAD_SUCCESS);
 
-		cIconMng::GlobalInit();		
-		cDataMng::GlobalInit();		
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP Icon/Data GlobalInit begin" );
+		cIconMng::GlobalInit();
+		cDataMng::GlobalInit();
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP Icon/Data GlobalInit end" );
 
-		// 레지스트 설정된거 적용	
 		nsCsGBTerrain::g_eTexFilter = (NiTexturingProperty::FilterMode)g_pResist->m_Global.s_eTexFilter;
 		nsCsGBTerrain::g_bShadowRender = ( g_pResist->m_Global.s_nShadowType == cResist::sGLOBAL::SHADOW_ON );
 		nsCsGBTerrain::g_bCharOutLine = g_pResist->m_Global.s_bCharOutLine;
-		nsCsGBTerrain::g_bSpeedCellRender = g_pResist->m_Global.s_bCell;	
+		nsCsGBTerrain::g_bSpeedCellRender = g_pResist->m_Global.s_bCell;
 		g_pWeather->SetPerformance( g_pResist->m_Global.s_nWeather );
 		CsC_AvObject::g_bEnableVoice = g_pResist->m_Global.s_bEnableVoice;
 
-
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP Tooltip init begin" );
 		CREATE_SINGLETON( CToolTipMng );
 		if( TOOLTIPMNG_STPTR )
 			TOOLTIPMNG_ST.Init();
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP Tooltip init end" );
 
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP net start begin" );
 		net::start();
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP net start end" );
 
 #ifndef SKIP_LOGO
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP StartFlow logo begin" );
 		FLOWMGR_ST.StartFlow(Flow::CFlow::FLW_LOGO);
 #else
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP StartFlow login begin" );
 		FLOWMGR_ST.StartFlow(Flow::CFlow::FLW_LOGIN);
 #endif
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP StartFlow end" );
 
 #ifdef DEF_CORE_NPROTECT
 		m_fCheckGameGuardTimer = CHECK_NPROTECT_TIME;
 #endif
-// 		if( GAME_EVENT_STPTR )
-// 			GAME_EVENT_STPTR->OnEvent(EVENT_CODE::START_RESOURCECHECKER);
-
+		nsCSDEBUG::CrashLogger::LogMessage( "GAMEAPP OnInitialize end" );
 		return TRUE;
 	}
 	//---------------------------------------------------------------------------

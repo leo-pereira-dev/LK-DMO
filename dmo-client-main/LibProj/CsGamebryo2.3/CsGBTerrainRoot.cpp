@@ -2,6 +2,25 @@
 
 #include "stdafx.h"
 #include "CsGBTerrainRoot.h"
+#include "../CsFunc/CrashLogger.h"
+
+#if defined(DMO_X64_WINDX9_BRIDGE)
+namespace
+{
+	struct sDiskTRPathInfoWin32
+	{
+		UINT	s_uiPEGroupCount;
+		UINT	s_uiTotalPECount;
+		DWORD	s_pptTranse;
+		DWORD	s_pPECount;
+		DWORD	s_pData;
+		DWORD	s_pType;
+		int		s_nDataTotalCount;
+	};
+
+	static_assert(sizeof(sDiskTRPathInfoWin32) == 28, "Unexpected Win32 terrain path info disk size");
+}
+#endif
 
 CsGBTerrainRoot::sINFO::sINFO()
 {
@@ -1885,14 +1904,24 @@ int CsGBTerrainRoot::ApplyTerrainPath()
 	CsGBObject::sPATHINFO* pPathInfo = &m_TrPathInfo.s_PathInfo;
 	UINT uiGroup = pPathInfo->s_uiPEGroupCount;
 
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT ApplyTerrainPath begin groups=%u totalPE=%u dataTotal=%d",
+		(unsigned)uiGroup, (unsigned)pPathInfo->s_uiTotalPECount, m_TrPathInfo.s_nDataTotalCount );
 	int nOffset = 0;
 	for( UINT i=0; i<uiGroup; ++i )
 	{
+		if( ( i & 0xFF ) == 0 )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage( "TRROOT ApplyTerrainPath progress index=%u type=%d offset=%d pos=%.3f,%.3f",
+				(unsigned)i, (int)m_TrPathInfo.s_pType[ i ], nOffset,
+				pPathInfo->s_pptTranse[ i ].x, pPathInfo->s_pptTranse[ i ].y );
+		}
 		switch( m_TrPathInfo.s_pType[ i ] )
 		{
 		case CsGBTerrainRoot::sTR_PATHINFO::MESH4:
 			if( g_pCsPathEngine->SetShape( pPathInfo->s_pptTranse[ i ].x, pPathInfo->s_pptTranse[ i ].y, 4, &pPathInfo->s_pData[ nOffset ] ) == false )
 			{
+				nsCSDEBUG::CrashLogger::LogMessage( "TRROOT ApplyTerrainPath SetShape failed index=%u type=MESH4 offset=%d pos=%.3f,%.3f",
+					(unsigned)i, nOffset, pPathInfo->s_pptTranse[ i ].x, pPathInfo->s_pptTranse[ i ].y );
 				nErrorIndex = i;
 			}
 			nOffset += 8;
@@ -1900,6 +1929,8 @@ int CsGBTerrainRoot::ApplyTerrainPath()
 		case CsGBTerrainRoot::sTR_PATHINFO::MESH6:
 			if( g_pCsPathEngine->SetShape( pPathInfo->s_pptTranse[ i ].x, pPathInfo->s_pptTranse[ i ].y, 6, &pPathInfo->s_pData[ nOffset ] ) == false )
 			{
+				nsCSDEBUG::CrashLogger::LogMessage( "TRROOT ApplyTerrainPath SetShape failed index=%u type=MESH6 offset=%d pos=%.3f,%.3f",
+					(unsigned)i, nOffset, pPathInfo->s_pptTranse[ i ].x, pPathInfo->s_pptTranse[ i ].y );
 				nErrorIndex = i;
 			}
 			nOffset += 12;
@@ -1907,15 +1938,20 @@ int CsGBTerrainRoot::ApplyTerrainPath()
 		case CsGBTerrainRoot::sTR_PATHINFO::MESH8:
 			if( g_pCsPathEngine->SetShape( pPathInfo->s_pptTranse[ i ].x, pPathInfo->s_pptTranse[ i ].y, 8, &pPathInfo->s_pData[ nOffset ] ) == false )
 			{
+				nsCSDEBUG::CrashLogger::LogMessage( "TRROOT ApplyTerrainPath SetShape failed index=%u type=MESH8 offset=%d pos=%.3f,%.3f",
+					(unsigned)i, nOffset, pPathInfo->s_pptTranse[ i ].x, pPathInfo->s_pptTranse[ i ].y );
 				nErrorIndex = i;
 			}
 			nOffset += 16;
 			break;
 		default:
+			nsCSDEBUG::CrashLogger::LogMessage( "TRROOT ApplyTerrainPath invalid type index=%u type=%d offset=%d",
+				(unsigned)i, (int)m_TrPathInfo.s_pType[ i ], nOffset );
 			assert_cs( false );
 		}
 	}
 
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT ApplyTerrainPath end errorIndex=%d finalOffset=%d", nErrorIndex, nOffset );
 	return nErrorIndex;
 }
 
@@ -1942,7 +1978,7 @@ void GetTmpEmrPath(const char *szSrcFile, char *szDstFile, unsigned nBuffSize)
 	if(!tmp)
 	{
 //		xstop1(tmp, "GetTmpEmrPath ERROR szSrcFile(%s)", szSrcFile);
-		__asm int 3;
+		__debugbreak();
 	}
 
 	strcpy_s(szDstFile, nBuffSize, ".\\emr");
@@ -1955,7 +1991,7 @@ void GetTmpEmrPath(const char *szSrcFile, char *szDstFile, unsigned nBuffSize)
 	if(!tmp)
 	{
 //		xstop1(tmp, "GetTmpEmrPath ERROR2 szSrcFile(%s)", szSrcFile);
-		__asm int 3;
+		__debugbreak();
 	}
 
 	strcpy_s(tmp+1, nBuffSize-20, "emr");
@@ -2315,6 +2351,8 @@ void CsGBTerrainRoot::_SaveToolExtraData()
 
 bool CsGBTerrainRoot::LoadExtraData( CsNiNodePtr pNiNode, const char* cFile )
 {
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData detail begin file=%s node=%p",
+		cFile ? cFile : "<null>", (void*)pNiNode );
 	if( pNiNode->GetExtraDataSize() == 0 )
 	{
 		CsMessageBox( MB_OK, _T( "RootNode 의 ExtraData 가 존재 하지 않습니다.\n맵툴에서 생성한 지형 데이터가 아닙니다." ) );		
@@ -2331,6 +2369,7 @@ bool CsGBTerrainRoot::LoadExtraData( CsNiNodePtr pNiNode, const char* cFile )
 	unsigned int uiSize;
 	char* pData;
 	pExtData->GetValue( uiSize, pData );
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData root extra size=%u data=%p", uiSize, pData );
 
 	// 실제 파일 버젼 기입
 	if( m_dwOrgVersion == 0 )
@@ -2374,6 +2413,9 @@ bool CsGBTerrainRoot::LoadExtraData( CsNiNodePtr pNiNode, const char* cFile )
 	//======================================================================================================		
 	memcpy( &m_Info, pData, sizeof( sINFO ) );
 	m_Info.s_dwMapID = nsCsGBTerrain::g_pTRMng->GetBackupMapID();
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData root info map=%u version=0x%08X xVert=%d yVert=%d leaves=%d",
+		(unsigned)m_Info.s_dwMapID, (unsigned)m_Info.s_dwMapResVersion,
+		m_Info.s_nXVertCount, m_Info.s_nYVertCount, m_Info.s_nTotalLeafCount );
 
 	m_fOrgClipObject_Far = m_Info.s_fClipObject_Far;
 	m_fOrgFogObject_Start = m_Info.s_fFogStart;
@@ -2390,6 +2432,7 @@ bool CsGBTerrainRoot::LoadExtraData( CsNiNodePtr pNiNode, const char* cFile )
 
 	Alloc_HField_Normal();
 	int nVertCount = m_Info.s_nXVertCount*m_Info.s_nYVertCount;	
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData field size=%u vertCount=%d", uiSize, nVertCount );
 	// Height Field		
 	memcpy( m_FieldInfo.s_pfHeightField, pData, sizeof( float )*nVertCount );
 
@@ -2408,9 +2451,14 @@ bool CsGBTerrainRoot::LoadExtraData( CsNiNodePtr pNiNode, const char* cFile )
 		int nObjCount;
 		memcpy( &nObjCount, &pData[ nNoPickOffset ], sizeof( int ) );
 		nNoPickOffset += sizeof( int );
+		nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData nopick begin count=%d size=%u", nObjCount, uiSize );
 
 		for( int i=0; i<nObjCount; ++i )
 		{
+			if( ( i & 0xFF ) == 0 )
+			{
+				nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData nopick progress index=%d offset=%u", i, nNoPickOffset );
+			}
 			CsGBObject::sFILE_HEADER fh;
 			memcpy( &fh, &pData[ nNoPickOffset ], sizeof( CsGBObject::sFILE_HEADER ) );
 			nNoPickOffset += sizeof( CsGBObject::sFILE_HEADER );
@@ -2447,6 +2495,7 @@ bool CsGBTerrainRoot::LoadExtraData( CsNiNodePtr pNiNode, const char* cFile )
 				}					
 			}
 		}
+		nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData nopick end count=%d offset=%u", nObjCount, nNoPickOffset );
 	}
 
 	//======================================================================================================
@@ -2457,10 +2506,23 @@ bool CsGBTerrainRoot::LoadExtraData( CsNiNodePtr pNiNode, const char* cFile )
 	pExtData = (NiBinaryExtraData*)pNiNode->GetExtraData( CsGBTR_PathExtraKey );
 	assert_cs( pExtData != NULL );	
 	pExtData->GetValue( uiSize, pData );
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData path raw size=%u", uiSize );
 
 	int nOffset = 0;
+#if defined(DMO_X64_WINDX9_BRIDGE)
+	const sDiskTRPathInfoWin32* pDiskPath = (const sDiskTRPathInfoWin32*)&pData[ nOffset ];
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData path disk32 groups=%u totalPE=%u dataTotal=%d",
+		(unsigned)pDiskPath->s_uiPEGroupCount, (unsigned)pDiskPath->s_uiTotalPECount, pDiskPath->s_nDataTotalCount );
+	m_TrPathInfo.s_PathInfo.Reset();
+	m_TrPathInfo.s_PathInfo.s_uiPEGroupCount = pDiskPath->s_uiPEGroupCount;
+	m_TrPathInfo.s_PathInfo.s_uiTotalPECount = pDiskPath->s_uiTotalPECount;
+	m_TrPathInfo.s_pType = NULL;
+	m_TrPathInfo.s_nDataTotalCount = pDiskPath->s_nDataTotalCount;
+	nOffset += sizeof(sDiskTRPathInfoWin32);
+#else
 	memcpy( &m_TrPathInfo, &pData[ nOffset ], sizeof( sTR_PATHINFO ) );
 	nOffset += sizeof( sTR_PATHINFO );
+#endif
 
 	UINT uiPEGroupCount = m_TrPathInfo.s_PathInfo.s_uiPEGroupCount;
 	m_TrPathInfo.s_pType = csnew char[ uiPEGroupCount ];
@@ -2472,13 +2534,17 @@ bool CsGBTerrainRoot::LoadExtraData( CsNiNodePtr pNiNode, const char* cFile )
 	memcpy( m_TrPathInfo.s_PathInfo.s_pptTranse, &pData[ nOffset ], sizeof( NiPoint2 )*uiPEGroupCount );
 	nOffset += sizeof( NiPoint2 )*uiPEGroupCount;
 	memcpy( m_TrPathInfo.s_PathInfo.s_pData, &pData[ nOffset ], sizeof( long )*m_TrPathInfo.s_nDataTotalCount );
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData path end groups=%u dataTotal=%d finalOffset=%d",
+		(unsigned)uiPEGroupCount, m_TrPathInfo.s_nDataTotalCount, nOffset + (int)( sizeof( long )*m_TrPathInfo.s_nDataTotalCount ) );
 
 	//======================================================================================================
 	//
 	//		스카이 박스
 	//
 	//======================================================================================================
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData SkyBox begin file=%s", cFile ? cFile : "<null>" );
 	m_SkyBox.LoadExtraData( pNiNode );		
+	nsCSDEBUG::CrashLogger::LogMessage( "TRROOT LoadExtraData detail end file=%s", cFile ? cFile : "<null>" );
 
 	return true;
 }

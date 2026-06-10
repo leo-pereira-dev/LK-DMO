@@ -73,9 +73,143 @@ void sCHAR_IMAGE::ResetDevice()
 
 float CCharOption::g_fNameScaleConstant = 1.0f;
 
+namespace
+{
+	bool IsNamePlateRange( DWORD nID, DWORD nBegin, DWORD nEnd )
+	{
+		return nID >= nBegin && nID <= nEnd;
+	}
+
+	const char* GetNamePlateTextureName( DWORD nID )
+	{
+		switch( nID )
+		{
+		case 39000: case 39004: case 39030: case 128419: case 141110: case 151043: case 1310332: case 1310362:
+			return "GoldClock1";
+		case 39001: case 39005: case 39031: case 128420: case 141111: case 151044: case 1310333: case 1310363:
+			return "Summer1";
+		case 39002: case 39006: case 39032: case 128421: case 141112: case 151045: case 155298: case 1310334: case 1310364:
+			return "Flex";
+		case 39003: case 39007: case 39033: case 128422: case 141113: case 151046: case 1310335: case 1310365:
+			return "Boss";
+		case 39008: case 39012: case 39034: case 128423: case 141114: case 151047: case 1310366:
+			return "MirrorBall";
+		case 39009: case 39013: case 39035: case 128424: case 141115: case 151048: case 1310367:
+			return "Moon";
+		case 39010: case 39014: case 39036: case 128425: case 141116: case 151049: case 1310368:
+			return "Sun";
+		case 39011: case 39015: case 39037: case 128426: case 141117: case 151050: case 1310336: case 1310369:
+			return "Angel";
+		case 39016: case 39018: case 39038: case 128427: case 141118: case 151051: case 1310337: case 1310370:
+			return "Blaze";
+		case 39017: case 39019: case 39039: case 128428: case 141119: case 151052: case 1310371:
+			return "Poop";
+		case 39020: case 39067: case 39114:
+			return "Lightning_1";
+		case 39021: case 39024: case 39040: case 128430: case 1310338: case 1310372:
+			return "Fox_Tail";
+		case 39026: case 39028: case 39041: case 1310373:
+			return "Halloween_1";
+		case 39027: case 39029: case 39042: case 1310374:
+			return "Halloween_2";
+		case 39043: case 39046: case 1310339: case 1310375:
+			return "Cristmas";
+		case 39044: case 39047: case 1310340: case 1310376:
+			return "Ice_Crystal";
+		case 39045: case 39048: case 155251: case 1310341: case 1310377:
+			return "Dark_Blaze";
+		case 39065: case 39066: case 39113:
+			return "solarsystem_1";
+		case 39068: case 39070: case 39109:
+			return "Hurricane_1";
+		case 39069: case 39071: case 39110:
+			return "Tornado_1";
+		case 39073: case 39075: case 39111:
+			return "windwave";
+		case 39074: case 39076: case 39112:
+			return "Butterfly";
+		case 39102: case 39104: case 39107:
+			return "Fireball";
+		case 39103: case 39105: case 39108:
+			return "FlowerShower";
+		case 152217:
+			return "Arena_Challenger";
+		case 152218:
+			return "Arena_master";
+		}
+
+		if( IsNamePlateRange( nID, 39290, 39309 ) ||
+			IsNamePlateRange( nID, 39311, 39330 ) ||
+			IsNamePlateRange( nID, 47336, 47355 ) ||
+			IsNamePlateRange( nID, 152753, 152772 ) ||
+			IsNamePlateRange( nID, 160386, 160425 ) ||
+			nID == 160637 ||
+			nID == 160639 )
+			return "Butter-fly_1";
+
+		if( nID == 39356 ||
+			nID == 39358 ||
+			nID == 39362 ||
+			IsNamePlateRange( nID, 180720, 180739 ) ||
+			IsNamePlateRange( nID, 180760, 180779 ) ||
+			IsNamePlateRange( nID, 180800, 180819 ) ||
+			IsNamePlateRange( nID, 180840, 180859 ) ||
+			IsNamePlateRange( nID, 180880, 180899 ) ||
+			IsNamePlateRange( nID, 181176, 181180 ) )
+			return "zeed";
+
+		if( nID == 39360 ||
+			IsNamePlateRange( nID, 180976, 180995 ) ||
+			IsNamePlateRange( nID, 181016, 181035 ) ||
+			IsNamePlateRange( nID, 181056, 181075 ) ||
+			IsNamePlateRange( nID, 181096, 181115 ) ||
+			IsNamePlateRange( nID, 181181, 181184 ) )
+			return "ShoutX7_1";
+
+		if( IsNamePlateRange( nID, 180503, 180522 ) ||
+			IsNamePlateRange( nID, 180543, 180562 ) ||
+			IsNamePlateRange( nID, 180583, 180602 ) ||
+			IsNamePlateRange( nID, 180623, 180642 ) ||
+			IsNamePlateRange( nID, 180663, 180682 ) ||
+			IsNamePlateRange( nID, 181171, 181175 ) )
+			return "Heaven";
+
+		return NULL;
+	}
+
+	bool AddItemIconBillboard( cText3D* pText, DWORD nID )
+	{
+		if( pText == NULL )
+			return false;
+
+		CsItem* pItem = nsCsFileTable::g_pItemMng->GetItem( nID );
+		if( pItem == NULL || pItem->GetInfo() == NULL || pItem->GetInfo()->s_nIcon == 0 )
+			return false;
+
+		DWORD dwTex = 0;
+		int nIconIdx = 0;
+		cIconMng::_IconIDToTexIndex( dwTex, nIconIdx, NULL, pItem->GetInfo()->s_nIcon );
+
+		char szIconPath[ MAX_PATH ] = { 0, };
+		sprintf_s( szIconPath, MAX_PATH, "Icon\\Icon%02u.dds", dwTex );
+
+		float const fUnit = 1.0f / 32.0f;
+		pText->AddBillBoard(
+			szIconPath,
+			NiPoint2( 0.0f, 0.0f ),
+			( nIconIdx % 32 ) * fUnit,
+			( ( nIconIdx % 32 ) + 1 ) * fUnit,
+			( nIconIdx / 32 ) * fUnit,
+			( ( nIconIdx / 32 ) + 1 ) * fUnit,
+			NiPoint2( 18.0f, 18.0f ) );
+
+		return true;
+	}
+}
+
 CCharOption::CCharOption():m_pTextName(NULL),m_pTextPenName(NULL)
 ,m_pAchieve(NULL),m_nAchieveID(0),m_pGuildName(NULL),m_pParent(NULL),m_dwPlag(0)
-,m_pIcon(NULL),m_pMatchIcon(NULL),m_nSkillCode(0),m_AchiveColor(FONT_GREEN)
+,m_pIcon(NULL),m_nIconID(0),m_pMatchIcon(NULL),m_nMatchIconID(0),m_pTamerIcon(NULL),m_nTamerIconID(0),m_nSkillCode(0),m_AchiveColor(FONT_GREEN)
 {
 	m_szName[ 0 ] = NULL;
 	m_szPenName[ 0 ] = NULL;
@@ -96,6 +230,7 @@ void CCharOption::Delete()
 	SAFE_NIDELETE( m_pAchieve );
 	SAFE_NIDELETE(m_pIcon);
 	SAFE_NIDELETE( m_pMatchIcon );
+	SAFE_NIDELETE( m_pTamerIcon );
 	m_pParent = NULL;
 	m_szName[ 0 ] = NULL;
 	m_szPenName[ 0 ] = NULL;
@@ -104,6 +239,9 @@ void CCharOption::Delete()
 	m_szGuildMarkName[ 0 ] = NULL;
 	m_dwPlag = 0;
 	m_nSkillCode = 0;
+	m_nIconID = 0;
+	m_nMatchIconID = 0;
+	m_nTamerIconID = 0;
 }
 
 void CCharOption::Init( CsC_AvObject* pParent, LPCTSTR szName )
@@ -239,6 +377,12 @@ void CCharOption::SetAlpha( float fAlpha )
 		m_pAchieve->SetAlpha( fAlpha );
 	if( m_pIcon )
 		m_pIcon->SetAlpha( fAlpha );
+
+	if( m_pMatchIcon )
+		m_pMatchIcon->SetAlpha( fAlpha );
+
+	if( m_pTamerIcon )
+		m_pTamerIcon->SetAlpha( fAlpha );
 }
 
 void CCharOption::RenderName()
@@ -275,11 +419,36 @@ void CCharOption::RenderName()
 	}
 
 	// 이름
+	NiPoint3 kTextPos = pos;
+	NiPoint3 kNamePlatePos = pos;
+	NiPoint3 kDepthDir = pos - CAMERA_ST.GetWorldTranslate();
+	if( kDepthDir.Unitize() > 0.001f )
+	{
+		kNamePlatePos += kDepthDir * 4.0f;
+		kTextPos -= kDepthDir * 4.0f;
+	}
+
+	if( m_pTamerIcon )
+	{
+		if( m_pTamerIcon->IsEnableTexture() )
+		{
+			m_pTamerIcon->Render( kNamePlatePos, 0, 0, fScale );
+		}
+		else
+		{
+			SetTamerIcon( m_nTamerIconID );
+		}
+	}
+	else if( m_nTamerIconID != 0 )
+	{
+		SetTamerIcon( m_nTamerIconID );
+	}
+
 	if( m_pTextName )
 	{
 		if( m_pTextName->IsEnableTexture() )
 		{
-			m_pTextName->Render( pos, 0, 0, fScale );			
+			m_pTextName->Render( kTextPos, 0, 0, fScale );
 		}
 		else
 		{
@@ -739,6 +908,47 @@ bool CCharOption::SetMatchIcon( DWORD nTeam/*0 = 팀없음, 1 = A팀, 2 = B팀*/
  		m_pMatchIcon->AddBillBoard( "Data/interface/MastersMatch/MastersMatch_TeamIcon.tga", NiPoint2( 0.0f , 0.0f ), ( nIconIdx % 5 ) / 5.0f, ( ( nIconIdx % 5 ) + 1 ) / 5.0f, 
  			( nIconIdx / 5 ) / 5.0f, ( ( nIconIdx / 5 ) + 1 ) / 5.0f, NiPoint2( 26, 26 ) );
 	}	
+
+	return true;
+}
+
+bool CCharOption::SetTamerIcon( DWORD nID )
+{
+	m_nTamerIconID = nID;
+	SAFE_NIDELETE( m_pTamerIcon );
+
+	if( m_nTamerIconID == 0 )
+		return true;
+
+	cText::sTEXTINFO ti;
+	ti.Init( &g_pEngine->m_FontSystem, CFont::FS_24, m_pParent->GetNameColor() );
+	ti.SetText( _T(" ") );
+	ti.s_bOutLine = false;
+	m_pTamerIcon = NiNew cText3D;
+	if( m_pTamerIcon->Init3D( &ti ) == false )
+	{
+		SAFE_NIDELETE( m_pTamerIcon );
+		return false;
+	}
+
+	bool bAddBillboard = false;
+	char const* pTextureName = GetNamePlateTextureName( m_nTamerIconID );
+	if( pTextureName != NULL )
+	{
+		char szNamePlatePath[ MAX_PATH ] = { 0, };
+		sprintf_s( szNamePlatePath, MAX_PATH, "Data\\interface\\NamePlate\\%s.tga", pTextureName );
+		m_pTamerIcon->AddBillBoard( szNamePlatePath, NiPoint2( 0.0f, 0.0f ), NiPoint2( 85.0f, 40.0f ) );
+		bAddBillboard = true;
+	}
+
+	if( bAddBillboard == false )
+		bAddBillboard = AddItemIconBillboard( m_pTamerIcon, m_nTamerIconID );
+
+	if( bAddBillboard == false )
+	{
+		SAFE_NIDELETE( m_pTamerIcon );
+		return false;
+	}
 
 	return true;
 }

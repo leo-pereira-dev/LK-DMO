@@ -22,7 +22,7 @@ namespace nLimit
 		ItemRank		=  255,	// item rank 최대값
 
 		SkillSlot		=    5,	// digivice 내에 장착 가능한 스킬아이템 슬롯 최대 갯수
-		Chipset			=   12, // digivice chipset slots
+		Chipset			=    8, // digivice normal chipset slots; jogress uses a separate slot
 		Digivice		=    1, // digivice 내의 디지바이스 아이템 슬롯
 
 		//Capsule		=    3,	// 클라이언트에서 사용
@@ -40,12 +40,12 @@ namespace nLimit
 		GiftShop		=	 7,	// 선물 또는 아이템 복구로 인해 테이머에게 제공되는 아이템 창고
 
 		EvoStep			=    Language::pCountry::EvoStep,	// 최대 5단계 진화(0~4), 5번째는 퇴화
-		EvoUnit			=   17,	// 최대 진화 개체수 20 가지를 넘지 않을듯, 0번째 배열 사용하지 아니함 // 테이블에 15개까지 존재 할수 있음
+		EvoUnit			=   18,	// 0 is unused; slots 1..17 are needed by newer GDMO evolutions.
 
 		Skill			=    5,	// maximum skill number, 디지몬,테이머가 소유할 수 있는 스킬의 최대 갯수
 		Quest			= 3072,	// maximum quest number, 128bytes == 1024bits
 //#ifdef QUEST_EXPAND
-		MaxQuestSetCount=	2,
+		MaxQuestSetCount=	3,
 //#else
 //		MaxQuestSetCount=	1,	// 퀘스트셋 최대 카운트(기존 1 + 확장 1) #define QUEST_EXPAND
 //#endif

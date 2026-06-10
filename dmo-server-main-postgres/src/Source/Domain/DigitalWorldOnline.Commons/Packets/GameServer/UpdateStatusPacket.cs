@@ -31,12 +31,12 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteShort(character.Partner.FS);
             WriteInt(partnerAttack);
             WriteInt(character.Partner.DE);
-            WriteShort(character.Partner.CC);
+            WriteUShort(character.Partner.CC);
             WriteFloat(character.Partner.AS / 1000f);
-            WriteShort(character.Partner.EV);
+            WriteUShort(character.Partner.EV);
             WriteInt(character.Partner.HT);
-            WriteShort(character.Partner.AR);
-            WriteShort(character.Partner.BL);
+            WriteUShort(character.Partner.AR);
+            WriteUShort(character.Partner.BL);
 
             WriteShort(character.Partner.Digiclone.CloneLevel);
             WriteShort(character.Partner.Digiclone.ATValue);
@@ -83,11 +83,19 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteInt(detailBL);
             WriteInt(detailEV);
 
-            Console.WriteLine(
-                $"[UpdateStatusPacket:Main] tamer={character.Id} tamerHP={character.HP} tamerDS={character.DS} tamerCurrHP={character.CurrentHp} tamerCurrDS={character.CurrentDs} tamerAT={character.AT} tamerDE={character.DE} tamerMS={character.MS} partner={character.Partner.Id} partnerName={character.Partner.Name} partnerHP={character.Partner.HP} partnerDS={character.Partner.DS} partnerCurrHP={character.Partner.CurrentHp} partnerCurrDS={character.Partner.CurrentDs} partnerAT={partnerAttack} partnerRawAT={partnerRawAttack} partnerDE={character.Partner.DE} partnerAS={character.Partner.AS} partnerCT={character.Partner.CC} partnerHT={character.Partner.HT} partnerAR={character.Partner.AR} partnerBL={character.Partner.BL} partnerEV={character.Partner.EV} fs={character.Partner.FS} fsLayout=int32");
-
-            Console.WriteLine(
-                $"[UpdateStatusPacket:DetailInfo] tamer={character.Id} partner={character.Partner.Id} detailHP={detailHP} detailDS={detailDS} detailAT={detailAT} detailAS={detailAS} detailCT={detailCT} detailHT={detailHT} detailSCD={detailSCD} detailCD={detailCD} detailSD={detailSD} detailBaseDamage={detailBaseDamage} detailDE={detailDE} detailBL={detailBL} detailEV={detailEV}");
+            if (character.Partner.CC >= short.MaxValue ||
+                character.Partner.EV >= short.MaxValue ||
+                character.Partner.AR >= short.MaxValue ||
+                character.Partner.BL >= short.MaxValue ||
+                detailCT > short.MaxValue ||
+                detailEV > short.MaxValue ||
+                detailBL > short.MaxValue)
+            {
+                Console.WriteLine(
+                    $"[UpdateStatusPacket:UnsignedStat] tamer={character.Id} partner={character.Partner.Id} partnerCT={character.Partner.CC} partnerEV={character.Partner.EV} partnerAR={character.Partner.AR} partnerBL={character.Partner.BL} detailCT={detailCT} detailEV={detailEV} detailBL={detailBL} shortMax={short.MaxValue} u2Max={ushort.MaxValue}");
+                Console.WriteLine(
+                    $"[UpdateStatusPacket:CTBreakdown] tamer={character.Id} tamerName={character.Name} partner={character.Partner.Id} partnerName={character.Partner.Name} {character.Partner.CriticalStatusDebugBreakdown()}");
+            }
 
             if (partnerRawAttack != partnerAttack || partnerAttack >= 100000 || detailAT >= 100000)
             {

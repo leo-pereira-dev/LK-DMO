@@ -1,0 +1,29 @@
+<div class="ranking-panel panel" id="ranking">
+    <div class="panel-heading">
+        <h2>Ranking de Tamers</h2>
+        <a href="#ranking">Ver ranking</a>
+    </div>
+
+    @foreach (var player in Ranking)
+    {
+        <div class="ranking-row">
+            <span class="rank-position @player.ClassName">@player.Position</span>
+            <span class="avatar">@player.Initials</span>
+            <strong>@player.Name</strong>
+            <small>Nivel @player.Level</small>
+        </div>
+    }
+</div>
+
+@code {
+    private static readonly RankingPlayer[] Ranking =
+    [
+        new("1", "ShoutmonX7", 140, "SX", "gold"),
+        new("2", "OmegamonZ", 139, "OZ", "silver"),
+        new("3", "AlphamonX", 138, "AX", "bronze"),
+        new("4", "DorumonX", 137, "DX", ""),
+        new("5", "Gallantmon", 136, "GM", "")
+    ];
+
+    private sealed record RankingPlayer(string Position, string Name, int Level, string Initials, string ClassName);
+}

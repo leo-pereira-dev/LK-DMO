@@ -6,6 +6,24 @@
 #include "../Adapt/AdaptTutorialQuest.h"
 #include "../Adapt/AdaptFriendShoutOut.h"
 #include <shellapi.h>
+#include "../../../LibProj/CsFunc/CrashLogger.h"
+
+namespace
+{
+	int ResolveTamerEquipSlotFromPacket( int nSlotNo )
+	{
+		if( nSlotNo < nItem::Head )
+			return nSlotNo;
+
+		switch( nSlotNo )
+		{
+		case nItem::Goggles:		return nTamer::Goggles;
+		case nItem::NamePlate:	return nTamer::NamePlate;
+		case nItem::Keyring:	return nTamer::Keyring;
+		default:				return nSlotNo - nItem::Head;
+		}
+	}
+}
 
 
 extern void spawn_browser(	const char *uri,	// URL
@@ -1865,6 +1883,18 @@ void NewCashshopContents::Recv_CashItemCrop(void* pData)
 	GS2C_RECV_CASHITEM_CROP* pRecv = static_cast<GS2C_RECV_CASHITEM_CROP*>(pData);	
 	cMessageBox::DelMsg( 14010, false );
 
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"ITEM_CASH_CROP_EVENT result=%u rtime=%u cashSlot=%u slotType=%u slotNo=%u item=%u count=%u rate=%u end=%u",
+		(unsigned)pRecv->m_nResult,
+		(unsigned)pRecv->m_nRTime,
+		(unsigned)pRecv->m_nCashWarehouseSlotNum,
+		(unsigned)pRecv->m_nSlotType,
+		(unsigned)pRecv->m_nSlotNo,
+		(unsigned)pRecv->m_nItemType,
+		(unsigned)pRecv->m_nItemCount,
+		(unsigned)pRecv->m_nItemRate,
+		(unsigned)pRecv->m_nItemEndTime );
+
 	switch( pRecv->m_nResult )
 	{
 	case nsCashShopResult::BILLING_RESULT_CROPCASHITEM_SUCCESS: // 아이템 정상 획득
@@ -1895,7 +1925,7 @@ void NewCashshopContents::Recv_CashItemCrop(void* pData)
 	}
 
 	cItemInfo data;
-	data.m_nType = pRecv->m_nItemType;
+	data.SetType( pRecv->m_nItemType );
 	data.m_nCount = pRecv->m_nItemCount;
 	data.m_nRate = pRecv->m_nItemRate;
 	data.m_nEndTime = pRecv->m_nItemEndTime;
@@ -1915,8 +1945,8 @@ void NewCashshopContents::Recv_CashItemCrop(void* pData)
 	case nItem::TabEquip:
 		{
 #pragma todo("29가 들어와서 임시 셋팅")
-			assert_csm1( pRecv->m_nSlotNo < nTamer::MaxParts, _T( "type > MaxParts, type = %d" ), pRecv->m_nSlotNo );
-			int nSlotNo = pRecv->m_nSlotNo > nTamer::MaxParts ? pRecv->m_nSlotNo - 21 : pRecv->m_nSlotNo;
+			int nSlotNo = ResolveTamerEquipSlotFromPacket( pRecv->m_nSlotNo );
+			assert_csm1( nSlotNo < nTamer::MaxParts, _T( "type > MaxParts, type = %d" ), nSlotNo );
 			g_pDataMng->GetTEquip()->SetData( nSlotNo, &data, true );
 		}
 		break;

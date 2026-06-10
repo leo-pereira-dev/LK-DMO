@@ -5,6 +5,7 @@ using DigitalWorldOnline.Application.Separar.Commands.Update;
 using DigitalWorldOnline.Application.Separar.Queries;
 using DigitalWorldOnline.Application.GameAssets.Queries;
 using DigitalWorldOnline.Commons.DTOs.Account;
+using DigitalWorldOnline.Commons.Constants;
 using DigitalWorldOnline.Commons.Entities;
 using DigitalWorldOnline.Commons.Enums.Account;
 using DigitalWorldOnline.Commons.Enums.Character;
@@ -16,6 +17,7 @@ using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.GameServer.Combat;
 using DigitalWorldOnline.Commons.Packets.Items;
 using DigitalWorldOnline.Commons.Packets.MapServer;
+using DigitalWorldOnline.Game.Configuration;
 using DigitalWorldOnline.Commons.Utils;
 using DigitalWorldOnline.Commons.Writers;
 using DigitalWorldOnline.Game.Managers;
@@ -46,6 +48,7 @@ namespace DigitalWorldOnline.Game
         private readonly ISender _sender;
         private readonly IConfiguration _configuration;
         private readonly OwnerStorageFlushService _ownerStorageFlushService;
+        private readonly AccessoryEnchantService _accessoryEnchantService;
 
         public GameMasterCommandsProcessor(
             PartyManager partyManager,
@@ -59,7 +62,8 @@ namespace DigitalWorldOnline.Game
             ILogger logger,
             ISender sender,
             IConfiguration configuration,
-            OwnerStorageFlushService ownerStorageFlushService)
+            OwnerStorageFlushService ownerStorageFlushService,
+            AccessoryEnchantService accessoryEnchantService)
         {
             _partyManager = partyManager;
             _expManager = expManager;
@@ -73,6 +77,7 @@ namespace DigitalWorldOnline.Game
             _sender = sender;
             _configuration = configuration;
             _ownerStorageFlushService = ownerStorageFlushService;
+            _accessoryEnchantService = accessoryEnchantService;
         }
 
         public async Task ExecuteCommand(GameClient client, string message)
@@ -82,7 +87,7 @@ namespace DigitalWorldOnline.Game
             if (command[0] == "summon" && command.Length > 2)
             {
                
-                // MantÃ©m o segundo elemento em sua forma original
+                // Mantém o segundo elemento em sua forma original
                 command[2] = message.Split(' ')[2];
             }
             _logger.Information($"Account {client.AccountId} {client.Tamer.Name} used !{message}.");
@@ -337,7 +342,7 @@ namespace DigitalWorldOnline.Game
 
                 case "channels":
                     {
-                        // Phase E Step 7 â€” live channel snapshot for the
+                        // Phase E Step 7 — live channel snapshot for the
                         // requesting GM's current map (default-map type only).
                         var mapId = client.Tamer.Location.MapId;
                         var summary = new System.Text.StringBuilder();
@@ -449,7 +454,7 @@ namespace DigitalWorldOnline.Game
                                                     client.Partner.Slot,
                                                     client.Partner.GeneralHandler);
 
-                                                if (client.Tamer.Level >= 120)
+                                                if (client.Tamer.Level >= LevelConstants.MaxLevel)
                                                 {
                                                     client.Send(new SystemMessagePacket($"Tamer already at max level."));
                                                     _logger.Information("GM tamer exp max ignored tamer={TamerId} reason=max-level level={Level}", client.TamerId, client.Tamer.Level);
@@ -520,7 +525,7 @@ namespace DigitalWorldOnline.Game
                                                     client.Partner.Slot,
                                                     client.Partner.GeneralHandler);
 
-                                                if (client.Tamer.Level >= 120)
+                                                if (client.Tamer.Level >= LevelConstants.MaxLevel)
                                                 {
                                                     client.Send(new SystemMessagePacket($"Tamer already at max level."));
                                                     _logger.Information("GM tamer exp add ignored tamer={TamerId} reason=max-level level={Level}", client.TamerId, client.Tamer.Level);
@@ -585,7 +590,7 @@ namespace DigitalWorldOnline.Game
                                                     .Where(x => x.Type == client.Tamer.Model)
                                                     .ToList();
 
-                                                if (tamerInfos == null || !tamerInfos.Any() || tamerInfos.Count != 120)
+                                                if (tamerInfos == null || !tamerInfos.Any() || tamerInfos.Count < LevelConstants.MaxLevel)
                                                 {
                                                     _logger.Warning($"Incomplete level config for tamer {client.Tamer.Model}.");
 
@@ -745,7 +750,7 @@ namespace DigitalWorldOnline.Game
                                                     client.Partner.Slot,
                                                     client.Partner.GeneralHandler);
 
-                                                if (client.Partner.Level == 120)
+                                                if (client.Partner.Level >= LevelConstants.MaxLevel)
                                                 {
                                                     client.Send(new SystemMessagePacket($"Partner already at max level."));
                                                     _logger.Information("GM digimon exp max ignored tamer={TamerId} partner={PartnerId}:{PartnerName} reason=max-level level={Level}", client.TamerId, client.Partner.Id, client.Partner.Name, client.Partner.Level);
@@ -818,7 +823,7 @@ namespace DigitalWorldOnline.Game
                                                     client.Partner.GeneralHandler,
                                                     command.Length > 3 ? command[3] : "");
 
-                                                if (client.Partner.Level == 120)
+                                                if (client.Partner.Level >= LevelConstants.MaxLevel)
                                                 {
                                                     client.Send(new SystemMessagePacket($"Partner already at max level."));
                                                     _logger.Information("GM digimon exp add ignored tamer={TamerId} partner={PartnerId}:{PartnerName} reason=max-level level={Level}", client.TamerId, client.Partner.Id, client.Partner.Name, client.Partner.Level);
@@ -886,7 +891,7 @@ namespace DigitalWorldOnline.Game
                                                     .Where(x => x.Type == client.Tamer.Partner.BaseType)
                                                     .ToList();
 
-                                                if (digimonInfos == null || !digimonInfos.Any() || digimonInfos.Count != 120)
+                                                if (digimonInfos == null || !digimonInfos.Any() || digimonInfos.Count < LevelConstants.MaxLevel)
                                                 {
                                                     _logger.Warning($"Incomplete level config for digimon {client.Tamer.Partner.BaseType}.");
 
@@ -1042,7 +1047,7 @@ namespace DigitalWorldOnline.Game
 
                         client.Send(new MapSwapPacket(
                             _configuration[GamerServerPublic],
-                            _configuration[GameServerPort],
+                            _configuration.GetPublicGameServerPort(),
                             client.Tamer.Location.MapId,
                             client.Tamer.Location.X,
                             client.Tamer.Location.Y)
@@ -1130,7 +1135,7 @@ namespace DigitalWorldOnline.Game
 
                         client.Send(new MapSwapPacket(
                             _configuration[GamerServerPublic],
-                            _configuration[GameServerPort],
+                            _configuration.GetPublicGameServerPort(),
                             client.Tamer.Location.MapId,
                             client.Tamer.Location.X,
                             client.Tamer.Location.Y));
@@ -1162,13 +1167,17 @@ namespace DigitalWorldOnline.Game
 
                         newItem.ItemId = itemId;
                         newItem.Amount = command.Length == 2 ? 1 : int.Parse(command[2]);
+                        _accessoryEnchantService.ApplyMaximumDefaultStats(newItem);
 
                         if (newItem.IsTemporary)
                             newItem.SetRemainingTime((uint)newItem.ItemInfo.UsageTimeMinutes);
 
                         if (client.Tamer.Inventory.AddItem(newItem))
                         {
-                            client.Send(new ReceiveItemPacket(newItem, InventoryTypeEnum.Inventory));
+                            client.Send(
+                                UtilitiesFunctions.GroupPackets(
+                                    new ReceiveItemPacket(newItem, InventoryTypeEnum.Inventory).Serialize(),
+                                    new LoadInventoryPacket(client.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()));
                             await _sender.Send(new UpdateItemsCommand(client.Tamer.Inventory));
                         }
                         else
@@ -1217,13 +1226,17 @@ namespace DigitalWorldOnline.Game
 
                         newItem.ItemId = itemId;
                         newItem.Amount = amount;
+                        _accessoryEnchantService.ApplyMaximumDefaultStats(newItem);
 
                         if (newItem.IsTemporary)
                             newItem.SetRemainingTime((uint)newItem.ItemInfo.UsageTimeMinutes);
 
                         if (targetClient.Tamer.Inventory.AddItem(newItem))
                         {
-                            targetClient.Send(new ReceiveItemPacket(newItem, InventoryTypeEnum.Inventory));
+                            targetClient.Send(
+                                UtilitiesFunctions.GroupPackets(
+                                    new ReceiveItemPacket(newItem, InventoryTypeEnum.Inventory).Serialize(),
+                                    new LoadInventoryPacket(targetClient.Tamer.Inventory, InventoryTypeEnum.Inventory).Serialize()));
                             await _sender.Send(new UpdateItemsCommand(targetClient.Tamer.Inventory));
 
                             client.Send(new SystemMessagePacket($"Sent item {itemId} x{amount} to {targetClient.Tamer.Name}."));
@@ -1570,7 +1583,7 @@ namespace DigitalWorldOnline.Game
 
                         client.Send(new MapSwapPacket(
                             _configuration[GamerServerPublic],
-                            _configuration[GameServerPort],
+                            _configuration.GetPublicGameServerPort(),
                             client.Tamer.Location.MapId,
                             client.Tamer.Location.X,
                             client.Tamer.Location.Y));
@@ -1609,7 +1622,7 @@ namespace DigitalWorldOnline.Game
 
                         client.Send(new MapSwapPacket(
                             _configuration[GamerServerPublic],
-                            _configuration[GameServerPort],
+                            _configuration.GetPublicGameServerPort(),
                             client.Tamer.Location.MapId,
                             client.Tamer.Location.X,
                             client.Tamer.Location.Y));
@@ -1752,7 +1765,7 @@ namespace DigitalWorldOnline.Game
                                     client.SetGameQuit(false);
                                     client.Send(new MapSwapPacket(
                                         _configuration[GamerServerPublic],
-                                        _configuration[GameServerPort],
+                                        _configuration.GetPublicGameServerPort(),
                                         client.Tamer.Location.MapId,
                                         client.Tamer.Location.X,
                                         client.Tamer.Location.Y));

@@ -110,7 +110,7 @@ private:
 private:
 	void					_TutorialEvent_Initialize( void* pData );		// 튜토리얼용 데이터 초기화
 	void					_TutorialEvent_ClearData();
-	void					_TutorialEvent_PlayVideo( std::wstring const& wsPath );
+	bool					_TutorialEvent_PlayVideo( std::wstring const& wsPath );
 	void					_TutorialEvent_Skip( void* pData );
 
 	void					_CheckAndOpenDoor(void* pData);

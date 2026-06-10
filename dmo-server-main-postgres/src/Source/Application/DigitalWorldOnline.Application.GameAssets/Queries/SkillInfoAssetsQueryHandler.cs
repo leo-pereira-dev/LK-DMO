@@ -53,7 +53,7 @@ namespace DigitalWorldOnline.Application.GameAssets.Queries
                 {
                     Id = rec.Id,
                     SkillId = rec.Id,
-                    Name = string.Empty,
+                    Name = rec.Name,
                     FamilyType = (byte)rec.FamilyType,
                     DSUsage = rec.UseDS,
                     HPUsage = rec.UseHP,
@@ -78,7 +78,7 @@ namespace DigitalWorldOnline.Application.GameAssets.Queries
                     MemorySkill = (byte)Math.Min((int)rec.MemorySkill, byte.MaxValue),
                     SkillGroup = rec.SkillGroup,
                     SkillRank = rec.SkillRank,
-                    Description = string.Empty
+                    Description = rec.Comment
                 });
             }
             return Task.FromResult(list);

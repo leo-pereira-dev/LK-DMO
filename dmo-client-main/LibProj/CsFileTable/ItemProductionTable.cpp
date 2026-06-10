@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "ItemMng.h"
+#include "../CsFunc/CrashLogger.h"
 
 #define IL_COL_NPC_IDX					0
 #define IL_COL_UNIQUE_ID				1
@@ -428,11 +429,15 @@ void CsItemMng::_LoadBin_ItemProductionTable( FILE* fp )
 void CsItemMng::_LoadFilePack_ItemProductionTable( int nHandle )
 {
 	int nCount;
+	long nStartOffset = _tell( nHandle );
 	CmUtil::CmPackRead::Read_Value( nHandle, &nCount );
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST Craft table npcCount=%d offset=%ld", nCount, nStartOffset );
 	for( int i=0; i<nCount; ++i )
 	{
 		DWORD dwNpcIdx = 0;
 		CmUtil::CmPackRead::Read_Value( nHandle, &dwNpcIdx );
+		if( i < 5 || i + 5 >= nCount || ( i % 25 ) == 0 )
+			nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST Craft npc progress index=%d npc=%u offset=%ld", i, (unsigned int)dwNpcIdx, _tell( nHandle ) );
 		if( 0 == dwNpcIdx )
 			continue;
 
@@ -447,6 +452,7 @@ void CsItemMng::_LoadFilePack_ItemProductionTable( int nHandle )
 
 		it->second._LoadFilePack( nHandle );
 	}
+	nsCSDEBUG::CrashLogger::LogMessage( "ITEMLIST Craft table end npcCount=%d offset=%ld", nCount, _tell( nHandle ) );
 }
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////

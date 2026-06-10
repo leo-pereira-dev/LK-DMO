@@ -19,7 +19,6 @@ void cTooltip::_MakeTooltip_Item(bool compare)
 	cString* pString;
 	TCHAR sz[ TOOLTIP_MAX_TEXT_LEN ];
 
-
 	//=================================================================================================================
 	//
 	//		타이틀
@@ -68,19 +67,37 @@ void cTooltip::_MakeTooltip_Item(bool compare)
 
 		if( pFTAcc->IsAccessory() )//악세서리 일 때
 		{
-			std::wstring wsText;
-			DmCS::StringFn::Format( wsText, L"%s - %s", UISTRING_TEXT( "COMMON_TXT_ACCESSORY" ).c_str(), UISTRING_TEXT( "COMMON_TXT_DIGITARY_POWER" ).c_str() );
-			ti.SetText( wsText.c_str() );
+			if( pFTAcc->s_nType_L == nItem::Digivice )
+			{
+				SAFE_NIDELETE( pString );
+				pString = NULL;
+			}
+			else
+			{
+				std::wstring wsText;
+				std::wstring wsDigitalPowerText = UISTRING_TEXT( "COMMON_TXT_DIGITARY_POWER" );
+				if( wsDigitalPowerText == L"Digitary Power" )
+					wsDigitalPowerText = L"Digital Power";
+				DmCS::StringFn::Format( wsText, L"%s - %s", UISTRING_TEXT( "COMMON_TXT_ACCESSORY" ).c_str(), wsDigitalPowerText.c_str() );
+				ti.SetText( wsText.c_str() );
+			}
 		}
 		else
-			ti.SetText( UISTRING_TEXT( "TOOLTIP_ITEM_TEST_ATTRIBUTE" ).c_str() );
-		pString->AddText( &ti );
+		{
+			SAFE_NIDELETE( pString );
+			pString = NULL;
+		}
 
-		_stprintf_s( sz, TOOLTIP_MAX_TEXT_LEN, _T( "%d%%" ), ( (cItemInfo*)m_pData )->GetSocketRate() );
-		ti.SetText( sz );
-		pString->AddText( &ti );
+		if( pString != NULL )
+		{
+			pString->AddText( &ti );
 
-		m_StringList.AddTail( pString );
+			_stprintf_s( sz, TOOLTIP_MAX_TEXT_LEN, _T( "%d%%" ), ( (cItemInfo*)m_pData )->GetSocketRate() );
+			ti.SetText( sz );
+			pString->AddText( &ti );
+
+			m_StringList.AddTail( pString );
+		}
 	}
 
 	pString = NiNew cString;
@@ -113,7 +130,10 @@ void cTooltip::_MakeTooltip_Item(bool compare)
 			ti.s_eFontSize = CFont::FS_14;
 			ti.s_Color = FONT_WHITE;
 
-			ti.SetText( UISTRING_TEXT( "COMMON_TXT_DIGITARY_POWER" ).c_str() );
+			std::wstring wsDigitalPowerText = UISTRING_TEXT( "COMMON_TXT_DIGITARY_POWER" );
+			if( wsDigitalPowerText == L"Digitary Power" )
+				wsDigitalPowerText = L"Digital Power";
+			ti.SetText( wsDigitalPowerText.c_str() );
 			//디지터리 수치
 			int nRate = ( (cItemInfo*)m_pData )->GetSocketRate();
 			if( nRate < 100 )
@@ -437,6 +457,9 @@ void cTooltip::_MakeTooltip_Item(bool compare)
 	case nItem::Shoes:
 	case nItem::Costume:
 	case nItem::Glass:
+	case nItem::Goggles:
+	case nItem::NamePlate:
+	case nItem::Keyring:
 	case nItem::Earring:
 	case nItem::Necklace:
 	case nItem::Ring:
@@ -612,6 +635,24 @@ void cTooltip::_MakeTooltip_Item(bool compare)
 	}
 
 	// 제한퀘스트
+	if( m_pData && cItemInfo::GetTamerEquipmentUpgradeSkillID( pFTInfo->s_dwItemID, 1 ) != 0 )
+	{
+		cItemInfo* pInfo = (cItemInfo*)m_pData;
+
+		pString = NiNew cString;
+		ti.s_eFontSize = TOOLTIP_FONT_1_SIZE;
+		ti.s_Color = FONT_GOLD;
+		ti.SetText( _T( "Enchant Stage" ) );
+		pString->AddText( &ti )->s_ptSize.x = TOOLTIP_TAB_SIZE * 3;
+
+		ti.s_eFontSize = TOOLTIP_FONT_1_SIZE;
+		ti.s_Color = FONT_WHITE;
+		_stprintf_s( sz, TOOLTIP_MAX_TEXT_LEN, _T( "%d Stage" ), pInfo->m_nLevel );
+		ti.SetText( sz );
+		pString->AddText( &ti );
+		m_StringList.AddTail( pString );
+	}
+
 	if( pFTInfo->s_nQuestRequire )
 	{
 		bool bLimit = true;
@@ -934,7 +975,7 @@ void cTooltip::_MakeTooltip_Item(bool compare)
 		pFTInfo->GetTamerReqLv( nTamerLimitLevel_Min, nTamerLimitLevel_Max );
 		pFTInfo->GetDigimonReqLv( nDigimonLimitLevel_Min, nDigimonLimitLevel_Max );
 		bEnableTamerLv = pFTInfo->IsEnableTamerLv(nTLv);
-		bEnableDigimonLv = pFTInfo->IsEnableTamerLv(nDLv);
+		bEnableDigimonLv = pFTInfo->IsEnableDigimonLv(nDLv);
 
 		bool bEnableLevel = ( bEnableTamerLv && bEnableDigimonLv ) ? true : false;
 		if( 1 < nTamerLimitLevel_Min || 1 < nTamerLimitLevel_Max )
@@ -1160,6 +1201,9 @@ void cTooltip::_MakeTooltip_Item(bool compare)
 	case nItem::Pants:			
 	case nItem::Shoes:
 	case nItem::Glass:
+	case nItem::Goggles:
+	case nItem::NamePlate:
+	case nItem::Keyring:
 	case nItem::EquipAura: //오라 추가 chu8820
 		{
 			if( pFTInfo->s_nSocketCount > 0 )
@@ -1241,6 +1285,11 @@ void cTooltip::_MakeTooltip_Item(bool compare)
 		break;
 	}
 
+	if( g_pStringAnalysis && g_pStringAnalysis->IsSetBonusTooltipItem( pFTInfo->s_dwItemID ) )
+	{
+		_AddLine( true );
+		g_pStringAnalysis->ItemSetBonus_Parcing( &m_StringList, pFTInfo->s_dwItemID );
+	}
 
 	//=================================================================================================================
 	//

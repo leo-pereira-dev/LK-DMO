@@ -1,6 +1,8 @@
 #pragma once 
 #include "MakeTacticsContents.h"
 
+class cSpriteAni;
+
 #define IF_MAKE_TACTICS_REQUITE_LEVEL			3
 #define IF_DIGITAMA_MAKE_TACTICS_ITEM_TYPE		93
 
@@ -129,6 +131,7 @@ protected:
 
 	sBAR					m_CurBar;
 	cRenderTex*				m_pRenderTex;
+	cSpriteAni*				m_pTutorialArrow;
 
 protected:
 	void					PressBackupDiskBtn( void* pSender, void* pData );	//2017-04-11-nova
@@ -162,6 +165,9 @@ private:
 	n4						GetNpcID() const;
 	void					SendMiniGameCheck();	// 2016.03.22	(eiless84) 이성진
 	void					_RefreshGradeString();	// 버튼 ID에 따라 하급~고급 버튼 string 반환
+
+	void					_MoveTutorialEggToFirstSlot();
+	void					_RenderTutorialArrow();
 
 protected:
 	bool					m_bPortable;	

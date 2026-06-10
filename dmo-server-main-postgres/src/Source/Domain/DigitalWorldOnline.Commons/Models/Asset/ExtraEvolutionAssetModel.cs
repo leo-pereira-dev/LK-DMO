@@ -8,6 +8,8 @@
 
         public byte RequiredLevel { get; set; }
 
+        public ushort WayType { get; set; }
+
         public long Price { get; set; }
 
         public List<ExtraEvolutionMaterialAssetModel> Materials { get; set; }

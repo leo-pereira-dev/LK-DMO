@@ -140,7 +140,11 @@ CsMapNpc* CsMapNpcMng::GetNpc( DWORD dwNpcID )
 
 CsMapNpc* CsMapNpcMng::AddNpc( CsMapNpc::sINFO* pInfo )
 {
-	assert_csm1( IsNpc( pInfo->s_dwNpcID ) == false, _T( "이미 NPC가 존재합!! Npc = %d" ), pInfo->s_dwNpcID );
+	if( pInfo == NULL || pInfo->s_dwNpcID == 0 || pInfo->s_dwMapID == 0 )
+		return NULL;
+
+	if( IsNpc( pInfo->s_dwNpcID ) == true )
+		return GetNpc( pInfo->s_dwNpcID );
 
 	// 그룹이 존재 하지 않는다면 새로 생성
 	if( m_mapMapNpcGroup.find( pInfo->s_dwMapID ) == m_mapMapNpcGroup.end() )
@@ -242,12 +246,17 @@ bool CsMapNpcMng::_LoadBin( char* cPath )
 	}
 
 	int nCount;
-	fread( &nCount, sizeof( int ), 1, fp );
+	if( fread( &nCount, sizeof( int ), 1, fp ) != 1 || nCount < 0 )
+	{
+		fclose( fp );
+		return false;
+	}
 
 	CsMapNpc::sINFO info;
 	for( int i=0; i<nCount; ++i )
 	{
-		fread( &info, sizeof( CsMapNpc::sINFO ), 1, fp );
+		if( fread( &info, sizeof( CsMapNpc::sINFO ), 1, fp ) != 1 )
+			break;
 		AddNpc( &info );
 	}
 
@@ -266,12 +275,17 @@ void CsMapNpcMng::_LoadFilePack( char* cPath )
 	int nHandle = CsFPS::CsFPSystem::GetFileHandle( FT_PACKHANDLE, cName );
 
 	int nCount;
-	_read( nHandle, &nCount, sizeof( int ) );
+	if( _read( nHandle, &nCount, sizeof( int ) ) != sizeof( int ) || nCount < 0 )
+	{
+		CsFPS::CsFPSystem::SeekUnLock( FT_PACKHANDLE );
+		return;
+	}
 
 	CsMapNpc::sINFO info;
 	for( int i=0; i<nCount; ++i )
 	{
-		_read( nHandle, &info, sizeof( CsMapNpc::sINFO ) );
+		if( _read( nHandle, &info, sizeof( CsMapNpc::sINFO ) ) != sizeof( CsMapNpc::sINFO ) )
+			break;
 		AddNpc( &info );
 	}
 

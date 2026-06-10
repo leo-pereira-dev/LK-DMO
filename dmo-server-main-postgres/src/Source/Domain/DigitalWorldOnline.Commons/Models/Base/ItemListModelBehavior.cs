@@ -161,6 +161,46 @@ namespace DigitalWorldOnline.Commons.Models.Base
             return true;
         }
 
+        public bool RemoveOrReduceItemsByItemIds(IReadOnlyCollection<int> itemIds, int totalAmount)
+        {
+            if (itemIds == null || itemIds.Count == 0 || totalAmount <= 0)
+                return false;
+
+            var backup = BackupOperation();
+            var targetAmount = totalAmount;
+            var itemIdSet = itemIds.ToHashSet();
+            var targetItems = Items
+                .Where(x => x.Amount > 0 && itemIdSet.Contains(x.ItemId))
+                .OrderBy(x => x.Slot)
+                .ToList();
+
+            foreach (var targetItem in targetItems)
+            {
+                if (targetItem.Amount >= targetAmount)
+                {
+                    targetItem.ReduceAmount(targetAmount);
+                    targetAmount = 0;
+                }
+                else
+                {
+                    targetAmount -= targetItem.Amount;
+                    targetItem.SetAmount();
+                }
+
+                if (targetAmount == 0)
+                    break;
+            }
+
+            if (targetAmount > 0)
+            {
+                RevertOperation(backup);
+                return false;
+            }
+
+            CheckEmptyItems();
+            return true;
+        }
+
         public List<ItemModel> FindItemsBySection(int itemSection)
         {
             return Items
@@ -514,7 +554,7 @@ namespace DigitalWorldOnline.Commons.Models.Base
         {
             var targetItems = FindItemsById(itemToAdd.ItemId);
 
-            foreach (var targetItem in targetItems.Where(x => x.ItemInfo.Overlap > 1))
+            foreach (var targetItem in targetItems.Where(x => x.ItemInfo.Overlap > 1 && CanStackWithSameInstanceData(itemToAdd, x)))
             {
                 if (targetItem.Amount + itemToAdd.Amount > itemToAdd.ItemInfo.Overlap)
                 {
@@ -529,6 +569,52 @@ namespace DigitalWorldOnline.Commons.Models.Base
 
                 itemToAdd.Slot = targetItem.Slot;
             }
+        }
+
+        private static bool CanStackWithSameInstanceData(ItemModel source, ItemModel target)
+        {
+            if (source.Power != target.Power ||
+                source.RerollLeft != target.RerollLeft ||
+                source.FamilyType != target.FamilyType ||
+                source.Duration != target.Duration ||
+                source.EndDate != target.EndDate ||
+                source.FirstExpired != target.FirstExpired)
+            {
+                return false;
+            }
+
+            var sourceAccessory = source.AccessoryStatus.OrderBy(x => x.Slot).ToList();
+            var targetAccessory = target.AccessoryStatus.OrderBy(x => x.Slot).ToList();
+            if (sourceAccessory.Count != targetAccessory.Count)
+                return false;
+
+            for (var i = 0; i < sourceAccessory.Count; i++)
+            {
+                if (sourceAccessory[i].Slot != targetAccessory[i].Slot ||
+                    sourceAccessory[i].Type != targetAccessory[i].Type ||
+                    sourceAccessory[i].Value != targetAccessory[i].Value)
+                {
+                    return false;
+                }
+            }
+
+            var sourceSocket = source.SocketStatus.OrderBy(x => x.Slot).ToList();
+            var targetSocket = target.SocketStatus.OrderBy(x => x.Slot).ToList();
+            if (sourceSocket.Count != targetSocket.Count)
+                return false;
+
+            for (var i = 0; i < sourceSocket.Count; i++)
+            {
+                if (sourceSocket[i].Slot != targetSocket[i].Slot ||
+                    sourceSocket[i].Type != targetSocket[i].Type ||
+                    sourceSocket[i].AttributeId != targetSocket[i].AttributeId ||
+                    sourceSocket[i].Value != targetSocket[i].Value)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void FillExistentSlot(ItemModel itemToAdd, int targetSlot)
@@ -776,7 +862,15 @@ namespace DigitalWorldOnline.Commons.Models.Base
             var backup = BackupOperation();
 
             var targetItem = FindItemBySlot(slot);
-            targetItem?.ReduceAmount(itemToRemove.Amount);
+            if (targetItem == null ||
+                targetItem.ItemId != itemToRemove.ItemId ||
+                targetItem.Amount < itemToRemove.Amount)
+            {
+                RevertOperation(backup);
+                return false;
+            }
+
+            targetItem.ReduceAmount(itemToRemove.Amount);
             itemToRemove.SetAmount();
 
             if (itemToRemove.Amount > 0)

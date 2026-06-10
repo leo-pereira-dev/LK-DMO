@@ -1,0 +1,81 @@
+@page "/login"
+@inject AccountApiClient AccountApi
+
+<PageTitle>Entrar | LKDMO Tamers</PageTitle>
+
+<div class="site-shell">
+    <SiteHeader />
+
+    <main class="auth-page">
+        <img class="auth-art" src="assets/img/banner.png" alt="" aria-hidden="true" />
+        <div class="auth-overlay" aria-hidden="true"></div>
+
+        <section class="auth-shell">
+            <div class="auth-copy">
+                <p class="eyebrow">Area do Tamer</p>
+                <h1>Entre na sua conta.</h1>
+                <p>Acesse sua conta do servidor para acompanhar novidades, recompensas e sua jornada no Digital World.</p>
+            </div>
+
+            <div class="auth-card">
+                <div class="auth-tabs" role="tablist" aria-label="Conta">
+                    <a class="active" href="/login">Entrar</a>
+                    <a href="/register">Registrar</a>
+                </div>
+
+                <EditForm Model="@loginModel" OnValidSubmit="@SubmitLogin">
+                    <DataAnnotationsValidator />
+                    <div class="form-field">
+                        <label for="login-user">Usuario</label>
+                        <InputText id="login-user" @bind-Value="loginModel.Username" autocomplete="username" />
+                        <ValidationMessage For="@(() => loginModel.Username)" />
+                    </div>
+                    <div class="form-field">
+                        <label for="login-pass">Senha</label>
+                        <InputText id="login-pass" type="password" @bind-Value="loginModel.Password" autocomplete="current-password" />
+                        <ValidationMessage For="@(() => loginModel.Password)" />
+                    </div>
+                    <button class="form-submit" type="submit" disabled="@loginBusy">@GetButtonText(loginBusy, "Entrar")</button>
+                </EditForm>
+
+                @if (!string.IsNullOrWhiteSpace(statusMessage))
+                {
+                    <div class="form-status @(statusSuccess ? "success" : "error")" role="status">@statusMessage</div>
+                }
+            </div>
+        </section>
+    </main>
+</div>
+
+@code {
+    private readonly LoginFormModel loginModel = new();
+    private string? statusMessage;
+    private bool statusSuccess;
+    private bool loginBusy;
+
+    private static string GetButtonText(bool busy, string text) => busy ? "Aguarde..." : text;
+
+    private async Task SubmitLogin()
+    {
+        loginBusy = true;
+        statusMessage = null;
+
+        try
+        {
+            var result = await AccountApi.LoginAsync(loginModel.Username, loginModel.Password);
+            statusSuccess = result.Success;
+            statusMessage = result.Success
+                ? $"Bem-vindo, {result.Username}. Acesso: {result.AccessLevel}."
+                : result.Message;
+        }
+        catch (Exception ex)
+        {
+            statusSuccess = false;
+            statusMessage = $"Falha ao conectar na API: {ex.Message}";
+        }
+        finally
+        {
+            loginBusy = false;
+        }
+    }
+}

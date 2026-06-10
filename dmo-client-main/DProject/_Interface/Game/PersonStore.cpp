@@ -241,7 +241,7 @@ cBaseWindow::eMU_TYPE cPersonStore::Update_ForMouse()
 		PersonStoreContents::sSellInfo* pInfo = GetSystem()->GetSellInfo( pSellInfo->nSellInfoIndex );
 		SAFE_POINTER_RETVAL( pSellInfo, muReturn );
 
- 		pToolTip->SetTooltip( pOverItem->GetWorldPos(), CsPoint( 226, 44 ), TOOLTIP_MAX_SIZE, cTooltip::ITEM, pInfo->ItemData.m_nType, cBaseWindow::WT_PERSONSTORE, cTooltip::OPEN_SLOT, 0, &pInfo->ItemData );
+ 		pToolTip->SetTooltip( pOverItem->GetWorldPos(), CsPoint( 226, 44 ), TOOLTIP_MAX_SIZE, cTooltip::ITEM, pInfo->ItemData.GetType(), cBaseWindow::WT_PERSONSTORE, cTooltip::OPEN_SLOT, 0, &pInfo->ItemData );
 		return muReturn;
 	}
 
@@ -576,7 +576,7 @@ void cPersonStore::AddListItem(int nIndex, u8 const& uPrice, cItemData const& It
 	if( pStrButton )
 		pStrButton->SetAutoPointerDelete( true );
 
-	int nItemType = ItemData.m_nType;	
+	int nItemType = ItemData.GetType();	
 	
 	// ¾ÆÀÌÅÛ ¾ÆÀÌÄÜ
 	cString::sICON* pAddCon = pControl->AddIcon( IF_PERSONSTORE_ICON_SIZE, ICONITEM::ITEM_ICON, nItemType, 1, CsPoint::ZERO );

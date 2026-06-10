@@ -1,0 +1,21 @@
+<IfModule mod_mime.c>
+  AddType application/wasm .wasm
+  AddType application/octet-stream .dll
+  AddType application/octet-stream .dat
+  AddEncoding br .br
+  AddEncoding gzip .gz
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header unset Content-Security-Policy
+  Header always unset Content-Security-Policy
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^api/(.*)$ api/index.php [QSA,L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>

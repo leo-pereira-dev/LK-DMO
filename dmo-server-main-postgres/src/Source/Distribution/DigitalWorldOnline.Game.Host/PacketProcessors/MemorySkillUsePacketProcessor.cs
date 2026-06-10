@@ -146,7 +146,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             {
                 targetMob = client.DungeonMap
                     ? _dungeonServer.GetMobByHandler(mapId, targetHandler, client.TamerId)
-                    : _mapServer.GetMobByHandler(mapId, targetHandler);
+                    : _mapServer.GetMobByHandler(mapId, targetHandler, client.TamerId);
 
                 if (targetMob == null)
                 {
@@ -289,10 +289,15 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
                 if (rawBuff != null)
                 {
-                    // Memory skills don't carry an explicit duration in the bin; use the
-                    // DMO convention of 30 minutes (1800 s).  Stack policy: if an instance
-                    // with the same skill is already active, remove + re-add to refresh.
-                    const int MemorySkillBuffDurationSeconds = 1800;
+                    // Memory-skill buff duration comes from Skill.bin
+                    // CsSkill::sINFO::s_fDamageTime, exposed as EffectDuration.
+                    // Keep a one-minute fallback for malformed/zero rows. Stack policy:
+                    // if an instance with the same skill is already active, remove +
+                    // re-add to refresh.
+                    const int DefaultMemorySkillBuffDurationSeconds = 60;
+                    var memorySkillBuffDurationSeconds = skillInfo.EffectDuration > 0
+                        ? skillInfo.EffectDuration
+                        : DefaultMemorySkillBuffDurationSeconds;
 
                     var existing = client.Partner.BuffList.ActiveBuffs.FirstOrDefault(x => x.SkillId == skillCode);
                     if (existing != null)
@@ -310,7 +315,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                         buffId:   (int)rawBuff.Id,
                         skillId:  skillCode,
                         TypeN:    0,
-                        duration: MemorySkillBuffDurationSeconds,
+                        duration: memorySkillBuffDurationSeconds,
                         Cooldown: 0);
                     client.Partner.BuffList.Add(newBuff);
 
@@ -326,8 +331,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                     // nlib).  So we send the raw duration in seconds, NOT a Unix-epoch
                     // timestamp.  UtilitiesFunctions.RemainingTimeSeconds(N) would have
                     // returned ~1.747e9 (Unix epoch+N), which the client then displayed
-                    // as ~20,231 days.  Sending N directly displays as N seconds → "30 M".
-                    var dur = MemorySkillBuffDurationSeconds;
+                    // as ~20,231 days.  Sending N directly displays as N seconds.
+                    var dur = memorySkillBuffDurationSeconds;
                     var addBuffPacket = new AddBuffPacket(partnerHandler, (int)rawBuff.Id, skillCode, (short)0, dur).Serialize();
                     if (client.DungeonMap)
                         _dungeonServer.BroadcastForTamerViewsAndSelf(client.TamerId, addBuffPacket);

@@ -5,6 +5,10 @@ namespace DigitalWorldOnline.Application.Separar.Queries
 {
     internal static class MobDropRewardBinder
     {
+        private const int SafeMercenaryDigiEggMinItemId = 7001;
+        private const int SafeMercenaryDigiEggMaxItemId = 8080;
+        private const int MercenaryDigiEggItemIdOffset = 93000;
+
         public static Dictionary<int, List<MobConfigDTO>> BuildLookup(
             IEnumerable<MobConfigDTO> dropMobs,
             int mapId)
@@ -116,12 +120,20 @@ namespace DigitalWorldOnline.Application.Separar.Queries
             {
                 Id = source.Id,
                 DropRewardId = source.DropRewardId,
-                ItemId = source.ItemId,
+                ItemId = NormalizeDropItemId(source.ItemId),
                 MinAmount = minAmount,
                 MaxAmount = maxAmount,
                 Chance = source.Chance,
                 Rank = source.Rank
             };
+        }
+
+        private static int NormalizeDropItemId(int itemId)
+        {
+            if (itemId >= SafeMercenaryDigiEggMinItemId && itemId <= SafeMercenaryDigiEggMaxItemId)
+                return itemId + MercenaryDigiEggItemIdOffset;
+
+            return itemId;
         }
 
         private static BitsDropConfigDTO CloneBitsDrop(BitsDropConfigDTO? source)

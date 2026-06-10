@@ -1017,6 +1017,15 @@ void cCliGame::_RecvSkillApplyAround_ExistHitter()
 			}
 		}
 	}
+	if( pHitter && ( pHitter->GetLeafRTTI() == RTTI_TUTORIAL_MONSTER || pHitter->GetLeafRTTI() == RTTI_MONSTER ) )
+	{
+		CsMonsterSkill::sINFO* pSkillInfo = nsCsFileTable::g_pMonsterMng->GetMonsterSkill( nSkillArrIDX );
+		if( pSkillInfo )
+		{
+			SetSkillInfo2( &hitter, &target, false, nTargetUID, (int)pSkillInfo->s_nValocity, (int)pSkillInfo->s_nAccel );
+			return;
+		}
+	}
 	SetSkillInfo( &hitter, &target, false );
 }
 

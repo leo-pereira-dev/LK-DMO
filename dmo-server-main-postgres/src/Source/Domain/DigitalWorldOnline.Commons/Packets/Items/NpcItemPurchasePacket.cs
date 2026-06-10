@@ -16,7 +16,6 @@ namespace DigitalWorldOnline.Commons.Packets.Items
             Type(PacketNumber);
             WriteInt64(currentBits);
             WriteByte(0);
-            WriteByte(0);
         }
         
         public NpcItemPurchasePacket(long currentBits, ItemModel purchasedItem)

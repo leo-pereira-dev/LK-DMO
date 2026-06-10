@@ -191,9 +191,9 @@ void cMoneySeparate::Init( cBaseWindow::eWINDOW_TYPE wt, int nWTValue1,  sMONEY 
 
 #pragma warning( disable : 4311 )
 #pragma warning( disable : 4312 )
-	EditProc_MoneySeparate=(WNDPROC)SetWindowLong(m_hEditTera,GWL_WNDPROC,(LONG)EditSubProc_MoneySeparate);
-	EditProc_MoneySeparate=(WNDPROC)SetWindowLong(m_hEditMega,GWL_WNDPROC,(LONG)EditSubProc_MoneySeparate);
-	EditProc_MoneySeparate=(WNDPROC)SetWindowLong(m_hEditBit,GWL_WNDPROC,(LONG)EditSubProc_MoneySeparate);
+	EditProc_MoneySeparate=(WNDPROC)SetWindowLongPtr(m_hEditTera,GWLP_WNDPROC,(LONG_PTR)EditSubProc_MoneySeparate);
+	EditProc_MoneySeparate=(WNDPROC)SetWindowLongPtr(m_hEditMega,GWLP_WNDPROC,(LONG_PTR)EditSubProc_MoneySeparate);
+	EditProc_MoneySeparate=(WNDPROC)SetWindowLongPtr(m_hEditBit,GWLP_WNDPROC,(LONG_PTR)EditSubProc_MoneySeparate);
 
 #pragma warning( default : 4311 )
 #pragma warning( default : 4312 )

@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "DigimonUser.h"
+#include "../LibProj/CsFunc/CrashLogger.h"
 
 #define COMMON_EVOL_UPDATE_DELAY_TIME		0.8f
 
@@ -288,6 +289,7 @@ void CDigimon::CheckEnchantEffect()
 		case 3:	GetProp_Effect()->AddLoopEffect( CsC_EffectProp::LE_ENCHANT, "system\\LevelEffect\\Enchant_K45.nif" );	return;
 		// 4개 능력치가 15강이 되었을 때
 		case 4:	GetProp_Effect()->AddLoopEffect( CsC_EffectProp::LE_ENCHANT, "system\\LevelEffect\\Enchant_K60.nif" );	return;
+		case 5:	GetProp_Effect()->AddLoopEffect( CsC_EffectProp::LE_ENCHANT, "system\\LevelEffect\\Enchant_K60.nif" );	return;
 		default:	break;
 		}
 
@@ -389,11 +391,18 @@ void CDigimon::CheckingXAntiEffect()
 					{
 						std::string kBoneName = pDigiObj->m_szEnchant;
 						size_t iBipID = kBoneName.find("Bip");
-						if(iBipID >= 0 ){
+						if(iBipID != std::string::npos ){
 							char szBuff[256] = {0,};
 							kBoneName.copy(szBuff, iBipID + 5);//ex bip01 or bip02 ...
 							mToeName = szBuff;
 							mToeName += " L Toe0";
+						}
+						else
+						{
+							nsCSDEBUG::CrashLogger::LogMessage(
+								"[XANTI] toe anchor prefix not found ftid=%u enchantNode=%s",
+								(unsigned)GetFTID(),
+								kBoneName.c_str() );
 						}
 					}
 				}
@@ -525,12 +534,22 @@ void CDigimon::_Update_EffectPos()
 			if( pPosLE != NULL )
 				kFinalPos = pPosLE->GetWorldTranslate();
 
-			if( pToe == NULL )
-			{
-				assert_cs(false);
-				}
-			else
+			if( pToe != NULL )
 				kFinalPos.z = pToe->GetWorldTranslate().z;
+			else
+			{
+				static DWORD s_lastMissingToeFTID = 0;
+				if( s_lastMissingToeFTID != GetFTID() )
+				{
+					s_lastMissingToeFTID = GetFTID();
+					nsCSDEBUG::CrashLogger::LogMessage(
+						"[XANTI] toe anchor missing ftid=%u toe=%s enchantNode=%s posAnchor=%d",
+						(unsigned)GetFTID(),
+						mToeName.c_str(),
+						pDigiObj ? pDigiObj->m_szEnchant : "<null>",
+						pPosLE ? 1 : 0 );
+				}
+			}
 
 			GetProp_Effect()->GetLoopEffect( CsC_EffectProp::LE_XJOGRESS )->SetPos( kFinalPos );	
 		}
@@ -1019,8 +1038,21 @@ bool CDigimon::Scene_Evol( UINT nNextFTID, bool bAbsoluteEvolution )
 
 	m_nNextFTID = nNextFTID;
 
-	CDigimonEvolveObj* pFTEvolObj = nsCsFileTable::g_pEvolMng->GetEvolObj( nNextFTID );
-	if( pFTEvolObj->m_nChipsetType != 0 && ( pFTEvolObj->m_nOpenQuest != 0 || pFTEvolObj->m_nEvolutionTree == CDigimonUser::TREE_JOGRESS ) ) 
+	CDigimonEvolveObj* pFTEvolObj = nsCsFileTable::g_pEvolMng ? nsCsFileTable::g_pEvolMng->GetEvolObj( nNextFTID ) : NULL;
+	if( pFTEvolObj == NULL )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"EVOLUTION missing evolution object current=%u nextType=%u absolute=%d",
+			(unsigned)GetFTID(),
+			(unsigned)nNextFTID,
+			(int)bAbsoluteEvolution );
+		return false;
+	}
+	const bool bUseJointProgressEvolution =
+		pFTEvolObj->m_nChipsetType != 0 &&
+		( pFTEvolObj->m_nOpenQuest != 0 || pFTEvolObj->m_nEvolutionTree == CDigimonUser::TREE_JOGRESS );
+
+	if( bUseJointProgressEvolution ) 
 	{		
 		SetDigimonState( DIGIMON_EVOL_JOINTPROGRESS );	// 상태값 "조그레스 진화" 로 변경
 		SetAnimation( ANI::DIGIMON_EVOLUTION_DOWN, 0.5f );	// 진화 에니 시작 901703 번 버로우 에니		
@@ -1365,11 +1397,24 @@ bool CDigimon::_UpdateEvolScene( float fDeltaTime )
 		{
 			// 진화 이펙트
 			//캡슐진화체는 각 캡슐별 다른 이펙트
-			u4 nEvolTree = nsCsFileTable::g_pEvolMng->GetEvolObj( m_nNextFTID )->m_nEvolutionTree;
+			CDigimonEvolveObj* pEvolObj = nsCsFileTable::g_pEvolMng ? nsCsFileTable::g_pEvolMng->GetEvolObj( m_nNextFTID ) : NULL;
+			if( pEvolObj == NULL )
+			{
+				nsCSDEBUG::CrashLogger::LogMessage(
+					"EVOLUTION update missing evolution object current=%u nextType=%u step=%d",
+					(unsigned)GetFTID(),
+					(unsigned)m_nNextFTID,
+					(int)m_nEvolStep );
+				SetPauseAll( false );
+				m_eDigimonState = m_eBackupDigimonState;
+				return true;
+			}
+
+			u4 nEvolTree = pEvolObj->m_nEvolutionTree;
 
 			if( nEvolTree == CDigimonUser::TREE_CAPSULE )
 			{
-				u4 nItemSType = nsCsFileTable::g_pEvolMng->GetEvolObj( m_nNextFTID )->m_nOpenItemTypeS;
+				u4 nItemSType = pEvolObj->m_nOpenItemTypeS;
 				DWORD dwDispID = nsCsFileTable::g_pItemMng->TypeT_to_Disp( nItemSType );
 				
 				char cEffectPath[ITEM_FILE_LEN];

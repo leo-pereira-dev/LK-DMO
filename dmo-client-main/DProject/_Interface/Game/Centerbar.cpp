@@ -173,7 +173,7 @@ void cCenterbar::Render()
 				cItemInfo Item;
 // 				Item.m_nType = nID;
 // 				Item.m_nCount = nCount;
-				Item.m_nType = pInfo->s_nID;
+				Item.SetType( pInfo->s_nID );
 				Item.m_nCount = pInfo->s_nCount;
 
 				g_pIconMng->RenderItem( &Item, pos, CsPoint( 21, 21 ), true );
@@ -360,7 +360,7 @@ int cCenterbar::_InvenToCenterBar( int nInvenIndex, cResist::sCHAR_CENTERBAR::sI
 	int nReturn = 0;
 
 	cItemInfo* pItem = g_pDataMng->GetInven()->GetData( nInvenIndex );
-	CsItem::sINFO* pFTInfo = nsCsFileTable::g_pItemMng->GetItem( pItem->m_nType )->GetInfo();
+	CsItem::sINFO* pFTInfo = nsCsFileTable::g_pItemMng->GetItem( pItem->GetType() )->GetInfo();
 
 	// 퀵슬롯 장착 가능한 물품인지 확인
 	switch( pFTInfo->s_nType_L )
@@ -390,6 +390,7 @@ int cCenterbar::_InvenToCenterBar( int nInvenIndex, cResist::sCHAR_CENTERBAR::sI
 	case nItem::DigimonSlotInc:
 	case nItem::Cash_DigimonCareSlot:	
 	case nItem::ScanUse_Item:
+	case nItem::SelectionBox:
 	case nItem::Item_TamerSKillConsume:
 	case nItem::PersonStore:
 #ifdef CROSSWARS_SYSTEM
@@ -425,9 +426,9 @@ int cCenterbar::_InvenToCenterBar( int nInvenIndex, cResist::sCHAR_CENTERBAR::sI
 	}
 
 	pData->s_eType = cResist::ITEM;
-	pData->s_nID = pItem->m_nType;
-	pData->s_nCount = g_pDataMng->GetInven()->GetCount_Item_ID( pItem->m_nType );
-	pData->s_nCount += g_pDataMng->GetTEquip()->GetCount_Item_ID( pItem->m_nType );
+	pData->s_nID = pItem->GetType();
+	pData->s_nCount = g_pDataMng->GetInven()->GetCount_Item_ID( pItem->GetType() );
+	pData->s_nCount += g_pDataMng->GetTEquip()->GetCount_Item_ID( pItem->GetType() );
 	assert_cs( pData->s_nCount > 0 );
 	return nReturn;
 }
@@ -468,4 +469,3 @@ void cCenterbar::CheckAllSlot()
 		}
 	}
 }
-

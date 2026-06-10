@@ -1,4 +1,5 @@
 using DigitalWorldOnline.Application.GameAssets.Bins;
+using DigitalWorldOnline.Commons.Constants;
 using DigitalWorldOnline.Commons.DTOs.Assets;
 using DigitalWorldOnline.Commons.Enums;
 using MediatR;
@@ -22,6 +23,10 @@ namespace DigitalWorldOnline.Application.GameAssets.Queries
         public Task<List<CharacterLevelStatusAssetDTO>> Handle(TamerLevelingAssetsQuery request, CancellationToken cancellationToken)
         {
             var rows = _dmBase.Data.TamerStats;
+            var fallbackExpByLevel = _dmBase.Data.DigimonStats.Values
+                .GroupBy(x => x.Level)
+                .ToDictionary(x => x.Key, x => x.OrderBy(y => y.Id).First().Exp);
+
             var list = new List<CharacterLevelStatusAssetDTO>(rows.Count);
             foreach (var rec in rows.Values)
             {
@@ -38,7 +43,7 @@ namespace DigitalWorldOnline.Application.GameAssets.Queries
                     // path compared against the DB's already-divided Asset_CharacterLevelStatus
                     // value). Without /100 here, the server compares e.g. 8010 < 13500 and
                     // never levels up while the client UI shows 5xxx% complete (8010 / 135).
-                    ExpValue = rec.Exp / 100,
+                    ExpValue = ResolveTamerExpValue(rec, fallbackExpByLevel),
                     HPValue = rec.HP,
                     DSValue = rec.DS,
                     MSValue = rec.MoveSpeed,
@@ -49,7 +54,63 @@ namespace DigitalWorldOnline.Application.GameAssets.Queries
                     HTValue = rec.HitRate
                 });
             }
+            ExtendSyntheticLevels(list);
+
             return Task.FromResult(list);
+        }
+
+        private static long ResolveTamerExpValue(
+            DMBaseStatRecord rec,
+            IReadOnlyDictionary<ushort, long> fallbackExpByLevel)
+        {
+            var wireExp = rec.Exp;
+            if (wireExp <= 0 && fallbackExpByLevel.TryGetValue(rec.Level, out var fallbackWireExp))
+                wireExp = fallbackWireExp;
+
+            return Math.Max(1L, wireExp / 100);
+        }
+
+        private static void ExtendSyntheticLevels(List<CharacterLevelStatusAssetDTO> list)
+        {
+            foreach (var group in list.GroupBy(x => x.Type).ToList())
+            {
+                var ordered = group.OrderBy(x => x.Level).ToList();
+                if (!ordered.Any() || ordered.Last().Level >= LevelConstants.MaxLevel)
+                    continue;
+
+                var last = ordered.Last();
+                var previous = ordered.Count > 1 ? ordered[^2] : last;
+
+                for (var level = last.Level + 1; level <= LevelConstants.MaxLevel; level++)
+                {
+                    var offset = level - last.Level;
+
+                    list.Add(new CharacterLevelStatusAssetDTO
+                    {
+                        Id = last.Id + offset,
+                        Type = last.Type,
+                        Level = (byte)level,
+                        ExpValue = last.ExpValue,
+                        HPValue = Extrapolate(last.HPValue, previous.HPValue, offset),
+                        DSValue = Extrapolate(last.DSValue, previous.DSValue, offset),
+                        MSValue = last.MSValue,
+                        DEValue = Extrapolate(last.DEValue, previous.DEValue, offset),
+                        EVValue = Extrapolate(last.EVValue, previous.EVValue, offset),
+                        CTValue = Extrapolate(last.CTValue, previous.CTValue, offset),
+                        ATValue = Extrapolate(last.ATValue, previous.ATValue, offset),
+                        HTValue = Extrapolate(last.HTValue, previous.HTValue, offset),
+                        ASValue = last.ASValue,
+                        ARValue = last.ARValue,
+                        BLValue = last.BLValue,
+                        WSValue = last.WSValue
+                    });
+                }
+            }
+        }
+
+        private static int Extrapolate(int last, int previous, int offset)
+        {
+            return last + Math.Max(0, last - previous) * offset;
         }
     }
 }

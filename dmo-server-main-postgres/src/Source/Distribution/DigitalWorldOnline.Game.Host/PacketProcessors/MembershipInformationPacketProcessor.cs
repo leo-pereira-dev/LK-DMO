@@ -11,9 +11,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
         public Task Process(GameClient client, byte[] packetData)
         {
-            if (client.MembershipExpirationDate != null)
+            if (client.HasActiveMembership)
             {
-                client.Send(new MembershipPacket(client.MembershipExpirationDate.Value, client.MembershipUtcSeconds));
+                client.Send(new MembershipPacket(client.MembershipExpirationDate!.Value, client.MembershipUtcSeconds));
             }
             else
             {

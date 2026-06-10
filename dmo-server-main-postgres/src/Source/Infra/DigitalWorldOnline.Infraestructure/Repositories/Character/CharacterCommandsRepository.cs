@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using DigitalWorldOnline.Commons.Enums.Character;
 using DigitalWorldOnline.Commons.Models.Digimon;
 using DigitalWorldOnline.Commons.Models.Character;
@@ -484,6 +484,8 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
 
         public async Task UpdateCharacterProgressCompleteAsync(CharacterProgressModel progress)
         {
+            progress.EnsureQuestProgressCapacity();
+
             var dto = await _context.CharacterProgress
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == progress.Id);
@@ -674,7 +676,7 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
             await UpsertOwnerListBitsAsync(itemListId, bits);
         }
 
-        public async Task UpdateItemsAsync(List<ItemModel> items)
+        public async Task UpdateItemsAsync(List<ItemModel> items, bool preserveUnreferencedInstances = false)
         {
             if (!items.Any())
                 return;
@@ -690,7 +692,7 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
             }
 
             foreach (var itemListGroup in groupedByList)
-                await UpsertOwnerItemsAsync(itemListGroup.ToList());
+                await UpsertOwnerItemsAsync(itemListGroup.ToList(), preserveUnreferencedInstances);
         }
 
         public async Task UpdateItemAccessoryStatusAsync(ItemModel item)
@@ -793,7 +795,7 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
             await _context.SaveChangesAsync();
         }
 
-        private async Task UpsertOwnerItemsAsync(List<ItemModel> items)
+        private async Task UpsertOwnerItemsAsync(List<ItemModel> items, bool preserveUnreferencedInstances = false)
         {
             if (!items.Any())
                 return;
@@ -811,7 +813,12 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
             var (ownerId, storageType, ownerKind) = ParseOwnerStorageToken(itemListId);
             if (ownerKind == OwnerStorageKind.Account)
             {
-                await UpsertOwnerItemsForAccountAsync(ownerId, storageType, items, sourceModelList: items.Select(x => x.ItemList).FirstOrDefault(x => x != null));
+                await UpsertOwnerItemsForAccountAsync(
+                    ownerId,
+                    storageType,
+                    items,
+                    sourceModelList: items.Select(x => x.ItemList).FirstOrDefault(x => x != null),
+                    preserveUnreferencedInstances);
                 return;
             }
 
@@ -846,21 +853,23 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
                     .ToListAsync();
                 var slotsByPosition = slots.ToDictionary(x => (int)x.Slot);
 
-                var instanceIds = slots
+                var existingInstanceIds = slots
                     .Where(x => x.ItemInstanceId.HasValue)
                     .Select(x => x.ItemInstanceId!.Value)
                     .ToHashSet();
 
-                var instances = await _context.OwnerItemStorageInstances
-                    .Where(x => instanceIds.Contains(x.Id))
-                    .ToDictionaryAsync(x => x.Id);
+                var payloadInstanceIds = items
+                    .Where(x => x.ItemId > 0 && x.Amount > 0 && x.Id != Guid.Empty)
+                    .Select(x => x.Id)
+                    .ToHashSet();
 
-                var accessoryStatuses = await _context.OwnerItemStorageAccessoryStatuses
-                    .Where(x => instanceIds.Contains(x.ItemInstanceId))
-                    .ToListAsync();
-                var socketStatuses = await _context.OwnerItemStorageSocketStatuses
-                    .Where(x => instanceIds.Contains(x.ItemInstanceId))
-                    .ToListAsync();
+                var instanceIdsToLoad = existingInstanceIds
+                    .Concat(payloadInstanceIds)
+                    .ToHashSet();
+
+                var instances = await _context.OwnerItemStorageInstances
+                    .Where(x => instanceIdsToLoad.Contains(x.Id))
+                    .ToDictionaryAsync(x => x.Id);
 
                 var seenInstanceIds = new HashSet<Guid>();
                 var accessoryStatusesToInsert = new List<OwnerItemStorageInstanceAccessoryStatusReadModel>();
@@ -868,97 +877,89 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
 
                 foreach (var item in items)
                 {
-                if (!slotsByPosition.TryGetValue(item.Slot, out var slot))
-                {
+                    if (!slotsByPosition.TryGetValue(item.Slot, out var slot))
+                    {
                         slot = new OwnerItemStorageCharacterSlotReadModel
                         {
                             CharacterId = ownerId,
                             Type = storageType,
                             Slot = (short)item.Slot,
                             UpdatedAt = DateTime.UtcNow
-                    };
-                    _context.OwnerItemStorageCharacterSlots.Add(slot);
-                    slotsByPosition[item.Slot] = slot;
-                }
+                        };
+                        _context.OwnerItemStorageCharacterSlots.Add(slot);
+                        slotsByPosition[item.Slot] = slot;
+                    }
 
-                slot.UpdatedAt = DateTime.UtcNow;
+                    slot.UpdatedAt = DateTime.UtcNow;
 
-                if (item.ItemId <= 0 || item.Amount <= 0)
-                {
-                    slot.ItemInstanceId = null;
-                    continue;
-                }
-
-                if (item.Id == Guid.Empty)
-                {
-                    slot.ItemInstanceId = null;
-                    continue;
-                }
-
-                slot.ItemInstanceId = item.Id;
-                seenInstanceIds.Add(item.Id);
-
-                if (!instances.TryGetValue(item.Id, out var instance))
-                {
-                    instance = new OwnerItemStorageInstanceReadModel
+                    if (item.ItemId <= 0 || item.Amount <= 0)
                     {
-                        Id = item.Id,
-                        CreatedAt = DateTime.UtcNow
-                    };
-                    _context.OwnerItemStorageInstances.Add(instance);
-                    instances[item.Id] = instance;
-                }
+                        slot.ItemInstanceId = null;
+                        continue;
+                    }
 
-                instance.ItemId = item.ItemId;
-                instance.Amount = item.Amount;
-                instance.Power = item.Power;
-                instance.RerollLeft = item.RerollLeft;
-                instance.FamilyType = item.FamilyType;
-                instance.Duration = item.Duration;
-                instance.EndDate = item.EndDate == DateTime.MinValue ? null : item.EndDate;
-                instance.FirstExpired = item.FirstExpired;
-                instance.TamerShopSellPrice = item.TamerShopSellPrice;
+                    if (item.Id == Guid.Empty)
+                    {
+                        slot.ItemInstanceId = null;
+                        continue;
+                    }
 
-                if (accessoryStatuses.Any(x => x.ItemInstanceId == item.Id))
-                {
+                    slot.ItemInstanceId = item.Id;
+                    seenInstanceIds.Add(item.Id);
+
+                    if (!instances.TryGetValue(item.Id, out var instance))
+                    {
+                        instance = new OwnerItemStorageInstanceReadModel
+                        {
+                            Id = item.Id,
+                            CreatedAt = DateTime.UtcNow
+                        };
+                        _context.OwnerItemStorageInstances.Add(instance);
+                        instances[item.Id] = instance;
+                    }
+
+                    instance.ItemId = item.ItemId;
+                    instance.Amount = item.Amount;
+                    instance.Power = item.Power;
+                    instance.RerollLeft = item.RerollLeft;
+                    instance.FamilyType = item.FamilyType;
+                    instance.Duration = item.Duration;
+                    instance.EndDate = item.EndDate == DateTime.MinValue ? null : item.EndDate;
+                    instance.FirstExpired = item.FirstExpired;
+                    instance.TamerShopSellPrice = item.TamerShopSellPrice;
+
                     await _context.OwnerItemStorageAccessoryStatuses
                         .Where(x => x.ItemInstanceId == item.Id)
                         .ExecuteDeleteAsync();
-                    accessoryStatuses.RemoveAll(x => x.ItemInstanceId == item.Id);
-                }
 
-                if (socketStatuses.Any(x => x.ItemInstanceId == item.Id))
-                {
                     await _context.OwnerItemStorageSocketStatuses
                         .Where(x => x.ItemInstanceId == item.Id)
                         .ExecuteDeleteAsync();
-                    socketStatuses.RemoveAll(x => x.ItemInstanceId == item.Id);
-                }
 
-                foreach (var status in item.AccessoryStatus)
-                {
-                    accessoryStatusesToInsert.Add(new OwnerItemStorageInstanceAccessoryStatusReadModel
+                    foreach (var status in item.AccessoryStatus)
                     {
-                        Id = Guid.NewGuid(),
-                        ItemInstanceId = item.Id,
-                        Slot = status.Slot,
-                        Type = (short)status.Type,
-                        Value = status.Value
-                    });
-                }
+                        accessoryStatusesToInsert.Add(new OwnerItemStorageInstanceAccessoryStatusReadModel
+                        {
+                            Id = Guid.NewGuid(),
+                            ItemInstanceId = item.Id,
+                            Slot = status.Slot,
+                            Type = (short)status.Type,
+                            Value = status.Value
+                        });
+                    }
 
-                foreach (var status in item.SocketStatus)
-                {
-                    socketStatusesToInsert.Add(new OwnerItemStorageInstanceSocketStatusReadModel
+                    foreach (var status in item.SocketStatus)
                     {
-                        Id = Guid.NewGuid(),
-                        ItemInstanceId = item.Id,
-                        Slot = status.Slot,
-                        Type = (short)status.Type,
-                        AttributeId = status.AttributeId,
-                        Value = status.Value
-                    });
-                }
+                        socketStatusesToInsert.Add(new OwnerItemStorageInstanceSocketStatusReadModel
+                        {
+                            Id = Guid.NewGuid(),
+                            ItemInstanceId = item.Id,
+                            Slot = status.Slot,
+                            Type = (short)status.Type,
+                            AttributeId = status.AttributeId,
+                            Value = status.Value
+                        });
+                    }
                 }
 
                 var referencedInstanceIds = slotsByPosition.Values
@@ -966,24 +967,14 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
                     .Select(x => x.ItemInstanceId!.Value)
                     .ToHashSet();
 
-                var removedInstanceIds = instanceIds
+                var removedCandidateInstanceIds = existingInstanceIds
                     .Where(x => !referencedInstanceIds.Contains(x))
                     .ToList();
 
-                foreach (var instanceId in removedInstanceIds)
-                {
-                    await _context.OwnerItemStorageAccessoryStatuses
-                        .Where(x => x.ItemInstanceId == instanceId)
-                        .ExecuteDeleteAsync();
-                    await _context.OwnerItemStorageSocketStatuses
-                        .Where(x => x.ItemInstanceId == instanceId)
-                        .ExecuteDeleteAsync();
-                    await _context.OwnerItemStorageInstances
-                        .Where(x => x.Id == instanceId)
-                        .ExecuteDeleteAsync();
-                }
-
                 await _context.SaveChangesAsync();
+
+                if (!preserveUnreferencedInstances)
+                    await DeleteUnreferencedOwnerStorageInstancesAsync(removedCandidateInstanceIds);
 
                 var persistedInstanceIds = await _context.OwnerItemStorageInstances
                     .AsNoTracking()
@@ -1010,7 +1001,7 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
             }
         }
 
-        private async Task UpsertOwnerItemsForAccountAsync(long accountId, int storageType, List<ItemModel> items, ItemListModel? sourceModelList)
+        private async Task UpsertOwnerItemsForAccountAsync(long accountId, int storageType, List<ItemModel> items, ItemListModel? sourceModelList, bool preserveUnreferencedInstances = false)
         {
             await using var transaction = await _context.Database.BeginTransactionAsync();
             try
@@ -1045,8 +1036,19 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
                     .Distinct()
                     .ToList();
 
+                var payloadCandidateIds = items
+                    .Where(x => x.ItemId > 0 && x.Amount > 0 && x.Id != Guid.Empty)
+                    .Select(x => x.Id)
+                    .Distinct()
+                    .ToList();
+
+                var instanceIdsToLoad = existingInstanceIds
+                    .Concat(payloadCandidateIds)
+                    .Distinct()
+                    .ToList();
+
                 var instances = await _context.OwnerItemStorageInstances
-                    .Where(x => existingInstanceIds.Contains(x.Id))
+                    .Where(x => instanceIdsToLoad.Contains(x.Id))
                     .ToDictionaryAsync(x => x.Id);
                 var accessoryStatusesToInsert = new List<OwnerItemStorageInstanceAccessoryStatusReadModel>();
                 var socketStatusesToInsert = new List<OwnerItemStorageInstanceSocketStatusReadModel>();
@@ -1143,22 +1145,14 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
                     .Distinct()
                     .ToList();
 
-                var orphanedInstanceIds = existingInstanceIds
+                var orphanedCandidateInstanceIds = existingInstanceIds
                     .Except(referencedInstanceIds)
                     .ToList();
 
-                if (orphanedInstanceIds.Count > 0)
-                {
-                    await _context.OwnerItemStorageAccessoryStatuses
-                        .Where(x => orphanedInstanceIds.Contains(x.ItemInstanceId))
-                        .ExecuteDeleteAsync();
-                    await _context.OwnerItemStorageSocketStatuses
-                        .Where(x => orphanedInstanceIds.Contains(x.ItemInstanceId))
-                        .ExecuteDeleteAsync();
-                    await _context.OwnerItemStorageInstances
-                        .Where(x => orphanedInstanceIds.Contains(x.Id))
-                        .ExecuteDeleteAsync();
-                }
+                await _context.SaveChangesAsync();
+
+                if (!preserveUnreferencedInstances)
+                    await DeleteUnreferencedOwnerStorageInstancesAsync(orphanedCandidateInstanceIds);
 
                 if (accessoryStatusesToInsert.Count > 0)
                 {
@@ -1179,6 +1173,50 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
                 await transaction.RollbackAsync();
                 throw;
             }
+        }
+
+        private async Task DeleteUnreferencedOwnerStorageInstancesAsync(IEnumerable<Guid> candidateInstanceIds)
+        {
+            var instanceIds = candidateInstanceIds
+                .Where(x => x != Guid.Empty)
+                .Distinct()
+                .ToList();
+
+            if (instanceIds.Count == 0)
+                return;
+
+            var characterReferences = await _context.OwnerItemStorageCharacterSlots
+                .AsNoTracking()
+                .Where(x => x.ItemInstanceId.HasValue && instanceIds.Contains(x.ItemInstanceId.Value))
+                .Select(x => x.ItemInstanceId!.Value)
+                .ToListAsync();
+
+            var accountReferences = await _context.OwnerItemStorageAccountSlots
+                .AsNoTracking()
+                .Where(x => x.ItemInstanceId.HasValue && instanceIds.Contains(x.ItemInstanceId.Value))
+                .Select(x => x.ItemInstanceId!.Value)
+                .ToListAsync();
+
+            var stillReferencedIds = characterReferences
+                .Concat(accountReferences)
+                .ToHashSet();
+
+            var orphanedInstanceIds = instanceIds
+                .Where(x => !stillReferencedIds.Contains(x))
+                .ToList();
+
+            if (orphanedInstanceIds.Count == 0)
+                return;
+
+            await _context.OwnerItemStorageAccessoryStatuses
+                .Where(x => orphanedInstanceIds.Contains(x.ItemInstanceId))
+                .ExecuteDeleteAsync();
+            await _context.OwnerItemStorageSocketStatuses
+                .Where(x => orphanedInstanceIds.Contains(x.ItemInstanceId))
+                .ExecuteDeleteAsync();
+            await _context.OwnerItemStorageInstances
+                .Where(x => orphanedInstanceIds.Contains(x.Id))
+                .ExecuteDeleteAsync();
         }
 
         public async Task AddInventorySlotsAsync(List<ItemModel> items)
@@ -1276,7 +1314,8 @@ namespace DigitalWorldOnline.Infraestructure.Repositories.Character
                 SkillId = skillId,
                 MaxLevel = maxLevel,
                 CurrentLevel = 1,
-                AcquiredAt = DateTime.UtcNow
+                AcquiredAt = DateTime.UtcNow,
+                CooldownEndsAt = DigimonMemorySkillModel.ReadyCooldownEndsAt
             };
             _context.DigimonMemorySkill.Add(dto);
             await _context.SaveChangesAsync();

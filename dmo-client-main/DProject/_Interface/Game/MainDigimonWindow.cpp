@@ -2,6 +2,25 @@
 #include "stdafx.h"
 #include "MainDigimonWindow.h"
 
+namespace
+{
+	const int DIGIMON_EXP_BAR_MAX = 10000;
+
+	double ClampExpRate(__int64 nCurExp, __int64 nMaxExp)
+	{
+		if (nMaxExp < 1)
+			nMaxExp = 1;
+		if (nCurExp < 0)
+			nCurExp = 0;
+
+		double dRate = static_cast<double>(nCurExp) / static_cast<double>(nMaxExp);
+		if (dRate < 0.0)
+			return 0.0;
+		if (dRate > 1.0)
+			return 1.0;
+		return dRate;
+	}
+}
 
 cMainDigimonWindow::cMainDigimonWindow()
 :m_pLevelBG_Normal(NULL)
@@ -143,13 +162,15 @@ void cMainDigimonWindow::Update(float const& fDeltaTime)
 	m_pDSBar->SetRange( CsPoint( 0, pBaseStat->GetMaxDS() ) );
 	m_pDSBar->SetBarPos( pBaseStat->GetDS() );
 	// Exp
-	int nMaxEXP = static_cast<int>(FMDigimon::GetMaxExp( pBaseStat->GetLevel() ));
-	int nCurEXP = static_cast<int>(pBaseStat->GetExp());
-	m_pExpBar->SetRange( CsPoint( 0, nMaxEXP ) );
-	m_pExpBar->SetBarPos( nCurEXP );
+	__int64 nMaxEXP = FMDigimon::GetMaxExp( pBaseStat->GetLevel() );
+	__int64 nCurEXP = pBaseStat->GetExp();
+	double dExpRate = ClampExpRate(nCurEXP, nMaxEXP);
+	int nExpBar = static_cast<int>(dExpRate * DIGIMON_EXP_BAR_MAX);
+	m_pExpBar->SetRange( CsPoint( 0, DIGIMON_EXP_BAR_MAX ) );
+	m_pExpBar->SetBarPos( nExpBar );
 
 	TCHAR sz[ 32 ];
-	_stprintf_s( sz, 32, _T( "%.3f%%" ), nCurEXP/(float)nMaxEXP*100.0f );
+	_stprintf_s( sz, 32, _T( "%.3f%%" ), dExpRate * 100.0 );
 	m_pExpPercentText->SetText( sz );
 
 	_UpdateBattle();

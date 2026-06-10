@@ -126,8 +126,11 @@ private:
 	cScrollBar*				m_pAdditionalStatScrollBar;
 	cScriptUI*				m_pAdditionalStatPopup;
 
+	cGridListBox*			m_pTamerTopEquipList;
 	cGridListBox*			m_pTamerLeftEquipList;
+	cGridListBox*			m_pTamerBottomEquipList;
 	cGridListBox*			m_pTamerRightEquipList;
+	cGridListBox*			m_pTamerRightBottomEquipList;
 	cGridListBox*			m_pDigimonSkillGrid;
 
 	std::map<int, sEquipIcon>	m_mapEquipIcon;

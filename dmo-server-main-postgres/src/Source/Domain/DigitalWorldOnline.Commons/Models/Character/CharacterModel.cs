@@ -248,6 +248,7 @@ namespace DigitalWorldOnline.Commons.Models.Character
         public Dictionary<int, int> TradeReservedItems { get; private set; } = new();
         public Dictionary<int, int> TradeSlotSourceMap { get; private set; } = new();
         public long TradeReservedBits { get; private set; }
+        private Dictionary<int, DateTime> ActiveEncyclopediaDeckEffects { get; set; } = new();
 
         public ConditionEnum CurrentCondition { get; private set; }
         public ConditionEnum PreviousCondition { get; private set; }

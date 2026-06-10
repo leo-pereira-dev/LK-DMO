@@ -512,10 +512,10 @@ void cQuickSlot::_RenderSlot( cResist::sCHAR_QUICKSLOT::sCHAR* pResistQuickSlot,
 		case cResist::ITEM:
 			{
 				cItemInfo Item;
-				Item.m_nType = pResistQuickSlotInfo->s_nID;
+				Item.SetType( pResistQuickSlotInfo->s_nID );
 				Item.m_nCount = pResistQuickSlotInfo->s_nCount;
 
-				if( Item.m_nType == 0 || Item.m_nCount == 0 )
+				if( Item.GetType() == 0 || Item.m_nCount == 0 )
 					break;
 
 				g_pIconMng->RenderItem( &Item, pos, true );
@@ -1246,7 +1246,7 @@ void cQuickSlot::_Render_AddSlot()
 			case cResist::ITEM:
 				{
 					cItemInfo Item;
-					Item.m_nType = pResistQuickSlotInfo->s_nID;
+					Item.SetType( pResistQuickSlotInfo->s_nID );
 					Item.m_nCount = pResistQuickSlotInfo->s_nCount;
 					g_pIconMng->RenderItem( &Item, pos, true );
 

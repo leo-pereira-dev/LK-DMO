@@ -1,5 +1,13 @@
 #include "stdafx.h"
 #include "StringAnalysis.h"
+#include "../../DataMng.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <algorithm>
+#include <set>
+#include <vector>
 
 namespace
 {
@@ -1611,6 +1619,454 @@ TCHAR* cStringAnalysis::Quest_Parcing( TCHAR* szDest, const int nDestSize, TCHAR
 	return szDest;
 }
 
+namespace
+{
+	static const DWORD SET_ITEM_SKILL_FIRST = 2702087;
+	static const DWORD SET_ITEM_SKILL_LAST = 2702263;
+	static const DWORD SET_EFFECT_SKILL_FIRST = 2702279;
+	static const int SET_ITEM_GROUP_COUNT = 12;
+	static const int SET_EFFECT_COUNT_PER_GROUP = 2;
+	static const int SET_FALLBACK_REQUIRED_COUNTS[ SET_EFFECT_COUNT_PER_GROUP ] = { 4, 6 };
+	static const USHORT SET_ITEM_TYPE_PATTERN[ 6 ] =
+	{
+		nItem::Head,
+		nItem::Glass,
+		nItem::Coat,
+		nItem::Pants,
+		nItem::Glove,
+		nItem::Shoes
+	};
+	static const DWORD LAST_EVOLUTION_SET_ITEM_IDS[] =
+	{
+		47512, 47513, 47514, 47515, 47516, 47517,
+		47518, 47519, 47520, 47521, 47522, 47535
+	};
+	static const DWORD LAST_EVOLUTION_SET_EFFECT_SKILL_ID = 2702846;
+	static const int LAST_EVOLUTION_SET_REQUIRED_COUNT = 2;
+	static const wchar_t* LAST_EVOLUTION_SET_NAME = L"Last Evolution";
+	static const wchar_t* LAST_EVOLUTION_SET_EFFECT_TEXT =
+		L"Max HP +2000, Hit Rate +1000, Critical Rate +10%, Final Damage Increase +1%";
+
+	struct sSetBonusItemCandidate
+	{
+		DWORD s_dwItemID;
+		DWORD s_dwSkillID;
+		USHORT s_nTypeL;
+	};
+
+	struct sSetBonusEffectLine
+	{
+		int s_nRequiredCount;
+		DWORD s_dwSkillID;
+		std::wstring s_wsText;
+	};
+
+	struct sSetBonusTooltipRow
+	{
+		int s_nSetIndex;
+		int s_nDisplayCount;
+		std::wstring s_wsName;
+		std::vector< DWORD > s_OrderedItemIDs;
+		std::set< DWORD > s_ItemIDs;
+		std::vector< sSetBonusEffectLine > s_Effects;
+	};
+
+	typedef std::vector< sSetBonusTooltipRow > SetBonusTooltipRows;
+
+	SetBonusTooltipRows g_SetBonusTooltipRows;
+	bool g_bSetBonusTooltipRowsLoaded = false;
+
+	bool IsSetPieceType( USHORT nTypeL )
+	{
+		for( int i = 0; i < sizeof( SET_ITEM_TYPE_PATTERN ) / sizeof( SET_ITEM_TYPE_PATTERN[ 0 ] ); ++i )
+		{
+			if( nTypeL == SET_ITEM_TYPE_PATTERN[ i ] )
+				return true;
+		}
+
+		return false;
+	}
+
+	bool IsSetPieceItemInfo( const CsItem::sINFO* pInfo )
+	{
+		return pInfo != NULL &&
+			pInfo->s_dwSkill >= SET_ITEM_SKILL_FIRST &&
+			pInfo->s_dwSkill <= SET_ITEM_SKILL_LAST &&
+			IsSetPieceType( pInfo->s_nType_L );
+	}
+
+	bool SetBonusItemCandidateLess( const sSetBonusItemCandidate& lhs, const sSetBonusItemCandidate& rhs )
+	{
+		return lhs.s_dwItemID < rhs.s_dwItemID;
+	}
+
+	bool IsExpectedSetItemChunk( const std::vector< sSetBonusItemCandidate >& candidates, int nStart )
+	{
+		if( nStart < 0 || nStart + SET_ITEM_GROUP_COUNT > (int)candidates.size() )
+			return false;
+
+		for( int i = 0; i < SET_ITEM_GROUP_COUNT; ++i )
+		{
+			if( candidates[ nStart + i ].s_nTypeL != SET_ITEM_TYPE_PATTERN[ i % 6 ] )
+				return false;
+		}
+
+		return true;
+	}
+
+	int ParseSetRequiredCount( const TCHAR* pText, int nFallback )
+	{
+		if( pText == NULL )
+			return nFallback;
+
+		const TCHAR* pSet = _tcsstr( pText, _T( "Set " ) );
+		if( pSet == NULL )
+			return nFallback;
+
+		pSet += 4;
+		int nCount = _ttoi( pSet );
+		return nCount > 0 ? nCount : nFallback;
+	}
+
+	const wchar_t* GetSetBonusNameFallback( int nSetIndex )
+	{
+		static const wchar_t* SET_BONUS_NAMES[] =
+		{
+			L"Power of Courage",
+			L"Light of Hope",
+			L"Heart of Love"
+		};
+
+		if( nSetIndex >= 0 && nSetIndex < sizeof( SET_BONUS_NAMES ) / sizeof( SET_BONUS_NAMES[ 0 ] ) )
+			return SET_BONUS_NAMES[ nSetIndex ];
+
+		return L"Set Effect";
+	}
+
+	bool HasSetBonusItem( DWORD dwItemID )
+	{
+		for( SetBonusTooltipRows::const_iterator it = g_SetBonusTooltipRows.begin(); it != g_SetBonusTooltipRows.end(); ++it )
+		{
+			if( it->s_ItemIDs.find( dwItemID ) != it->s_ItemIDs.end() )
+				return true;
+		}
+
+		return false;
+	}
+
+	void AppendLastEvolutionSetBonusRow()
+	{
+		if( HasSetBonusItem( 47522 ) )
+			return;
+
+		sSetBonusTooltipRow row;
+		row.s_nSetIndex = 9;
+		row.s_nDisplayCount = sizeof( LAST_EVOLUTION_SET_ITEM_IDS ) / sizeof( LAST_EVOLUTION_SET_ITEM_IDS[ 0 ] );
+		row.s_wsName = LAST_EVOLUTION_SET_NAME;
+
+		for( int i = 0; i < (int)( sizeof( LAST_EVOLUTION_SET_ITEM_IDS ) / sizeof( LAST_EVOLUTION_SET_ITEM_IDS[ 0 ] ) ); ++i )
+		{
+			row.s_OrderedItemIDs.push_back( LAST_EVOLUTION_SET_ITEM_IDS[ i ] );
+			row.s_ItemIDs.insert( LAST_EVOLUTION_SET_ITEM_IDS[ i ] );
+		}
+
+		sSetBonusEffectLine line;
+		line.s_nRequiredCount = LAST_EVOLUTION_SET_REQUIRED_COUNT;
+		line.s_dwSkillID = LAST_EVOLUTION_SET_EFFECT_SKILL_ID;
+		line.s_wsText = LAST_EVOLUTION_SET_EFFECT_TEXT;
+		row.s_Effects.push_back( line );
+
+		g_SetBonusTooltipRows.push_back( row );
+	}
+
+	void BuildSetBonusTooltipRows()
+	{
+		if( g_bSetBonusTooltipRowsLoaded )
+			return;
+
+		g_bSetBonusTooltipRowsLoaded = true;
+		g_SetBonusTooltipRows.clear();
+
+		if( nsCsFileTable::g_pItemMng == NULL || nsCsFileTable::g_pSkillMng == NULL )
+			return;
+
+		CsItem::MAP* pItemMap = nsCsFileTable::g_pItemMng->GetItemMap();
+		if( pItemMap == NULL )
+			return;
+
+		std::vector< sSetBonusItemCandidate > candidates;
+		for( CsItem::MAP_IT it = pItemMap->begin(); it != pItemMap->end(); ++it )
+		{
+			if( it->second == NULL || it->second->GetInfo() == NULL )
+				continue;
+
+			CsItem::sINFO* pInfo = it->second->GetInfo();
+			if( IsSetPieceItemInfo( pInfo ) == false )
+				continue;
+
+			sSetBonusItemCandidate candidate;
+			candidate.s_dwItemID = pInfo->s_dwItemID;
+			candidate.s_dwSkillID = pInfo->s_dwSkill;
+			candidate.s_nTypeL = pInfo->s_nType_L;
+			candidates.push_back( candidate );
+		}
+
+		std::sort( candidates.begin(), candidates.end(), SetBonusItemCandidateLess );
+
+		for( int i = 0; i + SET_ITEM_GROUP_COUNT <= (int)candidates.size(); )
+		{
+			if( IsExpectedSetItemChunk( candidates, i ) == false )
+			{
+				++i;
+				continue;
+			}
+
+			sSetBonusTooltipRow row;
+			row.s_nSetIndex = (int)g_SetBonusTooltipRows.size();
+			row.s_nDisplayCount = 6;
+			row.s_wsName = GetSetBonusNameFallback( row.s_nSetIndex );
+			for( int nItem = 0; nItem < SET_ITEM_GROUP_COUNT; ++nItem )
+			{
+				row.s_OrderedItemIDs.push_back( candidates[ i + nItem ].s_dwItemID );
+				row.s_ItemIDs.insert( candidates[ i + nItem ].s_dwItemID );
+			}
+
+			for( int nEffect = 0; nEffect < SET_EFFECT_COUNT_PER_GROUP; ++nEffect )
+			{
+				DWORD dwSkillID = SET_EFFECT_SKILL_FIRST + ( row.s_nSetIndex * SET_EFFECT_COUNT_PER_GROUP ) + nEffect;
+				CsSkill* pSkill = nsCsFileTable::g_pSkillMng->GetSkill( dwSkillID );
+				if( pSkill == NULL || pSkill->GetInfo() == NULL )
+					continue;
+
+				CsSkill::sINFO* pSkillInfo = pSkill->GetInfo();
+				if( pSkillInfo->s_szComment[ 0 ] == 0 )
+					continue;
+
+				sSetBonusEffectLine line;
+				line.s_nRequiredCount = ParseSetRequiredCount( pSkillInfo->s_szComment, SET_FALLBACK_REQUIRED_COUNTS[ nEffect ] );
+				line.s_dwSkillID = dwSkillID;
+				line.s_wsText = pSkillInfo->s_szComment;
+				row.s_Effects.push_back( line );
+			}
+
+			if( row.s_Effects.empty() == false )
+				g_SetBonusTooltipRows.push_back( row );
+
+			i += SET_ITEM_GROUP_COUNT;
+		}
+
+		AppendLastEvolutionSetBonusRow();
+	}
+
+	bool IsSetBonusItem( const sSetBonusTooltipRow& row, DWORD dwItemID )
+	{
+		return row.s_ItemIDs.find( dwItemID ) != row.s_ItemIDs.end();
+	}
+
+	int GetSetBonusDisplayStartIndex( const sSetBonusTooltipRow& row, DWORD dwItemID )
+	{
+		if( row.s_nDisplayCount <= 0 || row.s_nDisplayCount >= (int)row.s_OrderedItemIDs.size() )
+			return 0;
+
+		for( int i = 0; i < (int)row.s_OrderedItemIDs.size(); ++i )
+		{
+			if( row.s_OrderedItemIDs[ i ] == dwItemID )
+				return i < row.s_nDisplayCount ? 0 : row.s_nDisplayCount;
+		}
+
+		return 0;
+	}
+
+	bool IsDisplaySetBonusItem( const sSetBonusTooltipRow& row, DWORD dwItemID, int nDisplayStartIndex, int nDisplayCount )
+	{
+		if( nDisplayStartIndex < 0 || nDisplayCount <= 0 )
+			return false;
+
+		int nEndIndex = nDisplayStartIndex + nDisplayCount;
+		if( nEndIndex > (int)row.s_OrderedItemIDs.size() )
+			nEndIndex = (int)row.s_OrderedItemIDs.size();
+
+		for( int i = nDisplayStartIndex; i < nEndIndex; ++i )
+		{
+			if( row.s_OrderedItemIDs[ i ] == dwItemID )
+				return true;
+		}
+
+		return false;
+	}
+
+	int GetEquippedSetBonusCount( const sSetBonusTooltipRow& row, int nDisplayStartIndex, int nDisplayCount )
+	{
+		if( g_pDataMng == NULL || g_pDataMng->GetTEquip() == NULL )
+			return 0;
+
+		int nCount = 0;
+		cData_TEquip* pTEquip = g_pDataMng->GetTEquip();
+		for( int i = 0; i < nLimit::Equip; ++i )
+		{
+			cItemInfo* pItem = pTEquip->GetData( i );
+			if( pItem != NULL &&
+				pItem->IsEnable() &&
+				IsDisplaySetBonusItem( row, pItem->GetType(), nDisplayStartIndex, nDisplayCount ) )
+				++nCount;
+		}
+
+		cItemInfo* pDigivice = pTEquip->GetDigiviceItem();
+		if( pDigivice != NULL &&
+			pDigivice->IsEnable() &&
+			IsDisplaySetBonusItem( row, pDigivice->GetType(), nDisplayStartIndex, nDisplayCount ) )
+			++nCount;
+
+		return nCount;
+	}
+
+	bool IsEquippedSetBonusItem( DWORD dwItemID )
+	{
+		if( g_pDataMng == NULL || g_pDataMng->GetTEquip() == NULL )
+			return false;
+
+		cData_TEquip* pTEquip = g_pDataMng->GetTEquip();
+		for( int i = 0; i < nLimit::Equip; ++i )
+		{
+			cItemInfo* pItem = pTEquip->GetData( i );
+			if( pItem != NULL && pItem->IsEnable() && pItem->GetType() == dwItemID )
+				return true;
+		}
+
+		cItemInfo* pDigivice = pTEquip->GetDigiviceItem();
+		return pDigivice != NULL && pDigivice->IsEnable() && pDigivice->GetType() == dwItemID;
+	}
+
+	void AppendSkillApplyToolTip( cStringList* pList, cText::sTEXTINFO& ti, DWORD dwSkillID, int nRate )
+	{
+		CsSkill* pSkill = nsCsFileTable::g_pSkillMng ? nsCsFileTable::g_pSkillMng->GetSkill( dwSkillID ) : NULL;
+		if( pSkill == NULL || pSkill->GetInfo() == NULL )
+			return;
+
+		CsSkill::sINFO* pSkillInfo = pSkill->GetInfo();
+		if( pSkillInfo->s_nMemorySkill )
+			return;
+
+		const int STAGE_PARCING_LEN = 128;
+		TCHAR szTemp[ STAGE_PARCING_LEN ] = {0,};
+		TCHAR szInt[ 32 ] = {0,};
+		for( int i = 0; i < SKILL_APPLY_MAX_COUNT; ++i )
+		{
+			if( pSkillInfo->s_Apply[ i ].s_nID == 0 ||
+				pSkillInfo->s_Apply[ i ].s_nA == APPLY_EvoTypeDamageIncrease ||
+				pSkillInfo->s_Apply[ i ].s_nA == APPLY_NatureTypeDamageIncrease )
+				continue;
+
+			memset( szTemp, 0, sizeof( szTemp ) );
+			memset( szInt, 0, sizeof( szInt ) );
+
+			if( FMCommon::GetSkillAttStr( pSkillInfo->s_Apply[ i ].s_nA, STAGE_PARCING_LEN, szTemp ) == true )
+			{
+				float fPV = FMCommon::GetSkillAtt( dwSkillID, 0, i ) * nRate * 0.01f;
+				bool bMinus = ( fPV < 0.0f );
+				int nValue = CsFloat2Int( abs( fPV ) );
+				if( bMinus )
+					nValue = -nValue;
+
+				if( nValue != 0 )
+				{
+					_stprintf_s( szInt, 32, _T( " %d " ), nValue );
+					_tcscat_s( szTemp, STAGE_PARCING_LEN, szInt );
+				}
+
+				FMCommon::GetStrApply_ID( szTemp, STAGE_PARCING_LEN, pSkillInfo->s_Apply[ i ].s_nID, bMinus );
+			}
+
+			ti.SetText( szTemp );
+			cString* pString = NiNew cString;
+			pString->AddText( &ti );
+			pList->AddTail( pString );
+		}
+	}
+
+}
+
+bool cStringAnalysis::IsSetBonusTooltipItem( DWORD dwItemID )
+{
+	BuildSetBonusTooltipRows();
+
+	for( SetBonusTooltipRows::const_iterator it = g_SetBonusTooltipRows.begin(); it != g_SetBonusTooltipRows.end(); ++it )
+	{
+		if( IsSetBonusItem( *it, dwItemID ) )
+			return true;
+	}
+
+	return false;
+}
+
+bool cStringAnalysis::ItemSetBonus_Parcing( cStringList* pList, DWORD dwItemID )
+{
+	if( pList == NULL )
+		return false;
+
+	BuildSetBonusTooltipRows();
+
+	for( SetBonusTooltipRows::const_iterator it = g_SetBonusTooltipRows.begin(); it != g_SetBonusTooltipRows.end(); ++it )
+	{
+		if( IsSetBonusItem( *it, dwItemID ) == false )
+			continue;
+
+		cText::sTEXTINFO ti;
+		ti.Init( &g_pEngine->m_FontSystem, CFont::FS_10 );
+
+		int nDisplayStartIndex = GetSetBonusDisplayStartIndex( *it, dwItemID );
+		int nDisplayCount = it->s_nDisplayCount > 0 ? it->s_nDisplayCount : 6;
+		if( nDisplayStartIndex + nDisplayCount > (int)it->s_OrderedItemIDs.size() )
+			nDisplayCount = (int)it->s_OrderedItemIDs.size() - nDisplayStartIndex;
+
+		int nEquippedCount = GetEquippedSetBonusCount( *it, nDisplayStartIndex, nDisplayCount );
+		std::wstring wsTitle;
+		const wchar_t* pSetName = it->s_wsName.empty() ? GetSetBonusNameFallback( it->s_nSetIndex ) : it->s_wsName.c_str();
+		DmCS::StringFn::Format( wsTitle, L"%s (%d/%d)", pSetName, nEquippedCount, nDisplayCount );
+
+		cString* pString = NiNew cString;
+		ti.s_Color = FONT_GOLD;
+		ti.SetText( wsTitle.c_str() );
+		pString->AddText( &ti );
+		pList->AddTail( pString );
+
+		for( int nDisplayIndex = nDisplayStartIndex; nDisplayIndex < nDisplayStartIndex + nDisplayCount; ++nDisplayIndex )
+		{
+			DWORD dwDisplayItemID = it->s_OrderedItemIDs[ nDisplayIndex ];
+			CsItem* pSetItem = nsCsFileTable::g_pItemMng ? nsCsFileTable::g_pItemMng->GetItem( dwDisplayItemID ) : NULL;
+			if( pSetItem == NULL || pSetItem->GetInfo() == NULL )
+				continue;
+
+			pString = NiNew cString;
+			pString->HeadAddSizeX( TOOLTIP_TAB_SIZE );
+			ti.s_Color = IsEquippedSetBonusItem( dwDisplayItemID ) ? FONT_WHITE : NiColor( 0.55f, 0.55f, 0.55f );
+			ti.SetText( pSetItem->GetInfo()->s_szName );
+			pString->AddText( &ti );
+			pList->AddTail( pString );
+		}
+
+		for( std::vector< sSetBonusEffectLine >::const_iterator effectIt = it->s_Effects.begin(); effectIt != it->s_Effects.end(); ++effectIt )
+		{
+			bool bActive = nEquippedCount >= effectIt->s_nRequiredCount;
+
+			pString = NiNew cString;
+			ti.s_Color = bActive ? FONT_GREEN : NiColor( 0.55f, 0.55f, 0.55f );
+			std::wstring wsHeader;
+			DmCS::StringFn::Format( wsHeader, L"%d Set Effect", effectIt->s_nRequiredCount );
+			ti.SetText( wsHeader.c_str() );
+			pString->AddText( &ti );
+			pList->AddTail( pString );
+
+			ti.s_Color = bActive ? FONT_GREEN : NiColor( 0.55f, 0.55f, 0.55f );
+			Cut( pList, TOOLTIP_CUT_SIZE, effectIt->s_wsText.c_str(), &ti );
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
 void cStringAnalysis::ItemComment_Parcing( cStringList* pList, cItemInfo* pEquipItem )
 {
 #define EC_PARCING_LEN		128
@@ -2102,6 +2558,10 @@ void cStringAnalysis::ItemComment_Parcing( cStringList* pList, cItemInfo* pEquip
 		pString->AddText( &ti );
 		pList->AddTail( pString );
 	}
+
+	DWORD dwStageSkillID = pEquipItem->GetTamerEquipmentUpgradeSkillID();
+	if( dwStageSkillID != 0 )
+		AppendSkillApplyToolTip( pList, ti, dwStageSkillID, pEquipItem->m_nRate );
 }
 
 void cStringAnalysis::ItemComment_Parcing( cStringList* pList, int nEquipType )
@@ -2223,8 +2683,18 @@ void cStringAnalysis::ItemComment_Parcing( cStringList* pList, int nEquipType )
 			// 둘다 값이 0이라면 비율은 1로 적용
 			if( ( nMin || nMax ) == false )
 				nMin = nMax = nValue;
-			
-			if( nMin != nMax )
+
+			szInt[ 0 ] = 0;
+			bool bChipsetPercentValue = ( pFTItem->s_nType_L == nItem::Chipset ) &&
+				( pFTSkill->s_Apply[ i ].s_nA == APPLY_CA || pFTSkill->s_Apply[ i ].s_nA == APPLY_EV );
+			if( bChipsetPercentValue )
+			{
+				if( nMin != nMax )
+					_stprintf_s( szInt, 32, _T( " %.2f%%~%.2f%% " ), nMin * 0.01f, nMax * 0.01f );
+				else if( nValue != 0 )
+					_stprintf_s( szInt, 32, _T( " %.2f%% " ), nMin * 0.01f );
+			}
+			else if( nMin != nMax )
 				_stprintf_s( szInt, 32, _T( " %d~%d " ), nMin, nMax );
 			else if( nValue != 0)
 				_stprintf_s( szInt, 32, _T( " %d " ), nMin );
@@ -2237,6 +2707,7 @@ void cStringAnalysis::ItemComment_Parcing( cStringList* pList, int nEquipType )
 		pString->AddText( &ti );
 		pList->AddTail( pString );
 	}	
+
 }
 
 void cStringAnalysis::Equip_EItemComment_Parcing( cStringList* pList, cString* pBeginString, cItemInfo* pEquip, int nSocketIndex, bool bCashEndItem )

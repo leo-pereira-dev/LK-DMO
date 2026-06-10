@@ -112,7 +112,7 @@ void cIcon::Init( CsPoint patch, CsPoint size, char* cPath )
 //====================================================================================
 void cIcon::Render( int nIconIdx, CsPoint pos )
 {
-	if( m_pSpr )
+	if( m_pSpr && m_ptIndexCount.x > 0 && m_ptIndexCount.y > 0 && nIconIdx >= 0 )
 	{
 		NiPoint2 tex = NiPoint2( ( nIconIdx%m_ptIndexCount.x )/(float)m_ptIndexCount.x, ( nIconIdx/m_ptIndexCount.x )/(float)m_ptIndexCount.y );
 		m_pSpr->Render( pos, tex, m_vPatchTex + tex );
@@ -134,7 +134,7 @@ void cIcon::Render( int nIconIdx, CsPoint pos )
 
 void cIcon::Render( int nCol, int nRow, CsPoint pos )
 {
-	if( m_pSpr )
+	if( m_pSpr && m_ptIndexCount.x > 0 && m_ptIndexCount.y > 0 && nCol >= 0 && nRow >= 0 )
 	{
 		NiPoint2 tex = NiPoint2( (float)nCol/(float)m_ptIndexCount.x, (float)nRow/(float)m_ptIndexCount.y );
 		m_pSpr->Render( pos, tex, m_vPatchTex + tex );
@@ -158,7 +158,7 @@ void cIcon::Render( int nCol, int nRow, CsPoint pos )
 void cIcon::Render( int nCol, int nRow, CsPoint pos, CsPoint size )
 {
 	assert_cs( m_pSpr != NULL );
-	if( m_pSpr )
+	if( m_pSpr && m_ptIndexCount.x > 0 && m_ptIndexCount.y > 0 && nCol >= 0 && nRow >= 0 )
 	{
 		NiPoint2 tex = NiPoint2( (float)nCol/(float)m_ptIndexCount.x, (float)nRow/(float)m_ptIndexCount.y );
 		m_pSpr->Render( pos, size, tex, m_vPatchTex + tex );
@@ -181,7 +181,7 @@ void cIcon::Render( int nCol, int nRow, CsPoint pos, CsPoint size )
 
 void cIcon::Render( int nIconIdx, CsPoint pos, CsPoint size )
 {
-	if( m_pSpr )
+	if( m_pSpr && m_ptIndexCount.x > 0 && m_ptIndexCount.y > 0 && nIconIdx >= 0 )
 	{
 		NiPoint2 tex = NiPoint2( ( nIconIdx%m_ptIndexCount.x )/(float)m_ptIndexCount.x, ( nIconIdx/m_ptIndexCount.x )/(float)m_ptIndexCount.y );
 		m_pSpr->Render( pos, size, tex, m_vPatchTex + tex );
@@ -204,7 +204,7 @@ void cIcon::Render( int nIconIdx, CsPoint pos, CsPoint size )
 
 void cIcon::Render( int nIconIdx, CsPoint pos, CsPoint size, float fAlpha )
 {
-	if( m_pSpr )
+	if( m_pSpr && m_ptIndexCount.x > 0 && m_ptIndexCount.y > 0 && nIconIdx >= 0 )
 	{
 		NiPoint2 tex = NiPoint2( ( nIconIdx%m_ptIndexCount.x )/(float)m_ptIndexCount.x, ( nIconIdx/m_ptIndexCount.x )/(float)m_ptIndexCount.y );
 		m_pSpr->SetAlpha(fAlpha);
@@ -281,5 +281,3 @@ void cIcon::SetIconText( int nIconIdx, TCHAR const* szText, CsPoint ptDeltaPos )
 	
 	m_MapIconText[ nIconIdx ] = pIconText;
 }
-
-

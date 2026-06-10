@@ -13,7 +13,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
         public PartyLootItemPacket(CharacterModel tamer,ItemModel item, byte diceCount = 0, string diceName = "")
         {
             Type(PacketNumber);
-            WriteInt(tamer.GeneralHandler);
+            WriteUShort((ushort)tamer.GeneralHandler);
             WriteInt(item.ItemId);
             WriteShort((short)item.Amount);
             WriteByte(100);

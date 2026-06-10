@@ -3,6 +3,17 @@
 #include "../Adapt/AdaptTutorialQuest.h"
 #include "../Adapt/AdaptMacroProtectSystem.h"
 #include "../../ContentsSystem/ContentsSystemDef.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
+
+namespace
+{
+	bool IsSameTradeUIDX(UINT lhs, UINT rhs)
+	{
+		if( lhs == 0 || rhs == 0 )
+			return lhs == rhs;
+		return lhs == rhs || ((lhs & 0xFFFF) == (rhs & 0xFFFF));
+	}
+}
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -91,7 +102,7 @@ int	CTradeContents::sTradeInfo::GetEmptySlotNum() const
 {
 	for( int n = 0; n < MAX_TRADE_ITEM_SLOT; ++n )
 	{
-		if( m_vecItems[n].s_Item.m_nType != 0 )
+		if( m_vecItems[n].s_Item.GetType() != 0 )
 			continue;
 		return n;
 	}
@@ -107,7 +118,7 @@ bool CTradeContents::sTradeInfo::IsEmptySlot(int const& nSlotNum) const
 {
 	if( MAX_TRADE_ITEM_SLOT <= nSlotNum || nSlotNum < 0 )
 		return false;
-	return m_vecItems[nSlotNum].s_Item.m_nType == 0 ? true : false;
+	return m_vecItems[nSlotNum].s_Item.GetType() == 0 ? true : false;
 }
 
 cItemData const * CTradeContents::sTradeInfo::GetItemData( int const& nSlotNum ) const
@@ -115,7 +126,7 @@ cItemData const * CTradeContents::sTradeInfo::GetItemData( int const& nSlotNum )
 	if( MAX_TRADE_ITEM_SLOT <= nSlotNum || nSlotNum < 0 )
 		return NULL;
 
-	if( m_vecItems[nSlotNum].s_Item.m_nType == 0 )
+	if( m_vecItems[nSlotNum].s_Item.GetType() == 0 )
 		return NULL;
 		 
 	return &m_vecItems[nSlotNum].s_Item;
@@ -148,7 +159,7 @@ void CTradeContents::sTradeInfo::AddTradeItemToInven( cData_Inven * pInven )
 	size_t totalSize = m_vecItems.size();
 	for( size_t n =0; n < totalSize; ++n )
 	{
-		if( 0 == m_vecItems[n].s_Item.m_nType )
+		if( 0 == m_vecItems[n].s_Item.GetType() )
 			continue;
 
 		pInven->ItemCrop( &m_vecItems[n].s_Item );
@@ -175,7 +186,7 @@ int const CTradeContents::IsContentsIdentity(void)
 	return E_CT_TRADE;
 }
 
-CTradeContents::CTradeContents(void):m_TradeTargetObjectUIDX(0),m_AdaptTutorialQuest(0),m_AdaptMacroProtect(0)
+CTradeContents::CTradeContents(void):m_TradeTargetObjectUIDX(0),m_bPendingCloseTrade(false),m_bPendingTradeFinalSuccess(false),m_nPendingTradeFinalTargetUID(0),m_AdaptTutorialQuest(0),m_AdaptMacroProtect(0)
 {
 	GAME_EVENT_ST.AddEvent( EVENT_CODE::SEND_TRADE_REQUEST_TAMERNAME, this, &CTradeContents::Send_Trade_Request_Name );
 	GAME_EVENT_ST.AddEvent( EVENT_CODE::SEND_TRADE_REQUEST_TAMEROBJECTIDX, this, &CTradeContents::Send_Trade_Request_UIDX );
@@ -253,6 +264,18 @@ bool CTradeContents::IntraConnection(ContentsSystem& System)
 
 void CTradeContents::Update(float const& fElapsedTime)
 {
+	if( m_bPendingTradeFinalSuccess )
+	{
+		ProcessTradeFinalSuccess();
+		return;
+	}
+
+	if( m_bPendingCloseTrade )
+	{
+		m_bPendingCloseTrade = false;
+		nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS PendingClose process target=%u", m_TradeTargetObjectUIDX );
+		CloseTrade();
+	}
 }
 
 void CTradeContents::NotifyEvent(int const& iNotifiedEvt)
@@ -302,6 +325,9 @@ void CTradeContents::MakeWorldData(void)
 void CTradeContents::ResetData(void)
 {
 	m_TradeTargetObjectUIDX = 0;	// 거래 대상의 인덱스	
+	m_bPendingCloseTrade = false;
+	m_bPendingTradeFinalSuccess = false;
+	m_nPendingTradeFinalTargetUID = 0;
 	m_MyTradeData.Reset();
 	m_TargetTradeData.Reset();
 }
@@ -310,9 +336,50 @@ void CTradeContents::CloseTrade(void)
 {
 	GAME_EVENT_ST.DeleteEvent( EVENT_CODE::EVENT_CHAT_PROCESS, this );	
 
-	ResetData();
+	UINT const nTargetUID = m_TradeTargetObjectUIDX;
+	nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS CloseTrade begin target=%u", nTargetUID );
+
 	if( g_pGameIF )
 		g_pGameIF->CloseDynamicIF( cBaseWindow::WT_TRADE );	
+
+	ResetData();
+	nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS CloseTrade end target=%u", nTargetUID );
+}
+
+void CTradeContents::RequestCloseTrade(char const* pReason)
+{
+	nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS PendingClose request reason=%s target=%u",
+		pReason ? pReason : "unknown", m_TradeTargetObjectUIDX );
+	m_bPendingCloseTrade = true;
+}
+
+void CTradeContents::ProcessTradeFinalSuccess(void)
+{
+	UINT const nTargetUID = m_nPendingTradeFinalTargetUID;
+	m_bPendingTradeFinalSuccess = false;
+	m_nPendingTradeFinalTargetUID = 0;
+
+	nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS FinalResult process-main-thread target=%u", nTargetUID );
+
+	if( g_pCharMng && g_pCharMng->GetTamerUser() )
+	{
+		UINT unIdx = g_pCharMng->GetTamerUser()->GetUniqID();
+		g_pCharMng->AttachEffectFromTamerUIDX( unIdx, "system\\TradeEnd.nif", 1.0f, 0 );
+		g_pCharMng->AttachEffectFromTamerUIDX( nTargetUID, "system\\TradeEnd.nif", 1.0f, 0 );
+	}
+
+	cPrintMsg::PrintMsg( 30020 );
+	cWindow::PlaySound( "System\\Tactics_done.wav" );
+
+	CloseTrade();
+
+	cData_QuickSlot::CheckItemCount_AllUser();
+	if( g_pDataMng )
+	{
+		cData_Quest* pQuestData = g_pDataMng->GetQuest();
+		if( pQuestData )
+			pQuestData->CalProcess();
+	}
 }
 //////////////////////////////////////////////////////////////////////////
 
@@ -398,9 +465,10 @@ void CTradeContents::Send_Trade_Request_Cancel(void* pData)
 
 void CTradeContents::SendTradeCancel(void)
 {
+	nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS SendTradeCancel target=%u", m_TradeTargetObjectUIDX );
 	if( 0 == m_TradeTargetObjectUIDX )
 	{
-		CloseTrade();
+		nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS SendTradeCancel skipped reason=target-zero" );
 	}
 	else
 	{
@@ -718,18 +786,20 @@ void CTradeContents::Recv_TradeRequest_Result(void* pData)
 	SAFE_POINTER_RET( pData );
 
 	GS2C_RECV_TRADE_REQUEST_RESULT * recv = static_cast<GS2C_RECV_TRADE_REQUEST_RESULT*>(pData);
+	nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS RecvTradeResult result=%d target=%u", recv->m_dwResult, recv->m_TargetTamerUID );
 	if( recv->m_dwResult != 0 )
 	{	// 창 닫기
 		cPrintMsg::PrintMsg( recv->m_dwResult );
-		CloseTrade();
+		RequestCloseTrade( "request-result-error" );
 		return;
 	}	
 	
 	CsC_AvObject* pTarget = g_pMngCollector->GetObject( recv->m_TargetTamerUID );
 	if( pTarget == NULL )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS RecvTradeResult close reason=target-null target=%u", recv->m_TargetTamerUID );
 		cPrintMsg::PrintMsg( 30023 );
-		CloseTrade();
+		RequestCloseTrade( "request-result-target-null" );
 		return;
 	}
 
@@ -739,12 +809,14 @@ void CTradeContents::Recv_TradeRequest_Result(void* pData)
 	// 매크로 프로텍터 사용 중이면 거래 취소 패킷을 보내자
 	if( IsMacroProtecting() )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS RecvTradeResult cancel reason=macro target=%u", recv->m_TargetTamerUID );
 		SendTradeCancel();
 		return;
 	}
 
 	// 거래창 열기
 	cBaseWindow* pTradeWindow = g_pGameIF->GetDynamicIF( cBaseWindow::WT_TRADE );
+	nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS OpenTradeWindow target=%u window=%p", recv->m_TargetTamerUID, pTradeWindow );
 	SAFE_POINTER_RET( pTradeWindow );	
 
 	// 인벤토리 모두 열기
@@ -930,8 +1002,20 @@ void CTradeContents::Recv_TradeItemRegist(void* pData)
 {
 	SAFE_POINTER_RET( pData );
 	GS2C_RECV_TRADE_ITEM_REGIST* pRecv = static_cast<GS2C_RECV_TRADE_ITEM_REGIST*>(pData);
-	 
-	if( g_pCharMng->IsTamerUserFromUIDX(pRecv->m_TargetTamerUID) )
+
+	UINT myUID = 0;
+	if( g_pCharMng && g_pCharMng->GetTamerUser() )
+		myUID = g_pCharMng->GetTamerUser()->GetUniqID();
+
+	bool bMyItem = g_pCharMng && g_pCharMng->IsTamerUserFromUIDX(pRecv->m_TargetTamerUID);
+	bool bTargetItem = IsSameTradeUIDX( m_TradeTargetObjectUIDX, pRecv->m_TargetTamerUID );
+
+	nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS RecvItem owner=%u ownerLow=%u my=%u myLow=%u target=%u targetLow=%u item=%u count=%u tradeSlot=%d invenSlot=%u myMatch=%d targetMatch=%d",
+		pRecv->m_TargetTamerUID, (pRecv->m_TargetTamerUID & 0xFFFF), myUID, (myUID & 0xFFFF),
+		m_TradeTargetObjectUIDX, (m_TradeTargetObjectUIDX & 0xFFFF), pRecv->m_ItemData.GetType(), pRecv->m_ItemData.GetCount(),
+		pRecv->m_TradeInvenSlotNum, pRecv->m_InventorySlotNum, bMyItem ? 1 : 0, bTargetItem ? 1 : 0 );
+
+	if( bMyItem )
 	{
 		if( m_MyTradeData.ItemRegist( pRecv->m_ItemData, pRecv->m_TradeInvenSlotNum, pRecv->m_InventorySlotNum, true ) )
 		{
@@ -941,7 +1025,7 @@ void CTradeContents::Recv_TradeItemRegist(void* pData)
 			Notify( eMyTradeItem_Regist, kTmp );
 		}
 	}
-	else if( m_TradeTargetObjectUIDX == pRecv->m_TargetTamerUID )
+	else if( bTargetItem )
 	{
 		if( m_TargetTradeData.ItemRegist( pRecv->m_ItemData, pRecv->m_TradeInvenSlotNum, pRecv->m_InventorySlotNum, false ) )
 		{
@@ -950,6 +1034,10 @@ void CTradeContents::Recv_TradeItemRegist(void* pData)
 			kTmp << nAddInvenSlotNum;
 			Notify( eTargetTradeItem_Regist, kTmp );
 		}
+	}
+	else
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS RecvItem ignored owner=%u my=%u target=%u", pRecv->m_TargetTamerUID, myUID, m_TradeTargetObjectUIDX );
 	}
 }
 
@@ -969,7 +1057,7 @@ void CTradeContents::Recv_TradeItemUnregist(void* pData)
 		kTmp << nDelSlot;
 		Notify( eMyTradeItem_UnRegist, kTmp );
 	}
-	else if( m_TradeTargetObjectUIDX == pRecv->m_TargetTamerUID )
+	else if( IsSameTradeUIDX( m_TradeTargetObjectUIDX, pRecv->m_TargetTamerUID ) )
 	{
 		m_TargetTradeData.UnRegistItem( nDelSlot );
 		ContentsStream kTmp;
@@ -992,7 +1080,7 @@ void CTradeContents::Recv_TradeMoneyChange(void* pData)
 		m_MyTradeData.ChangeMoney( pRecv->m_nMoney );
 		Notify( eMyTrade_Money_Change );
 	}
-	else if( m_TradeTargetObjectUIDX == pRecv->m_TargetTamerUID )
+	else if( IsSameTradeUIDX( m_TradeTargetObjectUIDX, pRecv->m_TargetTamerUID ) )
 	{
 		m_TargetTradeData.ChangeMoney( pRecv->m_nMoney );
 		Notify( eTargetTrade_Money_Change );
@@ -1009,7 +1097,7 @@ void CTradeContents::Recv_TradeInvenLock_UnLock(void* pData)
 
 	if( g_pCharMng->IsTamerUserFromUIDX( pRecv->m_TargetTamerUID ) )
 		m_MyTradeData.SetInvenLock(pRecv->m_bLock);
-	else if( m_TradeTargetObjectUIDX == pRecv->m_TargetTamerUID )
+	else if( IsSameTradeUIDX( m_TradeTargetObjectUIDX, pRecv->m_TargetTamerUID ) )
 		m_TargetTradeData.SetInvenLock( pRecv->m_bLock );
 	else
 		return;
@@ -1030,7 +1118,7 @@ void CTradeContents::Recv_Trade_StandBy(void* pData)
 		m_MyTradeData.SetStandBy(true);
 		Notify(eTrade_StandBy);
 	}
-	else if( m_TradeTargetObjectUIDX == pRecv->m_TargetTamerUID )
+	else if( IsSameTradeUIDX( m_TradeTargetObjectUIDX, pRecv->m_TargetTamerUID ) )
 		m_TargetTradeData.SetStandBy(true);
 }
 
@@ -1046,29 +1134,34 @@ void CTradeContents::Recv_TradeFinal_Result(void* pData)
 	if( 0 != pRecv->m_dwResult )
 		return;
 
-	// 거래 성공
+	UINT const nTargetUID = m_TradeTargetObjectUIDX;
+	nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS FinalResult success target=%u use-server-inventory=1", nTargetUID );
+
+#if 0
+	// Server sends LoadInventoryPacket before packet 1504; replaying this locally double-applies trade items.
 	cData_Inven* pInven = g_pDataMng->GetInven();
-	if( pInven )// 돈 증감.
+	if( pInven )
 	{
 		if( m_MyTradeData.GetTradeMoney() > 0 )
 			pInven->DecreaseMoney( m_MyTradeData.GetTradeMoney() );
 		if( m_TargetTradeData.GetTradeMoney() > 0 )
 			pInven->IncreaseMoney( m_TargetTradeData.GetTradeMoney(), true );
-	}
 
-	if( pInven )
-	{
 		m_MyTradeData.RemoveTradeItemToInven( pInven );
 		m_TargetTradeData.AddTradeItemToInven( pInven );
 	}
+#endif
+	m_nPendingTradeFinalTargetUID = nTargetUID;
+	m_bPendingTradeFinalSuccess = true;
+	nsCSDEBUG::CrashLogger::LogMessage( "TRADE_CONTENTS FinalResult queued target=%u", nTargetUID );
+	return;
 
-	
 	// 거래 성공시 이팩트 출력
-	if( g_pCharMng )
+	if( g_pCharMng && g_pCharMng->GetTamerUser() )
 	{
 		UINT unIdx = g_pCharMng->GetTamerUser()->GetUniqID();
 		g_pCharMng->AttachEffectFromTamerUIDX( unIdx, "system\\TradeEnd.nif", 1.0f, 0 );
-		g_pCharMng->AttachEffectFromTamerUIDX( m_TradeTargetObjectUIDX, "system\\TradeEnd.nif", 1.0f, 0 );
+		g_pCharMng->AttachEffectFromTamerUIDX( nTargetUID, "system\\TradeEnd.nif", 1.0f, 0 );
 	}
 
 	cPrintMsg::PrintMsg( 30020 );

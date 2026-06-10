@@ -187,14 +187,25 @@ std::wstring LoadingContents::GetLoadingTipString()
 
 void LoadingContents::_DataLoadComplete()
 {
-	_RequestEncyclopediaPreload();
-
 	// 데이터 로드가 완료 되면 서버에 패킷을 보낸다
 	// 서버에 동기화
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"MAPLOAD DataLoadComplete nextMap=%u progress=%d firstLoading=%d game=%p gate=%p",
+		(unsigned)net::next_map_no,
+		m_nLoadingProgress,
+		g_bFirstLoding ? 1 : 0,
+		net::game,
+		net::gate );
 	if( net::game && ( g_bFirstLoding == false ) )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD send ChangeServer via game nextMap=%u", (unsigned)net::next_map_no );
 		net::game->SendChangeServer();
+	}
 	else if( net::gate )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD send ChangeServer via gate nextMap=%u", (unsigned)net::next_map_no );
 		net::gate->SendChangeServer();
+	}
 }
 
 
@@ -242,6 +253,26 @@ void LoadingContents::_RequestEncyclopediaPreload()
 		return;
 	}
 
+	if( g_pResist && g_pResist->IsMovePortal() )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"[ENCYREQ] preload skip: portal move active progress=%d nextMap=%u",
+			m_nLoadingProgress,
+			(unsigned)net::next_map_no );
+		return;
+	}
+
+	if( net::game->m_bPortalRequesting || net::game->m_bPortalProcessing )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"[ENCYREQ] preload skip: portal flags requesting=%d processing=%d progress=%d nextMap=%u",
+			net::game->m_bPortalRequesting ? 1 : 0,
+			net::game->m_bPortalProcessing ? 1 : 0,
+			m_nLoadingProgress,
+			(unsigned)net::next_map_no );
+		return;
+	}
+
 	bool bServerRecv = false;
 	GAME_EVENT_STPTR->OnEvent( EVENT_CODE::GET_ENCYCLOPEDIA_BISRECV, &bServerRecv );
 	if( bServerRecv )
@@ -262,11 +293,21 @@ bool LoadingContents::_DataProcess_Update()
 	if( m_nLoadingProgress < 10 )
 	{
 		CsMapList* pMapList	= nsCsMapTable::g_pMapListMng->GetList( net::next_map_no );
+		nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD step<10 nextMap=%u mapList=%p", (unsigned)net::next_map_no, pMapList );
 		if( pMapList )
 		{
 			CsMapList::sINFO* pMapInfo = pMapList->GetInfo();
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"MAPLOAD mapInfo nextMap=%u path=%s cameraMax=%d",
+				(unsigned)net::next_map_no,
+				pMapInfo ? pMapInfo->s_cMapPath.c_str() : "<null>",
+				pMapInfo ? pMapInfo->s_nCamera_Max_Level : 0 );
 			if(!_CheckMapPathHash( net::next_map_no, pMapInfo->s_cMapPath ))
 			{
+				nsCSDEBUG::CrashLogger::LogMessage(
+					"MAPLOAD map hash mismatch nextMap=%u path=%s",
+					(unsigned)net::next_map_no,
+					pMapInfo->s_cMapPath.c_str() );
 				GAMEAPP_ST.SetProcessState( App::CWin32App::PROCESS_STOP );
 				ContentsStream kTmp;
 				kTmp << net::next_map_no << pMapInfo->s_cMapPath;
@@ -278,6 +319,7 @@ bool LoadingContents::_DataProcess_Update()
 	}
 	else if( m_nLoadingProgress < 54 )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD step<54 nextMap=%u gameIF=%p", (unsigned)net::next_map_no, g_pGameIF );
 		if( g_pGameIF == NULL )
 			cGameInterface::GlobalInit();
 		g_pMngCollector->DeleteChar( net::next_map_no );
@@ -286,34 +328,41 @@ bool LoadingContents::_DataProcess_Update()
 	}
 	else if( m_nLoadingProgress < 56 )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD step<56 nextMap=%u", (unsigned)net::next_map_no );
 		g_pThread->GetResMng()->ReleaseConnetTerrain();// 쓰레드 리소스 매니져의 외부포인터들 없애 준다
 		_SetLoadingProgressValue( 56 );
 	}
 	else if( m_nLoadingProgress < 58 )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD step<58 nextMap=%u", (unsigned)net::next_map_no );
 		g_pMngCollector->ResetMap();
 		g_pThread->GetResMng()->ReleaseImmediatelyResource();
 		_SetLoadingProgressValue( 58 );
 	}else if( m_nLoadingProgress < 60 )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD step<60 LoadTerrain begin nextMap=%u", (unsigned)net::next_map_no );
 		_SetCameraSet();
 		//DUMPLOGA( "Move Map : %d -> %d", g_pTerrainMng->GetBackupMapID(), net::next_map_no );
 		g_pMngCollector->LoadTerrain( net::next_map_no );	// 맵 로딩
 	}else if( m_nLoadingProgress < 72 )
 	{
 		g_pThread->GetResMng()->ApplyConnetTerrain();// 쓰레드 리소스 매니져의 외부포인터 재 연결
+		nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD step<72 ApplyConnetTerrain nextMap=%u", (unsigned)net::next_map_no );
 		_SetLoadingProgressValue( 80 );
 	}else if( m_nLoadingProgress < 90 )// NPC 배치
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD step<90 LoadChar begin nextMap=%u", (unsigned)net::next_map_no );
 		g_pMngCollector->LoadChar( net::next_map_no );
-		_RequestEncyclopediaPreload();
+		nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD step<90 LoadChar end nextMap=%u", (unsigned)net::next_map_no );
 		_SetLoadingProgressValue( 90 );
 	}
 	else if( m_nLoadingProgress < 100 )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD step<100 finalize begin nextMap=%u", (unsigned)net::next_map_no );
 		g_pThread->GetResMng()->ReleaseImmediatelyResource();
 		_SetLoadingProgressValue( 100 );
 		_DataLoadComplete();
+		nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD step<100 finalize end nextMap=%u", (unsigned)net::next_map_no );
 	}
 	return true;
 }
@@ -373,6 +422,11 @@ void LoadingContents::LoadingStart(void* pData)
 // 게임으로 진입 시킨다.
 void LoadingContents::RecvPlayerDataLoaded(void* pData)
 {
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"MAPLOAD RecvPlayerDataLoaded begin nextMap=%u progress=%d loadStart=%d",
+		(unsigned)net::next_map_no,
+		m_nLoadingProgress,
+		m_bLoadStart ? 1 : 0 );
 	if( g_pMngCollector )
 		g_pMngCollector->LoadCompleate( net::next_map_no );
 	if( g_pResist )
@@ -397,12 +451,14 @@ void LoadingContents::RecvPlayerDataLoaded(void* pData)
 	GAME_EVENT_ST.DeleteEvent( EVENT_CODE::FADE_IN_END, this );
 
 	_ResetData();
+	nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD RecvPlayerDataLoaded end nextMap=%u", (unsigned)net::next_map_no );
 }
 
 void LoadingContents::DataLoadStart(void* pData)
 {
 	m_nLoadingProgress = 0;
 	m_bLoadStart = true;
+	nsCSDEBUG::CrashLogger::LogMessage( "MAPLOAD DataLoadStart nextMap=%u prevMap=%u", (unsigned)net::next_map_no, (unsigned)net::prev_map_no );
 }
 
 // 배틀 로딩시 필요한 데이터를 가져온다.

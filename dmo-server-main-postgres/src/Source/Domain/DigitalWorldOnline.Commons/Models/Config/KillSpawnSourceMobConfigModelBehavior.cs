@@ -10,6 +10,15 @@ namespace DigitalWorldOnline.Commons.Models.Config
         /// </summary>
         public void DecreaseCurrentSourceMobAmount(byte amount = 1)
         {
+            if (CurrentSourceMobRequiredAmount == 0)
+                return;
+
+            if (amount >= CurrentSourceMobRequiredAmount)
+            {
+                CurrentSourceMobRequiredAmount = 0;
+                return;
+            }
+
             CurrentSourceMobRequiredAmount -= amount;
         }
 

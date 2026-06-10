@@ -1,0 +1,188 @@
+<Window x:Class="LkDmoBinConverter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LKDMO Bin Converter"
+        Height="760"
+        Width="1120"
+        MinHeight="680"
+        MinWidth="980"
+        WindowStartupLocation="CenterScreen"
+        Background="#0A0F18">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Panel" Color="#111A27" />
+        <SolidColorBrush x:Key="Line" Color="#26364B" />
+        <SolidColorBrush x:Key="Text" Color="#EAF1FF" />
+        <SolidColorBrush x:Key="Muted" Color="#91A0B8" />
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource Text}" />
+            <Setter Property="FontFamily" Value="Segoe UI Variable, Segoe UI" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="#F7FBFF" />
+            <Setter Property="Background" Value="#1C2A3C" />
+            <Setter Property="BorderBrush" Value="#30445E" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="16,10" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#263B55" />
+                    <Setter Property="BorderBrush" Value="#55A7FF" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.45" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#0E1622" />
+            <Setter Property="Foreground" Value="#EAF1FF" />
+            <Setter Property="BorderBrush" Value="#2A3A52" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="12,9" />
+            <Setter Property="CaretBrush" Value="#35D0A3" />
+            <Setter Property="FontFamily" Value="Cascadia Mono, Consolas" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="#0E1622" />
+            <Setter Property="Foreground" Value="#EAF1FF" />
+            <Setter Property="BorderBrush" Value="#2A3A52" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10,7" />
+            <Setter Property="FontFamily" Value="Segoe UI Variable, Segoe UI" />
+        </Style>
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="#0E1622" />
+            <Setter Property="Foreground" Value="#EAF1FF" />
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#91A0B8" />
+            <Setter Property="FontFamily" Value="Segoe UI Variable, Segoe UI" />
+            <Setter Property="Margin" Value="0,0,0,16" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" CornerRadius="22" Padding="24" Background="#0F1724" BorderBrush="#203047" BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="LKDMO Bin Converter" FontSize="30" FontWeight="Bold" />
+                    <TextBlock Margin="0,8,0,0"
+                               Foreground="{StaticResource Muted}"
+                               FontSize="14"
+                               Text="Convert GDMO split bins into LKDMO legacy templates with dry-run validation, backups, and Pack03 patching." />
+                </StackPanel>
+                <Border Grid.Column="1" Background="#102A27" BorderBrush="#35D0A3" BorderThickness="1" CornerRadius="18" Padding="16,10" VerticalAlignment="Center">
+                    <TextBlock Text="DARK SAFE MODE" Foreground="#92FFE1" FontWeight="Bold" />
+                </Border>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="0,18,0,18">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="0,0,9,0" CornerRadius="18" Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" Padding="18">
+                <StackPanel>
+                    <TextBlock Text="Sources" FontSize="18" FontWeight="Bold" />
+                    <TextBlock Margin="0,4,0,14" Foreground="{StaticResource Muted}" Text="Point to GDMO Bin/XML exports and LKDMO Pack03 or a direct bin file." />
+
+                    <TextBlock Text="GDMO Bin or XML folder" Foreground="{StaticResource Muted}" />
+                    <DockPanel Margin="0,6,0,12">
+                        <Button DockPanel.Dock="Right" Margin="8,0,0,0" Content="Browse" Click="BrowseGdmo_Click" />
+                        <TextBox x:Name="GdmoPathBox" />
+                    </DockPanel>
+
+                    <TextBlock Text="LKDMO Pack03 or a direct supported bin file" Foreground="{StaticResource Muted}" />
+                    <DockPanel Margin="0,6,0,0">
+                        <Button DockPanel.Dock="Right" Margin="8,0,0,0" Content="Browse" Click="BrowseLkdmo_Click" />
+                        <TextBox x:Name="LkdmoPathBox" />
+                    </DockPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" Margin="9,0,0,0" CornerRadius="18" Background="{StaticResource Panel}" BorderBrush="{StaticResource Line}" BorderThickness="1" Padding="18">
+                <StackPanel>
+                    <TextBlock Text="Output and actions" FontSize="18" FontWeight="Bold" />
+                    <TextBlock Margin="0,4,0,14" Foreground="{StaticResource Muted}" Text="Dry-run creates converted files without touching Pack03. Apply creates backups first." />
+
+                    <TextBlock Text="Output folder" Foreground="{StaticResource Muted}" />
+                    <DockPanel Margin="0,6,0,16">
+                        <Button DockPanel.Dock="Right" Margin="8,0,0,0" Content="Browse" Click="BrowseOutput_Click" />
+                        <TextBox x:Name="OutputPathBox" />
+                    </DockPanel>
+
+                    <TextBlock Text="Conversion mode" Foreground="{StaticResource Muted}" />
+                    <ComboBox x:Name="ConversionModeBox" Margin="0,6,0,16" SelectedIndex="0">
+                        <ComboBoxItem Content="Craft / ItemList.bin" />
+                        <ComboBoxItem Content="NPC Dungeon Type 25 / Npc.bin" />
+                        <ComboBoxItem Content="Maps / MapList.bin" />
+                        <ComboBoxItem Content="Monsters / Monster.bin + MapMonsterList.bin" />
+                    </ComboBox>
+
+                    <CheckBox x:Name="PatchEmbeddedItemListCraftBox"
+                              Content="Patch embedded ItemList craft section (experimental, required for craft window)"
+                              ToolTip="Default safe mode patches only sidecar craft bins. Enable this only when the generated ItemList template is confirmed client-safe." />
+
+                    <WrapPanel>
+                        <Button x:Name="AnalyzeButton" Content="Analyze / Dry Run" Click="Analyze_Click" Background="#124135" BorderBrush="#35D0A3" />
+                        <Button x:Name="ApplyButton" Margin="10,0,0,0" Content="Apply to Pack03" Click="Apply_Click" Background="#173552" BorderBrush="#55A7FF" />
+                    </WrapPanel>
+                    <TextBlock Margin="0,14,0,0"
+                               Foreground="{StaticResource Muted}"
+                               Text="Craft mode stages ItemCreation tables and a generated ItemList for diff. Safe apply keeps embedded ItemList unchanged unless the experimental checkbox is enabled. NPC mode converts GDMO Type 25 dungeon NPCs into the LKDMO legacy Npc.bin template. Maps mode converts GDMO MapList into the LKDMO legacy MapList.bin template and preserves LKDMO descriptions/resurrection data when available. Monster mode converts GDMO Monster, MonsterSkill, MonsterSkillTerms, MonsterName_Str and MapMonster into LKDMO Monster.bin and MapMonsterList.bin."
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" CornerRadius="18" Background="#08101A" BorderBrush="{StaticResource Line}" BorderThickness="1" Padding="14">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Conversion report" FontSize="18" FontWeight="Bold" Margin="4,0,0,12" />
+                <TextBox x:Name="ReportBox"
+                         Grid.Row="1"
+                         AcceptsReturn="True"
+                         AcceptsTab="True"
+                         IsReadOnly="True"
+                         TextWrapping="NoWrap"
+                         VerticalScrollBarVisibility="Auto"
+                         HorizontalScrollBarVisibility="Auto"
+                         FontSize="13" />
+            </Grid>
+        </Border>
+
+        <TextBlock x:Name="StatusText" Grid.Row="3" Margin="4,12,0,0" Foreground="{StaticResource Muted}" Text="Ready." />
+    </Grid>
+</Window>

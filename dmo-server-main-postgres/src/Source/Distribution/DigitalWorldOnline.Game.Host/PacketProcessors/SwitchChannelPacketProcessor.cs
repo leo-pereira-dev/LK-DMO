@@ -6,6 +6,7 @@ using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
 using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.MapServer;
+using DigitalWorldOnline.Game.Configuration;
 using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
 using MediatR;
@@ -138,7 +139,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             // the channel matching client.Tamer.Channel (Phase E Step 6).
             client.Send(new MapSwapPacket(
                 _configuration[GameServerPublic],
-                _configuration[GameServerPort],
+                _configuration.GetPublicGameServerPort(),
                 client.Tamer.Location.MapId,
                 client.Tamer.Location.X,
                 client.Tamer.Location.Y)

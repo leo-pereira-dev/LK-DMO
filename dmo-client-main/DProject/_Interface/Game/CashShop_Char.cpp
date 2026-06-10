@@ -87,6 +87,7 @@ void cCashShop_Char::Init( CsPoint ptPos )
 
 	CsSIZE size( 32, 32 );	
 	m_IFIcon_Equip[ nTamer::Head ].Init( CsRect( CsPoint( 29, 110 ) + ptPos, size ) );
+	m_IFIcon_Equip[ nTamer::Goggles ].Init( CsRect( CsPoint( 258, 45 ) + ptPos, size ) );
 	m_IFIcon_Equip[ nTamer::Coat ].Init( CsRect( CsPoint( 29, 166 ) + ptPos, size ) );
 	m_IFIcon_Equip[ nTamer::Pants ].Init( CsRect( CsPoint( 29, 223 ) + ptPos, size ) );
 	m_IFIcon_Equip[ nTamer::Glove ].Init( CsRect( CsPoint( 29, 279 ) + ptPos, size ) );

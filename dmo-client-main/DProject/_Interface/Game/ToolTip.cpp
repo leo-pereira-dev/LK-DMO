@@ -17,6 +17,23 @@ namespace
 		return ( pText != NULL ) ? pText : _T( "" );
 	}
 
+	CsPoint ClampTooltipRenderPosition( CsPoint pos, CsPoint size )
+	{
+		const int nMargin = 4;
+
+		if( pos.x + size.x > g_nScreenWidth - nMargin )
+			pos.x = g_nScreenWidth - size.x - nMargin;
+		if( pos.y + size.y > g_nScreenHeight - nMargin )
+			pos.y = g_nScreenHeight - size.y - nMargin;
+
+		if( pos.x < nMargin )
+			pos.x = nMargin;
+		if( pos.y < nMargin )
+			pos.y = nMargin;
+
+		return pos;
+	}
+
 	int GetTooltipActiveSealCount( int nSealItemID )
 	{
 		if( CONTENTSSYSTEM_PTR == NULL )
@@ -290,6 +307,8 @@ void cTooltip::Render()
 	}
 	//////////////////////////////////////////////////////////
 
+	pos = ClampTooltipRenderPosition( pos, m_ptMaxSize );
+
 	m_pPopupWindow->Render( pos );	
 	m_StringList.Render( pos + CsPoint( 10, 10 ), TOOLTIP_STRINGLIST_DELTA_Y );
 
@@ -338,6 +357,8 @@ void cTooltip::Render( CsPoint ptPos, bool right )
 		}	
 		//////////////////////////////////////////////////////////
 	}
+
+	ptPos = ClampTooltipRenderPosition( ptPos, m_ptMaxSize );
 
 	m_pPopupWindow->Render( ptPos );	
 	m_StringList.Render( ptPos + CsPoint( 10, 10 ), TOOLTIP_STRINGLIST_DELTA_Y );

@@ -41,7 +41,6 @@ namespace DigitalWorldOnline.GameHost
                 if (client == null || !client.IsConnected || client.Partner == null)
                     continue;
 
-
                 GetInViewMobs(map, tamer);
                 GetInViewMobs(map, tamer, true);
 
@@ -57,6 +56,7 @@ namespace DigitalWorldOnline.GameHost
                 _ = _dailyEvent.TickAsync(client);
 
                 tamer.AutoRegen();
+                _verdandiXProgram.Tick(client, map, BroadcastForTamerViewsAndSelf, BroadcastForTargetTamers);
                 tamer.ActiveEvolutionReduction();
 
                 if (tamer.BreakEvolution)
@@ -75,10 +75,15 @@ namespace DigitalWorldOnline.GameHost
                             new RideModeStopPacket(tamer.GeneralHandler, tamer.Partner.GeneralHandler).Serialize());
                     }
 
-                    var buffToRemove = client.Tamer.Partner.BuffList.TamerBaseSkill();
-                    if (buffToRemove != null)
+                    var passiveBuffIdsToRemove = client.Tamer.Partner.BuffList.Buffs
+                        .Where(x => x.SkillId / 1000000 == 8 && x.Duration == 0)
+                        .Select(x => x.BuffId)
+                        .Distinct()
+                        .ToList();
+
+                    foreach (var buffIdToRemove in passiveBuffIdsToRemove)
                     {
-                        BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Partner.GeneralHandler, buffToRemove.BuffId).Serialize());
+                        BroadcastForTamerViewsAndSelf(client.TamerId, new RemoveBuffPacket(client.Partner.GeneralHandler, buffIdToRemove).Serialize());
                     }
 
                     client.Tamer.RemovePartnerPassiveBuff();
@@ -533,6 +538,14 @@ namespace DigitalWorldOnline.GameHost
             map?.SwapDigimonHandlers(oldPartner, newPartner);
         }
 
+        public void SwapDigimonHandlers(int mapId, DigimonModel oldPartner, DigimonModel newPartner, long tamerId)
+        {
+            var map = _registry.FindByTamer(tamerId);
+
+            if (map?.MapId == mapId)
+                map.SwapDigimonHandlers(oldPartner, newPartner);
+        }
+
         private void ShowOrHideTamer(MapInstance map, CharacterModel tamer)
         {
             foreach (var connectedTamer in map.ConnectedTamers.Where(x => x.Id != tamer.Id))
@@ -543,10 +556,129 @@ namespace DigitalWorldOnline.GameHost
                     tamer.Location.Y,
                     connectedTamer.Location.Y);
 
+                var alreadyViewing = map.ViewingTamer(tamer.Id, connectedTamer.Id);
+                var action = distanceDifference <= _startToSee
+                    ? alreadyViewing ? "keep-visible" : "show"
+                    : distanceDifference >= _stopSeeing
+                        ? alreadyViewing ? "hide" : "keep-hidden"
+                        : alreadyViewing ? "keep-visible-midrange" : "keep-hidden-midrange";
+
+                if (ShouldLogTamerVisibilityPair(map, tamer, connectedTamer))
+                {
+                    _logger.Information(
+                        "Tamer visibility pair source={SourceId}:{SourceName} target={TargetId}:{TargetName} map={MapId} channel={Channel} distance={Distance} start={StartDistance} stop={StopDistance} viewing={Viewing} action={Action} sourceState={SourceState} targetState={TargetState} sourcePos={SourceX},{SourceY} targetPos={TargetX},{TargetY}",
+                        tamer.Id,
+                        tamer.Name,
+                        connectedTamer.Id,
+                        connectedTamer.Name,
+                        map.MapId,
+                        map.Channel,
+                        distanceDifference,
+                        _startToSee,
+                        _stopSeeing,
+                        alreadyViewing,
+                        action,
+                        tamer.State,
+                        connectedTamer.State,
+                        tamer.Location.X,
+                        tamer.Location.Y,
+                        connectedTamer.Location.X,
+                        connectedTamer.Location.Y);
+                }
+
                 if (distanceDifference <= _startToSee)
-                    ShowTamer(map, tamer, connectedTamer.Id);
+                {
+                    if (alreadyViewing)
+                        RepairTamerVisibility(map, tamer, connectedTamer.Id, distanceDifference);
+                    else
+                        ShowTamer(map, tamer, connectedTamer.Id);
+                }
                 else if (distanceDifference >= _stopSeeing)
                     HideTamer(map, tamer, connectedTamer.Id);
+            }
+        }
+
+        private bool ShouldLogTamerVisibilityPair(MapInstance map, CharacterModel source, CharacterModel target)
+        {
+            var now = DateTime.UtcNow;
+            var key = $"{map.MapId}:{map.Channel}:{source.Id}:{target.Id}";
+
+            lock (_visibilityPairLogLock)
+            {
+                if (_visibilityPairLogTimes.TryGetValue(key, out var lastLog) &&
+                    now - lastLog < _visibilityPairLogInterval)
+                {
+                    return false;
+                }
+
+                _visibilityPairLogTimes[key] = now;
+                return true;
+            }
+        }
+
+        private bool ShouldRepairTamerVisibility(MapInstance map, CharacterModel source, long targetId)
+        {
+            var now = DateTime.UtcNow;
+            var key = $"{map.MapId}:{map.Channel}:{source.Id}:{targetId}";
+
+            lock (_visibilityPairLogLock)
+            {
+                if (_visibilityRepairTimes.TryGetValue(key, out var lastRepair) &&
+                    now - lastRepair < _visibilityRepairInterval)
+                {
+                    return false;
+                }
+
+                _visibilityRepairTimes[key] = now;
+                return true;
+            }
+        }
+
+        private void RepairTamerVisibility(MapInstance map, CharacterModel tamerToShow, long tamerToSeeId, long distance)
+        {
+            if (!ShouldRepairTamerVisibility(map, tamerToShow, tamerToSeeId))
+                return;
+
+            foreach (var item in tamerToShow.Equipment.EquippedItems.Where(x => x.ItemInfo == null))
+                item?.SetItemInfo(_assets.ItemInfo.FirstOrDefault(x => x.ItemId == item?.ItemId));
+
+            var targetClient = map.Clients.FirstOrDefault(x => x.TamerId == tamerToSeeId);
+            if (targetClient == null || !targetClient.IsConnected)
+            {
+                _logger.Warning(
+                    "Tamer visibility repair skipped source={SourceId}:{SourceName} target={TargetId} map={MapId} channel={Channel}: target client unavailable",
+                    tamerToShow.Id,
+                    tamerToShow.Name,
+                    tamerToSeeId,
+                    map.MapId,
+                    map.Channel);
+                return;
+            }
+
+            var loadTamerPacket = new LoadTamerPacket(tamerToShow).Serialize();
+            var loadBuffsPacket = new LoadBuffsPacket(tamerToShow).Serialize();
+
+            _logger.Information(
+                "Tamer visibility repair resend source={SourceId}:{SourceName} target={TargetId}:{TargetName} map={MapId} channel={Channel} distance={Distance} sourceHandler={SourceHandler} partnerHandler={PartnerHandler} bytes={Bytes} prefix={Prefix}",
+                tamerToShow.Id,
+                tamerToShow.Name,
+                tamerToSeeId,
+                targetClient.Tamer.Name,
+                map.MapId,
+                map.Channel,
+                distance,
+                tamerToShow.GeneralHandler,
+                tamerToShow.Partner.GeneralHandler,
+                loadTamerPacket.Length,
+                PacketPrefix(loadTamerPacket));
+
+            targetClient.Send(loadTamerPacket);
+            targetClient.Send(loadBuffsPacket);
+
+            if (tamerToShow.InBattle)
+            {
+                targetClient.Send(new SetCombatOnPacket(tamerToShow.GeneralHandler));
+                targetClient.Send(new SetCombatOnPacket(tamerToShow.Partner.GeneralHandler));
             }
         }
 
@@ -557,13 +689,55 @@ namespace DigitalWorldOnline.GameHost
                 foreach (var item in tamerToShow.Equipment.EquippedItems.Where(x => x.ItemInfo == null))
                     item?.SetItemInfo(_assets.ItemInfo.FirstOrDefault(x => x.ItemId == item?.ItemId));
 
-                map.ShowTamer(tamerToShow.Id, tamerToSeeId);
-
                 var targetClient = map.Clients.FirstOrDefault(x => x.TamerId == tamerToSeeId);
                 if (targetClient != null)
                 {
-                    targetClient.Send(new LoadTamerPacket(tamerToShow));
-                    targetClient.Send(new LoadBuffsPacket(tamerToShow));
+                    map.ShowTamer(tamerToShow.Id, tamerToSeeId);
+
+                    _logger.Information(
+                        "Tamer visibility show source={SourceId}:{SourceName} target={TargetId} map={MapId} channel={Channel} sourceHandler={SourceHandler} partnerHandler={PartnerHandler} sourcePos={SourceX},{SourceY} targetPos={TargetX},{TargetY}",
+                        tamerToShow.Id,
+                        tamerToShow.Name,
+                        tamerToSeeId,
+                        map.MapId,
+                        map.Channel,
+                        tamerToShow.GeneralHandler,
+                        tamerToShow.Partner.GeneralHandler,
+                        tamerToShow.Location.X,
+                        tamerToShow.Location.Y,
+                        targetClient.Tamer.Location.X,
+                        targetClient.Tamer.Location.Y);
+
+                    var loadTamerPacket = new LoadTamerPacket(tamerToShow).Serialize();
+                    var loadBuffsPacket = new LoadBuffsPacket(tamerToShow).Serialize();
+
+                    _logger.Information(
+                        "PKT-TRACE ShowTamer LoadTamer source={SourceId}:{SourceName} target={TargetId}:{TargetName} map={MapId} channel={Channel} bytes={Bytes} prefix={Prefix}",
+                        tamerToShow.Id,
+                        tamerToShow.Name,
+                        tamerToSeeId,
+                        targetClient.Tamer.Name,
+                        map.MapId,
+                        map.Channel,
+                        loadTamerPacket.Length,
+                        PacketPrefix(loadTamerPacket));
+
+                    _logger.Information(
+                        "PKT-TRACE ShowTamer LoadBuffs source={SourceId}:{SourceName} target={TargetId}:{TargetName} map={MapId} channel={Channel} bytes={Bytes} prefix={Prefix} tamerBuffs={TamerBuffs} partnerBuffs={PartnerBuffs} partnerDebuffs={PartnerDebuffs}",
+                        tamerToShow.Id,
+                        tamerToShow.Name,
+                        tamerToSeeId,
+                        targetClient.Tamer.Name,
+                        map.MapId,
+                        map.Channel,
+                        loadBuffsPacket.Length,
+                        PacketPrefix(loadBuffsPacket),
+                        tamerToShow.BuffList.ActiveBuffs.Count,
+                        tamerToShow.Partner.BuffList.ActiveBuffs.Count,
+                        tamerToShow.Partner.DebuffList.ActiveBuffs.Count);
+
+                    targetClient.Send(loadTamerPacket);
+                    targetClient.Send(loadBuffsPacket);
                     if (tamerToShow.InBattle)
                     {
                         targetClient.Send(new SetCombatOnPacket(tamerToShow.GeneralHandler));
@@ -573,6 +747,16 @@ namespace DigitalWorldOnline.GameHost
                     var serialized = SerializeShowTamer(tamerToShow);
                     //File.WriteAllText($"Shows\\Show{tamerToShow.Id}To{tamerToSeeId}_{DateTime.Now:dd_MM_yy_HH_mm_ss}.temp", serialized);
 #endif
+                }
+                else
+                {
+                    _logger.Warning(
+                        "Tamer visibility show skipped source={SourceId}:{SourceName} target={TargetId} map={MapId} channel={Channel}: target client not found",
+                        tamerToShow.Id,
+                        tamerToShow.Name,
+                        tamerToSeeId,
+                        map.MapId,
+                        map.Channel);
                 }
             }
         }
@@ -587,6 +771,14 @@ namespace DigitalWorldOnline.GameHost
 
                 if (targetClient != null)
                 {
+                    _logger.Information(
+                        "Tamer visibility hide source={SourceId}:{SourceName} target={TargetId} map={MapId} channel={Channel}",
+                        tamerToHide.Id,
+                        tamerToHide.Name,
+                        tamerToBlindId,
+                        map.MapId,
+                        map.Channel);
+
                     targetClient.Send(new UnloadTamerPacket(tamerToHide));
 
 #if DEBUG
@@ -611,6 +803,12 @@ namespace DigitalWorldOnline.GameHost
             sb.AppendLine($"PartnerLocation {tamer.Partner.Location.Y.ToString()}");
 
             return sb.ToString();
+        }
+
+        private static string PacketPrefix(byte[] packet, int maxBytes = 96)
+        {
+            var count = Math.Min(packet.Length, maxBytes);
+            return BitConverter.ToString(packet, 0, count).Replace("-", string.Empty);
         }
 
         private static string SerializeShowTamer(CharacterModel tamer)

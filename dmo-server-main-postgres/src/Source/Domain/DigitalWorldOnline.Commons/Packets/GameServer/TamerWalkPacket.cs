@@ -6,6 +6,7 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
     public class TamerWalkPacket : PacketWriter
     {
         private const int PacketNumber = 1006;
+        private const byte RotationSyncType = 0x7F;
 
         /// <summary>
         /// Default tamer movimentation packet.
@@ -19,9 +20,13 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteUInt(tamer.GeneralHandler);
             WriteInt(tamer.Location.X);
             WriteInt(tamer.Location.Y);
-            WriteInt(0);
+            WriteByte(RotationSyncType);
+            WriteShort(1);
+            WriteUInt(tamer.GeneralHandler);
+            WriteFloat(tamer.Location.Z);
+            WriteByte(0);
         }
-        public TamerWalkPacket(int X,int Y, uint Handle)
+        public TamerWalkPacket(int X,int Y, uint Handle, float rotation = 0)
         {
             Type(PacketNumber);
             WriteByte(5);
@@ -29,7 +34,11 @@ namespace DigitalWorldOnline.Commons.Packets.GameServer
             WriteUInt(Handle);
             WriteInt(X);
             WriteInt(Y);
-            WriteInt(0);
+            WriteByte(RotationSyncType);
+            WriteShort(1);
+            WriteUInt(Handle);
+            WriteFloat(rotation);
+            WriteByte(0);
         }
     }
 }

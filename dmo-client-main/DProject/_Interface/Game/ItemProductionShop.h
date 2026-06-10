@@ -2,6 +2,8 @@
 
 #include "ItemProduction_Contents.h"
 
+class cSpriteAni;
+
 class cItemProductionShop : public cBaseWindow, public CItemProductionContents::ObserverType
 {
 	struct sAssistItem : public CUSTOMDATA
@@ -139,6 +141,8 @@ private:
 	void					changeProductionCost( u8 const& dwNeedCost );
 	void					ChangeHaveItemCount( ContentsStream const& kStream );
 	void					_UpdateMaterialItemCount(DWORD const& dwMakeItemcount);
+	void					_RenderTutorialCategoryArrow();
+	int						_GetTutorialCategoryRow( cTreeBoxItem*& pTargetItem );
 
 	void					SetProtectAssistItem( int const& nGroupID );
 	void					SetPrecentageAssistItem( int const& nGroupID );
@@ -209,6 +213,8 @@ private:
 	sProductionItemList		const* m_pItemInfo;
 	cGridListBox*			m_pAssisteItemList;
 	MAP_AssistItems			m_mapAssistControl;
+	cSpriteAni*				m_pTutorialCategoryArrow;
+	cTreeBoxItem*			m_pTutorialMainCategoryItem;
+	cTreeBoxItem*			m_pTutorialSubCategoryItem;
 };
-
 

@@ -1,15 +1,17 @@
 #include "stdafx.h"
 #include "TamerStatusUI_Digivice.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 
 #define IF_DIGIMON_SLOT_COUNT 8
+#define	IF_EVOCHIP_SLOT_COUNT 1
 #define	IF_CHIPSET_SLOT_COUNT 8
 #define IF_DIGIMON_SLOT_TYPE_OPEN 0
 #define IF_DIGIMON_SLOT_TYPE_LOCK 1
 #define IF_DIGIMON_SLOT_TYPE_DISABLE 2
 
 cTamerStatusUI_Digivice::cTamerStatusUI_Digivice()
-: m_pChipset(NULL), m_pLTactics(NULL), m_pRTactics(NULL)
+: m_pEvoChipset(NULL), m_pChipset(NULL), m_pLTactics(NULL), m_pRTactics(NULL)
 {
 	Construct();
 }
@@ -55,6 +57,20 @@ void cTamerStatusUI_Digivice::Create(cWindow* pkRoot, int nValue /*= 0 */)
 		m_pChipsetText = AddText( &ti, CsPoint( 20, 504 ) );
 	}
 
+	m_pEvoChipset = NiNew cGridListBox;
+	if( m_pEvoChipset )
+	{
+		m_pEvoChipset->Init( GetRoot(), CsPoint( 182, 450 ), CsPoint( 42, 42 ), CsPoint( 0, 0 ), CsPoint( 32, 32 ), cGridListBox::LowRightDown, cGridListBox::LeftTop, false, 1 );
+		m_pEvoChipset->SetMouseOverImg( "Icon\\Mask_Over.tga" );
+		m_pEvoChipset->SetBackOverAndSelectedImgRender( false );
+		m_pEvoChipset->SetAutoSelection( false );
+		m_pEvoChipset->AddEvent( cGridListBox::GRID_SELECTED_ITEM_RIGHT,	this, &cTamerStatusUI_Digivice::_OnRClickChipset );
+		m_pEvoChipset->AddEvent( cGridListBox::GRID_CHANGED_MOUSEON_ITEM,	this, &cTamerStatusUI_Digivice::_OnMouseOverChipset );
+		m_pEvoChipset->AddEvent( cGridListBox::GRID_MOUSE_DOWN_ON_ITEM,	this, &cTamerStatusUI_Digivice::_OnLClickChipset );
+		AddChildControl( m_pEvoChipset );
+	}
+	_MakeEvoChipsetGrid();
+
 	m_pChipset = NiNew cGridListBox;
 	if( m_pChipset )
 	{
@@ -99,6 +115,9 @@ void cTamerStatusUI_Digivice::Update(float const& fDeltaTime)
 
 BOOL cTamerStatusUI_Digivice::Update_ForMouse()
 {
+	if( m_pEvoChipset && m_pEvoChipset->Update_ForMouse( CURSOR_ST.GetPos() ) )
+		return TRUE;
+
 	if( m_pChipset && m_pChipset->Update_ForMouse( CURSOR_ST.GetPos() ) )
 		return TRUE;
 
@@ -131,6 +150,18 @@ void cTamerStatusUI_Digivice::ReleaseSelect()
 void cTamerStatusUI_Digivice::UpdateViewer()
 {
 	bool bIsDigivice = GetSystem()->IsEquipDigivice();
+	std::map< int, sChipset >::iterator itEvo = m_mapEvoChipset.find( 0 );
+	if( itEvo != m_mapEvoChipset.end() )
+	{
+		cItemInfo * pEvoChipset = GetSystem()->GetEvoChipsetItem();
+		if( !pEvoChipset )
+			itEvo->second.ChangeItem( 0 );
+		else
+			itEvo->second.ChangeItem( pEvoChipset->GetType(), pEvoChipset->GetCount() );
+
+		itEvo->second.SetChipsetBg( bIsDigivice );
+	}
+
 	int nCount = GetSystem()->GetOpenedChipsetSlot();
 	for( int i = 0; i < IF_CHIPSET_SLOT_COUNT; ++i )
 	{
@@ -168,19 +199,127 @@ void cTamerStatusUI_Digivice::OnLButtonUp(CsPoint pos)
 
 bool cTamerStatusUI_Digivice::CursorIconLBtnUp(CURSOR_ICON::eTYPE eIconType, int nIconSlot, int nIconCount)
 {
-	SAFE_POINTER_RETVAL( m_pChipset, false );
-	CsPoint ptPos = m_pChipset->MousePosToWindowPos( CURSOR_ST.GetPos() );
-	cGridListBoxItem const* pOverItem = m_pChipset->getItemAtPoint( ptPos );
+	cGridListBoxItem const* pOverItem = NULL;
+	bool const bTraceChipsetDrop =
+		eIconType == CURSOR_ICON::CI_INVEN ||
+		eIconType == CURSOR_ICON::CI_CHIPSET ||
+		eIconType == CURSOR_ICON::CI_EVOCHIP;
+
+	if( bTraceChipsetDrop )
+	{
+		CsPoint const ptCursor = CURSOR_ST.GetPos();
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_UI_DROP begin iconType=%d iconSlot=%d iconCount=%d cursor=(%d,%d)",
+			(int)eIconType,
+			nIconSlot,
+			nIconCount,
+			ptCursor.x,
+			ptCursor.y );
+	}
+
+	if( m_pEvoChipset )
+	{
+		CsPoint ptEvoPos = m_pEvoChipset->MousePosToWindowPos( CURSOR_ST.GetPos() );
+		pOverItem = m_pEvoChipset->getItemAtPoint( ptEvoPos );
+	}
+
+	if( !pOverItem && m_pChipset )
+	{
+		CsPoint ptPos = m_pChipset->MousePosToWindowPos( CURSOR_ST.GetPos() );
+		pOverItem = m_pChipset->getItemAtPoint( ptPos );
+	}
+
 	if( !pOverItem )
 	{
+		if( bTraceChipsetDrop )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"CHIPSET_UI_DROP no slot hit iconType=%d iconSlot=%d",
+				(int)eIconType,
+				nIconSlot );
+		}
 		CURSOR_ST.ReleaseIcon();
 		return false;
 	}
 
 	sChipsetInfo* pChipsetInfo = dynamic_cast< sChipsetInfo* >( pOverItem->GetUserData() );
-	SAFE_POINTER_RETVAL( pChipsetInfo, false );
+	if( !pChipsetInfo )
+	{
+		if( bTraceChipsetDrop )
+		{
+			nsCSDEBUG::CrashLogger::LogMessage(
+				"CHIPSET_UI_DROP missing slot user data iconType=%d iconSlot=%d",
+				(int)eIconType,
+				nIconSlot );
+		}
+		return false;
+	}
+
+	if( bTraceChipsetDrop )
+	{
+		unsigned nCursorRawType = 0;
+		unsigned nCursorResolvedType = 0;
+		unsigned nCursorItemClass = 0;
+		unsigned nCursorSkill = 0;
+
+		if( eIconType == CURSOR_ICON::CI_INVEN && g_pDataMng && g_pDataMng->GetInven() )
+		{
+			cItemInfo* pItemInfo = g_pDataMng->GetInven()->GetData( TO_ID( nIconSlot ) );
+			if( pItemInfo )
+			{
+				nCursorRawType = (unsigned)pItemInfo->m_nType;
+				nCursorResolvedType = (unsigned)pItemInfo->GetType();
+				if( nsCsFileTable::g_pItemMng )
+				{
+					CsItem* pFTItem = nsCsFileTable::g_pItemMng->GetItem( pItemInfo->GetType() );
+					if( pFTItem && pFTItem->GetInfo() )
+					{
+						nCursorItemClass = (unsigned)pFTItem->GetInfo()->s_nClass;
+						nCursorSkill = (unsigned)pFTItem->GetInfo()->s_dwSkill;
+					}
+				}
+			}
+		}
+
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHIPSET_UI_DROP over iconType=%d iconSlot=%d dstChipset=%d evoSlot=%d slotItem=%u cursorRaw=%u cursorResolved=%u cursorClass=%u cursorSkill=%u",
+			(int)eIconType,
+			nIconSlot,
+			pChipsetInfo->nChipsetIndex,
+			pChipsetInfo->bIsEvoChipset ? 1 : 0,
+			(unsigned)pChipsetInfo->nItemType,
+			nCursorRawType,
+			nCursorResolvedType,
+			nCursorItemClass,
+			nCursorSkill );
+	}
 
 	bool bIsMove = false;
+	if( pChipsetInfo->bIsEvoChipset )
+	{
+		switch( eIconType )
+		{
+		case CURSOR_ICON::CI_INVEN:
+			GetSystem()->MoveEvoChipsetItem( nIconSlot, false, false );
+			bIsMove = true;
+			break;
+		case CURSOR_ICON::CI_CHIPSET:
+			GetSystem()->MoveEvoChipsetItem( nIconSlot, false, true );
+			bIsMove = true;
+			break;
+		case CURSOR_ICON::CI_EVOCHIP:
+			break;
+		case CURSOR_ICON::CI_WAREHOUSE:
+			cPrintMsg::PrintMsg( 11018 );
+			break;
+		default:
+			cPrintMsg::PrintMsg( 11014 );
+			break;
+		}
+		CURSOR_ST.ReleaseIcon();
+		return bIsMove;
+	}
+
 	switch( eIconType )
 	{
 	case CURSOR_ICON::CI_INVEN:
@@ -198,6 +337,10 @@ bool cTamerStatusUI_Digivice::CursorIconLBtnUp(CURSOR_ICON::eTYPE eIconType, int
 			GetSystem()->MoveChipsetItem( nIconSlot, pChipsetInfo->nChipsetIndex, false, true );
 			bIsMove = true;
 		}
+		break;
+
+	case CURSOR_ICON::CI_EVOCHIP:
+		cPrintMsg::PrintMsg( 11014 );
 		break;
 
 	case CURSOR_ICON::CI_WAREHOUSE:
@@ -271,6 +414,19 @@ void cTamerStatusUI_Digivice::_MakeChipsetGrid()
 	}
 }
 
+void cTamerStatusUI_Digivice::_MakeEvoChipsetGrid()
+{
+	SAFE_POINTER_RET( m_pEvoChipset );
+	m_pEvoChipset->RemoveAllItem();
+	m_mapEvoChipset.clear();
+
+	cItemInfo* pChipset = GetSystem()->GetEvoChipsetItem();
+	if( pChipset )
+		_AddEvoChipsetGridItem( 0, pChipset->GetType(), pChipset->GetSkillRate() );
+	else
+		_AddEvoChipsetGridItem( 0, 0, 0 );
+}
+
 void cTamerStatusUI_Digivice::_AddChipsetGridItem(int nIndex, uint nItemType, int nItemRate, int nCount /*= 1*/)
 {
 	cString* pControl = NiNew cString;
@@ -301,6 +457,39 @@ void cTamerStatusUI_Digivice::_AddChipsetGridItem(int nIndex, uint nItemType, in
 
 		m_pChipset->AddItem( sChip.pGridItem );
 		m_mapChipset.insert( std::make_pair( nIndex, sChip ) );
+	}
+}
+
+void cTamerStatusUI_Digivice::_AddEvoChipsetGridItem(int nIndex, uint nItemType, int nItemRate, int nCount /*= 1*/)
+{
+	cString* pControl = NiNew cString;
+	SAFE_POINTER_RET( pControl );
+
+	sChipset sChip;
+	cSprite* pSlotBg = NiNew cSprite;
+	if( pSlotBg )
+	{
+		pSlotBg->Init( NULL, CsPoint( -5, -5 ), CsPoint( 42, 42 ), "TamerStatus_New\\Tamer_C_slot_Jogress.tga", false );
+		sChip.pChipsetBg = pControl->AddSprite( pSlotBg );
+		sChip.pChipsetBg->SetAutoPointerDelete( true );
+		sChip.pChipsetBg->SetVisible( true );
+	}
+
+	sChip.pChipsetIcon = pControl->AddIcon( CsPoint( 32, 32 ), ICONITEM::ITEM_ICON, nItemType, nCount );
+	if( sChip.pChipsetIcon )
+	{
+		sChip.pChipsetIcon->s_nIndex_3 = nItemRate;
+		sChip.pChipsetIcon->SetAutoPointerDelete( true );
+	}
+
+	sChip.pGridItem  = NiNew cGridListBoxItem( nIndex, CsPoint( 32, 32 ) );
+	if( sChip.pGridItem )
+	{
+		sChip.pGridItem->SetItem( pControl );
+		sChip.pGridItem->SetUserData( new sChipsetInfo( nItemType, nItemRate, nIndex, true ) );
+
+		m_pEvoChipset->AddItem( sChip.pGridItem );
+		m_mapEvoChipset.insert( std::make_pair( nIndex, sChip ) );
 	}
 }
 
@@ -467,8 +656,9 @@ void cTamerStatusUI_Digivice::_OnMouseOverChipset(void* pSender, void* pData)
 		return;
 	}
 
+	cItemInfo* pTooltipItem = pChipInfo->bIsEvoChipset ? GetSystem()->GetEvoChipsetItem() : GetSystem()->GetChipsetItem( pChipInfo->nChipsetIndex );
 	pTooltip->SetTooltip( pOverItem->GetWorldPos(), CsPoint( 32, 32 ), TOOLTIP_MAX_SIZE, cTooltip::ITEM, 
-		pChipInfo->nItemType, cBaseWindow::WT_NEW_TAMERSTATUS, 0, 0, GetSystem()->GetChipsetItem( pChipInfo->nChipsetIndex ) );
+		pChipInfo->nItemType, cBaseWindow::WT_NEW_TAMERSTATUS, 0, 0, pTooltipItem );
 }
 
 void cTamerStatusUI_Digivice::_OnLClickChipset(void*pSender, void* pData)
@@ -491,8 +681,13 @@ void cTamerStatusUI_Digivice::_OnRClickChipset(void* pSender, void* pData)
 	cGridListBoxItem* pChipset = static_cast< cGridListBoxItem* >( pData );
 	sChipsetInfo* pChipsetInfo = dynamic_cast< sChipsetInfo* >( pChipset->GetUserData() );
 	SAFE_POINTER_RET( pChipsetInfo );
+	if( pChipsetInfo->nItemType == 0 )
+		return;
 
-	GetSystem()->MoveChipsetItem( CURSOR_ST.GetIconSlot(), pChipsetInfo->nChipsetIndex, true, true );
+	if( pChipsetInfo->bIsEvoChipset )
+		GetSystem()->MoveEvoChipsetItem( CURSOR_ST.GetIconSlot(), true, true );
+	else
+		GetSystem()->MoveChipsetItem( CURSOR_ST.GetIconSlot(), pChipsetInfo->nChipsetIndex, true, true );
 }
 
 bool cTamerStatusUI_Digivice::_OnClickChipset(cGridListBoxItem const* pOverItem)
@@ -505,9 +700,12 @@ bool cTamerStatusUI_Digivice::_OnClickChipset(cGridListBoxItem const* pOverItem)
 	}
 
 	sChipsetInfo* pChipsetInfo = dynamic_cast< sChipsetInfo* >( pOverItem->GetUserData() );
-	if( pChipsetInfo )
+	if( pChipsetInfo && pChipsetInfo->nItemType != 0 )
 	{
-		CURSOR_ST.SetIcon( CURSOR_ICON::CI_CHIPSET, pChipsetInfo->nChipsetIndex, 1, NULL );
+		if( pChipsetInfo->bIsEvoChipset )
+			CURSOR_ST.SetIcon( CURSOR_ICON::CI_EVOCHIP, TO_EVOCHIP_SID( 0 ), 1, NULL );
+		else
+			CURSOR_ST.SetIcon( CURSOR_ICON::CI_CHIPSET, pChipsetInfo->nChipsetIndex, 1, NULL );
 		CURSOR_ST.SetIconSubInfo( pChipsetInfo->nItemRate, 0, 0 );
 		bSetItem = true;
 	}
@@ -627,4 +825,3 @@ void cTamerStatusUI_Digivice::sTactics::UpdateDigimon(int nTacticsIndex, int nTa
 		}
 	}
 }
-

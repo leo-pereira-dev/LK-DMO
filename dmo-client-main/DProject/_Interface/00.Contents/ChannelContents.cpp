@@ -2,6 +2,7 @@
 #include "ChannelContents.h"
 #include "../../ContentsSystem/ContentsSystemDef.h"
 #include "../Adapt/AdaptCommunity.h"
+#include "../../../LibProj/CsFunc/CrashLogger.h"
 
 int const ChannelContents::IsContentsIdentity(void)
 {
@@ -98,12 +99,25 @@ void ChannelContents::ReceiveChannel(void* pData)
 
 	memset(channelInfo.channel, 0xFF, sizeof(channelInfo.channel));
 	bool bIsMakeChannelWindow = false;
+	int nAvailableChannels = 0;
 	for( int i = 0; i < nLimit::Channel; ++i)
 	{
 		channelInfo.channel[i] = pCastData->channel[i];
-		if( channelInfo.channel[ i ] != 0xFF || channelInfo.channel[ i ] != -1 )
+		if( channelInfo.channel[ i ] != (char)0xFF )
 			bIsMakeChannelWindow = true;
+		if( channelInfo.channel[ i ] != (char)0xFF )
+			++nAvailableChannels;
 	}
+
+	nsCSDEBUG::CrashLogger::LogMessage(
+		"CHANNEL RecvChannelInfo current=%u available=%d ch0=%d ch1=%d ch2=%d ch3=%d makeWindow=%d",
+		channelInfo.channel_idx,
+		nAvailableChannels,
+		(int)channelInfo.channel[0],
+		(int)channelInfo.channel[1],
+		(int)channelInfo.channel[2],
+		(int)channelInfo.channel[3],
+		(int)bIsMakeChannelWindow);
 
 	if( bIsMakeChannelWindow )
 	{
@@ -151,9 +165,16 @@ void ChannelContents::PopupChangeChannel(void* pData)
 	SAFE_POINTER_RET(pData);
 	int nActive1 = *static_cast<int*>(pData);
 
+	if( nActive1 < 0 || nActive1 >= nLimit::Channel )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL PopupChangeChannel blocked target=%d reason=out-of-range current=%u", nActive1, channelInfo.channel_idx );
+		return;
+	}
+
 	// 전투 중인지체크
 	if( null != g_pCharMng->GetTamerUser() && g_pCharMng->GetTamerUser()->IsBattle() == true )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL PopupChangeChannel blocked target=%d reason=battle current=%u", nActive1, channelInfo.channel_idx );
 		cPrintMsg::PrintMsg( 16002 );
 		return;
 	}
@@ -163,9 +184,11 @@ void ChannelContents::PopupChangeChannel(void* pData)
 #ifdef CHANGE_CHANNEL_LIMIT
 		if( channelInfo.channel[ nActive1 ] >= 20 )	// 포화 상태
 		{
+			nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL PopupChangeChannel full target=%d current=%u population=%d", nActive1, channelInfo.channel_idx, (int)channelInfo.channel[ nActive1 ] );
 			cPrintMsg::PrintMsg( 10016 );	// 채널 변경을 할 수 없습니다.\n 잠시후에 다시 시도해 주시기 바랍니다.
 		}
 #endif
+		nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL PopupChangeChannel confirm target=%d state=%d current=%u", nActive1, (int)channelInfo.channel[ nActive1 ], channelInfo.channel_idx );
 		TCHAR sz[ 32 ];
 		_stprintf_s( sz, 32, _T( "%d " ), nActive1 );
 		cPrintMsg::PrintMsg( 10017, sz );
@@ -173,6 +196,10 @@ void ChannelContents::PopupChangeChannel(void* pData)
 		if( pMsgBox )
 			pMsgBox->SetValue1( nActive1 );
 	}	
+	else
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL PopupChangeChannel ignored target=%d reason=same-current current=%u", nActive1, channelInfo.channel_idx );
+	}
 }
 void ChannelContents::DisplayChangeChannel(void* pData)
 {
@@ -208,8 +235,18 @@ void ChannelContents::SendChangeChannel(void* pData)
 {
 	SAFE_POINTER_RET(pData);
 	int nChannelIDX = *static_cast<int*>(pData);
-	if( net::game != null && Set_ChannelTryIndexNChat(nChannelIDX) )
+
+	if( net::game == null )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL SendChangeChannel blocked target=%d reason=net-game-null", nChannelIDX );
+		return;
+	}
+
+	if( Set_ChannelTryIndexNChat(nChannelIDX) )
+	{
+		nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL SendChangeChannel event target=%d", nChannelIDX );
 		net::game->SendChangeChannel(nChannelIDX);
+	}
 }
 void ChannelContents::SendChangeChannelByMaster(void* pData)
 {
@@ -223,25 +260,34 @@ bool ChannelContents::Set_ChannelTryIndexNChat(int nChannelIDX)
 	assert( channelInfo.channel_idx != nChannelIDX );
 	if(net::game == null || g_pGameIF == null || nChannelIDX < 0)
 	{
+		nsCSDEBUG::CrashLogger::LogMessage(
+			"CHANNEL SetChannelTry blocked target=%d reason=null-or-negative net=%d gameif=%d",
+			nChannelIDX,
+			(int)(net::game != null),
+			(int)(g_pGameIF != null) );
 		return false;
 	}
 	if( net::game->m_bPortalRequesting )
 	{		
+		nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL SetChannelTry blocked target=%d reason=portal-requesting", nChannelIDX );
 		return false;
 	}
 	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_TRADE ) )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL SetChannelTry blocked target=%d reason=trade-window", nChannelIDX );
 		cPrintMsg::PrintMsg( 30028 );
 		return false;
 	}
 	if( g_pGameIF->IsActiveWindow( cBaseWindow::WT_PERSONSTORE ) )
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL SetChannelTry blocked target=%d reason=person-store-window", nChannelIDX );
 		cPrintMsg::PrintMsg( 30357 );
 		return false;
 	}
 
 	if(nChannelIDX >= nLimit::Channel)
 	{
+		nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL SetChannelTry blocked target=%d reason=out-of-range limit=%d", nChannelIDX, nLimit::Channel );
 		DisplayChangeChannel(null);
 		return false;
 	}
@@ -261,5 +307,6 @@ bool ChannelContents::Set_ChannelTryIndexNChat(int nChannelIDX)
 	ContentsStream kStream;
 	kStream << nChannelIDX;
 	NotifyContentsAndStream( CONTENTS_EVENT::EStreamEvt_Guild_Channel, kStream );
+	nsCSDEBUG::CrashLogger::LogMessage( "CHANNEL SetChannelTry accepted target=%d current=%u", nChannelIDX, channelInfo.channel_idx );
 	return true;
 }

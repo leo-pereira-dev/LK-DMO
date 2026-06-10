@@ -29,7 +29,7 @@ namespace DigitalWorldOnline.Application.GameAssets.Queries
                 {
                     Id = rec.Id,
                     SkillCode = rec.Id,
-                    Comment = string.Empty,
+                    Comment = rec.Comment,
                     Apply = new List<SkillCodeApplyAssetDTO>(3)
                 };
                 dto.Apply.Add(MapApply(rec.Apply0, rec.Id));

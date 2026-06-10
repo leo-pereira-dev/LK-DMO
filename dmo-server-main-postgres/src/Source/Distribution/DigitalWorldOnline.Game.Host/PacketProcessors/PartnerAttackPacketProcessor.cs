@@ -3,13 +3,16 @@ using DigitalWorldOnline.Commons.Enums;
 using DigitalWorldOnline.Commons.Enums.ClientEnums;
 using DigitalWorldOnline.Commons.Enums.PacketProcessor;
 using DigitalWorldOnline.Commons.Interfaces;
+using DigitalWorldOnline.Commons.Models.Asset;
 using DigitalWorldOnline.Commons.Models.Combat;
 using DigitalWorldOnline.Commons.Models;
 using DigitalWorldOnline.Commons.Models.Config;
 using DigitalWorldOnline.Commons.Models.Digimon;
 using DigitalWorldOnline.Commons.Models.Summon;
+using DigitalWorldOnline.Commons.Packets.GameServer;
 using DigitalWorldOnline.Commons.Packets.GameServer.Combat;
 using DigitalWorldOnline.Commons.Utils;
+using DigitalWorldOnline.Game.Services;
 using DigitalWorldOnline.GameHost;
 using Microsoft.Extensions.Configuration;
 using Serilog;
@@ -26,18 +29,21 @@ namespace DigitalWorldOnline.Game.PacketProcessors
         private readonly DungeonsServer _dungeonServer;
         private readonly ILogger _logger;
         private readonly DamageFormulaConfig _damageFormulaConfig;
+        private readonly EquipmentSetBonusService _equipmentSetBonusService;
 
         public PartnerAttackPacketProcessor(
             MapServer mapServer,
             PvpServer pvpServer,
             ILogger logger,
             DungeonsServer dungeonsServer,
+            EquipmentSetBonusService equipmentSetBonusService,
             IConfiguration configuration)
         {
             _mapServer = mapServer;
             _pvpServer = pvpServer;
             _dungeonServer = dungeonsServer;
             _logger = logger;
+            _equipmentSetBonusService = equipmentSetBonusService;
             _damageFormulaConfig = LoadDamageFormulaConfig(configuration);
         }
 
@@ -57,8 +63,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var lookupAttacker = attackerHandler & CTypeClassIdxMask;
             var lookupTarget = targetHandler & CTypeClassIdxMask;
 
-            _logger.Information("Attack packet: handler={Handler}(0x{Handler:X}) mask={MaskedHandler}(0x{MaskedHandler:X}) target={Target}(0x{Target:X}) mask={MaskedTarget}(0x{MaskedTarget:X}) tamer={TamerId} map={MapId} currentType={CurrentType}",
-                attackerHandler, lookupAttacker, targetHandler, lookupTarget, client.TamerId, client.Tamer.Location.MapId, client.Partner?.CurrentType);
+            _logger.Information("Attack packet: attackerRaw={AttackerRaw} attackerRawHex=0x{AttackerRawHex:X} attackerLookup={AttackerLookup} attackerLookupHex=0x{AttackerLookupHex:X} targetRaw={TargetRaw} targetRawHex=0x{TargetRawHex:X} targetLookup={TargetLookup} targetLookupHex=0x{TargetLookupHex:X} tamer={TamerId} map={MapId} channel={Channel} currentType={CurrentType}",
+                attackerHandler, attackerHandler, lookupAttacker, lookupAttacker, targetHandler, targetHandler, lookupTarget, lookupTarget, client.TamerId, client.Tamer.Location.MapId, client.Tamer.Channel, client.Partner?.CurrentType);
 
             // Reply packets must use the same class+index handler announced in InitialInfoPacket.
             // Newer client builds may send CType.m_nTypeAll here (for example 0x84001 for
@@ -152,6 +158,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                             if (finalDmg > targetPartner.CurrentHp) finalDmg = targetPartner.CurrentHp;
 
                             var newHp = targetPartner.ReceiveDamage(finalDmg);
+                            TryApplyEquipmentSetTrigger(client, EquipmentSetBonusTrigger.NormalAttack);
 
                             var hitType = blocked ? 2 : critBonusMultiplier > 0 ? 1 : 0;
 
@@ -301,6 +308,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                                 if (finalDmg > targetMob.CurrentHP) finalDmg = targetMob.CurrentHP;
 
                                 var newHp = targetMob.ReceiveDamage(finalDmg, client.TamerId);
+                                TryApplyEquipmentSetTrigger(client, EquipmentSetBonusTrigger.NormalAttack);
 
                                 var hitType = blocked ? 2 : critBonusMultiplier > 0 ? 1 : 0;
 
@@ -333,6 +341,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                                             hitType).Serialize());
 
                                     targetMob?.Die();
+                                    TryApplyEquipmentSetTrigger(client, EquipmentSetBonusTrigger.MonsterDefeated);
 
                                     if (!_dungeonServer.MobsAttacking(client.Tamer.Location.MapId, client.TamerId))
                                     {
@@ -450,6 +459,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                                 if (finalDmg > targetMob.CurrentHP) finalDmg = targetMob.CurrentHP;
 
                                 var newHp = targetMob.ReceiveDamage(finalDmg, client.TamerId);
+                                TryApplyEquipmentSetTrigger(client, EquipmentSetBonusTrigger.NormalAttack);
 
                                 var hitType = blocked ? 2 : critBonusMultiplier > 0 ? 1 : 0;
 
@@ -482,6 +492,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                                             hitType).Serialize());
 
                                     targetMob?.Die();
+                                    TryApplyEquipmentSetTrigger(client, EquipmentSetBonusTrigger.MonsterDefeated);
 
                                     if (!_dungeonServer.MobsAttacking(client.Tamer.Location.MapId, client.TamerId))
                                     {
@@ -512,9 +523,9 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                 }
 
             }
-            else if (_mapServer.GetMobByHandler(client.Tamer.Location.MapId, lookupTarget, true) != null) //Summon
+            else if (_mapServer.GetMobByHandler(client.Tamer.Location.MapId, lookupTarget, true, client.TamerId) != null) //Summon
             {
-                var targetMob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, lookupTarget, true);
+                var targetMob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, lookupTarget, true, client.TamerId);
 
                 if (targetMob == null || client.Partner == null)
                     return Task.CompletedTask;
@@ -601,6 +612,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                             if (finalDmg > targetMob.CurrentHP) finalDmg = targetMob.CurrentHP;
 
                             var newHp = targetMob.ReceiveDamage(finalDmg, client.TamerId);
+                            TryApplyEquipmentSetTrigger(client, EquipmentSetBonusTrigger.NormalAttack);
 
                             var hitType = blocked ? 2 : critBonusMultiplier > 0 ? 1 : 0;
 
@@ -633,6 +645,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                                         hitType).Serialize());
 
                                 targetMob?.Die();
+                                TryApplyEquipmentSetTrigger(client, EquipmentSetBonusTrigger.MonsterDefeated);
 
                                 if (!_mapServer.MobsAttacking(client.Tamer.Location.MapId, client.TamerId))
                                 {
@@ -663,12 +676,12 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
             else
             {
-                var targetMob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, lookupTarget);
+                var targetMob = _mapServer.GetMobByHandler(client.Tamer.Location.MapId, lookupTarget, client.TamerId);
 
                 if (targetMob == null || client.Partner == null)
                 {
-                    _logger.Information("Attack ignored: targetMob={HasTargetMob} partner={HasPartner} targetHandler={TargetHandler} maskedTarget={MaskedTarget} tamer={TamerId} map={MapId}",
-                        targetMob != null, client.Partner != null, targetHandler, lookupTarget, client.TamerId, client.Tamer.Location.MapId);
+                    _logger.Information("Attack ignored: targetMob={HasTargetMob} partner={HasPartner} targetHandler={TargetHandler} maskedTarget={MaskedTarget} tamer={TamerId} map={MapId} channel={Channel}",
+                        targetMob != null, client.Partner != null, targetHandler, lookupTarget, client.TamerId, client.Tamer.Location.MapId, client.Tamer.Channel);
                     return Task.CompletedTask;
                 }
 
@@ -756,6 +769,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                             if (finalDmg > targetMob.CurrentHP) finalDmg = targetMob.CurrentHP;
 
                             var newHp = targetMob.ReceiveDamage(finalDmg, client.TamerId);
+                            TryApplyEquipmentSetTrigger(client, EquipmentSetBonusTrigger.NormalAttack);
 
                             var hitType = blocked ? 2 : critBonusMultiplier > 0 ? 1 : 0;
 
@@ -788,6 +802,7 @@ namespace DigitalWorldOnline.Game.PacketProcessors
                                         hitType).Serialize());
 
                                 targetMob?.Die();
+                                TryApplyEquipmentSetTrigger(client, EquipmentSetBonusTrigger.MonsterDefeated);
 
                                 if (!_mapServer.MobsAttacking(client.Tamer.Location.MapId, client.TamerId))
                                 {
@@ -814,6 +829,17 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             }
 
             return Task.CompletedTask;
+        }
+
+        private void TryApplyEquipmentSetTrigger(GameClient client, EquipmentSetBonusTrigger trigger)
+        {
+            Action<byte[]> broadcast = client.PvpMap
+                ? packet => _pvpServer.BroadcastForTamerViewsAndSelf(client.TamerId, packet)
+                : client.DungeonMap
+                    ? packet => _dungeonServer.BroadcastForTamerViewsAndSelf(client.TamerId, packet)
+                    : packet => _mapServer.BroadcastForTamerViewsAndSelf(client.TamerId, packet);
+
+            _equipmentSetBonusService.TryApplyPartnerTrigger(client, trigger, broadcast);
         }
 
         private static int DebuffReductionDamage(GameClient client, int finalDmg)
@@ -952,6 +978,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (targetMob == null || client?.Tamer?.Partner?.BaseInfo == null)
                 return 0;
 
+            TryActivateEncyclopediaDeckEffect(client, 1);
+
             if (_damageFormulaConfig.Enable)
             {
                 blocked = targetMob.BLValue >= UtilitiesFunctions.RandomDouble();
@@ -1051,6 +1079,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
 
             if (targetMob == null || client?.Tamer?.Partner?.BaseInfo == null)
                 return 0;
+
+            TryActivateEncyclopediaDeckEffect(client, 1);
 
             if (_damageFormulaConfig.Enable)
             {
@@ -1153,6 +1183,8 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             if (targetPartner == null || client?.Tamer?.Partner?.BaseInfo == null)
                 return 0;
 
+            TryActivateEncyclopediaDeckEffect(client, 1);
+
             if (_damageFormulaConfig.Enable)
             {
                 blocked = targetPartner.BL >= UtilitiesFunctions.RandomDouble();
@@ -1219,6 +1251,34 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             };
         }
 
+        private void TryActivateEncyclopediaDeckEffect(GameClient client, int attackType)
+        {
+            if (!UtilitiesFunctions.TryRollEncyclopediaDeckEffect(
+                    client.Tamer.EncyclopediaDeckId,
+                    attackType,
+                    out var effect))
+                return;
+
+            if (effect.Option == 4)
+            {
+                foreach (var skill in client.Tamer.Partner.CurrentEvolution.Skills)
+                    skill.ResetCooldown();
+
+                client.Send(new EncyclopediaDeckEffectPacket(100, 0).Serialize());
+                return;
+            }
+
+            var endDate = client.Tamer.ActivateEncyclopediaDeckEffect(effect.Index, effect.Time);
+            var endTimestamp = (int)new DateTimeOffset(endDate).ToUnixTimeSeconds();
+            client.Send(new EncyclopediaDeckEffectPacket(effect.Index, endTimestamp).Serialize());
+
+            if (effect.Option == 5 || effect.Option == 6 || effect.Option == 7 || effect.Option == 10)
+            {
+                client.Send(new EncyclopediaDeckStatusPacket(client.Tamer).Serialize());
+                client.Send(new UpdateStatusPacket(client.Tamer).Serialize());
+            }
+        }
+
         private DamageFormulaInput CreateDamageFormulaInput(
             GameClient client,
             DigimonAttributeEnum targetAttribute,
@@ -1237,11 +1297,12 @@ namespace DigitalWorldOnline.Game.PacketProcessors
             var elementPercent = Math.Max(0, attackerElement.GetElementDelta(targetElement));
             var hasAttributeAdvantage = attackerAttribute.HasAttributeAdvantage(targetAttribute);
             var hasElementAdvantage = elementPercent > 0;
+            var attack = attackOverride > 0 ? attackOverride : partner.AT;
 
             return new DamageFormulaInput
             {
-                Attack = attackOverride > 0 ? attackOverride : partner.AT,
-                ExtraAttack = 0,
+                Attack = attack,
+                ExtraAttack = isSkill ? 0 : attack * partner.NormalAttackDamageBasisPoints / 10000,
                 SkillBaseDamage = skillBaseDamage,
                 SkillDamageFlat = skillDamageFlat,
                 AttributePercent = partner.ATT,
